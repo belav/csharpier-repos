@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ToolStripDropDownItemAccessibleObject" FullName="System.Windows.Forms.ToolStripDropDownItemAccessibleObject">
-  <TypeSignature Language="C#" Value="public class ToolStripDropDownItemAccessibleObject : System.Windows.Forms.ToolStripItem.ToolStripItemAccessibleObject" />
+<Type
+  Name="ToolStripDropDownItemAccessibleObject"
+  FullName="System.Windows.Forms.ToolStripDropDownItemAccessibleObject"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripDropDownItemAccessibleObject : System.Windows.Forms.ToolStripItem.ToolStripItemAccessibleObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,12 +19,20 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides information that accessibility applications use to adjust the user interface of a <see cref="T:System.Windows.Forms.ToolStripDropDown" /> for users with impairments.</para>
+      <para
+        >Provides information that accessibility applications use to adjust the user interface of a <see
+         cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+         for users with impairments.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripDropDownItemAccessibleObject (System.Windows.Forms.ToolStripDropDownItem item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripDropDownItemAccessibleObject (System.Windows.Forms.ToolStripDropDownItem item);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -30,10 +44,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownItemAccessibleObject" /> class with the specified <see cref="T:System.Windows.Forms.ToolStripDropDownItem" />. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripDropDownItemAccessibleObject" />
+
+             class with the specified <see
+             cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            . </para
+          >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ToolStripDropDownItem" /> that owns this <see cref="T:System.Windows.Forms.ToolStripDropDownItemAccessibleObject" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+           that owns this <see
+           cref="T:System.Windows.Forms.ToolStripDropDownItemAccessibleObject" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DoDefaultAction">
@@ -49,7 +80,18 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Clients can retrieve the object's default action by inspecting an object's <see cref="P:System.Windows.Forms.AccessibleObject.DefaultAction" /> property. A client can use automation (if supported) instead of <see cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" /> to perform an object's default action. However, <see cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" /> provides an easy way to perform an object's most commonly used action.</para>
+          <para
+            >Clients can retrieve the object's default action by inspecting an object's <see
+             cref="P:System.Windows.Forms.AccessibleObject.DefaultAction" />
+
+             property. A client can use automation (if supported) instead of <see
+             cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" />
+
+             to perform an object's default action. However, <see
+             cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" />
+
+             provides an easy way to perform an object's most commonly used action.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -58,7 +100,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetChild">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleObject GetChild (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleObject GetChild (int index);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -77,10 +122,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Windows.Forms.AccessibleObject" /> that represents the accessible child control corresponding to the specified index.</para>
+          <para
+            >An <see
+             cref="T:System.Windows.Forms.AccessibleObject" />
+
+             that represents the accessible child control corresponding to the specified index.</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index of the accessible child control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index of the accessible child control.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetChildCount">
@@ -106,7 +159,10 @@
       </Docs>
     </Member>
     <Member MemberName="Role">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleRole Role { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleRole Role { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

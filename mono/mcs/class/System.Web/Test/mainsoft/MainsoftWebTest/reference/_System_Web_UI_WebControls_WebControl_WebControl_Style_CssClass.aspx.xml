@@ -33,20 +33,16 @@
     </span>
   </div>
   <div id="GHTSubTest9" testname="System.Web.UI.WebControls.HyperLink: CssClass1">
-    <a id="ctrl_8" class="CssClass1">
-    </a>
+    <a id="ctrl_8" class="CssClass1"></a>
   </div>
   <div id="GHTSubTest10" testname="System.Web.UI.WebControls.HyperLink: CssClass2">
-    <a id="ctrl_9" class="CssClass2">
-    </a>
+    <a id="ctrl_9" class="CssClass2"></a>
   </div>
   <div id="GHTSubTest11" testname="System.Web.UI.WebControls.HyperLink: Empty string">
-    <a id="ctrl_10" class="Empty string">
-    </a>
+    <a id="ctrl_10" class="Empty string"></a>
   </div>
   <div id="GHTSubTest12" testname="System.Web.UI.WebControls.HyperLink: Non existing CssClass">
-    <a id="ctrl_11" class="Non existing CssClass">
-    </a>
+    <a id="ctrl_11" class="Non existing CssClass"></a>
   </div>
   <div id="GHTSubTest13" testname="System.Web.UI.WebControls.Image: CssClass1">
     <img id="ctrl_12" alt="" border="0" class="CssClass1" />
@@ -70,55 +66,50 @@
     <input id="ctrl_18" alt="" border="0" type="image" name="ctrl_18" class="Empty string" />
   </div>
   <div id="GHTSubTest20" testname="System.Web.UI.WebControls.ImageButton: Non existing CssClass">
-    <input id="ctrl_19" alt="" border="0" type="image" name="ctrl_19" class="Non existing CssClass" />
+    <input
+      id="ctrl_19"
+      alt=""
+      border="0"
+      type="image"
+      name="ctrl_19"
+      class="Non existing CssClass"
+    />
   </div>
   <div id="GHTSubTest21" testname="System.Web.UI.WebControls.Label: CssClass1">
-    <span id="ctrl_20" class="CssClass1">
-    </span>
+    <span id="ctrl_20" class="CssClass1"></span>
   </div>
   <div id="GHTSubTest22" testname="System.Web.UI.WebControls.Label: CssClass2">
-    <span id="ctrl_21" class="CssClass2">
-    </span>
+    <span id="ctrl_21" class="CssClass2"></span>
   </div>
   <div id="GHTSubTest23" testname="System.Web.UI.WebControls.Label: Empty string">
-    <span id="ctrl_22" class="Empty string">
-    </span>
+    <span id="ctrl_22" class="Empty string"></span>
   </div>
   <div id="GHTSubTest24" testname="System.Web.UI.WebControls.Label: Non existing CssClass">
-    <span id="ctrl_23" class="Non existing CssClass">
-    </span>
+    <span id="ctrl_23" class="Non existing CssClass"></span>
   </div>
   <div id="GHTSubTest25" testname="System.Web.UI.WebControls.LinkButton: CssClass1">
-    <a href="javascript:__doPostBack('ctrl_24','')" id="ctrl_24" class="CssClass1">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_24','')" id="ctrl_24" class="CssClass1"></a>
   </div>
   <div id="GHTSubTest26" testname="System.Web.UI.WebControls.LinkButton: CssClass2">
-    <a href="javascript:__doPostBack('ctrl_25','')" id="ctrl_25" class="CssClass2">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_25','')" id="ctrl_25" class="CssClass2"></a>
   </div>
   <div id="GHTSubTest27" testname="System.Web.UI.WebControls.LinkButton: Empty string">
-    <a href="javascript:__doPostBack('ctrl_26','')" id="ctrl_26" class="Empty string">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_26','')" id="ctrl_26" class="Empty string"></a>
   </div>
   <div id="GHTSubTest28" testname="System.Web.UI.WebControls.LinkButton: Non existing CssClass">
-    <a href="javascript:__doPostBack('ctrl_27','')" id="ctrl_27" class="Non existing CssClass">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_27','')" id="ctrl_27" class="Non existing CssClass"></a>
   </div>
   <div id="GHTSubTest29" testname="System.Web.UI.WebControls.Panel: CssClass1">
-    <div id="ctrl_28" class="CssClass1">
-    </div>
+    <div id="ctrl_28" class="CssClass1"></div>
   </div>
   <div id="GHTSubTest30" testname="System.Web.UI.WebControls.Panel: CssClass2">
-    <div id="ctrl_29" class="CssClass2">
-    </div>
+    <div id="ctrl_29" class="CssClass2"></div>
   </div>
   <div id="GHTSubTest31" testname="System.Web.UI.WebControls.Panel: Empty string">
-    <div id="ctrl_30" class="Empty string">
-    </div>
+    <div id="ctrl_30" class="Empty string"></div>
   </div>
   <div id="GHTSubTest32" testname="System.Web.UI.WebControls.Panel: Non existing CssClass">
-    <div id="ctrl_31" class="Non existing CssClass">
-    </div>
+    <div id="ctrl_31" class="Non existing CssClass"></div>
   </div>
   <div id="GHTSubTest33" testname="System.Web.UI.WebControls.RadioButton: CssClass1">
     <span class="CssClass1">
@@ -154,75 +145,171 @@
   </div>
   <div id="GHTSubTest41" testname="System.Web.UI.WebControls.DropDownList: CssClass1">
     <select id="ctrl_40" name="ctrl_40" class="CssClass1">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest42" testname="System.Web.UI.WebControls.DropDownList: CssClass2">
     <select id="ctrl_41" name="ctrl_41" class="CssClass2">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest43" testname="System.Web.UI.WebControls.DropDownList: Empty string">
     <select id="ctrl_42" name="ctrl_42" class="Empty string">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest44" testname="System.Web.UI.WebControls.DropDownList: Non existing CssClass">
     <select id="ctrl_43" name="ctrl_43" class="Non existing CssClass">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest45" testname="System.Web.UI.WebControls.ListBox: CssClass1">
     <select id="ctrl_44" size="4" name="ctrl_44" class="CssClass1">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest46" testname="System.Web.UI.WebControls.ListBox: CssClass2">
     <select id="ctrl_45" size="4" name="ctrl_45" class="CssClass2">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest47" testname="System.Web.UI.WebControls.ListBox: Empty string">
     <select id="ctrl_46" size="4" name="ctrl_46" class="Empty string">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest48" testname="System.Web.UI.WebControls.ListBox: Non existing CssClass">
     <select id="ctrl_47" size="4" name="ctrl_47" class="Non existing CssClass">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest49" testname="System.Web.UI.WebControls.RadioButtonList: CssClass1">
     <table id="ctrl_48" border="0" class="CssClass1">
@@ -308,7 +395,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest52" testname="System.Web.UI.WebControls.RadioButtonList: Non existing CssClass">
+  <div
+    id="GHTSubTest52"
+    testname="System.Web.UI.WebControls.RadioButtonList: Non existing CssClass"
+  >
     <table id="ctrl_51" border="0" class="Non existing CssClass">
       <tr>
         <td>
@@ -449,7 +539,14 @@
     </table>
   </div>
   <div id="GHTSubTest57" testname="System.Web.UI.WebControls.DataGrid: CssClass1">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" class="CssClass1" id="ctrl_56">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      rules="all"
+      class="CssClass1"
+      id="ctrl_56"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -473,7 +570,14 @@
     </table>
   </div>
   <div id="GHTSubTest58" testname="System.Web.UI.WebControls.DataGrid: CssClass2">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" class="CssClass2" id="ctrl_57">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      rules="all"
+      class="CssClass2"
+      id="ctrl_57"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -497,7 +601,14 @@
     </table>
   </div>
   <div id="GHTSubTest59" testname="System.Web.UI.WebControls.DataGrid: Empty string">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" class="Empty string" id="ctrl_58">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      rules="all"
+      class="Empty string"
+      id="ctrl_58"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -521,7 +632,14 @@
     </table>
   </div>
   <div id="GHTSubTest60" testname="System.Web.UI.WebControls.DataGrid: Non existing CssClass">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" class="Non existing CssClass" id="ctrl_59">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      rules="all"
+      class="Non existing CssClass"
+      id="ctrl_59"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -641,7 +759,13 @@
     </table>
   </div>
   <div id="GHTSubTest65" testname="System.Web.UI.WebControls.DataList: CssClass1">
-    <table id="ctrl_68" cellspacing="0" border="0" style="border-collapse:collapse" class="CssClass1">
+    <table
+      id="ctrl_68"
+      cellspacing="0"
+      border="0"
+      style="border-collapse:collapse"
+      class="CssClass1"
+    >
       <tr>
         <td>
           <div>

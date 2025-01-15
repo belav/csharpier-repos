@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ToolStripItemDesignerAvailability" FullName="System.Windows.Forms.Design.ToolStripItemDesignerAvailability">
+<Type
+  Name="ToolStripItemDesignerAvailability"
+  FullName="System.Windows.Forms.Design.ToolStripItemDesignerAvailability"
+>
   <TypeSignature Language="C#" Value="public enum ToolStripItemDesignerAvailability" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -49,7 +52,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that <see cref="T:System.Windows.Forms.ContextMenuStrip" /> is visible.</para>
+          <para
+            >Specifies that <see
+             cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+             is visible.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -66,7 +74,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that <see cref="T:System.Windows.Forms.MenuStrip" /> is visible.</para>
+          <para
+            >Specifies that <see
+             cref="T:System.Windows.Forms.MenuStrip" />
+
+             is visible.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -100,7 +113,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that <see cref="T:System.Windows.Forms.StatusStrip" /> is visible.</para>
+          <para
+            >Specifies that <see
+             cref="T:System.Windows.Forms.StatusStrip" />
+
+             is visible.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -117,7 +135,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that <see cref="T:System.Windows.Forms.ToolStrip" /> is visible.</para>
+          <para
+            >Specifies that <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+             is visible.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

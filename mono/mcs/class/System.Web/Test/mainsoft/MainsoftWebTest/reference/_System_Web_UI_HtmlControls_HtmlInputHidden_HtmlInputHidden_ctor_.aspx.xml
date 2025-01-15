@@ -6,6 +6,9 @@
   <div id="GHTSubTest2" style="height:104px;width:553px">
     <input id="Hidden2" type="hidden" name="Hidden2" value="new value of hidden2" />
     <span>
-      <br />new value of hidden2</span>
+      <br />
+
+      new value of hidden2</span
+    >
   </div>
 </testresults>

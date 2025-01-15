@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DiagnosticSection" FullName="System.ServiceModel.Configuration.DiagnosticSection">
-  <TypeSignature Language="C#" Value="public sealed class DiagnosticSection : System.Configuration.ConfigurationSection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed DiagnosticSection extends System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DiagnosticSection : System.Configuration.ConfigurationSection"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed DiagnosticSection extends System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +26,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DiagnosticSection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +39,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.DiagnosticSection" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.DiagnosticSection" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EndToEndTracing">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.EndToEndTracingElement EndToEndTracing { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.EndToEndTracingElement EndToEndTracing" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.EndToEndTracingElement EndToEndTracing { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.EndToEndTracingElement EndToEndTracing"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -54,7 +74,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the End-to-End tracing configuration settings specified in a <see cref="T:System.ServiceModel.Configuration.EndToEndTracingElement" /> instance.</para>
+          <para
+            >Gets the End-to-End tracing configuration settings specified in a <see
+             cref="T:System.ServiceModel.Configuration.EndToEndTracingElement" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -86,8 +111,14 @@
       </Docs>
     </Member>
     <Member MemberName="MessageLogging">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.MessageLoggingElement MessageLogging { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.MessageLoggingElement MessageLogging" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.MessageLoggingElement MessageLogging { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.MessageLoggingElement MessageLogging"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -131,8 +162,14 @@
       </Docs>
     </Member>
     <Member MemberName="PerformanceCounters">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Diagnostics.PerformanceCounterScope PerformanceCounters { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Diagnostics.PerformanceCounterScope PerformanceCounters" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Diagnostics.PerformanceCounterScope PerformanceCounters { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Diagnostics.PerformanceCounterScope PerformanceCounters"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -155,8 +192,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

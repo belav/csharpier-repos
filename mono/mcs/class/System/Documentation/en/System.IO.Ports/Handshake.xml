@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="Handshake" FullName="System.IO.Ports.Handshake">
   <TypeSignature Language="C#" Value="public enum Handshake" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed Handshake extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed Handshake extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,17 +17,30 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used with the <see cref="P:System.IO.Ports.SerialPort.Handshake" /> property.</para>
+      <para
+        >This enumeration is used with the <see
+         cref="P:System.IO.Ports.SerialPort.Handshake" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the control protocol used in establishing a serial port communication for a <see cref="T:System.IO.Ports.SerialPort" /> object.</para>
+      <para
+        >Specifies the control protocol used in establishing a serial port communication for a <see
+         cref="T:System.IO.Ports.SerialPort" />
+
+         object.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.Ports.Handshake None = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.Ports.Handshake None = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -43,7 +59,10 @@
     </Member>
     <Member MemberName="RequestToSend">
       <MemberSignature Language="C#" Value="RequestToSend" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.Ports.Handshake RequestToSend = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.Ports.Handshake RequestToSend = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,7 +81,10 @@
     </Member>
     <Member MemberName="RequestToSendXOnXOff">
       <MemberSignature Language="C#" Value="RequestToSendXOnXOff" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.Ports.Handshake RequestToSendXOnXOff = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.Ports.Handshake RequestToSendXOnXOff = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -81,7 +103,10 @@
     </Member>
     <Member MemberName="XOnXOff">
       <MemberSignature Language="C#" Value="XOnXOff" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.IO.Ports.Handshake XOnXOff = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.IO.Ports.Handshake XOnXOff = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

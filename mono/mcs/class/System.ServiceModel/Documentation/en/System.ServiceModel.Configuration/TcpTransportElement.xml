@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TcpTransportElement" FullName="System.ServiceModel.Configuration.TcpTransportElement">
-  <TypeSignature Language="C#" Value="public sealed class TcpTransportElement : System.ServiceModel.Configuration.ConnectionOrientedTransportElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit TcpTransportElement extends System.ServiceModel.Configuration.ConnectionOrientedTransportElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class TcpTransportElement : System.ServiceModel.Configuration.ConnectionOrientedTransportElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit TcpTransportElement extends System.ServiceModel.Configuration.ConnectionOrientedTransportElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public TcpTransportElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +42,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.TcpTransportElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.TcpTransportElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ApplyConfiguration">
-      <MemberSignature Language="C#" Value="public override void ApplyConfiguration (System.ServiceModel.Channels.BindingElement bindingElement);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ApplyConfiguration(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void ApplyConfiguration (System.ServiceModel.Channels.BindingElement bindingElement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void ApplyConfiguration(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -54,15 +74,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Applies the settings of the specified <see cref="T:System.ServiceModel.Channels.BindingElement" /> to this configuration element.</para>
+          <para
+            >Applies the settings of the specified <see
+             cref="T:System.ServiceModel.Channels.BindingElement" />
+
+             to this configuration element.</para
+          >
         </summary>
         <param name="bindingElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.BindingElement" /> whose settings are to be applied to this configuration element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.BindingElement" />
+
+           whose settings are to be applied to this configuration element.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
       <MemberSignature Language="C#" Value="public override Type BindingElementType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type BindingElementType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type BindingElementType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -75,13 +109,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Type" /> object that represents the custom binding element.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Type" />
+
+             object that represents the custom binding element.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ConnectionPoolSettings">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement ConnectionPoolSettings { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement ConnectionPoolSettings" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement ConnectionPoolSettings { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement ConnectionPoolSettings"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -104,8 +149,14 @@
       </Docs>
     </Member>
     <Member MemberName="CopyFrom">
-      <MemberSignature Language="C#" Value="public override void CopyFrom (System.ServiceModel.Configuration.ServiceModelExtensionElement from);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void CopyFrom(class System.ServiceModel.Configuration.ServiceModelExtensionElement from) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void CopyFrom (System.ServiceModel.Configuration.ServiceModelExtensionElement from);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void CopyFrom(class System.ServiceModel.Configuration.ServiceModelExtensionElement from) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -114,7 +165,10 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="from" Type="System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+        <Parameter
+          Name="from"
+          Type="System.ServiceModel.Configuration.ServiceModelExtensionElement"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -123,12 +177,21 @@
           <para>Copies the settings from the specified configuration element to this configuration element.</para>
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />The configuration element whose settings are to be copied to this configuration element section.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The configuration element whose settings are to be copied to this configuration element section.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateDefaultBindingElement">
-      <MemberSignature Language="C#" Value="protected override System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -144,8 +207,14 @@
       </Docs>
     </Member>
     <Member MemberName="InitializeFrom">
-      <MemberSignature Language="C#" Value="protected override void InitializeFrom (System.ServiceModel.Channels.BindingElement bindingElement);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void InitializeFrom(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void InitializeFrom (System.ServiceModel.Channels.BindingElement bindingElement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance void InitializeFrom(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -184,7 +253,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Connections in excess of the limit are queued until a space below the limit becomes available. The <see cref="P:System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement.LeaseTimeout" /> property limits the duration the client waits to be connected before throwing a connection exception.</para>
+          <para
+            >Connections in excess of the limit are queued until a space below the limit becomes available. The <see
+             cref="P:System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement.LeaseTimeout" />
+
+             property limits the duration the client waits to be connected before throwing a connection exception.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -213,7 +287,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This setting is relevant only to services. Clients are not affected.</para>
           <para>Using this setting requires enabling the indigo1 TCP Port Sharing Service by changing its Startup Type to Manual or Automatic.</para>
-          <para>crabout the TCP Listener and how to start it, see <see cref="T:System.Net.Sockets.TcpListener" />.</para>
+          <para
+            >crabout the TCP Listener and how to start it, see <see
+             cref="T:System.Net.Sockets.TcpListener" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -222,8 +301,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -256,8 +341,23 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property enables Teredo for the underlying TCP socket. For more information, see <see cref="http://go.microsoft.com/fwlink/?LinkId=96651">Teredo Overview</see>.</para>
-          <para>This property is only applicable on wxpsp2 and ws2003. wv has a machine-wide configuration option for Teredo, so when running wv, this property is ignored. Teredo requires that the client and service machines both have the Microsoft IPv6 stack installed and correctly configured for Teredo usage. For more information about configuring Teredo, see <see cref="http://go.microsoft.com/fwlink/?LinkId=96651">Teredo Overview</see>. For more information, see <see cref="http://go.microsoft.com/fwlink/?LinkId=96652">Windows Server 2003 Technology Centers</see>.</para>
+          <para
+            >This property enables Teredo for the underlying TCP socket. For more information, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=96651">Teredo Overview</see>
+
+            .</para
+          >
+          <para
+            >This property is only applicable on wxpsp2 and ws2003. wv has a machine-wide configuration option for Teredo, so when running wv, this property is ignored. Teredo requires that the client and service machines both have the Microsoft IPv6 stack installed and correctly configured for Teredo usage. For more information about configuring Teredo, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=96651">Teredo Overview</see>
+
+            . For more information, see <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=96652"
+              >Windows Server 2003 Technology Centers</see
+            >
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

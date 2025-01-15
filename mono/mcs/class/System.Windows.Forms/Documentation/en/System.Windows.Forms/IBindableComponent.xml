@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IBindableComponent" FullName="System.Windows.Forms.IBindableComponent">
-  <TypeSignature Language="C#" Value="public interface IBindableComponent : System.ComponentModel.IComponent" />
+  <TypeSignature
+    Language="C#"
+    Value="public interface IBindableComponent : System.ComponentModel.IComponent"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,8 +17,27 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A <see cref="T:System.Windows.Forms.Binding" /> contains a reference to its <see cref="T:System.Windows.Forms.IBindableComponent" /> owner through the <see cref="P:System.Windows.Forms.Binding.BindableComponent" /> property.</para>
-      <para>The <see cref="T:System.Windows.Forms.Control" /> class implements this interface, so if your bindable component inherits from <see cref="T:System.Windows.Forms.Control" />, you do not need to implement this interface.</para>
+      <para
+        >A <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         contains a reference to its <see
+         cref="T:System.Windows.Forms.IBindableComponent" />
+
+         owner through the <see
+         cref="P:System.Windows.Forms.Binding.BindableComponent" />
+
+         property.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.Control" />
+
+         class implements this interface, so if your bindable component inherits from <see
+         cref="T:System.Windows.Forms.Control" />
+
+        , you do not need to implement this interface.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -24,7 +46,10 @@
   </Docs>
   <Members>
     <Member MemberName="BindingContext">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.BindingContext BindingContext { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.BindingContext BindingContext { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.BindingContext</ReturnType>
@@ -35,7 +60,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the collection of currency managers for the <see cref="T:System.Windows.Forms.IBindableComponent" />. </para>
+          <para
+            >Gets or sets the collection of currency managers for the <see
+             cref="T:System.Windows.Forms.IBindableComponent" />
+
+            . </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -43,7 +73,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DataBindings">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ControlBindingsCollection DataBindings { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ControlBindingsCollection DataBindings { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ControlBindingsCollection</ReturnType>
@@ -54,7 +87,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the collection of data-binding objects for this <see cref="T:System.Windows.Forms.IBindableComponent" />.</para>
+          <para
+            >Gets the collection of data-binding objects for this <see
+             cref="T:System.Windows.Forms.IBindableComponent" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

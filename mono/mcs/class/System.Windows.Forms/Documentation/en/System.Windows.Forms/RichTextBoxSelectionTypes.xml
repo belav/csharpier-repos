@@ -17,11 +17,27 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to determine the value of the <see cref="P:System.Windows.Forms.RichTextBox.SelectionType" /> property of the <see cref="T:System.Windows.Forms.RichTextBox" /> class. The <see cref="P:System.Windows.Forms.RichTextBox.SelectionType" /> property can return any combination of values from this enumeration.</para>
+      <para
+        >Use the members of this enumeration to determine the value of the <see
+         cref="P:System.Windows.Forms.RichTextBox.SelectionType" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.RichTextBox" />
+
+         class. The <see
+         cref="P:System.Windows.Forms.RichTextBox.SelectionType" />
+
+         property can return any combination of values from this enumeration.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the type of selection in a <see cref="T:System.Windows.Forms.RichTextBox" /> control.</para>
+      <para
+        >Specifies the type of selection in a <see
+         cref="T:System.Windows.Forms.RichTextBox" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>

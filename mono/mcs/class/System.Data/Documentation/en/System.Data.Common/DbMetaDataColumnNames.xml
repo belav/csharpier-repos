@@ -14,7 +14,15 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides static values that are used for the column names in the MetaDataCollection objects contained in the <see cref="T:System.Data.DataTable" />. The <see cref="T:System.Data.DataTable" /> is created by the GetSchema method.</para>
+      <para
+        >Provides static values that are used for the column names in the MetaDataCollection objects contained in the <see
+         cref="T:System.Data.DataTable" />
+
+        . The <see
+         cref="T:System.Data.DataTable" />
+
+         is created by the GetSchema method.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -55,7 +63,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CompositeIdentifierSeparatorPattern">
-      <MemberSignature Language="C#" Value="public static readonly string CompositeIdentifierSeparatorPattern;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string CompositeIdentifierSeparatorPattern;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -127,7 +138,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DataSourceProductVersion">
-      <MemberSignature Language="C#" Value="public static readonly string DataSourceProductVersion;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string DataSourceProductVersion;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -145,7 +159,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DataSourceProductVersionNormalized">
-      <MemberSignature Language="C#" Value="public static readonly string DataSourceProductVersionNormalized;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string DataSourceProductVersionNormalized;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -526,7 +543,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NumberOfIdentifierParts">
-      <MemberSignature Language="C#" Value="public static readonly string NumberOfIdentifierParts;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string NumberOfIdentifierParts;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -562,7 +582,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OrderByColumnsInSelect">
-      <MemberSignature Language="C#" Value="public static readonly string OrderByColumnsInSelect;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string OrderByColumnsInSelect;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -598,7 +621,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ParameterMarkerPattern">
-      <MemberSignature Language="C#" Value="public static readonly string ParameterMarkerPattern;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string ParameterMarkerPattern;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -616,7 +642,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ParameterNameMaxLength">
-      <MemberSignature Language="C#" Value="public static readonly string ParameterNameMaxLength;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string ParameterNameMaxLength;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -688,7 +717,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="QuotedIdentifierPattern">
-      <MemberSignature Language="C#" Value="public static readonly string QuotedIdentifierPattern;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string QuotedIdentifierPattern;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -724,7 +756,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="StatementSeparatorPattern">
-      <MemberSignature Language="C#" Value="public static readonly string StatementSeparatorPattern;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string StatementSeparatorPattern;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -760,7 +795,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SupportedJoinOperators">
-      <MemberSignature Language="C#" Value="public static readonly string SupportedJoinOperators;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly string SupportedJoinOperators;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>

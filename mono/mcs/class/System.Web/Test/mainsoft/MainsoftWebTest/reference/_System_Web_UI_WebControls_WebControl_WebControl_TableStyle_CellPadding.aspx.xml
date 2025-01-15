@@ -84,7 +84,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest4" testname="System.Web.UI.WebControls.RadioButtonList: check that default is -1.">
+  <div
+    id="GHTSubTest4"
+    testname="System.Web.UI.WebControls.RadioButtonList: check that default is -1."
+  >
     <table id="ctrl_3" border="0">
       <tr>
         <td>
@@ -112,7 +115,10 @@
       </tr>
     </table>
     <span>
-      <br />-1</span>
+      <br />
+
+      -1</span
+    >
   </div>
   <div id="GHTSubTest5" testname="System.Web.UI.WebControls.RadioButtonList: Set only in CssClass.">
     <table id="ctrl_4" border="0" class="CssClass1">
@@ -142,7 +148,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest6" testname="System.Web.UI.WebControls.RadioButtonList: Set both in CssClass and in code.">
+  <div
+    id="GHTSubTest6"
+    testname="System.Web.UI.WebControls.RadioButtonList: Set both in CssClass and in code."
+  >
     <table id="ctrl_5" border="0" cellpadding="20" class="CssClass1">
       <tr>
         <td>
@@ -170,7 +179,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest7" testname="System.Web.UI.WebControls.RadioButtonList: Throws an exception if set to less then -1.">
+  <div
+    id="GHTSubTest7"
+    testname="System.Web.UI.WebControls.RadioButtonList: Throws an exception if set to less then -1."
+  >
     <table id="ctrl_6" border="0">
       <tr>
         <td>
@@ -198,7 +210,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest8" testname="System.Web.UI.WebControls.CheckBoxList: Legal value.">
     <table id="ctrl_7" border="0" cellpadding="10">
@@ -284,7 +299,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest11" testname="System.Web.UI.WebControls.CheckBoxList: check that default is -1.">
+  <div
+    id="GHTSubTest11"
+    testname="System.Web.UI.WebControls.CheckBoxList: check that default is -1."
+  >
     <table id="ctrl_10" border="0">
       <tr>
         <td>
@@ -312,7 +330,10 @@
       </tr>
     </table>
     <span>
-      <br />-1</span>
+      <br />
+
+      -1</span
+    >
   </div>
   <div id="GHTSubTest12" testname="System.Web.UI.WebControls.CheckBoxList: Set only in CssClass.">
     <table id="ctrl_11" border="0" class="CssClass1">
@@ -342,7 +363,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest13" testname="System.Web.UI.WebControls.CheckBoxList: Set both in CssClass and in code.">
+  <div
+    id="GHTSubTest13"
+    testname="System.Web.UI.WebControls.CheckBoxList: Set both in CssClass and in code."
+  >
     <table id="ctrl_12" border="0" cellpadding="20" class="CssClass1">
       <tr>
         <td>
@@ -370,7 +394,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest14" testname="System.Web.UI.WebControls.CheckBoxList: Throws an exception if set to less then -1.">
+  <div
+    id="GHTSubTest14"
+    testname="System.Web.UI.WebControls.CheckBoxList: Throws an exception if set to less then -1."
+  >
     <table id="ctrl_13" border="0">
       <tr>
         <td>
@@ -398,10 +425,20 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest15" testname="System.Web.UI.WebControls.DataGrid: Legal value.">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" cellpadding="10" rules="all" id="ctrl_14">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      cellpadding="10"
+      rules="all"
+      id="ctrl_14"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -425,7 +462,14 @@
     </table>
   </div>
   <div id="GHTSubTest16" testname="System.Web.UI.WebControls.DataGrid: Zero.">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" cellpadding="0" rules="all" id="ctrl_15">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      cellpadding="0"
+      rules="all"
+      id="ctrl_15"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -496,10 +540,20 @@
       </tr>
     </table>
     <span>
-      <br />-1</span>
+      <br />
+
+      -1</span
+    >
   </div>
   <div id="GHTSubTest19" testname="System.Web.UI.WebControls.DataGrid: Set only in CssClass.">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" class="CssClass1" id="ctrl_18">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      rules="all"
+      class="CssClass1"
+      id="ctrl_18"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -522,8 +576,19 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest20" testname="System.Web.UI.WebControls.DataGrid: Set both in CssClass and in code.">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" cellpadding="20" rules="all" class="CssClass1" id="ctrl_19">
+  <div
+    id="GHTSubTest20"
+    testname="System.Web.UI.WebControls.DataGrid: Set both in CssClass and in code."
+  >
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      cellpadding="20"
+      rules="all"
+      class="CssClass1"
+      id="ctrl_19"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -546,7 +611,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest21" testname="System.Web.UI.WebControls.DataGrid: Throws an exception if set to less then -1.">
+  <div
+    id="GHTSubTest21"
+    testname="System.Web.UI.WebControls.DataGrid: Throws an exception if set to less then -1."
+  >
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="ctrl_20">
       <tr>
         <td>Id</td>
@@ -570,10 +638,19 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest22" testname="System.Web.UI.WebControls.DataList: Legal value.">
-    <table id="ctrl_21" cellspacing="0" border="0" style="border-collapse:collapse" cellpadding="10">
+    <table
+      id="ctrl_21"
+      cellspacing="0"
+      border="0"
+      style="border-collapse:collapse"
+      cellpadding="10"
+    >
       <tr>
         <td>
           <div>

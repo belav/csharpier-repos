@@ -12,8 +12,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.PowerStatus" /> class represents information about the current AC line power status, battery charging status, and battery charge status.</para>
-      <para>This class is used by the <see cref="P:System.Windows.Forms.SystemInformation.PowerStatus" /> property of the <see cref="T:System.Windows.Forms.SystemInformation" /> class to indicate current system power information.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.PowerStatus" />
+
+         class represents information about the current AC line power status, battery charging status, and battery charge status.</para
+      >
+      <para
+        >This class is used by the <see
+         cref="P:System.Windows.Forms.SystemInformation.PowerStatus" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.SystemInformation" />
+
+         class to indicate current system power information.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -22,7 +35,10 @@
   </Docs>
   <Members>
     <Member MemberName="BatteryChargeStatus">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.BatteryChargeStatus BatteryChargeStatus { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.BatteryChargeStatus BatteryChargeStatus { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -97,7 +113,10 @@
       </Docs>
     </Member>
     <Member MemberName="PowerLineStatus">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.PowerLineStatus PowerLineStatus { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.PowerLineStatus PowerLineStatus { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

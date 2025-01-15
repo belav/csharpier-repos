@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WeakReference&lt;T&gt;" FullName="System.WeakReference&lt;T&gt;">
-  <TypeSignature Language="C#" Value="public sealed class WeakReference&lt;T&gt; : System.Runtime.Serialization.ISerializable where T : class" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit WeakReference`1&lt;class T&gt; extends System.Object implements class System.Runtime.Serialization.ISerializable" />
+<Type Name="WeakReference<T>" FullName="System.WeakReference<T>">
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class WeakReference<T> : System.Runtime.Serialization.ISerializable where T : class"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit WeakReference`1<class T> extends System.Object implements class System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -35,7 +41,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public WeakReference (T target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T target) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T target) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -50,8 +59,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WeakReference (T target, bool trackResurrection);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T target, bool trackResurrection) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public WeakReference (T target, bool trackResurrection);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T target, bool trackResurrection) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -69,7 +84,10 @@
     </Member>
     <Member MemberName="Finalize">
       <MemberSignature Language="C#" Value="~WeakReference`1 ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Finalize() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void Finalize() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -82,13 +100,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Discards the reference to the target that is represented by the current <see cref="T:System.WeakReference`1" /> object.</para>
+          <para
+            >Discards the reference to the target that is represented by the current <see
+             cref="T:System.WeakReference`1" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -104,17 +133,37 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with all the data necessary to serialize the current <see cref="T:System.WeakReference`1" /> object.</para>
+          <para
+            >Populates a <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+             object with all the data necessary to serialize the current <see
+             cref="T:System.WeakReference`1" />
+
+             object.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that holds all the data necessary to serialize or deserialize the current <see cref="T:System.WeakReference`1" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that holds all the data necessary to serialize or deserialize the current <see
+           cref="T:System.WeakReference`1" />
+
+           object.</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The location where serialized data is stored and retrieved.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The location where serialized data is stored and retrieved.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetTarget">
       <MemberSignature Language="C#" Value="public void SetTarget (T target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetTarget(!T target) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetTarget(!T target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -133,7 +182,10 @@
     </Member>
     <Member MemberName="TryGetTarget">
       <MemberSignature Language="C#" Value="public bool TryGetTarget (out T target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryGetTarget(!T target) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool TryGetTarget(!T target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -142,7 +194,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="target" Type="T&amp;" RefType="out" />
+        <Parameter Name="target" Type="T&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="target">To be added.</param>

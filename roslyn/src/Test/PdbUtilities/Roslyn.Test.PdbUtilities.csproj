@@ -34,13 +34,35 @@
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.ResultProvider.UnitTests" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.DiaSymReader" Version="$(MicrosoftDiaSymReaderVersion)" Aliases="DSR"/>
-    <PackageReference Include="Microsoft.DiaSymReader.PortablePdb" Version="$(MicrosoftDiaSymReaderPortablePdbVersion)" />
-    <PackageReference Include="Microsoft.DiaSymReader.Converter" Version="$(MicrosoftDiaSymReaderConverterVersion)" />
-    <PackageReference Include="Microsoft.DiaSymReader.Converter.Xml" Version="$(MicrosoftDiaSymReaderConverterXmlVersion)" />
-    <PackageReference Include="Microsoft.Metadata.Visualizer" Version="$(MicrosoftMetadataVisualizerVersion)" />
-    <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
-    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
+    <PackageReference
+      Include="Microsoft.DiaSymReader"
+      Version="$(MicrosoftDiaSymReaderVersion)"
+      Aliases="DSR"
+    />
+    <PackageReference
+      Include="Microsoft.DiaSymReader.PortablePdb"
+      Version="$(MicrosoftDiaSymReaderPortablePdbVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.DiaSymReader.Converter"
+      Version="$(MicrosoftDiaSymReaderConverterVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.DiaSymReader.Converter.Xml"
+      Version="$(MicrosoftDiaSymReaderConverterXmlVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Metadata.Visualizer"
+      Version="$(MicrosoftMetadataVisualizerVersion)"
+    />
+    <PackageReference
+      Include="System.Collections.Immutable"
+      Version="$(SystemCollectionsImmutableVersion)"
+    />
+    <PackageReference
+      Include="System.Reflection.Metadata"
+      Version="$(SystemReflectionMetadataVersion)"
+    />
     <PackageReference Include="xunit.assert" Version="$(xunitassertVersion)" />
   </ItemGroup>
   <ItemGroup>
@@ -49,8 +71,14 @@
       which doesn't have netstandard 2.0 binaries.
     -->
     <PackageReference Include="System.IO.FileSystem" Version="$(SystemIOFileSystemVersion)" />
-    <PackageReference Include="System.IO.FileSystem.Primitives" Version="$(SystemIOFileSystemPrimitivesVersion)" />
-    <PackageReference Include="System.Text.Encoding.Extensions" Version="$(SystemTextEncodingExtensionsVersion)" />
+    <PackageReference
+      Include="System.IO.FileSystem.Primitives"
+      Version="$(SystemIOFileSystemPrimitivesVersion)"
+    />
+    <PackageReference
+      Include="System.Text.Encoding.Extensions"
+      Version="$(SystemTextEncodingExtensionsVersion)"
+    />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Compilers\Core\Portable\Microsoft.CodeAnalysis.csproj" />

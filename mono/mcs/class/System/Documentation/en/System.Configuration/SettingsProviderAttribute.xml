@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SettingsProviderAttribute" FullName="System.Configuration.SettingsProviderAttribute">
   <TypeSignature Language="C#" Value="public sealed class SettingsProviderAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SettingsProviderAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SettingsProviderAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,8 +23,24 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Each application settings class defines a group of application settings properties that represent information that persists between executions of the application. However, it is a settings provider—a class derived from <see cref="T:System.Configuration.SettingsProvider" />—that actually provides the storage mechanism. </para>
-      <para>The <see cref="T:System.Configuration.SettingsProviderAttribute" /> specifies the settings provider used to provide storage for application settings properties. This attribute can be applied to the entire application settings class or individual application settings properties. A <see cref="T:System.Configuration.SettingsProviderAttribute" /> set at the property level will override the class-level attribute. If a settings provider is not explicitly specified, the default provider is used. For client applications, the default provider is <see cref="T:System.Configuration.LocalFileSettingsProvider" />.</para>
+      <para
+        >Each application settings class defines a group of application settings properties that represent information that persists between executions of the application. However, it is a settings provider—a class derived from <see
+         cref="T:System.Configuration.SettingsProvider" />
+
+        —that actually provides the storage mechanism. </para
+      >
+      <para
+        >The <see
+         cref="T:System.Configuration.SettingsProviderAttribute" />
+
+         specifies the settings provider used to provide storage for application settings properties. This attribute can be applied to the entire application settings class or individual application settings properties. A <see
+         cref="T:System.Configuration.SettingsProviderAttribute" />
+
+         set at the property level will override the class-level attribute. If a settings provider is not explicitly specified, the default provider is used. For client applications, the default provider is <see
+         cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+        .</para
+      >
       <para>Setting providers cannot be determined at run time. Any run-time determination of storage methods must be coded into the settings provider class itself.</para>
       <block subset="none" type="note">
         <para>Using custom settings providers from arbitrary third parties is inherently unsafe because these providers have full read/write access to your application's configuration information. A settings provider should be thoroughly vetted before it is adopted for general use.</para>
@@ -34,8 +53,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SettingsProviderAttribute (string providerTypeName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string providerTypeName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SettingsProviderAttribute (string providerTypeName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string providerTypeName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -48,22 +73,44 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The type name is the name of the class, derived from <see cref="T:System.Configuration.SettingsProvider" />, that is being specified as the settings provider.</para>
+          <para
+            >The type name is the name of the class, derived from <see
+             cref="T:System.Configuration.SettingsProvider" />
+
+            , that is being specified as the settings provider.</para
+          >
           <block subset="none" type="note">
             <para>Using custom settings providers from arbitrary third parties is inherently unsafe because these providers have full read/write access to your application's configuration information. A settings provider should be thoroughly vetted before it is adopted for general use.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes an instance of the <see cref="T:System.Configuration.SettingsProviderAttribute" /> class.</para>
+          <para
+            >Initializes an instance of the <see
+             cref="T:System.Configuration.SettingsProviderAttribute" />
+
+             class.</para
+          >
         </summary>
         <param name="providerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> containing the name of the settings provider.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           containing the name of the settings provider.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SettingsProviderAttribute (Type providerType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type providerType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SettingsProviderAttribute (Type providerType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type providerType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -77,10 +124,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Configuration.SettingsProviderAttribute" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Configuration.SettingsProviderAttribute" />
+
+             class. </para
+          >
         </summary>
         <param name="providerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Type" /> containing the settings provider type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Type" />
+
+           containing the settings provider type.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ProviderTypeName">
@@ -99,7 +157,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Configuration.SettingsProviderAttribute.ProviderTypeName" /> property is set in the <see cref="M:System.Configuration.SettingsProviderAttribute.#ctor(System.String)" /> for the class.</para>
+          <para
+            >The <see
+             cref="P:System.Configuration.SettingsProviderAttribute.ProviderTypeName" />
+
+             property is set in the <see
+             cref="M:System.Configuration.SettingsProviderAttribute.#ctor(System.String)" />
+
+             for the class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

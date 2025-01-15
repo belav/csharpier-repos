@@ -16,7 +16,21 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the type of SQL query to be used by the <see cref="T:System.Data.OleDb.OleDbRowUpdatedEventArgs" />, <see cref="T:System.Data.OleDb.OleDbRowUpdatingEventArgs" />, <see cref="T:System.Data.SqlClient.SqlRowUpdatedEventArgs" />, or <see cref="T:System.Data.SqlClient.SqlRowUpdatingEventArgs" /> class.</para>
+      <para
+        >Specifies the type of SQL query to be used by the <see
+         cref="T:System.Data.OleDb.OleDbRowUpdatedEventArgs" />
+
+        , <see
+         cref="T:System.Data.OleDb.OleDbRowUpdatingEventArgs" />
+
+        , <see
+         cref="T:System.Data.SqlClient.SqlRowUpdatedEventArgs" />
+
+        , or <see
+         cref="T:System.Data.SqlClient.SqlRowUpdatingEventArgs" />
+
+         class.</para
+      >
     </summary>
   </Docs>
   <Members>

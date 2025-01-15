@@ -13,7 +13,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>You cannot create a new instance of the <see cref="T:System.Windows.Forms.MessageBox" /> class. To display a message box, call the static method <see cref="M:System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions,System.Boolean)" />. The title, message, buttons, and icons displayed in the message box are determined by parameters that you pass to this method.</para>
+      <para
+        >You cannot create a new instance of the <see
+         cref="T:System.Windows.Forms.MessageBox" />
+
+         class. To display a message box, call the static method <see
+         cref="M:System.Windows.Forms.MessageBox.Show(System.String,System.String,System.Windows.Forms.MessageBoxButtons,System.Windows.Forms.MessageBoxIcon,System.Windows.Forms.MessageBoxDefaultButton,System.Windows.Forms.MessageBoxOptions,System.Boolean)" />
+
+        . The title, message, buttons, and icons displayed in the message box are determined by parameters that you pass to this method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -22,7 +30,10 @@
   </Docs>
   <Members>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -33,7 +44,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By default, the message box displays an <ui>OK</ui> button. The message box does not contain a caption in the title.</para>
+          <para
+            >By default, the message box displays an <ui
+            >OK</ui>
+
+             button. The message box does not contain a caption in the title.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -41,10 +57,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -52,7 +76,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text, string caption);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text, string caption);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -64,7 +91,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By default, the message box displays an <ui>OK</ui> button.</para>
+          <para
+            >By default, the message box displays an <ui
+            >OK</ui>
+
+             button.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -72,12 +104,23 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -85,7 +128,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -97,8 +143,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use the <paramref name="owner" /> parameter to specify a particular object, which implements the <see cref="T:System.Windows.Forms.IWin32Window" /> interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
-          <para>By default, the message box displays an <ui>OK</ui> button. The message box does not contain a caption in the title.</para>
+          <para
+            >You can use the <paramref
+             name="owner" />
+
+             parameter to specify a particular object, which implements the <see
+             cref="T:System.Windows.Forms.IWin32Window" />
+
+             interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para
+          >
+          <para
+            >By default, the message box displays an <ui
+            >OK</ui>
+
+             button. The message box does not contain a caption in the title.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -106,12 +165,26 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that will own the modal dialog box. </param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -119,7 +192,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -140,14 +216,31 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -155,7 +248,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -168,8 +264,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use the <paramref name="owner" /> parameter to specify a particular object, which implements the <see cref="T:System.Windows.Forms.IWin32Window" /> interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
-          <para>By default, the message box displays an <ui>OK</ui> button.</para>
+          <para
+            >You can use the <paramref
+             name="owner" />
+
+             parameter to specify a particular object, which implements the <see
+             cref="T:System.Windows.Forms.IWin32Window" />
+
+             interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para
+          >
+          <para
+            >By default, the message box displays an <ui
+            >OK</ui>
+
+             button.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -177,14 +286,31 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that will own the modal dialog box.</param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -192,7 +318,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -214,16 +343,39 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -231,7 +383,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -245,7 +400,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use the <paramref name="owner" /> parameter to specify a particular object, which implements the <see cref="T:System.Windows.Forms.IWin32Window" /> interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
+          <para
+            >You can use the <paramref
+             name="owner" />
+
+             parameter to specify a particular object, which implements the <see
+             cref="T:System.Windows.Forms.IWin32Window" />
+
+             interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para
+          >
           <para>You can have a maximum of three buttons on the message box.</para>
         </remarks>
         <summary>
@@ -254,16 +417,39 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that will own the modal dialog box.</param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -271,7 +457,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -294,18 +483,47 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -313,7 +531,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -328,7 +549,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use the <paramref name="owner" /> parameter to specify a particular object, which implements the <see cref="T:System.Windows.Forms.IWin32Window" /> interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
+          <para
+            >You can use the <paramref
+             name="owner" />
+
+             parameter to specify a particular object, which implements the <see
+             cref="T:System.Windows.Forms.IWin32Window" />
+
+             interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para
+          >
           <para>You can have a maximum of three buttons on the message box.</para>
         </remarks>
         <summary>
@@ -337,18 +566,47 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that will own the modal dialog box.</param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -356,7 +614,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -380,20 +641,55 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -401,7 +697,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -417,7 +716,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use the <paramref name="owner" /> parameter to specify a particular object, which implements the <see cref="T:System.Windows.Forms.IWin32Window" /> interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
+          <para
+            >You can use the <paramref
+             name="owner" />
+
+             parameter to specify a particular object, which implements the <see
+             cref="T:System.Windows.Forms.IWin32Window" />
+
+             interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para
+          >
           <para>You can have a maximum of three buttons on the message box.</para>
         </remarks>
         <summary>
@@ -426,20 +733,55 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that will own the modal dialog box.</param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -447,7 +789,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, bool displayHelpButton);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, bool displayHelpButton);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -468,7 +813,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
-          <para>When the user clicks the Help button, the form that owns the message box (or the active form) receives the <see cref="E:System.Windows.Forms.Control.HelpRequested" /> event. Handle the <see cref="E:System.Windows.Forms.Control.HelpRequested" /> event to perform custom Help actions.</para>
+          <para
+            >When the user clicks the Help button, the form that owns the message box (or the active form) receives the <see
+             cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+             event. Handle the <see
+             cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+             event to perform custom Help actions.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -476,26 +829,67 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
         <param name="displayHelpButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to show the Help button; otherwise, false. The default is false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to show the Help button; otherwise, false. The default is false. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -516,8 +910,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
-          <para>When the user clicks Help button, the Help file specified in the <paramref name="helpFilePath" /> parameter is opened. The form that owns the message box (or the active form) also receives the <see cref="E:System.Windows.Forms.Control.HelpRequested" /> event.</para>
-          <para>The <paramref name="helpFilePath" /> parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para>
+          <para
+            >When the user clicks Help button, the Help file specified in the <paramref
+             name="helpFilePath" />
+
+             parameter is opened. The form that owns the message box (or the active form) also receives the <see
+             cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+             event.</para
+          >
+          <para
+            >The <paramref
+             name="helpFilePath" />
+
+             parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -525,26 +932,67 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
         <param name="helpFilePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path and name of the Help file to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path and name of the Help file to display when the user clicks the Help button. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DialogResult</ReturnType>
@@ -561,7 +1009,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use the <paramref name="owner" /> parameter to specify a particular object, which implements the <see cref="T:System.Windows.Forms.IWin32Window" /> interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
+          <para
+            >You can use the <paramref
+             name="owner" />
+
+             parameter to specify a particular object, which implements the <see
+             cref="T:System.Windows.Forms.IWin32Window" />
+
+             interface, that will serve as the dialog box's top-level window and owner. A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para
+          >
           <para>You can have a maximum of three buttons on the message box.</para>
         </remarks>
         <summary>
@@ -570,22 +1026,63 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that will own the modal dialog box.</param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values the specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values the specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -593,7 +1090,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, string keyword);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, string keyword);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -615,7 +1115,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
-          <para>When the user clicks the Help button, the Help file specified in the <paramref name="helpFilePath" /> parameter is opened and the Help keyword topic identified by the <paramref name="keyword" /> parameter is displayed. The form that owns the message box (or the active form) also receives the <see cref="E:System.Windows.Forms.Control.HelpRequested" /> event.</para>
+          <para
+            >When the user clicks the Help button, the Help file specified in the <paramref
+             name="helpFilePath" />
+
+             parameter is opened and the Help keyword topic identified by the <paramref
+             name="keyword" />
+
+             parameter is displayed. The form that owns the message box (or the active form) also receives the <see
+             cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+             event.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -623,28 +1134,72 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
         <param name="helpFilePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path and name of the Help file to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path and name of the Help file to display when the user clicks the Help button. </param
+        >
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Help keyword to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Help keyword to display when the user clicks the Help button. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, System.Windows.Forms.HelpNavigator navigator);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, System.Windows.Forms.HelpNavigator navigator);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -666,9 +1221,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
-          <para>When the user clicks the Help button, the help file specified in the <paramref name="helpFilePath" /> parameter is opened and the Help content identified by the <paramref name="navigator" /> parameter is displayed. The form that owns the message box (or the active form) also receives the <see cref="E:System.Windows.Forms.Control.HelpRequested" /> event.</para>
-          <para>Compiled Help files provide table of contents, index, search, and keyword links in pages. You can use the following values for <paramref name="navigator" />: <see cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />, <see cref="F:System.Windows.Forms.HelpNavigator.Find" />, <see cref="F:System.Windows.Forms.HelpNavigator.Index" />, or <see cref="F:System.Windows.Forms.HelpNavigator.Topic" />.</para>
-          <para>The <paramref name="helpFilePath" /> parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para>
+          <para
+            >When the user clicks the Help button, the help file specified in the <paramref
+             name="helpFilePath" />
+
+             parameter is opened and the Help content identified by the <paramref
+             name="navigator" />
+
+             parameter is displayed. The form that owns the message box (or the active form) also receives the <see
+             cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+             event.</para
+          >
+          <para
+            >Compiled Help files provide table of contents, index, search, and keyword links in pages. You can use the following values for <paramref
+             name="navigator" />
+
+            : <see
+             cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            , <see
+             cref="F:System.Windows.Forms.HelpNavigator.Find" />
+
+            , <see
+             cref="F:System.Windows.Forms.HelpNavigator.Index" />
+
+            , or <see
+             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            .</para
+          >
+          <para
+            >The <paramref
+             name="helpFilePath" />
+
+             parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -676,28 +1264,75 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
         <param name="helpFilePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path and name of the Help file to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path and name of the Help file to display when the user clicks the Help button. </param
+        >
         <param name="navigator">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.HelpNavigator" />
+
+           values. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -718,9 +1353,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur. You can use the <paramref name="owner" /> parameter to specify a particular object, which implements the <see cref="T:System.Windows.Forms.IWin32Window" /> interface, that will serve as the dialog box's top-level window and owner.</para>
-          <para>When the user clicks the Help button, the Help file specified in the <paramref name="helpFilePath" /> parameter is opened. The form that owns the message box (or the active form) also receives the <see cref="E:System.Windows.Forms.Control.HelpRequested" /> event.</para>
-          <para>The <paramref name="helpFilePath" /> parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para>
+          <para
+            >A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur. You can use the <paramref
+             name="owner" />
+
+             parameter to specify a particular object, which implements the <see
+             cref="T:System.Windows.Forms.IWin32Window" />
+
+             interface, that will serve as the dialog box's top-level window and owner.</para
+          >
+          <para
+            >When the user clicks the Help button, the Help file specified in the <paramref
+             name="helpFilePath" />
+
+             parameter is opened. The form that owns the message box (or the active form) also receives the <see
+             cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+             event.</para
+          >
+          <para
+            >The <paramref
+             name="helpFilePath" />
+
+             parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -728,28 +1384,75 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that will own the modal dialog box.</param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
         <param name="helpFilePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path and name of the Help file to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path and name of the Help file to display when the user clicks the Help button. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, System.Windows.Forms.HelpNavigator navigator, object param);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, System.Windows.Forms.HelpNavigator navigator, object param);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -772,10 +1475,69 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur.</para>
-          <para>When the user clicks the Help button, the Help file specified in the <paramref name="helpFilePath" /> parameter is opened and the Help content identified by the <paramref name="navigator" /> parameter is displayed. The form that owns the message box (or the active form) also receives the <see cref="E:System.Windows.Forms.Control.HelpRequested" /> event.</para>
-          <para>Compiled help files provide table of contents, index, search, and keyword links in pages. You can use the following values for <paramref name="navigator" />: <see cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />, <see cref="F:System.Windows.Forms.HelpNavigator.Find" />, <see cref="F:System.Windows.Forms.HelpNavigator.Index" />, or <see cref="F:System.Windows.Forms.HelpNavigator.Topic" />.</para>
-          <para>You can use <paramref name="param" /> to provide further refinement of the <see cref="F:System.Windows.Forms.HelpNavigator.Topic" /> command. If the value specified in the <paramref name="navigator" /> parameter is <see cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />, <see cref="F:System.Windows.Forms.HelpNavigator.Index" />, or <see cref="F:System.Windows.Forms.HelpNavigator.Find" />, this value should be null. If the <paramref name="navigator" /> parameter references <see cref="F:System.Windows.Forms.HelpNavigator.Topic" />, this value should reference an object that contains the numeric value of the topic to display.</para>
-          <para>The <paramref name="helpFilePath" /> parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para>
+          <para
+            >When the user clicks the Help button, the Help file specified in the <paramref
+             name="helpFilePath" />
+
+             parameter is opened and the Help content identified by the <paramref
+             name="navigator" />
+
+             parameter is displayed. The form that owns the message box (or the active form) also receives the <see
+             cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+             event.</para
+          >
+          <para
+            >Compiled help files provide table of contents, index, search, and keyword links in pages. You can use the following values for <paramref
+             name="navigator" />
+
+            : <see
+             cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            , <see
+             cref="F:System.Windows.Forms.HelpNavigator.Find" />
+
+            , <see
+             cref="F:System.Windows.Forms.HelpNavigator.Index" />
+
+            , or <see
+             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            .</para
+          >
+          <para
+            >You can use <paramref
+             name="param" />
+
+             to provide further refinement of the <see
+             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+             command. If the value specified in the <paramref
+             name="navigator" />
+
+             parameter is <see
+             cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            , <see
+             cref="F:System.Windows.Forms.HelpNavigator.Index" />
+
+            , or <see
+             cref="F:System.Windows.Forms.HelpNavigator.Find" />
+
+            , this value should be null. If the <paramref
+             name="navigator" />
+
+             parameter references <see
+             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            , this value should reference an object that contains the numeric value of the topic to display.</para
+          >
+          <para
+            >The <paramref
+             name="helpFilePath" />
+
+             parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -783,30 +1545,80 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
         <param name="helpFilePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path and name of the Help file to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path and name of the Help file to display when the user clicks the Help button. </param
+        >
         <param name="navigator">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.HelpNavigator" />
+
+           values. </param
+        >
         <param name="param">
-          <attribution license="cc4" from="Microsoft" modified="false" />The numeric ID of the Help topic to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The numeric ID of the Help topic to display when the user clicks the Help button. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, string keyword);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, string keyword);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -828,8 +1640,27 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur. You can use the <paramref name="owner" /> parameter to specify a particular object, which implements the <see cref="T:System.Windows.Forms.IWin32Window" /> interface, that will serve as the dialog box's top-level owner.</para>
-          <para>When the user clicks the Help button, the Help file specified in the <paramref name="helpFilePath" /> parameter is opened and the Help keyword topic identified by the <paramref name="keyword" /> parameter is displayed. The form that owns the message box (or the active form) also receives the <see cref="E:System.Windows.Forms.Control.HelpRequested" /> event.</para>
+          <para
+            >A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur. You can use the <paramref
+             name="owner" />
+
+             parameter to specify a particular object, which implements the <see
+             cref="T:System.Windows.Forms.IWin32Window" />
+
+             interface, that will serve as the dialog box's top-level owner.</para
+          >
+          <para
+            >When the user clicks the Help button, the Help file specified in the <paramref
+             name="helpFilePath" />
+
+             parameter is opened and the Help keyword topic identified by the <paramref
+             name="keyword" />
+
+             parameter is displayed. The form that owns the message box (or the active form) also receives the <see
+             cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+             event.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -837,30 +1668,80 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that will own the modal dialog box.</param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
         <param name="helpFilePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path and name of the Help file to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path and name of the Help file to display when the user clicks the Help button. </param
+        >
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Help keyword to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Help keyword to display when the user clicks the Help button. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, System.Windows.Forms.HelpNavigator navigator);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, System.Windows.Forms.HelpNavigator navigator);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -882,10 +1763,51 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur. You can use the <paramref name="owner" /> parameter to specify a particular object, which implements the <see cref="T:System.Windows.Forms.IWin32Window" /> interface, that will serve as the dialog box's top-level window and owner.</para>
-          <para>When the user clicks the Help button, the Help file specified in the <paramref name="helpFilePath" /> parameter is opened and the Help content identified by the <paramref name="navigator" /> parameter is displayed. The form that owns the message box (or the active form) also receives the <see cref="E:System.Windows.Forms.Control.HelpRequested" /> event.</para>
-          <para>Compiled Help files provide table of contents, index, search, and keyword links in pages. You can use the following values for <paramref name="navigator" />: <see cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />, <see cref="F:System.Windows.Forms.HelpNavigator.Find" />, <see cref="F:System.Windows.Forms.HelpNavigator.Index" />, or <see cref="F:System.Windows.Forms.HelpNavigator.Topic" />.</para>
-          <para>The <paramref name="helpFilePath" /> parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para>
+          <para
+            >A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur. You can use the <paramref
+             name="owner" />
+
+             parameter to specify a particular object, which implements the <see
+             cref="T:System.Windows.Forms.IWin32Window" />
+
+             interface, that will serve as the dialog box's top-level window and owner.</para
+          >
+          <para
+            >When the user clicks the Help button, the Help file specified in the <paramref
+             name="helpFilePath" />
+
+             parameter is opened and the Help content identified by the <paramref
+             name="navigator" />
+
+             parameter is displayed. The form that owns the message box (or the active form) also receives the <see
+             cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+             event.</para
+          >
+          <para
+            >Compiled Help files provide table of contents, index, search, and keyword links in pages. You can use the following values for <paramref
+             name="navigator" />
+
+            : <see
+             cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            , <see
+             cref="F:System.Windows.Forms.HelpNavigator.Find" />
+
+            , <see
+             cref="F:System.Windows.Forms.HelpNavigator.Index" />
+
+            , or <see
+             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            .</para
+          >
+          <para
+            >The <paramref
+             name="helpFilePath" />
+
+             parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -893,30 +1815,83 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that will own the modal dialog box.</param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
         <param name="helpFilePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path and name of the Help file to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path and name of the Help file to display when the user clicks the Help button. </param
+        >
         <param name="navigator">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.HelpNavigator" />
+
+           values. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, System.Windows.Forms.HelpNavigator navigator, object param);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.DialogResult Show (System.Windows.Forms.IWin32Window owner, string text, string caption, System.Windows.Forms.MessageBoxButtons buttons, System.Windows.Forms.MessageBoxIcon icon, System.Windows.Forms.MessageBoxDefaultButton defaultButton, System.Windows.Forms.MessageBoxOptions options, string helpFilePath, System.Windows.Forms.HelpNavigator navigator, object param);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -939,11 +1914,78 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur. You can use the <paramref name="owner" /> parameter to specify a particular object, which implements the <see cref="T:System.Windows.Forms.IWin32Window" /> interface, that will serve as the dialog box's top-level window and owner.</para>
-          <para>When the user clicks the Help button, the Help file specified in the <paramref name="helpFilePath" /> parameter is opened and the Help content identified by the <paramref name="navigator" /> parameter is displayed. The form that owns the message box (or the active form) also receives the <see cref="E:System.Windows.Forms.Control.HelpRequested" /> event.</para>
-          <para>Compiled help files provide table of contents, index, search, and keyword links in pages. You can use the following values for <paramref name="navigator" />: <see cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />, <see cref="F:System.Windows.Forms.HelpNavigator.Find" />, <see cref="F:System.Windows.Forms.HelpNavigator.Index" />, or <see cref="F:System.Windows.Forms.HelpNavigator.Topic" />.</para>
-          <para>You can use <paramref name="param" /> to provide further refinement of the <see cref="F:System.Windows.Forms.HelpNavigator.Topic" /> command. If the value specified in the <paramref name="navigator" /> parameter is <see cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />, <see cref="F:System.Windows.Forms.HelpNavigator.Index" />, or <see cref="F:System.Windows.Forms.HelpNavigator.Find" />, this value should be null. If the <paramref name="navigator" /> parameter references <see cref="F:System.Windows.Forms.HelpNavigator.Topic" />, this value should reference an object that contains the numeric value of the topic to display.</para>
-          <para>The <paramref name="helpFilePath" /> parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para>
+          <para
+            >A message box is a modal dialog box, which means no input (keyboard or mouse click) can occur except to objects on the modal form. The program must hide or close a modal form (typically in response to some user action) before input to another form can occur. You can use the <paramref
+             name="owner" />
+
+             parameter to specify a particular object, which implements the <see
+             cref="T:System.Windows.Forms.IWin32Window" />
+
+             interface, that will serve as the dialog box's top-level window and owner.</para
+          >
+          <para
+            >When the user clicks the Help button, the Help file specified in the <paramref
+             name="helpFilePath" />
+
+             parameter is opened and the Help content identified by the <paramref
+             name="navigator" />
+
+             parameter is displayed. The form that owns the message box (or the active form) also receives the <see
+             cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+             event.</para
+          >
+          <para
+            >Compiled help files provide table of contents, index, search, and keyword links in pages. You can use the following values for <paramref
+             name="navigator" />
+
+            : <see
+             cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            , <see
+             cref="F:System.Windows.Forms.HelpNavigator.Find" />
+
+            , <see
+             cref="F:System.Windows.Forms.HelpNavigator.Index" />
+
+            , or <see
+             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            .</para
+          >
+          <para
+            >You can use <paramref
+             name="param" />
+
+             to provide further refinement of the <see
+             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+             command. If the value specified in the <paramref
+             name="navigator" />
+
+             parameter is <see
+             cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+
+            , <see
+             cref="F:System.Windows.Forms.HelpNavigator.Index" />
+
+            , or <see
+             cref="F:System.Windows.Forms.HelpNavigator.Find" />
+
+            , this value should be null. If the <paramref
+             name="navigator" />
+
+             parameter references <see
+             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+
+            , this value should reference an object that contains the numeric value of the topic to display.</para
+          >
+          <para
+            >The <paramref
+             name="helpFilePath" />
+
+             parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -951,28 +1993,81 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>One of the <see cref="T:System.Windows.Forms.DialogResult" /> values.</para>
+          <para
+            >One of the <see
+             cref="T:System.Windows.Forms.DialogResult" />
+
+             values.</para
+          >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.Windows.Forms.IWin32Window" /> that will own the modal dialog box.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.Windows.Forms.IWin32Window" />
+
+           that will own the modal dialog box.</param
+        >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the message box. </param
+        >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text to display in the title bar of the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text to display in the title bar of the message box. </param
+        >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" /> values that specifies which buttons to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxButtons" />
+
+           values that specifies which buttons to display in the message box. </param
+        >
         <param name="icon">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxIcon" /> values that specifies which icon to display in the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxIcon" />
+
+           values that specifies which icon to display in the message box. </param
+        >
         <param name="defaultButton">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxDefaultButton" /> values that specifies the default button for the message box. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxDefaultButton" />
+
+           values that specifies the default button for the message box. </param
+        >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.MessageBoxOptions" /> values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.MessageBoxOptions" />
+
+           values that specifies which display and association options will be used for the message box. You may pass in 0 if you wish to use the defaults.</param
+        >
         <param name="helpFilePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path and name of the Help file to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path and name of the Help file to display when the user clicks the Help button. </param
+        >
         <param name="navigator">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.HelpNavigator" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.HelpNavigator" />
+
+           values. </param
+        >
         <param name="param">
-          <attribution license="cc4" from="Microsoft" modified="false" />The numeric ID of the Help topic to display when the user clicks the Help button. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The numeric ID of the Help topic to display when the user clicks the Help button. </param
+        >
       </Docs>
     </Member>
   </Members>

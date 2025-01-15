@@ -1,5 +1,11 @@
-<Type Name="RadioButton+RadioButtonAccessibleObject" FullName="System.Windows.Forms.RadioButton+RadioButtonAccessibleObject">
-  <TypeSignature Language="C#" Value="public class RadioButton.RadioButtonAccessibleObject : System.Windows.Forms.ButtonBase.ButtonBaseAccessibleObject" />
+<Type
+  Name="RadioButton+RadioButtonAccessibleObject"
+  FullName="System.Windows.Forms.RadioButton+RadioButtonAccessibleObject"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class RadioButton.RadioButtonAccessibleObject : System.Windows.Forms.ButtonBase.ButtonBaseAccessibleObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -20,7 +26,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RadioButtonAccessibleObject (System.Windows.Forms.RadioButton owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public RadioButtonAccessibleObject (System.Windows.Forms.RadioButton owner);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="owner" Type="System.Windows.Forms.RadioButton" />
@@ -68,7 +77,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Role">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleRole Role { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleRole Role { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.AccessibleRole</ReturnType>
@@ -84,7 +96,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="State">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleStates State { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleStates State { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.AccessibleStates</ReturnType>

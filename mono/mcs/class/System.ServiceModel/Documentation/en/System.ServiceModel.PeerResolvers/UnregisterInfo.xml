@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="UnregisterInfo" FullName="System.ServiceModel.PeerResolvers.UnregisterInfo">
   <TypeSignature Language="C#" Value="public class UnregisterInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit UnregisterInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit UnregisterInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -28,7 +31,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public UnregisterInfo ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -38,13 +44,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.UnregisterInfo" /> class. </para>
+          <para
+            >Initializes a new default instance of the <see
+             cref="T:System.ServiceModel.PeerResolvers.UnregisterInfo" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public UnregisterInfo (string meshId, Guid registration_id);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string meshId, valuetype System.Guid registration_id) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public UnregisterInfo (string meshId, Guid registration_id);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string meshId, valuetype System.Guid registration_id) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,16 +75,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.UnregisterInfo" /> class with mesh and registration ID of the peer to remove from the registration lookup table in the resolver service.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.PeerResolvers.UnregisterInfo" />
+
+             class with mesh and registration ID of the peer to remove from the registration lookup table in the resolver service.</para
+          >
         </summary>
         <param name="meshId">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.String" /> that specifies the mesh ID of the peer whose entry is to be removed.</param>
+          <see cref="T:System.String" />
+
+           that specifies the mesh ID of the peer whose entry is to be removed.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="HasBody">
       <MemberSignature Language="C#" Value="public bool HasBody ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool HasBody() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool HasBody() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -109,7 +137,10 @@
     </Member>
     <Member MemberName="RegistrationId">
       <MemberSignature Language="C#" Value="public Guid RegistrationId { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Guid RegistrationId" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Guid RegistrationId"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

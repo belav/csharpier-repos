@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="HttpListenerWebSocketContext" FullName="System.Net.WebSockets.HttpListenerWebSocketContext">
-  <TypeSignature Language="C#" Value="public class HttpListenerWebSocketContext : System.Net.WebSockets.WebSocketContext" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit HttpListenerWebSocketContext extends System.Net.WebSockets.WebSocketContext" />
+<Type
+  Name="HttpListenerWebSocketContext"
+  FullName="System.Net.WebSockets.HttpListenerWebSocketContext"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class HttpListenerWebSocketContext : System.Net.WebSockets.WebSocketContext"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit HttpListenerWebSocketContext extends System.Net.WebSockets.WebSocketContext"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,13 +23,21 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides access to information received by the <see cref="T:System.Net.HttpListener" /> class when accepting WebSocket connections.</para>
+      <para
+        >Provides access to information received by the <see
+         cref="T:System.Net.HttpListener" />
+
+         class when accepting WebSocket connections.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public HttpListenerWebSocketContext ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -32,8 +49,14 @@
       </Docs>
     </Member>
     <Member MemberName="CookieCollection">
-      <MemberSignature Language="C#" Value="public override System.Net.CookieCollection CookieCollection { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.CookieCollection CookieCollection" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Net.CookieCollection CookieCollection { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.CookieCollection CookieCollection"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -51,13 +74,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the cookies received by the <see cref="T:System.Net.HttpListener" /> object in the WebSocket opening handshake.</para>
+          <para
+            >Gets the cookies received by the <see
+             cref="T:System.Net.HttpListener" />
+
+             object in the WebSocket opening handshake.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Headers">
-      <MemberSignature Language="C#" Value="public override System.Collections.Specialized.NameValueCollection Headers { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Specialized.NameValueCollection Headers" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Collections.Specialized.NameValueCollection Headers { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Specialized.NameValueCollection Headers"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -75,7 +109,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the HTTP headers received by the <see cref="T:System.Net.HttpListener" /> object in the WebSocket opening handshake.</para>
+          <para
+            >Gets the HTTP headers received by the <see
+             cref="T:System.Net.HttpListener" />
+
+             object in the WebSocket opening handshake.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -224,8 +263,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecWebSocketProtocols">
-      <MemberSignature Language="C#" Value="public override System.Collections.Generic.IEnumerable&lt;string&gt; SecWebSocketProtocols { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IEnumerable`1&lt;string&gt; SecWebSocketProtocols" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Collections.Generic.IEnumerable<string> SecWebSocketProtocols { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IEnumerable`1<string> SecWebSocketProtocols"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -272,8 +317,14 @@
       </Docs>
     </Member>
     <Member MemberName="User">
-      <MemberSignature Language="C#" Value="public override System.Security.Principal.IPrincipal User { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Principal.IPrincipal User" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.Principal.IPrincipal User { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Principal.IPrincipal User"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -296,8 +347,14 @@
       </Docs>
     </Member>
     <Member MemberName="WebSocket">
-      <MemberSignature Language="C#" Value="public override System.Net.WebSockets.WebSocket WebSocket { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.WebSockets.WebSocket WebSocket" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Net.WebSockets.WebSocket WebSocket { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.WebSockets.WebSocket WebSocket"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="WindowsFormsSection" FullName="System.Windows.Forms.WindowsFormsSection">
-  <TypeSignature Language="C#" Value="public sealed class WindowsFormsSection : System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class WindowsFormsSection : System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -12,11 +15,23 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class supports application settings in Windows Forms. For more information about this feature, see <format type="text/html"><a href="0dd8bca5-a6bf-4ac4-8eec-5725d08b38dc">Application Settings Overview</a></format>.</para>
+      <para
+        >This class supports application settings in Windows Forms. For more information about this feature, see <format
+         type="text/html">
+          <a href="0dd8bca5-a6bf-4ac4-8eec-5725d08b38dc">Application Settings Overview</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines a new <see cref="T:System.Configuration.ConfigurationSection" /> for parsing application settings. This class cannot be inherited. </para>
+      <para
+        >Defines a new <see
+         cref="T:System.Configuration.ConfigurationSection" />
+
+         for parsing application settings. This class cannot be inherited. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -31,7 +46,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.WindowsFormsSection" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.WindowsFormsSection" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -59,7 +79,10 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

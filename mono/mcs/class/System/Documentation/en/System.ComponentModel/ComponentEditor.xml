@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ComponentEditor" FullName="System.ComponentModel.ComponentEditor">
   <TypeSignature Language="C#" Value="public abstract class ComponentEditor" Maintainer="auto" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ComponentEditor extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit ComponentEditor extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -18,7 +21,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A component editor is used to edit a component as a whole and can be used to implement a user interface similar to that of the property pages. You associate a component editor with a component by using the <see cref="T:System.ComponentModel.EditorAttribute" /> attribute.</para>
+      <para
+        >A component editor is used to edit a component as a whole and can be used to implement a user interface similar to that of the property pages. You associate a component editor with a component by using the <see
+         cref="T:System.ComponentModel.EditorAttribute" />
+
+         attribute.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -28,7 +36,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected ComponentEditor ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -41,13 +52,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.ComponentEditor" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.ComponentEditor" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EditComponent">
       <MemberSignature Language="C#" Value="public bool EditComponent (object component);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool EditComponent(object component) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool EditComponent(object component) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -74,12 +93,21 @@
           <para>true if the component was modified; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component to be edited. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component to be edited. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="EditComponent">
-      <MemberSignature Language="C#" Value="public abstract bool EditComponent (System.ComponentModel.ITypeDescriptorContext context, object component);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool EditComponent(class System.ComponentModel.ITypeDescriptorContext context, object component) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool EditComponent (System.ComponentModel.ITypeDescriptorContext context, object component);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool EditComponent(class System.ComponentModel.ITypeDescriptorContext context, object component) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -107,9 +135,15 @@
           <para>true if the component was modified; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An optional context object that can be used to obtain further information about the edit. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An optional context object that can be used to obtain further information about the edit. </param
+        >
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component to be edited. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component to be edited. </param
+        >
       </Docs>
     </Member>
   </Members>

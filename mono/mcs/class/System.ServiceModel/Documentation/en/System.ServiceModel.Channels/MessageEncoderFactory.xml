@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MessageEncoderFactory" FullName="System.ServiceModel.Channels.MessageEncoderFactory">
   <TypeSignature Language="C#" Value="public abstract class MessageEncoderFactory" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit MessageEncoderFactory extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit MessageEncoderFactory extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -32,7 +35,26 @@
           </para>
         </item>
       </list>
-      <para>Override the <see cref="P:System.ServiceModel.Channels.MessageEncoderFactory.Encoder" /> to return an instance of your custom <see cref="T:System.ServiceModel.Channels.MessageEncoder" />. Then wire up your custom <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" /> to the binding element stack used to configure the service or client by overriding the <see cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" /> method to return an instance of this factory. For more information about custom encoders, see <format type="text/html"><a href="0f03c635-f3e7-4c5c-9463-3cb0135e221e">Custom Encoders</a></format>.</para>
+      <para
+        >Override the <see
+         cref="P:System.ServiceModel.Channels.MessageEncoderFactory.Encoder" />
+
+         to return an instance of your custom <see
+         cref="T:System.ServiceModel.Channels.MessageEncoder" />
+
+        . Then wire up your custom <see
+         cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+
+         to the binding element stack used to configure the service or client by overriding the <see
+         cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" />
+
+         method to return an instance of this factory. For more information about custom encoders, see <format
+         type="text/html">
+          <a href="0f03c635-f3e7-4c5c-9463-3cb0135e221e">Custom Encoders</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -42,7 +64,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected MessageEncoderFactory ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -52,13 +77,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CreateSessionEncoder">
-      <MemberSignature Language="C#" Value="public virtual System.ServiceModel.Channels.MessageEncoder CreateSessionEncoder ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Channels.MessageEncoder CreateSessionEncoder() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.ServiceModel.Channels.MessageEncoder CreateSessionEncoder ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Channels.MessageEncoder CreateSessionEncoder() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -78,13 +114,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Channels.MessageEncoder" /> that is used in session-based exchanges of messages.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Channels.MessageEncoder" />
+
+             that is used in session-based exchanges of messages.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Encoder">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.Channels.MessageEncoder Encoder { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.MessageEncoder Encoder" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.Channels.MessageEncoder Encoder { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.MessageEncoder Encoder"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -102,8 +149,14 @@
       </Docs>
     </Member>
     <Member MemberName="MessageVersion">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.Channels.MessageVersion MessageVersion { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.MessageVersion MessageVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.Channels.MessageVersion MessageVersion { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.MessageVersion MessageVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -115,7 +168,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The message version can be set using the <see cref="P:System.ServiceModel.Channels.MessageEncodingBindingElement.MessageVersion" /> property. <see cref="T:System.ServiceModel.Channels.MessageVersion" /> is limited to using certain versions of SOAP and WS-Addressing and is not extensible. So if these versions are not to be used, this property should be overridden to return <see cref="P:System.ServiceModel.Channels.MessageVersion.None" />.</para>
+          <para
+            >The message version can be set using the <see
+             cref="P:System.ServiceModel.Channels.MessageEncodingBindingElement.MessageVersion" />
+
+             property. <see
+             cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+             is limited to using certain versions of SOAP and WS-Addressing and is not extensible. So if these versions are not to be used, this property should be overridden to return <see
+             cref="P:System.ServiceModel.Channels.MessageVersion.None" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -10,7 +10,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This interface is implemented by the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />, <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />, and <see cref="T:System.Web.UI.WebControls.DataControlField" /> classes. These implementations are used by the .NET Framework and are not intended for use in your code.</para>
+      <para
+        >This interface is implemented by the <see
+         cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+        , <see
+         cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+        , and <see
+         cref="T:System.Web.UI.WebControls.DataControlField" />
+
+         classes. These implementations are used by the .NET Framework and are not intended for use in your code.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,7 +40,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This interface is implemented by the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />, <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />, and <see cref="T:System.Web.UI.WebControls.DataControlField" /> classes. These implementations are used by the .NET Framework and are not intended for use in your code.</para>
+          <para
+            >This interface is implemented by the <see
+             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            , <see
+             cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            , and <see
+             cref="T:System.Web.UI.WebControls.DataControlField" />
+
+             classes. These implementations are used by the .NET Framework and are not intended for use in your code.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

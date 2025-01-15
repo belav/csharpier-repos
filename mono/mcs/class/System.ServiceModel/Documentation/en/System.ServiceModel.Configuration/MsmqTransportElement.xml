@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MsmqTransportElement" FullName="System.ServiceModel.Configuration.MsmqTransportElement">
-  <TypeSignature Language="C#" Value="public sealed class MsmqTransportElement : System.ServiceModel.Configuration.MsmqElementBase" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit MsmqTransportElement extends System.ServiceModel.Configuration.MsmqElementBase" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class MsmqTransportElement : System.ServiceModel.Configuration.MsmqElementBase"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit MsmqTransportElement extends System.ServiceModel.Configuration.MsmqElementBase"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,8 +19,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" /> enables the user to set the properties of the queued communication channel. The queued communication channel uses MSMQ for its transport.</para>
-      <para>This binding element is the default binding element used by the MSMQ standard binding (<see cref="T:System.ServiceModel.NetMsmqBinding" />).</para>
+      <para
+        >The <see
+         cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" />
+
+         enables the user to set the properties of the queued communication channel. The queued communication channel uses MSMQ for its transport.</para
+      >
+      <para
+        >This binding element is the default binding element used by the MSMQ standard binding (<see
+         cref="T:System.ServiceModel.NetMsmqBinding" />
+
+        ).</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -24,7 +40,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public MsmqTransportElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,13 +53,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqTransportElement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.MsmqTransportElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ApplyConfiguration">
-      <MemberSignature Language="C#" Value="public override void ApplyConfiguration (System.ServiceModel.Channels.BindingElement bindingElement);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ApplyConfiguration(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void ApplyConfiguration (System.ServiceModel.Channels.BindingElement bindingElement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void ApplyConfiguration(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -55,15 +85,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Applies the settings of this configuration element to the specified <see cref="T:System.ServiceModel.Channels.BindingElement" /> binding element.</para>
+          <para
+            >Applies the settings of this configuration element to the specified <see
+             cref="T:System.ServiceModel.Channels.BindingElement" />
+
+             binding element.</para
+          >
         </summary>
         <param name="bindingElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.BindingElement" /> to which settings are applied.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.BindingElement" />
+
+           to which settings are applied.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
       <MemberSignature Language="C#" Value="public override Type BindingElementType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type BindingElementType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type BindingElementType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -81,8 +125,14 @@
       </Docs>
     </Member>
     <Member MemberName="CopyFrom">
-      <MemberSignature Language="C#" Value="public override void CopyFrom (System.ServiceModel.Configuration.ServiceModelExtensionElement from);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void CopyFrom(class System.ServiceModel.Configuration.ServiceModelExtensionElement from) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void CopyFrom (System.ServiceModel.Configuration.ServiceModelExtensionElement from);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void CopyFrom(class System.ServiceModel.Configuration.ServiceModelExtensionElement from) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -91,21 +141,38 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="from" Type="System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+        <Parameter
+          Name="from"
+          Type="System.ServiceModel.Configuration.ServiceModelExtensionElement"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the settings from the specified <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" /> to this configuration element.</para>
+          <para
+            >Copies the settings from the specified <see
+             cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+
+             to this configuration element.</para
+          >
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />The element to copy settings from.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The element to copy settings from.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateDefaultBindingElement">
-      <MemberSignature Language="C#" Value="protected override System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -121,8 +188,14 @@
       </Docs>
     </Member>
     <Member MemberName="InitializeFrom">
-      <MemberSignature Language="C#" Value="protected override void InitializeFrom (System.ServiceModel.Channels.BindingElement bindingElement);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void InitializeFrom(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void InitializeFrom (System.ServiceModel.Channels.BindingElement bindingElement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance void InitializeFrom(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -170,8 +243,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -186,8 +265,14 @@
       </Docs>
     </Member>
     <Member MemberName="QueueTransferProtocol">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.QueueTransferProtocol QueueTransferProtocol { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.QueueTransferProtocol QueueTransferProtocol" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.QueueTransferProtocol QueueTransferProtocol { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.QueueTransferProtocol QueueTransferProtocol"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -204,7 +289,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>MSMQ does not support Active Directory addressing when using SOAP Reliable Messaging Protocol, so do not set <see cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.QueueTransferProtocol" /> to <see cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" /> or <see cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" /> when <see cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" /> is set to true.</para>
+          <para
+            >MSMQ does not support Active Directory addressing when using SOAP Reliable Messaging Protocol, so do not set <see
+             cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.QueueTransferProtocol" />
+
+             to <see
+             cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
+
+             or <see
+             cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" />
+
+             when <see
+             cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
+
+             is set to true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -232,7 +331,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>MSMQ queue addresses can consist of path names or direct format names. With a direct format name, MSMQ resolves the queue name using DNS, NetBIOS, or IP. With a path name, MSMQ resolves the queue name using Active Directory.</para>
-          <para>By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" /> property to true, an application can specify that the queued transport should resolve the computer name using Active Directory rather than DNS, NetBIOS, or IP.</para>
+          <para
+            >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see
+             cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
+
+             property to true, an application can specify that the queued transport should resolve the computer name using Active Directory rather than DNS, NetBIOS, or IP.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

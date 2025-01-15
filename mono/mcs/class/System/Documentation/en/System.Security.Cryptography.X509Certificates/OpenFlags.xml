@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="OpenFlags" FullName="System.Security.Cryptography.X509Certificates.OpenFlags">
   <TypeSignature Language="C#" Value="public enum OpenFlags" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed OpenFlags extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed OpenFlags extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,7 +22,24 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.ReadOnly" />, <see cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.ReadWrite" />, and <see cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.MaxAllowed" /> flags are mutually exclusive. The <see cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.OpenExistingOnly" /> flag is the only flag that does not require the <see cref="F:System.Security.Permissions.StorePermissionFlags.CreateStore" /> permission to be granted.</para>
+      <para
+        >The <see
+         cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.ReadOnly" />
+
+        , <see
+         cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.ReadWrite" />
+
+        , and <see
+         cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.MaxAllowed" />
+
+         flags are mutually exclusive. The <see
+         cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.OpenExistingOnly" />
+
+         flag is the only flag that does not require the <see
+         cref="F:System.Security.Permissions.StorePermissionFlags.CreateStore" />
+
+         permission to be granted.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,7 +49,10 @@
   <Members>
     <Member MemberName="IncludeArchived">
       <MemberSignature Language="C#" Value="IncludeArchived" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.OpenFlags IncludeArchived = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.OpenFlags IncludeArchived = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -48,7 +71,10 @@
     </Member>
     <Member MemberName="MaxAllowed">
       <MemberSignature Language="C#" Value="MaxAllowed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.OpenFlags MaxAllowed = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.OpenFlags MaxAllowed = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -67,7 +93,10 @@
     </Member>
     <Member MemberName="OpenExistingOnly">
       <MemberSignature Language="C#" Value="OpenExistingOnly" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.OpenFlags OpenExistingOnly = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.OpenFlags OpenExistingOnly = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -80,13 +109,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Opens only existing stores; if no store exists, the <see cref="M:System.Security.Cryptography.X509Certificates.X509Store.Open(System.Security.Cryptography.X509Certificates.OpenFlags)" /> method will not create a new store.</para>
+          <para
+            >Opens only existing stores; if no store exists, the <see
+             cref="M:System.Security.Cryptography.X509Certificates.X509Store.Open(System.Security.Cryptography.X509Certificates.OpenFlags)" />
+
+             method will not create a new store.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ReadOnly">
       <MemberSignature Language="C#" Value="ReadOnly" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.OpenFlags ReadOnly = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.OpenFlags ReadOnly = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -105,7 +142,10 @@
     </Member>
     <Member MemberName="ReadWrite">
       <MemberSignature Language="C#" Value="ReadWrite" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.OpenFlags ReadWrite = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.OpenFlags ReadWrite = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

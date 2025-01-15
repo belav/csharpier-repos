@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HttpListenerPrefixCollection" FullName="System.Net.HttpListenerPrefixCollection">
-  <TypeSignature Language="C#" Value="public class HttpListenerPrefixCollection : System.Collections.Generic.ICollection&lt;string&gt;, System.Collections.Generic.IEnumerable&lt;string&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit HttpListenerPrefixCollection extends System.Object implements class System.Collections.Generic.ICollection`1&lt;string&gt;, class System.Collections.Generic.IEnumerable`1&lt;string&gt;, class System.Collections.IEnumerable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class HttpListenerPrefixCollection : System.Collections.Generic.ICollection<string>, System.Collections.Generic.IEnumerable<string>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit HttpListenerPrefixCollection extends System.Object implements class System.Collections.Generic.ICollection`1<string>, class System.Collections.Generic.IEnumerable`1<string>, class System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -22,17 +28,30 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="P:System.Net.HttpListener.Prefixes" /> property returns instances of this collection.</para>
+      <para
+        >The <see
+         cref="P:System.Net.HttpListener.Prefixes" />
+
+         property returns instances of this collection.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the collection used to store Uniform Resource Identifier (URI) prefixes for <see cref="T:System.Net.HttpListener" /> objects.</para>
+      <para
+        >Represents the collection used to store Uniform Resource Identifier (URI) prefixes for <see
+         cref="T:System.Net.HttpListener" />
+
+         objects.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Add">
       <MemberSignature Language="C#" Value="public void Add (string uriPrefix);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Add(string uriPrefix) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Add(string uriPrefix) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -48,21 +67,63 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method adds a URI prefix to the set of prefixes managed by the associated <see cref="T:System.Net.HttpListener" /> object. When checking <paramref name="uriPrefix" /> to ensure it is valid, case is ignored.</para>
-          <para>A URI prefix string is composed of a scheme (http or https), a host, an optional port, and an optional path, for example, "http://www.contoso.com:8080/customerData/". The prefix must be terminated with a forward slash ("/"). The <see cref="T:System.Net.HttpListener" /> with the prefix that most closely matches a requested URI responds to the request. Multiple <see cref="T:System.Net.HttpListener" /> objects cannot add the same prefix. An <see cref="T:System.Net.HttpListenerException" /> exception is thrown if an <see cref="T:System.Net.HttpListener" /> adds a prefix that is already in use. </para>
-          <para>When a port is specified, the host element can be replaced with "*" to indicate that the <see cref="T:System.Net.HttpListener" /> accepts requests sent to the port if the requested URI does not match any other prefix. For example, to receive all requests sent to port 8080 when the requested URI is not handled by any other <see cref="T:System.Net.HttpListener" />, the prefix is "http://*:8080/". Similarly, to specify that the <see cref="T:System.Net.HttpListener" /> accepts all requests sent to a port, replace the host element with the "+" character, "https://+:8080/". The "*" and "+" characters can be present in prefixes that include paths.</para>
+          <para
+            >This method adds a URI prefix to the set of prefixes managed by the associated <see
+             cref="T:System.Net.HttpListener" />
+
+             object. When checking <paramref
+             name="uriPrefix" />
+
+             to ensure it is valid, case is ignored.</para
+          >
+          <para
+            >A URI prefix string is composed of a scheme (http or https), a host, an optional port, and an optional path, for example, "http://www.contoso.com:8080/customerData/". The prefix must be terminated with a forward slash ("/"). The <see
+             cref="T:System.Net.HttpListener" />
+
+             with the prefix that most closely matches a requested URI responds to the request. Multiple <see
+             cref="T:System.Net.HttpListener" />
+
+             objects cannot add the same prefix. An <see
+             cref="T:System.Net.HttpListenerException" />
+
+             exception is thrown if an <see
+             cref="T:System.Net.HttpListener" />
+
+             adds a prefix that is already in use. </para
+          >
+          <para
+            >When a port is specified, the host element can be replaced with "*" to indicate that the <see
+             cref="T:System.Net.HttpListener" />
+
+             accepts requests sent to the port if the requested URI does not match any other prefix. For example, to receive all requests sent to port 8080 when the requested URI is not handled by any other <see
+             cref="T:System.Net.HttpListener" />
+
+            , the prefix is "http://*:8080/". Similarly, to specify that the <see
+             cref="T:System.Net.HttpListener" />
+
+             accepts all requests sent to a port, replace the host element with the "+" character, "https://+:8080/". The "*" and "+" characters can be present in prefixes that include paths.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Adds a Uniform Resource Identifier (URI) prefix to the collection.</para>
         </summary>
         <param name="uriPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that identifies the URI information that is compared in incoming requests. The prefix must be terminated with a forward slash ("/").</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that identifies the URI information that is compared in incoming requests. The prefix must be terminated with a forward slash ("/").</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Clear">
       <MemberSignature Language="C#" Value="public void Clear ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Clear() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Clear() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -76,7 +137,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>After calling this method, you cannot start the associated <see cref="T:System.Net.HttpListener" /> without adding new prefixes; if you try to do so, an exception is thrown.</para>
+          <para
+            >After calling this method, you cannot start the associated <see
+             cref="T:System.Net.HttpListener" />
+
+             without adding new prefixes; if you try to do so, an exception is thrown.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -86,7 +152,10 @@
     </Member>
     <Member MemberName="Contains">
       <MemberSignature Language="C#" Value="public bool Contains (string uriPrefix);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Contains(string uriPrefix) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Contains(string uriPrefix) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -106,19 +175,38 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.Boolean" /> value that indicates whether the specified prefix is contained in the collection.</para>
+          <para
+            >Returns a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether the specified prefix is contained in the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if this collection contains the prefix specified by <paramref name="uriPrefix" />; otherwise, false.</para>
+          <para
+            >true if this collection contains the prefix specified by <paramref
+             name="uriPrefix" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="uriPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the Uniform Resource Identifier (URI) prefix to test.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the Uniform Resource Identifier (URI) prefix to test.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
       <MemberSignature Language="C#" Value="public void CopyTo (Array array, int offset);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void CopyTo(class System.Array array, int32 offset) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void CopyTo(class System.Array array, int32 offset) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -139,17 +227,37 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the contents of an <see cref="T:System.Net.HttpListenerPrefixCollection" /> to the specified array. </para>
+          <para
+            >Copies the contents of an <see
+             cref="T:System.Net.HttpListenerPrefixCollection" />
+
+             to the specified array. </para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The one dimensional <see cref="T:System.Array" /> that receives the Uniform Resource Identifier (URI) prefix strings in this collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The one dimensional <see
+           cref="T:System.Array" />
+
+           that receives the Uniform Resource Identifier (URI) prefix strings in this collection.</param
+        >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> at which copying begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           at which copying begins.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
       <MemberSignature Language="C#" Value="public void CopyTo (string[] array, int offset);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CopyTo(string[] array, int32 offset) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void CopyTo(string[] array, int32 offset) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -170,12 +278,26 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the contents of an <see cref="T:System.Net.HttpListenerPrefixCollection" /> to the specified string array. </para>
+          <para
+            >Copies the contents of an <see
+             cref="T:System.Net.HttpListenerPrefixCollection" />
+
+             to the specified string array. </para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The one dimensional string array that receives the Uniform Resource Identifier (URI) prefix strings in this collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The one dimensional string array that receives the Uniform Resource Identifier (URI) prefix strings in this collection.</param
+        >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> at which copying begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           at which copying begins.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -200,8 +322,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerator&lt;string&gt; GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IEnumerator`1&lt;string&gt; GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerator<string> GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IEnumerator`1<string> GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -215,9 +343,36 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method before you can access the first element. To access the element at the current position, call the <see cref="P:System.Collections.IEnumerator.Current" /> property.</para>
-          <para>Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see cref="M:System.Collections.IEnumerator.MoveNext" /> or <see cref="M:System.Collections.IEnumerator.Reset" /> causes an <see cref="T:System.InvalidOperationException" />.</para>
-          <para>For a detailed description of enumerators, see the documentation for the <see cref="T:System.Collections.IEnumerator" /> class and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method.</para>
+          <para
+            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see
+             cref="M:System.Collections.IEnumerator.MoveNext" />
+
+             method before you can access the first element. To access the element at the current position, call the <see
+             cref="P:System.Collections.IEnumerator.Current" />
+
+             property.</para
+          >
+          <para
+            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see
+             cref="M:System.Collections.IEnumerator.MoveNext" />
+
+             or <see
+             cref="M:System.Collections.IEnumerator.Reset" />
+
+             causes an <see
+             cref="T:System.InvalidOperationException" />
+
+            .</para
+          >
+          <para
+            >For a detailed description of enumerators, see the documentation for the <see
+             cref="T:System.Collections.IEnumerator" />
+
+             class and the <see
+             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -225,7 +380,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object that implements the <see cref="T:System.Collections.IEnumerator" /> interface and provides access to the strings in this collection.</para>
+          <para
+            >An object that implements the <see
+             cref="T:System.Collections.IEnumerator" />
+
+             interface and provides access to the strings in this collection.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -276,7 +436,10 @@
     </Member>
     <Member MemberName="Remove">
       <MemberSignature Language="C#" Value="public bool Remove (string uriPrefix);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Remove(string uriPrefix) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Remove(string uriPrefix) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -292,23 +455,53 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <paramref name="uriPrefix" /> is not in the collection, this method does nothing.</para>
+          <para
+            >If <paramref
+             name="uriPrefix" />
+
+             is not in the collection, this method does nothing.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the specified Uniform Resource Identifier (URI) from the list of prefixes handled by the <see cref="T:System.Net.HttpListener" /> object.</para>
+          <para
+            >Removes the specified Uniform Resource Identifier (URI) from the list of prefixes handled by the <see
+             cref="T:System.Net.HttpListener" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <paramref name="uriPrefix" /> was found in the <see cref="T:System.Net.HttpListenerPrefixCollection" /> and removed; otherwise false.</para>
+          <para
+            >true if the <paramref
+             name="uriPrefix" />
+
+             was found in the <see
+             cref="T:System.Net.HttpListenerPrefixCollection" />
+
+             and removed; otherwise false.</para
+          >
         </returns>
         <param name="uriPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the URI prefix to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the URI prefix to remove.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -321,9 +514,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see cref="M:System.Collections.IEnumerator.MoveNext" /> method before you can access the first element. To access the element at the current position, call the <see cref="P:System.Collections.IEnumerator.Current" /> property.</para>
-          <para>Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see cref="M:System.Collections.IEnumerator.MoveNext" /> or <see cref="M:System.Collections.IEnumerator.Reset" /> causes an <see cref="T:System.InvalidOperationException" />.</para>
-          <para>For a detailed description of enumerators, see the documentation for the <see cref="T:System.Collections.IEnumerator" /> class and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method.</para>
+          <para
+            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see
+             cref="M:System.Collections.IEnumerator.MoveNext" />
+
+             method before you can access the first element. To access the element at the current position, call the <see
+             cref="P:System.Collections.IEnumerator.Current" />
+
+             property.</para
+          >
+          <para
+            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see
+             cref="M:System.Collections.IEnumerator.MoveNext" />
+
+             or <see
+             cref="M:System.Collections.IEnumerator.Reset" />
+
+             causes an <see
+             cref="T:System.InvalidOperationException" />
+
+            .</para
+          >
+          <para
+            >For a detailed description of enumerators, see the documentation for the <see
+             cref="T:System.Collections.IEnumerator" />
+
+             class and the <see
+             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -331,7 +551,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object that implements the <see cref="T:System.Collections.IEnumerator" /> interface and provides access to the strings in this collection.</para>
+          <para
+            >An object that implements the <see
+             cref="T:System.Collections.IEnumerator" />
+
+             interface and provides access to the strings in this collection.</para
+          >
         </returns>
       </Docs>
     </Member>

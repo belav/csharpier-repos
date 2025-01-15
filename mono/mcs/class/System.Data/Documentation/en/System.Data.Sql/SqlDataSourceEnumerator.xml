@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SqlDataSourceEnumerator" FullName="System.Data.Sql.SqlDataSourceEnumerator">
-  <TypeSignature Language="C#" Value="public sealed class SqlDataSourceEnumerator : System.Data.Common.DbDataSourceEnumerator" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqlDataSourceEnumerator : System.Data.Common.DbDataSourceEnumerator"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Both SQL Server 2000 and SQL Server 2005 make it possible for applications to determine the existence of SQL Server instances within the current network. The <see cref="T:System.Data.Sql.SqlDataSourceEnumerator" /> class exposes this information to the application developer, providing a <see cref="T:System.Data.DataTable" /> containing information about all the available servers. This returned table contains a list of server instances that matches the list provided when a user attempts to create a new connection, and on the <paramref name="Connection Properties" /> dialog box, expands the drop-down list containing all the available servers.</para>
+      <para
+        >Both SQL Server 2000 and SQL Server 2005 make it possible for applications to determine the existence of SQL Server instances within the current network. The <see
+         cref="T:System.Data.Sql.SqlDataSourceEnumerator" />
+
+         class exposes this information to the application developer, providing a <see
+         cref="T:System.Data.DataTable" />
+
+         containing information about all the available servers. This returned table contains a list of server instances that matches the list provided when a user attempts to create a new connection, and on the <paramref
+         name="Connection Properties" />
+
+         dialog box, expands the drop-down list containing all the available servers.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -22,7 +36,10 @@
   </Docs>
   <Members>
     <Member MemberName="GetDataSources">
-      <MemberSignature Language="C#" Value="public override System.Data.DataTable GetDataSources ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.DataTable GetDataSources ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.DataTable</ReturnType>
@@ -78,16 +95,31 @@
             </item>
           </list>
           <block subset="none" type="note">
-            <para>Due to the nature of the mechanism used by <see cref="T:System.Data.Sql.SqlDataSourceEnumerator" /> to locate data sources on a network, the method will not always return a complete list of the available servers, and the list might not be the same on every call. If you plan to use this function to let users select a server from a list, make sure that you always also supply an option to type in a name that is not in the list, in case the server enumeration does not return all the available servers. In addition, this method may take a significant amount of time to execute, so be careful about calling it when performance is critical.</para>
+            <para
+              >Due to the nature of the mechanism used by <see
+               cref="T:System.Data.Sql.SqlDataSourceEnumerator" />
+
+               to locate data sources on a network, the method will not always return a complete list of the available servers, and the list might not be the same on every call. If you plan to use this function to let users select a server from a list, make sure that you always also supply an option to type in a name that is not in the list, in case the server enumeration does not return all the available servers. In addition, this method may take a significant amount of time to execute, so be careful about calling it when performance is critical.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves a <see cref="T:System.Data.DataTable" /> containing information about all visible SQL Server 2000 or SQL Server 2005 instances.</para>
+          <para
+            >Retrieves a <see
+             cref="T:System.Data.DataTable" />
+
+             containing information about all visible SQL Server 2000 or SQL Server 2005 instances.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.Data.DataTable" /> containing information about the visible SQL Server instances.</para>
+          <para
+            >Returns a <see
+             cref="T:System.Data.DataTable" />
+
+             containing information about the visible SQL Server instances.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -95,7 +127,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Instance">
-      <MemberSignature Language="C#" Value="public static System.Data.Sql.SqlDataSourceEnumerator Instance { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.Sql.SqlDataSourceEnumerator Instance { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Sql.SqlDataSourceEnumerator</ReturnType>
@@ -105,11 +140,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Data.Sql.SqlDataSourceEnumerator" /> class does not provide a constructor. Use the <see cref="P:System.Data.Sql.SqlDataSourceEnumerator.Instance" /> property to retrieve an instance of the class instead.</para>
+          <para
+            >The <see
+             cref="T:System.Data.Sql.SqlDataSourceEnumerator" />
+
+             class does not provide a constructor. Use the <see
+             cref="P:System.Data.Sql.SqlDataSourceEnumerator.Instance" />
+
+             property to retrieve an instance of the class instead.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an instance of the <see cref="T:System.Data.Sql.SqlDataSourceEnumerator" />, which can be used to retrieve information about available SQL Server instances.</para>
+          <para
+            >Gets an instance of the <see
+             cref="T:System.Data.Sql.SqlDataSourceEnumerator" />
+
+            , which can be used to retrieve information about available SQL Server instances.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

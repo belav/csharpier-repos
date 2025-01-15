@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="XmlSchemaSimpleContentExtension" FullName="System.Xml.Schema.XmlSchemaSimpleContentExtension">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class XmlSchemaSimpleContentExtension : System.Xml.Schema.XmlSchemaContent" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XmlSchemaSimpleContentExtension extends System.Xml.Schema.XmlSchemaContent" />
+<Type
+  Name="XmlSchemaSimpleContentExtension"
+  FullName="System.Xml.Schema.XmlSchemaSimpleContentExtension"
+>
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class XmlSchemaSimpleContentExtension : System.Xml.Schema.XmlSchemaContent"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XmlSchemaSimpleContentExtension extends System.Xml.Schema.XmlSchemaContent"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -18,13 +28,23 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the extension element for simple content from XML Schema as specified by the <format type="text/html"><a href="">World Wide Web Consortium (W3C)</a></format>. This class can be used to derive simple types by extension. Such derivations are used to extend the simple type content of the element by adding attributes.</para>
+      <para
+        >Represents the extension element for simple content from XML Schema as specified by the <format
+         type="text/html">
+          <a href="">World Wide Web Consortium (W3C)</a>
+        </format>
+
+        . This class can be used to derive simple types by extension. Such derivations are used to extend the simple type content of the element by adding attributes.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XmlSchemaSimpleContentExtension ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -37,13 +57,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaSimpleContentExtension" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Schema.XmlSchemaSimpleContentExtension" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AnyAttribute">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaAnyAttribute AnyAttribute { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaAnyAttribute AnyAttribute" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaAnyAttribute AnyAttribute { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaAnyAttribute AnyAttribute"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -69,8 +100,14 @@
       </Docs>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public System.Xml.Schema.XmlSchemaObjectCollection Attributes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Schema.XmlSchemaObjectCollection Attributes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Schema.XmlSchemaObjectCollection Attributes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Schema.XmlSchemaObjectCollection Attributes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -93,13 +130,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the collection of <see cref="T:System.Xml.Schema.XmlSchemaAttribute" /> and <see cref="T:System.Xml.Schema.XmlSchemaAttributeGroupRef" />.</para>
+          <para
+            >Gets the collection of <see
+             cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+             and <see
+             cref="T:System.Xml.Schema.XmlSchemaAttributeGroupRef" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BaseTypeName">
-      <MemberSignature Language="C#" Value="public System.Xml.XmlQualifiedName BaseTypeName { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.XmlQualifiedName BaseTypeName" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.XmlQualifiedName BaseTypeName { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.XmlQualifiedName BaseTypeName"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="UrlAttribute" FullName="System.Runtime.Remoting.Activation.UrlAttribute">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class UrlAttribute : System.Runtime.Remoting.Contexts.ContextAttribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit UrlAttribute extends System.Runtime.Remoting.Contexts.ContextAttribute" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public sealed class UrlAttribute : System.Runtime.Remoting.Contexts.ContextAttribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit UrlAttribute extends System.Runtime.Remoting.Contexts.ContextAttribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -13,8 +20,7 @@
   <Base>
     <BaseTypeName>System.Runtime.Remoting.Contexts.ContextAttribute</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Attributes>
     <Attribute>
       <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
@@ -23,8 +29,28 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> is passed in the activation attributes array as a parameter to <see cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> when creating activated objects with the <see cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" /> method.</para>
-      <para>For more information about using attributes, see <format type="text/html"><a href="30386922-1E00-4602-9EBF-526B271A8B87">[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a></format>.</para>
+      <para
+        >The <see
+         cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+         is passed in the activation attributes array as a parameter to <see
+         cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+         when creating activated objects with the <see
+         cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+         method.</para
+      >
+      <para
+        >For more information about using attributes, see <format
+         type="text/html">
+          <a href="30386922-1E00-4602-9EBF-526B271A8B87"
+            >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
+          >
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -34,7 +60,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public UrlAttribute (string callsiteURL);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string callsiteURL) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string callsiteURL) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -49,15 +78,26 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> class.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+             class.</para
+          >
         </summary>
         <param name="callsiteURL">
-          <attribution license="cc4" from="Microsoft" modified="false" />The call site URL. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The call site URL. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object o);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object o) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object o) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -73,7 +113,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method overrides the default <see cref="M:System.Object.Equals(System.Object)" /> method.</para>
+          <para
+            >This method overrides the default <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -81,15 +126,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the object is a <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" /> with the same value; otherwise, false.</para>
+          <para
+            >true if the object is a <see
+             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+             with the same value; otherwise, false.</para
+          >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to compare to the current <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to compare to the current <see
+           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -104,17 +163,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the hash value for the current <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />.</para>
+          <para
+            >Returns the hash value for the current <see
+             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The hash value for the current <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />.</para>
+          <para
+            >The hash value for the current <see
+             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetPropertiesForNewContext">
-      <MemberSignature Language="C#" Value="public override void GetPropertiesForNewContext (System.Runtime.Remoting.Activation.IConstructionCallMessage ctorMsg);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void GetPropertiesForNewContext(class System.Runtime.Remoting.Activation.IConstructionCallMessage ctorMsg) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void GetPropertiesForNewContext (System.Runtime.Remoting.Activation.IConstructionCallMessage ctorMsg);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void GetPropertiesForNewContext(class System.Runtime.Remoting.Activation.IConstructionCallMessage ctorMsg) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -130,25 +205,43 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="ctorMsg" Type="System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+        <Parameter
+          Name="ctorMsg"
+          Type="System.Runtime.Remoting.Activation.IConstructionCallMessage"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.Runtime.Remoting.Activation.UrlAttribute.GetPropertiesForNewContext(System.Runtime.Remoting.Activation.IConstructionCallMessage)" /> does not contribute any properties to the new context because it is used by the remoting infrastructure to force the creation of the context and the server object inside the context at the specified URL.</para>
+            <see cref="M:System.Runtime.Remoting.Activation.UrlAttribute.GetPropertiesForNewContext(System.Runtime.Remoting.Activation.IConstructionCallMessage)" />
+
+             does not contribute any properties to the new context because it is used by the remoting infrastructure to force the creation of the context and the server object inside the context at the specified URL.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Forces the creation of the context and the server object inside the context at the specified URL.</para>
         </summary>
         <param name="ctorMsg">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" /> of the server object to create. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+           of the server object to create. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsContextOK">
-      <MemberSignature Language="C#" Value="public override bool IsContextOK (System.Runtime.Remoting.Contexts.Context ctx, System.Runtime.Remoting.Activation.IConstructionCallMessage msg);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsContextOK(class System.Runtime.Remoting.Contexts.Context ctx, class System.Runtime.Remoting.Activation.IConstructionCallMessage msg) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool IsContextOK (System.Runtime.Remoting.Contexts.Context ctx, System.Runtime.Remoting.Activation.IConstructionCallMessage msg);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsContextOK(class System.Runtime.Remoting.Contexts.Context ctx, class System.Runtime.Remoting.Activation.IConstructionCallMessage msg) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -171,16 +264,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a Boolean value that indicates whether the specified <see cref="T:System.Runtime.Remoting.Contexts.Context" /> meets <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />'s requirements.</para>
+          <para
+            >Returns a Boolean value that indicates whether the specified <see
+             cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+             meets <see
+             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            's requirements.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if the passed-in context is acceptable; otherwise, false.</para>
         </returns>
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />The context to check against the current context attribute. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The context to check against the current context attribute. </param
+        >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />The construction call, the parameters of which need to be checked against the current context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The construction call, the parameters of which need to be checked against the current context. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="UrlValue">
@@ -200,7 +307,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the URL value of the <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />.</para>
+          <para
+            >Gets the URL value of the <see
+             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

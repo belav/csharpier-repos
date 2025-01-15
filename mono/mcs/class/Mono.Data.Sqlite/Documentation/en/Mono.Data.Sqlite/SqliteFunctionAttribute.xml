@@ -1,6 +1,9 @@
 <Type Name="SqliteFunctionAttribute" FullName="Mono.Data.Sqlite.SqliteFunctionAttribute">
   <TypeSignature Language="C#" Value="public sealed class SqliteFunctionAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SqliteFunctionAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SqliteFunctionAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -24,7 +27,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteFunctionAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -56,8 +62,14 @@
       </Docs>
     </Member>
     <Member MemberName="FuncType">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.FunctionType FuncType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype Mono.Data.Sqlite.FunctionType FuncType" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.FunctionType FuncType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype Mono.Data.Sqlite.FunctionType FuncType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

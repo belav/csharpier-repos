@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ToolStripArrowRenderEventHandler" FullName="System.Windows.Forms.ToolStripArrowRenderEventHandler">
-  <TypeSignature Language="C#" Value="public delegate void ToolStripArrowRenderEventHandler(object sender, ToolStripArrowRenderEventArgs e);" />
+<Type
+  Name="ToolStripArrowRenderEventHandler"
+  FullName="System.Windows.Forms.ToolStripArrowRenderEventHandler"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public delegate void ToolStripArrowRenderEventHandler(object sender, ToolStripArrowRenderEventArgs e);"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -22,7 +28,15 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the method that will handle the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" /> event of a <see cref="T:System.Windows.Forms.ToolStripRenderer" />. This class cannot be inherited. </para>
+      <para
+        >Represents the method that will handle the <see
+         cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" />
+
+         event of a <see
+         cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+        . This class cannot be inherited. </para
+      >
     </summary>
   </Docs>
 </Type>

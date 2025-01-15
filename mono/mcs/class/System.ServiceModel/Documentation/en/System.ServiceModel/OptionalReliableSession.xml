@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="OptionalReliableSession" FullName="System.ServiceModel.OptionalReliableSession">
-  <TypeSignature Language="C#" Value="public class OptionalReliableSession : System.ServiceModel.ReliableSession" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit OptionalReliableSession extends System.ServiceModel.ReliableSession" />
+  <TypeSignature
+    Language="C#"
+    Value="public class OptionalReliableSession : System.ServiceModel.ReliableSession"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit OptionalReliableSession extends System.ServiceModel.ReliableSession"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,10 +22,23 @@
       <para>The ability to enable a reliable session is provided with three of the system-provided bindings. A reliable session is:</para>
       <list type="bullet">
         <item>
-          <para>Optional (and off by default) with <see cref="T:System.ServiceModel.NetTcpBinding" /> and <see cref="T:System.ServiceModel.WsHttpBinding" /> and </para>
+          <para
+            >Optional (and off by default) with <see
+             cref="T:System.ServiceModel.NetTcpBinding" />
+
+             and <see
+             cref="T:System.ServiceModel.WsHttpBinding" />
+
+             and </para
+          >
         </item>
         <item>
-          <para>Required (and hence always on) with <see cref="T:System.ServiceModel.WsDualHttpBinding" />.</para>
+          <para
+            >Required (and hence always on) with <see
+             cref="T:System.ServiceModel.WsDualHttpBinding" />
+
+            .</para
+          >
         </item>
       </list>
     </remarks>
@@ -31,7 +50,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public OptionalReliableSession ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -41,26 +63,45 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.OptionalReliableSession" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.OptionalReliableSession" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public OptionalReliableSession (System.ServiceModel.Channels.ReliableSessionBindingElement binding);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.ReliableSessionBindingElement binding) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public OptionalReliableSession (System.ServiceModel.Channels.ReliableSessionBindingElement binding);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.ReliableSessionBindingElement binding) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="binding" Type="System.ServiceModel.Channels.ReliableSessionBindingElement" />
+        <Parameter
+          Name="binding"
+          Type="System.ServiceModel.Channels.ReliableSessionBindingElement"
+        />
       </Parameters>
       <Docs>
         <param name="binding">To be added.</param>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.OptionalReliableSession" /> class from a reliable session binding element.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.OptionalReliableSession" />
+
+             class from a reliable session binding element.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -81,10 +122,23 @@
           <para>The ability to enable a reliable session is provided with three of the system-provided bindings. A reliable session is:</para>
           <list type="bullet">
             <item>
-              <para>Optional (and off by default) with <see cref="T:System.ServiceModel.NetTcpBinding" /> and <see cref="T:System.ServiceModel.WsHttpBinding" />. </para>
+              <para
+                >Optional (and off by default) with <see
+                 cref="T:System.ServiceModel.NetTcpBinding" />
+
+                 and <see
+                 cref="T:System.ServiceModel.WsHttpBinding" />
+
+                . </para
+              >
             </item>
             <item>
-              <para>Required (and hence always on) with <see cref="T:System.ServiceModel.WsDualHttpBinding" />.</para>
+              <para
+                >Required (and hence always on) with <see
+                 cref="T:System.ServiceModel.WsDualHttpBinding" />
+
+                .</para
+              >
             </item>
           </list>
         </remarks>

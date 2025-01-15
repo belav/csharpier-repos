@@ -1,4 +1,7 @@
-<Type Name="Rebar+GripperVertical" FullName="System.Windows.Forms.VisualStyles.Rebar+GripperVertical">
+<Type
+  Name="Rebar+GripperVertical"
+  FullName="System.Windows.Forms.VisualStyles.Rebar+GripperVertical"
+>
   <TypeSignature Language="C#" Value="public static class Rebar.GripperVertical" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -15,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName="Normal">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.VisualStyleElement</ReturnType>

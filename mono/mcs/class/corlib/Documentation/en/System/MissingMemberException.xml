@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="MissingMemberException" FullName="System.MissingMemberException" FullNameSP="System_MissingMemberException" Maintainer="ecma">
-  <TypeSignature Language="ILASM" Value=".class public serializable MissingMemberException extends System.MemberAccessException" />
-  <TypeSignature Language="C#" Value="public class MissingMemberException : MemberAccessException" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit MissingMemberException extends System.MemberAccessException" />
+<Type
+  Name="MissingMemberException"
+  FullName="System.MissingMemberException"
+  FullNameSP="System_MissingMemberException"
+  Maintainer="ecma"
+>
+  <TypeSignature
+    Language="ILASM"
+    Value=".class public serializable MissingMemberException extends System.MemberAccessException"
+  />
+  <TypeSignature
+    Language="C#"
+    Value="public class MissingMemberException : MemberAccessException"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit MissingMemberException extends System.MemberAccessException"
+  />
   <MemberOfLibrary>RuntimeInfrastructure</MemberOfLibrary>
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
@@ -24,12 +38,46 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Normally a compilation error is generated if the code attempts to access a nonexistent member of a class. <see cref="T:System.MissingMemberException" /> is designed to handle cases where a field or a method is deleted or renamed in one assembly and the change is not reflected in a second assembly. At runtime, <see cref="T:System.MissingMemberException" /> will be thrown when the code in the second assembly attempts to access the missing member in the first assembly.</para>
+      <para
+        >Normally a compilation error is generated if the code attempts to access a nonexistent member of a class. <see
+         cref="T:System.MissingMemberException" />
+
+         is designed to handle cases where a field or a method is deleted or renamed in one assembly and the change is not reflected in a second assembly. At runtime, <see
+         cref="T:System.MissingMemberException" />
+
+         will be thrown when the code in the second assembly attempts to access the missing member in the first assembly.</para
+      >
       <para>
-        <see cref="T:System.MissingMemberException" /> is the base class for <see cref="T:System.MissingFieldException" /> and <see cref="T:System.MissingMethodException" />. In general it is better to use one of the derived classes of <see cref="T:System.MissingMemberException" /> to more precisely indicate the exact nature of the error. Throw a <see cref="T:System.MissingMemberException" /> if you are only interested in capturing the general case of a missing member error.</para>
+        <see cref="T:System.MissingMemberException" />
+
+         is the base class for <see
+         cref="T:System.MissingFieldException" />
+
+         and <see
+         cref="T:System.MissingMethodException" />
+
+        . In general it is better to use one of the derived classes of <see
+         cref="T:System.MissingMemberException" />
+
+         to more precisely indicate the exact nature of the error. Throw a <see
+         cref="T:System.MissingMemberException" />
+
+         if you are only interested in capturing the general case of a missing member error.</para
+      >
       <para>
-        <see cref="T:System.MissingMemberException" /> uses the HRESULT COR_E_MISSINGMEMBER, that has the value 0x80131512.</para>
-      <para>For a list of initial property values for an instance of <see cref="T:System.MissingMemberException" />, see the <see cref="M:System.MissingMemberException.#ctor" /> constructors.</para>
+        <see cref="T:System.MissingMemberException" />
+
+         uses the HRESULT COR_E_MISSINGMEMBER, that has the value 0x80131512.</para
+      >
+      <para
+        >For a list of initial property values for an instance of <see
+         cref="T:System.MissingMemberException" />
+
+        , see the <see
+         cref="M:System.MissingMemberException.#ctor" />
+
+         constructors.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -38,9 +86,15 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor()" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor()"
+      />
       <MemberSignature Language="C#" Value="public MissingMemberException ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -52,8 +106,18 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor initializes the <see cref="P:System.MissingMemberException.Message" /> property of the new instance to a system-supplied message that describes the error, such as "Attempted to access a missing member." This message takes into account the current system culture.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.MissingMemberException" />.</para>
+          <para
+            >This constructor initializes the <see
+             cref="P:System.MissingMemberException.Message" />
+
+             property of the new instance to a system-supplied message that describes the error, such as "Attempted to access a missing member." This message takes into account the current system culture.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.MissingMemberException" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -68,7 +132,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>A null reference (Nothing in Visual Basic). </para>
@@ -77,7 +142,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.MissingMemberException.Message" /> </para>
+                  <see cref="P:System.MissingMemberException.Message" />
+                </para>
               </term>
               <description>
                 <para>The localized error message string. </para>
@@ -87,15 +153,26 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.MissingMemberException" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.MissingMemberException" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(string message)" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor(string message)"
+      />
       <MemberSignature Language="C#" Value="public MissingMemberException (string message);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -109,8 +186,18 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The content of the <paramref name="message" /> parameter should be understandable by the user. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.MissingMemberException" />.</para>
+          <para
+            >The content of the <paramref
+             name="message" />
+
+             parameter should be understandable by the user. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.MissingMemberException" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -125,7 +212,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>A null reference (Nothing in Visual Basic). </para>
@@ -134,7 +222,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.MissingMemberException.Message" /> </para>
+                  <see cref="P:System.MissingMemberException.Message" />
+                </para>
               </term>
               <description>
                 <para>The error message string. </para>
@@ -144,16 +233,30 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.MissingMemberException" /> class with a specified error message.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.MissingMemberException" />
+
+             class with a specified error message.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message that describes the error. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message that describes the error. </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected MissingMemberException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected MissingMemberException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -167,22 +270,49 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html"><a href="832ac524-21bc-419a-a27b-ca8bfc45840f">XML and Soap Serialization</a></format>.</para>
+          <para
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
+             type="text/html">
+              <a href="832ac524-21bc-419a-a27b-ca8bfc45840f">XML and Soap Serialization</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.MissingMemberException" /> class with serialized data.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.MissingMemberException" />
+
+             class with serialized data.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object that holds the serialized object data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object that holds the serialized object data. </param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The contextual information about the source or destination. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The contextual information about the source or destination. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="ILASM" Value="public rtspecialname specialname instance void .ctor(string message, class System.Exception inner)" />
-      <MemberSignature Language="C#" Value="public MissingMemberException (string message, Exception inner);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception inner) cil managed" />
+      <MemberSignature
+        Language="ILASM"
+        Value="public rtspecialname specialname instance void .ctor(string message, class System.Exception inner)"
+      />
+      <MemberSignature
+        Language="C#"
+        Value="public MissingMemberException (string message, Exception inner);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception inner) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -197,8 +327,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" /> property. The <see cref="P:System.Exception.InnerException" /> property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" /> property does not supply the inner exception value to the constructor.</para>
-          <para>The following table shows the initial property values for an instance of <see cref="T:System.MissingMemberException" />.</para>
+          <para
+            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see
+             cref="P:System.Exception.InnerException" />
+
+             property. The <see
+             cref="P:System.Exception.InnerException" />
+
+             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
+             cref="P:System.Exception.InnerException" />
+
+             property does not supply the inner exception value to the constructor.</para
+          >
+          <para
+            >The following table shows the initial property values for an instance of <see
+             cref="T:System.MissingMemberException" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -213,7 +359,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Exception.InnerException" /> </para>
+                  <see cref="P:System.Exception.InnerException" />
+                </para>
               </term>
               <description>
                 <para>The inner exception reference. </para>
@@ -222,7 +369,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.MissingMemberException.Message" /> </para>
+                  <see cref="P:System.MissingMemberException.Message" />
+                </para>
               </term>
               <description>
                 <para>The error message string. </para>
@@ -232,18 +380,44 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.MissingMemberException" /> class with a specified error message and a reference to the inner exception that is the root cause of this exception.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.MissingMemberException" />
+
+             class with a specified error message and a reference to the inner exception that is the root cause of this exception.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message that explains the reason for the exception. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message that explains the reason for the exception. </param
+        >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />An instance of <see cref="T:System.Exception" /> that is the cause of the current Exception. If <paramref name="inner" /> is not a null reference (Nothing in Visual Basic), then the current Exception is raised in a catch block handling <paramref name="inner" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An instance of <see
+           cref="T:System.Exception" />
+
+           that is the cause of the current Exception. If <paramref
+           name="inner" />
+
+           is not a null reference (Nothing in Visual Basic), then the current Exception is raised in a catch block handling <paramref
+           name="inner" />
+
+          . </param
+        >
       </Docs>
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public MissingMemberException (string className, string memberName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string className, string memberName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public MissingMemberException (string className, string memberName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string className, string memberName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -258,12 +432,23 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.MissingMemberException" /> class with the specified class name and member name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.MissingMemberException" />
+
+             class with the specified class name and member name.</para
+          >
         </summary>
         <param name="className">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the class in which access to a nonexistent member was attempted. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the class in which access to a nonexistent member was attempted. </param
+        >
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member that cannot be accessed. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the member that cannot be accessed. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ClassName">
@@ -287,8 +472,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -306,17 +497,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:System.TypeLoadException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with all the exception object data targeted for serialization. During deserialization, the exception object is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> transmitted over the stream.</para>
-          <para>For more information, see <see cref="T:System.Runtime.Serialization.SerializationInfo" />.</para>
+            <see cref="M:System.TypeLoadException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+             sets a <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+             with all the exception object data targeted for serialization. During deserialization, the exception object is reconstituted from the <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+             transmitted over the stream.</para
+          >
+          <para
+            >For more information, see <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with the class name, the member name, the signature of the missing member, and additional exception information.</para>
+          <para
+            >Sets the <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+             object with the class name, the member name, the signature of the missing member, and additional exception information.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object that holds the serialized object data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object that holds the serialized object data. </param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The contextual information about the source or destination. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The contextual information about the source or destination. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="MemberName">
@@ -356,7 +572,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the class name is not specified when the object is constructed, the default text string inherited from the base class is returned.</para>
-          <para>This property overrides <see cref="P:System.Exception.Message" />. The error message should be localized.</para>
+          <para
+            >This property overrides <see
+             cref="P:System.Exception.Message" />
+
+            . The error message should be localized.</para
+          >
           <para>This property is read-only.</para>
         </remarks>
         <summary>
@@ -381,9 +602,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.MissingMemberException.Signature" /> contains a <see cref="T:System.Byte" /> value that represents the signature of the missing member.</para>
+            <see cref="F:System.MissingMemberException.Signature" />
+
+             contains a <see
+             cref="T:System.Byte" />
+
+             value that represents the signature of the missing member.</para
+          >
           <para>
-            <see cref="M:System.String.Format(System.String,System.Object)" /> is used to format the signature. For additional information, see <see cref="T:System.Reflection.Emit.SignatureHelper" />, <see cref="T:System.Reflection.Emit.SignatureToken" />, and <see cref="T:System.String" />.</para>
+            <see cref="M:System.String.Format(System.String,System.Object)" />
+
+             is used to format the signature. For additional information, see <see
+             cref="T:System.Reflection.Emit.SignatureHelper" />
+
+            , <see
+             cref="T:System.Reflection.Emit.SignatureToken" />
+
+            , and <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

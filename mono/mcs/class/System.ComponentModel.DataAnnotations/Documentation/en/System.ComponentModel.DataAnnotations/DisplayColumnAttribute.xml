@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DisplayColumnAttribute" FullName="System.ComponentModel.DataAnnotations.DisplayColumnAttribute">
+<Type
+  Name="DisplayColumnAttribute"
+  FullName="System.ComponentModel.DataAnnotations.DisplayColumnAttribute"
+>
   <TypeSignature Language="C#" Value="public class DisplayColumnAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DisplayColumnAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit DisplayColumnAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ComponentModel.DataAnnotations</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,7 +24,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>When a column in a table contains a foreign key, Dynamic Data infers the display value for that column from the referenced table. By default, the first column of the referenced table whose type is string (or text) is used. The <see cref="T:System.ComponentModel.DataAnnotations.DisplayColumnAttribute" /> attribute enables you to change this default behavior and to specify a different parent table column to use as the column for the foreign key field.</para>
+      <para
+        >When a column in a table contains a foreign key, Dynamic Data infers the display value for that column from the referenced table. By default, the first column of the referenced table whose type is string (or text) is used. The <see
+         cref="T:System.ComponentModel.DataAnnotations.DisplayColumnAttribute" />
+
+         attribute enables you to change this default behavior and to specify a different parent table column to use as the column for the foreign key field.</para
+      >
       <para>When you apply this attribute, you must adhere to the following usage constraints:</para>
       <list type="bullet">
         <item>
@@ -39,8 +50,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DisplayColumnAttribute (string displayColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string displayColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DisplayColumnAttribute (string displayColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string displayColumn) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -52,15 +69,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.DisplayColumnAttribute" /> class by using the specified column. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.DisplayColumnAttribute" />
+
+             class by using the specified column. </para
+          >
         </summary>
         <param name="displayColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the column to use as the display column.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the column to use as the display column.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DisplayColumnAttribute (string displayColumn, string sortColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string displayColumn, string sortColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DisplayColumnAttribute (string displayColumn, string sortColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string displayColumn, string sortColumn) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -72,21 +103,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By default, the column specified in <paramref name="sortColumn" /> will be sorted in ascending order.</para>
+          <para
+            >By default, the column specified in <paramref
+             name="sortColumn" />
+
+             will be sorted in ascending order.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.DisplayColumnAttribute" /> class by using the specified display and sort columns. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.DisplayColumnAttribute" />
+
+             class by using the specified display and sort columns. </para
+          >
         </summary>
         <param name="displayColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the column to use as the display column.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the column to use as the display column.</param
+        >
         <param name="sortColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the column to use for sorting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the column to use for sorting.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DisplayColumnAttribute (string displayColumn, string sortColumn, bool sortDescending);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string displayColumn, string sortColumn, bool sortDescending) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DisplayColumnAttribute (string displayColumn, string sortColumn, bool sortDescending);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string displayColumn, string sortColumn, bool sortDescending) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -100,14 +153,28 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.DisplayColumnAttribute" /> class by using the specified display column, and the specified sort column and sort order. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.DisplayColumnAttribute" />
+
+             class by using the specified display column, and the specified sort column and sort order. </para
+          >
         </summary>
         <param name="displayColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the column to use as the display column.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the column to use as the display column.</param
+        >
         <param name="sortColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the column to use for sorting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the column to use for sorting.</param
+        >
         <param name="sortDescending">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to sort in descending order; otherwise, false. The default is false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to sort in descending order; otherwise, false. The default is false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DisplayColumn">

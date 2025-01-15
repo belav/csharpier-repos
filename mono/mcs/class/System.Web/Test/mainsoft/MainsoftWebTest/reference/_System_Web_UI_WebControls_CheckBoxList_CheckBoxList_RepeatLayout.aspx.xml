@@ -118,10 +118,16 @@
   </div>
   <div id="GHTSubTest4" testname="Ilegal RepeateLayout value - not a number">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest5" testname="Ilegal RepeateLayout value - out of range">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="AutoCompleteStringCollection" FullName="System.Windows.Forms.AutoCompleteStringCollection">
-  <TypeSignature Language="C#" Value="public class AutoCompleteStringCollection : System.Collections.IList" />
+<Type
+  Name="AutoCompleteStringCollection"
+  FullName="System.Windows.Forms.AutoCompleteStringCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class AutoCompleteStringCollection : System.Collections.IList"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -31,7 +37,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -52,14 +63,30 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Inserts a new <see cref="T:System.String" /> into the collection.</para>
+          <para
+            >Inserts a new <see
+             cref="T:System.String" />
+
+             into the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The position in the collection where the <see cref="T:System.String" /> was added.</para>
+          <para
+            >The position in the collection where the <see
+             cref="T:System.String" />
+
+             was added.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to add to the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -79,10 +106,18 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the elements of a <see cref="T:System.String" /> collection to the end. </para>
+          <para
+            >Adds the elements of a <see
+             cref="T:System.String" />
+
+             collection to the end. </para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The strings to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The strings to add to the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -108,7 +143,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CollectionChanged">
-      <MemberSignature Language="C#" Value="public event System.ComponentModel.CollectionChangeEventHandler CollectionChanged;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.ComponentModel.CollectionChangeEventHandler CollectionChanged;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>System.ComponentModel.CollectionChangeEventHandler</ReturnType>
@@ -139,14 +177,30 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether the <see cref="T:System.String" /> exists within the collection.</para>
+          <para
+            >Indicates whether the <see
+             cref="T:System.String" />
+
+             exists within the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.String" /> exists within the collection; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.String" />
+
+             exists within the collection; otherwise, false.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> for which to search.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           for which to search.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -167,12 +221,26 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies an array of <see cref="T:System.String" /> objects into the collection, starting at the specified position.</para>
+          <para
+            >Copies an array of <see
+             cref="T:System.String" />
+
+             objects into the collection, starting at the specified position.</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> objects to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           objects to add to the collection.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The position within the collection at which to start the insertion. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The position within the collection at which to start the insertion. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -190,7 +258,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of items in the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> .</para>
+          <para
+            >Gets the number of items in the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -198,7 +271,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerator GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -209,7 +285,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an enumerator that iterates through the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" />.</para>
+          <para
+            >Returns an enumerator that iterates through the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -233,7 +314,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Windows.Forms.AutoCompleteStringCollection.IndexOf(System.String)" /> returns the index for the first occurrence of the string within the collection.</para>
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.AutoCompleteStringCollection.IndexOf(System.String)" />
+
+             returns the index for the first occurrence of the string within the collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -244,7 +330,13 @@
           <para>The index for the specified item.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> for which to search.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           for which to search.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -268,9 +360,15 @@
           <para>Inserts the string into a specific index in the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The position at which to insert the string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The position at which to insert the string.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to insert.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to insert.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -307,7 +405,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether access to the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> is synchronized (thread safe).</para>
+          <para
+            >Gets a value indicating whether access to the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             is synchronized (thread safe).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -335,7 +438,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnCollectionChanged">
-      <MemberSignature Language="C#" Value="protected void OnCollectionChanged (System.ComponentModel.CollectionChangeEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void OnCollectionChanged (System.ComponentModel.CollectionChangeEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -348,10 +454,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.AutoCompleteStringCollection.CollectionChanged" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.AutoCompleteStringCollection.CollectionChanged" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -374,7 +491,13 @@
           <para>Removes a string from the collection. </para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -397,7 +520,10 @@
           <para>Removes the string at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index of the string to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index of the string to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -415,7 +541,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an object that can be used to synchronize access to the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" />.</para>
+          <para
+            >Gets an object that can be used to synchronize access to the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -438,16 +569,50 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> instance is cast to an <see cref="T:System.Collections.ICollection" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.ICollection" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the strings of the collection to an <see cref="T:System.Array" />, starting at a particular <see cref="T:System.Array" /> index. For a description of this member, see <see cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />.</para>
+          <para
+            >Copies the strings of the collection to an <see
+             cref="T:System.Array" />
+
+            , starting at a particular <see
+             cref="T:System.Array" />
+
+             index. For a description of this member, see <see
+             cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
+
+            .</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The one-dimensional <see cref="T:System.Array" /> that is the destination of the strings copied from collection. The <see cref="T:System.Array" /> must have zero-based indexing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The one-dimensional <see
+           cref="T:System.Array" />
+
+           that is the destination of the strings copied from collection. The <see
+           cref="T:System.Array" />
+
+           must have zero-based indexing.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> at which copying begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           at which copying begins.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Add">
@@ -465,18 +630,39 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a string to the collection. For a description of this member, see <see cref="M:System.Collections.IList.Add(System.Object)" />.</para>
+          <para
+            >Adds a string to the collection. For a description of this member, see <see
+             cref="M:System.Collections.IList.Add(System.Object)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The index at which the <paramref name="value" /> has been added. </para>
+          <para
+            >The index at which the <paramref
+             name="value" />
+
+             has been added. </para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to be added to the collection</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to be added to the collection</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Contains">
@@ -494,18 +680,39 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines where the collection contains a specified string. For a description of this member, see <see cref="M:System.Collections.IList.Contains(System.Object)" />.</para>
+          <para
+            >Determines where the collection contains a specified string. For a description of this member, see <see
+             cref="M:System.Collections.IList.Contains(System.Object)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if <paramref name="value" /> is found in the collection; otherwise, false.</para>
+          <para
+            >true if <paramref
+             name="value" />
+
+             is found in the collection; otherwise, false.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to locate in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to locate in the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IndexOf">
@@ -523,18 +730,39 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines the index of a specified string in the collection. For a description of this member, see <see cref="M:System.Collections.IList.IndexOf(System.Object)" />.</para>
+          <para
+            >Determines the index of a specified string in the collection. For a description of this member, see <see
+             cref="M:System.Collections.IList.IndexOf(System.Object)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The index of <paramref name="value" /> if found in the list; otherwise, -1.</para>
+          <para
+            >The index of <paramref
+             name="value" />
+
+             if found in the list; otherwise, -1.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to locate in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to locate in the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Insert">
@@ -553,16 +781,38 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Inserts an item to the collection at the specified index. For a description of this member, see <see cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />.</para>
+          <para
+            >Inserts an item to the collection at the specified index. For a description of this member, see <see
+             cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />
+
+            .</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index at which <paramref name="value" /> should be inserted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index at which <paramref
+           name="value" />
+
+           should be inserted.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to insert into the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to insert into the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IsFixedSize">
@@ -578,11 +828,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the collection has a fixed size. For a description of this member, see <see cref="P:System.Collections.IList.IsFixedSize" />.</para>
+          <para
+            >Gets a value indicating whether the collection has a fixed size. For a description of this member, see <see
+             cref="P:System.Collections.IList.IsFixedSize" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -599,16 +862,32 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the collection is read-only. For a description of this member, see <see cref="P:System.Collections.IList.IsReadOnly" />.</para>
+          <para
+            >Gets a value indicating whether the collection is read-only. For a description of this member, see <see
+             cref="P:System.Collections.IList.IsReadOnly" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Item">
-      <MemberSignature Language="C#" Value="object System.Collections.IList.Item[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IList.Item[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -641,14 +920,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the first occurrence of a specific string from the collection. For a description of this member, see <see cref="M:System.Collections.IList.Remove(System.Object)" />.</para>
+          <para
+            >Removes the first occurrence of a specific string from the collection. For a description of this member, see <see
+             cref="M:System.Collections.IList.Remove(System.Object)" />
+
+            .</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to remove from the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to remove from the collection.</param
+        >
       </Docs>
     </Member>
   </Members>

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IRegistrationServices" FullName="System.Runtime.InteropServices.IRegistrationServices">
   <TypeSignature Maintainer="auto" Language="C#" Value="public interface IRegistrationServices" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IRegistrationServices" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IRegistrationServices"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -32,7 +35,10 @@
   <Members>
     <Member MemberName="GetManagedCategoryGuid">
       <MemberSignature Language="C#" Value="public Guid GetManagedCategoryGuid ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Guid GetManagedCategoryGuid() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance valuetype System.Guid GetManagedCategoryGuid() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -57,7 +63,10 @@
     </Member>
     <Member MemberName="GetProgIdForType">
       <MemberSignature Language="C#" Value="public string GetProgIdForType (Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetProgIdForType(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string GetProgIdForType(class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -81,12 +90,21 @@
           <para>The ProgID for the specified type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type whose ProgID is being requested. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type whose ProgID is being requested. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetRegistrableTypesInAssembly">
-      <MemberSignature Language="C#" Value="public Type[] GetRegistrableTypesInAssembly (System.Reflection.Assembly assembly);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Type[] GetRegistrableTypesInAssembly(class System.Reflection.Assembly assembly) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Type[] GetRegistrableTypesInAssembly (System.Reflection.Assembly assembly);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Type[] GetRegistrableTypesInAssembly(class System.Reflection.Assembly assembly) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -103,19 +121,41 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves a list of classes in an assembly that would be registered by a call to <see cref="M:System.Runtime.InteropServices.IRegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />.</para>
+          <para
+            >Retrieves a list of classes in an assembly that would be registered by a call to <see
+             cref="M:System.Runtime.InteropServices.IRegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Type" /> array containing a list of classes in <paramref name="assembly" />.</para>
+          <para
+            >A <see
+             cref="T:System.Type" />
+
+             array containing a list of classes in <paramref
+             name="assembly" />
+
+            .</para
+          >
         </returns>
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />The assembly to search for classes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The assembly to search for classes. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="RegisterAssembly">
-      <MemberSignature Language="C#" Value="public bool RegisterAssembly (System.Reflection.Assembly assembly, System.Runtime.InteropServices.AssemblyRegistrationFlags flags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool RegisterAssembly(class System.Reflection.Assembly assembly, valuetype System.Runtime.InteropServices.AssemblyRegistrationFlags flags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool RegisterAssembly (System.Reflection.Assembly assembly, System.Runtime.InteropServices.AssemblyRegistrationFlags flags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool RegisterAssembly(class System.Reflection.Assembly assembly, valuetype System.Runtime.InteropServices.AssemblyRegistrationFlags flags) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -133,7 +173,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>RegisterAssembly adds the appropriate registry entries for the types in the specified assembly. This method also calls any registration functions found in the assembly.</para>
-          <para>Use <see cref="M:System.Reflection.Assembly.Load(System.String)" /> to get an assembly.</para>
+          <para
+            >Use <see
+             cref="M:System.Reflection.Assembly.Load(System.String)" />
+
+             to get an assembly.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -141,17 +186,40 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if <paramref name="assembly" /> contains types that were successfully registered; otherwise false if the assembly contains no eligible types.</para>
+          <para
+            >true if <paramref
+             name="assembly" />
+
+             contains types that were successfully registered; otherwise false if the assembly contains no eligible types.</para
+          >
         </returns>
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />The assembly to be registered. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The assembly to be registered. </param
+        >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Runtime.InteropServices.AssemblyRegistrationFlags" /> value indicating any special settings needed when registering <paramref name="assembly" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Runtime.InteropServices.AssemblyRegistrationFlags" />
+
+           value indicating any special settings needed when registering <paramref
+           name="assembly" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="RegisterTypeForComClients">
-      <MemberSignature Language="C#" Value="public void RegisterTypeForComClients (Type type, ref Guid g);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RegisterTypeForComClients(class System.Type type, valuetype System.Guid g) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RegisterTypeForComClients (Type type, ref Guid g);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void RegisterTypeForComClients(class System.Type type, valuetype System.Guid g) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -163,7 +231,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="type" Type="System.Type" />
-        <Parameter Name="g" Type="System.Guid&amp;" RefType="ref" />
+        <Parameter Name="g" Type="System.Guid&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="type">To be added: an object of type 'Type'</param>
@@ -174,7 +242,10 @@
     </Member>
     <Member MemberName="TypeRepresentsComType">
       <MemberSignature Language="C#" Value="public bool TypeRepresentsComType (Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool TypeRepresentsComType(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool TypeRepresentsComType(class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -198,12 +269,18 @@
           <para>true if the specified type is a COM type; otherwise false.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type to determine if it is a COM type. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type to determine if it is a COM type. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="TypeRequiresRegistration">
       <MemberSignature Language="C#" Value="public bool TypeRequiresRegistration (Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool TypeRequiresRegistration(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool TypeRequiresRegistration(class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -227,12 +304,21 @@
           <para>true if the type must be registered for use from COM; otherwise false.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type to check for COM registration requirements. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type to check for COM registration requirements. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="UnregisterAssembly">
-      <MemberSignature Language="C#" Value="public bool UnregisterAssembly (System.Reflection.Assembly assembly);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool UnregisterAssembly(class System.Reflection.Assembly assembly) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool UnregisterAssembly (System.Reflection.Assembly assembly);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool UnregisterAssembly(class System.Reflection.Assembly assembly) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -248,7 +334,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>UnregisterAssembly removes the registry entries for the types in the specified assembly previously added by <see cref="M:System.Runtime.InteropServices.IRegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />. This method also calls any unregistration functions found in the assembly.</para>
+          <para
+            >UnregisterAssembly removes the registry entries for the types in the specified assembly previously added by <see
+             cref="M:System.Runtime.InteropServices.IRegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />
+
+            . This method also calls any unregistration functions found in the assembly.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -256,10 +347,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if <paramref name="assembly" /> contains types that were successfully unregistered; otherwise false if the assembly contains no eligible types.</para>
+          <para
+            >true if <paramref
+             name="assembly" />
+
+             contains types that were successfully unregistered; otherwise false if the assembly contains no eligible types.</para
+          >
         </returns>
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />The assembly to be unregistered. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The assembly to be unregistered. </param
+        >
       </Docs>
     </Member>
   </Members>

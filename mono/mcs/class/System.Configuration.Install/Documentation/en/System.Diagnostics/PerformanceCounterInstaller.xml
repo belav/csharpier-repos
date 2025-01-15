@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="PerformanceCounterInstaller" FullName="System.Diagnostics.PerformanceCounterInstaller">
-  <TypeSignature Language="C#" Value="public class PerformanceCounterInstaller : System.Configuration.Install.ComponentInstaller" />
+  <TypeSignature
+    Language="C#"
+    Value="public class PerformanceCounterInstaller : System.Configuration.Install.ComponentInstaller"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Configuration.Install</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -17,7 +20,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies an installer for the <see cref="T:System.Diagnostics.PerformanceCounter" /> component.</para>
+      <para
+        >Specifies an installer for the <see
+         cref="T:System.Diagnostics.PerformanceCounter" />
+
+         component.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -29,7 +37,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.PerformanceCounterInstaller" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.PerformanceCounterInstaller" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -89,7 +102,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CategoryType">
-      <MemberSignature Language="C#" Value="public System.Diagnostics.PerformanceCounterCategoryType CategoryType { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Diagnostics.PerformanceCounterCategoryType CategoryType { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -109,7 +125,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Diagnostics.PerformanceCounterInstaller.CategoryType" /> property specifies whether the performance counter category can have multiple instances.  </para>
+          <para
+            >The <see
+             cref="P:System.Diagnostics.PerformanceCounterInstaller.CategoryType" />
+
+             property specifies whether the performance counter category can have multiple instances.  </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -118,7 +139,10 @@
       </Docs>
     </Member>
     <Member MemberName="CopyFromComponent">
-      <MemberSignature Language="C#" Value="public override void CopyFromComponent (System.ComponentModel.IComponent component);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void CopyFromComponent (System.ComponentModel.IComponent component);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -130,14 +154,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Diagnostics.PerformanceCounterInstaller" /> can only install multiple counters in the same category.</para>
+            <see cref="T:System.Diagnostics.PerformanceCounterInstaller" />
+
+             can only install multiple counters in the same category.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Copies all the properties from the specified component that are required at install time for a performance counter.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component to copy from. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component to copy from. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -145,7 +175,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Counters">
-      <MemberSignature Language="C#" Value="public System.Diagnostics.CounterCreationDataCollection Counters { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Diagnostics.CounterCreationDataCollection Counters { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -169,7 +202,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Install">
-      <MemberSignature Language="C#" Value="public override void Install (System.Collections.IDictionary stateSaver);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Install (System.Collections.IDictionary stateSaver);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -189,7 +225,13 @@
           <para>Performs the installation.</para>
         </summary>
         <param name="stateSaver">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Collections.IDictionary" /> that is used to save the information needed to perform a commit, rollback, or uninstall operation. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Collections.IDictionary" />
+
+           that is used to save the information needed to perform a commit, rollback, or uninstall operation. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -197,7 +239,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Rollback">
-      <MemberSignature Language="C#" Value="public override void Rollback (System.Collections.IDictionary savedState);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Rollback (System.Collections.IDictionary savedState);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -212,7 +257,13 @@
           <para>Restores the computer to the state it was in before the installation.</para>
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Collections.IDictionary" /> that contains the pre-installation state of the computer. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Collections.IDictionary" />
+
+           that contains the pre-installation state of the computer. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -220,7 +271,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Uninstall">
-      <MemberSignature Language="C#" Value="public override void Uninstall (System.Collections.IDictionary savedState);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Uninstall (System.Collections.IDictionary savedState);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -235,7 +289,13 @@
           <para>Removes an installation.</para>
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Collections.IDictionary" /> that contains the post-installation state of the computer. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Collections.IDictionary" />
+
+           that contains the post-installation state of the computer. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -243,7 +303,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="UninstallAction">
-      <MemberSignature Language="C#" Value="public System.Configuration.Install.UninstallAction UninstallAction { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.Install.UninstallAction UninstallAction { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>

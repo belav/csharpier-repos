@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DbCommand" FullName="System.Data.Common.DbCommand">
-  <TypeSignature Language="C#" Value="public abstract class DbCommand : System.ComponentModel.Component, System.Data.IDbCommand" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class DbCommand : System.ComponentModel.Component, System.Data.IDbCommand"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,7 +21,10 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents an SQL statement or stored procedure to execute against a data source. Provides a base class for database-specific classes that represent commands. <see cref="Overload:System.Data.Common.DbCommand.ExecuteNonQueryAsync" /></para>
+      <para
+        >Represents an SQL statement or stored procedure to execute against a data source. Provides a base class for database-specific classes that represent commands. <see
+         cref="Overload:System.Data.Common.DbCommand.ExecuteNonQueryAsync" />
+      </para>
     </summary>
   </Docs>
   <Members>
@@ -31,7 +37,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Constructs an instance of the <see cref="T:System.Data.Common.DbCommand" /> object.</para>
+          <para
+            >Constructs an instance of the <see
+             cref="T:System.Data.Common.DbCommand" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -53,7 +64,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Attempts to cancels the execution of a <see cref="T:System.Data.Common.DbCommand" />.</para>
+          <para
+            >Attempts to cancels the execution of a <see
+             cref="T:System.Data.Common.DbCommand" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -79,7 +95,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you set the <see cref="T:System.Data.CommandType" /> to StoredProcedure, you should set the <see cref="P:System.Data.Common.DbCommand.CommandText" /> property to the name of the stored procedure. The command executes this stored procedure when you call one of the Execute methods.</para>
+          <para
+            >When you set the <see
+             cref="T:System.Data.CommandType" />
+
+             to StoredProcedure, you should set the <see
+             cref="P:System.Data.Common.DbCommand.CommandText" />
+
+             property to the name of the stored procedure. The command executes this stored procedure when you call one of the Execute methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -101,7 +125,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.ArgumentException" /> is generated if the assigned <see cref="P:System.Data.Common.DbCommand.CommandTimeout" /> property value is less than 0.</para>
+          <para
+            >An <see
+             cref="T:System.ArgumentException" />
+
+             is generated if the assigned <see
+             cref="P:System.Data.Common.DbCommand.CommandTimeout" />
+
+             property value is less than 0.</para
+          >
           <para>Note to implementers, it is recommended that 0 means no timeout.</para>
         </remarks>
         <summary>
@@ -114,7 +146,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CommandType">
-      <MemberSignature Language="C#" Value="public abstract System.Data.CommandType CommandType { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Data.CommandType CommandType { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -132,11 +167,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When you set the <see cref="T:System.Data.CommandType" /> to StoredProcedure, you should set the <see cref="P:System.Data.Common.DbCommand.CommandText" /> property to the name of the stored procedure. The command executes this stored procedure when you call one of the Execute methods.</para>
+          <para
+            >When you set the <see
+             cref="T:System.Data.CommandType" />
+
+             to StoredProcedure, you should set the <see
+             cref="P:System.Data.Common.DbCommand.CommandText" />
+
+             property to the name of the stored procedure. The command executes this stored procedure when you call one of the Execute methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates or specifies how the <see cref="P:System.Data.Common.DbCommand.CommandText" /> property is interpreted.</para>
+          <para
+            >Indicates or specifies how the <see
+             cref="P:System.Data.Common.DbCommand.CommandText" />
+
+             property is interpreted.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -144,7 +192,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Connection">
-      <MemberSignature Language="C#" Value="public System.Data.Common.DbConnection Connection { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.Common.DbConnection Connection { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -166,7 +217,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Data.Common.DbConnection" /> used by this <see cref="T:System.Data.Common.DbCommand" />.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Data.Common.DbConnection" />
+
+             used by this <see
+             cref="T:System.Data.Common.DbCommand" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -174,7 +233,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateDbParameter">
-      <MemberSignature Language="C#" Value="protected abstract System.Data.Common.DbParameter CreateDbParameter ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract System.Data.Common.DbParameter CreateDbParameter ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbParameter</ReturnType>
@@ -185,11 +247,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of a <see cref="T:System.Data.Common.DbParameter" /> object.</para>
+          <para
+            >Creates a new instance of a <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.Common.DbParameter" /> object.</para>
+          <para
+            >A <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -197,7 +269,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateParameter">
-      <MemberSignature Language="C#" Value="public System.Data.Common.DbParameter CreateParameter ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.Common.DbParameter CreateParameter ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbParameter</ReturnType>
@@ -208,11 +283,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of a <see cref="T:System.Data.Common.DbParameter" /> object.</para>
+          <para
+            >Creates a new instance of a <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.Common.DbParameter" /> object.</para>
+          <para
+            >A <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -220,7 +305,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DbConnection">
-      <MemberSignature Language="C#" Value="protected abstract System.Data.Common.DbConnection DbConnection { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract System.Data.Common.DbConnection DbConnection { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbConnection</ReturnType>
@@ -231,7 +319,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Data.Common.DbConnection" /> used by this <see cref="T:System.Data.Common.DbCommand" />.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Data.Common.DbConnection" />
+
+             used by this <see
+             cref="T:System.Data.Common.DbCommand" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -239,7 +335,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DbParameterCollection">
-      <MemberSignature Language="C#" Value="protected abstract System.Data.Common.DbParameterCollection DbParameterCollection { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract System.Data.Common.DbParameterCollection DbParameterCollection { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbParameterCollection</ReturnType>
@@ -250,7 +349,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the collection of <see cref="T:System.Data.Common.DbParameter" /> objects.</para>
+          <para
+            >Gets the collection of <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             objects.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -258,7 +362,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DbTransaction">
-      <MemberSignature Language="C#" Value="protected abstract System.Data.Common.DbTransaction DbTransaction { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract System.Data.Common.DbTransaction DbTransaction { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbTransaction</ReturnType>
@@ -269,7 +376,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="P:System.Data.Common.DbCommand.DbTransaction" /> within which this <see cref="T:System.Data.Common.DbCommand" /> object executes.</para>
+          <para
+            >Gets or sets the <see
+             cref="P:System.Data.Common.DbCommand.DbTransaction" />
+
+             within which this <see
+             cref="T:System.Data.Common.DbCommand" />
+
+             object executes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -310,7 +425,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ExecuteDbDataReader">
-      <MemberSignature Language="C#" Value="protected abstract System.Data.Common.DbDataReader ExecuteDbDataReader (System.Data.CommandBehavior behavior);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract System.Data.Common.DbDataReader ExecuteDbDataReader (System.Data.CommandBehavior behavior);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbDataReader</ReturnType>
@@ -330,7 +448,13 @@
           <para>A task representing the operation.</para>
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />An instance of <see cref="T:System.Data.CommandBehavior" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An instance of <see
+           cref="T:System.Data.CommandBehavior" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -347,8 +471,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use <see cref="M:System.Data.Common.DbCommand.ExecuteNonQuery" /> to perform catalog operations (for example, querying the structure of a database or creating database objects such as tables), or to change the data in a database by executing UPDATE, INSERT, or DELETE statements.</para>
-          <para>Although <see cref="M:System.Data.Common.DbCommand.ExecuteNonQuery" /> does not return any rows, any output parameters or return values mapped to parameters are populated with data.</para>
+          <para
+            >You can use <see
+             cref="M:System.Data.Common.DbCommand.ExecuteNonQuery" />
+
+             to perform catalog operations (for example, querying the structure of a database or creating database objects such as tables), or to change the data in a database by executing UPDATE, INSERT, or DELETE statements.</para
+          >
+          <para
+            >Although <see
+             cref="M:System.Data.Common.DbCommand.ExecuteNonQuery" />
+
+             does not return any rows, any output parameters or return values mapped to parameters are populated with data.</para
+          >
           <para>For UPDATE, INSERT, and DELETE statements, the return value is the number of rows affected by the command. For all other types of statements, the return value is -1.</para>
         </remarks>
         <summary>
@@ -365,7 +499,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ExecuteReader">
-      <MemberSignature Language="C#" Value="public System.Data.Common.DbDataReader ExecuteReader ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.Common.DbDataReader ExecuteReader ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbDataReader</ReturnType>
@@ -376,11 +513,27 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Executes the <see cref="P:System.Data.Common.DbCommand.CommandText" /> against the <see cref="P:System.Data.Common.DbCommand.Connection" />, and returns an <see cref="T:System.Data.Common.DbDataReader" />.</para>
+          <para
+            >Executes the <see
+             cref="P:System.Data.Common.DbCommand.CommandText" />
+
+             against the <see
+             cref="P:System.Data.Common.DbCommand.Connection" />
+
+            , and returns an <see
+             cref="T:System.Data.Common.DbDataReader" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.Common.DbDataReader" /> object.</para>
+          <para
+            >A <see
+             cref="T:System.Data.Common.DbDataReader" />
+
+             object.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -388,7 +541,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ExecuteReader">
-      <MemberSignature Language="C#" Value="public System.Data.Common.DbDataReader ExecuteReader (System.Data.CommandBehavior behavior);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.Common.DbDataReader ExecuteReader (System.Data.CommandBehavior behavior);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbDataReader</ReturnType>
@@ -401,14 +557,39 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Executes the <see cref="P:System.Data.Common.DbCommand.CommandText" /> against the <see cref="P:System.Data.Common.DbCommand.Connection" />, and returns an <see cref="T:System.Data.Common.DbDataReader" /> using one of the <see cref="T:System.Data.CommandBehavior" /> values. </para>
+          <para
+            >Executes the <see
+             cref="P:System.Data.Common.DbCommand.CommandText" />
+
+             against the <see
+             cref="P:System.Data.Common.DbCommand.Connection" />
+
+            , and returns an <see
+             cref="T:System.Data.Common.DbDataReader" />
+
+             using one of the <see
+             cref="T:System.Data.CommandBehavior" />
+
+             values. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Data.Common.DbDataReader" /> object.</para>
+          <para
+            >An <see
+             cref="T:System.Data.Common.DbDataReader" />
+
+             object.</para
+          >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Data.CommandBehavior" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Data.CommandBehavior" />
+
+           values.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -425,7 +606,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Data.Common.DbCommand.ExecuteScalar" /> method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see cref="M:System.Data.Common.DbCommand.ExecuteReader" /> method and performing the operations necessary to generate the single value using the data returned by a <see cref="T:System.Data.Common.DbDataReader" />.</para>
+          <para
+            >Use the <see
+             cref="M:System.Data.Common.DbCommand.ExecuteScalar" />
+
+             method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see
+             cref="M:System.Data.Common.DbCommand.ExecuteReader" />
+
+             method and performing the operations necessary to generate the single value using the data returned by a <see
+             cref="T:System.Data.Common.DbDataReader" />
+
+            .</para
+          >
           <para>If the first column of the first row in the result set is not found, a null reference (Nothing in Visual Basic) is returned. If the value in the database is null, the query returns DBNull.Value.</para>
         </remarks>
         <summary>
@@ -442,7 +634,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Parameters">
-      <MemberSignature Language="C#" Value="public System.Data.Common.DbParameterCollection Parameters { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.Common.DbParameterCollection Parameters { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -461,7 +656,19 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the collection of <see cref="T:System.Data.Common.DbParameter" /> objects. For more information on parameters, see <format type="text/html"><a href="537d8a2c-d40b-4000-83eb-bc1fcc93f707">Configuring Parameters and Parameter Data Types (ADO.NET)</a></format>.</para>
+          <para
+            >Gets the collection of <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             objects. For more information on parameters, see <format
+             type="text/html">
+              <a href="537d8a2c-d40b-4000-83eb-bc1fcc93f707"
+                >Configuring Parameters and Parameter Data Types (ADO.NET)</a
+              >
+            </format>
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -479,7 +686,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Data.Common.DbCommand.CommandType" /> property is set to TableDirect, Prepare does nothing. If <see cref="P:System.Data.Common.DbCommand.CommandType" /> is set to StoredProcedure, the call to Prepare should succeed, although it may result in a no-op.</para>
+          <para
+            >If the <see
+             cref="P:System.Data.Common.DbCommand.CommandType" />
+
+             property is set to TableDirect, Prepare does nothing. If <see
+             cref="P:System.Data.Common.DbCommand.CommandType" />
+
+             is set to StoredProcedure, the call to Prepare should succeed, although it may result in a no-op.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -491,7 +706,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="System.Data.IDbCommand.Connection">
-      <MemberSignature Language="C#" Value="System.Data.IDbConnection System.Data.IDbCommand.Connection { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Data.IDbConnection System.Data.IDbCommand.Connection { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -503,16 +721,32 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.Data.IDbCommand.Connection" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.Data.IDbCommand.Connection" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Data.IDbConnection" /> used by this instance of the <see cref="T:System.Data.IDbCommand" />.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Data.IDbConnection" />
+
+             used by this instance of the <see
+             cref="T:System.Data.IDbCommand" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Data.IDbCommand.CreateParameter">
-      <MemberSignature Language="C#" Value="System.Data.IDbDataParameter IDbCommand.CreateParameter ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Data.IDbDataParameter IDbCommand.CreateParameter ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -524,12 +758,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbCommand" /> instance is cast to an <see cref="T:System.Data.IDbCommand" /> interface.</para>
-          <para>For more information, see <see cref="M:System.Data.IDbCommand.CreateParameter" />.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Data.Common.DbCommand" />
+
+             instance is cast to an <see
+             cref="T:System.Data.IDbCommand" />
+
+             interface.</para
+          >
+          <para
+            >For more information, see <see
+             cref="M:System.Data.IDbCommand.CreateParameter" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of an <see cref="T:System.Data.IDbDataParameter" /> object.</para>
+          <para
+            >Creates a new instance of an <see
+             cref="T:System.Data.IDbDataParameter" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -550,21 +802,53 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbCommand" /> instance is cast to an <see cref="T:System.Data.IDbCommand" /> interface.</para>
-          <para>For more information, see <see cref="M:System.Data.IDbCommand.ExecuteReader" />.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Data.Common.DbCommand" />
+
+             instance is cast to an <see
+             cref="T:System.Data.IDbCommand" />
+
+             interface.</para
+          >
+          <para
+            >For more information, see <see
+             cref="M:System.Data.IDbCommand.ExecuteReader" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Executes the <see cref="P:System.Data.IDbCommand.CommandText" /> against the <see cref="P:System.Data.IDbCommand.Connection" /> and builds an <see cref="T:System.Data.IDataReader" />.</para>
+          <para
+            >Executes the <see
+             cref="P:System.Data.IDbCommand.CommandText" />
+
+             against the <see
+             cref="P:System.Data.IDbCommand.Connection" />
+
+             and builds an <see
+             cref="T:System.Data.IDataReader" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Data.IDataReader" /> object.</para>
+          <para
+            >An <see
+             cref="T:System.Data.IDataReader" />
+
+             object.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="System.Data.IDbCommand.ExecuteReader">
-      <MemberSignature Language="C#" Value="System.Data.IDataReader IDbCommand.ExecuteReader (System.Data.CommandBehavior behavior);" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Data.IDataReader IDbCommand.ExecuteReader (System.Data.CommandBehavior behavior);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -578,23 +862,64 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbCommand" /> instance is cast to an <see cref="T:System.Data.IDbCommand" /> interface.</para>
-          <para>For more information, see <see cref="M:System.Data.IDbCommand.ExecuteReader(System.Data.CommandBehavior)" />.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Data.Common.DbCommand" />
+
+             instance is cast to an <see
+             cref="T:System.Data.IDbCommand" />
+
+             interface.</para
+          >
+          <para
+            >For more information, see <see
+             cref="M:System.Data.IDbCommand.ExecuteReader(System.Data.CommandBehavior)" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Executes the <see cref="P:System.Data.IDbCommand.CommandText" /> against the <see cref="P:System.Data.IDbCommand.Connection" />, and builds an <see cref="T:System.Data.IDataReader" /> using one of the <see cref="T:System.Data.CommandBehavior" /> values.</para>
+          <para
+            >Executes the <see
+             cref="P:System.Data.IDbCommand.CommandText" />
+
+             against the <see
+             cref="P:System.Data.IDbCommand.Connection" />
+
+            , and builds an <see
+             cref="T:System.Data.IDataReader" />
+
+             using one of the <see
+             cref="T:System.Data.CommandBehavior" />
+
+             values.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Data.IDataReader" /> object.</para>
+          <para
+            >An <see
+             cref="T:System.Data.IDataReader" />
+
+             object.</para
+          >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Data.CommandBehavior" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Data.CommandBehavior" />
+
+           values.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Data.IDbCommand.Parameters">
-      <MemberSignature Language="C#" Value="System.Data.IDataParameterCollection System.Data.IDbCommand.Parameters { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Data.IDataParameterCollection System.Data.IDbCommand.Parameters { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -606,17 +931,38 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbCommand" /> instance is cast to an <see cref="T:System.Data.IDbCommand" /> interface.</para>
-          <para>For more information, see <see cref="M:System.Data.IDbCommand.Parameters" />.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Data.Common.DbCommand" />
+
+             instance is cast to an <see
+             cref="T:System.Data.IDbCommand" />
+
+             interface.</para
+          >
+          <para
+            >For more information, see <see
+             cref="M:System.Data.IDbCommand.Parameters" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Data.IDataParameterCollection" />.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Data.IDataParameterCollection" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Data.IDbCommand.Transaction">
-      <MemberSignature Language="C#" Value="System.Data.IDbTransaction System.Data.IDbCommand.Transaction { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Data.IDbTransaction System.Data.IDbCommand.Transaction { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -628,16 +974,32 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="M:System.Data.IDbCommand.Ttransaction" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.Data.IDbCommand.Ttransaction" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="P:System.Data.Common.DbCommand.DbTransaction" /> within which this <see cref="T:System.Data.Common.DbCommand" /> object executes.</para>
+          <para
+            >Gets or sets the <see
+             cref="P:System.Data.Common.DbCommand.DbTransaction" />
+
+             within which this <see
+             cref="T:System.Data.Common.DbCommand" />
+
+             object executes.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Transaction">
-      <MemberSignature Language="C#" Value="public System.Data.Common.DbTransaction Transaction { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.Common.DbTransaction Transaction { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -659,7 +1021,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Data.Common.DbTransaction" /> within which this <see cref="T:System.Data.Common.DbCommand" /> object executes.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Data.Common.DbTransaction" />
+
+             within which this <see
+             cref="T:System.Data.Common.DbCommand" />
+
+             object executes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -667,7 +1037,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="UpdatedRowSource">
-      <MemberSignature Language="C#" Value="public abstract System.Data.UpdateRowSource UpdatedRowSource { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Data.UpdateRowSource UpdatedRowSource { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -682,11 +1055,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Throws a <see cref="T:System.ArgumentException" /> if the value entered was not one of the <see cref="T:System.Data.UpdateRowSource" /> values.</para>
+          <para
+            >Throws a <see
+             cref="T:System.ArgumentException" />
+
+             if the value entered was not one of the <see
+             cref="T:System.Data.UpdateRowSource" />
+
+             values.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets how command results are applied to the <see cref="T:System.Data.DataRow" /> when used by the Update method of a <see cref="T:System.Data.Common.DbDataAdapter" />.</para>
+          <para
+            >Gets or sets how command results are applied to the <see
+             cref="T:System.Data.DataRow" />
+
+             when used by the Update method of a <see
+             cref="T:System.Data.Common.DbDataAdapter" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

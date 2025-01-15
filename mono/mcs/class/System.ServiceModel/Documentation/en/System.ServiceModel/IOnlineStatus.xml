@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IOnlineStatus" FullName="System.ServiceModel.IOnlineStatus">
   <TypeSignature Language="C#" Value="public interface IOnlineStatus" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IOnlineStatus" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IOnlineStatus"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>

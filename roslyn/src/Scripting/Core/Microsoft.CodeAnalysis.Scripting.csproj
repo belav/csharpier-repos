@@ -7,7 +7,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TargetFrameworks>$(SourceBuildTargetFrameworks);netstandard2.0</TargetFrameworks>
     <DefineConstants>$(DefineConstants);SCRIPTING</DefineConstants>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <PackageId>Microsoft.CodeAnalysis.Scripting.Common</PackageId>
@@ -20,7 +19,11 @@
     <ProjectReference Include="..\..\Compilers\Core\Portable\Microsoft.CodeAnalysis.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Runtime.Loader" Version="$(SystemRuntimeLoaderVersion)" PrivateAssets="all" />
+    <PackageReference
+      Include="System.Runtime.Loader"
+      Version="$(SystemRuntimeLoaderVersion)"
+      PrivateAssets="all"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Compilers\Shared\CoreClrShim.cs" />
@@ -56,10 +59,22 @@
     <InternalsVisibleTo Include="csi" />
     <InternalsVisibleTo Include="vbi" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.InteractiveHost" />
-    <InternalsVisibleTo Include="Microsoft.VisualStudio.LanguageServices" WorkItem="https://github.com/dotnet/roslyn/issues/5661" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Features" WorkItem="https://github.com/dotnet/roslyn/issues/5661" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.EditorFeatures" WorkItem="https://github.com/dotnet/roslyn/issues/5661" />
-    <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CSharp.EditorFeatures" WorkItem="https://github.com/dotnet/roslyn/issues/5661" />
+    <InternalsVisibleTo
+      Include="Microsoft.VisualStudio.LanguageServices"
+      WorkItem="https://github.com/dotnet/roslyn/issues/5661"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.Features"
+      WorkItem="https://github.com/dotnet/roslyn/issues/5661"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.EditorFeatures"
+      WorkItem="https://github.com/dotnet/roslyn/issues/5661"
+    />
+    <InternalsVisibleTo
+      Include="Microsoft.CodeAnalysis.CSharp.EditorFeatures"
+      WorkItem="https://github.com/dotnet/roslyn/issues/5661"
+    />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Scripting.UnitTests" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Scripting.TestUtilities" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Scripting.Desktop.UnitTests" />

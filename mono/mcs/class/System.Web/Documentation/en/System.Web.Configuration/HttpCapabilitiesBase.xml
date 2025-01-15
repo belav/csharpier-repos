@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HttpCapabilitiesBase" FullName="System.Web.Configuration.HttpCapabilitiesBase">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class HttpCapabilitiesBase : System.Web.UI.IFilterResolutionService" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class HttpCapabilitiesBase : System.Web.UI.IFilterResolutionService"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -21,7 +24,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" /> is the base class from which the <see cref="T:System.Web.HttpBrowserCapabilities" /> class is derived. <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" /> offers a large number of read-only properties that provide type-safe access to a browser's capabilities dictionary. You can access the <see cref="T:System.Web.HttpBrowserCapabilities" /> class through the <see cref="P:System.Web.HttpRequest.Browser" /> property that is exposed by the ASP.NET <see cref="P:System.Web.HttpRequest.Browser" /> property.</para>
+        <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+
+         is the base class from which the <see
+         cref="T:System.Web.HttpBrowserCapabilities" />
+
+         class is derived. <see
+         cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+
+         offers a large number of read-only properties that provide type-safe access to a browser's capabilities dictionary. You can access the <see
+         cref="T:System.Web.HttpBrowserCapabilities" />
+
+         class through the <see
+         cref="P:System.Web.HttpRequest.Browser" />
+
+         property that is exposed by the ASP.NET <see
+         cref="P:System.Web.HttpRequest.Browser" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -38,7 +59,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" /> class.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -65,7 +91,10 @@
       </Docs>
     </Member>
     <Member MemberName="Adapters">
-      <MemberSignature Language="C#" Value="public System.Collections.IDictionary Adapters { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IDictionary Adapters { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -101,7 +130,10 @@
           <para>Used internally to add an entry to the internal collection of browsers for which capabilities are recognized.</para>
         </summary>
         <param name="browserName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the browser to add.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the browser to add.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AOL">
@@ -180,7 +212,10 @@
       </Docs>
     </Member>
     <Member MemberName="Browsers">
-      <MemberSignature Language="C#" Value="public System.Collections.ArrayList Browsers { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ArrayList Browsers { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -193,7 +228,15 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an <see cref="T:System.Collections.ArrayList" /> of the browsers in the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Capabilities" /> dictionary.</para>
+          <para
+            >Gets an <see
+             cref="T:System.Collections.ArrayList" />
+
+             of the browsers in the <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Capabilities" />
+
+             dictionary.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -210,7 +253,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanCombineFormsInDeck" /> property applies only to WML-compatible mobile devices. If true, the adapter can output multiple forms from the same page as cards of a single deck, where possible.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanCombineFormsInDeck" />
+
+             property applies only to WML-compatible mobile devices. If true, the adapter can output multiple forms from the same page as cards of a single deck, where possible.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -231,7 +279,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanInitiateVoiceCall" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanInitiateVoiceCall" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -240,7 +293,10 @@
       </Docs>
     </Member>
     <Member MemberName="CanRenderAfterInputOrSelectElement">
-      <MemberSignature Language="C#" Value="public virtual bool CanRenderAfterInputOrSelectElement { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool CanRenderAfterInputOrSelectElement { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -252,7 +308,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderAfterInputOrSelectElement" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderAfterInputOrSelectElement" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -279,7 +340,10 @@
       </Docs>
     </Member>
     <Member MemberName="CanRenderInputAndSelectElementsTogether">
-      <MemberSignature Language="C#" Value="public virtual bool CanRenderInputAndSelectElementsTogether { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool CanRenderInputAndSelectElementsTogether { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -291,7 +355,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderInputAndSelectElementsTogether" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderInputAndSelectElementsTogether" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -312,7 +381,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderMixedSelects" /> property applies only to WML-compatible mobile devices. </para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderMixedSelects" />
+
+             property applies only to WML-compatible mobile devices. </para
+          >
           <para>If false, onpick values are displayed as hyperlinks and value attributes require a &lt;do&gt; element for postback.</para>
         </remarks>
         <summary>
@@ -322,7 +396,10 @@
       </Docs>
     </Member>
     <Member MemberName="CanRenderOneventAndPrevElementsTogether">
-      <MemberSignature Language="C#" Value="public virtual bool CanRenderOneventAndPrevElementsTogether { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool CanRenderOneventAndPrevElementsTogether { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -334,7 +411,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderOneventAndPrevElementsTogether" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderOneventAndPrevElementsTogether" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
           <para>If false, WML &lt;onevent&gt; and &lt;prev&gt; elements that coexist within the same WML card will not be properly rendered.</para>
         </remarks>
         <summary>
@@ -356,7 +438,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderPostBackCards" /> property applies only to WML-compatible mobile-device browsers.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderPostBackCards" />
+
+             property applies only to WML-compatible mobile-device browsers.</para
+          >
           <para>If false, postback cards will not be properly rendered by the browser.</para>
         </remarks>
         <summary>
@@ -366,7 +453,10 @@
       </Docs>
     </Member>
     <Member MemberName="CanRenderSetvarZeroWithMultiSelectionList">
-      <MemberSignature Language="C#" Value="public virtual bool CanRenderSetvarZeroWithMultiSelectionList { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool CanRenderSetvarZeroWithMultiSelectionList { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -378,7 +468,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderSetvarZeroWithMultiSelectionList" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderSetvarZeroWithMultiSelectionList" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
           <para>If false, HTML &lt;setvar&gt; elements with a value attribute of 0 will not display correctly.</para>
         </remarks>
         <summary>
@@ -406,7 +501,10 @@
       </Docs>
     </Member>
     <Member MemberName="Capabilities">
-      <MemberSignature Language="C#" Value="public System.Collections.IDictionary Capabilities { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IDictionary Capabilities { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -454,9 +552,19 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.ClrVersion" /> property is supported only when the browser is Internet Explorer version 5.0 and later.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.ClrVersion" />
+
+             property is supported only when the browser is Internet Explorer version 5.0 and later.</para
+          >
           <para>If the .NET Framework is not installed on the client, the value of the version elements returned is 0, 0,-1,-1.</para>
-          <para>If more than one version of the .NET Framework is installed on the client, the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.ClrVersion" /> property returns the latest version.</para>
+          <para
+            >If more than one version of the .NET Framework is installed on the client, the <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.ClrVersion" />
+
+             property returns the latest version.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -477,7 +585,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Cookies" /> property indicates whether the browser application supports cookies. If the user has disabled cookies in their application, the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Cookies" /> property will not be affected.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Cookies" />
+
+             property indicates whether the browser application supports cookies. If the user has disabled cookies in their application, the <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Cookies" />
+
+             property will not be affected.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -504,7 +620,10 @@
       </Docs>
     </Member>
     <Member MemberName="CreateHtmlTextWriter">
-      <MemberSignature Language="C#" Value="public System.Web.UI.HtmlTextWriter CreateHtmlTextWriter (System.IO.TextWriter w);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.HtmlTextWriter CreateHtmlTextWriter (System.IO.TextWriter w);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -519,15 +638,28 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Web.UI.HtmlTextWriter" /> to be used.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Web.UI.HtmlTextWriter" />
+
+             to be used.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of the <see cref="T:System.Web.UI.HtmlTextWriter" /> to be used.</para>
+          <para
+            >A new instance of the <see
+             cref="T:System.Web.UI.HtmlTextWriter" />
+
+             to be used.</para
+          >
         </returns>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.IO.TextWriter" /> to be created.</param>
+          <see cref="T:System.IO.TextWriter" />
+
+           to be created.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DefaultSubmitButtonLimit">
@@ -543,8 +675,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" /> property primarily represents the number of soft keys that are available on a WML-compatible mobile device. </para>
-          <para>Web Forms pages for mobile devices can contain a <see cref="T:System.Web.UI.MobileControls.SelectionList" /> object and more than one <see cref="T:System.Web.UI.MobileControls.Command" /> control. The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" /> allows you to choose which of the <see cref="T:System.Web.UI.MobileControls.Command" /> controls should be assigned to a soft key on devices that have multiple soft keys.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" />
+
+             property primarily represents the number of soft keys that are available on a WML-compatible mobile device. </para
+          >
+          <para
+            >Web Forms pages for mobile devices can contain a <see
+             cref="T:System.Web.UI.MobileControls.SelectionList" />
+
+             object and more than one <see
+             cref="T:System.Web.UI.MobileControls.Command" />
+
+             control. The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" />
+
+             allows you to choose which of the <see
+             cref="T:System.Web.UI.MobileControls.Command" />
+
+             controls should be assigned to a soft key on devices that have multiple soft keys.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -673,7 +824,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.Configuration.HttpCapabilitiesBase.GetClrVersions" />  method is supported only when the browser is Internet Explorer version 5.0 or later. If the common language runtime is not installed on the client, the property returns an array containing a single <see cref="T:System.Version" /> object with the values 0, 0,-1,-1.</para>
+          <para
+            >The <see
+             cref="M:System.Web.Configuration.HttpCapabilitiesBase.GetClrVersions" />
+
+              method is supported only when the browser is Internet Explorer version 5.0 or later. If the common language runtime is not installed on the client, the property returns an array containing a single <see
+             cref="T:System.Version" />
+
+             object with the values 0, 0,-1,-1.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -681,12 +840,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of <see cref="T:System.Version" /> objects.</para>
+          <para
+            >An array of <see
+             cref="T:System.Version" />
+
+             objects.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetConfigCapabilities">
-      <MemberSignature Language="C#" Value="public static System.Web.Configuration.HttpCapabilitiesBase GetConfigCapabilities (string configKey, System.Web.HttpRequest request);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Web.Configuration.HttpCapabilitiesBase GetConfigCapabilities (string configKey, System.Web.HttpRequest request);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.HttpCapabilitiesBase</ReturnType>
@@ -699,16 +866,44 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used internally to return an instance of <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" /> representing the browser that generated the specified <see cref="T:System.Web.HttpRequest" />.</para>
+          <para
+            >Used internally to return an instance of <see
+             cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+
+             representing the browser that generated the specified <see
+             cref="T:System.Web.HttpRequest" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance of <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" /> representing the browser that generated the specified <see cref="T:System.Web.HttpRequest" />.</para>
+          <para
+            >An instance of <see
+             cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+
+             representing the browser that generated the specified <see
+             cref="T:System.Web.HttpRequest" />
+
+            .</para
+          >
         </returns>
         <param name="configKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the configuration section that configures browser capabilities.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the configuration section that configures browser capabilities.</param
+        >
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.HttpRequest" /> generated by the browser for which to return capabilities and which is usually the current <see cref="T:System.Web.HttpRequest" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.HttpRequest" />
+
+           generated by the browser for which to return capabilities and which is usually the current <see
+           cref="T:System.Web.HttpRequest" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -728,16 +923,29 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If false, a link control might be necessary when a <ui>Back</ui> button is not available.</para>
+          <para
+            >If false, a link control might be necessary when a <ui
+            >Back</ui>
+
+             button is not available.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the browser has a dedicated <ui>Back</ui> button.</para>
+          <para
+            >Gets a value indicating whether the browser has a dedicated <ui
+            >Back</ui>
+
+             button.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="HidesRightAlignedMultiselectScrollbars">
-      <MemberSignature Language="C#" Value="public virtual bool HidesRightAlignedMultiselectScrollbars { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool HidesRightAlignedMultiselectScrollbars { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -768,7 +976,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the fully qualified class name of the <see cref="T:System.Web.UI.HtmlTextWriter" /> to use.</para>
+          <para
+            >Gets or sets the fully qualified class name of the <see
+             cref="T:System.Web.UI.HtmlTextWriter" />
+
+             to use.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -856,7 +1069,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.Configuration.HttpCapabilitiesBase.IsBrowser(System.String)" /> method also returns true if the client browser definition inherits from the specified browser.</para>
+          <para
+            >The <see
+             cref="M:System.Web.Configuration.HttpCapabilitiesBase.IsBrowser(System.String)" />
+
+             method also returns true if the client browser definition inherits from the specified browser.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -867,7 +1085,10 @@
           <para>true if the client browser is the same as the specified browser; otherwise, false. The default is false.</para>
         </returns>
         <param name="browserName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The specified browser.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The specified browser.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsColor">
@@ -962,7 +1183,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the browser supports JavaScript but scripting is disabled through a security setting, the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.JavaScript" /> property will return true but script will not execute on the browser.</para>
+          <para
+            >If the browser supports JavaScript but scripting is disabled through a security setting, the <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.JavaScript" />
+
+             property will return true but script will not execute on the browser.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1039,7 +1265,10 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Processing by an intermediate gateway can change the number of bytes that reach the browser. ASP.NET does not enforce this limit on page size.</para>
           <para>
-            <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.MaximumRenderedPageSize" /> is primarily useful when working with mobile-client browsers.</para>
+            <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.MaximumRenderedPageSize" />
+
+             is primarily useful when working with mobile-client browsers.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1048,7 +1277,10 @@
       </Docs>
     </Member>
     <Member MemberName="MaximumSoftkeyLabelLength">
-      <MemberSignature Language="C#" Value="public virtual int MaximumSoftkeyLabelLength { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual int MaximumSoftkeyLabelLength { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1060,7 +1292,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.MaximumSoftkeyLabelLength" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.MaximumSoftkeyLabelLength" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1105,7 +1342,10 @@
       </Docs>
     </Member>
     <Member MemberName="MobileDeviceManufacturer">
-      <MemberSignature Language="C#" Value="public virtual string MobileDeviceManufacturer { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string MobileDeviceManufacturer { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1171,7 +1411,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.NumberOfSoftkeys" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.NumberOfSoftkeys" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
           <para>Soft keys are special keys that the application can usually map to custom tasks. Soft-key text is displayed on the screen in the lower-left and lower-right corners.</para>
         </remarks>
         <summary>
@@ -1193,7 +1438,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Some of the possible values for the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Platform" /> property are as follows: </para>
+          <para
+            >Some of the possible values for the <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Platform" />
+
+             property are as follows: </para
+          >
           <list type="bullet">
             <item>
               <para>Unknown</para>
@@ -1258,7 +1508,10 @@
       </Docs>
     </Member>
     <Member MemberName="PreferredRenderingMime">
-      <MemberSignature Language="C#" Value="public virtual string PreferredRenderingMime { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string PreferredRenderingMime { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1276,7 +1529,10 @@
       </Docs>
     </Member>
     <Member MemberName="PreferredRenderingType">
-      <MemberSignature Language="C#" Value="public virtual string PreferredRenderingType { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string PreferredRenderingType { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1294,7 +1550,10 @@
       </Docs>
     </Member>
     <Member MemberName="PreferredRequestEncoding">
-      <MemberSignature Language="C#" Value="public virtual string PreferredRequestEncoding { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string PreferredRequestEncoding { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1312,7 +1571,10 @@
       </Docs>
     </Member>
     <Member MemberName="PreferredResponseEncoding">
-      <MemberSignature Language="C#" Value="public virtual string PreferredResponseEncoding { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string PreferredResponseEncoding { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1330,7 +1592,10 @@
       </Docs>
     </Member>
     <Member MemberName="RendersBreakBeforeWmlSelectAndInput">
-      <MemberSignature Language="C#" Value="public virtual bool RendersBreakBeforeWmlSelectAndInput { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RendersBreakBeforeWmlSelectAndInput { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1342,7 +1607,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreakBeforeWmlSelectAndInput" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreakBeforeWmlSelectAndInput" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
           <para>If true, content following &lt;select&gt; or &lt;input&gt; elements will automatically be placed on a new line.</para>
         </remarks>
         <summary>
@@ -1352,7 +1622,10 @@
       </Docs>
     </Member>
     <Member MemberName="RendersBreaksAfterHtmlLists">
-      <MemberSignature Language="C#" Value="public virtual bool RendersBreaksAfterHtmlLists { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RendersBreaksAfterHtmlLists { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1373,7 +1646,10 @@
       </Docs>
     </Member>
     <Member MemberName="RendersBreaksAfterWmlAnchor">
-      <MemberSignature Language="C#" Value="public virtual bool RendersBreaksAfterWmlAnchor { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RendersBreaksAfterWmlAnchor { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1385,7 +1661,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreaksAfterWmlAnchor" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreaksAfterWmlAnchor" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
           <para>If true, content following a stand-alone HTML &lt;a&gt; (anchor) element will automatically be placed on a new line.</para>
         </remarks>
         <summary>
@@ -1395,7 +1676,10 @@
       </Docs>
     </Member>
     <Member MemberName="RendersBreaksAfterWmlInput">
-      <MemberSignature Language="C#" Value="public virtual bool RendersBreaksAfterWmlInput { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RendersBreaksAfterWmlInput { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1407,7 +1691,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreaksAfterWmlInput" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreaksAfterWmlInput" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
           <para>If true, content following an HTML &lt;input&gt; element will automatically be placed on a new line.</para>
         </remarks>
         <summary>
@@ -1417,7 +1706,10 @@
       </Docs>
     </Member>
     <Member MemberName="RendersWmlDoAcceptsInline">
-      <MemberSignature Language="C#" Value="public virtual bool RendersWmlDoAcceptsInline { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RendersWmlDoAcceptsInline { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1429,7 +1721,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersWmlDoAcceptsInline" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersWmlDoAcceptsInline" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1438,7 +1735,10 @@
       </Docs>
     </Member>
     <Member MemberName="RendersWmlSelectsAsMenuCards">
-      <MemberSignature Language="C#" Value="public virtual bool RendersWmlSelectsAsMenuCards { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RendersWmlSelectsAsMenuCards { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1450,7 +1750,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersWmlSelectsAsMenuCards" /> property applies only to WML-compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersWmlSelectsAsMenuCards" />
+
+             property applies only to WML-compatible mobile devices.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1459,7 +1764,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiredMetaTagNameValue">
-      <MemberSignature Language="C#" Value="public virtual string RequiredMetaTagNameValue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string RequiredMetaTagNameValue { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1481,7 +1789,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresAttributeColonSubstitution">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresAttributeColonSubstitution { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresAttributeColonSubstitution { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1502,7 +1813,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresContentTypeMetaTag">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresContentTypeMetaTag { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresContentTypeMetaTag { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1516,7 +1830,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If true, server-control adapters insert the following tag into the HTML &lt;head&gt; element of a Web page:</para>
           <code>&lt;META HTTP-EQUIV="CONTENT-TYPE" CONTENT=""; CHARSET=""&gt;</code>
-          <para>In this example, <paramref name="CONTENT" /> is the value returned by the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.PreferredRenderingMime" /> property, and charset is the character encoding used.</para>
+          <para
+            >In this example, <paramref
+             name="CONTENT" />
+
+             is the value returned by the <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.PreferredRenderingMime" />
+
+             property, and charset is the character encoding used.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1561,7 +1883,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresHtmlAdaptiveErrorReporting">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresHtmlAdaptiveErrorReporting { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresHtmlAdaptiveErrorReporting { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1582,7 +1907,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresLeadingPageBreak">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresLeadingPageBreak { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresLeadingPageBreak { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1603,7 +1931,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresNoBreakInFormatting">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresNoBreakInFormatting { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresNoBreakInFormatting { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1624,7 +1955,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresOutputOptimization">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresOutputOptimization { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresOutputOptimization { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1638,7 +1972,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If true, server control adapters generate minimal output to reduce the size of the resulting page.</para>
           <block subset="none" type="note">
-            <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RequiresOutputOptimization" /> property returns true for i-mode–compatible browsers.</para>
+            <para
+              >The <see
+               cref="P:System.Web.Configuration.HttpCapabilitiesBase.RequiresOutputOptimization" />
+
+               property returns true for i-mode–compatible browsers.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1648,7 +1987,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresPhoneNumbersAsPlainText">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresPhoneNumbersAsPlainText { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresPhoneNumbersAsPlainText { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1660,7 +2002,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RequiresPhoneNumbersAsPlainText" />  property applies only to browsers for which the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanInitiateVoiceCall" /> property is true.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RequiresPhoneNumbersAsPlainText" />
+
+              property applies only to browsers for which the <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanInitiateVoiceCall" />
+
+             property is true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1669,7 +2019,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresSpecialViewStateEncoding">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresSpecialViewStateEncoding { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresSpecialViewStateEncoding { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1681,7 +2034,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>HTTP is a stateless protocol, and VIEWSTATE is one mechanism used to persist client changes across multiple requests. Each control on a Web page contains a <see cref="P:System.Web.UI.Control.ViewState" /> property, which represents the accumulation of any changes made by the client. In a Web Forms page, these changes are encoded in postback data as the value of an HTML &lt;input&gt; element with a type attribute of hidden. For example:</para>
+          <para
+            >HTTP is a stateless protocol, and VIEWSTATE is one mechanism used to persist client changes across multiple requests. Each control on a Web page contains a <see
+             cref="P:System.Web.UI.Control.ViewState" />
+
+             property, which represents the accumulation of any changes made by the client. In a Web Forms page, these changes are encoded in postback data as the value of an HTML &lt;input&gt; element with a type attribute of hidden. For example:</para
+          >
           <code>&lt;input type="hidden" name="__VIEWSTATE" value="t0PH_u56?cDxleHQ7P=" /&gt;</code>
           <para>If true, non-alphabetic characters in the VIEWSTATE value will not be sent correctly by the browser, nor by an intermediate gateway. To correct this, server-control adapters replace non-alphabetic characters in the VIEWSTATE value with ones that do not require encoding in HTTP requests.</para>
         </remarks>
@@ -1692,7 +2050,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresUniqueFilePathSuffix">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresUniqueFilePathSuffix { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresUniqueFilePathSuffix { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1704,7 +2065,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A self-referring HTML &lt;form&gt; element is one for which the action attribute specifies its own URL. If true, self-referring forms do not return the correct results. This is due to caching by either the browser or an intermediate gateway. To correct this, server control adapters append a default query string (__ufps=<paramref name="uniquefilepathsuffix" />) onto the form-action URL values of self-referring forms.</para>
+          <para
+            >A self-referring HTML &lt;form&gt; element is one for which the action attribute specifies its own URL. If true, self-referring forms do not return the correct results. This is due to caching by either the browser or an intermediate gateway. To correct this, server control adapters append a default query string (__ufps=<paramref
+             name="uniquefilepathsuffix" />
+
+            ) onto the form-action URL values of self-referring forms.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1713,7 +2079,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresUniqueHtmlCheckboxNames">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresUniqueHtmlCheckboxNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresUniqueHtmlCheckboxNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1731,7 +2100,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresUniqueHtmlInputNames">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresUniqueHtmlInputNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresUniqueHtmlInputNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1749,7 +2121,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequiresUrlEncodedPostfieldValues">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresUrlEncodedPostfieldValues { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresUrlEncodedPostfieldValues { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1869,7 +2244,10 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsAccesskeyAttribute">
-      <MemberSignature Language="C#" Value="public virtual bool SupportsAccesskeyAttribute { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool SupportsAccesskeyAttribute { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1926,7 +2304,10 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsCacheControlMetaTag">
-      <MemberSignature Language="C#" Value="public virtual bool SupportsCacheControlMetaTag { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool SupportsCacheControlMetaTag { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1941,8 +2322,18 @@
           <para>The cache-control value for the http-equiv attribute of HTML &lt;meta&gt; elements allows control over client caching of downloaded content, which includes Web pages. The following HTML fragment shows an example:</para>
           <code>&lt;META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"/&gt;</code>
           <para>If true, the inclusion of this tag in the &lt;head&gt; element of a Web page should force the browser to reload content from the server.</para>
-          <para>If false, server control adapters append a default query string (__ufps=<paramref name="uniquefilepathsuffix" />) onto link URL values that do not already have one. This forces the browser to reload content from the server.</para>
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsCacheControlMetaTag" /> property also applies to the equivalent HTTP header form:</para>
+          <para
+            >If false, server control adapters append a default query string (__ufps=<paramref
+             name="uniquefilepathsuffix" />
+
+            ) onto link URL values that do not already have one. This forces the browser to reload content from the server.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsCacheControlMetaTag" />
+
+             property also applies to the equivalent HTTP header form:</para
+          >
           <code>CACHE-CONTROL: NO-CACHE</code>
         </remarks>
         <summary>
@@ -2030,7 +2421,10 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsEmptyStringInCookieValue">
-      <MemberSignature Language="C#" Value="public virtual bool SupportsEmptyStringInCookieValue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool SupportsEmptyStringInCookieValue { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2132,8 +2526,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" /> property applies only to i-mode–compatible devices.</para>
-          <para>Set i-Phone–specific picture symbols for i-mode–compatible browsers by using the <see cref="P:System.Web.UI.WebControls.Image.ImageUrl" /> property. </para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" />
+
+             property applies only to i-mode–compatible devices.</para
+          >
+          <para
+            >Set i-Phone–specific picture symbols for i-mode–compatible browsers by using the <see
+             cref="P:System.Web.UI.WebControls.Image.ImageUrl" />
+
+             property. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2154,7 +2558,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" /> property applies only to i-mode–compatible devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" />
+
+             property applies only to i-mode–compatible devices.</para
+          >
           <para>The istyle attribute is used for setting the input style of a text-input field on i-mode–compatible browsers. </para>
         </remarks>
         <summary>
@@ -2176,7 +2585,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" /> property applies only to i-mode–compatible devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" />
+
+             property applies only to i-mode–compatible devices.</para
+          >
           <para>The MODE attribute is used for setting the input mode of a text input field on i-mode–compatible browsers. </para>
         </remarks>
         <summary>
@@ -2204,7 +2618,10 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsJPhoneMultiMediaAttributes">
-      <MemberSignature Language="C#" Value="public virtual bool SupportsJPhoneMultiMediaAttributes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool SupportsJPhoneMultiMediaAttributes { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2216,7 +2633,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsJPhoneMultiMediaAttributes" /> property applies only to J-Phone–compatible mobile devices.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsJPhoneMultiMediaAttributes" />
+
+             property applies only to J-Phone–compatible mobile devices.</para
+          >
           <para>J-Phone is a markup language specification, based on HTML, for J-Phone–compatible browsers. If true, the browser supports additional attributes for HTML &lt;a&gt; (anchor) and &lt;select&gt; elements. The additional attributes supported are as follows:</para>
           <list type="bullet">
             <item>
@@ -2258,8 +2680,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsJPhoneSymbols" /> property applies only to J-Phone–compatible mobile devices.</para>
-          <para>Set J-Phone–specific picture symbols for J-Phone–compatible browsers by using the <see cref="P:System.Web.UI.WebControls.Image.ImageUrl" /> property.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsJPhoneSymbols" />
+
+             property applies only to J-Phone–compatible mobile devices.</para
+          >
+          <para
+            >Set J-Phone–specific picture symbols for J-Phone–compatible browsers by using the <see
+             cref="P:System.Web.UI.WebControls.Image.ImageUrl" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2268,7 +2700,10 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsQueryStringInFormAction">
-      <MemberSignature Language="C#" Value="public virtual bool SupportsQueryStringInFormAction { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool SupportsQueryStringInFormAction { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2289,7 +2724,10 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsRedirectWithCookie">
-      <MemberSignature Language="C#" Value="public virtual bool SupportsRedirectWithCookie { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool SupportsRedirectWithCookie { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2301,8 +2739,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>With UP.Browser 4.1 or UP.Browser 3.2, the <see cref="M:System.Web.HttpResponse.Redirect(System.String)" /> method behaves as if the value of the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsRedirectWithCookie" /> property of the <see cref="T:System.Web.HttpBrowserCapabilities" /> object is false, unless the <see cref="P:System.Web.Configuration.SessionStateSection.Cookieless" /> property in the <see cref="P:System.Web.Configuration.SystemWebSectionGroup.SessionState" /> section of Web.config has been explicitly set to true.</para>
-          <para>In ASP.NET 1.1, the options for this setting were true or false, but with ASP.NET 2.0, the choices are expanded, and <see cref="F:System.Web.HttpCookieMode.AutoDetect" /> is now the default setting. If your Web application has the cookieless attribute of the &lt;sessionState&gt; section in the Web.config file set to a Boolean value, <see cref="M:System.Web.HttpResponse.Redirect(System.String)" /> should work as expected for these browsers.</para>
+          <para
+            >With UP.Browser 4.1 or UP.Browser 3.2, the <see
+             cref="M:System.Web.HttpResponse.Redirect(System.String)" />
+
+             method behaves as if the value of the <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsRedirectWithCookie" />
+
+             property of the <see
+             cref="T:System.Web.HttpBrowserCapabilities" />
+
+             object is false, unless the <see
+             cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
+
+             property in the <see
+             cref="P:System.Web.Configuration.SystemWebSectionGroup.SessionState" />
+
+             section of Web.config has been explicitly set to true.</para
+          >
+          <para
+            >In ASP.NET 1.1, the options for this setting were true or false, but with ASP.NET 2.0, the choices are expanded, and <see
+             cref="F:System.Web.HttpCookieMode.AutoDetect" />
+
+             is now the default setting. If your Web application has the cookieless attribute of the &lt;sessionState&gt; section in the Web.config file set to a Boolean value, <see
+             cref="M:System.Web.HttpResponse.Redirect(System.String)" />
+
+             should work as expected for these browsers.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2368,7 +2831,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IFilterResolutionService.CompareFilters">
-      <MemberSignature Language="C#" Value="int IFilterResolutionService.CompareFilters (string filter1, string filter2);" />
+      <MemberSignature
+        Language="C#"
+        Value="int IFilterResolutionService.CompareFilters (string filter1, string filter2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2388,16 +2854,45 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>1 if <paramref name="filter1" /> is a parent of <paramref name="filter2" />; -1 if <paramref name="filter2" /> is a parent of <paramref name="filter1" />; 0 if there is no parent-child relationship between <paramref name="filter1" /> and <paramref name="filter2" />.</para>
+          <para
+            >1 if <paramref
+             name="filter1" />
+
+             is a parent of <paramref
+             name="filter2" />
+
+            ; -1 if <paramref
+             name="filter2" />
+
+             is a parent of <paramref
+             name="filter1" />
+
+            ; 0 if there is no parent-child relationship between <paramref
+             name="filter1" />
+
+             and <paramref
+             name="filter2" />
+
+            .</para
+          >
         </returns>
         <param name="filter1">
-          <attribution license="cc4" from="Microsoft" modified="false" />The first filter to compare.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The first filter to compare.</param
+        >
         <param name="filter2">
-          <attribution license="cc4" from="Microsoft" modified="false" />The second filter to compare.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The second filter to compare.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Web.UI.IFilterResolutionService.EvaluateFilter">
-      <MemberSignature Language="C#" Value="bool IFilterResolutionService.EvaluateFilter (string filterName);" />
+      <MemberSignature
+        Language="C#"
+        Value="bool IFilterResolutionService.EvaluateFilter (string filterName);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2419,7 +2914,10 @@
           <para>true if the filter was successfully evaluated; otherwise, false.</para>
         </returns>
         <param name="filterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The filter to evaluate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The filter to evaluate.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Tables">
@@ -2525,7 +3023,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Version" /> property returns a string. In some scenarios, the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Version" /> property might contain letter characters, as in the case of a browser or client device that is a beta version such as "7.0b." To correctly get the version as a data type that can be used in a numeric comparison, concatenate the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.MajorVersion" /> and <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.MinorVersion" /> property values.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Version" />
+
+             property returns a string. In some scenarios, the <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Version" />
+
+             property might contain letter characters, as in the case of a browser or client device that is a beta version such as "7.0b." To correctly get the version as a data type that can be used in a numeric comparison, concatenate the <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.MajorVersion" />
+
+             and <see
+             cref="P:System.Web.Configuration.HttpCapabilitiesBase.MinorVersion" />
+
+             property values.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

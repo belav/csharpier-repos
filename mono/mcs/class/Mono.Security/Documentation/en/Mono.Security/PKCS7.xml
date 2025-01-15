@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -17,7 +22,10 @@
   </Docs>
   <Members>
     <Member MemberName="AlgorithmIdentifier">
-      <MemberSignature Language="C#" Value="public static Mono.Security.ASN1 AlgorithmIdentifier (string oid);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.ASN1 AlgorithmIdentifier (string oid);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.ASN1</ReturnType>
@@ -26,9 +34,15 @@
         <Parameter Name="oid" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="oid">a <see cref="T:System.String" /></param>
+        <param name="oid"
+          >a <see
+           cref="T:System.String" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
+        <returns
+          >a <see
+           cref="T:Mono.Security.ASN1" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -37,7 +51,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AlgorithmIdentifier">
-      <MemberSignature Language="C#" Value="public static Mono.Security.ASN1 AlgorithmIdentifier (string oid, Mono.Security.ASN1 parameters);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.ASN1 AlgorithmIdentifier (string oid, Mono.Security.ASN1 parameters);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.ASN1</ReturnType>
@@ -47,10 +64,19 @@
         <Parameter Name="parameters" Type="Mono.Security.ASN1" />
       </Parameters>
       <Docs>
-        <param name="oid">a <see cref="T:System.String" /></param>
-        <param name="parameters">a <see cref="T:Mono.Security.ASN1" /></param>
+        <param name="oid"
+          >a <see
+           cref="T:System.String" />
+        </param>
+        <param name="parameters"
+          >a <see
+           cref="T:Mono.Security.ASN1" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
+        <returns
+          >a <see
+           cref="T:Mono.Security.ASN1" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -59,7 +85,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Attribute">
-      <MemberSignature Language="C#" Value="public static Mono.Security.ASN1 Attribute (string oid, Mono.Security.ASN1 value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.ASN1 Attribute (string oid, Mono.Security.ASN1 value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.ASN1</ReturnType>
@@ -69,10 +98,19 @@
         <Parameter Name="value" Type="Mono.Security.ASN1" />
       </Parameters>
       <Docs>
-        <param name="oid">a <see cref="T:System.String" /></param>
-        <param name="value">a <see cref="T:Mono.Security.ASN1" /></param>
+        <param name="oid"
+          >a <see
+           cref="T:System.String" />
+        </param>
+        <param name="value"
+          >a <see
+           cref="T:Mono.Security.ASN1" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
+        <returns
+          >a <see
+           cref="T:Mono.Security.ASN1" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -81,7 +119,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IssuerAndSerialNumber">
-      <MemberSignature Language="C#" Value="public static Mono.Security.ASN1 IssuerAndSerialNumber (Mono.Security.X509.X509Certificate x509);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.ASN1 IssuerAndSerialNumber (Mono.Security.X509.X509Certificate x509);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.ASN1</ReturnType>
@@ -90,9 +131,15 @@
         <Parameter Name="x509" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="x509">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
+        <param name="x509"
+          >a <see
+           cref="T:Mono.Security.X509.X509Certificate" />
+        </param>
         <summary>To be added</summary>
-        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
+        <returns
+          >a <see
+           cref="T:Mono.Security.ASN1" />
+        </returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

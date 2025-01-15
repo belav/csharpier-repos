@@ -59,12 +59,22 @@
       </tr>
       <tr align="Center">
         <td colspan="3">
-          <span>&lt;</span>&amp;nbsp;<a href="javascript:__doPostBack('DataGrid1$_ctl14$_ctl1','')">&gt;</a></td>
+          <span>&lt;</span>
+
+          &amp;nbsp;<a
+           href="javascript:__doPostBack('DataGrid1$_ctl14$_ctl1','')">&gt;</a>
+        </td>
       </tr>
     </table>
     <span>
-      <br />System.Web.UI.WebControls.DataGridPagerStyle</span>
+      <br />
+
+      System.Web.UI.WebControls.DataGridPagerStyle</span
+    >
     <span>
-      <br />NextPrev</span>
+      <br />
+
+      NextPrev</span
+    >
   </div>
 </testresults>

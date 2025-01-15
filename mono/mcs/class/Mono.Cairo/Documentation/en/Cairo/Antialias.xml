@@ -10,8 +10,7 @@
   </Base>
   <Docs>
     <summary>Specifies the type of antialiasing to do when rendering text or shapes.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName="Default">

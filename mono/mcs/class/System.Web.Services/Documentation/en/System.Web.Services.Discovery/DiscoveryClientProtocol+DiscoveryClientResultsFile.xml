@@ -1,5 +1,11 @@
-<Type Name="DiscoveryClientProtocol+DiscoveryClientResultsFile" FullName="System.Web.Services.Discovery.DiscoveryClientProtocol+DiscoveryClientResultsFile">
-  <TypeSignature Language="C#" Value="public sealed class DiscoveryClientProtocol.DiscoveryClientResultsFile" />
+<Type
+  Name="DiscoveryClientProtocol+DiscoveryClientResultsFile"
+  FullName="System.Web.Services.Discovery.DiscoveryClientProtocol+DiscoveryClientResultsFile"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DiscoveryClientProtocol.DiscoveryClientResultsFile"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -28,7 +34,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Results">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Discovery.DiscoveryClientResultCollection Results { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Discovery.DiscoveryClientResultCollection Results { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Discovery.DiscoveryClientResultCollection</ReturnType>

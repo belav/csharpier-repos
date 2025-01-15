@@ -12,7 +12,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.WebParts.PartChromeState" /> enumeration represents the possible visible states that a Web Parts control and its surrounding border can be in. </para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.WebParts.PartChromeState" />
+
+         enumeration represents the possible visible states that a Web Parts control and its surrounding border can be in. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

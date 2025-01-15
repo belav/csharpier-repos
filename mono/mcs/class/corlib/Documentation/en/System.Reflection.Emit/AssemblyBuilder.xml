@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="AssemblyBuilder" FullName="System.Reflection.Emit.AssemblyBuilder">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class AssemblyBuilder : System.Reflection.Assembly, System.Runtime.InteropServices._AssemblyBuilder" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit AssemblyBuilder extends System.Reflection.Assembly implements class System.Runtime.InteropServices._AssemblyBuilder" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public sealed class AssemblyBuilder : System.Reflection.Assembly, System.Runtime.InteropServices._AssemblyBuilder"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit AssemblyBuilder extends System.Reflection.Assembly implements class System.Runtime.InteropServices._AssemblyBuilder"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -32,11 +39,48 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A dynamic assembly is an assembly that is created using the Reflection Emit APIs. The dynamic modules in the assembly are saved when the dynamic assembly is saved using the <see cref="M:System.Reflection.Emit.AssemblyBuilder.Save(System.String)" /> method. To generate an executable, the <see cref="M:System.Reflection.Emit.AssemblyBuilder.SetEntryPoint(System.Reflection.MethodInfo)" /> method must be called to identify the method that is the entry point to the assembly. Assemblies are saved as DLL by default, unless <see cref="M:System.Reflection.Emit.AssemblyBuilder.SetEntryPoint(System.Reflection.MethodInfo)" /> requests the generation of a console application or a Windows-based application.</para>
-      <para>If a dynamic assembly contains more than one dynamic module, the assembly's manifest file name should match the module's name that is specified as the first argument to <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule(System.String)" />.</para>
-      <para>Some methods on the base class <see cref="T:System.Reflection.Assembly" /> such as GetModules and GetLoadedModules will not work correctly when called AssemblyBuilder objects. You can load the defined dynamic assembly and call the methods on the loaded assembly. For example, to ensure that resource modules are included in the returned module list, call GetModules on the loaded <see cref="T:System.Reflection.Assembly" /> object.</para>
-      <para>The signing of a dynamic assembly using <see cref="P:System.Reflection.AssemblyName.KeyPair" /> is not effective until the assembly is saved to disk. So, strong names will not work with transient dynamic assemblies.</para>
-      <para>To get an <see cref="T:System.Reflection.Emit.AssemblyBuilder" /> object, use the <see cref="Overload:System.AppDomain.DefineDynamicAssembly" /> method.</para>
+      <para
+        >A dynamic assembly is an assembly that is created using the Reflection Emit APIs. The dynamic modules in the assembly are saved when the dynamic assembly is saved using the <see
+         cref="M:System.Reflection.Emit.AssemblyBuilder.Save(System.String)" />
+
+         method. To generate an executable, the <see
+         cref="M:System.Reflection.Emit.AssemblyBuilder.SetEntryPoint(System.Reflection.MethodInfo)" />
+
+         method must be called to identify the method that is the entry point to the assembly. Assemblies are saved as DLL by default, unless <see
+         cref="M:System.Reflection.Emit.AssemblyBuilder.SetEntryPoint(System.Reflection.MethodInfo)" />
+
+         requests the generation of a console application or a Windows-based application.</para
+      >
+      <para
+        >If a dynamic assembly contains more than one dynamic module, the assembly's manifest file name should match the module's name that is specified as the first argument to <see
+         cref="M:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule(System.String)" />
+
+        .</para
+      >
+      <para
+        >Some methods on the base class <see
+         cref="T:System.Reflection.Assembly" />
+
+         such as GetModules and GetLoadedModules will not work correctly when called AssemblyBuilder objects. You can load the defined dynamic assembly and call the methods on the loaded assembly. For example, to ensure that resource modules are included in the returned module list, call GetModules on the loaded <see
+         cref="T:System.Reflection.Assembly" />
+
+         object.</para
+      >
+      <para
+        >The signing of a dynamic assembly using <see
+         cref="P:System.Reflection.AssemblyName.KeyPair" />
+
+         is not effective until the assembly is saved to disk. So, strong names will not work with transient dynamic assemblies.</para
+      >
+      <para
+        >To get an <see
+         cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+         object, use the <see
+         cref="Overload:System.AppDomain.DefineDynamicAssembly" />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -45,8 +89,14 @@
   </Docs>
   <Members>
     <Member MemberName="AddResourceFile">
-      <MemberSignature Language="C#" Value="public void AddResourceFile (string name, string fileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddResourceFile(string name, string fileName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddResourceFile (string name, string fileName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AddResourceFile(string name, string fileName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -64,11 +114,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="fileName" /> should not be the same as that of any other persistable module, standalone managed resource, or the standalone manifest file.</para>
+            <paramref name="fileName" />
+
+             should not be the same as that of any other persistable module, standalone managed resource, or the standalone manifest file.</para
+          >
           <para>The managed resources in the file are assumed to be public.</para>
           <para>The specified resource file must be in the directory where the assembly will be saved.</para>
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -76,14 +144,26 @@
           <para>Adds an existing resource file to this assembly.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The logical name of the resource. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The logical name of the resource. </param
+        >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The physical file name (.resources file) to which the logical name is mapped. This should not include a path; the file must be in the same directory as the assembly to which it is added. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The physical file name (.resources file) to which the logical name is mapped. This should not include a path; the file must be in the same directory as the assembly to which it is added. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="AddResourceFile">
-      <MemberSignature Language="C#" Value="public void AddResourceFile (string name, string fileName, System.Reflection.ResourceAttributes attribute);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddResourceFile(string name, string fileName, valuetype System.Reflection.ResourceAttributes attribute) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddResourceFile (string name, string fileName, System.Reflection.ResourceAttributes attribute);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AddResourceFile(string name, string fileName, valuetype System.Reflection.ResourceAttributes attribute) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -102,11 +182,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="fileName" /> should not be the same as that of any other persistable module, standalone managed resource, or the standalone manifest file.</para>
+            <paramref name="fileName" />
+
+             should not be the same as that of any other persistable module, standalone managed resource, or the standalone manifest file.</para
+          >
           <para>Attributes can be specified for the managed resource.</para>
           <para>The specified resource file must be in the directory where the assembly will be saved.</para>
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -114,11 +212,20 @@
           <para>Adds an existing resource file to this assembly.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The logical name of the resource. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The logical name of the resource. </param
+        >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The physical file name (.resources file) to which the logical name is mapped. This should not include a path; the file must be in the same directory as the assembly to which it is added. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The physical file name (.resources file) to which the logical name is mapped. This should not include a path; the file must be in the same directory as the assembly to which it is added. </param
+        >
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />The resource attributes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The resource attributes. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="CodeBase">
@@ -137,17 +244,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To get the absolute path to the loaded manifest-containing file, use the <see cref="P:System.Reflection.Assembly.Location" /> property.</para>
+          <para
+            >To get the absolute path to the loaded manifest-containing file, use the <see
+             cref="P:System.Reflection.Assembly.Location" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the location of the assembly, as specified originally (such as in an <see cref="T:System.Reflection.AssemblyName" /> object).</para>
+          <para
+            >Gets the location of the assembly, as specified originally (such as in an <see
+             cref="T:System.Reflection.AssemblyName" />
+
+             object).</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicModule">
-      <MemberSignature Language="C#" Value="public System.Reflection.Emit.ModuleBuilder DefineDynamicModule (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Reflection.Emit.ModuleBuilder DefineDynamicModule(string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.Emit.ModuleBuilder DefineDynamicModule (string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Reflection.Emit.ModuleBuilder DefineDynamicModule(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -164,12 +287,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>It is an error to define multiple dynamic modules with the same name in an assembly.</para>
-          <para>The defined dynamic module is transient. The dynamic module is not saved, even if the parent dynamic assembly was created with <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave" />.</para>
+          <para
+            >The defined dynamic module is transient. The dynamic module is not saved, even if the parent dynamic assembly was created with <see
+             cref="F:System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave" />
+
+            .</para
+          >
           <block subset="none" type="note">
-            <para>To suppress optimizations when debugging dynamic modules, apply the <see cref="T:System.Diagnostics.DebuggableAttribute" /> attribute to the dynamic assembly before calling <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />. Create an instance of <see cref="T:System.Diagnostics.DebuggableAttribute" /> with the <see cref="F:System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations" /> flag and apply it using the <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" /> method. The attribute must be applied to the dynamic assembly. It has no effect if applied to the module.</para>
+            <para
+              >To suppress optimizations when debugging dynamic modules, apply the <see
+               cref="T:System.Diagnostics.DebuggableAttribute" />
+
+               attribute to the dynamic assembly before calling <see
+               cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />
+
+              . Create an instance of <see
+               cref="T:System.Diagnostics.DebuggableAttribute" />
+
+               with the <see
+               cref="F:System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations" />
+
+               flag and apply it using the <see
+               cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" />
+
+               method. The attribute must be applied to the dynamic assembly. It has no effect if applied to the module.</para
+            >
           </block>
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -178,15 +338,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Reflection.Emit.ModuleBuilder" /> representing the defined dynamic module.</para>
+          <para
+            >A <see
+             cref="T:System.Reflection.Emit.ModuleBuilder" />
+
+             representing the defined dynamic module.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the dynamic module. Must be less than 260 characters in length. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the dynamic module. Must be less than 260 characters in length. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicModule">
-      <MemberSignature Language="C#" Value="public System.Reflection.Emit.ModuleBuilder DefineDynamicModule (string name, bool emitSymbolInfo);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Reflection.Emit.ModuleBuilder DefineDynamicModule(string name, bool emitSymbolInfo) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.Emit.ModuleBuilder DefineDynamicModule (string name, bool emitSymbolInfo);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Reflection.Emit.ModuleBuilder DefineDynamicModule(string name, bool emitSymbolInfo) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -204,12 +378,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>It is an error to define multiple dynamic modules with the same name in an assembly.</para>
-          <para>The dynamic module is not saved, even if the parent dynamic assembly was created with <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave" />.</para>
+          <para
+            >The dynamic module is not saved, even if the parent dynamic assembly was created with <see
+             cref="F:System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave" />
+
+            .</para
+          >
           <block subset="none" type="note">
-            <para>To suppress optimizations when debugging dynamic modules, apply the <see cref="T:System.Diagnostics.DebuggableAttribute" /> attribute to the dynamic assembly before calling <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />. Create an instance of <see cref="T:System.Diagnostics.DebuggableAttribute" /> with the <see cref="F:System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations" /> flag and apply it using the <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" /> method. The attribute must be applied to the dynamic assembly. It has no effect if applied to the module.</para>
+            <para
+              >To suppress optimizations when debugging dynamic modules, apply the <see
+               cref="T:System.Diagnostics.DebuggableAttribute" />
+
+               attribute to the dynamic assembly before calling <see
+               cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />
+
+              . Create an instance of <see
+               cref="T:System.Diagnostics.DebuggableAttribute" />
+
+               with the <see
+               cref="F:System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations" />
+
+               flag and apply it using the <see
+               cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" />
+
+               method. The attribute must be applied to the dynamic assembly. It has no effect if applied to the module.</para
+            >
           </block>
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -218,17 +429,34 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Reflection.Emit.ModuleBuilder" /> representing the defined dynamic module.</para>
+          <para
+            >A <see
+             cref="T:System.Reflection.Emit.ModuleBuilder" />
+
+             representing the defined dynamic module.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the dynamic module. Must be less than 260 characters in length. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the dynamic module. Must be less than 260 characters in length. </param
+        >
         <param name="emitSymbolInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if symbol information is to be emitted; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if symbol information is to be emitted; otherwise, false. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicModule">
-      <MemberSignature Language="C#" Value="public System.Reflection.Emit.ModuleBuilder DefineDynamicModule (string name, string fileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Reflection.Emit.ModuleBuilder DefineDynamicModule(string name, string fileName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.Emit.ModuleBuilder DefineDynamicModule (string name, string fileName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Reflection.Emit.ModuleBuilder DefineDynamicModule(string name, string fileName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -245,14 +473,68 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To define a persistable dynamic module, this assembly needs to be created with the <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" /> or the <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave" /> attribute.</para>
-          <para>If you want the module to contain the assembly manifest, <paramref name="name" /> should be the same as the name of the assembly (that is, the <see cref="P:System.Reflection.AssemblyName.Name" /> property of the <see cref="T:System.Reflection.AssemblyName" /> used to create the dynamic assembly) and <paramref name="fileName" /> should be the same as the filename you specify when you save the assembly. </para>
+          <para
+            >To define a persistable dynamic module, this assembly needs to be created with the <see
+             cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />
+
+             or the <see
+             cref="F:System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave" />
+
+             attribute.</para
+          >
+          <para
+            >If you want the module to contain the assembly manifest, <paramref
+             name="name" />
+
+             should be the same as the name of the assembly (that is, the <see
+             cref="P:System.Reflection.AssemblyName.Name" />
+
+             property of the <see
+             cref="T:System.Reflection.AssemblyName" />
+
+             used to create the dynamic assembly) and <paramref
+             name="fileName" />
+
+             should be the same as the filename you specify when you save the assembly. </para
+          >
           <para>In an assembly with only one module, that module should contain the assembly manifest.</para>
           <block subset="none" type="note">
-            <para>To suppress optimizations when debugging dynamic modules, apply the <see cref="T:System.Diagnostics.DebuggableAttribute" /> attribute to the dynamic assembly before calling <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />. Create an instance of <see cref="T:System.Diagnostics.DebuggableAttribute" /> with the <see cref="F:System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations" /> flag and apply it using the <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" /> method. The attribute must be applied to the dynamic assembly. It has no effect if applied to the module.</para>
+            <para
+              >To suppress optimizations when debugging dynamic modules, apply the <see
+               cref="T:System.Diagnostics.DebuggableAttribute" />
+
+               attribute to the dynamic assembly before calling <see
+               cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />
+
+              . Create an instance of <see
+               cref="T:System.Diagnostics.DebuggableAttribute" />
+
+               with the <see
+               cref="F:System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations" />
+
+               flag and apply it using the <see
+               cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" />
+
+               method. The attribute must be applied to the dynamic assembly. It has no effect if applied to the module.</para
+            >
           </block>
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -261,17 +543,34 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Reflection.Emit.ModuleBuilder" /> object representing the defined dynamic module.</para>
+          <para
+            >A <see
+             cref="T:System.Reflection.Emit.ModuleBuilder" />
+
+             object representing the defined dynamic module.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the dynamic module. Must be less than 260 characters in length. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the dynamic module. Must be less than 260 characters in length. </param
+        >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the file to which the dynamic module should be saved. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the file to which the dynamic module should be saved. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="DefineDynamicModule">
-      <MemberSignature Language="C#" Value="public System.Reflection.Emit.ModuleBuilder DefineDynamicModule (string name, string fileName, bool emitSymbolInfo);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Reflection.Emit.ModuleBuilder DefineDynamicModule(string name, string fileName, bool emitSymbolInfo) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.Emit.ModuleBuilder DefineDynamicModule (string name, string fileName, bool emitSymbolInfo);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Reflection.Emit.ModuleBuilder DefineDynamicModule(string name, string fileName, bool emitSymbolInfo) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -289,14 +588,68 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To define a persistable dynamic module, this assembly needs to be created with the <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" /> or the <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave" /> attribute.</para>
-          <para>If you want the module to contain the assembly manifest, <paramref name="name" /> should be the same as the name of the assembly (that is, the <see cref="P:System.Reflection.AssemblyName.Name" /> property of the <see cref="T:System.Reflection.AssemblyName" /> used to create the dynamic assembly) and <paramref name="fileName" /> should be the same as the filename you specify when you save the assembly. </para>
+          <para
+            >To define a persistable dynamic module, this assembly needs to be created with the <see
+             cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />
+
+             or the <see
+             cref="F:System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave" />
+
+             attribute.</para
+          >
+          <para
+            >If you want the module to contain the assembly manifest, <paramref
+             name="name" />
+
+             should be the same as the name of the assembly (that is, the <see
+             cref="P:System.Reflection.AssemblyName.Name" />
+
+             property of the <see
+             cref="T:System.Reflection.AssemblyName" />
+
+             used to create the dynamic assembly) and <paramref
+             name="fileName" />
+
+             should be the same as the filename you specify when you save the assembly. </para
+          >
           <para>In an assembly with only one module, that module should contain the assembly manifest.</para>
           <block subset="none" type="note">
-            <para>To suppress optimizations when debugging dynamic modules, apply the <see cref="T:System.Diagnostics.DebuggableAttribute" /> attribute to the dynamic assembly before calling <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />. Create an instance of <see cref="T:System.Diagnostics.DebuggableAttribute" /> with the <see cref="F:System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations" /> flag and apply it using the <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" /> method. The attribute must be applied to the dynamic assembly. It has no effect if applied to the module.</para>
+            <para
+              >To suppress optimizations when debugging dynamic modules, apply the <see
+               cref="T:System.Diagnostics.DebuggableAttribute" />
+
+               attribute to the dynamic assembly before calling <see
+               cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />
+
+              . Create an instance of <see
+               cref="T:System.Diagnostics.DebuggableAttribute" />
+
+               with the <see
+               cref="F:System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations" />
+
+               flag and apply it using the <see
+               cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" />
+
+               method. The attribute must be applied to the dynamic assembly. It has no effect if applied to the module.</para
+            >
           </block>
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -305,19 +658,39 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Reflection.Emit.ModuleBuilder" /> object representing the defined dynamic module.</para>
+          <para
+            >A <see
+             cref="T:System.Reflection.Emit.ModuleBuilder" />
+
+             object representing the defined dynamic module.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the dynamic module. Must be less than 260 characters in length. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the dynamic module. Must be less than 260 characters in length. </param
+        >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the file to which the dynamic module should be saved. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the file to which the dynamic module should be saved. </param
+        >
         <param name="emitSymbolInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />If true, symbolic information is written using the default symbol writer. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          If true, symbolic information is written using the default symbol writer. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="DefineResource">
-      <MemberSignature Language="C#" Value="public System.Resources.IResourceWriter DefineResource (string name, string description, string fileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Resources.IResourceWriter DefineResource(string name, string description, string fileName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Resources.IResourceWriter DefineResource (string name, string description, string fileName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Resources.IResourceWriter DefineResource(string name, string description, string fileName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -335,12 +708,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Fine grain resources can be added with the returned <see cref="T:System.Resources.ResourceWriter" /> by calling <see cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />.</para>
+          <para
+            >Fine grain resources can be added with the returned <see
+             cref="T:System.Resources.ResourceWriter" />
+
+             by calling <see
+             cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
+
+            .</para
+          >
           <para>
-            <paramref name="fileName" /> should not be the same as that of any other persistable module, stand-alone managed resource, or the stand-alone manifest file.</para>
-          <para>The runtime calls the <see cref="M:System.Resources.ResourceWriter.Close" /> method when the dynamic assembly is saved.</para>
+            <paramref name="fileName" />
+
+             should not be the same as that of any other persistable module, stand-alone managed resource, or the stand-alone manifest file.</para
+          >
+          <para
+            >The runtime calls the <see
+             cref="M:System.Resources.ResourceWriter.Close" />
+
+             method when the dynamic assembly is saved.</para
+          >
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -349,19 +753,39 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Resources.ResourceWriter" /> object for the specified resource.</para>
+          <para
+            >A <see
+             cref="T:System.Resources.ResourceWriter" />
+
+             object for the specified resource.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The logical name of the resource. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The logical name of the resource. </param
+        >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />A textual description of the resource. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A textual description of the resource. </param
+        >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The physical file name (.resources file) to which the logical name is mapped. This should not include a path. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The physical file name (.resources file) to which the logical name is mapped. This should not include a path. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="DefineResource">
-      <MemberSignature Language="C#" Value="public System.Resources.IResourceWriter DefineResource (string name, string description, string fileName, System.Reflection.ResourceAttributes attribute);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Resources.IResourceWriter DefineResource(string name, string description, string fileName, valuetype System.Reflection.ResourceAttributes attribute) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Resources.IResourceWriter DefineResource (string name, string description, string fileName, System.Reflection.ResourceAttributes attribute);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Resources.IResourceWriter DefineResource(string name, string description, string fileName, valuetype System.Reflection.ResourceAttributes attribute) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -380,12 +804,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Fine-grain resources can be added with the returned <see cref="T:System.Resources.ResourceWriter" /> by calling <see cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />.</para>
+          <para
+            >Fine-grain resources can be added with the returned <see
+             cref="T:System.Resources.ResourceWriter" />
+
+             by calling <see
+             cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
+
+            .</para
+          >
           <para>
-            <paramref name="fileName" /> should not be the same as that of any other persistable module, standalone managed resource, or the standalone manifest file.</para>
-          <para>The runtime calls the <see cref="M:System.Resources.ResourceWriter.Close" /> method when the dynamic assembly is saved.</para>
+            <paramref name="fileName" />
+
+             should not be the same as that of any other persistable module, standalone managed resource, or the standalone manifest file.</para
+          >
+          <para
+            >The runtime calls the <see
+             cref="M:System.Resources.ResourceWriter.Close" />
+
+             method when the dynamic assembly is saved.</para
+          >
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -394,21 +849,44 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Resources.ResourceWriter" /> object for the specified resource.</para>
+          <para
+            >A <see
+             cref="T:System.Resources.ResourceWriter" />
+
+             object for the specified resource.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The logical name of the resource. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The logical name of the resource. </param
+        >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />A textual description of the resource. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A textual description of the resource. </param
+        >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The physical file name (.resources file) to which the logical name is mapped. This should not include a path. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The physical file name (.resources file) to which the logical name is mapped. This should not include a path. </param
+        >
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />The resource attributes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The resource attributes. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="DefineUnmanagedResource">
-      <MemberSignature Language="C#" Value="public void DefineUnmanagedResource (byte[] resource);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DefineUnmanagedResource(unsigned int8[] resource) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void DefineUnmanagedResource (byte[] resource);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void DefineUnmanagedResource(unsigned int8[] resource) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -424,19 +902,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An assembly can be associated with only one unmanaged resource. This means that calling <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineVersionInfoResource(System.String,System.String,System.String,System.String,System.String)" /> or <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" /> after either one of the methods was called previously will throw the System.ArgumentException being throw. Multiple unmanaged resources need to be merged with a tool such as the Microsoft ResMerge utility (not supplied with the common language runtime).</para>
+          <para
+            >An assembly can be associated with only one unmanaged resource. This means that calling <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineVersionInfoResource(System.String,System.String,System.String,System.String,System.String)" />
+
+             or <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" />
+
+             after either one of the methods was called previously will throw the System.ArgumentException being throw. Multiple unmanaged resources need to be merged with a tool such as the Microsoft ResMerge utility (not supplied with the common language runtime).</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Defines an unmanaged resource for this assembly as an opaque blob of bytes.</para>
         </summary>
         <param name="resource">
-          <attribution license="cc4" from="Microsoft" modified="false" />The opaque blob of bytes representing the unmanaged resource. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The opaque blob of bytes representing the unmanaged resource. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="DefineUnmanagedResource">
-      <MemberSignature Language="C#" Value="public void DefineUnmanagedResource (string resourceFileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DefineUnmanagedResource(string resourceFileName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void DefineUnmanagedResource (string resourceFileName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void DefineUnmanagedResource(string resourceFileName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -452,9 +947,32 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An assembly can be associated with only one unmanaged resource. This means that calling <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineVersionInfoResource(System.String,System.String,System.String,System.String,System.String)" /> or <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" /> after either one of the methods was called previously will throw the System.ArgumentException. Multiple unmanaged resources need to be merged with a tool such as the Microsoft ResMerge utility (not supplied with the common language runtime).</para>
+          <para
+            >An assembly can be associated with only one unmanaged resource. This means that calling <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineVersionInfoResource(System.String,System.String,System.String,System.String,System.String)" />
+
+             or <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" />
+
+             after either one of the methods was called previously will throw the System.ArgumentException. Multiple unmanaged resources need to be merged with a tool such as the Microsoft ResMerge utility (not supplied with the common language runtime).</para
+          >
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -462,12 +980,18 @@
           <para>Defines an unmanaged resource file for this assembly given the name of the resource file.</para>
         </summary>
         <param name="resourceFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the resource file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the resource file. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="DefineVersionInfoResource">
       <MemberSignature Language="C#" Value="public void DefineVersionInfoResource ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DefineVersionInfoResource() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void DefineVersionInfoResource() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -481,11 +1005,34 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An assembly can be associated with only one unmanaged resource. This means that calling <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineVersionInfoResource(System.String,System.String,System.String,System.String,System.String)" /> or <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" /> after either one of the methods was called previously will throw the System.ArgumentException. Multiple unmanaged resources need to be merged with a tool such as the Microsoft ResMerge utility (not supplied with the common language runtime SDK).</para>
+          <para
+            >An assembly can be associated with only one unmanaged resource. This means that calling <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineVersionInfoResource(System.String,System.String,System.String,System.String,System.String)" />
+
+             or <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" />
+
+             after either one of the methods was called previously will throw the System.ArgumentException. Multiple unmanaged resources need to be merged with a tool such as the Microsoft ResMerge utility (not supplied with the common language runtime SDK).</para
+          >
           <para>Empty argument strings get written as a single space. Spaces are substituted for null characters in the argument strings.</para>
           <para>The information is inferred from the AssemblyName object used to define this dynamic assembly. This assembly's custom attributes override information specified in the AssemblyName object.</para>
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -495,8 +1042,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefineVersionInfoResource">
-      <MemberSignature Language="C#" Value="public void DefineVersionInfoResource (string product, string productVersion, string company, string copyright, string trademark);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void DefineVersionInfoResource(string product, string productVersion, string company, string copyright, string trademark) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void DefineVersionInfoResource (string product, string productVersion, string company, string copyright, string trademark);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void DefineVersionInfoResource(string product, string productVersion, string company, string copyright, string trademark) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -516,11 +1069,34 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An assembly can be associated with only one unmanaged resource. This means that calling <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineVersionInfoResource(System.String,System.String,System.String,System.String,System.String)" /> or <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" /> after either one of the methods was called previously will throw the System.ArgumentException. Multiple unmanaged resources need to be merged with a tool such as the Microsoft ResMerge utility (not supplied with the common language runtime SDK).</para>
+          <para
+            >An assembly can be associated with only one unmanaged resource. This means that calling <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineVersionInfoResource(System.String,System.String,System.String,System.String,System.String)" />
+
+             or <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" />
+
+             after either one of the methods was called previously will throw the System.ArgumentException. Multiple unmanaged resources need to be merged with a tool such as the Microsoft ResMerge utility (not supplied with the common language runtime SDK).</para
+          >
           <para>Empty argument strings get written as a single space. Spaces are substituted for null characters in the argument strings.</para>
           <para>The structure of the version resource includes data that identifies the version, language, and distribution of the file. Installation programs use the functions in the file installation library (VER.DLL) to retrieve the version information resource from a file and to extract the version information blocks from the resource.</para>
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -528,20 +1104,41 @@
           <para>Defines an unmanaged version information resource for this assembly with the given specifications.</para>
         </summary>
         <param name="product">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the product with which this assembly is distributed. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the product with which this assembly is distributed. </param
+        >
         <param name="productVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version of the product with which this assembly is distributed. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version of the product with which this assembly is distributed. </param
+        >
         <param name="company">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the company that produced this assembly. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the company that produced this assembly. </param
+        >
         <param name="copyright">
-          <attribution license="cc4" from="Microsoft" modified="false" />Describes all copyright notices, trademarks, and registered trademarks that apply to this assembly. This should include the full text of all notices, legal symbols, copyright dates, trademark numbers, and so on. In English, this string should be in the format "Copyright Microsoft Corp. 1990-2001". </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Describes all copyright notices, trademarks, and registered trademarks that apply to this assembly. This should include the full text of all notices, legal symbols, copyright dates, trademark numbers, and so on. In English, this string should be in the format "Copyright Microsoft Corp. 1990-2001". </param
+        >
         <param name="trademark">
-          <attribution license="cc4" from="Microsoft" modified="false" />Describes all trademarks and registered trademarks that apply to this assembly. This should include the full text of all notices, legal symbols, trademark numbers, and so on. In English, this string should be in the format "Windows is a trademark of Microsoft Corporation". </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Describes all trademarks and registered trademarks that apply to this assembly. This should include the full text of all notices, legal symbols, trademark numbers, and so on. In English, this string should be in the format "Windows is a trademark of Microsoft Corporation". </param
+        >
       </Docs>
     </Member>
     <Member MemberName="EntryPoint">
-      <MemberSignature Language="C#" Value="public override System.Reflection.MethodInfo EntryPoint { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Reflection.MethodInfo EntryPoint" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.MethodInfo EntryPoint { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Reflection.MethodInfo EntryPoint"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -562,7 +1159,10 @@
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -581,10 +1181,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if <paramref name="obj" /> equals the type and value of this instance; otherwise, false.</para>
+          <para
+            >true if <paramref
+             name="obj" />
+
+             equals the type and value of this instance; otherwise, false.</para
+          >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object to compare with this instance, or null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object to compare with this instance, or null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="FullName">
@@ -601,7 +1209,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="T:System.Reflection.AssemblyName" /> for a description of the format of the display name of an assembly.</para>
+          <para
+            >See <see
+             cref="T:System.Reflection.AssemblyName" />
+
+             for a description of the format of the display name of an assembly.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -610,8 +1223,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
-      <MemberSignature Language="C#" Value="public override object[] GetCustomAttributes (bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object[] GetCustomAttributes(bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object[] GetCustomAttributes (bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object[] GetCustomAttributes(bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -626,19 +1245,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns all the custom attributes that have been applied to the current <see cref="T:System.Reflection.Emit.AssemblyBuilder" />.</para>
+          <para
+            >Returns all the custom attributes that have been applied to the current <see
+             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An array that contains the custom attributes; the array is empty if there are no attributes.</para>
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />This argument is ignored for objects of this type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          This argument is ignored for objects of this type.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
-      <MemberSignature Language="C#" Value="public override object[] GetCustomAttributes (Type attributeType, bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object[] GetCustomAttributes(class System.Type attributeType, bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object[] GetCustomAttributes (Type attributeType, bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object[] GetCustomAttributes(class System.Type attributeType, bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -654,21 +1287,43 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns all the custom attributes that have been applied to the current <see cref="T:System.Reflection.Emit.AssemblyBuilder" />, and that derive from a specified attribute type.</para>
+          <para
+            >Returns all the custom attributes that have been applied to the current <see
+             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            , and that derive from a specified attribute type.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array that contains the custom attributes that are derived at any level from <paramref name="attributeType" />; the array is empty if there are no such attributes.</para>
+          <para
+            >An array that contains the custom attributes that are derived at any level from <paramref
+             name="attributeType" />
+
+            ; the array is empty if there are no such attributes.</para
+          >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The base type from which attributes derive.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The base type from which attributes derive.</param
+        >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />This argument is ignored for objects of this type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          This argument is ignored for objects of this type.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetDynamicModule">
-      <MemberSignature Language="C#" Value="public System.Reflection.Emit.ModuleBuilder GetDynamicModule (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Reflection.Emit.ModuleBuilder GetDynamicModule(string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.Emit.ModuleBuilder GetDynamicModule (string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Reflection.Emit.ModuleBuilder GetDynamicModule(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -692,12 +1347,18 @@
           <para>A ModuleBuilder object representing the requested dynamic module.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the requested dynamic module. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the requested dynamic module. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetExportedTypes">
       <MemberSignature Language="C#" Value="public override Type[] GetExportedTypes ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Type[] GetExportedTypes() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Type[] GetExportedTypes() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -716,13 +1377,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of <see cref="T:System.Type" /> containing the exported types defined in this assembly.</para>
+          <para
+            >An array of <see
+             cref="T:System.Type" />
+
+             containing the exported types defined in this assembly.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetFile">
-      <MemberSignature Language="C#" Value="public override System.IO.FileStream GetFile (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.IO.FileStream GetFile(string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.IO.FileStream GetFile (string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.IO.FileStream GetFile(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -739,23 +1411,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="name" /> should not include the path to the file.</para>
+            <paramref name="name" />
+
+             should not include the path to the file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.IO.FileStream" /> for the specified file in the file table of the manifest of this assembly.</para>
+          <para
+            >Gets a <see
+             cref="T:System.IO.FileStream" />
+
+             for the specified file in the file table of the manifest of this assembly.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.IO.FileStream" /> for the specified file, or null, if the file is not found.</para>
+          <para
+            >A <see
+             cref="T:System.IO.FileStream" />
+
+             for the specified file, or null, if the file is not found.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the specified file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the specified file. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetFiles">
-      <MemberSignature Language="C#" Value="public override System.IO.FileStream[] GetFiles (bool getResourceModules);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.IO.FileStream[] GetFiles(bool getResourceModules) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.IO.FileStream[] GetFiles (bool getResourceModules);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.IO.FileStream[] GetFiles(bool getResourceModules) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -776,15 +1470,26 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of <see cref="T:System.IO.FileStream" /> objects.</para>
+          <para
+            >An array of <see
+             cref="T:System.IO.FileStream" />
+
+             objects.</para
+          >
         </returns>
         <param name="getResourceModules">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to include resource modules; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to include resource modules; otherwise, false. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -806,8 +1511,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetLoadedModules">
-      <MemberSignature Language="C#" Value="public override System.Reflection.Module[] GetLoadedModules (bool getResourceModules);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.Module[] GetLoadedModules(bool getResourceModules) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.Module[] GetLoadedModules (bool getResourceModules);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.Module[] GetLoadedModules(bool getResourceModules) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -829,12 +1540,21 @@
           <para>The loaded modules that are part of this assembly.</para>
         </returns>
         <param name="getResourceModules">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to include resource modules; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to include resource modules; otherwise, false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetManifestResourceInfo">
-      <MemberSignature Language="C#" Value="public override System.Reflection.ManifestResourceInfo GetManifestResourceInfo (string resourceName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.ManifestResourceInfo GetManifestResourceInfo(string resourceName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.ManifestResourceInfo GetManifestResourceInfo (string resourceName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.ManifestResourceInfo GetManifestResourceInfo(string resourceName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -856,15 +1576,27 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Reflection.ManifestResourceInfo" /> populated with information about the resource's topology, or null if the resource is not found.</para>
+            <see cref="T:System.Reflection.ManifestResourceInfo" />
+
+             populated with information about the resource's topology, or null if the resource is not found.</para
+          >
         </returns>
         <param name="resourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the resource. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the resource. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetManifestResourceNames">
-      <MemberSignature Language="C#" Value="public override string[] GetManifestResourceNames ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string[] GetManifestResourceNames() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override string[] GetManifestResourceNames ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string[] GetManifestResourceNames() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -888,8 +1620,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetManifestResourceStream">
-      <MemberSignature Language="C#" Value="public override System.IO.Stream GetManifestResourceStream (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.IO.Stream GetManifestResourceStream(string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.IO.Stream GetManifestResourceStream (string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.IO.Stream GetManifestResourceStream(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -910,15 +1648,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.IO.Stream" /> representing this manifest resource.</para>
+          <para
+            >A <see
+             cref="T:System.IO.Stream" />
+
+             representing this manifest resource.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the manifest resource being requested. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the manifest resource being requested. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetManifestResourceStream">
-      <MemberSignature Language="C#" Value="public override System.IO.Stream GetManifestResourceStream (Type type, string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.IO.Stream GetManifestResourceStream(class System.Type type, string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.IO.Stream GetManifestResourceStream (Type type, string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.IO.Stream GetManifestResourceStream(class System.Type type, string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -935,7 +1687,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The returned <see cref="T:System.IO.Stream" /> has its file pointer set to the beginning of the resource.</para>
+          <para
+            >The returned <see
+             cref="T:System.IO.Stream" />
+
+             has its file pointer set to the beginning of the resource.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -943,17 +1700,34 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.IO.Stream" /> representing this manifest resource.</para>
+          <para
+            >A <see
+             cref="T:System.IO.Stream" />
+
+             representing this manifest resource.</para
+          >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type whose namespace is used to scope the manifest resource name. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type whose namespace is used to scope the manifest resource name. </param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the manifest resource being requested. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the manifest resource being requested. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetModule">
-      <MemberSignature Language="C#" Value="public override System.Reflection.Module GetModule (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.Module GetModule(string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.Module GetModule (string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.Module GetModule(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -975,12 +1749,21 @@
           <para>The module being requested, or null if the module is not found.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the requested module.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the requested module.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetModules">
-      <MemberSignature Language="C#" Value="public override System.Reflection.Module[] GetModules (bool getResourceModules);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.Module[] GetModules(bool getResourceModules) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.Module[] GetModules (bool getResourceModules);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.Module[] GetModules(bool getResourceModules) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1002,12 +1785,21 @@
           <para>The modules that are part of this assembly.</para>
         </returns>
         <param name="getResourceModules">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to include resource modules; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to include resource modules; otherwise, false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetName">
-      <MemberSignature Language="C#" Value="public override System.Reflection.AssemblyName GetName (bool copiedName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.AssemblyName GetName(bool copiedName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.AssemblyName GetName (bool copiedName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.AssemblyName GetName(bool copiedName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1022,19 +1814,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Reflection.AssemblyName" /> that was specified when the current dynamic assembly was created, and sets the code base as specified.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Reflection.AssemblyName" />
+
+             that was specified when the current dynamic assembly was created, and sets the code base as specified.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The name of the dynamic assembly.</para>
         </returns>
         <param name="copiedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to set the code base to the location of the assembly after it is shadow-copied; false to set the code base to the original location.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to set the code base to the location of the assembly after it is shadow-copied; false to set the code base to the original location.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetReferencedAssemblies">
-      <MemberSignature Language="C#" Value="public override System.Reflection.AssemblyName[] GetReferencedAssemblies ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.AssemblyName[] GetReferencedAssemblies() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.AssemblyName[] GetReferencedAssemblies ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.AssemblyName[] GetReferencedAssemblies() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1046,12 +1852,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method does not return a complete list of referenced assemblies. For example, if you apply a custom attribute to the <see cref="T:System.Reflection.Emit.AssemblyBuilder" />, the assembly in which the attribute was defined is included in the list returned by this method. However, if you use a <see cref="T:System.Type" /> object to specify the type of a method parameter, that type is not included.</para>
-          <para>To get a complete list of referenced assemblies, save the assembly, load it into another application domain, and call the <see cref="M:System.Reflection.Assembly.GetReferencedAssemblies" /> method.</para>
+          <para
+            >This method does not return a complete list of referenced assemblies. For example, if you apply a custom attribute to the <see
+             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            , the assembly in which the attribute was defined is included in the list returned by this method. However, if you use a <see
+             cref="T:System.Type" />
+
+             object to specify the type of a method parameter, that type is not included.</para
+          >
+          <para
+            >To get a complete list of referenced assemblies, save the assembly, load it into another application domain, and call the <see
+             cref="M:System.Reflection.Assembly.GetReferencedAssemblies" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an incomplete list of <see cref="T:System.Reflection.AssemblyName" /> objects for the assemblies that are referenced by this <see cref="T:System.Reflection.Emit.AssemblyBuilder" />. </para>
+          <para
+            >Gets an incomplete list of <see
+             cref="T:System.Reflection.AssemblyName" />
+
+             objects for the assemblies that are referenced by this <see
+             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            . </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1060,8 +1887,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetSatelliteAssembly">
-      <MemberSignature Language="C#" Value="public override System.Reflection.Assembly GetSatelliteAssembly (System.Globalization.CultureInfo culture);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.Assembly GetSatelliteAssembly(class System.Globalization.CultureInfo culture) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.Assembly GetSatelliteAssembly (System.Globalization.CultureInfo culture);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.Assembly GetSatelliteAssembly(class System.Globalization.CultureInfo culture) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1087,12 +1920,21 @@
           <para>The specified satellite assembly.</para>
         </returns>
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />The specified culture. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The specified culture. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetSatelliteAssembly">
-      <MemberSignature Language="C#" Value="public override System.Reflection.Assembly GetSatelliteAssembly (System.Globalization.CultureInfo culture, Version version);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.Assembly GetSatelliteAssembly(class System.Globalization.CultureInfo culture, class System.Version version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.Assembly GetSatelliteAssembly (System.Globalization.CultureInfo culture, Version version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.Assembly GetSatelliteAssembly(class System.Globalization.CultureInfo culture, class System.Version version) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1108,7 +1950,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Satellite assemblies contain localized resources, as distinct from main application assemblies, which contain non-localizable executable code and resources for a single culture that serve as the default or neutral culture.</para>
-          <para>Call the <see cref="M:System.Reflection.Assembly.GetSatelliteAssembly(System.Globalization.CultureInfo)" /> overload to use your current assembly version.</para>
+          <para
+            >Call the <see
+             cref="M:System.Reflection.Assembly.GetSatelliteAssembly(System.Globalization.CultureInfo)" />
+
+             overload to use your current assembly version.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1119,14 +1966,26 @@
           <para>The specified satellite assembly.</para>
         </returns>
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />The specified culture. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The specified culture. </param
+        >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version of the satellite assembly. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version of the satellite assembly. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetType">
-      <MemberSignature Language="C#" Value="public override Type GetType (string name, bool throwOnError, bool ignoreCase);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Type GetType(string name, bool throwOnError, bool ignoreCase) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override Type GetType (string name, bool throwOnError, bool ignoreCase);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Type GetType(string name, bool throwOnError, bool ignoreCase) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1142,22 +2001,41 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A type cannot be found until it has been created by calling the <see cref="M:System.Reflection.Emit.TypeBuilder.CreateType" /> method.</para>
+          <para
+            >A type cannot be found until it has been created by calling the <see
+             cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the specified type from the types that have been defined and created in the current <see cref="T:System.Reflection.Emit.AssemblyBuilder" />.</para>
+          <para
+            >Gets the specified type from the types that have been defined and created in the current <see
+             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The specified type, or null if the type is not found or has not been created yet. </para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the type to search for.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the type to search for.</param
+        >
         <param name="throwOnError">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to throw an exception if the type is not found; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to throw an exception if the type is not found; otherwise, false.</param
+        >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to ignore the case of the type name when searching; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to ignore the case of the type name when searching; otherwise, false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GlobalAssemblyCache">
@@ -1175,7 +2053,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Reflection.Emit.AssemblyBuilder" /> objects always represent dynamic assemblies, and therefore are never loaded from the global assembly cache.</para>
+            <see cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+             objects always represent dynamic assemblies, and therefore are never loaded from the global assembly cache.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1205,8 +2086,14 @@
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
-      <MemberSignature Language="C#" Value="public override bool IsDefined (Type attributeType, bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsDefined(class System.Type attributeType, bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool IsDefined (Type attributeType, bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsDefined(class System.Type attributeType, bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1226,12 +2113,23 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if one or more instances of <paramref name="attributeType" /> is applied to this dynamic assembly; otherwise, false.</para>
+          <para
+            >true if one or more instances of <paramref
+             name="attributeType" />
+
+             is applied to this dynamic assembly; otherwise, false.</para
+          >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of attribute to test for.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of attribute to test for.</param
+        >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />This argument is ignored for objects of this type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          This argument is ignored for objects of this type.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsDynamic">
@@ -1248,7 +2146,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Reflection.Emit.AssemblyBuilder" /> object always represents a dynamic assembly.</para>
+          <para
+            >An <see
+             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+             object always represents a dynamic assembly.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1278,8 +2181,14 @@
       </Docs>
     </Member>
     <Member MemberName="ManifestModule">
-      <MemberSignature Language="C#" Value="public override System.Reflection.Module ManifestModule { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Reflection.Module ManifestModule" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.Module ManifestModule { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Reflection.Module ManifestModule"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1292,7 +2201,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the module in the current <see cref="T:System.Reflection.Emit.AssemblyBuilder" /> that contains the assembly manifest.</para>
+          <para
+            >Gets the module in the current <see
+             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+             that contains the assembly manifest.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -1311,9 +2225,22 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To emit a dynamic assembly in the reflection-only context, specify <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.ReflectionOnly" /> when you create the <see cref="T:System.Reflection.Emit.AssemblyBuilder" />. If a dynamic assembly is emitted in the reflection-only context, its code cannot be executed.</para>
+          <para
+            >To emit a dynamic assembly in the reflection-only context, specify <see
+             cref="F:System.Reflection.Emit.AssemblyBuilderAccess.ReflectionOnly" />
+
+             when you create the <see
+             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            . If a dynamic assembly is emitted in the reflection-only context, its code cannot be executed.</para
+          >
           <block subset="none" type="note">
-            <para>After you have saved a dynamic assembly to disk, you can use the <see cref="M:System.Reflection.Assembly.ReflectionOnlyLoad(System.String)" /> method to load the completed assembly into the reflection-only context. However, the assembly can no longer be modified.</para>
+            <para
+              >After you have saved a dynamic assembly to disk, you can use the <see
+               cref="M:System.Reflection.Assembly.ReflectionOnlyLoad(System.String)" />
+
+               method to load the completed assembly into the reflection-only context. However, the assembly can no longer be modified.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1324,7 +2251,10 @@
     </Member>
     <Member MemberName="Save">
       <MemberSignature Language="C#" Value="public void Save (string assemblyFileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Save(string assemblyFileName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Save(string assemblyFileName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1340,22 +2270,75 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method saves all non-transient dynamic modules defined in this dynamic assembly. Transient dynamic modules are not saved. The assembly file name can be the same as the name of one of the modules. If so, the assembly manifest is stored within that module. <paramref name="assemblyFileName" /> can be different from the names of all of the modules contained within the assembly. If so, the assembly file contains only the assembly manifest.</para>
-          <para>For each <see cref="T:System.Resources.ResourceWriter" /> obtained using <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineResource(System.String,System.String,System.String)" />, this method writes the .resources file and calls <see cref="M:System.Resources.ResourceWriter.Close" /> to close the stream.</para>
-          <para>The <paramref name="assemblyFileName" /> needs to be a simple file name without a drive or directory component. To create an assembly in a specific directory, use one of the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" /> methods that takes a target directory argument.</para>
-          <para>In the .NET Framework version 2.0, this overload of the <see cref="Overload:System.Reflection.Emit.AssemblyBuilder.Save" /> method is equivalent to calling the <see cref="M:System.Reflection.Emit.AssemblyBuilder.Save(System.String,System.Reflection.PortableExecutableKinds,System.Reflection.ImageFileMachine)" /> method overload with <see cref="F:System.Reflection.PortableExecutableKinds.ILOnly" /> for the <paramref name="portableExecutableKind" /> parameter and <see cref="F:System.Reflection.ImageFileMachine.I386" /> for the <paramref name="imageFileMachine" /> parameter.</para>
+          <para
+            >This method saves all non-transient dynamic modules defined in this dynamic assembly. Transient dynamic modules are not saved. The assembly file name can be the same as the name of one of the modules. If so, the assembly manifest is stored within that module. <paramref
+             name="assemblyFileName" />
+
+             can be different from the names of all of the modules contained within the assembly. If so, the assembly file contains only the assembly manifest.</para
+          >
+          <para
+            >For each <see
+             cref="T:System.Resources.ResourceWriter" />
+
+             obtained using <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineResource(System.String,System.String,System.String)" />
+
+            , this method writes the .resources file and calls <see
+             cref="M:System.Resources.ResourceWriter.Close" />
+
+             to close the stream.</para
+          >
+          <para
+            >The <paramref
+             name="assemblyFileName" />
+
+             needs to be a simple file name without a drive or directory component. To create an assembly in a specific directory, use one of the <see
+             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
+
+             methods that takes a target directory argument.</para
+          >
+          <para
+            >In the .NET Framework version 2.0, this overload of the <see
+             cref="Overload:System.Reflection.Emit.AssemblyBuilder.Save" />
+
+             method is equivalent to calling the <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.Save(System.String,System.Reflection.PortableExecutableKinds,System.Reflection.ImageFileMachine)" />
+
+             method overload with <see
+             cref="F:System.Reflection.PortableExecutableKinds.ILOnly" />
+
+             for the <paramref
+             name="portableExecutableKind" />
+
+             parameter and <see
+             cref="F:System.Reflection.ImageFileMachine.I386" />
+
+             for the <paramref
+             name="imageFileMachine" />
+
+             parameter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Saves this dynamic assembly to disk.</para>
         </summary>
         <param name="assemblyFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file name of the assembly. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file name of the assembly. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
-      <MemberSignature Language="C#" Value="public void Save (string assemblyFileName, System.Reflection.PortableExecutableKinds portableExecutableKind, System.Reflection.ImageFileMachine imageFileMachine);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Save(string assemblyFileName, valuetype System.Reflection.PortableExecutableKinds portableExecutableKind, valuetype System.Reflection.ImageFileMachine imageFileMachine) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Save (string assemblyFileName, System.Reflection.PortableExecutableKinds portableExecutableKind, System.Reflection.ImageFileMachine imageFileMachine);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Save(string assemblyFileName, valuetype System.Reflection.PortableExecutableKinds portableExecutableKind, valuetype System.Reflection.ImageFileMachine imageFileMachine) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1373,26 +2356,94 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <paramref name="imageFileMachine" /> and <paramref name="portableExecutableKind" /> are incompatible, <paramref name="imageFileMachine" /> takes precedence over <paramref name="portableExecutableKind" />. No exception is thrown. For example, if you specify <see cref="F:System.Reflection.ImageFileMachine.I386" /> with <see cref="F:System.Reflection.PortableExecutableKinds.PE32Plus" />, <see cref="F:System.Reflection.PortableExecutableKinds.PE32Plus" /> is ignored. </para>
-          <para>This method saves all non-transient dynamic modules defined in this dynamic assembly. Transient dynamic modules are not saved. The assembly file name can be the same as the name of one of the module. If so, the assembly manifest is stored within that module. <paramref name="assemblyFileName" /> can be different from the names of all of the modules contained within the assembly. If so, the assembly file contains only the assembly manifest.</para>
-          <para>For each <see cref="T:System.Resources.ResourceWriter" /> obtained using <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineResource(System.String,System.String,System.String)" />, this method writes the .resources file and calls <see cref="M:System.Resources.ResourceWriter.Close" /> to close the stream.</para>
-          <para>The <paramref name="assemblyFileName" /> needs to be a simple file name without a drive or directory component. To create an assembly in a specific directory, use one of the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" /> methods that takes a target directory argument.</para>
+          <para
+            >If <paramref
+             name="imageFileMachine" />
+
+             and <paramref
+             name="portableExecutableKind" />
+
+             are incompatible, <paramref
+             name="imageFileMachine" />
+
+             takes precedence over <paramref
+             name="portableExecutableKind" />
+
+            . No exception is thrown. For example, if you specify <see
+             cref="F:System.Reflection.ImageFileMachine.I386" />
+
+             with <see
+             cref="F:System.Reflection.PortableExecutableKinds.PE32Plus" />
+
+            , <see
+             cref="F:System.Reflection.PortableExecutableKinds.PE32Plus" />
+
+             is ignored. </para
+          >
+          <para
+            >This method saves all non-transient dynamic modules defined in this dynamic assembly. Transient dynamic modules are not saved. The assembly file name can be the same as the name of one of the module. If so, the assembly manifest is stored within that module. <paramref
+             name="assemblyFileName" />
+
+             can be different from the names of all of the modules contained within the assembly. If so, the assembly file contains only the assembly manifest.</para
+          >
+          <para
+            >For each <see
+             cref="T:System.Resources.ResourceWriter" />
+
+             obtained using <see
+             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineResource(System.String,System.String,System.String)" />
+
+            , this method writes the .resources file and calls <see
+             cref="M:System.Resources.ResourceWriter.Close" />
+
+             to close the stream.</para
+          >
+          <para
+            >The <paramref
+             name="assemblyFileName" />
+
+             needs to be a simple file name without a drive or directory component. To create an assembly in a specific directory, use one of the <see
+             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
+
+             methods that takes a target directory argument.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Saves this dynamic assembly to disk, specifying the nature of code in the assembly's executables and the target platform.</para>
         </summary>
         <param name="assemblyFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file name of the assembly.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file name of the assembly.</param
+        >
         <param name="portableExecutableKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the <see cref="T:System.Reflection.PortableExecutableKinds" /> values that specifies the nature of the code.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the <see
+           cref="T:System.Reflection.PortableExecutableKinds" />
+
+           values that specifies the nature of the code.</param
+        >
         <param name="imageFileMachine">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Reflection.ImageFileMachine" /> values that specifies the target platform.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Reflection.ImageFileMachine" />
+
+           values that specifies the target platform.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
-      <MemberSignature Language="C#" Value="public void SetCustomAttribute (System.Reflection.Emit.CustomAttributeBuilder customBuilder);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetCustomAttribute(class System.Reflection.Emit.CustomAttributeBuilder customBuilder) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetCustomAttribute (System.Reflection.Emit.CustomAttributeBuilder customBuilder);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetCustomAttribute(class System.Reflection.Emit.CustomAttributeBuilder customBuilder) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1410,10 +2461,31 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para>
-              <see cref="M:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute(System.Reflection.ConstructorInfo,System.Byte[])" /> cannot be used to set declarative security attributes. Use one of the overloads of <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" /> that takes required, optional, and refused permissions.</para>
+              <see cref="M:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute(System.Reflection.ConstructorInfo,System.Byte[])" />
+
+               cannot be used to set declarative security attributes. Use one of the overloads of <see
+               cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
+
+               that takes required, optional, and refused permissions.</para
+            >
           </block>
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1421,12 +2493,21 @@
           <para>Set a custom attribute on this assembly using a custom attribute builder.</para>
         </summary>
         <param name="customBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />An instance of a helper class to define the custom attribute. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An instance of a helper class to define the custom attribute. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
-      <MemberSignature Language="C#" Value="public void SetCustomAttribute (System.Reflection.ConstructorInfo con, byte[] binaryAttribute);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetCustomAttribute(class System.Reflection.ConstructorInfo con, unsigned int8[] binaryAttribute) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetCustomAttribute (System.Reflection.ConstructorInfo con, byte[] binaryAttribute);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetCustomAttribute(class System.Reflection.ConstructorInfo con, unsigned int8[] binaryAttribute) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1448,14 +2529,63 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref name="binaryAttribute" />. The documentation is available online; see <see cref="http://go.microsoft.com/fwlink/?LinkID=99212">ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552">Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
-          <para>RuntimeConstructorInfo is a special type generated by the system. It derives from the <see cref="T:System.Reflection.ConstructorInfo" /> class, and any <see cref="T:System.Reflection.ConstructorInfo" /> object you obtain through reflection is actually an instance of RuntimeConstructorInfo. For information on runtime types, see <format type="text/html"><a href="c1439fb5-cf76-475d-a9d2-fe64ba858858">Runtime Types in Reflection</a></format>.</para>
+          <para
+            >See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref
+             name="binaryAttribute" />
+
+            . The documentation is available online; see <see
+             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              >ECMA C# and Common Language Infrastructure Standards</see
+            >
+
+             on MSDN and <see
+             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
+            >
+
+             on the Ecma International Web site.</para
+          >
+          <para
+            >RuntimeConstructorInfo is a special type generated by the system. It derives from the <see
+             cref="T:System.Reflection.ConstructorInfo" />
+
+             class, and any <see
+             cref="T:System.Reflection.ConstructorInfo" />
+
+             object you obtain through reflection is actually an instance of RuntimeConstructorInfo. For information on runtime types, see <format
+             type="text/html">
+              <a href="c1439fb5-cf76-475d-a9d2-fe64ba858858">Runtime Types in Reflection</a>
+            </format>
+
+            .</para
+          >
           <block subset="none" type="note">
             <para>
-              <see cref="M:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute(System.Reflection.ConstructorInfo,System.Byte[])" /> cannot be used to set declarative security attributes. Use one of the overloads of <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" /> that takes required, optional, and refused permissions.</para>
+              <see cref="M:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute(System.Reflection.ConstructorInfo,System.Byte[])" />
+
+               cannot be used to set declarative security attributes. Use one of the overloads of <see
+               cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
+
+               that takes required, optional, and refused permissions.</para
+            >
           </block>
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1463,14 +2593,26 @@
           <para>Set a custom attribute on this assembly using a specified custom attribute blob.</para>
         </summary>
         <param name="con">
-          <attribution license="cc4" from="Microsoft" modified="false" />The constructor for the custom attribute. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The constructor for the custom attribute. </param
+        >
         <param name="binaryAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte blob representing the attributes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte blob representing the attributes. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetEntryPoint">
-      <MemberSignature Language="C#" Value="public void SetEntryPoint (System.Reflection.MethodInfo entryMethod);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetEntryPoint(class System.Reflection.MethodInfo entryMethod) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetEntryPoint (System.Reflection.MethodInfo entryMethod);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetEntryPoint(class System.Reflection.MethodInfo entryMethod) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1490,12 +2632,21 @@
           <para>Sets the entry point for this dynamic assembly, assuming that a console application is being built.</para>
         </summary>
         <param name="entryMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />A reference to the method that represents the entry point for this dynamic assembly. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A reference to the method that represents the entry point for this dynamic assembly. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetEntryPoint">
-      <MemberSignature Language="C#" Value="public void SetEntryPoint (System.Reflection.MethodInfo entryMethod, System.Reflection.Emit.PEFileKinds fileKind);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetEntryPoint(class System.Reflection.MethodInfo entryMethod, valuetype System.Reflection.Emit.PEFileKinds fileKind) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetEntryPoint (System.Reflection.MethodInfo entryMethod, System.Reflection.Emit.PEFileKinds fileKind);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetEntryPoint(class System.Reflection.MethodInfo entryMethod, valuetype System.Reflection.Emit.PEFileKinds fileKind) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1513,7 +2664,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
-            <para>Starting with the net_v20sp1_long, this member no longer requires <see cref="T:System.Security.Permissions.ReflectionPermission" /> with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" /> flag. (See <format type="text/html"><a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298">Security Issues in Reflection Emit</a></format>.) To use this functionality, your application should target the net_v35_long or later.</para>
+            <para
+              >Starting with the net_v20sp1_long, this member no longer requires <see
+               cref="T:System.Security.Permissions.ReflectionPermission" />
+
+               with the <see
+               cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+               flag. (See <format
+               type="text/html">
+                <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
+                  >Security Issues in Reflection Emit</a
+                >
+              </format>
+
+              .) To use this functionality, your application should target the net_v35_long or later.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1521,14 +2687,26 @@
           <para>Sets the entry point for this assembly and defines the type of the portable executable (PE file) being built.</para>
         </summary>
         <param name="entryMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />A reference to the method that represents the entry point for this dynamic assembly. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A reference to the method that represents the entry point for this dynamic assembly. </param
+        >
         <param name="fileKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the assembly executable being built. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the assembly executable being built. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._AssemblyBuilder.GetIDsOfNames">
-      <MemberSignature Language="C#" Value="void _AssemblyBuilder.GetIDsOfNames (ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._AssemblyBuilder.GetIDsOfNames(valuetype System.Guid riid, native int rgszNames, unsigned int32 cNames, unsigned int32 lcid, native int rgDispId) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void _AssemblyBuilder.GetIDsOfNames (ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._AssemblyBuilder.GetIDsOfNames(valuetype System.Guid riid, native int rgszNames, unsigned int32 cNames, unsigned int32 lcid, native int rgDispId) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1539,7 +2717,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="riid" Type="System.Guid&amp;" RefType="ref" />
+        <Parameter Name="riid" Type="System.Guid&" RefType="ref" />
         <Parameter Name="rgszNames" Type="System.IntPtr" />
         <Parameter Name="cNames" Type="System.UInt32" />
         <Parameter Name="lcid" Type="System.UInt32" />
@@ -1556,8 +2734,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._AssemblyBuilder.GetTypeInfo">
-      <MemberSignature Language="C#" Value="void _AssemblyBuilder.GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._AssemblyBuilder.GetTypeInfo(unsigned int32 iTInfo, unsigned int32 lcid, native int ppTInfo) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void _AssemblyBuilder.GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._AssemblyBuilder.GetTypeInfo(unsigned int32 iTInfo, unsigned int32 lcid, native int ppTInfo) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1575,23 +2759,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para>
+          <para
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
+            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+
+            , see the MSDN Library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type information to return.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type information to return.</param
+        >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />The locale identifier for the type information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The locale identifier for the type information.</param
+        >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />Receives a pointer to the requested type information object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Receives a pointer to the requested type information object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._AssemblyBuilder.GetTypeInfoCount">
-      <MemberSignature Language="C#" Value="void _AssemblyBuilder.GetTypeInfoCount (out uint pcTInfo);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._AssemblyBuilder.GetTypeInfoCount(unsigned int32 pcTInfo) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void _AssemblyBuilder.GetTypeInfoCount (out uint pcTInfo);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._AssemblyBuilder.GetTypeInfoCount(unsigned int32 pcTInfo) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1602,7 +2806,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="pcTInfo" Type="System.UInt32&amp;" RefType="out" />
+        <Parameter Name="pcTInfo" Type="System.UInt32&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="pcTInfo">To be added.</param>
@@ -1611,8 +2815,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._AssemblyBuilder.Invoke">
-      <MemberSignature Language="C#" Value="void _AssemblyBuilder.Invoke (uint dispIdMember, ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._AssemblyBuilder.Invoke(unsigned int32 dispIdMember, valuetype System.Guid riid, unsigned int32 lcid, int16 wFlags, native int pDispParams, native int pVarResult, native int pExcepInfo, native int puArgErr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void _AssemblyBuilder.Invoke (uint dispIdMember, ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._AssemblyBuilder.Invoke(unsigned int32 dispIdMember, valuetype System.Guid riid, unsigned int32 lcid, int16 wFlags, native int pDispParams, native int pVarResult, native int pExcepInfo, native int puArgErr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1624,7 +2834,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="dispIdMember" Type="System.UInt32" />
-        <Parameter Name="riid" Type="System.Guid&amp;" RefType="ref" />
+        <Parameter Name="riid" Type="System.Guid&" RefType="ref" />
         <Parameter Name="lcid" Type="System.UInt32" />
         <Parameter Name="wFlags" Type="System.Int16" />
         <Parameter Name="pDispParams" Type="System.IntPtr" />

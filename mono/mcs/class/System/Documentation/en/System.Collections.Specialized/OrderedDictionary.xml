@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="OrderedDictionary" FullName="System.Collections.Specialized.OrderedDictionary">
-  <TypeSignature Language="C#" Value="public class OrderedDictionary : System.Collections.IDictionary, System.Collections.Specialized.IOrderedDictionary, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit OrderedDictionary extends System.Object implements class System.Collections.ICollection, class System.Collections.IDictionary, class System.Collections.IEnumerable, class System.Collections.Specialized.IOrderedDictionary, class System.Runtime.Serialization.IDeserializationCallback, class System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class OrderedDictionary : System.Collections.IDictionary, System.Collections.Specialized.IOrderedDictionary, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit OrderedDictionary extends System.Object implements class System.Collections.ICollection, class System.Collections.IDictionary, class System.Collections.IEnumerable, class System.Collections.Specialized.IOrderedDictionary, class System.Runtime.Serialization.IDeserializationCallback, class System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -28,9 +34,30 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Each element is a key/value pair stored in a <see cref="T:System.Collections.DictionaryEntry" /> object. A key cannot be null, but a value can be. </para>
-      <para>The elements of an <see cref="T:System.Collections.Specialized.OrderedDictionary" /> are not sorted by the key, unlike the elements of a <see cref="T:System.Collections.Generic.SortedDictionary`2" /> class. You can access elements either by the key or by the index.</para>
-      <para>The foreach statement of the C# language (For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />. The following code shows C#, Visual Basic and C++ syntax.</para>
+      <para
+        >Each element is a key/value pair stored in a <see
+         cref="T:System.Collections.DictionaryEntry" />
+
+         object. A key cannot be null, but a value can be. </para
+      >
+      <para
+        >The elements of an <see
+         cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+         are not sorted by the key, unlike the elements of a <see
+         cref="T:System.Collections.Generic.SortedDictionary`2" />
+
+         class. You can access elements either by the key or by the index.</para
+      >
+      <para
+        >The foreach statement of the C# language (For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see
+         cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+         collection is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
+         cref="T:System.Collections.DictionaryEntry" />
+
+        . The following code shows C#, Visual Basic and C++ syntax.</para
+      >
       <para>code reference: System.Collections.Specialized.OrderedDictionary1#06</para>
       <para>The foreach statement is a wrapper around the enumerator, which only allows reading from, not writing to, the collection.</para>
     </remarks>
@@ -42,7 +69,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public OrderedDictionary ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -53,17 +83,36 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />.</para>
+          <para
+            >The comparer determines whether two keys are equal. Every key in a <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection must be unique. The default comparer is the key's implementation of <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public OrderedDictionary (System.Collections.IEqualityComparer comparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.IEqualityComparer comparer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public OrderedDictionary (System.Collections.IEqualityComparer comparer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.IEqualityComparer comparer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -76,20 +125,42 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />.</para>
+          <para
+            >The comparer determines whether two keys are equal. Every key in a <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection must be unique. The default comparer is the key's implementation of <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+            .</para
+          >
           <para>The custom comparer enables such scenarios as doing lookups with case-insensitive strings.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> class using the specified comparer.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             class using the specified comparer.</para
+          >
         </summary>
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Collections.IComparer" /> to use to determine whether two keys are equal.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Collections.IComparer" />
+
+           to use to determine whether two keys are equal.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public OrderedDictionary (int capacity);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 capacity) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 capacity) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -102,19 +173,44 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />.</para>
+          <para
+            >The comparer determines whether two keys are equal. Every key in a <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection must be unique. The default comparer is the key's implementation of <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> class using the specified initial capacity.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             class using the specified initial capacity.</para
+          >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The initial number of elements that the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection can contain.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The initial number of elements that the <see
+           cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+           collection can contain.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public OrderedDictionary (int capacity, System.Collections.IEqualityComparer comparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 capacity, class System.Collections.IEqualityComparer comparer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public OrderedDictionary (int capacity, System.Collections.IEqualityComparer comparer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 capacity, class System.Collections.IEqualityComparer comparer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -128,22 +224,53 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />.</para>
+          <para
+            >The comparer determines whether two keys are equal. Every key in a <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection must be unique. The default comparer is the key's implementation of <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+            .</para
+          >
           <para>The custom comparer enables such scenarios as doing lookups with case-insensitive strings.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> class using the specified initial capacity and comparer.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             class using the specified initial capacity and comparer.</para
+          >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The initial number of elements that the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection can contain.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The initial number of elements that the <see
+           cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+           collection can contain.</param
+        >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Collections.IComparer" /> to use to determine whether two keys are equal.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Collections.IComparer" />
+
+           to use to determine whether two keys are equal.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected OrderedDictionary (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected OrderedDictionary (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -157,21 +284,61 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />.</para>
+          <para
+            >The comparer determines whether two keys are equal. Every key in a <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection must be unique. The default comparer is the key's implementation of <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> class that is serializable using the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> objects.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             class that is serializable using the specified <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+             and <see
+             cref="T:System.Runtime.Serialization.StreamingContext" />
+
+             objects.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object containing the information required to serialize the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+           object containing the information required to serialize the <see
+           cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+           collection.</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Specialized.OrderedDictionary" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Runtime.Serialization.StreamingContext" />
+
+           object containing the source and destination of the serialized stream associated with the <see
+           cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Add">
       <MemberSignature Language="C#" Value="public void Add (object key, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Add(object key, object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Add(object key, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -189,21 +356,55 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A key cannot be null, but a value can be.</para>
-          <para>You can also use the <see cref="P:System.Collections.Specialized.OrderedDictionary.Item(System.Object)" /> property to add new elements by setting the value of a key that does not exist in the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection; however, if the specified key already exists in the <see cref="T:System.Collections.Specialized.OrderedDictionary" />, setting the <see cref="P:System.Collections.Specialized.OrderedDictionary.Item(System.Object)" /> property overwrites the old value. In contrast, the <see cref="M:System.Collections.Specialized.OrderedDictionary.Add(System.Object,System.Object)" /> method does not modify existing elements.</para>
+          <para
+            >You can also use the <see
+             cref="P:System.Collections.Specialized.OrderedDictionary.Item(System.Object)" />
+
+             property to add new elements by setting the value of a key that does not exist in the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection; however, if the specified key already exists in the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            , setting the <see
+             cref="P:System.Collections.Specialized.OrderedDictionary.Item(System.Object)" />
+
+             property overwrites the old value. In contrast, the <see
+             cref="M:System.Collections.Specialized.OrderedDictionary.Add(System.Object,System.Object)" />
+
+             method does not modify existing elements.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds an entry with the specified key and value into the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection with the lowest available index.</para>
+          <para
+            >Adds an entry with the specified key and value into the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection with the lowest available index.</para
+          >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key of the entry to add.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key of the entry to add.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the entry to add. This value can be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the entry to add. This value can be null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AsReadOnly">
-      <MemberSignature Language="C#" Value="public System.Collections.Specialized.OrderedDictionary AsReadOnly ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Specialized.OrderedDictionary AsReadOnly() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Specialized.OrderedDictionary AsReadOnly ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Specialized.OrderedDictionary AsReadOnly() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -217,21 +418,45 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Collections.Specialized.OrderedDictionary.AsReadOnly" /> method creates a read-only wrapper around the current <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection. Changes made to the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection are reflected in the read-only copy.</para>
+          <para
+            >The <see
+             cref="M:System.Collections.Specialized.OrderedDictionary.AsReadOnly" />
+
+             method creates a read-only wrapper around the current <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection. Changes made to the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection are reflected in the read-only copy.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a read-only copy of the current <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >Returns a read-only copy of the current <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A read-only copy of the current <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >A read-only copy of the current <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Clear">
       <MemberSignature Language="C#" Value="public void Clear ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Clear() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Clear() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -245,17 +470,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>After calling the <see cref="M:System.Collections.Specialized.OrderedDictionary.Clear" /> method, the <see cref="P:System.Collections.Specialized.OrderedDictionary.Count" /> property is set to zero and references to other objects from elements of the collection are also released. The capacity is not changed as a result of calling this method.</para>
+          <para
+            >After calling the <see
+             cref="M:System.Collections.Specialized.OrderedDictionary.Clear" />
+
+             method, the <see
+             cref="P:System.Collections.Specialized.OrderedDictionary.Count" />
+
+             property is set to zero and references to other objects from elements of the collection are also released. The capacity is not changed as a result of calling this method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all elements from the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >Removes all elements from the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Contains">
       <MemberSignature Language="C#" Value="public bool Contains (object key);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Contains(object key) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Contains(object key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -271,24 +512,77 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Using the <see cref="P:System.Collections.Specialized.OrderedDictionary.Item(System.Object)" /> property can return a null value if the key does not exist or if the key is null. Use the <see cref="M:System.Collections.Specialized.OrderedDictionary.Contains(System.Object)" /> method to determine if a specific key exists in the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
-          <para>Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" /> and <see cref="M:System.IComparable.CompareTo(System.Object)" /> methods on <paramref name="item" /> to determine whether <paramref name="item" /> exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" /> and <see cref="M:System.IComparable.CompareTo(System.Object)" /> methods of the <paramref name="item" /> parameter on the objects in the collection.</para>
+          <para
+            >Using the <see
+             cref="P:System.Collections.Specialized.OrderedDictionary.Item(System.Object)" />
+
+             property can return a null value if the key does not exist or if the key is null. Use the <see
+             cref="M:System.Collections.Specialized.OrderedDictionary.Contains(System.Object)" />
+
+             method to determine if a specific key exists in the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
+          <para
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+             and <see
+             cref="M:System.IComparable.CompareTo(System.Object)" />
+
+             methods on <paramref
+             name="item" />
+
+             to determine whether <paramref
+             name="item" />
+
+             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+             and <see
+             cref="M:System.IComparable.CompareTo(System.Object)" />
+
+             methods of the <paramref
+             name="item" />
+
+             parameter on the objects in the collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection contains a specific key.</para>
+          <para
+            >Determines whether the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection contains a specific key.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection contains an element with the specified key; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection contains an element with the specified key; otherwise, false.</para
+          >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key to locate in the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key to locate in the <see
+           cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+           collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
       <MemberSignature Language="C#" Value="public void CopyTo (Array array, int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CopyTo(class System.Array array, int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void CopyTo(class System.Array array, int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -305,16 +599,53 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Collections.Specialized.OrderedDictionary.CopyTo(System.Array,System.Int32)" /> method is not guaranteed to preserve the order of the elements in the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >The <see
+             cref="M:System.Collections.Specialized.OrderedDictionary.CopyTo(System.Array,System.Int32)" />
+
+             method is not guaranteed to preserve the order of the elements in the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> elements to a one-dimensional <see cref="T:System.Array" /> object at the specified index.</para>
+          <para
+            >Copies the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             elements to a one-dimensional <see
+             cref="T:System.Array" />
+
+             object at the specified index.</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The one-dimensional <see cref="T:System.Array" /> object that is the destination of the <see cref="T:System.Collections.DictionaryEntry" /> objects copied from <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection. The <see cref="T:System.Array" /> must have zero-based indexing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The one-dimensional <see
+           cref="T:System.Array" />
+
+           object that is the destination of the <see
+           cref="T:System.Collections.DictionaryEntry" />
+
+           objects copied from <see
+           cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+           collection. The <see
+           cref="T:System.Array" />
+
+           must have zero-based indexing.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> at which copying begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           at which copying begins.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -334,13 +665,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of key/values pairs contained in the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >Gets the number of key/values pairs contained in the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IDictionaryEnumerator GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.IDictionaryEnumerator GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IDictionaryEnumerator GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Collections.IDictionaryEnumerator GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -364,17 +706,39 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an <see cref="T:System.Collections.IDictionaryEnumerator" /> object that iterates through the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >Returns an <see
+             cref="T:System.Collections.IDictionaryEnumerator" />
+
+             object that iterates through the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IDictionaryEnumerator" /> object for the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IDictionaryEnumerator" />
+
+             object for the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public virtual void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -392,17 +756,49 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and returns the data needed to serialize the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >Implements the <see
+             cref="T:System.Runtime.Serialization.ISerializable" />
+
+             interface and returns the data needed to serialize the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object containing the information required to serialize the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+           object containing the information required to serialize the <see
+           cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+           collection.</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Runtime.Serialization.StreamingContext" /> object containing the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Specialized.OrderedDictionary" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Runtime.Serialization.StreamingContext" />
+
+           object containing the source and destination of the serialized stream associated with the <see
+           cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, object key, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Insert(int32 index, object key, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, object key, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Insert(int32 index, object key, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -420,19 +816,47 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <paramref name="index" /> parameter is equal to the number of entries in the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection, the <paramref name="key" /> and <paramref name="value" /> parameters are appended to the end of the collection.</para>
+          <para
+            >If the <paramref
+             name="index" />
+
+             parameter is equal to the number of entries in the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection, the <paramref
+             name="key" />
+
+             and <paramref
+             name="value" />
+
+             parameters are appended to the end of the collection.</para
+          >
           <para>Entries that follow the insertion point move down to accommodate the new entry and the indexes of the moved entries are also updated.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Inserts a new entry into the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection with the specified key and value at the specified index.</para>
+          <para
+            >Inserts a new entry into the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection with the specified key and value at the specified index.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index at which the element should be inserted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index at which the element should be inserted.</param
+        >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key of the entry to add.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key of the entry to add.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the entry to add. The value can be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the entry to add. The value can be null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsReadOnly">
@@ -456,7 +880,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection is read-only.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection is read-only.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -506,7 +935,10 @@
     </Member>
     <Member MemberName="Keys">
       <MemberSignature Language="C#" Value="public System.Collections.ICollection Keys { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ICollection Keys" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ICollection Keys"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -520,17 +952,48 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The returned <see cref="T:System.Collections.ICollection" /> object is not a static copy; instead, the <see cref="T:System.Collections.ICollection" /> refers back to the keys in the original <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection. Therefore, changes to the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> continue to be reflected in the <see cref="T:System.Collections.ICollection" />.</para>
+          <para
+            >The returned <see
+             cref="T:System.Collections.ICollection" />
+
+             object is not a static copy; instead, the <see
+             cref="T:System.Collections.ICollection" />
+
+             refers back to the keys in the original <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection. Therefore, changes to the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             continue to be reflected in the <see
+             cref="T:System.Collections.ICollection" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an <see cref="T:System.Collections.ICollection" /> object containing the keys in the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >Gets an <see
+             cref="T:System.Collections.ICollection" />
+
+             object containing the keys in the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="OnDeserialization">
-      <MemberSignature Language="C#" Value="protected virtual void OnDeserialization (object sender);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnDeserialization(object sender) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnDeserialization (object sender);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void OnDeserialization(object sender) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -550,15 +1013,26 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and is called back by the deserialization event when deserialization is complete.</para>
+          <para
+            >Implements the <see
+             cref="T:System.Runtime.Serialization.ISerializable" />
+
+             interface and is called back by the deserialization event when deserialization is complete.</para
+          >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source of the deserialization event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The source of the deserialization event.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Remove">
       <MemberSignature Language="C#" Value="public void Remove (object key);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Remove(object key) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Remove(object key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -575,19 +1049,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The entries that follow the removed entry move up to occupy the vacated spot and the indexes of the entries that move are also updated.</para>
-          <para>If the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection does not contain an entry with the specified key, the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> remains unchanged and no exception is thrown.</para>
+          <para
+            >If the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection does not contain an entry with the specified key, the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             remains unchanged and no exception is thrown.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the entry with the specified key from the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >Removes the entry with the specified key from the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key of the entry to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key of the entry to remove.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
       <MemberSignature Language="C#" Value="public void RemoveAt (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveAt(int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void RemoveAt(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -607,15 +1100,29 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the entry at the specified index from the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >Removes the entry at the specified index from the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index of the entry to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index of the entry to remove.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
-      <MemberSignature Language="C#" Value="bool System.Collections.ICollection.IsSynchronized { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool System.Collections.ICollection.IsSynchronized" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.ICollection.IsSynchronized { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool System.Collections.ICollection.IsSynchronized"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -629,13 +1136,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether access to the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> object is synchronized (thread-safe).</para>
+          <para
+            >Gets a value indicating whether access to the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             object is synchronized (thread-safe).</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.SyncRoot">
-      <MemberSignature Language="C#" Value="object System.Collections.ICollection.SyncRoot { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance object System.Collections.ICollection.SyncRoot" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.ICollection.SyncRoot { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance object System.Collections.ICollection.SyncRoot"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -649,13 +1167,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> object.</para>
+          <para
+            >Gets an object that can be used to synchronize access to the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.IsFixedSize">
-      <MemberSignature Language="C#" Value="bool System.Collections.IDictionary.IsFixedSize { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool System.Collections.IDictionary.IsFixedSize" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.IDictionary.IsFixedSize { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool System.Collections.IDictionary.IsFixedSize"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -669,13 +1198,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> has a fixed size.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             has a fixed size.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -689,17 +1229,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an <see cref="T:System.Collections.IDictionaryEnumerator" /> object that iterates through the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >Returns an <see
+             cref="T:System.Collections.IDictionaryEnumerator" />
+
+             object that iterates through the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IDictionaryEnumerator" /> object for the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IDictionaryEnumerator" />
+
+             object for the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.Serialization.IDeserializationCallback.OnDeserialization">
-      <MemberSignature Language="C#" Value="void IDeserializationCallback.OnDeserialization (object sender);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(object sender) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IDeserializationCallback.OnDeserialization (object sender);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.Serialization.IDeserializationCallback.OnDeserialization(object sender) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -715,15 +1277,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Implements the <see cref="T:System.Runtime.Serialization.ISerializable" /> interface and is called back by the deserialization event when deserialization is complete.</para>
+          <para
+            >Implements the <see
+             cref="T:System.Runtime.Serialization.ISerializable" />
+
+             interface and is called back by the deserialization event when deserialization is complete.</para
+          >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source of the deserialization event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The source of the deserialization event.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Values">
-      <MemberSignature Language="C#" Value="public System.Collections.ICollection Values { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ICollection Values" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ICollection Values { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ICollection Values"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -737,11 +1313,36 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The returned <see cref="T:System.Collections.ICollection" /> object is not a static copy; instead, the <see cref="T:System.Collections.ICollection" /> refers back to the values in the original <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection. Therefore, changes to the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> continue to be reflected in the <see cref="T:System.Collections.ICollection" />.</para>
+          <para
+            >The returned <see
+             cref="T:System.Collections.ICollection" />
+
+             object is not a static copy; instead, the <see
+             cref="T:System.Collections.ICollection" />
+
+             refers back to the values in the original <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection. Therefore, changes to the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             continue to be reflected in the <see
+             cref="T:System.Collections.ICollection" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an <see cref="T:System.Collections.ICollection" /> object containing the values in the <see cref="T:System.Collections.Specialized.OrderedDictionary" /> collection.</para>
+          <para
+            >Gets an <see
+             cref="T:System.Collections.ICollection" />
+
+             object containing the values in the <see
+             cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
     </Member>

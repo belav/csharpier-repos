@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SimplePropertyEntry" FullName="System.Web.UI.SimplePropertyEntry">
-  <TypeSignature Language="C#" Value="public class SimplePropertyEntry : System.Web.UI.PropertyEntry" />
+  <TypeSignature
+    Language="C#"
+    Value="public class SimplePropertyEntry : System.Web.UI.PropertyEntry"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.SimplePropertyEntry" /> class represents simple properties or those properties that are not collections. The <see cref="T:System.Web.UI.ComplexPropertyEntry" /> class represents complex types such as collections. </para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.SimplePropertyEntry" />
+
+         class represents simple properties or those properties that are not collections. The <see
+         cref="T:System.Web.UI.ComplexPropertyEntry" />
+
+         class represents complex types such as collections. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -33,7 +44,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <see cref="M:System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" /> method should be called for the property during code creation.</para>
+          <para
+            >Gets or sets a value indicating whether the <see
+             cref="M:System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" />
+
+             method should be called for the property during code creation.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

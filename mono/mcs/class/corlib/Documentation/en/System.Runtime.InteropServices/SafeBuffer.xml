@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SafeBuffer" FullName="System.Runtime.InteropServices.SafeBuffer">
-  <TypeSignature Language="C#" Value="public abstract class SafeBuffer : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit SafeBuffer extends Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid implements class System.IDisposable" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class SafeBuffer : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit SafeBuffer extends Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid implements class System.IDisposable"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,13 +19,40 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>You must call the <see cref="Overload:System.Runtime.InteropServices.SafeBuffer.Initialize" /> method before you use any instance of <see cref="T:System.Runtime.InteropServices.SafeBuffer" />. To avoid races when you store an instance of a <see cref="T:System.Runtime.InteropServices.SafeBuffer" /> object in a static variable, you should use one of the following approaches:</para>
+      <para
+        >You must call the <see
+         cref="Overload:System.Runtime.InteropServices.SafeBuffer.Initialize" />
+
+         method before you use any instance of <see
+         cref="T:System.Runtime.InteropServices.SafeBuffer" />
+
+        . To avoid races when you store an instance of a <see
+         cref="T:System.Runtime.InteropServices.SafeBuffer" />
+
+         object in a static variable, you should use one of the following approaches:</para
+      >
       <list type="bullet">
         <item>
-          <para>Create a lock when publishing the <see cref="T:System.Runtime.InteropServices.SafeBuffer" />.</para>
+          <para
+            >Create a lock when publishing the <see
+             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+
+            .</para
+          >
         </item>
         <item>
-          <para>Create a local variable, initialize the <see cref="T:System.Runtime.InteropServices.SafeBuffer" />, and then assign the <see cref="T:System.Runtime.InteropServices.SafeBuffer" /> to the static variable, for example, by using the <see cref="M:System.Threading.Interlocked.CompareExchange``1(``0@,``0,``0)" /> method.</para>
+          <para
+            >Create a local variable, initialize the <see
+             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+
+            , and then assign the <see
+             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+
+             to the static variable, for example, by using the <see
+             cref="M:System.Threading.Interlocked.CompareExchange``1(``0@,``0,``0)" />
+
+             method.</para
+          >
         </item>
       </list>
       <block subset="none" type="note">
@@ -34,7 +67,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected SafeBuffer (bool ownsHandle);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool ownsHandle) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool ownsHandle) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -46,15 +82,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Runtime.InteropServices.SafeBuffer" /> class, and specifies whether the buffer handle is to be reliably released. </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+
+             class, and specifies whether the buffer handle is to be reliably released. </para
+          >
         </summary>
         <param name="ownsHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to reliably release the handle during the finalization phase; false to prevent reliable release (not recommended).</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to reliably release the handle during the finalization phase; false to prevent reliable release (not recommended).</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AcquirePointer">
       <MemberSignature Language="C#" Value="public void AcquirePointer (ref byte* pointer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AcquirePointer(unsigned int8* pointer) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AcquirePointer(unsigned int8* pointer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -71,7 +118,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="pointer" Type="System.Byte*&amp;" RefType="ref" />
+        <Parameter Name="pointer" Type="System.Byte*&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="pointer">To be added.</param>
@@ -105,7 +152,10 @@
     </Member>
     <Member MemberName="Initialize">
       <MemberSignature Language="C#" Value="public void Initialize (ulong numBytes);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Initialize(unsigned int64 numBytes) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Initialize(unsigned int64 numBytes) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -125,15 +175,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Defines the allocation size of the memory region in bytes. You must call this method before you use the <see cref="T:System.Runtime.InteropServices.SafeBuffer" /> instance.</para>
+          <para
+            >Defines the allocation size of the memory region in bytes. You must call this method before you use the <see
+             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+
+             instance.</para
+          >
         </summary>
         <param name="numBytes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes in the buffer.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes in the buffer.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Initialize">
-      <MemberSignature Language="C#" Value="public void Initialize (uint numElements, uint sizeOfEachElement);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Initialize(unsigned int32 numElements, unsigned int32 sizeOfEachElement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Initialize (uint numElements, uint sizeOfEachElement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Initialize(unsigned int32 numElements, unsigned int32 sizeOfEachElement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -157,17 +221,34 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the allocation size of the memory buffer by using the specified number of elements and element size. You must call this method before you use the <see cref="T:System.Runtime.InteropServices.SafeBuffer" /> instance.</para>
+          <para
+            >Specifies the allocation size of the memory buffer by using the specified number of elements and element size. You must call this method before you use the <see
+             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+
+             instance.</para
+          >
         </summary>
         <param name="numElements">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of elements in the buffer.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of elements in the buffer.</param
+        >
         <param name="sizeOfEachElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />The size of each element in the buffer.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The size of each element in the buffer.</param
+        >
       </Docs>
     </Member>
-    <Member MemberName="Initialize&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public void Initialize&lt;T&gt; (uint numElements) where T : struct;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Initialize&lt;struct .ctor (class System.ValueType) T&gt;(unsigned int32 numElements) cil managed" />
+    <Member MemberName="Initialize<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public void Initialize<T> (uint numElements) where T : struct;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Initialize<struct .ctor (class System.ValueType) T>(unsigned int32 numElements) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -196,17 +277,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Defines the allocation size of the memory region by specifying the number of value types. You must call this method before you use the <see cref="T:System.Runtime.InteropServices.SafeBuffer" /> instance.</para>
+          <para
+            >Defines the allocation size of the memory region by specifying the number of value types. You must call this method before you use the <see
+             cref="T:System.Runtime.InteropServices.SafeBuffer" />
+
+             instance.</para
+          >
         </summary>
         <param name="numElements">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of elements of the value type to allocate memory for.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of elements of the value type to allocate memory for.</param
+        >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value type to allocate memory for.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value type to allocate memory for.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="Read&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public T Read&lt;T&gt; (ulong byteOffset) where T : struct;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!T Read&lt;struct .ctor (class System.ValueType) T&gt;(unsigned int64 byteOffset) cil managed" />
+    <Member MemberName="Read<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public T Read<T> (ulong byteOffset) where T : struct;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !!T Read<struct .ctor (class System.ValueType) T>(unsigned int64 byteOffset) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -245,14 +343,26 @@
           <para>The value type that was read from memory.</para>
         </returns>
         <param name="byteOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The location from which to read the value type. You may have to consider alignment issues.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The location from which to read the value type. You may have to consider alignment issues.</param
+        >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value type to read.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value type to read.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="ReadArray&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public void ReadArray&lt;T&gt; (ulong byteOffset, T[] array, int index, int count) where T : struct;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ReadArray&lt;struct .ctor (class System.ValueType) T&gt;(unsigned int64 byteOffset, !!T[] array, int32 index, int32 count) cil managed" />
+    <Member MemberName="ReadArray<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public void ReadArray<T> (ulong byteOffset, T[] array, int index, int count) where T : struct;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void ReadArray<struct .ctor (class System.ValueType) T>(unsigned int64 byteOffset, !!T[] array, int32 index, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -295,7 +405,10 @@
     </Member>
     <Member MemberName="ReleasePointer">
       <MemberSignature Language="C#" Value="public void ReleasePointer ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void ReleasePointer() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void ReleasePointer() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -316,13 +429,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases a pointer that was obtained by the <see cref="M:System.Runtime.InteropServices.SafeBuffer.AcquirePointer(System.Byte*@)" /> method.</para>
+          <para
+            >Releases a pointer that was obtained by the <see
+             cref="M:System.Runtime.InteropServices.SafeBuffer.AcquirePointer(System.Byte*@)" />
+
+             method.</para
+          >
         </summary>
       </Docs>
     </Member>
-    <Member MemberName="Write&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public void Write&lt;T&gt; (ulong byteOffset, T value) where T : struct;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Write&lt;struct .ctor (class System.ValueType) T&gt;(unsigned int64 byteOffset, !!T value) cil managed" />
+    <Member MemberName="Write<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public void Write<T> (ulong byteOffset, T value) where T : struct;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Write<struct .ctor (class System.ValueType) T>(unsigned int64 byteOffset, !!T value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -359,9 +483,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="WriteArray&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public void WriteArray&lt;T&gt; (ulong byteOffset, T[] array, int index, int count) where T : struct;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void WriteArray&lt;struct .ctor (class System.ValueType) T&gt;(unsigned int64 byteOffset, !!T[] array, int32 index, int32 count) cil managed" />
+    <Member MemberName="WriteArray<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public void WriteArray<T> (ulong byteOffset, T[] array, int index, int count) where T : struct;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void WriteArray<struct .ctor (class System.ValueType) T>(unsigned int64 byteOffset, !!T[] array, int32 index, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

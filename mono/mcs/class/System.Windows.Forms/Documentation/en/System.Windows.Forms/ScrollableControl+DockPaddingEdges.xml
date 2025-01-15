@@ -1,5 +1,11 @@
-<Type Name="ScrollableControl+DockPaddingEdges" FullName="System.Windows.Forms.ScrollableControl+DockPaddingEdges">
-  <TypeSignature Language="C#" Value="public class ScrollableControl.DockPaddingEdges : ICloneable" />
+<Type
+  Name="ScrollableControl+DockPaddingEdges"
+  FullName="System.Windows.Forms.ScrollableControl+DockPaddingEdges"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ScrollableControl.DockPaddingEdges : ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>

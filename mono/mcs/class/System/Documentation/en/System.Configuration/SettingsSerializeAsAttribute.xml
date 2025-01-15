@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SettingsSerializeAsAttribute" FullName="System.Configuration.SettingsSerializeAsAttribute">
-  <TypeSignature Language="C#" Value="public sealed class SettingsSerializeAsAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SettingsSerializeAsAttribute extends System.Attribute" />
+<Type
+  Name="SettingsSerializeAsAttribute"
+  FullName="System.Configuration.SettingsSerializeAsAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SettingsSerializeAsAttribute : Attribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SettingsSerializeAsAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,8 +29,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A settings provider often supports more than one of the .NET Framework standard serialization schemes. These schemes are outlined by the <see cref="T:System.Configuration.SettingsSerializeAs" /> enumeration, and include plain text, XML, and binary serialization. In addition, a provider may optionally support a custom serialization scheme.</para>
-      <para>With the <see cref="T:System.Configuration.SettingsSerializeAsAttribute" />, you can specify which serialization mechanism should be used for a given application settings class or property. This attribute is considered a request to the settings provider. It may be ignored or cause an error if the provider or the individual property type does not support the specified serialization scheme. If this attribute is not present, the provider will usually provide a default serialization mechanism, most commonly plain text.</para>
+      <para
+        >A settings provider often supports more than one of the .NET Framework standard serialization schemes. These schemes are outlined by the <see
+         cref="T:System.Configuration.SettingsSerializeAs" />
+
+         enumeration, and include plain text, XML, and binary serialization. In addition, a provider may optionally support a custom serialization scheme.</para
+      >
+      <para
+        >With the <see
+         cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+
+        , you can specify which serialization mechanism should be used for a given application settings class or property. This attribute is considered a request to the settings provider. It may be ignored or cause an error if the provider or the individual property type does not support the specified serialization scheme. If this attribute is not present, the provider will usually provide a default serialization mechanism, most commonly plain text.</para
+      >
       <para>Although the settings provider may provide a way to dynamically change the serialization mechanism during run time, this is not a typical capability.</para>
     </remarks>
     <summary>
@@ -31,8 +50,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SettingsSerializeAsAttribute (System.Configuration.SettingsSerializeAs serializeAs);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Configuration.SettingsSerializeAs serializeAs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SettingsSerializeAsAttribute (System.Configuration.SettingsSerializeAs serializeAs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Configuration.SettingsSerializeAs serializeAs) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -45,7 +70,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the settings provider or the type of the property to be converted does not support the serialization scheme specified by the <paramref name="serializeAs" /> parameter, the operation may have one of the following results:</para>
+          <para
+            >If the settings provider or the type of the property to be converted does not support the serialization scheme specified by the <paramref
+             name="serializeAs" />
+
+             parameter, the operation may have one of the following results:</para
+          >
           <list type="bullet">
             <item>
               <para>The settings provider may ignore the attribute and use its default serialization scheme.</para>
@@ -60,15 +90,32 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes an instance of the <see cref="T:System.Configuration.SettingsSerializeAsAttribute" /> class.</para>
+          <para
+            >Initializes an instance of the <see
+             cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+
+             class.</para
+          >
         </summary>
         <param name="serializeAs">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Configuration.SettingsSerializeAs" /> enumerated value that specifies the serialization scheme.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Configuration.SettingsSerializeAs" />
+
+           enumerated value that specifies the serialization scheme.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SerializeAs">
-      <MemberSignature Language="C#" Value="public System.Configuration.SettingsSerializeAs SerializeAs { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Configuration.SettingsSerializeAs SerializeAs" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.SettingsSerializeAs SerializeAs { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Configuration.SettingsSerializeAs SerializeAs"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -82,11 +129,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is set in the <see cref="M:System.Configuration.SettingsSerializeAsAttribute.#ctor(System.Configuration.SettingsSerializeAs)" /> constructor. </para>
+          <para
+            >This property is set in the <see
+             cref="M:System.Configuration.SettingsSerializeAsAttribute.#ctor(System.Configuration.SettingsSerializeAs)" />
+
+             constructor. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Configuration.SettingsSerializeAs" /> enumeration value that specifies the serialization scheme.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Configuration.SettingsSerializeAs" />
+
+             enumeration value that specifies the serialization scheme.</para
+          >
         </summary>
       </Docs>
     </Member>

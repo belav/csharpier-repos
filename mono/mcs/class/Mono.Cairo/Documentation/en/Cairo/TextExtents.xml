@@ -60,8 +60,7 @@
       <Docs>
         <summary>Height of the glyphs as drawn</summary>
         <value>the height</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -69,7 +68,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (Cairo.TextExtents extents, Cairo.TextExtents other);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (Cairo.TextExtents extents, Cairo.TextExtents other);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -91,7 +93,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (Cairo.TextExtents extents, Cairo.TextExtents other);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (Cairo.TextExtents extents, Cairo.TextExtents other);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -121,8 +126,7 @@
       <Docs>
         <summary>Width of the glyphs as drawn</summary>
         <value>the width</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -138,8 +142,7 @@
       <Docs>
         <summary>Distance to advance in the X direction after drawing these glyphs</summary>
         <value>the x advance</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

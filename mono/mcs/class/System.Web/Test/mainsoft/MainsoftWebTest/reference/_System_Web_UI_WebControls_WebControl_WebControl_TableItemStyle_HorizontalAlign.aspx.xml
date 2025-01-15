@@ -10,7 +10,10 @@
       </tr>
     </table>
     <span>
-      <br />0</span>
+      <br />
+
+      0</span
+    >
   </div>
   <div id="GHTSubTest2" testname="System.Web.UI.WebControls.TableRow: Set 'Center'.">
     <table border="0">
@@ -62,7 +65,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest7" testname="System.Web.UI.WebControls.TableRow: Throws exception for illegal HorizontalAlign values.">
+  <div
+    id="GHTSubTest7"
+    testname="System.Web.UI.WebControls.TableRow: Throws exception for illegal HorizontalAlign values."
+  >
     <table border="0">
       <tr>
         <th>Header cell</th>
@@ -72,7 +78,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest8" testname="System.Web.UI.WebControls.TableCell: Test default value.">
     <table border="0">
@@ -84,7 +93,10 @@
       </tr>
     </table>
     <span>
-      <br />0</span>
+      <br />
+
+      0</span
+    >
   </div>
   <div id="GHTSubTest9" testname="System.Web.UI.WebControls.TableCell: Set 'Center'.">
     <table border="0">
@@ -136,7 +148,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest14" testname="System.Web.UI.WebControls.TableCell: Throws exception for illegal HorizontalAlign values.">
+  <div
+    id="GHTSubTest14"
+    testname="System.Web.UI.WebControls.TableCell: Throws exception for illegal HorizontalAlign values."
+  >
     <table border="0">
       <tr>
         <th>Header cell</th>
@@ -146,7 +161,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest15" testname="System.Web.UI.WebControls.DataListItem: Test default value.">
     <table id="ctrl_14" cellspacing="0" border="0" style="border-collapse:collapse">

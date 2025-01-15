@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IIntellisenseBuilder" FullName="System.ComponentModel.IIntellisenseBuilder">
   <TypeSignature Language="C#" Value="public interface IIntellisenseBuilder" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IIntellisenseBuilder" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IIntellisenseBuilder"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,8 +40,14 @@
       </Docs>
     </Member>
     <Member MemberName="Show">
-      <MemberSignature Language="C#" Value="public bool Show (string language, string value, ref string newValue);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Show(string language, string value, string newValue) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Show (string language, string value, ref string newValue);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Show(string language, string value, string newValue) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -50,7 +59,7 @@
       <Parameters>
         <Parameter Name="language" Type="System.String" />
         <Parameter Name="value" Type="System.String" />
-        <Parameter Name="newValue" Type="System.String&amp;" RefType="ref" />
+        <Parameter Name="newValue" Type="System.String&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="language">To be added.</param>

@@ -1,10 +1,12 @@
 <Type Name="LdapSearchConstraints" FullName="Novell.Directory.Ldap.LdapSearchConstraints">
-  <TypeSignature Language="C#" Value="public class LdapSearchConstraints : Novell.Directory.Ldap.LdapConstraints, System.ICloneable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapSearchConstraints : Novell.Directory.Ldap.LdapConstraints, System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -60,7 +62,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapSearchConstraints(Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapSearchConstraints(Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="cons" Type="Novell.Directory.Ldap.LdapConstraints" />
@@ -72,7 +77,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapSearchConstraints(int msLimit, int serverTimeLimit, int dereference, int maxResults, bool doReferrals, int batchSize, Novell.Directory.Ldap.LdapReferralHandler handler, int hop_limit)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapSearchConstraints(int msLimit, int serverTimeLimit, int dereference, int maxResults, bool doReferrals, int batchSize, Novell.Directory.Ldap.LdapReferralHandler handler, int hop_limit)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="msLimit" Type="System.Int32" />

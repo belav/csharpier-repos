@@ -50,7 +50,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnEndParsing">
-      <MemberSignature Language="C#" Value="public void OnEndParsing (Mono.Xml.MiniParser parser);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void OnEndParsing (Mono.Xml.MiniParser parser);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -69,7 +72,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnStartElement">
-      <MemberSignature Language="C#" Value="public void OnStartElement (string name, Mono.Xml.MiniParser.IAttrList attrs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void OnStartElement (string name, Mono.Xml.MiniParser.IAttrList attrs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -90,7 +96,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnStartParsing">
-      <MemberSignature Language="C#" Value="public void OnStartParsing (Mono.Xml.MiniParser parser);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void OnStartParsing (Mono.Xml.MiniParser parser);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

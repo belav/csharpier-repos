@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ConnectionStringsExpressionBuilder" FullName="System.Web.Compilation.ConnectionStringsExpressionBuilder">
-  <TypeSignature Language="C#" Value="public class ConnectionStringsExpressionBuilder : System.Web.Compilation.ExpressionBuilder" />
+<Type
+  Name="ConnectionStringsExpressionBuilder"
+  FullName="System.Web.Compilation.ConnectionStringsExpressionBuilder"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ConnectionStringsExpressionBuilder : System.Web.Compilation.ExpressionBuilder"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -21,7 +27,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" /> class provides access to values in the &lt;connectionStrings&gt; section of the Web.config file. The &lt;connectionStrings&gt; section of the Web.config file contains connection string values in name/value pairs.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+
+         class provides access to values in the &lt;connectionStrings&gt; section of the Web.config file. The &lt;connectionStrings&gt; section of the Web.config file contains connection string values in name/value pairs.</para
+      >
       <para>A connection string value is retrieved by assigning an expression of the form</para>
       <para>&lt;%$ ConnectionStrings: secureConnectionString %&gt;</para>
       <para>to a control property. The part of the expression before the colon (:) designates the type of expression to be retrieved, and the part after the colon signifies the name of the connection string. The preceding expression would retrieve the following value from the Web.config file.</para>
@@ -30,8 +41,21 @@
       <para>         Source=localhost;Integrated Security=SSPI;Initial</para>
       <para>         Catalog=Northwind;" providerName="System.Data.SqlClient" /&gt;</para>
       <para>&lt;/connectionStrings&gt;</para>
-      <para>When the page parser encounters an expression with the prefix ConnectionStrings, it creates an instance of the <see cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" /> class to handle the expression. </para>
-      <para>If the expression is encountered in a page that will be compiled, the <see cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" /> object generates code that retrieves the specified connection string from the Web.config file. If the expression is encountered in a page that will not be compiled, the <see cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" /> object returns the value from the Web.config file when the page is parsed.</para>
+      <para
+        >When the page parser encounters an expression with the prefix ConnectionStrings, it creates an instance of the <see
+         cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+
+         class to handle the expression. </para
+      >
+      <para
+        >If the expression is encountered in a page that will be compiled, the <see
+         cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+
+         object generates code that retrieves the specified connection string from the Web.config file. If the expression is encountered in a page that will not be compiled, the <see
+         cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+
+         object returns the value from the Web.config file when the page is parsed.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -48,7 +72,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -56,7 +85,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="EvaluateExpression">
-      <MemberSignature Language="C#" Value="public override object EvaluateExpression (object target, System.Web.UI.BoundPropertyEntry entry, object parsedData, System.Web.Compilation.ExpressionBuilderContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object EvaluateExpression (object target, System.Web.UI.BoundPropertyEntry entry, object parsedData, System.Web.Compilation.ExpressionBuilderContext context);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -71,7 +103,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is called when an expression of the form &lt;%$ ConnectionStrings: secureConnectionString %&gt; is encountered in a page that is not compiled. It retrieves the appropriate value from the &lt;connectionStrings&gt; section of the Web.config file. This method overrides the <see cref="M:System.Web.Compilation.ExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" /> method by calling the <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionString(System.String)" /> method if a connection string is included in the <paramref name="parsedData" /> parameter, or by calling the <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionStringProviderName(System.String)" /> method if a connection string is not included in the <paramref name="parsedData" /> parameter.</para>
+          <para
+            >This method is called when an expression of the form &lt;%$ ConnectionStrings: secureConnectionString %&gt; is encountered in a page that is not compiled. It retrieves the appropriate value from the &lt;connectionStrings&gt; section of the Web.config file. This method overrides the <see
+             cref="M:System.Web.Compilation.ExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+             method by calling the <see
+             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionString(System.String)" />
+
+             method if a connection string is included in the <paramref
+             name="parsedData" />
+
+             parameter, or by calling the <see
+             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionStringProviderName(System.String)" />
+
+             method if a connection string is not included in the <paramref
+             name="parsedData" />
+
+             parameter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -79,23 +128,46 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Object" /> associated with a key in the &lt;connectionStrings&gt; section of the Web.config file.</para>
+          <para
+            >The <see
+             cref="T:System.Object" />
+
+             associated with a key in the &lt;connectionStrings&gt; section of the Web.config file.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object that contains the expression.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object that contains the expression.</param
+        >
         <param name="entry">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property to which the expression is bound.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property to which the expression is bound.</param
+        >
         <param name="parsedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object that represents parsed data as returned by <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object that represents parsed data as returned by <see
+           cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
+
+          .</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />Properties for the control or page.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Properties for the control or page.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetCodeExpression">
-      <MemberSignature Language="C#" Value="public override System.CodeDom.CodeExpression GetCodeExpression (System.Web.UI.BoundPropertyEntry entry, object parsedData, System.Web.Compilation.ExpressionBuilderContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.CodeDom.CodeExpression GetCodeExpression (System.Web.UI.BoundPropertyEntry entry, object parsedData, System.Web.Compilation.ExpressionBuilderContext context);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.CodeDom.CodeExpression</ReturnType>
@@ -109,7 +181,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is called during the CodeDOM creation for a page or control. The <see cref="T:System.CodeDom.CodeExpression" /> object returned is of the type <see cref="T:System.CodeDom.CodeMethodInvokeExpression" /> and represents the method to call when retrieving a connection string value.</para>
+          <para
+            >This method is called during the CodeDOM creation for a page or control. The <see
+             cref="T:System.CodeDom.CodeExpression" />
+
+             object returned is of the type <see
+             cref="T:System.CodeDom.CodeMethodInvokeExpression" />
+
+             and represents the method to call when retrieving a connection string value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -117,21 +197,41 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.CodeDom.CodeExpression" /> that invokes a method.</para>
+          <para
+            >A <see
+             cref="T:System.CodeDom.CodeExpression" />
+
+             that invokes a method.</para
+          >
         </returns>
         <param name="entry">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that represents information about the property bound to by the expression.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that represents information about the property bound to by the expression.</param
+        >
         <param name="parsedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object that represents parsed data as returned by <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object that represents parsed data as returned by <see
+           cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
+
+          .</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />Properties for the control or page.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Properties for the control or page.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetConnectionString">
-      <MemberSignature Language="C#" Value="public static string GetConnectionString (string connectionStringName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetConnectionString (string connectionStringName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -143,7 +243,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Configuration.ConfigurationManager.ConnectionStrings" /> property returns a collection of connection string values. The <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionString(System.String)" /> method returns the value from this collection that is associated with the connection string name.</para>
+          <para
+            >The <see
+             cref="P:System.Configuration.ConfigurationManager.ConnectionStrings" />
+
+             property returns a collection of connection string values. The <see
+             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionString(System.String)" />
+
+             method returns the value from this collection that is associated with the connection string name.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -151,17 +259,28 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The connection string as a <see cref="T:System.String" /> for this connection string name.</para>
+          <para
+            >The connection string as a <see
+             cref="T:System.String" />
+
+             for this connection string name.</para
+          >
         </returns>
         <param name="connectionStringName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the connection string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the connection string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetConnectionStringProviderName">
-      <MemberSignature Language="C#" Value="public static string GetConnectionStringProviderName (string connectionStringName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetConnectionStringProviderName (string connectionStringName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -173,7 +292,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Configuration.ConfigurationManager.ConnectionStrings" /> property returns a collection of connection string values. The <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionStringProviderName(System.String)" /> method returns the provider for the value from this collection that is associated with the connection string name.</para>
+          <para
+            >The <see
+             cref="P:System.Configuration.ConfigurationManager.ConnectionStrings" />
+
+             property returns a collection of connection string values. The <see
+             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionStringProviderName(System.String)" />
+
+             method returns the provider for the value from this collection that is associated with the connection string name.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -181,17 +308,28 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The provider as a <see cref="T:System.String" /> for this connection string name.</para>
+          <para
+            >The provider as a <see
+             cref="T:System.String" />
+
+             for this connection string name.</para
+          >
         </returns>
         <param name="connectionStringName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the connection string.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the connection string.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="ParseExpression">
-      <MemberSignature Language="C#" Value="public override object ParseExpression (string expression, Type propertyType, System.Web.Compilation.ExpressionBuilderContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object ParseExpression (string expression, Type propertyType, System.Web.Compilation.ExpressionBuilderContext context);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -205,7 +343,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The returned <see cref="T:System.Object" /> is of the type <see cref="T:System.Web.UI.Pair" />. This <see cref="T:System.Web.UI.Pair" /> object can be passed to both the <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" /> method and the <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetCodeExpression(System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" /> method as <paramref name="parsedData" />. The <see cref="T:System.Web.UI.Pair" /> object contains the name and value of the connection string.</para>
+          <para
+            >The returned <see
+             cref="T:System.Object" />
+
+             is of the type <see
+             cref="T:System.Web.UI.Pair" />
+
+            . This <see
+             cref="T:System.Web.UI.Pair" />
+
+             object can be passed to both the <see
+             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+             method and the <see
+             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetCodeExpression(System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+             method as <paramref
+             name="parsedData" />
+
+            . The <see
+             cref="T:System.Web.UI.Pair" />
+
+             object contains the name and value of the connection string.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -213,14 +374,28 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Object" /> containing the parsed representation of the expression.</para>
+          <para
+            >An <see
+             cref="T:System.Object" />
+
+             containing the parsed representation of the expression.</para
+          >
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the declarative expression.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the declarative expression.</param
+        >
         <param name="propertyType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The targeted type for the expression.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The targeted type for the expression.</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />Properties for the control or page.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Properties for the control or page.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -237,7 +412,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Compilation.ConnectionStringsExpressionBuilder.SupportsEvaluate" /> property indicates whether the <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" /> method has been implemented in the class. <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" /> must be implemented within an expression builder for an expression to be evaluated in a page that is not compiled. <see cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" /> supports no-compile evaluation of connection strings, so true is always returned.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Compilation.ConnectionStringsExpressionBuilder.SupportsEvaluate" />
+
+             property indicates whether the <see
+             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+             method has been implemented in the class. <see
+             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+             must be implemented within an expression builder for an expression to be evaluated in a page that is not compiled. <see
+             cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+
+             supports no-compile evaluation of connection strings, so true is always returned.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

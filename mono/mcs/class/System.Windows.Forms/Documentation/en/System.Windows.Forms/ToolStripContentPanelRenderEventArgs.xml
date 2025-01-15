@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ToolStripContentPanelRenderEventArgs" FullName="System.Windows.Forms.ToolStripContentPanelRenderEventArgs">
-  <TypeSignature Language="C#" Value="public class ToolStripContentPanelRenderEventArgs : EventArgs" />
+<Type
+  Name="ToolStripContentPanelRenderEventArgs"
+  FullName="System.Windows.Forms.ToolStripContentPanelRenderEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripContentPanelRenderEventArgs : EventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,12 +20,20 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.ToolStripContentPanel.RendererChanged" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.ToolStripContentPanel.RendererChanged" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripContentPanelRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStripContentPanel contentPanel);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripContentPanelRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStripContentPanel contentPanel);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="g" Type="System.Drawing.Graphics" />
@@ -30,12 +44,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
+
+             class. </para
+          >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> representing the GDI+ drawing surface.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           representing the GDI+ drawing surface.</param
+        >
         <param name="contentPanel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ToolStripContentPanel" /> to render.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+           to render.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -80,7 +111,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ToolStripContentPanel">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripContentPanel ToolStripContentPanel { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripContentPanel ToolStripContentPanel { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ToolStripContentPanel</ReturnType>
@@ -91,7 +125,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.ToolStripContentPanel" /> affected by the click.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+             affected by the click.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

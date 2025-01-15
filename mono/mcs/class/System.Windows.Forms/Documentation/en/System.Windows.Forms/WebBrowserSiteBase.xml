@@ -22,7 +22,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Implements the interfaces of an ActiveX site for use as a base class by the <see cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" /> class.</para>
+      <para
+        >Implements the interfaces of an ActiveX site for use as a base class by the <see
+         cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" />
+
+         class.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -40,7 +45,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases all resources used by the <see cref="T:System.Windows.Forms.WebBrowserSiteBase" />. </para>
+          <para
+            >Releases all resources used by the <see
+             cref="T:System.Windows.Forms.WebBrowserSiteBase" />
+
+            . </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -60,10 +70,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.WebBrowserSiteBase" /> and optionally releases the managed resources. </para>
+          <para
+            >Releases the unmanaged resources used by the <see
+             cref="T:System.Windows.Forms.WebBrowserSiteBase" />
+
+             and optionally releases the managed resources. </para
+          >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
+        >
       </Docs>
     </Member>
   </Members>

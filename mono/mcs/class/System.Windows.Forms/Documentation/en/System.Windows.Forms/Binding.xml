@@ -18,10 +18,51 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the <see cref="T:System.Windows.Forms.Binding" /> class to create and maintain a simple binding between the property of a control and either the property of an object, or the property of the current object in a list of objects.</para>
-      <para>As an example of the first case, you can bind the <see cref="P:System.Windows.Forms.Control.Text" /> property of a <see cref="T:System.Windows.Forms.TextBox" /> control to the FirstName property of a Customer object. As an example of the second case, you can bind the <see cref="P:System.Windows.Forms.Control.Text" /> property of a <see cref="T:System.Windows.Forms.TextBox" /> control to the FirstName property of a <see cref="T:System.Data.DataTable" /> that contains customers.</para>
-      <para>The <see cref="T:System.Windows.Forms.Binding" /> class also enables you to format values for display through the <see cref="E:System.Windows.Forms.Binding.Format" /> event and to retrieve formatted values through the <see cref="E:System.Windows.Forms.Binding.Parse" /> event.</para>
-      <para>When constructing a <see cref="T:System.Windows.Forms.Binding" /> instance with <see cref="M:System.Windows.Forms.Binding.#ctor(System.String,System.Object,System.String,System.Boolean)" /> constructor, you must specify three items:</para>
+      <para
+        >Use the <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         class to create and maintain a simple binding between the property of a control and either the property of an object, or the property of the current object in a list of objects.</para
+      >
+      <para
+        >As an example of the first case, you can bind the <see
+         cref="P:System.Windows.Forms.Control.Text" />
+
+         property of a <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         control to the FirstName property of a Customer object. As an example of the second case, you can bind the <see
+         cref="P:System.Windows.Forms.Control.Text" />
+
+         property of a <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         control to the FirstName property of a <see
+         cref="T:System.Data.DataTable" />
+
+         that contains customers.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         class also enables you to format values for display through the <see
+         cref="E:System.Windows.Forms.Binding.Format" />
+
+         event and to retrieve formatted values through the <see
+         cref="E:System.Windows.Forms.Binding.Parse" />
+
+         event.</para
+      >
+      <para
+        >When constructing a <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         instance with <see
+         cref="M:System.Windows.Forms.Binding.#ctor(System.String,System.Object,System.String,System.Boolean)" />
+
+         constructor, you must specify three items:</para
+      >
       <list type="bullet">
         <item>
           <para>The name of the control property to bind to.</para>
@@ -30,10 +71,23 @@
           <para>The data source.</para>
         </item>
         <item>
-          <para>The navigation path that resolves to a list or property in the data source. The navigation path is also used to create the object's <see cref="P:System.Windows.Forms.Binding.BindingMemberInfo" /> property.</para>
+          <para
+            >The navigation path that resolves to a list or property in the data source. The navigation path is also used to create the object's <see
+             cref="P:System.Windows.Forms.Binding.BindingMemberInfo" />
+
+             property.</para
+          >
         </item>
       </list>
-      <para>First, you must specify name of the control property you want to bind the data to. For example, to display data in a <see cref="T:System.Windows.Forms.TextBox" /> control, specify the <see cref="P:System.Windows.Forms.TextBoxBase.Text" /> property.</para>
+      <para
+        >First, you must specify name of the control property you want to bind the data to. For example, to display data in a <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         control, specify the <see
+         cref="P:System.Windows.Forms.TextBoxBase.Text" />
+
+         property.</para
+      >
       <para>Second, you can specify an instance of any one of the classes in the following table as the data source. </para>
       <list type="table">
         <listheader>
@@ -48,7 +102,27 @@
         </listheader>
         <item>
           <term>
-            <para>Any class that implements <see cref="T:System.ComponentModel.IBindingList" /> or <see cref="T:System.ComponentModel.ITypedList" />. These include the following: <see cref="T:System.Data.DataSet" />, <see cref="T:System.Data.DataTable" />, <see cref="T:System.Data.DataView" />, or <see cref="T:System.Data.DataViewManager" />. </para>
+            <para
+              >Any class that implements <see
+               cref="T:System.ComponentModel.IBindingList" />
+
+               or <see
+               cref="T:System.ComponentModel.ITypedList" />
+
+              . These include the following: <see
+               cref="T:System.Data.DataSet" />
+
+              , <see
+               cref="T:System.Data.DataTable" />
+
+              , <see
+               cref="T:System.Data.DataView" />
+
+              , or <see
+               cref="T:System.Data.DataViewManager" />
+
+              . </para
+            >
           </term>
           <description>
             <code>DataSet ds = new DataSet("myDataSet");</code>
@@ -56,7 +130,15 @@
         </item>
         <item>
           <term>
-            <para>Any class that implements <see cref="T:System.Collections.IList" /> to create an indexed collection of objects. The collection must be created and filled before creating the <see cref="T:System.Windows.Forms.Binding" />. The objects in the list must all be of the same type; otherwise, an exception will be thrown. </para>
+            <para
+              >Any class that implements <see
+               cref="T:System.Collections.IList" />
+
+               to create an indexed collection of objects. The collection must be created and filled before creating the <see
+               cref="T:System.Windows.Forms.Binding" />
+
+              . The objects in the list must all be of the same type; otherwise, an exception will be thrown. </para
+            >
           </term>
           <description>
             <code>ArrayList ar1 = new ArrayList;
@@ -68,19 +150,65 @@ ar1.Add(cust1);</code>
         </item>
         <item>
           <term>
-            <para>A strongly typed <see cref="T:System.Collections.IList" /> of strongly typed objects </para>
+            <para
+              >A strongly typed <see
+               cref="T:System.Collections.IList" />
+
+               of strongly typed objects </para
+            >
           </term>
           <description>
             <code>Customer [] custList = new Customer[3];</code>
           </description>
         </item>
       </list>
-      <para>Third, you must specify the navigation path, which can be an empty string (""), a single property name, or a period-delimited hierarchy of names. If you set the navigation path to an empty string, the <see cref="M:System.Object.ToString" /> method will be called on the underlying data source object.</para>
-      <para>If the data source is a <see cref="T:System.Data.DataTable" />, which can contain multiple <see cref="T:System.Data.DataColumn" /> objects, the navigation path must be used to resolve to a specific column.</para>
+      <para
+        >Third, you must specify the navigation path, which can be an empty string (""), a single property name, or a period-delimited hierarchy of names. If you set the navigation path to an empty string, the <see
+         cref="M:System.Object.ToString" />
+
+         method will be called on the underlying data source object.</para
+      >
+      <para
+        >If the data source is a <see
+         cref="T:System.Data.DataTable" />
+
+        , which can contain multiple <see
+         cref="T:System.Data.DataColumn" />
+
+         objects, the navigation path must be used to resolve to a specific column.</para
+      >
       <block subset="none" type="note">
-        <para>When the data source is a <see cref="T:System.Data.DataSet" />, <see cref="T:System.Data.DataViewManager" />, or <see cref="T:System.Data.DataTable" />, you are actually binding to a <see cref="T:System.Data.DataView" />. Consequently, the bound rows are actually <see cref="T:System.Data.DataRowView" /> objects.</para>
+        <para
+          >When the data source is a <see
+           cref="T:System.Data.DataSet" />
+
+          , <see
+           cref="T:System.Data.DataViewManager" />
+
+          , or <see
+           cref="T:System.Data.DataTable" />
+
+          , you are actually binding to a <see
+           cref="T:System.Data.DataView" />
+
+          . Consequently, the bound rows are actually <see
+           cref="T:System.Data.DataRowView" />
+
+           objects.</para
+        >
       </block>
-      <para>A period-delimited navigation path is required when the data source is set to an object that contains multiple <see cref="T:System.Data.DataTable" /> objects (such as a <see cref="T:System.Data.DataSet" /> or <see cref="T:System.Data.DataViewManager" />). You can also use a period-delimited navigation path when you bind to an object whose properties return references to other objects (such as a class with properties that return other class objects). For example, the following navigation paths all describe valid data fields: </para>
+      <para
+        >A period-delimited navigation path is required when the data source is set to an object that contains multiple <see
+         cref="T:System.Data.DataTable" />
+
+         objects (such as a <see
+         cref="T:System.Data.DataSet" />
+
+         or <see
+         cref="T:System.Data.DataViewManager" />
+
+        ). You can also use a period-delimited navigation path when you bind to an object whose properties return references to other objects (such as a class with properties that return other class objects). For example, the following navigation paths all describe valid data fields: </para
+      >
       <list type="bullet">
         <item>
           <para>"Size.Height" </para>
@@ -95,8 +223,51 @@ ar1.Add(cust1);</code>
           <para>"Regions.regionsToCustomers.customersToOrders.ordersToDetails.Quantity" </para>
         </item>
       </list>
-      <para>Each member of the path can return either a property that resolves to a single value (such as an integer), or a list of values (such as an array of strings). Although each member in the path can be a list or property, the final member must resolve to a property. Each member builds on the previous member: "Size.Height" resolves to the <see cref="P:System.Drawing.Size.Height" /> property for the current <see cref="T:System.Drawing.Size" />; "Regions.regionsToCustomers.CustomerFirstName" resolves to the first name for the current customer, where the customer is one of the customers for the current region.</para>
-      <para>A <see cref="T:System.Data.DataRelation" /> returns a list of values by linking one <see cref="T:System.Data.DataTable" /> to a second <see cref="T:System.Data.DataTable" /> in a <see cref="T:System.Data.DataSet" />. If the <see cref="T:System.Data.DataSet" /> contains <see cref="T:System.Data.DataRelation" /> objects, you can specify the data member as a <see cref="P:System.Data.DataTable.TableName" /> followed by a <see cref="P:System.Data.DataRelation.RelationName" />, and then a <see cref="P:System.Data.DataColumn.ColumnName" />. For example, if the <see cref="T:System.Data.DataTable" /> named "Suppliers" contains a <see cref="T:System.Data.DataRelation" /> named "suppliers2products", the data member could be "Suppliers.suppliers2products.ProductName".</para>
+      <para
+        >Each member of the path can return either a property that resolves to a single value (such as an integer), or a list of values (such as an array of strings). Although each member in the path can be a list or property, the final member must resolve to a property. Each member builds on the previous member: "Size.Height" resolves to the <see
+         cref="P:System.Drawing.Size.Height" />
+
+         property for the current <see
+         cref="T:System.Drawing.Size" />
+
+        ; "Regions.regionsToCustomers.CustomerFirstName" resolves to the first name for the current customer, where the customer is one of the customers for the current region.</para
+      >
+      <para
+        >A <see
+         cref="T:System.Data.DataRelation" />
+
+         returns a list of values by linking one <see
+         cref="T:System.Data.DataTable" />
+
+         to a second <see
+         cref="T:System.Data.DataTable" />
+
+         in a <see
+         cref="T:System.Data.DataSet" />
+
+        . If the <see
+         cref="T:System.Data.DataSet" />
+
+         contains <see
+         cref="T:System.Data.DataRelation" />
+
+         objects, you can specify the data member as a <see
+         cref="P:System.Data.DataTable.TableName" />
+
+         followed by a <see
+         cref="P:System.Data.DataRelation.RelationName" />
+
+        , and then a <see
+         cref="P:System.Data.DataColumn.ColumnName" />
+
+        . For example, if the <see
+         cref="T:System.Data.DataTable" />
+
+         named "Suppliers" contains a <see
+         cref="T:System.Data.DataRelation" />
+
+         named "suppliers2products", the data member could be "Suppliers.suppliers2products.ProductName".</para
+      >
       <para>The data source can consist of a set of related classes. For example, imagine a set of classes that catalogs solar systems. The class named System contains a property named Stars that returns a collection of Star objects. Each Star object has Name and Mass properties, as well as a Planets property that returns a collection of Planet objects. In this system, each planet also has Mass and Name properties. Each Planet object further has a Moons property that returns a collection of Moon objects, each of which also has Name and Mass properties. If you specify a System object as the data source, you can specify any of the following as the data member: </para>
       <list type="bullet">
         <item>
@@ -118,107 +289,227 @@ ar1.Add(cust1);</code>
           <para>"Stars.Planets.Moons.Mass" </para>
         </item>
       </list>
-      <para>Controls that can be simple-bound feature a collection of <see cref="T:System.Windows.Forms.Binding" /> objects in a <see cref="T:System.Windows.Forms.ControlBindingsCollection" />, which you can access through the control's <see cref="P:System.Windows.Forms.Control.DataBindings" /> property. You add a <see cref="T:System.Windows.Forms.Binding" /> to the collection by calling the <see cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.Windows.Forms.Binding)" /> method, thereby binding a property of the control to a property of an object (or to a property of the current object in a list).</para>
-      <para>You can simple-bind to any object that derives from the <see cref="T:System.Windows.Forms.Control" /> class, for example, the following Windows controls: </para>
+      <para
+        >Controls that can be simple-bound feature a collection of <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         objects in a <see
+         cref="T:System.Windows.Forms.ControlBindingsCollection" />
+
+        , which you can access through the control's <see
+         cref="P:System.Windows.Forms.Control.DataBindings" />
+
+         property. You add a <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         to the collection by calling the <see
+         cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.Windows.Forms.Binding)" />
+
+         method, thereby binding a property of the control to a property of an object (or to a property of the current object in a list).</para
+      >
+      <para
+        >You can simple-bind to any object that derives from the <see
+         cref="T:System.Windows.Forms.Control" />
+
+         class, for example, the following Windows controls: </para
+      >
       <list type="bullet">
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.Button" /> </para>
+            <see cref="T:System.Windows.Forms.Button" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.CheckBox" /> </para>
+            <see cref="T:System.Windows.Forms.CheckBox" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.CheckedListBox" /> </para>
+            <see cref="T:System.Windows.Forms.CheckedListBox" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.ComboBox" /> </para>
+            <see cref="T:System.Windows.Forms.ComboBox" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.DateTimePicker" /> </para>
+            <see cref="T:System.Windows.Forms.DateTimePicker" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.DomainUpDown" /> </para>
+            <see cref="T:System.Windows.Forms.DomainUpDown" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.GroupBox" /> </para>
+            <see cref="T:System.Windows.Forms.GroupBox" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.HScrollBar" /> </para>
+            <see cref="T:System.Windows.Forms.HScrollBar" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.Label" /> </para>
+            <see cref="T:System.Windows.Forms.Label" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.LinkLabel" /> </para>
+            <see cref="T:System.Windows.Forms.LinkLabel" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.ListBox" /> </para>
+            <see cref="T:System.Windows.Forms.ListBox" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.ListView" /> </para>
+            <see cref="T:System.Windows.Forms.ListView" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.MonthCalendar" /> </para>
+            <see cref="T:System.Windows.Forms.MonthCalendar" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.NumericUpDown" /> </para>
+            <see cref="T:System.Windows.Forms.NumericUpDown" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.PictureBox" /> </para>
+            <see cref="T:System.Windows.Forms.PictureBox" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.ProgressBar" /> </para>
+            <see cref="T:System.Windows.Forms.ProgressBar" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.RadioButton" /> </para>
+            <see cref="T:System.Windows.Forms.RadioButton" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.RichTextBox" /> </para>
+            <see cref="T:System.Windows.Forms.RichTextBox" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.ScrollBar" /> </para>
+            <see cref="T:System.Windows.Forms.ScrollBar" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.StatusBar" /> </para>
+            <see cref="T:System.Windows.Forms.StatusBar" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.TextBox" /> </para>
+            <see cref="T:System.Windows.Forms.TextBox" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.TreeView" /> </para>
+            <see cref="T:System.Windows.Forms.TreeView" />
+          </para>
         </item>
         <item>
           <para>
-            <see cref="T:System.Windows.Forms.VScrollBar" /> </para>
+            <see cref="T:System.Windows.Forms.VScrollBar" />
+          </para>
         </item>
       </list>
       <block subset="none" type="note">
-        <para>Only the <see cref="P:System.Windows.Forms.ListControl.SelectedValue" /> property of the <see cref="T:System.Windows.Forms.ComboBox" />, <see cref="T:System.Windows.Forms.CheckedListBox" />, and <see cref="T:System.Windows.Forms.ListBox" /> control is simple bound.</para>
+        <para
+          >Only the <see
+           cref="P:System.Windows.Forms.ListControl.SelectedValue" />
+
+           property of the <see
+           cref="T:System.Windows.Forms.ComboBox" />
+
+          , <see
+           cref="T:System.Windows.Forms.CheckedListBox" />
+
+          , and <see
+           cref="T:System.Windows.Forms.ListBox" />
+
+           control is simple bound.</para
+        >
       </block>
-      <para>The <see cref="T:System.Windows.Forms.BindingManagerBase" /> class is an abstract class that manages all the <see cref="T:System.Windows.Forms.Binding" /> objects for a particular data source and data member. Classes that derive from <see cref="T:System.Windows.Forms.BindingManagerBase" /> are the <see cref="T:System.Windows.Forms.CurrencyManager" /> and the <see cref="T:System.Windows.Forms.PropertyManager" /> classes. How a <see cref="T:System.Windows.Forms.Binding" /> is managed depends on whether the <see cref="T:System.Windows.Forms.Binding" /> is a list binding or a property binding. For example, if it is a list binding, you can use the <see cref="T:System.Windows.Forms.BindingManagerBase" /> to specify a <see cref="P:System.Windows.Forms.BindingManagerBase.Position" /> in the list; the <see cref="P:System.Windows.Forms.BindingManagerBase.Position" />, therefore, determines which item (out of all items in the list) is actually bound to a control. To return the appropriate <see cref="T:System.Windows.Forms.BindingManagerBase" />, use the <see cref="T:System.Windows.Forms.BindingContext" />.</para>
-      <para>To add a new row to a set of controls bound to the same <see cref="P:System.Windows.Forms.Binding.DataSource" />, use the <see cref="M:System.Windows.Forms.BindingManagerBase.AddNew" /> method of the <see cref="T:System.Windows.Forms.BindingManagerBase" /> class. Use the <see cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" /> property of the <see cref="T:System.Windows.Forms.BindingContext" /> class to return the appropriate <see cref="T:System.Windows.Forms.CurrencyManager" />. To escape the addition of the new row, use the <see cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" /> method.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.BindingManagerBase" />
+
+         class is an abstract class that manages all the <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         objects for a particular data source and data member. Classes that derive from <see
+         cref="T:System.Windows.Forms.BindingManagerBase" />
+
+         are the <see
+         cref="T:System.Windows.Forms.CurrencyManager" />
+
+         and the <see
+         cref="T:System.Windows.Forms.PropertyManager" />
+
+         classes. How a <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         is managed depends on whether the <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         is a list binding or a property binding. For example, if it is a list binding, you can use the <see
+         cref="T:System.Windows.Forms.BindingManagerBase" />
+
+         to specify a <see
+         cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+         in the list; the <see
+         cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+        , therefore, determines which item (out of all items in the list) is actually bound to a control. To return the appropriate <see
+         cref="T:System.Windows.Forms.BindingManagerBase" />
+
+        , use the <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+        .</para
+      >
+      <para
+        >To add a new row to a set of controls bound to the same <see
+         cref="P:System.Windows.Forms.Binding.DataSource" />
+
+        , use the <see
+         cref="M:System.Windows.Forms.BindingManagerBase.AddNew" />
+
+         method of the <see
+         cref="T:System.Windows.Forms.BindingManagerBase" />
+
+         class. Use the <see
+         cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.BindingContext" />
+
+         class to return the appropriate <see
+         cref="T:System.Windows.Forms.CurrencyManager" />
+
+        . To escape the addition of the new row, use the <see
+         cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -227,7 +518,10 @@ ar1.Add(cust1);</code>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Binding (string propertyName, object dataSource, string dataMember);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Binding (string propertyName, object dataSource, string dataMember);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="propertyName" Type="System.String" />
@@ -241,19 +535,23 @@ ar1.Add(cust1);</code>
           <list type="bullet">
             <item>
               <para>
-                <see cref="T:System.Data.DataSet" /> </para>
+                <see cref="T:System.Data.DataSet" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataTable" /> </para>
+                <see cref="T:System.Data.DataTable" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataView" /> </para>
+                <see cref="T:System.Data.DataView" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataViewManager" /> </para>
+                <see cref="T:System.Data.DataViewManager" />
+              </para>
             </item>
             <item>
               <para>
@@ -261,14 +559,32 @@ ar1.Add(cust1);</code>
               </para>
             </item>
             <item>
-              <para>Any class that implements the <see cref="T:System.Collections.IList" /> interface</para>
+              <para
+                >Any class that implements the <see
+                 cref="T:System.Collections.IList" />
+
+                 interface</para
+              >
             </item>
             <item>
               <para>Any class</para>
             </item>
           </list>
-          <para>See the <see cref="T:System.Windows.Forms.Binding" /> class for more information about creating the <paramref name="dataMember" /> string.</para>
-          <para>When you create a binding to a control's property, the new <see cref="T:System.Windows.Forms.Binding" /> inspects the events exposed by the bound control and attaches to two particular events: </para>
+          <para
+            >See the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class for more information about creating the <paramref
+             name="dataMember" />
+
+             string.</para
+          >
+          <para
+            >When you create a binding to a control's property, the new <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             inspects the events exposed by the bound control and attaches to two particular events: </para
+          >
           <list type="bullet">
             <item>
               <para>
@@ -276,21 +592,54 @@ ar1.Add(cust1);</code>
               </para>
             </item>
             <item>
-              <para>An event named PropertyNameChanged (for example, <see cref="E:System.Windows.Forms.Control.BackColorChanged" />)</para>
+              <para
+                >An event named PropertyNameChanged (for example, <see
+                 cref="E:System.Windows.Forms.Control.BackColorChanged" />
+
+                )</para
+              >
             </item>
           </list>
-          <para>If you attempt to bind to a property that does not exist, an <see cref="T:System.ArgumentException" /> will be thrown when the <see cref="T:System.Windows.Forms.Binding" /> is added to the control's <see cref="P:System.Windows.Forms.Control.DataBindings" /> collection.</para>
+          <para
+            >If you attempt to bind to a property that does not exist, an <see
+             cref="T:System.ArgumentException" />
+
+             will be thrown when the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             is added to the control's <see
+             cref="P:System.Windows.Forms.Control.DataBindings" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Binding" /> class that simple-binds the indicated control property to the specified data member of the data source.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class that simple-binds the indicated control property to the specified data member of the data source.</para
+          >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the control property to bind. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the control property to bind. </param
+        >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> that represents the data source. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           that represents the data source. </param
+        >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property or list to bind to. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property or list to bind to. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -298,7 +647,10 @@ ar1.Add(cust1);</code>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Binding (string propertyName, object dataSource, string dataMember, bool formattingEnabled);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Binding (string propertyName, object dataSource, string dataMember, bool formattingEnabled);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -313,20 +665,43 @@ ar1.Add(cust1);</code>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Binding" /> class that binds the indicated control property to the specified data member of the data source, and optionally enables formatting to be applied.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class that binds the indicated control property to the specified data member of the data source, and optionally enables formatting to be applied.</para
+          >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the control property to bind. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the control property to bind. </param
+        >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> that represents the data source. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           that represents the data source. </param
+        >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property or list to bind to. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property or list to bind to. </param
+        >
         <param name="formattingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to format the displayed data; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to format the displayed data; otherwise, false. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Binding (string propertyName, object dataSource, string dataMember, bool formattingEnabled, System.Windows.Forms.DataSourceUpdateMode dataSourceUpdateMode);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Binding (string propertyName, object dataSource, string dataMember, bool formattingEnabled, System.Windows.Forms.DataSourceUpdateMode dataSourceUpdateMode);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -345,19 +720,23 @@ ar1.Add(cust1);</code>
           <list type="bullet">
             <item>
               <para>
-                <see cref="T:System.Data.DataSet" /> </para>
+                <see cref="T:System.Data.DataSet" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataTable" /> </para>
+                <see cref="T:System.Data.DataTable" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataView" /> </para>
+                <see cref="T:System.Data.DataView" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataViewManager" /> </para>
+                <see cref="T:System.Data.DataViewManager" />
+              </para>
             </item>
             <item>
               <para>
@@ -365,42 +744,97 @@ ar1.Add(cust1);</code>
               </para>
             </item>
             <item>
-              <para>Any class that implements the <see cref="T:System.Collections.IList" /> interface</para>
+              <para
+                >Any class that implements the <see
+                 cref="T:System.Collections.IList" />
+
+                 interface</para
+              >
             </item>
             <item>
               <para>Any class</para>
             </item>
           </list>
-          <para>See the <see cref="T:System.Windows.Forms.Binding" /> class for more information about creating the <paramref name="dataMember" /> string.</para>
-          <para>When you create a binding to a control's property, the new <see cref="T:System.Windows.Forms.Binding" /> inspects the events exposed by the bound control and attaches to two particular events: </para>
+          <para
+            >See the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class for more information about creating the <paramref
+             name="dataMember" />
+
+             string.</para
+          >
+          <para
+            >When you create a binding to a control's property, the new <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             inspects the events exposed by the bound control and attaches to two particular events: </para
+          >
           <list type="bullet">
             <item>
               <para>
-                <see cref="E:System.Windows.Forms.Control.Validating" />.</para>
+                <see cref="E:System.Windows.Forms.Control.Validating" />
+
+                .</para
+              >
             </item>
             <item>
-              <para>An event named PropertyNameChanged (for example, <see cref="E:System.Windows.Forms.Control.BackColorChanged" />)</para>
+              <para
+                >An event named PropertyNameChanged (for example, <see
+                 cref="E:System.Windows.Forms.Control.BackColorChanged" />
+
+                )</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Binding" /> class that binds the specified control property to the specified data member of the specified data source. Optionally enables formatting and propagates values to the data source based on the specified update setting.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class that binds the specified control property to the specified data member of the specified data source. Optionally enables formatting and propagates values to the data source based on the specified update setting.</para
+          >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the control property to bind. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the control property to bind. </param
+        >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> representing the data source. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           representing the data source. </param
+        >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property or list to bind to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property or list to bind to.</param
+        >
         <param name="formattingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to format the displayed data; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to format the displayed data; otherwise, false.</param
+        >
         <param name="dataSourceUpdateMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.DataSourceUpdateMode" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+           values.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Binding (string propertyName, object dataSource, string dataMember, bool formattingEnabled, System.Windows.Forms.DataSourceUpdateMode dataSourceUpdateMode, object nullValue);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Binding (string propertyName, object dataSource, string dataMember, bool formattingEnabled, System.Windows.Forms.DataSourceUpdateMode dataSourceUpdateMode, object nullValue);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -420,19 +854,23 @@ ar1.Add(cust1);</code>
           <list type="bullet">
             <item>
               <para>
-                <see cref="T:System.Data.DataSet" /> </para>
+                <see cref="T:System.Data.DataSet" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataTable" /> </para>
+                <see cref="T:System.Data.DataTable" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataView" /> </para>
+                <see cref="T:System.Data.DataView" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataViewManager" /> </para>
+                <see cref="T:System.Data.DataViewManager" />
+              </para>
             </item>
             <item>
               <para>
@@ -440,14 +878,32 @@ ar1.Add(cust1);</code>
               </para>
             </item>
             <item>
-              <para>Any class that implements the <see cref="T:System.Collections.IList" /> interface</para>
+              <para
+                >Any class that implements the <see
+                 cref="T:System.Collections.IList" />
+
+                 interface</para
+              >
             </item>
             <item>
               <para>Any class</para>
             </item>
           </list>
-          <para>See the <see cref="T:System.Windows.Forms.Binding" /> class for more information about creating the <paramref name="dataMember" /> string.</para>
-          <para>When you create a binding to a control's property, the new <see cref="T:System.Windows.Forms.Binding" /> inspects the events exposed by the bound control and attaches to two particular events: </para>
+          <para
+            >See the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class for more information about creating the <paramref
+             name="dataMember" />
+
+             string.</para
+          >
+          <para
+            >When you create a binding to a control's property, the new <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             inspects the events exposed by the bound control and attaches to two particular events: </para
+          >
           <list type="bullet">
             <item>
               <para>
@@ -455,30 +911,76 @@ ar1.Add(cust1);</code>
               </para>
             </item>
             <item>
-              <para>An event named PropertyNameChanged (for example, <see cref="E:System.Windows.Forms.Control.BackColorChanged" />)</para>
+              <para
+                >An event named PropertyNameChanged (for example, <see
+                 cref="E:System.Windows.Forms.Control.BackColorChanged" />
+
+                )</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Binding" /> class that binds the indicated control property to the specified data member of the specified data source. Optionally enables formatting, propagates values to the data source based on the specified update setting, and sets the property to the specified value when a <see cref="T:System.DBNull" /> is returned from the data source.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class that binds the indicated control property to the specified data member of the specified data source. Optionally enables formatting, propagates values to the data source based on the specified update setting, and sets the property to the specified value when a <see
+             cref="T:System.DBNull" />
+
+             is returned from the data source.</para
+          >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the control property to bind. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the control property to bind. </param
+        >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> representing the data source. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           representing the data source. </param
+        >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property or list to bind to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property or list to bind to.</param
+        >
         <param name="formattingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to format the displayed data; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to format the displayed data; otherwise, false.</param
+        >
         <param name="dataSourceUpdateMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.DataSourceUpdateMode" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+           values.</param
+        >
         <param name="nullValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Object" /> to be applied to the bound control property if the data source value is <see cref="T:System.DBNull" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Object" />
+
+           to be applied to the bound control property if the data source value is <see
+           cref="T:System.DBNull" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Binding (string propertyName, object dataSource, string dataMember, bool formattingEnabled, System.Windows.Forms.DataSourceUpdateMode dataSourceUpdateMode, object nullValue, string formatString);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Binding (string propertyName, object dataSource, string dataMember, bool formattingEnabled, System.Windows.Forms.DataSourceUpdateMode dataSourceUpdateMode, object nullValue, string formatString);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -499,19 +1001,23 @@ ar1.Add(cust1);</code>
           <list type="bullet">
             <item>
               <para>
-                <see cref="T:System.Data.DataSet" /> </para>
+                <see cref="T:System.Data.DataSet" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataTable" /> </para>
+                <see cref="T:System.Data.DataTable" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataView" /> </para>
+                <see cref="T:System.Data.DataView" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataViewManager" /> </para>
+                <see cref="T:System.Data.DataViewManager" />
+              </para>
             </item>
             <item>
               <para>
@@ -519,14 +1025,32 @@ ar1.Add(cust1);</code>
               </para>
             </item>
             <item>
-              <para>Any class that implements the <see cref="T:System.Collections.IList" /> interface</para>
+              <para
+                >Any class that implements the <see
+                 cref="T:System.Collections.IList" />
+
+                 interface</para
+              >
             </item>
             <item>
               <para>Any class</para>
             </item>
           </list>
-          <para>See the <see cref="T:System.Windows.Forms.Binding" /> class for more information about creating the <paramref name="dataMember" /> string.</para>
-          <para>When you create a binding to a control's property, the new <see cref="T:System.Windows.Forms.Binding" /> inspects the events exposed by the bound control and attaches to two particular events: </para>
+          <para
+            >See the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class for more information about creating the <paramref
+             name="dataMember" />
+
+             string.</para
+          >
+          <para
+            >When you create a binding to a control's property, the new <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             inspects the events exposed by the bound control and attaches to two particular events: </para
+          >
           <list type="bullet">
             <item>
               <para>
@@ -534,32 +1058,81 @@ ar1.Add(cust1);</code>
               </para>
             </item>
             <item>
-              <para>An event named PropertyNameChanged (for example, <see cref="E:System.Windows.Forms.Control.BackColorChanged" />)</para>
+              <para
+                >An event named PropertyNameChanged (for example, <see
+                 cref="E:System.Windows.Forms.Control.BackColorChanged" />
+
+                )</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Binding" /> class that binds the specified control property to the specified data member of the specified data source. Optionally enables formatting with the specified format string; propagates values to the data source based on the specified update setting; and sets the property to the specified value when a <see cref="T:System.DBNull" /> is returned from the data source.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class that binds the specified control property to the specified data member of the specified data source. Optionally enables formatting with the specified format string; propagates values to the data source based on the specified update setting; and sets the property to the specified value when a <see
+             cref="T:System.DBNull" />
+
+             is returned from the data source.</para
+          >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the control property to bind. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the control property to bind. </param
+        >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> representing the data source. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           representing the data source. </param
+        >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property or list to bind to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property or list to bind to.</param
+        >
         <param name="formattingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to format the displayed data; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to format the displayed data; otherwise, false.</param
+        >
         <param name="dataSourceUpdateMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.DataSourceUpdateMode" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+           values.</param
+        >
         <param name="nullValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Object" /> to be applied to the bound control property if the data source value is <see cref="T:System.DBNull" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Object" />
+
+           to be applied to the bound control property if the data source value is <see
+           cref="T:System.DBNull" />
+
+          .</param
+        >
         <param name="formatString">
-          <attribution license="cc4" from="Microsoft" modified="false" />One or more format specifier characters that indicate how a value is to be displayed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One or more format specifier characters that indicate how a value is to be displayed.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Binding (string propertyName, object dataSource, string dataMember, bool formattingEnabled, System.Windows.Forms.DataSourceUpdateMode dataSourceUpdateMode, object nullValue, string formatString, IFormatProvider formatInfo);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Binding (string propertyName, object dataSource, string dataMember, bool formattingEnabled, System.Windows.Forms.DataSourceUpdateMode dataSourceUpdateMode, object nullValue, string formatString, IFormatProvider formatInfo);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -581,19 +1154,23 @@ ar1.Add(cust1);</code>
           <list type="bullet">
             <item>
               <para>
-                <see cref="T:System.Data.DataSet" /> </para>
+                <see cref="T:System.Data.DataSet" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataTable" /> </para>
+                <see cref="T:System.Data.DataTable" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataView" /> </para>
+                <see cref="T:System.Data.DataView" />
+              </para>
             </item>
             <item>
               <para>
-                <see cref="T:System.Data.DataViewManager" /> </para>
+                <see cref="T:System.Data.DataViewManager" />
+              </para>
             </item>
             <item>
               <para>
@@ -601,14 +1178,32 @@ ar1.Add(cust1);</code>
               </para>
             </item>
             <item>
-              <para>Any class that implements the <see cref="T:System.Collections.IList" /> interface</para>
+              <para
+                >Any class that implements the <see
+                 cref="T:System.Collections.IList" />
+
+                 interface</para
+              >
             </item>
             <item>
               <para>Any class</para>
             </item>
           </list>
-          <para>See the <see cref="T:System.Windows.Forms.Binding" /> class for more information about creating the <paramref name="dataMember" /> string.</para>
-          <para>When you create a binding to a control's property, the new <see cref="T:System.Windows.Forms.Binding" /> inspects the events exposed by the bound control and attaches to two particular events: </para>
+          <para
+            >See the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class for more information about creating the <paramref
+             name="dataMember" />
+
+             string.</para
+          >
+          <para
+            >When you create a binding to a control's property, the new <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             inspects the events exposed by the bound control and attaches to two particular events: </para
+          >
           <list type="bullet">
             <item>
               <para>
@@ -616,34 +1211,89 @@ ar1.Add(cust1);</code>
               </para>
             </item>
             <item>
-              <para>An event named PropertyNameChanged (for example, <see cref="E:System.Windows.Forms.Control.BackColorChanged" />)</para>
+              <para
+                >An event named PropertyNameChanged (for example, <see
+                 cref="E:System.Windows.Forms.Control.BackColorChanged" />
+
+                )</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Binding" /> class with the specified control property to the specified data member of the specified data source. Optionally enables formatting with the specified format string; propagates values to the data source based on the specified update setting; enables formatting with the specified format string; sets the property to the specified value when a <see cref="T:System.DBNull" /> is returned from the data source; and sets the specified format provider.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             class with the specified control property to the specified data member of the specified data source. Optionally enables formatting with the specified format string; propagates values to the data source based on the specified update setting; enables formatting with the specified format string; sets the property to the specified value when a <see
+             cref="T:System.DBNull" />
+
+             is returned from the data source; and sets the specified format provider.</para
+          >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the control property to bind. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the control property to bind. </param
+        >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> representing the data source. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           representing the data source. </param
+        >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property or list to bind to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property or list to bind to.</param
+        >
         <param name="formattingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to format the displayed data; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to format the displayed data; otherwise, false.</param
+        >
         <param name="dataSourceUpdateMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.DataSourceUpdateMode" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+           values.</param
+        >
         <param name="nullValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Object" /> to be applied to the bound control property if the data source value is <see cref="T:System.DBNull" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Object" />
+
+           to be applied to the bound control property if the data source value is <see
+           cref="T:System.DBNull" />
+
+          .</param
+        >
         <param name="formatString">
-          <attribution license="cc4" from="Microsoft" modified="false" />One or more format specifier characters that indicate how a value is to be displayed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One or more format specifier characters that indicate how a value is to be displayed.</param
+        >
         <param name="formatInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />An implementation of <see cref="T:System.IFormatProvider" /> to override default formatting behavior.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An implementation of <see
+           cref="T:System.IFormatProvider" />
+
+           to override default formatting behavior.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="BindableComponent">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.IBindableComponent BindableComponent { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.IBindableComponent BindableComponent { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -661,12 +1311,20 @@ ar1.Add(cust1);</code>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the control the <see cref="T:System.Windows.Forms.Binding" /> is associated with.</para>
+          <para
+            >Gets the control the <see
+             cref="T:System.Windows.Forms.Binding" />
+
+             is associated with.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BindingComplete">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.BindingCompleteEventHandler BindingComplete;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.BindingCompleteEventHandler BindingComplete;"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -677,7 +1335,12 @@ ar1.Add(cust1);</code>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This event is raised under any of the following conditions when <see cref="P:System.Windows.Forms.Binding.FormattingEnabled" /> is true: </para>
+          <para
+            >This event is raised under any of the following conditions when <see
+             cref="P:System.Windows.Forms.Binding.FormattingEnabled" />
+
+             is true: </para
+          >
           <list type="bullet">
             <item>
               <para>Data from the data source is pushed onto the control property.</para>
@@ -686,17 +1349,46 @@ ar1.Add(cust1);</code>
               <para>Data from the control property is pushed onto the data source.</para>
             </item>
           </list>
-          <para>This event is raised at the completion of these operations, independent of the completion status. For example, if a binding operation binds a null value to a <see cref="P:System.Windows.Forms.DateTimePicker.Value" /> property, an exception is thrown, but the <see cref="E:System.Windows.Forms.Binding.BindingComplete" /> event still occurs. The handler of this event can take the appropriate action, based on the success, error, or exceptions in the binding process, by examining the <see cref="P:System.Windows.Forms.BindingCompleteEventArgs.BindingCompleteState" /> property of the <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" /> parameter.</para>
-          <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >This event is raised at the completion of these operations, independent of the completion status. For example, if a binding operation binds a null value to a <see
+             cref="P:System.Windows.Forms.DateTimePicker.Value" />
+
+             property, an exception is thrown, but the <see
+             cref="E:System.Windows.Forms.Binding.BindingComplete" />
+
+             event still occurs. The handler of this event can take the appropriate action, based on the success, error, or exceptions in the binding process, by examining the <see
+             cref="P:System.Windows.Forms.BindingCompleteEventArgs.BindingCompleteState" />
+
+             property of the <see
+             cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+
+             parameter.</para
+          >
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the <see cref="P:System.Windows.Forms.Binding.FormattingEnabled" /> property is set to true and a binding operation is complete, such as when data is pushed from the control to the data source or vice versa</para>
+          <para
+            >Occurs when the <see
+             cref="P:System.Windows.Forms.Binding.FormattingEnabled" />
+
+             property is set to true and a binding operation is complete, such as when data is pushed from the control to the data source or vice versa</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BindingManagerBase">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.BindingManagerBase BindingManagerBase { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.BindingManagerBase BindingManagerBase { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.BindingManagerBase</ReturnType>
@@ -705,11 +1397,36 @@ ar1.Add(cust1);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="T:System.Windows.Forms.BindingManagerBase" /> to iterate through a data-bound list by incrementing or decrementing the <see cref="P:System.Windows.Forms.BindingManagerBase.Position" /> property. The <see cref="T:System.Windows.Forms.BindingManagerBase" /> class is abstract. The <see cref="T:System.Windows.Forms.CurrencyManager" /> class, which manages data-bound lists, inherits from the <see cref="T:System.Windows.Forms.BindingManagerBase" /> class.</para>
+          <para
+            >Use the <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             to iterate through a data-bound list by incrementing or decrementing the <see
+             cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+             property. The <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             class is abstract. The <see
+             cref="T:System.Windows.Forms.CurrencyManager" />
+
+             class, which manages data-bound lists, inherits from the <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.BindingManagerBase" /> for this <see cref="T:System.Windows.Forms.Binding" />.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             for this <see
+             cref="T:System.Windows.Forms.Binding" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -718,7 +1435,10 @@ ar1.Add(cust1);</code>
       </AssemblyInfo>
     </Member>
     <Member MemberName="BindingMemberInfo">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.BindingMemberInfo BindingMemberInfo { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.BindingMemberInfo BindingMemberInfo { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.BindingMemberInfo</ReturnType>
@@ -727,11 +1447,30 @@ ar1.Add(cust1);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.BindingMemberInfo" /> is created from the <paramref name="dataMember" /> string passed to the <see cref="Overload:System.Windows.Forms.Binding.#ctor" /> constructor.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.BindingMemberInfo" />
+
+             is created from the <paramref
+             name="dataMember" />
+
+             string passed to the <see
+             cref="Overload:System.Windows.Forms.Binding.#ctor" />
+
+             constructor.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an object that contains information about this binding based on the <paramref name="dataMember" /> parameter in the <see cref="Overload:System.Windows.Forms.Binding.#ctor" /> constructor.</para>
+          <para
+            >Gets an object that contains information about this binding based on the <paramref
+             name="dataMember" />
+
+             parameter in the <see
+             cref="Overload:System.Windows.Forms.Binding.#ctor" />
+
+             constructor.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -764,7 +1503,10 @@ ar1.Add(cust1);</code>
       </AssemblyInfo>
     </Member>
     <Member MemberName="ControlUpdateMode">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ControlUpdateMode ControlUpdateMode { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ControlUpdateMode ControlUpdateMode { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -799,19 +1541,36 @@ ar1.Add(cust1);</code>
           <para>Possible data sources include: </para>
           <list type="bullet">
             <item>
-              <para>A <see cref="T:System.Data.DataSet" /></para>
+              <para
+                >A <see
+                 cref="T:System.Data.DataSet" />
+              </para>
             </item>
             <item>
-              <para>A <see cref="T:System.Data.DataTable" /></para>
+              <para
+                >A <see
+                 cref="T:System.Data.DataTable" />
+              </para>
             </item>
             <item>
-              <para>A <see cref="T:System.Data.DataView" /></para>
+              <para
+                >A <see
+                 cref="T:System.Data.DataView" />
+              </para>
             </item>
             <item>
-              <para>A <see cref="T:System.Data.DataViewManager" /></para>
+              <para
+                >A <see
+                 cref="T:System.Data.DataViewManager" />
+              </para>
             </item>
             <item>
-              <para>Any object that implements the <see cref="T:System.Collections.IList" /> interface</para>
+              <para
+                >Any object that implements the <see
+                 cref="T:System.Collections.IList" />
+
+                 interface</para
+              >
             </item>
             <item>
               <para>Any object</para>
@@ -841,7 +1600,15 @@ ar1.Add(cust1);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use the <see cref="P:System.Windows.Forms.Binding.NullValue" /> property to specify the value displayed in a bound control when the data source contains <see cref="T:System.DBNull" />. </para>
+          <para
+            >You can use the <see
+             cref="P:System.Windows.Forms.Binding.NullValue" />
+
+             property to specify the value displayed in a bound control when the data source contains <see
+             cref="T:System.DBNull" />
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -850,7 +1617,10 @@ ar1.Add(cust1);</code>
       </Docs>
     </Member>
     <Member MemberName="DataSourceUpdateMode">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.DataSourceUpdateMode DataSourceUpdateMode { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.DataSourceUpdateMode DataSourceUpdateMode { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -867,7 +1637,12 @@ ar1.Add(cust1);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Note that even if this property is set to <see cref="F:System.Windows.Forms.DataSourceUpdateMode.Never" />, the binding will update at least one time, when it is first established.</para>
+          <para
+            >Note that even if this property is set to <see
+             cref="F:System.Windows.Forms.DataSourceUpdateMode.Never" />
+
+            , the binding will update at least one time, when it is first established.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -876,7 +1651,10 @@ ar1.Add(cust1);</code>
       </Docs>
     </Member>
     <Member MemberName="Format">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.ConvertEventHandler Format;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.ConvertEventHandler Format;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ConvertEventHandler</ReturnType>
@@ -884,22 +1662,98 @@ ar1.Add(cust1);</code>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="E:System.Windows.Forms.Binding.Format" /> event is raised when data is pushed from the data source into the control. You can handle the <see cref="E:System.Windows.Forms.Binding.Format" /> event to convert unformatted data from the data source into formatted data for display. When data is pulled from the control into the data source, the <see cref="E:System.Windows.Forms.Binding.Parse" /> event is raised to unformat the displayed value, then the <see cref="E:System.Windows.Forms.Binding.Format" /> event occurs to reformat the data for display. This ensures that the bound control displays correctly formatted data regardless of whether the user enters formatted or unformatted data in the control.</para>
-          <para>The <see cref="E:System.Windows.Forms.Binding.Format" /> and <see cref="E:System.Windows.Forms.Binding.Parse" /> events allow you to create custom formats for displaying data. For example, if the data in a table is of type <see cref="T:System.Decimal" />, you can display the data in the local currency format by setting the <see cref="P:System.Windows.Forms.ConvertEventArgs.Value" /> property of the <see cref="T:System.Windows.Forms.ConvertEventArgs" /> to the formatted value in the <see cref="E:System.Windows.Forms.Binding.Format" /> event. You must consequently unformat the displayed value in the <see cref="E:System.Windows.Forms.Binding.Parse" /> event.</para>
-          <para>The <see cref="E:System.Windows.Forms.Binding.Format" /> event occurs whenever the <see cref="P:System.Windows.Forms.BindingManagerBase.Current" /> value of the <see cref="T:System.Windows.Forms.BindingManagerBase" /> changes, which includes: </para>
+          <para
+            >The <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             event is raised when data is pushed from the data source into the control. You can handle the <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             event to convert unformatted data from the data source into formatted data for display. When data is pulled from the control into the data source, the <see
+             cref="E:System.Windows.Forms.Binding.Parse" />
+
+             event is raised to unformat the displayed value, then the <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             event occurs to reformat the data for display. This ensures that the bound control displays correctly formatted data regardless of whether the user enters formatted or unformatted data in the control.</para
+          >
+          <para
+            >The <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             and <see
+             cref="E:System.Windows.Forms.Binding.Parse" />
+
+             events allow you to create custom formats for displaying data. For example, if the data in a table is of type <see
+             cref="T:System.Decimal" />
+
+            , you can display the data in the local currency format by setting the <see
+             cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+
+             property of the <see
+             cref="T:System.Windows.Forms.ConvertEventArgs" />
+
+             to the formatted value in the <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             event. You must consequently unformat the displayed value in the <see
+             cref="E:System.Windows.Forms.Binding.Parse" />
+
+             event.</para
+          >
+          <para
+            >The <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             event occurs whenever the <see
+             cref="P:System.Windows.Forms.BindingManagerBase.Current" />
+
+             value of the <see
+             cref="T:System.Windows.Forms.BindingManagerBase" />
+
+             changes, which includes: </para
+          >
           <list type="bullet">
             <item>
               <para>The first time the property is bound.</para>
             </item>
             <item>
-              <para>Any time the <see cref="P:System.Windows.Forms.BindingManagerBase.Position" /> changes.</para>
+              <para
+                >Any time the <see
+                 cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+                 changes.</para
+              >
             </item>
             <item>
-              <para>Whenever the data-bound list is sorted or filtered, which is accomplished when a <see cref="T:System.Data.DataView" /> supplies the list.</para>
+              <para
+                >Whenever the data-bound list is sorted or filtered, which is accomplished when a <see
+                 cref="T:System.Data.DataView" />
+
+                 supplies the list.</para
+              >
             </item>
           </list>
-          <para>The <see cref="E:System.Windows.Forms.Binding.Format" /> event also occurs after the <see cref="E:System.Windows.Forms.Binding.Parse" /> event. For example, when a control loses focus, its contents are parsed. Immediately afterward, as new data is pushed into the control, the <see cref="E:System.Windows.Forms.Binding.Format" /> event occurs allowing the new contents to be formatted.</para>
-          <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >The <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             event also occurs after the <see
+             cref="E:System.Windows.Forms.Binding.Parse" />
+
+             event. For example, when a control loses focus, its contents are parsed. Immediately afterward, as new data is pushed into the control, the <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             event occurs allowing the new contents to be formatted.</para
+          >
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -929,11 +1783,21 @@ ar1.Add(cust1);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Setting this property will override the default formatting behavior, which uses the <see cref="P:System.Windows.Forms.Application.CurrentCulture" /> property setting.  </para>
+          <para
+            >Setting this property will override the default formatting behavior, which uses the <see
+             cref="P:System.Windows.Forms.Application.CurrentCulture" />
+
+             property setting.  </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.IFormatProvider" /> that provides custom formatting behavior.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.IFormatProvider" />
+
+             that provides custom formatting behavior.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -950,7 +1814,14 @@ ar1.Add(cust1);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The format string used should follow standard .NET Framework format specifications. For more information, see <format type="text/html"><a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Overview</a></format>.</para>
+          <para
+            >The format string used should follow standard .NET Framework format specifications. For more information, see <format
+             type="text/html">
+              <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Overview</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -976,7 +1847,18 @@ ar1.Add(cust1);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Setting this property to true also enables error-handling behavior and causes the <see cref="E:System.Windows.Forms.Binding.BindingComplete" /> event to be raised. The handler of this event can take the appropriate action, based on the success, error, or exceptions in the binding process, by examining the <see cref="P:System.Windows.Forms.BindingCompleteEventArgs.BindingCompleteState" /> property of the <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" /> parameter.</para>
+          <para
+            >Setting this property to true also enables error-handling behavior and causes the <see
+             cref="E:System.Windows.Forms.Binding.BindingComplete" />
+
+             event to be raised. The handler of this event can take the appropriate action, based on the success, error, or exceptions in the binding process, by examining the <see
+             cref="P:System.Windows.Forms.BindingCompleteEventArgs.BindingCompleteState" />
+
+             property of the <see
+             cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+
+             parameter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1000,10 +1882,29 @@ ar1.Add(cust1);</code>
               <para>All its properties are set.</para>
             </item>
             <item>
-              <para>The user did not call <see cref="M:System.Windows.Forms.BindingManagerBase.ResumeBinding" /> or <see cref="M:System.Windows.Forms.BindingManagerBase.SuspendBinding" /> on the <see cref="T:System.Windows.Forms.BindingManagerBase" /> that the <see cref="T:System.Windows.Forms.Binding" /> belongs to.</para>
+              <para
+                >The user did not call <see
+                 cref="M:System.Windows.Forms.BindingManagerBase.ResumeBinding" />
+
+                 or <see
+                 cref="M:System.Windows.Forms.BindingManagerBase.SuspendBinding" />
+
+                 on the <see
+                 cref="T:System.Windows.Forms.BindingManagerBase" />
+
+                 that the <see
+                 cref="T:System.Windows.Forms.Binding" />
+
+                 belongs to.</para
+              >
             </item>
             <item>
-              <para>The control to which the <see cref="T:System.Windows.Forms.Binding" /> belongs has been created.</para>
+              <para
+                >The control to which the <see
+                 cref="T:System.Windows.Forms.Binding" />
+
+                 belongs has been created.</para
+              >
             </item>
           </list>
         </remarks>
@@ -1030,17 +1931,50 @@ ar1.Add(cust1);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The data source must contain <see cref="T:System.DBNull" /> for the <see cref="P:System.Windows.Forms.Binding.NullValue" /> property to be correctly applied. If the data source type is a type such as a string or integer the value of the <see cref="P:System.Windows.Forms.Binding.NullValue" /> property will be ignored. Also, the <see cref="P:System.Windows.Forms.Binding.NullValue" /> property is ignored if it is set to null.</para>
-          <para>A null value will be added to the data source when the control property is set to the object of <see cref="P:System.Windows.Forms.Binding.NullValue" />. If <see cref="P:System.Windows.Forms.Binding.NullValue" /> is set to a string value, comparisons are case-insensitive.</para>
+          <para
+            >The data source must contain <see
+             cref="T:System.DBNull" />
+
+             for the <see
+             cref="P:System.Windows.Forms.Binding.NullValue" />
+
+             property to be correctly applied. If the data source type is a type such as a string or integer the value of the <see
+             cref="P:System.Windows.Forms.Binding.NullValue" />
+
+             property will be ignored. Also, the <see
+             cref="P:System.Windows.Forms.Binding.NullValue" />
+
+             property is ignored if it is set to null.</para
+          >
+          <para
+            >A null value will be added to the data source when the control property is set to the object of <see
+             cref="P:System.Windows.Forms.Binding.NullValue" />
+
+            . If <see
+             cref="P:System.Windows.Forms.Binding.NullValue" />
+
+             is set to a string value, comparisons are case-insensitive.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Object" /> to be set as the control property when the data source contains a <see cref="T:System.DBNull" /> value. </para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Object" />
+
+             to be set as the control property when the data source contains a <see
+             cref="T:System.DBNull" />
+
+             value. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="OnBindingComplete">
-      <MemberSignature Language="C#" Value="protected virtual void OnBindingComplete (System.Windows.Forms.BindingCompleteEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnBindingComplete (System.Windows.Forms.BindingCompleteEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1054,19 +1988,45 @@ ar1.Add(cust1);</code>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.Binding.OnBindingComplete(System.Windows.Forms.BindingCompleteEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.Binding.OnBindingComplete(System.Windows.Forms.BindingCompleteEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Binding.BindingComplete" /> event. </para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Binding.BindingComplete" />
+
+             event. </para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />  that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+
+            that contains the event data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnFormat">
-      <MemberSignature Language="C#" Value="protected virtual void OnFormat (System.Windows.Forms.ConvertEventArgs cevent);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnFormat (System.Windows.Forms.ConvertEventArgs cevent);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1077,15 +2037,38 @@ ar1.Add(cust1);</code>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.Binding.OnFormat(System.Windows.Forms.ConvertEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.Binding.OnFormat(System.Windows.Forms.ConvertEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Binding.Format" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             event.</para
+          >
         </summary>
         <param name="cevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.ConvertEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.ConvertEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1093,7 +2076,10 @@ ar1.Add(cust1);</code>
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnParse">
-      <MemberSignature Language="C#" Value="protected virtual void OnParse (System.Windows.Forms.ConvertEventArgs cevent);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnParse (System.Windows.Forms.ConvertEventArgs cevent);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1104,15 +2090,38 @@ ar1.Add(cust1);</code>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.Binding.OnParse(System.Windows.Forms.ConvertEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.Binding.OnParse(System.Windows.Forms.ConvertEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Binding.Parse" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Binding.Parse" />
+
+             event.</para
+          >
         </summary>
         <param name="cevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.ConvertEventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.ConvertEventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1120,7 +2129,10 @@ ar1.Add(cust1);</code>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.ConvertEventHandler Parse;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.ConvertEventHandler Parse;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ConvertEventHandler</ReturnType>
@@ -1128,20 +2140,82 @@ ar1.Add(cust1);</code>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="E:System.Windows.Forms.Binding.Format" /> and <see cref="E:System.Windows.Forms.Binding.Parse" /> events allow you to create custom formats for displaying data. For example, if the data in a table is of type <see cref="T:System.Decimal" />, you can display the data in the local currency format by setting the <see cref="P:System.Windows.Forms.ConvertEventArgs.Value" /> property of the <see cref="T:System.Windows.Forms.ConvertEventArgs" /> to the formatted value in the <see cref="E:System.Windows.Forms.Binding.Format" /> event. You must consequently unformat the displayed value in the <see cref="E:System.Windows.Forms.Binding.Parse" /> event.</para>
-          <para>The <see cref="E:System.Windows.Forms.Binding.Parse" /> event occurs under the following conditions: </para>
+          <para
+            >The <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             and <see
+             cref="E:System.Windows.Forms.Binding.Parse" />
+
+             events allow you to create custom formats for displaying data. For example, if the data in a table is of type <see
+             cref="T:System.Decimal" />
+
+            , you can display the data in the local currency format by setting the <see
+             cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+
+             property of the <see
+             cref="T:System.Windows.Forms.ConvertEventArgs" />
+
+             to the formatted value in the <see
+             cref="E:System.Windows.Forms.Binding.Format" />
+
+             event. You must consequently unformat the displayed value in the <see
+             cref="E:System.Windows.Forms.Binding.Parse" />
+
+             event.</para
+          >
+          <para
+            >The <see
+             cref="E:System.Windows.Forms.Binding.Parse" />
+
+             event occurs under the following conditions: </para
+          >
           <list type="bullet">
             <item>
-              <para>After the <see cref="E:System.Windows.Forms.Control.Validated" /> event of the <see cref="T:System.Windows.Forms.Control" /> occurs.</para>
+              <para
+                >After the <see
+                 cref="E:System.Windows.Forms.Control.Validated" />
+
+                 event of the <see
+                 cref="T:System.Windows.Forms.Control" />
+
+                 occurs.</para
+              >
             </item>
             <item>
-              <para>When the <see cref="M:System.Windows.Forms.BindingManagerBase.EndCurrentEdit" /> method of the <see cref="T:System.Windows.Forms.BindingManagerBase" /> is called.</para>
+              <para
+                >When the <see
+                 cref="M:System.Windows.Forms.BindingManagerBase.EndCurrentEdit" />
+
+                 method of the <see
+                 cref="T:System.Windows.Forms.BindingManagerBase" />
+
+                 is called.</para
+              >
             </item>
             <item>
-              <para>When the <see cref="P:System.Windows.Forms.BindingManagerBase.Current" /> of the <see cref="T:System.Windows.Forms.BindingManagerBase" /> changes (in other words, when the <see cref="P:System.Windows.Forms.BindingManagerBase.Position" /> changes).</para>
+              <para
+                >When the <see
+                 cref="P:System.Windows.Forms.BindingManagerBase.Current" />
+
+                 of the <see
+                 cref="T:System.Windows.Forms.BindingManagerBase" />
+
+                 changes (in other words, when the <see
+                 cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+                 changes).</para
+              >
             </item>
           </list>
-          <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1168,7 +2242,18 @@ ar1.Add(cust1);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Windows.Forms.Binding.PropertyName" /> to specify the control property that you want to bind to a list in a data source. Most commonly, you bind a display property such as the <see cref="P:System.Windows.Forms.Control.Text" /> property of a <see cref="T:System.Windows.Forms.TextBox" /> control. However, because you can bind any property of a control, you can programmatically create controls at run time using data from a database.</para>
+          <para
+            >Use the <see
+             cref="P:System.Windows.Forms.Binding.PropertyName" />
+
+             to specify the control property that you want to bind to a list in a data source. Most commonly, you bind a display property such as the <see
+             cref="P:System.Windows.Forms.Control.Text" />
+
+             property of a <see
+             cref="T:System.Windows.Forms.TextBox" />
+
+             control. However, because you can bind any property of a control, you can programmatically create controls at run time using data from a database.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -6,6 +6,5 @@
     <MergedWrapperProjectReference Include="d*/**/*_d.??proj" />
     <MergedWrapperProjectReference Include="e*/**/*_d.??proj" />
   </ItemGroup>
-
   <Import Project="$(TestSourceDir)MergedTestRunner.targets" />
 </Project>

@@ -12,53 +12,76 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The SqlNotificationSource enumeration is referenced by an instance of the <see cref="T:System.Data.SqlClient.SqlNotificationEventArgs" /> class.</para>
+      <para
+        >The SqlNotificationSource enumeration is referenced by an instance of the <see
+         cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
+
+         class.</para
+      >
       <para>Query notifications are supported only for SELECT statements that meet a list of specific requirements. The following table provides links to the Service Broker and Query Notifications documentation in SQL Server Books Online. </para>
       <para>SQL Server Books Online</para>
       <list type="bullet">
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms181122.aspx">Creating a Query for Notification</see>
+            <see cref="http://msdn.microsoft.com/library/ms181122.aspx"
+              >Creating a Query for Notification</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms166059.aspx">Security Considerations for Service Broker</see>
+            <see cref="http://msdn.microsoft.com/library/ms166059.aspx"
+              >Security Considerations for Service Broker</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/bb522911.aspx">Security and Protection (Service Broker)</see>
+            <see cref="http://msdn.microsoft.com/library/bb522911.aspx"
+              >Security and Protection (Service Broker)</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms172604.aspx">Security Considerations for Notifications Services</see>
+            <see cref="http://msdn.microsoft.com/library/ms172604.aspx"
+              >Security Considerations for Notifications Services</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms188311.aspx">Query Notification Permissions</see>
+            <see cref="http://msdn.microsoft.com/library/ms188311.aspx"
+              >Query Notification Permissions</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms166028.aspx">International Considerations for Service Broker</see>
+            <see cref="http://msdn.microsoft.com/library/ms166028.aspx"
+              >International Considerations for Service Broker</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/bb522899.aspx">Solution Design Considerations (Service Broker)</see>
+            <see cref="http://msdn.microsoft.com/library/bb522899.aspx"
+              >Solution Design Considerations (Service Broker)</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/ms166100.aspx">Service Broker Developer InfoCenter</see>
+            <see cref="http://msdn.microsoft.com/library/ms166100.aspx"
+              >Service Broker Developer InfoCenter</see
+            >
           </para>
         </item>
         <item>
           <para>
-            <see cref="http://msdn.microsoft.com/library/bb522908.aspx">Developer's Guide (Service Broker)</see>
+            <see cref="http://msdn.microsoft.com/library/bb522908.aspx"
+              >Developer's Guide (Service Broker)</see
+            >
           </para>
         </item>
       </list>

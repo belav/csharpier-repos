@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DesignerVerb" FullName="System.ComponentModel.Design.DesignerVerb">
-  <TypeSignature Language="C#" Value="public class DesignerVerb : System.ComponentModel.Design.MenuCommand" Maintainer="auto" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DesignerVerb extends System.ComponentModel.Design.MenuCommand" />
+  <TypeSignature
+    Language="C#"
+    Value="public class DesignerVerb : System.ComponentModel.Design.MenuCommand"
+    Maintainer="auto"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit DesignerVerb extends System.ComponentModel.Design.MenuCommand"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -23,7 +30,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A designer verb is a menu command linked to an event handler. Designer verbs are added to a component's shortcut menu at design time. In Visual Studio, each designer verb is also listed, using a <see cref="T:System.Windows.Forms.LinkLabel" />, in the <ui>Description</ui> pane of the Properties window.</para>
+      <para
+        >A designer verb is a menu command linked to an event handler. Designer verbs are added to a component's shortcut menu at design time. In Visual Studio, each designer verb is also listed, using a <see
+         cref="T:System.Windows.Forms.LinkLabel" />
+
+        , in the <ui
+        >Description</ui>
+
+         pane of the Properties window.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -32,8 +47,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DesignerVerb (string text, EventHandler handler);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string text, class System.EventHandler handler) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DesignerVerb (string text, EventHandler handler);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string text, class System.EventHandler handler) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -52,17 +73,34 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerVerb" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.DesignerVerb" />
+
+             class.</para
+          >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text of the menu command that is shown to the user. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text of the menu command that is shown to the user. </param
+        >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event handler that performs the actions of the verb. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The event handler that performs the actions of the verb. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DesignerVerb (string text, EventHandler handler, System.ComponentModel.Design.CommandID startCommandID);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string text, class System.EventHandler handler, class System.ComponentModel.Design.CommandID startCommandID) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DesignerVerb (string text, EventHandler handler, System.ComponentModel.Design.CommandID startCommandID);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string text, class System.EventHandler handler, class System.ComponentModel.Design.CommandID startCommandID) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -82,14 +120,28 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerVerb" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.DesignerVerb" />
+
+             class.</para
+          >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text of the menu command that is shown to the user. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text of the menu command that is shown to the user. </param
+        >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event handler that performs the actions of the verb. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The event handler that performs the actions of the verb. </param
+        >
         <param name="startCommandID">
-          <attribution license="cc4" from="Microsoft" modified="false" />The starting command ID for this verb. By default, the designer architecture sets aside a range of command IDs for verbs. You can override this by providing a custom command ID. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The starting command ID for this verb. By default, the designer architecture sets aside a range of command IDs for verbs. You can override this by providing a custom command ID. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Description">
@@ -135,7 +187,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -150,7 +205,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Overrides <see cref="M:System.Object.ToString" />.</para>
+          <para
+            >Overrides <see
+             cref="M:System.Object.ToString" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

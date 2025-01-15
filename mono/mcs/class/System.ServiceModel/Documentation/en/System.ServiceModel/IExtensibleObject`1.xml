@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IExtensibleObject&lt;T&gt;" FullName="System.ServiceModel.IExtensibleObject&lt;T&gt;">
-  <TypeSignature Language="C#" Value="public interface IExtensibleObject&lt;T&gt; where T : IExtensibleObject&lt;T&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IExtensibleObject`1&lt;(class System.ServiceModel.IExtensibleObject`1&lt;!T&gt;) T&gt;" />
+<Type Name="IExtensibleObject<T>" FullName="System.ServiceModel.IExtensibleObject<T>">
+  <TypeSignature
+    Language="C#"
+    Value="public interface IExtensibleObject<T> where T : IExtensibleObject<T>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IExtensibleObject`1<(class System.ServiceModel.IExtensibleObject`1<!T>) T>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,8 +24,18 @@
     <typeparam name="T">To be added.</typeparam>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Implement <see cref="T:System.ServiceModel.IExtensibleObject`1" /> to enable aggregation of extensions.</para>
-      <para>For example, if you are implementing a TreeNode class and want to allow external code to add annotations and methods to some instances of TreeNode, you can have TreeNode implement IExtensibleObject&lt;TreeNode&gt;. This enables code that uses TreeNode to add objects that implement IExtensibleObject&lt;TreeNode&gt; to the <see cref="P:System.ServiceModel.IExtensibleObject`1.Extensions" /> collection.</para>
+      <para
+        >Implement <see
+         cref="T:System.ServiceModel.IExtensibleObject`1" />
+
+         to enable aggregation of extensions.</para
+      >
+      <para
+        >For example, if you are implementing a TreeNode class and want to allow external code to add annotations and methods to some instances of TreeNode, you can have TreeNode implement IExtensibleObject&lt;TreeNode&gt;. This enables code that uses TreeNode to add objects that implement IExtensibleObject&lt;TreeNode&gt; to the <see
+         cref="P:System.ServiceModel.IExtensibleObject`1.Extensions" />
+
+         collection.</para
+      >
       <para>There are four extensible objects in indigo1:</para>
       <list type="bullet">
         <item>
@@ -43,7 +59,14 @@
           </para>
         </item>
       </list>
-      <para>For a discussion about how to create extension to work with these objects, see <format type="text/html"><a href="bc88cefc-31fb-428e-9447-6d20a7d452af">Extensible Objects</a></format>.</para>
+      <para
+        >For a discussion about how to create extension to work with these objects, see <format
+         type="text/html">
+          <a href="bc88cefc-31fb-428e-9447-6d20a7d452af">Extensible Objects</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -52,8 +75,14 @@
   </Docs>
   <Members>
     <Member MemberName="Extensions">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.IExtensionCollection&lt;T&gt; Extensions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.IExtensionCollection`1&lt;!T&gt; Extensions" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.IExtensionCollection<T> Extensions { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.IExtensionCollection`1<!T> Extensions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

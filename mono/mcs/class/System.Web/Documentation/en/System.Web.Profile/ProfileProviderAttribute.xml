@@ -18,7 +18,25 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Profile.ProfileProviderAttribute" /> class is used to identify the profile provider for a property of a custom profile implementation. A custom profile implementation is a class that inherits from the <see cref="T:System.Web.Profile.ProfileBase" /> abstract class and defines properties for the user profile that are not specified in the <format type="text/html"><a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a></format> configuration element. You can specify a custom type for the user profile using the inherits attribute of the <format type="text/html"><a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a></format> configuration element in the Web.config file for an application, as shown in the following example.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Profile.ProfileProviderAttribute" />
+
+         class is used to identify the profile provider for a property of a custom profile implementation. A custom profile implementation is a class that inherits from the <see
+         cref="T:System.Web.Profile.ProfileBase" />
+
+         abstract class and defines properties for the user profile that are not specified in the <format
+         type="text/html">
+          <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
+        </format>
+
+         configuration element. You can specify a custom type for the user profile using the inherits attribute of the <format
+         type="text/html">
+          <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
+        </format>
+
+         configuration element in the Web.config file for an application, as shown in the following example.</para
+      >
       <code>&lt;configuration&gt;
   &lt;connectionStrings&gt;
     &lt;add name="SqlServices" connectionString=
@@ -65,7 +83,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ProfileProviderAttribute (string providerName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ProfileProviderAttribute (string providerName);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="providerName" Type="System.String" />
@@ -74,14 +95,35 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Profile.ProfileProviderAttribute" /> class is used to identify the profile provider for a property of a custom profile implementation. A custom profile implementation is a class that inherits from the <see cref="T:System.Web.Profile.ProfileBase" /> abstract class and defines properties for the user profile that are not specified in the <format type="text/html"><a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a></format> configuration element.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Profile.ProfileProviderAttribute" />
+
+             class is used to identify the profile provider for a property of a custom profile implementation. A custom profile implementation is a class that inherits from the <see
+             cref="T:System.Web.Profile.ProfileBase" />
+
+             abstract class and defines properties for the user profile that are not specified in the <format
+             type="text/html">
+              <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
+            </format>
+
+             configuration element.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Web.Profile.ProfileProviderAttribute" /> class with the specified profile provider name.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Web.Profile.ProfileProviderAttribute" />
+
+             class with the specified profile provider name.</para
+          >
         </summary>
         <param name="providerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the profile provider for the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the profile provider for the property.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

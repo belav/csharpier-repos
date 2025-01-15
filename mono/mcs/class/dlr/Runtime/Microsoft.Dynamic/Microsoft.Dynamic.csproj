@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project
+  DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+  ToolsVersion="4.0"
+>
   <Import Project="$(ProjectDir)..\..\Solutions\Common.proj" />
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
@@ -12,38 +16,42 @@
     <CodeAnalysisRuleSet>$(AssemblyName).ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>$(SolutionDir)..\bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'FxCop|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Win8Debug|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Win8Release|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'v2Debug|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'v2Release|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'WP7Debug|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'WP7Release|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Silverlight4Debug|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Silverlight4Release|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Silverlight5Debug|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Silverlight5Release|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AndroidDebug|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AndroidRelease|AnyCPU' ">
-  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'FxCop|AnyCPU' "></PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' "></PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "></PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Win8Debug|AnyCPU' "></PropertyGroup>
+  <PropertyGroup
+    Condition=" '$(Configuration)|$(Platform)' == 'Win8Release|AnyCPU' "
+  ></PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'v2Debug|AnyCPU' "></PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'v2Release|AnyCPU' "></PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'WP7Debug|AnyCPU' "></PropertyGroup>
+  <PropertyGroup
+    Condition=" '$(Configuration)|$(Platform)' == 'WP7Release|AnyCPU' "
+  ></PropertyGroup>
+  <PropertyGroup
+    Condition=" '$(Configuration)|$(Platform)' == 'Silverlight4Debug|AnyCPU' "
+  ></PropertyGroup>
+  <PropertyGroup
+    Condition=" '$(Configuration)|$(Platform)' == 'Silverlight4Release|AnyCPU' "
+  ></PropertyGroup>
+  <PropertyGroup
+    Condition=" '$(Configuration)|$(Platform)' == 'Silverlight5Debug|AnyCPU' "
+  ></PropertyGroup>
+  <PropertyGroup
+    Condition=" '$(Configuration)|$(Platform)' == 'Silverlight5Release|AnyCPU' "
+  ></PropertyGroup>
+  <PropertyGroup
+    Condition=" '$(Configuration)|$(Platform)' == 'AndroidDebug|AnyCPU' "
+  ></PropertyGroup>
+  <PropertyGroup
+    Condition=" '$(Configuration)|$(Platform)' == 'AndroidRelease|AnyCPU' "
+  ></PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\Hosts\Silverlight\SilverlightVersion.cs" Condition=" '$(IsSilverlight)' == 'true' ">
+    <Compile
+      Include="..\..\Hosts\Silverlight\SilverlightVersion.cs"
+      Condition=" '$(IsSilverlight)' == 'true' "
+    >
       <Link>Properties\SilverlightVersion.cs</Link>
     </Compile>
     <Compile Include="Actions\Calls\ActualArguments.cs" />
@@ -445,7 +453,10 @@
     <Reference Include="System.Xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Scripting.Core\Microsoft.Scripting.Core.csproj" Condition="'$(FeatureCoreDlr)' != 'true'">
+    <ProjectReference
+      Include="..\Microsoft.Scripting.Core\Microsoft.Scripting.Core.csproj"
+      Condition="'$(FeatureCoreDlr)' != 'true'"
+    >
       <Project>{2AE75F5A-CD1F-4925-9647-AF4D1C282FB4}</Project>
       <Name>Microsoft.Scripting.Core</Name>
       <Private>False</Private>
@@ -454,7 +465,10 @@
       <Project>{02FF0909-F5AD-48CF-A86A-345E721B7E40}</Project>
       <Name>Microsoft.Scripting</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Microsoft.Scripting.Metadata\Microsoft.Scripting.Metadata.csproj" Condition=" '$(IsFullFramework)' == 'true' ">
+    <ProjectReference
+      Include="..\Microsoft.Scripting.Metadata\Microsoft.Scripting.Metadata.csproj"
+      Condition=" '$(IsFullFramework)' == 'true' "
+    >
       <Project>{ACDD9B9E-8FE6-439C-9521-1CCBA47F6143}</Project>
       <Name>Microsoft.Scripting.Metadata</Name>
     </ProjectReference>

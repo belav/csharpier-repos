@@ -13,9 +13,35 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Profile.ProfileInfo" /> class is used to represent information about a user profile from the data store, including the last date and time when profile properties were retrieved or updated, the user name associated with the profile, and whether the profile is for an anonymous or authenticated user.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Profile.ProfileInfo" />
+
+         class is used to represent information about a user profile from the data store, including the last date and time when profile properties were retrieved or updated, the user name associated with the profile, and whether the profile is for an anonymous or authenticated user.</para
+      >
       <para>
-        <see cref="T:System.Web.Profile.ProfileInfo" /> objects are constructed and returned as part of a <see cref="T:System.Web.Profile.ProfileInfoCollection" /> by the <see cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />, <see cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />, <see cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />, and <see cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" /> methods of a <see cref="T:System.Web.Profile.ProfileProvider" />.</para>
+        <see cref="T:System.Web.Profile.ProfileInfo" />
+
+         objects are constructed and returned as part of a <see
+         cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+         by the <see
+         cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+        , <see
+         cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+        , <see
+         cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+
+        , and <see
+         cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+         methods of a <see
+         cref="T:System.Web.Profile.ProfileProvider" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -31,13 +57,50 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This <see cref="T:System.Web.Profile.ProfileInfo" /> constructor is not intended to be used from your code. Instead, use the <see cref="M:System.Web.Profile.ProfileInfo.#ctor(System.String,System.Boolean,System.DateTime,System.DateTime,System.Int32)" />.</para>
+          <para
+            >This <see
+             cref="T:System.Web.Profile.ProfileInfo" />
+
+             constructor is not intended to be used from your code. Instead, use the <see
+             cref="M:System.Web.Profile.ProfileInfo.#ctor(System.String,System.Boolean,System.DateTime,System.DateTime,System.Int32)" />
+
+            .</para
+          >
           <para>
-            <see cref="T:System.Web.Profile.ProfileInfo" /> objects are constructed and returned as part of a <see cref="T:System.Web.Profile.ProfileInfoCollection" /> by the <see cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />, <see cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />, <see cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />, and <see cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" /> methods of a <see cref="T:System.Web.Profile.ProfileProvider" />.</para>
+            <see cref="T:System.Web.Profile.ProfileInfo" />
+
+             objects are constructed and returned as part of a <see
+             cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+             by the <see
+             cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+            , <see
+             cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            , <see
+             cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+
+            , and <see
+             cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+             methods of a <see
+             cref="T:System.Web.Profile.ProfileProvider" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of the <see cref="T:System.Web.Profile.ProfileInfo" /> object for a class that inherits the <see cref="T:System.Web.Profile.ProfileInfo" /> class.</para>
+          <para
+            >Creates an instance of the <see
+             cref="T:System.Web.Profile.ProfileInfo" />
+
+             object for a class that inherits the <see
+             cref="T:System.Web.Profile.ProfileInfo" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -45,7 +108,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ProfileInfo (string username, bool isAnonymous, DateTime lastActivityDate, DateTime lastUpdatedDate, int size);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ProfileInfo (string username, bool isAnonymous, DateTime lastActivityDate, DateTime lastUpdatedDate, int size);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="username" Type="System.String" />
@@ -58,24 +124,70 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Profile.ProfileInfo" /> object is used to represent information about a user profile from the data store, including the last date and time when profile properties were retrieved or updated, the user name associated with the profile, and whether the profile is for an anonymous or authenticated user.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Profile.ProfileInfo" />
+
+             object is used to represent information about a user profile from the data store, including the last date and time when profile properties were retrieved or updated, the user name associated with the profile, and whether the profile is for an anonymous or authenticated user.</para
+          >
           <para>
-            <see cref="T:System.Web.Profile.ProfileInfo" /> objects are constructed and returned as a <see cref="T:System.Web.Profile.ProfileInfoCollection" /> by the <see cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />, <see cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />, <see cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />, and <see cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" /> methods of a <see cref="T:System.Web.Profile.ProfileProvider" />.</para>
+            <see cref="T:System.Web.Profile.ProfileInfo" />
+
+             objects are constructed and returned as a <see
+             cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+             by the <see
+             cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+            , <see
+             cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            , <see
+             cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+
+            , and <see
+             cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+             methods of a <see
+             cref="T:System.Web.Profile.ProfileProvider" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of the <see cref="T:System.Web.Profile.ProfileInfo" /> class with the specified property values.</para>
+          <para
+            >Creates an instance of the <see
+             cref="T:System.Web.Profile.ProfileInfo" />
+
+             class with the specified property values.</para
+          >
         </summary>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />The user name for the profile.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The user name for the profile.</param
+        >
         <param name="isAnonymous">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to indicate the profile is for an anonymous user; false to indicate the profile is for an authenticated user.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to indicate the profile is for an anonymous user; false to indicate the profile is for an authenticated user.</param
+        >
         <param name="lastActivityDate">
-          <attribution license="cc4" from="Microsoft" modified="false" />The last date and time when the profile was read or updated.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The last date and time when the profile was read or updated.</param
+        >
         <param name="lastUpdatedDate">
-          <attribution license="cc4" from="Microsoft" modified="false" />The last date and time when the profile was updated.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The last date and time when the profile was updated.</param
+        >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />The size of the profile information and values stored in the data source.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The size of the profile information and values stored in the data source.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -149,7 +261,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Profile.SqlProfileProvider" /> calculates the size of the profile as the total size of the string and binary columns that store the profile property values and the column that stores the profile property names. The size of the columns is determined using the SQL Server DATALENGTH function.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Profile.SqlProfileProvider" />
+
+             calculates the size of the profile as the total size of the string and binary columns that store the profile property values and the column that stores the profile property names. The size of the columns is determined using the SQL Server DATALENGTH function.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

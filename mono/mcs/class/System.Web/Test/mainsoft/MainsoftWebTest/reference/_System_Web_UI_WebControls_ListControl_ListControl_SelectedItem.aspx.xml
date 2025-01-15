@@ -2,77 +2,196 @@
 <testresults name="">
   <div id="GHTSubTest1" testname="None selected">
     <select id="_ctrl0" size="4" name="_ctrl0">
-      <option value="aaa" />aaa
-		<option value="bbb" />bbb
-		<option value="ccc" />ccc
-		<option value="ddd" />ddd
-		<option value="eee" />eee
-		<option value="fff" />fff
-		<option value="ggg" />ggg
+      <option value="aaa" />
 
-	</select>
+      aaa
+		<option
+       value="bbb" />
+
+      bbb
+		<option
+       value="ccc" />
+
+      ccc
+		<option
+       value="ddd" />
+
+      ddd
+		<option
+       value="eee" />
+
+      eee
+		<option
+       value="fff" />
+
+      fff
+		<option
+       value="ggg" />
+
+      ggg
+
+	</select
+    >
     <span>
-      <br />Test passed: SelectedItem is null</span>
+      <br />
+
+      Test passed: SelectedItem is null</span
+    >
   </div>
   <div id="GHTSubTest2" testname="valid value">
     <select id="_ctrl1" size="4" name="_ctrl1">
-      <option value="aaa" />aaa
-		<option value="bbb" />bbb
-		<option value="ccc" />ccc
-		<option value="ddd" />ddd
-		<option value="eee" />eee
-		<option value="fff" selected="selected" />fff
-		<option value="ggg" />ggg
+      <option value="aaa" />
 
-	</select>
+      aaa
+		<option
+       value="bbb" />
+
+      bbb
+		<option
+       value="ccc" />
+
+      ccc
+		<option
+       value="ddd" />
+
+      ddd
+		<option
+       value="eee" />
+
+      eee
+		<option
+       value="fff" selected="selected" />
+
+      fff
+		<option
+       value="ggg" />
+
+      ggg
+
+	</select
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
   <div id="GHTSubTest3" testname="multiple Items selected">
     <select multiple="multiple" id="_ctrl2" size="4" name="_ctrl2">
-      <option value="aaa" />aaa
-		<option value="bbb" />bbb
-		<option value="ccc" selected="selected" />ccc
-		<option value="ddd" />ddd
-		<option value="eee" selected="selected" />eee
-		<option value="fff" />fff
-		<option value="ggg" selected="selected" />ggg
+      <option value="aaa" />
 
-	</select>
+      aaa
+		<option
+       value="bbb" />
+
+      bbb
+		<option
+       value="ccc" selected="selected" />
+
+      ccc
+		<option
+       value="ddd" />
+
+      ddd
+		<option
+       value="eee" selected="selected" />
+
+      eee
+		<option
+       value="fff" />
+
+      fff
+		<option
+       value="ggg" selected="selected" />
+
+      ggg
+
+	</select
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
   <div id="GHTSubTest4" testname="None selected">
     <select id="_ctrl3" name="_ctrl3">
-      <option value="aaa" selected="selected" />aaa
-		<option value="bbb" />bbb
-		<option value="ccc" />ccc
-		<option value="ddd" />ddd
-		<option value="eee" />eee
-		<option value="fff" />fff
-		<option value="ggg" />ggg
+      <option value="aaa" selected="selected" />
 
-	</select>
+      aaa
+		<option
+       value="bbb" />
+
+      bbb
+		<option
+       value="ccc" />
+
+      ccc
+		<option
+       value="ddd" />
+
+      ddd
+		<option
+       value="eee" />
+
+      eee
+		<option
+       value="fff" />
+
+      fff
+		<option
+       value="ggg" />
+
+      ggg
+
+	</select
+    >
     <span>
-      <br />Test failede: SelectedItem is not null</span>
+      <br />
+
+      Test failede: SelectedItem is not null</span
+    >
   </div>
   <div id="GHTSubTest5" testname="valid value">
     <select id="_ctrl4" name="_ctrl4">
-      <option value="aaa" />aaa
-		<option value="bbb" />bbb
-		<option value="ccc" />ccc
-		<option value="ddd" />ddd
-		<option value="eee" />eee
-		<option value="fff" selected="selected" />fff
-		<option value="ggg" />ggg
+      <option value="aaa" />
 
-	</select>
+      aaa
+		<option
+       value="bbb" />
+
+      bbb
+		<option
+       value="ccc" />
+
+      ccc
+		<option
+       value="ddd" />
+
+      ddd
+		<option
+       value="eee" />
+
+      eee
+		<option
+       value="fff" selected="selected" />
+
+      fff
+		<option
+       value="ggg" />
+
+      ggg
+
+	</select
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
   <div id="GHTSubTest6" testname="multiple Items selected">
-    <select id="_ctrl5" name="_ctrl5">
-    </select>
+    <select id="_ctrl5" name="_ctrl5"></select>
   </div>
   <div id="GHTSubTest7" testname="None selected">
     <table id="_ctrl6" border="0">
@@ -120,7 +239,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed: SelectedItem is null</span>
+      <br />
+
+      Test passed: SelectedItem is null</span
+    >
   </div>
   <div id="GHTSubTest8" testname="valid value">
     <table id="_ctrl7" border="0">
@@ -168,7 +290,10 @@
       </tr>
     </table>
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
   <div id="GHTSubTest9" testname="multiple Items selected">
     <table id="_ctrl8" border="0">
@@ -216,7 +341,10 @@
       </tr>
     </table>
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
   <div id="GHTSubTest10" testname="None selected">
     <table id="_ctrl9" border="0">
@@ -264,7 +392,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed: SelectedItem is null</span>
+      <br />
+
+      Test passed: SelectedItem is null</span
+    >
   </div>
   <div id="GHTSubTest11" testname="valid value">
     <table id="_ctrl10" border="0">
@@ -312,7 +443,10 @@
       </tr>
     </table>
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
   <div id="GHTSubTest12" testname="multiple Items selected">
     <table id="_ctrl11" border="0">
@@ -360,6 +494,9 @@
       </tr>
     </table>
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
 </testresults>

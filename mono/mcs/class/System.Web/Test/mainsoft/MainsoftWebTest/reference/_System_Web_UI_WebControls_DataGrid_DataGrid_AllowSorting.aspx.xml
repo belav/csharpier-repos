@@ -59,7 +59,10 @@
       </tr>
     </table>
     <span>
-      <br />False</span>
+      <br />
+
+      False</span
+    >
   </div>
   <div id="GHTSubTest2" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid2">
@@ -126,7 +129,10 @@
       </tr>
     </table>
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
   <div id="GHTSubTest3" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid3">
@@ -187,6 +193,9 @@
       </tr>
     </table>
     <span>
-      <br />False</span>
+      <br />
+
+      False</span
+    >
   </div>
 </testresults>

@@ -1,5 +1,11 @@
-<Type Name="CheckedListBox+ObjectCollection" FullName="System.Windows.Forms.CheckedListBox+ObjectCollection">
-  <TypeSignature Language="C#" Value="public class CheckedListBox.ObjectCollection : System.Windows.Forms.ListBox.ObjectCollection" />
+<Type
+  Name="CheckedListBox+ObjectCollection"
+  FullName="System.Windows.Forms.CheckedListBox+ObjectCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class CheckedListBox.ObjectCollection : System.Windows.Forms.ListBox.ObjectCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -15,7 +21,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ObjectCollection (System.Windows.Forms.CheckedListBox owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ObjectCollection (System.Windows.Forms.CheckedListBox owner);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="owner" Type="System.Windows.Forms.CheckedListBox" />
@@ -53,7 +62,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public int Add (object item, System.Windows.Forms.CheckState check);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int Add (object item, System.Windows.Forms.CheckState check);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>

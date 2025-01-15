@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TagPrefixInfo" FullName="System.Web.Configuration.TagPrefixInfo">
-  <TypeSignature Language="C#" Value="public sealed class TagPrefixInfo : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class TagPrefixInfo : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,15 +16,57 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.TagPrefixInfo" /> class allows you to programmatically access and modify tag-prefix information stored in a configuration file. It provides the same functionality as the ASP.NET @Register directive. Tag prefixes associate a "namespace" in ASP.NET to the assemblies and namespaces that must be included for custom controls and user controls to work properly. <see cref="T:System.Web.Configuration.TagPrefixInfo" /> objects are stored as members of a <see cref="T:System.Web.Configuration.TagPrefixCollection" /> object. The <see cref="T:System.Web.Configuration.TagPrefixCollection" /> class allows you to programmatically access and modify the controls subsection of the pages section of a configuration file. </para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.TagPrefixInfo" />
+
+         class allows you to programmatically access and modify tag-prefix information stored in a configuration file. It provides the same functionality as the ASP.NET @Register directive. Tag prefixes associate a "namespace" in ASP.NET to the assemblies and namespaces that must be included for custom controls and user controls to work properly. <see
+         cref="T:System.Web.Configuration.TagPrefixInfo" />
+
+         objects are stored as members of a <see
+         cref="T:System.Web.Configuration.TagPrefixCollection" />
+
+         object. The <see
+         cref="T:System.Web.Configuration.TagPrefixCollection" />
+
+         class allows you to programmatically access and modify the controls subsection of the pages section of a configuration file. </para
+      >
       <para>
-        <see cref="T:System.Web.Configuration.TagPrefixInfo" /> objects are added to the collection using the add element and specifying a value for the tagPrefix attribute along with values for other relevant attributes. The other required information varies based on the kind of control you will use with the specified tag prefix:</para>
+        <see cref="T:System.Web.Configuration.TagPrefixInfo" />
+
+         objects are added to the collection using the add element and specifying a value for the tagPrefix attribute along with values for other relevant attributes. The other required information varies based on the kind of control you will use with the specified tag prefix:</para
+      >
       <list type="bullet">
         <item>
-          <para>If it is a user control, you must define the <see cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />, <see cref="P:System.Web.Configuration.TagPrefixInfo.TagName" />, and <see cref="P:System.Web.Configuration.TagPrefixInfo.Source" /> properties.</para>
+          <para
+            >If it is a user control, you must define the <see
+             cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />
+
+            , <see
+             cref="P:System.Web.Configuration.TagPrefixInfo.TagName" />
+
+            , and <see
+             cref="P:System.Web.Configuration.TagPrefixInfo.Source" />
+
+             properties.</para
+          >
         </item>
         <item>
-          <para>If it is a custom control, you must define the <see cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />, <see cref="P:System.Web.Configuration.TagPrefixInfo.Namespace" />, and <see cref="P:System.Web.Configuration.TagPrefixInfo.Assembly" /> properties. The <see cref="P:System.Web.Configuration.TagPrefixInfo.Assembly" /> property is not required if the control is in the application code directory.</para>
+          <para
+            >If it is a custom control, you must define the <see
+             cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />
+
+            , <see
+             cref="P:System.Web.Configuration.TagPrefixInfo.Namespace" />
+
+            , and <see
+             cref="P:System.Web.Configuration.TagPrefixInfo.Assembly" />
+
+             properties. The <see
+             cref="P:System.Web.Configuration.TagPrefixInfo.Assembly" />
+
+             property is not required if the control is in the application code directory.</para
+          >
         </item>
       </list>
       <para>The same tagPrefix value can be used to map to multiple assemblies or namespaces.</para>
@@ -36,7 +81,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TagPrefixInfo (string tagPrefix, string nameSpace, string assembly, string tagName, string source);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TagPrefixInfo (string tagPrefix, string nameSpace, string assembly, string tagName, string source);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="tagPrefix" Type="System.String" />
@@ -49,30 +97,77 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates an instance of the <see cref="T:System.Web.Configuration.TagPrefixInfo" /> class and initializes it using the passed parameters. The parameters for which you specify values depend on the kind of control you refer to with the specified tag prefix. Parameters not required for that tag prefix should be left blank. (Use an empty string.) </para>
+          <para
+            >This constructor creates an instance of the <see
+             cref="T:System.Web.Configuration.TagPrefixInfo" />
+
+             class and initializes it using the passed parameters. The parameters for which you specify values depend on the kind of control you refer to with the specified tag prefix. Parameters not required for that tag prefix should be left blank. (Use an empty string.) </para
+          >
           <list type="bullet">
             <item>
-              <para>If the control is a user control, you must specify values for the <paramref name="tagPrefix" />, <paramref name="tagName" />, and <paramref name="source" /> parameters. </para>
+              <para
+                >If the control is a user control, you must specify values for the <paramref
+                 name="tagPrefix" />
+
+                , <paramref
+                 name="tagName" />
+
+                , and <paramref
+                 name="source" />
+
+                 parameters. </para
+              >
             </item>
             <item>
-              <para>If the control is a custom control, you must specify values for the <paramref name="tagPrefix" /> and <paramref name="nameSpace" /> parameters. If the control is not in the application code directory, you must also specify the <paramref name="assembly" /> parameter.</para>
+              <para
+                >If the control is a custom control, you must specify values for the <paramref
+                 name="tagPrefix" />
+
+                 and <paramref
+                 name="nameSpace" />
+
+                 parameters. If the control is not in the application code directory, you must also specify the <paramref
+                 name="assembly" />
+
+                 parameter.</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.TagPrefixInfo" /> class using the passed values.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.TagPrefixInfo" />
+
+             class using the passed values.</para
+          >
         </summary>
         <param name="tagPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />The tag prefix being mapped to a source file or namespace and assembly. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The tag prefix being mapped to a source file or namespace and assembly. </param
+        >
         <param name="nameSpace">
-          <attribution license="cc4" from="Microsoft" modified="false" />The namespace associated with the tag prefix.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The namespace associated with the tag prefix.</param
+        >
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />The assembly where the namespace resides.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The assembly where the namespace resides.</param
+        >
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the control to be used in the page.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the control to be used in the page.</param
+        >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the file that contains the user control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the file that contains the user control.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -106,7 +201,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ElementProperty">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElementProperty ElementProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElementProperty ElementProperty { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElementProperty</ReturnType>
@@ -142,7 +240,10 @@
           <para>true if the objects are identical; otherwise, false.</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />Object to compare.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Object to compare.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -199,7 +300,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -290,7 +394,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" /> property defines the alias used for the namespace where the control resides. It applies to user and custom controls. This is the value that would precede the tag name in the ASP.NET code. For example "myTag" in &lt;myTag: myControl /&gt;.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />
+
+             property defines the alias used for the namespace where the control resides. It applies to user and custom controls. This is the value that would precede the tag name in the ASP.NET code. For example "myTag" in &lt;myTag: myControl /&gt;.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

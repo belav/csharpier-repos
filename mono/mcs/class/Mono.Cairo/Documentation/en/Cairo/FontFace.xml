@@ -29,10 +29,12 @@
         <Parameter Name="handle" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="handle">The handle as an <see cref="t:System.IntPtr"/></param>
+        <param name="handle"
+          >The handle as an <see
+           cref="t:System.IntPtr" />
+        </param>
         <summary>The FontFace constructor</summary>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -49,8 +51,7 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">
-        </param>
+        <param name="disposing"></param>
         <summary>Frees FontFace and all other associated resources</summary>
         <remarks>This method should be called when the FontFace is not needed anymore.</remarks>
       </Docs>
@@ -82,10 +83,17 @@
         <ReturnType>Cairo.FontType</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>The <see cref="T:Cairo.FontType" /> of the FontFace</summary>
-        <value>The <see cref="T:Cairo.FontType" /></value>
-        <remarks>
-        </remarks>
+        <summary
+          >The <see
+           cref="T:Cairo.FontType" />
+
+           of the FontFace</summary
+        >
+        <value
+          >The <see
+           cref="T:Cairo.FontType" />
+        </value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Handle">
@@ -100,9 +108,11 @@
       </ReturnValue>
       <Docs>
         <summary>The handle of the FontFace</summary>
-        <value>The handle as <see cref="T:System.IntPtr" /></value>
-        <remarks>
-        </remarks>
+        <value
+          >The handle as <see
+           cref="T:System.IntPtr" />
+        </value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="ReferenceCount">
@@ -116,10 +126,15 @@
         <ReturnType>System.UInt32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Returns the current reference count of <see cref="T:Cairo.FontFace" /></summary>
-        <value>The current reference count as <see cref="T:System.UInt32" /></value>
-        <remarks>
-        </remarks>
+        <summary
+          >Returns the current reference count of <see
+           cref="T:Cairo.FontFace" />
+        </summary>
+        <value
+          >The current reference count as <see
+           cref="T:System.UInt32" />
+        </value>
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Status">
@@ -134,9 +149,13 @@
       </ReturnValue>
       <Docs>
         <summary>Checks whether an error has previously occurred for this FontFace</summary>
-        <value>A <see cref="T:Cairo.Status" /> representing the status of the FontFace</value>
-        <remarks>
-        </remarks>
+        <value
+          >A <see
+           cref="T:Cairo.Status" />
+
+           representing the status of the FontFace</value
+        >
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="System.IDisposable.Dispose">
@@ -151,9 +170,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>Calls <see cref="P:Cairo.FontFace.Dispose" /> with disposing = true</summary>
-        <remarks>
-        </remarks>
+        <summary
+          >Calls <see
+           cref="P:Cairo.FontFace.Dispose" />
+
+           with disposing = true</summary
+        >
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>

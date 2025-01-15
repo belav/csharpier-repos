@@ -2,135 +2,347 @@
 <testresults name="">
   <div id="GHTSubTest1" testname="string.empty">
     <select id="_ctrl0" size="4" name="_ctrl0">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
   </div>
   <div id="GHTSubTest2" testname="string.empty - bound to a table">
     <select id="_ctrl1" size="4" name="_ctrl1">
-      <option value="a" />a
-		<option value="b" />b
-		<option value="c" />c
-		<option value="d" />d
-		<option value="e" />e
-		<option value="f" />f
-		<option value="g" />g
-		<option value="h" />h
-		<option value="i" />i
-		<option value="j" />j
+      <option value="a" />
 
-	</select>
+      a
+		<option
+       value="b" />
+
+      b
+		<option
+       value="c" />
+
+      c
+		<option
+       value="d" />
+
+      d
+		<option
+       value="e" />
+
+      e
+		<option
+       value="f" />
+
+      f
+		<option
+       value="g" />
+
+      g
+		<option
+       value="h" />
+
+      h
+		<option
+       value="i" />
+
+      i
+		<option
+       value="j" />
+
+      j
+
+	</select
+    >
   </div>
   <div id="GHTSubTest3" testname="Name of an items property">
     <select id="_ctrl2" size="4" name="_ctrl2">
-      <option value="1" />1
-		<option value="2" />2
-		<option value="3" />3
-		<option value="4" />4
-		<option value="5" />5
-		<option value="6" />6
-		<option value="7" />7
+      <option value="1" />
 
-	</select>
+      1
+		<option
+       value="2" />
+
+      2
+		<option
+       value="3" />
+
+      3
+		<option
+       value="4" />
+
+      4
+		<option
+       value="5" />
+
+      5
+		<option
+       value="6" />
+
+      6
+		<option
+       value="7" />
+
+      7
+
+	</select
+    >
   </div>
   <div id="GHTSubTest4" testname="Name of an item non-existing property">
-    <select id="_ctrl3" size="4" name="_ctrl3">
-    </select>
+    <select id="_ctrl3" size="4" name="_ctrl3"></select>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest5" testname="Name of a column">
     <select id="_ctrl4" size="4" name="_ctrl4">
-      <option value="0" />0
-		<option value="1" />1
-		<option value="2" />2
-		<option value="3" />3
-		<option value="4" />4
-		<option value="5" />5
-		<option value="6" />6
-		<option value="7" />7
-		<option value="8" />8
-		<option value="9" />9
+      <option value="0" />
 
-	</select>
+      0
+		<option
+       value="1" />
+
+      1
+		<option
+       value="2" />
+
+      2
+		<option
+       value="3" />
+
+      3
+		<option
+       value="4" />
+
+      4
+		<option
+       value="5" />
+
+      5
+		<option
+       value="6" />
+
+      6
+		<option
+       value="7" />
+
+      7
+		<option
+       value="8" />
+
+      8
+		<option
+       value="9" />
+
+      9
+
+	</select
+    >
   </div>
   <div id="GHTSubTest6" testname="Name of a non-existing column">
-    <select id="_ctrl5" size="4" name="_ctrl5">
-    </select>
+    <select id="_ctrl5" size="4" name="_ctrl5"></select>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest7" testname="string.empty">
     <select id="_ctrl6" name="_ctrl6">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
   </div>
   <div id="GHTSubTest8" testname="string.empty - bound to a table">
     <select id="_ctrl7" name="_ctrl7">
-      <option value="a" />a
-		<option value="b" />b
-		<option value="c" />c
-		<option value="d" />d
-		<option value="e" />e
-		<option value="f" />f
-		<option value="g" />g
-		<option value="h" />h
-		<option value="i" />i
-		<option value="j" />j
+      <option value="a" />
 
-	</select>
+      a
+		<option
+       value="b" />
+
+      b
+		<option
+       value="c" />
+
+      c
+		<option
+       value="d" />
+
+      d
+		<option
+       value="e" />
+
+      e
+		<option
+       value="f" />
+
+      f
+		<option
+       value="g" />
+
+      g
+		<option
+       value="h" />
+
+      h
+		<option
+       value="i" />
+
+      i
+		<option
+       value="j" />
+
+      j
+
+	</select
+    >
   </div>
   <div id="GHTSubTest9" testname="Name of an items property">
     <select id="_ctrl8" name="_ctrl8">
-      <option value="1" />1
-		<option value="2" />2
-		<option value="3" />3
-		<option value="4" />4
-		<option value="5" />5
-		<option value="6" />6
-		<option value="7" />7
+      <option value="1" />
 
-	</select>
+      1
+		<option
+       value="2" />
+
+      2
+		<option
+       value="3" />
+
+      3
+		<option
+       value="4" />
+
+      4
+		<option
+       value="5" />
+
+      5
+		<option
+       value="6" />
+
+      6
+		<option
+       value="7" />
+
+      7
+
+	</select
+    >
   </div>
   <div id="GHTSubTest10" testname="Name of an item non-existing property">
-    <select id="_ctrl9" name="_ctrl9">
-    </select>
+    <select id="_ctrl9" name="_ctrl9"></select>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest11" testname="Name of a column">
     <select id="_ctrl10" name="_ctrl10">
-      <option value="0" />0
-		<option value="1" />1
-		<option value="2" />2
-		<option value="3" />3
-		<option value="4" />4
-		<option value="5" />5
-		<option value="6" />6
-		<option value="7" />7
-		<option value="8" />8
-		<option value="9" />9
+      <option value="0" />
 
-	</select>
+      0
+		<option
+       value="1" />
+
+      1
+		<option
+       value="2" />
+
+      2
+		<option
+       value="3" />
+
+      3
+		<option
+       value="4" />
+
+      4
+		<option
+       value="5" />
+
+      5
+		<option
+       value="6" />
+
+      6
+		<option
+       value="7" />
+
+      7
+		<option
+       value="8" />
+
+      8
+		<option
+       value="9" />
+
+      9
+
+	</select
+    >
   </div>
   <div id="GHTSubTest12" testname="Name of a non-existing column">
-    <select id="_ctrl11" name="_ctrl11">
-    </select>
+    <select id="_ctrl11" name="_ctrl11"></select>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest13" testname="string.empty">
     <table id="_ctrl12" border="0">
@@ -289,10 +501,12 @@
     </table>
   </div>
   <div id="GHTSubTest16" testname="Name of an item non-existing property">
-    <table id="_ctrl15" border="0">
-    </table>
+    <table id="_ctrl15" border="0"></table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest17" testname="Name of a column">
     <table id="_ctrl16" border="0">
@@ -359,10 +573,12 @@
     </table>
   </div>
   <div id="GHTSubTest18" testname="Name of a non-existing column">
-    <table id="_ctrl17" border="0">
-    </table>
+    <table id="_ctrl17" border="0"></table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest19" testname="string.empty">
     <table id="_ctrl18" border="0">
@@ -521,10 +737,12 @@
     </table>
   </div>
   <div id="GHTSubTest22" testname="Name of an item non-existing property">
-    <table id="_ctrl21" border="0">
-    </table>
+    <table id="_ctrl21" border="0"></table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest23" testname="Name of a column">
     <table id="_ctrl22" border="0">
@@ -591,9 +809,11 @@
     </table>
   </div>
   <div id="GHTSubTest24" testname="Name of a non-existing column">
-    <table id="_ctrl23" border="0">
-    </table>
+    <table id="_ctrl23" border="0"></table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

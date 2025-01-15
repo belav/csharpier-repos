@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BindingContext" FullName="System.ServiceModel.Channels.BindingContext">
   <TypeSignature Language="C#" Value="public class BindingContext" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit BindingContext extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit BindingContext extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -22,8 +25,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BindingContext (System.ServiceModel.Channels.CustomBinding binding, System.ServiceModel.Channels.BindingParameterCollection parms);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.CustomBinding binding, class System.ServiceModel.Channels.BindingParameterCollection parms) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public BindingContext (System.ServiceModel.Channels.CustomBinding binding, System.ServiceModel.Channels.BindingParameterCollection parms);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.CustomBinding binding, class System.ServiceModel.Channels.BindingParameterCollection parms) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -36,26 +45,57 @@
         <param name="parms">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of <see cref="T:System.ServiceModel.Description.ListenUriMode" /> is set to <see cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" /> by this constructor, the relative address is set to <see cref="F:System.String.Empty" />, and the base address is set to null.</para>
+          <para
+            >The value of <see
+             cref="T:System.ServiceModel.Description.ListenUriMode" />
+
+             is set to <see
+             cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" />
+
+             by this constructor, the relative address is set to <see
+             cref="F:System.String.Empty" />
+
+            , and the base address is set to null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingContext" /> class for a specified binding and collection of binding parameters.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.BindingContext" />
+
+             class for a specified binding and collection of binding parameters.</para
+          >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.CustomBinding" /> for the channel.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.CustomBinding" />
+
+           for the channel.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BindingContext (System.ServiceModel.Channels.CustomBinding binding, System.ServiceModel.Channels.BindingParameterCollection parameters, Uri listenUriBaseAddress, string listenUriRelativeAddress, System.ServiceModel.Description.ListenUriMode listenUriMode);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.CustomBinding binding, class System.ServiceModel.Channels.BindingParameterCollection parameters, class System.Uri listenUriBaseAddress, string listenUriRelativeAddress, valuetype System.ServiceModel.Description.ListenUriMode listenUriMode) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public BindingContext (System.ServiceModel.Channels.CustomBinding binding, System.ServiceModel.Channels.BindingParameterCollection parameters, Uri listenUriBaseAddress, string listenUriRelativeAddress, System.ServiceModel.Description.ListenUriMode listenUriMode);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.CustomBinding binding, class System.ServiceModel.Channels.BindingParameterCollection parameters, class System.Uri listenUriBaseAddress, string listenUriRelativeAddress, valuetype System.ServiceModel.Description.ListenUriMode listenUriMode) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="binding" Type="System.ServiceModel.Channels.CustomBinding" />
-        <Parameter Name="parameters" Type="System.ServiceModel.Channels.BindingParameterCollection" />
+        <Parameter
+          Name="parameters"
+          Type="System.ServiceModel.Channels.BindingParameterCollection"
+        />
         <Parameter Name="listenUriBaseAddress" Type="System.Uri" />
         <Parameter Name="listenUriRelativeAddress" Type="System.String" />
         <Parameter Name="listenUriMode" Type="System.ServiceModel.Description.ListenUriMode" />
@@ -64,23 +104,61 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BindingContext" /> class for a specified binding, collection of binding parameters, and address for the endpoint at which the service listens.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.BindingContext" />
+
+             class for a specified binding, collection of binding parameters, and address for the endpoint at which the service listens.</para
+          >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.CustomBinding" /> for the channel.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.CustomBinding" />
+
+           for the channel.</param
+        >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" /> for the channel.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+
+           for the channel.</param
+        >
         <param name="listenUriBaseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Uri" /> at which the service endpoint listens.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Uri" />
+
+           at which the service endpoint listens.</param
+        >
         <param name="listenUriRelativeAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />The relative address at which the service endpoint listens.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The relative address at which the service endpoint listens.</param
+        >
         <param name="listenUriMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Description.ListenUriMode" /> that indicates whether the transport must ensure that the URI provided for the service to listen on is unique.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Description.ListenUriMode" />
+
+           that indicates whether the transport must ensure that the URI provided for the service to listen on is unique.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Binding">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.CustomBinding Binding { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.CustomBinding Binding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.CustomBinding Binding { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.CustomBinding Binding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -98,8 +176,14 @@
       </Docs>
     </Member>
     <Member MemberName="BindingParameters">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.BindingParameterCollection BindingParameters { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.BindingParameterCollection BindingParameters" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.BindingParameterCollection BindingParameters { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.BindingParameterCollection BindingParameters"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -119,9 +203,15 @@
         </summary>
       </Docs>
     </Member>
-    <Member MemberName="BuildInnerChannelFactory&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.IChannelFactory&lt;TChannel&gt; BuildInnerChannelFactory&lt;TChannel&gt; ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ServiceModel.Channels.IChannelFactory`1&lt;!!TChannel&gt; BuildInnerChannelFactory&lt;TChannel&gt;() cil managed" />
+    <Member MemberName="BuildInnerChannelFactory<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.IChannelFactory<TChannel> BuildInnerChannelFactory<TChannel> ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ServiceModel.Channels.IChannelFactory`1<!!TChannel> BuildInnerChannelFactory<TChannel>() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -141,15 +231,35 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> that represents the inner channel factory of the current channel factory.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
+
+             of type <see
+             cref="T:System.ServiceModel.Channels.IChannel" />
+
+             that represents the inner channel factory of the current channel factory.</para
+          >
         </returns>
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of <see cref="T:System.ServiceModel.Channels.IChannel" /> object the inner channel factory produces.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of <see
+           cref="T:System.ServiceModel.Channels.IChannel" />
+
+           object the inner channel factory produces.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="BuildInnerChannelListener&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.IChannelListener&lt;TChannel&gt; BuildInnerChannelListener&lt;TChannel&gt; () where TChannel : class, System.ServiceModel.Channels.IChannel;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ServiceModel.Channels.IChannelListener`1&lt;!!TChannel&gt; BuildInnerChannelListener&lt;class (class System.ServiceModel.Channels.IChannel) TChannel&gt;() cil managed" />
+    <Member MemberName="BuildInnerChannelListener<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.IChannelListener<TChannel> BuildInnerChannelListener<TChannel> () where TChannel : class, System.ServiceModel.Channels.IChannel;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ServiceModel.Channels.IChannelListener`1<!!TChannel> BuildInnerChannelListener<class (class System.ServiceModel.Channels.IChannel) TChannel>() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -174,15 +284,35 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Channels.IChannelListener`1" /> of type <see cref="T:System.ServiceModel.Channels.IChannel" /> that represents the inner channel listener of the current channel factory.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+
+             of type <see
+             cref="T:System.ServiceModel.Channels.IChannel" />
+
+             that represents the inner channel listener of the current channel factory.</para
+          >
         </returns>
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of <see cref="T:System.ServiceModel.Channels.IChannel" /> object for which the inner channel listener listens.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of <see
+           cref="T:System.ServiceModel.Channels.IChannel" />
+
+           object for which the inner channel listener listens.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="CanBuildInnerChannelFactory&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public bool CanBuildInnerChannelFactory&lt;TChannel&gt; ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool CanBuildInnerChannelFactory&lt;TChannel&gt;() cil managed" />
+    <Member MemberName="CanBuildInnerChannelFactory<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public bool CanBuildInnerChannelFactory<TChannel> ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool CanBuildInnerChannelFactory<TChannel>() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -202,15 +332,32 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the inner channel factory can produce the specified <paramref name="TChannel" />; otherwise, false.</para>
+          <para
+            >true if the inner channel factory can produce the specified <paramref
+             name="TChannel" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of <see cref="T:System.ServiceModel.Channels.IChannel" /> object the inner channel factory produces.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of <see
+           cref="T:System.ServiceModel.Channels.IChannel" />
+
+           object the inner channel factory produces.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="CanBuildInnerChannelListener&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public bool CanBuildInnerChannelListener&lt;TChannel&gt; () where TChannel : class, System.ServiceModel.Channels.IChannel;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool CanBuildInnerChannelListener&lt;class (class System.ServiceModel.Channels.IChannel) TChannel&gt;() cil managed" />
+    <Member MemberName="CanBuildInnerChannelListener<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public bool CanBuildInnerChannelListener<TChannel> () where TChannel : class, System.ServiceModel.Channels.IChannel;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool CanBuildInnerChannelListener<class (class System.ServiceModel.Channels.IChannel) TChannel>() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -235,15 +382,32 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the inner channel listener can be built to listen for the <paramref name="TChannel" /> specified; otherwise, false.</para>
+          <para
+            >true if the inner channel listener can be built to listen for the <paramref
+             name="TChannel" />
+
+             specified; otherwise, false.</para
+          >
         </returns>
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of <see cref="T:System.ServiceModel.Channels.IChannel" /> object for which the inner channel listener listens.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of <see
+           cref="T:System.ServiceModel.Channels.IChannel" />
+
+           object for which the inner channel listener listens.</typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="Clone">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.BindingContext Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ServiceModel.Channels.BindingContext Clone() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.BindingContext Clone ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ServiceModel.Channels.BindingContext Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -263,13 +427,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ServiceModel.Channels.BindingContext" /> object that is a copy of the current channel build context.</para>
+          <para
+            >A <see
+             cref="T:System.ServiceModel.Channels.BindingContext" />
+
+             object that is a copy of the current channel build context.</para
+          >
         </returns>
       </Docs>
     </Member>
-    <Member MemberName="GetInnerProperty&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public T GetInnerProperty&lt;T&gt; () where T : class;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!T GetInnerProperty&lt;class T&gt;() cil managed" />
+    <Member MemberName="GetInnerProperty<T>">
+      <MemberSignature Language="C#" Value="public T GetInnerProperty<T> () where T : class;" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !!T GetInnerProperty<class T>() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -288,7 +460,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Clones the binding context and calls <see cref="M:System.ServiceModel.Channels.BindingElement.GetProperty``1(System.ServiceModel.Channels.BindingContext)" /> on the next binding element stored in the binding context.</para>
+          <para
+            >Clones the binding context and calls <see
+             cref="M:System.ServiceModel.Channels.BindingElement.GetProperty``1(System.ServiceModel.Channels.BindingContext)" />
+
+             on the next binding element stored in the binding context.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -296,15 +473,26 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The typed object <paramref name="T" /> requested if it is present or null if it is not.</para>
+          <para
+            >The typed object <paramref
+             name="T" />
+
+             requested if it is present or null if it is not.</para
+          >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />The typed object for which the method is querying.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The typed object for which the method is querying.</typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="ListenUriBaseAddress">
       <MemberSignature Language="C#" Value="public Uri ListenUriBaseAddress { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri ListenUriBaseAddress" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Uri ListenUriBaseAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -316,7 +504,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The address for the endpoint at which a service listens is obtained by appending the <see cref="P:System.ServiceModel.Channels.BindingContext.ListenUriRelativeAddress" /> to the <see cref="P:System.ServiceModel.Channels.BindingContext.ListenUriBaseAddress" />. This absolute address can be set using the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" /> property.</para>
+          <para
+            >The address for the endpoint at which a service listens is obtained by appending the <see
+             cref="P:System.ServiceModel.Channels.BindingContext.ListenUriRelativeAddress" />
+
+             to the <see
+             cref="P:System.ServiceModel.Channels.BindingContext.ListenUriBaseAddress" />
+
+            . This absolute address can be set using the <see
+             cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -325,8 +524,14 @@
       </Docs>
     </Member>
     <Member MemberName="ListenUriMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Description.ListenUriMode ListenUriMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Description.ListenUriMode ListenUriMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Description.ListenUriMode ListenUriMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Description.ListenUriMode ListenUriMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -345,7 +550,10 @@
     </Member>
     <Member MemberName="ListenUriRelativeAddress">
       <MemberSignature Language="C#" Value="public string ListenUriRelativeAddress { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string ListenUriRelativeAddress" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string ListenUriRelativeAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -357,7 +565,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The address for the endpoint at which a service listens is obtained by appending the <see cref="P:System.ServiceModel.Channels.BindingContext.ListenUriRelativeAddress" /> to the <see cref="P:System.ServiceModel.Channels.BindingContext.ListenUriBaseAddress" />. This absolute address can be set using the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" /> property.</para>
+          <para
+            >The address for the endpoint at which a service listens is obtained by appending the <see
+             cref="P:System.ServiceModel.Channels.BindingContext.ListenUriRelativeAddress" />
+
+             to the <see
+             cref="P:System.ServiceModel.Channels.BindingContext.ListenUriBaseAddress" />
+
+            . This absolute address can be set using the <see
+             cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -366,8 +585,14 @@
       </Docs>
     </Member>
     <Member MemberName="RemainingBindingElements">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.BindingElementCollection RemainingBindingElements { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.BindingElementCollection RemainingBindingElements" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.BindingElementCollection RemainingBindingElements { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.BindingElementCollection RemainingBindingElements"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

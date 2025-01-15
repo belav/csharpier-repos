@@ -4,11 +4,10 @@
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <DebugType />
     <Optimize>True</Optimize>
-   <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildProjectName).cs" />
-
     <CLRTestEnvironmentVariable Include="DOTNET_TieredCompilation" Value="1" />
     <CLRTestEnvironmentVariable Include="DOTNET_TC_QuickJitForLoops" Value="1" />
     <CLRTestEnvironmentVariable Include="DOTNET_TC_OnStackReplacement" Value="1" />

@@ -11,8 +11,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A snapline's priority acts as a suggestion to visual designers about how to treat a snapline with respect to its peers. The layout engine uses a simple method of determining whether to display the snaplines for a control: only the highest priority snaplines, including those with a value of <see cref="F:System.Windows.Forms.Design.Behavior.SnapLinePriority.Always" />, are shown for each orientation—vertical or horizontal.</para>
-      <para>To set the priority of a snapline, a <see cref="T:System.Windows.Forms.Design.Behavior.SnapLinePriority" /> enumeration is specified when creating an instance of the <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" /> class.</para>
+      <para
+        >A snapline's priority acts as a suggestion to visual designers about how to treat a snapline with respect to its peers. The layout engine uses a simple method of determining whether to display the snaplines for a control: only the highest priority snaplines, including those with a value of <see
+         cref="F:System.Windows.Forms.Design.Behavior.SnapLinePriority.Always" />
+
+        , are shown for each orientation—vertical or horizontal.</para
+      >
+      <para
+        >To set the priority of a snapline, a <see
+         cref="T:System.Windows.Forms.Design.Behavior.SnapLinePriority" />
+
+         enumeration is specified when creating an instance of the <see
+         cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

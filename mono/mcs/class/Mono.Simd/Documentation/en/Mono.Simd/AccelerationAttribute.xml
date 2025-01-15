@@ -25,7 +25,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AccelerationAttribute (Mono.Simd.AccelMode mode);" />
+      <MemberSignature
+        Language="C#"
+        Value="public AccelerationAttribute (Mono.Simd.AccelMode mode);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -52,8 +55,7 @@
       <Docs>
         <summary>The minimum hardware required to accelerate this operation.</summary>
         <value>The minimum hardware requirements to accelerate this operation.</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
     </Member>
   </Members>

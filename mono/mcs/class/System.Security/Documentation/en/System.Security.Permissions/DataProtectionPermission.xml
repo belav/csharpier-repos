@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataProtectionPermission" FullName="System.Security.Permissions.DataProtectionPermission">
-  <TypeSignature Language="C#" Value="public sealed class DataProtectionPermission : System.Security.CodeAccessPermission, System.Security.Permissions.IUnrestrictedPermission" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit DataProtectionPermission extends System.Security.CodeAccessPermission implements class System.Security.Permissions.IUnrestrictedPermission" />
+<Type
+  Name="DataProtectionPermission"
+  FullName="System.Security.Permissions.DataProtectionPermission"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DataProtectionPermission : System.Security.CodeAccessPermission, System.Security.Permissions.IUnrestrictedPermission"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit DataProtectionPermission extends System.Security.CodeAccessPermission implements class System.Security.Permissions.IUnrestrictedPermission"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Security</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,7 +28,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This permission is used to control the ability to encrypt data and memory using the <see cref="T:System.Security.Cryptography.ProtectedData" /> and <see cref="T:System.Security.Cryptography.ProtectedMemory" /> classes.</para>
+      <para
+        >This permission is used to control the ability to encrypt data and memory using the <see
+         cref="T:System.Security.Cryptography.ProtectedData" />
+
+         and <see
+         cref="T:System.Security.Cryptography.ProtectedMemory" />
+
+         classes.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -28,8 +45,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DataProtectionPermission (System.Security.Permissions.DataProtectionPermissionFlags flags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.DataProtectionPermissionFlags flags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DataProtectionPermission (System.Security.Permissions.DataProtectionPermissionFlags flags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.DataProtectionPermissionFlags flags) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -44,13 +67,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Permissions.DataProtectionPermission" /> class with the specified permission flags. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Permissions.DataProtectionPermission" />
+
+             class with the specified permission flags. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DataProtectionPermission (System.Security.Permissions.PermissionState state);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.PermissionState state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DataProtectionPermission (System.Security.Permissions.PermissionState state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.PermissionState state) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -67,15 +101,29 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Permissions.DataProtectionPermission" /> class with the specified permission state. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Permissions.DataProtectionPermission" />
+
+             class with the specified permission state. </para
+          >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.Permissions.PermissionState" />
+
+           values.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Copy">
       <MemberSignature Language="C#" Value="public override System.Security.IPermission Copy ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Copy() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Copy() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -102,8 +150,14 @@
       </Docs>
     </Member>
     <Member MemberName="Flags">
-      <MemberSignature Language="C#" Value="public System.Security.Permissions.DataProtectionPermissionFlags Flags { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Permissions.DataProtectionPermissionFlags Flags" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Permissions.DataProtectionPermissionFlags Flags { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Permissions.DataProtectionPermissionFlags Flags"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -117,7 +171,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property specifies whether the Protect and Unprotect methods of the <see cref="T:System.Security.Cryptography.ProtectedData" /> and <see cref="T:System.Security.Cryptography.ProtectedMemory" /> classes can be used.</para>
+          <para
+            >This property specifies whether the Protect and Unprotect methods of the <see
+             cref="T:System.Security.Cryptography.ProtectedData" />
+
+             and <see
+             cref="T:System.Security.Cryptography.ProtectedMemory" />
+
+             classes can be used.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -126,8 +188,14 @@
       </Docs>
     </Member>
     <Member MemberName="FromXml">
-      <MemberSignature Language="C#" Value="public override void FromXml (System.Security.SecurityElement e);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void FromXml(class System.Security.SecurityElement e) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void FromXml (System.Security.SecurityElement e);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void FromXml(class System.Security.SecurityElement e) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -144,7 +212,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Security.Permissions.DataProtectionPermission.FromXml(System.Security.SecurityElement)" /> method reconstructs a <see cref="T:System.Security.Permissions.DataProtectionPermission" /> object from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" /> class. Use the <see cref="M:System.Security.Permissions.DataProtectionPermission.ToXml" /> method to XML-encode the <see cref="T:System.Security.Permissions.DataProtectionPermission" />, including state information.</para>
+          <para
+            >The <see
+             cref="M:System.Security.Permissions.DataProtectionPermission.FromXml(System.Security.SecurityElement)" />
+
+             method reconstructs a <see
+             cref="T:System.Security.Permissions.DataProtectionPermission" />
+
+             object from an XML encoding defined by the <see
+             cref="T:System.Security.SecurityElement" />
+
+             class. Use the <see
+             cref="M:System.Security.Permissions.DataProtectionPermission.ToXml" />
+
+             method to XML-encode the <see
+             cref="T:System.Security.Permissions.DataProtectionPermission" />
+
+            , including state information.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -153,8 +238,14 @@
       </Docs>
     </Member>
     <Member MemberName="Intersect">
-      <MemberSignature Language="C#" Value="public override System.Security.IPermission Intersect (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Intersect(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.IPermission Intersect (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Intersect(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -181,12 +272,21 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A permission to intersect with the current permission. It must be the same type as the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A permission to intersect with the current permission. It must be the same type as the current permission. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
-      <MemberSignature Language="C#" Value="public override bool IsSubsetOf (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsSubsetOf(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool IsSubsetOf (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsSubsetOf(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -202,7 +302,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained in the specified permission.  For example, a permission for <see cref="F:System.Security.Permissions.DataProtectionPermissionFlags.ProtectData" /> access is a subset of a permission for <see cref="F:System.Security.Permissions.DataProtectionPermissionFlags.AllFlags" /> access.</para>
+          <para
+            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained in the specified permission.  For example, a permission for <see
+             cref="F:System.Security.Permissions.DataProtectionPermissionFlags.ProtectData" />
+
+             access is a subset of a permission for <see
+             cref="F:System.Security.Permissions.DataProtectionPermissionFlags.AllFlags" />
+
+             access.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -213,12 +321,18 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A permission to test for the subset relationship. This permission must be the same type as the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A permission to test for the subset relationship. This permission must be the same type as the current permission. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
       <MemberSignature Language="C#" Value="public bool IsUnrestricted ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsUnrestricted() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsUnrestricted() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -245,8 +359,14 @@
       </Docs>
     </Member>
     <Member MemberName="ToXml">
-      <MemberSignature Language="C#" Value="public override System.Security.SecurityElement ToXml ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.SecurityElement ToXml() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.SecurityElement ToXml ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.SecurityElement ToXml() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -260,7 +380,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Security.Permissions.DataProtectionPermission.FromXml(System.Security.SecurityElement)" /> method to restore the state information from a <see cref="T:System.Security.SecurityElement" />.</para>
+          <para
+            >Use the <see
+             cref="M:System.Security.Permissions.DataProtectionPermission.FromXml(System.Security.SecurityElement)" />
+
+             method to restore the state information from a <see
+             cref="T:System.Security.SecurityElement" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -273,8 +401,14 @@
       </Docs>
     </Member>
     <Member MemberName="Union">
-      <MemberSignature Language="C#" Value="public override System.Security.IPermission Union (System.Security.IPermission target);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission Union(class System.Security.IPermission target) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.IPermission Union (System.Security.IPermission target);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission Union(class System.Security.IPermission target) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -290,7 +424,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The result of a call to <see cref="M:System.Security.Permissions.DataProtectionPermission.Union(System.Security.IPermission)" /> is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para>
+          <para
+            >The result of a call to <see
+             cref="M:System.Security.Permissions.DataProtectionPermission.Union(System.Security.IPermission)" />
+
+             is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -301,7 +440,10 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />A permission to combine with the current permission. It must be of the same type as the current permission. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A permission to combine with the current permission. It must be of the same type as the current permission. </param
+        >
       </Docs>
     </Member>
   </Members>

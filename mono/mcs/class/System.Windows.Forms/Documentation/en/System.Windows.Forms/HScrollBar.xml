@@ -13,8 +13,36 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Most controls that need scroll bars already provide them and do not require this control. This is true of a multiline <see cref="T:System.Windows.Forms.TextBox" /> control, a <see cref="T:System.Windows.Forms.ListBox" />, and a <see cref="T:System.Windows.Forms.ComboBox" />, for example.</para>
-      <para>You can use this control to implement scrolling in containers that do not provide their own scroll bars such as a <see cref="T:System.Windows.Forms.PictureBox" /> or for user input of numeric data. The numeric data can be displayed in a control or used in code. The <see cref="P:System.Windows.Forms.ScrollBar.Minimum" /> and <see cref="P:System.Windows.Forms.ScrollBar.Maximum" /> properties determine the range of values the user can select. The <see cref="P:System.Windows.Forms.ScrollBar.LargeChange" /> property determines the effect of clicking within the scroll bar but outside the scroll box. The <see cref="P:System.Windows.Forms.ScrollBar.SmallChange" /> property determines the effect of clicking the scroll arrows at each end of the control.</para>
+      <para
+        >Most controls that need scroll bars already provide them and do not require this control. This is true of a multiline <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         control, a <see
+         cref="T:System.Windows.Forms.ListBox" />
+
+        , and a <see
+         cref="T:System.Windows.Forms.ComboBox" />
+
+        , for example.</para
+      >
+      <para
+        >You can use this control to implement scrolling in containers that do not provide their own scroll bars such as a <see
+         cref="T:System.Windows.Forms.PictureBox" />
+
+         or for user input of numeric data. The numeric data can be displayed in a control or used in code. The <see
+         cref="P:System.Windows.Forms.ScrollBar.Minimum" />
+
+         and <see
+         cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+
+         properties determine the range of values the user can select. The <see
+         cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+
+         property determines the effect of clicking within the scroll bar but outside the scroll box. The <see
+         cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+
+         property determines the effect of clicking the scroll arrows at each end of the control.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,7 +58,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.HScrollBar" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.HScrollBar" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -39,7 +72,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateParams">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.CreateParams CreateParams { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.CreateParams CreateParams { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.CreateParams</ReturnType>
@@ -58,7 +94,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DefaultSize">
-      <MemberSignature Language="C#" Value="protected override System.Drawing.Size DefaultSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Drawing.Size DefaultSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>

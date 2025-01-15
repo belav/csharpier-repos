@@ -2,7 +2,10 @@
 <clause number="17.5.5" title="Sealed methods">
   <paragraph>When an instance method declaration includes a sealed modifier, that method is said to be a sealed method. A sealed method overrides an inherited virtual method with the same signature. An override method can also be marked with the sealed modifier. Use of this modifier prevents a derived class from further overriding the method. </paragraph>
   <paragraph>
-    <example>[Example: The example <code_example><![CDATA[
+    <example
+      >[Example: The example <code_example
+      >
+        <![CDATA[
 using System;  
 class A  
 {  
@@ -28,6 +31,10 @@ class C: B
       Console.WriteLine("C.G");  
    }  
 }  
-]]></code_example>the class B provides two override methods: an F method that has the sealed modifier and a G method that does not. B's use of the sealed modifier prevents C from further overriding F. end example]</example>
+]]>
+      </code_example>
+
+      the class B provides two override methods: an F method that has the sealed modifier and a G method that does not. B's use of the sealed modifier prevents C from further overriding F. end example]</example
+    >
   </paragraph>
 </clause>

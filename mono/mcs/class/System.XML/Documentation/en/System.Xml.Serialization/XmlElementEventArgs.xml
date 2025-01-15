@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlElementEventArgs" FullName="System.Xml.Serialization.XmlElementEventArgs">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class XmlElementEventArgs : EventArgs" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XmlElementEventArgs extends System.EventArgs" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class XmlElementEventArgs : EventArgs"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XmlElementEventArgs extends System.EventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -17,18 +24,46 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For more information about handling events, see <format type="text/html"><a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a></format> and <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-      <para>The <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" /> event occurs only when you call the <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" /> method.</para>
+      <para
+        >For more information about handling events, see <format
+         type="text/html">
+          <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
+        </format>
+
+         and <format
+         type="text/html">
+          <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+        </format>
+
+        .</para
+      >
+      <para
+        >The <see
+         cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" />
+
+         event occurs only when you call the <see
+         cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Element">
       <MemberSignature Language="C#" Value="public System.Xml.XmlElement Element { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.XmlElement Element" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.XmlElement Element"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -84,11 +119,24 @@
         <value>To be added: an object of type 'int'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Xml.Serialization.XmlElementEventArgs.LineNumber" /> property returns a value only if the underlying XML reader is an <see cref="T:System.Xml.XmlTextReader" />.</para>
+          <para
+            >The <see
+             cref="P:System.Xml.Serialization.XmlElementEventArgs.LineNumber" />
+
+             property returns a value only if the underlying XML reader is an <see
+             cref="T:System.Xml.XmlTextReader" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the line number where the unknown element was encountered if the XML reader is an <see cref="T:System.Xml.XmlTextReader" />.</para>
+          <para
+            >Gets the line number where the unknown element was encountered if the XML reader is an <see
+             cref="T:System.Xml.XmlTextReader" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -109,7 +157,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the place in the line where the unknown element occurs if the XML reader is an <see cref="T:System.Xml.XmlTextReader" />.</para>
+          <para
+            >Gets the place in the line where the unknown element occurs if the XML reader is an <see
+             cref="T:System.Xml.XmlTextReader" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -130,7 +183,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the object the <see cref="T:System.Xml.Serialization.XmlSerializer" /> is deserializing.</para>
+          <para
+            >Gets the object the <see
+             cref="T:System.Xml.Serialization.XmlSerializer" />
+
+             is deserializing.</para
+          >
         </summary>
       </Docs>
     </Member>

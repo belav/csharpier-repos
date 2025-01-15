@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IcmpV4Statistics" FullName="System.Net.NetworkInformation.IcmpV4Statistics">
   <TypeSignature Language="C#" Value="public abstract class IcmpV4Statistics" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit IcmpV4Statistics extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit IcmpV4Statistics extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,7 +19,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>ICMPv4 is a set of error and informational messages for use with Internet Protocol version 4. ICMP version 4 is defined in IETF RFC 792.</para>
-      <para>This class is used by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIcmpV4Statistics" /> method to return ICMPv4 traffic information.</para>
+      <para
+        >This class is used by the <see
+         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIcmpV4Statistics" />
+
+         method to return ICMPv4 traffic information.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -26,7 +34,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected IcmpV4Statistics ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,17 +48,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />.</para>
+          <para
+            >This constructor can be called only by classes that derive from <see
+             cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IcmpV4Statistics" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AddressMaskRepliesReceived">
-      <MemberSignature Language="C#" Value="public abstract long AddressMaskRepliesReceived { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 AddressMaskRepliesReceived" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long AddressMaskRepliesReceived { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 AddressMaskRepliesReceived"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -94,8 +121,14 @@
       </Docs>
     </Member>
     <Member MemberName="AddressMaskRequestsReceived">
-      <MemberSignature Language="C#" Value="public abstract long AddressMaskRequestsReceived { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 AddressMaskRequestsReceived" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long AddressMaskRequestsReceived { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 AddressMaskRequestsReceived"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -118,7 +151,10 @@
       </Docs>
     </Member>
     <Member MemberName="AddressMaskRequestsSent">
-      <MemberSignature Language="C#" Value="public abstract long AddressMaskRequestsSent { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long AddressMaskRequestsSent { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 AddressMaskRequestsSent" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -142,8 +178,14 @@
       </Docs>
     </Member>
     <Member MemberName="DestinationUnreachableMessagesReceived">
-      <MemberSignature Language="C#" Value="public abstract long DestinationUnreachableMessagesReceived { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 DestinationUnreachableMessagesReceived" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long DestinationUnreachableMessagesReceived { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 DestinationUnreachableMessagesReceived"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -180,8 +222,14 @@
       </Docs>
     </Member>
     <Member MemberName="DestinationUnreachableMessagesSent">
-      <MemberSignature Language="C#" Value="public abstract long DestinationUnreachableMessagesSent { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 DestinationUnreachableMessagesSent" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long DestinationUnreachableMessagesSent { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 DestinationUnreachableMessagesSent"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -407,8 +455,14 @@
       </Docs>
     </Member>
     <Member MemberName="ParameterProblemsReceived">
-      <MemberSignature Language="C#" Value="public abstract long ParameterProblemsReceived { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 ParameterProblemsReceived" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long ParameterProblemsReceived { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 ParameterProblemsReceived"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -551,8 +605,14 @@
       </Docs>
     </Member>
     <Member MemberName="TimeExceededMessagesReceived">
-      <MemberSignature Language="C#" Value="public abstract long TimeExceededMessagesReceived { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 TimeExceededMessagesReceived" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long TimeExceededMessagesReceived { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 TimeExceededMessagesReceived"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -575,7 +635,10 @@
       </Docs>
     </Member>
     <Member MemberName="TimeExceededMessagesSent">
-      <MemberSignature Language="C#" Value="public abstract long TimeExceededMessagesSent { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long TimeExceededMessagesSent { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 TimeExceededMessagesSent" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -599,7 +662,10 @@
       </Docs>
     </Member>
     <Member MemberName="TimestampRepliesReceived">
-      <MemberSignature Language="C#" Value="public abstract long TimestampRepliesReceived { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long TimestampRepliesReceived { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 TimestampRepliesReceived" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -647,8 +713,14 @@
       </Docs>
     </Member>
     <Member MemberName="TimestampRequestsReceived">
-      <MemberSignature Language="C#" Value="public abstract long TimestampRequestsReceived { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 TimestampRequestsReceived" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long TimestampRequestsReceived { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 TimestampRequestsReceived"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

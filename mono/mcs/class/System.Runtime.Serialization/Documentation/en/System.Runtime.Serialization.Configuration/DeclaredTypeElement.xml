@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DeclaredTypeElement" FullName="System.Runtime.Serialization.Configuration.DeclaredTypeElement">
-  <TypeSignature Language="C#" Value="public sealed class DeclaredTypeElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed DeclaredTypeElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="DeclaredTypeElement"
+  FullName="System.Runtime.Serialization.Configuration.DeclaredTypeElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DeclaredTypeElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed DeclaredTypeElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Serialization</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,17 +23,32 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class is used to handle the XML element that specifies the declared type and contains its collection of known types.</para>
-      <para>For an example of adding known types to the collection using configuration, see <format type="text/html"><a href="f35184e4-9d9e-4d37-8fb4-d5b58220eb3e">&lt;declaredTypes&gt;</a></format>.</para>
+      <para
+        >For an example of adding known types to the collection using configuration, see <format
+         type="text/html">
+          <a href="f35184e4-9d9e-4d37-8fb4-d5b58220eb3e">&lt;declaredTypes&gt;</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Handles the XML elements used to add known types that are used for serialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para>
+      <para
+        >Handles the XML elements used to add known types that are used for serialization by the <see
+         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DeclaredTypeElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,13 +58,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DeclaredTypeElement (string typeName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string typeName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string typeName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -52,15 +84,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" /> class with the specified type name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" />
+
+             class with the specified type name.</para
+          >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the type that requires a collection of known types.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the type that requires a collection of known types.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="KnownTypes">
-      <MemberSignature Language="C#" Value="public System.Runtime.Serialization.Configuration.TypeElementCollection KnownTypes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Runtime.Serialization.Configuration.TypeElementCollection KnownTypes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Serialization.Configuration.TypeElementCollection KnownTypes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Runtime.Serialization.Configuration.TypeElementCollection KnownTypes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -84,7 +130,10 @@
     </Member>
     <Member MemberName="PostDeserialize">
       <MemberSignature Language="C#" Value="protected override void PostDeserialize ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void PostDeserialize() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void PostDeserialize() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -99,8 +148,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

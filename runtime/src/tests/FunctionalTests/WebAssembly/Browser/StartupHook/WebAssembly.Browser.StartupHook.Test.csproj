@@ -2,9 +2,7 @@
   <PropertyGroup>
     <StartupHookSupport>true</StartupHookSupport>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\..\TestAssets\StartupHookForFunctionalTest\StartupHookForFunctionalTest.csproj" />
   </ItemGroup>
-
 </Project>

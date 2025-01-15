@@ -21,15 +21,13 @@
     </span>
   </div>
   <div id="GHTSubTest5" testname="System.Web.UI.WebControls.HyperLink: Default value">
-    <a id="ctrl_4">
-    </a>
+    <a id="ctrl_4"></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest6" testname="System.Web.UI.WebControls.HyperLink: Valid value">
-    <a id="ctrl_5" title="ToolTip valid value">
-    </a>
+    <a id="ctrl_5" title="ToolTip valid value"></a>
   </div>
   <div id="GHTSubTest7" testname="System.Web.UI.WebControls.Image: Default value">
     <img id="ctrl_6" alt="" border="0" />
@@ -50,37 +48,31 @@
     <input id="ctrl_9" alt="" border="0" title="ToolTip valid value" type="image" name="ctrl_9" />
   </div>
   <div id="GHTSubTest11" testname="System.Web.UI.WebControls.Label: Default value">
-    <span id="ctrl_10">
-    </span>
+    <span id="ctrl_10"></span>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest12" testname="System.Web.UI.WebControls.Label: Valid value">
-    <span id="ctrl_11" title="ToolTip valid value">
-    </span>
+    <span id="ctrl_11" title="ToolTip valid value"></span>
   </div>
   <div id="GHTSubTest13" testname="System.Web.UI.WebControls.LinkButton: Default value">
-    <a href="javascript:__doPostBack('ctrl_12','')" id="ctrl_12">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_12','')" id="ctrl_12"></a>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest14" testname="System.Web.UI.WebControls.LinkButton: Valid value">
-    <a href="javascript:__doPostBack('ctrl_13','')" id="ctrl_13" title="ToolTip valid value">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_13','')" id="ctrl_13" title="ToolTip valid value"></a>
   </div>
   <div id="GHTSubTest15" testname="System.Web.UI.WebControls.Panel: Default value">
-    <div id="ctrl_14">
-    </div>
+    <div id="ctrl_14"></div>
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest16" testname="System.Web.UI.WebControls.Panel: Valid value">
-    <div id="ctrl_15" title="ToolTip valid value">
-    </div>
+    <div id="ctrl_15" title="ToolTip valid value"></div>
   </div>
   <div id="GHTSubTest17" testname="System.Web.UI.WebControls.RadioButton: Default value">
     <input id="ctrl_16" type="radio" name="ctrl_16" value="ctrl_16" />
@@ -104,45 +96,93 @@
   </div>
   <div id="GHTSubTest21" testname="System.Web.UI.WebControls.DropDownList: Default value">
     <select id="ctrl_20" name="ctrl_20">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest22" testname="System.Web.UI.WebControls.DropDownList: Valid value">
     <select id="ctrl_21" name="ctrl_21">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest23" testname="System.Web.UI.WebControls.ListBox: Default value">
     <select id="ctrl_22" size="4" name="ctrl_22">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
     <span>
       <br />
     </span>
   </div>
   <div id="GHTSubTest24" testname="System.Web.UI.WebControls.ListBox: Valid value">
     <select id="ctrl_23" size="4" name="ctrl_23">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest25" testname="System.Web.UI.WebControls.RadioButtonList: Default value">
     <table id="ctrl_24" border="0">
@@ -290,7 +330,14 @@
     </span>
   </div>
   <div id="GHTSubTest30" testname="System.Web.UI.WebControls.DataGrid: Valid value">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" title="ToolTip valid value" rules="all" id="ctrl_29">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      title="ToolTip valid value"
+      rules="all"
+      id="ctrl_29"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>

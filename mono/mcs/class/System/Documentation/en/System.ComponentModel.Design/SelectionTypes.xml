@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SelectionTypes" FullName="System.ComponentModel.Design.SelectionTypes">
   <TypeSignature Language="C#" Maintainer="auto" Value="public enum SelectionTypes" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SelectionTypes extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed SelectionTypes extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -25,8 +28,27 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Components of a designer document can be selected using the <see cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" /> method of the <see cref="T:System.ComponentModel.Design.ISelectionService" />. Some types of actions can operate on a selected component or group of selected components. The <see cref="T:System.ComponentModel.Design.ISelectionService" /> keeps track of the selection type of the current selection. These selection type identifiers indicate whether the selection was completed using a single click, a mouse down or mouse up selection, whether the selection should replace the previous selection, or use the default selection mode.</para>
-      <para>Use the <see cref="T:System.ComponentModel.Design.SelectionTypes" /> enumeration to specify the type of a selection when setting a new selection using the <see cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" /> method.</para>
+      <para
+        >Components of a designer document can be selected using the <see
+         cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
+
+         method of the <see
+         cref="T:System.ComponentModel.Design.ISelectionService" />
+
+        . Some types of actions can operate on a selected component or group of selected components. The <see
+         cref="T:System.ComponentModel.Design.ISelectionService" />
+
+         keeps track of the selection type of the current selection. These selection type identifiers indicate whether the selection was completed using a single click, a mouse down or mouse up selection, whether the selection should replace the previous selection, or use the default selection mode.</para
+      >
+      <para
+        >Use the <see
+         cref="T:System.ComponentModel.Design.SelectionTypes" />
+
+         enumeration to specify the type of a selection when setting a new selection using the <see
+         cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -36,7 +58,10 @@
   <Members>
     <Member MemberName="Add">
       <MemberSignature Language="C#" Value="Add" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Add = int32(64)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Add = int32(64)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -54,7 +79,10 @@
     </Member>
     <Member MemberName="Auto">
       <MemberSignature Language="C#" Value="Auto" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Auto = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Auto = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -72,7 +100,10 @@
     </Member>
     <Member MemberName="Click">
       <MemberSignature Language="C#" Value="Click" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Click = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Click = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -98,7 +129,10 @@
     </Member>
     <Member MemberName="MouseDown">
       <MemberSignature Language="C#" Value="MouseDown" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes MouseDown = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes MouseDown = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -124,7 +158,10 @@
     </Member>
     <Member MemberName="MouseUp">
       <MemberSignature Language="C#" Value="MouseUp" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes MouseUp = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes MouseUp = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -150,7 +187,10 @@
     </Member>
     <Member MemberName="Normal">
       <MemberSignature Language="C#" Value="Normal" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Normal = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Normal = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -176,7 +216,10 @@
     </Member>
     <Member MemberName="Primary">
       <MemberSignature Language="C#" Value="Primary" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Primary = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Primary = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -194,7 +237,10 @@
     </Member>
     <Member MemberName="Remove">
       <MemberSignature Language="C#" Value="Remove" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Remove = int32(128)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Remove = int32(128)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -212,7 +258,10 @@
     </Member>
     <Member MemberName="Replace">
       <MemberSignature Language="C#" Value="Replace" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Replace = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Replace = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -233,7 +282,10 @@
     </Member>
     <Member MemberName="Toggle">
       <MemberSignature Language="C#" Value="Toggle" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Toggle = int32(32)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Toggle = int32(32)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -245,13 +297,24 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents a toggle selection that switches between the current selection and the provided selection. If a component is already selected and is passed into <see cref="Overload:System.ComponentModel.Design.ISelectionService.SetSelectedComponents" /> with a selection type of <see cref="F:System.ComponentModel.Design.SelectionTypes.Toggle" />, the component selection will be canceled.</para>
+          <para
+            >Represents a toggle selection that switches between the current selection and the provided selection. If a component is already selected and is passed into <see
+             cref="Overload:System.ComponentModel.Design.ISelectionService.SetSelectedComponents" />
+
+             with a selection type of <see
+             cref="F:System.ComponentModel.Design.SelectionTypes.Toggle" />
+
+            , the component selection will be canceled.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Valid">
       <MemberSignature Language="C#" Value="Valid" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Valid = int32(31)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ComponentModel.Design.SelectionTypes Valid = int32(31)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -271,7 +334,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Identifies the valid selection types as <see cref="F:System.ComponentModel.Design.SelectionTypes.Normal" />, <see cref="F:System.ComponentModel.Design.SelectionTypes.Replace" />, <see cref="F:System.ComponentModel.Design.SelectionTypes.MouseDown" />, <see cref="F:System.ComponentModel.Design.SelectionTypes.MouseUp" />, or <see cref="F:System.ComponentModel.Design.SelectionTypes.Click" />.</para>
+          <para
+            >Identifies the valid selection types as <see
+             cref="F:System.ComponentModel.Design.SelectionTypes.Normal" />
+
+            , <see
+             cref="F:System.ComponentModel.Design.SelectionTypes.Replace" />
+
+            , <see
+             cref="F:System.ComponentModel.Design.SelectionTypes.MouseDown" />
+
+            , <see
+             cref="F:System.ComponentModel.Design.SelectionTypes.MouseUp" />
+
+            , or <see
+             cref="F:System.ComponentModel.Design.SelectionTypes.Click" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

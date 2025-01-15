@@ -1,6 +1,9 @@
 <Type Name="Widget+IMenuItem" FullName="Mono.DocTest.Widget+IMenuItem">
   <TypeSignature Language="C#" Value="public interface Widget.IMenuItem" />
-  <TypeSignature Language="ILAsm" Value=".class nested public interface auto ansi abstract Widget/IMenuItem" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested public interface auto ansi abstract Widget/IMenuItem"
+  />
   <AssemblyInfo>
     <AssemblyName>DocTest</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -9,12 +12,18 @@
   <Docs>
     <summary>To be added.</summary>
     <remarks>
-      <c>T:Mono.DocTest.Widget.IMenuItem</c>.</remarks>
+      <c>T:Mono.DocTest.Widget.IMenuItem</c>
+
+      .</remarks
+    >
   </Docs>
   <Members>
     <Member MemberName="A">
       <MemberSignature Language="C#" Value="public void A ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void A() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void A() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -26,7 +35,10 @@
       <Docs>
         <summary>To be added.</summary>
         <remarks>
-          <c>M:Mono.DocTest.Widget.IMenuItem.A</c>.</remarks>
+          <c>M:Mono.DocTest.Widget.IMenuItem.A</c>
+
+          .</remarks
+        >
       </Docs>
     </Member>
     <Member MemberName="B">
@@ -43,7 +55,10 @@
         <summary>To be added.</summary>
         <value>To be added.</value>
         <remarks>
-          <c>P:Mono.DocTest.Widget.IMenuItem.P</c>.</remarks>
+          <c>P:Mono.DocTest.Widget.IMenuItem.P</c>
+
+          .</remarks
+        >
       </Docs>
     </Member>
   </Members>

@@ -44,7 +44,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Refreshes the current page so that the <see cref="T:System.Web.UI.WebControls.Login" /> control can display an error message.</para>
+          <para
+            >Refreshes the current page so that the <see
+             cref="T:System.Web.UI.WebControls.Login" />
+
+             control can display an error message.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

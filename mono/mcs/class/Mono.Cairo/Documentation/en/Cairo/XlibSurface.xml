@@ -11,8 +11,7 @@
   <Interfaces />
   <Docs>
     <summary>X Window System rendering using XLib</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -34,7 +33,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XlibSurface (IntPtr display, IntPtr drawable, IntPtr visual, int width, int height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public XlibSurface (IntPtr display, IntPtr drawable, IntPtr visual, int width, int height);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="display" Type="System.IntPtr" />
@@ -46,14 +48,37 @@
       <Docs>
         <param name="display">an X Display</param>
         <param name="drawable">an X Drawable, (a Pixmap or a Window)</param>
-        <param name="visual">the visual to use for drawing to drawable. The depth of the visual must match the depth of the drawable. Currently, only TrueColor visuals are fully supported.</param>
-        <param name="width">the current width of <paramref name="drawable" />.</param>
-        <param name="height"> the current height of <paramref name="drawable" />.</param>
+        <param name="visual"
+          >the visual to use for drawing to drawable. The depth of the visual must match the depth of the drawable. Currently, only TrueColor visuals are fully supported.</param
+        >
+        <param name="width"
+          >the current width of <paramref
+           name="drawable" />
+
+          .</param
+        >
+        <param name="height"
+          > the current height of <paramref
+           name="drawable" />
+
+          .</param
+        >
         <summary>Creates an Xlib surface that draws to the given drawable.</summary>
-        <remarks>The way that colors are represented in the drawable is specified by the provided visual.
-		  <block subset="none" type="note">
-			If <paramref name="drawable" /> is a Window, then the function <see cref="M:Cairo.XlibSurface.SetSize()" /> must be called whenever the size of the window changes.
-		  </block></remarks>
+        <remarks
+          >The way that colors are represented in the drawable is specified by the provided visual.
+		  <block
+           subset="none" type="note"
+            >
+			If <paramref
+             name="drawable" />
+
+             is a Window, then the function <see
+             cref="M:Cairo.XlibSurface.SetSize()" />
+
+             must be called whenever the size of the window changes.
+		  </block
+          >
+        </remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -112,7 +137,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FromBitmap">
-      <MemberSignature Language="C#" Value="public static Cairo.XlibSurface FromBitmap (IntPtr display, IntPtr bitmap, IntPtr screen, int width, int height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Cairo.XlibSurface FromBitmap (IntPtr display, IntPtr bitmap, IntPtr screen, int width, int height);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Cairo.XlibSurface</ReturnType>
@@ -174,7 +202,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetDrawable">
-      <MemberSignature Language="C#" Value="public void SetDrawable (IntPtr drawable, int width, int height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetDrawable (IntPtr drawable, int width, int height);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

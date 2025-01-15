@@ -13,7 +13,15 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Controls how the values from the data source will be applied to existing rows when using the <see cref="Overload:System.Data.DataTable.Load" /> or <see cref="Overload:System.Data.DataSet.Load" /> method.</para>
+      <para
+        >Controls how the values from the data source will be applied to existing rows when using the <see
+         cref="Overload:System.Data.DataTable.Load" />
+
+         or <see
+         cref="Overload:System.Data.DataSet.Load" />
+
+         method.</para
+      >
     </summary>
   </Docs>
   <Members>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WsdlHelpGeneratorElement" FullName="System.Web.Services.Configuration.WsdlHelpGeneratorElement">
-  <TypeSignature Language="C#" Value="public sealed class WsdlHelpGeneratorElement : System.Configuration.ConfigurationElement" />
+<Type
+  Name="WsdlHelpGeneratorElement"
+  FullName="System.Web.Services.Configuration.WsdlHelpGeneratorElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class WsdlHelpGeneratorElement : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -27,7 +33,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.WsdlHelpGeneratorElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Configuration.WsdlHelpGeneratorElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -35,7 +46,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DeserializeElement">
-      <MemberSignature Language="C#" Value="protected override void DeserializeElement (System.Xml.XmlReader reader, bool serializeCollectionKey);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void DeserializeElement (System.Xml.XmlReader reader, bool serializeCollectionKey);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -80,7 +94,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -96,7 +113,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Reset">
-      <MemberSignature Language="C#" Value="protected override void Reset (System.Configuration.ConfigurationElement parentElement);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void Reset (System.Configuration.ConfigurationElement parentElement);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

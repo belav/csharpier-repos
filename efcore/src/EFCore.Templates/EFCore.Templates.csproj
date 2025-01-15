@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageId>Microsoft.EntityFrameworkCore.Templates</PackageId>
@@ -17,12 +16,10 @@
     <NoDefaultExcludes>true</NoDefaultExcludes>
     <IncludeSymbols>false</IncludeSymbols>
   </PropertyGroup>
-
   <ItemGroup>
     <Content Include="templates\**\*" Exclude="templates\**\bin\**;templates\**\obj\**" />
     <Compile Remove="**\*" />
   </ItemGroup>
-
   <ItemGroup>
     <GeneratedContent Include="..\EFCore.Design\Scaffolding\Internal\CSharpDbContextGenerator.tt">
       <PackagePath>content\templates\ef-templates\CodeTemplates\EFCore\DbContext.t4</PackagePath>
@@ -32,12 +29,14 @@
       <PackagePath>content\templates\ef-templates\CodeTemplates\EFCore\EntityType.t4</PackagePath>
     </GeneratedContent>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
-  <UsingTask TaskName="PatchTemplate" TaskFactory="RoslynCodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+  <UsingTask
+    TaskName="PatchTemplate"
+    TaskFactory="RoslynCodeTaskFactory"
+    AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll"
+  >
     <ParameterGroup>
       <TemplateFile ParameterType="System.String" Required="true" />
       <OutputPath ParameterType="System.String" Required="true" />
@@ -113,19 +112,21 @@ if (!linePragmasRemoved
       </Code>
     </Task>
   </UsingTask>
-
   <PropertyGroup>
     <BeforePack>$(BeforePack);GenerateContent</BeforePack>
   </PropertyGroup>
-
   <Target Name="GenerateContent">
-    <PatchTemplate TemplateFile="%(GeneratedContent.Identity)"
-                   OutputPath="$(IntermediateOutputPath)%(GeneratedContent.PackagePath)"
-                   IsDbContext="%(GeneratedContent.IsDbContext)"
-                   VersionPrefix="$(VersionPrefix)"/>
+    <PatchTemplate
+      TemplateFile="%(GeneratedContent.Identity)"
+      OutputPath="$(IntermediateOutputPath)%(GeneratedContent.PackagePath)"
+      IsDbContext="%(GeneratedContent.IsDbContext)"
+      VersionPrefix="$(VersionPrefix)"
+    />
     <ItemGroup>
-      <Content Include="$(IntermediateOutputPath)%(GeneratedContent.PackagePath)" PackagePath="$([System.IO.Path]::GetDirectoryName(%(GeneratedContent.PackagePath)))" />
+      <Content
+        Include="$(IntermediateOutputPath)%(GeneratedContent.PackagePath)"
+        PackagePath="$([System.IO.Path]::GetDirectoryName(%(GeneratedContent.PackagePath)))"
+      />
     </ItemGroup>
   </Target>
-
 </Project>

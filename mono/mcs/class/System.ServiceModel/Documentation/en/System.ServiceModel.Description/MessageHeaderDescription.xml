@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="MessageHeaderDescription" FullName="System.ServiceModel.Description.MessageHeaderDescription">
-  <TypeSignature Language="C#" Value="public class MessageHeaderDescription : System.ServiceModel.Description.MessagePartDescription" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit MessageHeaderDescription extends System.ServiceModel.Description.MessagePartDescription" />
+<Type
+  Name="MessageHeaderDescription"
+  FullName="System.ServiceModel.Description.MessageHeaderDescription"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class MessageHeaderDescription : System.ServiceModel.Description.MessagePartDescription"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit MessageHeaderDescription extends System.ServiceModel.Description.MessagePartDescription"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -19,8 +28,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public MessageHeaderDescription (string name, string ns);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, string ns) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public MessageHeaderDescription (string name, string ns);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, string ns) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,12 +48,23 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessageHeaderDescription" /> class with a specified qualified name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.MessageHeaderDescription" />
+
+             class with a specified qualified name.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the message header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the message header.</param
+        >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />The namespace of the message header.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The namespace of the message header.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Actor">

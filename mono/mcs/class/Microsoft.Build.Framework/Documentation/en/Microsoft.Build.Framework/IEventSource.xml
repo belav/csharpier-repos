@@ -11,12 +11,20 @@
     <since version="2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines the events raised by the build engine. Loggers receive an object implementing this interface in their <see cref="M:Microsoft.Build.Framework.ILogger.Initialize(Microsoft.Build.Framework.IEventSource)" /> method and use it to subscribe to the events they are interested in receiving.</para>
+      <para
+        >Defines the events raised by the build engine. Loggers receive an object implementing this interface in their <see
+         cref="M:Microsoft.Build.Framework.ILogger.Initialize(Microsoft.Build.Framework.IEventSource)" />
+
+         method and use it to subscribe to the events they are interested in receiving.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="AnyEventRaised">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.AnyEventHandler AnyEventRaised;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.AnyEventHandler AnyEventRaised;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.AnyEventHandler</ReturnType>
@@ -34,7 +42,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BuildFinished">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.BuildFinishedEventHandler BuildFinished;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.BuildFinishedEventHandler BuildFinished;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.BuildFinishedEventHandler</ReturnType>
@@ -52,7 +63,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BuildStarted">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.BuildStartedEventHandler BuildStarted;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.BuildStartedEventHandler BuildStarted;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.BuildStartedEventHandler</ReturnType>
@@ -70,7 +84,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CustomEventRaised">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.CustomBuildEventHandler CustomEventRaised;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.CustomBuildEventHandler CustomEventRaised;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.CustomBuildEventHandler</ReturnType>
@@ -88,7 +105,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ErrorRaised">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.BuildErrorEventHandler ErrorRaised;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.BuildErrorEventHandler ErrorRaised;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.BuildErrorEventHandler</ReturnType>
@@ -106,7 +126,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MessageRaised">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.BuildMessageEventHandler MessageRaised;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.BuildMessageEventHandler MessageRaised;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.BuildMessageEventHandler</ReturnType>
@@ -124,7 +147,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ProjectFinished">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.ProjectFinishedEventHandler ProjectFinished;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.ProjectFinishedEventHandler ProjectFinished;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.ProjectFinishedEventHandler</ReturnType>
@@ -142,7 +168,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ProjectStarted">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.ProjectStartedEventHandler ProjectStarted;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.ProjectStartedEventHandler ProjectStarted;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.ProjectStartedEventHandler</ReturnType>
@@ -160,7 +189,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="StatusEventRaised">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.BuildStatusEventHandler StatusEventRaised;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.BuildStatusEventHandler StatusEventRaised;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.BuildStatusEventHandler</ReturnType>
@@ -178,7 +210,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TargetFinished">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.TargetFinishedEventHandler TargetFinished;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.TargetFinishedEventHandler TargetFinished;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.TargetFinishedEventHandler</ReturnType>
@@ -196,7 +231,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TargetStarted">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.TargetStartedEventHandler TargetStarted;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.TargetStartedEventHandler TargetStarted;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.TargetStartedEventHandler</ReturnType>
@@ -214,7 +252,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TaskFinished">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.TaskFinishedEventHandler TaskFinished;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.TaskFinishedEventHandler TaskFinished;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.TaskFinishedEventHandler</ReturnType>
@@ -232,7 +273,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TaskStarted">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.TaskStartedEventHandler TaskStarted;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.TaskStartedEventHandler TaskStarted;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.TaskStartedEventHandler</ReturnType>
@@ -250,7 +294,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WarningRaised">
-      <MemberSignature Language="C#" Value="public event Microsoft.Build.Framework.BuildWarningEventHandler WarningRaised;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Microsoft.Build.Framework.BuildWarningEventHandler WarningRaised;"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.Framework.BuildWarningEventHandler</ReturnType>

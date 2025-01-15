@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="UriFormat" FullName="System.UriFormat">
   <TypeSignature Language="C#" Value="public enum UriFormat" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed UriFormat extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed UriFormat extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,10 +17,26 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" /> method to specify the level of character escaping in the returned URI.</para>
-      <para>RFC 2396 defines the standard escaping for URIs, and is available at <see cref="http://rfc-editor.org">http://rfc-editor.org</see>.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
+
+         method to specify the level of character escaping in the returned URI.</para
+      >
+      <para
+        >RFC 2396 defines the standard escaping for URIs, and is available at <see
+         cref="http://rfc-editor.org">http://rfc-editor.org</see>
+
+        .</para
+      >
       <para>
-        <see cref="F:System.UriFormat.SafeUnescaped" /> leaves the following characters escaped if the character has a reserved meaning in the requested <see cref="T:System.UriComponents" />: "%", "#", "?", "/", "\", and "@".</para>
+        <see cref="F:System.UriFormat.SafeUnescaped" />
+
+         leaves the following characters escaped if the character has a reserved meaning in the requested <see
+         cref="T:System.UriComponents" />
+
+        : "%", "#", "?", "/", "\", and "@".</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +46,10 @@
   <Members>
     <Member MemberName="SafeUnescaped">
       <MemberSignature Language="C#" Value="SafeUnescaped" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.UriFormat SafeUnescaped = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.UriFormat SafeUnescaped = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -46,7 +68,10 @@
     </Member>
     <Member MemberName="Unescaped">
       <MemberSignature Language="C#" Value="Unescaped" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.UriFormat Unescaped = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.UriFormat Unescaped = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -65,7 +90,10 @@
     </Member>
     <Member MemberName="UriEscaped">
       <MemberSignature Language="C#" Value="UriEscaped" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.UriFormat UriEscaped = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.UriFormat UriEscaped = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XNodeDocumentOrderComparer" FullName="System.Xml.Linq.XNodeDocumentOrderComparer">
-  <TypeSignature Language="C#" Value="public sealed class XNodeDocumentOrderComparer : System.Collections.Generic.IComparer&lt;System.Xml.Linq.XNode&gt;, System.Collections.IComparer" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit XNodeDocumentOrderComparer extends System.Object implements class System.Collections.Generic.IComparer`1&lt;class System.Xml.Linq.XNode&gt;, class System.Collections.IComparer" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class XNodeDocumentOrderComparer : System.Collections.Generic.IComparer<System.Xml.Linq.XNode>, System.Collections.IComparer"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit XNodeDocumentOrderComparer extends System.Object implements class System.Collections.Generic.IComparer`1<class System.Xml.Linq.XNode>, class System.Collections.IComparer"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml.Linq</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,8 +26,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class implements <unmanagedCodeEntityReference>IComparer</unmanagedCodeEntityReference> and <unmanagedCodeEntityReference>IComparer&lt;XNode&gt;</unmanagedCodeEntityReference>. </para>
-      <para>We recommend that instead of using this class directly, you use the <see cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" /> method. This class is used internally by that method.</para>
+      <para
+        >This class implements <unmanagedCodeEntityReference
+        >IComparer</unmanagedCodeEntityReference>
+
+         and <unmanagedCodeEntityReference
+        >IComparer&lt;XNode&gt;</unmanagedCodeEntityReference>
+
+        . </para
+      >
+      <para
+        >We recommend that instead of using this class directly, you use the <see
+         cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" />
+
+         method. This class is used internally by that method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -31,7 +50,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XNodeDocumentOrderComparer ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -40,17 +62,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>We recommend that instead of using this class directly, you use the <see cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" /> method. This class is used internally by that method.</para>
+          <para
+            >We recommend that instead of using this class directly, you use the <see
+             cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" />
+
+             method. This class is used internally by that method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Linq.XNodeDocumentOrderComparer" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Linq.XNodeDocumentOrderComparer" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Compare">
-      <MemberSignature Language="C#" Value="public int Compare (System.Xml.Linq.XNode x, System.Xml.Linq.XNode y);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 Compare(class System.Xml.Linq.XNode x, class System.Xml.Linq.XNode y) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public int Compare (System.Xml.Linq.XNode x, System.Xml.Linq.XNode y);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int32 Compare(class System.Xml.Linq.XNode x, class System.Xml.Linq.XNode y) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -65,7 +103,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>We recommend that instead of using this class directly, you use the <see cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" /> method. This class is used internally by that method.</para>
+          <para
+            >We recommend that instead of using this class directly, you use the <see
+             cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" />
+
+             method. This class is used internally by that method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -73,17 +116,49 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Int32" /> that contains 0 if the nodes are equal; -1 if <paramref name="x" /> is before <paramref name="y" />; 1 if <paramref name="x" /> is after <paramref name="y" />.</para>
+          <para
+            >An <see
+             cref="T:System.Int32" />
+
+             that contains 0 if the nodes are equal; -1 if <paramref
+             name="x" />
+
+             is before <paramref
+             name="y" />
+
+            ; 1 if <paramref
+             name="x" />
+
+             is after <paramref
+             name="y" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />The first <see cref="T:System.Xml.Linq.XNode" /> to compare.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The first <see
+           cref="T:System.Xml.Linq.XNode" />
+
+           to compare.</param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />The second <see cref="T:System.Xml.Linq.XNode" /> to compare.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The second <see
+           cref="T:System.Xml.Linq.XNode" />
+
+           to compare.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IComparer.Compare">
       <MemberSignature Language="C#" Value="int IComparer.Compare (object n1, object n2);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance int32 System.Collections.IComparer.Compare(object n1, object n2) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance int32 System.Collections.IComparer.Compare(object n1, object n2) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -100,7 +175,12 @@
         <param name="n2">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>We recommend that instead of using this class directly, you use the <see cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" /> method. This class is used internally by that method. </para>
+          <para
+            >We recommend that instead of using this class directly, you use the <see
+             cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" />
+
+             method. This class is used internally by that method. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -108,7 +188,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Int32" /> that contains 0 if the nodes are equal; -1 if <paramref name="x" /> is before <paramref name="y" />; 1 if <paramref name="x" /> is after <paramref name="y" />.</para>
+          <para
+            >An <see
+             cref="T:System.Int32" />
+
+             that contains 0 if the nodes are equal; -1 if <paramref
+             name="x" />
+
+             is before <paramref
+             name="y" />
+
+            ; 1 if <paramref
+             name="x" />
+
+             is after <paramref
+             name="y" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="GridViewCancelEditEventArgs" FullName="System.Web.UI.WebControls.GridViewCancelEditEventArgs">
-  <TypeSignature Language="C#" Value="public class GridViewCancelEditEventArgs : System.ComponentModel.CancelEventArgs" />
+<Type
+  Name="GridViewCancelEditEventArgs"
+  FullName="System.Web.UI.WebControls.GridViewCancelEditEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class GridViewCancelEditEventArgs : System.ComponentModel.CancelEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,14 +19,50 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.GridView" /> control raises the <see cref="E:System.Web.UI.WebControls.GridView.RowCancelingEdit" /> event when the Cancel button (a button with its CommandName property set to "Cancel") is clicked, but before exiting edit mode. This allows you to provide an event-handling method that performs a custom routine, such as stopping the cancel operation if it would put the row in an undesired state, whenever this event occurs.</para>
-      <para>A <see cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" /> object is passed to the event-handling method, which allows you to determine the index of the row containing the Cancel button that raised the event and to indicate that the cancel operation should be stopped. To stop the cancel operation, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true.</para>
-      <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>.</para>
-      <para>For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" />, see the <see cref="M:System.Web.UI.WebControls.GridViewCancelEditEventArgs.#ctor(System.Int32)" /> constructor.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.GridView" />
+
+         control raises the <see
+         cref="E:System.Web.UI.WebControls.GridView.RowCancelingEdit" />
+
+         event when the Cancel button (a button with its CommandName property set to "Cancel") is clicked, but before exiting edit mode. This allows you to provide an event-handling method that performs a custom routine, such as stopping the cancel operation if it would put the row in an undesired state, whenever this event occurs.</para
+      >
+      <para
+        >A <see
+         cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" />
+
+         object is passed to the event-handling method, which allows you to determine the index of the row containing the Cancel button that raised the event and to indicate that the cancel operation should be stopped. To stop the cancel operation, set the <see
+         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+         property to true.</para
+      >
+      <para
+        >For more information about handling events, see <format
+         type="text/html">
+          <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+        </format>
+
+        .</para
+      >
+      <para
+        >For a list of initial property values for an instance of <see
+         cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" />
+
+        , see the <see
+         cref="M:System.Web.UI.WebControls.GridViewCancelEditEventArgs.#ctor(System.Int32)" />
+
+         constructor.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Web.UI.WebControls.GridView.RowCancelingEdit" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Web.UI.WebControls.GridView.RowCancelingEdit" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -35,8 +77,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" /> class.</para>
-          <para>The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" />.</para>
+          <para
+            >Use this constructor to initialize a new instance of the <see
+             cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" />
+
+             class.</para
+          >
+          <para
+            >The following table shows the initial property value for an instance of <see
+             cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" />
+
+            .</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -51,10 +103,16 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Web.UI.WebControls.GridViewCancelEditEventArgs.RowIndex" /> </para>
+                  <see cref="P:System.Web.UI.WebControls.GridViewCancelEditEventArgs.RowIndex" />
+                </para>
               </term>
               <description>
-                <para>The value of the <paramref name="rowIndex" /> parameter. </para>
+                <para
+                  >The value of the <paramref
+                   name="rowIndex" />
+
+                   parameter. </para
+                >
               </description>
             </item>
           </list>
@@ -64,7 +122,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -82,7 +145,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Web.UI.WebControls.GridViewCancelEditEventArgs.RowIndex" /> property to determine the index of the row that contains the Cancel button clicked by the user. The row index is often used to retrieve this row from the <see cref="P:System.Web.UI.WebControls.GridView.Rows" /> collection of the <see cref="T:System.Web.UI.WebControls.GridView" /> control, which allows you to access the row's properties.</para>
+          <para
+            >Use the <see
+             cref="P:System.Web.UI.WebControls.GridViewCancelEditEventArgs.RowIndex" />
+
+             property to determine the index of the row that contains the Cancel button clicked by the user. The row index is often used to retrieve this row from the <see
+             cref="P:System.Web.UI.WebControls.GridView.Rows" />
+
+             collection of the <see
+             cref="T:System.Web.UI.WebControls.GridView" />
+
+             control, which allows you to access the row's properties.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

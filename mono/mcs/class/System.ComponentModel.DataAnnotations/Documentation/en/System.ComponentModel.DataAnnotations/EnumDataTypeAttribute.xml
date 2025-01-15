@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="EnumDataTypeAttribute" FullName="System.ComponentModel.DataAnnotations.EnumDataTypeAttribute">
-  <TypeSignature Language="C#" Value="public sealed class EnumDataTypeAttribute : System.ComponentModel.DataAnnotations.DataTypeAttribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit EnumDataTypeAttribute extends System.ComponentModel.DataAnnotations.DataTypeAttribute" />
+<Type
+  Name="EnumDataTypeAttribute"
+  FullName="System.ComponentModel.DataAnnotations.EnumDataTypeAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class EnumDataTypeAttribute : System.ComponentModel.DataAnnotations.DataTypeAttribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit EnumDataTypeAttribute extends System.ComponentModel.DataAnnotations.DataTypeAttribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ComponentModel.DataAnnotations</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -28,7 +37,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public EnumDataTypeAttribute (Type enumType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type enumType) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type enumType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -40,10 +52,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.EnumDataTypeAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.EnumDataTypeAttribute" />
+
+             class.</para
+          >
         </summary>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the enumeration.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the enumeration.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="EnumType">
@@ -67,7 +87,10 @@
     </Member>
     <Member MemberName="IsValid">
       <MemberSignature Language="C#" Value="public override bool IsValid (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsValid(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsValid(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -89,7 +112,10 @@
           <para>true if the data field value is valid; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data field value to validate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data field value to validate.</param
+        >
       </Docs>
     </Member>
   </Members>

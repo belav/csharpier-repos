@@ -1,6 +1,15 @@
-<Type Name="DesignerOptionService+DesignerOptionCollection+WrappedPropertyDescriptor" FullName="System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection+WrappedPropertyDescriptor">
-  <TypeSignature Language="C#" Value="public sealed class DesignerOptionService.DesignerOptionCollection.WrappedPropertyDescriptor : System.ComponentModel.PropertyDescriptor" />
-  <TypeSignature Language="ILAsm" Value=".class nested public auto ansi sealed beforefieldinit DesignerOptionService/DesignerOptionCollection/WrappedPropertyDescriptor extends System.ComponentModel.PropertyDescriptor" />
+<Type
+  Name="DesignerOptionService+DesignerOptionCollection+WrappedPropertyDescriptor"
+  FullName="System.ComponentModel.Design.DesignerOptionService+DesignerOptionCollection+WrappedPropertyDescriptor"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DesignerOptionService.DesignerOptionCollection.WrappedPropertyDescriptor : System.ComponentModel.PropertyDescriptor"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested public auto ansi sealed beforefieldinit DesignerOptionService/DesignerOptionCollection/WrappedPropertyDescriptor extends System.ComponentModel.PropertyDescriptor"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -15,8 +24,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WrappedPropertyDescriptor (System.ComponentModel.PropertyDescriptor property, object component);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ComponentModel.PropertyDescriptor property, object component) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public WrappedPropertyDescriptor (System.ComponentModel.PropertyDescriptor property, object component);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ComponentModel.PropertyDescriptor property, object component) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,8 +48,14 @@
       </Docs>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public override System.ComponentModel.AttributeCollection Attributes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ComponentModel.AttributeCollection Attributes" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ComponentModel.AttributeCollection Attributes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ComponentModel.AttributeCollection Attributes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -50,7 +71,10 @@
     </Member>
     <Member MemberName="CanResetValue">
       <MemberSignature Language="C#" Value="public override bool CanResetValue (object ignored);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool CanResetValue(object ignored) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool CanResetValue(object ignored) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -70,7 +94,10 @@
     </Member>
     <Member MemberName="ComponentType">
       <MemberSignature Language="C#" Value="public override Type ComponentType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type ComponentType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type ComponentType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -86,7 +113,10 @@
     </Member>
     <Member MemberName="GetValue">
       <MemberSignature Language="C#" Value="public override object GetValue (object ignored);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object GetValue(object ignored) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object GetValue(object ignored) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -138,7 +168,10 @@
     </Member>
     <Member MemberName="ResetValue">
       <MemberSignature Language="C#" Value="public override void ResetValue (object ignored);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ResetValue(object ignored) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void ResetValue(object ignored) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -156,8 +189,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetValue">
-      <MemberSignature Language="C#" Value="public override void SetValue (object ignored, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void SetValue(object ignored, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void SetValue (object ignored, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void SetValue(object ignored, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -177,8 +216,14 @@
       </Docs>
     </Member>
     <Member MemberName="ShouldSerializeValue">
-      <MemberSignature Language="C#" Value="public override bool ShouldSerializeValue (object ignored);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool ShouldSerializeValue(object ignored) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool ShouldSerializeValue (object ignored);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool ShouldSerializeValue(object ignored) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="GotoExpression" FullName="System.Linq.Expressions.GotoExpression">
-  <TypeSignature Language="C#" Value="public sealed class GotoExpression : System.Linq.Expressions.Expression" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit GotoExpression extends System.Linq.Expressions.Expression" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class GotoExpression : System.Linq.Expressions.Expression"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit GotoExpression extends System.Linq.Expressions.Expression"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -24,8 +30,14 @@
   </Docs>
   <Members>
     <Member MemberName="Accept">
-      <MemberSignature Language="C#" Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -44,8 +56,14 @@
       </Docs>
     </Member>
     <Member MemberName="Kind">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.GotoExpressionKind Kind { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Linq.Expressions.GotoExpressionKind Kind" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.GotoExpressionKind Kind { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Linq.Expressions.GotoExpressionKind Kind"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -63,8 +81,14 @@
       </Docs>
     </Member>
     <Member MemberName="NodeType">
-      <MemberSignature Language="C#" Value="public override sealed System.Linq.Expressions.ExpressionType NodeType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Linq.Expressions.ExpressionType NodeType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override sealed System.Linq.Expressions.ExpressionType NodeType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Linq.Expressions.ExpressionType NodeType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,13 +101,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />.</para>
+          <para
+            >Returns the node type of this <see
+             cref="T:System.Linq.Expressions.Expression" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Target">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.LabelTarget Target { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Linq.Expressions.LabelTarget Target" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.LabelTarget Target { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Linq.Expressions.LabelTarget Target"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -115,13 +150,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para>
+          <para
+            >Gets the static type of the expression that this <see
+             cref="T:System.Linq.Expressions.Expression" />
+
+             represents.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Update">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.GotoExpression Update (System.Linq.Expressions.LabelTarget target, System.Linq.Expressions.Expression value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Linq.Expressions.GotoExpression Update(class System.Linq.Expressions.LabelTarget target, class System.Linq.Expressions.Expression value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.GotoExpression Update (System.Linq.Expressions.LabelTarget target, System.Linq.Expressions.Expression value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Linq.Expressions.GotoExpression Update(class System.Linq.Expressions.LabelTarget target, class System.Linq.Expressions.Expression value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -144,14 +190,32 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.GotoExpression.Target" /> property of the result. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.GotoExpression.Target" />
+
+           property of the result. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.GotoExpression.Value" /> property of the result. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.GotoExpression.Value" />
+
+           property of the result. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Value">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.Expression Value { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Linq.Expressions.Expression Value" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.Expression Value { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Linq.Expressions.Expression Value"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

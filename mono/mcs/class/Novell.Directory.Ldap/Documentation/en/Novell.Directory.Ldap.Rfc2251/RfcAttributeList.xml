@@ -1,10 +1,12 @@
 <Type Name="RfcAttributeList" FullName="Novell.Directory.Ldap.Rfc2251.RfcAttributeList">
-  <TypeSignature Language="C#" Value="public class RfcAttributeList : Novell.Directory.Ldap.Asn1.Asn1SequenceOf, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class RfcAttributeList : Novell.Directory.Ldap.Asn1.Asn1SequenceOf, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>

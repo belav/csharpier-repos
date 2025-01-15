@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="Region" FullName="System.Drawing.Region">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public sealed class Region : MarshalByRefObject, IDisposable" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public sealed class Region : MarshalByRefObject, IDisposable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Drawing</AssemblyName>
     <AssemblyPublicKey>[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 07 D1 FA 57 C4 AE D9 F0 A3 2E 84 AA 0F AE FD 0D E9 E8 FD 6A EC 8F 87 FB 03 76 6C 83 4C 99 92 1E B2 3B E7 9A D9 D5 DC C1 DD 9A D2 36 13 21 02 90 0B 72 3C F9 80 95 7F C4 E1 77 10 8F C6 07 77 4F 29 E8 32 0E 92 EA 05 EC E4 E8 21 C0 A5 EF E8 F1 64 5C 4C 0C 93 C1 AB 99 28 5D 62 2C AA 65 2C 1D FA D6 3D 74 5D 6F 2D E5 F1 7E 5E AF 0F C4 96 3D 26 1C 8A 12 43 65 18 20 6D C0 93 34 4D 5A D2 93]</AssemblyPublicKey>
@@ -20,9 +24,31 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A region is scalable because its coordinates are specified in world coordinates. On a drawing surface, however, its interior is dependent on the size and shape of the pixels representing it. An application can use regions to clip the output of drawing operations. These regions are called clipping regions. For more information on using regions for clipping, see <format type="text/html"><a href="43d121b4-e14c-4901-b25c-2d6c25ba4e29">How To: Use Clipping with a Region</a></format>. </para>
-      <para>An application can also use regions in hit-testing operations, such as checking whether a point or a rectangle intersects a region. For more information on using regions for hit-testing, see <format type="text/html"><a href="3a4c07cb-a40a-4d14-ad35-008f531910a8">How To: Use Hit Testing with a Region</a></format>.</para>
-      <para>An application can fill a region by using the <see cref="M:System.Drawing.Graphics.FillRegion(System.Drawing.Brush,System.Drawing.Region)" /> method and a  <see cref="T:System.Drawing.Brush" /> object.</para>
+      <para
+        >A region is scalable because its coordinates are specified in world coordinates. On a drawing surface, however, its interior is dependent on the size and shape of the pixels representing it. An application can use regions to clip the output of drawing operations. These regions are called clipping regions. For more information on using regions for clipping, see <format
+         type="text/html">
+          <a href="43d121b4-e14c-4901-b25c-2d6c25ba4e29">How To: Use Clipping with a Region</a>
+        </format>
+
+        . </para
+      >
+      <para
+        >An application can also use regions in hit-testing operations, such as checking whether a point or a rectangle intersects a region. For more information on using regions for hit-testing, see <format
+         type="text/html">
+          <a href="3a4c07cb-a40a-4d14-ad35-008f531910a8">How To: Use Hit Testing with a Region</a>
+        </format>
+
+        .</para
+      >
+      <para
+        >An application can fill a region by using the <see
+         cref="M:System.Drawing.Graphics.FillRegion(System.Drawing.Brush,System.Drawing.Region)" />
+
+         method and a  <see
+         cref="T:System.Drawing.Brush" />
+
+         object.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -38,11 +64,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor initializes a new <see cref="T:System.Drawing.Region" /> with an infinite interior.</para>
+          <para
+            >This constructor initializes a new <see
+             cref="T:System.Drawing.Region" />
+
+             with an infinite interior.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Initializes a new <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -51,7 +87,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Region (System.Drawing.Drawing2D.GraphicsPath path);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Region (System.Drawing.Drawing2D.GraphicsPath path);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -60,14 +99,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method creates a new <see cref="T:System.Drawing.Region" /> with a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />. The new region is defined as the interior of the <see cref="T:System.Drawing.Drawing2D.GraphicsPath" /> specified by the <paramref name="path" /> parameter.</para>
+          <para
+            >This method creates a new <see
+             cref="T:System.Drawing.Region" />
+
+             with a <see
+             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            . The new region is defined as the interior of the <see
+             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+             specified by the <paramref
+             name="path" />
+
+             parameter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new <see cref="T:System.Drawing.Region" /> with the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />.</para>
+          <para
+            >Initializes a new <see
+             cref="T:System.Drawing.Region" />
+
+             with the specified <see
+             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            .</para
+          >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Drawing2D.GraphicsPath" /> that defines the new <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+           that defines the new <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -75,7 +145,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Region (System.Drawing.Drawing2D.RegionData rgnData);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Region (System.Drawing.Drawing2D.RegionData rgnData);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -84,14 +157,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method creates a new <see cref="T:System.Drawing.Region" /> with an interior defined by an existing <see cref="T:System.Drawing.Region" />. The <paramref name="rgnData" /> parameter is an array that contains the definition of an existing <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >This method creates a new <see
+             cref="T:System.Drawing.Region" />
+
+             with an interior defined by an existing <see
+             cref="T:System.Drawing.Region" />
+
+            . The <paramref
+             name="rgnData" />
+
+             parameter is an array that contains the definition of an existing <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new <see cref="T:System.Drawing.Region" /> from the specified data.</para>
+          <para
+            >Initializes a new <see
+             cref="T:System.Drawing.Region" />
+
+             from the specified data.</para
+          >
         </summary>
         <param name="rgnData">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Drawing2D.RegionData" /> that defines the interior of the new <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Drawing2D.RegionData" />
+
+           that defines the interior of the new <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -108,14 +209,39 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method creates a new <see cref="T:System.Drawing.Region" /> with a rectangular interior. The interior is defined by the <paramref name="rect" /> parameter.</para>
+          <para
+            >This method creates a new <see
+             cref="T:System.Drawing.Region" />
+
+             with a rectangular interior. The interior is defined by the <paramref
+             name="rect" />
+
+             parameter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new <see cref="T:System.Drawing.Region" /> from the specified <see cref="T:System.Drawing.Rectangle" /> structure.</para>
+          <para
+            >Initializes a new <see
+             cref="T:System.Drawing.Region" />
+
+             from the specified <see
+             cref="T:System.Drawing.Rectangle" />
+
+             structure.</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Rectangle" /> structure that defines the interior of the new <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Rectangle" />
+
+           structure that defines the interior of the new <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -132,14 +258,39 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method creates a new <see cref="T:System.Drawing.Region" /> with a rectangular interior. The interior is defined by the <paramref name="rect" /> parameter.</para>
+          <para
+            >This method creates a new <see
+             cref="T:System.Drawing.Region" />
+
+             with a rectangular interior. The interior is defined by the <paramref
+             name="rect" />
+
+             parameter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new <see cref="T:System.Drawing.Region" /> from the specified <see cref="T:System.Drawing.RectangleF" /> structure.</para>
+          <para
+            >Initializes a new <see
+             cref="T:System.Drawing.Region" />
+
+             from the specified <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structure.</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.RectangleF" /> structure that defines the interior of the new <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.RectangleF" />
+
+           structure that defines the interior of the new <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -157,11 +308,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an exact copy of this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Creates an exact copy of this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Drawing.Region" /> that this method creates.</para>
+          <para
+            >The <see
+             cref="T:System.Drawing.Region" />
+
+             that this method creates.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -170,7 +331,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Complement">
-      <MemberSignature Language="C#" Value="public void Complement (System.Drawing.Drawing2D.GraphicsPath path);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Complement (System.Drawing.Drawing2D.GraphicsPath path);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -182,10 +346,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to contain the portion of the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" /> that does not intersect with this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to contain the portion of the specified <see
+             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+             that does not intersect with this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" /> to complement this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+           to complement this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -193,7 +377,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Complement">
-      <MemberSignature Language="C#" Value="public void Complement (System.Drawing.Rectangle rect);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Complement (System.Drawing.Rectangle rect);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -205,10 +392,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to contain the portion of the specified <see cref="T:System.Drawing.Rectangle" /> structure that does not intersect with this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to contain the portion of the specified <see
+             cref="T:System.Drawing.Rectangle" />
+
+             structure that does not intersect with this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> structure to complement this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           structure to complement this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -216,7 +423,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Complement">
-      <MemberSignature Language="C#" Value="public void Complement (System.Drawing.RectangleF rect);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Complement (System.Drawing.RectangleF rect);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -228,10 +438,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to contain the portion of the specified <see cref="T:System.Drawing.RectangleF" /> structure that does not intersect with this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to contain the portion of the specified <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structure that does not intersect with this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.RectangleF" /> structure to complement this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.RectangleF" />
+
+           structure to complement this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -239,7 +469,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Complement">
-      <MemberSignature Language="C#" Value="public void Complement (System.Drawing.Region region);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Complement (System.Drawing.Region region);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -251,10 +484,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to contain the portion of the specified <see cref="T:System.Drawing.Region" /> that does not intersect with this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to contain the portion of the specified <see
+             cref="T:System.Drawing.Region" />
+
+             that does not intersect with this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Region" /> object to complement this <see cref="T:System.Drawing.Region" /> object. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Region" />
+
+           object to complement this <see
+           cref="T:System.Drawing.Region" />
+
+           object. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -271,15 +524,72 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Calling <see cref="M:System.Drawing.Region.Dispose" /> allows the resources used by this <see cref="T:System.Drawing.Region" /> to be reallocated for other purposes.</para>
-          <para>Call <see cref="M:System.Drawing.Region.Dispose" /> when you are finished using the <see cref="T:System.Drawing.Region" />. The <see cref="M:System.Drawing.Region.Dispose" /> method leaves the <see cref="T:System.Drawing.Region" /> in an unusable state. After calling <see cref="M:System.Drawing.Region.Dispose" />, you must release all references to the <see cref="T:System.Drawing.Region" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Drawing.Region" /> was occupying. For more information, see <format type="text/html"><a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a></format> and <format type="text/html"><a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a></format>. </para>
+          <para
+            >Calling <see
+             cref="M:System.Drawing.Region.Dispose" />
+
+             allows the resources used by this <see
+             cref="T:System.Drawing.Region" />
+
+             to be reallocated for other purposes.</para
+          >
+          <para
+            >Call <see
+             cref="M:System.Drawing.Region.Dispose" />
+
+             when you are finished using the <see
+             cref="T:System.Drawing.Region" />
+
+            . The <see
+             cref="M:System.Drawing.Region.Dispose" />
+
+             method leaves the <see
+             cref="T:System.Drawing.Region" />
+
+             in an unusable state. After calling <see
+             cref="M:System.Drawing.Region.Dispose" />
+
+            , you must release all references to the <see
+             cref="T:System.Drawing.Region" />
+
+             so the garbage collector can reclaim the memory that the <see
+             cref="T:System.Drawing.Region" />
+
+             was occupying. For more information, see <format
+             type="text/html">
+              <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
+            </format>
+
+            . </para
+          >
           <block subset="none" type="note">
-            <para>Always call <see cref="M:System.Drawing.Region.Dispose" /> before you release your last reference to the <see cref="T:System.Drawing.Region" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Drawing.Region" /> object's Finalize method.</para>
+            <para
+              >Always call <see
+               cref="M:System.Drawing.Region.Dispose" />
+
+               before you release your last reference to the <see
+               cref="T:System.Drawing.Region" />
+
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
+               cref="T:System.Drawing.Region" />
+
+               object's Finalize method.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases all resources used by this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Releases all resources used by this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -292,7 +602,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public bool Equals (System.Drawing.Region region, System.Drawing.Graphics g);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Equals (System.Drawing.Region region, System.Drawing.Graphics g);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -304,20 +617,50 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The current transformation of the graphics context <paramref name="g" /> is used to compute the region interiors on the drawing surface.</para>
+          <para
+            >The current transformation of the graphics context <paramref
+             name="g" />
+
+             is used to compute the region interiors on the drawing surface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether the specified <see cref="T:System.Drawing.Region" /> is identical to this <see cref="T:System.Drawing.Region" /> on the specified drawing surface.</para>
+          <para
+            >Tests whether the specified <see
+             cref="T:System.Drawing.Region" />
+
+             is identical to this <see
+             cref="T:System.Drawing.Region" />
+
+             on the specified drawing surface.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the interior of region is identical to the interior of this region when the transformation associated with the <paramref name="g" /> parameter is applied; otherwise, false.</para>
+          <para
+            >true if the interior of region is identical to the interior of this region when the transformation associated with the <paramref
+             name="g" />
+
+             parameter is applied; otherwise, false.</para
+          >
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Region" /> to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Region" />
+
+           to test. </param
+        >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a drawing surface. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a drawing surface. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -325,7 +668,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Exclude">
-      <MemberSignature Language="C#" Value="public void Exclude (System.Drawing.Drawing2D.GraphicsPath path);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Exclude (System.Drawing.Drawing2D.GraphicsPath path);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -337,10 +683,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to contain only the portion of its interior that does not intersect with the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to contain only the portion of its interior that does not intersect with the specified <see
+             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            .</para
+          >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" /> to exclude from this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+           to exclude from this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -360,10 +723,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to contain only the portion of its interior that does not intersect with the specified <see cref="T:System.Drawing.Rectangle" /> structure.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to contain only the portion of its interior that does not intersect with the specified <see
+             cref="T:System.Drawing.Rectangle" />
+
+             structure.</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> structure to exclude from this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           structure to exclude from this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -371,7 +751,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Exclude">
-      <MemberSignature Language="C#" Value="public void Exclude (System.Drawing.RectangleF rect);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Exclude (System.Drawing.RectangleF rect);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -383,10 +766,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to contain only the portion of its interior that does not intersect with the specified <see cref="T:System.Drawing.RectangleF" /> structure.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to contain only the portion of its interior that does not intersect with the specified <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structure.</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.RectangleF" /> structure to exclude from this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.RectangleF" />
+
+           structure to exclude from this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -406,10 +806,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to contain only the portion of its interior that does not intersect with the specified <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to contain only the portion of its interior that does not intersect with the specified <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Region" /> to exclude from this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Region" />
+
+           to exclude from this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -433,7 +850,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FromHrgn">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Region FromHrgn (IntPtr hrgn);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Region FromHrgn (IntPtr hrgn);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Region</ReturnType>
@@ -444,18 +864,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method creates a new <see cref="T:System.Drawing.Region" /> with an interior defined by the existing <see cref="T:System.Drawing.Region" /> referred to by the handle in the <paramref name="hrgn" /> parameter.</para>
+          <para
+            >This method creates a new <see
+             cref="T:System.Drawing.Region" />
+
+             with an interior defined by the existing <see
+             cref="T:System.Drawing.Region" />
+
+             referred to by the handle in the <paramref
+             name="hrgn" />
+
+             parameter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new <see cref="T:System.Drawing.Region" /> from a handle to the specified existing ndptecgdi region.</para>
+          <para
+            >Initializes a new <see
+             cref="T:System.Drawing.Region" />
+
+             from a handle to the specified existing ndptecgdi region.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The new <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >The new <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </returns>
         <param name="hrgn">
-          <attribution license="cc4" from="Microsoft" modified="false" />A handle to an existing <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A handle to an existing <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -463,7 +910,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetBounds">
-      <MemberSignature Language="C#" Value="public System.Drawing.RectangleF GetBounds (System.Drawing.Graphics g);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.RectangleF GetBounds (System.Drawing.Graphics g);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.RectangleF</ReturnType>
@@ -478,14 +928,42 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.RectangleF" /> structure that represents a rectangle that bounds this <see cref="T:System.Drawing.Region" /> on the drawing surface of a <see cref="T:System.Drawing.Graphics" /> object.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structure that represents a rectangle that bounds this <see
+             cref="T:System.Drawing.Region" />
+
+             on the drawing surface of a <see
+             cref="T:System.Drawing.Graphics" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.RectangleF" /> structure that represents the bounding rectangle for this <see cref="T:System.Drawing.Region" /> on the specified drawing surface.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structure that represents the bounding rectangle for this <see
+             cref="T:System.Drawing.Region" />
+
+             on the specified drawing surface.</para
+          >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> on which this <see cref="T:System.Drawing.Region" /> is drawn. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           on which this <see
+           cref="T:System.Drawing.Region" />
+
+           is drawn. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -505,14 +983,33 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a Windows handle to this <see cref="T:System.Drawing.Region" /> in the specified graphics context.</para>
+          <para
+            >Returns a Windows handle to this <see
+             cref="T:System.Drawing.Region" />
+
+             in the specified graphics context.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A Windows handle to this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >A Windows handle to this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> on which this <see cref="T:System.Drawing.Region" /> is drawn. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           on which this <see
+           cref="T:System.Drawing.Region" />
+
+           is drawn. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -520,7 +1017,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetRegionData">
-      <MemberSignature Language="C#" Value="public System.Drawing.Drawing2D.RegionData GetRegionData ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Drawing2D.RegionData GetRegionData ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Drawing2D.RegionData</ReturnType>
@@ -529,15 +1029,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Drawing.Region" /> class allows you to define a custom shape. The shape can be made up of lines, polygons, and curves. <see cref="M:System.Drawing.Region.GetRegionData" /> describes the  shape contained in this <see cref="T:System.Drawing.Region" />. </para>
+          <para
+            >The <see
+             cref="T:System.Drawing.Region" />
+
+             class allows you to define a custom shape. The shape can be made up of lines, polygons, and curves. <see
+             cref="M:System.Drawing.Region.GetRegionData" />
+
+             describes the  shape contained in this <see
+             cref="T:System.Drawing.Region" />
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.Drawing.Drawing2D.RegionData" /> that represents the information that describes this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Returns a <see
+             cref="T:System.Drawing.Drawing2D.RegionData" />
+
+             that represents the information that describes this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Drawing2D.RegionData" /> that represents the information that describes this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Drawing2D.RegionData" />
+
+             that represents the information that describes this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -546,7 +1073,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetRegionScans">
-      <MemberSignature Language="C#" Value="public System.Drawing.RectangleF[] GetRegionScans (System.Drawing.Drawing2D.Matrix matrix);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.RectangleF[] GetRegionScans (System.Drawing.Drawing2D.Matrix matrix);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.RectangleF[]</ReturnType>
@@ -558,14 +1088,36 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of <see cref="T:System.Drawing.RectangleF" /> structures that approximate this <see cref="T:System.Drawing.Region" /> after the specified matrix transformation is applied.</para>
+          <para
+            >Returns an array of <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structures that approximate this <see
+             cref="T:System.Drawing.Region" />
+
+             after the specified matrix transformation is applied.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of <see cref="T:System.Drawing.RectangleF" /> structures that approximate this <see cref="T:System.Drawing.Region" /> after the specified matrix transformation is applied.</para>
+          <para
+            >An array of <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structures that approximate this <see
+             cref="T:System.Drawing.Region" />
+
+             after the specified matrix transformation is applied.</para
+          >
         </returns>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Drawing2D.Matrix" /> that represents a geometric transformation to apply to the region. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Drawing2D.Matrix" />
+
+           that represents a geometric transformation to apply to the region. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -573,7 +1125,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Intersect">
-      <MemberSignature Language="C#" Value="public void Intersect (System.Drawing.Drawing2D.GraphicsPath path);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Intersect (System.Drawing.Drawing2D.GraphicsPath path);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -585,10 +1140,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the intersection of itself with the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the intersection of itself with the specified <see
+             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            .</para
+          >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" /> to intersect with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+           to intersect with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -596,7 +1168,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Intersect">
-      <MemberSignature Language="C#" Value="public void Intersect (System.Drawing.Rectangle rect);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Intersect (System.Drawing.Rectangle rect);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -608,14 +1183,31 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the intersection of itself with the specified <see cref="T:System.Drawing.Rectangle" /> structure.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the intersection of itself with the specified <see
+             cref="T:System.Drawing.Rectangle" />
+
+             structure.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method does not return a value.</para>
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> structure to intersect with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           structure to intersect with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -623,7 +1215,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Intersect">
-      <MemberSignature Language="C#" Value="public void Intersect (System.Drawing.RectangleF rect);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Intersect (System.Drawing.RectangleF rect);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -635,10 +1230,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the intersection of itself with the specified <see cref="T:System.Drawing.RectangleF" /> structure.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the intersection of itself with the specified <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structure.</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.RectangleF" /> structure to intersect with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.RectangleF" />
+
+           structure to intersect with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -646,7 +1258,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Intersect">
-      <MemberSignature Language="C#" Value="public void Intersect (System.Drawing.Region region);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Intersect (System.Drawing.Region region);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -658,14 +1273,31 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the intersection of itself with the specified <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the intersection of itself with the specified <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method does not return a value.</para>
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Region" /> to intersect with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Region" />
+
+           to intersect with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -684,18 +1316,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The current transformation of the graphics context <paramref name="g" /> is used to compute the region interior on the drawing surface.</para>
+          <para
+            >The current transformation of the graphics context <paramref
+             name="g" />
+
+             is used to compute the region interior on the drawing surface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether this <see cref="T:System.Drawing.Region" /> has an empty interior on the specified drawing surface.</para>
+          <para
+            >Tests whether this <see
+             cref="T:System.Drawing.Region" />
+
+             has an empty interior on the specified drawing surface.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the interior of this <see cref="T:System.Drawing.Region" /> is empty when the transformation associated with <paramref name="g" /> is applied; otherwise, false.</para>
+          <para
+            >true if the interior of this <see
+             cref="T:System.Drawing.Region" />
+
+             is empty when the transformation associated with <paramref
+             name="g" />
+
+             is applied; otherwise, false.</para
+          >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a drawing surface. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a drawing surface. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -714,18 +1370,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The current transformation of the graphics context <paramref name="g" /> is used to compute the region interior on the drawing surface.</para>
+          <para
+            >The current transformation of the graphics context <paramref
+             name="g" />
+
+             is used to compute the region interior on the drawing surface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether this <see cref="T:System.Drawing.Region" /> has an infinite interior on the specified drawing surface.</para>
+          <para
+            >Tests whether this <see
+             cref="T:System.Drawing.Region" />
+
+             has an infinite interior on the specified drawing surface.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the interior of this <see cref="T:System.Drawing.Region" /> is infinite when the transformation associated with <paramref name="g" /> is applied; otherwise, false.</para>
+          <para
+            >true if the interior of this <see
+             cref="T:System.Drawing.Region" />
+
+             is infinite when the transformation associated with <paramref
+             name="g" />
+
+             is applied; otherwise, false.</para
+          >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a drawing surface. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a drawing surface. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -745,14 +1425,36 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether the specified <see cref="T:System.Drawing.Point" /> structure is contained within this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Tests whether the specified <see
+             cref="T:System.Drawing.Point" />
+
+             structure is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when <paramref name="point" /> is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when <paramref
+             name="point" />
+
+             is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Point" /> structure to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Point" />
+
+           structure to test. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -772,14 +1474,36 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether the specified <see cref="T:System.Drawing.PointF" /> structure is contained within this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Tests whether the specified <see
+             cref="T:System.Drawing.PointF" />
+
+             structure is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when <paramref name="point" /> is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when <paramref
+             name="point" />
+
+             is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.PointF" /> structure to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.PointF" />
+
+           structure to test. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -787,7 +1511,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (System.Drawing.Rectangle rect);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (System.Drawing.Rectangle rect);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -799,14 +1526,36 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether any portion of the specified <see cref="T:System.Drawing.Rectangle" /> structure is contained within this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Tests whether any portion of the specified <see
+             cref="T:System.Drawing.Rectangle" />
+
+             structure is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method returns true when any portion of <paramref name="rect" /> is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >This method returns true when any portion of <paramref
+             name="rect" />
+
+             is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> structure to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           structure to test. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -814,7 +1563,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (System.Drawing.RectangleF rect);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (System.Drawing.RectangleF rect);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -826,14 +1578,36 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether any portion of the specified <see cref="T:System.Drawing.RectangleF" /> structure is contained within this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Tests whether any portion of the specified <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structure is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when any portion of <paramref name="rect" /> is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when any portion of <paramref
+             name="rect" />
+
+             is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.RectangleF" /> structure to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.RectangleF" />
+
+           structure to test. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -841,7 +1615,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (System.Drawing.Point point, System.Drawing.Graphics g);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (System.Drawing.Point point, System.Drawing.Graphics g);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -857,16 +1634,47 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether the specified <see cref="T:System.Drawing.Point" /> structure is contained within this <see cref="T:System.Drawing.Region" /> when drawn using the specified <see cref="T:System.Drawing.Graphics" />.</para>
+          <para
+            >Tests whether the specified <see
+             cref="T:System.Drawing.Point" />
+
+             structure is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+             when drawn using the specified <see
+             cref="T:System.Drawing.Graphics" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when <paramref name="point" /> is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when <paramref
+             name="point" />
+
+             is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Point" /> structure to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Point" />
+
+           structure to test. </param
+        >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a graphics context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a graphics context. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -874,7 +1682,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (System.Drawing.PointF point, System.Drawing.Graphics g);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (System.Drawing.PointF point, System.Drawing.Graphics g);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -890,16 +1701,47 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether the specified <see cref="T:System.Drawing.PointF" /> structure is contained within this <see cref="T:System.Drawing.Region" /> when drawn using the specified <see cref="T:System.Drawing.Graphics" />.</para>
+          <para
+            >Tests whether the specified <see
+             cref="T:System.Drawing.PointF" />
+
+             structure is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+             when drawn using the specified <see
+             cref="T:System.Drawing.Graphics" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when <paramref name="point" /> is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when <paramref
+             name="point" />
+
+             is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.PointF" /> structure to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.PointF" />
+
+           structure to test. </param
+        >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a graphics context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a graphics context. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -907,7 +1749,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (System.Drawing.Rectangle rect, System.Drawing.Graphics g);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (System.Drawing.Rectangle rect, System.Drawing.Graphics g);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -923,16 +1768,47 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether any portion of the specified <see cref="T:System.Drawing.Rectangle" /> structure is contained within this <see cref="T:System.Drawing.Region" /> when drawn using the specified <see cref="T:System.Drawing.Graphics" />.</para>
+          <para
+            >Tests whether any portion of the specified <see
+             cref="T:System.Drawing.Rectangle" />
+
+             structure is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+             when drawn using the specified <see
+             cref="T:System.Drawing.Graphics" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when any portion of the <paramref name="rect" /> is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when any portion of the <paramref
+             name="rect" />
+
+             is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> structure to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           structure to test. </param
+        >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a graphics context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a graphics context. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -940,7 +1816,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (System.Drawing.RectangleF rect, System.Drawing.Graphics g);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (System.Drawing.RectangleF rect, System.Drawing.Graphics g);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -956,16 +1835,47 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether any portion of the specified <see cref="T:System.Drawing.RectangleF" /> structure is contained within this <see cref="T:System.Drawing.Region" /> when drawn using the specified <see cref="T:System.Drawing.Graphics" />.</para>
+          <para
+            >Tests whether any portion of the specified <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structure is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+             when drawn using the specified <see
+             cref="T:System.Drawing.Graphics" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when <paramref name="rect" /> is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when <paramref
+             name="rect" />
+
+             is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.RectangleF" /> structure to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.RectangleF" />
+
+           structure to test. </param
+        >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a graphics context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a graphics context. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -986,16 +1896,32 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether the specified point is contained within this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Tests whether the specified point is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when the specified point is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when the specified point is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />The x-coordinate of the point to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The x-coordinate of the point to test. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />The y-coordinate of the point to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The y-coordinate of the point to test. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1003,7 +1929,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (int x, int y, System.Drawing.Graphics g);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (int x, int y, System.Drawing.Graphics g);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -1020,18 +1949,43 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether the specified point is contained within this <see cref="T:System.Drawing.Region" /> object when drawn using the specified <see cref="T:System.Drawing.Graphics" /> object.</para>
+          <para
+            >Tests whether the specified point is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+             object when drawn using the specified <see
+             cref="T:System.Drawing.Graphics" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when the specified point is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when the specified point is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />The x-coordinate of the point to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The x-coordinate of the point to test. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />The y-coordinate of the point to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The y-coordinate of the point to test. </param
+        >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a graphics context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a graphics context. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1039,7 +1993,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (float x, float y, System.Drawing.Graphics g);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (float x, float y, System.Drawing.Graphics g);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -1056,18 +2013,43 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether the specified point is contained within this <see cref="T:System.Drawing.Region" /> when drawn using the specified <see cref="T:System.Drawing.Graphics" />.</para>
+          <para
+            >Tests whether the specified point is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+             when drawn using the specified <see
+             cref="T:System.Drawing.Graphics" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when the specified point is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when the specified point is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />The x-coordinate of the point to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The x-coordinate of the point to test. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />The y-coordinate of the point to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The y-coordinate of the point to test. </param
+        >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a graphics context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a graphics context. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1075,7 +2057,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (int x, int y, int width, int height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (int x, int y, int width, int height);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -1090,20 +2075,42 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Tests whether any portion of the specified rectangle is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when any portion of the specified rectangle is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />The x-coordinate of the upper-left corner of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The x-coordinate of the upper-left corner of the rectangle to test. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />The y-coordinate of the upper-left corner of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The y-coordinate of the upper-left corner of the rectangle to test. </param
+        >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />The width of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The width of the rectangle to test. </param
+        >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />The height of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The height of the rectangle to test. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1111,7 +2118,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (float x, float y, float width, float height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (float x, float y, float width, float height);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -1126,20 +2136,42 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Tests whether any portion of the specified rectangle is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" /> object; otherwise, false.</para>
+          <para
+            >true when any portion of the specified rectangle is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+             object; otherwise, false.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />The x-coordinate of the upper-left corner of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The x-coordinate of the upper-left corner of the rectangle to test. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />The y-coordinate of the upper-left corner of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The y-coordinate of the upper-left corner of the rectangle to test. </param
+        >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />The width of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The width of the rectangle to test. </param
+        >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />The height of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The height of the rectangle to test. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1147,7 +2179,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (int x, int y, int width, int height, System.Drawing.Graphics g);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (int x, int y, int width, int height, System.Drawing.Graphics g);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -1166,22 +2201,53 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" /> when drawn using the specified <see cref="T:System.Drawing.Graphics" />.</para>
+          <para
+            >Tests whether any portion of the specified rectangle is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+             when drawn using the specified <see
+             cref="T:System.Drawing.Graphics" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when any portion of the specified rectangle is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />The x-coordinate of the upper-left corner of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The x-coordinate of the upper-left corner of the rectangle to test. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />The y-coordinate of the upper-left corner of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The y-coordinate of the upper-left corner of the rectangle to test. </param
+        >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />The width of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The width of the rectangle to test. </param
+        >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />The height of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The height of the rectangle to test. </param
+        >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a graphics context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a graphics context. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1189,7 +2255,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsVisible">
-      <MemberSignature Language="C#" Value="public bool IsVisible (float x, float y, float width, float height, System.Drawing.Graphics g);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool IsVisible (float x, float y, float width, float height, System.Drawing.Graphics g);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -1208,22 +2277,53 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Tests whether any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" /> when drawn using the specified <see cref="T:System.Drawing.Graphics" />.</para>
+          <para
+            >Tests whether any portion of the specified rectangle is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+             when drawn using the specified <see
+             cref="T:System.Drawing.Graphics" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true when any portion of the specified rectangle is contained within this <see cref="T:System.Drawing.Region" />; otherwise, false.</para>
+          <para
+            >true when any portion of the specified rectangle is contained within this <see
+             cref="T:System.Drawing.Region" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />The x-coordinate of the upper-left corner of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The x-coordinate of the upper-left corner of the rectangle to test. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />The y-coordinate of the upper-left corner of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The y-coordinate of the upper-left corner of the rectangle to test. </param
+        >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />The width of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The width of the rectangle to test. </param
+        >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />The height of the rectangle to test. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The height of the rectangle to test. </param
+        >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Graphics" /> that represents a graphics context. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Graphics" />
+
+           that represents a graphics context. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1241,7 +2341,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes this <see cref="T:System.Drawing.Region" /> to an empty interior.</para>
+          <para
+            >Initializes this <see
+             cref="T:System.Drawing.Region" />
+
+             to an empty interior.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1260,7 +2365,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes this <see cref="T:System.Drawing.Region" /> object to an infinite interior.</para>
+          <para
+            >Initializes this <see
+             cref="T:System.Drawing.Region" />
+
+             object to an infinite interior.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1284,14 +2394,28 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases the handle of the <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Releases the handle of the <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <param name="regionHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />The handle to the <see cref="T:System.Drawing.Region" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The handle to the <see
+           cref="T:System.Drawing.Region" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Transform">
-      <MemberSignature Language="C#" Value="public void Transform (System.Drawing.Drawing2D.Matrix matrix);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Transform (System.Drawing.Drawing2D.Matrix matrix);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1303,10 +2427,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Transforms this <see cref="T:System.Drawing.Region" /> by the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />.</para>
+          <para
+            >Transforms this <see
+             cref="T:System.Drawing.Region" />
+
+             by the specified <see
+             cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            .</para
+          >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Drawing2D.Matrix" /> by which to transform this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Drawing2D.Matrix" />
+
+           by which to transform this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1327,12 +2468,29 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Offsets the coordinates of this <see cref="T:System.Drawing.Region" /> by the specified amount.</para>
+          <para
+            >Offsets the coordinates of this <see
+             cref="T:System.Drawing.Region" />
+
+             by the specified amount.</para
+          >
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />The amount to offset this <see cref="T:System.Drawing.Region" /> horizontally. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The amount to offset this <see
+           cref="T:System.Drawing.Region" />
+
+           horizontally. </param
+        >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />The amount to offset this <see cref="T:System.Drawing.Region" /> vertically. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The amount to offset this <see
+           cref="T:System.Drawing.Region" />
+
+           vertically. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1353,12 +2511,29 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Offsets the coordinates of this <see cref="T:System.Drawing.Region" /> by the specified amount.</para>
+          <para
+            >Offsets the coordinates of this <see
+             cref="T:System.Drawing.Region" />
+
+             by the specified amount.</para
+          >
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />The amount to offset this <see cref="T:System.Drawing.Region" /> horizontally. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The amount to offset this <see
+           cref="T:System.Drawing.Region" />
+
+           horizontally. </param
+        >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />The amount to offset this <see cref="T:System.Drawing.Region" /> vertically. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The amount to offset this <see
+           cref="T:System.Drawing.Region" />
+
+           vertically. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1366,7 +2541,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Union">
-      <MemberSignature Language="C#" Value="public void Union (System.Drawing.Drawing2D.GraphicsPath path);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Union (System.Drawing.Drawing2D.GraphicsPath path);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1378,10 +2556,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the union of itself and the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the union of itself and the specified <see
+             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            .</para
+          >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" /> to unite with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+           to unite with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1401,10 +2596,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the union of itself and the specified <see cref="T:System.Drawing.Rectangle" /> structure.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the union of itself and the specified <see
+             cref="T:System.Drawing.Rectangle" />
+
+             structure.</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> structure to unite with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           structure to unite with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1424,10 +2636,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the union of itself and the specified <see cref="T:System.Drawing.RectangleF" /> structure.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the union of itself and the specified <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structure.</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.RectangleF" /> structure to unite with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.RectangleF" />
+
+           structure to unite with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1447,10 +2676,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the union of itself and the specified <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the union of itself and the specified <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Region" /> to unite with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Region" />
+
+           to unite with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1458,7 +2704,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Xor">
-      <MemberSignature Language="C#" Value="public void Xor (System.Drawing.Drawing2D.GraphicsPath path);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Xor (System.Drawing.Drawing2D.GraphicsPath path);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1470,10 +2719,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the union minus the intersection of itself with the specified <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the union minus the intersection of itself with the specified <see
+             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            .</para
+          >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Drawing2D.GraphicsPath" /> to <see cref="Overload:System.Drawing.Region.Xor" /> with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+           to <see
+           cref="Overload:System.Drawing.Region.Xor" />
+
+           with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1493,10 +2762,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the union minus the intersection of itself with the specified <see cref="T:System.Drawing.Rectangle" /> structure.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the union minus the intersection of itself with the specified <see
+             cref="T:System.Drawing.Rectangle" />
+
+             structure.</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> structure to <see cref="Overload:System.Drawing.Region.Xor" /> with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           structure to <see
+           cref="Overload:System.Drawing.Region.Xor" />
+
+           with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1516,10 +2805,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the union minus the intersection of itself with the specified <see cref="T:System.Drawing.RectangleF" /> structure.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the union minus the intersection of itself with the specified <see
+             cref="T:System.Drawing.RectangleF" />
+
+             structure.</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.RectangleF" /> structure to <see cref="M:System.Drawing.Region.Xor(System.Drawing.Drawing2D.GraphicsPath)" /> with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.RectangleF" />
+
+           structure to <see
+           cref="M:System.Drawing.Region.Xor(System.Drawing.Drawing2D.GraphicsPath)" />
+
+           with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1539,10 +2848,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Updates this <see cref="T:System.Drawing.Region" /> to the union minus the intersection of itself with the specified <see cref="T:System.Drawing.Region" />.</para>
+          <para
+            >Updates this <see
+             cref="T:System.Drawing.Region" />
+
+             to the union minus the intersection of itself with the specified <see
+             cref="T:System.Drawing.Region" />
+
+            .</para
+          >
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Region" /> to <see cref="Overload:System.Drawing.Region.Xor" /> with this <see cref="T:System.Drawing.Region" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Region" />
+
+           to <see
+           cref="Overload:System.Drawing.Region.Xor" />
+
+           with this <see
+           cref="T:System.Drawing.Region" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

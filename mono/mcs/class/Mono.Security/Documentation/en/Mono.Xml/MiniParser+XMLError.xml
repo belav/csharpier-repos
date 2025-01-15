@@ -44,7 +44,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public XMLError (string descr, int line, int column);" />
+      <MemberSignature
+        Language="C#"
+        Value="public XMLError (string descr, int line, int column);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="descr" Type="System.String" />

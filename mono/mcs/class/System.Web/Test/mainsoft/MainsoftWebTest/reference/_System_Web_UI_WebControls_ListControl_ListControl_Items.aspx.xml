@@ -1,90 +1,222 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <testresults name="">
-  <div id="GHTSubTest1" testname="Type &amp; contents">
+  <div id="GHTSubTest1" testname="Type & contents">
     <select id="_ctrl0" size="4" name="_ctrl0">
-      <option value="1" />aaa
-		<option value="2" />bbb
-		<option value="3" />ccc
-		<option value="4" />ddd
-		<option value="5" />eee
-		<option value="6" />fff
-		<option value="7" />ggg
+      <option value="1" />
 
-	</select>
+      aaa
+		<option
+       value="2" />
+
+      bbb
+		<option
+       value="3" />
+
+      ccc
+		<option
+       value="4" />
+
+      ddd
+		<option
+       value="5" />
+
+      eee
+		<option
+       value="6" />
+
+      fff
+		<option
+       value="7" />
+
+      ggg
+
+	</select
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
-  <div id="GHTSubTest2" testname="Type &amp; contents">
+  <div id="GHTSubTest2" testname="Type & contents">
     <select id="_ctrl1" name="_ctrl1">
-      <option value="1" />aaa
-		<option value="2" />bbb
-		<option value="3" />ccc
-		<option value="4" />ddd
-		<option value="5" />eee
-		<option value="6" />fff
-		<option value="7" />ggg
+      <option value="1" />
 
-	</select>
+      aaa
+		<option
+       value="2" />
+
+      bbb
+		<option
+       value="3" />
+
+      ccc
+		<option
+       value="4" />
+
+      ddd
+		<option
+       value="5" />
+
+      eee
+		<option
+       value="6" />
+
+      fff
+		<option
+       value="7" />
+
+      ggg
+
+	</select
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
-  <div id="GHTSubTest3" testname="Type &amp; contents">
+  <div id="GHTSubTest3" testname="Type & contents">
     <table id="_ctrl2" border="0">
       <tr>
         <td>
@@ -130,37 +262,82 @@
       </tr>
     </table>
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
-  <div id="GHTSubTest4" testname="Type &amp; contents">
+  <div id="GHTSubTest4" testname="Type & contents">
     <table id="_ctrl3" border="0">
       <tr>
         <td>
@@ -206,34 +383,79 @@
       </tr>
     </table>
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
 </testresults>

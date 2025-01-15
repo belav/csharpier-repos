@@ -3,8 +3,7 @@
   <TypeSignature Language="C#" Maintainer="auto" Value="public enum HttpValidationStatus" />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -26,8 +25,7 @@
       <ReturnValue>
         <ReturnType>System.Web.HttpValidationStatus</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -46,8 +44,7 @@
       <ReturnValue>
         <ReturnType>System.Web.HttpValidationStatus</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -66,8 +63,7 @@
       <ReturnValue>
         <ReturnType>System.Web.HttpValidationStatus</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>

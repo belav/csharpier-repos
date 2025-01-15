@@ -1,73 +1,64 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<Import Project="..\..\buildscripts\common.props"></Import>
-
-	<PropertyGroup>
-		<TargetFrameworks>net462;netcoreapp2.1;netcoreapp3.1;net6.0</TargetFrameworks>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<Authors>Castle Contributors</Authors>
-		<AssemblyName>Castle.Core.Tests</AssemblyName>
-		<RootNamespace>Castle</RootNamespace>
-		<Version>0.0.0.0</Version>
-		<AssemblyVersion>0.0.0.0</AssemblyVersion>
-		<SignAssembly>True</SignAssembly>
-		<AssemblyOriginatorKeyFile>..\..\buildscripts\CastleKey.snk</AssemblyOriginatorKeyFile>
-		<PublicSign Condition="'$(OS)'=='Unix'">true</PublicSign>
-		<StartupObject>Program</StartupObject>
-	</PropertyGroup>
-
-	<ItemGroup Condition="'$([MSBuild]::GetTargetFrameworkIdentifier(&quot;$(TargetFramework)&quot;))' == '.NETFramework'">
-		<None Include="config\netfx\App.config" />
-		<None Remove="config\netcoreapp\App.config" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$([MSBuild]::GetTargetFrameworkIdentifier(&quot;$(TargetFramework)&quot;))' == '.NETCoreApp'">
-		<None Remove="config\netfx\App.config" />
-		<None Include="config\netcoreapp\App.config" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="Services.Logging.Tests\log4netIntegration\log4net.xml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<EmbeddedResource Include="Core.Tests\Resource\file1.txt">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</EmbeddedResource>
-		<EmbeddedResource Include="Core.Tests\Resource\MoreRes\file2.txt">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
-		<PackageReference Include="NUnit.Console" Version="3.11.1" />
-		<PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
-		<PackageReference Include="NUnitLite" Version="3.13.3" />
-		<PackageReference Include="log4net" Version="2.0.13" />
-		<PackageReference Include="NLog" Version="4.5.0" />
-		<PackageReference Include="Serilog" Version="2.0.0" />
-		<PackageReference Include="Serilog.Sinks.TextWriter" Version="2.0.0" />
-		<ProjectReference Include="..\Castle.Core\Castle.Core.csproj" />
-		<ProjectReference Include="..\Castle.Services.Logging.log4netIntegration\Castle.Services.Logging.log4netIntegration.csproj" />
-		<ProjectReference Include="..\Castle.Services.Logging.NLogIntegration\Castle.Services.Logging.NLogIntegration.csproj" />
-		<ProjectReference Include="..\Castle.Services.Logging.SerilogIntegration\Castle.Services.Logging.SerilogIntegration.csproj" />
-	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)'=='netcoreapp2.1'OR'$(TargetFramework)'=='netcoreapp3.1'">
-		<PackageReference Include="System.Security.Permissions" Version="4.7.0" />
-	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
-		<PackageReference Include="System.Security.Permissions" Version="6.0.0" />
-	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
-		<PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
-		<PackageReference Include="System.Net.Primitives" Version="4.3.0" />
-	</ItemGroup>
-	
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
-		<PackageReference Include="PublicApiGenerator" Version="10.1.2" />
-	</ItemGroup>
-
+  <Import Project="..\..\buildscripts\common.props"></Import>
+  <PropertyGroup>
+    <TargetFrameworks>net462;netcoreapp2.1;netcoreapp3.1;net6.0</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <Authors>Castle Contributors</Authors>
+    <AssemblyName>Castle.Core.Tests</AssemblyName>
+    <RootNamespace>Castle</RootNamespace>
+    <Version>0.0.0.0</Version>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\buildscripts\CastleKey.snk</AssemblyOriginatorKeyFile>
+    <PublicSign Condition="'$(OS)'=='Unix'">true</PublicSign>
+    <StartupObject>Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup Condition="'$([MSBuild]::GetTargetFrameworkIdentifier(&quot;$(TargetFramework)&quot;))' == '.NETFramework'">
+    <None Include="config\netfx\App.config" />
+    <None Remove="config\netcoreapp\App.config" />
+  </ItemGroup>
+  <ItemGroup Condition="'$([MSBuild]::GetTargetFrameworkIdentifier(&quot;$(TargetFramework)&quot;))' == '.NETCoreApp'">
+    <None Remove="config\netfx\App.config" />
+    <None Include="config\netcoreapp\App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Services.Logging.Tests\log4netIntegration\log4net.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <EmbeddedResource Include="Core.Tests\Resource\file1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core.Tests\Resource\MoreRes\file2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+    <PackageReference Include="NUnit.Console" Version="3.11.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+    <PackageReference Include="NUnitLite" Version="3.13.3" />
+    <PackageReference Include="log4net" Version="2.0.13" />
+    <PackageReference Include="NLog" Version="4.5.0" />
+    <PackageReference Include="Serilog" Version="2.0.0" />
+    <PackageReference Include="Serilog.Sinks.TextWriter" Version="2.0.0" />
+    <ProjectReference Include="..\Castle.Core\Castle.Core.csproj" />
+    <ProjectReference Include="..\Castle.Services.Logging.log4netIntegration\Castle.Services.Logging.log4netIntegration.csproj" />
+    <ProjectReference Include="..\Castle.Services.Logging.NLogIntegration\Castle.Services.Logging.NLogIntegration.csproj" />
+    <ProjectReference Include="..\Castle.Services.Logging.SerilogIntegration\Castle.Services.Logging.SerilogIntegration.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp2.1'OR'$(TargetFramework)'=='netcoreapp3.1'">
+    <PackageReference Include="System.Security.Permissions" Version="4.7.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <PackageReference Include="System.Security.Permissions" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
+    <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
+    <PackageReference Include="System.Net.Primitives" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <PackageReference Include="PublicApiGenerator" Version="10.1.2" />
+  </ItemGroup>
 </Project>

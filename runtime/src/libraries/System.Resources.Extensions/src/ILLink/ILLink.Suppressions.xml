@@ -5,37 +5,49 @@
       <argument>ILLink</argument>
       <argument>IL2026</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:System.Resources.Extensions.DeserializingResourceReader.DeserializeObject(System.Int32)</property>
+      <property name="Target"
+        >M:System.Resources.Extensions.DeserializingResourceReader.DeserializeObject(System.Int32)</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2026</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:System.Resources.Extensions.DeserializingResourceReader.ReadBinaryFormattedObject</property>
+      <property name="Target"
+        >M:System.Resources.Extensions.DeserializingResourceReader.ReadBinaryFormattedObject</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2026</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:System.Resources.Extensions.PreserializedResourceWriter.AddResource(System.String,System.String,System.String)</property>
+      <property name="Target"
+        >M:System.Resources.Extensions.PreserializedResourceWriter.AddResource(System.String,System.String,System.String)</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2057</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:System.Resources.Extensions.DeserializingResourceReader.UndoTruncatedTypeNameSerializationBinder.BindToType(System.String,System.String)</property>
+      <property name="Target"
+        >M:System.Resources.Extensions.DeserializingResourceReader.UndoTruncatedTypeNameSerializationBinder.BindToType(System.String,System.String)</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2067</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:System.Resources.Extensions.PreserializedResourceWriter.AddResource(System.String,System.String,System.String)</property>
+      <property name="Target"
+        >M:System.Resources.Extensions.PreserializedResourceWriter.AddResource(System.String,System.String,System.String)</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2072</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:System.Resources.Extensions.DeserializingResourceReader.DeserializeObject(System.Int32)</property>
+      <property name="Target"
+        >M:System.Resources.Extensions.DeserializingResourceReader.DeserializeObject(System.Int32)</property
+      >
     </attribute>
   </assembly>
 </linker>

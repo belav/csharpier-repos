@@ -12,11 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.MenuItem.MergeType" /> property of the <see cref="T:System.Windows.Forms.MenuItem" />.</para>
+      <para
+        >Use the members of this enumeration to set the value of the <see
+         cref="P:System.Windows.Forms.MenuItem.MergeType" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.MenuItem" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the behavior of a <see cref="T:System.Windows.Forms.MenuItem" /> when it is merged with items in another menu.</para>
+      <para
+        >Specifies the behavior of a <see
+         cref="T:System.Windows.Forms.MenuItem" />
+
+         when it is merged with items in another menu.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -29,7 +42,15 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.MenuItem" /> is added to the collection of existing <see cref="T:System.Windows.Forms.MenuItem" /> objects in a merged menu.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.MenuItem" />
+
+             is added to the collection of existing <see
+             cref="T:System.Windows.Forms.MenuItem" />
+
+             objects in a merged menu.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -46,7 +67,15 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>All submenu items of this <see cref="T:System.Windows.Forms.MenuItem" /> are merged with those of existing <see cref="T:System.Windows.Forms.MenuItem" /> objects at the same position in a merged menu.</para>
+          <para
+            >All submenu items of this <see
+             cref="T:System.Windows.Forms.MenuItem" />
+
+             are merged with those of existing <see
+             cref="T:System.Windows.Forms.MenuItem" />
+
+             objects at the same position in a merged menu.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -63,7 +92,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.MenuItem" /> is not included in a merged menu.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.MenuItem" />
+
+             is not included in a merged menu.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +114,15 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.MenuItem" /> replaces an existing <see cref="T:System.Windows.Forms.MenuItem" /> at the same position in a merged menu.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.MenuItem" />
+
+             replaces an existing <see
+             cref="T:System.Windows.Forms.MenuItem" />
+
+             at the same position in a merged menu.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

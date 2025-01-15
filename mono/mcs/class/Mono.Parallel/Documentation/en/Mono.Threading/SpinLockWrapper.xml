@@ -1,6 +1,9 @@
 <Type Name="SpinLockWrapper" FullName="Mono.Threading.SpinLockWrapper">
   <TypeSignature Language="C#" Value="public class SpinLockWrapper" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SpinLockWrapper extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit SpinLockWrapper extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Parallel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -10,26 +13,42 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>Provide a simplistic class wrapper around <see cref="T:System.Threading.SpinLock" /> to be able to pass around the lock.</summary>
+    <summary
+      >Provide a simplistic class wrapper around <see
+       cref="T:System.Threading.SpinLock" />
+
+       to be able to pass around the lock.</summary
+    >
     <remarks />
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SpinLockWrapper ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>Initialize underlying <see cref="T:System.Threading.SpinLock" /> instance with thread tracking disabled.</summary>
+        <summary
+          >Initialize underlying <see
+           cref="T:System.Threading.SpinLock" />
+
+           instance with thread tracking disabled.</summary
+        >
         <remarks />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SpinLockWrapper (bool enableTracking);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool enableTracking) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool enableTracking) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -39,14 +58,28 @@
       </Parameters>
       <Docs>
         <param name="enableTracking">
-          <see langword="true" /> to enable thread tracking, <see langword="false" /> otherwise.</param>
-        <summary>Initialize underlying <see cref="T:System.Threading.SpinLock" /> with provided value.</summary>
+          <see langword="true" />
+
+           to enable thread tracking, <see
+           langword="false" />
+
+           otherwise.</param
+        >
+        <summary
+          >Initialize underlying <see
+           cref="T:System.Threading.SpinLock" />
+
+           with provided value.</summary
+        >
         <remarks />
       </Docs>
     </Member>
     <Member MemberName="Lock">
       <MemberSignature Language="C#" Value="public System.Threading.SpinLock Lock;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Threading.SpinLock Lock" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Threading.SpinLock Lock"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -55,7 +88,12 @@
         <ReturnType>System.Threading.SpinLock</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Instance of <see cref="T:System.Threading.SpinLock" /> to use.</summary>
+        <summary
+          >Instance of <see
+           cref="T:System.Threading.SpinLock" />
+
+           to use.</summary
+        >
         <remarks />
       </Docs>
     </Member>

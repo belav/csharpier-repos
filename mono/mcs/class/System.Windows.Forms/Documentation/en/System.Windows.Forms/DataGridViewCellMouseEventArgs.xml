@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataGridViewCellMouseEventArgs" FullName="System.Windows.Forms.DataGridViewCellMouseEventArgs">
-  <TypeSignature Language="C#" Value="public class DataGridViewCellMouseEventArgs : System.Windows.Forms.MouseEventArgs" />
+<Type
+  Name="DataGridViewCellMouseEventArgs"
+  FullName="System.Windows.Forms.DataGridViewCellMouseEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DataGridViewCellMouseEventArgs : System.Windows.Forms.MouseEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +19,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" /> class provides data for the following <see cref="T:System.Windows.Forms.DataGridView" /> events:</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+         class provides data for the following <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         events:</para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -64,12 +78,23 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for mouse events raised by a <see cref="T:System.Windows.Forms.DataGridView" /> whenever the mouse is moved within a <see cref="T:System.Windows.Forms.DataGridViewCell" />. </para>
+      <para
+        >Provides data for mouse events raised by a <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         whenever the mouse is moved within a <see
+         cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        . </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DataGridViewCellMouseEventArgs (int columnIndex, int rowIndex, int localX, int localY, System.Windows.Forms.MouseEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DataGridViewCellMouseEventArgs (int columnIndex, int rowIndex, int localX, int localY, System.Windows.Forms.MouseEventArgs e);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="columnIndex" Type="System.Int32" />
@@ -83,18 +108,41 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+             class.</para
+          >
         </summary>
         <param name="columnIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The cell's zero-based column index.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The cell's zero-based column index.</param
+        >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The cell's zero-based row index.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The cell's zero-based row index.</param
+        >
         <param name="localX">
-          <attribution license="cc4" from="Microsoft" modified="false" />The x-coordinate of the mouse, in pixels.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The x-coordinate of the mouse, in pixels.</param
+        >
         <param name="localY">
-          <attribution license="cc4" from="Microsoft" modified="false" />The y-coordinate of the mouse, in pixels.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The y-coordinate of the mouse, in pixels.</param
+        >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The originating <see cref="T:System.Windows.Forms.MouseEventArgs" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The originating <see
+           cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

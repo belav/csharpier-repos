@@ -13,16 +13,35 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An <see cref="T:System.Web.Compilation.ExpressionBuilderContext" /> object is typically used to obtain a virtual path or a <see cref="P:System.Web.UI.Control.TemplateControl" /> property for use with an expression builder. For more information, see <see cref="T:System.Web.Configuration.ExpressionBuilder" />.</para>
+      <para
+        >An <see
+         cref="T:System.Web.Compilation.ExpressionBuilderContext" />
+
+         object is typically used to obtain a virtual path or a <see
+         cref="P:System.Web.UI.Control.TemplateControl" />
+
+         property for use with an expression builder. For more information, see <see
+         cref="T:System.Web.Configuration.ExpressionBuilder" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides the context for an <see cref="T:System.Web.Compilation.ExpressionBuilder" /> object.</para>
+      <para
+        >Provides the context for an <see
+         cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+         object.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ExpressionBuilderContext (string virtualPath);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ExpressionBuilderContext (string virtualPath);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="virtualPath" Type="System.String" />
@@ -32,17 +51,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Compilation.ExpressionBuilderContext" /> class using the specified virtual path.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Compilation.ExpressionBuilderContext" />
+
+             class using the specified virtual path.</para
+          >
         </summary>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path of the file associated with the specified <see cref="T:System.Web.Compilation.ExpressionBuilder" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The virtual path of the file associated with the specified <see
+           cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ExpressionBuilderContext (System.Web.UI.TemplateControl templateControl);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ExpressionBuilderContext (System.Web.UI.TemplateControl templateControl);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="templateControl" Type="System.Web.UI.TemplateControl" />
@@ -52,17 +85,34 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Compilation.ExpressionBuilderContext" /> class using the specified template control.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Compilation.ExpressionBuilderContext" />
+
+             class using the specified template control.</para
+          >
         </summary>
         <param name="templateControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.TemplateControl" /> to use with the specified <see cref="T:System.Web.Compilation.ExpressionBuilder" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.TemplateControl" />
+
+           to use with the specified <see
+           cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="TemplateControl">
-      <MemberSignature Language="C#" Value="public System.Web.UI.TemplateControl TemplateControl { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.TemplateControl TemplateControl { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.TemplateControl</ReturnType>
@@ -73,11 +123,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An expression builder might require additional information about the containing page to evaluate or parse the expression value.</para>
-          <para>This also provides the <see cref="T:System.Web.Compilation.ExpressionBuilder" /> object with information regarding the page that might be required. When an instance of a control is part of a control template, the <see cref="P:System.Web.Compilation.ExpressionBuilderContext.TemplateControl" /> property contains a reference to the containing control. For more information, see <see cref="T:System.Web.UI.TemplateControl" />.</para>
+          <para
+            >This also provides the <see
+             cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+             object with information regarding the page that might be required. When an instance of a control is part of a control template, the <see
+             cref="P:System.Web.Compilation.ExpressionBuilderContext.TemplateControl" />
+
+             property contains a reference to the containing control. For more information, see <see
+             cref="T:System.Web.UI.TemplateControl" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Provides an <see cref="T:System.Web.Compilation.ExpressionBuilder" /> object with a reference to a <see cref="T:System.Web.UI.TemplateControl" /> object.</para>
+          <para
+            >Provides an <see
+             cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+             object with a reference to a <see
+             cref="T:System.Web.UI.TemplateControl" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -96,7 +165,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a virtual path to the file associated with the <see cref="T:System.Web.Compilation.ExpressionBuilderContext" /> object.</para>
+          <para
+            >Returns a virtual path to the file associated with the <see
+             cref="T:System.Web.Compilation.ExpressionBuilderContext" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

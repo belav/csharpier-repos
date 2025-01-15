@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="NetMsmqSecurityElement" FullName="System.ServiceModel.Configuration.NetMsmqSecurityElement">
-  <TypeSignature Language="C#" Value="public sealed class NetMsmqSecurityElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed NetMsmqSecurityElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="NetMsmqSecurityElement"
+  FullName="System.ServiceModel.Configuration.NetMsmqSecurityElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class NetMsmqSecurityElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed NetMsmqSecurityElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,17 +22,36 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Objects of this type are created by creating an instance of the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding. You can then use this object to reference all of the various security settings related to the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding.</para>
+      <para
+        >Objects of this type are created by creating an instance of the <see
+         cref="T:System.ServiceModel.NetMsmqBinding" />
+
+         binding. You can then use this object to reference all of the various security settings related to the <see
+         cref="T:System.ServiceModel.NetMsmqBinding" />
+
+         binding.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ServiceModel.Configuration.NetMsmqSecurityElement" /> class encapsulates the MSMQ security features available when using the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding.</para>
+      <para
+        >The <see
+         cref="T:System.ServiceModel.Configuration.NetMsmqSecurityElement" />
+
+         class encapsulates the MSMQ security features available when using the <see
+         cref="T:System.ServiceModel.NetMsmqBinding" />
+
+         binding.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NetMsmqSecurityElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +61,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetMsmqSecurityElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.NetMsmqSecurityElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Message">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.MessageSecurityOverMsmqElement Message { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.MessageSecurityOverMsmqElement Message" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.MessageSecurityOverMsmqElement Message { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.MessageSecurityOverMsmqElement Message"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -56,17 +95,36 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.MessageSecurityOverMsmq" /> instance encapsulates the SOAP message security settings.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.MessageSecurityOverMsmq" />
+
+             instance encapsulates the SOAP message security settings.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.ServiceModel.MessageSecurityOverMsmq" /> instance that is associated with the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding.</para>
+          <para
+            >Gets the <see
+             cref="T:System.ServiceModel.MessageSecurityOverMsmq" />
+
+             instance that is associated with the <see
+             cref="T:System.ServiceModel.NetMsmqBinding" />
+
+             binding.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Mode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.NetMsmqSecurityMode Mode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.NetMsmqSecurityMode Mode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.NetMsmqSecurityMode Mode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.NetMsmqSecurityMode Mode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -101,13 +159,27 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.ServiceModel.NetMsmqSecurityMode" /> instance that is associated with the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.ServiceModel.NetMsmqSecurityMode" />
+
+             instance that is associated with the <see
+             cref="T:System.ServiceModel.NetMsmqBinding" />
+
+             binding.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -122,8 +194,14 @@
       </Docs>
     </Member>
     <Member MemberName="Transport">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.MsmqTransportSecurityElement Transport { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.MsmqTransportSecurityElement Transport" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.MsmqTransportSecurityElement Transport { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.MsmqTransportSecurityElement Transport"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -144,7 +222,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.ServiceModel.Configuration.MsmqTransportSecurityElement" /> element that is associated with the <see cref="T:System.ServiceModel.NetMsmqBinding" /> binding.</para>
+          <para
+            >Gets the <see
+             cref="T:System.ServiceModel.Configuration.MsmqTransportSecurityElement" />
+
+             element that is associated with the <see
+             cref="T:System.ServiceModel.NetMsmqBinding" />
+
+             binding.</para
+          >
         </summary>
       </Docs>
     </Member>

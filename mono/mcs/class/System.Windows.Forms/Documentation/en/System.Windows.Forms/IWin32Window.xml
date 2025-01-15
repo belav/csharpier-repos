@@ -39,7 +39,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Depending on the implementer, the value of the <see cref="P:System.Windows.Forms.IWin32Window.Handle" /> property could change during the life of the window.</para>
+          <para
+            >Depending on the implementer, the value of the <see
+             cref="P:System.Windows.Forms.IWin32Window.Handle" />
+
+             property could change during the life of the window.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

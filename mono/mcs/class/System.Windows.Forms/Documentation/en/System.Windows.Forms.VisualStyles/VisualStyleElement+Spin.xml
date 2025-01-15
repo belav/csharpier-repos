@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+Spin" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+Spin">
+<Type
+  Name="VisualStyleElement+Spin"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+Spin"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.Spin" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

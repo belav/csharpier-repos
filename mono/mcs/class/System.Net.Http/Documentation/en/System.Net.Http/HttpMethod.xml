@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HttpMethod" FullName="System.Net.Http.HttpMethod">
-  <TypeSignature Language="C#" Value="public class HttpMethod : IEquatable&lt;System.Net.Http.HttpMethod&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit HttpMethod extends System.Object implements class System.IEquatable`1&lt;class System.Net.Http.HttpMethod&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public class HttpMethod : IEquatable<System.Net.Http.HttpMethod>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit HttpMethod extends System.Object implements class System.IEquatable`1<class System.Net.Http.HttpMethod>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Net.Http</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,7 +23,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The most common usage of <see cref="T:System.Net.Http.HttpMethod" /> is to use one of the static properties on this class.  However, if an app needs a different value for the HTTP method, the <see cref="M:System.Net.Http.HttpMethod.#ctor(System.String)" /> constructor initializes a new instance of the <see cref="T:System.Net.Http.HttpMethod" /> with an HTTP method that the app specifies. </para>
+      <para
+        >The most common usage of <see
+         cref="T:System.Net.Http.HttpMethod" />
+
+         is to use one of the static properties on this class.  However, if an app needs a different value for the HTTP method, the <see
+         cref="M:System.Net.Http.HttpMethod.#ctor(System.String)" />
+
+         constructor initializes a new instance of the <see
+         cref="T:System.Net.Http.HttpMethod" />
+
+         with an HTTP method that the app specifies. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +44,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public HttpMethod (string method);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string method) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string method) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -38,18 +58,37 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If an app needs a different value for the HTTP method from one of the static properties, the <see cref="M:System.Net.Http.HttpMethod.#ctor(System.String)" /> constructor initializes a new instance of the <see cref="T:System.Net.Http.HttpMethod" /> with an HTTP method that the app specifies.</para>
+          <para
+            >If an app needs a different value for the HTTP method from one of the static properties, the <see
+             cref="M:System.Net.Http.HttpMethod.#ctor(System.String)" />
+
+             constructor initializes a new instance of the <see
+             cref="T:System.Net.Http.HttpMethod" />
+
+             with an HTTP method that the app specifies.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Http.HttpMethod" /> class with a specific HTTP method.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Http.HttpMethod" />
+
+             class with a specific HTTP method.</para
+          >
         </summary>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />The HTTP method.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The HTTP method.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Delete">
-      <MemberSignature Language="C#" Value="public static System.Net.Http.HttpMethod Delete { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Http.HttpMethod Delete { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property class System.Net.Http.HttpMethod Delete" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -68,8 +107,14 @@
       </Docs>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public bool Equals (System.Net.Http.HttpMethod other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(class System.Net.Http.HttpMethod other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Equals (System.Net.Http.HttpMethod other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Equals(class System.Net.Http.HttpMethod other) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -84,20 +129,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether the specified <see cref="T:System.Net.Http.HttpMethod" /> is equal to the current <see cref="T:System.Object" />.</para>
+          <para
+            >Determines whether the specified <see
+             cref="T:System.Net.Http.HttpMethod" />
+
+             is equal to the current <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Boolean" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
           <para>true if the specified object is equal to the current object; otherwise, false.</para>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />The HTTP method to compare with the current object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The HTTP method to compare with the current object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -112,19 +176,38 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />.</para>
+          <para
+            >Determines whether the specified <see
+             cref="T:System.Object" />
+
+             is equal to the current <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Boolean" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
           <para>true if the specified object is equal to the current object; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to compare with the current object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to compare with the current object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Get">
-      <MemberSignature Language="C#" Value="public static System.Net.Http.HttpMethod Get { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Http.HttpMethod Get { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property class System.Net.Http.HttpMethod Get" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -144,7 +227,10 @@
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -156,7 +242,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.The <see cref="M:System.Net.Http.HttpMethod.GetHashCode" /> method is suitable for use in hashing algorithms and data structures such as a hash table. </para>
+          <para
+            >A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.The <see
+             cref="M:System.Net.Http.HttpMethod.GetHashCode" />
+
+             method is suitable for use in hashing algorithms and data structures such as a hash table. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -164,13 +255,26 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Int32" />.</para>
-          <para>A hash code for the current <see cref="T:System.Object" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Int32" />
+
+            .</para
+          >
+          <para
+            >A hash code for the current <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Head">
-      <MemberSignature Language="C#" Value="public static System.Net.Http.HttpMethod Head { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Http.HttpMethod Head { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property class System.Net.Http.HttpMethod Head" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -208,8 +312,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (System.Net.Http.HttpMethod left, System.Net.Http.HttpMethod right);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(class System.Net.Http.HttpMethod left, class System.Net.Http.HttpMethod right) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (System.Net.Http.HttpMethod left, System.Net.Http.HttpMethod right);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Equality(class System.Net.Http.HttpMethod left, class System.Net.Http.HttpMethod right) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -225,22 +335,58 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The equality operator for comparing two <see cref="T:System.Net.Http.HttpMethod" /> objects.</para>
+          <para
+            >The equality operator for comparing two <see
+             cref="T:System.Net.Http.HttpMethod" />
+
+             objects.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Boolean" />.</para>
-          <para>true if the specified <paramref name="left" /> and <paramref name="right" /> parameters are equal; otherwise, false.</para>
+          <para
+            >Returns <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
+          <para
+            >true if the specified <paramref
+             name="left" />
+
+             and <paramref
+             name="right" />
+
+             parameters are equal; otherwise, false.</para
+          >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />The left <see cref="T:System.Net.Http.HttpMethod" /> to an equality operator.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The left <see
+           cref="T:System.Net.Http.HttpMethod" />
+
+           to an equality operator.</param
+        >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />The right  <see cref="T:System.Net.Http.HttpMethod" /> to an equality operator.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The right  <see
+           cref="T:System.Net.Http.HttpMethod" />
+
+           to an equality operator.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (System.Net.Http.HttpMethod left, System.Net.Http.HttpMethod right);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(class System.Net.Http.HttpMethod left, class System.Net.Http.HttpMethod right) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (System.Net.Http.HttpMethod left, System.Net.Http.HttpMethod right);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Inequality(class System.Net.Http.HttpMethod left, class System.Net.Http.HttpMethod right) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -256,22 +402,58 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The inequality operator for comparing two <see cref="T:System.Net.Http.HttpMethod" /> objects.</para>
+          <para
+            >The inequality operator for comparing two <see
+             cref="T:System.Net.Http.HttpMethod" />
+
+             objects.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Boolean" />.</para>
-          <para>true if the specified <paramref name="left" /> and <paramref name="right" /> parameters are inequal; otherwise, false.</para>
+          <para
+            >Returns <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
+          <para
+            >true if the specified <paramref
+             name="left" />
+
+             and <paramref
+             name="right" />
+
+             parameters are inequal; otherwise, false.</para
+          >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />The left <see cref="T:System.Net.Http.HttpMethod" /> to an inequality operator.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The left <see
+           cref="T:System.Net.Http.HttpMethod" />
+
+           to an inequality operator.</param
+        >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />The right  <see cref="T:System.Net.Http.HttpMethod" /> to an inequality operator.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The right  <see
+           cref="T:System.Net.Http.HttpMethod" />
+
+           to an inequality operator.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Options">
-      <MemberSignature Language="C#" Value="public static System.Net.Http.HttpMethod Options { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.Net.Http.HttpMethod Options" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Http.HttpMethod Options { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.Net.Http.HttpMethod Options"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -289,7 +471,10 @@
       </Docs>
     </Member>
     <Member MemberName="Post">
-      <MemberSignature Language="C#" Value="public static System.Net.Http.HttpMethod Post { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Http.HttpMethod Post { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property class System.Net.Http.HttpMethod Post" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -308,7 +493,10 @@
       </Docs>
     </Member>
     <Member MemberName="Put">
-      <MemberSignature Language="C#" Value="public static System.Net.Http.HttpMethod Put { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Http.HttpMethod Put { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property class System.Net.Http.HttpMethod Put" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -328,7 +516,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -345,13 +536,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.String" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.String" />
+
+            .</para
+          >
           <para>A string representing the current object.</para>
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Trace">
-      <MemberSignature Language="C#" Value="public static System.Net.Http.HttpMethod Trace { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Http.HttpMethod Trace { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property class System.Net.Http.HttpMethod Trace" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>

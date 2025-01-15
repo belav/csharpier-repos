@@ -18,7 +18,12 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides <see cref="T:System.Windows.Forms.RichTextBox" /> settings for Input Method Editor (IME) and Asian language support.</para>
+      <para
+        >Provides <see
+         cref="T:System.Windows.Forms.RichTextBox" />
+
+         settings for Input Method Editor (IME) and Asian language support.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -66,7 +71,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that the <see cref="T:System.Windows.Forms.RichTextBox" /> control automatically changes the keyboard layout when the user explicitly changes to a different font, or when the user explicitly changes the insertion point to a new location in the text.  </para>
+          <para
+            >Specifies that the <see
+             cref="T:System.Windows.Forms.RichTextBox" />
+
+             control automatically changes the keyboard layout when the user explicitly changes to a different font, or when the user explicitly changes the insertion point to a new location in the text.  </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -83,7 +93,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the control to dual-font mode. Used for Asian language text. The <see cref="T:System.Windows.Forms.RichTextBox" /> control uses an English font for ASCII text and an Asian font for Asian text.</para>
+          <para
+            >Sets the control to dual-font mode. Used for Asian language text. The <see
+             cref="T:System.Windows.Forms.RichTextBox" />
+
+             control uses an English font for ASCII text and an Asian font for Asian text.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

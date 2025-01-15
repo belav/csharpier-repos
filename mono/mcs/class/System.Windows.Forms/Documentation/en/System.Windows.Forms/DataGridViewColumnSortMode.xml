@@ -12,11 +12,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Each column may have a different sort mode specified by the <see cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" /> property. </para>
+      <para
+        >Each column may have a different sort mode specified by the <see
+         cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
+
+         property. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines how a <see cref="T:System.Windows.Forms.DataGridView" /> column can be sorted by the user.</para>
+      <para
+        >Defines how a <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         column can be sorted by the user.</para
+      >
     </summary>
   </Docs>
   <Members>

@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <AssemblyName>Microsoft.EntityFrameworkCore.Analyzers.Tests</AssemblyName>
@@ -7,7 +6,6 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Diagnostics" />
     <Using Include="System.Linq.Expressions" />
@@ -34,18 +32,27 @@
     <Using Include="Xunit" />
     <Using Include="Xunit.Abstractions" />
   </ItemGroup>
-
- <ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\src\EFCore.Analyzers\EFCore.Analyzers.csproj" />
     <ProjectReference Include="..\..\src\EFCore.Relational\EFCore.Relational.csproj" />
     <ProjectReference Include="..\EFCore.Tests\EFCore.Tests.csproj" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="$(MicrosoftCodeAnalysisVersion)" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="$(MicrosoftExtensionsDependencyModelVersion)" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp.Workspaces"
+      Version="$(MicrosoftCodeAnalysisVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.DependencyModel"
+      Version="$(MicrosoftExtensionsDependencyModelVersion)"
+    />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit" Version="$(MicrosoftCodeAnalysisTestingVersion)" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit" Version="$(MicrosoftCodeAnalysisTestingVersion)" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing.XUnit"
+      Version="$(MicrosoftCodeAnalysisTestingVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing.XUnit"
+      Version="$(MicrosoftCodeAnalysisTestingVersion)"
+    />
   </ItemGroup>
-
 </Project>

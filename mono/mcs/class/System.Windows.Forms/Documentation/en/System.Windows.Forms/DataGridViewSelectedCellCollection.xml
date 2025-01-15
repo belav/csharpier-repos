@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataGridViewSelectedCellCollection" FullName="System.Windows.Forms.DataGridViewSelectedCellCollection">
-  <TypeSignature Language="C#" Value="public class DataGridViewSelectedCellCollection : System.Windows.Forms.BaseCollection, System.Collections.IList" />
+<Type
+  Name="DataGridViewSelectedCellCollection"
+  FullName="System.Windows.Forms.DataGridViewSelectedCellCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DataGridViewSelectedCellCollection : System.Windows.Forms.BaseCollection, System.Collections.IList"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -26,7 +32,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a collection of cells that are selected in a <see cref="T:System.Windows.Forms.DataGridView" />.</para>
+      <para
+        >Represents a collection of cells that are selected in a <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -41,7 +52,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is not relevant for this class. You cannot change the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> class directly. To clear the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />, use the <see cref="M:System.Windows.Forms.DataGridView.ClearSelection" /> method.</para>
+          <para
+            >This method is not relevant for this class. You cannot change the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             class directly. To clear the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+            , use the <see
+             cref="M:System.Windows.Forms.DataGridView.ClearSelection" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -58,7 +80,10 @@
       </Attributes>
     </Member>
     <Member MemberName="Contains">
-      <MemberSignature Language="C#" Value="public bool Contains (System.Windows.Forms.DataGridViewCell dataGridViewCell);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Contains (System.Windows.Forms.DataGridViewCell dataGridViewCell);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -75,17 +100,37 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if <paramref name="dataGridViewCell" /> is in the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />; otherwise, false.</para>
+          <para
+            >true if <paramref
+             name="dataGridViewCell" />
+
+             is in the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="dataGridViewCell">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.DataGridViewCell" /> to locate in the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.DataGridViewCell" />
+
+           to locate in the <see
+           cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo (System.Windows.Forms.DataGridViewCell[] array, int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo (System.Windows.Forms.DataGridViewCell[] array, int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -99,19 +144,39 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the elements of the collection to the specified <see cref="T:System.Windows.Forms.DataGridViewCell" /> array, starting at the specified index.</para>
+          <para
+            >Copies the elements of the collection to the specified <see
+             cref="T:System.Windows.Forms.DataGridViewCell" />
+
+             array, starting at the specified index.</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The one-dimensional array of type <see cref="T:System.Windows.Forms.DataGridViewCell" /> that is the destination of the elements copied from the collection. The array must have zero-based indexing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The one-dimensional array of type <see
+           cref="T:System.Windows.Forms.DataGridViewCell" />
+
+           that is the destination of the elements copied from the collection. The array must have zero-based indexing.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> at which copying begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           at which copying begins.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, System.Windows.Forms.DataGridViewCell dataGridViewCell);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, System.Windows.Forms.DataGridViewCell dataGridViewCell);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -124,16 +189,39 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is not relevant for this class. You cannot change the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> class directly. To add a cell to the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />, use the <see cref="P:System.Windows.Forms.DataGridViewCell.Selected" /> property.</para>
+          <para
+            >This method is not relevant for this class. You cannot change the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             class directly. To add a cell to the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+            , use the <see
+             cref="P:System.Windows.Forms.DataGridViewCell.Selected" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Inserts a cell into the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index at which <paramref name="dataGridViewCell" /> should be inserted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index at which <paramref
+           name="dataGridViewCell" />
+
+           should be inserted.</param
+        >
         <param name="dataGridViewCell">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to be added to the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to be added to the <see
+           cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -145,7 +233,10 @@
       </Attributes>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.DataGridViewCell this[int index] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.DataGridViewCell this[int index] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DataGridViewCell</ReturnType>
@@ -165,7 +256,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="List">
-      <MemberSignature Language="C#" Value="protected override System.Collections.ArrayList List { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Collections.ArrayList List { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -197,19 +291,52 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You cannot change the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> class directly. To add a cell to the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />, use the <see cref="P:System.Windows.Forms.DataGridViewCell.Selected" /> property.</para>
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >You cannot change the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             class directly. To add a cell to the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+            , use the <see
+             cref="P:System.Windows.Forms.DataGridViewCell.Selected" />
+
+             property.</para
+          >
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Implements the <see cref="M:System.Collections.IList.Add(System.Object)" /> method. Always throws <see cref="T:System.NotSupportedException" />.</para>
+          <para
+            >Implements the <see
+             cref="M:System.Collections.IList.Add(System.Object)" />
+
+             method. Always throws <see
+             cref="T:System.NotSupportedException" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The position into which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item to be added to the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item to be added to the <see
+           cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Clear">
@@ -225,12 +352,39 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You cannot change the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> class directly. To clear the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />, use the <see cref="M:System.Windows.Forms.DataGridView.ClearSelection" /> method.</para>
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >You cannot change the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             class directly. To clear the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+            , use the <see
+             cref="M:System.Windows.Forms.DataGridView.ClearSelection" />
+
+             method.</para
+          >
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Implements the <see cref="M:System.Collections.IList.Clear" /> method. Always throws <see cref="T:System.NotSupportedException" />.</para>
+          <para
+            >Implements the <see
+             cref="M:System.Collections.IList.Clear" />
+
+             method. Always throws <see
+             cref="T:System.NotSupportedException" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -249,7 +403,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -257,10 +419,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if <paramref name="value" /> is in the collection; otherwise, false.</para>
+          <para
+            >true if <paramref
+             name="value" />
+
+             is in the collection; otherwise, false.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.DataGridViewCell" /> to locate in the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.DataGridViewCell" />
+
+           to locate in the <see
+           cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IndexOf">
@@ -278,7 +454,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -286,10 +470,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The zero-based index of the <paramref name="value" /> parameter if it is found in the collection; otherwise, -1.</para>
+          <para
+            >The zero-based index of the <paramref
+             name="value" />
+
+             parameter if it is found in the collection; otherwise, -1.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The cell to locate in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The cell to locate in the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Insert">
@@ -308,17 +500,56 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You cannot change the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> class directly. To add a cell to the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />, use the <see cref="P:System.Windows.Forms.DataGridViewCell.Selected" /> property.</para>
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >You cannot change the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             class directly. To add a cell to the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+            , use the <see
+             cref="P:System.Windows.Forms.DataGridViewCell.Selected" />
+
+             property.</para
+          >
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Implements the <see cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" /> method. Always throws <see cref="T:System.NotSupportedException" />.</para>
+          <para
+            >Implements the <see
+             cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />
+
+             method. Always throws <see
+             cref="T:System.NotSupportedException" />
+
+            .</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index at which <paramref name="value" /> should be inserted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index at which <paramref
+           name="value" />
+
+           should be inserted.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to be added to the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to be added to the <see
+           cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.IsFixedSize">
@@ -334,7 +565,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -343,7 +582,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Item">
-      <MemberSignature Language="C#" Value="object System.Collections.IList.Item[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IList.Item[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -376,15 +618,48 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You cannot change the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> class directly. To remove a cell from the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />, use the <see cref="P:System.Windows.Forms.DataGridViewCell.Selected" /> property.</para>
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >You cannot change the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             class directly. To remove a cell from the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+            , use the <see
+             cref="P:System.Windows.Forms.DataGridViewCell.Selected" />
+
+             property.</para
+          >
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Implements the <see cref="M:System.Collections.IList.Remove(System.Object)" /> method. Always throws <see cref="T:System.NotSupportedException" />.</para>
+          <para
+            >Implements the <see
+             cref="M:System.Collections.IList.Remove(System.Object)" />
+
+             method. Always throws <see
+             cref="T:System.NotSupportedException" />
+
+            .</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to be removed from the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to be removed from the <see
+           cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.RemoveAt">
@@ -402,15 +677,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You cannot change the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> class directly. To remove a cell from the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />, use the <see cref="P:System.Windows.Forms.DataGridViewCell.Selected" /> property.</para>
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" /> instance is cast to an <see cref="T:System.Collections.IList" /> interface.</para>
+          <para
+            >You cannot change the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             class directly. To remove a cell from the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+            , use the <see
+             cref="P:System.Windows.Forms.DataGridViewCell.Selected" />
+
+             property.</para
+          >
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+             instance is cast to an <see
+             cref="T:System.Collections.IList" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Implements the <see cref="M:System.Collections.IList.RemoveAt(System.Int32)" /> method. Always throws <see cref="T:System.NotSupportedException" />.</para>
+          <para
+            >Implements the <see
+             cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
+
+             method. Always throws <see
+             cref="T:System.NotSupportedException" />
+
+            .</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index of the item to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index of the item to remove.</param
+        >
       </Docs>
     </Member>
   </Members>

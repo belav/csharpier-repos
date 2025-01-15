@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="FtpStatusCode" FullName="System.Net.FtpStatusCode">
   <TypeSignature Language="C#" Value="public enum FtpStatusCode" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed FtpStatusCode extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed FtpStatusCode extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,8 +17,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Net.FtpStatusCode" /> enumeration defines the values returned in the <see cref="P:System.Net.FtpWebResponse.StatusCode" /> property.</para>
-      <para>For additional information about FTP server status codes, see RFC 959, "File Transfer Protocol," Section 4.2, "FTP Replies," available at <see cref="http://www.ietf.org">http://www.rfc-editor.org</see>.</para>
+      <para
+        >The <see
+         cref="T:System.Net.FtpStatusCode" />
+
+         enumeration defines the values returned in the <see
+         cref="P:System.Net.FtpWebResponse.StatusCode" />
+
+         property.</para
+      >
+      <para
+        >For additional information about FTP server status codes, see RFC 959, "File Transfer Protocol," Section 4.2, "FTP Replies," available at <see
+         cref="http://www.ietf.org">http://www.rfc-editor.org</see>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +41,10 @@
   <Members>
     <Member MemberName="AccountNeeded">
       <MemberSignature Language="C#" Value="AccountNeeded" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode AccountNeeded = int32(532)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode AccountNeeded = int32(532)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -44,7 +63,10 @@
     </Member>
     <Member MemberName="ActionAbortedLocalProcessingError">
       <MemberSignature Language="C#" Value="ActionAbortedLocalProcessingError" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ActionAbortedLocalProcessingError = int32(451)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ActionAbortedLocalProcessingError = int32(451)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -63,7 +85,10 @@
     </Member>
     <Member MemberName="ActionAbortedUnknownPageType">
       <MemberSignature Language="C#" Value="ActionAbortedUnknownPageType" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ActionAbortedUnknownPageType = int32(551)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ActionAbortedUnknownPageType = int32(551)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -82,7 +107,10 @@
     </Member>
     <Member MemberName="ActionNotTakenFilenameNotAllowed">
       <MemberSignature Language="C#" Value="ActionNotTakenFilenameNotAllowed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ActionNotTakenFilenameNotAllowed = int32(553)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ActionNotTakenFilenameNotAllowed = int32(553)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -101,7 +129,10 @@
     </Member>
     <Member MemberName="ActionNotTakenFileUnavailable">
       <MemberSignature Language="C#" Value="ActionNotTakenFileUnavailable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ActionNotTakenFileUnavailable = int32(550)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ActionNotTakenFileUnavailable = int32(550)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -120,7 +151,10 @@
     </Member>
     <Member MemberName="ActionNotTakenFileUnavailableOrBusy">
       <MemberSignature Language="C#" Value="ActionNotTakenFileUnavailableOrBusy" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ActionNotTakenFileUnavailableOrBusy = int32(450)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ActionNotTakenFileUnavailableOrBusy = int32(450)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -139,7 +173,10 @@
     </Member>
     <Member MemberName="ActionNotTakenInsufficientSpace">
       <MemberSignature Language="C#" Value="ActionNotTakenInsufficientSpace" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ActionNotTakenInsufficientSpace = int32(452)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ActionNotTakenInsufficientSpace = int32(452)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -158,7 +195,10 @@
     </Member>
     <Member MemberName="ArgumentSyntaxError">
       <MemberSignature Language="C#" Value="ArgumentSyntaxError" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ArgumentSyntaxError = int32(501)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ArgumentSyntaxError = int32(501)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -177,7 +217,10 @@
     </Member>
     <Member MemberName="BadCommandSequence">
       <MemberSignature Language="C#" Value="BadCommandSequence" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode BadCommandSequence = int32(503)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode BadCommandSequence = int32(503)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -196,7 +239,10 @@
     </Member>
     <Member MemberName="CantOpenData">
       <MemberSignature Language="C#" Value="CantOpenData" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode CantOpenData = int32(425)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode CantOpenData = int32(425)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -215,7 +261,10 @@
     </Member>
     <Member MemberName="ClosingControl">
       <MemberSignature Language="C#" Value="ClosingControl" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ClosingControl = int32(221)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ClosingControl = int32(221)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -234,7 +283,10 @@
     </Member>
     <Member MemberName="ClosingData">
       <MemberSignature Language="C#" Value="ClosingData" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ClosingData = int32(226)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ClosingData = int32(226)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -253,7 +305,10 @@
     </Member>
     <Member MemberName="CommandExtraneous">
       <MemberSignature Language="C#" Value="CommandExtraneous" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode CommandExtraneous = int32(202)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode CommandExtraneous = int32(202)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -272,7 +327,10 @@
     </Member>
     <Member MemberName="CommandNotImplemented">
       <MemberSignature Language="C#" Value="CommandNotImplemented" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode CommandNotImplemented = int32(502)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode CommandNotImplemented = int32(502)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -291,7 +349,10 @@
     </Member>
     <Member MemberName="CommandOK">
       <MemberSignature Language="C#" Value="CommandOK" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode CommandOK = int32(200)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode CommandOK = int32(200)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -310,7 +371,10 @@
     </Member>
     <Member MemberName="CommandSyntaxError">
       <MemberSignature Language="C#" Value="CommandSyntaxError" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode CommandSyntaxError = int32(500)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode CommandSyntaxError = int32(500)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -329,7 +393,10 @@
     </Member>
     <Member MemberName="ConnectionClosed">
       <MemberSignature Language="C#" Value="ConnectionClosed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ConnectionClosed = int32(426)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ConnectionClosed = int32(426)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -348,7 +415,10 @@
     </Member>
     <Member MemberName="DataAlreadyOpen">
       <MemberSignature Language="C#" Value="DataAlreadyOpen" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode DataAlreadyOpen = int32(125)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode DataAlreadyOpen = int32(125)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -367,7 +437,10 @@
     </Member>
     <Member MemberName="DirectoryStatus">
       <MemberSignature Language="C#" Value="DirectoryStatus" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode DirectoryStatus = int32(212)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode DirectoryStatus = int32(212)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -386,7 +459,10 @@
     </Member>
     <Member MemberName="EnteringPassive">
       <MemberSignature Language="C#" Value="EnteringPassive" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode EnteringPassive = int32(227)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode EnteringPassive = int32(227)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -405,7 +481,10 @@
     </Member>
     <Member MemberName="FileActionAborted">
       <MemberSignature Language="C#" Value="FileActionAborted" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode FileActionAborted = int32(552)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode FileActionAborted = int32(552)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -424,7 +503,10 @@
     </Member>
     <Member MemberName="FileActionOK">
       <MemberSignature Language="C#" Value="FileActionOK" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode FileActionOK = int32(250)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode FileActionOK = int32(250)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -443,7 +525,10 @@
     </Member>
     <Member MemberName="FileCommandPending">
       <MemberSignature Language="C#" Value="FileCommandPending" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode FileCommandPending = int32(350)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode FileCommandPending = int32(350)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -462,7 +547,10 @@
     </Member>
     <Member MemberName="FileStatus">
       <MemberSignature Language="C#" Value="FileStatus" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode FileStatus = int32(213)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode FileStatus = int32(213)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -481,7 +569,10 @@
     </Member>
     <Member MemberName="LoggedInProceed">
       <MemberSignature Language="C#" Value="LoggedInProceed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode LoggedInProceed = int32(230)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode LoggedInProceed = int32(230)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -500,7 +591,10 @@
     </Member>
     <Member MemberName="NeedLoginAccount">
       <MemberSignature Language="C#" Value="NeedLoginAccount" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode NeedLoginAccount = int32(332)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode NeedLoginAccount = int32(332)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -519,7 +613,10 @@
     </Member>
     <Member MemberName="NotLoggedIn">
       <MemberSignature Language="C#" Value="NotLoggedIn" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode NotLoggedIn = int32(530)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode NotLoggedIn = int32(530)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -538,7 +635,10 @@
     </Member>
     <Member MemberName="OpeningData">
       <MemberSignature Language="C#" Value="OpeningData" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode OpeningData = int32(150)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode OpeningData = int32(150)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -557,7 +657,10 @@
     </Member>
     <Member MemberName="PathnameCreated">
       <MemberSignature Language="C#" Value="PathnameCreated" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode PathnameCreated = int32(257)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode PathnameCreated = int32(257)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -576,7 +679,10 @@
     </Member>
     <Member MemberName="RestartMarker">
       <MemberSignature Language="C#" Value="RestartMarker" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode RestartMarker = int32(110)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode RestartMarker = int32(110)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -595,7 +701,10 @@
     </Member>
     <Member MemberName="SendPasswordCommand">
       <MemberSignature Language="C#" Value="SendPasswordCommand" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode SendPasswordCommand = int32(331)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode SendPasswordCommand = int32(331)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -614,7 +723,10 @@
     </Member>
     <Member MemberName="SendUserCommand">
       <MemberSignature Language="C#" Value="SendUserCommand" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode SendUserCommand = int32(220)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode SendUserCommand = int32(220)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -633,7 +745,10 @@
     </Member>
     <Member MemberName="ServerWantsSecureSession">
       <MemberSignature Language="C#" Value="ServerWantsSecureSession" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ServerWantsSecureSession = int32(234)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ServerWantsSecureSession = int32(234)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -652,7 +767,10 @@
     </Member>
     <Member MemberName="ServiceNotAvailable">
       <MemberSignature Language="C#" Value="ServiceNotAvailable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ServiceNotAvailable = int32(421)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ServiceNotAvailable = int32(421)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -671,7 +789,10 @@
     </Member>
     <Member MemberName="ServiceTemporarilyNotAvailable">
       <MemberSignature Language="C#" Value="ServiceTemporarilyNotAvailable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode ServiceTemporarilyNotAvailable = int32(120)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode ServiceTemporarilyNotAvailable = int32(120)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -690,7 +811,10 @@
     </Member>
     <Member MemberName="SystemType">
       <MemberSignature Language="C#" Value="SystemType" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode SystemType = int32(215)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode SystemType = int32(215)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -709,7 +833,10 @@
     </Member>
     <Member MemberName="Undefined">
       <MemberSignature Language="C#" Value="Undefined" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.FtpStatusCode Undefined = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.FtpStatusCode Undefined = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

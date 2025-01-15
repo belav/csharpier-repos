@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Various helpers for writing tests that use ASP.NET Core.</Description>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework);$(DefaultNetFxTargetFramework);netstandard2.0</TargetFrameworks>
@@ -17,11 +16,9 @@
     <!-- Nullable disabled because package is used in tests. -->
     <Nullable>disable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.InternalTesting.Tests" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.DependencyInjection" />
     <Reference Include="Microsoft.Extensions.Logging.Console" />
@@ -29,7 +26,6 @@
     <Reference Include="Serilog.Extensions.Logging" />
     <Reference Include="Serilog.Sinks.File" />
     <Reference Include="System.ValueTuple" />
-
     <!--
       This intentionally does not reference 'xunit', 'xunit.core', or any runner packages.
       XUnit recommends only using xunit.extensibility.*, xunit.assert, and xunit.abstractions for packages which "extend" xunit.
@@ -42,18 +38,17 @@
     <Reference Include="xunit.extensibility.execution" />
     <Reference Include="Microsoft.DotNet.RemoteExecutor" />
   </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' OR
+  <ItemGroup
+    Condition=" '$(TargetFramework)' == 'netstandard2.0' OR
       '$(TargetFramework)' == '$(DefaultNetFxTargetFramework)' OR
-      '$(MSBuildRestoreSessionId)' == '' ">
+      '$(MSBuildRestoreSessionId)' == '' "
+  >
     <Reference Include="Microsoft.Win32.Registry" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == '$(DefaultNetFxTargetFramework)' OR '$(MSBuildRestoreSessionId)' == ''">
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="contentFiles\cs\netstandard2.0\EventSourceTestCollection.cs" />
     <Content Include="contentFiles\cs\netstandard2.0\EventSourceTestCollection.cs">
@@ -62,12 +57,16 @@
     </Content>
     <Compile Include="$(SharedSourceRoot)TaskExtensions.cs" LinkBase="Shared\TaskExtensions.cs" />
     <Compile Include="$(SharedSourceRoot)ThrowHelpers\ArgumentThrowHelper.cs" LinkBase="Shared" />
-    <Compile Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs" LinkBase="Shared" />
-    <Compile Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs" LinkBase="Shared" />
+    <Compile
+      Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs"
+      LinkBase="Shared"
+    />
+    <Compile
+      Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs"
+      LinkBase="Shared"
+    />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' != '$(DefaultNetCoreTargetFramework)'">
     <Compile Include="$(SharedSourceRoot)Nullable\NullableAttributes.cs" LinkBase="Shared" />
   </ItemGroup>
-
 </Project>

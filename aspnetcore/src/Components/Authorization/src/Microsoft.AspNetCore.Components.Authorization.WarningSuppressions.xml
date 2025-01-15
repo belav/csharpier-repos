@@ -5,13 +5,17 @@
       <argument>ILLink</argument>
       <argument>IL2110</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.RenderContentInDefaultLayout(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,Microsoft.AspNetCore.Components.RenderFragment)</property>
+      <property name="Target"
+        >M:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.RenderContentInDefaultLayout(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,Microsoft.AspNetCore.Components.RenderFragment)</property
+      >
     </attribute>
     <attribute fullname="System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessageAttribute">
       <argument>ILLink</argument>
       <argument>IL2111</argument>
       <property name="Scope">member</property>
-      <property name="Target">M:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.RenderContentInDefaultLayout(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,Microsoft.AspNetCore.Components.RenderFragment)</property>
+      <property name="Target"
+        >M:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView.RenderContentInDefaultLayout(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder,Microsoft.AspNetCore.Components.RenderFragment)</property
+      >
     </attribute>
   </assembly>
 </linker>

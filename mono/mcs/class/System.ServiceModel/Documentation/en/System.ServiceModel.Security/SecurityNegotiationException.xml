@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SecurityNegotiationException" FullName="System.ServiceModel.Security.SecurityNegotiationException">
-  <TypeSignature Language="C#" Value="public class SecurityNegotiationException : System.ServiceModel.CommunicationException" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit SecurityNegotiationException extends System.ServiceModel.CommunicationException" />
+<Type
+  Name="SecurityNegotiationException"
+  FullName="System.ServiceModel.Security.SecurityNegotiationException"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class SecurityNegotiationException : System.ServiceModel.CommunicationException"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit SecurityNegotiationException extends System.ServiceModel.CommunicationException"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,7 +25,19 @@
       <para>This exception can happen in the following cases: </para>
       <list type="bullet">
         <item>
-          <para>While negotiating the initial security context. The exact error depends on the negotiation technology used: either <see cref="http://go.microsoft.com/fwlink/?LinkId=96699">Simple and Protected GSS-API Negotiation (SPNEGO)</see> or TLSNEGO. crdefault <format type="text/html"><a href="57ffcbea-807c-4e43-a41c-44b3db8ed2af">Security Protocols</a></format>.</para>
+          <para
+            >While negotiating the initial security context. The exact error depends on the negotiation technology used: either <see
+             cref="http://go.microsoft.com/fwlink/?LinkId=96699"
+              >Simple and Protected GSS-API Negotiation (SPNEGO)</see
+            >
+
+             or TLSNEGO. crdefault <format
+             type="text/html">
+              <a href="57ffcbea-807c-4e43-a41c-44b3db8ed2af">Security Protocols</a>
+            </format>
+
+            .</para
+          >
         </item>
         <item>
           <para>While establishing a security session on top of an initial security context.</para>
@@ -25,7 +46,15 @@
           <para>During key renewal for an existing security session.</para>
         </item>
       </list>
-      <para>Security negotiation errors can occur as part of the <newTerm>Spnego</newTerm>/<newTerm>Sslnego</newTerm> security protocol or as part of the SecureConversation protocol.</para>
+      <para
+        >Security negotiation errors can occur as part of the <newTerm
+        >Spnego</newTerm>
+
+        /<newTerm
+        >Sslnego</newTerm>
+
+         security protocol or as part of the SecureConversation protocol.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -35,7 +64,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SecurityNegotiationException ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -45,13 +77,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityNegotiationException" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.SecurityNegotiationException" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SecurityNegotiationException (string message);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SecurityNegotiationException (string message);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -63,15 +106,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityNegotiationException" /> class with a specified error message.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.SecurityNegotiationException" />
+
+             class with a specified error message.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message that explains the reason for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message that explains the reason for the exception.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected SecurityNegotiationException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected SecurityNegotiationException (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -84,17 +141,40 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityNegotiationException" /> class with serialization information and streaming context specified.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.SecurityNegotiationException" />
+
+             class with serialization information and streaming context specified.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that contains all the data required to serialize the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+           that contains all the data required to serialize the exception.</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.StreamingContext" /> that specifies the source and destination of the stream.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.StreamingContext" />
+
+           that specifies the source and destination of the stream.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SecurityNegotiationException (string message, Exception innerException);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception innerException) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SecurityNegotiationException (string message, Exception innerException);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string message, class System.Exception innerException) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -107,12 +187,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityNegotiationException" /> class with serialization information and inner exception specified.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.SecurityNegotiationException" />
+
+             class with serialization information and inner exception specified.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message that explains the reason for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message that explains the reason for the exception.</param
+        >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Exception" /> that caused the current exception to be thrown.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Exception" />
+
+           that caused the current exception to be thrown.</param
+        >
       </Docs>
     </Member>
   </Members>

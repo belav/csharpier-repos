@@ -1,10 +1,12 @@
 <Type Name="RfcBindRequest" FullName="Novell.Directory.Ldap.Rfc2251.RfcBindRequest">
-  <TypeSignature Language="C#" Value="public class RfcBindRequest : Novell.Directory.Ldap.Asn1.Asn1Sequence, Novell.Directory.Ldap.Rfc2251.RfcRequest, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class RfcBindRequest : Novell.Directory.Ldap.Asn1.Asn1Sequence, Novell.Directory.Ldap.Rfc2251.RfcRequest, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -54,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcBindRequest(Novell.Directory.Ldap.Asn1.Asn1Integer version, Novell.Directory.Ldap.Rfc2251.RfcLdapDN name, Novell.Directory.Ldap.Rfc2251.RfcAuthenticationChoice auth)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcBindRequest(Novell.Directory.Ldap.Asn1.Asn1Integer version, Novell.Directory.Ldap.Rfc2251.RfcLdapDN name, Novell.Directory.Ldap.Rfc2251.RfcAuthenticationChoice auth)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="version" Type="Novell.Directory.Ldap.Asn1.Asn1Integer" />
@@ -70,7 +75,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcBindRequest(int version, string dn, string mechanism, sbyte[] credentials)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcBindRequest(int version, string dn, string mechanism, sbyte[] credentials)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>
@@ -93,7 +101,10 @@
       </Docs>
     </Member>
     <Member MemberName="dupRequest">
-      <MemberSignature Language="C#" Value="public Novell.Directory.Ldap.Rfc2251.RfcRequest dupRequest(string base_Renamed, string filter, bool request)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Novell.Directory.Ldap.Rfc2251.RfcRequest dupRequest(string base_Renamed, string filter, bool request)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Rfc2251.RfcRequest</ReturnType>
@@ -126,7 +137,10 @@
       </Docs>
     </Member>
     <Member MemberName="Version">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Asn1.Asn1Integer Version { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Asn1.Asn1Integer Version { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1Integer</ReturnType>
@@ -138,7 +152,10 @@
       </Docs>
     </Member>
     <Member MemberName="Name">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Rfc2251.RfcLdapDN Name { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Rfc2251.RfcLdapDN Name { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Rfc2251.RfcLdapDN</ReturnType>
@@ -150,7 +167,10 @@
       </Docs>
     </Member>
     <Member MemberName="AuthenticationChoice">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Rfc2251.RfcAuthenticationChoice AuthenticationChoice { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Rfc2251.RfcAuthenticationChoice AuthenticationChoice { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Rfc2251.RfcAuthenticationChoice</ReturnType>

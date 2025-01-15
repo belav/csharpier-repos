@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ToolStripPanelRenderEventArgs" FullName="System.Windows.Forms.ToolStripPanelRenderEventArgs">
+<Type
+  Name="ToolStripPanelRenderEventArgs"
+  FullName="System.Windows.Forms.ToolStripPanelRenderEventArgs"
+>
   <TypeSignature Language="C#" Value="public class ToolStripPanelRenderEventArgs : EventArgs" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -14,12 +17,20 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for <see cref="T:System.Windows.Forms.ToolStripPanel" /> drawing.</para>
+      <para
+        >Provides data for <see
+         cref="T:System.Windows.Forms.ToolStripPanel" />
+
+         drawing.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripPanelRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStripPanel toolStripPanel);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripPanelRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStripPanel toolStripPanel);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="g" Type="System.Drawing.Graphics" />
@@ -30,12 +41,32 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" /> class for the specified <see cref="T:System.Windows.Forms.ToolStripPanel" /> that uses the specified graphics for drawing. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
+
+             class for the specified <see
+             cref="T:System.Windows.Forms.ToolStripPanel" />
+
+             that uses the specified graphics for drawing. </para
+          >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The graphics used to paint the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The graphics used to paint the <see
+           cref="T:System.Windows.Forms.ToolStripPanel" />
+
+          .</param
+        >
         <param name="toolStripPanel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ToolStripPanel" /> to draw.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ToolStripPanel" />
+
+           to draw.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -53,7 +84,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the graphics used to paint the <see cref="T:System.Windows.Forms.ToolStripPanel" />.</para>
+          <para
+            >Gets or sets the graphics used to paint the <see
+             cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +116,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ToolStripPanel">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStripPanel ToolStripPanel { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStripPanel ToolStripPanel { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ToolStripPanel</ReturnType>
@@ -91,7 +130,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.ToolStripPanel" /> to paint.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.ToolStripPanel" />
+
+             to paint.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

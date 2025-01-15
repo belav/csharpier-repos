@@ -13,8 +13,8 @@
   <Copyright>To be added.</Copyright>
   <Types>
     <Namespace Name="Mono.Collections.Concurrent">
-      <Type Name="ConcurrentOrderedList`1" DisplayName="ConcurrentOrderedList&lt;T&gt;" Kind="Class" />
-      <Type Name="ConcurrentSkipList`1" DisplayName="ConcurrentSkipList&lt;T&gt;" Kind="Class" />
+      <Type Name="ConcurrentOrderedList`1" DisplayName="ConcurrentOrderedList<T>" Kind="Class" />
+      <Type Name="ConcurrentSkipList`1" DisplayName="ConcurrentSkipList<T>" Kind="Class" />
     </Namespace>
     <Namespace Name="Mono.Threading">
       <Type Name="AtomicBoolean" Kind="Class" />
@@ -27,8 +27,8 @@
       <Type Name="SpinLockWrapper" Kind="Class" />
     </Namespace>
     <Namespace Name="Mono.Threading.Tasks">
-      <Type Name="CyclicDeque`1" DisplayName="CyclicDeque&lt;T&gt;" Kind="Class" />
-      <Type Name="IConcurrentDeque`1" DisplayName="IConcurrentDeque&lt;T&gt;" Kind="Interface" />
+      <Type Name="CyclicDeque`1" DisplayName="CyclicDeque<T>" Kind="Class" />
+      <Type Name="IConcurrentDeque`1" DisplayName="IConcurrentDeque<T>" Kind="Interface" />
       <Type Name="PopResult" Kind="Enumeration" />
     </Namespace>
   </Types>

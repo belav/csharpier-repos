@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="Attachment" FullName="System.Net.Mail.Attachment">
   <TypeSignature Language="C#" Value="public class Attachment : System.Net.Mail.AttachmentBase" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Attachment extends System.Net.Mail.AttachmentBase" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit Attachment extends System.Net.Mail.AttachmentBase"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,11 +18,60 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Net.Mail.Attachment" /> class is used with the <see cref="T:System.Net.Mail.MailMessage" /> class. All messages include a <see cref="P:System.Net.Mail.MailMessage.Body" />, which contains the content of the message. In addition to the body, you might want to send additional files. These are sent as attachments and are represented as <see cref="T:System.Net.Mail.Attachment" /> instances. To add an attachment to a mail message, add it to the <see cref="P:System.Net.Mail.MailMessage.Attachments" /> collection.</para>
-      <para>Attachment content can be a <see cref="T:System.String" />, <see cref="T:System.IO.Stream" />, or file name. You can specify the content in an attachment by using any of the <see cref="Overload:System.Net.Mail.Attachment.#ctor" /> constructors.</para>
-      <para>The MIME Content-Type header information for the attachment is represented by the <see cref="P:System.Net.Mail.AttachmentBase.ContentType" /> property. The Content-Type header specifies the media type and subtype and any associated parameters. Use <see cref="P:System.Net.Mail.AttachmentBase.ContentType" /> to get the instance associated with an attachment.</para>
-      <para>The MIME Content-Disposition header is represented by the <see cref="P:System.Net.Mail.Attachment.ContentDisposition" /> property. The Content-Disposition header specifies the presentation and file time stamps for an attachment. A Content-Disposition header is sent only if the attachment is a file. Use the <see cref="P:System.Net.Mail.Attachment.ContentDisposition" /> property to get the instance associated with an attachment.</para>
-      <para>The MIME Content-Transfer-Encoding header is represented by the <see cref="P:System.Net.Mail.AttachmentBase.TransferEncoding" /> property.</para>
+      <para
+        >The <see
+         cref="T:System.Net.Mail.Attachment" />
+
+         class is used with the <see
+         cref="T:System.Net.Mail.MailMessage" />
+
+         class. All messages include a <see
+         cref="P:System.Net.Mail.MailMessage.Body" />
+
+        , which contains the content of the message. In addition to the body, you might want to send additional files. These are sent as attachments and are represented as <see
+         cref="T:System.Net.Mail.Attachment" />
+
+         instances. To add an attachment to a mail message, add it to the <see
+         cref="P:System.Net.Mail.MailMessage.Attachments" />
+
+         collection.</para
+      >
+      <para
+        >Attachment content can be a <see
+         cref="T:System.String" />
+
+        , <see
+         cref="T:System.IO.Stream" />
+
+        , or file name. You can specify the content in an attachment by using any of the <see
+         cref="Overload:System.Net.Mail.Attachment.#ctor" />
+
+         constructors.</para
+      >
+      <para
+        >The MIME Content-Type header information for the attachment is represented by the <see
+         cref="P:System.Net.Mail.AttachmentBase.ContentType" />
+
+         property. The Content-Type header specifies the media type and subtype and any associated parameters. Use <see
+         cref="P:System.Net.Mail.AttachmentBase.ContentType" />
+
+         to get the instance associated with an attachment.</para
+      >
+      <para
+        >The MIME Content-Disposition header is represented by the <see
+         cref="P:System.Net.Mail.Attachment.ContentDisposition" />
+
+         property. The Content-Disposition header specifies the presentation and file time stamps for an attachment. A Content-Disposition header is sent only if the attachment is a file. Use the <see
+         cref="P:System.Net.Mail.Attachment.ContentDisposition" />
+
+         property to get the instance associated with an attachment.</para
+      >
+      <para
+        >The MIME Content-Transfer-Encoding header is represented by the <see
+         cref="P:System.Net.Mail.AttachmentBase.TransferEncoding" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,7 +81,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Attachment (string fileName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,7 +117,10 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Net.Mime.MediaTypeNames.Text.Plain" />.</para>
+                  <see cref="F:System.Net.Mime.MediaTypeNames.Text.Plain" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
@@ -73,22 +131,42 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Net.Mime.TransferEncoding.QuotedPrintable" />.</para>
+                  <see cref="F:System.Net.Mime.TransferEncoding.QuotedPrintable" />
+
+                  .</para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Mail.Attachment" /> class with the specified content string. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Mail.Attachment" />
+
+             class with the specified content string. </para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains a file path to use to create this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains a file path to use to create this attachment.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Attachment (System.IO.Stream contentStream, System.Net.Mime.ContentType contentType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IO.Stream contentStream, class System.Net.Mime.ContentType contentType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Attachment (System.IO.Stream contentStream, System.Net.Mime.ContentType contentType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IO.Stream contentStream, class System.Net.Mime.ContentType contentType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -102,22 +180,64 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Net.Mail.AttachmentBase.TransferEncoding" /> property is set to <see cref="F:System.Net.Mime.TransferEncoding.Base64" />.</para>
-          <para>If the stream's <see cref="P:System.IO.Stream.CanSeek" /> property is false, the attachment and the <see cref="T:System.Net.Mail.MailMessage" /> that contains it are not reusable. You must supply a stream that can be searched to reuse an attachment.</para>
+          <para
+            >The <see
+             cref="P:System.Net.Mail.AttachmentBase.TransferEncoding" />
+
+             property is set to <see
+             cref="F:System.Net.Mime.TransferEncoding.Base64" />
+
+            .</para
+          >
+          <para
+            >If the stream's <see
+             cref="P:System.IO.Stream.CanSeek" />
+
+             property is false, the attachment and the <see
+             cref="T:System.Net.Mail.MailMessage" />
+
+             that contains it are not reusable. You must supply a stream that can be searched to reuse an attachment.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Mail.Attachment" /> class with the specified stream and content type. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Mail.Attachment" />
+
+             class with the specified stream and content type. </para
+          >
         </summary>
         <param name="contentStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />A readable <see cref="T:System.IO.Stream" /> that contains the content for this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A readable <see
+           cref="T:System.IO.Stream" />
+
+           that contains the content for this attachment.</param
+        >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Net.Mime.ContentType" /> that describes the data in <paramref name="stream" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Net.Mime.ContentType" />
+
+           that describes the data in <paramref
+           name="stream" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Attachment (System.IO.Stream contentStream, string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IO.Stream contentStream, string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Attachment (System.IO.Stream contentStream, string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IO.Stream contentStream, string name) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -131,22 +251,82 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <paramref name="name" /> is not null or equal to <see cref="F:System.String.Empty" /> (""), the <see cref="T:System.Net.Mime.ContentType" /> for this attachment is constructed with the <see cref="P:System.Net.Mime.ContentType.Name" /> property set to <paramref name="name" />. The <see cref="P:System.Net.Mail.AttachmentBase.TransferEncoding" /> property is set to <see cref="F:System.Net.Mime.TransferEncoding.Base64" />.</para>
-          <para>If the stream's <see cref="P:System.IO.Stream.CanSeek" /> property is false, the attachment and the <see cref="T:System.Net.Mail.MailMessage" /> that contains it are not reusable. You must supply a stream that can be searched in order to reuse an attachment.</para>
+          <para
+            >If <paramref
+             name="name" />
+
+             is not null or equal to <see
+             cref="F:System.String.Empty" />
+
+             (""), the <see
+             cref="T:System.Net.Mime.ContentType" />
+
+             for this attachment is constructed with the <see
+             cref="P:System.Net.Mime.ContentType.Name" />
+
+             property set to <paramref
+             name="name" />
+
+            . The <see
+             cref="P:System.Net.Mail.AttachmentBase.TransferEncoding" />
+
+             property is set to <see
+             cref="F:System.Net.Mime.TransferEncoding.Base64" />
+
+            .</para
+          >
+          <para
+            >If the stream's <see
+             cref="P:System.IO.Stream.CanSeek" />
+
+             property is false, the attachment and the <see
+             cref="T:System.Net.Mail.MailMessage" />
+
+             that contains it are not reusable. You must supply a stream that can be searched in order to reuse an attachment.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Mail.Attachment" /> class with the specified stream and name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Mail.Attachment" />
+
+             class with the specified stream and name.</para
+          >
         </summary>
         <param name="contentStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />A readable <see cref="T:System.IO.Stream" /> that contains the content for this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A readable <see
+           cref="T:System.IO.Stream" />
+
+           that contains the content for this attachment.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the value for the <see cref="P:System.Net.Mime.ContentType.Name" /> property of the <see cref="T:System.Net.Mime.ContentType" /> associated with this attachment. This value can be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the value for the <see
+           cref="P:System.Net.Mime.ContentType.Name" />
+
+           property of the <see
+           cref="T:System.Net.Mime.ContentType" />
+
+           associated with this attachment. This value can be null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Attachment (string fileName, System.Net.Mime.ContentType contentType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, class System.Net.Mime.ContentType contentType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Attachment (string fileName, System.Net.Mime.ContentType contentType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, class System.Net.Mime.ContentType contentType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -161,17 +341,46 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Mail.Attachment" /> class with the specified content string and <see cref="T:System.Net.Mime.ContentType" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Mail.Attachment" />
+
+             class with the specified content string and <see
+             cref="T:System.Net.Mime.ContentType" />
+
+            .</para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains a file path to use to create this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains a file path to use to create this attachment.</param
+        >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Net.Mime.ContentType" /> that describes the data in <paramref name="string" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Net.Mime.ContentType" />
+
+           that describes the data in <paramref
+           name="string" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Attachment (string fileName, string mediaType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, string mediaType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Attachment (string fileName, string mediaType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string fileName, string mediaType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -185,21 +394,64 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <paramref name="mediaType" /> is null or equal to <see cref="F:System.String.Empty" /> (""), the <see cref="P:System.Net.Mime.ContentType.MediaType" /> property for this attachment is set to <see cref="F:System.Net.Mime.MediaTypeNames.Text.Plain" />. If <paramref name="mediaType" /> is not null and is not a zero-length string, it is used to construct the <see cref="T:System.Net.Mime.ContentType" /> associated with this attachment.</para>
+          <para
+            >If <paramref
+             name="mediaType" />
+
+             is null or equal to <see
+             cref="F:System.String.Empty" />
+
+             (""), the <see
+             cref="P:System.Net.Mime.ContentType.MediaType" />
+
+             property for this attachment is set to <see
+             cref="F:System.Net.Mime.MediaTypeNames.Text.Plain" />
+
+            . If <paramref
+             name="mediaType" />
+
+             is not null and is not a zero-length string, it is used to construct the <see
+             cref="T:System.Net.Mime.ContentType" />
+
+             associated with this attachment.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Mail.Attachment" /> class with the specified content string and MIME type information. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Mail.Attachment" />
+
+             class with the specified content string and MIME type information. </para
+          >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the content for this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the content for this attachment.</param
+        >
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the MIME Content-Header information for this attachment. This value can be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the MIME Content-Header information for this attachment. This value can be null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Attachment (System.IO.Stream contentStream, string name, string mediaType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IO.Stream contentStream, string name, string mediaType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Attachment (System.IO.Stream contentStream, string name, string mediaType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IO.Stream contentStream, string name, string mediaType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -214,25 +466,99 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <paramref name="mediaType" /> is not null or equal to <see cref="F:System.String.Empty" /> (""), it is used to construct the <see cref="T:System.Net.Mime.ContentType" /> class associated with this attachment.</para>
-          <para>If <paramref name="mediaType" /> and <paramref name="name" /> both contain <see cref="P:System.Net.Mime.ContentType.Name" /> information, the value specified in <paramref name="name" /> is used. The <see cref="P:System.Net.Mail.AttachmentBase.TransferEncoding" /> property is set to <see cref="F:System.Net.Mime.TransferEncoding.Base64" />.</para>
-          <para>If the stream's <see cref="P:System.IO.Stream.CanSeek" /> property is false, the attachment and the <see cref="T:System.Net.Mail.MailMessage" /> that contains it are not reusable. You must supply a stream that can be searched in order to reuse an attachment.</para>
+          <para
+            >If <paramref
+             name="mediaType" />
+
+             is not null or equal to <see
+             cref="F:System.String.Empty" />
+
+             (""), it is used to construct the <see
+             cref="T:System.Net.Mime.ContentType" />
+
+             class associated with this attachment.</para
+          >
+          <para
+            >If <paramref
+             name="mediaType" />
+
+             and <paramref
+             name="name" />
+
+             both contain <see
+             cref="P:System.Net.Mime.ContentType.Name" />
+
+             information, the value specified in <paramref
+             name="name" />
+
+             is used. The <see
+             cref="P:System.Net.Mail.AttachmentBase.TransferEncoding" />
+
+             property is set to <see
+             cref="F:System.Net.Mime.TransferEncoding.Base64" />
+
+            .</para
+          >
+          <para
+            >If the stream's <see
+             cref="P:System.IO.Stream.CanSeek" />
+
+             property is false, the attachment and the <see
+             cref="T:System.Net.Mail.MailMessage" />
+
+             that contains it are not reusable. You must supply a stream that can be searched in order to reuse an attachment.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Mail.Attachment" /> class with the specified stream, name, and MIME type information. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Mail.Attachment" />
+
+             class with the specified stream, name, and MIME type information. </para
+          >
         </summary>
         <param name="contentStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />A readable <see cref="T:System.IO.Stream" /> that contains the content for this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A readable <see
+           cref="T:System.IO.Stream" />
+
+           that contains the content for this attachment.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the value for the <see cref="P:System.Net.Mime.ContentType.Name" /> property of the <see cref="T:System.Net.Mime.ContentType" /> associated with this attachment. This value can be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the value for the <see
+           cref="P:System.Net.Mime.ContentType.Name" />
+
+           property of the <see
+           cref="T:System.Net.Mime.ContentType" />
+
+           associated with this attachment. This value can be null.</param
+        >
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the MIME Content-Header information for this attachment. This value can be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the MIME Content-Header information for this attachment. This value can be null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ContentDisposition">
-      <MemberSignature Language="C#" Value="public System.Net.Mime.ContentDisposition ContentDisposition { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Mime.ContentDisposition ContentDisposition" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Mime.ContentDisposition ContentDisposition { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Mime.ContentDisposition ContentDisposition"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -246,7 +572,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The information in the <see cref="T:System.Net.Mime.ContentDisposition" /> class represents the MIME Content-Disposition header. This header is described in RFC 2183, available at <see cref="http://www.ietf.org/">http://www.ietf.org</see>.</para>
+          <para
+            >The information in the <see
+             cref="T:System.Net.Mime.ContentDisposition" />
+
+             class represents the MIME Content-Disposition header. This header is described in RFC 2183, available at <see
+             cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -255,8 +589,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateAttachmentFromString">
-      <MemberSignature Language="C#" Value="public static System.Net.Mail.Attachment CreateAttachmentFromString (string content, System.Net.Mime.ContentType contentType);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Net.Mail.Attachment CreateAttachmentFromString(string content, class System.Net.Mime.ContentType contentType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Mail.Attachment CreateAttachmentFromString (string content, System.Net.Mime.ContentType contentType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Net.Mail.Attachment CreateAttachmentFromString(string content, class System.Net.Mime.ContentType contentType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -274,21 +614,49 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a mail attachment using the content from the specified string, and the specified <see cref="T:System.Net.Mime.ContentType" />.</para>
+          <para
+            >Creates a mail attachment using the content from the specified string, and the specified <see
+             cref="T:System.Net.Mime.ContentType" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object of type <see cref="T:System.Net.Mail.Attachment" />.</para>
+          <para
+            >An object of type <see
+             cref="T:System.Net.Mail.Attachment" />
+
+            .</para
+          >
         </returns>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the content for this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the content for this attachment.</param
+        >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Net.Mime.ContentType" /> object that represents the Multipurpose Internet Mail Exchange (MIME) protocol Content-Type header to be used.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Net.Mime.ContentType" />
+
+           object that represents the Multipurpose Internet Mail Exchange (MIME) protocol Content-Type header to be used.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateAttachmentFromString">
-      <MemberSignature Language="C#" Value="public static System.Net.Mail.Attachment CreateAttachmentFromString (string content, string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Net.Mail.Attachment CreateAttachmentFromString(string content, string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Mail.Attachment CreateAttachmentFromString (string content, string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Net.Mail.Attachment CreateAttachmentFromString(string content, string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -314,17 +682,37 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object of type <see cref="T:System.Net.Mail.Attachment" />.</para>
+          <para
+            >An object of type <see
+             cref="T:System.Net.Mail.Attachment" />
+
+            .</para
+          >
         </returns>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the content for this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the content for this attachment.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The MIME content type name value in the content type associated with this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The MIME content type name value in the content type associated with this attachment.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateAttachmentFromString">
-      <MemberSignature Language="C#" Value="public static System.Net.Mail.Attachment CreateAttachmentFromString (string content, string name, System.Text.Encoding contentEncoding, string mediaType);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Net.Mail.Attachment CreateAttachmentFromString(string content, string name, class System.Text.Encoding contentEncoding, string mediaType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.Mail.Attachment CreateAttachmentFromString (string content, string name, System.Text.Encoding contentEncoding, string mediaType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Net.Mail.Attachment CreateAttachmentFromString(string content, string name, class System.Text.Encoding contentEncoding, string mediaType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -348,16 +736,42 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An object of type <see cref="T:System.Net.Mail.Attachment" />.</para>
+          <para
+            >An object of type <see
+             cref="T:System.Net.Mail.Attachment" />
+
+            .</para
+          >
         </returns>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the content for this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the content for this attachment.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The MIME content type name value in the content type associated with this attachment.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The MIME content type name value in the content type associated with this attachment.</param
+        >
         <param name="contentEncoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Text.Encoding" />. This value can be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Text.Encoding" />
+
+          . This value can be null.</param
+        >
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.String" /> that contains the MIME Content-Header information for this attachment. This value can be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.String" />
+
+           that contains the MIME Content-Header information for this attachment. This value can be null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Name">
@@ -376,7 +790,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Net.Mail.Attachment.Name" /> property is used in the Content-Type header generated for this attachment. The <see cref="P:System.Net.Mail.Attachment.Name" /> is displayed as the attachment’s name when the email with the attachment is received. A grammar that details the syntax of the Content-Type header is described in RFC 2045 Section 5.1. RFC 2046 provides detailed information about MIME media types and their parameters. These RFCs are available at <see cref="http://www.ietf.org/">http://www.ietf.org</see>.</para>
+          <para
+            >The <see
+             cref="P:System.Net.Mail.Attachment.Name" />
+
+             property is used in the Content-Type header generated for this attachment. The <see
+             cref="P:System.Net.Mail.Attachment.Name" />
+
+             is displayed as the attachment’s name when the email with the attachment is received. A grammar that details the syntax of the Content-Type header is described in RFC 2045 Section 5.1. RFC 2046 provides detailed information about MIME media types and their parameters. These RFCs are available at <see
+             cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -385,8 +810,14 @@
       </Docs>
     </Member>
     <Member MemberName="NameEncoding">
-      <MemberSignature Language="C#" Value="public System.Text.Encoding NameEncoding { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Text.Encoding NameEncoding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Text.Encoding NameEncoding { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Text.Encoding NameEncoding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -401,7 +832,13 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the encoding for the <see cref="T:System.Net.Mail.Attachment" /> <see cref="P:System.Net.Mail.Attachment.Name" />.</para>
+          <para
+            >Specifies the encoding for the <see
+             cref="T:System.Net.Mail.Attachment" />
+            <see cref="P:System.Net.Mail.Attachment.Name" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="EventMappingSettingsCollection" FullName="System.Web.Configuration.EventMappingSettingsCollection">
-  <TypeSignature Language="C#" Value="public sealed class EventMappingSettingsCollection : System.Configuration.ConfigurationElementCollection" />
+<Type
+  Name="EventMappingSettingsCollection"
+  FullName="System.Web.Configuration.EventMappingSettingsCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class EventMappingSettingsCollection : System.Configuration.ConfigurationElementCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,11 +24,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.EventMappingSettings" /> class corresponds to the eventMappings configuration file element. The eventMappings element allows you to assign friendly names to event sources. These names are then used to associate event sources with the related event consumers, called providers, in the rules subsection of the healthMonitoring section of the configuration file.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.EventMappingSettings" />
+
+         class corresponds to the eventMappings configuration file element. The eventMappings element allows you to assign friendly names to event sources. These names are then used to associate event sources with the related event consumers, called providers, in the rules subsection of the healthMonitoring section of the configuration file.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides a collection of <see cref="T:System.Web.Configuration.EventMappingSettings" /> objects. This class cannot be inherited.</para>
+      <para
+        >Provides a collection of <see
+         cref="T:System.Web.Configuration.EventMappingSettings" />
+
+         objects. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -34,11 +50,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" /> property of the <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> class always contains an instance of the <see cref="T:System.Web.Configuration.EventMappingSettingsCollection" />. Use this instance, rather than creating your own instance of the class.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
+
+             property of the <see
+             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+             class always contains an instance of the <see
+             cref="T:System.Web.Configuration.EventMappingSettingsCollection" />
+
+            . Use this instance, rather than creating your own instance of the class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.EventMappingSettingsCollection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.EventMappingSettingsCollection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -46,26 +78,48 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (System.Web.Configuration.EventMappingSettings eventMappingSettings);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (System.Web.Configuration.EventMappingSettings eventMappingSettings);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="eventMappingSettings" Type="System.Web.Configuration.EventMappingSettings" />
+        <Parameter
+          Name="eventMappingSettings"
+          Type="System.Web.Configuration.EventMappingSettings"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The collection must not already contain a <see cref="T:System.Web.Configuration.EventMappingSettings" /> object with the same name.</para>
+          <para
+            >The collection must not already contain a <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object with the same name.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds an <see cref="T:System.Web.Configuration.EventMappingSettings" /> object to the collection.</para>
+          <para
+            >Adds an <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object to the collection.</para
+          >
         </summary>
         <param name="eventMappingSettings">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Web.Configuration.EventMappingSettings" /> object to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           object to add to the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -86,7 +140,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all <see cref="T:System.Web.Configuration.EventMappingSettings" /> objects from the collection.</para>
+          <para
+            >Removes all <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             objects from the collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -110,21 +169,40 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether the collection contains an <see cref="T:System.Web.Configuration.EventMappingSettings" /> object with the specified name.</para>
+          <para
+            >Indicates whether the collection contains an <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object with the specified name.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the collection contains an <see cref="T:System.Web.Configuration.EventMappingSettings" /> object with the specified name; otherwise, false.</para>
+          <para
+            >true if the collection contains an <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object with the specified name; otherwise, false.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of an <see cref="T:System.Web.Configuration.EventMappingSettings" /> object in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of an <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           object in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateNewElement">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElement</ReturnType>
@@ -141,7 +219,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetElementKey">
-      <MemberSignature Language="C#" Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -155,7 +236,13 @@
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Web.Configuration.EventMappingSettings" /> object in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           object in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -175,28 +262,50 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the index of the specified <see cref="T:System.Web.Configuration.EventMappingSettings" /> object.</para>
+          <para
+            >Returns the index of the specified <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The index of the specified <see cref="T:System.Web.Configuration.EventMappingSettings" /> object, or -1 if the object is not found in the collection.</para>
+          <para
+            >The index of the specified <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object, or -1 if the object is not found in the collection.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of an <see cref="T:System.Web.Configuration.EventMappingSettings" /> object in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of an <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           object in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, System.Web.Configuration.EventMappingSettings eventMappingSettings);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, System.Web.Configuration.EventMappingSettings eventMappingSettings);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="index" Type="System.Int32" />
-        <Parameter Name="eventMappingSettings" Type="System.Web.Configuration.EventMappingSettings" />
+        <Parameter
+          Name="eventMappingSettings"
+          Type="System.Web.Configuration.EventMappingSettings"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
@@ -206,19 +315,39 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the specified <see cref="T:System.Web.Configuration.EventMappingSettings" /> object to the specified index point in the collection.</para>
+          <para
+            >Adds the specified <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object to the specified index point in the collection.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />A valid index of an <see cref="T:System.Web.Configuration.EventMappingSettings" /> object in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A valid index of an <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           object in the collection.</param
+        >
         <param name="eventMappingSettings">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.EventMappingSettings" /> object to insert into the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           object to insert into the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.EventMappingSettings this[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.EventMappingSettings this[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.EventMappingSettings</ReturnType>
@@ -238,7 +367,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.EventMappingSettings this[string name] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.EventMappingSettings this[string name] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.EventMappingSettings</ReturnType>
@@ -258,7 +390,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -290,10 +425,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes an <see cref="T:System.Web.Configuration.EventMappingSettings" /> object from the collection.</para>
+          <para
+            >Removes an <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object from the collection.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.EventMappingSettings" /> to remove from the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           to remove from the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -316,10 +462,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes an <see cref="T:System.Web.Configuration.EventMappingSettings" /> object from the collection.</para>
+          <para
+            >Removes an <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             object from the collection.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of an <see cref="T:System.Web.Configuration.EventMappingSettings" /> object in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of an <see
+           cref="T:System.Web.Configuration.EventMappingSettings" />
+
+           object in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

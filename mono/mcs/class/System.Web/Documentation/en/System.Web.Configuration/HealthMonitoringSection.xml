@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HealthMonitoringSection" FullName="System.Web.Configuration.HealthMonitoringSection">
-  <TypeSignature Language="C#" Value="public sealed class HealthMonitoringSection : System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class HealthMonitoringSection : System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -59,7 +62,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> class using default settings.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+             class using default settings.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -67,7 +75,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BufferModes">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.BufferModesCollection BufferModes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.BufferModesCollection BufferModes { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -82,8 +93,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is a collection of <see cref="T:System.Web.Configuration.BufferModeSettings" /> objects that define the manner in which health-monitoring events can be buffered before they are raised.</para>
-          <para>This property defaults to an empty <see cref="T:System.Web.Configuration.BufferModesCollection" /> collection.</para>
+          <para
+            >This is a collection of <see
+             cref="T:System.Web.Configuration.BufferModeSettings" />
+
+             objects that define the manner in which health-monitoring events can be buffered before they are raised.</para
+          >
+          <para
+            >This property defaults to an empty <see
+             cref="T:System.Web.Configuration.BufferModesCollection" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -119,7 +140,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="EventMappings">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.EventMappingSettingsCollection EventMappings { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.EventMappingSettingsCollection EventMappings { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -135,7 +159,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Configuration.EventMappingSettingsCollection" /> collection of <see cref="T:System.Web.Configuration.EventMappingSettings" /> objects.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Configuration.EventMappingSettingsCollection" />
+
+             collection of <see
+             cref="T:System.Web.Configuration.EventMappingSettings" />
+
+             objects.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -164,11 +196,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="T:System.TimeSpan" /> value is zero ticks, no <see cref="T:System.Web.Management.WebHeartbeatEvent" /> event is raised.</para>
+          <para
+            >If the <see
+             cref="T:System.TimeSpan" />
+
+             value is zero ticks, no <see
+             cref="T:System.Web.Management.WebHeartbeatEvent" />
+
+             event is raised.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the interval used by the application domain when it raises the <see cref="T:System.Web.Management.WebHeartbeatEvent" /> event.</para>
+          <para
+            >Gets or sets the interval used by the application domain when it raises the <see
+             cref="T:System.Web.Management.WebHeartbeatEvent" />
+
+             event.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -176,7 +221,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Profiles">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.ProfileSettingsCollection Profiles { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.ProfileSettingsCollection Profiles { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -192,7 +240,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Configuration.ProfileSettingsCollection" /> collection of <see cref="T:System.Web.Configuration.ProfileSettings" /> objects.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Configuration.ProfileSettingsCollection" />
+
+             collection of <see
+             cref="T:System.Web.Configuration.ProfileSettings" />
+
+             objects.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -200,7 +256,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -211,7 +270,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the properties collection for the <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> object.</para>
+          <para
+            >Gets the properties collection for the <see
+             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -219,7 +283,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Providers">
-      <MemberSignature Language="C#" Value="public System.Configuration.ProviderSettingsCollection Providers { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.ProviderSettingsCollection Providers { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -234,11 +301,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" /> property specifies which provider is used for which of the events defined in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" /> property.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+             property specifies which provider is used for which of the events defined in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.ProviderSettingsCollection" /> collection of <see cref="T:System.Configuration.ProviderSettings" /> objects.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.ProviderSettingsCollection" />
+
+             collection of <see
+             cref="T:System.Configuration.ProviderSettings" />
+
+             objects.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -246,7 +329,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Rules">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.RuleSettingsCollection Rules { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.RuleSettingsCollection Rules { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -261,11 +347,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Each <see cref="T:System.Web.Configuration.RuleSettings" /> object defines a connection between an event defined in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" /> property and an event provider defined in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" /> property.</para>
+          <para
+            >Each <see
+             cref="T:System.Web.Configuration.RuleSettings" />
+
+             object defines a connection between an event defined in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
+
+             property and an event provider defined in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Configuration.RuleSettingsCollection" /> collection of <see cref="T:System.Web.Configuration.RuleSettings" /> objects.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Configuration.RuleSettingsCollection" />
+
+             collection of <see
+             cref="T:System.Web.Configuration.RuleSettings" />
+
+             objects.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

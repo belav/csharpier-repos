@@ -1,17 +1,25 @@
 <Type Name="DiffieHellmanManaged" FullName="Mono.Security.Cryptography.DiffieHellmanManaged">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public sealed class DiffieHellmanManaged : Mono.Security.Cryptography.DiffieHellman" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public sealed class DiffieHellmanManaged : Mono.Security.Cryptography.DiffieHellman"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Security</AssemblyName>
     <AssemblyPublicKey>[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 79 15 99 77 D2 D0 3A 8E 6B EA 7A 2E 74 E8 D1 AF CC 93 E8 85 19 74 95 2B B4 80 A1 2C 91 34 47 4D 04 06 24 47 C3 7E 0E 68 C0 80 53 6F CF 3C 3F BE 2F F9 C9 79 CE 99 84 75 E5 06 E8 CE 82 DD 5B 0F 35 0D C1 0E 93 BF 2E EE CF 87 4B 24 77 0C 50 81 DB EA 74 47 FD DA FA 27 7B 22 DE 47 D6 FF EA 44 96 74 A4 F9 FC CF 84 D1 50 69 08 93 80 28 4D BD D3 5F 46 CD FF 12 A1 BD 78 E4 EF 00 65 D0 16 DF]</AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>Mono.Security.Cryptography.DiffieHellman</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <summary>Implements the Diffie-Hellman algorithm.</summary>
     <remarks>To be added</remarks>
@@ -32,7 +40,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DiffieHellmanManaged (byte[] p, byte[] g, byte[] x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DiffieHellmanManaged (byte[] p, byte[] g, byte[] x);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -41,14 +52,48 @@
         <Parameter Name="x" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="p">The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</param>
-        <param name="g">The G parameter of the Diffie-Hellman algorithm. This is a public parameter.</param>
-        <param name="x">The X parameter of the Diffie-Hellman algorithm. This is a private parameter. If this parameters is a null reference (<b>Nothing</b> in Visual Basic), a secret value of the default size will be generated.</param>
+        <param name="p"
+          >The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</param
+        >
+        <param name="g"
+          >The G parameter of the Diffie-Hellman algorithm. This is a public parameter.</param
+        >
+        <param name="x"
+          >The X parameter of the Diffie-Hellman algorithm. This is a private parameter. If this parameters is a null reference (<b
+          >Nothing</b>
+
+           in Visual Basic), a secret value of the default size will be generated.</param
+        >
         <summary>Initializes a new DiffieHellmanManaged instance.</summary>
         <remarks>
-          <para>An <see cref="T:System.ArgumentNullException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is a null reference (<b>Nothing</b> in Visual Basic).</para>
-          <para>A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is invalid.
-</para>
+          <para
+            >An <see
+             cref="T:System.ArgumentNullException" />
+
+             is thrown if <paramref
+             name="p" />
+
+             or <paramref
+             name="g" />
+
+             is a null reference (<b
+            >Nothing</b>
+
+             in Visual Basic).</para
+          >
+          <para
+            >A <see
+             cref="T:System.Security.Cryptography.CryptographicException" />
+
+             is thrown if <paramref
+             name="p" />
+
+             or <paramref
+             name="g" />
+
+             is invalid.
+</para
+          >
         </remarks>
       </Docs>
       <AssemblyInfo>
@@ -57,7 +102,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DiffieHellmanManaged (byte[] p, byte[] g, int l);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DiffieHellmanManaged (byte[] p, byte[] g, int l);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -66,15 +114,54 @@
         <Parameter Name="l" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="p">The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</param>
-        <param name="g">The G parameter of the Diffie-Hellman algorithm. This is a public parameter.</param>
-        <param name="l">The length, in bits, of the private value. If 0 is specified, the default value will be used.</param>
+        <param name="p"
+          >The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</param
+        >
+        <param name="g"
+          >The G parameter of the Diffie-Hellman algorithm. This is a public parameter.</param
+        >
+        <param name="l"
+          >The length, in bits, of the private value. If 0 is specified, the default value will be used.</param
+        >
         <summary>The P parameter of the Diffie-Hellman algorithm. This is a public parameter.</summary>
         <remarks>
-          <para>An <see cref="T:System.ArgumentNullException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is a null reference (<b>Nothing</b> in Visual Basic).</para>
-          <para>An <see cref="T:System.ArgumentException" /> if <paramref name="l" /> is invalid.</para>
-          <para>A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if <paramref name="p" /> or <paramref name="g" /> is invalid.
-</para>
+          <para
+            >An <see
+             cref="T:System.ArgumentNullException" />
+
+             is thrown if <paramref
+             name="p" />
+
+             or <paramref
+             name="g" />
+
+             is a null reference (<b
+            >Nothing</b>
+
+             in Visual Basic).</para
+          >
+          <para
+            >An <see
+             cref="T:System.ArgumentException" />
+
+             if <paramref
+             name="l" />
+
+             is invalid.</para
+          >
+          <para
+            >A <see
+             cref="T:System.Security.Cryptography.CryptographicException" />
+
+             is thrown if <paramref
+             name="p" />
+
+             or <paramref
+             name="g" />
+
+             is invalid.
+</para
+          >
         </remarks>
       </Docs>
       <AssemblyInfo>
@@ -83,7 +170,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DiffieHellmanManaged (int bitLength, int l, Mono.Security.Cryptography.DHKeyGeneration method);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DiffieHellmanManaged (int bitLength, int l, Mono.Security.Cryptography.DHKeyGeneration method);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -93,12 +183,24 @@
       </Parameters>
       <Docs>
         <param name="bitLength">The length, in bits, of the public P parameter.</param>
-        <param name="l">The length, in bits, of the secret value X. This parameter can be set to 0 to use the default size.</param>
-        <param name="method">One of the <see cref="T:Mono.Security.Cryptography.DHKeyGeneration" /> values.</param>
+        <param name="l"
+          >The length, in bits, of the secret value X. This parameter can be set to 0 to use the default size.</param
+        >
+        <param name="method"
+          >One of the <see
+           cref="T:Mono.Security.Cryptography.DHKeyGeneration" />
+
+           values.</param
+        >
         <summary>Initializes a new DiffieHellmanManaged instance.</summary>
         <remarks>
           <para>The larger the bit length, the more secure the algorithm is. The default is 1024 bits. The minimum bit length is 128 bits.</para>
-          <para>An <see cref="T:System.ArgumentException" /> is thrown if the specified bit length is invalid.</para>
+          <para
+            >An <see
+             cref="T:System.ArgumentException" />
+
+             is thrown if the specified bit length is invalid.</para
+          >
         </remarks>
       </Docs>
       <AssemblyInfo>
@@ -124,7 +226,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DecryptKeyExchange">
-      <MemberSignature Language="C#" Value="public override byte[] DecryptKeyExchange (byte[] keyEx);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override byte[] DecryptKeyExchange (byte[] keyEx);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -153,7 +258,10 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">a <see cref="T:System.Boolean" /></param>
+        <param name="disposing"
+          >a <see
+           cref="T:System.Boolean" />
+        </param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -163,7 +271,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ExportParameters">
-      <MemberSignature Language="C#" Value="public override Mono.Security.Cryptography.DHParameters ExportParameters (bool includePrivateParameters);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override Mono.Security.Cryptography.DHParameters ExportParameters (bool includePrivateParameters);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.Cryptography.DHParameters</ReturnType>
@@ -173,7 +284,13 @@
       </Parameters>
       <Docs>
         <param name="includePrivateParameters">
-          <b>True</b> to include private parameters; otherwise, <b>false</b>.</param>
+          <b>True</b>
+
+           to include private parameters; otherwise, <b
+          >false</b>
+
+          .</param
+        >
         <summary>Exports the DH parameters.</summary>
         <returns>The parameters for DiffieHellman.</returns>
         <remarks>To be added</remarks>
@@ -200,7 +317,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ImportParameters">
-      <MemberSignature Language="C#" Value="public override void ImportParameters (Mono.Security.Cryptography.DHParameters parameters);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void ImportParameters (Mono.Security.Cryptography.DHParameters parameters);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -211,7 +331,24 @@
       <Docs>
         <param name="parameters">The parameters for DiffieHellman.</param>
         <summary>Imports the specified DH parameters.</summary>
-        <remarks>A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if <paramref name="P" /> or <paramref name="G" /> is a null reference (<b>Nothing</b> in Visual Basic) -or- <paramref name="P" /> is not a prime number.</remarks>
+        <remarks
+          >A <see
+           cref="T:System.Security.Cryptography.CryptographicException" />
+
+           is thrown if <paramref
+           name="P" />
+
+           or <paramref
+           name="G" />
+
+           is a null reference (<b
+          >Nothing</b>
+
+           in Visual Basic) -or- <paramref
+           name="P" />
+
+           is not a prime number.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

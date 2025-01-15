@@ -17,11 +17,27 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>You can use the <see cref="T:System.Data.SqlClient.SqlBulkCopyOptions" /> enumeration when you construct a <see cref="T:System.Data.SqlClient.SqlBulkCopy" /> instance to change how the <see cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" /> methods for that instance behave.</para>
+      <para
+        >You can use the <see
+         cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
+
+         enumeration when you construct a <see
+         cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+         instance to change how the <see
+         cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+
+         methods for that instance behave.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Bitwise flag that specifies one or more options to use with an instance of <see cref="T:System.Data.SqlClient.SqlBulkCopy" />.</para>
+      <para
+        >Bitwise flag that specifies one or more options to use with an instance of <see
+         cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -137,7 +153,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When specified, each batch of the bulk-copy operation will occur within a transaction. If you indicate this option and also provide a <see cref="T:System.Data.SqlClient.SqlTransaction" /> object to the constructor, an <see cref="T:System.ArgumentException" /> occurs.</para>
+          <para
+            >When specified, each batch of the bulk-copy operation will occur within a transaction. If you indicate this option and also provide a <see
+             cref="T:System.Data.SqlClient.SqlTransaction" />
+
+             object to the constructor, an <see
+             cref="T:System.ArgumentException" />
+
+             occurs.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IActivationFactory" FullName="System.Runtime.InteropServices.WindowsRuntime.IActivationFactory">
+<Type
+  Name="IActivationFactory"
+  FullName="System.Runtime.InteropServices.WindowsRuntime.IActivationFactory"
+>
   <TypeSignature Language="C#" Value="public interface IActivationFactory" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IActivationFactory" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IActivationFactory"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -22,7 +28,10 @@
   <Members>
     <Member MemberName="ActivateInstance">
       <MemberSignature Language="C#" Value="public object ActivateInstance ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object ActivateInstance() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object ActivateInstance() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -35,7 +44,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a new instance of the wrt class that is created by the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.IActivationFactory" /> interface. </para>
+          <para
+            >Returns a new instance of the wrt class that is created by the <see
+             cref="T:System.Runtime.InteropServices.WindowsRuntime.IActivationFactory" />
+
+             interface. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

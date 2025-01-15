@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ComContractsSection" FullName="System.ServiceModel.Configuration.ComContractsSection">
-  <TypeSignature Language="C#" Value="public sealed class ComContractsSection : System.Configuration.ConfigurationSection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed ComContractsSection extends System.Configuration.ConfigurationSection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ComContractsSection : System.Configuration.ConfigurationSection"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed ComContractsSection extends System.Configuration.ConfigurationSection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,7 +22,10 @@
       <para>The COM+ integration service contracts are currently restricted to the “http://tempuri.org” namespace, and contract name is derived from the supporting COM interface. You can, however, specify alternatives by using the comContracts section in the configuration file. For example, you can use the following configuration to specify the namespace and contract name for a service contract </para>
       <para>code reference: S_UEComContractsSection#0</para>
       <para>
-        <br />When the service is initialized, the specified namespaces and contract names are applied to the generated service descriptions.</para>
+        <br />
+
+        When the service is initialized, the specified namespaces and contract names are applied to the generated service descriptions.</para
+      >
       <para>When this section is empty, the service initialization applies a default namespace and contract name taken from the supporting COM interface ID.</para>
     </remarks>
     <summary>
@@ -27,7 +36,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ComContractsSection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,13 +49,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ComContractsSection" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.ComContractsSection" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ComContracts">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ComContractElementCollection ComContracts { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ComContractElementCollection ComContracts" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ComContractElementCollection ComContracts { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ComContractElementCollection ComContracts"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -66,8 +89,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

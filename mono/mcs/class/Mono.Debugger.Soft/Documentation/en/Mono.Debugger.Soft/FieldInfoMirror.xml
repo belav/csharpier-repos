@@ -1,6 +1,9 @@
 <Type Name="FieldInfoMirror" FullName="Mono.Debugger.Soft.FieldInfoMirror">
   <TypeSignature Language="C#" Value="public class FieldInfoMirror : Mono.Debugger.Soft.Mirror" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit FieldInfoMirror extends Mono.Debugger.Soft.Mirror" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit FieldInfoMirror extends Mono.Debugger.Soft.Mirror"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Debugger.Soft</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -11,13 +14,18 @@
   <Interfaces />
   <Docs>
     <summary>Represents a FieldInfo in the debuggee.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public FieldInfoMirror (Mono.Debugger.Soft.TypeMirror parent, long id, string name, Mono.Debugger.Soft.TypeMirror type, System.Reflection.FieldAttributes attrs);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Mono.Debugger.Soft.TypeMirror parent, int64 id, string name, class Mono.Debugger.Soft.TypeMirror type, valuetype System.Reflection.FieldAttributes attrs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public FieldInfoMirror (Mono.Debugger.Soft.TypeMirror parent, long id, string name, Mono.Debugger.Soft.TypeMirror type, System.Reflection.FieldAttributes attrs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Mono.Debugger.Soft.TypeMirror parent, int64 id, string name, class Mono.Debugger.Soft.TypeMirror type, valuetype System.Reflection.FieldAttributes attrs) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -40,8 +48,14 @@
       </Docs>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public System.Reflection.FieldAttributes Attributes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Reflection.FieldAttributes Attributes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.FieldAttributes Attributes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Reflection.FieldAttributes Attributes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -56,8 +70,14 @@
       </Docs>
     </Member>
     <Member MemberName="DeclaringType">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.TypeMirror DeclaringType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.TypeMirror DeclaringType" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.TypeMirror DeclaringType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.TypeMirror DeclaringType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -72,8 +92,14 @@
       </Docs>
     </Member>
     <Member MemberName="FieldType">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.TypeMirror FieldType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.TypeMirror FieldType" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.TypeMirror FieldType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.TypeMirror FieldType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -88,8 +114,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.CustomAttributeDataMirror[] GetCustomAttributes (bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.CustomAttributeDataMirror[] GetCustomAttributes(bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.CustomAttributeDataMirror[] GetCustomAttributes (bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.CustomAttributeDataMirror[] GetCustomAttributes(bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -108,8 +140,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.CustomAttributeDataMirror[] GetCustomAttributes (Mono.Debugger.Soft.TypeMirror attributeType, bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.CustomAttributeDataMirror[] GetCustomAttributes(class Mono.Debugger.Soft.TypeMirror attributeType, bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.CustomAttributeDataMirror[] GetCustomAttributes (Mono.Debugger.Soft.TypeMirror attributeType, bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.CustomAttributeDataMirror[] GetCustomAttributes(class Mono.Debugger.Soft.TypeMirror attributeType, bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

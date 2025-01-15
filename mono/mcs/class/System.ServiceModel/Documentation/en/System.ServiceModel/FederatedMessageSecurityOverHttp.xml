@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="FederatedMessageSecurityOverHttp" FullName="System.ServiceModel.FederatedMessageSecurityOverHttp">
+<Type
+  Name="FederatedMessageSecurityOverHttp"
+  FullName="System.ServiceModel.FederatedMessageSecurityOverHttp"
+>
   <TypeSignature Language="C#" Value="public sealed class FederatedMessageSecurityOverHttp" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit FederatedMessageSecurityOverHttp extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit FederatedMessageSecurityOverHttp extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -22,8 +28,14 @@
   </Docs>
   <Members>
     <Member MemberName="AlgorithmSuite">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.SecurityAlgorithmSuite AlgorithmSuite { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.SecurityAlgorithmSuite AlgorithmSuite" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.SecurityAlgorithmSuite AlgorithmSuite { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.SecurityAlgorithmSuite AlgorithmSuite"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -35,7 +47,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -44,8 +61,14 @@
       </Docs>
     </Member>
     <Member MemberName="ClaimTypeRequirements">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;System.ServiceModel.Security.Tokens.ClaimTypeRequirement&gt; ClaimTypeRequirements { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.Collection`1&lt;class System.ServiceModel.Security.Tokens.ClaimTypeRequirement&gt; ClaimTypeRequirements" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.Collection<System.ServiceModel.Security.Tokens.ClaimTypeRequirement> ClaimTypeRequirements { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.Collection`1<class System.ServiceModel.Security.Tokens.ClaimTypeRequirement> ClaimTypeRequirements"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -62,7 +85,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of the <see cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" /> instances for this binding.</para>
+          <para
+            >Gets a collection of the <see
+             cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
+
+             instances for this binding.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -86,8 +114,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuedKeyType">
-      <MemberSignature Language="C#" Value="public System.IdentityModel.Tokens.SecurityKeyType IssuedKeyType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.IdentityModel.Tokens.SecurityKeyType IssuedKeyType" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.IdentityModel.Tokens.SecurityKeyType IssuedKeyType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.IdentityModel.Tokens.SecurityKeyType IssuedKeyType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -99,7 +133,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Valid values of <see cref="T:System.IdentityModel.Tokens.SecurityKeyType" /> are <see cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" /> and <see cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />.</para>
+          <para
+            >Valid values of <see
+             cref="T:System.IdentityModel.Tokens.SecurityKeyType" />
+
+             are <see
+             cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />
+
+             and <see
+             cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -131,8 +176,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuerAddress">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.EndpointAddress IssuerAddress { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.EndpointAddress IssuerAddress" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.EndpointAddress IssuerAddress { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.EndpointAddress IssuerAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -154,8 +205,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuerBinding">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.Binding IssuerBinding { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.Binding IssuerBinding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.Binding IssuerBinding { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.Binding IssuerBinding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -172,13 +229,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the binding to be used by the client when communicating with the security token service whose endpoint address equals <see cref="P:System.ServiceModel.FederatedMessageSecurityOverHttp.IssuerAddress" />.</para>
+          <para
+            >Gets or sets the binding to be used by the client when communicating with the security token service whose endpoint address equals <see
+             cref="P:System.ServiceModel.FederatedMessageSecurityOverHttp.IssuerAddress" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IssuerMetadataAddress">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.EndpointAddress IssuerMetadataAddress { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.EndpointAddress IssuerMetadataAddress" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.EndpointAddress IssuerMetadataAddress { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.EndpointAddress IssuerMetadataAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -200,7 +268,10 @@
     </Member>
     <Member MemberName="NegotiateServiceCredential">
       <MemberSignature Language="C#" Value="public bool NegotiateServiceCredential { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool NegotiateServiceCredential" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool NegotiateServiceCredential"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -223,8 +294,14 @@
       </Docs>
     </Member>
     <Member MemberName="TokenRequestParameters">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;System.Xml.XmlElement&gt; TokenRequestParameters { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.Collection`1&lt;class System.Xml.XmlElement&gt; TokenRequestParameters" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.Collection<System.Xml.XmlElement> TokenRequestParameters { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.Collection`1<class System.Xml.XmlElement> TokenRequestParameters"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

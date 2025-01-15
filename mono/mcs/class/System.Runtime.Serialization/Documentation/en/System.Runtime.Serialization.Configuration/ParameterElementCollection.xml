@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ParameterElementCollection" FullName="System.Runtime.Serialization.Configuration.ParameterElementCollection">
-  <TypeSignature Language="C#" Value="public sealed class ParameterElementCollection : System.Configuration.ConfigurationElementCollection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ParameterElementCollection extends System.Configuration.ConfigurationElementCollection" />
+<Type
+  Name="ParameterElementCollection"
+  FullName="System.Runtime.Serialization.Configuration.ParameterElementCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ParameterElementCollection : System.Configuration.ConfigurationElementCollection"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ParameterElementCollection extends System.Configuration.ConfigurationElementCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Serialization</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,17 +27,37 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class is used to handle the set of <format type="text/html"><a href="0fb41e2d-64f7-44ab-993e-05892eac6d82">parameter</a></format> elements within the <format type="text/html"><a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a></format> element. Specifically, this allows the addition of types to the collection of known types.</para>
+      <para
+        >This class is used to handle the set of <format
+         type="text/html">
+          <a href="0fb41e2d-64f7-44ab-993e-05892eac6d82">parameter</a>
+        </format>
+
+         elements within the <format
+         type="text/html">
+          <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
+        </format>
+
+         element. Specifically, this allows the addition of types to the collection of known types.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Handles the XML elements used to configure serialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />.</para>
+      <para
+        >Handles the XML elements used to configure serialization by the <see
+         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ParameterElementCollection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -38,13 +67,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.ParameterElementCollection" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Serialization.Configuration.ParameterElementCollection" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (System.Runtime.Serialization.Configuration.ParameterElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Add(class System.Runtime.Serialization.Configuration.ParameterElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (System.Runtime.Serialization.Configuration.ParameterElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Add(class System.Runtime.Serialization.Configuration.ParameterElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -53,7 +93,10 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="element" Type="System.Runtime.Serialization.Configuration.ParameterElement" />
+        <Parameter
+          Name="element"
+          Type="System.Runtime.Serialization.Configuration.ParameterElement"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -62,12 +105,21 @@
           <para>Adds an element to the collection of parameter elements.</para>
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" /> element to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
+
+           element to add to the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Clear">
       <MemberSignature Language="C#" Value="public void Clear ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Clear() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Clear() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -85,8 +137,14 @@
       </Docs>
     </Member>
     <Member MemberName="CollectionType">
-      <MemberSignature Language="C#" Value="public override System.Configuration.ConfigurationElementCollectionType CollectionType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Configuration.ConfigurationElementCollectionType CollectionType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Configuration.ConfigurationElementCollectionType CollectionType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Configuration.ConfigurationElementCollectionType CollectionType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -105,7 +163,10 @@
     </Member>
     <Member MemberName="Contains">
       <MemberSignature Language="C#" Value="public bool Contains (string typeName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool Contains(string typeName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool Contains(string typeName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -127,12 +188,21 @@
           <para>true if the element is present; otherwise, false.</para>
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the type to find.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the type to find.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateNewElement">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Configuration.ConfigurationElement CreateNewElement() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.Configuration.ConfigurationElement CreateNewElement() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -164,8 +234,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetElementKey">
-      <MemberSignature Language="C#" Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance object GetElementKey(class System.Configuration.ConfigurationElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance object GetElementKey(class System.Configuration.ConfigurationElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -184,8 +260,14 @@
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
-      <MemberSignature Language="C#" Value="public int IndexOf (System.Runtime.Serialization.Configuration.ParameterElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 IndexOf(class System.Runtime.Serialization.Configuration.ParameterElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IndexOf (System.Runtime.Serialization.Configuration.ParameterElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance int32 IndexOf(class System.Runtime.Serialization.Configuration.ParameterElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -194,7 +276,10 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="element" Type="System.Runtime.Serialization.Configuration.ParameterElement" />
+        <Parameter
+          Name="element"
+          Type="System.Runtime.Serialization.Configuration.ParameterElement"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -207,12 +292,24 @@
           <para>The position of the specified element.</para>
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" /> element to find.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
+
+           element to find.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Runtime.Serialization.Configuration.ParameterElement this[int index] { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Runtime.Serialization.Configuration.ParameterElement Item(int32)" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Serialization.Configuration.ParameterElement this[int index] { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Runtime.Serialization.Configuration.ParameterElement Item(int32)"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -231,8 +328,14 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public void Remove (System.Runtime.Serialization.Configuration.ParameterElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Remove(class System.Runtime.Serialization.Configuration.ParameterElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Remove (System.Runtime.Serialization.Configuration.ParameterElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Remove(class System.Runtime.Serialization.Configuration.ParameterElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -241,7 +344,10 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="element" Type="System.Runtime.Serialization.Configuration.ParameterElement" />
+        <Parameter
+          Name="element"
+          Type="System.Runtime.Serialization.Configuration.ParameterElement"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -250,12 +356,21 @@
           <para>Removes the specified element from the collection.</para>
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.Configuration.ParameterElement" /> to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.Configuration.ParameterElement" />
+
+           to remove.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
       <MemberSignature Language="C#" Value="public void RemoveAt (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void RemoveAt(int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void RemoveAt(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -273,7 +388,10 @@
           <para>Removes the element at the specified position.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The position of the element to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The position of the element to remove.</param
+        >
       </Docs>
     </Member>
   </Members>

@@ -1,6 +1,12 @@
-<Type Name="XmlSerializationReader+Fixup" FullName="System.Xml.Serialization.XmlSerializationReader+Fixup">
+<Type
+  Name="XmlSerializationReader+Fixup"
+  FullName="System.Xml.Serialization.XmlSerializationReader+Fixup"
+>
   <TypeSignature Language="C#" Value="protected class XmlSerializationReader.Fixup" />
-  <TypeSignature Language="ILAsm" Value=".class nested protected auto ansi beforefieldinit XmlSerializationReader/Fixup extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested protected auto ansi beforefieldinit XmlSerializationReader/Fixup extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -15,8 +21,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Fixup (object o, System.Xml.Serialization.XmlSerializationFixupCallback callback, int count);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(object o, class System.Xml.Serialization.XmlSerializationFixupCallback callback, int32 count) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Fixup (object o, System.Xml.Serialization.XmlSerializationFixupCallback callback, int count);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(object o, class System.Xml.Serialization.XmlSerializationFixupCallback callback, int32 count) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -35,8 +47,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Fixup (object o, System.Xml.Serialization.XmlSerializationFixupCallback callback, string[] ids);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(object o, class System.Xml.Serialization.XmlSerializationFixupCallback callback, string[] ids) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Fixup (object o, System.Xml.Serialization.XmlSerializationFixupCallback callback, string[] ids);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(object o, class System.Xml.Serialization.XmlSerializationFixupCallback callback, string[] ids) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -55,8 +73,14 @@
       </Docs>
     </Member>
     <Member MemberName="Callback">
-      <MemberSignature Language="C#" Value="public System.Xml.Serialization.XmlSerializationFixupCallback Callback { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.Serialization.XmlSerializationFixupCallback Callback" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.Serialization.XmlSerializationFixupCallback Callback { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.Serialization.XmlSerializationFixupCallback Callback"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DefaultExpression" FullName="System.Linq.Expressions.DefaultExpression">
-  <TypeSignature Language="C#" Value="public sealed class DefaultExpression : System.Linq.Expressions.Expression" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit DefaultExpression extends System.Linq.Expressions.Expression" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DefaultExpression : System.Linq.Expressions.Expression"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit DefaultExpression extends System.Linq.Expressions.Expression"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -24,8 +30,14 @@
   </Docs>
   <Members>
     <Member MemberName="Accept">
-      <MemberSignature Language="C#" Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -44,8 +56,14 @@
       </Docs>
     </Member>
     <Member MemberName="NodeType">
-      <MemberSignature Language="C#" Value="public override sealed System.Linq.Expressions.ExpressionType NodeType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Linq.Expressions.ExpressionType NodeType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override sealed System.Linq.Expressions.ExpressionType NodeType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Linq.Expressions.ExpressionType NodeType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,7 +76,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the node type of this expression. Extension nodes should return <see cref="F:System.Linq.Expressions.ExpressionType.Extension" /> when overriding this method.</para>
+          <para
+            >Returns the node type of this expression. Extension nodes should return <see
+             cref="F:System.Linq.Expressions.ExpressionType.Extension" />
+
+             when overriding this method.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -77,7 +100,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para>
+          <para
+            >Gets the static type of the expression that this <see
+             cref="T:System.Linq.Expressions.Expression" />
+
+             represents.</para
+          >
         </summary>
       </Docs>
     </Member>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="AdapterDictionary" FullName="System.Web.Configuration.AdapterDictionary">
-  <TypeSignature Language="C#" Value="public class AdapterDictionary : System.Collections.Specialized.OrderedDictionary" />
+  <TypeSignature
+    Language="C#"
+    Value="public class AdapterDictionary : System.Collections.Specialized.OrderedDictionary"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -55,7 +58,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="System.Runtime.Serialization.IDeserializationCallback.OnDeserialization">
-      <MemberSignature Language="C#" Value="void IDeserializationCallback.OnDeserialization (object sender);" />
+      <MemberSignature
+        Language="C#"
+        Value="void IDeserializationCallback.OnDeserialization (object sender);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

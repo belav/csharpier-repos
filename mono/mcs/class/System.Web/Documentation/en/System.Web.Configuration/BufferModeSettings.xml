@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BufferModeSettings" FullName="System.Web.Configuration.BufferModeSettings">
-  <TypeSignature Language="C#" Value="public sealed class BufferModeSettings : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class BufferModeSettings : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.BufferModeSettings" /> class is used to define roles for event providers, such as Critical, Notification, Analysis, and Logging. Each role would buffer events differently, as appropriate for that role. For example a Critical role would keep the <see cref="P:System.Web.Configuration.BufferModeSettings.MaxBufferSize" />, <see cref="P:System.Web.Configuration.BufferModeSettings.MaxFlushSize" />, and <see cref="P:System.Web.Configuration.BufferModeSettings.UrgentFlushInterval" /> properties small, whereas an Analysis role would set those properties to higher values.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.BufferModeSettings" />
+
+         class is used to define roles for event providers, such as Critical, Notification, Analysis, and Logging. Each role would buffer events differently, as appropriate for that role. For example a Critical role would keep the <see
+         cref="P:System.Web.Configuration.BufferModeSettings.MaxBufferSize" />
+
+        , <see
+         cref="P:System.Web.Configuration.BufferModeSettings.MaxFlushSize" />
+
+        , and <see
+         cref="P:System.Web.Configuration.BufferModeSettings.UrgentFlushInterval" />
+
+         properties small, whereas an Analysis role would set those properties to higher values.</para
+      >
       <para>This class corresponds to the bufferModes configuration-file element.</para>
     </remarks>
     <summary>
@@ -23,7 +40,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BufferModeSettings (string name, int maxBufferSize, int maxFlushSize, int urgentFlushThreshold, TimeSpan regularFlushInterval, TimeSpan urgentFlushInterval, int maxBufferThreads);" />
+      <MemberSignature
+        Language="C#"
+        Value="public BufferModeSettings (string name, int maxBufferSize, int maxFlushSize, int urgentFlushThreshold, TimeSpan regularFlushInterval, TimeSpan urgentFlushInterval, int maxBufferThreads);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
@@ -39,29 +59,70 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.BufferModeSettings" /> class using specified settings.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.BufferModeSettings" />
+
+             class using specified settings.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.BufferModeSettings" /> object being created.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.BufferModeSettings" />
+
+           object being created.</param
+        >
         <param name="maxBufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of events buffered at one time. The value must be greater than zero.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of events buffered at one time. The value must be greater than zero.</param
+        >
         <param name="maxFlushSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of events per buffer flush. Must be greater than zero.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of events per buffer flush. Must be greater than zero.</param
+        >
         <param name="urgentFlushThreshold">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of events buffered before a buffer flush is triggered. The value must be greater than zero and less than or equal to <paramref name="maxBufferSize" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of events buffered before a buffer flush is triggered. The value must be greater than zero and less than or equal to <paramref
+           name="maxBufferSize" />
+
+          .</param
+        >
         <param name="regularFlushInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />The standard amount of time between buffer flushes. The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" /> ticks.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The standard amount of time between buffer flushes. The value can be made infinite by setting it to <see
+           cref="F:System.Int32.MaxValue" />
+
+           ticks.</param
+        >
         <param name="urgentFlushInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />The minimum length of time that can pass between buffer flushes. The value must be less than or equal to <paramref name="regularFlushInterval" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The minimum length of time that can pass between buffer flushes. The value must be less than or equal to <paramref
+           name="regularFlushInterval" />
+
+          .</param
+        >
         <param name="maxBufferThreads">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of buffer-flushing threads that can be active at one time.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of buffer-flushing threads that can be active at one time.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="ElementProperty">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElementProperty ElementProperty { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElementProperty ElementProperty { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElementProperty</ReturnType>
@@ -99,7 +160,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property must have a value greater than zero. Invalid values may cause an exception to be thrown when the configuration section is saved.</para>
-          <para>The default value varies based on the provider. The <see cref="T:System.Web.Configuration.BufferModeSettings" /> objects in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" /> collection are referred to by name by the providers in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" /> collection.</para>
+          <para
+            >The default value varies based on the provider. The <see
+             cref="T:System.Web.Configuration.BufferModeSettings" />
+
+             objects in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" />
+
+             collection are referred to by name by the providers in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -166,7 +238,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property must have a value greater than zero. Invalid values may cause an exception to be thrown when the configuration section is saved.</para>
-          <para>The default value varies based on the provider. The <see cref="T:System.Web.Configuration.BufferModeSettings" /> objects in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" /> collection are referred to by name by the providers in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" /> collection.</para>
+          <para
+            >The default value varies based on the provider. The <see
+             cref="T:System.Web.Configuration.BufferModeSettings" />
+
+             objects in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" />
+
+             collection are referred to by name by the providers in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -200,7 +283,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the name of the <see cref="T:System.Web.Configuration.BufferModeSettings" /> object.</para>
+          <para
+            >Gets or sets the name of the <see
+             cref="T:System.Web.Configuration.BufferModeSettings" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -208,7 +296,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -222,7 +313,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> collection.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+
+             collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -251,8 +347,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property must have a value greater than zero. The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" /> ticks. Invalid values may cause an exception when the configuration section is saved.</para>
-          <para>The default value varies based on the provider. The <see cref="T:System.Web.Configuration.BufferModeSettings" /> objects in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" /> collection are referred to by name by the providers in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" /> collection.</para>
+          <para
+            >This property must have a value greater than zero. The value can be made infinite by setting it to <see
+             cref="F:System.Int32.MaxValue" />
+
+             ticks. Invalid values may cause an exception when the configuration section is saved.</para
+          >
+          <para
+            >The default value varies based on the provider. The <see
+             cref="T:System.Web.Configuration.BufferModeSettings" />
+
+             objects in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" />
+
+             collection are referred to by name by the providers in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -282,8 +394,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property must have a value greater than zero and less than or equal to the value of the <see cref="P:System.Web.Configuration.BufferModeSettings.RegularFlushInterval" /> property. Invalid values may cause an exception to be thrown when the configuration section is saved.</para>
-          <para>The default value varies based on the provider. The <see cref="T:System.Web.Configuration.BufferModeSettings" /> objects in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" /> collection are referred to by name by the providers in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" /> collection.</para>
+          <para
+            >This property must have a value greater than zero and less than or equal to the value of the <see
+             cref="P:System.Web.Configuration.BufferModeSettings.RegularFlushInterval" />
+
+             property. Invalid values may cause an exception to be thrown when the configuration section is saved.</para
+          >
+          <para
+            >The default value varies based on the provider. The <see
+             cref="T:System.Web.Configuration.BufferModeSettings" />
+
+             objects in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" />
+
+             collection are referred to by name by the providers in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -316,8 +444,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property must have a value greater than zero and less than or equal to the value of the <see cref="P:System.Web.Configuration.BufferModeSettings.MaxBufferSize" /> property. Invalid values may cause an exception when the configuration section is saved.</para>
-          <para>The default value varies based on the provider. The <see cref="T:System.Web.Configuration.BufferModeSettings" /> objects in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" /> collection are referred to by name by the providers in the <see cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" /> collection.</para>
+          <para
+            >This property must have a value greater than zero and less than or equal to the value of the <see
+             cref="P:System.Web.Configuration.BufferModeSettings.MaxBufferSize" />
+
+             property. Invalid values may cause an exception when the configuration section is saved.</para
+          >
+          <para
+            >The default value varies based on the provider. The <see
+             cref="T:System.Web.Configuration.BufferModeSettings" />
+
+             objects in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" />
+
+             collection are referred to by name by the providers in the <see
+             cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

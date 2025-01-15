@@ -61,7 +61,10 @@
         <Target Type="T:System.Byte[]" />
       </Targets>
       <Member MemberName="GetVector">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b GetVector (this byte[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b GetVector (this byte[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -75,7 +78,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Byte[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Byte[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -83,7 +89,10 @@
         <Target Type="T:System.Double[]" />
       </Targets>
       <Member MemberName="GetVector">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d GetVector (this double[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d GetVector (this double[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -97,7 +106,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Double[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Double[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -105,7 +117,10 @@
         <Target Type="T:System.Int16[]" />
       </Targets>
       <Member MemberName="GetVector">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s GetVector (this short[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s GetVector (this short[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -119,7 +134,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Int16[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Int16[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -127,7 +145,10 @@
         <Target Type="T:System.Int32[]" />
       </Targets>
       <Member MemberName="GetVector">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i GetVector (this int[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4i GetVector (this int[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4i</ReturnType>
@@ -141,7 +162,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Int32[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Int32[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -149,7 +173,10 @@
         <Target Type="T:System.Int64[]" />
       </Targets>
       <Member MemberName="GetVector">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l GetVector (this long[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2l GetVector (this long[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2l</ReturnType>
@@ -163,7 +190,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Int64[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Int64[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -171,7 +201,10 @@
         <Target Type="T:System.SByte[]" />
       </Targets>
       <Member MemberName="GetVector">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb GetVector (this sbyte[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb GetVector (this sbyte[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -185,7 +218,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVector(System.SByte[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVector(System.SByte[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -193,7 +229,10 @@
         <Target Type="T:System.Single[]" />
       </Targets>
       <Member MemberName="GetVector">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f GetVector (this float[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f GetVector (this float[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -207,7 +246,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Single[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVector(System.Single[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -215,7 +257,10 @@
         <Target Type="T:System.UInt16[]" />
       </Targets>
       <Member MemberName="GetVector">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us GetVector (this ushort[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us GetVector (this ushort[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -229,7 +274,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVector(System.UInt16[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVector(System.UInt16[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -237,7 +285,10 @@
         <Target Type="T:System.UInt32[]" />
       </Targets>
       <Member MemberName="GetVector">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui GetVector (this uint[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4ui GetVector (this uint[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4ui</ReturnType>
@@ -251,7 +302,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVector(System.UInt32[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVector(System.UInt32[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -259,7 +313,10 @@
         <Target Type="T:System.UInt64[]" />
       </Targets>
       <Member MemberName="GetVector">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul GetVector (this ulong[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2ul GetVector (this ulong[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2ul</ReturnType>
@@ -273,7 +330,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVector(System.UInt64[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVector(System.UInt64[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -281,7 +341,10 @@
         <Target Type="T:System.Byte[]" />
       </Targets>
       <Member MemberName="GetVectorAligned">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b GetVectorAligned (this byte[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b GetVectorAligned (this byte[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -295,7 +358,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Byte[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Byte[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -303,7 +369,10 @@
         <Target Type="T:System.Double[]" />
       </Targets>
       <Member MemberName="GetVectorAligned">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d GetVectorAligned (this double[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d GetVectorAligned (this double[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -317,7 +386,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Double[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Double[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -325,7 +397,10 @@
         <Target Type="T:System.Int16[]" />
       </Targets>
       <Member MemberName="GetVectorAligned">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s GetVectorAligned (this short[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s GetVectorAligned (this short[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -339,7 +414,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Int16[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Int16[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -347,7 +425,10 @@
         <Target Type="T:System.Int32[]" />
       </Targets>
       <Member MemberName="GetVectorAligned">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i GetVectorAligned (this int[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4i GetVectorAligned (this int[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4i</ReturnType>
@@ -361,7 +442,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Int32[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Int32[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -369,7 +453,10 @@
         <Target Type="T:System.Int64[]" />
       </Targets>
       <Member MemberName="GetVectorAligned">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l GetVectorAligned (this long[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2l GetVectorAligned (this long[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2l</ReturnType>
@@ -383,7 +470,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Int64[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Int64[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -391,7 +481,10 @@
         <Target Type="T:System.SByte[]" />
       </Targets>
       <Member MemberName="GetVectorAligned">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb GetVectorAligned (this sbyte[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb GetVectorAligned (this sbyte[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -405,7 +498,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.SByte[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.SByte[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -413,7 +509,10 @@
         <Target Type="T:System.Single[]" />
       </Targets>
       <Member MemberName="GetVectorAligned">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f GetVectorAligned (this float[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f GetVectorAligned (this float[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -427,7 +526,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Single[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.Single[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -435,7 +537,10 @@
         <Target Type="T:System.UInt16[]" />
       </Targets>
       <Member MemberName="GetVectorAligned">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us GetVectorAligned (this ushort[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us GetVectorAligned (this ushort[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -449,7 +554,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.UInt16[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.UInt16[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -457,7 +565,10 @@
         <Target Type="T:System.UInt32[]" />
       </Targets>
       <Member MemberName="GetVectorAligned">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui GetVectorAligned (this uint[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4ui GetVectorAligned (this uint[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4ui</ReturnType>
@@ -471,7 +582,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.UInt32[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.UInt32[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -479,7 +593,10 @@
         <Target Type="T:System.UInt64[]" />
       </Targets>
       <Member MemberName="GetVectorAligned">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul GetVectorAligned (this ulong[] array, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2ul GetVectorAligned (this ulong[] array, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2ul</ReturnType>
@@ -493,15 +610,21 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.UInt64[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.GetVectorAligned(System.UInt64[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
       <Targets>
         <Target Type="T:T[]" />
       </Targets>
-      <Member MemberName="IsAligned&lt;T&gt;">
-        <MemberSignature Language="C#" Value="public static bool IsAligned&lt;T&gt; (this T[] vect, int index) where T : struct;" />
+      <Member MemberName="IsAligned<T>">
+        <MemberSignature
+          Language="C#"
+          Value="public static bool IsAligned<T> (this T[] vect, int index) where T : struct;"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Boolean</ReturnType>
@@ -525,7 +648,10 @@
           <param name="index">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.IsAligned``1(``0[],System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.IsAligned``1(``0[],System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -533,7 +659,10 @@
         <Target Type="T:System.Byte[]" />
       </Targets>
       <Member MemberName="SetVector">
-        <MemberSignature Language="C#" Value="public static void SetVector (this byte[] array, Mono.Simd.Vector16b val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVector (this byte[] array, Mono.Simd.Vector16b val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -549,7 +678,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Byte[],Mono.Simd.Vector16b,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Byte[],Mono.Simd.Vector16b,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -557,7 +689,10 @@
         <Target Type="T:System.Double[]" />
       </Targets>
       <Member MemberName="SetVector">
-        <MemberSignature Language="C#" Value="public static void SetVector (this double[] array, Mono.Simd.Vector2d val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVector (this double[] array, Mono.Simd.Vector2d val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -573,7 +708,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Double[],Mono.Simd.Vector2d,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Double[],Mono.Simd.Vector2d,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -581,7 +719,10 @@
         <Target Type="T:System.Int16[]" />
       </Targets>
       <Member MemberName="SetVector">
-        <MemberSignature Language="C#" Value="public static void SetVector (this short[] array, Mono.Simd.Vector8s val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVector (this short[] array, Mono.Simd.Vector8s val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -597,7 +738,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Int16[],Mono.Simd.Vector8s,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Int16[],Mono.Simd.Vector8s,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -605,7 +749,10 @@
         <Target Type="T:System.Int32[]" />
       </Targets>
       <Member MemberName="SetVector">
-        <MemberSignature Language="C#" Value="public static void SetVector (this int[] array, Mono.Simd.Vector4i val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVector (this int[] array, Mono.Simd.Vector4i val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -621,7 +768,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Int32[],Mono.Simd.Vector4i,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Int32[],Mono.Simd.Vector4i,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -629,7 +779,10 @@
         <Target Type="T:System.Int64[]" />
       </Targets>
       <Member MemberName="SetVector">
-        <MemberSignature Language="C#" Value="public static void SetVector (this long[] array, Mono.Simd.Vector2l val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVector (this long[] array, Mono.Simd.Vector2l val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -645,7 +798,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Int64[],Mono.Simd.Vector2l,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Int64[],Mono.Simd.Vector2l,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -653,7 +809,10 @@
         <Target Type="T:System.SByte[]" />
       </Targets>
       <Member MemberName="SetVector">
-        <MemberSignature Language="C#" Value="public static void SetVector (this sbyte[] array, Mono.Simd.Vector16sb val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVector (this sbyte[] array, Mono.Simd.Vector16sb val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -669,7 +828,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVector(System.SByte[],Mono.Simd.Vector16sb,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVector(System.SByte[],Mono.Simd.Vector16sb,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -677,7 +839,10 @@
         <Target Type="T:System.Single[]" />
       </Targets>
       <Member MemberName="SetVector">
-        <MemberSignature Language="C#" Value="public static void SetVector (this float[] array, Mono.Simd.Vector4f val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVector (this float[] array, Mono.Simd.Vector4f val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -693,7 +858,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Single[],Mono.Simd.Vector4f,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVector(System.Single[],Mono.Simd.Vector4f,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -701,7 +869,10 @@
         <Target Type="T:System.UInt16[]" />
       </Targets>
       <Member MemberName="SetVector">
-        <MemberSignature Language="C#" Value="public static void SetVector (this ushort[] array, Mono.Simd.Vector8us val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVector (this ushort[] array, Mono.Simd.Vector8us val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -717,7 +888,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVector(System.UInt16[],Mono.Simd.Vector8us,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVector(System.UInt16[],Mono.Simd.Vector8us,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -725,7 +899,10 @@
         <Target Type="T:System.UInt32[]" />
       </Targets>
       <Member MemberName="SetVector">
-        <MemberSignature Language="C#" Value="public static void SetVector (this uint[] array, Mono.Simd.Vector4ui val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVector (this uint[] array, Mono.Simd.Vector4ui val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -741,7 +918,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVector(System.UInt32[],Mono.Simd.Vector4ui,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVector(System.UInt32[],Mono.Simd.Vector4ui,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -749,7 +929,10 @@
         <Target Type="T:System.UInt64[]" />
       </Targets>
       <Member MemberName="SetVector">
-        <MemberSignature Language="C#" Value="public static void SetVector (this ulong[] array, Mono.Simd.Vector2ul val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVector (this ulong[] array, Mono.Simd.Vector2ul val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -765,7 +948,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVector(System.UInt64[],Mono.Simd.Vector2ul,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVector(System.UInt64[],Mono.Simd.Vector2ul,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -773,7 +959,10 @@
         <Target Type="T:System.Byte[]" />
       </Targets>
       <Member MemberName="SetVectorAligned">
-        <MemberSignature Language="C#" Value="public static void SetVectorAligned (this byte[] array, Mono.Simd.Vector16b val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVectorAligned (this byte[] array, Mono.Simd.Vector16b val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -789,7 +978,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Byte[],Mono.Simd.Vector16b,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Byte[],Mono.Simd.Vector16b,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -797,7 +989,10 @@
         <Target Type="T:System.Double[]" />
       </Targets>
       <Member MemberName="SetVectorAligned">
-        <MemberSignature Language="C#" Value="public static void SetVectorAligned (this double[] array, Mono.Simd.Vector2d val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVectorAligned (this double[] array, Mono.Simd.Vector2d val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -813,7 +1008,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Double[],Mono.Simd.Vector2d,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Double[],Mono.Simd.Vector2d,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -821,7 +1019,10 @@
         <Target Type="T:System.Int16[]" />
       </Targets>
       <Member MemberName="SetVectorAligned">
-        <MemberSignature Language="C#" Value="public static void SetVectorAligned (this short[] array, Mono.Simd.Vector8s val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVectorAligned (this short[] array, Mono.Simd.Vector8s val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -837,7 +1038,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Int16[],Mono.Simd.Vector8s,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Int16[],Mono.Simd.Vector8s,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -845,7 +1049,10 @@
         <Target Type="T:System.Int32[]" />
       </Targets>
       <Member MemberName="SetVectorAligned">
-        <MemberSignature Language="C#" Value="public static void SetVectorAligned (this int[] array, Mono.Simd.Vector4i val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVectorAligned (this int[] array, Mono.Simd.Vector4i val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -861,7 +1068,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Int32[],Mono.Simd.Vector4i,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Int32[],Mono.Simd.Vector4i,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -869,7 +1079,10 @@
         <Target Type="T:System.Int64[]" />
       </Targets>
       <Member MemberName="SetVectorAligned">
-        <MemberSignature Language="C#" Value="public static void SetVectorAligned (this long[] array, Mono.Simd.Vector2l val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVectorAligned (this long[] array, Mono.Simd.Vector2l val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -885,7 +1098,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Int64[],Mono.Simd.Vector2l,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Int64[],Mono.Simd.Vector2l,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -893,7 +1109,10 @@
         <Target Type="T:System.SByte[]" />
       </Targets>
       <Member MemberName="SetVectorAligned">
-        <MemberSignature Language="C#" Value="public static void SetVectorAligned (this sbyte[] array, Mono.Simd.Vector16sb val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVectorAligned (this sbyte[] array, Mono.Simd.Vector16sb val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -909,7 +1128,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.SByte[],Mono.Simd.Vector16sb,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.SByte[],Mono.Simd.Vector16sb,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -917,7 +1139,10 @@
         <Target Type="T:System.Single[]" />
       </Targets>
       <Member MemberName="SetVectorAligned">
-        <MemberSignature Language="C#" Value="public static void SetVectorAligned (this float[] array, Mono.Simd.Vector4f val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVectorAligned (this float[] array, Mono.Simd.Vector4f val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -933,7 +1158,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Single[],Mono.Simd.Vector4f,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.Single[],Mono.Simd.Vector4f,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -941,7 +1169,10 @@
         <Target Type="T:System.UInt16[]" />
       </Targets>
       <Member MemberName="SetVectorAligned">
-        <MemberSignature Language="C#" Value="public static void SetVectorAligned (this ushort[] array, Mono.Simd.Vector8us val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVectorAligned (this ushort[] array, Mono.Simd.Vector8us val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -957,7 +1188,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.UInt16[],Mono.Simd.Vector8us,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.UInt16[],Mono.Simd.Vector8us,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -965,7 +1199,10 @@
         <Target Type="T:System.UInt32[]" />
       </Targets>
       <Member MemberName="SetVectorAligned">
-        <MemberSignature Language="C#" Value="public static void SetVectorAligned (this uint[] array, Mono.Simd.Vector4ui val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVectorAligned (this uint[] array, Mono.Simd.Vector4ui val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -981,7 +1218,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.UInt32[],Mono.Simd.Vector4ui,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.UInt32[],Mono.Simd.Vector4ui,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -989,7 +1229,10 @@
         <Target Type="T:System.UInt64[]" />
       </Targets>
       <Member MemberName="SetVectorAligned">
-        <MemberSignature Language="C#" Value="public static void SetVectorAligned (this ulong[] array, Mono.Simd.Vector2ul val, int offset);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static void SetVectorAligned (this ulong[] array, Mono.Simd.Vector2ul val, int offset);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Void</ReturnType>
@@ -1005,7 +1248,10 @@
           <param name="offset">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.ArrayExtensions" Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.UInt64[],Mono.Simd.Vector2ul,System.Int32)" />
+        <Link
+          Type="Mono.Simd.ArrayExtensions"
+          Member="M:Mono.Simd.ArrayExtensions.SetVectorAligned(System.UInt64[],Mono.Simd.Vector2ul,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1013,7 +1259,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="AddSub">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d AddSub (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d AddSub (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1027,7 +1276,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.AddSub(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.AddSub(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1035,7 +1287,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="AddSub">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f AddSub (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f AddSub (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1049,7 +1304,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.AddSub(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.AddSub(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1057,7 +1315,10 @@
         <Target Type="T:Mono.Simd.Vector16b" />
       </Targets>
       <Member MemberName="AddWithSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b AddWithSaturation (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b AddWithSaturation (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -1071,7 +1332,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.AddWithSaturation(Mono.Simd.Vector16b,Mono.Simd.Vector16b)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.AddWithSaturation(Mono.Simd.Vector16b,Mono.Simd.Vector16b)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1079,7 +1343,10 @@
         <Target Type="T:Mono.Simd.Vector16sb" />
       </Targets>
       <Member MemberName="AddWithSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb AddWithSaturation (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb AddWithSaturation (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -1093,7 +1360,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.AddWithSaturation(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.AddWithSaturation(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1101,7 +1371,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="AddWithSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s AddWithSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s AddWithSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -1115,7 +1388,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.AddWithSaturation(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.AddWithSaturation(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1123,7 +1399,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="AddWithSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us AddWithSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us AddWithSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -1137,7 +1416,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.AddWithSaturation(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.AddWithSaturation(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1145,7 +1427,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="AndNot">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d AndNot (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d AndNot (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1159,7 +1444,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.AndNot(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.AndNot(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1167,7 +1455,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="AndNot">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f AndNot (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f AndNot (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1181,7 +1472,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.AndNot(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.AndNot(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1189,7 +1483,10 @@
         <Target Type="T:Mono.Simd.Vector4ui" />
       </Targets>
       <Member MemberName="ArithmeticRightShift">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui ArithmeticRightShift (this Mono.Simd.Vector4ui v1, int amount);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4ui ArithmeticRightShift (this Mono.Simd.Vector4ui v1, int amount);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4ui</ReturnType>
@@ -1203,7 +1500,10 @@
           <param name="amount">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.ArithmeticRightShift(Mono.Simd.Vector4ui,System.Int32)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.ArithmeticRightShift(Mono.Simd.Vector4ui,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1211,7 +1511,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="ArithmeticRightShift">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us ArithmeticRightShift (this Mono.Simd.Vector8us va, int amount);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us ArithmeticRightShift (this Mono.Simd.Vector8us va, int amount);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -1225,7 +1528,10 @@
           <param name="amount">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.ArithmeticRightShift(Mono.Simd.Vector8us,System.Int32)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.ArithmeticRightShift(Mono.Simd.Vector8us,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1233,7 +1539,10 @@
         <Target Type="T:Mono.Simd.Vector16b" />
       </Targets>
       <Member MemberName="Average">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b Average (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b Average (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -1247,7 +1556,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Average(Mono.Simd.Vector16b,Mono.Simd.Vector16b)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Average(Mono.Simd.Vector16b,Mono.Simd.Vector16b)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1255,7 +1567,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="Average">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us Average (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us Average (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -1269,7 +1584,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Average(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Average(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1277,7 +1595,10 @@
         <Target Type="T:Mono.Simd.Vector16b" />
       </Targets>
       <Member MemberName="CompareEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b CompareEqual (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b CompareEqual (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -1291,7 +1612,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector16b,Mono.Simd.Vector16b)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector16b,Mono.Simd.Vector16b)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1299,7 +1623,10 @@
         <Target Type="T:Mono.Simd.Vector16sb" />
       </Targets>
       <Member MemberName="CompareEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb CompareEqual (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb CompareEqual (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -1313,7 +1640,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1321,7 +1651,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="CompareEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d CompareEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1335,7 +1668,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1343,7 +1679,10 @@
         <Target Type="T:Mono.Simd.Vector2l" />
       </Targets>
       <Member MemberName="CompareEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l CompareEqual (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2l CompareEqual (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2l</ReturnType>
@@ -1357,7 +1696,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector2l,Mono.Simd.Vector2l)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector2l,Mono.Simd.Vector2l)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1365,7 +1707,10 @@
         <Target Type="T:Mono.Simd.Vector2ul" />
       </Targets>
       <Member MemberName="CompareEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul CompareEqual (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2ul CompareEqual (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2ul</ReturnType>
@@ -1379,7 +1724,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector2ul,Mono.Simd.Vector2ul)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector2ul,Mono.Simd.Vector2ul)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1387,7 +1735,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="CompareEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f CompareEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1401,7 +1752,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1409,7 +1763,10 @@
         <Target Type="T:Mono.Simd.Vector4i" />
       </Targets>
       <Member MemberName="CompareEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i CompareEqual (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4i CompareEqual (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4i</ReturnType>
@@ -1423,7 +1780,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector4i,Mono.Simd.Vector4i)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector4i,Mono.Simd.Vector4i)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1431,7 +1791,10 @@
         <Target Type="T:Mono.Simd.Vector4ui" />
       </Targets>
       <Member MemberName="CompareEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui CompareEqual (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4ui CompareEqual (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4ui</ReturnType>
@@ -1445,7 +1808,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1453,7 +1819,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="CompareEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s CompareEqual (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s CompareEqual (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -1467,7 +1836,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1475,7 +1847,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="CompareEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us CompareEqual (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us CompareEqual (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -1489,7 +1864,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareEqual(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1497,7 +1875,10 @@
         <Target Type="T:Mono.Simd.Vector16sb" />
       </Targets>
       <Member MemberName="CompareGreaterThan">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb CompareGreaterThan (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb CompareGreaterThan (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -1511,7 +1892,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareGreaterThan(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareGreaterThan(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1519,7 +1903,10 @@
         <Target Type="T:Mono.Simd.Vector2l" />
       </Targets>
       <Member MemberName="CompareGreaterThan">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l CompareGreaterThan (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2l CompareGreaterThan (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2l</ReturnType>
@@ -1533,7 +1920,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareGreaterThan(Mono.Simd.Vector2l,Mono.Simd.Vector2l)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareGreaterThan(Mono.Simd.Vector2l,Mono.Simd.Vector2l)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1541,7 +1931,10 @@
         <Target Type="T:Mono.Simd.Vector4i" />
       </Targets>
       <Member MemberName="CompareGreaterThan">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i CompareGreaterThan (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4i CompareGreaterThan (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4i</ReturnType>
@@ -1555,7 +1948,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareGreaterThan(Mono.Simd.Vector4i,Mono.Simd.Vector4i)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareGreaterThan(Mono.Simd.Vector4i,Mono.Simd.Vector4i)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1563,7 +1959,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="CompareGreaterThan">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s CompareGreaterThan (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s CompareGreaterThan (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -1577,7 +1976,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareGreaterThan(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareGreaterThan(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1585,7 +1987,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="CompareLessEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareLessEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d CompareLessEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1599,7 +2004,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareLessEqual(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareLessEqual(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1607,7 +2015,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="CompareLessEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareLessEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f CompareLessEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1621,7 +2032,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareLessEqual(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareLessEqual(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1629,7 +2043,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="CompareLessThan">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareLessThan (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d CompareLessThan (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1643,7 +2060,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareLessThan(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareLessThan(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1651,7 +2071,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="CompareLessThan">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareLessThan (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f CompareLessThan (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1665,7 +2088,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareLessThan(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareLessThan(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1673,7 +2099,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="CompareNotEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareNotEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d CompareNotEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1687,7 +2116,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareNotEqual(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareNotEqual(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1695,7 +2127,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="CompareNotEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareNotEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f CompareNotEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1709,7 +2144,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareNotEqual(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareNotEqual(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1717,7 +2155,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="CompareNotLessEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareNotLessEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d CompareNotLessEqual (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1731,7 +2172,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareNotLessEqual(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareNotLessEqual(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1739,7 +2183,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="CompareNotLessEqual">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareNotLessEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f CompareNotLessEqual (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1753,7 +2200,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareNotLessEqual(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareNotLessEqual(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1761,7 +2211,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="CompareNotLessThan">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareNotLessThan (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d CompareNotLessThan (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1775,7 +2228,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareNotLessThan(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareNotLessThan(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1783,7 +2239,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="CompareNotLessThan">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareNotLessThan (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f CompareNotLessThan (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1797,7 +2256,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareNotLessThan(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareNotLessThan(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1805,7 +2267,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="CompareOrdered">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareOrdered (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d CompareOrdered (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1819,7 +2284,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareOrdered(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareOrdered(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1827,7 +2295,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="CompareOrdered">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareOrdered (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f CompareOrdered (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1841,7 +2312,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareOrdered(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareOrdered(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1849,7 +2323,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="CompareUnordered">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d CompareUnordered (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d CompareUnordered (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1863,7 +2340,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareUnordered(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareUnordered(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1871,7 +2351,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="CompareUnordered">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f CompareUnordered (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f CompareUnordered (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1885,7 +2368,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.CompareUnordered(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.CompareUnordered(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1893,7 +2379,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="Duplicate">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d Duplicate (this Mono.Simd.Vector2d v1);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d Duplicate (this Mono.Simd.Vector2d v1);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -1905,7 +2394,10 @@
           <param name="v1">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Duplicate(Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Duplicate(Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1913,7 +2405,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="DuplicateHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f DuplicateHigh (this Mono.Simd.Vector4f v1);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f DuplicateHigh (this Mono.Simd.Vector4f v1);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1925,7 +2420,10 @@
           <param name="v1">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.DuplicateHigh(Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.DuplicateHigh(Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1933,7 +2431,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="DuplicateLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f DuplicateLow (this Mono.Simd.Vector4f v1);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f DuplicateLow (this Mono.Simd.Vector4f v1);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -1945,7 +2446,10 @@
           <param name="v1">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.DuplicateLow(Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.DuplicateLow(Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1953,7 +2457,10 @@
         <Target Type="T:Mono.Simd.Vector16b" />
       </Targets>
       <Member MemberName="ExtractByteMask">
-        <MemberSignature Language="C#" Value="public static int ExtractByteMask (this Mono.Simd.Vector16b va);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static int ExtractByteMask (this Mono.Simd.Vector16b va);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Int32</ReturnType>
@@ -1965,7 +2472,10 @@
           <param name="va">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.ExtractByteMask(Mono.Simd.Vector16b)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.ExtractByteMask(Mono.Simd.Vector16b)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1973,7 +2483,10 @@
         <Target Type="T:Mono.Simd.Vector16sb" />
       </Targets>
       <Member MemberName="ExtractByteMask">
-        <MemberSignature Language="C#" Value="public static int ExtractByteMask (this Mono.Simd.Vector16sb va);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static int ExtractByteMask (this Mono.Simd.Vector16sb va);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Int32</ReturnType>
@@ -1985,7 +2498,10 @@
           <param name="va">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.ExtractByteMask(Mono.Simd.Vector16sb)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.ExtractByteMask(Mono.Simd.Vector16sb)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -1993,7 +2509,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="HorizontalAdd">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d HorizontalAdd (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d HorizontalAdd (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -2007,7 +2526,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.HorizontalAdd(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.HorizontalAdd(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2015,7 +2537,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="HorizontalAdd">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f HorizontalAdd (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f HorizontalAdd (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -2029,7 +2554,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.HorizontalAdd(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.HorizontalAdd(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2037,7 +2565,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="HorizontalSub">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d HorizontalSub (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d HorizontalSub (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -2051,7 +2582,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.HorizontalSub(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.HorizontalSub(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2059,7 +2593,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="HorizontalSub">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f HorizontalSub (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f HorizontalSub (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -2073,7 +2610,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.HorizontalSub(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.HorizontalSub(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2081,7 +2621,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="InterleaveHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d InterleaveHigh (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d InterleaveHigh (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -2095,7 +2638,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.InterleaveHigh(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.InterleaveHigh(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2103,7 +2649,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="InterleaveHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f InterleaveHigh (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f InterleaveHigh (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -2117,7 +2666,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.InterleaveHigh(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.InterleaveHigh(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2125,7 +2677,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="InterleaveLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d InterleaveLow (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d InterleaveLow (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -2139,7 +2694,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.InterleaveLow(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.InterleaveLow(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2147,7 +2705,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="InterleaveLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f InterleaveLow (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f InterleaveLow (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -2161,7 +2722,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.InterleaveLow(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.InterleaveLow(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2169,7 +2733,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="InvSqrt">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f InvSqrt (this Mono.Simd.Vector4f v1);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f InvSqrt (this Mono.Simd.Vector4f v1);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -2181,7 +2748,10 @@
           <param name="v1">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.InvSqrt(Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.InvSqrt(Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2189,7 +2759,10 @@
         <Target Type="T:Mono.Simd.Vector2l" />
       </Targets>
       <Member MemberName="LogicalRightShift">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l LogicalRightShift (this Mono.Simd.Vector2l v1, int amount);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2l LogicalRightShift (this Mono.Simd.Vector2l v1, int amount);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2l</ReturnType>
@@ -2203,7 +2776,10 @@
           <param name="amount">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.LogicalRightShift(Mono.Simd.Vector2l,System.Int32)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.LogicalRightShift(Mono.Simd.Vector2l,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2211,7 +2787,10 @@
         <Target Type="T:Mono.Simd.Vector4i" />
       </Targets>
       <Member MemberName="LogicalRightShift">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i LogicalRightShift (this Mono.Simd.Vector4i v1, int amount);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4i LogicalRightShift (this Mono.Simd.Vector4i v1, int amount);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4i</ReturnType>
@@ -2225,7 +2804,10 @@
           <param name="amount">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.LogicalRightShift(Mono.Simd.Vector4i,System.Int32)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.LogicalRightShift(Mono.Simd.Vector4i,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2233,7 +2815,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="LogicalRightShift">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s LogicalRightShift (this Mono.Simd.Vector8s va, int amount);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s LogicalRightShift (this Mono.Simd.Vector8s va, int amount);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -2247,7 +2832,10 @@
           <param name="amount">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.LogicalRightShift(Mono.Simd.Vector8s,System.Int32)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.LogicalRightShift(Mono.Simd.Vector8s,System.Int32)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2255,7 +2843,10 @@
         <Target Type="T:Mono.Simd.Vector16b" />
       </Targets>
       <Member MemberName="Max">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b Max (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b Max (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -2269,7 +2860,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector16b,Mono.Simd.Vector16b)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector16b,Mono.Simd.Vector16b)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2277,7 +2871,10 @@
         <Target Type="T:Mono.Simd.Vector16sb" />
       </Targets>
       <Member MemberName="Max">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb Max (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb Max (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -2291,7 +2888,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2299,7 +2899,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="Max">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d Max (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d Max (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -2313,7 +2916,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2321,7 +2927,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="Max">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f Max (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f Max (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -2335,7 +2944,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2343,7 +2955,10 @@
         <Target Type="T:Mono.Simd.Vector4i" />
       </Targets>
       <Member MemberName="Max">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i Max (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4i Max (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4i</ReturnType>
@@ -2357,7 +2972,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector4i,Mono.Simd.Vector4i)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector4i,Mono.Simd.Vector4i)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2365,7 +2983,10 @@
         <Target Type="T:Mono.Simd.Vector4ui" />
       </Targets>
       <Member MemberName="Max">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui Max (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4ui Max (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4ui</ReturnType>
@@ -2379,7 +3000,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2387,7 +3011,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="Max">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s Max (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s Max (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -2401,7 +3028,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2409,7 +3039,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="Max">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us Max (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us Max (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -2423,7 +3056,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Max(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2431,7 +3067,10 @@
         <Target Type="T:Mono.Simd.Vector16b" />
       </Targets>
       <Member MemberName="Min">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b Min (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b Min (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -2445,7 +3084,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector16b,Mono.Simd.Vector16b)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector16b,Mono.Simd.Vector16b)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2453,7 +3095,10 @@
         <Target Type="T:Mono.Simd.Vector16sb" />
       </Targets>
       <Member MemberName="Min">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb Min (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb Min (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -2467,7 +3112,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2475,7 +3123,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="Min">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d Min (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d Min (this Mono.Simd.Vector2d v1, Mono.Simd.Vector2d v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -2489,7 +3140,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector2d,Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector2d,Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2497,7 +3151,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="Min">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f Min (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f Min (this Mono.Simd.Vector4f v1, Mono.Simd.Vector4f v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -2511,7 +3168,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector4f,Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector4f,Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2519,7 +3179,10 @@
         <Target Type="T:Mono.Simd.Vector4i" />
       </Targets>
       <Member MemberName="Min">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i Min (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4i Min (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4i</ReturnType>
@@ -2533,7 +3196,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector4i,Mono.Simd.Vector4i)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector4i,Mono.Simd.Vector4i)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2541,7 +3207,10 @@
         <Target Type="T:Mono.Simd.Vector4ui" />
       </Targets>
       <Member MemberName="Min">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui Min (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4ui Min (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4ui</ReturnType>
@@ -2555,7 +3224,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2563,7 +3235,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="Min">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s Min (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s Min (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -2577,7 +3252,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2585,7 +3263,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="Min">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us Min (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us Min (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -2599,7 +3280,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Min(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2607,7 +3291,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="MultiplyStoreHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s MultiplyStoreHigh (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s MultiplyStoreHigh (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -2621,7 +3308,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.MultiplyStoreHigh(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.MultiplyStoreHigh(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2629,7 +3319,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="MultiplyStoreHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us MultiplyStoreHigh (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us MultiplyStoreHigh (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -2643,7 +3336,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.MultiplyStoreHigh(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.MultiplyStoreHigh(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2651,7 +3347,10 @@
         <Target Type="T:Mono.Simd.Vector4i" />
       </Targets>
       <Member MemberName="PackWithSignedSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s PackWithSignedSaturation (this Mono.Simd.Vector4i va, Mono.Simd.Vector4i vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s PackWithSignedSaturation (this Mono.Simd.Vector4i va, Mono.Simd.Vector4i vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -2665,7 +3364,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.PackWithSignedSaturation(Mono.Simd.Vector4i,Mono.Simd.Vector4i)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.PackWithSignedSaturation(Mono.Simd.Vector4i,Mono.Simd.Vector4i)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2673,7 +3375,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="PackWithSignedSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb PackWithSignedSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb PackWithSignedSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -2687,7 +3392,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.PackWithSignedSaturation(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.PackWithSignedSaturation(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2695,7 +3403,10 @@
         <Target Type="T:Mono.Simd.Vector4i" />
       </Targets>
       <Member MemberName="PackWithUnsignedSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us PackWithUnsignedSaturation (this Mono.Simd.Vector4i va, Mono.Simd.Vector4i vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us PackWithUnsignedSaturation (this Mono.Simd.Vector4i va, Mono.Simd.Vector4i vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -2709,7 +3420,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.PackWithUnsignedSaturation(Mono.Simd.Vector4i,Mono.Simd.Vector4i)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.PackWithUnsignedSaturation(Mono.Simd.Vector4i,Mono.Simd.Vector4i)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2717,7 +3431,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="PackWithUnsignedSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b PackWithUnsignedSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b PackWithUnsignedSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -2731,7 +3448,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.PackWithUnsignedSaturation(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.PackWithUnsignedSaturation(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2739,7 +3459,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="Reciprocal">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f Reciprocal (this Mono.Simd.Vector4f v1);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f Reciprocal (this Mono.Simd.Vector4f v1);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -2751,7 +3474,10 @@
           <param name="v1">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Reciprocal(Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Reciprocal(Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2759,7 +3485,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="Shuffle">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f Shuffle (this Mono.Simd.Vector4f v1, Mono.Simd.ShuffleSel sel);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f Shuffle (this Mono.Simd.Vector4f v1, Mono.Simd.ShuffleSel sel);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -2773,7 +3502,10 @@
           <param name="sel">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Shuffle(Mono.Simd.Vector4f,Mono.Simd.ShuffleSel)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Shuffle(Mono.Simd.Vector4f,Mono.Simd.ShuffleSel)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2781,7 +3513,10 @@
         <Target Type="T:Mono.Simd.Vector4i" />
       </Targets>
       <Member MemberName="Shuffle">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i Shuffle (this Mono.Simd.Vector4i v1, Mono.Simd.ShuffleSel sel);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4i Shuffle (this Mono.Simd.Vector4i v1, Mono.Simd.ShuffleSel sel);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4i</ReturnType>
@@ -2795,7 +3530,10 @@
           <param name="sel">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Shuffle(Mono.Simd.Vector4i,Mono.Simd.ShuffleSel)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Shuffle(Mono.Simd.Vector4i,Mono.Simd.ShuffleSel)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2803,7 +3541,10 @@
         <Target Type="T:Mono.Simd.Vector4ui" />
       </Targets>
       <Member MemberName="Shuffle">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui Shuffle (this Mono.Simd.Vector4ui v1, Mono.Simd.ShuffleSel sel);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4ui Shuffle (this Mono.Simd.Vector4ui v1, Mono.Simd.ShuffleSel sel);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4ui</ReturnType>
@@ -2817,7 +3558,10 @@
           <param name="sel">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Shuffle(Mono.Simd.Vector4ui,Mono.Simd.ShuffleSel)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Shuffle(Mono.Simd.Vector4ui,Mono.Simd.ShuffleSel)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2825,7 +3569,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="ShuffleHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s ShuffleHigh (this Mono.Simd.Vector8s va, Mono.Simd.ShuffleSel sel);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s ShuffleHigh (this Mono.Simd.Vector8s va, Mono.Simd.ShuffleSel sel);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -2839,7 +3586,10 @@
           <param name="sel">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.ShuffleHigh(Mono.Simd.Vector8s,Mono.Simd.ShuffleSel)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.ShuffleHigh(Mono.Simd.Vector8s,Mono.Simd.ShuffleSel)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2847,7 +3597,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="ShuffleHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us ShuffleHigh (this Mono.Simd.Vector8us va, Mono.Simd.ShuffleSel sel);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us ShuffleHigh (this Mono.Simd.Vector8us va, Mono.Simd.ShuffleSel sel);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -2861,7 +3614,10 @@
           <param name="sel">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.ShuffleHigh(Mono.Simd.Vector8us,Mono.Simd.ShuffleSel)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.ShuffleHigh(Mono.Simd.Vector8us,Mono.Simd.ShuffleSel)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2869,7 +3625,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="ShuffleLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s ShuffleLow (this Mono.Simd.Vector8s va, Mono.Simd.ShuffleSel sel);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s ShuffleLow (this Mono.Simd.Vector8s va, Mono.Simd.ShuffleSel sel);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -2883,7 +3642,10 @@
           <param name="sel">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.ShuffleLow(Mono.Simd.Vector8s,Mono.Simd.ShuffleSel)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.ShuffleLow(Mono.Simd.Vector8s,Mono.Simd.ShuffleSel)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2891,7 +3653,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="ShuffleLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us ShuffleLow (this Mono.Simd.Vector8us va, Mono.Simd.ShuffleSel sel);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us ShuffleLow (this Mono.Simd.Vector8us va, Mono.Simd.ShuffleSel sel);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -2905,7 +3670,10 @@
           <param name="sel">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.ShuffleLow(Mono.Simd.Vector8us,Mono.Simd.ShuffleSel)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.ShuffleLow(Mono.Simd.Vector8us,Mono.Simd.ShuffleSel)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2913,7 +3681,10 @@
         <Target Type="T:Mono.Simd.Vector4ui" />
       </Targets>
       <Member MemberName="SignedPackWithSignedSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s SignedPackWithSignedSaturation (this Mono.Simd.Vector4ui va, Mono.Simd.Vector4ui vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s SignedPackWithSignedSaturation (this Mono.Simd.Vector4ui va, Mono.Simd.Vector4ui vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -2927,7 +3698,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.SignedPackWithSignedSaturation(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.SignedPackWithSignedSaturation(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2935,7 +3709,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="SignedPackWithSignedSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb SignedPackWithSignedSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb SignedPackWithSignedSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -2949,7 +3726,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.SignedPackWithSignedSaturation(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.SignedPackWithSignedSaturation(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2957,7 +3737,10 @@
         <Target Type="T:Mono.Simd.Vector4ui" />
       </Targets>
       <Member MemberName="SignedPackWithUnsignedSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us SignedPackWithUnsignedSaturation (this Mono.Simd.Vector4ui va, Mono.Simd.Vector4ui vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us SignedPackWithUnsignedSaturation (this Mono.Simd.Vector4ui va, Mono.Simd.Vector4ui vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -2971,7 +3754,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.SignedPackWithUnsignedSaturation(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.SignedPackWithUnsignedSaturation(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -2979,7 +3765,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="SignedPackWithUnsignedSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b SignedPackWithUnsignedSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b SignedPackWithUnsignedSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -2993,7 +3782,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.SignedPackWithUnsignedSaturation(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.SignedPackWithUnsignedSaturation(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3001,7 +3793,10 @@
         <Target Type="T:Mono.Simd.Vector2d" />
       </Targets>
       <Member MemberName="Sqrt">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2d Sqrt (this Mono.Simd.Vector2d v1);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2d Sqrt (this Mono.Simd.Vector2d v1);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2d</ReturnType>
@@ -3013,7 +3808,10 @@
           <param name="v1">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Sqrt(Mono.Simd.Vector2d)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Sqrt(Mono.Simd.Vector2d)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3021,7 +3819,10 @@
         <Target Type="T:Mono.Simd.Vector4f" />
       </Targets>
       <Member MemberName="Sqrt">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4f Sqrt (this Mono.Simd.Vector4f v1);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4f Sqrt (this Mono.Simd.Vector4f v1);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4f</ReturnType>
@@ -3033,7 +3834,10 @@
           <param name="v1">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.Sqrt(Mono.Simd.Vector4f)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.Sqrt(Mono.Simd.Vector4f)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3041,7 +3845,10 @@
         <Target Type="T:Mono.Simd.Vector16b" />
       </Targets>
       <Member MemberName="SubtractWithSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b SubtractWithSaturation (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b SubtractWithSaturation (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -3055,7 +3862,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.SubtractWithSaturation(Mono.Simd.Vector16b,Mono.Simd.Vector16b)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.SubtractWithSaturation(Mono.Simd.Vector16b,Mono.Simd.Vector16b)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3063,7 +3873,10 @@
         <Target Type="T:Mono.Simd.Vector16sb" />
       </Targets>
       <Member MemberName="SubtractWithSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb SubtractWithSaturation (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb SubtractWithSaturation (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -3077,7 +3890,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.SubtractWithSaturation(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.SubtractWithSaturation(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3085,7 +3901,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="SubtractWithSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s SubtractWithSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s SubtractWithSaturation (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -3099,7 +3918,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.SubtractWithSaturation(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.SubtractWithSaturation(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3107,7 +3929,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="SubtractWithSaturation">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us SubtractWithSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us SubtractWithSaturation (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -3121,7 +3946,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.SubtractWithSaturation(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.SubtractWithSaturation(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3129,7 +3957,10 @@
         <Target Type="T:Mono.Simd.Vector16b" />
       </Targets>
       <Member MemberName="SumOfAbsoluteDifferences">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us SumOfAbsoluteDifferences (this Mono.Simd.Vector16b va, Mono.Simd.Vector16sb vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us SumOfAbsoluteDifferences (this Mono.Simd.Vector16b va, Mono.Simd.Vector16sb vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -3143,7 +3974,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.SumOfAbsoluteDifferences(Mono.Simd.Vector16b,Mono.Simd.Vector16sb)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.SumOfAbsoluteDifferences(Mono.Simd.Vector16b,Mono.Simd.Vector16sb)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3151,7 +3985,10 @@
         <Target Type="T:Mono.Simd.Vector16b" />
       </Targets>
       <Member MemberName="UnpackHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b UnpackHigh (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b UnpackHigh (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -3165,7 +4002,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector16b,Mono.Simd.Vector16b)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector16b,Mono.Simd.Vector16b)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3173,7 +4013,10 @@
         <Target Type="T:Mono.Simd.Vector16sb" />
       </Targets>
       <Member MemberName="UnpackHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb UnpackHigh (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb UnpackHigh (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -3187,7 +4030,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3195,7 +4041,10 @@
         <Target Type="T:Mono.Simd.Vector2l" />
       </Targets>
       <Member MemberName="UnpackHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l UnpackHigh (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2l UnpackHigh (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2l</ReturnType>
@@ -3209,7 +4058,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector2l,Mono.Simd.Vector2l)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector2l,Mono.Simd.Vector2l)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3217,7 +4069,10 @@
         <Target Type="T:Mono.Simd.Vector2ul" />
       </Targets>
       <Member MemberName="UnpackHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul UnpackHigh (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2ul UnpackHigh (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2ul</ReturnType>
@@ -3231,7 +4086,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector2ul,Mono.Simd.Vector2ul)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector2ul,Mono.Simd.Vector2ul)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3239,7 +4097,10 @@
         <Target Type="T:Mono.Simd.Vector4i" />
       </Targets>
       <Member MemberName="UnpackHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i UnpackHigh (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4i UnpackHigh (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4i</ReturnType>
@@ -3253,7 +4114,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector4i,Mono.Simd.Vector4i)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector4i,Mono.Simd.Vector4i)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3261,7 +4125,10 @@
         <Target Type="T:Mono.Simd.Vector4ui" />
       </Targets>
       <Member MemberName="UnpackHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui UnpackHigh (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4ui UnpackHigh (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4ui</ReturnType>
@@ -3275,7 +4142,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3283,7 +4153,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="UnpackHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s UnpackHigh (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s UnpackHigh (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -3297,7 +4170,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3305,7 +4181,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="UnpackHigh">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us UnpackHigh (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us UnpackHigh (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -3319,7 +4198,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackHigh(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3327,7 +4209,10 @@
         <Target Type="T:Mono.Simd.Vector16b" />
       </Targets>
       <Member MemberName="UnpackLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16b UnpackLow (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16b UnpackLow (this Mono.Simd.Vector16b va, Mono.Simd.Vector16b vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16b</ReturnType>
@@ -3341,7 +4226,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector16b,Mono.Simd.Vector16b)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector16b,Mono.Simd.Vector16b)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3349,7 +4237,10 @@
         <Target Type="T:Mono.Simd.Vector16sb" />
       </Targets>
       <Member MemberName="UnpackLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector16sb UnpackLow (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector16sb UnpackLow (this Mono.Simd.Vector16sb va, Mono.Simd.Vector16sb vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector16sb</ReturnType>
@@ -3363,7 +4254,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector16sb,Mono.Simd.Vector16sb)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3371,7 +4265,10 @@
         <Target Type="T:Mono.Simd.Vector2l" />
       </Targets>
       <Member MemberName="UnpackLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2l UnpackLow (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2l UnpackLow (this Mono.Simd.Vector2l v1, Mono.Simd.Vector2l v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2l</ReturnType>
@@ -3385,7 +4282,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector2l,Mono.Simd.Vector2l)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector2l,Mono.Simd.Vector2l)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3393,7 +4293,10 @@
         <Target Type="T:Mono.Simd.Vector2ul" />
       </Targets>
       <Member MemberName="UnpackLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector2ul UnpackLow (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector2ul UnpackLow (this Mono.Simd.Vector2ul v1, Mono.Simd.Vector2ul v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector2ul</ReturnType>
@@ -3407,7 +4310,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector2ul,Mono.Simd.Vector2ul)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector2ul,Mono.Simd.Vector2ul)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3415,7 +4321,10 @@
         <Target Type="T:Mono.Simd.Vector4i" />
       </Targets>
       <Member MemberName="UnpackLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4i UnpackLow (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4i UnpackLow (this Mono.Simd.Vector4i v1, Mono.Simd.Vector4i v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4i</ReturnType>
@@ -3429,7 +4338,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector4i,Mono.Simd.Vector4i)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector4i,Mono.Simd.Vector4i)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3437,7 +4349,10 @@
         <Target Type="T:Mono.Simd.Vector4ui" />
       </Targets>
       <Member MemberName="UnpackLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector4ui UnpackLow (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector4ui UnpackLow (this Mono.Simd.Vector4ui v1, Mono.Simd.Vector4ui v2);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector4ui</ReturnType>
@@ -3451,7 +4366,10 @@
           <param name="v2">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector4ui,Mono.Simd.Vector4ui)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3459,7 +4377,10 @@
         <Target Type="T:Mono.Simd.Vector8s" />
       </Targets>
       <Member MemberName="UnpackLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8s UnpackLow (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8s UnpackLow (this Mono.Simd.Vector8s va, Mono.Simd.Vector8s vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8s</ReturnType>
@@ -3473,7 +4394,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector8s,Mono.Simd.Vector8s)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector8s,Mono.Simd.Vector8s)"
+        />
       </Member>
     </ExtensionMethod>
     <ExtensionMethod>
@@ -3481,7 +4405,10 @@
         <Target Type="T:Mono.Simd.Vector8us" />
       </Targets>
       <Member MemberName="UnpackLow">
-        <MemberSignature Language="C#" Value="public static Mono.Simd.Vector8us UnpackLow (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);" />
+        <MemberSignature
+          Language="C#"
+          Value="public static Mono.Simd.Vector8us UnpackLow (this Mono.Simd.Vector8us va, Mono.Simd.Vector8us vb);"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>Mono.Simd.Vector8us</ReturnType>
@@ -3495,7 +4422,10 @@
           <param name="vb">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="Mono.Simd.VectorOperations" Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector8us,Mono.Simd.Vector8us)" />
+        <Link
+          Type="Mono.Simd.VectorOperations"
+          Member="M:Mono.Simd.VectorOperations.UnpackLow(Mono.Simd.Vector8us,Mono.Simd.Vector8us)"
+        />
       </Member>
     </ExtensionMethod>
   </ExtensionMethods>

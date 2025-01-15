@@ -10,7 +10,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ServiceModel.Channels.ISession" /> interface is the base interface for all sessions. It contains a <see cref="P:System.ServiceModel.Channels.ISession.ID" /> property for identifying the session.</para>
+      <para
+        >The <see
+         cref="T:System.ServiceModel.Channels.ISession" />
+
+         interface is the base interface for all sessions. It contains a <see
+         cref="P:System.ServiceModel.Channels.ISession.ID" />
+
+         property for identifying the session.</para
+      >
       <para>A session is a shared context among all participants in a communication exchange. This shared context is characterized by the following three properties: </para>
       <list type="bullet">
         <item>
@@ -20,12 +28,20 @@
           <para>Message correlation - a method for correlating a group of messages to an instance of shared context. </para>
         </item>
         <item>
-          <para>The <see cref="T:System.ServiceModel.Channels.ISession" /> interface is not informed as to the number of participants in a session or the lifetime of a session.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Channels.ISession" />
+
+             interface is not informed as to the number of participants in a session or the lifetime of a session.</para
+          >
         </item>
       </list>
       <para>These session properties are provided by associating an ID with a session. </para>
       <para>
-        <see cref="T:System.ServiceModel.Channels.ISession" /> is inherited by:</para>
+        <see cref="T:System.ServiceModel.Channels.ISession" />
+
+         is inherited by:</para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -44,7 +60,11 @@
         </item>
         <item>
           <para>
-            <see cref="T:System.ServiceModel.Channels.ISessionChannel`1" /> of type <see cref="T:System.ServiceModel.Channels.ISession" /></para>
+            <see cref="T:System.ServiceModel.Channels.ISessionChannel`1" />
+
+             of type <see
+             cref="T:System.ServiceModel.Channels.ISession" />
+          </para>
         </item>
       </list>
     </remarks>
@@ -68,7 +88,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the session is interrupted, it can be retrieved using the <see cref="P:System.ServiceModel.Channels.ISession.Id" />.</para>
+          <para
+            >If the session is interrupted, it can be retrieved using the <see
+             cref="P:System.ServiceModel.Channels.ISession.Id" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

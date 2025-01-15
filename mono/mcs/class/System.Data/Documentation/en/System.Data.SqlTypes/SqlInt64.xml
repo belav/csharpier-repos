@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SqlInt64" FullName="System.Data.SqlTypes.SqlInt64">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public struct SqlInt64 : IComparable, System.Data.SqlTypes.INullable, System.Xml.Serialization.IXmlSerializable" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public struct SqlInt64 : IComparable, System.Data.SqlTypes.INullable, System.Xml.Serialization.IXmlSerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -42,10 +46,18 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure using the supplied long integer.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure using the supplied long integer.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A long integer. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A long integer. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -53,7 +65,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 Add (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 Add (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -66,16 +81,44 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Computes the sum of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters.</para>
+          <para
+            >Computes the sum of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> is equal to the sum of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             is equal to the sum of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -83,7 +126,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BitwiseAnd">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 BitwiseAnd (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 BitwiseAnd (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -96,16 +142,38 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Computes the bitwise AND of its <see cref="T:System.Data.SqlTypes.SqlInt64" /> operands.</para>
+          <para
+            >Computes the bitwise AND of its <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             operands.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure that contains the results of the bitwise AND operation.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure that contains the results of the bitwise AND operation.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -113,7 +181,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BitwiseOr">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 BitwiseOr (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 BitwiseOr (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -126,16 +197,38 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Computes the bitwise OR of its two <see cref="T:System.Data.SqlTypes.SqlInt64" /> operands.</para>
+          <para
+            >Computes the bitwise OR of its two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             operands.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure that contains the results of the bitwise OR operation.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure that contains the results of the bitwise OR operation.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -143,7 +236,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CompareTo">
-      <MemberSignature Language="C#" Value="public int CompareTo (System.Data.SqlTypes.SqlInt64 value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int CompareTo (System.Data.SqlTypes.SqlInt64 value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -158,7 +254,15 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Compares this <see cref="T:System.Data.SqlTypes.SqlInt64" /> instance to the supplied <see cref="T:System.Data.SqlTypes.SqlInt64" /> and returns an indication of their relative values.</para>
+          <para
+            >Compares this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             instance to the supplied <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             and returns an indication of their relative values.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -203,7 +307,13 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Data.SqlTypes.SqlInt64" /> to be compared.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           to be compared.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CompareTo">
@@ -219,7 +329,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Compares this <see cref="T:System.Data.SqlTypes.SqlInt64" /> instance to the supplied <see cref="T:System.Object" /> and returns an indication of their relative values.</para>
+          <para
+            >Compares this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             instance to the supplied <see
+             cref="T:System.Object" />
+
+             and returns an indication of their relative values.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -264,7 +382,13 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Object" /> to be compared. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Object" />
+
+           to be compared. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -272,7 +396,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Divide">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 Divide (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 Divide (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -285,16 +412,41 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Divides the first <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameter by the second.</para>
+          <para
+            >Divides the first <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameter by the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> property contains the results of the division operation.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             property contains the results of the division operation.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -314,14 +466,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Compares the supplied object parameter to the <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> property of the <see cref="T:System.Data.SqlTypes.SqlInt64" /> object.</para>
+          <para
+            >Compares the supplied object parameter to the <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             property of the <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if object is an instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> and the two are equal; otherwise false.</para>
+          <para
+            >true if object is an instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             and the two are equal; otherwise false.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to be compared. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to be compared. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -329,7 +497,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean Equals (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean Equals (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlBoolean</ReturnType>
@@ -342,16 +513,33 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters to determine whether they are equal.</para>
+          <para
+            >Performs a logical comparison of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters to determine whether they are equal.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if the two values are equal. Otherwise, false. If either instance is null, then the SqlInt64 will be null.</para>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -382,7 +570,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetXsdType">
-      <MemberSignature Language="C#" Value="public static System.Xml.XmlQualifiedName GetXsdType (System.Xml.Schema.XmlSchemaSet schemaSet);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Xml.XmlQualifiedName GetXsdType (System.Xml.Schema.XmlSchemaSet schemaSet);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -397,18 +588,37 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</para>
+          <para
+            >Returns the XML Schema definition language (XSD) of the specified <see
+             cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string that indicates the XSD of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</para>
+          <para
+            >A string that indicates the XSD of the specified <see
+             cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            .</para
+          >
         </returns>
         <param name="schemaSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.Schema.XmlSchemaSet" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GreaterThan">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean GreaterThan (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean GreaterThan (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlBoolean</ReturnType>
@@ -421,16 +631,56 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters to determine whether the first is greater than the second.</para>
+          <para
+            >Performs a logical comparison of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters to determine whether the first is greater than the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the first instance is greater than the second instance. Otherwise, <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+            . If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -438,7 +688,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GreaterThanOrEqual">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean GreaterThanOrEqual (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlBoolean</ReturnType>
@@ -451,16 +704,56 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters to determine whether the first is greater than or equal to the second.</para>
+          <para
+            >Performs a logical comparison of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters to determine whether the first is greater than or equal to the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the first instance is greater than or equal to the second instance. Otherwise, <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+            . If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -477,11 +770,23 @@
         <value>To be added: an object of type 'bool'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <format type="text/html"><a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a></format>.</para>
+          <para
+            >For more information, see <format
+             type="text/html">
+              <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a Boolean value that indicates whether this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure is null.</para>
+          <para
+            >Gets a Boolean value that indicates whether this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure is null.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -490,7 +795,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LessThan">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean LessThan (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean LessThan (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlBoolean</ReturnType>
@@ -503,16 +811,56 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a logical comparison on the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters to determine whether the first is less than the second.</para>
+          <para
+            >Performs a logical comparison on the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters to determine whether the first is less than the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the first instance is less than the second instance. Otherwise, <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+            . If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -520,7 +868,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LessThanOrEqual">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean LessThanOrEqual (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlBoolean</ReturnType>
@@ -533,16 +884,56 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a logical comparison on the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters to determine whether the first is less than or equal to the second.</para>
+          <para
+            >Performs a logical comparison on the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters to determine whether the first is less than or equal to the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the first instance is less than or equal to the second instance. Otherwise, <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+            . If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -550,7 +941,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MaxValue">
-      <MemberSignature Language="C#" Value="public static readonly System.Data.SqlTypes.SqlInt64 MaxValue;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Data.SqlTypes.SqlInt64 MaxValue;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -559,11 +953,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of this constant is 2 <superscript>63</superscript> -1.</para>
+          <para
+            >The value of this constant is 2 <superscript
+            >63</superscript>
+
+             -1.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant representing the largest possible value for a <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure.</para>
+          <para
+            >A constant representing the largest possible value for a <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -572,7 +976,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MinValue">
-      <MemberSignature Language="C#" Value="public static readonly System.Data.SqlTypes.SqlInt64 MinValue;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Data.SqlTypes.SqlInt64 MinValue;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -581,11 +988,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of this constant is -2 <superscript>63</superscript>.</para>
+          <para
+            >The value of this constant is -2 <superscript
+            >63</superscript>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant representing the smallest possible value for a <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure.</para>
+          <para
+            >A constant representing the smallest possible value for a <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -594,7 +1011,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Mod">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 Mod (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 Mod (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -607,16 +1027,41 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Computes the remainder after dividing the first <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameter by the second.</para>
+          <para
+            >Computes the remainder after dividing the first <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameter by the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> property contains the remainder.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             property contains the remainder.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -624,7 +1069,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Modulus">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 Modulus (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 Modulus (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -639,24 +1087,60 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If either instance of <paramref name="x" /> or <paramref name="y" /> is null, the value will be null.</para>
+          <para
+            >If either instance of <paramref
+             name="x" />
+
+             or <paramref
+             name="y" />
+
+             is null, the value will be null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Divides two <see cref="T:System.Data.SqlTypes.SqlInt64" /> values and returns the remainder.</para>
+          <para
+            >Divides two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             values and returns the remainder.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The remainder left after division is performed on <paramref name="x" /> and <paramref name="y" />.</para>
+          <para
+            >The remainder left after division is performed on <paramref
+             name="x" />
+
+             and <paramref
+             name="y" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           value.</param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           value.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Multiply">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 Multiply (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 Multiply (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -669,16 +1153,44 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Computes the product of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters.</para>
+          <para
+            >Computes the product of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> is equal to the product of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             is equal to the product of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -686,7 +1198,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NotEquals">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean NotEquals (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean NotEquals (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlBoolean</ReturnType>
@@ -703,12 +1218,47 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" /> if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the two instances are not equal or <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+             if the two instances are equal. If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -716,7 +1266,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Null">
-      <MemberSignature Language="C#" Value="public static readonly System.Data.SqlTypes.SqlInt64 Null;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Data.SqlTypes.SqlInt64 Null;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -726,11 +1279,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="F:System.Data.SqlTypes.SqlInt64.Null" /> functions as a constant for the <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. For more information, see <format type="text/html"><a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a></format>.</para>
+            <see cref="F:System.Data.SqlTypes.SqlInt64.Null" />
+
+             functions as a constant for the <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure. For more information, see <format
+             type="text/html">
+              <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents a <see cref="T:System.DBNull" /> that can be assigned to this instance of the <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure.</para>
+          <para
+            >Represents a <see
+             cref="T:System.DBNull" />
+
+             that can be assigned to this instance of the <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -739,7 +1311,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnesComplement">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 OnesComplement (System.Data.SqlTypes.SqlInt64 x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 OnesComplement (System.Data.SqlTypes.SqlInt64 x);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -751,14 +1326,36 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a bitwise one's complement operation on its <see cref="T:System.Data.SqlTypes.SqlInt64" /> operand.</para>
+          <para
+            >Performs a bitwise one's complement operation on its <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             operand.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> is equal to the ones complement of the <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameter.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             is equal to the ones complement of the <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameter.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -766,7 +1363,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="op_Addition">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Addition (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Addition (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -783,20 +1383,51 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Computes the sum of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters.</para>
+          <para
+            >Computes the sum of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> is equal to the sum of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             is equal to the sum of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_BitwiseAnd">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_BitwiseAnd (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_BitwiseAnd (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -813,20 +1444,45 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Computes the bitwise AND of its <see cref="T:System.Data.SqlTypes.SqlInt64" /> operands.</para>
+          <para
+            >Computes the bitwise AND of its <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             operands.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure that contains the results of the bitwise AND operation.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure that contains the results of the bitwise AND operation.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_BitwiseOr">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_BitwiseOr (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_BitwiseOr (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -843,20 +1499,45 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Computes the bitwise OR of its two <see cref="T:System.Data.SqlTypes.SqlInt64" /> operands.</para>
+          <para
+            >Computes the bitwise OR of its two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             operands.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure that contains the results of the bitwise OR operation.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure that contains the results of the bitwise OR operation.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_Division">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Division (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Division (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -873,20 +1554,48 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Divides the first <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameter by the second.</para>
+          <para
+            >Divides the first <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameter by the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> property contains the results of the division operation.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             property contains the results of the division operation.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean op_Equality (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean op_Equality (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -903,20 +1612,63 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters to determine whether they are equal.</para>
+          <para
+            >Performs a logical comparison of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters to determine whether they are equal.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the two instances are equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" /> if the two instances are not equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the two instances are equal or <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+             if the two instances are not equal. If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_ExclusiveOr">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_ExclusiveOr (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_ExclusiveOr (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -937,16 +1689,36 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure that contains the results of the bitwise XOR operation.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure that contains the results of the bitwise XOR operation.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlBoolean x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlBoolean x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -966,7 +1738,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlDecimal x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlDecimal x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -986,7 +1761,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlDouble x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlDouble x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1006,7 +1784,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static long op_Explicit (System.Data.SqlTypes.SqlInt64 x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static long op_Explicit (System.Data.SqlTypes.SqlInt64 x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1026,7 +1807,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlMoney x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlMoney x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1046,7 +1830,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlSingle x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlSingle x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1066,7 +1853,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlString x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Explicit (System.Data.SqlTypes.SqlString x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1086,7 +1876,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_GreaterThan">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean op_GreaterThan (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean op_GreaterThan (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1103,20 +1896,63 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters to determine whether the first is greater than the second.</para>
+          <para
+            >Performs a logical comparison of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters to determine whether the first is greater than the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the first instance is greater than the second instance. Otherwise, <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+            . If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_GreaterThanOrEqual">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean op_GreaterThanOrEqual (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean op_GreaterThanOrEqual (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1133,20 +1969,63 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters to determine whether the first is greater than or equal to the second.</para>
+          <para
+            >Performs a logical comparison of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters to determine whether the first is greater than or equal to the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the first instance is greater than or equal to the second instance. Otherwise, <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+            . If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Implicit (System.Data.SqlTypes.SqlByte x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Implicit (System.Data.SqlTypes.SqlByte x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1166,7 +2045,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Implicit (System.Data.SqlTypes.SqlInt16 x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Implicit (System.Data.SqlTypes.SqlInt16 x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1186,7 +2068,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Implicit (System.Data.SqlTypes.SqlInt32 x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Implicit (System.Data.SqlTypes.SqlInt32 x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1206,7 +2091,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Implicit (long x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Implicit (long x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1226,7 +2114,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean op_Inequality (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean op_Inequality (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1247,16 +2138,54 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" /> if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the two instances are not equal or <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+             if the two instances are equal. If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_LessThan">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean op_LessThan (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean op_LessThan (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1273,20 +2202,63 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a logical comparison on the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters to determine whether the first is less than the second.</para>
+          <para
+            >Performs a logical comparison on the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters to determine whether the first is less than the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the first instance is less than the second instance. Otherwise, <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+            . If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_LessThanOrEqual">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlBoolean op_LessThanOrEqual (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlBoolean op_LessThanOrEqual (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1303,20 +2275,63 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a logical comparison on the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters to determine whether the first is less than or equal to the second.</para>
+          <para
+            >Performs a logical comparison on the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters to determine whether the first is less than or equal to the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlBoolean" /> that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" /> if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />. If either instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlBoolean" /> will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             that is <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+             if the first instance is less than or equal to the second instance. Otherwise, <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+
+            . If either instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             is null, the <see
+             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+             will be <see
+             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            .</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_Modulus">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Modulus (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Modulus (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1333,20 +2348,48 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Computes the remainder after dividing the first <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameter by the second.</para>
+          <para
+            >Computes the remainder after dividing the first <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameter by the second.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> property contains the remainder.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             property contains the remainder.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_Multiply">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Multiply (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Multiply (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1363,20 +2406,51 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Computes the product of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters.</para>
+          <para
+            >Computes the product of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> is equal to the product of the two <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameters.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             is equal to the product of the two <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameters.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_OnesComplement">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_OnesComplement (System.Data.SqlTypes.SqlInt64 x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_OnesComplement (System.Data.SqlTypes.SqlInt64 x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1392,18 +2466,43 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Performs a bitwise one's complement operation on its <see cref="T:System.Data.SqlTypes.SqlInt64" /> operand.</para>
+          <para
+            >Performs a bitwise one's complement operation on its <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             operand.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> is equal to the ones complement of the <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameter.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             is equal to the ones complement of the <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameter.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_Subtraction">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_Subtraction (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_Subtraction (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1420,20 +2519,48 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Subtracts the second <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameter from the first.</para>
+          <para
+            >Subtracts the second <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameter from the first.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> property equals the results of the subtraction operation.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             property equals the results of the subtraction operation.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="op_UnaryNegation">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 op_UnaryNegation (System.Data.SqlTypes.SqlInt64 x);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 op_UnaryNegation (System.Data.SqlTypes.SqlInt64 x);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1449,18 +2576,49 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The unary minus operator negates the <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlInt64" /> operand.</para>
+          <para
+            >The unary minus operator negates the <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             operand.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> is equal to the negated <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> of the <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameter.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             is equal to the negated <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             of the <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameter.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 Parse (string s);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 Parse (string s);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -1472,14 +2630,30 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts the <see cref="T:System.String" /> representation of a number to its 64-bit signed integer equivalent.</para>
+          <para
+            >Converts the <see
+             cref="T:System.String" />
+
+             representation of a number to its 64-bit signed integer equivalent.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A 64-bit signed integer equivalent to the value that is contained in the specified <see cref="T:System.String" />.</para>
+          <para
+            >A 64-bit signed integer equivalent to the value that is contained in the specified <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to be parsed. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to be parsed. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1487,7 +2661,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Subtract">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 Subtract (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 Subtract (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -1500,16 +2677,41 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Subtracts the second <see cref="T:System.Data.SqlTypes.SqlInt64" /> parameter from the first.</para>
+          <para
+            >Subtracts the second <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             parameter from the first.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure whose <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> property equals the results of the subtraction operation.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure whose <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             property equals the results of the subtraction operation.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1517,7 +2719,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.GetSchema">
-      <MemberSignature Language="C#" Value="System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Xml.Schema.XmlSchema IXmlSerializable.GetSchema ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1539,7 +2744,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.ReadXml">
-      <MemberSignature Language="C#" Value="void IXmlSerializable.ReadXml (System.Xml.XmlReader reader);" />
+      <MemberSignature
+        Language="C#"
+        Value="void IXmlSerializable.ReadXml (System.Xml.XmlReader reader);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1557,11 +2765,17 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />XmlReader</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          XmlReader</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Xml.Serialization.IXmlSerializable.WriteXml">
-      <MemberSignature Language="C#" Value="void IXmlSerializable.WriteXml (System.Xml.XmlWriter writer);" />
+      <MemberSignature
+        Language="C#"
+        Value="void IXmlSerializable.WriteXml (System.Xml.XmlWriter writer);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1579,11 +2793,17 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />XmlWriter</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          XmlWriter</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToSqlBoolean">
-      <MemberSignature Language="C#" Value="public System.Data.SqlTypes.SqlBoolean ToSqlBoolean ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.SqlTypes.SqlBoolean ToSqlBoolean ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlBoolean</ReturnType>
@@ -1593,11 +2813,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure to <see cref="T:System.Data.SqlTypes.SqlBoolean" />.</para>
+          <para
+            >Converts this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure to <see
+             cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> is non-zero; false if zero; otherwise Null.</para>
+          <para
+            >true if the <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             is non-zero; false if zero; otherwise Null.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1616,11 +2849,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure to <see cref="T:System.Data.SqlTypes.SqlByte" />.</para>
+          <para
+            >Converts this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure to <see
+             cref="T:System.Data.SqlTypes.SqlByte" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlByte" /> structure whose Value equals the Value of this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlByte" />
+
+             structure whose Value equals the Value of this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure. </para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1629,7 +2878,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ToSqlDecimal">
-      <MemberSignature Language="C#" Value="public System.Data.SqlTypes.SqlDecimal ToSqlDecimal ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.SqlTypes.SqlDecimal ToSqlDecimal ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlDecimal</ReturnType>
@@ -1639,11 +2891,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure to <see cref="T:System.Data.SqlTypes.SqlDecimal" />.</para>
+          <para
+            >Converts this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure to <see
+             cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlDecimal" /> equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+             equal to the value of this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1652,7 +2920,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ToSqlDouble">
-      <MemberSignature Language="C#" Value="public System.Data.SqlTypes.SqlDouble ToSqlDouble ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.SqlTypes.SqlDouble ToSqlDouble ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlDouble</ReturnType>
@@ -1662,11 +2933,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure to <see cref="T:System.Data.SqlTypes.SqlDouble" />.</para>
+          <para
+            >Converts this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure to <see
+             cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlDouble" /> equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlDouble" />
+
+             equal to the value of this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1685,11 +2972,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure to <see cref="T:System.Data.SqlTypes.SqlInt16" />.</para>
+          <para
+            >Converts this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure to <see
+             cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt16" /> equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt16" />
+
+             equal to the value of this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1708,11 +3011,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure to <see cref="T:System.Data.SqlTypes.SqlInt32" />.</para>
+          <para
+            >Converts this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure to <see
+             cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlInt64" /> equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             equal to the value of this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1731,11 +3050,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure to <see cref="T:System.Data.SqlTypes.SqlMoney" />.</para>
+          <para
+            >Converts this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure to <see
+             cref="T:System.Data.SqlTypes.SqlMoney" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlMoney" /> equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlMoney" />
+
+             equal to the value of this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1744,7 +3079,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ToSqlSingle">
-      <MemberSignature Language="C#" Value="public System.Data.SqlTypes.SqlSingle ToSqlSingle ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.SqlTypes.SqlSingle ToSqlSingle ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlSingle</ReturnType>
@@ -1754,11 +3092,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure to <see cref="T:System.Data.SqlTypes.SqlSingle" />.</para>
+          <para
+            >Converts this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure to <see
+             cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Data.SqlTypes.SqlSingle" /> equal to the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
+          <para
+            >A new <see
+             cref="T:System.Data.SqlTypes.SqlSingle" />
+
+             equal to the value of this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1767,7 +3121,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ToSqlString">
-      <MemberSignature Language="C#" Value="public System.Data.SqlTypes.SqlString ToSqlString ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.SqlTypes.SqlString ToSqlString ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlString</ReturnType>
@@ -1777,11 +3134,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure to <see cref="T:System.Data.SqlTypes.SqlString" />.</para>
+          <para
+            >Converts this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure to <see
+             cref="T:System.Data.SqlTypes.SqlString" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlString" /> representing the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlString" />
+
+             representing the value of this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1800,11 +3173,27 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts this instance of <see cref="T:System.Data.SqlTypes.SqlInt64" /> to <see cref="T:System.String" />.</para>
+          <para
+            >Converts this instance of <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             to <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> representing the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" />.</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             representing the value of this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1823,7 +3212,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the value of this <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. This property is read-only.</para>
+          <para
+            >Gets the value of this <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure. This property is read-only.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1832,7 +3226,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Xor">
-      <MemberSignature Language="C#" Value="public static System.Data.SqlTypes.SqlInt64 Xor (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.SqlTypes.SqlInt64 Xor (System.Data.SqlTypes.SqlInt64 x, System.Data.SqlTypes.SqlInt64 y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -1849,12 +3246,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure that contains the results of the bitwise XOR operation.</para>
+          <para
+            >A <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure that contains the results of the bitwise XOR operation.</para
+          >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Data.SqlTypes.SqlInt64" />
+
+           structure. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1862,7 +3276,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Zero">
-      <MemberSignature Language="C#" Value="public static readonly System.Data.SqlTypes.SqlInt64 Zero;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Data.SqlTypes.SqlInt64 Zero;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlTypes.SqlInt64</ReturnType>
@@ -1871,11 +3288,27 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="F:System.Data.SqlTypes.SqlInt64.Zero" /> field is a constant for the <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure.</para>
+          <para
+            >The <see
+             cref="F:System.Data.SqlTypes.SqlInt64.Zero" />
+
+             field is a constant for the <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Represents a zero value that can be assigned to the <see cref="P:System.Data.SqlTypes.SqlInt64.Value" /> property of an instance of the <see cref="T:System.Data.SqlTypes.SqlInt64" /> structure.</para>
+          <para
+            >Represents a zero value that can be assigned to the <see
+             cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+             property of an instance of the <see
+             cref="T:System.Data.SqlTypes.SqlInt64" />
+
+             structure.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

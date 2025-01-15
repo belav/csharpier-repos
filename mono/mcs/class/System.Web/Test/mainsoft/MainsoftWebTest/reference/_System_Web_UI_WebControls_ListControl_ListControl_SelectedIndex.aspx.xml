@@ -46,7 +46,10 @@
       </tr>
     </table>
     <span>
-      <br />2</span>
+      <br />
+
+      2</span
+    >
   </div>
   <div id="GHTSubTest2" style="height:88px;width:56px">
     <table id="RadioButtonList1" border="0">
@@ -64,7 +67,13 @@
       </tr>
       <tr>
         <td>
-          <input id="RadioButtonList1_2" checked="checked" type="radio" name="RadioButtonList1" value="c" />
+          <input
+            id="RadioButtonList1_2"
+            checked="checked"
+            type="radio"
+            name="RadioButtonList1"
+            value="c"
+          />
           <label for="RadioButtonList1_2">c</label>
         </td>
       </tr>
@@ -76,7 +85,13 @@
       </tr>
       <tr>
         <td>
-          <input id="RadioButtonList1_4" checked="checked" type="radio" name="RadioButtonList1" value="e" />
+          <input
+            id="RadioButtonList1_4"
+            checked="checked"
+            type="radio"
+            name="RadioButtonList1"
+            value="e"
+          />
           <label for="RadioButtonList1_4">e</label>
         </td>
       </tr>
@@ -88,139 +103,364 @@
       </tr>
       <tr>
         <td>
-          <input id="RadioButtonList1_6" checked="checked" type="radio" name="RadioButtonList1" value="g" />
+          <input
+            id="RadioButtonList1_6"
+            checked="checked"
+            type="radio"
+            name="RadioButtonList1"
+            value="g"
+          />
           <label for="RadioButtonList1_6">g</label>
         </td>
       </tr>
     </table>
     <span>
-      <br />2</span>
+      <br />
+
+      2</span
+    >
   </div>
   <div id="GHTSubTest3" style="height:88px;width:56px">
     <select multiple="multiple" id="ListBox1" style="height:190px" size="4" name="ListBox1">
-      <option value="a" selected="selected" />a
-		<option value="b" />b
-		<option value="c" />c
-		<option value="d" />d
-		<option value="e" />e
-		<option value="f" />f
-		<option value="g" />g
+      <option value="a" selected="selected" />
 
-	</select>
+      a
+		<option
+       value="b" />
+
+      b
+		<option
+       value="c" />
+
+      c
+		<option
+       value="d" />
+
+      d
+		<option
+       value="e" />
+
+      e
+		<option
+       value="f" />
+
+      f
+		<option
+       value="g" />
+
+      g
+
+	</select
+    >
     <span>
-      <br />2</span>
+      <br />
+
+      2</span
+    >
   </div>
   <div id="GHTSubTest4" testname="None selected">
     <select id="_ctrl0" size="4" name="_ctrl0">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
     <span>
-      <br />-1</span>
+      <br />
+
+      -1</span
+    >
   </div>
   <div id="GHTSubTest5" testname="valid value">
     <select id="_ctrl1" size="4" name="_ctrl1">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" selected="selected" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" selected="selected" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
     <span>
-      <br />5</span>
+      <br />
+
+      5</span
+    >
   </div>
   <div id="GHTSubTest6" testname="Invalid value - above length of items.">
     <select id="_ctrl2" size="4" name="_ctrl2">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest7" testname="Invalid value - below -1.">
     <select id="_ctrl3" size="4" name="_ctrl3">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest8" testname="None selected">
     <select id="_ctrl4" name="_ctrl4">
-      <option value="1aaa" selected="selected" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" selected="selected" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
     <span>
-      <br />0</span>
+      <br />
+
+      0</span
+    >
   </div>
   <div id="GHTSubTest9" testname="valid value">
     <select id="_ctrl5" name="_ctrl5">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" selected="selected" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" selected="selected" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
     <span>
-      <br />5</span>
+      <br />
+
+      5</span
+    >
   </div>
   <div id="GHTSubTest10" testname="Invalid value - above length of items.">
     <select id="_ctrl6" name="_ctrl6">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest11" testname="Invalid value - below -1.">
     <select id="_ctrl7" name="_ctrl7">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest12" testname="None selected">
     <table id="_ctrl8" border="0">
@@ -268,7 +508,10 @@
       </tr>
     </table>
     <span>
-      <br />-1</span>
+      <br />
+
+      -1</span
+    >
   </div>
   <div id="GHTSubTest13" testname="valid value">
     <table id="_ctrl9" border="0">
@@ -316,7 +559,10 @@
       </tr>
     </table>
     <span>
-      <br />5</span>
+      <br />
+
+      5</span
+    >
   </div>
   <div id="GHTSubTest14" testname="Invalid value - above length of items.">
     <table id="_ctrl10" border="0">
@@ -364,7 +610,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest15" testname="Invalid value - below -1.">
     <table id="_ctrl11" border="0">
@@ -412,7 +661,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest16" testname="None selected">
     <table id="_ctrl12" border="0">
@@ -460,7 +712,10 @@
       </tr>
     </table>
     <span>
-      <br />-1</span>
+      <br />
+
+      -1</span
+    >
   </div>
   <div id="GHTSubTest17" testname="valid value">
     <table id="_ctrl13" border="0">
@@ -508,7 +763,10 @@
       </tr>
     </table>
     <span>
-      <br />5</span>
+      <br />
+
+      5</span
+    >
   </div>
   <div id="GHTSubTest18" testname="Invalid value - above length of items.">
     <table id="_ctrl14" border="0">
@@ -556,7 +814,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest19" testname="Invalid value - below -1.">
     <table id="_ctrl15" border="0">
@@ -604,10 +865,19 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
     <span>
-      <br />no exception should be raised</span>
+      <br />
+
+      no exception should be raised</span
+    >
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

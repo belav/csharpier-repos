@@ -1,4 +1,7 @@
-<Type Name="SoapServerFormatterSink+Protocol" FullName="System.Runtime.Remoting.Channels.SoapServerFormatterSink+Protocol">
+<Type
+  Name="SoapServerFormatterSink+Protocol"
+  FullName="System.Runtime.Remoting.Channels.SoapServerFormatterSink+Protocol"
+>
   <TypeSignature Language="C#" Value="public enum SoapServerFormatterSink.Protocol" />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Remoting</AssemblyName>

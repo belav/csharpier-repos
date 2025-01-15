@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="QualifiedAce" FullName="System.Security.AccessControl.QualifiedAce">
-  <TypeSignature Language="C#" Value="public abstract class QualifiedAce : System.Security.AccessControl.KnownAce" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit QualifiedAce extends System.Security.AccessControl.KnownAce" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class QualifiedAce : System.Security.AccessControl.KnownAce"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit QualifiedAce extends System.Security.AccessControl.KnownAce"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,13 +22,33 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents an Access Control Entry (ACE) that contains a qualifier. The qualifier, represented by an <see cref="T:System.Security.AccessControl.AceQualifier" /> object, specifies whether the ACE allows access, denies access, causes system audits, or causes system alarms. The <see cref="T:System.Security.AccessControl.QualifiedAce" /> class is the abstract base class for the <see cref="T:System.Security.AccessControl.CommonAce" /> and <see cref="T:System.Security.AccessControl.ObjectAce" /> classes.</para>
+      <para
+        >Represents an Access Control Entry (ACE) that contains a qualifier. The qualifier, represented by an <see
+         cref="T:System.Security.AccessControl.AceQualifier" />
+
+         object, specifies whether the ACE allows access, denies access, causes system audits, or causes system alarms. The <see
+         cref="T:System.Security.AccessControl.QualifiedAce" />
+
+         class is the abstract base class for the <see
+         cref="T:System.Security.AccessControl.CommonAce" />
+
+         and <see
+         cref="T:System.Security.AccessControl.ObjectAce" />
+
+         classes.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="AceQualifier">
-      <MemberSignature Language="C#" Value="public System.Security.AccessControl.AceQualifier AceQualifier { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.AccessControl.AceQualifier AceQualifier" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.AccessControl.AceQualifier AceQualifier { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.AccessControl.AceQualifier AceQualifier"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -43,7 +69,10 @@
     </Member>
     <Member MemberName="GetOpaque">
       <MemberSignature Language="C#" Value="public byte[] GetOpaque ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] GetOpaque() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance unsigned int8[] GetOpaque() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -61,11 +90,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the opaque callback data associated with this <see cref="T:System.Security.AccessControl.QualifiedAce" /> object. </para>
+          <para
+            >Returns the opaque callback data associated with this <see
+             cref="T:System.Security.AccessControl.QualifiedAce" />
+
+             object. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of byte values that represents the opaque callback data associated with this <see cref="T:System.Security.AccessControl.QualifiedAce" /> object.</para>
+          <para
+            >An array of byte values that represents the opaque callback data associated with this <see
+             cref="T:System.Security.AccessControl.QualifiedAce" />
+
+             object.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -86,7 +125,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies whether this <see cref="T:System.Security.AccessControl.QualifiedAce" /> object contains callback data.</para>
+          <para
+            >Specifies whether this <see
+             cref="T:System.Security.AccessControl.QualifiedAce" />
+
+             object contains callback data.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -107,13 +151,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the length of the opaque callback data associated with this <see cref="T:System.Security.AccessControl.QualifiedAce" /> object. This property is valid only for callback Access Control Entries (ACEs).</para>
+          <para
+            >Gets the length of the opaque callback data associated with this <see
+             cref="T:System.Security.AccessControl.QualifiedAce" />
+
+             object. This property is valid only for callback Access Control Entries (ACEs).</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SetOpaque">
       <MemberSignature Language="C#" Value="public void SetOpaque (byte[] opaque);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetOpaque(unsigned int8[] opaque) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetOpaque(unsigned int8[] opaque) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -133,10 +185,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the opaque callback data associated with this <see cref="T:System.Security.AccessControl.QualifiedAce" /> object.</para>
+          <para
+            >Sets the opaque callback data associated with this <see
+             cref="T:System.Security.AccessControl.QualifiedAce" />
+
+             object.</para
+          >
         </summary>
         <param name="opaque">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of byte values that represents the opaque callback data for this <see cref="T:System.Security.AccessControl.QualifiedAce" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of byte values that represents the opaque callback data for this <see
+           cref="T:System.Security.AccessControl.QualifiedAce" />
+
+           object.</param
+        >
       </Docs>
     </Member>
   </Members>

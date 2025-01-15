@@ -20,7 +20,14 @@
     </table>
   </div>
   <div tabindex="5" id="GHTSubTest2" style="height:40px;width:277px">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" cellpadding="0" rules="all" id="DataGrid2">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      cellpadding="0"
+      rules="all"
+      id="DataGrid2"
+    >
       <tr>
         <td>col a</td>
         <td>col b</td>
@@ -39,7 +46,14 @@
     </table>
   </div>
   <div id="GHTSubTest3" style="height:148px;width:225px">
-    <table border="1" cellspacing="0" style="border-collapse:collapse" cellpadding="2" rules="all" id="DataGrid3">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse"
+      cellpadding="2"
+      rules="all"
+      id="DataGrid3"
+    >
       <tr>
         <td>col a</td>
         <td>col b</td>
@@ -59,7 +73,10 @@
   </div>
   <div tabindex="5" id="GHTSubTest4" style="height:40px;width:215px">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest5" style="width:86px">
     <table id="DataList1" cellspacing="0" border="1" style="border-collapse:collapse" rules="all">
@@ -78,7 +95,14 @@
     </table>
   </div>
   <div id="GHTSubTest6" style="width:86px">
-    <table id="DataList2" cellspacing="0" border="1" style="border-collapse:collapse" cellpadding="0" rules="all">
+    <table
+      id="DataList2"
+      cellspacing="0"
+      border="1"
+      style="border-collapse:collapse"
+      cellpadding="0"
+      rules="all"
+    >
       <tr>
         <td>
           <td>row 1</td>
@@ -94,7 +118,15 @@
     </table>
   </div>
   <div id="GHTSubTest7" style="width:103px">
-    <table id="DataList3" cellspacing="0" border="1" style="border-collapse:collapse" cellpadding="2" rules="all" designtimedragdrop="258">
+    <table
+      id="DataList3"
+      cellspacing="0"
+      border="1"
+      style="border-collapse:collapse"
+      cellpadding="2"
+      rules="all"
+      designtimedragdrop="258"
+    >
       <tr>
         <td>
           <td>row 1</td>
@@ -111,6 +143,9 @@
   </div>
   <div id="GHTSubTest8" style="width:93px">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

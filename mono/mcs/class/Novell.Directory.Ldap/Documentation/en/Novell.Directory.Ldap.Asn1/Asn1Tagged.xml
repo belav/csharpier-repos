@@ -1,10 +1,12 @@
 <Type Name="Asn1Tagged" FullName="Novell.Directory.Ldap.Asn1.Asn1Tagged">
-  <TypeSignature Language="C#" Value="public class Asn1Tagged : Novell.Directory.Ldap.Asn1.Asn1Object, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class Asn1Tagged : Novell.Directory.Ldap.Asn1.Asn1Object, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -56,7 +58,10 @@
   </Attributes>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Asn1Tagged(Novell.Directory.Ldap.Asn1.Asn1Identifier identifier, Novell.Directory.Ldap.Asn1.Asn1Object object_Renamed)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Asn1Tagged(Novell.Directory.Ldap.Asn1.Asn1Identifier identifier, Novell.Directory.Ldap.Asn1.Asn1Object object_Renamed)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="identifier" Type="Novell.Directory.Ldap.Asn1.Asn1Identifier" />
@@ -70,7 +75,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Asn1Tagged(Novell.Directory.Ldap.Asn1.Asn1Identifier identifier, Novell.Directory.Ldap.Asn1.Asn1Object object_Renamed, bool explicit_Renamed)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Asn1Tagged(Novell.Directory.Ldap.Asn1.Asn1Identifier identifier, Novell.Directory.Ldap.Asn1.Asn1Object object_Renamed, bool explicit_Renamed)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="identifier" Type="Novell.Directory.Ldap.Asn1.Asn1Identifier" />
@@ -86,7 +94,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Asn1Tagged(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len, Novell.Directory.Ldap.Asn1.Asn1Identifier identifier)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Asn1Tagged(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len, Novell.Directory.Ldap.Asn1.Asn1Identifier identifier)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>
@@ -109,7 +120,10 @@
       </Docs>
     </Member>
     <Member MemberName="taggedValue">
-      <MemberSignature Language="C#" Value="public Novell.Directory.Ldap.Asn1.Asn1Object taggedValue()" />
+      <MemberSignature
+        Language="C#"
+        Value="public Novell.Directory.Ldap.Asn1.Asn1Object taggedValue()"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1Object</ReturnType>
@@ -122,7 +136,10 @@
       </Docs>
     </Member>
     <Member MemberName="TaggedValue">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Asn1.Asn1Object TaggedValue { set; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Asn1.Asn1Object TaggedValue { set; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>

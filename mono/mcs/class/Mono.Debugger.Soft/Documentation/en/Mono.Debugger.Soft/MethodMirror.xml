@@ -1,6 +1,9 @@
 <Type Name="MethodMirror" FullName="Mono.Debugger.Soft.MethodMirror">
   <TypeSignature Language="C#" Value="public class MethodMirror : Mono.Debugger.Soft.Mirror" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit MethodMirror extends Mono.Debugger.Soft.Mirror" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit MethodMirror extends Mono.Debugger.Soft.Mirror"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Debugger.Soft</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -11,13 +14,18 @@
   <Interfaces />
   <Docs>
     <summary>Represents a MethodInfo in the debuggee.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public System.Reflection.MethodAttributes Attributes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Reflection.MethodAttributes Attributes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.MethodAttributes Attributes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Reflection.MethodAttributes Attributes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -32,8 +40,14 @@
       </Docs>
     </Member>
     <Member MemberName="DeclaringType">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.TypeMirror DeclaringType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.TypeMirror DeclaringType" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.TypeMirror DeclaringType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.TypeMirror DeclaringType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -64,8 +78,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetLocal">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.LocalVariable GetLocal (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.LocalVariable GetLocal(string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.LocalVariable GetLocal (string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.LocalVariable GetLocal(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -84,8 +104,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetLocals">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.LocalVariable[] GetLocals ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.LocalVariable[] GetLocals() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.LocalVariable[] GetLocals ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.LocalVariable[] GetLocals() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -101,8 +127,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetMethodBody">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.MethodBodyMirror GetMethodBody ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.MethodBodyMirror GetMethodBody() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.MethodBodyMirror GetMethodBody ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.MethodBodyMirror GetMethodBody() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -118,8 +150,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetParameters">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.ParameterInfoMirror[] GetParameters ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.ParameterInfoMirror[] GetParameters() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.ParameterInfoMirror[] GetParameters ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.ParameterInfoMirror[] GetParameters() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -135,8 +173,14 @@
       </Docs>
     </Member>
     <Member MemberName="ILOffsets">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;int&gt; ILOffsets { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;int32&gt; ILOffsets" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IList<int> ILOffsets { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IList`1<int32> ILOffsets"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -359,8 +403,14 @@
       </Docs>
     </Member>
     <Member MemberName="LineNumbers">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;int&gt; LineNumbers { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;int32&gt; LineNumbers" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IList<int> LineNumbers { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IList`1<int32> LineNumbers"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -375,8 +425,14 @@
       </Docs>
     </Member>
     <Member MemberName="LocationAtILOffset">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.Location LocationAtILOffset (int il_offset);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Debugger.Soft.Location LocationAtILOffset(int32 il_offset) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.Location LocationAtILOffset (int il_offset);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Debugger.Soft.Location LocationAtILOffset(int32 il_offset) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -395,8 +451,14 @@
       </Docs>
     </Member>
     <Member MemberName="Locations">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;Mono.Debugger.Soft.Location&gt; Locations { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;class Mono.Debugger.Soft.Location&gt; Locations" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IList<Mono.Debugger.Soft.Location> Locations { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IList`1<class Mono.Debugger.Soft.Location> Locations"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -412,7 +474,10 @@
     </Member>
     <Member MemberName="Metadata">
       <MemberSignature Language="C#" Value="public Mono.Cecil.MethodDefinition Metadata { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Cecil.MethodDefinition Metadata" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Cecil.MethodDefinition Metadata"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -459,8 +524,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReturnParameter">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.ParameterInfoMirror ReturnParameter { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.ParameterInfoMirror ReturnParameter" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.ParameterInfoMirror ReturnParameter { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.ParameterInfoMirror ReturnParameter"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -475,8 +546,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReturnType">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.TypeMirror ReturnType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.TypeMirror ReturnType" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.TypeMirror ReturnType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.TypeMirror ReturnType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

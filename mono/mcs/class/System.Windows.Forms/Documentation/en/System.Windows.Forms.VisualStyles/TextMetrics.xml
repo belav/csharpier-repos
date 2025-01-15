@@ -13,7 +13,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.VisualStyles.TextMetrics" /> structure specifies the return values of the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetTextMetrics(System.Drawing.IDeviceContext)" /> method.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.VisualStyles.TextMetrics" />
+
+         structure specifies the return values of the <see
+         cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetTextMetrics(System.Drawing.IDeviceContext)" />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -85,7 +93,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CharSet">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.VisualStyles.TextMetricsCharacterSet CharSet { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.VisualStyles.TextMetricsCharacterSet CharSet { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.TextMetricsCharacterSet</ReturnType>
@@ -234,7 +245,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The height of a character is equal to the <see cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Ascent" /> plus the <see cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Descent" />.</para>
+          <para
+            >The height of a character is equal to the <see
+             cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Ascent" />
+
+             plus the <see
+             cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Descent" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -260,7 +279,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the amount of leading inside the bounds set by the <see cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Height" /> property. </para>
+          <para
+            >Gets or sets the amount of leading inside the bounds set by the <see
+             cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Height" />
+
+             property. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -344,7 +368,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PitchAndFamily">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.VisualStyles.TextMetricsPitchAndFamilyValues PitchAndFamily { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.VisualStyles.TextMetricsPitchAndFamilyValues PitchAndFamily { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.TextMetricsPitchAndFamilyValues</ReturnType>

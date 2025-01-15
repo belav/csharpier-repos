@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ApplicationId" FullName="System.ApplicationId">
   <TypeSignature Language="C#" Value="public sealed class ApplicationId" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit ApplicationId extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit ApplicationId extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,9 +23,22 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An application identity consists of the publisher's public key, the application name, the target processor architecture, the application culture, and the application version. The application identity properties values correspond to information contained in the application manifest. For more information about the application manifest, see <format type="text/html"><a href="29570cec-4e53-4660-a850-abc4fa150243">ClickOnce Application Manifest</a></format>.</para>
+      <para
+        >An application identity consists of the publisher's public key, the application name, the target processor architecture, the application culture, and the application version. The application identity properties values correspond to information contained in the application manifest. For more information about the application manifest, see <format
+         type="text/html">
+          <a href="29570cec-4e53-4660-a850-abc4fa150243">ClickOnce Application Manifest</a>
+        </format>
+
+        .</para
+      >
       <para>
-        <see cref="T:System.ApplicationId" /> is used by the <see cref="T:System.Security.Policy.ApplicationSecurityInfo" /> class to identify a manifest-based application. </para>
+        <see cref="T:System.ApplicationId" />
+
+         is used by the <see
+         cref="T:System.Security.Policy.ApplicationSecurityInfo" />
+
+         class to identify a manifest-based application. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -31,8 +47,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ApplicationId (byte[] publicKeyToken, string name, Version version, string processorArchitecture, string culture);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] publicKeyToken, string name, class System.Version version, string processorArchitecture, string culture) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ApplicationId (byte[] publicKeyToken, string name, Version version, string processorArchitecture, string culture);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] publicKeyToken, string name, class System.Version version, string processorArchitecture, string culture) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -49,27 +71,73 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The constructor initializes the <see cref="P:System.ApplicationId.Culture" />, <see cref="P:System.ApplicationId.Name" />, <see cref="P:System.ApplicationId.ProcessorArchitecture" />, <see cref="P:System.ApplicationId.PublicKeyToken" />, and <see cref="P:System.ApplicationId.Version" /> properties of the <see cref="T:System.ApplicationId" />.</para>
+          <para
+            >The constructor initializes the <see
+             cref="P:System.ApplicationId.Culture" />
+
+            , <see
+             cref="P:System.ApplicationId.Name" />
+
+            , <see
+             cref="P:System.ApplicationId.ProcessorArchitecture" />
+
+            , <see
+             cref="P:System.ApplicationId.PublicKeyToken" />
+
+            , and <see
+             cref="P:System.ApplicationId.Version" />
+
+             properties of the <see
+             cref="T:System.ApplicationId" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ApplicationId" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ApplicationId" />
+
+             class.</para
+          >
         </summary>
         <param name="publicKeyToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array of bytes representing the raw public key data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The array of bytes representing the raw public key data. </param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the application. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the application. </param
+        >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Version" /> object that specifies the version of the application. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Version" />
+
+           object that specifies the version of the application. </param
+        >
         <param name="processorArchitecture">
-          <attribution license="cc4" from="Microsoft" modified="false" />The processor architecture of the application. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The processor architecture of the application. </param
+        >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />The culture of the application. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The culture of the application. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Copy">
       <MemberSignature Language="C#" Value="public ApplicationId Copy ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ApplicationId Copy() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ApplicationId Copy() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -83,7 +151,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The copy returned by this method is equal to the original as substantiated by the <see cref="M:System.ApplicationId.Equals(System.Object)" /> method. The hash codes for the original and the copy are also equal.</para>
+          <para
+            >The copy returned by this method is equal to the original as substantiated by the <see
+             cref="M:System.ApplicationId.Equals(System.Object)" />
+
+             method. The hash codes for the original and the copy are also equal.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -91,7 +164,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.ApplicationId" /> object that represents an exact copy of the original.</para>
+          <para
+            >An <see
+             cref="T:System.ApplicationId" />
+
+             object that represents an exact copy of the original.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -111,8 +189,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.ApplicationId.Culture" /> value can include language information, for example, "en-US".</para>
-          <para>For information about culture values, see <see cref="T:System.Globalization.CultureInfo" />.</para>
+          <para
+            >The <see
+             cref="P:System.ApplicationId.Culture" />
+
+             value can include language information, for example, "en-US".</para
+          >
+          <para
+            >For information about culture values, see <see
+             cref="T:System.Globalization.CultureInfo" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -122,7 +210,10 @@
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object o);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object o) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object o) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -138,23 +229,56 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method overrides the <see cref="M:System.Object.Equals(System.Object)" /> method.</para>
+          <para
+            >This method overrides the <see
+             cref="M:System.Object.Equals(System.Object)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether the specified <see cref="T:System.ApplicationId" /> object is equivalent to the current <see cref="T:System.ApplicationId" />.</para>
+          <para
+            >Determines whether the specified <see
+             cref="T:System.ApplicationId" />
+
+             object is equivalent to the current <see
+             cref="T:System.ApplicationId" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the specified <see cref="T:System.ApplicationId" /> object is equivalent to the current <see cref="T:System.ApplicationId" />; otherwise, false.</para>
+          <para
+            >true if the specified <see
+             cref="T:System.ApplicationId" />
+
+             object is equivalent to the current <see
+             cref="T:System.ApplicationId" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ApplicationId" /> object to compare to the current <see cref="T:System.ApplicationId" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ApplicationId" />
+
+           object to compare to the current <see
+           cref="T:System.ApplicationId" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -168,7 +292,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method generates the same hash code for two objects that have the same values for their <see cref="P:System.ApplicationId.Name" /> and <see cref="P:System.ApplicationId.Version" /> properties.</para>
+          <para
+            >This method generates the same hash code for two objects that have the same values for their <see
+             cref="P:System.ApplicationId.Name" />
+
+             and <see
+             cref="P:System.ApplicationId.Version" />
+
+             properties.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -197,7 +329,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.ApplicationId.Name" /> is the simple, unencrypted name of the application.</para>
+            <see cref="P:System.ApplicationId.Name" />
+
+             is the simple, unencrypted name of the application.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -246,7 +381,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The public key token is represented by the last 8 bytes of the SHA-1 hash of the public key under which the application is signed.</para>
-          <para>For more information, see <see cref="M:System.Reflection.AssemblyName.GetPublicKeyToken" />.</para>
+          <para
+            >For more information, see <see
+             cref="M:System.Reflection.AssemblyName.GetPublicKeyToken" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -256,7 +396,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -270,7 +413,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method overrides the <see cref="M:System.Object.ToString" /> method.</para>
+          <para
+            >This method overrides the <see
+             cref="M:System.Object.ToString" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -298,7 +446,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information, see <see cref="T:System.Version" />.</para>
+          <para
+            >For more information, see <see
+             cref="T:System.Version" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

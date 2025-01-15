@@ -19,7 +19,10 @@
   </Docs>
   <Members>
     <Member MemberName="GetDotNetFrameworkRootRegistryKey">
-      <MemberSignature Language="C#" Value="public static string GetDotNetFrameworkRootRegistryKey (Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetDotNetFrameworkRootRegistryKey (Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -39,14 +42,20 @@
           <para>A string containing the full name of the dnprdnshort root registry key.</para>
         </returns>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version of the dnprdnshort to target.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version of the dnprdnshort to target.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetDotNetFrameworkSdkInstallKeyValue">
-      <MemberSignature Language="C#" Value="public static string GetDotNetFrameworkSdkInstallKeyValue (Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetDotNetFrameworkSdkInstallKeyValue (Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -59,21 +68,37 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the name of the value under the <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetDotNetFrameworkRootRegistryKey(Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" /> that contains the dnprdnshort SDK installation path.</para>
+          <para
+            >Gets the name of the value under the <see
+             cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetDotNetFrameworkRootRegistryKey(Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" />
+
+             that contains the dnprdnshort SDK installation path.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a string containing the name of the registry key value under the <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetDotNetFrameworkRootRegistryKey(Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" /> that contains the dnprdnshort SDK installation path.</para>
+          <para
+            >Returns a string containing the name of the registry key value under the <see
+             cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetDotNetFrameworkRootRegistryKey(Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" />
+
+             that contains the dnprdnshort SDK installation path.</para
+          >
         </returns>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version of the dnprdnshort to target.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version of the dnprdnshort to target.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetDotNetFrameworkVersionFolderPrefix">
-      <MemberSignature Language="C#" Value="public static string GetDotNetFrameworkVersionFolderPrefix (Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetDotNetFrameworkVersionFolderPrefix (Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -96,14 +121,20 @@
           <para>Returns the prefix of the dnprdnshort folder.</para>
         </returns>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version of the dnprdnshort to target.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version of the dnprdnshort to target.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetPathToDotNetFramework">
-      <MemberSignature Language="C#" Value="public static string GetPathToDotNetFramework (Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetPathToDotNetFramework (Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -123,14 +154,20 @@
           <para>A string containing the fully qualified path to the dnprdnshort root directory, or a null reference (Nothing in vbprvb) if the targeted version of the dnprdnshort is not installed.</para>
         </returns>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version of the dnprdnshort to target.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version of the dnprdnshort to target.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetPathToDotNetFrameworkFile">
-      <MemberSignature Language="C#" Value="public static string GetPathToDotNetFrameworkFile (string fileName, Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetPathToDotNetFrameworkFile (string fileName, Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -151,16 +188,25 @@
           <para>A string containing the fully qualified path to the specified file, or a null reference (Nothing in vbprvb) if the targeted version of the dnprdnshort is not installed.</para>
         </returns>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file to locate in the dnprdnshort directory.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file to locate in the dnprdnshort directory.</param
+        >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version of the dnprdnshort to target.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version of the dnprdnshort to target.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetPathToDotNetFrameworkSdk">
-      <MemberSignature Language="C#" Value="public static string GetPathToDotNetFrameworkSdk (Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetPathToDotNetFrameworkSdk (Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -180,14 +226,20 @@
           <para>A string containing the fully qualified path to the \bin directory of the dnprdnshort SDK, or a null reference (Nothing in vbprvb) if the targeted version of the dnprdnshort SDK is not installed.</para>
         </returns>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version of the dnprdnshort to target.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version of the dnprdnshort to target.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetPathToDotNetFrameworkSdkFile">
-      <MemberSignature Language="C#" Value="public static string GetPathToDotNetFrameworkSdkFile (string fileName, Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetPathToDotNetFrameworkSdkFile (string fileName, Microsoft.Build.Utilities.TargetDotNetFrameworkVersion version);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -201,7 +253,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The path for the SDK takes in consideration the processor architecture environment information for the calling process, so it might end up being ".../bin/i64", for example.</para>
-          <para>Unlike <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetPathToDotNetFrameworkFile(System.String,Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" /> and <see cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetPathToSystemFile(System.String)" /> this method checks for the existence of the file, so that an invalid <paramref name="fileName" /> returns null.</para>
+          <para
+            >Unlike <see
+             cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetPathToDotNetFrameworkFile(System.String,Microsoft.Build.Utilities.TargetDotNetFrameworkVersion)" />
+
+             and <see
+             cref="M:Microsoft.Build.Utilities.ToolLocationHelper.GetPathToSystemFile(System.String)" />
+
+             this method checks for the existence of the file, so that an invalid <paramref
+             name="fileName" />
+
+             returns null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -212,16 +275,25 @@
           <para>A string containing the fully qualified path to the \bin directory of the dnprdnshort SDK, or a null reference (Nothing in vbprvb) if the targeted version of the dnprdnshort SDK is not installed.</para>
         </returns>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file to locate in the dnprdnshort SDK.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file to locate in the dnprdnshort SDK.</param
+        >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version of the dnprdnshort to target.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version of the dnprdnshort to target.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetPathToSystemFile">
-      <MemberSignature Language="C#" Value="public static string GetPathToSystemFile (string fileName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetPathToSystemFile (string fileName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -244,7 +316,10 @@
           <para>A string containing the fully qualified path to the the file in the system directory.</para>
         </returns>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file to locate in the System folder.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file to locate in the System folder.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -1,10 +1,12 @@
 <Type Name="RfcReferral" FullName="Novell.Directory.Ldap.Rfc2251.RfcReferral">
-  <TypeSignature Language="C#" Value="public class RfcReferral : Novell.Directory.Ldap.Asn1.Asn1SequenceOf, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class RfcReferral : Novell.Directory.Ldap.Asn1.Asn1SequenceOf, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +53,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcReferral(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcReferral(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>

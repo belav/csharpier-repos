@@ -19,7 +19,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqlNotificationEventArgs (System.Data.SqlClient.SqlNotificationType type, System.Data.SqlClient.SqlNotificationInfo info, System.Data.SqlClient.SqlNotificationSource source);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqlNotificationEventArgs (System.Data.SqlClient.SqlNotificationType type, System.Data.SqlClient.SqlNotificationInfo info, System.Data.SqlClient.SqlNotificationSource source);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="type" Type="System.Data.SqlClient.SqlNotificationType" />
@@ -31,24 +34,41 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Data.SqlClient.SqlNotificationEventArgs" /> object. </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
+
+             object. </para
+          >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Data.SqlClient.SqlNotificationType" /> value that indicates whether this notification is generated because of an actual change, or by the subscription. </param>
+          <see cref="T:System.Data.SqlClient.SqlNotificationType" />
+
+           value that indicates whether this notification is generated because of an actual change, or by the subscription. </param
+        >
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Data.SqlClient.SqlNotificationInfo" /> value that indicates the reason for the notification event. This may occur because the data in the store actually changed, or the notification became invalid (for example, it timed out). </param>
+          <see cref="T:System.Data.SqlClient.SqlNotificationInfo" />
+
+           value that indicates the reason for the notification event. This may occur because the data in the store actually changed, or the notification became invalid (for example, it timed out). </param
+        >
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Data.SqlClient.SqlNotificationSource" /> value that indicates the source that generated the notification. </param>
+          <see cref="T:System.Data.SqlClient.SqlNotificationSource" />
+
+           value that indicates the source that generated the notification. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Info">
-      <MemberSignature Language="C#" Value="public System.Data.SqlClient.SqlNotificationInfo Info { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.SqlClient.SqlNotificationInfo Info { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlClient.SqlNotificationInfo</ReturnType>
@@ -70,7 +90,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Source">
-      <MemberSignature Language="C#" Value="public System.Data.SqlClient.SqlNotificationSource Source { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.SqlClient.SqlNotificationSource Source { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlClient.SqlNotificationSource</ReturnType>
@@ -89,7 +112,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Type">
-      <MemberSignature Language="C#" Value="public System.Data.SqlClient.SqlNotificationType Type { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.SqlClient.SqlNotificationType Type { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.SqlClient.SqlNotificationType</ReturnType>

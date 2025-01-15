@@ -3,17 +3,41 @@
   <Docs>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="N:System.ComponentModel.Design" /> namespace contains classes that developers can use to build custom design-time behavior for components and user interfaces for configuring components at design time. The design time environment provides systems that enable developers to arrange components and configure their properties. Some components may require specific design-time only behavior to function properly in a design time environment. It may also be valuable to provide custom user interfaces which assist developers in configuring components or the values of complex data types. The classes and interfaces defined within this namespace can be used to build design-time behavior for components, access design-time services, and implement customized design-time configuration interfaces.</para>
+      <para
+        >The <see
+         cref="N:System.ComponentModel.Design" />
+
+         namespace contains classes that developers can use to build custom design-time behavior for components and user interfaces for configuring components at design time. The design time environment provides systems that enable developers to arrange components and configure their properties. Some components may require specific design-time only behavior to function properly in a design time environment. It may also be valuable to provide custom user interfaces which assist developers in configuring components or the values of complex data types. The classes and interfaces defined within this namespace can be used to build design-time behavior for components, access design-time services, and implement customized design-time configuration interfaces.</para
+      >
     </summary>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The classes in this namespace include: </para>
       <list type="bullet">
         <item>
-          <para>A basic <see cref="T:System.ComponentModel.Design.IDesigner" /> interface that you can use to customize design-time behavior for specific types of components.</para>
+          <para
+            >A basic <see
+             cref="T:System.ComponentModel.Design.IDesigner" />
+
+             interface that you can use to customize design-time behavior for specific types of components.</para
+          >
         </item>
         <item>
-          <para>A <see cref="T:System.ComponentModel.Design.ComponentDesigner" /> class that provides a more sophisticated designer base class which implements the <see cref="T:System.ComponentModel.Design.IDesigner" />, <see cref="T:System.IDisposable" />, and <see cref="T:System.ComponentModel.Design.IDesignerFilter" /> interfaces.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+             class that provides a more sophisticated designer base class which implements the <see
+             cref="T:System.ComponentModel.Design.IDesigner" />
+
+            , <see
+             cref="T:System.IDisposable" />
+
+            , and <see
+             cref="T:System.ComponentModel.Design.IDesignerFilter" />
+
+             interfaces.</para
+          >
         </item>
         <item>
           <para>Designer interfaces and services that enable a designer to support additional functionality, including:</para>
@@ -116,10 +140,26 @@
           </list>
         </item>
         <item>
-          <para>Classes that can be used to customize design-time license context management and serialization: <see cref="T:System.ComponentModel.Design.DesigntimeLicenseContext" /> and <see cref="T:System.ComponentModel.Design.DesigntimeLicenseContextSerializer" />.</para>
+          <para
+            >Classes that can be used to customize design-time license context management and serialization: <see
+             cref="T:System.ComponentModel.Design.DesigntimeLicenseContext" />
+
+             and <see
+             cref="T:System.ComponentModel.Design.DesigntimeLicenseContextSerializer" />
+
+            .</para
+          >
         </item>
         <item>
-          <para>Simple collection editors that can be extended: <see cref="T:System.ComponentModel.Design.ArrayEditor" /> and <see cref="T:System.ComponentModel.Design.CollectionEditor" />.</para>
+          <para
+            >Simple collection editors that can be extended: <see
+             cref="T:System.ComponentModel.Design.ArrayEditor" />
+
+             and <see
+             cref="T:System.ComponentModel.Design.CollectionEditor" />
+
+            .</para
+          >
         </item>
       </list>
     </remarks>

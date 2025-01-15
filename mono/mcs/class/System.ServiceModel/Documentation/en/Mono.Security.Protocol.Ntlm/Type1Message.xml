@@ -1,6 +1,12 @@
 <Type Name="Type1Message" FullName="Mono.Security.Protocol.Ntlm.Type1Message">
-  <TypeSignature Language="C#" Value="public class Type1Message : Mono.Security.Protocol.Ntlm.MessageBase" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Type1Message extends Mono.Security.Protocol.Ntlm.MessageBase" />
+  <TypeSignature
+    Language="C#"
+    Value="public class Type1Message : Mono.Security.Protocol.Ntlm.MessageBase"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit Type1Message extends Mono.Security.Protocol.Ntlm.MessageBase"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,7 +22,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Type1Message ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -28,8 +37,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Type1Message (Mono.Security.Protocol.Ntlm.NtlmVersion version);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype Mono.Security.Protocol.Ntlm.NtlmVersion version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Type1Message (Mono.Security.Protocol.Ntlm.NtlmVersion version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype Mono.Security.Protocol.Ntlm.NtlmVersion version) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -45,7 +60,10 @@
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public Type1Message (byte[] message);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] message) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] message) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -60,8 +78,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Type1Message (byte[] message, Mono.Security.Protocol.Ntlm.NtlmVersion version);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] message, valuetype Mono.Security.Protocol.Ntlm.NtlmVersion version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Type1Message (byte[] message, Mono.Security.Protocol.Ntlm.NtlmVersion version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8[] message, valuetype Mono.Security.Protocol.Ntlm.NtlmVersion version) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -79,7 +103,10 @@
     </Member>
     <Member MemberName="Decode">
       <MemberSignature Language="C#" Value="protected override void Decode (byte[] message);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Decode(unsigned int8[] message) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void Decode(unsigned int8[] message) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -114,7 +141,10 @@
     </Member>
     <Member MemberName="GetBytes">
       <MemberSignature Language="C#" Value="public override byte[] GetBytes ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance unsigned int8[] GetBytes() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance unsigned int8[] GetBytes() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

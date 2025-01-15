@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HostProtectionAttribute" FullName="System.Security.Permissions.HostProtectionAttribute">
-  <TypeSignature Language="C#" Value="public sealed class HostProtectionAttribute : System.Security.Permissions.CodeAccessSecurityAttribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit HostProtectionAttribute extends System.Security.Permissions.CodeAccessSecurityAttribute" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class HostProtectionAttribute : System.Security.Permissions.CodeAccessSecurityAttribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit HostProtectionAttribute extends System.Security.Permissions.CodeAccessSecurityAttribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -25,7 +31,12 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This attribute affects only unmanaged applications that host the common language runtime and implement host protection, such as SQL Server. If the code is run in a client application or on a server that is not host-protected, the attribute "evaporates"; it is not detected and therefore not applied. When applied, the security action results in the creation of a link demand based on the host resources the class or method exposes. </para>
       <block subset="none" type="note">
-        <para>The purpose of this attribute is to enforce host-specific programming model guidelines, not security behavior.  Although a link demand is used to check for conformance to programming model requirements, the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> is not a security permission.</para>
+        <para
+          >The purpose of this attribute is to enforce host-specific programming model guidelines, not security behavior.  Although a link demand is used to check for conformance to programming model requirements, the <see
+           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+           is not a security permission.</para
+        >
       </block>
       <para>If the host does not have programming model requirements, the link demands do not occur.</para>
       <para>This attribute identifies the following: </para>
@@ -41,10 +52,28 @@
         </item>
       </list>
       <block subset="none" type="note">
-        <para>If you are creating a class library that is to be called by applications that may execute in a host protected environment, you should apply this attribute to members that expose <see cref="T:System.Security.Permissions.HostProtectionResource" /> resource categories. The .NET Framework class library members with this attribute cause only the immediate caller to be checked.  Your library member must also cause a check of its immediate caller in the same manner. </para>
+        <para
+          >If you are creating a class library that is to be called by applications that may execute in a host protected environment, you should apply this attribute to members that expose <see
+           cref="T:System.Security.Permissions.HostProtectionResource" />
+
+           resource categories. The .NET Framework class library members with this attribute cause only the immediate caller to be checked.  Your library member must also cause a check of its immediate caller in the same manner. </para
+        >
       </block>
       <block subset="none" type="note">
-        <para>Do not use the <format type="text/html"><a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Native Image Generator (Ngen.exe)</a></format> to create a native image of assemblies that are protected by the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />. In a full-trust environment, the image is always loaded, without regard to the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />, and in a partial-trust environment the image is not loaded. </para>
+        <para
+          >Do not use the <format
+           type="text/html">
+            <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Native Image Generator (Ngen.exe)</a>
+          </format>
+
+           to create a native image of assemblies that are protected by the <see
+           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+          . In a full-trust environment, the image is always loaded, without regard to the <see
+           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+          , and in a partial-trust environment the image is not loaded. </para
+        >
         <para />
       </block>
     </remarks>
@@ -56,7 +85,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public HostProtectionAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -67,17 +99,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates a <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> with all Boolean properties set to false.</para>
+          <para
+            >This constructor creates a <see
+             cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+             with all Boolean properties set to false.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class with default values.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+             class with default values.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HostProtectionAttribute (System.Security.Permissions.SecurityAction action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.SecurityAction action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public HostProtectionAttribute (System.Security.Permissions.SecurityAction action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Permissions.SecurityAction action) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -94,15 +142,35 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class with the specified <see cref="T:System.Security.Permissions.SecurityAction" /> value.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+             class with the specified <see
+             cref="T:System.Security.Permissions.SecurityAction" />
+
+             value.</para
+          >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.Permissions.SecurityAction" />
+
+           values. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreatePermission">
-      <MemberSignature Language="C#" Value="public override System.Security.IPermission CreatePermission ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.IPermission CreatePermission() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.IPermission CreatePermission ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.IPermission CreatePermission() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -125,7 +193,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Security.IPermission" /> that corresponds to the current attribute.</para>
+          <para
+            >An <see
+             cref="T:System.Security.IPermission" />
+
+             that corresponds to the current attribute.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -202,8 +275,14 @@
       </Docs>
     </Member>
     <Member MemberName="Resources">
-      <MemberSignature Language="C#" Value="public System.Security.Permissions.HostProtectionResource Resources { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Permissions.HostProtectionResource Resources" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Permissions.HostProtectionResource Resources { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Permissions.HostProtectionResource Resources"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -217,7 +296,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Security.Permissions.HostProtectionResource" /> flags specify the resources exposed by the method or class that are potentially harmful to the host.</para>
+          <para
+            >The <see
+             cref="T:System.Security.Permissions.HostProtectionResource" />
+
+             flags specify the resources exposed by the method or class that are potentially harmful to the host.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -246,7 +330,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The use of a <see cref="T:System.Security.Principal.WindowsIdentity" /> object to impersonate a user is an example of exposing the security infrastructure.</para>
+          <para
+            >The use of a <see
+             cref="T:System.Security.Principal.WindowsIdentity" />
+
+             object to impersonate a user is an example of exposing the security infrastructure.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -318,7 +407,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When <see cref="P:System.Security.Permissions.HostProtectionAttribute.SharedState" /> is true, it indicates that a state is exposed that might be shared between threads.</para>
+          <para
+            >When <see
+             cref="P:System.Security.Permissions.HostProtectionAttribute.SharedState" />
+
+             is true, it indicates that a state is exposed that might be shared between threads.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

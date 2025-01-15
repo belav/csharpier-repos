@@ -1,4 +1,7 @@
-<Type Name="RelaxngInference+InferenceOption" FullName="Commons.Xml.Relaxng.Inference.RelaxngInference+InferenceOption">
+<Type
+  Name="RelaxngInference+InferenceOption"
+  FullName="Commons.Xml.Relaxng.Inference.RelaxngInference+InferenceOption"
+>
   <TypeSignature Language="C#" Value="public enum InferenceOption" />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>

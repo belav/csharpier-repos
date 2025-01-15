@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project
+  DefaultTargets="Build"
+  ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
   <PropertyGroup>
     <ExcludeFromWindowsBuild>true</ExcludeFromWindowsBuild>
   </PropertyGroup>
@@ -64,7 +68,10 @@
     <ClCompile Include="$(MonoSourceLocation)\mono\metadata\loaded-images-global.c" />
     <ClCompile Include="$(MonoSourceLocation)\mono\metadata\loader.c" />
     <ClInclude Include="$(MonoSourceLocation)\mono\metadata\loader-internals.h" />
-    <ClCompile Include="$(MonoSourceLocation)\mono\culture\locales.c" Condition="Exists('$(MonoSourceLocation)\mono\culture\locales.c')" />
+    <ClCompile
+      Include="$(MonoSourceLocation)\mono\culture\locales.c"
+      Condition="Exists('$(MonoSourceLocation)\mono\culture\locales.c')"
+    />
     <ClInclude Include="$(MonoSourceLocation)\mono\metadata\locales.h" />
     <ClCompile Include="$(MonoSourceLocation)\mono\metadata\lock-tracer.c" />
     <ClInclude Include="$(MonoSourceLocation)\mono\metadata\lock-tracer.h" />

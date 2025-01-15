@@ -19,11 +19,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:Microsoft.SqlServer.Server.SqlFacetAttribute" /> may only be specified on non-void return values.</para>
+        <see cref="T:Microsoft.SqlServer.Server.SqlFacetAttribute" />
+
+         may only be specified on non-void return values.</para
+      >
       <para>
-        <see cref="T:Microsoft.SqlServer.Server.SqlFacetAttribute" /> is used only to derive information about the return type, and is not intended to be a constraint specification on what can be stored in the type. Thus, if a field has a <see cref="T:Microsoft.SqlServer.Server.SqlFacetAttribute" /> indicating its size to be 2 characters, then the SQL Server type of the field access expression is of size 2, but assignments into the field are not restricted by this facet.</para>
+        <see cref="T:Microsoft.SqlServer.Server.SqlFacetAttribute" />
+
+         is used only to derive information about the return type, and is not intended to be a constraint specification on what can be stored in the type. Thus, if a field has a <see
+         cref="T:Microsoft.SqlServer.Server.SqlFacetAttribute" />
+
+         indicating its size to be 2 characters, then the SQL Server type of the field access expression is of size 2, but assignments into the field are not restricted by this facet.</para
+      >
       <para>The table below captures the matrix of valid values for the various properties for specific field types. In this table, "Y" indicates that the property is valid, and "N" indicates that the property is not valid. </para>
-      <para>The specified <see cref="T:Microsoft.SqlServer.Server.SqlFacetAttribute" /> must be compatible with the field type. If the property is not valid, type registration will report an error if the user specifies a non-default value for the property. The maximum values for <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" /> and <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" /> properties are 38. For the <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.MaxSize" /> property, the value should be in the range of 1-8000 for binary and non-Unicode data, 1-4000 for Unicode data, or -1. All other values are not valid.</para>
+      <para
+        >The specified <see
+         cref="T:Microsoft.SqlServer.Server.SqlFacetAttribute" />
+
+         must be compatible with the field type. If the property is not valid, type registration will report an error if the user specifies a non-default value for the property. The maximum values for <see
+         cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" />
+
+         and <see
+         cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" />
+
+         properties are 38. For the <see
+         cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.MaxSize" />
+
+         property, the value should be in the range of 1-8000 for binary and non-Unicode data, 1-4000 for Unicode data, or -1. All other values are not valid.</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -497,7 +520,10 @@
             <para>N</para>
           </description>
           <description>
-            <para>Y<superscript>1</superscript></para>
+            <para
+              >Y<superscript
+              >1</superscript>
+            </para>
           </description>
           <description>
             <para>N</para>
@@ -561,7 +587,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property must be set to false if the <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.MaxSize" /> property is set to 1.</para>
+          <para
+            >This property must be set to false if the <see
+             cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.MaxSize" />
+
+             property is set to 1.</para
+          >
           <para>The default value is false.</para>
         </remarks>
         <summary>
@@ -630,8 +661,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" /> property is valid only for numeric types. The <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" /> property must also be specified when setting the <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" /> property. </para>
-          <para>The maximum value of the <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" /> property is 38; the default value is 38.</para>
+          <para
+            >The <see
+             cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" />
+
+             property is valid only for numeric types. The <see
+             cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" />
+
+             property must also be specified when setting the <see
+             cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" />
+
+             property. </para
+          >
+          <para
+            >The maximum value of the <see
+             cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" />
+
+             property is 38; the default value is 38.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -653,8 +700,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" /> property is valid only for decimal types. The <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" /> property must also be specified when setting the <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" /> property. </para>
-          <para>The maximum value of the <see cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" /> property is 38; the default value is 0.</para>
+          <para
+            >The <see
+             cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" />
+
+             property is valid only for decimal types. The <see
+             cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" />
+
+             property must also be specified when setting the <see
+             cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" />
+
+             property. </para
+          >
+          <para
+            >The maximum value of the <see
+             cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" />
+
+             property is 38; the default value is 0.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

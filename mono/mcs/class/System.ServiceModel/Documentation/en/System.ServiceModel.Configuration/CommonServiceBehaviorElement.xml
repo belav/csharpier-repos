@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="CommonServiceBehaviorElement" FullName="System.ServiceModel.Configuration.CommonServiceBehaviorElement">
-  <TypeSignature Language="C#" Value="public class CommonServiceBehaviorElement : System.ServiceModel.Configuration.ServiceModelExtensionCollectionElement&lt;System.ServiceModel.Configuration.BehaviorExtensionElement&gt;, System.Collections.Generic.ICollection&lt;System.ServiceModel.Configuration.BehaviorExtensionElement&gt;, System.Collections.Generic.IEnumerable&lt;System.ServiceModel.Configuration.BehaviorExtensionElement&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi CommonServiceBehaviorElement extends System.ServiceModel.Configuration.ServiceModelExtensionCollectionElement`1&lt;class System.ServiceModel.Configuration.BehaviorExtensionElement&gt; implements class System.Collections.Generic.ICollection`1&lt;class System.ServiceModel.Configuration.BehaviorExtensionElement&gt;, class System.Collections.Generic.IEnumerable`1&lt;class System.ServiceModel.Configuration.BehaviorExtensionElement&gt;, class System.Collections.IEnumerable" />
+<Type
+  Name="CommonServiceBehaviorElement"
+  FullName="System.ServiceModel.Configuration.CommonServiceBehaviorElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class CommonServiceBehaviorElement : System.ServiceModel.Configuration.ServiceModelExtensionCollectionElement<System.ServiceModel.Configuration.BehaviorExtensionElement>, System.Collections.Generic.ICollection<System.ServiceModel.Configuration.BehaviorExtensionElement>, System.Collections.Generic.IEnumerable<System.ServiceModel.Configuration.BehaviorExtensionElement>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi CommonServiceBehaviorElement extends System.ServiceModel.Configuration.ServiceModelExtensionCollectionElement`1<class System.ServiceModel.Configuration.BehaviorExtensionElement> implements class System.Collections.Generic.ICollection`1<class System.ServiceModel.Configuration.BehaviorExtensionElement>, class System.Collections.Generic.IEnumerable`1<class System.ServiceModel.Configuration.BehaviorExtensionElement>, class System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -9,7 +18,9 @@
   <Base>
     <BaseTypeName>System.ServiceModel.Configuration.ServiceModelExtensionCollectionElement&lt;System.ServiceModel.Configuration.BehaviorExtensionElement&gt;</BaseTypeName>
     <BaseTypeArguments>
-      <BaseTypeArgument TypeParamName="TServiceModelExtensionElement">System.ServiceModel.Configuration.BehaviorExtensionElement</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="TServiceModelExtensionElement"
+        >System.ServiceModel.Configuration.BehaviorExtensionElement</BaseTypeArgument
+      >
     </BaseTypeArguments>
   </Base>
   <Interfaces>
@@ -30,7 +41,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CommonServiceBehaviorElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -40,7 +54,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CommonServiceBehaviorElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.CommonServiceBehaviorElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>

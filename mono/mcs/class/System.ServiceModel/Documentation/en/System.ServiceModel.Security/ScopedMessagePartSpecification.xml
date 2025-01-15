@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ScopedMessagePartSpecification" FullName="System.ServiceModel.Security.ScopedMessagePartSpecification">
+<Type
+  Name="ScopedMessagePartSpecification"
+  FullName="System.ServiceModel.Security.ScopedMessagePartSpecification"
+>
   <TypeSignature Language="C#" Value="public class ScopedMessagePartSpecification" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ScopedMessagePartSpecification extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ScopedMessagePartSpecification extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,7 +19,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class contains the <see cref="T:System.ServiceModel.Security.MessagePartSpecification" /> instances of different messages, each distinguished by the message Action.</para>
+      <para
+        >This class contains the <see
+         cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+
+         instances of different messages, each distinguished by the message Action.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -23,7 +34,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ScopedMessagePartSpecification ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,33 +47,64 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ScopedMessagePartSpecification (System.ServiceModel.Security.ScopedMessagePartSpecification other);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.ScopedMessagePartSpecification other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ScopedMessagePartSpecification (System.ServiceModel.Security.ScopedMessagePartSpecification other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.ScopedMessagePartSpecification other) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="other" Type="System.ServiceModel.Security.ScopedMessagePartSpecification" />
+        <Parameter
+          Name="other"
+          Type="System.ServiceModel.Security.ScopedMessagePartSpecification"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" /> class from another instance of this class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+
+             class from another instance of this class.  </para
+          >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />The other <see cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The other <see
+           cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Actions">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.ICollection&lt;string&gt; Actions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.ICollection`1&lt;string&gt; Actions" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.ICollection<string> Actions { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.ICollection`1<string> Actions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,8 +122,14 @@
       </Docs>
     </Member>
     <Member MemberName="AddParts">
-      <MemberSignature Language="C#" Value="public void AddParts (System.ServiceModel.Security.MessagePartSpecification parts);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddParts(class System.ServiceModel.Security.MessagePartSpecification parts) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddParts (System.ServiceModel.Security.MessagePartSpecification parts);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AddParts(class System.ServiceModel.Security.MessagePartSpecification parts) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -96,12 +147,24 @@
           <para>Adds channel message parts to the collections in the instance of this class. </para>
         </summary>
         <param name="parts">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Security.MessagePartSpecification" /> that contains the parts to be added.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+
+           that contains the parts to be added.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AddParts">
-      <MemberSignature Language="C#" Value="public void AddParts (System.ServiceModel.Security.MessagePartSpecification parts, string action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddParts(class System.ServiceModel.Security.MessagePartSpecification parts, string action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddParts (System.ServiceModel.Security.MessagePartSpecification parts, string action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AddParts(class System.ServiceModel.Security.MessagePartSpecification parts, string action) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -120,14 +183,29 @@
           <para>Adds message parts to the MessagePartSpecification that corresponds to the specified action.</para>
         </summary>
         <param name="parts">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Security.MessagePartSpecification" /> that contains the parts to be added.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+
+           that contains the parts to be added.</param
+        >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />The action key to match to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The action key to match to.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ChannelParts">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.MessagePartSpecification ChannelParts { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.MessagePartSpecification ChannelParts" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.MessagePartSpecification ChannelParts { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.MessagePartSpecification ChannelParts"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -161,7 +239,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use <see cref="M:System.ServiceModel.Security.ScopedMessagePartSpecification.MakeReadOnly" /> to set this property to true. </para>
+          <para
+            >You can use <see
+             cref="M:System.ServiceModel.Security.ScopedMessagePartSpecification.MakeReadOnly" />
+
+             to set this property to true. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -171,7 +254,10 @@
     </Member>
     <Member MemberName="MakeReadOnly">
       <MemberSignature Language="C#" Value="public void MakeReadOnly ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void MakeReadOnly() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void MakeReadOnly() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -189,8 +275,14 @@
       </Docs>
     </Member>
     <Member MemberName="TryGetParts">
-      <MemberSignature Language="C#" Value="public bool TryGetParts (string action, out System.ServiceModel.Security.MessagePartSpecification parts);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryGetParts(string action, class System.ServiceModel.Security.MessagePartSpecification parts) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool TryGetParts (string action, out System.ServiceModel.Security.MessagePartSpecification parts);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool TryGetParts(string action, class System.ServiceModel.Security.MessagePartSpecification parts) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -200,7 +292,11 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="action" Type="System.String" />
-        <Parameter Name="parts" Type="System.ServiceModel.Security.MessagePartSpecification&amp;" RefType="out" />
+        <Parameter
+          Name="parts"
+          Type="System.ServiceModel.Security.MessagePartSpecification&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="action">To be added.</param>
@@ -211,8 +307,14 @@
       </Docs>
     </Member>
     <Member MemberName="TryGetParts">
-      <MemberSignature Language="C#" Value="public bool TryGetParts (string action, bool excludeChannelScope, out System.ServiceModel.Security.MessagePartSpecification parts);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryGetParts(string action, bool excludeChannelScope, class System.ServiceModel.Security.MessagePartSpecification parts) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool TryGetParts (string action, bool excludeChannelScope, out System.ServiceModel.Security.MessagePartSpecification parts);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool TryGetParts(string action, bool excludeChannelScope, class System.ServiceModel.Security.MessagePartSpecification parts) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -223,7 +325,11 @@
       <Parameters>
         <Parameter Name="action" Type="System.String" />
         <Parameter Name="excludeChannelScope" Type="System.Boolean" />
-        <Parameter Name="parts" Type="System.ServiceModel.Security.MessagePartSpecification&amp;" RefType="out" />
+        <Parameter
+          Name="parts"
+          Type="System.ServiceModel.Security.MessagePartSpecification&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="action">To be added.</param>

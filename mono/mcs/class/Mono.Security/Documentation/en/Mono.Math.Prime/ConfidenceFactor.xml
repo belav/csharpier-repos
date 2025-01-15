@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
@@ -21,8 +26,7 @@
       <ReturnValue>
         <ReturnType>Mono.Math.Prime.ConfidenceFactor</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
@@ -38,8 +42,7 @@
       <ReturnValue>
         <ReturnType>Mono.Math.Prime.ConfidenceFactor</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
@@ -55,8 +58,7 @@
       <ReturnValue>
         <ReturnType>Mono.Math.Prime.ConfidenceFactor</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
@@ -72,8 +74,7 @@
       <ReturnValue>
         <ReturnType>Mono.Math.Prime.ConfidenceFactor</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
@@ -89,8 +90,7 @@
       <ReturnValue>
         <ReturnType>Mono.Math.Prime.ConfidenceFactor</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
@@ -106,8 +106,7 @@
       <ReturnValue>
         <ReturnType>Mono.Math.Prime.ConfidenceFactor</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>To be added</summary>
         <remarks>To be added</remarks>

@@ -1,4 +1,7 @@
-<Type Name="Application+MessageLoopCallback" FullName="System.Windows.Forms.Application+MessageLoopCallback">
+<Type
+  Name="Application+MessageLoopCallback"
+  FullName="System.Windows.Forms.Application+MessageLoopCallback"
+>
   <TypeSignature Language="C#" Value="public delegate bool Application.MessageLoopCallback();" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

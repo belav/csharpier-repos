@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IRemoteWebConfigurationHostServer" FullName="System.Web.Configuration.IRemoteWebConfigurationHostServer">
+<Type
+  Name="IRemoteWebConfigurationHostServer"
+  FullName="System.Web.Configuration.IRemoteWebConfigurationHostServer"
+>
   <TypeSignature Language="C#" Value="public interface IRemoteWebConfigurationHostServer" />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
@@ -18,7 +21,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Base class from which <see cref="T:System.Web.Configuration.RemoteWebConfigurationHostServer" /> extends.</para>
+      <para
+        >Base class from which <see
+         cref="T:System.Web.Configuration.RemoteWebConfigurationHostServer" />
+
+         extends.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +35,10 @@
   </Docs>
   <Members>
     <Member MemberName="DoEncryptOrDecrypt">
-      <MemberSignature Language="C#" Value="public string DoEncryptOrDecrypt (bool do_encrypt, string xml_string, string protection_provider_name, string protection_provider_type, string[] params_keys, string[] param_values);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string DoEncryptOrDecrypt (bool do_encrypt, string xml_string, string protection_provider_name, string protection_provider_type, string[] params_keys, string[] param_values);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -51,11 +62,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Conditionally encrypts or decrypts the value of the string referenced by the <paramref name="xmlString" /> parameter.</para>
+          <para
+            >Conditionally encrypts or decrypts the value of the string referenced by the <paramref
+             name="xmlString" />
+
+             parameter.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string containing either the encrypted or decrypted value of the <paramref name="xmlString" />.</para>
+          <para
+            >A string containing either the encrypted or decrypted value of the <paramref
+             name="xmlString" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -63,7 +84,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetData">
-      <MemberSignature Language="C#" Value="public byte[] GetData (string filename, bool getReadTimeOnly, out long readTime);" />
+      <MemberSignature
+        Language="C#"
+        Value="public byte[] GetData (string filename, bool getReadTimeOnly, out long readTime);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -71,7 +95,7 @@
       <Parameters>
         <Parameter Name="filename" Type="System.String" />
         <Parameter Name="getReadTimeOnly" Type="System.Boolean" />
-        <Parameter Name="readTime" Type="System.Int64&amp;" RefType="out" />
+        <Parameter Name="readTime" Type="System.Int64&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="filename">To be added.</param>
@@ -87,17 +111,20 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetFileDetails">
-      <MemberSignature Language="C#" Value="public void GetFileDetails (string name, out bool exists, out long size, out long create_data, out long last_write_date);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetFileDetails (string name, out bool exists, out long size, out long create_data, out long last_write_date);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
-        <Parameter Name="exists" Type="System.Boolean&amp;" RefType="out" />
-        <Parameter Name="size" Type="System.Int64&amp;" RefType="out" />
-        <Parameter Name="create_data" Type="System.Int64&amp;" RefType="out" />
-        <Parameter Name="last_write_date" Type="System.Int64&amp;" RefType="out" />
+        <Parameter Name="exists" Type="System.Boolean&" RefType="out" />
+        <Parameter Name="size" Type="System.Int64&" RefType="out" />
+        <Parameter Name="create_data" Type="System.Int64&" RefType="out" />
+        <Parameter Name="last_write_date" Type="System.Int64&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="name">To be added.</param>
@@ -114,7 +141,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetFilePaths">
-      <MemberSignature Language="C#" Value="public string GetFilePaths (int webLevel, string path, string site, string locationSubPath);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string GetFilePaths (int webLevel, string path, string site, string locationSubPath);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -137,20 +167,35 @@
           <para>A concatenated string representing the file path of the configuration file.</para>
         </returns>
         <param name="webLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The level of the configuration file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The level of the configuration file.</param
+        >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />Path to the remote configuration file to be accessed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Path to the remote configuration file to be accessed.</param
+        >
         <param name="site">
-          <attribution license="cc4" from="Microsoft" modified="false" />Path to the remote machine.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Path to the remote machine.</param
+        >
         <param name="locationSubPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The subpath of the location of the configuration file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The subpath of the location of the configuration file.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="WriteData">
-      <MemberSignature Language="C#" Value="public void WriteData (string fileName, string templateFileName, byte[] data, ref long readTime);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void WriteData (string fileName, string templateFileName, byte[] data, ref long readTime);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -159,7 +204,7 @@
         <Parameter Name="fileName" Type="System.String" />
         <Parameter Name="templateFileName" Type="System.String" />
         <Parameter Name="data" Type="System.Byte[]" />
-        <Parameter Name="readTime" Type="System.Int64&amp;" RefType="ref" />
+        <Parameter Name="readTime" Type="System.Int64&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="fileName">To be added.</param>

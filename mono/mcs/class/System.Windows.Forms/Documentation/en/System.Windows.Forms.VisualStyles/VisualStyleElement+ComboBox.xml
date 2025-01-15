@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+ComboBox" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ComboBox">
+<Type
+  Name="VisualStyleElement+ComboBox"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ComboBox"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.ComboBox" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

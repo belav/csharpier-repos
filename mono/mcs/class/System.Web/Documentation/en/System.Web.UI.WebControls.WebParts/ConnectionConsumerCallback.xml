@@ -1,5 +1,11 @@
-<Type Name="ConnectionConsumerCallback" FullName="System.Web.UI.WebControls.WebParts.ConnectionConsumerCallback">
-  <TypeSignature Language="C#" Value="public delegate void ConnectionConsumerCallback(object conn);" />
+<Type
+  Name="ConnectionConsumerCallback"
+  FullName="System.Web.UI.WebControls.WebParts.ConnectionConsumerCallback"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public delegate void ConnectionConsumerCallback(object conn);"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>

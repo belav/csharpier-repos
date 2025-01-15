@@ -17,7 +17,12 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains the graphical data that makes up a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" /> object. This class cannot be inherited.</para>
+      <para
+        >Contains the graphical data that makes up a <see
+         cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+         object. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +35,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.PathData" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Drawing.Drawing2D.PathData" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -44,14 +54,18 @@
       <ReturnValue>
         <ReturnType>System.Drawing.PointF[]</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'Drawing.PointF []'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an array of <see cref="T:System.Drawing.PointF" /> structures that represents the points through which the path is constructed.</para>
+          <para
+            >Gets or sets an array of <see
+             cref="T:System.Drawing.PointF" />
+
+             structures that represents the points through which the path is constructed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -65,8 +79,7 @@
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'byte []'</value>
         <remarks>To be added</remarks>

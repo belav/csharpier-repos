@@ -2,7 +2,10 @@
 <clause number="12.1" title="Variable categories">
   <paragraph>C# defines seven categories of variables: static variables, instance variables, array elements, value parameters, reference parameters, output parameters, and local variables. The sections that follow describe each of these categories. </paragraph>
   <paragraph>
-    <example>[Example: In the example <code_example><![CDATA[
+    <example
+      >[Example: In the example <code_example
+      >
+        <![CDATA[
 class A  
 {  
    public static int x;  
@@ -12,6 +15,10 @@ class A
       c = a + b++;  
    }  
 }  
-]]></code_example>x is a static variable, y is an instance variable, v[0] is an array element, a is a value parameter, b is a reference parameter, c is an output parameter, and i is a local variable. end example]</example>
+]]>
+      </code_example>
+
+      x is a static variable, y is an instance variable, v[0] is an array element, a is a value parameter, b is a reference parameter, c is an output parameter, and i is a local variable. end example]</example
+    >
   </paragraph>
 </clause>

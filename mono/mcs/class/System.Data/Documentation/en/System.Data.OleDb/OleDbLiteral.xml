@@ -15,7 +15,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.OleDb.OleDbLiteral" /> enumeration returns the following categories of literal information.</para>
+      <para
+        >The <see
+         cref="T:System.Data.OleDb.OleDbLiteral" />
+
+         enumeration returns the following categories of literal information.</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -60,9 +65,19 @@
           </description>
         </item>
       </list>
-      <para>Most members of the <see cref="T:System.Data.OleDb.OleDbLiteral" /> enumeration maps to one of the OLE DB DBLITERAL values that are returned in the DBLITERALINFO structure.</para>
+      <para
+        >Most members of the <see
+         cref="T:System.Data.OleDb.OleDbLiteral" />
+
+         enumeration maps to one of the OLE DB DBLITERAL values that are returned in the DBLITERALINFO structure.</para
+      >
       <para>Multidimensional restriction columns are members of schema objects and map to OLE DB for OLAP used by the IDBSchemaRowset interface.</para>
-      <para>A <see cref="T:System.NotSupportedException" /> is generated if the specified literal information is not supported and cannot be returned.</para>
+      <para
+        >A <see
+         cref="T:System.NotSupportedException" />
+
+         is generated if the specified literal information is not supported and cannot be returned.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

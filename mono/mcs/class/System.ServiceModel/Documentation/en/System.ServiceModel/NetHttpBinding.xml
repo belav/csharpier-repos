@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NetHttpBinding" FullName="System.ServiceModel.NetHttpBinding">
-  <TypeSignature Language="C#" Value="public class NetHttpBinding : System.ServiceModel.HttpBindingBase" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit NetHttpBinding extends System.ServiceModel.HttpBindingBase" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NetHttpBinding : System.ServiceModel.HttpBindingBase"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit NetHttpBinding extends System.ServiceModel.HttpBindingBase"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,7 +20,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.ServiceModel.NetHttpBinding" />is a binding designed for consuming HTTP or WebSocket services and uses binary encoding by default. Note: WebSockets are only supported on Windows 8. <see cref="T:System.ServiceModel.NetHttpBinding" /> will detect whether it is used with a request-reply contract or duplex contract and change its behavior to match - it will use HTTP for request-reply and WebSockets for duplex (only on Windows 8). This behavior can be overridden by setting the <see cref="P:System.ServiceModel.NetHttpBinding.WebSocketTransportUsage" /> property to one of the following values:</para>
+        <see cref="T:System.ServiceModel.NetHttpBinding" />
+
+        is a binding designed for consuming HTTP or WebSocket services and uses binary encoding by default. Note: WebSockets are only supported on Windows 8. <see
+         cref="T:System.ServiceModel.NetHttpBinding" />
+
+         will detect whether it is used with a request-reply contract or duplex contract and change its behavior to match - it will use HTTP for request-reply and WebSockets for duplex (only on Windows 8). This behavior can be overridden by setting the <see
+         cref="P:System.ServiceModel.NetHttpBinding.WebSocketTransportUsage" />
+
+         property to one of the following values:</para
+      >
       <list type="ordered">
         <item>
           <para>WhenDuplex- This is the default value and behaves as described above.</para>
@@ -27,17 +42,28 @@
         </item>
       </list>
       <para>
-        <see cref="T:System.ServiceModel.NetHttpBinding" />supports reliable sessions in both HTTP mode and WebSocket mode. In WebSocket mode sessions are provided by the transport.</para>
+        <see cref="T:System.ServiceModel.NetHttpBinding" />
+
+        supports reliable sessions in both HTTP mode and WebSocket mode. In WebSocket mode sessions are provided by the transport.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies settings for <see cref="T:System.ServiceModel.NetHttpBinding" />.</para>
+      <para
+        >Specifies settings for <see
+         cref="T:System.ServiceModel.NetHttpBinding" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NetHttpBinding ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -47,13 +73,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.NetHttpBinding" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.NetHttpBinding" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NetHttpBinding (System.ServiceModel.BasicHttpSecurityMode securityMode);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ServiceModel.BasicHttpSecurityMode securityMode) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public NetHttpBinding (System.ServiceModel.BasicHttpSecurityMode securityMode);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ServiceModel.BasicHttpSecurityMode securityMode) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -65,15 +102,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.NetHttpBinding" /> class with the specified security mode.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.NetHttpBinding" />
+
+             class with the specified security mode.</para
+          >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The mode of the security.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The mode of the security.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NetHttpBinding (string configurationName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string configurationName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string configurationName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -85,15 +133,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.NetHttpBinding" /> class with the specified configuration name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.NetHttpBinding" />
+
+             class with the specified configuration name.</para
+          >
         </summary>
         <param name="configurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the configuration.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the configuration.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NetHttpBinding (System.ServiceModel.BasicHttpSecurityMode securityMode, bool reliableSessionEnabled);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ServiceModel.BasicHttpSecurityMode securityMode, bool reliableSessionEnabled) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public NetHttpBinding (System.ServiceModel.BasicHttpSecurityMode securityMode, bool reliableSessionEnabled);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ServiceModel.BasicHttpSecurityMode securityMode, bool reliableSessionEnabled) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -106,17 +168,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.NetHttpBinding" /> class with the specified security mode.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.NetHttpBinding" />
+
+             class with the specified security mode.</para
+          >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The mode of the security.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The mode of the security.</param
+        >
         <param name="reliableSessionEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to indicate that the reliable session was enabled; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to indicate that the reliable session was enabled; otherwise, false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateBindingElements">
-      <MemberSignature Language="C#" Value="public override System.ServiceModel.Channels.BindingElementCollection CreateBindingElements ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.BindingElementCollection CreateBindingElements() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ServiceModel.Channels.BindingElementCollection CreateBindingElements ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.ServiceModel.Channels.BindingElementCollection CreateBindingElements() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -138,8 +217,14 @@
       </Docs>
     </Member>
     <Member MemberName="MessageEncoding">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.NetHttpMessageEncoding MessageEncoding { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.NetHttpMessageEncoding MessageEncoding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.NetHttpMessageEncoding MessageEncoding { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.NetHttpMessageEncoding MessageEncoding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -157,8 +242,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReliableSession">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.OptionalReliableSession ReliableSession { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.OptionalReliableSession ReliableSession" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.OptionalReliableSession ReliableSession { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.OptionalReliableSession ReliableSession"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -192,8 +283,14 @@
       </Docs>
     </Member>
     <Member MemberName="Security">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.BasicHttpSecurity Security { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.BasicHttpSecurity Security" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.BasicHttpSecurity Security { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.BasicHttpSecurity Security"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -212,7 +309,10 @@
     </Member>
     <Member MemberName="ShouldSerializeReliableSession">
       <MemberSignature Language="C#" Value="public bool ShouldSerializeReliableSession ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool ShouldSerializeReliableSession() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool ShouldSerializeReliableSession() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -235,7 +335,10 @@
     </Member>
     <Member MemberName="ShouldSerializeSecurity">
       <MemberSignature Language="C#" Value="public bool ShouldSerializeSecurity ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool ShouldSerializeSecurity() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool ShouldSerializeSecurity() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -257,8 +360,14 @@
       </Docs>
     </Member>
     <Member MemberName="WebSocketSettings">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.WebSocketTransportSettings WebSocketSettings { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.WebSocketTransportSettings WebSocketSettings" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.WebSocketTransportSettings WebSocketSettings { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.WebSocketTransportSettings WebSocketSettings"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -1,5 +1,12 @@
-<Type Name="SimplePropertyDescriptor" FullName="System.ComponentModel.TypeConverter+SimplePropertyDescriptor">
-  <TypeSignature Language="C#" Value="protected abstract class SimplePropertyDescriptor : System.ComponentModel.PropertyDescriptor" Maintainer="auto" />
+<Type
+  Name="SimplePropertyDescriptor"
+  FullName="System.ComponentModel.TypeConverter+SimplePropertyDescriptor"
+>
+  <TypeSignature
+    Language="C#"
+    Value="protected abstract class SimplePropertyDescriptor : System.ComponentModel.PropertyDescriptor"
+    Maintainer="auto"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -35,7 +42,10 @@
   <Attributes />
   <Members>
     <Member MemberName="ShouldSerializeValue">
-      <MemberSignature Language="C#" Value="public virtual bool ShouldSerializeValue (object component);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool ShouldSerializeValue (object component);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -66,7 +76,10 @@
       </Docs>
     </Member>
     <Member MemberName="CanResetValue">
-      <MemberSignature Language="C#" Value="public virtual bool CanResetValue (object component);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool CanResetValue (object component);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -82,7 +95,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SimplePropertyDescriptor (Type componentType, string name, Type propertyType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SimplePropertyDescriptor (Type componentType, string name, Type propertyType);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -100,7 +116,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SimplePropertyDescriptor (Type componentType, string name, Type propertyType, Attribute [] attributes);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SimplePropertyDescriptor (Type componentType, string name, Type propertyType, Attribute [] attributes);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>

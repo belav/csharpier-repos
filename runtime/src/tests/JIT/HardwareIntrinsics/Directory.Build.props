@@ -2,11 +2,9 @@
 <Project>
   <Import Project="..\..\Directory.Merged.props" />
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
-
   <ItemGroup>
     <ProjectReference Include="$(TestLibraryProjectPath)" />
   </ItemGroup>
-
   <PropertyGroup>
     <RunAnalyzers>true</RunAnalyzers>
     <EnableNETAnalyzers>false</EnableNETAnalyzers>

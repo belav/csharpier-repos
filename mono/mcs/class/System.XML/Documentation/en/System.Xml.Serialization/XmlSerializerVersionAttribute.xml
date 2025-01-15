@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="XmlSerializerVersionAttribute" FullName="System.Xml.Serialization.XmlSerializerVersionAttribute">
-  <TypeSignature Language="C#" Value="public sealed class XmlSerializerVersionAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit XmlSerializerVersionAttribute extends System.Attribute" />
+<Type
+  Name="XmlSerializerVersionAttribute"
+  FullName="System.Xml.Serialization.XmlSerializerVersionAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class XmlSerializerVersionAttribute : Attribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit XmlSerializerVersionAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,8 +29,24 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The .NET Framework XML serialization infrastructure dynamically generates derivations of <see cref="T:System.Xml.Serialization.XmlSerializer" /> that are optimized to serialize user-defined types. The serializers are stored in assemblies that can be reused for efficient serialization. </para>
-      <para>The <see cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" /> attribute stores version information about the parent assembly for which a set of serializers is generated. Later, when the <see cref="T:System.Xml.Serialization.XmlSerializer" /> constructor is called, the infrastructure attempts to locate the pre-generated assembly. If the infrastructure finds an assembly with a matching name, the assembly is loaded and the infrastructure checks <see cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" /> for a match between the found assembly's version and the current version of the parent assembly. If the version does not match, the found assembly is not used. Instead, a temporary assembly is generated for the serialization.</para>
+      <para
+        >The .NET Framework XML serialization infrastructure dynamically generates derivations of <see
+         cref="T:System.Xml.Serialization.XmlSerializer" />
+
+         that are optimized to serialize user-defined types. The serializers are stored in assemblies that can be reused for efficient serialization. </para
+      >
+      <para
+        >The <see
+         cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
+
+         attribute stores version information about the parent assembly for which a set of serializers is generated. Later, when the <see
+         cref="T:System.Xml.Serialization.XmlSerializer" />
+
+         constructor is called, the infrastructure attempts to locate the pre-generated assembly. If the infrastructure finds an assembly with a matching name, the assembly is loaded and the infrastructure checks <see
+         cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
+
+         for a match between the found assembly's version and the current version of the parent assembly. If the version does not match, the found assembly is not used. Instead, a temporary assembly is generated for the serialization.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -31,7 +56,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XmlSerializerVersionAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -43,13 +71,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XmlSerializerVersionAttribute (Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type type) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -63,10 +99,18 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" /> class for the specified type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Serialization.XmlSerializerVersionAttribute" />
+
+             class for the specified type.</para
+          >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type that is being serialized.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type that is being serialized.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Namespace">

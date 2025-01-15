@@ -1,6 +1,9 @@
 <Type Name="Flock" FullName="Mono.Unix.Native.Flock">
-  <TypeSignature Language="C#" Value="public struct Flock : IEquatable&lt;Mono.Unix.Native.Flock&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit Flock extends System.ValueType implements class System.IEquatable`1&lt;valuetype Mono.Unix.Native.Flock&gt;" />
+  <TypeSignature Language="C#" Value="public struct Flock : IEquatable<Mono.Unix.Native.Flock>" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit Flock extends System.ValueType implements class System.IEquatable`1<valuetype Mono.Unix.Native.Flock>"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Posix</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -21,18 +24,35 @@
   </Interfaces>
   <Docs>
     <summary>
-      <see cref="M:Mono.Unix.Native.Syscall.fcntl" />(2) advisory file locking information.</summary>
-    <remarks>This can only be used with 
-    <see cref="F:Mono.Unix.Native.FcntlCommand.F_GETLK" />, 
-    <see cref="F:Mono.Unix.Native.FcntlCommand.F_SETLK" />, and
-    <see cref="F:Mono.Unix.Native.FcntlCommand.F_SETLKW" />.
-    </remarks>
-    <altmember cref="M:Mono.Unix.Native.Syscall.fcntl(int,Mono.Unix.Native.FcntlCommand,Mono.Unix.Native.Flock&amp;)" />
+      <see cref="M:Mono.Unix.Native.Syscall.fcntl" />
+
+      (2) advisory file locking information.</summary
+    >
+    <remarks
+      >This can only be used with 
+    <see
+       cref="F:Mono.Unix.Native.FcntlCommand.F_GETLK" />
+
+      , 
+    <see
+       cref="F:Mono.Unix.Native.FcntlCommand.F_SETLK" />
+
+      , and
+    <see
+       cref="F:Mono.Unix.Native.FcntlCommand.F_SETLKW" />
+
+      .
+    </remarks
+    >
+    <altmember cref="M:Mono.Unix.Native.Syscall.fcntl(int,Mono.Unix.Native.FcntlCommand,Mono.Unix.Native.Flock&)" />
   </Docs>
   <Members>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public bool Equals (Mono.Unix.Native.Flock value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype Mono.Unix.Native.Flock value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Equals(valuetype Mono.Unix.Native.Flock value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -54,7 +74,10 @@
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -76,7 +99,10 @@
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -106,7 +132,12 @@
         <ReturnType>System.Int64</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Length of file locking.  <c>l_len</c> = 0 means until enf of file.</summary>
+        <summary
+          >Length of file locking.  <c
+          >l_len</c>
+
+           = 0 means until enf of file.</summary
+        >
         <remarks />
       </Docs>
     </Member>
@@ -146,7 +177,10 @@
     </Member>
     <Member MemberName="l_type">
       <MemberSignature Language="C#" Value="public Mono.Unix.Native.LockType l_type;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype Mono.Unix.Native.LockType l_type" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype Mono.Unix.Native.LockType l_type"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -168,7 +202,10 @@
     </Member>
     <Member MemberName="l_whence">
       <MemberSignature Language="C#" Value="public Mono.Unix.Native.SeekFlags l_whence;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype Mono.Unix.Native.SeekFlags l_whence" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype Mono.Unix.Native.SeekFlags l_whence"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -184,13 +221,24 @@
         <ReturnType>Mono.Unix.Native.SeekFlags</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>How to interpret <c>l_start</c>.</summary>
+        <summary
+          >How to interpret <c
+          >l_start</c>
+
+          .</summary
+        >
         <remarks />
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (Mono.Unix.Native.Flock lhs, Mono.Unix.Native.Flock rhs);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype Mono.Unix.Native.Flock lhs, valuetype Mono.Unix.Native.Flock rhs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (Mono.Unix.Native.Flock lhs, Mono.Unix.Native.Flock rhs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Equality(valuetype Mono.Unix.Native.Flock lhs, valuetype Mono.Unix.Native.Flock rhs) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -213,8 +261,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (Mono.Unix.Native.Flock lhs, Mono.Unix.Native.Flock rhs);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype Mono.Unix.Native.Flock lhs, valuetype Mono.Unix.Native.Flock rhs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (Mono.Unix.Native.Flock lhs, Mono.Unix.Native.Flock rhs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Inequality(valuetype Mono.Unix.Native.Flock lhs, valuetype Mono.Unix.Native.Flock rhs) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

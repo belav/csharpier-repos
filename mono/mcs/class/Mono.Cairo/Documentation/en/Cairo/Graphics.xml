@@ -8,12 +8,10 @@
   <Base>
     <BaseTypeName>Cairo.Context</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <summary>Obsolete version of Cairo.Context, use it instead.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -23,11 +21,32 @@
         <Parameter Name="surface" Type="Cairo.Surface" />
       </Parameters>
       <Docs>
-        <param name="surface">The <see cref="T:Cairo.Surface" /> on which this Graphics object will render everything.</param>
-        <summary>Creates a <see cref="T:Cairo.Graphics" /> object using the provided surface.</summary>
-        <remarks>
+        <param name="surface"
+          >The <see
+           cref="T:Cairo.Surface" />
 
-Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /> or <see cref="T:Cairo.ImageSurface" />.</remarks>
+           on which this Graphics object will render everything.</param
+        >
+        <summary
+          >Creates a <see
+           cref="T:Cairo.Graphics" />
+
+           object using the provided surface.</summary
+        >
+        <remarks
+          >
+
+Note that the <paramref
+           name="surface" />
+
+           can be a <see
+           cref="T:Cairo.Surface" />
+
+           or <see
+           cref="T:Cairo.ImageSurface" />
+
+          .</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -42,7 +61,12 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       </Parameters>
       <Docs>
         <param name="state">The raw C object.</param>
-        <summary>This constructor accepts a Cairo graphics object coming in from the C API and wraps it into our <see cref="T:Cairo.Graphics" /> class.</summary>
+        <summary
+          >This constructor accepts a Cairo graphics object coming in from the C API and wraps it into our <see
+           cref="T:Cairo.Graphics" />
+
+           class.</summary
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -59,7 +83,12 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       <Docs>
         <summary>The antialiasing mode of the rasterizer used for drawing shapes.</summary>
         <value>The antialiasing mode</value>
-        <remarks>This value is a hint, and a particular backend may or may not support a particular value. At the current time, no backend supports <see cref="F:Cairo.Antialias.Subpixel" /> when drawing shapes. Note that this option does not affect text rendering.</remarks>
+        <remarks
+          >This value is a hint, and a particular backend may or may not support a particular value. At the current time, no backend supports <see
+           cref="F:Cairo.Antialias.Subpixel" />
+
+           when drawing shapes. Note that this option does not affect text rendering.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -75,8 +104,7 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       <Docs>
         <summary>The current Color in the drawing context.</summary>
         <value>the Color</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -90,7 +118,12 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
         <ReturnType>Cairo.Color</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>The current Color in the drawing context (obsolete, use <see cref="P:Cairo.Graphics.Color" />)</summary>
+        <summary
+          >The current Color in the drawing context (obsolete, use <see
+           cref="P:Cairo.Graphics.Color" />
+
+          )</summary
+        >
         <value>the Color</value>
         <remarks />
       </Docs>
@@ -128,7 +161,10 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       </ReturnValue>
       <Docs>
         <summary>Get or set the fill rule.</summary>
-        <value>See <see cref="T:Cairo.FillRule" /></value>
+        <value
+          >See <see
+           cref="T:Cairo.FillRule" />
+        </value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -144,7 +180,12 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       </ReturnValue>
       <Docs>
         <summary>The metric information for a font</summary>
-        <value>A <see cref="t:Cairo.FontExtents" /> structure</value>
+        <value
+          >A <see
+           cref="t:Cairo.FontExtents" />
+
+           structure</value
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -161,7 +202,12 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       <Docs>
         <summary>The current font matrix</summary>
         <value>a matrix describing a transform to be applied to the current font.</value>
-        <remarks>The font matrix gives a transformation from the design space of the font (in this space, the em-square is 1 unit by 1 unit) to user space. Normally, a simple scale is used (see <see cref="M:Cairo.Graphics.SetFontSize()" />), but a more complex font matrix can be used to shear the font or stretch it unequally along the two axes</remarks>
+        <remarks
+          >The font matrix gives a transformation from the design space of the font (in this space, the em-square is 1 unit by 1 unit) to user space. Normally, a simple scale is used (see <see
+           cref="M:Cairo.Graphics.SetFontSize()" />
+
+          ), but a more complex font matrix can be used to shear the font or stretch it unequally along the two axes</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -193,8 +239,7 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       <Docs>
         <summary>Internal handle to the native cairo object</summary>
         <value>pointer to native object</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -209,7 +254,12 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       </ReturnValue>
       <Docs>
         <summary>Get or set the line cap style.</summary>
-        <value>See <see cref="T:Cairo.LineCap" />.</value>
+        <value
+          >See <see
+           cref="T:Cairo.LineCap" />
+
+          .</value
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -225,7 +275,12 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       </ReturnValue>
       <Docs>
         <summary>Get or set the line join style.</summary>
-        <value>See <see cref="T:Cairo.LineJoin" />.</value>
+        <value
+          >See <see
+           cref="T:Cairo.LineJoin" />
+
+          .</value
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -257,7 +312,10 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       </ReturnValue>
       <Docs>
         <summary>Get or set the current transformation matrix (CTM).</summary>
-        <value>The current Transformation Matrix <see cref="t:Cairo.Matrix" /></value>
+        <value
+          >The current Transformation Matrix <see
+           cref="t:Cairo.Matrix" />
+        </value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -273,7 +331,10 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       </ReturnValue>
       <Docs>
         <summary>Get or set the miter limit (the value beyond which joins are no longer mitered).</summary>
-        <value>the miter limit as <see cref="t:System.Double" /></value>
+        <value
+          >the miter limit as <see
+           cref="t:System.Double" />
+        </value>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -290,8 +351,7 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
       <Docs>
         <summary>The current Operator for the drawing context.</summary>
         <value>the Operator</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -305,8 +365,18 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
         <ReturnType>Cairo.Pattern</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>See <see cref="P:Cairo.Graphics.Source" />.</summary>
-        <value>See <see cref="P:Cairo.Graphics.Source" />.</value>
+        <summary
+          >See <see
+           cref="P:Cairo.Graphics.Source" />
+
+          .</summary
+        >
+        <value
+          >See <see
+           cref="P:Cairo.Graphics.Source" />
+
+          .</value
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -321,9 +391,19 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
         <ReturnType>Cairo.Pattern</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Sets the source pattern within graphics object to <paramref name="source" />.</summary>
-        <value>A <see cref="T:Cairo.Pattern" /> to be used as the source for subsequent drawing operations.
-</value>
+        <summary
+          >Sets the source pattern within graphics object to <paramref
+           name="source" />
+
+          .</summary
+        >
+        <value
+          >A <see
+           cref="T:Cairo.Pattern" />
+
+           to be used as the source for subsequent drawing operations.
+</value
+        >
         <remarks>This pattern will then be used for any subsequent drawing operation until a new source pattern is set.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -354,10 +434,14 @@ Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /
         <ReturnType>Cairo.Surface</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Gets the target surface for the cairo context as passed to <see cref="C:Cairo.Graphics()" />.</summary>
+        <summary
+          >Gets the target surface for the cairo context as passed to <see
+           cref="C:Cairo.Graphics()" />
+
+          .</summary
+        >
         <value>the target surface.</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

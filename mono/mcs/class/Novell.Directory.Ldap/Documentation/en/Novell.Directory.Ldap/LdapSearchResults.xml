@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -60,7 +59,10 @@
       </Docs>
     </Member>
     <Member MemberName="next">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapEntry next()" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapEntry next()"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapEntry</ReturnType>
@@ -85,7 +87,10 @@
       </Docs>
     </Member>
     <Member MemberName="ResponseControls">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapControl[] ResponseControls { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapControl[] ResponseControls { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapControl[]</ReturnType>

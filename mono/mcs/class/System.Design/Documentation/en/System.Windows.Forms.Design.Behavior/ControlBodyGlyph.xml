@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ControlBodyGlyph" FullName="System.Windows.Forms.Design.Behavior.ControlBodyGlyph">
-  <TypeSignature Language="C#" Value="public class ControlBodyGlyph : System.Windows.Forms.Design.Behavior.ComponentGlyph" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ControlBodyGlyph : System.Windows.Forms.Design.Behavior.ComponentGlyph"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -12,16 +15,29 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is placed on every control and is sized to the exact bounds of each control.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+         is placed on every control and is sized to the exact bounds of each control.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Associates a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> with its control.</para>
+      <para
+        >Associates a <see
+         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+         with its control.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ControlBodyGlyph (System.Drawing.Rectangle bounds, System.Windows.Forms.Cursor cursor, System.ComponentModel.IComponent relatedComponent, System.Windows.Forms.Design.Behavior.Behavior behavior);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ControlBodyGlyph (System.Drawing.Rectangle bounds, System.Windows.Forms.Cursor cursor, System.ComponentModel.IComponent relatedComponent, System.Windows.Forms.Design.Behavior.Behavior behavior);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -36,20 +52,61 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
+
+             class.</para
+          >
         </summary>
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Rectangle" /> that represents the bounds of the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that represents the bounds of the <see
+           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          .</param
+        >
         <param name="cursor">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.Cursor" /> that represents the cursor to display when the mouse pointer is over the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.Cursor" />
+
+           that represents the cursor to display when the mouse pointer is over the <see
+           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          .</param
+        >
         <param name="relatedComponent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component with which the <see
+           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+           is associated.</param
+        >
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+           with which the <see
+           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+           is associated.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ControlBodyGlyph (System.Drawing.Rectangle bounds, System.Windows.Forms.Cursor cursor, System.ComponentModel.IComponent relatedComponent, System.Windows.Forms.Design.ControlDesigner designer);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ControlBodyGlyph (System.Drawing.Rectangle bounds, System.Windows.Forms.Cursor cursor, System.ComponentModel.IComponent relatedComponent, System.Windows.Forms.Design.ControlDesigner designer);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -64,20 +121,61 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
+
+             class.</para
+          >
         </summary>
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Rectangle" /> that represents the bounds of the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that represents the bounds of the <see
+           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          .</param
+        >
         <param name="cursor">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.Cursor" /> that represents the cursor to display when the mouse pointer is over the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.Cursor" />
+
+           that represents the cursor to display when the mouse pointer is over the <see
+           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          .</param
+        >
         <param name="relatedComponent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The component with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The component with which the <see
+           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+           is associated.</param
+        >
         <param name="designer">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.Design.ControlDesigner" /> with which the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.Design.ControlDesigner" />
+
+           with which the <see
+           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+           is associated.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Bounds">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Rectangle Bounds { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Rectangle Bounds { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -90,12 +188,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the bounds of the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />.</para>
+          <para
+            >Gets the bounds of the <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetHitTest">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.Cursor GetHitTest (System.Drawing.Point p);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.Cursor GetHitTest (System.Drawing.Point p);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -110,14 +216,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether a mouse click at the specified point should be handled by the <see cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />.</para>
+          <para
+            >Indicates whether a mouse click at the specified point should be handled by the <see
+             cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Windows.Forms.Cursor" /> if the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> is associated with <paramref name="p" />; otherwise, null.</para>
+          <para
+            >A <see
+             cref="T:System.Windows.Forms.Cursor" />
+
+             if the <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+             is associated with <paramref
+             name="p" />
+
+            ; otherwise, null.</para
+          >
         </returns>
         <param name="p">
-          <attribution license="cc4" from="Microsoft" modified="false" />A point to hit test.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A point to hit test.</param
+        >
       </Docs>
     </Member>
   </Members>

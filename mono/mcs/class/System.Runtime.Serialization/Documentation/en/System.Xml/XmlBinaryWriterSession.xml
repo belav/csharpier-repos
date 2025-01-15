@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlBinaryWriterSession" FullName="System.Xml.XmlBinaryWriterSession">
   <TypeSignature Language="C#" Value="public class XmlBinaryWriterSession" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XmlBinaryWriterSession extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XmlBinaryWriterSession extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Serialization</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,7 +16,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Session objects (this class together with <see cref="T:System.Xml.XmlBinaryReaderSession" />) enable dynamic string atomization that can span an entire conversation. These session objects manage dynamic dictionaries. For more information about dynamic dictionaries see <see cref="T:System.Xml.XmlDictionary" />.</para>
+      <para
+        >Session objects (this class together with <see
+         cref="T:System.Xml.XmlBinaryReaderSession" />
+
+        ) enable dynamic string atomization that can span an entire conversation. These session objects manage dynamic dictionaries. For more information about dynamic dictionaries see <see
+         cref="T:System.Xml.XmlDictionary" />
+
+        .</para
+      >
       <para>Due to asynchronous processing, it is possible for messages that arrive synchronously to be processed in a different order than the order in which they were sent. String atomization that spans messages must ensure the messages are processed in the original order or the atomized strings must be conveyed using a different mechanism.</para>
       <para>To use them, you create a session object and pass it to the constructor or initializer for a binary XML reader or writer. </para>
       <para>To reuse a dynamic dictionary pass the same session object to all subsequent readers and writers.</para>
@@ -27,7 +38,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XmlBinaryWriterSession ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -43,7 +57,10 @@
     </Member>
     <Member MemberName="Reset">
       <MemberSignature Language="C#" Value="public void Reset ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Reset() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Reset() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -61,8 +78,14 @@
       </Docs>
     </Member>
     <Member MemberName="TryAdd">
-      <MemberSignature Language="C#" Value="public virtual bool TryAdd (System.Xml.XmlDictionaryString value, out int key);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool TryAdd(class System.Xml.XmlDictionaryString value, int32 key) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool TryAdd (System.Xml.XmlDictionaryString value, out int key);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool TryAdd(class System.Xml.XmlDictionaryString value, int32 key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -72,7 +95,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="value" Type="System.Xml.XmlDictionaryString" />
-        <Parameter Name="key" Type="System.Int32&amp;" RefType="out" />
+        <Parameter Name="key" Type="System.Int32&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="value">To be added.</param>

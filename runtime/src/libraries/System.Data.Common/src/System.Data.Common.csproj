@@ -1,12 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoWarn>$(NoWarn);SYSLIB0038</NoWarn>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System.Data.Common.TypeForwards.cs" />
     <Compile Include="System\Data\DataReaderExtensions.cs" />
@@ -168,8 +166,10 @@
     <Compile Include="System\Data\UpdateRowSource.cs" />
     <Compile Include="System\Data\Common\UInt64Storage.cs" />
     <Compile Include="System\Data\Common\AdapterUtil.Common.cs" />
-    <Compile Include="$(CommonPath)System\Data\Common\AdapterUtil.cs"
-             Link="System\Data\Common\AdapterUtil.cs" />
+    <Compile
+      Include="$(CommonPath)System\Data\Common\AdapterUtil.cs"
+      Link="System\Data\Common\AdapterUtil.cs"
+    />
     <Compile Include="System\Data\Common\BigIntegerStorage.cs" />
     <Compile Include="System\Data\Common\BooleanStorage.cs" />
     <Compile Include="System\Data\Common\ByteStorage.cs" />
@@ -200,10 +200,14 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="System\Data\Common\DbConnectionOptions.cs" />
-    <Compile Include="$(CommonPath)System\Data\Common\DbConnectionOptions.Common.cs"
-             Link="System\Data\Common\DbConnectionOptions.Common.cs" />
-    <Compile Include="$(CommonPath)System\Data\Common\DbConnectionPoolKey.cs"
-             Link="System\Data\Common\DbConnectionPoolKey.cs" />
+    <Compile
+      Include="$(CommonPath)System\Data\Common\DbConnectionOptions.Common.cs"
+      Link="System\Data\Common\DbConnectionOptions.Common.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Data\Common\DbConnectionPoolKey.cs"
+      Link="System\Data\Common\DbConnectionPoolKey.cs"
+    />
     <Compile Include="System\Data\Common\DbConnectionStringBuilder.cs" />
     <Compile Include="System\Data\Common\DbConnectionStringCommon.cs" />
     <Compile Include="System\Data\Common\DbConnectionStringBuilderDescriptor.cs" />
@@ -237,10 +241,14 @@
     <Compile Include="System\Data\Common\Int16Storage.cs" />
     <Compile Include="System\Data\Common\Int32Storage.cs" />
     <Compile Include="System\Data\Common\Int64Storage.cs" />
-    <Compile Include="$(CommonPath)System\Data\Common\MultipartIdentifier.cs"
-             Link="System\Data\Common\MultipartIdentifier.cs" />
-    <Compile Include="$(CommonPath)System\Data\Common\NameValuePair.cs"
-             Link="System\Data\Common\NameValuePair.cs" />
+    <Compile
+      Include="$(CommonPath)System\Data\Common\MultipartIdentifier.cs"
+      Link="System\Data\Common\MultipartIdentifier.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Data\Common\NameValuePair.cs"
+      Link="System\Data\Common\NameValuePair.cs"
+    />
     <Compile Include="System\Data\Common\ObjectStorage.cs" />
     <Compile Include="System\Data\Common\RowUpdatedEventArgs.cs" />
     <Compile Include="System\Data\Common\RowUpdatingEventArgs.cs" />
@@ -293,8 +301,10 @@
     <Compile Include="System\Data\SQLTypes\SQLInt32.cs" />
     <Compile Include="System\Data\SQLTypes\SQLInt64.cs" />
     <Compile Include="System\Data\SQLTypes\SQLMoney.cs" />
-    <Compile Include="$(CommonPath)System\Data\Common\SQLResource.cs"
-             Link="System\Data\SQLTypes\SQLResource.cs" />
+    <Compile
+      Include="$(CommonPath)System\Data\Common\SQLResource.cs"
+      Link="System\Data\SQLTypes\SQLResource.cs"
+    />
     <Compile Include="System\Data\SQLTypes\SQLSingle.cs" />
     <Compile Include="System\Data\SQLTypes\SQLString.cs" />
     <Compile Include="System\Data\SQLTypes\SQLUtility.cs" />
@@ -306,17 +316,18 @@
     <Compile Include="System\Data\SQLTypes\SQLBytes.cs" />
     <Compile Include="System\Data\ProviderBase\DataReaderContainer.cs" />
     <Compile Include="System\Data\ProviderBase\SchemaMapping.cs" />
-    <Compile Include="$(CommonPath)System\Obsoletions.cs"
-             Link="Common\System\Obsoletions.cs" />
+    <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(CoreLibProject)" />
     <ProjectReference Include="..\..\System.Collections\src\System.Collections.csproj" />
     <ProjectReference Include="..\..\System.Collections.NonGeneric\src\System.Collections.NonGeneric.csproj" />
     <ProjectReference Include="..\..\System.ComponentModel.TypeConverter\src\System.ComponentModel.TypeConverter.csproj" />
     <ProjectReference Include="..\..\System.Runtime\src\System.Runtime.csproj" />
-    <ProjectReference Include="..\..\System.Private.Uri\src\System.Private.Uri.csproj" PrivateAssets="all" />
+    <ProjectReference
+      Include="..\..\System.Private.Uri\src\System.Private.Uri.csproj"
+      PrivateAssets="all"
+    />
     <Reference Include="System.Collections.Concurrent" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.Primitives" />
@@ -330,10 +341,11 @@
     <Reference Include="System.Transactions.Local" />
     <Reference Include="System.Xml.ReaderWriter" />
     <Reference Include="System.Xml.XmlSerializer" />
-    <ProjectReference Include="..\..\System.Text.RegularExpressions\gen\System.Text.RegularExpressions.Generator.csproj"
-                  SetTargetFramework="TargetFramework=netstandard2.0"
-                  OutputItemType="Analyzer"
-                  ReferenceOutputAssembly="false" />
+    <ProjectReference
+      Include="..\..\System.Text.RegularExpressions\gen\System.Text.RegularExpressions.Generator.csproj"
+      SetTargetFramework="TargetFramework=netstandard2.0"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false"
+    />
   </ItemGroup>
-
 </Project>

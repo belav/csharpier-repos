@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="X509SecurityTokenParameters" FullName="System.ServiceModel.Security.Tokens.X509SecurityTokenParameters">
-  <TypeSignature Language="C#" Value="public class X509SecurityTokenParameters : System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit X509SecurityTokenParameters extends System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+<Type
+  Name="X509SecurityTokenParameters"
+  FullName="System.ServiceModel.Security.Tokens.X509SecurityTokenParameters"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class X509SecurityTokenParameters : System.ServiceModel.Security.Tokens.SecurityTokenParameters"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit X509SecurityTokenParameters extends System.ServiceModel.Security.Tokens.SecurityTokenParameters"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +32,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public X509SecurityTokenParameters ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,19 +45,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509SecurityTokenParameters (System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType x509ReferenceStyle);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType x509ReferenceStyle) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509SecurityTokenParameters (System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType x509ReferenceStyle);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType x509ReferenceStyle) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="x509ReferenceStyle" Type="System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />
+        <Parameter
+          Name="x509ReferenceStyle"
+          Type="System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType"
+        />
       </Parameters>
       <Docs>
         <remarks>
@@ -55,59 +81,116 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.Any" />.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" />
+
+                 is set to <see
+                 cref="F:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType.Any" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" />
+
+                 is set to <see
+                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" /> is set to true.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                 is set to true.</para
+              >
             </item>
           </list>
           <para>The corresponding properties are set to the values in the input parameters.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" />
+
+             class.</para
+          >
         </summary>
         <param name="x509ReferenceStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected X509SecurityTokenParameters (System.ServiceModel.Security.Tokens.X509SecurityTokenParameters source);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.Tokens.X509SecurityTokenParameters source) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected X509SecurityTokenParameters (System.ServiceModel.Security.Tokens.X509SecurityTokenParameters source);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.Tokens.X509SecurityTokenParameters source) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="source" Type="System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" />
+        <Parameter
+          Name="source"
+          Type="System.ServiceModel.Security.Tokens.X509SecurityTokenParameters"
+        />
       </Parameters>
       <Docs>
         <param name="source">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The new instance property values are set to the corresponding values in <paramref name="other" />.</para>
+          <para
+            >The new instance property values are set to the corresponding values in <paramref
+             name="other" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509SecurityTokenParameters (System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType x509ReferenceStyle, System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode inclusionMode);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType x509ReferenceStyle, valuetype System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode inclusionMode) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509SecurityTokenParameters (System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType x509ReferenceStyle, System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode inclusionMode);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType x509ReferenceStyle, valuetype System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode inclusionMode) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="x509ReferenceStyle" Type="System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />
-        <Parameter Name="inclusionMode" Type="System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode" />
+        <Parameter
+          Name="x509ReferenceStyle"
+          Type="System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType"
+        />
+        <Parameter
+          Name="inclusionMode"
+          Type="System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode"
+        />
       </Parameters>
       <Docs>
         <remarks>
@@ -116,32 +199,70 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" /> is set to <paramref name="inclusionMode" />.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" />
+
+                 is set to <paramref
+                 name="inclusionMode" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" /> is set to <paramref name="x509ReferenceStyle" />.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" />
+
+                 is set to <paramref
+                 name="x509ReferenceStyle" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" /> is set to true.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                 is set to true.</para
+              >
             </item>
           </list>
           <para>The corresponding properties are set to the values in the input parameters.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters" />
+
+             class.</para
+          >
         </summary>
         <param name="x509ReferenceStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType" />
+
+          .</param
+        >
         <param name="inclusionMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CloneCore">
-      <MemberSignature Language="C#" Value="protected override System.ServiceModel.Security.Tokens.SecurityTokenParameters CloneCore ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.ServiceModel.Security.Tokens.SecurityTokenParameters CloneCore() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.ServiceModel.Security.Tokens.SecurityTokenParameters CloneCore ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.ServiceModel.Security.Tokens.SecurityTokenParameters CloneCore() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -153,10 +274,32 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" /> and <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" /> methods follow the Core design pattern. </para>
+          <para
+            >The <see
+             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" />
+
+             and <see
+             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+             methods follow the Core design pattern. </para
+          >
           <para>
-            <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" /> is an abstract class which is overridden by <see cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.CloneCore" />.</para>
-          <para>The <see cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.CloneCore" /> method calls the <see cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.X509SecurityTokenParameters)" /> constructor.</para>
+            <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+             is an abstract class which is overridden by <see
+             cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.CloneCore" />
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.CloneCore" />
+
+             method calls the <see
+             cref="M:System.ServiceModel.Security.Tokens.X509SecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.X509SecurityTokenParameters)" />
+
+             constructor.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -164,13 +307,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />.</para>
+          <para
+            >A new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CreateKeyIdentifierClause">
-      <MemberSignature Language="C#" Value="protected override System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClause (System.IdentityModel.Tokens.SecurityToken token, System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClause(class System.IdentityModel.Tokens.SecurityToken token, valuetype System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClause (System.IdentityModel.Tokens.SecurityToken token, System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClause(class System.IdentityModel.Tokens.SecurityToken token, valuetype System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -180,7 +334,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="token" Type="System.IdentityModel.Tokens.SecurityToken" />
-        <Parameter Name="referenceStyle" Type="System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle" />
+        <Parameter
+          Name="referenceStyle"
+          Type="System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -193,9 +350,18 @@
           <para>The security key identifier clause.</para>
         </returns>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />The token.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The token.</param
+        >
         <param name="referenceStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="HasAsymmetricKey">
@@ -221,8 +387,14 @@
       </Docs>
     </Member>
     <Member MemberName="InitializeSecurityTokenRequirement">
-      <MemberSignature Language="C#" Value="protected override void InitializeSecurityTokenRequirement (System.IdentityModel.Selectors.SecurityTokenRequirement requirement);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void InitializeSecurityTokenRequirement(class System.IdentityModel.Selectors.SecurityTokenRequirement requirement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void InitializeSecurityTokenRequirement (System.IdentityModel.Selectors.SecurityTokenRequirement requirement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance void InitializeSecurityTokenRequirement(class System.IdentityModel.Selectors.SecurityTokenRequirement requirement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -231,36 +403,71 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requirement" Type="System.IdentityModel.Selectors.SecurityTokenRequirement" />
+        <Parameter
+          Name="requirement"
+          Type="System.IdentityModel.Selectors.SecurityTokenRequirement"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following properties of the <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" /> are initialized:</para>
+          <para
+            >The following properties of the <see
+             cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+
+             are initialized:</para
+          >
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" /> = <see cref="P:System.IdentityModel.Tokens.SecurityTokenTypes.X509Certificate" />.</para>
+                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" />
+
+                 = <see
+                 cref="P:System.IdentityModel.Tokens.SecurityTokenTypes.X509Certificate" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.RequireCryptographicToken" /> = true.</para>
+                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.RequireCryptographicToken" />
+
+                 = true.</para
+              >
             </item>
           </list>
           <para>
-            <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.KeyType" /> = <see cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />.</para>
+            <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.KeyType" />
+
+             = <see
+             cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Initializes a security token requirement.</para>
         </summary>
         <param name="requirement">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SupportsClientAuthentication">
-      <MemberSignature Language="C#" Value="protected override bool SupportsClientAuthentication { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SupportsClientAuthentication" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool SupportsClientAuthentication { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool SupportsClientAuthentication"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -278,8 +485,14 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsClientWindowsIdentity">
-      <MemberSignature Language="C#" Value="protected override bool SupportsClientWindowsIdentity { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SupportsClientWindowsIdentity" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool SupportsClientWindowsIdentity { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool SupportsClientWindowsIdentity"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -297,8 +510,14 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsServerAuthentication">
-      <MemberSignature Language="C#" Value="protected override bool SupportsServerAuthentication { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SupportsServerAuthentication" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool SupportsServerAuthentication { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool SupportsServerAuthentication"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -317,7 +536,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -339,8 +561,14 @@
       </Docs>
     </Member>
     <Member MemberName="X509ReferenceStyle">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType X509ReferenceStyle { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType X509ReferenceStyle" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType X509ReferenceStyle { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Security.Tokens.X509KeyIdentifierClauseType X509ReferenceStyle"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

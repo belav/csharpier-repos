@@ -10,8 +10,7 @@
   </Base>
   <Docs>
     <summary>Describes the version number of the SVG specification that a generated SVG file will conform to.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
     <since version="cairo 1.2" />
   </Docs>
   <Members>

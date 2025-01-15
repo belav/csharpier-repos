@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="BuildProviderAppliesToAttribute" FullName="System.Web.Compilation.BuildProviderAppliesToAttribute">
-  <TypeSignature Language="C#" Value="public sealed class BuildProviderAppliesToAttribute : Attribute" />
+<Type
+  Name="BuildProviderAppliesToAttribute"
+  FullName="System.Web.Compilation.BuildProviderAppliesToAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class BuildProviderAppliesToAttribute : Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,9 +24,39 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Compilation.BuildProvider" /> class will parse and generate code during compilation for a resource with a specific file extension. The <see cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" /> attribute defines the location scope for which the <see cref="T:System.Web.Compilation.BuildProvider" /> object will be called. </para>
-      <para>By setting the <see cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" /> attribute, you can limit a <see cref="T:System.Web.Compilation.BuildProvider" /> object to certain reserved ASP.NET directories, such as \App_Code. </para>
-      <para>If you do not apply a <see cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" /> attribute to a <see cref="T:System.Web.Compilation.BuildProvider" /> class, the default is <see cref="F:System.Web.Compilation.BuildProviderAppliesTo.All" />.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Compilation.BuildProvider" />
+
+         class will parse and generate code during compilation for a resource with a specific file extension. The <see
+         cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" />
+
+         attribute defines the location scope for which the <see
+         cref="T:System.Web.Compilation.BuildProvider" />
+
+         object will be called. </para
+      >
+      <para
+        >By setting the <see
+         cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" />
+
+         attribute, you can limit a <see
+         cref="T:System.Web.Compilation.BuildProvider" />
+
+         object to certain reserved ASP.NET directories, such as \App_Code. </para
+      >
+      <para
+        >If you do not apply a <see
+         cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" />
+
+         attribute to a <see
+         cref="T:System.Web.Compilation.BuildProvider" />
+
+         class, the default is <see
+         cref="F:System.Web.Compilation.BuildProviderAppliesTo.All" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,7 +65,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BuildProviderAppliesToAttribute (System.Web.Compilation.BuildProviderAppliesTo appliesTo);" />
+      <MemberSignature
+        Language="C#"
+        Value="public BuildProviderAppliesToAttribute (System.Web.Compilation.BuildProviderAppliesTo appliesTo);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="appliesTo" Type="System.Web.Compilation.BuildProviderAppliesTo" />
@@ -39,17 +78,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" /> class that applies to the specified resource location. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" />
+
+             class that applies to the specified resource location. </para
+          >
         </summary>
         <param name="appliesTo">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Web.Compilation.BuildProviderAppliesTo" /> values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Web.Compilation.BuildProviderAppliesTo" />
+
+           values.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AppliesTo">
-      <MemberSignature Language="C#" Value="public System.Web.Compilation.BuildProviderAppliesTo AppliesTo { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Compilation.BuildProviderAppliesTo AppliesTo { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Compilation.BuildProviderAppliesTo</ReturnType>
@@ -60,7 +113,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that indicates where the specified <see cref="T:System.Web.Compilation.BuildProvider" /> class will be applied when a resource with the appropriate extension is found.</para>
+          <para
+            >Gets a value that indicates where the specified <see
+             cref="T:System.Web.Compilation.BuildProvider" />
+
+             class will be applied when a resource with the appropriate extension is found.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

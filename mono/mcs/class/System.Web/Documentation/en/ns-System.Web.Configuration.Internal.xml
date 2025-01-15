@@ -4,7 +4,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="N:System.Web.Configuration.Internal" /> namespace contains configuration types intended for internal use only.</para>
+      <para
+        >The <see
+         cref="N:System.Web.Configuration.Internal" />
+
+         namespace contains configuration types intended for internal use only.</para
+      >
     </summary>
   </Docs>
 </Namespace>

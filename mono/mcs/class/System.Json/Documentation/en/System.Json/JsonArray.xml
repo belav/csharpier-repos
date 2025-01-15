@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="JsonArray" FullName="System.Json.JsonArray">
-  <TypeSignature Language="C#" Value="public class JsonArray : System.Json.JsonValue, System.Collections.Generic.ICollection&lt;System.Json.JsonValue&gt;, System.Collections.Generic.IEnumerable&lt;System.Json.JsonValue&gt;, System.Collections.Generic.IList&lt;System.Json.JsonValue&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit JsonArray extends System.Json.JsonValue implements class System.Collections.Generic.ICollection`1&lt;class System.Json.JsonValue&gt;, class System.Collections.Generic.IEnumerable`1&lt;class System.Json.JsonValue&gt;, class System.Collections.Generic.IList`1&lt;class System.Json.JsonValue&gt;, class System.Collections.IEnumerable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class JsonArray : System.Json.JsonValue, System.Collections.Generic.ICollection<System.Json.JsonValue>, System.Collections.Generic.IEnumerable<System.Json.JsonValue>, System.Collections.Generic.IList<System.Json.JsonValue>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit JsonArray extends System.Json.JsonValue implements class System.Collections.Generic.ICollection`1<class System.Json.JsonValue>, class System.Collections.Generic.IEnumerable`1<class System.Json.JsonValue>, class System.Collections.Generic.IList`1<class System.Json.JsonValue>, class System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Json</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -29,28 +35,51 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public JsonArray (System.Collections.Generic.IEnumerable&lt;System.Json.JsonValue&gt; items);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;class System.Json.JsonValue&gt; items) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public JsonArray (System.Collections.Generic.IEnumerable<System.Json.JsonValue> items);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1<class System.Json.JsonValue> items) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="items" Type="System.Collections.Generic.IEnumerable&lt;System.Json.JsonValue&gt;" />
+        <Parameter
+          Name="items"
+          Type="System.Collections.Generic.IEnumerable<System.Json.JsonValue>"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonArray" /> class with the specified items.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonArray" />
+
+             class with the specified items.</para
+          >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />The enumeration of objects of type <see cref="T:System.Json.JsonValue" /> used to initialize the JavaScript Object Notation (JSON) array.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The enumeration of objects of type <see
+           cref="T:System.Json.JsonValue" />
+
+           used to initialize the JavaScript Object Notation (JSON) array.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonArray (System.Json.JsonValue[] items);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Json.JsonValue[] items) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Json.JsonValue[] items) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -68,15 +97,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonArray" /> class with the specified items.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonArray" />
+
+             class with the specified items.</para
+          >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array of type <see cref="T:System.Json.JsonValue" /> used to initialize the JavaScript Object Notation (JSON) array.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The array of type <see
+           cref="T:System.Json.JsonValue" />
+
+           used to initialize the JavaScript Object Notation (JSON) array.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Add">
       <MemberSignature Language="C#" Value="public void Add (System.Json.JsonValue item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Add(class System.Json.JsonValue item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Add(class System.Json.JsonValue item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -91,15 +134,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a <see cref="T:System.Json.JsonValue" /> object to the end of the array.</para>
+          <para
+            >Adds a <see
+             cref="T:System.Json.JsonValue" />
+
+             object to the end of the array.</para
+          >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Json.JsonValue" /> object to add.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Json.JsonValue" />
+
+           object to add.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public void AddRange (System.Collections.Generic.IEnumerable&lt;System.Json.JsonValue&gt; items);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddRange(class System.Collections.Generic.IEnumerable`1&lt;class System.Json.JsonValue&gt; items) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddRange (System.Collections.Generic.IEnumerable<System.Json.JsonValue> items);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AddRange(class System.Collections.Generic.IEnumerable`1<class System.Json.JsonValue> items) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -108,21 +168,38 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="items" Type="System.Collections.Generic.IEnumerable&lt;System.Json.JsonValue&gt;" />
+        <Parameter
+          Name="items"
+          Type="System.Collections.Generic.IEnumerable<System.Json.JsonValue>"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the elements from a collection of type <see cref="T:System.Json.JsonValue" /> to the array.</para>
+          <para
+            >Adds the elements from a collection of type <see
+             cref="T:System.Json.JsonValue" />
+
+             to the array.</para
+          >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />The collection of types to add.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The collection of types to add.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public void AddRange (System.Json.JsonValue[] items);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddRange(class System.Json.JsonValue[] items) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddRange (System.Json.JsonValue[] items);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AddRange(class System.Json.JsonValue[] items) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -143,15 +220,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the elements from an array of type <see cref="T:System.Json.JsonValue" /> to the array.</para>
+          <para
+            >Adds the elements from an array of type <see
+             cref="T:System.Json.JsonValue" />
+
+             to the array.</para
+          >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array of type <see cref="T:System.Json.JsonValue" /> to be added to the array.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The array of type <see
+           cref="T:System.Json.JsonValue" />
+
+           to be added to the array.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Clear">
       <MemberSignature Language="C#" Value="public void Clear ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Clear() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Clear() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -164,13 +255,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all JSON CLR types from the <see cref="T:System.Json.JsonArray" />.</para>
+          <para
+            >Removes all JSON CLR types from the <see
+             cref="T:System.Json.JsonArray" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Contains">
       <MemberSignature Language="C#" Value="public bool Contains (System.Json.JsonValue item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Contains(class System.Json.JsonValue item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Contains(class System.Json.JsonValue item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -185,19 +284,41 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether a specified JSON CLR type is in the <see cref="T:System.Json.JsonArray" />.</para>
+          <para
+            >Indicates whether a specified JSON CLR type is in the <see
+             cref="T:System.Json.JsonArray" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the item is found in the <see cref="T:System.Json.JsonArray" />; otherwise, false.</para>
+          <para
+            >true if the item is found in the <see
+             cref="T:System.Json.JsonArray" />
+
+            ; otherwise, false.</para
+          >
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Json.JsonValue" /> to check for in the array.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Json.JsonValue" />
+
+           to check for in the array.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo (System.Json.JsonValue[] array, int arrayIndex);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CopyTo(class System.Json.JsonValue[] array, int32 arrayIndex) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo (System.Json.JsonValue[] array, int arrayIndex);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void CopyTo(class System.Json.JsonValue[] array, int32 arrayIndex) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -216,9 +337,15 @@
           <para>Copies the contents of the current JSON CLR array instance into a specified destination array beginning at the specified index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The destination array to which the elements of the current array are copied.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The destination array to which the elements of the current array are copied.</param
+        >
         <param name="arrayIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in the destination array at which the copying of the elements of the JSON CLR array begins.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in the destination array at which the copying of the elements of the JSON CLR array begins.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Count">
@@ -236,13 +363,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of <see cref="T:System.Json.JsonValue" /> elements in the array.</para>
+          <para
+            >Gets the number of <see
+             cref="T:System.Json.JsonValue" />
+
+             elements in the array.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
       <MemberSignature Language="C#" Value="public int IndexOf (System.Json.JsonValue item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 IndexOf(class System.Json.JsonValue item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int32 IndexOf(class System.Json.JsonValue item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -264,12 +399,24 @@
           <para>The zero-based index of the first occurrence of item within the array, if found; otherwise, -1.</para>
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Json.JsonValue" /> object to look up.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Json.JsonValue" />
+
+           object to look up.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, System.Json.JsonValue item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Insert(int32 index, class System.Json.JsonValue item) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, System.Json.JsonValue item);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Insert(int32 index, class System.Json.JsonValue item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -288,9 +435,18 @@
           <para>Inserts a JSON CLR type into the array at a specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index at which the item should be inserted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index at which the item should be inserted.</param
+        >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Json.JsonValue" /> object to insert.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Json.JsonValue" />
+
+           object to insert.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsReadOnly">
@@ -308,13 +464,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that indicates whether the <see cref="T:System.Json.JsonArray" /> is read-only.</para>
+          <para
+            >Gets a value that indicates whether the <see
+             cref="T:System.Json.JsonArray" />
+
+             is read-only.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public override sealed System.Json.JsonValue this[int index] { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Json.JsonValue Item(int32)" />
+      <MemberSignature
+        Language="C#"
+        Value="public override sealed System.Json.JsonValue this[int index] { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Json.JsonValue Item(int32)"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -333,8 +500,14 @@
       </Docs>
     </Member>
     <Member MemberName="JsonType">
-      <MemberSignature Language="C#" Value="public override System.Json.JsonType JsonType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Json.JsonType JsonType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Json.JsonType JsonType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Json.JsonType JsonType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -353,7 +526,10 @@
     </Member>
     <Member MemberName="Remove">
       <MemberSignature Language="C#" Value="public bool Remove (System.Json.JsonValue item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Remove(class System.Json.JsonValue item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Remove(class System.Json.JsonValue item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -375,12 +551,18 @@
           <para>true if the item is successfully removed; otherwise, false. This method also returns false if the item was not found in the array.</para>
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The JSON value to remove from the array.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The JSON value to remove from the array.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
       <MemberSignature Language="C#" Value="public void RemoveAt (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RemoveAt(int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void RemoveAt(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -398,12 +580,18 @@
           <para>Removes the JSON value at a specified index of array.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index at which to remove the JSON value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index at which to remove the JSON value.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Save">
       <MemberSignature Language="C#" Value="public override void Save (System.IO.Stream stream);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Save(class System.IO.Stream stream) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Save(class System.IO.Stream stream) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -420,9 +608,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.IEnumerable&lt;System.Json.JsonValue&gt;.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.Generic.IEnumerator&lt;System.Json.JsonValue&gt; IEnumerable&lt;JsonValue&gt;.GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.Generic.IEnumerator`1&lt;class System.Json.JsonValue&gt; System.Collections.Generic.IEnumerable&lt;System.Json.JsonValue&gt;.GetEnumerator() cil managed" />
+    <Member MemberName="System.Collections.Generic.IEnumerable<System.Json.JsonValue>.GetEnumerator">
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.Generic.IEnumerator<System.Json.JsonValue> IEnumerable<JsonValue>.GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Collections.Generic.IEnumerator`1<class System.Json.JsonValue> System.Collections.Generic.IEnumerable<System.Json.JsonValue>.GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -438,8 +632,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -452,11 +652,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an enumerator that iterates through the <see cref="T:System.Json.JsonValue" /> objects in the array.</para>
+          <para
+            >Returns an enumerator that iterates through the <see
+             cref="T:System.Json.JsonValue" />
+
+             objects in the array.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An enumerator that iterates through the <see cref="T:System.Json.JsonValue" /> elements in the array.</para>
+          <para
+            >An enumerator that iterates through the <see
+             cref="T:System.Json.JsonValue" />
+
+             elements in the array.</para
+          >
         </returns>
       </Docs>
     </Member>

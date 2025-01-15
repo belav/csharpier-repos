@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataGridViewCellMouseEventHandler" FullName="System.Windows.Forms.DataGridViewCellMouseEventHandler">
-  <TypeSignature Language="C#" Value="public delegate void DataGridViewCellMouseEventHandler(object sender, DataGridViewCellMouseEventArgs e);" />
+<Type
+  Name="DataGridViewCellMouseEventHandler"
+  FullName="System.Windows.Forms.DataGridViewCellMouseEventHandler"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public delegate void DataGridViewCellMouseEventHandler(object sender, DataGridViewCellMouseEventArgs e);"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -21,7 +27,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventHandler" /> delegate handles the following <see cref="T:System.Windows.Forms.DataGridView" /> events:</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.DataGridViewCellMouseEventHandler" />
+
+         delegate handles the following <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         events:</para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -69,11 +83,26 @@
           </para>
         </item>
       </list>
-      <para>When you create a <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventHandler" /> delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html"><a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a></format>.</para>
+      <para
+        >When you create a <see
+         cref="T:System.Windows.Forms.DataGridViewCellMouseEventHandler" />
+
+         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
+         type="text/html">
+          <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the method that will handle mouse-related events raised by a <see cref="T:System.Windows.Forms.DataGridView" />.</para>
+      <para
+        >Represents the method that will handle mouse-related events raised by a <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+        .</para
+      >
     </summary>
   </Docs>
 </Type>

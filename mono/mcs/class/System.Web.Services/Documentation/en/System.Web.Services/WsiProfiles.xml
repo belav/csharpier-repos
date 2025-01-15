@@ -17,7 +17,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The WS-I organization publishes non-proprietary Web services specifications to promote the interoperability of Web services across platforms. This enumeration is used by the <see cref="P:System.Web.Services.WebServiceBindingAttribute.ConformsTo" /> property of the <see cref="T:System.Web.Services.WebServiceBindingAttribute" /> attribute to indicate the WSI specification to which the Web service claims to conform.</para>
+      <para
+        >The WS-I organization publishes non-proprietary Web services specifications to promote the interoperability of Web services across platforms. This enumeration is used by the <see
+         cref="P:System.Web.Services.WebServiceBindingAttribute.ConformsTo" />
+
+         property of the <see
+         cref="T:System.Web.Services.WebServiceBindingAttribute" />
+
+         attribute to indicate the WSI specification to which the Web service claims to conform.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

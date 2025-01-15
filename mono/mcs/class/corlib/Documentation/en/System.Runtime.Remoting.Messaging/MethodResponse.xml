@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MethodResponse" FullName="System.Runtime.Remoting.Messaging.MethodResponse">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class MethodResponse : System.Runtime.Remoting.Messaging.IInternalMessage, System.Runtime.Remoting.Messaging.IMethodReturnMessage, System.Runtime.Remoting.Messaging.ISerializationRootObject, System.Runtime.Serialization.ISerializable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit MethodResponse extends System.Object implements class System.Runtime.Remoting.Messaging.IInternalMessage, class System.Runtime.Remoting.Messaging.IMessage, class System.Runtime.Remoting.Messaging.IMethodMessage, class System.Runtime.Remoting.Messaging.IMethodReturnMessage, class System.Runtime.Remoting.Messaging.ISerializationRootObject, class System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class MethodResponse : System.Runtime.Remoting.Messaging.IInternalMessage, System.Runtime.Remoting.Messaging.IMethodReturnMessage, System.Runtime.Remoting.Messaging.ISerializationRootObject, System.Runtime.Serialization.ISerializable"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit MethodResponse extends System.Object implements class System.Runtime.Remoting.Messaging.IInternalMessage, class System.Runtime.Remoting.Messaging.IMessage, class System.Runtime.Remoting.Messaging.IMethodMessage, class System.Runtime.Remoting.Messaging.IMethodReturnMessage, class System.Runtime.Remoting.Messaging.ISerializationRootObject, class System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -38,20 +45,53 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> is generated as a result of a method called on a remote object, and is used to return the results of the method call back to the caller. The message includes a return value and out arguments. </para>
-      <para>The <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" /> interface.</para>
+      <para
+        >A <see
+         cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+         is generated as a result of a method called on a remote object, and is used to return the results of the method call back to the caller. The message includes a return value and out arguments. </para
+      >
+      <para
+        >The <see
+         cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
+         cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+         class directly; instead, use the <see
+         cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+
+         interface.</para
+      >
       <para>
-        <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> contains remoting data at the end of the message sink. A remoting server returns a <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> message to a client.</para>
+        <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+         contains remoting data at the end of the message sink. A remoting server returns a <see
+         cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+         message to a client.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Implements the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" /> interface to create a message that acts as a method response on a remote object.</para>
+      <para
+        >Implements the <see
+         cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+
+         interface to create a message that acts as a method response on a remote object.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public MethodResponse (System.Runtime.Remoting.Messaging.Header[] h1, System.Runtime.Remoting.Messaging.IMethodCallMessage mcm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Remoting.Messaging.Header[] h1, class System.Runtime.Remoting.Messaging.IMethodCallMessage mcm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public MethodResponse (System.Runtime.Remoting.Messaging.Header[] h1, System.Runtime.Remoting.Messaging.IMethodCallMessage mcm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Runtime.Remoting.Messaging.Header[] h1, class System.Runtime.Remoting.Messaging.IMethodCallMessage mcm) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -66,16 +106,41 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" /> interface.</para>
+          <para
+            >The <see
+             cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
+             cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+             class directly; instead, use the <see
+             cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> class from an array of remoting headers and a request message. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+             class from an array of remoting headers and a request message. </para
+          >
         </summary>
         <param name="h1">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of remoting headers that contains key/value pairs. This array is used to initialize <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> fields for headers that belong to the namespace "http://schemas.microsoft.com/clr/soap/messageProperties".</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of remoting headers that contains key/value pairs. This array is used to initialize <see
+           cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+           fields for headers that belong to the namespace "http://schemas.microsoft.com/clr/soap/messageProperties".</param
+        >
         <param name="mcm">
-          <attribution license="cc4" from="Microsoft" modified="false" />A request message that acts as a method call on a remote object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A request message that acts as a method call on a remote object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ArgCount">
@@ -128,7 +193,10 @@
     </Member>
     <Member MemberName="Exception">
       <MemberSignature Language="C#" Value="public Exception Exception { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Exception Exception" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Exception Exception"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -151,8 +219,14 @@
       </Docs>
     </Member>
     <Member MemberName="ExternalProperties">
-      <MemberSignature Language="C#" Value="protected System.Collections.IDictionary ExternalProperties;" />
-      <MemberSignature Language="ILAsm" Value=".field family class System.Collections.IDictionary ExternalProperties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected System.Collections.IDictionary ExternalProperties;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field family class System.Collections.IDictionary ExternalProperties"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -166,17 +240,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" /> field is also accessible through the <see cref="P:System.Runtime.Remoting.Messaging.MethodResponse.Properties" /> property.</para>
+          <para
+            >The <see
+             cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" />
+
+             field is also accessible through the <see
+             cref="P:System.Runtime.Remoting.Messaging.MethodResponse.Properties" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties. </para>
+          <para
+            >Specifies an <see
+             cref="T:System.Collections.IDictionary" />
+
+             interface that represents a collection of the remoting message's properties. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetArg">
       <MemberSignature Language="C#" Value="public object GetArg (int argNum);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object GetArg(int32 argNum) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object GetArg(int32 argNum) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -203,12 +293,18 @@
           <para>The method argument as an object.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the requested argument.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the requested argument.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetArgName">
       <MemberSignature Language="C#" Value="public string GetArgName (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetArgName(int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string GetArgName(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -235,12 +331,21 @@
           <para>The name of the method argument.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the requested argument.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the requested argument.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public virtual void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void GetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -257,21 +362,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Runtime.Remoting.Messaging.MethodResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> method throws a <see cref="T:System.NotSupportedException" />.</para>
+          <para
+            >The <see
+             cref="M:System.Runtime.Remoting.Messaging.MethodResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+             method throws a <see
+             cref="T:System.NotSupportedException" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Runtime.Remoting.Messaging.MethodResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> method is not implemented. </para>
+          <para
+            >The <see
+             cref="M:System.Runtime.Remoting.Messaging.MethodResponse.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+             method is not implemented. </para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />Data for serializing or deserializing the remote object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Data for serializing or deserializing the remote object.</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />Context of a certain serialized stream.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Context of a certain serialized stream.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetOutArg">
       <MemberSignature Language="C#" Value="public object GetOutArg (int argNum);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object GetOutArg(int32 argNum) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object GetOutArg(int32 argNum) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -298,12 +425,18 @@
           <para>The specified argument marked as a ref parameter or an out parameter.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the requested argument.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the requested argument.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetOutArgName">
       <MemberSignature Language="C#" Value="public string GetOutArgName (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetOutArgName(int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string GetOutArgName(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -330,7 +463,10 @@
           <para>The argument name, or null if the current method is not implemented.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the requested argument.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the requested argument.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="HasVarArgs">
@@ -358,8 +494,14 @@
       </Docs>
     </Member>
     <Member MemberName="HeaderHandler">
-      <MemberSignature Language="C#" Value="public virtual object HeaderHandler (System.Runtime.Remoting.Messaging.Header[] h);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object HeaderHandler(class System.Runtime.Remoting.Messaging.Header[] h) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual object HeaderHandler (System.Runtime.Remoting.Messaging.Header[] h);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object HeaderHandler(class System.Runtime.Remoting.Messaging.Header[] h) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -386,12 +528,24 @@
           <para>An internal serialization handler.</para>
         </returns>
         <param name="h">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of remoting headers that contain key/value pairs. This array is used to initialize <see cref="T:System.Runtime.Remoting.Messaging.MethodResponse" /> fields for headers that belong to the namespace "http://schemas.microsoft.com/clr/soap/messageProperties".</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of remoting headers that contain key/value pairs. This array is used to initialize <see
+           cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+           fields for headers that belong to the namespace "http://schemas.microsoft.com/clr/soap/messageProperties".</param
+        >
       </Docs>
     </Member>
     <Member MemberName="InternalProperties">
-      <MemberSignature Language="C#" Value="protected System.Collections.IDictionary InternalProperties;" />
-      <MemberSignature Language="ILAsm" Value=".field family class System.Collections.IDictionary InternalProperties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected System.Collections.IDictionary InternalProperties;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field family class System.Collections.IDictionary InternalProperties"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -406,13 +560,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties. </para>
+          <para
+            >Specifies an <see
+             cref="T:System.Collections.IDictionary" />
+
+             interface that represents a collection of the remoting message's properties. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="LogicalCallContext">
-      <MemberSignature Language="C#" Value="public System.Runtime.Remoting.Messaging.LogicalCallContext LogicalCallContext { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Runtime.Remoting.Messaging.LogicalCallContext LogicalCallContext" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Remoting.Messaging.LogicalCallContext LogicalCallContext { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Runtime.Remoting.Messaging.LogicalCallContext LogicalCallContext"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -430,13 +595,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" /> for the current method call. </para>
+          <para
+            >Gets the <see
+             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+
+             for the current method call. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="MethodBase">
-      <MemberSignature Language="C#" Value="public System.Reflection.MethodBase MethodBase { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Reflection.MethodBase MethodBase" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.MethodBase MethodBase { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Reflection.MethodBase MethodBase"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -454,7 +630,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Reflection.MethodBase" /> of the called method. </para>
+          <para
+            >Gets the <see
+             cref="T:System.Reflection.MethodBase" />
+
+             of the called method. </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -555,8 +736,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IDictionary Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.IDictionary Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IDictionary Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.IDictionary Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -570,11 +757,24 @@
         <value>To be added: an object of type 'Collections.IDictionary'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Runtime.Remoting.Messaging.MethodResponse.Properties" /> property returns the value of the <see cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" /> field.</para>
+          <para
+            >The <see
+             cref="P:System.Runtime.Remoting.Messaging.MethodResponse.Properties" />
+
+             property returns the value of the <see
+             cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" />
+
+             field.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an <see cref="T:System.Collections.IDictionary" /> interface that represents a collection of the remoting message's properties. </para>
+          <para
+            >Gets an <see
+             cref="T:System.Collections.IDictionary" />
+
+             interface that represents a collection of the remoting message's properties. </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -603,8 +803,14 @@
       </Docs>
     </Member>
     <Member MemberName="RootSetObjectData">
-      <MemberSignature Language="C#" Value="public void RootSetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext ctx);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void RootSetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext ctx) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RootSetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext ctx);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void RootSetObjectData(class System.Runtime.Serialization.SerializationInfo info, valuetype System.Runtime.Serialization.StreamingContext ctx) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -628,14 +834,26 @@
           <para>Sets method information from serialization settings. </para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data for serializing or deserializing the remote object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data for serializing or deserializing the remote object.</param
+        >
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />The context of a certain serialized stream.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The context of a certain serialized stream.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.Remoting.Messaging.IInternalMessage.TargetIdentity">
-      <MemberSignature Language="C#" Value="System.Runtime.Remoting.Identity System.Runtime.Remoting.Messaging.IInternalMessage.TargetIdentity { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Runtime.Remoting.Identity System.Runtime.Remoting.Messaging.IInternalMessage.TargetIdentity" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Runtime.Remoting.Identity System.Runtime.Remoting.Messaging.IInternalMessage.TargetIdentity { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Runtime.Remoting.Identity System.Runtime.Remoting.Messaging.IInternalMessage.TargetIdentity"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -652,8 +870,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.Remoting.Messaging.IInternalMessage.Uri">
-      <MemberSignature Language="C#" Value="string System.Runtime.Remoting.Messaging.IInternalMessage.Uri { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string System.Runtime.Remoting.Messaging.IInternalMessage.Uri" />
+      <MemberSignature
+        Language="C#"
+        Value="string System.Runtime.Remoting.Messaging.IInternalMessage.Uri { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string System.Runtime.Remoting.Messaging.IInternalMessage.Uri"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

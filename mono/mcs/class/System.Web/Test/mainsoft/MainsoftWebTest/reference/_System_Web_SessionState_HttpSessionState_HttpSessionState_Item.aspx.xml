@@ -7,11 +7,17 @@
   </div>
   <div id="GHTSubTest2" testname="GHTSubTest2">
     <span>
-      <br />var1</span>
+      <br />
+
+      var1</span
+    >
   </div>
   <div id="GHTSubTest3" testname="GHTSubTest3">
     <span>
-      <br />changed var1</span>
+      <br />
+
+      changed var1</span
+    >
   </div>
   <div id="GHTSubTest4" testname="GHTSubTest4">
     <span>
@@ -23,6 +29,9 @@
       <br />
     </span>
     <span>
-      <br />1</span>
+      <br />
+
+      1</span
+    >
   </div>
 </testresults>

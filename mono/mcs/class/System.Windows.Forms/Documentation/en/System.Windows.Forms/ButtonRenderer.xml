@@ -13,9 +13,38 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.ButtonRenderer" /> class provides a set of static methods that can be used to render a button control. Rendering a control refers to drawing the user interface of a control. To draw a button, use one of the <see cref="Overload:System.Windows.Forms.ButtonRenderer.DrawButton" /> methods. These methods provide a variety of options, such as drawing text or an image on the button.</para>
-      <para>If visual styles are enabled in the operating system and visual styles are applied to the current application, <see cref="Overload:System.Windows.Forms.ButtonRenderer.DrawButton" /> will draw the button with the current visual style. Otherwise, <see cref="Overload:System.Windows.Forms.ButtonRenderer.DrawButton" /> will draw the button with the classic Windows style. This is useful if you are drawing a custom control that should automatically match the current visual style setting of the operating system.</para>
-      <para>This class wraps the functionality of a <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" /> that is set to one of the elements exposed by the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton" /> class. For more information, see <format type="text/html"><a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a></format>.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.ButtonRenderer" />
+
+         class provides a set of static methods that can be used to render a button control. Rendering a control refers to drawing the user interface of a control. To draw a button, use one of the <see
+         cref="Overload:System.Windows.Forms.ButtonRenderer.DrawButton" />
+
+         methods. These methods provide a variety of options, such as drawing text or an image on the button.</para
+      >
+      <para
+        >If visual styles are enabled in the operating system and visual styles are applied to the current application, <see
+         cref="Overload:System.Windows.Forms.ButtonRenderer.DrawButton" />
+
+         will draw the button with the current visual style. Otherwise, <see
+         cref="Overload:System.Windows.Forms.ButtonRenderer.DrawButton" />
+
+         will draw the button with the classic Windows style. This is useful if you are drawing a custom control that should automatically match the current visual style setting of the operating system.</para
+      >
+      <para
+        >This class wraps the functionality of a <see
+         cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+         that is set to one of the elements exposed by the <see
+         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton" />
+
+         class. For more information, see <format
+         type="text/html">
+          <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -24,7 +53,10 @@
   </Docs>
   <Members>
     <Member MemberName="DrawButton">
-      <MemberSignature Language="C#" Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.VisualStyles.PushButtonState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.VisualStyles.PushButtonState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -45,18 +77,39 @@
           <para>Draws a button control in the specified state and bounds.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the button.</param
+        >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that specifies the bounds of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that specifies the bounds of the button.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" /> values that specifies the visual state of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+           values that specifies the visual state of the button.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawButton">
-      <MemberSignature Language="C#" Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -78,20 +131,44 @@
           <para>Draws a button control in the specified state and bounds, and with an optional focus rectangle.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the button.</param
+        >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that specifies the bounds of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that specifies the bounds of the button.</param
+        >
         <param name="focused">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to draw a focus rectangle on the button; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to draw a focus rectangle on the button; otherwise, false.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" /> values that specifies the visual state of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+           values that specifies the visual state of the button.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawButton">
-      <MemberSignature Language="C#" Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Drawing.Image image, System.Drawing.Rectangle imageBounds, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Drawing.Image image, System.Drawing.Rectangle imageBounds, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -115,24 +192,63 @@
           <para>Draws a button control in the specified state and bounds, with the specified image, and with an optional focus rectangle.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the button.</param
+        >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that specifies the bounds of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that specifies the bounds of the button.</param
+        >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Image" /> to draw on the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Image" />
+
+           to draw on the button.</param
+        >
         <param name="imageBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that represents the dimensions of <paramref name="image" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that represents the dimensions of <paramref
+           name="image" />
+
+          .</param
+        >
         <param name="focused">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to draw a focus rectangle on the button; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to draw a focus rectangle on the button; otherwise, false.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" /> values that specifies the visual state of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+           values that specifies the visual state of the button.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawButton">
-      <MemberSignature Language="C#" Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, string buttonText, System.Drawing.Font font, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, string buttonText, System.Drawing.Font font, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -156,24 +272,63 @@
           <para>Draws a button control in the specified state and bounds, with the specified text, and with an optional focus rectangle.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the button.</param
+        >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that specifies the bounds of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that specifies the bounds of the button.</param
+        >
         <param name="buttonText">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to draw on the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to draw on the button.</param
+        >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Font" /> to apply to <paramref name="buttonText" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Font" />
+
+           to apply to <paramref
+           name="buttonText" />
+
+          .</param
+        >
         <param name="focused">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to draw a focus rectangle on the button; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to draw a focus rectangle on the button; otherwise, false.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" /> values that specifies the visual state of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+           values that specifies the visual state of the button.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawButton">
-      <MemberSignature Language="C#" Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, string buttonText, System.Drawing.Font font, System.Windows.Forms.TextFormatFlags flags, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, string buttonText, System.Drawing.Font font, System.Windows.Forms.TextFormatFlags flags, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -198,26 +353,74 @@
           <para>Draws a button control in the specified state and bounds, with the specified text and text formatting, and with an optional focus rectangle.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the button.</param
+        >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that specifies the bounds of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that specifies the bounds of the button.</param
+        >
         <param name="buttonText">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to draw on the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to draw on the button.</param
+        >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Font" /> to apply to <paramref name="buttonText" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Font" />
+
+           to apply to <paramref
+           name="buttonText" />
+
+          .</param
+        >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the <see cref="T:System.Windows.Forms.TextFormatFlags" /> values to apply to <paramref name="buttonText" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the <see
+           cref="T:System.Windows.Forms.TextFormatFlags" />
+
+           values to apply to <paramref
+           name="buttonText" />
+
+          .</param
+        >
         <param name="focused">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to draw a focus rectangle on the button; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to draw a focus rectangle on the button; otherwise, false.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" /> values that specifies the visual state of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+           values that specifies the visual state of the button.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawButton">
-      <MemberSignature Language="C#" Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, string buttonText, System.Drawing.Font font, System.Drawing.Image image, System.Drawing.Rectangle imageBounds, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, string buttonText, System.Drawing.Font font, System.Drawing.Image image, System.Drawing.Rectangle imageBounds, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -243,28 +446,82 @@
           <para>Draws a button control in the specified state and bounds, with the specified text and image, and with an optional focus rectangle.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the button.</param
+        >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that specifies the bounds of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that specifies the bounds of the button.</param
+        >
         <param name="buttonText">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to draw on the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to draw on the button.</param
+        >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Font" /> to apply to <paramref name="buttonText" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Font" />
+
+           to apply to <paramref
+           name="buttonText" />
+
+          .</param
+        >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Image" /> to draw on the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Image" />
+
+           to draw on the button.</param
+        >
         <param name="imageBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that represents the dimensions of <paramref name="image" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that represents the dimensions of <paramref
+           name="image" />
+
+          .</param
+        >
         <param name="focused">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to draw a focus rectangle on the button; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to draw a focus rectangle on the button; otherwise, false.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" /> values that specifies the visual state of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+           values that specifies the visual state of the button.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawButton">
-      <MemberSignature Language="C#" Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, string buttonText, System.Drawing.Font font, System.Windows.Forms.TextFormatFlags flags, System.Drawing.Image image, System.Drawing.Rectangle imageBounds, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawButton (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, string buttonText, System.Drawing.Font font, System.Windows.Forms.TextFormatFlags flags, System.Drawing.Image image, System.Drawing.Rectangle imageBounds, bool focused, System.Windows.Forms.VisualStyles.PushButtonState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -291,30 +548,93 @@
           <para>Draws a button control in the specified state and bounds; with the specified text, text formatting, and image; and with an optional focus rectangle.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the button.</param
+        >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that specifies the bounds of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that specifies the bounds of the button.</param
+        >
         <param name="buttonText">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> to draw on the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           to draw on the button.</param
+        >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Font" /> to apply to <paramref name="buttonText" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Font" />
+
+           to apply to <paramref
+           name="buttonText" />
+
+          .</param
+        >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the <see cref="T:System.Windows.Forms.TextFormatFlags" /> values to apply to <paramref name="buttonText" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the <see
+           cref="T:System.Windows.Forms.TextFormatFlags" />
+
+           values to apply to <paramref
+           name="buttonText" />
+
+          .</param
+        >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Image" /> to draw on the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Image" />
+
+           to draw on the button.</param
+        >
         <param name="imageBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that represents the dimensions of <paramref name="image" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that represents the dimensions of <paramref
+           name="image" />
+
+          .</param
+        >
         <param name="focused">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to draw a focus rectangle on the button; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to draw a focus rectangle on the button; otherwise, false.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" /> values that specifies the visual state of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+           values that specifies the visual state of the button.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawParentBackground">
-      <MemberSignature Language="C#" Value="public static void DrawParentBackground (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.Control childControl);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void DrawParentBackground (System.Drawing.Graphics g, System.Drawing.Rectangle bounds, System.Windows.Forms.Control childControl);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -332,18 +652,39 @@
           <para>Draws the background of a control's parent in the specified area.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to draw the background of the parent of <paramref name="childControl" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to draw the background of the parent of <paramref
+           name="childControl" />
+
+          .</param
+        >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> in which to draw the parent control's background. This rectangle should be inside the child control’s bounds.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           in which to draw the parent control's background. This rectangle should be inside the child control’s bounds.</param
+        >
         <param name="childControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />The control whose parent's background will be drawn.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The control whose parent's background will be drawn.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsBackgroundPartiallyTransparent">
-      <MemberSignature Language="C#" Value="public static bool IsBackgroundPartiallyTransparent (System.Windows.Forms.VisualStyles.PushButtonState state);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsBackgroundPartiallyTransparent (System.Windows.Forms.VisualStyles.PushButtonState state);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -363,14 +704,23 @@
           <para>true if the background of the button has semitransparent or alpha-blended pieces; otherwise, false.</para>
         </returns>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" /> values that specifies the visual state of the button.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+           values that specifies the visual state of the button.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RenderMatchingApplicationState">
-      <MemberSignature Language="C#" Value="public static bool RenderMatchingApplicationState { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool RenderMatchingApplicationState { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -380,7 +730,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Windows.Forms.ButtonRenderer.RenderMatchingApplicationState" /> property is true, the <see cref="T:System.Windows.Forms.ButtonRenderer" /> uses the setting from the <see cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" /> property to determine the rendering style. If <see cref="P:System.Windows.Forms.ButtonRenderer.RenderMatchingApplicationState" /> is false, the renderer will always render using visual styles.</para>
+          <para
+            >If the <see
+             cref="P:System.Windows.Forms.ButtonRenderer.RenderMatchingApplicationState" />
+
+             property is true, the <see
+             cref="T:System.Windows.Forms.ButtonRenderer" />
+
+             uses the setting from the <see
+             cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
+
+             property to determine the rendering style. If <see
+             cref="P:System.Windows.Forms.ButtonRenderer.RenderMatchingApplicationState" />
+
+             is false, the renderer will always render using visual styles.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

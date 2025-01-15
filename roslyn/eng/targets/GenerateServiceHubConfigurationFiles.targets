@@ -4,17 +4,14 @@
   <PropertyGroup>
     <RoslynPackageGuid>6cf2e545-6109-4730-8883-cf43d7aec3e1</RoslynPackageGuid>
   </PropertyGroup>
-
   <PropertyGroup>
     <GetVsixSourceItemsDependsOn>$(GetVsixSourceItemsDependsOn);GenerateServiceHubConfigurationFiles</GetVsixSourceItemsDependsOn>
   </PropertyGroup>
-
   <Target Name="CalculateServiceHubConfigurationFiles">
     <ItemGroup Condition="'$(ServiceHubHostRuntime)'=='desktop'">
       <_ServicesWithSuffix Include="@(ServiceHubService)" FileSuffix="64" HostIdSuffix="" />
-      <_ServicesWithSuffix Include="@(ServiceHubService)" FileSuffix="64S" HostIdSuffix="S" />  
-
-      <ServiceHubServiceJsonFile Include="$(IntermediateOutputPath)%(_ServicesWithSuffix.Identity)%(_ServicesWithSuffix.FileSuffix).servicehub.service.json" >
+      <_ServicesWithSuffix Include="@(ServiceHubService)" FileSuffix="64S" HostIdSuffix="S" />
+      <ServiceHubServiceJsonFile Include="$(IntermediateOutputPath)%(_ServicesWithSuffix.Identity)%(_ServicesWithSuffix.FileSuffix).servicehub.service.json">
         <Content>
           <![CDATA[{
   "host": "netfx.anycpu",
@@ -32,12 +29,10 @@
         </Content>
       </ServiceHubServiceJsonFile>
     </ItemGroup>
-
     <ItemGroup Condition="'$(ServiceHubHostRuntime)'=='core'">
       <_ServicesWithSuffix Include="@(ServiceHubService)" FileSuffix="Core64" HostIdSuffix="" />
-      <_ServicesWithSuffix Include="@(ServiceHubService)" FileSuffix="Core64S" HostIdSuffix="S" />      
-
-      <ServiceHubServiceJsonFile Include="$(IntermediateOutputPath)%(_ServicesWithSuffix.Identity)%(_ServicesWithSuffix.FileSuffix).servicehub.service.json" >
+      <_ServicesWithSuffix Include="@(ServiceHubService)" FileSuffix="Core64S" HostIdSuffix="S" />
+      <ServiceHubServiceJsonFile Include="$(IntermediateOutputPath)%(_ServicesWithSuffix.Identity)%(_ServicesWithSuffix.FileSuffix).servicehub.service.json">
         <Content>
           <![CDATA[{
   "host": "dotnet",
@@ -54,17 +49,20 @@
       </ServiceHubServiceJsonFile>
     </ItemGroup>
   </Target>
-
-  <Target Name="GenerateServiceHubConfigurationFiles"
-          DependsOnTargets="CalculateServiceHubConfigurationFiles"
-          BeforeTargets="CreateVsixContainer"
-          Inputs="$(MSBuildAllProjects)"
-          Outputs="@(ServiceHubServiceJsonFile)">
-
-    <WriteLinesToFile File="%(ServiceHubServiceJsonFile.Identity)" Lines="%(ServiceHubServiceJsonFile.Content)" Overwrite="true"/>
-
+  <Target
+    Name="GenerateServiceHubConfigurationFiles"
+    DependsOnTargets="CalculateServiceHubConfigurationFiles"
+    BeforeTargets="CreateVsixContainer"
+    Inputs="$(MSBuildAllProjects)"
+    Outputs="@(ServiceHubServiceJsonFile)"
+  >
+    <WriteLinesToFile
+      File="%(ServiceHubServiceJsonFile.Identity)"
+      Lines="%(ServiceHubServiceJsonFile.Content)"
+      Overwrite="true"
+    />
     <ItemGroup>
-      <FileWrites Include="@(ServiceHubServiceJsonFile->'%(Identity)')"/>
+      <FileWrites Include="@(ServiceHubServiceJsonFile->'%(Identity)')" />
       <VSIXSourceItem Include="@(ServiceHubServiceJsonFile->'%(Identity)')" />
     </ItemGroup>
   </Target>

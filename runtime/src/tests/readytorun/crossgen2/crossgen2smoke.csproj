@@ -2,7 +2,6 @@
   <PropertyGroup>
     <!-- ilasm round-trip testing doesn't make sense for this test -->
     <IlasmRoundTripIncompatible>true</IlasmRoundTripIncompatible>
-
     <!-- This is an explicit crossgen test -->
     <AlwaysUseCrossGen2>true</AlwaysUseCrossGen2>
   </PropertyGroup>

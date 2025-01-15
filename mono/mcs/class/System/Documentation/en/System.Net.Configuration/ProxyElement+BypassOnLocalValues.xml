@@ -1,6 +1,12 @@
-<Type Name="ProxyElement+BypassOnLocalValues" FullName="System.Net.Configuration.ProxyElement+BypassOnLocalValues">
+<Type
+  Name="ProxyElement+BypassOnLocalValues"
+  FullName="System.Net.Configuration.ProxyElement+BypassOnLocalValues"
+>
   <TypeSignature Language="C#" Value="public enum ProxyElement.BypassOnLocalValues" />
-  <TypeSignature Language="ILAsm" Value=".class nested public auto ansi sealed ProxyElement/BypassOnLocalValues extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested public auto ansi sealed ProxyElement/BypassOnLocalValues extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -17,7 +23,10 @@
   <Members>
     <Member MemberName="False">
       <MemberSignature Language="C#" Value="False" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Configuration.ProxyElement/BypassOnLocalValues False = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Configuration.ProxyElement/BypassOnLocalValues False = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -33,7 +42,10 @@
     </Member>
     <Member MemberName="True">
       <MemberSignature Language="C#" Value="True" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Configuration.ProxyElement/BypassOnLocalValues True = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Configuration.ProxyElement/BypassOnLocalValues True = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -49,7 +61,10 @@
     </Member>
     <Member MemberName="Unspecified">
       <MemberSignature Language="C#" Value="Unspecified" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Configuration.ProxyElement/BypassOnLocalValues Unspecified = int32(-1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Configuration.ProxyElement/BypassOnLocalValues Unspecified = int32(-1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

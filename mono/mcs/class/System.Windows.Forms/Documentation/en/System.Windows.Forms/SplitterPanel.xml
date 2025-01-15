@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SplitterPanel" FullName="System.Windows.Forms.SplitterPanel">
-  <TypeSignature Language="C#" Value="public sealed class SplitterPanel : System.Windows.Forms.Panel" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SplitterPanel : System.Windows.Forms.Panel"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -30,16 +33,44 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.SplitterPanel" /> is a member of its associated <see cref="T:System.Windows.Forms.SplitContainer" /> rather than being a member of the underlying form. At design time, the <see cref="T:System.Windows.Forms.SplitterPanel" /> is accessible through the <see cref="P:System.Windows.Forms.SplitContainer.Panel1" /> or <see cref="P:System.Windows.Forms.SplitContainer.Panel2" /> properties of <see cref="T:System.Windows.Forms.SplitContainer" />.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.SplitterPanel" />
+
+         is a member of its associated <see
+         cref="T:System.Windows.Forms.SplitContainer" />
+
+         rather than being a member of the underlying form. At design time, the <see
+         cref="T:System.Windows.Forms.SplitterPanel" />
+
+         is accessible through the <see
+         cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+         or <see
+         cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+         properties of <see
+         cref="T:System.Windows.Forms.SplitContainer" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Creates a panel that is associated with a <see cref="T:System.Windows.Forms.SplitContainer" />.</para>
+      <para
+        >Creates a panel that is associated with a <see
+         cref="T:System.Windows.Forms.SplitContainer" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SplitterPanel (System.Windows.Forms.SplitContainer owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SplitterPanel (System.Windows.Forms.SplitContainer owner);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="owner" Type="System.Windows.Forms.SplitContainer" />
@@ -49,17 +80,37 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.SplitterPanel" /> class with its specified <see cref="T:System.Windows.Forms.SplitContainer" />. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+             class with its specified <see
+             cref="T:System.Windows.Forms.SplitContainer" />
+
+            . </para
+          >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.SplitContainer" /> that contains the <see cref="T:System.Windows.Forms.SplitterPanel" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.SplitContainer" />
+
+           that contains the <see
+           cref="T:System.Windows.Forms.SplitterPanel" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Anchor">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.AnchorStyles Anchor { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.AnchorStyles Anchor { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -84,7 +135,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets how a <see cref="T:System.Windows.Forms.SplitterPanel" /> attaches to the edges of the <see cref="T:System.Windows.Forms.SplitContainer" />. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets how a <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+             attaches to the edges of the <see
+             cref="T:System.Windows.Forms.SplitContainer" />
+
+            . This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -117,7 +176,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.SplitterPanel" /> is automatically resized to display its entire contents. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets a value indicating whether the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+             is automatically resized to display its entire contents. This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -153,7 +217,10 @@
       </Docs>
     </Member>
     <Member MemberName="AutoSizeMode">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AutoSizeMode AutoSizeMode { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AutoSizeMode AutoSizeMode { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -183,12 +250,23 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Enables the <see cref="T:System.Windows.Forms.SplitterPanel" /> to shrink when <see cref="P:System.Windows.Forms.SplitterPanel.AutoSize" /> is true. This property is not relevant to this class.</para>
+          <para
+            >Enables the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+             to shrink when <see
+             cref="P:System.Windows.Forms.SplitterPanel.AutoSize" />
+
+             is true. This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BorderStyle">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.BorderStyle BorderStyle { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.BorderStyle BorderStyle { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -213,7 +291,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the border style for the <see cref="T:System.Windows.Forms.SplitterPanel" />. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets the border style for the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+            . This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -221,7 +304,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DefaultMargin">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.Padding DefaultMargin { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.Padding DefaultMargin { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -236,7 +322,10 @@
       </Docs>
     </Member>
     <Member MemberName="Dock">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.DockStyle Dock { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.DockStyle Dock { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -261,7 +350,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets which edge of the <see cref="T:System.Windows.Forms.SplitContainer" /> that the <see cref="T:System.Windows.Forms.SplitterPanel" /> is docked to. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets which edge of the <see
+             cref="T:System.Windows.Forms.SplitContainer" />
+
+             that the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+             is docked to. This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -291,16 +388,31 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This event is not relevant to this class. For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >This event is not relevant to this class. For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.SplitterPanel.Dock" /> property changes. This event is not relevant to this class.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.SplitterPanel.Dock" />
+
+             property changes. This event is not relevant to this class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="DockPadding">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ScrollableControl.DockPaddingEdges DockPadding { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ScrollableControl.DockPaddingEdges DockPadding { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -325,7 +437,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the internal spacing between the <see cref="T:System.Windows.Forms.SplitterPanel" /> and its edges. This property is not relevant to this class.</para>
+          <para
+            >Gets the internal spacing between the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+             and its edges. This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -355,7 +472,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the height of the <see cref="T:System.Windows.Forms.SplitterPanel" />.</para>
+          <para
+            >Gets or sets the height of the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -388,7 +510,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the coordinates of the upper-left corner of the <see cref="T:System.Windows.Forms.SplitterPanel" /> relative to the upper-left corner of its <see cref="T:System.Windows.Forms.SplitContainer" />. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets the coordinates of the upper-left corner of the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+             relative to the upper-left corner of its <see
+             cref="T:System.Windows.Forms.SplitContainer" />
+
+            . This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -418,11 +548,23 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This event is not relevant to this class. For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>.</para>
+          <para
+            >This event is not relevant to this class. For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.SplitterPanel.Location" /> property changes. This event is not relevant to this class.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.SplitterPanel.Location" />
+
+             property changes. This event is not relevant to this class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -452,7 +594,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the size that is the upper limit that <see cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" /> can specify. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets the size that is the upper limit that <see
+             cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" />
+
+             can specify. This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -485,7 +632,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the size that is the lower limit that <see cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" /> can specify. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets the size that is the lower limit that <see
+             cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" />
+
+             can specify. This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -518,7 +670,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The name of this <see cref="T:System.Windows.Forms.SplitterPanel" />. This property is not relevant to this class.</para>
+          <para
+            >The name of this <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+            . This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -526,7 +683,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Parent">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.Control Parent { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.Control Parent { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -551,7 +711,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Windows.Forms.SplitContainer" /> that contains this <see cref="T:System.Windows.Forms.SplitterPanel" />. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Windows.Forms.SplitContainer" />
+
+             that contains this <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+            . This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -584,7 +752,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the height and width of the <see cref="T:System.Windows.Forms.SplitterPanel" />. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets the height and width of the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+            . This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -617,7 +790,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the tab order of the <see cref="T:System.Windows.Forms.SplitterPanel" /> within its <see cref="T:System.Windows.Forms.SplitContainer" />. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets the tab order of the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+             within its <see
+             cref="T:System.Windows.Forms.SplitContainer" />
+
+            . This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -647,11 +828,23 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This event is not relevant to this class. For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>.</para>
+          <para
+            >This event is not relevant to this class. For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.SplitterPanel.TabIndex" /> property changes. This event is not relevant to this class.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.SplitterPanel.TabIndex" />
+
+             property changes. This event is not relevant to this class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -681,7 +874,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the user can give the focus to this <see cref="T:System.Windows.Forms.SplitterPanel" /> using the TAB key. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets a value indicating whether the user can give the focus to this <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+             using the TAB key. This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -711,11 +909,23 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This event is not relevant to this class. For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>.</para>
+          <para
+            >This event is not relevant to this class. For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.SplitterPanel.TabStop" /> property changes. This event is not relevant to this class.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.SplitterPanel.TabStop" />
+
+             property changes. This event is not relevant to this class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -745,7 +955,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.SplitterPanel" /> is displayed. This property is not relevant to this class.</para>
+          <para
+            >Gets or sets a value indicating whether the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+             is displayed. This property is not relevant to this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -775,11 +990,23 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This event is not relevant to this class. For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>.</para>
+          <para
+            >This event is not relevant to this class. For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.SplitterPanel.Visible" /> property changes. This event is not relevant to this class.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.SplitterPanel.Visible" />
+
+             property changes. This event is not relevant to this class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -806,7 +1033,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the width of the <see cref="T:System.Windows.Forms.SplitterPanel" />.</para>
+          <para
+            >Gets or sets the width of the <see
+             cref="T:System.Windows.Forms.SplitterPanel" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

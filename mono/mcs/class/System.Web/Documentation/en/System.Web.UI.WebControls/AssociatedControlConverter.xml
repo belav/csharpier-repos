@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="AssociatedControlConverter" FullName="System.Web.UI.WebControls.AssociatedControlConverter">
-  <TypeSignature Language="C#" Value="public class AssociatedControlConverter : System.Web.UI.WebControls.ControlIDConverter" />
+<Type
+  Name="AssociatedControlConverter"
+  FullName="System.Web.UI.WebControls.AssociatedControlConverter"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class AssociatedControlConverter : System.Web.UI.WebControls.ControlIDConverter"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,12 +19,46 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.AssociatedControlConverter" /> class derives from the <see cref="T:System.Web.UI.WebControls.ControlIDConverter" /> class and provides a type converter specifically for controls that derive from the <see cref="T:System.Web.UI.WebControls.WebControl" /> class. It is used by the <see cref="P:System.Web.UI.WebControls.Label.AssociatedControlID" /> property of the <see cref="T:System.Web.UI.WebControls.Label" /> control.</para>
-      <para>For more information about type converters, see <format type="text/html"><a href="90373A3F-D8C8-492D-841C-945D62393C56">How to: Implement a Type Converter</a></format> or <format type="text/html"><a href="49253AE6-7657-4810-82AB-1176A6FEEADA">Generalized Type Conversion</a></format>.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.AssociatedControlConverter" />
+
+         class derives from the <see
+         cref="T:System.Web.UI.WebControls.ControlIDConverter" />
+
+         class and provides a type converter specifically for controls that derive from the <see
+         cref="T:System.Web.UI.WebControls.WebControl" />
+
+         class. It is used by the <see
+         cref="P:System.Web.UI.WebControls.Label.AssociatedControlID" />
+
+         property of the <see
+         cref="T:System.Web.UI.WebControls.Label" />
+
+         control.</para
+      >
+      <para
+        >For more information about type converters, see <format
+         type="text/html">
+          <a href="90373A3F-D8C8-492D-841C-945D62393C56">How to: Implement a Type Converter</a>
+        </format>
+
+         or <format
+         type="text/html">
+          <a href="49253AE6-7657-4810-82AB-1176A6FEEADA">Generalized Type Conversion</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides a type converter that retrieves a list of <see cref="T:System.Web.UI.WebControls.WebControl" /> controls in the current container.</para>
+      <para
+        >Provides a type converter that retrieves a list of <see
+         cref="T:System.Web.UI.WebControls.WebControl" />
+
+         controls in the current container.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,11 +70,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Note  You should never access a type converter directly. Instead, call the appropriate converter by using a <see cref="T:System.ComponentModel.TypeDescriptor" /> object. For more information, see the examples in <see cref="T:System.ComponentModel.TypeConverter" />.</para>
+          <para
+            >Note  You should never access a type converter directly. Instead, call the appropriate converter by using a <see
+             cref="T:System.ComponentModel.TypeDescriptor" />
+
+             object. For more information, see the examples in <see
+             cref="T:System.ComponentModel.TypeConverter" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.AssociatedControlConverter" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.WebControls.AssociatedControlConverter" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -42,7 +95,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FilterControl">
-      <MemberSignature Language="C#" Value="protected override bool FilterControl (System.Web.UI.Control control);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool FilterControl (System.Web.UI.Control control);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -55,14 +111,33 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether the provided control inherits from <see cref="T:System.Web.UI.WebControls.WebControl" />.</para>
+          <para
+            >Indicates whether the provided control inherits from <see
+             cref="T:System.Web.UI.WebControls.WebControl" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <paramref name="control" /> inherits from the <see cref="T:System.Web.UI.WebControls.WebControl" /> class; otherwise, false.</para>
+          <para
+            >true if the <paramref
+             name="control" />
+
+             inherits from the <see
+             cref="T:System.Web.UI.WebControls.WebControl" />
+
+             class; otherwise, false.</para
+          >
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />The control instance to test whether it is a <see cref="T:System.Web.UI.WebControls.WebControl" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The control instance to test whether it is a <see
+           cref="T:System.Web.UI.WebControls.WebControl" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

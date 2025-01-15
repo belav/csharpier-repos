@@ -1,9 +1,12 @@
 <Type Name="NativeFileChangeEventHandler" FullName="System.Web.Util.NativeFileChangeEventHandler">
-  <TypeSignature Language="C#" Value="public sealed delegate void NativeFileChangeEventHandler (object sender, int method);" Maintainer="auto" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed delegate void NativeFileChangeEventHandler (object sender, int method);"
+    Maintainer="auto"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <AssemblyCulture>neutral</AssemblyCulture>
     <Attributes>
@@ -24,7 +27,12 @@
       </Attribute>
     </Attributes>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Docs>
     <summary>To be added</summary>
     <remarks>To be added</remarks>

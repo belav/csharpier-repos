@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="AssemblyHashAlgorithm" FullName="System.Configuration.Assemblies.AssemblyHashAlgorithm">
   <TypeSignature Maintainer="auto" Language="C#" Value="public enum AssemblyHashAlgorithm" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed AssemblyHashAlgorithm extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed AssemblyHashAlgorithm extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -21,7 +24,28 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A <paramref name="hash function" /> <paramref name="H" /> is a transformation that takes an input <paramref name="m" /> and returns a fixed-size string, which is called the hash value <paramref name="h" /> (that is, <paramref name="h" /> = <paramref name="H" /> (<paramref name="m" />)). Hash functions with just this property have a variety of general computational uses, but when employed in cryptography, the hash functions are usually chosen to have some additional properties.</para>
+      <para
+        >A <paramref
+         name="hash function" />
+        <paramref name="H" />
+
+         is a transformation that takes an input <paramref
+         name="m" />
+
+         and returns a fixed-size string, which is called the hash value <paramref
+         name="h" />
+
+         (that is, <paramref
+         name="h" />
+
+         = <paramref
+         name="H" />
+
+         (<paramref
+         name="m" />
+
+        )). Hash functions with just this property have a variety of general computational uses, but when employed in cryptography, the hash functions are usually chosen to have some additional properties.</para
+      >
       <para>The basic requirements for a cryptographic hash function are: </para>
       <list type="bullet">
         <item>
@@ -32,15 +56,33 @@
         </item>
         <item>
           <para>
-            <paramref name="H" /> (<paramref name="x)" /> is relatively easy to compute for any given x.</para>
+            <paramref name="H" />
+
+             (<paramref
+             name="x)" />
+
+             is relatively easy to compute for any given x.</para
+          >
         </item>
         <item>
           <para>
-            <paramref name="H" /> (<paramref name="x" />) is one-way.</para>
+            <paramref name="H" />
+
+             (<paramref
+             name="x" />
+
+            ) is one-way.</para
+          >
         </item>
         <item>
           <para>
-            <paramref name="H" /> (<paramref name="x" />) is collision-free.</para>
+            <paramref name="H" />
+
+             (<paramref
+             name="x" />
+
+            ) is collision-free.</para
+          >
         </item>
       </list>
       <para>The hash value represents concisely the longer message or document from which it was computed; this value is called the message digest. You can think of a message digest as a digital fingerprint of the larger document. Examples of well-known hash functions are MD2 and and SHA.</para>
@@ -53,7 +95,10 @@
   <Members>
     <Member MemberName="MD5">
       <MemberSignature Language="C#" Value="MD5" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm MD5 = int32(32771)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm MD5 = int32(32771)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -74,7 +119,10 @@
     </Member>
     <Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm None = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm None = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -95,7 +143,10 @@
     </Member>
     <Member MemberName="SHA1">
       <MemberSignature Language="C#" Value="SHA1" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm SHA1 = int32(32772)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm SHA1 = int32(32772)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -116,7 +167,10 @@
     </Member>
     <Member MemberName="SHA256">
       <MemberSignature Language="C#" Value="SHA256" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm SHA256 = int32(32780)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm SHA256 = int32(32780)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -133,7 +187,10 @@
     </Member>
     <Member MemberName="SHA384">
       <MemberSignature Language="C#" Value="SHA384" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm SHA384 = int32(32781)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm SHA384 = int32(32781)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -150,7 +207,10 @@
     </Member>
     <Member MemberName="SHA512">
       <MemberSignature Language="C#" Value="SHA512" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm SHA512 = int32(32782)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Configuration.Assemblies.AssemblyHashAlgorithm SHA512 = int32(32782)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

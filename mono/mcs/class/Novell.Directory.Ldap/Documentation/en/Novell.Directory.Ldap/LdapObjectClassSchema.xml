@@ -1,10 +1,12 @@
 <Type Name="LdapObjectClassSchema" FullName="Novell.Directory.Ldap.LdapObjectClassSchema">
-  <TypeSignature Language="C#" Value="public class LdapObjectClassSchema : Novell.Directory.Ldap.LdapSchemaElement, System.ICloneable, System.IComparable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapObjectClassSchema : Novell.Directory.Ldap.LdapSchemaElement, System.ICloneable, System.IComparable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -54,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapObjectClassSchema(string[] names, string oid, string[] superiors, string description, string[] required, string[] optional, int type, bool obsolete)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapObjectClassSchema(string[] names, string oid, string[] superiors, string description, string[] required, string[] optional, int type, bool obsolete)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="names" Type="System.String[]" />

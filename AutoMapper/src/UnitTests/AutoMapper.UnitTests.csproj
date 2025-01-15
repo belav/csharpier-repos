@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>net7.0</TargetFrameworks>
     <NoWarn>$(NoWarn);649;618</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\AutoMapper\AutoMapper.csproj" />
     <PackageReference Include="Shouldly" Version="4.0.3" />

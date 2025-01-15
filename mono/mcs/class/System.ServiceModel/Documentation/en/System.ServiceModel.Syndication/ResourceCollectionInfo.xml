@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ResourceCollectionInfo" FullName="System.ServiceModel.Syndication.ResourceCollectionInfo">
+<Type
+  Name="ResourceCollectionInfo"
+  FullName="System.ServiceModel.Syndication.ResourceCollectionInfo"
+>
   <TypeSignature Language="C#" Value="public class ResourceCollectionInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ResourceCollectionInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ResourceCollectionInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +26,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ResourceCollectionInfo ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +39,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" /> class. </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ResourceCollectionInfo (System.ServiceModel.Syndication.TextSyndicationContent title, Uri link);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Syndication.TextSyndicationContent title, class System.Uri link) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ResourceCollectionInfo (System.ServiceModel.Syndication.TextSyndicationContent title, Uri link);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Syndication.TextSyndicationContent title, class System.Uri link) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -49,17 +69,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" /> class. </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+             class. </para
+          >
         </summary>
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />The title of the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The title of the collection.</param
+        >
         <param name="link">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URI of the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URI of the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ResourceCollectionInfo (string title, Uri link);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string title, class System.Uri link) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ResourceCollectionInfo (string title, Uri link);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string title, class System.Uri link) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -72,17 +109,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" /> class. </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+             class. </para
+          >
         </summary>
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />The title of the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The title of the collection.</param
+        >
         <param name="link">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URI of the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URI of the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ResourceCollectionInfo (System.ServiceModel.Syndication.TextSyndicationContent title, Uri link, System.Collections.Generic.IEnumerable&lt;System.ServiceModel.Syndication.CategoriesDocument&gt; categories, bool allowsNewEntries);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Syndication.TextSyndicationContent title, class System.Uri link, class System.Collections.Generic.IEnumerable`1&lt;class System.ServiceModel.Syndication.CategoriesDocument&gt; categories, bool allowsNewEntries) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ResourceCollectionInfo (System.ServiceModel.Syndication.TextSyndicationContent title, Uri link, System.Collections.Generic.IEnumerable<System.ServiceModel.Syndication.CategoriesDocument> categories, bool allowsNewEntries);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Syndication.TextSyndicationContent title, class System.Uri link, class System.Collections.Generic.IEnumerable`1<class System.ServiceModel.Syndication.CategoriesDocument> categories, bool allowsNewEntries) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -90,7 +144,10 @@
       <Parameters>
         <Parameter Name="title" Type="System.ServiceModel.Syndication.TextSyndicationContent" />
         <Parameter Name="link" Type="System.Uri" />
-        <Parameter Name="categories" Type="System.Collections.Generic.IEnumerable&lt;System.ServiceModel.Syndication.CategoriesDocument&gt;" />
+        <Parameter
+          Name="categories"
+          Type="System.Collections.Generic.IEnumerable<System.ServiceModel.Syndication.CategoriesDocument>"
+        />
         <Parameter Name="allowsNewEntries" Type="System.Boolean" />
       </Parameters>
       <Docs>
@@ -100,21 +157,44 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" /> class. </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+             class. </para
+          >
         </summary>
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />The title of the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The title of the collection.</param
+        >
         <param name="link">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URI of the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URI of the collection.</param
+        >
         <param name="categories">
-          <attribution license="cc4" from="Microsoft" modified="false" />A collection of categories documents.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A collection of categories documents.</param
+        >
         <param name="allowsNewEntries">
-          <attribution license="cc4" from="Microsoft" modified="false" />A value that specifies whether new &lt;accept&gt; elements can be added to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A value that specifies whether new &lt;accept&gt; elements can be added to the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ResourceCollectionInfo (System.ServiceModel.Syndication.TextSyndicationContent title, Uri link, System.Collections.Generic.IEnumerable&lt;System.ServiceModel.Syndication.CategoriesDocument&gt; categories, System.Collections.Generic.IEnumerable&lt;string&gt; accepts);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Syndication.TextSyndicationContent title, class System.Uri link, class System.Collections.Generic.IEnumerable`1&lt;class System.ServiceModel.Syndication.CategoriesDocument&gt; categories, class System.Collections.Generic.IEnumerable`1&lt;string&gt; accepts) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ResourceCollectionInfo (System.ServiceModel.Syndication.TextSyndicationContent title, Uri link, System.Collections.Generic.IEnumerable<System.ServiceModel.Syndication.CategoriesDocument> categories, System.Collections.Generic.IEnumerable<string> accepts);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Syndication.TextSyndicationContent title, class System.Uri link, class System.Collections.Generic.IEnumerable`1<class System.ServiceModel.Syndication.CategoriesDocument> categories, class System.Collections.Generic.IEnumerable`1<string> accepts) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -122,28 +202,54 @@
       <Parameters>
         <Parameter Name="title" Type="System.ServiceModel.Syndication.TextSyndicationContent" />
         <Parameter Name="link" Type="System.Uri" />
-        <Parameter Name="categories" Type="System.Collections.Generic.IEnumerable&lt;System.ServiceModel.Syndication.CategoriesDocument&gt;" />
-        <Parameter Name="accepts" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter
+          Name="categories"
+          Type="System.Collections.Generic.IEnumerable<System.ServiceModel.Syndication.CategoriesDocument>"
+        />
+        <Parameter Name="accepts" Type="System.Collections.Generic.IEnumerable<System.String>" />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" /> class. </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+             class. </para
+          >
         </summary>
         <param name="title">
-          <attribution license="cc4" from="Microsoft" modified="false" />The title of the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The title of the collection.</param
+        >
         <param name="link">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URI of the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URI of the collection.</param
+        >
         <param name="categories">
-          <attribution license="cc4" from="Microsoft" modified="false" />A collection of categories documents.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A collection of categories documents.</param
+        >
         <param name="accepts">
-          <attribution license="cc4" from="Microsoft" modified="false" />A collection of resource types that can be added to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A collection of resource types that can be added to the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Accepts">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;string&gt; Accepts { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.Collection`1&lt;string&gt; Accepts" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.Collection<string> Accepts { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.Collection`1<string> Accepts"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -161,8 +267,14 @@
       </Docs>
     </Member>
     <Member MemberName="AttributeExtensions">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.Dictionary&lt;System.Xml.XmlQualifiedName,string&gt; AttributeExtensions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.Dictionary`2&lt;class System.Xml.XmlQualifiedName, string&gt; AttributeExtensions" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName,string> AttributeExtensions { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.Dictionary`2<class System.Xml.XmlQualifiedName, string> AttributeExtensions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -194,13 +306,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets and sets the base URI for the <see cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" /> instance.</para>
+          <para
+            >Gets and sets the base URI for the <see
+             cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Categories">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;System.ServiceModel.Syndication.CategoriesDocument&gt; Categories { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.Collection`1&lt;class System.ServiceModel.Syndication.CategoriesDocument&gt; Categories" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.Collection<System.ServiceModel.Syndication.CategoriesDocument> Categories { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.Collection`1<class System.ServiceModel.Syndication.CategoriesDocument> Categories"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -213,13 +336,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of <see cref="T:System.ServiceModel.Syndication.CategoriesDocument" /> objects.</para>
+          <para
+            >Gets a collection of <see
+             cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+             objects.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CreateInlineCategoriesDocument">
-      <MemberSignature Language="C#" Value="protected virtual System.ServiceModel.Syndication.InlineCategoriesDocument CreateInlineCategoriesDocument ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.ServiceModel.Syndication.InlineCategoriesDocument CreateInlineCategoriesDocument() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.ServiceModel.Syndication.InlineCategoriesDocument CreateInlineCategoriesDocument ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.ServiceModel.Syndication.InlineCategoriesDocument CreateInlineCategoriesDocument() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -232,19 +366,35 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /> instance.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+             instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>
-Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />.
-</para>
+          <para
+            >
+Returns <see
+             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            .
+</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CreateReferencedCategoriesDocument">
-      <MemberSignature Language="C#" Value="protected virtual System.ServiceModel.Syndication.ReferencedCategoriesDocument CreateReferencedCategoriesDocument ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class System.ServiceModel.Syndication.ReferencedCategoriesDocument CreateReferencedCategoriesDocument() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.ServiceModel.Syndication.ReferencedCategoriesDocument CreateReferencedCategoriesDocument ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance class System.ServiceModel.Syndication.ReferencedCategoriesDocument CreateReferencedCategoriesDocument() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -257,19 +407,35 @@ Returns <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" /
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" /> instance.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />
+
+             instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>
-Returns <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />.
-</para>
+          <para
+            >
+Returns <see
+             cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />
+
+            .
+</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="ElementExtensions">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Syndication.SyndicationElementExtensionCollection ElementExtensions { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Syndication.SyndicationElementExtensionCollection ElementExtensions" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Syndication.SyndicationElementExtensionCollection ElementExtensions { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Syndication.SyndicationElementExtensionCollection ElementExtensions"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -311,8 +477,14 @@ Returns <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocumen
       </Docs>
     </Member>
     <Member MemberName="Title">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Syndication.TextSyndicationContent Title { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Syndication.TextSyndicationContent Title" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Syndication.TextSyndicationContent Title { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Syndication.TextSyndicationContent Title"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -330,8 +502,14 @@ Returns <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocumen
       </Docs>
     </Member>
     <Member MemberName="TryParseAttribute">
-      <MemberSignature Language="C#" Value="protected virtual bool TryParseAttribute (string name, string ns, string value, string version);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance bool TryParseAttribute(string name, string ns, string value, string version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual bool TryParseAttribute (string name, string ns, string value, string version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance bool TryParseAttribute(string name, string ns, string value, string version) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -353,23 +531,46 @@ Returns <see cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocumen
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>
-Returns <see cref="T:System.Boolean" />.
-</para>
+          <para
+            >
+Returns <see
+             cref="T:System.Boolean" />
+
+            .
+</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the element.</param
+        >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />The namespace of the element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The namespace of the element.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The attribute to parse.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The attribute to parse.</param
+        >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The syndication version to use when parsing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The syndication version to use when parsing.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="TryParseElement">
-      <MemberSignature Language="C#" Value="protected virtual bool TryParseElement (System.Xml.XmlReader reader, string version);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance bool TryParseElement(class System.Xml.XmlReader reader, string version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual bool TryParseElement (System.Xml.XmlReader reader, string version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance bool TryParseElement(class System.Xml.XmlReader reader, string version) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -389,19 +590,39 @@ Returns <see cref="T:System.Boolean" />.
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>
-Returns <see cref="T:System.Boolean" />.
-</para>
+          <para
+            >
+Returns <see
+             cref="T:System.Boolean" />
+
+            .
+</para
+          >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlReader" /> to read from.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlReader" />
+
+           to read from.</param
+        >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The syndication version to use when parsing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The syndication version to use when parsing.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="WriteAttributeExtensions">
-      <MemberSignature Language="C#" Value="protected virtual void WriteAttributeExtensions (System.Xml.XmlWriter writer, string version);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance void WriteAttributeExtensions(class System.Xml.XmlWriter writer, string version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void WriteAttributeExtensions (System.Xml.XmlWriter writer, string version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance void WriteAttributeExtensions(class System.Xml.XmlWriter writer, string version) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -417,17 +638,37 @@ Returns <see cref="T:System.Boolean" />.
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes the attribute extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para>
+          <para
+            >Writes the attribute extensions to the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+             using the specified syndication version.</para
+          >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlReader" /> to write to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlReader" />
+
+           to write to.</param
+        >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The syndication version to use when writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The syndication version to use when writing.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="WriteElementExtensions">
-      <MemberSignature Language="C#" Value="protected virtual void WriteElementExtensions (System.Xml.XmlWriter writer, string version);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance void WriteElementExtensions(class System.Xml.XmlWriter writer, string version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void WriteElementExtensions (System.Xml.XmlWriter writer, string version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig newslot virtual instance void WriteElementExtensions(class System.Xml.XmlWriter writer, string version) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -443,12 +684,26 @@ Returns <see cref="T:System.Boolean" />.
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes the element extensions to the specified <see cref="T:System.Xml.XmlWriter" /> using the specified syndication version.</para>
+          <para
+            >Writes the element extensions to the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+             using the specified syndication version.</para
+          >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlWriter" />
+
+           to write to.</param
+        >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The syndication version to use when writing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The syndication version to use when writing.</param
+        >
       </Docs>
     </Member>
   </Members>

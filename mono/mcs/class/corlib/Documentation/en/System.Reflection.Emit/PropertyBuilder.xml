@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="PropertyBuilder" FullName="System.Reflection.Emit.PropertyBuilder">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class PropertyBuilder : System.Reflection.PropertyInfo, System.Runtime.InteropServices._PropertyBuilder" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit PropertyBuilder extends System.Reflection.PropertyInfo implements class System.Runtime.InteropServices._PropertyBuilder" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public sealed class PropertyBuilder : System.Reflection.PropertyInfo, System.Runtime.InteropServices._PropertyBuilder"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit PropertyBuilder extends System.Reflection.PropertyInfo implements class System.Runtime.InteropServices._PropertyBuilder"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -41,8 +48,14 @@
   </Docs>
   <Members>
     <Member MemberName="AddOtherMethod">
-      <MemberSignature Language="C#" Value="public void AddOtherMethod (System.Reflection.Emit.MethodBuilder mdBuilder);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddOtherMethod(class System.Reflection.Emit.MethodBuilder mdBuilder) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddOtherMethod (System.Reflection.Emit.MethodBuilder mdBuilder);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AddOtherMethod(class System.Reflection.Emit.MethodBuilder mdBuilder) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -62,12 +75,21 @@
           <para>Adds one of the other methods associated with this property.</para>
         </summary>
         <param name="mdBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />A MethodBuilder object that represents the other method. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A MethodBuilder object that represents the other method. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public override System.Reflection.PropertyAttributes Attributes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Reflection.PropertyAttributes Attributes" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.PropertyAttributes Attributes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Reflection.PropertyAttributes Attributes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -136,7 +158,10 @@
     </Member>
     <Member MemberName="DeclaringType">
       <MemberSignature Language="C#" Value="public override Type DeclaringType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type DeclaringType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type DeclaringType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -156,8 +181,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetAccessors">
-      <MemberSignature Language="C#" Value="public override System.Reflection.MethodInfo[] GetAccessors (bool nonPublic);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.MethodInfo[] GetAccessors(bool nonPublic) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.MethodInfo[] GetAccessors (bool nonPublic);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.MethodInfo[] GetAccessors(bool nonPublic) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -184,12 +215,21 @@
           <para>An array of type MethodInfo containing the matching public or non-public accessors, or an empty array if matching accessors do not exist on this property.</para>
         </returns>
         <param name="nonPublic">
-          <attribution license="cc4" from="Microsoft" modified="false" />Indicates whether non-public methods should be returned in the MethodInfo array. true if non-public methods are to be included; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Indicates whether non-public methods should be returned in the MethodInfo array. true if non-public methods are to be included; otherwise, false. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
-      <MemberSignature Language="C#" Value="public override object[] GetCustomAttributes (bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object[] GetCustomAttributes(bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object[] GetCustomAttributes (bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object[] GetCustomAttributes(bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -216,12 +256,21 @@
           <para>An array of all the custom attributes.</para>
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />If true, walks up this property's inheritance chain to find the custom attributes </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          If true, walks up this property's inheritance chain to find the custom attributes </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
-      <MemberSignature Language="C#" Value="public override object[] GetCustomAttributes (Type attributeType, bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object[] GetCustomAttributes(class System.Type attributeType, bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object[] GetCustomAttributes (Type attributeType, bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object[] GetCustomAttributes(class System.Type attributeType, bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -242,21 +291,38 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of custom attributes identified by <see cref="T:System.Type" />.</para>
+          <para
+            >Returns an array of custom attributes identified by <see
+             cref="T:System.Type" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An array of custom attributes defined on this reflected member, or null if no attributes are defined on this member.</para>
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of custom attributes identified by type. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of custom attributes identified by type. </param
+        >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />If true, walks up this property's inheritance chain to find the custom attributes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          If true, walks up this property's inheritance chain to find the custom attributes. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetGetMethod">
-      <MemberSignature Language="C#" Value="public override System.Reflection.MethodInfo GetGetMethod (bool nonPublic);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.MethodInfo GetGetMethod(bool nonPublic) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.MethodInfo GetGetMethod (bool nonPublic);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.MethodInfo GetGetMethod(bool nonPublic) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -280,15 +346,35 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A MethodInfo object representing the get accessor for this property, if <paramref name="nonPublic" /> is true. Returns null if <paramref name="nonPublic" /> is false and the get accessor is non-public, or if <paramref name="nonPublic" /> is true but no get accessors exist.</para>
+          <para
+            >A MethodInfo object representing the get accessor for this property, if <paramref
+             name="nonPublic" />
+
+             is true. Returns null if <paramref
+             name="nonPublic" />
+
+             is false and the get accessor is non-public, or if <paramref
+             name="nonPublic" />
+
+             is true but no get accessors exist.</para
+          >
         </returns>
         <param name="nonPublic">
-          <attribution license="cc4" from="Microsoft" modified="false" />Indicates whether non-public get accessors should be returned. true if non-public methods are to be included; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Indicates whether non-public get accessors should be returned. true if non-public methods are to be included; otherwise, false. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetIndexParameters">
-      <MemberSignature Language="C#" Value="public override System.Reflection.ParameterInfo[] GetIndexParameters ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.ParameterInfo[] GetIndexParameters() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.ParameterInfo[] GetIndexParameters ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.ParameterInfo[] GetIndexParameters() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -315,8 +401,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetSetMethod">
-      <MemberSignature Language="C#" Value="public override System.Reflection.MethodInfo GetSetMethod (bool nonPublic);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.MethodInfo GetSetMethod(bool nonPublic) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.MethodInfo GetSetMethod (bool nonPublic);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.MethodInfo GetSetMethod(bool nonPublic) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -353,12 +445,20 @@
             </listheader>
             <item>
               <term>
-                <para>A <see cref="T:System.Reflection.MethodInfo" /> object representing the Set method for this property. </para>
+                <para
+                  >A <see
+                   cref="T:System.Reflection.MethodInfo" />
+
+                   object representing the Set method for this property. </para
+                >
               </term>
               <description>
                 <para>The set accessor is public.</para>
                 <para>
-                  <paramref name="nonPublic" /> is true and non-public methods can be returned. </para>
+                  <paramref name="nonPublic" />
+
+                   is true and non-public methods can be returned. </para
+                >
               </description>
             </item>
             <item>
@@ -367,20 +467,35 @@
               </term>
               <description>
                 <para>
-                  <paramref name="nonPublic" /> is true, but the property is read-only.</para>
+                  <paramref name="nonPublic" />
+
+                   is true, but the property is read-only.</para
+                >
                 <para>
-                  <paramref name="nonPublic" /> is false and the set accessor is non-public. </para>
+                  <paramref name="nonPublic" />
+
+                   is false and the set accessor is non-public. </para
+                >
               </description>
             </item>
           </list>
         </returns>
         <param name="nonPublic">
-          <attribution license="cc4" from="Microsoft" modified="false" />Indicates whether the accessor should be returned if it is non-public. true if non-public methods are to be included; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Indicates whether the accessor should be returned if it is non-public. true if non-public methods are to be included; otherwise, false. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetValue">
-      <MemberSignature Language="C#" Value="public override object GetValue (object obj, object[] index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object GetValue(object obj, object[] index) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object GetValue (object obj, object[] index);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object GetValue(object obj, object[] index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -408,14 +523,26 @@
           <para>The value of the specified indexed property.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object whose property value will be returned. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object whose property value will be returned. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional index values for indexed properties. This value should be null for non-indexed properties. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional index values for indexed properties. This value should be null for non-indexed properties. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetValue">
-      <MemberSignature Language="C#" Value="public override object GetValue (object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, object[] index, System.Globalization.CultureInfo culture);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object GetValue(object obj, valuetype System.Reflection.BindingFlags invokeAttr, class System.Reflection.Binder binder, object[] index, class System.Globalization.CultureInfo culture) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object GetValue (object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, object[] index, System.Globalization.CultureInfo culture);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object GetValue(object obj, valuetype System.Reflection.BindingFlags invokeAttr, class System.Reflection.Binder binder, object[] index, class System.Globalization.CultureInfo culture) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -443,23 +570,52 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The property value for <paramref name="obj" />.</para>
+          <para
+            >The property value for <paramref
+             name="obj" />
+
+            .</para
+          >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object whose property value will be returned. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object whose property value will be returned. </param
+        >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set. </param
+        >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref name="binder" /> is null, the default binder is used. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref
+           name="binder" />
+
+           is null, the default binder is used. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional index values for indexed properties. This value should be null for non-indexed properties. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional index values for indexed properties. This value should be null for non-indexed properties. </param
+        >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />The CultureInfo object that represents the culture for which the resource is to be localized. Note that if the resource is not localized for this culture, the CultureInfo.Parent method will be called successively in search of a match. If this value is null, the CultureInfo is obtained from the CultureInfo.CurrentUICulture property. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The CultureInfo object that represents the culture for which the resource is to be localized. Note that if the resource is not localized for this culture, the CultureInfo.Parent method will be called successively in search of a match. If this value is null, the CultureInfo is obtained from the CultureInfo.CurrentUICulture property. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
-      <MemberSignature Language="C#" Value="public override bool IsDefined (Type attributeType, bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsDefined(class System.Type attributeType, bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool IsDefined (Type attributeType, bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsDefined(class System.Type attributeType, bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -480,21 +636,43 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether one or more instance of <paramref name="attributeType" /> is defined on this property.</para>
+          <para
+            >Indicates whether one or more instance of <paramref
+             name="attributeType" />
+
+             is defined on this property.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if one or more instance of <paramref name="attributeType" /> is defined on this property; otherwise false.</para>
+          <para
+            >true if one or more instance of <paramref
+             name="attributeType" />
+
+             is defined on this property; otherwise false.</para
+          >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Type object to which the custom attributes are applied. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Type object to which the custom attributes are applied. </param
+        >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether to walk up this property's inheritance chain to find the custom attributes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether to walk up this property's inheritance chain to find the custom attributes. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Module">
-      <MemberSignature Language="C#" Value="public override System.Reflection.Module Module { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Reflection.Module Module" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.Module Module { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Reflection.Module Module"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -508,7 +686,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is provided as a convenience for the user. It is equivalent to using the <see cref="P:System.Reflection.Emit.PropertyBuilder.DeclaringType" /> property to get the type in which the property is declared, and then calling the <see cref="P:System.Type.Module" /> property of the resulting <see cref="T:System.Type" /> object.</para>
+          <para
+            >This property is provided as a convenience for the user. It is equivalent to using the <see
+             cref="P:System.Reflection.Emit.PropertyBuilder.DeclaringType" />
+
+             property to get the type in which the property is declared, and then calling the <see
+             cref="P:System.Type.Module" />
+
+             property of the resulting <see
+             cref="T:System.Type" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -538,8 +727,14 @@
       </Docs>
     </Member>
     <Member MemberName="PropertyToken">
-      <MemberSignature Language="C#" Value="public System.Reflection.Emit.PropertyToken PropertyToken { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Reflection.Emit.PropertyToken PropertyToken" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.Emit.PropertyToken PropertyToken { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Reflection.Emit.PropertyToken PropertyToken"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -581,7 +776,10 @@
     </Member>
     <Member MemberName="ReflectedType">
       <MemberSignature Language="C#" Value="public override Type ReflectedType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type ReflectedType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type ReflectedType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -602,7 +800,10 @@
     </Member>
     <Member MemberName="SetConstant">
       <MemberSignature Language="C#" Value="public void SetConstant (object defaultValue);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetConstant(object defaultValue) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetConstant(object defaultValue) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -619,19 +820,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <paramref name="defaultValue" /> is restricted to the following types: Boolean, SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, UInt64, Single, Double, DateTime, Char, String, and Enum. If the property type is a reference type, CLS compliance requires <paramref name="defaultValue" /> to be null. However, starting with the net_v40_long, <paramref name="defaultValue" /> can be non-null for reference types as long as the value can be assigned to that reference type. For example, an Int32 value can be assigned to a property of type <see cref="T:System.Object" />. This is not CLS-compliant, but it can be useful in interop scenarios.</para>
+            <paramref name="defaultValue" />
+
+             is restricted to the following types: Boolean, SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, UInt64, Single, Double, DateTime, Char, String, and Enum. If the property type is a reference type, CLS compliance requires <paramref
+             name="defaultValue" />
+
+             to be null. However, starting with the net_v40_long, <paramref
+             name="defaultValue" />
+
+             can be non-null for reference types as long as the value can be assigned to that reference type. For example, an Int32 value can be assigned to a property of type <see
+             cref="T:System.Object" />
+
+            . This is not CLS-compliant, but it can be useful in interop scenarios.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Sets the default value of this property.</para>
         </summary>
         <param name="defaultValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The default value of this property. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The default value of this property. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
-      <MemberSignature Language="C#" Value="public void SetCustomAttribute (System.Reflection.Emit.CustomAttributeBuilder customBuilder);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetCustomAttribute(class System.Reflection.Emit.CustomAttributeBuilder customBuilder) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetCustomAttribute (System.Reflection.Emit.CustomAttributeBuilder customBuilder);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetCustomAttribute(class System.Reflection.Emit.CustomAttributeBuilder customBuilder) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -651,12 +873,21 @@
           <para>Set a custom attribute using a custom attribute builder.</para>
         </summary>
         <param name="customBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />An instance of a helper class to define the custom attribute. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An instance of a helper class to define the custom attribute. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetCustomAttribute">
-      <MemberSignature Language="C#" Value="public void SetCustomAttribute (System.Reflection.ConstructorInfo con, byte[] binaryAttribute);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetCustomAttribute(class System.Reflection.ConstructorInfo con, unsigned int8[] binaryAttribute) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetCustomAttribute (System.Reflection.ConstructorInfo con, byte[] binaryAttribute);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetCustomAttribute(class System.Reflection.ConstructorInfo con, unsigned int8[] binaryAttribute) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -678,21 +909,48 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref name="binaryAttribute" />. The Partition II documentation is available online on MSDN (<see cref="http://go.microsoft.com/fwlink/?linkid=65555">ECMA C# and Common Language Infrastructure Standards</see> Web page) and on the ECMA Web site (<see cref="http://go.microsoft.com/fwlink/?linkid=65552">Standard ECMA-335 Common Language Infrastructure</see> document). </para>
+          <para
+            >See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref
+             name="binaryAttribute" />
+
+            . The Partition II documentation is available online on MSDN (<see
+             cref="http://go.microsoft.com/fwlink/?linkid=65555"
+              >ECMA C# and Common Language Infrastructure Standards</see
+            >
+
+             Web page) and on the ECMA Web site (<see
+             cref="http://go.microsoft.com/fwlink/?linkid=65552"
+              >Standard ECMA-335 Common Language Infrastructure</see
+            >
+
+             document). </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Set a custom attribute using a specified custom attribute blob.</para>
         </summary>
         <param name="con">
-          <attribution license="cc4" from="Microsoft" modified="false" />The constructor for the custom attribute. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The constructor for the custom attribute. </param
+        >
         <param name="binaryAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />A byte blob representing the attributes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A byte blob representing the attributes. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetGetMethod">
-      <MemberSignature Language="C#" Value="public void SetGetMethod (System.Reflection.Emit.MethodBuilder mdBuilder);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetGetMethod(class System.Reflection.Emit.MethodBuilder mdBuilder) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetGetMethod (System.Reflection.Emit.MethodBuilder mdBuilder);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetGetMethod(class System.Reflection.Emit.MethodBuilder mdBuilder) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -712,12 +970,21 @@
           <para>Sets the method that gets the property value.</para>
         </summary>
         <param name="mdBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />A MethodBuilder object that represents the method that gets the property value. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A MethodBuilder object that represents the method that gets the property value. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetSetMethod">
-      <MemberSignature Language="C#" Value="public void SetSetMethod (System.Reflection.Emit.MethodBuilder mdBuilder);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetSetMethod(class System.Reflection.Emit.MethodBuilder mdBuilder) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetSetMethod (System.Reflection.Emit.MethodBuilder mdBuilder);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetSetMethod(class System.Reflection.Emit.MethodBuilder mdBuilder) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -737,12 +1004,21 @@
           <para>Sets the method that sets the property value.</para>
         </summary>
         <param name="mdBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />A MethodBuilder object that represents the method that sets the property value. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A MethodBuilder object that represents the method that sets the property value. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetValue">
-      <MemberSignature Language="C#" Value="public override void SetValue (object obj, object value, object[] index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void SetValue(object obj, object value, object[] index) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void SetValue (object obj, object value, object[] index);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void SetValue(object obj, object value, object[] index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -760,23 +1036,52 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To set the value of a property, reflect on the property's parent type using <see cref="Overload:System.Type.GetType" /> or <see cref="Overload:System.Reflection.Assembly.GetType" />, retrieve the <see cref="T:System.Reflection.PropertyInfo" /> object from the type, and call <see cref="Overload:System.Reflection.PropertyInfo.SetValue" />.</para>
+          <para
+            >To set the value of a property, reflect on the property's parent type using <see
+             cref="Overload:System.Type.GetType" />
+
+             or <see
+             cref="Overload:System.Reflection.Assembly.GetType" />
+
+            , retrieve the <see
+             cref="T:System.Reflection.PropertyInfo" />
+
+             object from the type, and call <see
+             cref="Overload:System.Reflection.PropertyInfo.SetValue" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Sets the value of the property with optional index values for index properties.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object whose property value will be set. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object whose property value will be set. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new value for this property. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new value for this property. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional index values for indexed properties. This value should be null for non-indexed properties. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional index values for indexed properties. This value should be null for non-indexed properties. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetValue">
-      <MemberSignature Language="C#" Value="public override void SetValue (object obj, object value, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, object[] index, System.Globalization.CultureInfo culture);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void SetValue(object obj, object value, valuetype System.Reflection.BindingFlags invokeAttr, class System.Reflection.Binder binder, object[] index, class System.Globalization.CultureInfo culture) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void SetValue (object obj, object value, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, object[] index, System.Globalization.CultureInfo culture);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void SetValue(object obj, object value, valuetype System.Reflection.BindingFlags invokeAttr, class System.Reflection.Binder binder, object[] index, class System.Globalization.CultureInfo culture) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -797,29 +1102,70 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To set the value of a property, reflect on the property's parent type using <see cref="Overload:System.Type.GetType" /> or <see cref="Overload:System.Reflection.Assembly.GetType" />, retrieve the <see cref="T:System.Reflection.PropertyInfo" /> object from the type, and call <see cref="Overload:System.Reflection.PropertyInfo.SetValue" />.</para>
+          <para
+            >To set the value of a property, reflect on the property's parent type using <see
+             cref="Overload:System.Type.GetType" />
+
+             or <see
+             cref="Overload:System.Reflection.Assembly.GetType" />
+
+            , retrieve the <see
+             cref="T:System.Reflection.PropertyInfo" />
+
+             object from the type, and call <see
+             cref="Overload:System.Reflection.PropertyInfo.SetValue" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Sets the property value for the given object to the given value.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object whose property value will be returned. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object whose property value will be returned. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new value for this property. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new value for this property. </param
+        >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The invocation attribute. This must be a bit flag from BindingFlags : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag of BindingFlags must be set. </param
+        >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref name="binder" /> is null, the default binder is used. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref
+           name="binder" />
+
+           is null, the default binder is used. </param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />Optional index values for indexed properties. This value should be null for non-indexed properties. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Optional index values for indexed properties. This value should be null for non-indexed properties. </param
+        >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />The CultureInfo object that represents the culture for which the resource is to be localized. Note that if the resource is not localized for this culture, the CultureInfo.Parent method will be called successively in search of a match. If this value is null, the CultureInfo is obtained from the CultureInfo.CurrentUICulture property. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The CultureInfo object that represents the culture for which the resource is to be localized. Note that if the resource is not localized for this culture, the CultureInfo.Parent method will be called successively in search of a match. If this value is null, the CultureInfo is obtained from the CultureInfo.CurrentUICulture property. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._PropertyBuilder.GetIDsOfNames">
-      <MemberSignature Language="C#" Value="void _PropertyBuilder.GetIDsOfNames (ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._PropertyBuilder.GetIDsOfNames(valuetype System.Guid riid, native int rgszNames, unsigned int32 cNames, unsigned int32 lcid, native int rgDispId) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void _PropertyBuilder.GetIDsOfNames (ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._PropertyBuilder.GetIDsOfNames(valuetype System.Guid riid, native int rgszNames, unsigned int32 cNames, unsigned int32 lcid, native int rgDispId) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -830,7 +1176,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="riid" Type="System.Guid&amp;" RefType="ref" />
+        <Parameter Name="riid" Type="System.Guid&" RefType="ref" />
         <Parameter Name="rgszNames" Type="System.IntPtr" />
         <Parameter Name="cNames" Type="System.UInt32" />
         <Parameter Name="lcid" Type="System.UInt32" />
@@ -847,8 +1193,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._PropertyBuilder.GetTypeInfo">
-      <MemberSignature Language="C#" Value="void _PropertyBuilder.GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._PropertyBuilder.GetTypeInfo(unsigned int32 iTInfo, unsigned int32 lcid, native int ppTInfo) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void _PropertyBuilder.GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._PropertyBuilder.GetTypeInfo(unsigned int32 iTInfo, unsigned int32 lcid, native int ppTInfo) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -866,23 +1218,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>, see the MSDN Library.</para>
+          <para
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
+            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+
+            , see the MSDN Library.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type information to return.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type information to return.</param
+        >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />The locale identifier for the type information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The locale identifier for the type information.</param
+        >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />Receives a pointer to the requested type information object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Receives a pointer to the requested type information object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._PropertyBuilder.GetTypeInfoCount">
-      <MemberSignature Language="C#" Value="void _PropertyBuilder.GetTypeInfoCount (out uint pcTInfo);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._PropertyBuilder.GetTypeInfoCount(unsigned int32 pcTInfo) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void _PropertyBuilder.GetTypeInfoCount (out uint pcTInfo);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._PropertyBuilder.GetTypeInfoCount(unsigned int32 pcTInfo) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -893,7 +1265,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="pcTInfo" Type="System.UInt32&amp;" RefType="out" />
+        <Parameter Name="pcTInfo" Type="System.UInt32&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="pcTInfo">To be added.</param>
@@ -902,8 +1274,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Runtime.InteropServices._PropertyBuilder.Invoke">
-      <MemberSignature Language="C#" Value="void _PropertyBuilder.Invoke (uint dispIdMember, ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._PropertyBuilder.Invoke(unsigned int32 dispIdMember, valuetype System.Guid riid, unsigned int32 lcid, int16 wFlags, native int pDispParams, native int pVarResult, native int pExcepInfo, native int puArgErr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void _PropertyBuilder.Invoke (uint dispIdMember, ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Runtime.InteropServices._PropertyBuilder.Invoke(unsigned int32 dispIdMember, valuetype System.Guid riid, unsigned int32 lcid, int16 wFlags, native int pDispParams, native int pVarResult, native int pExcepInfo, native int puArgErr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -915,7 +1293,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="dispIdMember" Type="System.UInt32" />
-        <Parameter Name="riid" Type="System.Guid&amp;" RefType="ref" />
+        <Parameter Name="riid" Type="System.Guid&" RefType="ref" />
         <Parameter Name="lcid" Type="System.UInt32" />
         <Parameter Name="wFlags" Type="System.Int16" />
         <Parameter Name="pDispParams" Type="System.IntPtr" />

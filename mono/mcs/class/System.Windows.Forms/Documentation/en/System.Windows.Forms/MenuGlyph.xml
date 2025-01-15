@@ -12,11 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The values of this enumeration are used in the <see cref="M:System.Windows.Forms.ControlPaint.DrawMenuGlyph(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.MenuGlyph)" /> method of the <see cref="T:System.Windows.Forms.ControlPaint" /> class. These values represent the different types of symbols that can be drawn on a menu item.</para>
+      <para
+        >The values of this enumeration are used in the <see
+         cref="M:System.Windows.Forms.ControlPaint.DrawMenuGlyph(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.MenuGlyph)" />
+
+         method of the <see
+         cref="T:System.Windows.Forms.ControlPaint" />
+
+         class. These values represent the different types of symbols that can be drawn on a menu item.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the image to draw when drawing a menu with the <see cref="M:System.Windows.Forms.ControlPaint.DrawMenuGlyph(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.MenuGlyph)" /> method.</para>
+      <para
+        >Specifies the image to draw when drawing a menu with the <see
+         cref="M:System.Windows.Forms.ControlPaint.DrawMenuGlyph(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.MenuGlyph)" />
+
+         method.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -80,7 +93,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The maximum value available by this enumeration (equal to the <see cref="F:System.Windows.Forms.MenuGlyph.Bullet" /> value).</para>
+          <para
+            >The maximum value available by this enumeration (equal to the <see
+             cref="F:System.Windows.Forms.MenuGlyph.Bullet" />
+
+             value).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -97,7 +115,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The minimum value available by this enumeration (equal to the <see cref="F:System.Windows.Forms.MenuGlyph.Arrow" /> value).</para>
+          <para
+            >The minimum value available by this enumeration (equal to the <see
+             cref="F:System.Windows.Forms.MenuGlyph.Arrow" />
+
+             value).</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

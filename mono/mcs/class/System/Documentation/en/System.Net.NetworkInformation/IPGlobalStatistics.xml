@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IPGlobalStatistics" FullName="System.Net.NetworkInformation.IPGlobalStatistics">
   <TypeSignature Language="C#" Value="public abstract class IPGlobalStatistics" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit IPGlobalStatistics extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit IPGlobalStatistics extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,7 +18,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class is used by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" /> and <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" /> methods to return IP traffic information.</para>
+      <para
+        >This class is used by the <see
+         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" />
+
+         and <see
+         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />
+
+         methods to return IP traffic information.</para
+      >
       <para>The Internet protocol is used to move IP packets from a source computer to a destination computer. IP also handles dividing a packet that is too large into multiple packets that are small enough for transport, in a process known as fragmentation.</para>
       <para>The properties in this class correlate to the Management Information Base objects for IP defined in IETF RFC 2011.</para>
     </remarks>
@@ -27,7 +38,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected IPGlobalStatistics ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -38,11 +52,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />.</para>
+          <para
+            >This constructor can be called only by classes that derive from <see
+             cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -90,7 +114,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that specifies whether Internet Protocol (IP) packet forwarding is enabled.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that specifies whether Internet Protocol (IP) packet forwarding is enabled.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -136,7 +165,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The data returned by this property includes addresses of pseudo network interfaces such as tunnels.</para>
-          <para>If this instance was obtained by calling <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" />, this property returns the number of IPv4 addresses assigned to the local computer. Similarly, if this instance was obtained by calling <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />, this property returns the number of IPv6 addresses assigned to the local computer.</para>
+          <para
+            >If this instance was obtained by calling <see
+             cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" />
+
+            , this property returns the number of IPv4 addresses assigned to the local computer. Similarly, if this instance was obtained by calling <see
+             cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />
+
+            , this property returns the number of IPv6 addresses assigned to the local computer.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -190,8 +227,14 @@
       </Docs>
     </Member>
     <Member MemberName="OutputPacketRoutingDiscards">
-      <MemberSignature Language="C#" Value="public abstract long OutputPacketRoutingDiscards { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 OutputPacketRoutingDiscards" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long OutputPacketRoutingDiscards { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 OutputPacketRoutingDiscards"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -238,7 +281,10 @@
       </Docs>
     </Member>
     <Member MemberName="OutputPacketsWithNoRoute">
-      <MemberSignature Language="C#" Value="public abstract long OutputPacketsWithNoRoute { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long OutputPacketsWithNoRoute { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 OutputPacketsWithNoRoute" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -286,8 +332,14 @@
       </Docs>
     </Member>
     <Member MemberName="PacketReassembliesRequired">
-      <MemberSignature Language="C#" Value="public abstract long PacketReassembliesRequired { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 PacketReassembliesRequired" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long PacketReassembliesRequired { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 PacketReassembliesRequired"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -310,7 +362,10 @@
       </Docs>
     </Member>
     <Member MemberName="PacketReassemblyFailures">
-      <MemberSignature Language="C#" Value="public abstract long PacketReassemblyFailures { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long PacketReassemblyFailures { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 PacketReassemblyFailures" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -334,7 +389,10 @@
       </Docs>
     </Member>
     <Member MemberName="PacketReassemblyTimeout">
-      <MemberSignature Language="C#" Value="public abstract long PacketReassemblyTimeout { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long PacketReassemblyTimeout { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 PacketReassemblyTimeout" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -430,7 +488,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReceivedPacketsDelivered">
-      <MemberSignature Language="C#" Value="public abstract long ReceivedPacketsDelivered { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long ReceivedPacketsDelivered { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 ReceivedPacketsDelivered" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -454,7 +515,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReceivedPacketsDiscarded">
-      <MemberSignature Language="C#" Value="public abstract long ReceivedPacketsDiscarded { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long ReceivedPacketsDiscarded { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 ReceivedPacketsDiscarded" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -478,7 +542,10 @@
       </Docs>
     </Member>
     <Member MemberName="ReceivedPacketsForwarded">
-      <MemberSignature Language="C#" Value="public abstract long ReceivedPacketsForwarded { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long ReceivedPacketsForwarded { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 ReceivedPacketsForwarded" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -502,8 +569,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReceivedPacketsWithAddressErrors">
-      <MemberSignature Language="C#" Value="public abstract long ReceivedPacketsWithAddressErrors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 ReceivedPacketsWithAddressErrors" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long ReceivedPacketsWithAddressErrors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 ReceivedPacketsWithAddressErrors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -526,8 +599,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReceivedPacketsWithHeadersErrors">
-      <MemberSignature Language="C#" Value="public abstract long ReceivedPacketsWithHeadersErrors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 ReceivedPacketsWithHeadersErrors" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long ReceivedPacketsWithHeadersErrors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 ReceivedPacketsWithHeadersErrors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -550,8 +629,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReceivedPacketsWithUnknownProtocol">
-      <MemberSignature Language="C#" Value="public abstract long ReceivedPacketsWithUnknownProtocol { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 ReceivedPacketsWithUnknownProtocol" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long ReceivedPacketsWithUnknownProtocol { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 ReceivedPacketsWithUnknownProtocol"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -12,12 +12,28 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:Microsoft.SqlServer.Server.TriggerAction" /> enumeration is used by the <see cref="T:Microsoft.SqlServer.Server.SqlTriggerContext" /> class to indicate what action fired the trigger.</para>
+      <para
+        >The <see
+         cref="T:Microsoft.SqlServer.Server.TriggerAction" />
+
+         enumeration is used by the <see
+         cref="T:Microsoft.SqlServer.Server.SqlTriggerContext" />
+
+         class to indicate what action fired the trigger.</para
+      >
       <para>For more information, see the Transact-SQL Reference of SQL Server Books Online.</para>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:Microsoft.SqlServer.Server.TriggerAction" /> enumeration is used by the <see cref="T:Microsoft.SqlServer.Server.SqlTriggerContext" /> class to indicate what action fired the trigger. </para>
+      <para
+        >The <see
+         cref="T:Microsoft.SqlServer.Server.TriggerAction" />
+
+         enumeration is used by the <see
+         cref="T:Microsoft.SqlServer.Server.SqlTriggerContext" />
+
+         class to indicate what action fired the trigger. </para
+      >
     </summary>
   </Docs>
   <Members>

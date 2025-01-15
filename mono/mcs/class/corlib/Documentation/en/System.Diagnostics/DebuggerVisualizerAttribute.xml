@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DebuggerVisualizerAttribute" FullName="System.Diagnostics.DebuggerVisualizerAttribute">
-  <TypeSignature Language="C#" Value="public sealed class DebuggerVisualizerAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit DebuggerVisualizerAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DebuggerVisualizerAttribute : Attribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit DebuggerVisualizerAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -23,9 +29,29 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This attribute can be used at the assembly level. Typically the attribute constructors take two types.  The two types are a visualizer and a visualizer object source, specified as types or as fully qualified assembly type names. The second option is provided so that the visualizer assembly does not need to be referenced by the assembly containing the <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />. This allows a component creator to ship the visualizer in a DLL to be called only at debug time. The <see cref="P:System.Diagnostics.DebuggerVisualizerAttribute.Description" /> property specifies the visualizer description that appears in the drop-down box. The target parameters specify the type that is the target of the visualizer. For more information about visualizers, see <format type="text/html"><a href="c24c006f-f2ac-429f-89db-677fc0c6e1ea">Visualizers</a></format>.</para>
+      <para
+        >This attribute can be used at the assembly level. Typically the attribute constructors take two types.  The two types are a visualizer and a visualizer object source, specified as types or as fully qualified assembly type names. The second option is provided so that the visualizer assembly does not need to be referenced by the assembly containing the <see
+         cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+        . This allows a component creator to ship the visualizer in a DLL to be called only at debug time. The <see
+         cref="P:System.Diagnostics.DebuggerVisualizerAttribute.Description" />
+
+         property specifies the visualizer description that appears in the drop-down box. The target parameters specify the type that is the target of the visualizer. For more information about visualizers, see <format
+         type="text/html">
+          <a href="c24c006f-f2ac-429f-89db-677fc0c6e1ea">Visualizers</a>
+        </format>
+
+        .</para
+      >
       <block subset="none" type="note">
-        <para>Visualizer and visualizer object source implementation is dependent upon the hosting debugger.  For information on creating a visualizer for vsprvslong, see <format type="text/html"><a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a></format>.  </para>
+        <para
+          >Visualizer and visualizer object source implementation is dependent upon the hosting debugger.  For information on creating a visualizer for vsprvslong, see <format
+           type="text/html">
+            <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
+          </format>
+
+          .  </para
+        >
       </block>
     </remarks>
     <summary>
@@ -35,8 +61,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DebuggerVisualizerAttribute (string visualizerTypeName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string visualizerTypeName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DebuggerVisualizerAttribute (string visualizerTypeName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string visualizerTypeName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -49,19 +81,43 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format type="text/html"><a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a></format>.</para>
+          <para
+            >The <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
+             type="text/html">
+              <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> class, specifying the type name of the visualizer.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             class, specifying the type name of the visualizer.</para
+          >
         </summary>
         <param name="visualizerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The fully qualified type name of the visualizer.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The fully qualified type name of the visualizer.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DebuggerVisualizerAttribute (Type visualizer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type visualizer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DebuggerVisualizerAttribute (Type visualizer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type visualizer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -74,19 +130,43 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format type="text/html"><a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a></format>.</para>
+          <para
+            >The <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
+             type="text/html">
+              <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> class, specifying the type of the visualizer.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             class, specifying the type of the visualizer.</para
+          >
         </summary>
         <param name="visualizer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the visualizer.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the visualizer.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DebuggerVisualizerAttribute (string visualizerTypeName, string visualizerObjectSourceTypeName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string visualizerTypeName, string visualizerObjectSourceTypeName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DebuggerVisualizerAttribute (string visualizerTypeName, string visualizerObjectSourceTypeName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string visualizerTypeName, string visualizerObjectSourceTypeName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -100,21 +180,48 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format type="text/html"><a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a></format>.</para>
+          <para
+            >The <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
+             type="text/html">
+              <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> class, specifying the type name of the visualizer and the type name of the visualizer object source.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             class, specifying the type name of the visualizer and the type name of the visualizer object source.</para
+          >
         </summary>
         <param name="visualizerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The fully qualified type name of the visualizer.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The fully qualified type name of the visualizer.</param
+        >
         <param name="visualizerObjectSourceTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The fully qualified type name of the visualizer object source.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The fully qualified type name of the visualizer object source.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DebuggerVisualizerAttribute (string visualizerTypeName, Type visualizerObjectSource);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string visualizerTypeName, class System.Type visualizerObjectSource) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DebuggerVisualizerAttribute (string visualizerTypeName, Type visualizerObjectSource);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string visualizerTypeName, class System.Type visualizerObjectSource) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -128,21 +235,48 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format type="text/html"><a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a></format>.</para>
+          <para
+            >The <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
+             type="text/html">
+              <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> class, specifying the type name of the visualizer and the type of the visualizer object source.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             class, specifying the type name of the visualizer and the type of the visualizer object source.</para
+          >
         </summary>
         <param name="visualizerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The fully qualified type name of the visualizer.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The fully qualified type name of the visualizer.</param
+        >
         <param name="visualizerObjectSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the visualizer object source.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the visualizer object source.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DebuggerVisualizerAttribute (Type visualizer, string visualizerObjectSourceTypeName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type visualizer, string visualizerObjectSourceTypeName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DebuggerVisualizerAttribute (Type visualizer, string visualizerObjectSourceTypeName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type visualizer, string visualizerObjectSourceTypeName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -156,21 +290,48 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format type="text/html"><a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a></format>.</para>
+          <para
+            >The <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
+             type="text/html">
+              <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> class, specifying the type of the visualizer and the type name of the visualizer object source.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             class, specifying the type of the visualizer and the type name of the visualizer object source.</para
+          >
         </summary>
         <param name="visualizer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the visualizer.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the visualizer.</param
+        >
         <param name="visualizerObjectSourceTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The fully qualified type name of the visualizer object source.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The fully qualified type name of the visualizer object source.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DebuggerVisualizerAttribute (Type visualizer, Type visualizerObjectSource);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type visualizer, class System.Type visualizerObjectSource) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DebuggerVisualizerAttribute (Type visualizer, Type visualizerObjectSource);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type visualizer, class System.Type visualizerObjectSource) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -184,16 +345,37 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format type="text/html"><a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a></format>.</para>
+          <para
+            >The <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             can be applied to assemblies, classes, and structures. For information on the use of this attribute, see <format
+             type="text/html">
+              <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerVisualizerAttribute" /> class, specifying the type of the visualizer and the type of the visualizer object source.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.DebuggerVisualizerAttribute" />
+
+             class, specifying the type of the visualizer and the type of the visualizer object source.</para
+          >
         </summary>
         <param name="visualizer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the visualizer.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the visualizer.</param
+        >
         <param name="visualizerObjectSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the visualizer object source.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the visualizer object source.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Description">
@@ -254,7 +436,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the target was specified by type (rather than by type name), the name returned is the <see cref="P:System.Type.AssemblyQualifiedName" /> property of the target type.</para>
+          <para
+            >If the target was specified by type (rather than by type name), the name returned is the <see
+             cref="P:System.Type.AssemblyQualifiedName" />
+
+             property of the target type.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -263,8 +450,14 @@
       </Docs>
     </Member>
     <Member MemberName="VisualizerObjectSourceTypeName">
-      <MemberSignature Language="C#" Value="public string VisualizerObjectSourceTypeName { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string VisualizerObjectSourceTypeName" />
+      <MemberSignature
+        Language="C#"
+        Value="public string VisualizerObjectSourceTypeName { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string VisualizerObjectSourceTypeName"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -278,8 +471,23 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the visualizer object source was specified by its type, then the value returned is the <see cref="P:System.Type.AssemblyQualifiedName" /> property of the visualizer object source type.</para>
-          <para>A visualizer object source created for vsprvslong should inherit from the vsprvs class <unmanagedCodeEntityReference>VisualizerObjectSource</unmanagedCodeEntityReference> class. For information on creating a visualizer, see <format type="text/html"><a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a></format>.</para>
+          <para
+            >If the visualizer object source was specified by its type, then the value returned is the <see
+             cref="P:System.Type.AssemblyQualifiedName" />
+
+             property of the visualizer object source type.</para
+          >
+          <para
+            >A visualizer object source created for vsprvslong should inherit from the vsprvs class <unmanagedCodeEntityReference
+            >VisualizerObjectSource</unmanagedCodeEntityReference>
+
+             class. For information on creating a visualizer, see <format
+             type="text/html">
+              <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -303,8 +511,20 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the visualizer was specified by its type, then the value returned is the <see cref="P:System.Type.AssemblyQualifiedName" /> property for the visualizer type.</para>
-          <para>For information on creating a visualizer, see <format type="text/html"><a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a></format>.</para>
+          <para
+            >If the visualizer was specified by its type, then the value returned is the <see
+             cref="P:System.Type.AssemblyQualifiedName" />
+
+             property for the visualizer type.</para
+          >
+          <para
+            >For information on creating a visualizer, see <format
+             type="text/html">
+              <a href="625a0d4f-abcc-43f2-9f8c-31c131a4378e">How to: Write a Visualizer</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

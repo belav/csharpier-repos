@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <RootNamespace>Microsoft.EntityFrameworkCore.Tools</RootNamespace>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Diagnostics" />
     <Using Include="System.Linq.Expressions" />
@@ -28,23 +26,25 @@
     <Using Include="Xunit" />
     <Using Include="Xunit.Abstractions" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\EFCore.Specification.Tests\TestUtilities\BuildFileResult.cs" />
     <Compile Include="..\EFCore.Specification.Tests\TestUtilities\BuildReference.cs" />
     <Compile Include="..\EFCore.Specification.Tests\TestUtilities\BuildSource.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\ef\ef.csproj" />
     <ProjectReference Include="..\..\src\EFCore.Design\EFCore.Design.csproj" />
     <ProjectReference Include="..\..\src\EFCore.SqlServer\EFCore.SqlServer.csproj" />
     <ProjectReference Include="..\..\src\EFCore.Analyzers\EFCore.Analyzers.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="$(MicrosoftCodeAnalysisVersion)" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="$(MicrosoftExtensionsDependencyModelVersion)" />
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.CSharp"
+      Version="$(MicrosoftCodeAnalysisVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.DependencyModel"
+      Version="$(MicrosoftExtensionsDependencyModelVersion)"
+    />
   </ItemGroup>
-
 </Project>

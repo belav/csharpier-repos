@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="PropertyGridCommands" FullName="System.Windows.Forms.PropertyGridInternal.PropertyGridCommands">
+<Type
+  Name="PropertyGridCommands"
+  FullName="System.Windows.Forms.PropertyGridInternal.PropertyGridCommands"
+>
   <TypeSignature Language="C#" Value="public class PropertyGridCommands" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -26,7 +29,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.PropertyGridInternal.PropertyGridCommands" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.PropertyGridInternal.PropertyGridCommands" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -35,7 +43,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Commands">
-      <MemberSignature Language="C#" Value="public static readonly System.ComponentModel.Design.CommandID Commands = null;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.ComponentModel.Design.CommandID Commands = null;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.ComponentModel.Design.CommandID</ReturnType>
@@ -54,7 +65,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Description">
-      <MemberSignature Language="C#" Value="public static readonly System.ComponentModel.Design.CommandID Description = null;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.ComponentModel.Design.CommandID Description = null;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.ComponentModel.Design.CommandID</ReturnType>
@@ -73,7 +87,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Hide">
-      <MemberSignature Language="C#" Value="public static readonly System.ComponentModel.Design.CommandID Hide = null;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.ComponentModel.Design.CommandID Hide = null;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.ComponentModel.Design.CommandID</ReturnType>
@@ -92,7 +109,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Reset">
-      <MemberSignature Language="C#" Value="public static readonly System.ComponentModel.Design.CommandID Reset = null;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.ComponentModel.Design.CommandID Reset = null;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.ComponentModel.Design.CommandID</ReturnType>
@@ -111,7 +131,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="wfcMenuCommand">
-      <MemberSignature Language="C#" Value="protected static readonly Guid wfcMenuCommand = 00000000-0000-0000-0000-000000000000;" />
+      <MemberSignature
+        Language="C#"
+        Value="protected static readonly Guid wfcMenuCommand = 00000000-0000-0000-0000-000000000000;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>
@@ -130,7 +153,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="wfcMenuGroup">
-      <MemberSignature Language="C#" Value="protected static readonly Guid wfcMenuGroup = 00000000-0000-0000-0000-000000000000;" />
+      <MemberSignature
+        Language="C#"
+        Value="protected static readonly Guid wfcMenuGroup = 00000000-0000-0000-0000-000000000000;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Guid</ReturnType>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="EncoderReplacementFallback" FullName="System.Text.EncoderReplacementFallback">
-  <TypeSignature Language="C#" Value="public sealed class EncoderReplacementFallback : System.Text.EncoderFallback" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit EncoderReplacementFallback extends System.Text.EncoderFallback" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class EncoderReplacementFallback : System.Text.EncoderFallback"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit EncoderReplacementFallback extends System.Text.EncoderFallback"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,10 +21,36 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. For example, an <see cref="T:System.Text.ASCIIEncoding" /> object cannot encode a character having a Unicode code point value that is outside the range U+0000 to U+007F. If the input character cannot be converted to an output byte sequence, a <see cref="T:System.Text.EncoderReplacementFallback" /> object substitutes a specified replacement string for the original input character. The conversion process encodes the replacement string and then continues to process the remainder of the original input. </para>
-      <para>The value of a <see cref="T:System.Text.EncoderReplacementFallback" /> object is the replacement string used to initialize that object.</para>
-      <para>This class is one of two .NET Framework classes that implement different fallback strategies for handling encoding conversion failures. The other class is the <see cref="T:System.Text.EncoderExceptionFallback" /> class, which throws an <see cref="T:System.Text.EncoderFallbackException" /> when an invalid character is encountered.</para>
-      <para>When you choose a fallback string to use with this class, make sure that the string is composed entirely of characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see cref="T:System.ArgumentException" />. </para>
+      <para
+        >A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. For example, an <see
+         cref="T:System.Text.ASCIIEncoding" />
+
+         object cannot encode a character having a Unicode code point value that is outside the range U+0000 to U+007F. If the input character cannot be converted to an output byte sequence, a <see
+         cref="T:System.Text.EncoderReplacementFallback" />
+
+         object substitutes a specified replacement string for the original input character. The conversion process encodes the replacement string and then continues to process the remainder of the original input. </para
+      >
+      <para
+        >The value of a <see
+         cref="T:System.Text.EncoderReplacementFallback" />
+
+         object is the replacement string used to initialize that object.</para
+      >
+      <para
+        >This class is one of two .NET Framework classes that implement different fallback strategies for handling encoding conversion failures. The other class is the <see
+         cref="T:System.Text.EncoderExceptionFallback" />
+
+         class, which throws an <see
+         cref="T:System.Text.EncoderFallbackException" />
+
+         when an invalid character is encountered.</para
+      >
+      <para
+        >When you choose a fallback string to use with this class, make sure that the string is composed entirely of characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see
+         cref="T:System.ArgumentException" />
+
+        . </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -28,7 +60,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public EncoderReplacementFallback ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -39,17 +74,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By default, the replacement string that is the value of this <see cref="T:System.Text.EncoderReplacementFallback" /> object is "?".</para>
+          <para
+            >By default, the replacement string that is the value of this <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object is "?".</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Text.EncoderReplacementFallback" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public EncoderReplacementFallback (string replacement);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string replacement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public EncoderReplacementFallback (string replacement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string replacement) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,20 +113,56 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="replacement" /> parameter initializes the replacement string that is the value of this <see cref="T:System.Text.EncoderReplacementFallback" /> object. You application must provide a <paramref name="replacement" /> value that contains only characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see cref="T:System.ArgumentException" />. For example, the fallback provided for an <see cref="T:System.Text.ASCIIEncoding" /> object cannot include the character "¿" (U+00BF) because that character is itself not a valid ASCII character.</para>
-          <para>As a result of this, U+FFFD, which is a good choice for a fallback string for <see cref="T:System.Text.DecoderExceptionFallback" />, is not generally a good choice for this class. Also, the null character (U+0000) cannot be used in the fallback string.</para>
+          <para
+            >The <paramref
+             name="replacement" />
+
+             parameter initializes the replacement string that is the value of this <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object. You application must provide a <paramref
+             name="replacement" />
+
+             value that contains only characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see
+             cref="T:System.ArgumentException" />
+
+            . For example, the fallback provided for an <see
+             cref="T:System.Text.ASCIIEncoding" />
+
+             object cannot include the character "¿" (U+00BF) because that character is itself not a valid ASCII character.</para
+          >
+          <para
+            >As a result of this, U+FFFD, which is a good choice for a fallback string for <see
+             cref="T:System.Text.DecoderExceptionFallback" />
+
+            , is not generally a good choice for this class. Also, the null character (U+0000) cannot be used in the fallback string.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Text.EncoderReplacementFallback" /> class using a specified replacement string.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             class using a specified replacement string.</para
+          >
         </summary>
         <param name="replacement">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string that is converted in an encoding operation in place of an input character that cannot be encoded.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string that is converted in an encoding operation in place of an input character that cannot be encoded.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateFallbackBuffer">
-      <MemberSignature Language="C#" Value="public override System.Text.EncoderFallbackBuffer CreateFallbackBuffer ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Text.EncoderFallbackBuffer CreateFallbackBuffer() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Text.EncoderFallbackBuffer CreateFallbackBuffer ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Text.EncoderFallbackBuffer CreateFallbackBuffer() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -90,11 +177,27 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a <see cref="T:System.Text.EncoderFallbackBuffer" /> object that is initialized with the replacement string of this <see cref="T:System.Text.EncoderReplacementFallback" /> object.</para>
+          <para
+            >Creates a <see
+             cref="T:System.Text.EncoderFallbackBuffer" />
+
+             object that is initialized with the replacement string of this <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Text.EncoderFallbackBuffer" /> object equal to this <see cref="T:System.Text.EncoderReplacementFallback" /> object. </para>
+          <para
+            >A <see
+             cref="T:System.Text.EncoderFallbackBuffer" />
+
+             object equal to this <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object. </para
+          >
         </returns>
       </Docs>
     </Member>
@@ -115,13 +218,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the replacement string that is the value of the <see cref="T:System.Text.EncoderReplacementFallback" /> object.</para>
+          <para
+            >Gets the replacement string that is the value of the <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -137,23 +248,56 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of a <see cref="T:System.Text.EncoderReplacementFallback" /> object is the value of its <see cref="P:System.Text.EncoderReplacementFallback.DefaultString" /> property.</para>
+          <para
+            >The value of a <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object is the value of its <see
+             cref="P:System.Text.EncoderReplacementFallback.DefaultString" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether the value of a specified object is equal to the <see cref="T:System.Text.EncoderReplacementFallback" /> object.</para>
+          <para
+            >Indicates whether the value of a specified object is equal to the <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <paramref name="value" /> parameter specifies an <see cref="T:System.Text.EncoderReplacementFallback" /> object and the replacement string of that object is equal to the replacement string of this <see cref="T:System.Text.EncoderReplacementFallback" /> object; otherwise, false. </para>
+          <para
+            >true if the <paramref
+             name="value" />
+
+             parameter specifies an <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object and the replacement string of that object is equal to the replacement string of this <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object; otherwise, false. </para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Text.EncoderReplacementFallback" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Text.EncoderReplacementFallback" />
+
+           object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -167,11 +311,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of a <see cref="T:System.Text.EncoderReplacementFallback" /> object is the value of its <see cref="P:System.Text.EncoderReplacementFallback.DefaultString" /> property.</para>
+          <para
+            >The value of a <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object is the value of its <see
+             cref="P:System.Text.EncoderReplacementFallback.DefaultString" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves the hash code for the value of the <see cref="T:System.Text.EncoderReplacementFallback" /> object.</para>
+          <para
+            >Retrieves the hash code for the value of the <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -196,7 +353,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of characters in the replacement string for the <see cref="T:System.Text.EncoderReplacementFallback" /> object.</para>
+          <para
+            >Gets the number of characters in the replacement string for the <see
+             cref="T:System.Text.EncoderReplacementFallback" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>

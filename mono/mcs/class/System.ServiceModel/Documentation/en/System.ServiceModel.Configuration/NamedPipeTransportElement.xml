@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="NamedPipeTransportElement" FullName="System.ServiceModel.Configuration.NamedPipeTransportElement">
-  <TypeSignature Language="C#" Value="public sealed class NamedPipeTransportElement : System.ServiceModel.Configuration.ConnectionOrientedTransportElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit NamedPipeTransportElement extends System.ServiceModel.Configuration.ConnectionOrientedTransportElement" />
+<Type
+  Name="NamedPipeTransportElement"
+  FullName="System.ServiceModel.Configuration.NamedPipeTransportElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class NamedPipeTransportElement : System.ServiceModel.Configuration.ConnectionOrientedTransportElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit NamedPipeTransportElement extends System.ServiceModel.Configuration.ConnectionOrientedTransportElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NamedPipeTransportElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +42,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NamedPipeTransportElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.NamedPipeTransportElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ApplyConfiguration">
-      <MemberSignature Language="C#" Value="public override void ApplyConfiguration (System.ServiceModel.Channels.BindingElement bindingElement);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ApplyConfiguration(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void ApplyConfiguration (System.ServiceModel.Channels.BindingElement bindingElement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void ApplyConfiguration(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -54,12 +77,18 @@
           <para>Applies the content of the specified configuration element to this configuration element.</para>
         </summary>
         <param name="bindingElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />A binding element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A binding element.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="BindingElementType">
       <MemberSignature Language="C#" Value="public override Type BindingElementType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type BindingElementType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type BindingElementType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,8 +106,14 @@
       </Docs>
     </Member>
     <Member MemberName="ConnectionPoolSettings">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.NamedPipeConnectionPoolSettingsElement ConnectionPoolSettings { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.NamedPipeConnectionPoolSettingsElement ConnectionPoolSettings" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.NamedPipeConnectionPoolSettingsElement ConnectionPoolSettings { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.NamedPipeConnectionPoolSettingsElement ConnectionPoolSettings"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -101,8 +136,14 @@
       </Docs>
     </Member>
     <Member MemberName="CopyFrom">
-      <MemberSignature Language="C#" Value="public override void CopyFrom (System.ServiceModel.Configuration.ServiceModelExtensionElement from);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void CopyFrom(class System.ServiceModel.Configuration.ServiceModelExtensionElement from) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void CopyFrom (System.ServiceModel.Configuration.ServiceModelExtensionElement from);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void CopyFrom(class System.ServiceModel.Configuration.ServiceModelExtensionElement from) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -111,7 +152,10 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="from" Type="System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+        <Parameter
+          Name="from"
+          Type="System.ServiceModel.Configuration.ServiceModelExtensionElement"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -120,12 +164,21 @@
           <para>Copies the content of the specified configuration element to this configuration element.</para>
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />The configuration element to be copied.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The configuration element to be copied.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateDefaultBindingElement">
-      <MemberSignature Language="C#" Value="protected override System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.ServiceModel.Channels.TransportBindingElement CreateDefaultBindingElement() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -141,8 +194,14 @@
       </Docs>
     </Member>
     <Member MemberName="InitializeFrom">
-      <MemberSignature Language="C#" Value="protected override void InitializeFrom (System.ServiceModel.Channels.BindingElement bindingElement);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void InitializeFrom(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void InitializeFrom (System.ServiceModel.Channels.BindingElement bindingElement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance void InitializeFrom(class System.ServiceModel.Channels.BindingElement bindingElement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -160,8 +219,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

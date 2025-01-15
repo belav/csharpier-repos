@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IssuedSecurityTokenProvider" FullName="System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider">
-  <TypeSignature Language="C#" Value="public class IssuedSecurityTokenProvider : System.IdentityModel.Selectors.SecurityTokenProvider, System.ServiceModel.ICommunicationObject" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit IssuedSecurityTokenProvider extends System.IdentityModel.Selectors.SecurityTokenProvider implements class System.ServiceModel.ICommunicationObject" />
+<Type
+  Name="IssuedSecurityTokenProvider"
+  FullName="System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class IssuedSecurityTokenProvider : System.IdentityModel.Selectors.SecurityTokenProvider, System.ServiceModel.ICommunicationObject"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit IssuedSecurityTokenProvider extends System.IdentityModel.Selectors.SecurityTokenProvider implements class System.ServiceModel.ICommunicationObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,7 +26,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Care must be taken when caching and reusing security tokens that are returned from the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method, because the security token might become unusable when the channel that the token provider is associated with is closed. The security token becomes unusable when the requested key type is asymmetric and the thread is running under impersonated context when the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method is called.</para>
+      <para
+        >Care must be taken when caching and reusing security tokens that are returned from the <see
+         cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" />
+
+         method, because the security token might become unusable when the channel that the token provider is associated with is closed. The security token becomes unusable when the requested key type is asymmetric and the thread is running under impersonated context when the <see
+         cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" />
+
+         method is called.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +44,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public IssuedSecurityTokenProvider ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,13 +57,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Abort">
       <MemberSignature Language="C#" Value="public void Abort ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Abort() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Abort() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -61,8 +89,14 @@
       </Docs>
     </Member>
     <Member MemberName="BeginClose">
-      <MemberSignature Language="C#" Value="public IAsyncResult BeginClose (AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginClose(class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public IAsyncResult BeginClose (AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginClose(class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -82,17 +116,40 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para>
+          <para
+            >An <see
+             cref="T:System.IAsyncResult" />
+
+             object that represents the result of an asynchronous operation.</para
+          >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.AsyncCallback" />
+
+           method to execute when the operation completed.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> that represents the state of the operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           that represents the state of the operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="BeginClose">
-      <MemberSignature Language="C#" Value="public IAsyncResult BeginClose (TimeSpan timeout, AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginClose(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public IAsyncResult BeginClose (TimeSpan timeout, AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginClose(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -113,19 +170,48 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para>
+          <para
+            >An <see
+             cref="T:System.IAsyncResult" />
+
+             object that represents the result of an asynchronous operation.</para
+          >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.TimeSpan" />
+
+           after which the call times out.</param
+        >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.AsyncCallback" />
+
+           method to execute when the operation completed.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> that represents the state of the operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           that represents the state of the operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="BeginGetTokenCore">
-      <MemberSignature Language="C#" Value="protected override IAsyncResult BeginGetTokenCore (TimeSpan timeout, AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.IAsyncResult BeginGetTokenCore(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override IAsyncResult BeginGetTokenCore (TimeSpan timeout, AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.IAsyncResult BeginGetTokenCore(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -146,19 +232,48 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para>
+          <para
+            >An <see
+             cref="T:System.IAsyncResult" />
+
+             object that represents the result of an asynchronous operation.</para
+          >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.TimeSpan" />
+
+           after which the call times out.</param
+        >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.AsyncCallback" />
+
+           method to execute when the operation completed.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> that represents the state of the operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           that represents the state of the operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="BeginOpen">
-      <MemberSignature Language="C#" Value="public IAsyncResult BeginOpen (AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginOpen(class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public IAsyncResult BeginOpen (AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginOpen(class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -178,17 +293,40 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para>
+          <para
+            >An <see
+             cref="T:System.IAsyncResult" />
+
+             object that represents the result of an asynchronous operation.</para
+          >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.AsyncCallback" />
+
+           method to execute when the operation completed.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> that represents the state of the operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           that represents the state of the operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="BeginOpen">
-      <MemberSignature Language="C#" Value="public IAsyncResult BeginOpen (TimeSpan timeout, AsyncCallback callback, object state);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginOpen(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public IAsyncResult BeginOpen (TimeSpan timeout, AsyncCallback callback, object state);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.IAsyncResult BeginOpen(valuetype System.TimeSpan timeout, class System.AsyncCallback callback, object state) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -209,14 +347,37 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</para>
+          <para
+            >An <see
+             cref="T:System.IAsyncResult" />
+
+             object that represents the result of an asynchronous operation.</para
+          >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.TimeSpan" />
+
+           after which the call times out.</param
+        >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.AsyncCallback" /> method to execute when the operation completed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.AsyncCallback" />
+
+           method to execute when the operation completed.</param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Object" /> that represents the state of the operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Object" />
+
+           that represents the state of the operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CacheIssuedTokens">
@@ -240,7 +401,10 @@
     </Member>
     <Member MemberName="Close">
       <MemberSignature Language="C#" Value="public void Close ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Close() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Close() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -259,7 +423,10 @@
     </Member>
     <Member MemberName="Close">
       <MemberSignature Language="C#" Value="public void Close (TimeSpan timeout);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Close(valuetype System.TimeSpan timeout) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Close(valuetype System.TimeSpan timeout) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -277,7 +444,13 @@
           <para>Closes the provider.</para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.TimeSpan" />
+
+           after which the call times out.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Closed">
@@ -318,7 +491,10 @@
     </Member>
     <Member MemberName="DefaultCloseTimeout">
       <MemberSignature Language="C#" Value="public virtual TimeSpan DefaultCloseTimeout { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan DefaultCloseTimeout" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan DefaultCloseTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -340,7 +516,10 @@
     </Member>
     <Member MemberName="DefaultOpenTimeout">
       <MemberSignature Language="C#" Value="public virtual TimeSpan DefaultOpenTimeout { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan DefaultOpenTimeout" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan DefaultOpenTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -362,7 +541,10 @@
     </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="public void Dispose ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Dispose() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Dispose() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -375,13 +557,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases all resources used by the current instance of the <see cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider" /> class.</para>
+          <para
+            >Releases all resources used by the current instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EndClose">
       <MemberSignature Language="C#" Value="public void EndClose (IAsyncResult result);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void EndClose(class System.IAsyncResult result) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void EndClose(class System.IAsyncResult result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -399,12 +589,24 @@
           <para>Ends the asynchronous call for closing the provider.</para>
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.IAsyncResult" />
+
+           object that represents the result of an asynchronous operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="EndGetTokenCore">
-      <MemberSignature Language="C#" Value="protected override System.IdentityModel.Tokens.SecurityToken EndGetTokenCore (IAsyncResult result);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityToken EndGetTokenCore(class System.IAsyncResult result) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.IdentityModel.Tokens.SecurityToken EndGetTokenCore (IAsyncResult result);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityToken EndGetTokenCore(class System.IAsyncResult result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -426,12 +628,21 @@
           <para>A security token.</para>
         </returns>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.IAsyncResult" />
+
+           object that represents the result of an asynchronous operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="EndOpen">
       <MemberSignature Language="C#" Value="public void EndOpen (IAsyncResult result);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void EndOpen(class System.IAsyncResult result) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void EndOpen(class System.IAsyncResult result) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -449,7 +660,13 @@
           <para>Ends the asynchronous call for opening the provider.</para>
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.IAsyncResult" /> object that represents the result of an asynchronous operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.IAsyncResult" />
+
+           object that represents the result of an asynchronous operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Faulted">
@@ -471,8 +688,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetTokenCore">
-      <MemberSignature Language="C#" Value="protected override System.IdentityModel.Tokens.SecurityToken GetTokenCore (TimeSpan timeout);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityToken GetTokenCore(valuetype System.TimeSpan timeout) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.IdentityModel.Tokens.SecurityToken GetTokenCore (TimeSpan timeout);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityToken GetTokenCore(valuetype System.TimeSpan timeout) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -486,7 +709,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Care must be taken when caching and reusing security tokens that are returned from the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method, because the security token might become unusable when the channel that the token provider is associated with is closed. The security token becomes unusable when the requested key type is asymmetric and the thread is running under impersonated context when the <see cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" /> method is called.</para>
+          <para
+            >Care must be taken when caching and reusing security tokens that are returned from the <see
+             cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" />
+
+             method, because the security token might become unusable when the channel that the token provider is associated with is closed. The security token becomes unusable when the requested key type is asymmetric and the thread is running under impersonated context when the <see
+             cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" />
+
+             method is called.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -494,15 +725,32 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.IdentityModel.Tokens.SecurityToken" /> that represents the token core.</para>
+          <para
+            >The <see
+             cref="T:System.IdentityModel.Tokens.SecurityToken" />
+
+             that represents the token core.</para
+          >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.TimeSpan" />
+
+           after which the call times out.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IdentityVerifier">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.IdentityVerifier IdentityVerifier { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.IdentityVerifier IdentityVerifier" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.IdentityVerifier IdentityVerifier { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.IdentityVerifier IdentityVerifier"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -520,8 +768,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuedTokenRenewalThresholdPercentage">
-      <MemberSignature Language="C#" Value="public int IssuedTokenRenewalThresholdPercentage { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 IssuedTokenRenewalThresholdPercentage" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IssuedTokenRenewalThresholdPercentage { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int32 IssuedTokenRenewalThresholdPercentage"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -542,8 +796,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuerAddress">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.EndpointAddress IssuerAddress { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.EndpointAddress IssuerAddress" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.EndpointAddress IssuerAddress { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.EndpointAddress IssuerAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -561,8 +821,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuerBinding">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.Binding IssuerBinding { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.Binding IssuerBinding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.Binding IssuerBinding { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.Binding IssuerBinding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -580,8 +846,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuerChannelBehaviors">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.KeyedByTypeCollection&lt;System.ServiceModel.Description.IEndpointBehavior&gt; IssuerChannelBehaviors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.KeyedByTypeCollection`1&lt;class System.ServiceModel.Description.IEndpointBehavior&gt; IssuerChannelBehaviors" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.KeyedByTypeCollection<System.ServiceModel.Description.IEndpointBehavior> IssuerChannelBehaviors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.KeyedByTypeCollection`1<class System.ServiceModel.Description.IEndpointBehavior> IssuerChannelBehaviors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -602,8 +874,14 @@
       </Docs>
     </Member>
     <Member MemberName="KeyEntropyMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.SecurityKeyEntropyMode KeyEntropyMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Security.SecurityKeyEntropyMode KeyEntropyMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.SecurityKeyEntropyMode KeyEntropyMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Security.SecurityKeyEntropyMode KeyEntropyMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -624,8 +902,14 @@
       </Docs>
     </Member>
     <Member MemberName="MaxIssuedTokenCachingTime">
-      <MemberSignature Language="C#" Value="public TimeSpan MaxIssuedTokenCachingTime { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan MaxIssuedTokenCachingTime" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan MaxIssuedTokenCachingTime { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan MaxIssuedTokenCachingTime"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -643,8 +927,14 @@
       </Docs>
     </Member>
     <Member MemberName="MessageSecurityVersion">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.MessageSecurityVersion MessageSecurityVersion { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.MessageSecurityVersion MessageSecurityVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.MessageSecurityVersion MessageSecurityVersion { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.MessageSecurityVersion MessageSecurityVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -656,7 +946,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.MessageSecurityVersion" /> contains numerous properties that specify version numbers of different components of a message.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.MessageSecurityVersion" />
+
+             contains numerous properties that specify version numbers of different components of a message.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -666,7 +961,10 @@
     </Member>
     <Member MemberName="Open">
       <MemberSignature Language="C#" Value="public void Open ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Open() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Open() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -685,7 +983,10 @@
     </Member>
     <Member MemberName="Open">
       <MemberSignature Language="C#" Value="public void Open (TimeSpan timeout);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Open(valuetype System.TimeSpan timeout) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Open(valuetype System.TimeSpan timeout) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -703,7 +1004,13 @@
           <para>Opens the provider.</para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.TimeSpan" /> after which the call times out.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.TimeSpan" />
+
+           after which the call times out.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Opened">
@@ -743,8 +1050,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityAlgorithmSuite">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.SecurityAlgorithmSuite SecurityAlgorithmSuite { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.SecurityAlgorithmSuite SecurityAlgorithmSuite" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.SecurityAlgorithmSuite SecurityAlgorithmSuite { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.SecurityAlgorithmSuite SecurityAlgorithmSuite"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -756,7 +1069,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" /> object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para>
+          <para
+            >The <see
+             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+             object that is returned contains numerous properties that specify security algorithms to use in specific conditions. It also describes various security capabilities of the service.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -765,8 +1083,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityTokenSerializer">
-      <MemberSignature Language="C#" Value="public System.IdentityModel.Selectors.SecurityTokenSerializer SecurityTokenSerializer { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.IdentityModel.Selectors.SecurityTokenSerializer SecurityTokenSerializer" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.IdentityModel.Selectors.SecurityTokenSerializer SecurityTokenSerializer { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.IdentityModel.Selectors.SecurityTokenSerializer SecurityTokenSerializer"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -784,8 +1108,14 @@
       </Docs>
     </Member>
     <Member MemberName="State">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.CommunicationState State { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.CommunicationState State" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.CommunicationState State { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.CommunicationState State"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -803,7 +1133,10 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsTokenCancellation">
-      <MemberSignature Language="C#" Value="public override bool SupportsTokenCancellation { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool SupportsTokenCancellation { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance bool SupportsTokenCancellation" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -822,8 +1155,14 @@
       </Docs>
     </Member>
     <Member MemberName="TargetAddress">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.EndpointAddress TargetAddress { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.EndpointAddress TargetAddress" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.EndpointAddress TargetAddress { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.EndpointAddress TargetAddress"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -841,8 +1180,14 @@
       </Docs>
     </Member>
     <Member MemberName="TokenRequestParameters">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;System.Xml.XmlElement&gt; TokenRequestParameters { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.Collection`1&lt;class System.Xml.XmlElement&gt; TokenRequestParameters" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.Collection<System.Xml.XmlElement> TokenRequestParameters { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.Collection`1<class System.Xml.XmlElement> TokenRequestParameters"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

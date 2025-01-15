@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="StreamUpgradeProvider" FullName="System.ServiceModel.Channels.StreamUpgradeProvider">
-  <TypeSignature Language="C#" Value="public abstract class StreamUpgradeProvider : System.ServiceModel.Channels.CommunicationObject" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit StreamUpgradeProvider extends System.ServiceModel.Channels.CommunicationObject" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class StreamUpgradeProvider : System.ServiceModel.Channels.CommunicationObject"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit StreamUpgradeProvider extends System.ServiceModel.Channels.CommunicationObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,20 +19,40 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An example of a stream upgrade is to build a compression stream directly on top of the transport stream. To add a security upgrade, you additionally implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />. You can implement multiple upgrades, each wrapping the preceding one.</para>
+      <para
+        >An example of a stream upgrade is to build a compression stream directly on top of the transport stream. To add a security upgrade, you additionally implement a class that derives from <see
+         cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+
+        . You can implement multiple upgrades, each wrapping the preceding one.</para
+      >
       <para>The upgrade process has the following steps:</para>
       <list type="ordered">
         <item>
-          <para>Implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />. </para>
+          <para
+            >Implement a class that derives from <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+
+            . </para
+          >
         </item>
         <item>
           <para>Register it. You do this by creating a binding element for it, and registering the provider in a custom binding.</para>
         </item>
         <item>
-          <para>The derived class that you implement creates an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />, which at run time initiates a request to the other end of its connection to upgrade the channel transport layer.</para>
+          <para
+            >The derived class that you implement creates an instance of <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
+
+            , which at run time initiates a request to the other end of its connection to upgrade the channel transport layer.</para
+          >
         </item>
         <item>
-          <para>The derived class that you implement creates an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />, which at run time receives the upgrade request from the preceding step and, if possible, accepts the upgrade and returns the upgraded stream to the other side of its connection.</para>
+          <para
+            >The derived class that you implement creates an instance of <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+
+            , which at run time receives the upgrade request from the preceding step and, if possible, accepts the upgrade and returns the upgraded stream to the other side of its connection.</para
+          >
         </item>
         <item>
           <para>If there are additional upgrade requests, they are processed sequentially, as described in the preceding two steps.</para>
@@ -41,7 +67,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected StreamUpgradeProvider ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -54,13 +83,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected StreamUpgradeProvider (System.ServiceModel.IDefaultCommunicationTimeouts timeouts);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.IDefaultCommunicationTimeouts timeouts) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected StreamUpgradeProvider (System.ServiceModel.IDefaultCommunicationTimeouts timeouts);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.IDefaultCommunicationTimeouts timeouts) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -76,13 +116,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CreateUpgradeAcceptor">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.Channels.StreamUpgradeAcceptor CreateUpgradeAcceptor ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Channels.StreamUpgradeAcceptor CreateUpgradeAcceptor() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.Channels.StreamUpgradeAcceptor CreateUpgradeAcceptor ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Channels.StreamUpgradeAcceptor CreateUpgradeAcceptor() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -98,17 +149,33 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />.</para>
+          <para
+            >Creates an instance of <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />.</para>
+          <para
+            >Returns an instance of <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CreateUpgradeInitiator">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.Channels.StreamUpgradeInitiator CreateUpgradeInitiator (System.ServiceModel.EndpointAddress remoteAddress, Uri via);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Channels.StreamUpgradeInitiator CreateUpgradeInitiator(class System.ServiceModel.EndpointAddress remoteAddress, class System.Uri via) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.Channels.StreamUpgradeInitiator CreateUpgradeInitiator (System.ServiceModel.EndpointAddress remoteAddress, Uri via);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Channels.StreamUpgradeInitiator CreateUpgradeInitiator(class System.ServiceModel.EndpointAddress remoteAddress, class System.Uri via) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -125,21 +192,45 @@
         <param name="via">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method creates the associated <see cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" /> for this upgrade provider that creates upgrade requests for the matching <see cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" /> at the endpoint provided.</para>
+          <para
+            >This method creates the associated <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
+
+             for this upgrade provider that creates upgrade requests for the matching <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+
+             at the endpoint provided.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />.</para>
+          <para
+            >Creates an instance of <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an instance of <see cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />.</para>
+          <para
+            >Returns an instance of <see
+             cref="T:System.ServiceModel.Channels.StreamUpgradeInitiator" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="DefaultCloseTimeout">
-      <MemberSignature Language="C#" Value="protected override TimeSpan DefaultCloseTimeout { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan DefaultCloseTimeout" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override TimeSpan DefaultCloseTimeout { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan DefaultCloseTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -157,8 +248,14 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultOpenTimeout">
-      <MemberSignature Language="C#" Value="protected override TimeSpan DefaultOpenTimeout { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan DefaultOpenTimeout" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override TimeSpan DefaultOpenTimeout { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan DefaultOpenTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

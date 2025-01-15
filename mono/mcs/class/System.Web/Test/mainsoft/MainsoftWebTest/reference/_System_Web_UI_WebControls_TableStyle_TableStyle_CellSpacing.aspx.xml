@@ -15,10 +15,18 @@
       </tr>
     </table>
     <span>
-      <br />None</span>
+      <br />
+
+      None</span
+    >
   </div>
   <div id="GHTSubTest2" style="height:144px;width:176px">
-    <table id="Table2" cellspacing="0" border="0" style="border-collapse:collapse;height:56px;width:88px">
+    <table
+      id="Table2"
+      cellspacing="0"
+      border="0"
+      style="border-collapse:collapse;height:56px;width:88px"
+    >
       <tr>
         <td>aaaaa</td>
         <td>aaa</td>
@@ -32,7 +40,10 @@
       </tr>
     </table>
     <span>
-      <br />None</span>
+      <br />
+
+      None</span
+    >
   </div>
   <div id="GHTSubTest3" style="height:144px;width:176px">
     <table id="Table3" cellspacing="9" border="0" style="height:56px;width:88px">
@@ -49,6 +60,9 @@
       </tr>
     </table>
     <span>
-      <br />None</span>
+      <br />
+
+      None</span
+    >
   </div>
 </testresults>

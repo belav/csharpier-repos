@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ProtectionLevel" FullName="System.Net.Security.ProtectionLevel">
   <TypeSignature Language="C#" Value="public enum ProtectionLevel" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed ProtectionLevel extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed ProtectionLevel extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,7 +17,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="T:System.Net.Security.NegotiateStream" /> class.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="T:System.Net.Security.NegotiateStream" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -24,7 +32,10 @@
   <Members>
     <Member MemberName="EncryptAndSign">
       <MemberSignature Language="C#" Value="EncryptAndSign" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Security.ProtectionLevel EncryptAndSign = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Security.ProtectionLevel EncryptAndSign = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -43,7 +54,10 @@
     </Member>
     <Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Security.ProtectionLevel None = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Security.ProtectionLevel None = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,7 +76,10 @@
     </Member>
     <Member MemberName="Sign">
       <MemberSignature Language="C#" Value="Sign" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.Security.ProtectionLevel Sign = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.Security.ProtectionLevel Sign = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

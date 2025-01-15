@@ -3,7 +3,6 @@
     <!-- Needed for NativeAotIncompatible -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
     <!-- Non-intrinsic implementation of RuntimeHelpers.GetSpanDataFrom -->
     <NativeAotIncompatible>true</NativeAotIncompatible>
   </PropertyGroup>

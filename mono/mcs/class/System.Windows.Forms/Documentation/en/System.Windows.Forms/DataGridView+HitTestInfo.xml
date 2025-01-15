@@ -84,7 +84,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Nowhere">
-      <MemberSignature Language="C#" Value="public static readonly System.Windows.Forms.DataGridView.HitTestInfo Nowhere;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Windows.Forms.DataGridView.HitTestInfo Nowhere;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DataGridView+HitTestInfo</ReturnType>
@@ -148,7 +151,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Type">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.DataGridViewHitTestType Type { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.DataGridViewHitTestType Type { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.DataGridViewHitTestType</ReturnType>

@@ -1,30 +1,33 @@
 <Project>
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-
     <BundleDir>$([MSBuild]::NormalizeDirectory('$(OutDir)', 'publish'))</BundleDir>
     <RunScriptOutputPath>$([MSBuild]::NormalizePath('$(BundleDir)', '$(RunScriptOutputName)'))</RunScriptOutputPath>
     <RuntimeIdentifier>$(OutputRID)</RuntimeIdentifier>
-
     <RunScriptCommand Condition="'$(TargetOS)' == 'windows'">$(AssemblyName).exe</RunScriptCommand>
-    <RunScriptCommand Condition="'$(TargetOS)' != 'windows'">chmod +rwx $(AssemblyName) &amp;&amp; ./$(AssemblyName)</RunScriptCommand>
+    <RunScriptCommand Condition="'$(TargetOS)' != 'windows'"
+      >chmod +rwx $(AssemblyName) &amp;&amp; ./$(AssemblyName)</RunScriptCommand
+    >
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TestNativeAot)' != 'true'">
     <PublishSingleFile>true</PublishSingleFile>
     <UseAppHost>true</UseAppHost>
     <SelfContained>true</SelfContained>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TestReadyToRun)' == 'true'">
     <PublishReadyToRun>true</PublishReadyToRun>
     <PublishSingleFile>false</PublishSingleFile>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(TestNativeAot)' == 'true'">
     <IlcToolsPath>$(CoreCLRILCompilerDir)</IlcToolsPath>
-    <IlcToolsPath Condition="'$(CrossBuild)' == 'true' or '$(TargetArchitecture)' != '$(BuildArchitecture)' or '$(EnableNativeSanitizers)' != ''">$(CoreCLRCrossILCompilerDir)</IlcToolsPath>
-    <SysRoot Condition="('$(CrossBuild)' == 'true' or '$(BuildArchitecture)' != '$(TargetArchitecture)') and '$(HostOS)' != 'windows'">$(ROOTFS_DIR)</SysRoot>
+    <IlcToolsPath
+      Condition="'$(CrossBuild)' == 'true' or '$(TargetArchitecture)' != '$(BuildArchitecture)' or '$(EnableNativeSanitizers)' != ''"
+      >$(CoreCLRCrossILCompilerDir)</IlcToolsPath
+    >
+    <SysRoot
+      Condition="('$(CrossBuild)' == 'true' or '$(BuildArchitecture)' != '$(TargetArchitecture)') and '$(HostOS)' != 'windows'"
+      >$(ROOTFS_DIR)</SysRoot
+    >
     <IlcBuildTasksPath>$(CoreCLRILCompilerDir)netstandard/ILCompiler.Build.Tasks.dll</IlcBuildTasksPath>
     <IlcSdkPath>$(CoreCLRAotSdkDir)</IlcSdkPath>
     <IlcFrameworkPath>$(NetCoreAppCurrentTestHostSharedFrameworkPath)</IlcFrameworkPath>
@@ -34,86 +37,103 @@
     <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
     <TrimmerSingleWarn>false</TrimmerSingleWarn>
   </PropertyGroup>
-
   <!-- Needed for the amd64 -> amd64 musl cross-build to pass the target flag. -->
-  <Target Name="_FixIlcTargetTriple"
-          AfterTargets="SetupOSSpecificProps"
-          Condition="'$(CrossBuild)' == 'true' and '$(HostOS)' != 'windows'">
+  <Target
+    Name="_FixIlcTargetTriple"
+    AfterTargets="SetupOSSpecificProps"
+    Condition="'$(CrossBuild)' == 'true' and '$(HostOS)' != 'windows'"
+  >
     <!-- Compute CrossCompileRid, and copy the downstream logic as-is. -->
     <PropertyGroup>
       <CrossCompileRid>$(RuntimeIdentifier)</CrossCompileRid>
-
       <CrossCompileArch />
       <CrossCompileArch Condition="$(CrossCompileRid.EndsWith('-x64'))">x86_64</CrossCompileArch>
-      <CrossCompileArch Condition="$(CrossCompileRid.EndsWith('-arm64')) and '$(_IsApplePlatform)' != 'true'">aarch64</CrossCompileArch>
-      <CrossCompileArch Condition="$(CrossCompileRid.EndsWith('-arm64')) and '$(_IsApplePlatform)' == 'true'">arm64</CrossCompileArch>
-
+      <CrossCompileArch
+        Condition="$(CrossCompileRid.EndsWith('-arm64')) and '$(_IsApplePlatform)' != 'true'"
+        >aarch64</CrossCompileArch
+      >
+      <CrossCompileArch
+        Condition="$(CrossCompileRid.EndsWith('-arm64')) and '$(_IsApplePlatform)' == 'true'"
+        >arm64</CrossCompileArch
+      >
       <TargetTriple />
-      <TargetTriple Condition="'$(CrossCompileArch)' != ''">$(CrossCompileArch)-linux-gnu</TargetTriple>
-      <TargetTriple Condition="'$(CrossCompileArch)' != '' and ($(CrossCompileRid.StartsWith('linux-musl')) or $(CrossCompileRid.StartsWith('alpine')))">$(CrossCompileArch)-alpine-linux-musl</TargetTriple>
-      <TargetTriple Condition="'$(CrossCompileArch)' != '' and ($(CrossCompileRid.StartsWith('freebsd')))">$(CrossCompileArch)-unknown-freebsd12</TargetTriple>
+      <TargetTriple Condition="'$(CrossCompileArch)' != ''"
+        >$(CrossCompileArch)-linux-gnu</TargetTriple
+      >
+      <TargetTriple
+        Condition="'$(CrossCompileArch)' != '' and ($(CrossCompileRid.StartsWith('linux-musl')) or $(CrossCompileRid.StartsWith('alpine')))"
+        >$(CrossCompileArch)-alpine-linux-musl</TargetTriple
+      >
+      <TargetTriple
+        Condition="'$(CrossCompileArch)' != '' and ($(CrossCompileRid.StartsWith('freebsd')))"
+        >$(CrossCompileArch)-unknown-freebsd12</TargetTriple
+      >
     </PropertyGroup>
-
     <ItemGroup>
-      <LinkerArg Include="--target=$(TargetTriple)" Condition="'$(TargetOS)' != 'osx' and '$(TargetTriple)' != ''" />
+      <LinkerArg
+        Include="--target=$(TargetTriple)"
+        Condition="'$(TargetOS)' != 'osx' and '$(TargetTriple)' != ''"
+      />
     </ItemGroup>
   </Target>
-
   <ItemGroup Condition="'$(NativeAotSupported)' == 'true'">
-    <CustomLinkerArg Condition="'$(CrossBuild)' == 'true' and '$(_hostArchitecture)' == '$(_targetArchitecture)' and '$(_hostOS)' != 'windows'" Include="--gcc-toolchain=$(ROOTFS_DIR)/usr" />
+    <CustomLinkerArg
+      Condition="'$(CrossBuild)' == 'true' and '$(_hostArchitecture)' == '$(_targetArchitecture)' and '$(_hostOS)' != 'windows'"
+      Include="--gcc-toolchain=$(ROOTFS_DIR)/usr"
+    />
   </ItemGroup>
-
   <PropertyGroup Condition="'$(PublishSingleFile)' == 'true' or '$(TestNativeAot)' == 'true'">
     <DefineConstants>$(DefineConstants);SINGLE_FILE_TEST_RUNNER</DefineConstants>
   </PropertyGroup>
-
-  <Import Project="$(CoreCLRBuildIntegrationDir)Microsoft.DotNet.ILCompiler.SingleEntry.targets" Condition="'$(TestNativeAot)' == 'true'" />
-
+  <Import
+    Project="$(CoreCLRBuildIntegrationDir)Microsoft.DotNet.ILCompiler.SingleEntry.targets"
+    Condition="'$(TestNativeAot)' == 'true'"
+  />
   <ItemGroup Condition="'$(TestNativeAot)' == 'true'">
     <RdXmlFile Include="$(MSBuildThisFileDirectory)default.rd.xml" />
-
     <!-- xunit calls MakeGenericType to check if something is IEquatable -->
     <IlcArg Include="--feature:System.Reflection.IsTypeConstructionEagerlyValidated=false" />
-
     <TrimmerRootAssembly Include="TestUtilities" />
   </ItemGroup>
-
   <ItemGroup>
-    <Compile Include="$(CommonTestPath)SingleFileTestRunner\SingleFileTestRunner.cs"
-             Link="Common\SingleFileTestRunner\SingleFileTestRunner.cs" />
+    <Compile
+      Include="$(CommonTestPath)SingleFileTestRunner\SingleFileTestRunner.cs"
+      Link="Common\SingleFileTestRunner\SingleFileTestRunner.cs"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="xunit.runner.utility" Version="$(XUnitVersion)" />
   </ItemGroup>
-
-  <Target Name="__ExcludeAssembliesFromSingleFile"
-          Inputs="%(ResolvedFileToPublish.Identity)"
-          Outputs="__NewResolvedFiles"
-          BeforeTargets="_ComputeFilesToBundle">
+  <Target
+    Name="__ExcludeAssembliesFromSingleFile"
+    Inputs="%(ResolvedFileToPublish.Identity)"
+    Outputs="__NewResolvedFiles"
+    BeforeTargets="_ComputeFilesToBundle"
+  >
     <PropertyGroup>
       <__Identity>%(ResolvedFileToPublish.Identity)</__Identity>
       <__FileName>%(ResolvedFileToPublish.Filename)%(ResolvedFileToPublish.Extension)</__FileName>
     </PropertyGroup>
-
     <ItemGroup>
       <__NewResolvedFiles Include="@(ResolvedFileToPublish)">
-        <ExcludeFromSingleFile Condition="'%(__ExcludeFromBundle.Identity)' == '$(__FileName)'">true</ExcludeFromSingleFile>
+        <ExcludeFromSingleFile Condition="'%(__ExcludeFromBundle.Identity)' == '$(__FileName)'"
+          >true</ExcludeFromSingleFile
+        >
       </__NewResolvedFiles>
     </ItemGroup>
   </Target>
-
-  <Target Name="__UpdateExcludedAssembliesFromSingleFile"
-          Inputs="ExcludeFromSingleFile"
-          Outputs="ResolvedFileToPublish"
-          DependsOnTargets="ComputeResolvedFilesToPublishList"
-          BeforeTargets="_ComputeFilesToBundle">
+  <Target
+    Name="__UpdateExcludedAssembliesFromSingleFile"
+    Inputs="ExcludeFromSingleFile"
+    Outputs="ResolvedFileToPublish"
+    DependsOnTargets="ComputeResolvedFilesToPublishList"
+    BeforeTargets="_ComputeFilesToBundle"
+  >
     <ItemGroup>
       <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)" />
       <ResolvedFileToPublish Include="@(__NewResolvedFiles)" />
     </ItemGroup>
   </Target>
-
   <!--
     Use init-compiler.sh to locate the compiler toolchain which was resolved for rest of the build.
     This target is essentially an override hook which is called before `SetupOSSpecificProps` in
@@ -121,30 +141,32 @@
     and the output is `CppLinker`, because from `SetupOSSpecificProps` onwards, we only use `CppLinker`
     (when alternative compiler, i.e. gcc, is not selected)
   -->
-  <Target Name="LocateNativeCompiler"
-          Condition="'$(TestNativeAot)' == 'true' and '$(HostOS)' != 'windows'"
-          BeforeTargets="SetupOSSpecificProps">
+  <Target
+    Name="LocateNativeCompiler"
+    Condition="'$(TestNativeAot)' == 'true' and '$(HostOS)' != 'windows'"
+    BeforeTargets="SetupOSSpecificProps"
+  >
     <PropertyGroup>
       <CppCompilerAndLinker Condition="'$(CppCompilerAndLinker)' == ''">clang</CppCompilerAndLinker>
     </PropertyGroup>
-
-    <Exec Command="sh -c 'build_arch=&quot;$(TargetArchitecture)&quot; compiler=&quot;$(CppCompilerAndLinker)&quot; . &quot;$(RepositoryEngineeringDir)/common/native/init-compiler.sh&quot; &amp;&amp; echo &quot;$CC;$LDFLAGS&quot;' 2>/dev/null"
-          EchoOff="true"
-          ConsoleToMsBuild="true"
-          StandardOutputImportance="Low">
+    <Exec
+      Command="sh -c 'build_arch=&quot;$(TargetArchitecture)&quot; compiler=&quot;$(CppCompilerAndLinker)&quot; . &quot;$(RepositoryEngineeringDir)/common/native/init-compiler.sh&quot; &&& echo &quot;&quot;"
+      EchoOff="true"
+      ConsoleToMsBuild="true"
+      StandardOutputImportance="Low"
+    >
       <Output TaskParameter="ConsoleOutput" PropertyName="_CC_LDFLAGS" />
     </Exec>
-
     <PropertyGroup>
       <CppLinker>$(_CC_LDFLAGS.SubString(0, $(_CC_LDFLAGS.IndexOf(';'))))</CppLinker>
       <_LDFLAGS>$(_CC_LDFLAGS.SubString($([MSBuild]::Add($(_CC_LDFLAGS.IndexOf(';')), 1))))</_LDFLAGS>
       <LinkerFlavor Condition="$(_LDFLAGS.Contains('lld'))">lld</LinkerFlavor>
     </PropertyGroup>
   </Target>
-
-  <Target Name="PublishTestAsSingleFile"
-          Condition="'$(IsCrossTargetingBuild)' != 'true'"
-          AfterTargets="Build"
-          DependsOnTargets="Publish;ArchiveTests" />
-
+  <Target
+    Name="PublishTestAsSingleFile"
+    Condition="'$(IsCrossTargetingBuild)' != 'true'"
+    AfterTargets="Build"
+    DependsOnTargets="Publish;ArchiveTests"
+  />
 </Project>

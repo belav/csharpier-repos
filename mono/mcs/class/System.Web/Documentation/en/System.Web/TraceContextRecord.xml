@@ -12,8 +12,36 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.TraceContextRecord" /> object encapsulates the trace message, category, any associated <see cref="T:System.Exception" />, and whether the trace record was written by the <see cref="Overload:System.Web.TraceContext.Warn" /> method. </para>
-      <para>Every call to the <see cref="Overload:System.Web.TraceContext.Write" /> and <see cref="Overload:System.Web.TraceContext.Warn" /> methods generates a <see cref="T:System.Web.TraceContextRecord" /> object that is added to the <see cref="P:System.Web.TraceContextEventArgs.TraceRecords" /> messages collection. You can access the collection of records by handling the <see cref="E:System.Web.TraceContext.TraceFinished" /> event.</para>
+      <para
+        >The <see
+         cref="T:System.Web.TraceContextRecord" />
+
+         object encapsulates the trace message, category, any associated <see
+         cref="T:System.Exception" />
+
+        , and whether the trace record was written by the <see
+         cref="Overload:System.Web.TraceContext.Warn" />
+
+         method. </para
+      >
+      <para
+        >Every call to the <see
+         cref="Overload:System.Web.TraceContext.Write" />
+
+         and <see
+         cref="Overload:System.Web.TraceContext.Warn" />
+
+         methods generates a <see
+         cref="T:System.Web.TraceContextRecord" />
+
+         object that is added to the <see
+         cref="P:System.Web.TraceContextEventArgs.TraceRecords" />
+
+         messages collection. You can access the collection of records by handling the <see
+         cref="E:System.Web.TraceContext.TraceFinished" />
+
+         event.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -22,7 +50,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TraceContextRecord (string category, string msg, bool isWarning, Exception errorInfo);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TraceContextRecord (string category, string msg, bool isWarning, Exception errorInfo);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -36,20 +67,72 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Every call to the <see cref="Overload:System.Web.TraceContext.Write" /> and <see cref="Overload:System.Web.TraceContext.Warn" /> methods generates a <see cref="T:System.Web.TraceContextRecord" /> object that is added to the <see cref="P:System.Web.TraceContextEventArgs.TraceRecords" /> messages collection. The <see cref="Overload:System.Web.TraceContext.Warn" /> method call sets the <see cref="P:System.Web.TraceContextRecord.IsWarning" /> property to true, while the <see cref="Overload:System.Web.TraceContext.Write" /> method calls set it to false.</para>
+          <para
+            >Every call to the <see
+             cref="Overload:System.Web.TraceContext.Write" />
+
+             and <see
+             cref="Overload:System.Web.TraceContext.Warn" />
+
+             methods generates a <see
+             cref="T:System.Web.TraceContextRecord" />
+
+             object that is added to the <see
+             cref="P:System.Web.TraceContextEventArgs.TraceRecords" />
+
+             messages collection. The <see
+             cref="Overload:System.Web.TraceContext.Warn" />
+
+             method call sets the <see
+             cref="P:System.Web.TraceContextRecord.IsWarning" />
+
+             property to true, while the <see
+             cref="Overload:System.Web.TraceContext.Write" />
+
+             method calls set it to false.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.TraceContextRecord" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.TraceContextRecord" />
+
+             class. </para
+          >
         </summary>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />The trace category that receives the message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The trace category that receives the message.</param
+        >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />The trace message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The trace message.</param
+        >
         <param name="isWarning">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if the method associated with the <see cref="T:System.Web.TraceContextRecord" /> is the <see cref="Overload:System.Web.TraceContext.Warn" /> method; false if the tracing method is the <see cref="Overload:System.Web.TraceContext.Write" /> method.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if the method associated with the <see
+           cref="T:System.Web.TraceContextRecord" />
+
+           is the <see
+           cref="Overload:System.Web.TraceContext.Warn" />
+
+           method; false if the tracing method is the <see
+           cref="Overload:System.Web.TraceContext.Write" />
+
+           method.</param
+        >
         <param name="errorInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Exception" /> object that contains additional error information. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Exception" />
+
+           object that contains additional error information. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Category">
@@ -65,7 +148,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The category is used to better organize trace messages into recognizable groups, but can be any string. The <see cref="T:System.Web.TraceContext" /> class uses <see cref="F:System.String.Empty" /> as its default category for methods that take only a <paramref name="message" /> parameter. The default category for ASP.NET, which writes several trace records when tracing is enabled, is "aspx.page".</para>
+          <para
+            >The category is used to better organize trace messages into recognizable groups, but can be any string. The <see
+             cref="T:System.Web.TraceContext" />
+
+             class uses <see
+             cref="F:System.String.Empty" />
+
+             as its default category for methods that take only a <paramref
+             name="message" />
+
+             parameter. The default category for ASP.NET, which writes several trace records when tracing is enabled, is "aspx.page".</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -86,11 +180,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can include an exception in a trace record if you are using tracing to debug an application or troubleshoot error and exception handling. The <see cref="P:System.Web.TraceContextRecord.ErrorInfo" /> property is null when the trace record is associated with one of the <see cref="T:System.Web.TraceContext" /> methods that does not have an explicit <paramref name="errorInfo" /> parameter or no exception is provided.</para>
+          <para
+            >You can include an exception in a trace record if you are using tracing to debug an application or troubleshoot error and exception handling. The <see
+             cref="P:System.Web.TraceContextRecord.ErrorInfo" />
+
+             property is null when the trace record is associated with one of the <see
+             cref="T:System.Web.TraceContext" />
+
+             methods that does not have an explicit <paramref
+             name="errorInfo" />
+
+             parameter or no exception is provided.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Exception" /> associated with the trace record, if one is available.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Exception" />
+
+             associated with the trace record, if one is available.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -108,7 +218,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the trace record is associated with a <see cref="Overload:System.Web.TraceContext.Warn" /> method call.</para>
+          <para
+            >Gets a value indicating whether the trace record is associated with a <see
+             cref="Overload:System.Web.TraceContext.Warn" />
+
+             method call.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -125,7 +240,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The message can be any string, and is used to write detailed tracing information. It corresponds to the message parameter that is passed to the <see cref="Overload:System.Web.TraceContext.Write" /> and <see cref="Overload:System.Web.TraceContext.Warn" /> methods. The information can be run-time values, messages to orient you and guide you through a program's execution, or other diagnostic data.</para>
+          <para
+            >The message can be any string, and is used to write detailed tracing information. It corresponds to the message parameter that is passed to the <see
+             cref="Overload:System.Web.TraceContext.Write" />
+
+             and <see
+             cref="Overload:System.Web.TraceContext.Warn" />
+
+             methods. The information can be run-time values, messages to orient you and guide you through a program's execution, or other diagnostic data.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

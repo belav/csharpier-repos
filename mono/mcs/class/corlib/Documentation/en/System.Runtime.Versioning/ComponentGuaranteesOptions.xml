@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ComponentGuaranteesOptions" FullName="System.Runtime.Versioning.ComponentGuaranteesOptions">
+<Type
+  Name="ComponentGuaranteesOptions"
+  FullName="System.Runtime.Versioning.ComponentGuaranteesOptions"
+>
   <TypeSignature Language="C#" Value="public enum ComponentGuaranteesOptions" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed ComponentGuaranteesOptions extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed ComponentGuaranteesOptions extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,8 +23,33 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Runtime.Versioning.ComponentGuaranteesOptions" /> enumeration is used by the <see cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" /> class to indicate the level of compatibility that is guaranteed for a component or class library that spans multiple versions. <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Exchange" /> provides the strongest compatibility guarantee, followed by <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" /> and <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.SideBySide" />. <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" /> does not promise compatibility across versions.</para>
-      <para>For a detailed discussion of the meaning of each guarantee, see the <see cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" /> topic. </para>
+      <para
+        >The <see
+         cref="T:System.Runtime.Versioning.ComponentGuaranteesOptions" />
+
+         enumeration is used by the <see
+         cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" />
+
+         class to indicate the level of compatibility that is guaranteed for a component or class library that spans multiple versions. <see
+         cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Exchange" />
+
+         provides the strongest compatibility guarantee, followed by <see
+         cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" />
+
+         and <see
+         cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.SideBySide" />
+
+        . <see
+         cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />
+
+         does not promise compatibility across versions.</para
+      >
+      <para
+        >For a detailed discussion of the meaning of each guarantee, see the <see
+         cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" />
+
+         topic. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -28,7 +59,10 @@
   <Members>
     <Member MemberName="Exchange">
       <MemberSignature Language="C#" Value="Exchange" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.Versioning.ComponentGuaranteesOptions Exchange = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.Versioning.ComponentGuaranteesOptions Exchange = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -45,7 +79,10 @@
     </Member>
     <Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.Versioning.ComponentGuaranteesOptions None = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.Versioning.ComponentGuaranteesOptions None = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -62,7 +99,10 @@
     </Member>
     <Member MemberName="SideBySide">
       <MemberSignature Language="C#" Value="SideBySide" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.Versioning.ComponentGuaranteesOptions SideBySide = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.Versioning.ComponentGuaranteesOptions SideBySide = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -79,7 +119,10 @@
     </Member>
     <Member MemberName="Stable">
       <MemberSignature Language="C#" Value="Stable" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.Versioning.ComponentGuaranteesOptions Stable = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.Versioning.ComponentGuaranteesOptions Stable = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="X509ContentType" FullName="System.Security.Cryptography.X509Certificates.X509ContentType">
+<Type
+  Name="X509ContentType"
+  FullName="System.Security.Cryptography.X509Certificates.X509ContentType"
+>
   <TypeSignature Language="C#" Value="public enum X509ContentType" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed X509ContentType extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed X509ContentType extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,7 +25,32 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Content types <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" />, <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Pkcs12" />, and <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" /> can be exported as byte arrays. Therefore, all three formats are serialized certificates. <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" /> differs from an exported <see cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" /> file in that it is created by using the <see cref="http://go.microsoft.com/fwlink/?LinkId=183293">CertSerializeCertificateStoreElement function</see>, which serializes both the encoded certificate and its encoded properties. If you export the same <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" /> object in both formats and view the resulting byte arrays, you will see that the two are different. </para>
+      <para
+        >Content types <see
+         cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" />
+
+        , <see
+         cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Pkcs12" />
+
+        , and <see
+         cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />
+
+         can be exported as byte arrays. Therefore, all three formats are serialized certificates. <see
+         cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />
+
+         differs from an exported <see
+         cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" />
+
+         file in that it is created by using the <see
+         cref="http://go.microsoft.com/fwlink/?LinkId=183293"
+          >CertSerializeCertificateStoreElement function</see
+        >
+
+        , which serializes both the encoded certificate and its encoded properties. If you export the same <see
+         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+         object in both formats and view the resulting byte arrays, you will see that the two are different. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,7 +60,10 @@
   <Members>
     <Member MemberName="Authenticode">
       <MemberSignature Language="C#" Value="Authenticode" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Authenticode = int32(6)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Authenticode = int32(6)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -48,7 +82,10 @@
     </Member>
     <Member MemberName="Cert">
       <MemberSignature Language="C#" Value="Cert" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Cert = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Cert = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -67,7 +104,10 @@
     </Member>
     <Member MemberName="Pfx">
       <MemberSignature Language="C#" Value="Pfx" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Pfx = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Pfx = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -86,7 +126,10 @@
     </Member>
     <Member MemberName="Pkcs12">
       <MemberSignature Language="C#" Value="Pkcs12" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Pkcs12 = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Pkcs12 = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -105,7 +148,10 @@
     </Member>
     <Member MemberName="Pkcs7">
       <MemberSignature Language="C#" Value="Pkcs7" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Pkcs7 = int32(5)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Pkcs7 = int32(5)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -124,7 +170,10 @@
     </Member>
     <Member MemberName="SerializedCert">
       <MemberSignature Language="C#" Value="SerializedCert" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType SerializedCert = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType SerializedCert = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -143,7 +192,10 @@
     </Member>
     <Member MemberName="SerializedStore">
       <MemberSignature Language="C#" Value="SerializedStore" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType SerializedStore = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType SerializedStore = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -162,7 +214,10 @@
     </Member>
     <Member MemberName="Unknown">
       <MemberSignature Language="C#" Value="Unknown" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Unknown = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.Cryptography.X509Certificates.X509ContentType Unknown = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

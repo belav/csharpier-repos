@@ -50,7 +50,10 @@
       </Docs>
     </Member>
     <Member MemberName="TryUpdate">
-      <MemberSignature Language="C#" Value="public bool TryUpdate (long newval, ConnectionPool+Counter clone);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool TryUpdate (long newval, ConnectionPool+Counter clone);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>

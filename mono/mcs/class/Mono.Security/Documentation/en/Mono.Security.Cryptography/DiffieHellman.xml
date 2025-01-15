@@ -1,17 +1,25 @@
 <Type Name="DiffieHellman" FullName="Mono.Security.Cryptography.DiffieHellman">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public abstract class DiffieHellman : System.Security.Cryptography.AsymmetricAlgorithm" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public abstract class DiffieHellman : System.Security.Cryptography.AsymmetricAlgorithm"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Security</AssemblyName>
     <AssemblyPublicKey>[00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00 79 15 99 77 D2 D0 3A 8E 6B EA 7A 2E 74 E8 D1 AF CC 93 E8 85 19 74 95 2B B4 80 A1 2C 91 34 47 4D 04 06 24 47 C3 7E 0E 68 C0 80 53 6F CF 3C 3F BE 2F F9 C9 79 CE 99 84 75 E5 06 E8 CE 82 DD 5B 0F 35 0D C1 0E 93 BF 2E EE CF 87 4B 24 77 0C 50 81 DB EA 74 47 FD DA FA 27 7B 22 DE 47 D6 FF EA 44 96 74 A4 F9 FC CF 84 D1 50 69 08 93 80 28 4D BD D3 5F 46 CD FF 12 A1 BD 78 E4 EF 00 65 D0 16 DF]</AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Security.Cryptography.AsymmetricAlgorithm</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <summary>Defines a base class from which all Diffie-Hellman implementations inherit.</summary>
     <remarks>To be added</remarks>
@@ -32,7 +40,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public static Mono.Security.Cryptography.DiffieHellman Create ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.Cryptography.DiffieHellman Create ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.Cryptography.DiffieHellman</ReturnType>
@@ -49,7 +60,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public static Mono.Security.Cryptography.DiffieHellman Create (string algName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.Cryptography.DiffieHellman Create (string algName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.Cryptography.DiffieHellman</ReturnType>
@@ -86,7 +100,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DecryptKeyExchange">
-      <MemberSignature Language="C#" Value="public abstract byte[] DecryptKeyExchange (byte[] keyex);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract byte[] DecryptKeyExchange (byte[] keyex);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -95,7 +112,9 @@
         <Parameter Name="keyex" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="keyex">The key exchange data within which the secret information is hidden.</param>
+        <param name="keyex"
+          >The key exchange data within which the secret information is hidden.</param
+        >
         <summary>When overridden in a derived class, extracts secret information from the key exchange data.</summary>
         <returns>The secret information derived from the key exchange data.</returns>
         <remarks>To be added</remarks>
@@ -106,7 +125,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ExportParameters">
-      <MemberSignature Language="C#" Value="public abstract Mono.Security.Cryptography.DHParameters ExportParameters (bool includePrivate);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract Mono.Security.Cryptography.DHParameters ExportParameters (bool includePrivate);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.Cryptography.DHParameters</ReturnType>
@@ -116,7 +138,13 @@
       </Parameters>
       <Docs>
         <param name="includePrivate">
-          <b>True</b> to include private parameters; otherwise, <b>false</b>.</param>
+          <b>True</b>
+
+           to include private parameters; otherwise, <b
+          >false</b>
+
+          .</param
+        >
         <summary>When overridden in a derived class, exports the DHParameters.</summary>
         <returns>The parameters for Diffie-Hellman.</returns>
         <remarks>To be added</remarks>
@@ -127,7 +155,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FromXmlString">
-      <MemberSignature Language="C#" Value="public override void FromXmlString (string xmlString);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void FromXmlString (string xmlString);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -136,9 +167,16 @@
         <Parameter Name="xmlString" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="xmlString">The XML string to use to reconstruct the DiffieHellman object.</param>
+        <param name="xmlString"
+          >The XML string to use to reconstruct the DiffieHellman object.</param
+        >
         <summary>Reconstructs a DiffieHellman object from an XML string.</summary>
-        <remarks>A <see cref="T:System.Security.Cryptography.CryptographicException" /> is thrown if one of the values in the XML string is invalid.</remarks>
+        <remarks
+          >A <see
+           cref="T:System.Security.Cryptography.CryptographicException" />
+
+           is thrown if one of the values in the XML string is invalid.</remarks
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -146,7 +184,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ImportParameters">
-      <MemberSignature Language="C#" Value="public abstract void ImportParameters (Mono.Security.Cryptography.DHParameters parameters);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void ImportParameters (Mono.Security.Cryptography.DHParameters parameters);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -165,7 +206,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ToXmlString">
-      <MemberSignature Language="C#" Value="public override string ToXmlString (bool includePrivateParameters);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override string ToXmlString (bool includePrivateParameters);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -175,7 +219,13 @@
       </Parameters>
       <Docs>
         <param name="includePrivateParameters">
-          <b>True</b> to include private parameters; otherwise, <b>false</b>.</param>
+          <b>True</b>
+
+           to include private parameters; otherwise, <b
+          >false</b>
+
+          .</param
+        >
         <summary>Creates and returns an XML string representation of the current DiffieHellman object.</summary>
         <returns>An XML string encoding of the current DiffieHellman object.</returns>
         <remarks>To be added</remarks>

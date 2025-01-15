@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <!-- Needed by System.Windows.Extensions package -->
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum)</TargetFrameworks>
     <TargetFramework />
-    <DisableImplicitFrameworkReferences Condition="'$(TargetFramework)' != '$(NetCoreAppCurrent)'">false</DisableImplicitFrameworkReferences>
+    <DisableImplicitFrameworkReferences Condition="'$(TargetFramework)' != '$(NetCoreAppCurrent)'"
+      >false</DisableImplicitFrameworkReferences
+    >
   </PropertyGroup>
-
   <ItemGroup>
     <ForwardedType Include="System.Drawing.Bitmap" />
     <ForwardedType Include="System.Drawing.BitmapSuffixInSameAssemblyAttribute" />
@@ -57,18 +57,21 @@
     <ForwardedType Include="System.Drawing.Drawing2D.WarpMode" />
     <ForwardedType Include="System.Drawing.Drawing2D.WrapMode" />
     <ForwardedType Include="System.Drawing.Font" />
-    <ForwardedType Include="System.Drawing.FontConverter"
-                   InnerClass="FontNameConverter;FontUnitConverter" />
+    <ForwardedType
+      Include="System.Drawing.FontConverter"
+      InnerClass="FontNameConverter;FontUnitConverter"
+    />
     <ForwardedType Include="System.Drawing.FontFamily" />
     <ForwardedType Include="System.Drawing.FontStyle" />
-    <ForwardedType Include="System.Drawing.Graphics"
-                   InnerClass="DrawImageAbort;EnumerateMetafileProc" />
+    <ForwardedType
+      Include="System.Drawing.Graphics"
+      InnerClass="DrawImageAbort;EnumerateMetafileProc"
+    />
     <ForwardedType Include="System.Drawing.GraphicsUnit" />
     <ForwardedType Include="System.Drawing.IDeviceContext" />
     <ForwardedType Include="System.Drawing.Icon" />
     <ForwardedType Include="System.Drawing.IconConverter" />
-    <ForwardedType Include="System.Drawing.Image"
-                   InnerClass="GetThumbnailImageAbort" />
+    <ForwardedType Include="System.Drawing.Image" InnerClass="GetThumbnailImageAbort" />
     <ForwardedType Include="System.Drawing.ImageAnimator" />
     <ForwardedType Include="System.Drawing.ImageConverter" />
     <ForwardedType Include="System.Drawing.ImageFormatConverter" />
@@ -128,8 +131,10 @@
     <ForwardedType Include="System.Drawing.Printing.PrintRange" />
     <ForwardedType Include="System.Drawing.Printing.PrinterResolution" />
     <ForwardedType Include="System.Drawing.Printing.PrinterResolutionKind" />
-    <ForwardedType Include="System.Drawing.Printing.PrinterSettings"
-                   InnerClass="PaperSizeCollection;PaperSourceCollection;PrinterResolutionCollection;StringCollection" />
+    <ForwardedType
+      Include="System.Drawing.Printing.PrinterSettings"
+      InnerClass="PaperSizeCollection;PaperSourceCollection;PrinterResolutionCollection;StringCollection"
+    />
     <ForwardedType Include="System.Drawing.Printing.PrinterUnit" />
     <ForwardedType Include="System.Drawing.Printing.PrinterUnitConvert" />
     <ForwardedType Include="System.Drawing.Printing.QueryPageSettingsEventArgs" />
@@ -157,5 +162,4 @@
     <ForwardedType Include="System.Drawing.TextureBrush" />
     <ForwardedType Include="System.Drawing.ToolboxBitmapAttribute" />
   </ItemGroup>
-
 </Project>

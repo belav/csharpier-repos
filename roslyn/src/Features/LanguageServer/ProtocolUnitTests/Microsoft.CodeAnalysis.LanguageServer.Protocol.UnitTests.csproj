@@ -15,14 +15,18 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Prevents ambiguity caused by InternalsVisibleTo from dependent assemblies. -->
-    <Compile Include="..\..\..\Compilers\Core\Portable\InternalUtilities\IsExternalInit.cs" Link="Utilities\IsExternalInit.cs" />
+    <Compile
+      Include="..\..\..\Compilers\Core\Portable\InternalUtilities\IsExternalInit.cs"
+      Link="Utilities\IsExternalInit.cs"
+    />
   </ItemGroup>
-
   <ItemGroup Label="Package References">
     <PackageReference Include="BenchmarkDotNet" Version="$(BenchmarkDotNetVersion)" />
-    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="$(BenchmarkDotNetDiagnosticsWindowsVersion)" />
+    <PackageReference
+      Include="BenchmarkDotNet.Diagnostics.Windows"
+      Version="$(BenchmarkDotNetDiagnosticsWindowsVersion)"
+    />
   </ItemGroup>
-
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\..\Compilers\Core\Portable\Microsoft.CodeAnalysis.csproj" />
     <ProjectReference Include="..\..\..\Compilers\CSharp\Portable\Microsoft.CodeAnalysis.CSharp.csproj" />

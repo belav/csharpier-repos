@@ -1,6 +1,9 @@
 <Type Name="DocAttribute" FullName="Mono.DocTest.DocAttribute">
   <TypeSignature Language="C#" Value="public class DocAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DocAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit DocAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>DocTest</AssemblyName>
   </AssemblyInfo>
@@ -20,7 +23,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DocAttribute (string docs);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string docs) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string docs) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="docs" Type="System.String" />
@@ -45,7 +51,10 @@
     </Member>
     <Member MemberName="FlagsEnum">
       <MemberSignature Language="C#" Value="public ConsoleModifiers FlagsEnum;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.ConsoleModifiers FlagsEnum" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.ConsoleModifiers FlagsEnum"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.ConsoleModifiers</ReturnType>
@@ -57,7 +66,10 @@
     </Member>
     <Member MemberName="NonFlagsEnum">
       <MemberSignature Language="C#" Value="public Mono.DocTest.Color NonFlagsEnum;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype Mono.DocTest.Color NonFlagsEnum" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype Mono.DocTest.Color NonFlagsEnum"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>Mono.DocTest.Color</ReturnType>

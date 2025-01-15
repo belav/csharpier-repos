@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServicePointManagerElement" FullName="System.Net.Configuration.ServicePointManagerElement">
-  <TypeSignature Language="C#" Value="public sealed class ServicePointManagerElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed ServicePointManagerElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="ServicePointManagerElement"
+  FullName="System.Net.Configuration.ServicePointManagerElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ServicePointManagerElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed ServicePointManagerElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,8 +24,22 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class corresponds to the servicePointManager attribute of the settings <format type="text/html"><a href="6e5def51-3646-4ef6-a7bd-c69151321bec">ServicePointManager Element (Network Settings)</a></format> configuration element.</para>
-      <para>This class is used to specify the values that are used to initialize new <see cref="T:System.Net.ServicePoint" /> objects. </para>
+      <para
+        >This class corresponds to the servicePointManager attribute of the settings <format
+         type="text/html">
+          <a href="6e5def51-3646-4ef6-a7bd-c69151321bec"
+            >ServicePointManager Element (Network Settings)</a
+          >
+        </format>
+
+         configuration element.</para
+      >
+      <para
+        >This class is used to specify the values that are used to initialize new <see
+         cref="T:System.Net.ServicePoint" />
+
+         objects. </para
+      >
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
     </remarks>
     <summary>
@@ -27,7 +50,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ServicePointManagerElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -39,7 +65,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Configuration.ServicePointManagerElement" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.Configuration.ServicePointManagerElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -70,8 +101,14 @@
       </Docs>
     </Member>
     <Member MemberName="CheckCertificateRevocationList">
-      <MemberSignature Language="C#" Value="public bool CheckCertificateRevocationList { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool CheckCertificateRevocationList" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool CheckCertificateRevocationList { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool CheckCertificateRevocationList"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -119,7 +156,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of this property sets the <see cref="P:System.Net.ServicePointManager.DnsRefreshTimeout" /> property.</para>
+          <para
+            >The value of this property sets the <see
+             cref="P:System.Net.ServicePointManager.DnsRefreshTimeout" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -175,7 +217,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When this property is set to true, client requests that use the POST method expect to receive a 100-Continue response from the server to indicate that the client should send the data to be posted. This mechanism allows clients to avoid sending large amounts of data over the network when the server, based on the request headers, intends to reject the request.</para>
-          <para>For additional information, see <see cref="P:System.Net.ServicePointManager.Expect100Continue" />.</para>
+          <para
+            >For additional information, see <see
+             cref="P:System.Net.ServicePointManager.Expect100Continue" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -185,7 +232,10 @@
     </Member>
     <Member MemberName="PostDeserialize">
       <MemberSignature Language="C#" Value="protected override void PostDeserialize ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void PostDeserialize() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void PostDeserialize() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -207,8 +257,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -222,9 +278,29 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The collection contains six elements, which correspond to the <see cref="P:System.Net.Configuration.ServicePointManagerElement.CheckCertificateName" />, <see cref="P:System.Net.Configuration.ServicePointManagerElement.DnsRefreshTimeout" />, <see cref="P:System.Net.Configuration.ServicePointManagerElement.EnableDnsRoundRobin" />, <see cref="P:System.Net.Configuration.ServicePointManagerElement.Expect100Continue" />,</para>
+          <para
+            >The collection contains six elements, which correspond to the <see
+             cref="P:System.Net.Configuration.ServicePointManagerElement.CheckCertificateName" />
+
+            , <see
+             cref="P:System.Net.Configuration.ServicePointManagerElement.DnsRefreshTimeout" />
+
+            , <see
+             cref="P:System.Net.Configuration.ServicePointManagerElement.EnableDnsRoundRobin" />
+
+            , <see
+             cref="P:System.Net.Configuration.ServicePointManagerElement.Expect100Continue" />
+
+            ,</para
+          >
           <para>
-            <see cref="P:System.Net.Configuration.ServicePointManagerElement.UseNagleAlgorithm" />, and <see cref="P:System.Net.Configuration.ServicePointManagerElement.CheckCertificateRevocationList" /> properties.</para>
+            <see cref="P:System.Net.Configuration.ServicePointManagerElement.UseNagleAlgorithm" />
+
+            , and <see
+             cref="P:System.Net.Configuration.ServicePointManagerElement.CheckCertificateRevocationList" />
+
+             properties.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

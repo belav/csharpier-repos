@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ListControlConvertEventArgs" FullName="System.Windows.Forms.ListControlConvertEventArgs">
-  <TypeSignature Language="C#" Value="public class ListControlConvertEventArgs : System.Windows.Forms.ConvertEventArgs" />
+<Type
+  Name="ListControlConvertEventArgs"
+  FullName="System.Windows.Forms.ListControlConvertEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ListControlConvertEventArgs : System.Windows.Forms.ConvertEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,12 +20,20 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.ListControl.Format" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.ListControl.Format" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ListControlConvertEventArgs (object value, Type desiredType, object listItem);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ListControlConvertEventArgs (object value, Type desiredType, object listItem);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="value" Type="System.Object" />
@@ -30,18 +44,46 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This class can be used to build a custom string to display in the <see cref="T:System.Windows.Forms.ListControl" /> from the data source item.</para>
+          <para
+            >This class can be used to build a custom string to display in the <see
+             cref="T:System.Windows.Forms.ListControl" />
+
+             from the data source item.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ListControlConvertEventArgs" /> class with the specified object, type, and list item.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ListControlConvertEventArgs" />
+
+             class with the specified object, type, and list item.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value displayed in the <see cref="T:System.Windows.Forms.ListControl" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value displayed in the <see
+           cref="T:System.Windows.Forms.ListControl" />
+
+          .</param
+        >
         <param name="desiredType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> for the displayed item.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           for the displayed item.</param
+        >
         <param name="listItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data source item to be displayed in the <see cref="T:System.Windows.Forms.ListControl" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data source item to be displayed in the <see
+           cref="T:System.Windows.Forms.ListControl" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

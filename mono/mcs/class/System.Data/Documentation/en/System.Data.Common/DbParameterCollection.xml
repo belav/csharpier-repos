@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DbParameterCollection" FullName="System.Data.Common.DbParameterCollection">
-  <TypeSignature Language="C#" Value="public abstract class DbParameterCollection : MarshalByRefObject, System.Data.IDataParameterCollection" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class DbParameterCollection : MarshalByRefObject, System.Data.IDataParameterCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,7 +21,12 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The base class for a collection of parameters relevant to a <see cref="T:System.Data.Common.DbCommand" />. </para>
+      <para
+        >The base class for a collection of parameters relevant to a <see
+         cref="T:System.Data.Common.DbCommand" />
+
+        . </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -31,7 +39,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.Common.DbParameterCollection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.Common.DbParameterCollection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -52,14 +65,36 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the specified <see cref="T:System.Data.Common.DbParameter" /> object to the <see cref="T:System.Data.Common.DbParameterCollection" />.</para>
+          <para
+            >Adds the specified <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object to the <see
+             cref="T:System.Data.Common.DbParameterCollection" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The index of the <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</para>
+          <para
+            >The index of the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object in the collection.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Data.Common.DbParameter.Value" /> of the <see cref="T:System.Data.Common.DbParameter" /> to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Data.Common.DbParameter.Value" />
+
+           of the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           to add to the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -79,10 +114,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds an array of items with the specified values to the <see cref="T:System.Data.Common.DbParameterCollection" />.</para>
+          <para
+            >Adds an array of items with the specified values to the <see
+             cref="T:System.Data.Common.DbParameterCollection" />
+
+            .</para
+          >
         </summary>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of values of type <see cref="T:System.Data.Common.DbParameter" /> to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of values of type <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           to add to the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -100,7 +146,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all <see cref="T:System.Data.Common.DbParameter" /> values from the <see cref="T:System.Data.Common.DbParameterCollection" />.</para>
+          <para
+            >Removes all <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             values from the <see
+             cref="T:System.Data.Common.DbParameterCollection" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -121,14 +175,36 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether a <see cref="T:System.Data.Common.DbParameter" /> with the specified <see cref="P:System.Data.Common.DbParameter.Value" /> is contained in the collection.</para>
+          <para
+            >Indicates whether a <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             with the specified <see
+             cref="P:System.Data.Common.DbParameter.Value" />
+
+             is contained in the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Data.Common.DbParameter" /> is in the collection; otherwise false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             is in the collection; otherwise false.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Data.Common.DbParameter.Value" /> of the <see cref="T:System.Data.Common.DbParameter" /> to look for in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Data.Common.DbParameter.Value" />
+
+           of the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           to look for in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -148,21 +224,40 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether a <see cref="T:System.Data.Common.DbParameter" /> with the specified name exists in the collection.</para>
+          <para
+            >Indicates whether a <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             with the specified name exists in the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Data.Common.DbParameter" /> is in the collection; otherwise false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             is in the collection; otherwise false.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Data.Common.DbParameter" /> to look for in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           to look for in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public abstract void CopyTo (Array array, int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void CopyTo (Array array, int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -179,9 +274,15 @@
           <para>Copies an array of items to the collection starting at the specified index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array of items to copy to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The array of items to copy to the collection.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index in the collection to copy the items.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index in the collection to copy the items.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -215,7 +316,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public abstract System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Collections.IEnumerator GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -226,11 +330,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Exposes the <see cref="M:System.Collections.IEnumerable.GetEnumerator" /> method, which supports a simple iteration over a collection by a .NET Framework data provider.</para>
+          <para
+            >Exposes the <see
+             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+             method, which supports a simple iteration over a collection by a .NET Framework data provider.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IEnumerator" /> that can be used to iterate through the collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IEnumerator" />
+
+             that can be used to iterate through the collection.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -243,7 +357,10 @@
       </Attributes>
     </Member>
     <Member MemberName="GetParameter">
-      <MemberSignature Language="C#" Value="protected abstract System.Data.Common.DbParameter GetParameter (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract System.Data.Common.DbParameter GetParameter (int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbParameter</ReturnType>
@@ -256,21 +373,40 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the <see cref="T:System.Data.Common.DbParameter" /> object at the specified index in the collection.</para>
+          <para
+            >Returns the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object at the specified index in the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Data.Common.DbParameter" /> object at the specified index in the collection.</para>
+          <para
+            >The <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object at the specified index in the collection.</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the <see cref="T:System.Data.Common.DbParameter" /> in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetParameter">
-      <MemberSignature Language="C#" Value="protected abstract System.Data.Common.DbParameter GetParameter (string parameterName);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract System.Data.Common.DbParameter GetParameter (string parameterName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbParameter</ReturnType>
@@ -283,14 +419,30 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Data.Common.DbParameter" /> the object with the specified name.</para>
+          <para
+            >Returns <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             the object with the specified name.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Data.Common.DbParameter" /> the object with the specified name.</para>
+          <para
+            >The <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             the object with the specified name.</para
+          >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Data.Common.DbParameter" /> in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -310,14 +462,30 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the index of the specified <see cref="T:System.Data.Common.DbParameter" /> object.</para>
+          <para
+            >Returns the index of the specified <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The index of the specified <see cref="T:System.Data.Common.DbParameter" /> object.</para>
+          <para
+            >The index of the specified <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           object in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -337,21 +505,40 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the index of the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name.</para>
+          <para
+            >Returns the index of the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object with the specified name.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The index of the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name.</para>
+          <para
+            >The index of the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object with the specified name.</para
+          >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           object in the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public abstract void Insert (int index, object value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void Insert (int index, object value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -365,12 +552,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Inserts the specified index of the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name into the collection at the specified index.</para>
+          <para
+            >Inserts the specified index of the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object with the specified name into the collection at the specified index.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index at which to insert the <see cref="T:System.Data.Common.DbParameter" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index at which to insert the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           object.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Data.Common.DbParameter" /> object to insert into the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           object to insert into the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -467,7 +671,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Data.Common.DbParameter this[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.Common.DbParameter this[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbParameter</ReturnType>
@@ -487,7 +694,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Data.Common.DbParameter this[string parameterName] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.Common.DbParameter this[string parameterName] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbParameter</ReturnType>
@@ -520,10 +730,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the specified <see cref="T:System.Data.Common.DbParameter" /> object from the collection.</para>
+          <para
+            >Removes the specified <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object from the collection.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Data.Common.DbParameter" /> object to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           object to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -543,17 +764,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the <see cref="T:System.Data.Common.DbParameter" /> object at the specified from the collection.</para>
+          <para
+            >Removes the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object at the specified from the collection.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index where the <see cref="T:System.Data.Common.DbParameter" /> object is located.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index where the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           object is located.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RemoveAt">
-      <MemberSignature Language="C#" Value="public abstract void RemoveAt (string parameterName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void RemoveAt (string parameterName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -566,17 +801,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name from the collection.</para>
+          <para
+            >Removes the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object with the specified name from the collection.</para
+          >
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Data.Common.DbParameter" /> object to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           object to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetParameter">
-      <MemberSignature Language="C#" Value="protected abstract void SetParameter (int index, System.Data.Common.DbParameter value);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract void SetParameter (int index, System.Data.Common.DbParameter value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -590,19 +839,39 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the <see cref="T:System.Data.Common.DbParameter" /> object at the specified index to a new value. </para>
+          <para
+            >Sets the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object at the specified index to a new value. </para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index where the <see cref="T:System.Data.Common.DbParameter" /> object is located.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index where the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           object is located.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new <see cref="T:System.Data.Common.DbParameter" /> value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           value.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetParameter">
-      <MemberSignature Language="C#" Value="protected abstract void SetParameter (string parameterName, System.Data.Common.DbParameter value);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract void SetParameter (string parameterName, System.Data.Common.DbParameter value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -616,12 +885,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the <see cref="T:System.Data.Common.DbParameter" /> object with the specified name to a new value.</para>
+          <para
+            >Sets the <see
+             cref="T:System.Data.Common.DbParameter" />
+
+             object with the specified name to a new value.</para
+          >
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Data.Common.DbParameter" /> object in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           object in the collection.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new <see cref="T:System.Data.Common.DbParameter" /> value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new <see
+           cref="T:System.Data.Common.DbParameter" />
+
+           value.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -650,7 +936,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the <see cref="T:System.Object" /> to be used to synchronize access to the collection.</para>
+          <para
+            >Specifies the <see
+             cref="T:System.Object" />
+
+             to be used to synchronize access to the collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -658,7 +949,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="System.Collections.IList.Item">
-      <MemberSignature Language="C#" Value="object System.Collections.IList.Item[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IList.Item[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -677,7 +971,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Data.IDataParameterCollection.Item">
-      <MemberSignature Language="C#" Value="object System.Data.IDataParameterCollection.Item[string parameterName] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Data.IDataParameterCollection.Item[string parameterName] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

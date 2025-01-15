@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ObjectSecurity" FullName="System.Security.AccessControl.ObjectSecurity">
   <TypeSignature Language="C#" Value="public abstract class ObjectSecurity" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ObjectSecurity extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit ObjectSecurity extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,13 +19,27 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides the ability to control access to objects without direct manipulation of Access Control Lists (ACLs). This class is the abstract base class for the <see cref="T:System.Security.AccessControl.CommonObjectSecurity" /> and <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" /> classes.</para>
+      <para
+        >Provides the ability to control access to objects without direct manipulation of Access Control Lists (ACLs). This class is the abstract base class for the <see
+         cref="T:System.Security.AccessControl.CommonObjectSecurity" />
+
+         and <see
+         cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+
+         classes.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected ObjectSecurity (bool isContainer, bool isDS);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, bool isDS) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected ObjectSecurity (bool isContainer, bool isDS);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(bool isContainer, bool isDS) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,17 +54,37 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.AccessControl.ObjectSecurity" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             class.</para
+          >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object is a container object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if the new <see
+           cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+           object is a container object.</param
+        >
         <param name="isDS">
-          <attribution license="cc4" from="Microsoft" modified="false" />True if the new <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object is a directory object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          True if the new <see
+           cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+           object is a directory object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AccessRightType">
       <MemberSignature Language="C#" Value="public abstract Type AccessRightType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type AccessRightType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type AccessRightType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -62,13 +99,27 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Type" /> of the securable object associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Type" />
+
+             of the securable object associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AccessRuleFactory">
-      <MemberSignature Language="C#" Value="public abstract System.Security.AccessControl.AccessRule AccessRuleFactory (System.Security.Principal.IdentityReference identityReference, int accessMask, bool isInherited, System.Security.AccessControl.InheritanceFlags inheritanceFlags, System.Security.AccessControl.PropagationFlags propagationFlags, System.Security.AccessControl.AccessControlType type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Security.AccessControl.AccessRule AccessRuleFactory(class System.Security.Principal.IdentityReference identityReference, int32 accessMask, bool isInherited, valuetype System.Security.AccessControl.InheritanceFlags inheritanceFlags, valuetype System.Security.AccessControl.PropagationFlags propagationFlags, valuetype System.Security.AccessControl.AccessControlType type) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Security.AccessControl.AccessRule AccessRuleFactory (System.Security.Principal.IdentityReference identityReference, int accessMask, bool isInherited, System.Security.AccessControl.InheritanceFlags inheritanceFlags, System.Security.AccessControl.PropagationFlags propagationFlags, System.Security.AccessControl.AccessControlType type);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Security.AccessControl.AccessRule AccessRuleFactory(class System.Security.Principal.IdentityReference identityReference, int32 accessMask, bool isInherited, valuetype System.Security.AccessControl.InheritanceFlags inheritanceFlags, valuetype System.Security.AccessControl.PropagationFlags propagationFlags, valuetype System.Security.AccessControl.AccessControlType type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -90,24 +141,61 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.AccessControl.AccessRule" /> class with the specified values.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.AccessControl.AccessRule" />
+
+             class with the specified values.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Security.AccessControl.AccessRule" /> object that this method creates.</para>
+          <para
+            >The <see
+             cref="T:System.Security.AccessControl.AccessRule" />
+
+             object that this method creates.</para
+          >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />The identity to which the access rule applies.  It must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The identity to which the access rule applies.  It must be an object that can be cast as a <see
+           cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          .</param
+        >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
+        >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if this rule is inherited from a parent container.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if this rule is inherited from a parent container.</param
+        >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies the inheritance properties of the access rule.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies the inheritance properties of the access rule.</param
+        >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" /> is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref
+           name="inheritanceFlags" />
+
+           is set to <see
+           cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          .</param
+        >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies the valid access control type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies the valid access control type.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AccessRulesModified">
@@ -127,13 +215,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a Boolean value that specifies whether the access rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object have been modified.</para>
+          <para
+            >Gets or sets a Boolean value that specifies whether the access rules associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object have been modified.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AccessRuleType">
       <MemberSignature Language="C#" Value="public abstract Type AccessRuleType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type AccessRuleType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type AccessRuleType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -148,7 +244,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Type" /> of the object associated with the access rules of this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object. The <see cref="T:System.Type" /> object must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" /> object.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Type" />
+
+             of the object associated with the access rules of this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object. The <see
+             cref="T:System.Type" />
+
+             object must be an object that can be cast as a <see
+             cref="T:System.Security.Principal.SecurityIdentifier" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -169,7 +279,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a Boolean value that specifies whether the access rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object are in canonical order.</para>
+          <para
+            >Gets a Boolean value that specifies whether the access rules associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object are in canonical order.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -190,7 +305,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a Boolean value that specifies whether the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object is protected.</para>
+          <para
+            >Gets a Boolean value that specifies whether the Discretionary Access Control List (DACL) associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object is protected.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -211,7 +331,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a Boolean value that specifies whether the audit rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object are in canonical order.</para>
+          <para
+            >Gets a Boolean value that specifies whether the audit rules associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object are in canonical order.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -232,13 +357,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a Boolean value that specifies whether the System Access Control List (SACL) associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object is protected.</para>
+          <para
+            >Gets a Boolean value that specifies whether the System Access Control List (SACL) associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object is protected.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AuditRuleFactory">
-      <MemberSignature Language="C#" Value="public abstract System.Security.AccessControl.AuditRule AuditRuleFactory (System.Security.Principal.IdentityReference identityReference, int accessMask, bool isInherited, System.Security.AccessControl.InheritanceFlags inheritanceFlags, System.Security.AccessControl.PropagationFlags propagationFlags, System.Security.AccessControl.AuditFlags flags);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Security.AccessControl.AuditRule AuditRuleFactory(class System.Security.Principal.IdentityReference identityReference, int32 accessMask, bool isInherited, valuetype System.Security.AccessControl.InheritanceFlags inheritanceFlags, valuetype System.Security.AccessControl.PropagationFlags propagationFlags, valuetype System.Security.AccessControl.AuditFlags flags) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Security.AccessControl.AuditRule AuditRuleFactory (System.Security.Principal.IdentityReference identityReference, int accessMask, bool isInherited, System.Security.AccessControl.InheritanceFlags inheritanceFlags, System.Security.AccessControl.PropagationFlags propagationFlags, System.Security.AccessControl.AuditFlags flags);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Security.AccessControl.AuditRule AuditRuleFactory(class System.Security.Principal.IdentityReference identityReference, int32 accessMask, bool isInherited, valuetype System.Security.AccessControl.InheritanceFlags inheritanceFlags, valuetype System.Security.AccessControl.PropagationFlags propagationFlags, valuetype System.Security.AccessControl.AuditFlags flags) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -260,24 +396,61 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.AccessControl.AuditRule" /> class with the specified values.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.AccessControl.AuditRule" />
+
+             class with the specified values.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Security.AccessControl.AuditRule" /> object that this method creates.</para>
+          <para
+            >The <see
+             cref="T:System.Security.AccessControl.AuditRule" />
+
+             object that this method creates.</para
+          >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />The identity to which the audit rule applies.  It must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The identity to which the audit rule applies.  It must be an object that can be cast as a <see
+           cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          .</param
+        >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
+        >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if this rule is inherited from a parent container.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if this rule is inherited from a parent container.</param
+        >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies the inheritance properties of the audit rule.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies the inheritance properties of the audit rule.</param
+        >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether inherited audit rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" /> is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether inherited audit rules are automatically propagated. The propagation flags are ignored if <paramref
+           name="inheritanceFlags" />
+
+           is set to <see
+           cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          .</param
+        >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies the conditions for which the rule is audited.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies the conditions for which the rule is audited.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AuditRulesModified">
@@ -297,13 +470,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a Boolean value that specifies whether the audit rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object have been modified.</para>
+          <para
+            >Gets or sets a Boolean value that specifies whether the audit rules associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object have been modified.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AuditRuleType">
       <MemberSignature Language="C#" Value="public abstract Type AuditRuleType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type AuditRuleType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type AuditRuleType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -318,13 +499,33 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Type" /> object associated with the audit rules of this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object. The <see cref="T:System.Type" /> object must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" /> object.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Type" />
+
+             object associated with the audit rules of this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object. The <see
+             cref="T:System.Type" />
+
+             object must be an object that can be cast as a <see
+             cref="T:System.Security.Principal.SecurityIdentifier" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetGroup">
-      <MemberSignature Language="C#" Value="public System.Security.Principal.IdentityReference GetGroup (Type targetType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Security.Principal.IdentityReference GetGroup(class System.Type targetType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Principal.IdentityReference GetGroup (Type targetType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Security.Principal.IdentityReference GetGroup(class System.Type targetType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -348,12 +549,21 @@
           <para>The primary group associated with the specified owner.</para>
         </returns>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The owner for which to get the primary group. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The owner for which to get the primary group. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetOwner">
-      <MemberSignature Language="C#" Value="public System.Security.Principal.IdentityReference GetOwner (Type targetType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Security.Principal.IdentityReference GetOwner(class System.Type targetType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Principal.IdentityReference GetOwner (Type targetType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Security.Principal.IdentityReference GetOwner(class System.Type targetType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -377,12 +587,18 @@
           <para>The owner associated with the specified group.</para>
         </returns>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The primary group for which to get the owner.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The primary group for which to get the owner.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetSecurityDescriptorBinaryForm">
       <MemberSignature Language="C#" Value="public byte[] GetSecurityDescriptorBinaryForm ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] GetSecurityDescriptorBinaryForm() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance unsigned int8[] GetSecurityDescriptorBinaryForm() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -400,17 +616,36 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of byte values that represents the security descriptor information for this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object.</para>
+          <para
+            >Returns an array of byte values that represents the security descriptor information for this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of byte values that represents the security descriptor for this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object. This method returns null if there is no security information in this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object.</para>
+          <para
+            >An array of byte values that represents the security descriptor for this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object. This method returns null if there is no security information in this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetSecurityDescriptorSddlForm">
-      <MemberSignature Language="C#" Value="public string GetSecurityDescriptorSddlForm (System.Security.AccessControl.AccessControlSections includeSections);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string GetSecurityDescriptorSddlForm(valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public string GetSecurityDescriptorSddlForm (System.Security.AccessControl.AccessControlSections includeSections);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance string GetSecurityDescriptorSddlForm(valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -420,21 +655,37 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the Security Descriptor Definition Language (SDDL) representation of the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object.</para>
+          <para
+            >Returns the Security Descriptor Definition Language (SDDL) representation of the specified sections of the security descriptor associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The SDDL representation of the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object.</para>
+          <para
+            >The SDDL representation of the specified sections of the security descriptor associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object.</para
+          >
         </returns>
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies which sections (access rules, audit rules, primary group, owner) of the security descriptor to get.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies which sections (access rules, audit rules, primary group, owner) of the security descriptor to get.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GroupModified">
@@ -475,7 +726,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a Boolean value that specifies whether this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object is a container object.</para>
+          <para
+            >Gets a Boolean value that specifies whether this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object is a container object.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -496,13 +752,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a Boolean value that specifies whether this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object is a directory object.</para>
+          <para
+            >Gets a Boolean value that specifies whether this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object is a directory object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="IsSddlConversionSupported">
       <MemberSignature Language="C#" Value="public static bool IsSddlConversionSupported ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsSddlConversionSupported() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool IsSddlConversionSupported() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -517,17 +781,33 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a Boolean value that specifies whether the security descriptor associated with this  <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object can be converted to the Security Descriptor Definition Language (SDDL) format.</para>
+          <para
+            >Returns a Boolean value that specifies whether the security descriptor associated with this  <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object can be converted to the Security Descriptor Definition Language (SDDL) format.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the security descriptor associated with this  <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object can be converted to the Security Descriptor Definition Language (SDDL) format; otherwise, false.</para>
+          <para
+            >true if the security descriptor associated with this  <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object can be converted to the Security Descriptor Definition Language (SDDL) format; otherwise, false.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="ModifyAccess">
-      <MemberSignature Language="C#" Value="protected abstract bool ModifyAccess (System.Security.AccessControl.AccessControlModification modification, System.Security.AccessControl.AccessRule rule, out bool modified);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance bool ModifyAccess(valuetype System.Security.AccessControl.AccessControlModification modification, class System.Security.AccessControl.AccessRule rule, bool modified) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract bool ModifyAccess (System.Security.AccessControl.AccessControlModification modification, System.Security.AccessControl.AccessRule rule, out bool modified);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance bool ModifyAccess(valuetype System.Security.AccessControl.AccessControlModification modification, class System.Security.AccessControl.AccessRule rule, bool modified) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -537,9 +817,12 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="modification" Type="System.Security.AccessControl.AccessControlModification" />
+        <Parameter
+          Name="modification"
+          Type="System.Security.AccessControl.AccessControlModification"
+        />
         <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule" />
-        <Parameter Name="modified" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="modified" Type="System.Boolean&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="modification">To be added.</param>
@@ -552,8 +835,14 @@
       </Docs>
     </Member>
     <Member MemberName="ModifyAccessRule">
-      <MemberSignature Language="C#" Value="public virtual bool ModifyAccessRule (System.Security.AccessControl.AccessControlModification modification, System.Security.AccessControl.AccessRule rule, out bool modified);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ModifyAccessRule(valuetype System.Security.AccessControl.AccessControlModification modification, class System.Security.AccessControl.AccessRule rule, bool modified) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool ModifyAccessRule (System.Security.AccessControl.AccessControlModification modification, System.Security.AccessControl.AccessRule rule, out bool modified);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool ModifyAccessRule(valuetype System.Security.AccessControl.AccessControlModification modification, class System.Security.AccessControl.AccessRule rule, bool modified) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -563,9 +852,12 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="modification" Type="System.Security.AccessControl.AccessControlModification" />
+        <Parameter
+          Name="modification"
+          Type="System.Security.AccessControl.AccessControlModification"
+        />
         <Parameter Name="rule" Type="System.Security.AccessControl.AccessRule" />
-        <Parameter Name="modified" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="modified" Type="System.Boolean&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="modification">To be added.</param>
@@ -578,8 +870,14 @@
       </Docs>
     </Member>
     <Member MemberName="ModifyAudit">
-      <MemberSignature Language="C#" Value="protected abstract bool ModifyAudit (System.Security.AccessControl.AccessControlModification modification, System.Security.AccessControl.AuditRule rule, out bool modified);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance bool ModifyAudit(valuetype System.Security.AccessControl.AccessControlModification modification, class System.Security.AccessControl.AuditRule rule, bool modified) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract bool ModifyAudit (System.Security.AccessControl.AccessControlModification modification, System.Security.AccessControl.AuditRule rule, out bool modified);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance bool ModifyAudit(valuetype System.Security.AccessControl.AccessControlModification modification, class System.Security.AccessControl.AuditRule rule, bool modified) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -589,9 +887,12 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="modification" Type="System.Security.AccessControl.AccessControlModification" />
+        <Parameter
+          Name="modification"
+          Type="System.Security.AccessControl.AccessControlModification"
+        />
         <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule" />
-        <Parameter Name="modified" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="modified" Type="System.Boolean&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="modification">To be added.</param>
@@ -604,8 +905,14 @@
       </Docs>
     </Member>
     <Member MemberName="ModifyAuditRule">
-      <MemberSignature Language="C#" Value="public virtual bool ModifyAuditRule (System.Security.AccessControl.AccessControlModification modification, System.Security.AccessControl.AuditRule rule, out bool modified);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ModifyAuditRule(valuetype System.Security.AccessControl.AccessControlModification modification, class System.Security.AccessControl.AuditRule rule, bool modified) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool ModifyAuditRule (System.Security.AccessControl.AccessControlModification modification, System.Security.AccessControl.AuditRule rule, out bool modified);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool ModifyAuditRule(valuetype System.Security.AccessControl.AccessControlModification modification, class System.Security.AccessControl.AuditRule rule, bool modified) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -615,9 +922,12 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="modification" Type="System.Security.AccessControl.AccessControlModification" />
+        <Parameter
+          Name="modification"
+          Type="System.Security.AccessControl.AccessControlModification"
+        />
         <Parameter Name="rule" Type="System.Security.AccessControl.AuditRule" />
-        <Parameter Name="modified" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="modified" Type="System.Boolean&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="modification">To be added.</param>
@@ -651,8 +961,14 @@
       </Docs>
     </Member>
     <Member MemberName="Persist">
-      <MemberSignature Language="C#" Value="protected virtual void Persist (System.Runtime.InteropServices.SafeHandle handle, System.Security.AccessControl.AccessControlSections includeSections);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void Persist(class System.Runtime.InteropServices.SafeHandle handle, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void Persist (System.Runtime.InteropServices.SafeHandle handle, System.Security.AccessControl.AccessControlSections includeSections);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void Persist(class System.Runtime.InteropServices.SafeHandle handle, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -663,27 +979,91 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="handle" Type="System.Runtime.InteropServices.SafeHandle" />
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When persisting a <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object, if the value of the <paramref name="includeSections" /> parameter passed to the <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" /> method is not identical to the value of the <paramref name="includeSections" /> parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object, sections of the persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" /> value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />, and later a <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" /> method is called on that object with an <paramref name="includeSections" /> value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />, the resulting persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object will contain unpredictable values for its audit rules, group, and owner.</para>
+          <para
+            >When persisting a <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object, if the value of the <paramref
+             name="includeSections" />
+
+             parameter passed to the <see
+             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+
+             method is not identical to the value of the <paramref
+             name="includeSections" />
+
+             parameter passed to the constructor used to create that <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object, sections of the persisted <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref
+             name="includeSections" />
+
+             value of <see
+             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            , and later a <see
+             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+
+             method is called on that object with an <paramref
+             name="includeSections" />
+
+             value of <see
+             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+
+            , the resulting persisted <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object will contain unpredictable values for its audit rules, group, and owner.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object to permanent storage. We recommend that the values of the <paramref name="includeSections" /> parameters passed to the constructor and persist methods be identical. For more information, see Remarks.</para>
+          <para
+            >Saves the specified sections of the security descriptor associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object to permanent storage. We recommend that the values of the <paramref
+             name="includeSections" />
+
+             parameters passed to the constructor and persist methods be identical. For more information, see Remarks.</para
+          >
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />The handle used to retrieve the persisted information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The handle used to retrieve the persisted information.</param
+        >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.AccessControl.AccessControlSections" />
+
+           enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Persist">
-      <MemberSignature Language="C#" Value="protected virtual void Persist (string name, System.Security.AccessControl.AccessControlSections includeSections);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void Persist(string name, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void Persist (string name, System.Security.AccessControl.AccessControlSections includeSections);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void Persist(string name, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -694,27 +1074,91 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When persisting a <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object, if the value of the <paramref name="includeSections" /> parameter passed to the <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" /> method is not identical to the value of the <paramref name="includeSections" /> parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object, sections of the persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" /> value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />, and later a <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" /> method is called on that object with an <paramref name="includeSections" /> value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />, the resulting persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object will contain unpredictable values for its audit rules, group, and owner.</para>
+          <para
+            >When persisting a <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object, if the value of the <paramref
+             name="includeSections" />
+
+             parameter passed to the <see
+             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+
+             method is not identical to the value of the <paramref
+             name="includeSections" />
+
+             parameter passed to the constructor used to create that <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object, sections of the persisted <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref
+             name="includeSections" />
+
+             value of <see
+             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            , and later a <see
+             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+
+             method is called on that object with an <paramref
+             name="includeSections" />
+
+             value of <see
+             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+
+            , the resulting persisted <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object will contain unpredictable values for its audit rules, group, and owner.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object to permanent storage. We recommend that the values of the <paramref name="includeSections" /> parameters passed to the constructor and persist methods be identical. For more information, see Remarks.</para>
+          <para
+            >Saves the specified sections of the security descriptor associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object to permanent storage. We recommend that the values of the <paramref
+             name="includeSections" />
+
+             parameters passed to the constructor and persist methods be identical. For more information, see Remarks.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name used to retrieve the persisted information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name used to retrieve the persisted information.</param
+        >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.AccessControl.AccessControlSections" />
+
+           enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Persist">
-      <MemberSignature Language="C#" Value="protected virtual void Persist (bool enableOwnershipPrivilege, string name, System.Security.AccessControl.AccessControlSections includeSections);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void Persist(bool enableOwnershipPrivilege, string name, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void Persist (bool enableOwnershipPrivilege, string name, System.Security.AccessControl.AccessControlSections includeSections);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance void Persist(bool enableOwnershipPrivilege, string name, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -731,29 +1175,96 @@
       <Parameters>
         <Parameter Name="enableOwnershipPrivilege" Type="System.Boolean" />
         <Parameter Name="name" Type="System.String" />
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When persisting a <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object, if the value of the <paramref name="includeSections" /> parameter passed to the <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" /> method is not identical to the value of the <paramref name="includeSections" /> parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object, sections of the persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" /> value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />, and later a <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" /> method is called on that object with an <paramref name="includeSections" /> value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />, the resulting persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object will contain unpredictable values for its audit rules, group, and owner.</para>
+          <para
+            >When persisting a <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object, if the value of the <paramref
+             name="includeSections" />
+
+             parameter passed to the <see
+             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+
+             method is not identical to the value of the <paramref
+             name="includeSections" />
+
+             parameter passed to the constructor used to create that <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object, sections of the persisted <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref
+             name="includeSections" />
+
+             value of <see
+             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            , and later a <see
+             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+
+             method is called on that object with an <paramref
+             name="includeSections" />
+
+             value of <see
+             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+
+            , the resulting persisted <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object will contain unpredictable values for its audit rules, group, and owner.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object to permanent storage. We recommend that the values of the <paramref name="includeSections" /> parameters passed to the constructor and persist methods be identical. For more information, see Remarks.</para>
+          <para
+            >Saves the specified sections of the security descriptor associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object to permanent storage. We recommend that the values of the <paramref
+             name="includeSections" />
+
+             parameters passed to the constructor and persist methods be identical. For more information, see Remarks.</para
+          >
         </summary>
         <param name="enableOwnershipPrivilege">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to enable the privilege that allows the caller to take ownership of the object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to enable the privilege that allows the caller to take ownership of the object.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name used to retrieve the persisted information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name used to retrieve the persisted information.</param
+        >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.AccessControl.AccessControlSections" /> enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.AccessControl.AccessControlSections" />
+
+           enumeration values that specifies the sections of the security descriptor (access rules, audit rules, owner, primary group) of the securable object to save.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="PurgeAccessRules">
-      <MemberSignature Language="C#" Value="public virtual void PurgeAccessRules (System.Security.Principal.IdentityReference identity);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void PurgeAccessRules(class System.Security.Principal.IdentityReference identity) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void PurgeAccessRules (System.Security.Principal.IdentityReference identity);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void PurgeAccessRules(class System.Security.Principal.IdentityReference identity) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -770,15 +1281,32 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all access rules associated with the specified <see cref="T:System.Security.Principal.IdentityReference" />.</para>
+          <para
+            >Removes all access rules associated with the specified <see
+             cref="T:System.Security.Principal.IdentityReference" />
+
+            .</para
+          >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Security.Principal.IdentityReference" /> for which to remove all access rules.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Security.Principal.IdentityReference" />
+
+           for which to remove all access rules.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="PurgeAuditRules">
-      <MemberSignature Language="C#" Value="public virtual void PurgeAuditRules (System.Security.Principal.IdentityReference identity);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void PurgeAuditRules(class System.Security.Principal.IdentityReference identity) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void PurgeAuditRules (System.Security.Principal.IdentityReference identity);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void PurgeAuditRules(class System.Security.Principal.IdentityReference identity) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -795,15 +1323,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all audit rules associated with the specified <see cref="T:System.Security.Principal.IdentityReference" />.</para>
+          <para
+            >Removes all audit rules associated with the specified <see
+             cref="T:System.Security.Principal.IdentityReference" />
+
+            .</para
+          >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Security.Principal.IdentityReference" /> for which to remove all audit rules.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Security.Principal.IdentityReference" />
+
+           for which to remove all audit rules.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReadLock">
       <MemberSignature Language="C#" Value="protected void ReadLock ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void ReadLock() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance void ReadLock() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -818,13 +1360,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Locks this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object for read access.</para>
+          <para
+            >Locks this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object for read access.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ReadUnlock">
       <MemberSignature Language="C#" Value="protected void ReadUnlock ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void ReadUnlock() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance void ReadUnlock() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -839,13 +1389,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Unlocks this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object for read access.</para>
+          <para
+            >Unlocks this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object for read access.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SetAccessRuleProtection">
-      <MemberSignature Language="C#" Value="public void SetAccessRuleProtection (bool isProtected, bool preserveInheritance);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetAccessRuleProtection(bool isProtected, bool preserveInheritance) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetAccessRuleProtection (bool isProtected, bool preserveInheritance);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetAccessRuleProtection(bool isProtected, bool preserveInheritance) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -863,17 +1424,40 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets or removes protection of the access rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object. Protected access rules cannot be modified by parent objects through inheritance.</para>
+          <para
+            >Sets or removes protection of the access rules associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object. Protected access rules cannot be modified by parent objects through inheritance.</para
+          >
         </summary>
         <param name="isProtected">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to protect the access rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object from inheritance; false to allow inheritance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to protect the access rules associated with this <see
+           cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+           object from inheritance; false to allow inheritance.</param
+        >
         <param name="preserveInheritance">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to preserve inherited access rules; false to remove inherited access rules. This parameter is ignored if <paramref name="isProtected" /> is false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to preserve inherited access rules; false to remove inherited access rules. This parameter is ignored if <paramref
+           name="isProtected" />
+
+           is false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetAuditRuleProtection">
-      <MemberSignature Language="C#" Value="public void SetAuditRuleProtection (bool isProtected, bool preserveInheritance);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetAuditRuleProtection(bool isProtected, bool preserveInheritance) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetAuditRuleProtection (bool isProtected, bool preserveInheritance);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetAuditRuleProtection(bool isProtected, bool preserveInheritance) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -891,17 +1475,40 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets or removes protection of the audit rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object. Protected audit rules cannot be modified by parent objects through inheritance.</para>
+          <para
+            >Sets or removes protection of the audit rules associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object. Protected audit rules cannot be modified by parent objects through inheritance.</para
+          >
         </summary>
         <param name="isProtected">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to protect the audit rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object from inheritance; false to allow inheritance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to protect the audit rules associated with this <see
+           cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+           object from inheritance; false to allow inheritance.</param
+        >
         <param name="preserveInheritance">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to preserve inherited audit rules; false to remove inherited audit rules. This parameter is ignored if <paramref name="isProtected" /> is false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to preserve inherited audit rules; false to remove inherited audit rules. This parameter is ignored if <paramref
+           name="isProtected" />
+
+           is false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetGroup">
-      <MemberSignature Language="C#" Value="public void SetGroup (System.Security.Principal.IdentityReference identity);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetGroup(class System.Security.Principal.IdentityReference identity) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetGroup (System.Security.Principal.IdentityReference identity);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetGroup(class System.Security.Principal.IdentityReference identity) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -918,15 +1525,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the primary group for the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object.</para>
+          <para
+            >Sets the primary group for the security descriptor associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object.</para
+          >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The primary group to set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The primary group to set.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetOwner">
-      <MemberSignature Language="C#" Value="public void SetOwner (System.Security.Principal.IdentityReference identity);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetOwner(class System.Security.Principal.IdentityReference identity) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetOwner (System.Security.Principal.IdentityReference identity);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetOwner(class System.Security.Principal.IdentityReference identity) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -943,15 +1564,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the owner for the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object.</para>
+          <para
+            >Sets the owner for the security descriptor associated with this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object.</para
+          >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The owner to set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The owner to set.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetSecurityDescriptorBinaryForm">
-      <MemberSignature Language="C#" Value="public void SetSecurityDescriptorBinaryForm (byte[] binaryForm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetSecurityDescriptorBinaryForm(unsigned int8[] binaryForm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetSecurityDescriptorBinaryForm (byte[] binaryForm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetSecurityDescriptorBinaryForm(unsigned int8[] binaryForm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -972,15 +1607,29 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the security descriptor for this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object from the specified array of byte values.</para>
+          <para
+            >Sets the security descriptor for this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object from the specified array of byte values.</para
+          >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array of bytes from which to set the security descriptor.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The array of bytes from which to set the security descriptor.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetSecurityDescriptorBinaryForm">
-      <MemberSignature Language="C#" Value="public void SetSecurityDescriptorBinaryForm (byte[] binaryForm, System.Security.AccessControl.AccessControlSections includeSections);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetSecurityDescriptorBinaryForm(unsigned int8[] binaryForm, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetSecurityDescriptorBinaryForm (byte[] binaryForm, System.Security.AccessControl.AccessControlSections includeSections);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetSecurityDescriptorBinaryForm(unsigned int8[] binaryForm, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -991,7 +1640,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="binaryForm" Type="System.Byte[]" />
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
@@ -1002,17 +1654,34 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the specified sections of the security descriptor for this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object from the specified array of byte values.</para>
+          <para
+            >Sets the specified sections of the security descriptor for this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object from the specified array of byte values.</para
+          >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array of bytes from which to set the security descriptor.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The array of bytes from which to set the security descriptor.</param
+        >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />The sections (access rules, audit rules, owner, primary group) of the security descriptor to set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The sections (access rules, audit rules, owner, primary group) of the security descriptor to set.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetSecurityDescriptorSddlForm">
-      <MemberSignature Language="C#" Value="public void SetSecurityDescriptorSddlForm (string sddlForm);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetSecurityDescriptorSddlForm(string sddlForm) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetSecurityDescriptorSddlForm (string sddlForm);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetSecurityDescriptorSddlForm(string sddlForm) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1033,15 +1702,29 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the security descriptor for this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object from the specified Security Descriptor Definition Language (SDDL) string.</para>
+          <para
+            >Sets the security descriptor for this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object from the specified Security Descriptor Definition Language (SDDL) string.</para
+          >
         </summary>
         <param name="sddlForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The SDDL string from which to set the security descriptor.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The SDDL string from which to set the security descriptor.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetSecurityDescriptorSddlForm">
-      <MemberSignature Language="C#" Value="public void SetSecurityDescriptorSddlForm (string sddlForm, System.Security.AccessControl.AccessControlSections includeSections);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void SetSecurityDescriptorSddlForm(string sddlForm, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetSecurityDescriptorSddlForm (string sddlForm, System.Security.AccessControl.AccessControlSections includeSections);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void SetSecurityDescriptorSddlForm(string sddlForm, valuetype System.Security.AccessControl.AccessControlSections includeSections) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1052,7 +1735,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="sddlForm" Type="System.String" />
-        <Parameter Name="includeSections" Type="System.Security.AccessControl.AccessControlSections" />
+        <Parameter
+          Name="includeSections"
+          Type="System.Security.AccessControl.AccessControlSections"
+        />
       </Parameters>
       <Docs>
         <since version=".NET 2.0" />
@@ -1063,17 +1749,31 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the specified sections of the security descriptor for this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object from the specified Security Descriptor Definition Language (SDDL) string.</para>
+          <para
+            >Sets the specified sections of the security descriptor for this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object from the specified Security Descriptor Definition Language (SDDL) string.</para
+          >
         </summary>
         <param name="sddlForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />The SDDL string from which to set the security descriptor.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The SDDL string from which to set the security descriptor.</param
+        >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />The sections (access rules, audit rules, owner, primary group) of the security descriptor to set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The sections (access rules, audit rules, owner, primary group) of the security descriptor to set.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="WriteLock">
       <MemberSignature Language="C#" Value="protected void WriteLock ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void WriteLock() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance void WriteLock() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1088,13 +1788,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Locks this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object for write access.</para>
+          <para
+            >Locks this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object for write access.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="WriteUnlock">
       <MemberSignature Language="C#" Value="protected void WriteUnlock ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance void WriteUnlock() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance void WriteUnlock() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1109,7 +1817,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Unlocks this <see cref="T:System.Security.AccessControl.ObjectSecurity" /> object for write access.</para>
+          <para
+            >Unlocks this <see
+             cref="T:System.Security.AccessControl.ObjectSecurity" />
+
+             object for write access.</para
+          >
         </summary>
       </Docs>
     </Member>

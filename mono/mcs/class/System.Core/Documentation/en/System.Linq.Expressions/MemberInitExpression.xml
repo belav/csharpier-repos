@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MemberInitExpression" FullName="System.Linq.Expressions.MemberInitExpression">
-  <TypeSignature Language="C#" Value="public sealed class MemberInitExpression : System.Linq.Expressions.Expression" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit MemberInitExpression extends System.Linq.Expressions.Expression" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class MemberInitExpression : System.Linq.Expressions.Expression"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit MemberInitExpression extends System.Linq.Expressions.Expression"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -19,8 +25,27 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the <see cref="Overload:System.Linq.Expressions.Expression.MemberInit" /> factory methods to create a <see cref="T:System.Linq.Expressions.MemberInitExpression" />.</para>
-      <para>The value of the <see cref="P:System.Linq.Expressions.Expression.NodeType" /> property of a <see cref="T:System.Linq.Expressions.MemberInitExpression" /> is <see cref="F:System.Linq.Expressions.ExpressionType.MemberInit" />.</para>
+      <para
+        >Use the <see
+         cref="Overload:System.Linq.Expressions.Expression.MemberInit" />
+
+         factory methods to create a <see
+         cref="T:System.Linq.Expressions.MemberInitExpression" />
+
+        .</para
+      >
+      <para
+        >The value of the <see
+         cref="P:System.Linq.Expressions.Expression.NodeType" />
+
+         property of a <see
+         cref="T:System.Linq.Expressions.MemberInitExpression" />
+
+         is <see
+         cref="F:System.Linq.Expressions.ExpressionType.MemberInit" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,8 +54,14 @@
   </Docs>
   <Members>
     <Member MemberName="Accept">
-      <MemberSignature Language="C#" Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Linq.Expressions.Expression Accept (System.Linq.Expressions.ExpressionVisitor visitor);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance class System.Linq.Expressions.Expression Accept(class System.Linq.Expressions.ExpressionVisitor visitor) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -49,8 +80,14 @@
       </Docs>
     </Member>
     <Member MemberName="Bindings">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;System.Linq.Expressions.MemberBinding&gt; Bindings { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;class System.Linq.Expressions.MemberBinding&gt; Bindings" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.ReadOnlyCollection<System.Linq.Expressions.MemberBinding> Bindings { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1<class System.Linq.Expressions.MemberBinding> Bindings"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -88,8 +125,14 @@
       </Docs>
     </Member>
     <Member MemberName="NewExpression">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.NewExpression NewExpression { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Linq.Expressions.NewExpression NewExpression" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.NewExpression NewExpression { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Linq.Expressions.NewExpression NewExpression"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -108,8 +151,14 @@
       </Docs>
     </Member>
     <Member MemberName="NodeType">
-      <MemberSignature Language="C#" Value="public override sealed System.Linq.Expressions.ExpressionType NodeType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Linq.Expressions.ExpressionType NodeType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override sealed System.Linq.Expressions.ExpressionType NodeType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Linq.Expressions.ExpressionType NodeType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -122,13 +171,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the node type of this Expression. Extension nodes should return <see cref="F:System.Linq.Expressions.ExpressionType.Extension" /> when overriding this method.</para>
+          <para
+            >Returns the node type of this Expression. Extension nodes should return <see
+             cref="F:System.Linq.Expressions.ExpressionType.Extension" />
+
+             when overriding this method.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Reduce">
-      <MemberSignature Language="C#" Value="public override System.Linq.Expressions.Expression Reduce ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Linq.Expressions.Expression Reduce() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Linq.Expressions.Expression Reduce ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Linq.Expressions.Expression Reduce() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -145,7 +205,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Reduces the <see cref="T:System.Linq.Expressions.MemberInitExpression" /> to a simpler expression. </para>
+          <para
+            >Reduces the <see
+             cref="T:System.Linq.Expressions.MemberInitExpression" />
+
+             to a simpler expression. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -168,13 +233,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" /> represents.</para>
+          <para
+            >Gets the static type of the expression that this <see
+             cref="T:System.Linq.Expressions.Expression" />
+
+             represents.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Update">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.MemberInitExpression Update (System.Linq.Expressions.NewExpression newExpression, System.Collections.Generic.IEnumerable&lt;System.Linq.Expressions.MemberBinding&gt; bindings);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Linq.Expressions.MemberInitExpression Update(class System.Linq.Expressions.NewExpression newExpression, class System.Collections.Generic.IEnumerable`1&lt;class System.Linq.Expressions.MemberBinding&gt; bindings) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.MemberInitExpression Update (System.Linq.Expressions.NewExpression newExpression, System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding> bindings);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Linq.Expressions.MemberInitExpression Update(class System.Linq.Expressions.NewExpression newExpression, class System.Collections.Generic.IEnumerable`1<class System.Linq.Expressions.MemberBinding> bindings) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -184,7 +260,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="newExpression" Type="System.Linq.Expressions.NewExpression" />
-        <Parameter Name="bindings" Type="System.Collections.Generic.IEnumerable&lt;System.Linq.Expressions.MemberBinding&gt;" />
+        <Parameter
+          Name="bindings"
+          Type="System.Collections.Generic.IEnumerable<System.Linq.Expressions.MemberBinding>"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -197,9 +276,21 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="newExpression">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.MemberInitExpression.NewExpression" /> property of the result.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.MemberInitExpression.NewExpression" />
+
+           property of the result.</param
+        >
         <param name="bindings">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="P:System.Linq.Expressions.MemberInitExpression.Bindings" /> property of the result.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="P:System.Linq.Expressions.MemberInitExpression.Bindings" />
+
+           property of the result.</param
+        >
       </Docs>
     </Member>
   </Members>

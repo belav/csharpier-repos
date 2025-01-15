@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IPInterfaceProperties" FullName="System.Net.NetworkInformation.IPInterfaceProperties">
   <TypeSignature Language="C#" Value="public abstract class IPInterfaceProperties" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit IPInterfaceProperties extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit IPInterfaceProperties extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,8 +18,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class provides access to configuration and address information for network interfaces that support IPv4 or IPv6. You do not create instances of this class; they are returned by the <see cref="M:System.Net.NetworkInformation.NetworkInterface.GetIPProperties" /> method.</para>
-      <para>To access IPv4-specific properties, use the object returned by the <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" /> method. To access IPv6-specific properties, use the object returned by the <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" /> method.</para>
+      <para
+        >This class provides access to configuration and address information for network interfaces that support IPv4 or IPv6. You do not create instances of this class; they are returned by the <see
+         cref="M:System.Net.NetworkInformation.NetworkInterface.GetIPProperties" />
+
+         method.</para
+      >
+      <para
+        >To access IPv4-specific properties, use the object returned by the <see
+         cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
+
+         method. To access IPv6-specific properties, use the object returned by the <see
+         cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -26,7 +42,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected IPInterfaceProperties ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,17 +56,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor can be called only from classes that derive from <see cref="T:System.Net.NetworkInformation.IPInterfaceProperties" />.</para>
+          <para
+            >This constructor can be called only from classes that derive from <see
+             cref="T:System.Net.NetworkInformation.IPInterfaceProperties" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPInterfaceProperties" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.IPInterfaceProperties" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AnycastAddresses">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.IPAddressInformationCollection AnycastAddresses { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.NetworkInformation.IPAddressInformationCollection AnycastAddresses" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.IPAddressInformationCollection AnycastAddresses { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.NetworkInformation.IPAddressInformationCollection AnycastAddresses"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -70,8 +105,14 @@
       </Docs>
     </Member>
     <Member MemberName="DhcpServerAddresses">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.IPAddressCollection DhcpServerAddresses { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.NetworkInformation.IPAddressCollection DhcpServerAddresses" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.IPAddressCollection DhcpServerAddresses { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.NetworkInformation.IPAddressCollection DhcpServerAddresses"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -94,8 +135,14 @@
       </Docs>
     </Member>
     <Member MemberName="DnsAddresses">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.IPAddressCollection DnsAddresses { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.NetworkInformation.IPAddressCollection DnsAddresses" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.IPAddressCollection DnsAddresses { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.NetworkInformation.IPAddressCollection DnsAddresses"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -133,7 +180,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The DNS suffix identifies the domain name (for example, "contoso.com") that is appended to an unqualified host name to obtain a fully qualified domain name (FQDN) suitable for a DNS name query. For example, if the local machine has "contoso.com" as its <see cref="P:System.Net.NetworkInformation.IPInterfaceProperties.DnsSuffix" />, and must resolve the unqualified host name "www", the FQDN to query is "www.contoso.com".</para>
+          <para
+            >The DNS suffix identifies the domain name (for example, "contoso.com") that is appended to an unqualified host name to obtain a fully qualified domain name (FQDN) suitable for a DNS name query. For example, if the local machine has "contoso.com" as its <see
+             cref="P:System.Net.NetworkInformation.IPInterfaceProperties.DnsSuffix" />
+
+            , and must resolve the unqualified host name "www", the FQDN to query is "www.contoso.com".</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -142,8 +194,14 @@
       </Docs>
     </Member>
     <Member MemberName="GatewayAddresses">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.GatewayIPAddressInformationCollection GatewayAddresses { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.NetworkInformation.GatewayIPAddressInformationCollection GatewayAddresses" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.GatewayIPAddressInformationCollection GatewayAddresses { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.NetworkInformation.GatewayIPAddressInformationCollection GatewayAddresses"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -166,8 +224,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetIPv4Properties">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.IPv4InterfaceProperties GetIPv4Properties ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Net.NetworkInformation.IPv4InterfaceProperties GetIPv4Properties() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.IPv4InterfaceProperties GetIPv4Properties ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Net.NetworkInformation.IPv4InterfaceProperties GetIPv4Properties() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -181,8 +245,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property returns null for <see cref="F:System.Net.NetworkInformation.NetworkInterfaceType.Loopback" /> interfaces.</para>
-          <para>For a detailed description of the information available for an interface that supports IPv4, see the <see cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" /> class documentation. Note that the object returned by the <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" /> method reflects the configuration as of the time the object is created. This information is not updated dynamically.</para>
+          <para
+            >This property returns null for <see
+             cref="F:System.Net.NetworkInformation.NetworkInterfaceType.Loopback" />
+
+             interfaces.</para
+          >
+          <para
+            >For a detailed description of the information available for an interface that supports IPv4, see the <see
+             cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
+
+             class documentation. Note that the object returned by the <see
+             cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
+
+             method reflects the configuration as of the time the object is created. This information is not updated dynamically.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -190,13 +267,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" /> object that contains IPv4 configuration data, or null if no data is available for the interface.</para>
+          <para
+            >An <see
+             cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
+
+             object that contains IPv4 configuration data, or null if no data is available for the interface.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetIPv6Properties">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.IPv6InterfaceProperties GetIPv6Properties ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Net.NetworkInformation.IPv6InterfaceProperties GetIPv6Properties() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.IPv6InterfaceProperties GetIPv6Properties ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Net.NetworkInformation.IPv6InterfaceProperties GetIPv6Properties() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -210,7 +298,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a detailed description of the information available for an interface that supports IPv6, see the <see cref="T:System.Net.NetworkInformation.IPv6InterfaceProperties" /> documentation. Note that the object returned by the <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" /> method reflects the configuration as of the time the object is created. This information is not updated dynamically.</para>
+          <para
+            >For a detailed description of the information available for an interface that supports IPv6, see the <see
+             cref="T:System.Net.NetworkInformation.IPv6InterfaceProperties" />
+
+             documentation. Note that the object returned by the <see
+             cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
+
+             method reflects the configuration as of the time the object is created. This information is not updated dynamically.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -218,7 +314,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Net.NetworkInformation.IPv6InterfaceProperties" /> object that contains IPv6 configuration data.</para>
+          <para
+            >An <see
+             cref="T:System.Net.NetworkInformation.IPv6InterfaceProperties" />
+
+             object that contains IPv6 configuration data.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -242,7 +343,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether NetBt is configured to use DNS name resolution on this interface.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether NetBt is configured to use DNS name resolution on this interface.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -266,13 +372,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether this interface is configured to automatically register its IP address information with the Domain Name System (DNS).</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether this interface is configured to automatically register its IP address information with the Domain Name System (DNS).</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="MulticastAddresses">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.MulticastIPAddressInformationCollection MulticastAddresses { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.NetworkInformation.MulticastIPAddressInformationCollection MulticastAddresses" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.MulticastIPAddressInformationCollection MulticastAddresses { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.NetworkInformation.MulticastIPAddressInformationCollection MulticastAddresses"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -295,8 +412,14 @@
       </Docs>
     </Member>
     <Member MemberName="UnicastAddresses">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.UnicastIPAddressInformationCollection UnicastAddresses { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.NetworkInformation.UnicastIPAddressInformationCollection UnicastAddresses" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.UnicastIPAddressInformationCollection UnicastAddresses { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.NetworkInformation.UnicastIPAddressInformationCollection UnicastAddresses"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -319,8 +442,14 @@
       </Docs>
     </Member>
     <Member MemberName="WinsServersAddresses">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.IPAddressCollection WinsServersAddresses { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.NetworkInformation.IPAddressCollection WinsServersAddresses" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.IPAddressCollection WinsServersAddresses { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.NetworkInformation.IPAddressCollection WinsServersAddresses"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

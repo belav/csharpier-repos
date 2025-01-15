@@ -18,8 +18,14 @@
   </div>
   <div id="GHTSubTest1" testname="Selected - Get">
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
     <span>
-      <br />False</span>
+      <br />
+
+      False</span
+    >
   </div>
 </testresults>

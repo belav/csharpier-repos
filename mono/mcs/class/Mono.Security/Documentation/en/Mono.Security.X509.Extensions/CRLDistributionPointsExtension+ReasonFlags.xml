@@ -1,4 +1,7 @@
-<Type Name="CRLDistributionPointsExtension+ReasonFlags" FullName="Mono.Security.X509.Extensions.CRLDistributionPointsExtension+ReasonFlags">
+<Type
+  Name="CRLDistributionPointsExtension+ReasonFlags"
+  FullName="Mono.Security.X509.Extensions.CRLDistributionPointsExtension+ReasonFlags"
+>
   <TypeSignature Language="C#" Value="public enum CRLDistributionPointsExtension.ReasonFlags" />
   <AssemblyInfo>
     <AssemblyName>Mono.Security</AssemblyName>

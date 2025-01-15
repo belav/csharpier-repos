@@ -31,7 +31,10 @@
       </Docs>
     </Member>
     <Member MemberName="Triggers">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Nvdl.NvdlTriggerList Triggers { get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Nvdl.NvdlTriggerList Triggers { get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlTriggerList</ReturnType>

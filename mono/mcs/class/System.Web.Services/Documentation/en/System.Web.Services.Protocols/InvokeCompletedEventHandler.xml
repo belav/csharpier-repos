@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="InvokeCompletedEventHandler" FullName="System.Web.Services.Protocols.InvokeCompletedEventHandler">
-  <TypeSignature Language="C#" Value="public delegate void InvokeCompletedEventHandler(object sender, InvokeCompletedEventArgs e);" />
+<Type
+  Name="InvokeCompletedEventHandler"
+  FullName="System.Web.Services.Protocols.InvokeCompletedEventHandler"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public delegate void InvokeCompletedEventHandler(object sender, InvokeCompletedEventArgs e);"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>

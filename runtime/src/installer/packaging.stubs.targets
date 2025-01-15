@@ -1,5 +1,4 @@
 <Project>
-
   <!--
     Provide default stub targets for packaging tasks, if not defined. Allows freer use of
     ProjectReferences in pkgproj.
@@ -7,5 +6,4 @@
   <Target Name="GetFilesToPackage" />
   <Target Name="GetDependenciesToPackage" />
   <Target Name="DetermineRuntimeDependencies" />
-
 </Project>

@@ -1,6 +1,12 @@
 <Type Name="SqliteParameter" FullName="Mono.Data.Sqlite.SqliteParameter">
-  <TypeSignature Language="C#" Value="public sealed class SqliteParameter : System.Data.Common.DbParameter, ICloneable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SqliteParameter extends System.Data.Common.DbParameter implements class System.ICloneable" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqliteParameter : System.Data.Common.DbParameter, ICloneable"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SqliteParameter extends System.Data.Common.DbParameter implements class System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -22,7 +28,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteParameter ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,7 +46,10 @@
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType dbType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -55,7 +67,10 @@
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -72,8 +87,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -92,8 +113,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType dbType, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType dbType, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, object value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -112,8 +139,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType dbType, string sourceColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, string sourceColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType dbType, string sourceColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, string sourceColumn) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -132,8 +165,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType dbType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType dbType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -152,8 +191,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, object value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -172,8 +217,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize, string sourceColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize, string sourceColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -194,8 +245,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType dbType, string sourceColumn, System.Data.DataRowVersion rowVersion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType dbType, string sourceColumn, System.Data.DataRowVersion rowVersion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType dbType, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -216,8 +273,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -238,8 +301,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType dbType, string sourceColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType, string sourceColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType dbType, string sourceColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType, string sourceColumn) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -260,8 +329,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize, string sourceColumn, System.Data.DataRowVersion rowVersion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (System.Data.DbType parameterType, int parameterSize, string sourceColumn, System.Data.DataRowVersion rowVersion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -284,8 +359,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, string sourceColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, string sourceColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -308,8 +389,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType dbType, string sourceColumn, System.Data.DataRowVersion rowVersion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType dbType, string sourceColumn, System.Data.DataRowVersion rowVersion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType dbType, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -332,8 +419,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, string sourceColumn, System.Data.DataRowVersion rowVersion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, string sourceColumn, System.Data.DataRowVersion rowVersion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -358,8 +451,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, System.Data.ParameterDirection direction, bool isNullable, byte precision, byte scale, string sourceColumn, System.Data.DataRowVersion rowVersion, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, valuetype System.Data.ParameterDirection direction, bool isNullable, unsigned int8 precision, unsigned int8 scale, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, System.Data.ParameterDirection direction, bool isNullable, byte precision, byte scale, string sourceColumn, System.Data.DataRowVersion rowVersion, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, valuetype System.Data.ParameterDirection direction, bool isNullable, unsigned int8 precision, unsigned int8 scale, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion, object value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -399,8 +498,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, System.Data.ParameterDirection direction, byte precision, byte scale, string sourceColumn, System.Data.DataRowVersion rowVersion, bool sourceColumnNullMapping, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, valuetype System.Data.ParameterDirection direction, unsigned int8 precision, unsigned int8 scale, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion, bool sourceColumnNullMapping, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteParameter (string parameterName, System.Data.DbType parameterType, int parameterSize, System.Data.ParameterDirection direction, byte precision, byte scale, string sourceColumn, System.Data.DataRowVersion rowVersion, bool sourceColumnNullMapping, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, valuetype System.Data.ParameterDirection direction, unsigned int8 precision, unsigned int8 scale, string sourceColumn, valuetype System.Data.DataRowVersion rowVersion, bool sourceColumnNullMapping, object value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -431,7 +536,9 @@
         <param name="scale">Ignored</param>
         <param name="sourceColumn">The source column</param>
         <param name="rowVersion">The row version information</param>
-        <param name="sourceColumnNullMapping">Whether or not this parameter is for comparing NULL's</param>
+        <param name="sourceColumnNullMapping"
+          >Whether or not this parameter is for comparing NULL's</param
+        >
         <param name="value">The intial value to assign the parameter</param>
         <summary>
             Constructs a named parameter, yet another flavor
@@ -441,7 +548,10 @@
     </Member>
     <Member MemberName="Clone">
       <MemberSignature Language="C#" Value="public object Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object Clone() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -459,8 +569,14 @@
       </Docs>
     </Member>
     <Member MemberName="DbType">
-      <MemberSignature Language="C#" Value="public override System.Data.DbType DbType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.DbType DbType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.DbType DbType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.DbType DbType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -485,8 +601,14 @@
       </Docs>
     </Member>
     <Member MemberName="Direction">
-      <MemberSignature Language="C#" Value="public override System.Data.ParameterDirection Direction { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.ParameterDirection Direction" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.ParameterDirection Direction { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.ParameterDirection Direction"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -540,7 +662,10 @@
     </Member>
     <Member MemberName="ResetDbType">
       <MemberSignature Language="C#" Value="public override void ResetDbType ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ResetDbType() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void ResetDbType() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -598,7 +723,10 @@
       </Docs>
     </Member>
     <Member MemberName="SourceColumnNullMapping">
-      <MemberSignature Language="C#" Value="public override bool SourceColumnNullMapping { get; set; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool SourceColumnNullMapping { get; set; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance bool SourceColumnNullMapping" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -616,8 +744,14 @@
       </Docs>
     </Member>
     <Member MemberName="SourceVersion">
-      <MemberSignature Language="C#" Value="public override System.Data.DataRowVersion SourceVersion { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.DataRowVersion SourceVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.DataRowVersion SourceVersion { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.DataRowVersion SourceVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

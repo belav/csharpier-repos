@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SslSecurityTokenParameters" FullName="System.ServiceModel.Security.Tokens.SslSecurityTokenParameters">
-  <TypeSignature Language="C#" Value="public class SslSecurityTokenParameters : System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SslSecurityTokenParameters extends System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+<Type
+  Name="SslSecurityTokenParameters"
+  FullName="System.ServiceModel.Security.Tokens.SslSecurityTokenParameters"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class SslSecurityTokenParameters : System.ServiceModel.Security.Tokens.SecurityTokenParameters"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit SslSecurityTokenParameters extends System.ServiceModel.Security.Tokens.SecurityTokenParameters"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +32,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SslSecurityTokenParameters ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -36,27 +48,53 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" />
+
+                 is set to <see
+                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" />
+
+                 is set to <see
+                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" /> is set to true.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                 is set to true.</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SslSecurityTokenParameters (bool requireClientCertificate);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool requireClientCertificate) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SslSecurityTokenParameters (bool requireClientCertificate);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool requireClientCertificate) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -71,55 +109,112 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" />
+
+                 is set to <see
+                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" />
+
+                 is set to <see
+                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" /> is set to true.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                 is set to true.</para
+              >
             </item>
           </list>
           <para>
-            <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" /> is set to false.</para>
+            <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" />
+
+             is set to false.</para
+          >
           <para>
-            <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" /> is set to <paramref name="requireClientCertificate" />.</para>
+            <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" />
+
+             is set to <paramref
+             name="requireClientCertificate" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
+
+             class.</para
+          >
         </summary>
         <param name="requireClientCertificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to require client certificate; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to require client certificate; otherwise, false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected SslSecurityTokenParameters (System.ServiceModel.Security.Tokens.SslSecurityTokenParameters source);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.Tokens.SslSecurityTokenParameters source) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected SslSecurityTokenParameters (System.ServiceModel.Security.Tokens.SslSecurityTokenParameters source);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Security.Tokens.SslSecurityTokenParameters source) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="source" Type="System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
+        <Parameter
+          Name="source"
+          Type="System.ServiceModel.Security.Tokens.SslSecurityTokenParameters"
+        />
       </Parameters>
       <Docs>
         <param name="source">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The new instance property values are set to the corresponding values in <paramref name="other" />.</para>
+          <para
+            >The new instance property values are set to the corresponding values in <paramref
+             name="other" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" /> class from another instance.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
+
+             class from another instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SslSecurityTokenParameters (bool requireClientCertificate, bool requireCancellation);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool requireClientCertificate, bool requireCancellation) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SslSecurityTokenParameters (bool requireClientCertificate, bool requireCancellation);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool requireClientCertificate, bool requireCancellation) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -135,35 +230,79 @@
           <list type="bullet">
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.InclusionMode" />
+
+                 is set to <see
+                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" /> is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.ReferenceStyle" />
+
+                 is set to <see
+                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" /> is set to true.</para>
+                <see cref="P:System.ServiceModel.Security.Tokens.SecurityTokenParameters.RequireDerivedKeys" />
+
+                 is set to true.</para
+              >
             </item>
           </list>
           <para>
-            <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" /> is set to <paramref name="requireCancellation" />.</para>
+            <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" />
+
+             is set to <paramref
+             name="requireCancellation" />
+
+            .</para
+          >
           <para>
-            <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" /> is set to <paramref name="requireClientCertificate" />.</para>
+            <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" />
+
+             is set to <paramref
+             name="requireClientCertificate" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
+
+             class.</para
+          >
         </summary>
         <param name="requireClientCertificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to require client certificate; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to require client certificate; otherwise, false.</param
+        >
         <param name="requireCancellation">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to require cancellation; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to require cancellation; otherwise, false.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CloneCore">
-      <MemberSignature Language="C#" Value="protected override System.ServiceModel.Security.Tokens.SecurityTokenParameters CloneCore ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.ServiceModel.Security.Tokens.SecurityTokenParameters CloneCore() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.ServiceModel.Security.Tokens.SecurityTokenParameters CloneCore ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.ServiceModel.Security.Tokens.SecurityTokenParameters CloneCore() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -175,8 +314,30 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" /> and <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" /> methods follow the Core design pattern. <see cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.CloneCore" /> overrides <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />.</para>
-          <para>The <see cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.CloneCore" /> method calls the <see cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.SslSecurityTokenParameters)" /> constructor.</para>
+          <para
+            >The <see
+             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" />
+
+             and <see
+             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+             methods follow the Core design pattern. <see
+             cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.CloneCore" />
+
+             overrides <see
+             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.CloneCore" />
+
+             method calls the <see
+             cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.SslSecurityTokenParameters)" />
+
+             constructor.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -184,13 +345,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" /> instance that represents the copy.</para>
+          <para
+            >A <see
+             cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+             instance that represents the copy.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="CreateKeyIdentifierClause">
-      <MemberSignature Language="C#" Value="protected override System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClause (System.IdentityModel.Tokens.SecurityToken token, System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClause(class System.IdentityModel.Tokens.SecurityToken token, valuetype System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClause (System.IdentityModel.Tokens.SecurityToken token, System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.IdentityModel.Tokens.SecurityKeyIdentifierClause CreateKeyIdentifierClause(class System.IdentityModel.Tokens.SecurityToken token, valuetype System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle referenceStyle) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -200,12 +372,23 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="token" Type="System.IdentityModel.Tokens.SecurityToken" />
-        <Parameter Name="referenceStyle" Type="System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle" />
+        <Parameter
+          Name="referenceStyle"
+          Type="System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method creates a key identifier clause using the <see cref="M:System.IdentityModel.Tokens.SecurityToken.CreateKeyIdentifierClause``1" /> method, with <paramref name="referenceStyle" /> as a generic parameter.</para>
+          <para
+            >This method creates a key identifier clause using the <see
+             cref="M:System.IdentityModel.Tokens.SecurityToken.CreateKeyIdentifierClause``1" />
+
+             method, with <paramref
+             name="referenceStyle" />
+
+             as a generic parameter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -216,9 +399,15 @@
           <para>The key identifier clause for a token.</para>
         </returns>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />The token.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The token.</param
+        >
         <param name="referenceStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />The reference style of the security token.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The reference style of the security token.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="HasAsymmetricKey">
@@ -245,8 +434,14 @@
       </Docs>
     </Member>
     <Member MemberName="InitializeSecurityTokenRequirement">
-      <MemberSignature Language="C#" Value="protected override void InitializeSecurityTokenRequirement (System.IdentityModel.Selectors.SecurityTokenRequirement requirement);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void InitializeSecurityTokenRequirement(class System.IdentityModel.Selectors.SecurityTokenRequirement requirement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void InitializeSecurityTokenRequirement (System.IdentityModel.Selectors.SecurityTokenRequirement requirement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance void InitializeSecurityTokenRequirement(class System.IdentityModel.Selectors.SecurityTokenRequirement requirement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -255,29 +450,73 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="requirement" Type="System.IdentityModel.Selectors.SecurityTokenRequirement" />
+        <Parameter
+          Name="requirement"
+          Type="System.IdentityModel.Selectors.SecurityTokenRequirement"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following properties of the <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" /> are initialized:</para>
+          <para
+            >The following properties of the <see
+             cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+
+             are initialized:</para
+          >
           <list type="bullet">
             <item>
-              <para>If <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" /> is true, <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" /> = <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenTypes.MutualSslNego" />; otherwise, it is set to <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenTypes.AnonymousSslNego" />.</para>
+              <para
+                >If <see
+                 cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" />
+
+                 is true, <see
+                 cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" />
+
+                 = <see
+                 cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenTypes.MutualSslNego" />
+
+                ; otherwise, it is set to <see
+                 cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenTypes.AnonymousSslNego" />
+
+                .</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.RequireCryptographicToken" /> = true.</para>
+                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.RequireCryptographicToken" />
+
+                 = true.</para
+              >
             </item>
             <item>
-              <para>The SupportSecurityContextCancellation property in <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" /> is set to <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" />.</para>
+              <para
+                >The SupportSecurityContextCancellation property in <see
+                 cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
+
+                 is set to <see
+                 cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" />
+
+                .</para
+              >
             </item>
             <item>
-              <para>The IssuedSecurityTokenParameters property in <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" /> is set to a clone of the current instance.</para>
+              <para
+                >The IssuedSecurityTokenParameters property in <see
+                 cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
+
+                 is set to a clone of the current instance.</para
+              >
             </item>
             <item>
               <para>
-                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.KeyType" /> = <see cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />.</para>
+                <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.KeyType" />
+
+                 = <see
+                 cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />
+
+                .</para
+              >
             </item>
           </list>
         </remarks>
@@ -286,7 +525,10 @@
           <para>Initializes a security token requirement.</para>
         </summary>
         <param name="requirement">
-          <attribution license="cc4" from="Microsoft" modified="false" />The requirement of the security token.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The requirement of the security token.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="RequireCancellation">
@@ -331,8 +573,14 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsClientAuthentication">
-      <MemberSignature Language="C#" Value="protected override bool SupportsClientAuthentication { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SupportsClientAuthentication" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool SupportsClientAuthentication { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool SupportsClientAuthentication"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -350,8 +598,14 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsClientWindowsIdentity">
-      <MemberSignature Language="C#" Value="protected override bool SupportsClientWindowsIdentity { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SupportsClientWindowsIdentity" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool SupportsClientWindowsIdentity { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool SupportsClientWindowsIdentity"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -369,8 +623,14 @@
       </Docs>
     </Member>
     <Member MemberName="SupportsServerAuthentication">
-      <MemberSignature Language="C#" Value="protected override bool SupportsServerAuthentication { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool SupportsServerAuthentication" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool SupportsServerAuthentication { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool SupportsServerAuthentication"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -392,7 +652,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -404,7 +667,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The method displays the name of this class, <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" />, and <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" />.</para>
+          <para
+            >The method displays the name of this class, <see
+             cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" />
+
+            , and <see
+             cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

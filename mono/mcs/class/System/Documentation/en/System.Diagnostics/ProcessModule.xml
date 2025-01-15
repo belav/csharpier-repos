@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ProcessModule" FullName="System.Diagnostics.ProcessModule">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class ProcessModule : System.ComponentModel.Component" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ProcessModule extends System.ComponentModel.Component" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class ProcessModule : System.ComponentModel.Component"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ProcessModule extends System.ComponentModel.Component"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -14,8 +21,7 @@
   <Base>
     <BaseTypeName>System.ComponentModel.Component</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Attributes>
     <Attribute>
       <AttributeName>System.ComponentModel.Designer("System.Diagnostics.Design.ProcessModuleDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")</AttributeName>
@@ -81,7 +87,12 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The module's entry point is the location of the function that is called during process startup, thread startup, process shutdown, and thread shutdown. While the entry point is not the address of the DllMain function, it should be close enough for most purposes.</para>
           <block subset="none" type="note">
-            <para>Due to changes in the way that Windows loads assemblies, <see cref="P:System.Diagnostics.ProcessModule.EntryPointAddress" /> will always return 0 on win8 or win81 and should not be relied on for those platforms.</para>
+            <para
+              >Due to changes in the way that Windows loads assemblies, <see
+               cref="P:System.Diagnostics.ProcessModule.EntryPointAddress" />
+
+               will always return 0 on win8 or win81 and should not be relied on for those platforms.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -120,8 +131,14 @@
       </Docs>
     </Member>
     <Member MemberName="FileVersionInfo">
-      <MemberSignature Language="C#" Value="public System.Diagnostics.FileVersionInfo FileVersionInfo { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Diagnostics.FileVersionInfo FileVersionInfo" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Diagnostics.FileVersionInfo FileVersionInfo { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Diagnostics.FileVersionInfo FileVersionInfo"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -167,7 +184,10 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Diagnostics.ProcessModule.ModuleMemorySize" /> does not include any additional memory allocations that the module makes once it is running; it includes only the size of the static code and data in the module file.</para>
+            <see cref="P:System.Diagnostics.ProcessModule.ModuleMemorySize" />
+
+             does not include any additional memory allocations that the module makes once it is running; it includes only the size of the static code and data in the module file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -206,7 +226,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -225,7 +248,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of the <see cref="P:System.Diagnostics.ProcessModule.ModuleName" /> property.</para>
+          <para
+            >The value of the <see
+             cref="P:System.Diagnostics.ProcessModule.ModuleName" />
+
+             property.</para
+          >
         </returns>
       </Docs>
     </Member>

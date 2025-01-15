@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ConcurrentDictionary&lt;TKey,TValue&gt;" FullName="System.Collections.Concurrent.ConcurrentDictionary&lt;TKey,TValue&gt;">
-  <TypeSignature Language="C#" Value="public class ConcurrentDictionary&lt;TKey,TValue&gt; : System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;, System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;, System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;, System.Collections.IDictionary" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit ConcurrentDictionary`2&lt;TKey, TValue&gt; extends System.Object implements class System.Collections.Generic.ICollection`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt;&gt;, class System.Collections.Generic.IDictionary`2&lt;!TKey, !TValue&gt;, class System.Collections.Generic.IEnumerable`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt;&gt;, class System.Collections.ICollection, class System.Collections.IDictionary, class System.Collections.IEnumerable" />
+<Type
+  Name="ConcurrentDictionary<TKey,TValue>"
+  FullName="System.Collections.Concurrent.ConcurrentDictionary<TKey,TValue>"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ConcurrentDictionary<TKey,TValue> : System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>, System.Collections.Generic.IDictionary<TKey,TValue>, System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey,TValue>>, System.Collections.IDictionary"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit ConcurrentDictionary`2<TKey, TValue> extends System.Object implements class System.Collections.Generic.ICollection`1<valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue>>, class System.Collections.Generic.IDictionary`2<!TKey, !TValue>, class System.Collections.Generic.IEnumerable`1<valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue>>, class System.Collections.ICollection, class System.Collections.IDictionary, class System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -40,8 +49,32 @@
     <typeparam name="TValue">To be added.</typeparam>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For very large <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> objects, you can increase the maximum array size to 2 gigabytes (GB) on a 64-bit system by setting the <format type="text/html"><a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">&lt;gcAllowVeryLargeObjects&gt;</a></format> configuration element to true in the run-time environment.</para>
-      <para>Like the <see cref="T:System.Collections.Generic.Dictionary`2" /> class, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> implements the <see cref="T:System.Collections.Generic.IDictionary`2" /> interface. In addition, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> provides several methods for adding or updating key/value pairs in the dictionary, as described in the following table.  </para>
+      <para
+        >For very large <see
+         cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+         objects, you can increase the maximum array size to 2 gigabytes (GB) on a 64-bit system by setting the <format
+         type="text/html">
+          <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">&lt;gcAllowVeryLargeObjects&gt;</a>
+        </format>
+
+         configuration element to true in the run-time environment.</para
+      >
+      <para
+        >Like the <see
+         cref="T:System.Collections.Generic.Dictionary`2" />
+
+         class, <see
+         cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+         implements the <see
+         cref="T:System.Collections.Generic.IDictionary`2" />
+
+         interface. In addition, <see
+         cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+         provides several methods for adding or updating key/value pairs in the dictionary, as described in the following table.  </para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -79,7 +112,12 @@
             </para>
           </description>
           <description>
-            <para>This method checks whether the key has a specified value, and if it does, updates the key with a new value. It's similar to the <see cref="Overload:System.Threading.Interlocked.CompareExchange" /> method, except that it's used for dictionary elements.</para>
+            <para
+              >This method checks whether the key has a specified value, and if it does, updates the key with a new value. It's similar to the <see
+               cref="Overload:System.Threading.Interlocked.CompareExchange" />
+
+               method, except that it's used for dictionary elements.</para
+            >
           </description>
         </item>
         <item>
@@ -108,9 +146,15 @@
           </description>
           <description>
             <para>
-              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate(`0,`1,System.Func{`0,`1,`1})" /> accepts the key and two delegates. It uses the first delegate if the key doesn’t exist in the dictionary; it accepts the key and returns the value that should be added for the key. It uses the second delegate if the key does exist; it accepts the key and its current value, and it returns the new value that should be set for the key.</para>
+              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate(`0,`1,System.Func{`0,`1,`1})" />
+
+               accepts the key and two delegates. It uses the first delegate if the key doesn’t exist in the dictionary; it accepts the key and returns the value that should be added for the key. It uses the second delegate if the key does exist; it accepts the key and its current value, and it returns the new value that should be set for the key.</para
+            >
             <para>
-              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate(`0,System.Func{`0,`1},System.Func{`0,`1,`1})" /> accepts the key, a value to add, and the update delegate. This is the same as the previous overload, except that it doesn't use a delegate to add a key.</para>
+              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate(`0,System.Func{`0,`1},System.Func{`0,`1,`1})" />
+
+               accepts the key, a value to add, and the update delegate. This is the same as the previous overload, except that it doesn't use a delegate to add a key.</para
+            >
           </description>
         </item>
         <item>
@@ -129,13 +173,33 @@
           <description>
             <para>These overloads provide lazy initialization for a key/value pair in the dictionary, adding the value only if it’s not there.</para>
             <para>
-              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(`0,`1)" /> takes the value to be added if the key doesn’t exist.</para>
+              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(`0,`1)" />
+
+               takes the value to be added if the key doesn’t exist.</para
+            >
             <para>
-              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(`0,System.Func{`0,`1})" /> takes a delegate that will generate the value if the key doesn’t exist.</para>
+              <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(`0,System.Func{`0,`1})" />
+
+               takes a delegate that will generate the value if the key doesn’t exist.</para
+            >
           </description>
         </item>
       </list>
-      <para>All these operations are atomic and are thread-safe with regards to all other operations on the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> class. The only exceptions are the methods that accept a delegate, that is, <see cref="Overload:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate" /> and <see cref="Overload:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd" />. For modifications and write operations to the dictionary, <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> uses fine-grained locking to ensure thread safety. (Read operations on the dictionary are performed in a lock-free manner.) However, delegates for these methods are called outside the locks to avoid the problems that can arise from executing unknown code under a lock. Therefore, the code executed by these delegates is not subject to the atomicity of the operation.</para>
+      <para
+        >All these operations are atomic and are thread-safe with regards to all other operations on the <see
+         cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+         class. The only exceptions are the methods that accept a delegate, that is, <see
+         cref="Overload:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate" />
+
+         and <see
+         cref="Overload:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd" />
+
+        . For modifications and write operations to the dictionary, <see
+         cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+         uses fine-grained locking to ensure thread safety. (Read operations on the dictionary are performed in a lock-free manner.) However, delegates for these methods are called outside the locks to avoid the problems that can arise from executing unknown code under a lock. Therefore, the code executed by these delegates is not subject to the atomicity of the operation.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -145,7 +209,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ConcurrentDictionary ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -158,19 +225,33 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> class that is empty, has the default concurrency level, has the default initial capacity, and uses the default comparer for the key type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+             class that is empty, has the default concurrency level, has the default initial capacity, and uses the default comparer for the key type.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ConcurrentDictionary (System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; collection);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt;&gt; collection) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ConcurrentDictionary (System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey,TValue>> collection);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1<valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue>> collection) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="collection" Type="System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;" />
+        <Parameter
+          Name="collection"
+          Type="System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey,TValue>>"
+        />
       </Parameters>
       <Docs>
         <param name="collection">To be added.</param>
@@ -179,14 +260,20 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ConcurrentDictionary (System.Collections.Generic.IEqualityComparer&lt;TKey&gt; comparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEqualityComparer`1&lt;!TKey&gt; comparer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ConcurrentDictionary (System.Collections.Generic.IEqualityComparer<TKey> comparer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEqualityComparer`1<!TKey> comparer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="comparer" Type="System.Collections.Generic.IEqualityComparer&lt;TKey&gt;" />
+        <Parameter Name="comparer" Type="System.Collections.Generic.IEqualityComparer<TKey>" />
       </Parameters>
       <Docs>
         <param name="comparer">To be added.</param>
@@ -195,15 +282,24 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ConcurrentDictionary (System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; collection, System.Collections.Generic.IEqualityComparer&lt;TKey&gt; comparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt;&gt; collection, class System.Collections.Generic.IEqualityComparer`1&lt;!TKey&gt; comparer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ConcurrentDictionary (System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey,TValue>> collection, System.Collections.Generic.IEqualityComparer<TKey> comparer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1<valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue>> collection, class System.Collections.Generic.IEqualityComparer`1<!TKey> comparer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="collection" Type="System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;" />
-        <Parameter Name="comparer" Type="System.Collections.Generic.IEqualityComparer&lt;TKey&gt;" />
+        <Parameter
+          Name="collection"
+          Type="System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey,TValue>>"
+        />
+        <Parameter Name="comparer" Type="System.Collections.Generic.IEqualityComparer<TKey>" />
       </Parameters>
       <Docs>
         <param name="collection">To be added.</param>
@@ -213,8 +309,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ConcurrentDictionary (int concurrencyLevel, int capacity);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 concurrencyLevel, int32 capacity) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ConcurrentDictionary (int concurrencyLevel, int capacity);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 concurrencyLevel, int32 capacity) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -227,25 +329,51 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> class that is empty, has the specified concurrency level and capacity, and uses the default comparer for the key type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+             class that is empty, has the specified concurrency level and capacity, and uses the default comparer for the key type.</para
+          >
         </summary>
         <param name="concurrencyLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The estimated number of threads that will update the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> concurrently.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The estimated number of threads that will update the <see
+           cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+           concurrently.</param
+        >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The initial number of elements that the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> can contain.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The initial number of elements that the <see
+           cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+           can contain.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ConcurrentDictionary (int concurrencyLevel, System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; collection, System.Collections.Generic.IEqualityComparer&lt;TKey&gt; comparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 concurrencyLevel, class System.Collections.Generic.IEnumerable`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt;&gt; collection, class System.Collections.Generic.IEqualityComparer`1&lt;!TKey&gt; comparer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ConcurrentDictionary (int concurrencyLevel, System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey,TValue>> collection, System.Collections.Generic.IEqualityComparer<TKey> comparer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 concurrencyLevel, class System.Collections.Generic.IEnumerable`1<valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue>> collection, class System.Collections.Generic.IEqualityComparer`1<!TKey> comparer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="concurrencyLevel" Type="System.Int32" />
-        <Parameter Name="collection" Type="System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;" />
-        <Parameter Name="comparer" Type="System.Collections.Generic.IEqualityComparer&lt;TKey&gt;" />
+        <Parameter
+          Name="collection"
+          Type="System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey,TValue>>"
+        />
+        <Parameter Name="comparer" Type="System.Collections.Generic.IEqualityComparer<TKey>" />
       </Parameters>
       <Docs>
         <param name="concurrencyLevel">To be added.</param>
@@ -256,8 +384,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ConcurrentDictionary (int concurrencyLevel, int capacity, System.Collections.Generic.IEqualityComparer&lt;TKey&gt; comparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 concurrencyLevel, int32 capacity, class System.Collections.Generic.IEqualityComparer`1&lt;!TKey&gt; comparer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ConcurrentDictionary (int concurrencyLevel, int capacity, System.Collections.Generic.IEqualityComparer<TKey> comparer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 concurrencyLevel, int32 capacity, class System.Collections.Generic.IEqualityComparer`1<!TKey> comparer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -265,7 +399,7 @@
       <Parameters>
         <Parameter Name="concurrencyLevel" Type="System.Int32" />
         <Parameter Name="capacity" Type="System.Int32" />
-        <Parameter Name="comparer" Type="System.Collections.Generic.IEqualityComparer&lt;TKey&gt;" />
+        <Parameter Name="comparer" Type="System.Collections.Generic.IEqualityComparer<TKey>" />
       </Parameters>
       <Docs>
         <param name="concurrencyLevel">To be added.</param>
@@ -276,8 +410,14 @@
       </Docs>
     </Member>
     <Member MemberName="AddOrUpdate">
-      <MemberSignature Language="C#" Value="public TValue AddOrUpdate (TKey key, Func&lt;TKey,TValue&gt; addValueFactory, Func&lt;TKey,TValue,TValue&gt; updateValueFactory);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !TValue AddOrUpdate(!TKey key, class System.Func`2&lt;!TKey, !TValue&gt; addValueFactory, class System.Func`3&lt;!TKey, !TValue, !TValue&gt; updateValueFactory) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public TValue AddOrUpdate (TKey key, Func<TKey,TValue> addValueFactory, Func<TKey,TValue,TValue> updateValueFactory);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !TValue AddOrUpdate(!TKey key, class System.Func`2<!TKey, !TValue> addValueFactory, class System.Func`3<!TKey, !TValue, !TValue> updateValueFactory) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -287,8 +427,8 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="key" Type="TKey" />
-        <Parameter Name="addValueFactory" Type="System.Func&lt;TKey,TValue&gt;" />
-        <Parameter Name="updateValueFactory" Type="System.Func&lt;TKey,TValue,TValue&gt;" />
+        <Parameter Name="addValueFactory" Type="System.Func<TKey,TValue>" />
+        <Parameter Name="updateValueFactory" Type="System.Func<TKey,TValue,TValue>" />
       </Parameters>
       <Docs>
         <param name="key">To be added.</param>
@@ -300,8 +440,14 @@
       </Docs>
     </Member>
     <Member MemberName="AddOrUpdate">
-      <MemberSignature Language="C#" Value="public TValue AddOrUpdate (TKey key, TValue addValue, Func&lt;TKey,TValue,TValue&gt; updateValueFactory);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !TValue AddOrUpdate(!TKey key, !TValue addValue, class System.Func`3&lt;!TKey, !TValue, !TValue&gt; updateValueFactory) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public TValue AddOrUpdate (TKey key, TValue addValue, Func<TKey,TValue,TValue> updateValueFactory);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !TValue AddOrUpdate(!TKey key, !TValue addValue, class System.Func`3<!TKey, !TValue, !TValue> updateValueFactory) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -312,7 +458,7 @@
       <Parameters>
         <Parameter Name="key" Type="TKey" />
         <Parameter Name="addValue" Type="TValue" />
-        <Parameter Name="updateValueFactory" Type="System.Func&lt;TKey,TValue,TValue&gt;" />
+        <Parameter Name="updateValueFactory" Type="System.Func<TKey,TValue,TValue>" />
       </Parameters>
       <Docs>
         <param name="key">To be added.</param>
@@ -325,7 +471,10 @@
     </Member>
     <Member MemberName="Clear">
       <MemberSignature Language="C#" Value="public void Clear ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Clear() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Clear() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -338,13 +487,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all keys and values from the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
+          <para
+            >Removes all keys and values from the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ContainsKey">
       <MemberSignature Language="C#" Value="public bool ContainsKey (TKey key);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ContainsKey(!TKey key) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool ContainsKey(!TKey key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -376,17 +533,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property has snapshot semantics and represents the number of items in the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> at the moment when the property was accessed.</para>
+          <para
+            >This property has snapshot semantics and represents the number of items in the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+             at the moment when the property was accessed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of key/value pairs contained in the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
+          <para
+            >Gets the number of key/value pairs contained in the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerator&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt; GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IEnumerator`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt;&gt; GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<TKey,TValue>> GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IEnumerator`1<valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue>> GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -398,21 +571,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The enumerator returned from the dictionary is safe to use concurrently with reads and writes to the dictionary, however it does not represent a moment-in-time snapshot of the dictionary. The contents exposed through the enumerator may contain modifications made to the dictionary after <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetEnumerator" /> was called.</para>
+          <para
+            >The enumerator returned from the dictionary is safe to use concurrently with reads and writes to the dictionary, however it does not represent a moment-in-time snapshot of the dictionary. The contents exposed through the enumerator may contain modifications made to the dictionary after <see
+             cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetEnumerator" />
+
+             was called.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an enumerator that iterates through the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
+          <para
+            >Returns an enumerator that iterates through the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An enumerator for the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
+          <para
+            >An enumerator for the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetOrAdd">
-      <MemberSignature Language="C#" Value="public TValue GetOrAdd (TKey key, Func&lt;TKey,TValue&gt; valueFactory);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !TValue GetOrAdd(!TKey key, class System.Func`2&lt;!TKey, !TValue&gt; valueFactory) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public TValue GetOrAdd (TKey key, Func<TKey,TValue> valueFactory);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !TValue GetOrAdd(!TKey key, class System.Func`2<!TKey, !TValue> valueFactory) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -422,7 +616,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="key" Type="TKey" />
-        <Parameter Name="valueFactory" Type="System.Func&lt;TKey,TValue&gt;" />
+        <Parameter Name="valueFactory" Type="System.Func<TKey,TValue>" />
       </Parameters>
       <Docs>
         <param name="key">To be added.</param>
@@ -434,7 +628,10 @@
     </Member>
     <Member MemberName="GetOrAdd">
       <MemberSignature Language="C#" Value="public TValue GetOrAdd (TKey key, TValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !TValue GetOrAdd(!TKey key, !TValue value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !TValue GetOrAdd(!TKey key, !TValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -469,7 +666,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value that indicates whether the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> is empty.</para>
+          <para
+            >Gets a value that indicates whether the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+             is empty.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -494,8 +696,14 @@
       </Docs>
     </Member>
     <Member MemberName="Keys">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.ICollection&lt;TKey&gt; Keys { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.ICollection`1&lt;!TKey&gt; Keys" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.ICollection<TKey> Keys { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.ICollection`1<!TKey> Keys"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -508,13 +716,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection containing the keys in the <see cref="T:System.Collections.Generic.Dictionary`2" />.</para>
+          <para
+            >Gets a collection containing the keys in the <see
+             cref="T:System.Collections.Generic.Dictionary`2" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.Add">
-      <MemberSignature Language="C#" Value="void ICollection&lt;KeyValuePair&lt;TKey,TValue&gt;&gt;.Add (System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt; pair);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.Add(valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt; pair) cil managed" />
+    <Member MemberName="System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.Add">
+      <MemberSignature
+        Language="C#"
+        Value="void ICollection<KeyValuePair<TKey,TValue>>.Add (System.Collections.Generic.KeyValuePair<TKey,TValue> pair);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.Add(valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue> pair) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -523,7 +742,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="pair" Type="System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;" />
+        <Parameter Name="pair" Type="System.Collections.Generic.KeyValuePair<TKey,TValue>" />
       </Parameters>
       <Docs>
         <param name="pair">To be added.</param>
@@ -531,9 +750,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.Contains">
-      <MemberSignature Language="C#" Value="bool ICollection&lt;KeyValuePair&lt;TKey,TValue&gt;&gt;.Contains (System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt; pair);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.Contains(valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt; pair) cil managed" />
+    <Member MemberName="System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.Contains">
+      <MemberSignature
+        Language="C#"
+        Value="bool ICollection<KeyValuePair<TKey,TValue>>.Contains (System.Collections.Generic.KeyValuePair<TKey,TValue> pair);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.Contains(valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue> pair) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -542,7 +767,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="pair" Type="System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;" />
+        <Parameter Name="pair" Type="System.Collections.Generic.KeyValuePair<TKey,TValue>" />
       </Parameters>
       <Docs>
         <param name="pair">To be added.</param>
@@ -551,9 +776,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.CopyTo">
-      <MemberSignature Language="C#" Value="void ICollection&lt;KeyValuePair&lt;TKey,TValue&gt;&gt;.CopyTo (System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;[] array, int startIndex);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.CopyTo(valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt;[] array, int32 startIndex) cil managed" />
+    <Member MemberName="System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.CopyTo">
+      <MemberSignature
+        Language="C#"
+        Value="void ICollection<KeyValuePair<TKey,TValue>>.CopyTo (System.Collections.Generic.KeyValuePair<TKey,TValue>[] array, int startIndex);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.CopyTo(valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue>[] array, int32 startIndex) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -562,7 +793,7 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="array" Type="System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;[]" />
+        <Parameter Name="array" Type="System.Collections.Generic.KeyValuePair<TKey,TValue>[]" />
         <Parameter Name="startIndex" Type="System.Int32" />
       </Parameters>
       <Docs>
@@ -572,9 +803,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.IsReadOnly">
-      <MemberSignature Language="C#" Value="bool System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.IsReadOnly { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.IsReadOnly" />
+    <Member MemberName="System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.IsReadOnly">
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.IsReadOnly { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.IsReadOnly"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -588,9 +825,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.Remove">
-      <MemberSignature Language="C#" Value="bool ICollection&lt;KeyValuePair&lt;TKey,TValue&gt;&gt;.Remove (System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt; pair);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool System.Collections.Generic.ICollection&lt;System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;&gt;.Remove(valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt; pair) cil managed" />
+    <Member MemberName="System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.Remove">
+      <MemberSignature
+        Language="C#"
+        Value="bool ICollection<KeyValuePair<TKey,TValue>>.Remove (System.Collections.Generic.KeyValuePair<TKey,TValue> pair);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance bool System.Collections.Generic.ICollection<System.Collections.Generic.KeyValuePair<TKey,TValue>>.Remove(valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue> pair) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -599,7 +842,7 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="pair" Type="System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;" />
+        <Parameter Name="pair" Type="System.Collections.Generic.KeyValuePair<TKey,TValue>" />
       </Parameters>
       <Docs>
         <param name="pair">To be added.</param>
@@ -608,9 +851,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.Add">
-      <MemberSignature Language="C#" Value="void IDictionary&lt;TKey,TValue&gt;.Add (TKey key, TValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.Add(!TKey key, !TValue value) cil managed" />
+    <Member MemberName="System.Collections.Generic.IDictionary<TKey,TValue>.Add">
+      <MemberSignature
+        Language="C#"
+        Value="void IDictionary<TKey,TValue>.Add (TKey key, TValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Collections.Generic.IDictionary<TKey,TValue>.Add(!TKey key, !TValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -629,9 +878,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.Remove">
-      <MemberSignature Language="C#" Value="bool IDictionary&lt;TKey,TValue&gt;.Remove (TKey key);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool System.Collections.Generic.IDictionary&lt;TKey,TValue&gt;.Remove(!TKey key) cil managed" />
+    <Member MemberName="System.Collections.Generic.IDictionary<TKey,TValue>.Remove">
+      <MemberSignature Language="C#" Value="bool IDictionary<TKey,TValue>.Remove (TKey key);" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance bool System.Collections.Generic.IDictionary<TKey,TValue>.Remove(!TKey key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -650,8 +902,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.CopyTo">
-      <MemberSignature Language="C#" Value="void ICollection.CopyTo (Array array, int startIndex);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Collections.ICollection.CopyTo(class System.Array array, int32 startIndex) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void ICollection.CopyTo (Array array, int startIndex);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Collections.ICollection.CopyTo(class System.Array array, int32 startIndex) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -668,15 +926,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the elements of the <see cref="T:System.Collections.ICollection" /> to an array, starting at the specified array index.</para>
+          <para
+            >Copies the elements of the <see
+             cref="T:System.Collections.ICollection" />
+
+             to an array, starting at the specified array index.</para
+          >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The one-dimensional array that is the destination of the elements copied from the <see cref="T:System.Collections.ICollection" />. The array must have zero-based indexing.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The one-dimensional array that is the destination of the elements copied from the <see
+           cref="T:System.Collections.ICollection" />
+
+          . The array must have zero-based indexing.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
-      <MemberSignature Language="C#" Value="bool System.Collections.ICollection.IsSynchronized { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool System.Collections.ICollection.IsSynchronized" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.ICollection.IsSynchronized { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool System.Collections.ICollection.IsSynchronized"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -689,13 +964,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" /> is synchronized with the SyncRoot.</para>
+          <para
+            >Gets a value indicating whether access to the <see
+             cref="T:System.Collections.ICollection" />
+
+             is synchronized with the SyncRoot.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.SyncRoot">
-      <MemberSignature Language="C#" Value="object System.Collections.ICollection.SyncRoot { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance object System.Collections.ICollection.SyncRoot" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.ICollection.SyncRoot { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance object System.Collections.ICollection.SyncRoot"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -708,13 +994,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />. This property is not supported.</para>
+          <para
+            >Gets an object that can be used to synchronize access to the <see
+             cref="T:System.Collections.ICollection" />
+
+            . This property is not supported.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.Add">
       <MemberSignature Language="C#" Value="void IDictionary.Add (object key, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Collections.IDictionary.Add(object key, object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Collections.IDictionary.Add(object key, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -733,14 +1027,23 @@
           <para>Adds the specified key and value to the dictionary.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to use as the key.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to use as the key.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to use as the value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to use as the value.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.Contains">
       <MemberSignature Language="C#" Value="bool IDictionary.Contains (object key);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool System.Collections.IDictionary.Contains(object key) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance bool System.Collections.IDictionary.Contains(object key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -755,19 +1058,41 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the specified key.</para>
+          <para
+            >Gets whether the <see
+             cref="T:System.Collections.Generic.IDictionary`2" />
+
+             contains an element with the specified key.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Collections.Generic.IDictionary`2" /> contains an element with the specified key; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Collections.Generic.IDictionary`2" />
+
+             contains an element with the specified key; otherwise, false.</para
+          >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key to locate in the <see cref="T:System.Collections.Generic.IDictionary`2" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key to locate in the <see
+           cref="T:System.Collections.Generic.IDictionary`2" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IDictionaryEnumerator IDictionary.GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.IDictionaryEnumerator System.Collections.IDictionary.GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IDictionaryEnumerator IDictionary.GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Collections.IDictionaryEnumerator System.Collections.IDictionary.GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -780,17 +1105,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Provides a <see cref="T:System.Collections.IDictionaryEnumerator" /> for the <see cref="T:System.Collections.Generic.IDictionary`2" />.</para>
+          <para
+            >Provides a <see
+             cref="T:System.Collections.IDictionaryEnumerator" />
+
+             for the <see
+             cref="T:System.Collections.Generic.IDictionary`2" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Collections.IDictionaryEnumerator" /> for the <see cref="T:System.Collections.Generic.IDictionary`2" />.</para>
+          <para
+            >A <see
+             cref="T:System.Collections.IDictionaryEnumerator" />
+
+             for the <see
+             cref="T:System.Collections.Generic.IDictionary`2" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.IsFixedSize">
-      <MemberSignature Language="C#" Value="bool System.Collections.IDictionary.IsFixedSize { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool System.Collections.IDictionary.IsFixedSize" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.IDictionary.IsFixedSize { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool System.Collections.IDictionary.IsFixedSize"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -803,13 +1150,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> has a fixed size.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Collections.Generic.IDictionary`2" />
+
+             has a fixed size.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.IsReadOnly">
-      <MemberSignature Language="C#" Value="bool System.Collections.IDictionary.IsReadOnly { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool System.Collections.IDictionary.IsReadOnly" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.IDictionary.IsReadOnly { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool System.Collections.IDictionary.IsReadOnly"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -822,13 +1180,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Collections.Generic.IDictionary`2" /> is read-only.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Collections.Generic.IDictionary`2" />
+
+             is read-only.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.Item">
-      <MemberSignature Language="C#" Value="object System.Collections.IDictionary.Item[object key] { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance object System.Collections.IDictionary.Item(object)" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IDictionary.Item[object key] { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance object System.Collections.IDictionary.Item(object)"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -847,8 +1216,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.Keys">
-      <MemberSignature Language="C#" Value="System.Collections.ICollection System.Collections.IDictionary.Keys { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ICollection System.Collections.IDictionary.Keys" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.ICollection System.Collections.IDictionary.Keys { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ICollection System.Collections.IDictionary.Keys"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -861,13 +1236,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an <see cref="T:System.Collections.ICollection" /> that contains the keys of the  <see cref="T:System.Collections.Generic.IDictionary`2" />.</para>
+          <para
+            >Gets an <see
+             cref="T:System.Collections.ICollection" />
+
+             that contains the keys of the  <see
+             cref="T:System.Collections.Generic.IDictionary`2" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.Remove">
       <MemberSignature Language="C#" Value="void IDictionary.Remove (object key);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.Collections.IDictionary.Remove(object key) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.Collections.IDictionary.Remove(object key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -882,15 +1268,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the element with the specified key from the <see cref="T:System.Collections.IDictionary" />.</para>
+          <para
+            >Removes the element with the specified key from the <see
+             cref="T:System.Collections.IDictionary" />
+
+            .</para
+          >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key of the element to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key of the element to remove.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IDictionary.Values">
-      <MemberSignature Language="C#" Value="System.Collections.ICollection System.Collections.IDictionary.Values { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ICollection System.Collections.IDictionary.Values" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.ICollection System.Collections.IDictionary.Values { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ICollection System.Collections.IDictionary.Values"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -903,13 +1303,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an <see cref="T:System.Collections.ICollection" /> that contains the values in the <see cref="T:System.Collections.IDictionary" />.</para>
+          <para
+            >Gets an <see
+             cref="T:System.Collections.ICollection" />
+
+             that contains the values in the <see
+             cref="T:System.Collections.IDictionary" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance class System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -921,21 +1335,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The enumerator returned from the dictionary is safe to use concurrently with reads and writes to the dictionary, however it does not represent a moment-in-time snapshot of the dictionary. The contents exposed through the enumerator may contain modifications made to the dictionary after <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetEnumerator" /> was called.</para>
+          <para
+            >The enumerator returned from the dictionary is safe to use concurrently with reads and writes to the dictionary, however it does not represent a moment-in-time snapshot of the dictionary. The contents exposed through the enumerator may contain modifications made to the dictionary after <see
+             cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetEnumerator" />
+
+             was called.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an enumerator that iterates through the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
+          <para
+            >Returns an enumerator that iterates through the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An enumerator for the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
+          <para
+            >An enumerator for the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="ToArray">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.KeyValuePair&lt;TKey,TValue&gt;[] ToArray ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.Collections.Generic.KeyValuePair`2&lt;!TKey, !TValue&gt;[] ToArray() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.KeyValuePair<TKey,TValue>[] ToArray ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance valuetype System.Collections.Generic.KeyValuePair`2<!TKey, !TValue>[] ToArray() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -948,17 +1383,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies the key and value pairs stored in the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" /> to a new array.</para>
+          <para
+            >Copies the key and value pairs stored in the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+             to a new array.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new array containing a snapshot of key and value pairs copied from the <see cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />.</para>
+          <para
+            >A new array containing a snapshot of key and value pairs copied from the <see
+             cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="TryAdd">
       <MemberSignature Language="C#" Value="public bool TryAdd (TKey key, TValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryAdd(!TKey key, !TValue value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool TryAdd(!TKey key, !TValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -979,8 +1427,14 @@
       </Docs>
     </Member>
     <Member MemberName="TryGetValue">
-      <MemberSignature Language="C#" Value="public bool TryGetValue (TKey key, out TValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool TryGetValue(!TKey key, !TValue value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool TryGetValue (TKey key, out TValue value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool TryGetValue(!TKey key, !TValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -990,7 +1444,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="key" Type="TKey" />
-        <Parameter Name="value" Type="TValue&amp;" RefType="out" />
+        <Parameter Name="value" Type="TValue&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="key">To be added.</param>
@@ -1002,7 +1456,10 @@
     </Member>
     <Member MemberName="TryRemove">
       <MemberSignature Language="C#" Value="public bool TryRemove (TKey key, out TValue value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryRemove(!TKey key, !TValue value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool TryRemove(!TKey key, !TValue value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1012,7 +1469,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="key" Type="TKey" />
-        <Parameter Name="value" Type="TValue&amp;" RefType="out" />
+        <Parameter Name="value" Type="TValue&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="key">To be added.</param>
@@ -1023,8 +1480,14 @@
       </Docs>
     </Member>
     <Member MemberName="TryUpdate">
-      <MemberSignature Language="C#" Value="public bool TryUpdate (TKey key, TValue newValue, TValue comparisonValue);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool TryUpdate(!TKey key, !TValue newValue, !TValue comparisonValue) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool TryUpdate (TKey key, TValue newValue, TValue comparisonValue);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool TryUpdate(!TKey key, !TValue newValue, !TValue comparisonValue) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1047,8 +1510,14 @@
       </Docs>
     </Member>
     <Member MemberName="Values">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.ICollection&lt;TValue&gt; Values { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.ICollection`1&lt;!TValue&gt; Values" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.ICollection<TValue> Values { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.ICollection`1<!TValue> Values"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1061,7 +1530,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection that contains the values in the <see cref="T:System.Collections.Generic.Dictionary`2" />.</para>
+          <para
+            >Gets a collection that contains the values in the <see
+             cref="T:System.Collections.Generic.Dictionary`2" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

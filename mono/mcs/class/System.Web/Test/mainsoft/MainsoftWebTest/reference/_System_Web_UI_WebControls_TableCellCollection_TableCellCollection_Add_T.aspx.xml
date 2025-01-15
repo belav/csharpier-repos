@@ -3,17 +3,13 @@
   <div id="GHTSubTest1" testname="Add cells">
     <table border="0">
       <tr>
-        <td>
-        </td>
-        <td>
-        </td>
-        <td>
-        </td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     </table>
     <table border="0">
-      <tr>
-      </tr>
+      <tr></tr>
     </table>
   </div>
 </testresults>

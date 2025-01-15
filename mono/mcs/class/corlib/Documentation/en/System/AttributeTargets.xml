@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="AttributeTargets" FullName="System.AttributeTargets" FullNameSP="System_AttributeTargets" Maintainer="ecma">
-  <TypeSignature Language="ILASM" Value=".class public sealed serializable AttributeTargets extends System.Enum" />
+<Type
+  Name="AttributeTargets"
+  FullName="System.AttributeTargets"
+  FullNameSP="System_AttributeTargets"
+  Maintainer="ecma"
+>
+  <TypeSignature
+    Language="ILASM"
+    Value=".class public sealed serializable AttributeTargets extends System.Enum"
+  />
   <TypeSignature Language="C#" Value="public enum AttributeTargets" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed AttributeTargets extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed AttributeTargets extends System.Enum"
+  />
   <MemberOfLibrary>BCL</MemberOfLibrary>
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
@@ -24,12 +35,27 @@
   </Attributes>
   <Docs>
     <example>
-      <para> The following example demonstrates how <see cref="T:System.AttributeTargets" /> can be
-   used with <see cref="T:System.AttributeUsageAttribute" /> so that a user-defined attribute class, <paramref name="Author" />,
-   can be applied to structures and classes. The <paramref name="Author" /> attribute is then
+      <para
+        > The following example demonstrates how <see
+         cref="T:System.AttributeTargets" />
+
+         can be
+   used with <see
+         cref="T:System.AttributeUsageAttribute" />
+
+         so that a user-defined attribute class, <paramref
+         name="Author" />
+
+        ,
+   can be applied to structures and classes. The <paramref
+         name="Author" />
+
+         attribute is then
    applied to a class.
-   There is no output.</para>
-      <code lang="C#">using System;
+   There is no output.</para
+      >
+      <code lang="C#"
+        >using System;
 
 [AttributeUsageAttribute(AttributeTargets.Class|
                          AttributeTargets.Struct)]
@@ -47,13 +73,22 @@ class JohnsClass {
    public static void Main() {
    }
 }
-</code>
+</code
+      >
     </example>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.AttributeUsageAttribute" /> class uses this enumeration to specify the kind of element on which it is valid to apply an attribute.</para>
+      <para
+        >The <see
+         cref="T:System.AttributeUsageAttribute" />
+
+         class uses this enumeration to specify the kind of element on which it is valid to apply an attribute.</para
+      >
       <para>
-        <see cref="T:System.AttributeTargets" /> enumeration values can be combined with a bitwise OR operation to get the preferred combination.</para>
+        <see cref="T:System.AttributeTargets" />
+
+         enumeration values can be combined with a bitwise OR operation to get the preferred combination.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -62,9 +97,15 @@ class JohnsClass {
   </Docs>
   <Members>
     <Member MemberName="All">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets All = Assembly | 0x2 | Class | Struct | Enum | Constructor | Method | Property | Field | Event | Interface | Parameter | Delegate | ReturnValue" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets All = Assembly | 0x2 | Class | Struct | Enum | Constructor | Method | Property | Field | Event | Interface | Parameter | Delegate | ReturnValue"
+      />
       <MemberSignature Language="C#" Value="All" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets All = int32(32767)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets All = int32(32767)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -86,9 +127,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Assembly">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Assembly = 0x1" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Assembly = 0x1"
+      />
       <MemberSignature Language="C#" Value="Assembly" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Assembly = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Assembly = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -110,9 +157,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Class">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Class = 0x4" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Class = 0x4"
+      />
       <MemberSignature Language="C#" Value="Class" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Class = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Class = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -134,9 +187,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Constructor">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Constructor = 0x20" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Constructor = 0x20"
+      />
       <MemberSignature Language="C#" Value="Constructor" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Constructor = int32(32)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Constructor = int32(32)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -158,9 +217,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Delegate">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Delegate = 0x1000" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Delegate = 0x1000"
+      />
       <MemberSignature Language="C#" Value="Delegate" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Delegate = int32(4096)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Delegate = int32(4096)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -182,9 +247,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Enum">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Enum = 0x10" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Enum = 0x10"
+      />
       <MemberSignature Language="C#" Value="Enum" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Enum = int32(16)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Enum = int32(16)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -206,9 +277,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Event">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Event = 0x200" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Event = 0x200"
+      />
       <MemberSignature Language="C#" Value="Event" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Event = int32(512)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Event = int32(512)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -230,9 +307,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Field">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Field = 0x100" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Field = 0x100"
+      />
       <MemberSignature Language="C#" Value="Field" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Field = int32(256)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Field = int32(256)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -255,7 +338,10 @@ class JohnsClass {
     </Member>
     <Member MemberName="GenericParameter">
       <MemberSignature Language="C#" Value="GenericParameter" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets GenericParameter = int32(16384)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets GenericParameter = int32(16384)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -280,9 +366,15 @@ class JohnsClass {
       </Docs>
     </Member>
     <Member MemberName="Interface">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Interface = 0x400" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Interface = 0x400"
+      />
       <MemberSignature Language="C#" Value="Interface" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Interface = int32(1024)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Interface = int32(1024)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -304,9 +396,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Method">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Method = 0x40" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Method = 0x40"
+      />
       <MemberSignature Language="C#" Value="Method" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Method = int32(64)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Method = int32(64)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -328,9 +426,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Module">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Module = 0x2" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Module = 0x2"
+      />
       <MemberSignature Language="C#" Value="Module" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Module = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Module = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -347,7 +451,10 @@ class JohnsClass {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para>
-              <paramref name="Module" /> refers to a portable executable file (.dll or.exe) and not a Visual Basic standard module.</para>
+              <paramref name="Module" />
+
+               refers to a portable executable file (.dll or.exe) and not a Visual Basic standard module.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -359,9 +466,15 @@ class JohnsClass {
       <ExcludedLibrary>RuntimeInfrastructure</ExcludedLibrary>
     </Member>
     <Member MemberName="Parameter">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Parameter = 0x800" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Parameter = 0x800"
+      />
       <MemberSignature Language="C#" Value="Parameter" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Parameter = int32(2048)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Parameter = int32(2048)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -383,9 +496,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Property">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Property = 0x80" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Property = 0x80"
+      />
       <MemberSignature Language="C#" Value="Property" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Property = int32(128)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Property = int32(128)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -407,9 +526,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="ReturnValue">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets ReturnValue = 0x2000" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets ReturnValue = 0x2000"
+      />
       <MemberSignature Language="C#" Value="ReturnValue" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets ReturnValue = int32(8192)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets ReturnValue = int32(8192)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -431,9 +556,15 @@ class JohnsClass {
       <Excluded>0</Excluded>
     </Member>
     <Member MemberName="Struct">
-      <MemberSignature Language="ILASM" Value=".field public static literal valuetype System.AttributeTargets Struct = 0x8" />
+      <MemberSignature
+        Language="ILASM"
+        Value=".field public static literal valuetype System.AttributeTargets Struct = 0x8"
+      />
       <MemberSignature Language="C#" Value="Struct" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.AttributeTargets Struct = int32(8)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.AttributeTargets Struct = int32(8)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

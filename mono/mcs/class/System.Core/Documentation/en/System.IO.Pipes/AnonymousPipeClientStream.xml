@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="AnonymousPipeClientStream" FullName="System.IO.Pipes.AnonymousPipeClientStream">
-  <TypeSignature Language="C#" Value="public sealed class AnonymousPipeClientStream : System.IO.Pipes.PipeStream" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit AnonymousPipeClientStream extends System.IO.Pipes.PipeStream" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class AnonymousPipeClientStream : System.IO.Pipes.PipeStream"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit AnonymousPipeClientStream extends System.IO.Pipes.PipeStream"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,10 +24,39 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Anonymous pipes help provide safe and secure interprocess communication between child and parent processes. The <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" /> class enables a child process to connect to and exchange information with a parent process.</para>
-      <para>Anonymous pipes are unnamed, one-way pipes that typically transfer data between parent and child processes. Anonymous pipes are always local; they cannot be used over a network. A <see cref="T:System.IO.Pipes.PipeDirection" /> value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" /> is not supported because anonymous pipes are defined to be one-way.</para>
-      <para>Anonymous pipes do not support <see cref="F:System.IO.Pipes.PipeTransmissionMode.Message" /> read modes.</para>
-      <para>The client side of an anonymous pipe must be created from a pipe handle provided by the server side by calling the <see cref="M:System.IO.Pipes.AnonymousPipeServerStream.GetClientHandleAsString" /> method. The string is then passed as a parameter when creating the client process. From the client process, it is passed to the <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" /> constructor as the <paramref name="pipeHandleAsString" /> parameter.</para>
+      <para
+        >Anonymous pipes help provide safe and secure interprocess communication between child and parent processes. The <see
+         cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+         class enables a child process to connect to and exchange information with a parent process.</para
+      >
+      <para
+        >Anonymous pipes are unnamed, one-way pipes that typically transfer data between parent and child processes. Anonymous pipes are always local; they cannot be used over a network. A <see
+         cref="T:System.IO.Pipes.PipeDirection" />
+
+         value of <see
+         cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+         is not supported because anonymous pipes are defined to be one-way.</para
+      >
+      <para
+        >Anonymous pipes do not support <see
+         cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
+
+         read modes.</para
+      >
+      <para
+        >The client side of an anonymous pipe must be created from a pipe handle provided by the server side by calling the <see
+         cref="M:System.IO.Pipes.AnonymousPipeServerStream.GetClientHandleAsString" />
+
+         method. The string is then passed as a parameter when creating the client process. From the client process, it is passed to the <see
+         cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+         constructor as the <paramref
+         name="pipeHandleAsString" />
+
+         parameter.</para
+      >
       <block subset="none" type="note">
         <para>For winxppro and win2kserver, a maximum of 10 pipes can simultaneously connect over the network.</para>
       </block>
@@ -33,8 +68,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AnonymousPipeClientStream (string pipeHandleAsString);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string pipeHandleAsString) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public AnonymousPipeClientStream (string pipeHandleAsString);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string pipeHandleAsString) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -45,19 +86,41 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For constructors without a <see cref="T:System.IO.Pipes.PipeDirection" /> parameter, the default direction is <see cref="F:System.IO.Pipes.PipeDirection.In" />.</para>
+          <para
+            >For constructors without a <see
+             cref="T:System.IO.Pipes.PipeDirection" />
+
+             parameter, the default direction is <see
+             cref="F:System.IO.Pipes.PipeDirection.In" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" /> class with the specified string representation of the pipe handle.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+             class with the specified string representation of the pipe handle.</para
+          >
         </summary>
         <param name="pipeHandleAsString">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string that represents the pipe handle.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string that represents the pipe handle.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AnonymousPipeClientStream (System.IO.Pipes.PipeDirection direction, Microsoft.Win32.SafeHandles.SafePipeHandle safePipeHandle);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.IO.Pipes.PipeDirection direction, class Microsoft.Win32.SafeHandles.SafePipeHandle safePipeHandle) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public AnonymousPipeClientStream (System.IO.Pipes.PipeDirection direction, Microsoft.Win32.SafeHandles.SafePipeHandle safePipeHandle);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.IO.Pipes.PipeDirection direction, class Microsoft.Win32.SafeHandles.SafePipeHandle safePipeHandle) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -69,21 +132,49 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.IO.Pipes.PipeDirection" /> value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" /> is not supported because anonymous pipes are defined to be one-way.</para>
+          <para
+            >A <see
+             cref="T:System.IO.Pipes.PipeDirection" />
+
+             value of <see
+             cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+             is not supported because anonymous pipes are defined to be one-way.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" /> class from the specified handle.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+             class from the specified handle.</para
+          >
         </summary>
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the enumeration values that determines the direction of the pipe.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the enumeration values that determines the direction of the pipe.</param
+        >
         <param name="safePipeHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />A safe handle for the pipe that this <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" /> object will encapsulate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A safe handle for the pipe that this <see
+           cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+           object will encapsulate.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AnonymousPipeClientStream (System.IO.Pipes.PipeDirection direction, string pipeHandleAsString);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.IO.Pipes.PipeDirection direction, string pipeHandleAsString) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public AnonymousPipeClientStream (System.IO.Pipes.PipeDirection direction, string pipeHandleAsString);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.IO.Pipes.PipeDirection direction, string pipeHandleAsString) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -95,21 +186,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.IO.Pipes.PipeDirection" /> value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" /> is not supported because anonymous pipes are defined to be one-way.</para>
+          <para
+            >A <see
+             cref="T:System.IO.Pipes.PipeDirection" />
+
+             value of <see
+             cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+             is not supported because anonymous pipes are defined to be one-way.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" /> class with the specified pipe direction and a string representation of the pipe handle.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+             class with the specified pipe direction and a string representation of the pipe handle.</para
+          >
         </summary>
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the enumeration values that determines the direction of the pipe.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the enumeration values that determines the direction of the pipe.</param
+        >
         <param name="pipeHandleAsString">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string that represents the pipe handle.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string that represents the pipe handle.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Finalize">
       <MemberSignature Language="C#" Value="~AnonymousPipeClientStream ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Finalize() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void Finalize() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -124,8 +237,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReadMode">
-      <MemberSignature Language="C#" Value="public override System.IO.Pipes.PipeTransmissionMode ReadMode { set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.IO.Pipes.PipeTransmissionMode ReadMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.IO.Pipes.PipeTransmissionMode ReadMode { set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.IO.Pipes.PipeTransmissionMode ReadMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -137,17 +256,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Anonymous pipes do not support <see cref="F:System.IO.Pipes.PipeTransmissionMode.Message" /> read mode.</para>
+          <para
+            >Anonymous pipes do not support <see
+             cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
+
+             read mode.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the reading mode for the <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" /> object.</para>
+          <para
+            >Sets the reading mode for the <see
+             cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="TransmissionMode">
-      <MemberSignature Language="C#" Value="public override System.IO.Pipes.PipeTransmissionMode TransmissionMode { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.IO.Pipes.PipeTransmissionMode TransmissionMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.IO.Pipes.PipeTransmissionMode TransmissionMode { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.IO.Pipes.PipeTransmissionMode TransmissionMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -159,7 +294,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Anonymous pipes do not support <see cref="F:System.IO.Pipes.PipeTransmissionMode.Message" /> read mode.</para>
+          <para
+            >Anonymous pipes do not support <see
+             cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
+
+             read mode.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

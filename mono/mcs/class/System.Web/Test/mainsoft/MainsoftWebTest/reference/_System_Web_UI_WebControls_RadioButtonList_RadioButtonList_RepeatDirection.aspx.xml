@@ -160,6 +160,9 @@
   </div>
   <div id="GHTSubTest4" testname="Non valid RepeateDirection value">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

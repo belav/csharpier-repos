@@ -6,9 +6,10 @@
     <TargetFramework>net472</TargetFramework>
     <UseWpf>true</UseWpf>
     <RootNamespace>Roslyn.VisualStudio.DiagnosticsWindow</RootNamespace>
-    <GenerateResourceUsePreserializedResources Condition="'$(MSBuildRuntimeType)' == 'Core'">true</GenerateResourceUsePreserializedResources>
+    <GenerateResourceUsePreserializedResources Condition="'$(MSBuildRuntimeType)' == 'Core'"
+      >true</GenerateResourceUsePreserializedResources
+    >
     <IsShipping>false</IsShipping>
-
     <!-- VSIX -->
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
@@ -17,10 +18,12 @@
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
   <ItemGroup Label="PkgDef">
-    <PkgDefPackageRegistration Include="{49e24138-9ee3-49e0-8ede-6b39f49303bf}"
-                               Name="Roslyn Diagnostics Window"
-                               Class="Roslyn.VisualStudio.DiagnosticsWindow.VisualStudioDiagnosticsWindowPackage"
-                               AllowsBackgroundLoad="true"/>
+    <PkgDefPackageRegistration
+      Include="{49e24138-9ee3-49e0-8ede-6b39f49303bf}"
+      Name="Roslyn Diagnostics Window"
+      Class="Roslyn.VisualStudio.DiagnosticsWindow.VisualStudioDiagnosticsWindowPackage"
+      AllowsBackgroundLoad="true"
+    />
     <None Include="PackageRegistration.pkgdef" PkgDefEntry="FileContent" />
   </ItemGroup>
   <ItemGroup Label="Project References">
@@ -49,10 +52,24 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.SDK.Analyzers" Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.VisualStudio.Text.UI" Version="$(MicrosoftVisualStudioTextUIVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Text.UI.Wpf" Version="$(MicrosoftVisualStudioTextUIWpfVersion)" />
-    <PackageReference Include="System.Resources.Extensions" Version="$(SystemResourcesExtensionsVersion)" PrivateAssets="all" />
+    <PackageReference
+      Include="Microsoft.VisualStudio.SDK.Analyzers"
+      Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Text.UI"
+      Version="$(MicrosoftVisualStudioTextUIVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Text.UI.Wpf"
+      Version="$(MicrosoftVisualStudioTextUIWpfVersion)"
+    />
+    <PackageReference
+      Include="System.Resources.Extensions"
+      Version="$(SystemResourcesExtensionsVersion)"
+      PrivateAssets="all"
+    />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources.resx" GenerateSource="true" />

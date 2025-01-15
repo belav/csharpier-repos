@@ -1,5 +1,8 @@
 <Type Name="MiniParser+AttrListImpl" FullName="Mono.Xml.MiniParser+AttrListImpl">
-  <TypeSignature Language="C#" Value="public class MiniParser.AttrListImpl : Mono.Xml.MiniParser.IMutableAttrList" />
+  <TypeSignature
+    Language="C#"
+    Value="public class MiniParser.AttrListImpl : Mono.Xml.MiniParser.IMutableAttrList"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Security</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -32,7 +35,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AttrListImpl (Mono.Xml.MiniParser.IAttrList attrs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public AttrListImpl (Mono.Xml.MiniParser.IAttrList attrs);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="attrs" Type="Mono.Xml.MiniParser+IAttrList" />
@@ -85,7 +91,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ChangeValue">
-      <MemberSignature Language="C#" Value="public void ChangeValue (string name, string newValue);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void ChangeValue (string name, string newValue);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -122,7 +131,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyFrom">
-      <MemberSignature Language="C#" Value="public void CopyFrom (Mono.Xml.MiniParser.IAttrList attrs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyFrom (Mono.Xml.MiniParser.IAttrList attrs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

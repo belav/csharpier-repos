@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ValidationAttribute" FullName="System.ComponentModel.DataAnnotations.ValidationAttribute">
+<Type
+  Name="ValidationAttribute"
+  FullName="System.ComponentModel.DataAnnotations.ValidationAttribute"
+>
   <TypeSignature Language="C#" Value="public abstract class ValidationAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ValidationAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit ValidationAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ComponentModel.DataAnnotations</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected ValidationAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,36 +42,63 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected ValidationAttribute (Func&lt;string&gt; errorMessageAccessor);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Func`1&lt;string&gt; errorMessageAccessor) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected ValidationAttribute (Func<string> errorMessageAccessor);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Func`1<string> errorMessageAccessor) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="errorMessageAccessor" Type="System.Func&lt;System.String&gt;" />
+        <Parameter Name="errorMessageAccessor" Type="System.Func<System.String>" />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor provides a resource accessor function that is used by the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageString" /> property to retrieve an error message. </para>
+          <para
+            >This constructor provides a resource accessor function that is used by the <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageString" />
+
+             property to retrieve an error message. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" /> class by using the function that enables access to validation resources.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+
+             class by using the function that enables access to validation resources.</para
+          >
         </summary>
         <param name="errorMessageAccessor">
-          <attribution license="cc4" from="Microsoft" modified="false" />The function that enables access to validation resources.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The function that enables access to validation resources.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected ValidationAttribute (string errorMessage);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(string errorMessage) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(string errorMessage) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -74,10 +110,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" /> class by using the error message to associate with a validation control.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+
+             class by using the error message to associate with a validation control.</para
+          >
         </summary>
         <param name="errorMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message to associate with a validation control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message to associate with a validation control.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ErrorMessage">
@@ -104,7 +148,10 @@
     </Member>
     <Member MemberName="ErrorMessageResourceName">
       <MemberSignature Language="C#" Value="public string ErrorMessageResourceName { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance string ErrorMessageResourceName" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance string ErrorMessageResourceName"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -116,17 +163,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You use the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" /> property together with the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" /> property in order to provide a localized error message. </para>
+          <para
+            >You use the <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
+
+             property together with the <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
+
+             property in order to provide a localized error message. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the error message resource name to use in order to look up the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" /> property value if validation fails.</para>
+          <para
+            >Gets or sets the error message resource name to use in order to look up the <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
+
+             property value if validation fails.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ErrorMessageResourceType">
       <MemberSignature Language="C#" Value="public Type ErrorMessageResourceType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type ErrorMessageResourceType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type ErrorMessageResourceType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -138,7 +201,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You use the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" /> property together with the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" /> property in to provide a localized error message.</para>
+          <para
+            >You use the <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
+
+             property together with the <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
+
+             property in to provide a localized error message.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -160,7 +231,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The error message string is obtained by evaluating the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessage" /> property or by evaluating the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" /> and <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" /> properties. The two cases are mutually exclusive. The second case is used if you want to display a localized error message.</para>
+          <para
+            >The error message string is obtained by evaluating the <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessage" />
+
+             property or by evaluating the <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
+
+             and <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
+
+             properties. The two cases are mutually exclusive. The second case is used if you want to display a localized error message.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -169,8 +251,14 @@
       </Docs>
     </Member>
     <Member MemberName="FormatErrorMessage">
-      <MemberSignature Language="C#" Value="public virtual string FormatErrorMessage (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string FormatErrorMessage(string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string FormatErrorMessage (string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string FormatErrorMessage(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -184,7 +272,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method formats an error message by using the <see cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageString" /> property. This method appends the name of the data field that triggered the error to the formatted error message. You can customize how the error message is formatted by creating a derived class that overrides this method.</para>
+          <para
+            >This method formats an error message by using the <see
+             cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageString" />
+
+             property. This method appends the name of the data field that triggered the error to the formatted error message. You can customize how the error message is formatted by creating a derived class that overrides this method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -195,12 +288,21 @@
           <para>An instance of the formatted error message.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name to include in the formatted message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name to include in the formatted message.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetValidationResult">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.DataAnnotations.ValidationResult GetValidationResult (object value, System.ComponentModel.DataAnnotations.ValidationContext validationContext);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ComponentModel.DataAnnotations.ValidationResult GetValidationResult(object value, class System.ComponentModel.DataAnnotations.ValidationContext validationContext) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.DataAnnotations.ValidationResult GetValidationResult (object value, System.ComponentModel.DataAnnotations.ValidationContext validationContext);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ComponentModel.DataAnnotations.ValidationResult GetValidationResult(object value, class System.ComponentModel.DataAnnotations.ValidationContext validationContext) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -210,12 +312,20 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="value" Type="System.Object" />
-        <Parameter Name="validationContext" Type="System.ComponentModel.DataAnnotations.ValidationContext" />
+        <Parameter
+          Name="validationContext"
+          Type="System.ComponentModel.DataAnnotations.ValidationContext"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)" /> method checks validity without throwing an exception.</para>
+          <para
+            >The <see
+             cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.GetValidationResult(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)" />
+
+             method checks validity without throwing an exception.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -223,17 +333,31 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" /> class. </para>
+          <para
+            >An instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+             class. </para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to validate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to validate.</param
+        >
         <param name="validationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />The context information about the validation operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The context information about the validation operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsValid">
       <MemberSignature Language="C#" Value="public virtual bool IsValid (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool IsValid(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool IsValid(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -247,7 +371,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you inherit from the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" /> class, you must implement the validation logic in this method.</para>
+          <para
+            >If you inherit from the <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+
+             class, you must implement the validation logic in this method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -258,12 +387,21 @@
           <para>true if the specified value is valid; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the object to validate. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the object to validate. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsValid">
-      <MemberSignature Language="C#" Value="protected virtual System.ComponentModel.DataAnnotations.ValidationResult IsValid (object value, System.ComponentModel.DataAnnotations.ValidationContext validationContext);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.ComponentModel.DataAnnotations.ValidationResult IsValid(object value, class System.ComponentModel.DataAnnotations.ValidationContext validationContext) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.ComponentModel.DataAnnotations.ValidationResult IsValid (object value, System.ComponentModel.DataAnnotations.ValidationContext validationContext);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance class System.ComponentModel.DataAnnotations.ValidationResult IsValid(object value, class System.ComponentModel.DataAnnotations.ValidationContext validationContext) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -273,7 +411,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="value" Type="System.Object" />
-        <Parameter Name="validationContext" Type="System.ComponentModel.DataAnnotations.ValidationContext" />
+        <Parameter
+          Name="validationContext"
+          Type="System.ComponentModel.DataAnnotations.ValidationContext"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -283,16 +424,30 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult" /> class. </para>
+          <para
+            >An instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationResult" />
+
+             class. </para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to validate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to validate.</param
+        >
         <param name="validationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />The context information about the validation operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The context information about the validation operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="RequiresValidationContext">
-      <MemberSignature Language="C#" Value="public virtual bool RequiresValidationContext { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool RequiresValidationContext { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance bool RequiresValidationContext" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -311,8 +466,14 @@
       </Docs>
     </Member>
     <Member MemberName="Validate">
-      <MemberSignature Language="C#" Value="public void Validate (object value, System.ComponentModel.DataAnnotations.ValidationContext validationContext);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Validate(object value, class System.ComponentModel.DataAnnotations.ValidationContext validationContext) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Validate (object value, System.ComponentModel.DataAnnotations.ValidationContext validationContext);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Validate(object value, class System.ComponentModel.DataAnnotations.ValidationContext validationContext) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -322,26 +483,58 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="value" Type="System.Object" />
-        <Parameter Name="validationContext" Type="System.ComponentModel.DataAnnotations.ValidationContext" />
+        <Parameter
+          Name="validationContext"
+          Type="System.ComponentModel.DataAnnotations.ValidationContext"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method calls the <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object)" /> method to determine whether the object that is specified by the <paramref name="value" /> parameter is valid. If the <see cref="Overload:System.ComponentModel.DataAnnotations.ValidationAttribute.Validate" /> method returns false, this method calls the <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.FormatErrorMessage(System.String)" /> method to get a localized message that states the problem. It then throws a <see cref="T:System.ComponentModel.DataAnnotations.ValidationException" /> exception.</para>
+          <para
+            >This method calls the <see
+             cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object)" />
+
+             method to determine whether the object that is specified by the <paramref
+             name="value" />
+
+             parameter is valid. If the <see
+             cref="Overload:System.ComponentModel.DataAnnotations.ValidationAttribute.Validate" />
+
+             method returns false, this method calls the <see
+             cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.FormatErrorMessage(System.String)" />
+
+             method to get a localized message that states the problem. It then throws a <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
+
+             exception.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Validates the specified object.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to validate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to validate.</param
+        >
         <param name="validationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" /> object that describes the context where the validation checks are performed. This parameter cannot be null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
+
+           object that describes the context where the validation checks are performed. This parameter cannot be null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Validate">
       <MemberSignature Language="C#" Value="public void Validate (object value, string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Validate(object value, string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Validate(object value, string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -356,16 +549,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method validates the value of the object or property on which the <see cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" /> attribute is declared. It calls the <see cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object)" /> method and passes <paramref name="value" /> as a parameter. If validation fails, a <see cref="T:System.ComponentModel.DataAnnotations.ValidationException" /> exception is thrown. </para>
+          <para
+            >This method validates the value of the object or property on which the <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+
+             attribute is declared. It calls the <see
+             cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object)" />
+
+             method and passes <paramref
+             name="value" />
+
+             as a parameter. If validation fails, a <see
+             cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
+
+             exception is thrown. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Validates the specified object.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the object to validate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the object to validate.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name to include in the error message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name to include in the error message.</param
+        >
       </Docs>
     </Member>
   </Members>

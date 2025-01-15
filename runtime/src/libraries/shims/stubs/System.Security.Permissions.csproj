@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ForwardedType Include="System.ApplicationIdentity" />
     <ForwardedType Include="System.Configuration.ConfigurationPermission" />
@@ -175,5 +174,4 @@
     <ForwardedType Include="System.Web.AspNetHostingPermissionAttribute" />
     <ForwardedType Include="System.Web.AspNetHostingPermissionLevel" />
   </ItemGroup>
-
 </Project>

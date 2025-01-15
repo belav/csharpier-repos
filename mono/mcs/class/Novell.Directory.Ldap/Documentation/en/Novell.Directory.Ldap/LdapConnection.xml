@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -233,13 +232,19 @@
       </Docs>
     </Member>
     <Member MemberName="AddUnsolicitedNotificationListener">
-      <MemberSignature Language="C#" Value="public virtual void AddUnsolicitedNotificationListener(Novell.Directory.Ldap.LdapUnsolicitedNotificationListener listener)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void AddUnsolicitedNotificationListener(Novell.Directory.Ldap.LdapUnsolicitedNotificationListener listener)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="listener" Type="Novell.Directory.Ldap.LdapUnsolicitedNotificationListener" />
+        <Parameter
+          Name="listener"
+          Type="Novell.Directory.Ldap.LdapUnsolicitedNotificationListener"
+        />
       </Parameters>
       <Docs>
         <summary>Registers an object to be notified on arrival of an unsolicited message from a server.</summary>
@@ -248,13 +253,19 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveUnsolicitedNotificationListener">
-      <MemberSignature Language="C#" Value="public virtual void RemoveUnsolicitedNotificationListener(Novell.Directory.Ldap.LdapUnsolicitedNotificationListener listener)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void RemoveUnsolicitedNotificationListener(Novell.Directory.Ldap.LdapUnsolicitedNotificationListener listener)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="listener" Type="Novell.Directory.Ldap.LdapUnsolicitedNotificationListener" />
+        <Parameter
+          Name="listener"
+          Type="Novell.Directory.Ldap.LdapUnsolicitedNotificationListener"
+        />
       </Parameters>
       <Docs>
         <summary>To be added.</summary>
@@ -263,7 +274,10 @@
       </Docs>
     </Member>
     <Member MemberName="Abandon">
-      <MemberSignature Language="C#" Value="public virtual void Abandon(Novell.Directory.Ldap.LdapSearchResults results)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Abandon(Novell.Directory.Ldap.LdapSearchResults results)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -278,7 +292,10 @@
       </Docs>
     </Member>
     <Member MemberName="Abandon">
-      <MemberSignature Language="C#" Value="public virtual void Abandon(Novell.Directory.Ldap.LdapSearchResults results, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Abandon(Novell.Directory.Ldap.LdapSearchResults results, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -310,7 +327,10 @@
       </Docs>
     </Member>
     <Member MemberName="Abandon">
-      <MemberSignature Language="C#" Value="public virtual void Abandon(int id, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Abandon(int id, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -327,7 +347,10 @@
       </Docs>
     </Member>
     <Member MemberName="Abandon">
-      <MemberSignature Language="C#" Value="public virtual void Abandon(Novell.Directory.Ldap.LdapMessageQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Abandon(Novell.Directory.Ldap.LdapMessageQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -342,7 +365,10 @@
       </Docs>
     </Member>
     <Member MemberName="Abandon">
-      <MemberSignature Language="C#" Value="public virtual void Abandon(Novell.Directory.Ldap.LdapMessageQueue queue, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Abandon(Novell.Directory.Ldap.LdapMessageQueue queue, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -359,7 +385,10 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual void Add(Novell.Directory.Ldap.LdapEntry entry)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Add(Novell.Directory.Ldap.LdapEntry entry)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -369,12 +398,17 @@
       </Parameters>
       <Docs>
         <summary>Synchronously adds an entry to the directory.</summary>
-        <param name="entry">LDAPEntry object specifying the distinguished name and attributes of the new entry.</param>
+        <param name="entry"
+          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual void Add(Novell.Directory.Ldap.LdapEntry entry, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Add(Novell.Directory.Ldap.LdapEntry entry, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -385,13 +419,18 @@
       </Parameters>
       <Docs>
         <summary>Synchronously adds an entry to the directory, using the specified constraints.</summary>
-        <param name="entry">LDAPEntry object specifying the distinguished name and attributes of the new entry.</param>
+        <param name="entry"
+          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param
+        >
         <param name="cons">Constraints specific to the operation.</param>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Add(Novell.Directory.Ldap.LdapEntry entry, Novell.Directory.Ldap.LdapResponseQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Add(Novell.Directory.Ldap.LdapEntry entry, Novell.Directory.Ldap.LdapResponseQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -402,14 +441,21 @@
       </Parameters>
       <Docs>
         <summary>Asynchronously adds an entry to the directory.</summary>
-        <param name="entry">LDAPEntry object specifying the distinguished name and attributes of the new entry.</param>
-        <param name="queue">Handler for messages returned from a server in response to this request. If it is null, a queue object is created internally.</param>
+        <param name="entry"
+          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param
+        >
+        <param name="queue"
+          >Handler for messages returned from a server in response to this request. If it is null, a queue object is created internally.</param
+        >
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Add(Novell.Directory.Ldap.LdapEntry entry, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Add(Novell.Directory.Ldap.LdapEntry entry, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -421,8 +467,12 @@
       </Parameters>
       <Docs>
         <summary>Asynchronously adds an entry to the directory, using the specified constraints.</summary>
-        <param name="entry">LDAPEntry object specifying the distinguished name and attributes of the new entry.</param>
-        <param name="queue">Handler for messages returned from a server in response to this request. If it is null, a queue object is created internally.</param>
+        <param name="entry"
+          >LDAPEntry object specifying the distinguished name and attributes of the new entry.</param
+        >
+        <param name="queue"
+          >Handler for messages returned from a server in response to this request. If it is null, a queue object is created internally.</param
+        >
         <param name="cons">Constraints specific to the operation.</param>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
@@ -446,7 +496,10 @@
       </Docs>
     </Member>
     <Member MemberName="Bind">
-      <MemberSignature Language="C#" Value="public virtual void Bind(int version, string dn, string passwd)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Bind(int version, string dn, string passwd)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -465,7 +518,10 @@
       </Docs>
     </Member>
     <Member MemberName="Bind">
-      <MemberSignature Language="C#" Value="public virtual void Bind(string dn, string passwd, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Bind(string dn, string passwd, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -484,7 +540,10 @@
       </Docs>
     </Member>
     <Member MemberName="Bind">
-      <MemberSignature Language="C#" Value="public virtual void Bind(int version, string dn, string passwd, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Bind(int version, string dn, string passwd, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -505,7 +564,10 @@
       </Docs>
     </Member>
     <Member MemberName="Bind">
-      <MemberSignature Language="C#" Value="public virtual void Bind(int version, string dn, sbyte[] passwd)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Bind(int version, string dn, sbyte[] passwd)"
+      />
       <MemberType>Method</MemberType>
       <Attributes>
         <Attribute>
@@ -529,7 +591,10 @@
       </Docs>
     </Member>
     <Member MemberName="Bind">
-      <MemberSignature Language="C#" Value="public virtual void Bind(int version, string dn, sbyte[] passwd, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Bind(int version, string dn, sbyte[] passwd, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <Attributes>
         <Attribute>
@@ -555,7 +620,10 @@
       </Docs>
     </Member>
     <Member MemberName="Bind">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Bind(int version, string dn, sbyte[] passwd, Novell.Directory.Ldap.LdapResponseQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Bind(int version, string dn, sbyte[] passwd, Novell.Directory.Ldap.LdapResponseQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <Attributes>
         <Attribute>
@@ -582,7 +650,10 @@
       </Docs>
     </Member>
     <Member MemberName="Bind">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Bind(int version, string dn, sbyte[] passwd, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Bind(int version, string dn, sbyte[] passwd, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <Attributes>
         <Attribute>
@@ -611,7 +682,10 @@
       </Docs>
     </Member>
     <Member MemberName="Compare">
-      <MemberSignature Language="C#" Value="public virtual bool Compare(string dn, Novell.Directory.Ldap.LdapAttribute attr)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool Compare(string dn, Novell.Directory.Ldap.LdapAttribute attr)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -629,7 +703,10 @@
       </Docs>
     </Member>
     <Member MemberName="Compare">
-      <MemberSignature Language="C#" Value="public virtual bool Compare(string dn, Novell.Directory.Ldap.LdapAttribute attr, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool Compare(string dn, Novell.Directory.Ldap.LdapAttribute attr, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -649,7 +726,10 @@
       </Docs>
     </Member>
     <Member MemberName="Compare">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Compare(string dn, Novell.Directory.Ldap.LdapAttribute attr, Novell.Directory.Ldap.LdapResponseQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Compare(string dn, Novell.Directory.Ldap.LdapAttribute attr, Novell.Directory.Ldap.LdapResponseQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -669,7 +749,10 @@
       </Docs>
     </Member>
     <Member MemberName="Compare">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Compare(string dn, Novell.Directory.Ldap.LdapAttribute attr, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Compare(string dn, Novell.Directory.Ldap.LdapAttribute attr, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -723,7 +806,10 @@
       </Docs>
     </Member>
     <Member MemberName="Delete">
-      <MemberSignature Language="C#" Value="public virtual void Delete(string dn, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Delete(string dn, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -740,7 +826,10 @@
       </Docs>
     </Member>
     <Member MemberName="Delete">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Delete(string dn, Novell.Directory.Ldap.LdapResponseQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Delete(string dn, Novell.Directory.Ldap.LdapResponseQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -758,7 +847,10 @@
       </Docs>
     </Member>
     <Member MemberName="Delete">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Delete(string dn, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Delete(string dn, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -790,7 +882,10 @@
       </Docs>
     </Member>
     <Member MemberName="Disconnect">
-      <MemberSignature Language="C#" Value="public virtual void Disconnect(Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Disconnect(Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -805,7 +900,10 @@
       </Docs>
     </Member>
     <Member MemberName="ExtendedOperation">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapExtendedResponse ExtendedOperation(Novell.Directory.Ldap.LdapExtendedOperation op)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapExtendedResponse ExtendedOperation(Novell.Directory.Ldap.LdapExtendedOperation op)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapExtendedResponse</ReturnType>
@@ -821,7 +919,10 @@
       </Docs>
     </Member>
     <Member MemberName="ExtendedOperation">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapExtendedResponse ExtendedOperation(Novell.Directory.Ldap.LdapExtendedOperation op, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapExtendedResponse ExtendedOperation(Novell.Directory.Ldap.LdapExtendedOperation op, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapExtendedResponse</ReturnType>
@@ -839,7 +940,10 @@
       </Docs>
     </Member>
     <Member MemberName="ExtendedOperation">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue ExtendedOperation(Novell.Directory.Ldap.LdapExtendedOperation op, Novell.Directory.Ldap.LdapResponseQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue ExtendedOperation(Novell.Directory.Ldap.LdapExtendedOperation op, Novell.Directory.Ldap.LdapResponseQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -857,7 +961,10 @@
       </Docs>
     </Member>
     <Member MemberName="ExtendedOperation">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue ExtendedOperation(Novell.Directory.Ldap.LdapExtendedOperation op, Novell.Directory.Ldap.LdapConstraints cons, Novell.Directory.Ldap.LdapResponseQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue ExtendedOperation(Novell.Directory.Ldap.LdapExtendedOperation op, Novell.Directory.Ldap.LdapConstraints cons, Novell.Directory.Ldap.LdapResponseQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -877,7 +984,10 @@
       </Docs>
     </Member>
     <Member MemberName="Modify">
-      <MemberSignature Language="C#" Value="public virtual void Modify(string dn, Novell.Directory.Ldap.LdapModification mod)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Modify(string dn, Novell.Directory.Ldap.LdapModification mod)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -894,7 +1004,10 @@
       </Docs>
     </Member>
     <Member MemberName="Modify">
-      <MemberSignature Language="C#" Value="public virtual void Modify(string dn, Novell.Directory.Ldap.LdapModification mod, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Modify(string dn, Novell.Directory.Ldap.LdapModification mod, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -913,7 +1026,10 @@
       </Docs>
     </Member>
     <Member MemberName="Modify">
-      <MemberSignature Language="C#" Value="public virtual void Modify(string dn, Novell.Directory.Ldap.LdapModification[] mods)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Modify(string dn, Novell.Directory.Ldap.LdapModification[] mods)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -930,7 +1046,10 @@
       </Docs>
     </Member>
     <Member MemberName="Modify">
-      <MemberSignature Language="C#" Value="public virtual void Modify(string dn, Novell.Directory.Ldap.LdapModification[] mods, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Modify(string dn, Novell.Directory.Ldap.LdapModification[] mods, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -949,7 +1068,10 @@
       </Docs>
     </Member>
     <Member MemberName="Modify">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Modify(string dn, Novell.Directory.Ldap.LdapModification mod, Novell.Directory.Ldap.LdapResponseQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Modify(string dn, Novell.Directory.Ldap.LdapModification mod, Novell.Directory.Ldap.LdapResponseQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -969,7 +1091,10 @@
       </Docs>
     </Member>
     <Member MemberName="Modify">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Modify(string dn, Novell.Directory.Ldap.LdapModification mod, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Modify(string dn, Novell.Directory.Ldap.LdapModification mod, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -991,7 +1116,10 @@
       </Docs>
     </Member>
     <Member MemberName="Modify">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Modify(string dn, Novell.Directory.Ldap.LdapModification[] mods, Novell.Directory.Ldap.LdapResponseQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Modify(string dn, Novell.Directory.Ldap.LdapModification[] mods, Novell.Directory.Ldap.LdapResponseQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -1011,7 +1139,10 @@
       </Docs>
     </Member>
     <Member MemberName="Modify">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Modify(string dn, Novell.Directory.Ldap.LdapModification[] mods, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Modify(string dn, Novell.Directory.Ldap.LdapModification[] mods, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -1033,7 +1164,10 @@
       </Docs>
     </Member>
     <Member MemberName="Read">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapEntry Read(string dn)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapEntry Read(string dn)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapEntry</ReturnType>
@@ -1049,7 +1183,10 @@
       </Docs>
     </Member>
     <Member MemberName="Read">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapEntry Read(string dn, Novell.Directory.Ldap.LdapSearchConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapEntry Read(string dn, Novell.Directory.Ldap.LdapSearchConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapEntry</ReturnType>
@@ -1067,7 +1204,10 @@
       </Docs>
     </Member>
     <Member MemberName="Read">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapEntry Read(string dn, string[] attrs)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapEntry Read(string dn, string[] attrs)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapEntry</ReturnType>
@@ -1085,7 +1225,10 @@
       </Docs>
     </Member>
     <Member MemberName="Read">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapEntry Read(string dn, string[] attrs, Novell.Directory.Ldap.LdapSearchConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapEntry Read(string dn, string[] attrs, Novell.Directory.Ldap.LdapSearchConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapEntry</ReturnType>
@@ -1105,7 +1248,10 @@
       </Docs>
     </Member>
     <Member MemberName="Read">
-      <MemberSignature Language="C#" Value="public static Novell.Directory.Ldap.LdapEntry Read(Novell.Directory.Ldap.LdapUrl toGet)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Novell.Directory.Ldap.LdapEntry Read(Novell.Directory.Ldap.LdapUrl toGet)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapEntry</ReturnType>
@@ -1121,7 +1267,10 @@
       </Docs>
     </Member>
     <Member MemberName="Read">
-      <MemberSignature Language="C#" Value="public static Novell.Directory.Ldap.LdapEntry Read(Novell.Directory.Ldap.LdapUrl toGet, Novell.Directory.Ldap.LdapSearchConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Novell.Directory.Ldap.LdapEntry Read(Novell.Directory.Ldap.LdapUrl toGet, Novell.Directory.Ldap.LdapSearchConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapEntry</ReturnType>
@@ -1139,7 +1288,10 @@
       </Docs>
     </Member>
     <Member MemberName="Rename">
-      <MemberSignature Language="C#" Value="public virtual void Rename(string dn, string newRdn, bool deleteOldRdn)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Rename(string dn, string newRdn, bool deleteOldRdn)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1158,7 +1310,10 @@
       </Docs>
     </Member>
     <Member MemberName="Rename">
-      <MemberSignature Language="C#" Value="public virtual void Rename(string dn, string newRdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Rename(string dn, string newRdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1179,7 +1334,10 @@
       </Docs>
     </Member>
     <Member MemberName="Rename">
-      <MemberSignature Language="C#" Value="public virtual void Rename(string dn, string newRdn, string newParentdn, bool deleteOldRdn)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Rename(string dn, string newRdn, string newParentdn, bool deleteOldRdn)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1200,7 +1358,10 @@
       </Docs>
     </Member>
     <Member MemberName="Rename">
-      <MemberSignature Language="C#" Value="public virtual void Rename(string dn, string newRdn, string newParentdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void Rename(string dn, string newRdn, string newParentdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1223,7 +1384,10 @@
       </Docs>
     </Member>
     <Member MemberName="Rename">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Rename(string dn, string newRdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapResponseQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Rename(string dn, string newRdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapResponseQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -1245,7 +1409,10 @@
       </Docs>
     </Member>
     <Member MemberName="Rename">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Rename(string dn, string newRdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Rename(string dn, string newRdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -1269,7 +1436,10 @@
       </Docs>
     </Member>
     <Member MemberName="Rename">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Rename(string dn, string newRdn, string newParentdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapResponseQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Rename(string dn, string newRdn, string newParentdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapResponseQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -1293,7 +1463,10 @@
       </Docs>
     </Member>
     <Member MemberName="Rename">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Rename(string dn, string newRdn, string newParentdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapResponseQueue Rename(string dn, string newRdn, string newParentdn, bool deleteOldRdn, Novell.Directory.Ldap.LdapResponseQueue queue, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapResponseQueue</ReturnType>
@@ -1319,7 +1492,10 @@
       </Docs>
     </Member>
     <Member MemberName="Search">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapSearchResults Search(string base_Renamed, int scope, string filter, string[] attrs, bool typesOnly)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapSearchResults Search(string base_Renamed, int scope, string filter, string[] attrs, bool typesOnly)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapSearchResults</ReturnType>
@@ -1343,7 +1519,10 @@
       </Docs>
     </Member>
     <Member MemberName="Search">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapSearchResults Search(string base_Renamed, int scope, string filter, string[] attrs, bool typesOnly, Novell.Directory.Ldap.LdapSearchConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapSearchResults Search(string base_Renamed, int scope, string filter, string[] attrs, bool typesOnly, Novell.Directory.Ldap.LdapSearchConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapSearchResults</ReturnType>
@@ -1369,7 +1548,10 @@
       </Docs>
     </Member>
     <Member MemberName="Search">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapSearchQueue Search(string base_Renamed, int scope, string filter, string[] attrs, bool typesOnly, Novell.Directory.Ldap.LdapSearchQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapSearchQueue Search(string base_Renamed, int scope, string filter, string[] attrs, bool typesOnly, Novell.Directory.Ldap.LdapSearchQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapSearchQueue</ReturnType>
@@ -1395,7 +1577,10 @@
       </Docs>
     </Member>
     <Member MemberName="Search">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapSearchQueue Search(string base_Renamed, int scope, string filter, string[] attrs, bool typesOnly, Novell.Directory.Ldap.LdapSearchQueue queue, Novell.Directory.Ldap.LdapSearchConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapSearchQueue Search(string base_Renamed, int scope, string filter, string[] attrs, bool typesOnly, Novell.Directory.Ldap.LdapSearchQueue queue, Novell.Directory.Ldap.LdapSearchConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapSearchQueue</ReturnType>
@@ -1423,7 +1608,10 @@
       </Docs>
     </Member>
     <Member MemberName="Search">
-      <MemberSignature Language="C#" Value="public static Novell.Directory.Ldap.LdapSearchResults Search(Novell.Directory.Ldap.LdapUrl toGet)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Novell.Directory.Ldap.LdapSearchResults Search(Novell.Directory.Ldap.LdapUrl toGet)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapSearchResults</ReturnType>
@@ -1439,7 +1627,10 @@
       </Docs>
     </Member>
     <Member MemberName="Search">
-      <MemberSignature Language="C#" Value="public static Novell.Directory.Ldap.LdapSearchResults Search(Novell.Directory.Ldap.LdapUrl toGet, Novell.Directory.Ldap.LdapSearchConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Novell.Directory.Ldap.LdapSearchResults Search(Novell.Directory.Ldap.LdapUrl toGet, Novell.Directory.Ldap.LdapSearchConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapSearchResults</ReturnType>
@@ -1457,7 +1648,10 @@
       </Docs>
     </Member>
     <Member MemberName="SendRequest">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapMessageQueue SendRequest(Novell.Directory.Ldap.LdapMessage request, Novell.Directory.Ldap.LdapMessageQueue queue)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapMessageQueue SendRequest(Novell.Directory.Ldap.LdapMessage request, Novell.Directory.Ldap.LdapMessageQueue queue)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapMessageQueue</ReturnType>
@@ -1475,7 +1669,10 @@
       </Docs>
     </Member>
     <Member MemberName="SendRequest">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapMessageQueue SendRequest(Novell.Directory.Ldap.LdapMessage request, Novell.Directory.Ldap.LdapMessageQueue queue, Novell.Directory.Ldap.LdapConstraints cons)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapMessageQueue SendRequest(Novell.Directory.Ldap.LdapMessage request, Novell.Directory.Ldap.LdapMessageQueue queue, Novell.Directory.Ldap.LdapConstraints cons)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapMessageQueue</ReturnType>
@@ -1495,7 +1692,10 @@
       </Docs>
     </Member>
     <Member MemberName="FetchSchema">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapSchema FetchSchema(string schemaDN)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapSchema FetchSchema(string schemaDN)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapSchema</ReturnType>
@@ -1576,7 +1776,10 @@
       </Docs>
     </Member>
     <Member MemberName="SaslBindProperties">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IDictionary SaslBindProperties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IDictionary SaslBindProperties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IDictionary</ReturnType>
@@ -1588,7 +1791,10 @@
       </Docs>
     </Member>
     <Member MemberName="SaslBindCallbackHandler">
-      <MemberSignature Language="C#" Value="public virtual object SaslBindCallbackHandler { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual object SaslBindCallbackHandler { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -1600,7 +1806,10 @@
       </Docs>
     </Member>
     <Member MemberName="Constraints">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapConstraints Constraints { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapConstraints Constraints { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapConstraints</ReturnType>
@@ -1636,7 +1845,10 @@
       </Docs>
     </Member>
     <Member MemberName="SearchConstraints">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapSearchConstraints SearchConstraints { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapSearchConstraints SearchConstraints { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapSearchConstraints</ReturnType>
@@ -1672,7 +1884,10 @@
       </Docs>
     </Member>
     <Member MemberName="ResponseControls">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapControl[] ResponseControls { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapControl[] ResponseControls { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapControl[]</ReturnType>

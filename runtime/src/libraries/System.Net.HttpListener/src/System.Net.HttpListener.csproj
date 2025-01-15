@@ -1,19 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent)-unix;$(NetCoreAppCurrent)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ForceManagedImplementation>false</ForceManagedImplementation>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
-    <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''">SR.SystemNetHttpListener_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage>
-    <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'windows'">$(DefineConstants);TARGET_WINDOWS</DefineConstants>
+    <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetPlatformIdentifier)' == ''"
+      >SR.SystemNetHttpListener_PlatformNotSupported</GeneratePlatformNotSupportedAssemblyMessage
+    >
+    <DefineConstants Condition="'$(TargetPlatformIdentifier)' == 'windows'"
+      >$(DefineConstants);TARGET_WINDOWS</DefineConstants
+    >
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Win32.Primitives" />
     <Reference Include="System.Collections" />
@@ -38,7 +39,6 @@
     <Reference Include="System.Threading" />
     <Reference Include="System.Threading.Overlapped" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' != ''">
     <Compile Include="System\Net\BoundaryType.cs" />
     <Compile Include="System\Net\EntitySendFormat.cs" />
@@ -59,43 +59,67 @@
     <Compile Include="System\Net\NetEventSource.HttpListener.cs" />
     <Compile Include="System\Net\WebSockets\HttpListenerWebSocketContext.cs" />
     <Compile Include="System\Net\WebSockets\HttpWebSocket.cs" />
-    <Compile Include="$(CommonPath)DisableRuntimeMarshalling.cs"
-             Link="Common\DisableRuntimeMarshalling.cs" />
-    <Compile Include="$(CommonPath)System\StringExtensions.cs"
-             Link="Common\System\StringExtensions.cs" />
-    <Compile Include="$(CommonPath)System\Net\Logging\NetEventSource.Common.cs"
-             Link="Common\System\Net\Logging\NetEventSource.Common.cs" />
-    <Compile Include="$(CommonPath)System\Net\Logging\NetEventSource.Common.Associate.cs"
-             Link="Common\System\Net\Logging\NetEventSource.Common.Associate.cs" />
-    <Compile Include="$(CommonPath)System\Net\Logging\NetEventSource.Common.DumpBuffer.cs"
-             Link="Common\System\Net\Logging\NetEventSource.Common.DumpBuffer.cs" />
-    <Compile Include="$(CommonPath)System\Net\CookieComparer.cs"
-             Link="Common\System\Net\CookieComparer.cs" />
-    <Compile Include="$(CommonPath)System\Net\CookieFields.cs"
-             Link="Common\System\Net\CookieFields.cs" />
-    <Compile Include="$(CommonPath)System\Net\CookieParser.cs"
-             Link="Common\System\Net\CookieParser.cs" />
-    <Compile Include="$(CommonPath)System\Net\ExceptionCheck.cs"
-             Link="Common\System\Net\ExceptionCheck.cs" />
-    <Compile Include="$(CommonPath)System\Net\HttpStatusDescription.cs"
-             Link="Common\System\Net\HttpStatusDescription.cs" />
-    <Compile Include="$(CommonPath)System\Net\HttpKnownHeaderNames.cs"
-             Link="Common\System\Net\HttpKnownHeaderNames.cs" />
-    <Compile Include="$(CommonPath)System\Net\LazyAsyncResult.cs"
-             Link="Common\System\Net\LazyAsyncResult.cs" />
-    <Compile Include="$(CommonPath)System\Net\UriScheme.cs"
-             Link="Common\System\Net\UriScheme.cs" />
-    <Compile Include="$(CommonPath)System\Net\WebHeaderEncoding.cs"
-             Link="Common\System\Net\WebHeaderEncoding.cs" />
-    <Compile Include="$(CommonPath)System\Net\WebSockets\WebSocketValidate.cs"
-             Link="Common\System\Net\WebSockets\WebSocketValidate.cs" />
+    <Compile
+      Include="$(CommonPath)DisableRuntimeMarshalling.cs"
+      Link="Common\DisableRuntimeMarshalling.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\StringExtensions.cs"
+      Link="Common\System\StringExtensions.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\Logging\NetEventSource.Common.cs"
+      Link="Common\System\Net\Logging\NetEventSource.Common.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\Logging\NetEventSource.Common.Associate.cs"
+      Link="Common\System\Net\Logging\NetEventSource.Common.Associate.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\Logging\NetEventSource.Common.DumpBuffer.cs"
+      Link="Common\System\Net\Logging\NetEventSource.Common.DumpBuffer.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\CookieComparer.cs"
+      Link="Common\System\Net\CookieComparer.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\CookieFields.cs"
+      Link="Common\System\Net\CookieFields.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\CookieParser.cs"
+      Link="Common\System\Net\CookieParser.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\ExceptionCheck.cs"
+      Link="Common\System\Net\ExceptionCheck.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\HttpStatusDescription.cs"
+      Link="Common\System\Net\HttpStatusDescription.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\HttpKnownHeaderNames.cs"
+      Link="Common\System\Net\HttpKnownHeaderNames.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\LazyAsyncResult.cs"
+      Link="Common\System\Net\LazyAsyncResult.cs"
+    />
+    <Compile Include="$(CommonPath)System\Net\UriScheme.cs" Link="Common\System\Net\UriScheme.cs" />
+    <Compile
+      Include="$(CommonPath)System\Net\WebHeaderEncoding.cs"
+      Link="Common\System\Net\WebHeaderEncoding.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\WebSockets\WebSocketValidate.cs"
+      Link="Common\System\Net\WebSockets\WebSocketValidate.cs"
+    />
     <Compile Include="System\Net\Windows\CookieExtensions.cs" />
-    <Compile Include="$(CommonPath)System\HexConverter.cs"
-             Link="Common\System\HexConverter.cs" />
-    <Compile Include="$(CommonPath)System\Obsoletions.cs"
-            Link="Common\System\Obsoletions.cs" />
+    <Compile Include="$(CommonPath)System\HexConverter.cs" Link="Common\System\HexConverter.cs" />
+    <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows' and '$(ForceManagedImplementation)' != 'true'">
     <Compile Include="System\Net\Windows\HttpListener.Windows.cs" />
     <Compile Include="System\Net\Windows\HttpListenerSession.Windows.cs" />
@@ -111,10 +135,14 @@
     <Compile Include="System\Net\Windows\RequestContextBase.cs" />
     <Compile Include="System\Net\Windows\SyncRequestContext.cs" />
     <Compile Include="System\Net\Windows\ListenerAsyncResult.Windows.cs" />
-    <Compile Include="$(CommonPath)System\Net\DebugSafeHandle.cs"
-             Link="Common\System\Net\DebugSafeHandle.cs" />
-    <Compile Include="$(CommonPath)System\Net\InternalException.cs"
-             Link="Common\System\Net\InternalException.cs" />
+    <Compile
+      Include="$(CommonPath)System\Net\DebugSafeHandle.cs"
+      Link="Common\System\Net\DebugSafeHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\InternalException.cs"
+      Link="Common\System\Net\InternalException.cs"
+    />
     <Compile Include="System\Net\Windows\HttpResponseStream.Windows.cs" />
     <Compile Include="System\Net\Windows\HttpResponseStreamAsyncResult.cs" />
     <Compile Include="System\Net\Windows\WebSockets\ServerWebSocket.cs" />
@@ -125,54 +153,99 @@
     <Compile Include="System\Net\Windows\HttpRequestStream.Windows.cs" />
     <Compile Include="System\Net\Windows\WebSockets\WebSocketHttpListenerDuplexStream.cs" />
     <Compile Include="System\Net\Windows\WebSockets\WebSocketProtocolComponent.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
-             Link="Common\Interop\Windows\Interop.Libraries.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.UNICODE_STRING.cs"
-             Link="Common\Interop\Windows\Interop.UNICODE_STRING.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.BOOL.cs"
-             Link="Common\Interop\Windows\Interop.BOOL.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.Structs.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.Structs.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketAbortHandle.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketAbortHandle.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketBeginClientHandshake.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketBeginClientHandshake.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketBeginServerHandshake.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketBeginServerHandshake.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketCompleteAction.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketCompleteAction.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketCreateClientHandle.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketCreateClientHandle.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketCreateServerHandle.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketCreateServerHandle.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketDeleteHandle.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketDeleteHandle.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketEndServerHandshake.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketEndServerHandshake.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketGetAction.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketGetAction.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketReceive.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketReceive.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketSend.cs"
-             Link="Common\Interop\Windows\WebSocket\Interop.WebSocketSend.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\HttpApi\Interop.ErrorCodes.cs"
-             Link="Common\Interop\Windows\HttpApi\Interop.ErrorCodes.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\HttpApi\Interop.HttpApi.cs"
-             Link="Common\Interop\Windows\HttpApi\Interop.HttpApi.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.SetFileCompletionNotificationModes.cs"
-             Link="Common\Interop\Windows\Kernel32\Interop.SetFileCompletionNotificationModes.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.CancelIoEx.cs"
-             Link="Common\Interop\Windows\Kernel32\Interop.CancelIoEx.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.LoadLibraryEx_IntPtr.cs"
-             Link="Common\Interop\Windows\Kernel32\Interop.LoadLibraryEx_IntPtr.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.SECURITY_ATTRIBUTES.cs"
-             Link="Common\Interop\Windows\Kernel32\Interop.SECURITY_ATTRIBUTES.cs" />
-    <Compile Include="$(CommonPath)Microsoft\Win32\SafeHandles\SafeLocalAllocHandle.cs"
-             Link="Common\Microsoft\Win32\SafeHandles\SafeLocalAllocHandle.cs" />
-    <Compile Include="$(CommonPath)System\Net\NegotiationInfoClass.cs"
-             Link="Common\System\Net\NegotiationInfoClass.cs" />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
+      Link="Common\Interop\Windows\Interop.Libraries.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.UNICODE_STRING.cs"
+      Link="Common\Interop\Windows\Interop.UNICODE_STRING.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.BOOL.cs"
+      Link="Common\Interop\Windows\Interop.BOOL.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.Structs.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.Structs.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketAbortHandle.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketAbortHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketBeginClientHandshake.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketBeginClientHandshake.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketBeginServerHandshake.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketBeginServerHandshake.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketCompleteAction.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketCompleteAction.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketCreateClientHandle.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketCreateClientHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketCreateServerHandle.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketCreateServerHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketDeleteHandle.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketDeleteHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketEndServerHandshake.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketEndServerHandshake.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketGetAction.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketGetAction.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketReceive.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketReceive.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\WebSocket\Interop.WebSocketSend.cs"
+      Link="Common\Interop\Windows\WebSocket\Interop.WebSocketSend.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\HttpApi\Interop.ErrorCodes.cs"
+      Link="Common\Interop\Windows\HttpApi\Interop.ErrorCodes.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\HttpApi\Interop.HttpApi.cs"
+      Link="Common\Interop\Windows\HttpApi\Interop.HttpApi.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.SetFileCompletionNotificationModes.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.SetFileCompletionNotificationModes.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.CancelIoEx.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.CancelIoEx.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.LoadLibraryEx_IntPtr.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.LoadLibraryEx_IntPtr.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.SECURITY_ATTRIBUTES.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.SECURITY_ATTRIBUTES.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Microsoft\Win32\SafeHandles\SafeLocalAllocHandle.cs"
+      Link="Common\Microsoft\Win32\SafeHandles\SafeLocalAllocHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\NegotiationInfoClass.cs"
+      Link="Common\System\Net\NegotiationInfoClass.cs"
+    />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix' or '$(ForceManagedImplementation)' == 'true'">
     <Compile Include="System\Net\Managed\HttpEndPointListener.cs" />
     <Compile Include="System\Net\Managed\HttpEndPointManager.cs" />
@@ -195,5 +268,4 @@
     <Reference Include="System.Net.Sockets" />
     <Reference Include="System.Threading.ThreadPool" />
   </ItemGroup>
-
 </Project>

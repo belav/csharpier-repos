@@ -9,8 +9,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Classes that implement the <see cref="T:System.ComponentModel.Design.Data.IDesignerDataSchema" /> interface retrieve schema information from a data store and return it to the user interface, typically to populate UI elements that enable the user to specify the data-store object that they  want to work with.</para>
-      <para>The <see cref="T:System.ComponentModel.Design.Data.IDesignerDataSchema" /> interface provides two methods: the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method, which returns the requested schema objects, and the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method, which indicates whether a specified data-schema object is supported by the data store. </para>
+      <para
+        >Classes that implement the <see
+         cref="T:System.ComponentModel.Design.Data.IDesignerDataSchema" />
+
+         interface retrieve schema information from a data store and return it to the user interface, typically to populate UI elements that enable the user to specify the data-store object that they  want to work with.</para
+      >
+      <para
+        >The <see
+         cref="T:System.ComponentModel.Design.Data.IDesignerDataSchema" />
+
+         interface provides two methods: the <see
+         cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+         method, which returns the requested schema objects, and the <see
+         cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+         method, which indicates whether a specified data-schema object is supported by the data store. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -19,7 +35,10 @@
   </Docs>
   <Members>
     <Member MemberName="GetSchemaItems">
-      <MemberSignature Language="C#" Value="public System.Collections.ICollection GetSchemaItems (System.ComponentModel.Design.Data.DesignerDataSchemaClass schemaClass);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ICollection GetSchemaItems (System.ComponentModel.Design.Data.DesignerDataSchemaClass schemaClass);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -28,15 +47,47 @@
         <ReturnType>System.Collections.ICollection</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="schemaClass" Type="System.ComponentModel.Design.Data.DesignerDataSchemaClass" />
+        <Parameter
+          Name="schemaClass"
+          Type="System.ComponentModel.Design.Data.DesignerDataSchemaClass"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method returns a collection of all the specified schema objects in the data store. </para>
-          <para>See the <see cref="T:System.ComponentModel.Design.Data.DesignerDataSchemaClass" /> class for the list of schema objects supported by the .NET Framework. Additional schema objects can be added to the <see cref="T:System.ComponentModel.Design.Data.DesignerDataSchemaClass" /> class by creating a derived type.</para>
-          <para>If the data store does not support the requested schema object, the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method should return null. You can use the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method to determine whether a data store supports the requested schema object before calling the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method, to avoid returning null to your application.</para>
-          <para>If the data store supports the requested object, but does not contain any instances, the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method should return an empty collection.</para>
+          <para
+            >The <see
+             cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+             method returns a collection of all the specified schema objects in the data store. </para
+          >
+          <para
+            >See the <see
+             cref="T:System.ComponentModel.Design.Data.DesignerDataSchemaClass" />
+
+             class for the list of schema objects supported by the .NET Framework. Additional schema objects can be added to the <see
+             cref="T:System.ComponentModel.Design.Data.DesignerDataSchemaClass" />
+
+             class by creating a derived type.</para
+          >
+          <para
+            >If the data store does not support the requested schema object, the <see
+             cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+             method should return null. You can use the <see
+             cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+             method to determine whether a data store supports the requested schema object before calling the <see
+             cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+             method, to avoid returning null to your application.</para
+          >
+          <para
+            >If the data store supports the requested object, but does not contain any instances, the <see
+             cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+             method should return an empty collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -47,11 +98,17 @@
           <para>A collection of schema objects of the specified type.</para>
         </returns>
         <param name="schemaClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />The schema objects to return.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The schema objects to return.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SupportsSchemaClass">
-      <MemberSignature Language="C#" Value="public bool SupportsSchemaClass (System.ComponentModel.Design.Data.DesignerDataSchemaClass schemaClass);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool SupportsSchemaClass (System.ComponentModel.Design.Data.DesignerDataSchemaClass schemaClass);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -60,13 +117,29 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="schemaClass" Type="System.ComponentModel.Design.Data.DesignerDataSchemaClass" />
+        <Parameter
+          Name="schemaClass"
+          Type="System.ComponentModel.Design.Data.DesignerDataSchemaClass"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method indicates whether the data store supports a specified data-schema object. If the data store does not support the specified object, the <see cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" /> method should return false.</para>
-          <para>You can add tests for additional data-schema objects by deriving from the <see cref="T:System.ComponentModel.Design.Data.DesignerDataSchemaClass" /> class.</para>
+          <para
+            >The <see
+             cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+             method indicates whether the data store supports a specified data-schema object. If the data store does not support the specified object, the <see
+             cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+             method should return false.</para
+          >
+          <para
+            >You can add tests for additional data-schema objects by deriving from the <see
+             cref="T:System.ComponentModel.Design.Data.DesignerDataSchemaClass" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -77,7 +150,10 @@
           <para>true if the data store supports the specified data-schema object; otherwise, false.</para>
         </returns>
         <param name="schemaClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />The schema objects to return.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The schema objects to return.</param
+        >
       </Docs>
     </Member>
   </Members>

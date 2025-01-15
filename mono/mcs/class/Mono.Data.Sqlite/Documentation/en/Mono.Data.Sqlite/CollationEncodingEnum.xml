@@ -1,6 +1,9 @@
 <Type Name="CollationEncodingEnum" FullName="Mono.Data.Sqlite.CollationEncodingEnum">
   <TypeSignature Language="C#" Value="public enum CollationEncodingEnum" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed CollationEncodingEnum extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed CollationEncodingEnum extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,7 +20,10 @@
   <Members>
     <Member MemberName="UTF16BE">
       <MemberSignature Language="C#" Value="UTF16BE" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Data.Sqlite.CollationEncodingEnum UTF16BE = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Data.Sqlite.CollationEncodingEnum UTF16BE = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,7 +39,10 @@
     </Member>
     <Member MemberName="UTF16LE">
       <MemberSignature Language="C#" Value="UTF16LE" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Data.Sqlite.CollationEncodingEnum UTF16LE = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Data.Sqlite.CollationEncodingEnum UTF16LE = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -49,7 +58,10 @@
     </Member>
     <Member MemberName="UTF8">
       <MemberSignature Language="C#" Value="UTF8" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Data.Sqlite.CollationEncodingEnum UTF8 = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Data.Sqlite.CollationEncodingEnum UTF8 = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

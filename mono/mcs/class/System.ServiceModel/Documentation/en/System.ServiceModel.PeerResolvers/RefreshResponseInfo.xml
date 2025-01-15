@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RefreshResponseInfo" FullName="System.ServiceModel.PeerResolvers.RefreshResponseInfo">
   <TypeSignature Language="C#" Value="public class RefreshResponseInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit RefreshResponseInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit RefreshResponseInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,7 +21,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>When <see cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Refresh(System.ServiceModel.PeerResolvers.RefreshInfo)" /> or an implementation of  <see cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Refresh(System.ServiceModel.PeerResolvers.RefreshInfo)" /> is called, this object is returned to the client. It contains the refreshed registration entry with the new expiry timestamp, and is returned when a previous <see cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" /> instance is sent to the peer resolver as part of a request to update the expiry of a registration entry.</para>
+      <para
+        >When <see
+         cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Refresh(System.ServiceModel.PeerResolvers.RefreshInfo)" />
+
+         or an implementation of  <see
+         cref="M:System.ServiceModel.PeerResolvers.CustomPeerResolverService.Refresh(System.ServiceModel.PeerResolvers.RefreshInfo)" />
+
+         is called, this object is returned to the client. It contains the refreshed registration entry with the new expiry timestamp, and is returned when a previous <see
+         cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
+
+         instance is sent to the peer resolver as part of a request to update the expiry of a registration entry.</para
+      >
       <para>Instances of this class are primarily used to pass information from the resolver service to a network client of that service.</para>
     </remarks>
     <summary>
@@ -29,7 +43,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public RefreshResponseInfo ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -39,13 +56,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.RefreshResponseInfo" /> class. </para>
+          <para
+            >Initializes a new default instance of the <see
+             cref="T:System.ServiceModel.PeerResolvers.RefreshResponseInfo" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RefreshResponseInfo (TimeSpan registrationLifetime, System.ServiceModel.PeerResolvers.RefreshResult result);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.TimeSpan registrationLifetime, valuetype System.ServiceModel.PeerResolvers.RefreshResult result) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public RefreshResponseInfo (TimeSpan registrationLifetime, System.ServiceModel.PeerResolvers.RefreshResult result);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.TimeSpan registrationLifetime, valuetype System.ServiceModel.PeerResolvers.RefreshResult result) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,19 +86,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.RefreshResponseInfo" /> class with the provided registration lifetime and refresh results.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.PeerResolvers.RefreshResponseInfo" />
+
+             class with the provided registration lifetime and refresh results.</para
+          >
         </summary>
         <param name="registrationLifetime">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.TimeSpan" /> that specifies the new lifetime of the peer's registration.</param>
+          <see cref="T:System.TimeSpan" />
+
+           that specifies the new lifetime of the peer's registration.</param
+        >
         <param name="result">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.PeerResolvers.RefreshResult" /> that specifies the result of the refresh.</param>
+          <see cref="T:System.ServiceModel.PeerResolvers.RefreshResult" />
+
+           that specifies the result of the refresh.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="HasBody">
       <MemberSignature Language="C#" Value="public bool HasBody ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool HasBody() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance bool HasBody() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -93,7 +135,10 @@
     </Member>
     <Member MemberName="RegistrationLifetime">
       <MemberSignature Language="C#" Value="public TimeSpan RegistrationLifetime { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan RegistrationLifetime" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan RegistrationLifetime"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -111,8 +156,14 @@
       </Docs>
     </Member>
     <Member MemberName="Result">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.PeerResolvers.RefreshResult Result { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.PeerResolvers.RefreshResult Result" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.PeerResolvers.RefreshResult Result { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.PeerResolvers.RefreshResult Result"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

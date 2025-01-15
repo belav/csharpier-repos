@@ -16,7 +16,12 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies identifiers that indicate the value editing style of a <see cref="T:System.Drawing.Design.UITypeEditor" />.</para>
+      <para
+        >Specifies identifiers that indicate the value editing style of a <see
+         cref="T:System.Drawing.Design.UITypeEditor" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>

@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
-
   <ItemGroup>
     <ForwardedType Include="System.IO.FileFormatException" />
     <ForwardedType Include="System.IO.Packaging.CompressionOption" />
@@ -21,5 +19,4 @@
     <ForwardedType Include="System.IO.Packaging.ZipPackage" />
     <ForwardedType Include="System.IO.Packaging.ZipPackagePart" />
   </ItemGroup>
-
 </Project>

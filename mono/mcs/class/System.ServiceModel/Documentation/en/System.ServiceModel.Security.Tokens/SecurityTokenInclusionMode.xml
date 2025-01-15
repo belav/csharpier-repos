@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SecurityTokenInclusionMode" FullName="System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode">
+<Type
+  Name="SecurityTokenInclusionMode"
+  FullName="System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode"
+>
   <TypeSignature Language="C#" Value="public enum SecurityTokenInclusionMode" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SecurityTokenInclusionMode extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed SecurityTokenInclusionMode extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -12,7 +18,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Instances of this class are used as parameters in many of the methods of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" /> class and in its derived classes when creating binding elements and certificates.</para>
+      <para
+        >Instances of this class are used as parameters in many of the methods of the <see
+         cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+         class and in its derived classes when creating binding elements and certificates.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -22,7 +33,10 @@
   <Members>
     <Member MemberName="AlwaysToInitiator">
       <MemberSignature Language="C#" Value="AlwaysToInitiator" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode AlwaysToInitiator = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode AlwaysToInitiator = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -39,7 +53,10 @@
     </Member>
     <Member MemberName="AlwaysToRecipient">
       <MemberSignature Language="C#" Value="AlwaysToRecipient" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode AlwaysToRecipient = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode AlwaysToRecipient = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -56,7 +73,10 @@
     </Member>
     <Member MemberName="Never">
       <MemberSignature Language="C#" Value="Never" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode Never = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode Never = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -73,7 +93,10 @@
     </Member>
     <Member MemberName="Once">
       <MemberSignature Language="C#" Value="Once" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode Once = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode Once = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

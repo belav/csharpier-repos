@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlCharacterData" FullName="System.Xml.XmlCharacterData">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public abstract class XmlCharacterData : System.Xml.XmlLinkedNode" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit XmlCharacterData extends System.Xml.XmlLinkedNode" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public abstract class XmlCharacterData : System.Xml.XmlLinkedNode"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit XmlCharacterData extends System.Xml.XmlLinkedNode"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -13,8 +20,7 @@
   <Base>
     <BaseTypeName>System.Xml.XmlLinkedNode</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <remarks>None.</remarks>
     <summary>
@@ -24,8 +30,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected XmlCharacterData (string data, System.Xml.XmlDocument doc);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig specialname rtspecialname instance void .ctor(string data, class System.Xml.XmlDocument doc) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected XmlCharacterData (string data, System.Xml.XmlDocument doc);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig specialname rtspecialname instance void .ctor(string data, class System.Xml.XmlDocument doc) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -40,18 +52,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.XmlCharacterData" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.XmlCharacterData" />
+
+             class.</para
+          >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />String that contains character data to be added to document.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          String that contains character data to be added to document.</param
+        >
         <param name="doc">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Xml.XmlDocument" /> to contain character data.</param>
+          <see cref="T:System.Xml.XmlDocument" />
+
+           to contain character data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AppendData">
       <MemberSignature Language="C#" Value="public virtual void AppendData (string strData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void AppendData(string strData) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void AppendData(string strData) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -74,7 +100,10 @@
           <para>Appends the specified string to the end of the character data of the node.</para>
         </summary>
         <param name="strData">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string to insert into the existing string. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string to insert into the existing string. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Data">
@@ -94,7 +123,12 @@
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The data returned is equivalent to the <see cref="P:System.Xml.XmlCharacterData.Value" /> property.</para>
+          <para
+            >The data returned is equivalent to the <see
+             cref="P:System.Xml.XmlCharacterData.Value" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -103,8 +137,14 @@
       </Docs>
     </Member>
     <Member MemberName="DeleteData">
-      <MemberSignature Language="C#" Value="public virtual void DeleteData (int offset, int count);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void DeleteData(int32 offset, int32 count) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void DeleteData (int offset, int count);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void DeleteData(int32 offset, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -128,9 +168,15 @@
           <para>Removes a range of characters from the node.</para>
         </summary>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The position within the string to start deleting. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The position within the string to start deleting. </param
+        >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters to delete. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of characters to delete. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="InnerText">
@@ -158,8 +204,14 @@
       </Docs>
     </Member>
     <Member MemberName="InsertData">
-      <MemberSignature Language="C#" Value="public virtual void InsertData (int offset, string strData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void InsertData(int32 offset, string strData) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void InsertData (int offset, string strData);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void InsertData(int32 offset, string strData) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -183,9 +235,15 @@
           <para>Inserts the specified string at the specified character offset.</para>
         </summary>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The position within the string to insert the supplied string data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The position within the string to insert the supplied string data. </param
+        >
         <param name="strData">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string data that is to be inserted into the existing string. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string data that is to be inserted into the existing string. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Length">
@@ -210,8 +268,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReplaceData">
-      <MemberSignature Language="C#" Value="public virtual void ReplaceData (int offset, int count, string strData);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ReplaceData(int32 offset, int32 count, string strData) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void ReplaceData (int offset, int count, string strData);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void ReplaceData(int32 offset, int32 count, string strData) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -236,16 +300,31 @@
           <para>Replaces the specified number of characters starting at the specified offset with the specified string.</para>
         </summary>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The position within the string to start replacing. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The position within the string to start replacing. </param
+        >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters to replace. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of characters to replace. </param
+        >
         <param name="strData">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new data that replaces the old string data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new data that replaces the old string data. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Substring">
-      <MemberSignature Language="C#" Value="public virtual string Substring (int offset, int count);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string Substring(int32 offset, int32 count) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string Substring (int offset, int count);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string Substring(int32 offset, int32 count) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -270,9 +349,15 @@
           <para>The substring corresponding to the specified range.</para>
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The position within the string to start retrieving. An offset of zero indicates the starting point is at the start of the data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The position within the string to start retrieving. An offset of zero indicates the starting point is at the start of the data. </param
+        >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of characters to retrieve. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of characters to retrieve. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Value">

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="AuthorizationRuleCollection" FullName="System.Web.Configuration.AuthorizationRuleCollection">
-  <TypeSignature Language="C#" Value="public sealed class AuthorizationRuleCollection : System.Configuration.ConfigurationElementCollection" />
+<Type
+  Name="AuthorizationRuleCollection"
+  FullName="System.Web.Configuration.AuthorizationRuleCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class AuthorizationRuleCollection : System.Configuration.ConfigurationElementCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,11 +24,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> type allows access to the elements of the authorization section collection.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+
+         type allows access to the elements of the authorization section collection.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a collection of <see cref="T:System.Web.Configuration.AuthorizationRule" /> objects. This class cannot be inherited.</para>
+      <para
+        >Represents a collection of <see
+         cref="T:System.Web.Configuration.AuthorizationRule" />
+
+         objects. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -35,7 +51,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -43,7 +64,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (System.Web.Configuration.AuthorizationRule rule);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (System.Web.Configuration.AuthorizationRule rule);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -55,14 +79,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The collection must not already contain the <see cref="T:System.Web.Configuration.AuthorizationRule" /> object you are adding.</para>
+          <para
+            >The collection must not already contain the <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             object you are adding.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to the collection.</para>
+          <para
+            >Adds a <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             object to the collection.</para
+          >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to add to the collection. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.AuthorizationRule" />
+
+           object to add to the collection. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -83,7 +123,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all <see cref="T:System.Web.Configuration.AuthorizationRule" /> objects from the collection.</para>
+          <para
+            >Removes all <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             objects from the collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -91,7 +136,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CollectionType">
-      <MemberSignature Language="C#" Value="public override System.Configuration.ConfigurationElementCollectionType CollectionType { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Configuration.ConfigurationElementCollectionType CollectionType { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElementCollectionType</ReturnType>
@@ -102,7 +150,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the type of this <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />.</para>
+          <para
+            >Gets the type of this <see
+             cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -110,7 +163,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateNewElement">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElement</ReturnType>
@@ -121,11 +177,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.Configuration.ConfigurationElement" />.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Configuration.ConfigurationElement" />. </para>
+          <para
+            >A new <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+            . </para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -133,7 +199,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateNewElement">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElement CreateNewElement (string elementName);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElement CreateNewElement (string elementName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElement</ReturnType>
@@ -146,14 +215,30 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.Configuration.ConfigurationElement" /> object.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Configuration.ConfigurationElement" />.</para>
+          <para
+            >A new <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+            .</para
+          >
         </returns>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />Name of the <see cref="T:System.Configuration.ConfigurationElement" /> to be created. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Name of the <see
+           cref="T:System.Configuration.ConfigurationElement" />
+
+           to be created. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -179,7 +264,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Get">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.AuthorizationRule Get (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.AuthorizationRule Get (int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.AuthorizationRule</ReturnType>
@@ -192,21 +280,40 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Web.Configuration.AuthorizationRule" /> at the specified index.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             at the specified index.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.AuthorizationRule" /> at the specified index.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             at the specified index.</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> index. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.AuthorizationRule" />
+
+           index. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetElementKey">
-      <MemberSignature Language="C#" Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -219,21 +326,43 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the element key for a specified <see cref="T:System.Configuration.ConfigurationElement" />. </para>
+          <para
+            >Gets the element key for a specified <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+            . </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Object" /> that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement" />. </para>
+          <para
+            >The <see
+             cref="T:System.Object" />
+
+             that acts as the key for the specified <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+            . </para
+          >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Configuration.ConfigurationElement" /> whose key is returned.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Configuration.ConfigurationElement" />
+
+           whose key is returned.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="IndexOf">
-      <MemberSignature Language="C#" Value="public int IndexOf (System.Web.Configuration.AuthorizationRule rule);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IndexOf (System.Web.Configuration.AuthorizationRule rule);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -246,21 +375,40 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the collection index of the specified <see cref="T:System.Web.Configuration.AuthorizationRule" /> object.</para>
+          <para
+            >Gets the collection index of the specified <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The index of the specified <see cref="T:System.Web.Configuration.AuthorizationRule" /> object.</para>
+          <para
+            >The index of the specified <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             object.</para
+          >
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object whose index is returned.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.AuthorizationRule" />
+
+           object whose index is returned.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsElementName">
-      <MemberSignature Language="C#" Value="protected override bool IsElementName (string elementname);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool IsElementName (string elementname);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -280,14 +428,20 @@
           <para>true if the name is allowed; otherwise, false.</para>
         </returns>
         <param name="elementname">
-          <attribution license="cc4" from="Microsoft" modified="false" />The element name to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The element name to check.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.AuthorizationRule this[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.AuthorizationRule this[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.AuthorizationRule</ReturnType>
@@ -307,7 +461,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -323,7 +480,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public void Remove (System.Web.Configuration.AuthorizationRule rule);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Remove (System.Web.Configuration.AuthorizationRule rule);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -339,10 +499,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes a <see cref="T:System.Web.Configuration.AuthorizationRule" /> object from the collection.</para>
+          <para
+            >Removes a <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             object from the collection.</para
+          >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.AuthorizationRule" />  object to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.AuthorizationRule" />
+
+            object to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -365,17 +536,31 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes a <see cref="T:System.Web.Configuration.AuthorizationRule" /> object from the collection at the specified index.</para>
+          <para
+            >Removes a <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             object from the collection at the specified index.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index location of the <see cref="T:System.Web.Configuration.AuthorizationRule" /> to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index location of the <see
+           cref="T:System.Web.Configuration.AuthorizationRule" />
+
+           to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Set">
-      <MemberSignature Language="C#" Value="public void Set (int index, System.Web.Configuration.AuthorizationRule rule);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Set (int index, System.Web.Configuration.AuthorizationRule rule);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -389,12 +574,29 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the specified <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to the collection at the specified index.</para>
+          <para
+            >Adds the specified <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             object to the collection at the specified index.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index location at which to add the specified <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" /> object. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index location at which to add the specified <see
+           cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+
+           object. </param
+        >
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to be added.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.AuthorizationRule" />
+
+           object to be added.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

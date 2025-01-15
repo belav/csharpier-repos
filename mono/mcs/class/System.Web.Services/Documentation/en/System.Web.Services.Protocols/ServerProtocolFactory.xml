@@ -14,7 +14,12 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The .NET Framework uses classes that are derived from the <see cref="T:System.Web.Services.Protocols.ServerProtocolFactory" /> class to process XML Web service requests.</para>
+      <para
+        >The .NET Framework uses classes that are derived from the <see
+         cref="T:System.Web.Services.Protocols.ServerProtocolFactory" />
+
+         class to process XML Web service requests.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -27,7 +32,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The constructor for <see cref="T:System.Web.Services.Protocols.ServerProtocolFactory" />.</para>
+          <para
+            >The constructor for <see
+             cref="T:System.Web.Services.Protocols.ServerProtocolFactory" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -35,7 +45,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateIfRequestCompatible">
-      <MemberSignature Language="C#" Value="protected abstract System.Web.Services.Protocols.ServerProtocol CreateIfRequestCompatible (System.Web.HttpRequest request);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected abstract System.Web.Services.Protocols.ServerProtocol CreateIfRequestCompatible (System.Web.HttpRequest request);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Protocols.ServerProtocol</ReturnType>
@@ -48,14 +61,36 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.Web.Services.Protocols.ServerProtocol" /> that can be used to process the XML Web service request specified by the <paramref name="request" /> parameter.</para>
+          <para
+            >Returns a <see
+             cref="T:System.Web.Services.Protocols.ServerProtocol" />
+
+             that can be used to process the XML Web service request specified by the <paramref
+             name="request" />
+
+             parameter.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Web.Services.Protocols.ServerProtocol" /> that can be used to process the XML Web service request specified by the <paramref name="request" /> parameter.</para>
+          <para
+            >A <see
+             cref="T:System.Web.Services.Protocols.ServerProtocol" />
+
+             that can be used to process the XML Web service request specified by the <paramref
+             name="request" />
+
+             parameter.</para
+          >
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.HttpRequest" /> that represents the Web service request.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.HttpRequest" />
+
+           that represents the Web service request.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

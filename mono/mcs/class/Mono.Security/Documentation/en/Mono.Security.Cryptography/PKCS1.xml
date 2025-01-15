@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -21,7 +26,10 @@
   </Docs>
   <Members>
     <Member MemberName="Decrypt_OAEP">
-      <MemberSignature Language="C#" Value="public static byte[] Decrypt_OAEP (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.HashAlgorithm hash, byte[] C);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] Decrypt_OAEP (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.HashAlgorithm hash, byte[] C);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -32,13 +40,28 @@
         <Parameter Name="C" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rsa">an <see cref="T:System.Security.Cryptography.RSA" />  instance that has a private key </param>
-        <param name="hash">a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> required for the MGF</param>
+        <param name="rsa"
+          >an <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+            instance that has a private key </param
+        >
+        <param name="hash"
+          >a <see
+           cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+           required for the MGF</param
+        >
         <param name="C">the encrypted message</param>
         <summary>RSA Encryption Scheme OAEP (Optimal Asymmetric Encryption Padding) Decryption.</summary>
         <returns>the decrypted message</returns>
         <remarks>
-          <para>See <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" /> for the actual framework implementation.</para>
+          <para
+            >See <see
+             cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" />
+
+             for the actual framework implementation.</para
+          >
           <para>See section 7.1.2 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -48,7 +71,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Decrypt_v15">
-      <MemberSignature Language="C#" Value="public static byte[] Decrypt_v15 (System.Security.Cryptography.RSA rsa, byte[] C);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] Decrypt_v15 (System.Security.Cryptography.RSA rsa, byte[] C);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -58,12 +84,22 @@
         <Parameter Name="C" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rsa">an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param>
+        <param name="rsa"
+          >an <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+           instance that has a private key</param
+        >
         <param name="C">the encrypted message</param>
         <summary>RSA Encryption Scheme PKCS1 v1.5 Decryption.</summary>
         <returns>the decrypted message </returns>
         <remarks>
-          <para>See <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" /> for the actual framework implementation.</para>
+          <para
+            >See <see
+             cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" />
+
+             for the actual framework implementation.</para
+          >
           <para>See section 7.2.2 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -73,7 +109,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Encode_v15">
-      <MemberSignature Language="C#" Value="public static byte[] Encode_v15 (System.Security.Cryptography.HashAlgorithm hash, byte[] hashValue, int emLength);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] Encode_v15 (System.Security.Cryptography.HashAlgorithm hash, byte[] hashValue, int emLength);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -84,7 +123,12 @@
         <Parameter Name="emLength" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="hash">a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> to include it's OID into the padding.</param>
+        <param name="hash"
+          >a <see
+           cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+           to include it's OID into the padding.</param
+        >
         <param name="hashValue">the message (generally a hash) to be encoded</param>
         <param name="emLength">length of the encoded message</param>
         <summary>Encoding Method for Signature with Appendix PKCS1 v1.5.</summary>
@@ -99,7 +143,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Encrypt_OAEP">
-      <MemberSignature Language="C#" Value="public static byte[] Encrypt_OAEP (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.HashAlgorithm hash, System.Security.Cryptography.RandomNumberGenerator rng, byte[] M);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] Encrypt_OAEP (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.HashAlgorithm hash, System.Security.Cryptography.RandomNumberGenerator rng, byte[] M);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -111,14 +158,34 @@
         <Parameter Name="M" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rsa">an <see cref="T:System.Security.Cryptography.RSA" /> instance</param>
-        <param name="hash">a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> required for the MGF</param>
-        <param name="rng">a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> to generate random data required for the padding</param>
+        <param name="rsa"
+          >an <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+           instance</param
+        >
+        <param name="hash"
+          >a <see
+           cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+           required for the MGF</param
+        >
+        <param name="rng"
+          >a <see
+           cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+
+           to generate random data required for the padding</param
+        >
         <param name="M">the message to encrypt</param>
         <summary>RSA Encryption Scheme OAEP (Optimal Asymmetric Encryption Padding) Encryption.</summary>
         <returns>the encrypted message </returns>
         <remarks>
-          <para>See <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" /> for the actual framework implementation.</para>
+          <para
+            >See <see
+             cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" />
+
+             for the actual framework implementation.</para
+          >
           <para>See section 7.1.1 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -128,7 +195,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Encrypt_v15">
-      <MemberSignature Language="C#" Value="public static byte[] Encrypt_v15 (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.RandomNumberGenerator rng, byte[] M);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] Encrypt_v15 (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.RandomNumberGenerator rng, byte[] M);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -139,13 +209,28 @@
         <Parameter Name="M" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rsa">a <see cref="T:System.Security.Cryptography.RSA" /> instance</param>
-        <param name="rng">a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /> to generate random data required for the padding </param>
+        <param name="rsa"
+          >a <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+           instance</param
+        >
+        <param name="rng"
+          >a <see
+           cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+
+           to generate random data required for the padding </param
+        >
         <param name="M">the message to encrypt</param>
         <summary>RSA Encryption Scheme PKCS1 v1.5 Encryption.</summary>
         <returns>the encrypted message</returns>
         <remarks>
-          <para>See <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter" /> for the actual framework implementation.</para>
+          <para
+            >See <see
+             cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter" />
+
+             for the actual framework implementation.</para
+          >
           <para>See section 7.2.1 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -187,7 +272,12 @@
         <Parameter Name="size" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="x">the <see cref="T:System.Int32" /> to convert</param>
+        <param name="x"
+          >the <see
+           cref="T:System.Int32" />
+
+           to convert</param
+        >
         <param name="size">the length the resulting octet string.</param>
         <summary>Integer to Octet String primitive.</summary>
         <returns>a byte array (named an octet string in PKCS#1) containing the encoded integer.</returns>
@@ -199,7 +289,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MGF1">
-      <MemberSignature Language="C#" Value="public static byte[] MGF1 (System.Security.Cryptography.HashAlgorithm hash, byte[] mgfSeed, int maskLen);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] MGF1 (System.Security.Cryptography.HashAlgorithm hash, byte[] mgfSeed, int maskLen);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -210,13 +303,23 @@
         <Parameter Name="maskLen" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="hash">a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> to generate the mask</param>
+        <param name="hash"
+          >a <see
+           cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+           to generate the mask</param
+        >
         <param name="mgfSeed">seed used to generate the mask</param>
         <param name="maskLen">length of the mask</param>
         <summary>Mask Generation Function #1</summary>
         <returns>the mask</returns>
         <remarks>
-          <para>See <see cref="T:System.Security.Cryptography.PKCS1MaskGenerationMethod" /> for the actual framework implementation.</para>
+          <para
+            >See <see
+             cref="T:System.Security.Cryptography.PKCS1MaskGenerationMethod" />
+
+             for the actual framework implementation.</para
+          >
           <para>See section B.2.1 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -235,7 +338,9 @@
         <Parameter Name="x" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="x">a byte array (named an octet string in PKCS#1) containing the encoded integer. </param>
+        <param name="x"
+          >a byte array (named an octet string in PKCS#1) containing the encoded integer. </param
+        >
         <summary>Octet String to Integer primitive.</summary>
         <returns>an array of bytes representing a large non-negative integer.</returns>
         <remarks>See section 4.2 of PKCS #1 v2.1 for more details.</remarks>
@@ -246,7 +351,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RSADP">
-      <MemberSignature Language="C#" Value="public static byte[] RSADP (System.Security.Cryptography.RSA rsa, byte[] c);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] RSADP (System.Security.Cryptography.RSA rsa, byte[] c);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -256,7 +364,12 @@
         <Parameter Name="c" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rsa">an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param>
+        <param name="rsa"
+          >an <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+           instance that has a private key</param
+        >
         <param name="c">the encrypted message</param>
         <summary>RSA Decryption Primitive.</summary>
         <returns>the decrypted message</returns>
@@ -268,7 +381,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RSAEP">
-      <MemberSignature Language="C#" Value="public static byte[] RSAEP (System.Security.Cryptography.RSA rsa, byte[] m);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] RSAEP (System.Security.Cryptography.RSA rsa, byte[] m);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -278,7 +394,12 @@
         <Parameter Name="m" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rsa">an <see cref="T:System.Security.Cryptography.RSA" /> instance</param>
+        <param name="rsa"
+          >an <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+           instance</param
+        >
         <param name="m">the message to encrypt</param>
         <summary>RSA Encryption Primitive.</summary>
         <returns>the encrypted message</returns>
@@ -290,7 +411,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RSASP1">
-      <MemberSignature Language="C#" Value="public static byte[] RSASP1 (System.Security.Cryptography.RSA rsa, byte[] m);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] RSASP1 (System.Security.Cryptography.RSA rsa, byte[] m);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -300,7 +424,12 @@
         <Parameter Name="m" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rsa">an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param>
+        <param name="rsa"
+          >an <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+           instance that has a private key</param
+        >
         <param name="m">the message (generally a properly padded hash) to sign</param>
         <summary>RSA Signature Primitive #1.</summary>
         <returns>the message signature</returns>
@@ -312,7 +441,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RSAVP1">
-      <MemberSignature Language="C#" Value="public static byte[] RSAVP1 (System.Security.Cryptography.RSA rsa, byte[] s);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] RSAVP1 (System.Security.Cryptography.RSA rsa, byte[] s);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -322,7 +454,12 @@
         <Parameter Name="s" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rsa">an <see cref="T:System.Security.Cryptography.RSA" /> instance</param>
+        <param name="rsa"
+          >an <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+           instance</param
+        >
         <param name="s">a message signature</param>
         <summary>RSA Verification Primitive #1.</summary>
         <returns>the message (generally a properly padded hash)</returns>
@@ -334,7 +471,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Sign_v15">
-      <MemberSignature Language="C#" Value="public static byte[] Sign_v15 (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.HashAlgorithm hash, byte[] hashValue);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] Sign_v15 (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.HashAlgorithm hash, byte[] hashValue);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -345,13 +485,28 @@
         <Parameter Name="hashValue" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rsa">an <see cref="T:System.Security.Cryptography.RSA" /> instance that has a private key</param>
-        <param name="hash">a <see cref="T:System.Security.Cryptography.HashAlgorithm" /> required for the PKCS#1 encoding</param>
+        <param name="rsa"
+          >an <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+           instance that has a private key</param
+        >
+        <param name="hash"
+          >a <see
+           cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+           required for the PKCS#1 encoding</param
+        >
         <param name="hashValue">the hash value to sign</param>
         <summary>RSA Signature Scheme with Appendix PKCS1 v1.5 Signature generation</summary>
         <returns>the message signature </returns>
         <remarks>
-          <para>See <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureFormatter" /> for the actual framework implementation.</para>
+          <para
+            >See <see
+             cref="T:System.Security.Cryptography.RSAPKCS1SignatureFormatter" />
+
+             for the actual framework implementation.</para
+          >
           <para>See section 8.2.1 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -361,7 +516,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Verify_v15">
-      <MemberSignature Language="C#" Value="public static bool Verify_v15 (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.HashAlgorithm hash, byte[] hashValue, byte[] signature);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool Verify_v15 (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.HashAlgorithm hash, byte[] hashValue, byte[] signature);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -373,14 +531,24 @@
         <Parameter Name="signature" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rsa">a <see cref="T:System.Security.Cryptography.RSA" /> instance</param>
+        <param name="rsa"
+          >a <see
+           cref="T:System.Security.Cryptography.RSA" />
+
+           instance</param
+        >
         <param name="hash">required for the PKCS#1 encoding </param>
         <param name="hashValue">the hash value to verify</param>
         <param name="signature">a message signature </param>
         <summary>RSA Signature Scheme with Appendix PKCS1 v1.5 Signature verification</summary>
         <returns>True if the signature can be verified, false otherwise.</returns>
         <remarks>
-          <para>See <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" /> for the actual framework implementation.</para>
+          <para
+            >See <see
+             cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" />
+
+             for the actual framework implementation.</para
+          >
           <para>See section 8.2.2 of PKCS #1 v2.1 for more details.</para>
         </remarks>
       </Docs>
@@ -390,7 +558,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Verify_v15">
-      <MemberSignature Language="C#" Value="public static bool Verify_v15 (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.HashAlgorithm hash, byte[] hashValue, byte[] signature, bool tryNonStandardEncoding);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool Verify_v15 (System.Security.Cryptography.RSA rsa, System.Security.Cryptography.HashAlgorithm hash, byte[] hashValue, byte[] signature, bool tryNonStandardEncoding);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

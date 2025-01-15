@@ -2,17 +2,14 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetFrameworkMinimum)</TargetFrameworks>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="..\src\HostFactoryResolver.cs" />
     <Compile Include="HostFactoryResolverTests.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\DynamicDependencyAttribute.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\DynamicallyAccessedMemberTypes.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="ApplicationNameSetFromArgument\ApplicationNameSetFromArgument.csproj" />
     <ProjectReference Include="BuildWebHostInvalidSignature\BuildWebHostInvalidSignature.csproj" />
@@ -30,7 +27,6 @@
     <ProjectReference Include="TopLevelStatements\TopLevelStatements.csproj" />
     <ProjectReference Include="TopLevelStatementsTestsTimeout\TopLevelStatementsTestsTimeout.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.Hosting.Abstractions\src\Microsoft.Extensions.Hosting.Abstractions.csproj" />
   </ItemGroup>

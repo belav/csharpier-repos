@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="PublicKeyInfo" FullName="System.Security.Cryptography.Pkcs.PublicKeyInfo">
   <TypeSignature Language="C#" Value="public sealed class PublicKeyInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit PublicKeyInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit PublicKeyInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Security</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,13 +22,24 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Security.Cryptography.Pkcs.PublicKeyInfo" /> class represents information associated with a public key.</para>
+      <para
+        >The <see
+         cref="T:System.Security.Cryptography.Pkcs.PublicKeyInfo" />
+
+         class represents information associated with a public key.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Algorithm">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.Pkcs.AlgorithmIdentifier Algorithm { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.Pkcs.AlgorithmIdentifier Algorithm" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.Pkcs.AlgorithmIdentifier Algorithm { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.Pkcs.AlgorithmIdentifier Algorithm"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -40,7 +54,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Security.Cryptography.Pkcs.PublicKeyInfo.Algorithm" /> property retrieves the algorithm identifier associated with the public key.</para>
+          <para
+            >The <see
+             cref="P:System.Security.Cryptography.Pkcs.PublicKeyInfo.Algorithm" />
+
+             property retrieves the algorithm identifier associated with the public key.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -61,7 +80,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Security.Cryptography.Pkcs.PublicKeyInfo.KeyValue" /> property retrieves the value of the encoded public component of the public key pair.</para>
+          <para
+            >The <see
+             cref="P:System.Security.Cryptography.Pkcs.PublicKeyInfo.KeyValue" />
+
+             property retrieves the value of the encoded public component of the public key pair.</para
+          >
         </summary>
       </Docs>
     </Member>

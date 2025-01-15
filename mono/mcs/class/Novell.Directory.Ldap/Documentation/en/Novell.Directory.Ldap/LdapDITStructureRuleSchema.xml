@@ -1,10 +1,12 @@
 <Type Name="LdapDITStructureRuleSchema" FullName="Novell.Directory.Ldap.LdapDITStructureRuleSchema">
-  <TypeSignature Language="C#" Value="public class LdapDITStructureRuleSchema : Novell.Directory.Ldap.LdapSchemaElement, System.ICloneable, System.IComparable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapDITStructureRuleSchema : Novell.Directory.Ldap.LdapSchemaElement, System.ICloneable, System.IComparable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -54,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapDITStructureRuleSchema(string[] names, int ruleID, string description, bool obsolete, string nameForm, string[] superiorIDs)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapDITStructureRuleSchema(string[] names, int ruleID, string description, bool obsolete, string nameForm, string[] superiorIDs)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="names" Type="System.String[]" />

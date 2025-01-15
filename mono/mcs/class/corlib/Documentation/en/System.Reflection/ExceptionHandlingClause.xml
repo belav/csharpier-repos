@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ExceptionHandlingClause" FullName="System.Reflection.ExceptionHandlingClause">
   <TypeSignature Language="C#" Value="public class ExceptionHandlingClause" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi beforefieldinit ExceptionHandlingClause extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi beforefieldinit ExceptionHandlingClause extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,9 +23,38 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Reflection.ExceptionHandlingClause" /> class provides information about the clauses in a try…catch…finally block (Try…Catch…Finally in Visual Basic). To get a list of exception-handling clauses in a method, obtain a <see cref="T:System.Reflection.MethodInfo" /> that represents the method. Use the <see cref="M:System.Reflection.MethodBase.GetMethodBody" /> method to obtain a <see cref="T:System.Reflection.MethodBody" /> object, and then use the <see cref="P:System.Reflection.MethodBody.ExceptionHandlingClauses" /> property to get the list of clauses.</para>
+      <para
+        >The <see
+         cref="T:System.Reflection.ExceptionHandlingClause" />
+
+         class provides information about the clauses in a try…catch…finally block (Try…Catch…Finally in Visual Basic). To get a list of exception-handling clauses in a method, obtain a <see
+         cref="T:System.Reflection.MethodInfo" />
+
+         that represents the method. Use the <see
+         cref="M:System.Reflection.MethodBase.GetMethodBody" />
+
+         method to obtain a <see
+         cref="T:System.Reflection.MethodBody" />
+
+         object, and then use the <see
+         cref="P:System.Reflection.MethodBody.ExceptionHandlingClauses" />
+
+         property to get the list of clauses.</para
+      >
       <block subset="none" type="note">
-        <para>Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see cref="http://go.microsoft.com/fwlink/?LinkID=99212">ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552">Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
+        <para
+          >Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
+           cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+            >ECMA C# and Common Language Infrastructure Standards</see
+          >
+
+           on MSDN and <see
+           cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+            >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
+          >
+
+           on the Ecma International Web site.</para
+        >
       </block>
     </remarks>
     <summary>
@@ -33,7 +65,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected ExceptionHandlingClause ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -42,11 +77,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor is invoked by derived classes during the construction of <see cref="T:System.Reflection.ExceptionHandlingClause" /> objects.</para>
+          <para
+            >This constructor is invoked by derived classes during the construction of <see
+             cref="T:System.Reflection.ExceptionHandlingClause" />
+
+             objects.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Reflection.ExceptionHandlingClause" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Reflection.ExceptionHandlingClause" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -67,7 +112,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
-            <para>Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see cref="http://go.microsoft.com/fwlink/?LinkID=99212">ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552">Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
+            <para
+              >Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                >ECMA C# and Common Language Infrastructure Standards</see
+              >
+
+               on MSDN and <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
+              >
+
+               on the Ecma International Web site.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -92,9 +149,26 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A filter clause contains user-supplied Microsoft intermediate language (MSIL) that determines whether an exception is handled by this clause. For example, any clause containing the Visual Basic When keyword is a <see cref="F:System.Reflection.ExceptionHandlingClauseOptions.Filter" /> clause.</para>
+          <para
+            >A filter clause contains user-supplied Microsoft intermediate language (MSIL) that determines whether an exception is handled by this clause. For example, any clause containing the Visual Basic When keyword is a <see
+             cref="F:System.Reflection.ExceptionHandlingClauseOptions.Filter" />
+
+             clause.</para
+          >
           <block subset="none" type="note">
-            <para>Working with exception-handling clauses requires a thorough understanding of metadata and MSIL instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see cref="http://go.microsoft.com/fwlink/?LinkID=99212">ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552">Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
+            <para
+              >Working with exception-handling clauses requires a thorough understanding of metadata and MSIL instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                >ECMA C# and Common Language Infrastructure Standards</see
+              >
+
+               on MSDN and <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
+              >
+
+               on the Ecma International Web site.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -104,8 +178,14 @@
       </Docs>
     </Member>
     <Member MemberName="Flags">
-      <MemberSignature Language="C#" Value="public virtual System.Reflection.ExceptionHandlingClauseOptions Flags { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Reflection.ExceptionHandlingClauseOptions Flags" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Reflection.ExceptionHandlingClauseOptions Flags { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Reflection.ExceptionHandlingClauseOptions Flags"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -120,7 +200,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
-            <para>Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see cref="http://go.microsoft.com/fwlink/?LinkID=99212">ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552">Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
+            <para
+              >Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                >ECMA C# and Common Language Infrastructure Standards</see
+              >
+
+               on MSDN and <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
+              >
+
+               on the Ecma International Web site.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -146,7 +238,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
-            <para>Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see cref="http://go.microsoft.com/fwlink/?LinkID=99212">ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552">Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
+            <para
+              >Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                >ECMA C# and Common Language Infrastructure Standards</see
+              >
+
+               on MSDN and <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
+              >
+
+               on the Ecma International Web site.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -172,7 +276,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
-            <para>Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see cref="http://go.microsoft.com/fwlink/?LinkID=99212">ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552">Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
+            <para
+              >Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                >ECMA C# and Common Language Infrastructure Standards</see
+              >
+
+               on MSDN and <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
+              >
+
+               on the Ecma International Web site.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -183,7 +299,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -223,7 +342,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An integer that represents the total length, in bytes, of the try block that includes this exception-handling clause.</para>
           <block subset="none" type="note">
-            <para>Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see cref="http://go.microsoft.com/fwlink/?LinkID=99212">ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552">Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
+            <para
+              >Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                >ECMA C# and Common Language Infrastructure Standards</see
+              >
+
+               on MSDN and <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
+              >
+
+               on the Ecma International Web site.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -249,7 +380,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
-            <para>Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see cref="http://go.microsoft.com/fwlink/?LinkID=99212">ECMA C# and Common Language Infrastructure Standards</see> on MSDN and <see cref="http://go.microsoft.com/fwlink/?LinkID=65552">Standard ECMA-335 - Common Language Infrastructure (CLI)</see> on the Ecma International Web site.</para>
+            <para
+              >Working with exception-handling clauses requires a thorough understanding of metadata and Microsoft intermediate language (MSIL) instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                >ECMA C# and Common Language Infrastructure Standards</see
+              >
+
+               on MSDN and <see
+               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
+              >
+
+               on the Ecma International Web site.</para
+            >
           </block>
         </remarks>
         <summary>

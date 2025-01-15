@@ -8,7 +8,7 @@
     <BaseTypeName>System.Delegate</BaseTypeName>
   </Base>
   <Parameters>
-    <Parameter Name="retvalue" Type="System.Object&amp;" RefType="ref" />
+    <Parameter Name="retvalue" Type="System.Object&" RefType="ref" />
   </Parameters>
   <ReturnValue>
     <ReturnType>System.Void</ReturnType>

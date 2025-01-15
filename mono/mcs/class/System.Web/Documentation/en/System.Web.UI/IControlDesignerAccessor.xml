@@ -10,8 +10,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The property and methods defined in the <see cref="T:System.Web.UI.IControlDesignerAccessor" /> interface offer a convenient way for the control designer to access a control for passing and retrieving temporary design-time data. The interface is implemented by the <see cref="T:System.Web.UI.Control" /> class. Control designers use the implementation of this interface to access the control.</para>
-      <para>Temporary design-time data is not persisted with the control itself. To persist design-time data for a control, you should retrieve the contents of the <see cref="P:System.Web.UI.IControlDesignerAccessor.UserData" /> property and store them in a designer-specific location.</para>
+      <para
+        >The property and methods defined in the <see
+         cref="T:System.Web.UI.IControlDesignerAccessor" />
+
+         interface offer a convenient way for the control designer to access a control for passing and retrieving temporary design-time data. The interface is implemented by the <see
+         cref="T:System.Web.UI.Control" />
+
+         class. Control designers use the implementation of this interface to access the control.</para
+      >
+      <para
+        >Temporary design-time data is not persisted with the control itself. To persist design-time data for a control, you should retrieve the contents of the <see
+         cref="P:System.Web.UI.IControlDesignerAccessor.UserData" />
+
+         property and store them in a designer-specific location.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -20,7 +33,10 @@
   </Docs>
   <Members>
     <Member MemberName="GetDesignModeState">
-      <MemberSignature Language="C#" Value="public System.Collections.IDictionary GetDesignModeState ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IDictionary GetDesignModeState ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IDictionary</ReturnType>
@@ -38,7 +54,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IDictionary" /> of the control state.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IDictionary" />
+
+             of the control state.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -46,7 +67,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetDesignModeState">
-      <MemberSignature Language="C#" Value="public void SetDesignModeState (System.Collections.IDictionary designData);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetDesignModeState (System.Collections.IDictionary designData);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -71,7 +95,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetOwnerControl">
-      <MemberSignature Language="C#" Value="public void SetOwnerControl (System.Web.UI.Control control);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetOwnerControl (System.Web.UI.Control control);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -96,7 +123,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="UserData">
-      <MemberSignature Language="C#" Value="public System.Collections.IDictionary UserData { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IDictionary UserData { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IDictionary</ReturnType>

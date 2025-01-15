@@ -15,8 +15,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.IsolationLevel" /> values are used by a .NET Framework data provider when performing a transaction.</para>
-      <para>The <see cref="T:System.Data.IsolationLevel" /> remains in effect until explicitly changed, but it can be changed at any time. The new value is used at execution time, not parse time. If changed during a transaction, the expected behavior of the server is to apply the new locking level to all statements remaining.</para>
+      <para
+        >The <see
+         cref="T:System.Data.IsolationLevel" />
+
+         values are used by a .NET Framework data provider when performing a transaction.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Data.IsolationLevel" />
+
+         remains in effect until explicitly changed, but it can be changed at any time. The new value is used at execution time, not parse time. If changed during a transaction, the expected behavior of the server is to apply the new locking level to all statements remaining.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -111,7 +121,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A range lock is placed on the <see cref="T:System.Data.DataSet" />, preventing other users from updating or inserting rows into the dataset until the transaction is complete.</para>
+          <para
+            >A range lock is placed on the <see
+             cref="T:System.Data.DataSet" />
+
+            , preventing other users from updating or inserting rows into the dataset until the transaction is complete.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -145,7 +160,18 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When using <see cref="T:System.Data.Odbc.OdbcTransaction" />, if you do not set <see cref="T:System.Data.IsolationLevel" /> or you set <see cref="T:System.Data.IsolationLevel" /> to Unspecified, the transaction executes according to the isolation level that is determined by the driver that is being used.</para>
+          <para
+            >When using <see
+             cref="T:System.Data.Odbc.OdbcTransaction" />
+
+            , if you do not set <see
+             cref="T:System.Data.IsolationLevel" />
+
+             or you set <see
+             cref="T:System.Data.IsolationLevel" />
+
+             to Unspecified, the transaction executes according to the isolation level that is determined by the driver that is being used.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

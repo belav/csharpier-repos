@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="LinkLabelLinkClickedEventArgs" FullName="System.Windows.Forms.LinkLabelLinkClickedEventArgs">
+<Type
+  Name="LinkLabelLinkClickedEventArgs"
+  FullName="System.Windows.Forms.LinkLabelLinkClickedEventArgs"
+>
   <TypeSignature Language="C#" Value="public class LinkLabelLinkClickedEventArgs : EventArgs" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -19,12 +22,20 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.LinkLabel.LinkClicked" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LinkLabelLinkClickedEventArgs (System.Windows.Forms.LinkLabel.Link link);" />
+      <MemberSignature
+        Language="C#"
+        Value="public LinkLabelLinkClickedEventArgs (System.Windows.Forms.LinkLabel.Link link);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="link" Type="System.Windows.Forms.LinkLabel+Link" />
@@ -40,7 +51,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LinkLabelLinkClickedEventArgs (System.Windows.Forms.LinkLabel.Link link, System.Windows.Forms.MouseButtons button);" />
+      <MemberSignature
+        Language="C#"
+        Value="public LinkLabelLinkClickedEventArgs (System.Windows.Forms.LinkLabel.Link link, System.Windows.Forms.MouseButtons button);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -57,7 +71,10 @@
       </Docs>
     </Member>
     <Member MemberName="Button">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.MouseButtons Button { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.MouseButtons Button { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -75,7 +92,10 @@
       </Docs>
     </Member>
     <Member MemberName="Link">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.LinkLabel.Link Link { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.LinkLabel.Link Link { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.LinkLabel+Link</ReturnType>
@@ -85,7 +105,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.LinkLabel.Link" /> that was clicked.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.LinkLabel.Link" />
+
+             that was clicked.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

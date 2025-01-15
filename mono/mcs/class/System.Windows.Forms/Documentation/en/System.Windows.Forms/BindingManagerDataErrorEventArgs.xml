@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="BindingManagerDataErrorEventArgs" FullName="System.Windows.Forms.BindingManagerDataErrorEventArgs">
+<Type
+  Name="BindingManagerDataErrorEventArgs"
+  FullName="System.Windows.Forms.BindingManagerDataErrorEventArgs"
+>
   <TypeSignature Language="C#" Value="public class BindingManagerDataErrorEventArgs : EventArgs" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -13,16 +16,32 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" /> provides the <see cref="T:System.Exception" /> that was caught in the binding process. </para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
+
+         provides the <see
+         cref="T:System.Exception" />
+
+         that was caught in the binding process. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.BindingManagerBase.DataError" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BindingManagerDataErrorEventArgs (Exception exception);" />
+      <MemberSignature
+        Language="C#"
+        Value="public BindingManagerDataErrorEventArgs (Exception exception);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="exception" Type="System.Exception" />
@@ -32,10 +51,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
+
+             class. </para
+          >
         </summary>
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Exception" /> that occurred in the binding process that caused the <see cref="E:System.Windows.Forms.BindingManagerBase.DataError" /> event to be raised.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Exception" />
+
+           that occurred in the binding process that caused the <see
+           cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
+
+           event to be raised.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -53,7 +86,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Exception" /> caught in the binding process that caused the <see cref="E:System.Windows.Forms.BindingManagerBase.DataError" /> event to be raised.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Exception" />
+
+             caught in the binding process that caused the <see
+             cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
+
+             event to be raised.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

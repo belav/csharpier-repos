@@ -12,11 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.LinkLabel.LinkBehavior" /> property of the <see cref="T:System.Windows.Forms.LinkLabel" />.</para>
+      <para
+        >Use the members of this enumeration to set the value of the <see
+         cref="P:System.Windows.Forms.LinkLabel.LinkBehavior" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.LinkLabel" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the behaviors of a link in a <see cref="T:System.Windows.Forms.LinkLabel" />.</para>
+      <para
+        >Specifies the behaviors of a link in a <see
+         cref="T:System.Windows.Forms.LinkLabel" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -63,7 +76,15 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The link text is never underlined. The link can still be distinguished from other text by use of the <see cref="P:System.Windows.Forms.LinkLabel.LinkColor" /> property of the <see cref="T:System.Windows.Forms.LinkLabel" /> control.</para>
+          <para
+            >The link text is never underlined. The link can still be distinguished from other text by use of the <see
+             cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
+
+             property of the <see
+             cref="T:System.Windows.Forms.LinkLabel" />
+
+             control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

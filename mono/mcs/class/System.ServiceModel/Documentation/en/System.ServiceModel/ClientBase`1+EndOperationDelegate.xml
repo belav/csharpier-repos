@@ -1,6 +1,15 @@
-<Type Name="ClientBase&lt;TChannel&gt;+EndOperationDelegate" FullName="System.ServiceModel.ClientBase&lt;TChannel&gt;+EndOperationDelegate">
-  <TypeSignature Language="C#" Value="protected delegate object[] ClientBase&lt;TChannel&gt;.EndOperationDelegate(IAsyncResult result) where TChannel : class;" />
-  <TypeSignature Language="ILAsm" Value=".class nested protected auto ansi sealed ClientBase`1/EndOperationDelegate&lt;class TChannel&gt; extends System.MulticastDelegate" />
+<Type
+  Name="ClientBase<TChannel>+EndOperationDelegate"
+  FullName="System.ServiceModel.ClientBase<TChannel>+EndOperationDelegate"
+>
+  <TypeSignature
+    Language="C#"
+    Value="protected delegate object[] ClientBase<TChannel>.EndOperationDelegate(IAsyncResult result) where TChannel : class;"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested protected auto ansi sealed ClientBase`1/EndOperationDelegate<class TChannel> extends System.MulticastDelegate"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>

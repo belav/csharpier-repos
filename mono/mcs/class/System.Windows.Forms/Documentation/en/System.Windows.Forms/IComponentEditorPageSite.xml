@@ -11,7 +11,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The site for a <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" />.</para>
+      <para
+        >The site for a <see
+         cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>

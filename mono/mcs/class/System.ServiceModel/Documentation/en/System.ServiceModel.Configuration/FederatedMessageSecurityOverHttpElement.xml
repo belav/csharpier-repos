@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="FederatedMessageSecurityOverHttpElement" FullName="System.ServiceModel.Configuration.FederatedMessageSecurityOverHttpElement">
-  <TypeSignature Language="C#" Value="public sealed class FederatedMessageSecurityOverHttpElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed FederatedMessageSecurityOverHttpElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="FederatedMessageSecurityOverHttpElement"
+  FullName="System.ServiceModel.Configuration.FederatedMessageSecurityOverHttpElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class FederatedMessageSecurityOverHttpElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed FederatedMessageSecurityOverHttpElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public FederatedMessageSecurityOverHttpElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +42,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.FederatedMessageSecurityOverHttpElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.FederatedMessageSecurityOverHttpElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AlgorithmSuite">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.SecurityAlgorithmSuite AlgorithmSuite { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.SecurityAlgorithmSuite AlgorithmSuite" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.SecurityAlgorithmSuite AlgorithmSuite { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.SecurityAlgorithmSuite AlgorithmSuite"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -62,8 +85,14 @@
       </Docs>
     </Member>
     <Member MemberName="ClaimTypeRequirements">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ClaimTypeElementCollection ClaimTypeRequirements { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ClaimTypeElementCollection ClaimTypeRequirements" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ClaimTypeElementCollection ClaimTypeRequirements { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ClaimTypeElementCollection ClaimTypeRequirements"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -110,8 +139,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuedKeyType">
-      <MemberSignature Language="C#" Value="public System.IdentityModel.Tokens.SecurityKeyType IssuedKeyType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.IdentityModel.Tokens.SecurityKeyType IssuedKeyType" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.IdentityModel.Tokens.SecurityKeyType IssuedKeyType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.IdentityModel.Tokens.SecurityKeyType IssuedKeyType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -161,8 +196,14 @@
       </Docs>
     </Member>
     <Member MemberName="Issuer">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.IssuedTokenParametersEndpointAddressElement Issuer { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.IssuedTokenParametersEndpointAddressElement Issuer" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.IssuedTokenParametersEndpointAddressElement Issuer { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.IssuedTokenParametersEndpointAddressElement Issuer"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -185,8 +226,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuerMetadata">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.EndpointAddressElementBase IssuerMetadata { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.EndpointAddressElementBase IssuerMetadata" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.EndpointAddressElementBase IssuerMetadata { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.EndpointAddressElementBase IssuerMetadata"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -210,7 +257,10 @@
     </Member>
     <Member MemberName="NegotiateServiceCredential">
       <MemberSignature Language="C#" Value="public bool NegotiateServiceCredential { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool NegotiateServiceCredential" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool NegotiateServiceCredential"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -228,7 +278,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property indicates whether the service credential is negotiated automatically between the client and the service. If this property is true, then such negotiation occurs. If this property is false, then the service credentials must be specified at the client before communication with the service can occur.</para>
-          <para>If this property is set to false, and the binding is configured to use Windows as a client credential type, the service account must be associated with a Service Principal Name (SPN). To do this, run the service under the NETWORK SERVICE account, or LOCAL SYSTEM account. Alternatively, use the SetSpn.exe tool to create an SPN for the service account. In either case, the client must use the correct SPN in the <format type="text/html"><a href="3f3b85d3-20f2-4cd8-8a6a-ee18befbd165">&lt;servicePrincipalName&gt;</a></format> element, or by using the <see cref="T:System.ServiceModel.EndpointAddress" /> constructor. For more information, see <format type="text/html"><a href="a4c8f52c-5b30-45c4-a545-63244aba82be">Specifying the Identity</a></format>.</para>
+          <para
+            >If this property is set to false, and the binding is configured to use Windows as a client credential type, the service account must be associated with a Service Principal Name (SPN). To do this, run the service under the NETWORK SERVICE account, or LOCAL SYSTEM account. Alternatively, use the SetSpn.exe tool to create an SPN for the service account. In either case, the client must use the correct SPN in the <format
+             type="text/html">
+              <a href="3f3b85d3-20f2-4cd8-8a6a-ee18befbd165">&lt;servicePrincipalName&gt;</a>
+            </format>
+
+             element, or by using the <see
+             cref="T:System.ServiceModel.EndpointAddress" />
+
+             constructor. For more information, see <format
+             type="text/html">
+              <a href="a4c8f52c-5b30-45c4-a545-63244aba82be">Specifying the Identity</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -237,8 +302,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -253,8 +324,14 @@
       </Docs>
     </Member>
     <Member MemberName="TokenRequestParameters">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.XmlElementElementCollection TokenRequestParameters { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.XmlElementElementCollection TokenRequestParameters" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.XmlElementElementCollection TokenRequestParameters { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.XmlElementElementCollection TokenRequestParameters"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

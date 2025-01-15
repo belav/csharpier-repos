@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="StandardEndpointElementCollection&lt;TEndpointConfiguration&gt;" FullName="System.ServiceModel.Configuration.StandardEndpointElementCollection&lt;TEndpointConfiguration&gt;">
-  <TypeSignature Language="C#" Value="public sealed class StandardEndpointElementCollection&lt;TEndpointConfiguration&gt; : System.ServiceModel.Configuration.ServiceModelEnhancedConfigurationElementCollection&lt;TEndpointConfiguration&gt; where TEndpointConfiguration : StandardEndpointElementnew()" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit StandardEndpointElementCollection`1&lt;.ctor (class System.ServiceModel.Configuration.StandardEndpointElement) TEndpointConfiguration&gt; extends System.ServiceModel.Configuration.ServiceModelEnhancedConfigurationElementCollection`1&lt;!TEndpointConfiguration&gt;" />
+<Type
+  Name="StandardEndpointElementCollection<TEndpointConfiguration>"
+  FullName="System.ServiceModel.Configuration.StandardEndpointElementCollection<TEndpointConfiguration>"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class StandardEndpointElementCollection<TEndpointConfiguration> : System.ServiceModel.Configuration.ServiceModelEnhancedConfigurationElementCollection<TEndpointConfiguration> where TEndpointConfiguration : StandardEndpointElementnew()"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit StandardEndpointElementCollection`1<.ctor (class System.ServiceModel.Configuration.StandardEndpointElement) TEndpointConfiguration> extends System.ServiceModel.Configuration.ServiceModelEnhancedConfigurationElementCollection`1<!TEndpointConfiguration>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,7 +26,9 @@
   <Base>
     <BaseTypeName>System.ServiceModel.Configuration.ServiceModelEnhancedConfigurationElementCollection&lt;TEndpointConfiguration&gt;</BaseTypeName>
     <BaseTypeArguments>
-      <BaseTypeArgument TypeParamName="TConfigurationElement">TEndpointConfiguration</BaseTypeArgument>
+      <BaseTypeArgument TypeParamName="TConfigurationElement"
+        >TEndpointConfiguration</BaseTypeArgument
+      >
     </BaseTypeArguments>
   </Base>
   <Interfaces />
@@ -32,7 +43,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public StandardEndpointElementCollection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -42,13 +56,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.StandardEndpointElementCollection`1" /> class.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.StandardEndpointElementCollection`1" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetElementKey">
-      <MemberSignature Language="C#" Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance object GetElementKey(class System.Configuration.ConfigurationElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance object GetElementKey(class System.Configuration.ConfigurationElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

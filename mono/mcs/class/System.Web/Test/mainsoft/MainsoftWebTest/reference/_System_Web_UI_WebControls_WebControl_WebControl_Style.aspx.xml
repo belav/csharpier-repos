@@ -1,78 +1,149 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <testresults name="">
   <div id="GHTSubTest24" style="height:56px;width:104px">
-    <input value="Button" style="color:firebrick;height:40px;width:120px" type="submit" name="Button2" id="Button2" />
+    <input
+      value="Button"
+      style="color:firebrick;height:40px;width:120px"
+      type="submit"
+      name="Button2"
+      id="Button2"
+    />
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest25" style="height:56px;width:104px">
     <span style="color:firebrick;height:40px;width:120px">
       <input id="Checkbox2" type="checkbox" name="Checkbox2" />
     </span>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest26" style="height:56px;width:104px">
     <a id="Hyperlink2" style="color:firebrick;height:40px;width:120px">HyperLink</a>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest27" style="height:56px;width:104px">
     <img id="Image2" alt="" border="0" style="color:firebrick;height:40px;width:120px" />
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest28" style="height:56px;width:104px">
-    <input id="Imagebutton2" alt="" border="0" style="color:firebrick;height:40px;width:120px" type="image" name="Imagebutton2" />
+    <input
+      id="Imagebutton2"
+      alt=""
+      border="0"
+      style="color:firebrick;height:40px;width:120px"
+      type="image"
+      name="Imagebutton2"
+    />
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest29" style="height:56px;width:104px">
     <span id="Label2" style="color:firebrick;height:40px;width:120px">Label</span>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest30" style="height:56px;width:104px">
-    <a href="javascript:__doPostBack('Linkbutton2','')" id="Linkbutton2" style="color:firebrick;height:40px;width:120px">LinkButton</a>
+    <a
+      href="javascript:__doPostBack('Linkbutton2','')"
+      id="Linkbutton2"
+      style="color:firebrick;height:40px;width:120px"
+      >LinkButton</a
+    >
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest31" style="height:56px;width:104px">
     <div id="Panel2" style="color:firebrick;height:40px;width:120px">
 		Panel
 	</div>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest32" style="height:56px;width:104px">
     <span style="color:firebrick;height:40px;width:120px">
       <input id="Radiobutton2" type="radio" name="Radiobutton2" value="Radiobutton2" />
     </span>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest33" style="height:56px;width:104px">
-    <input id="Textbox2" style="color:firebrick;height:40px;width:120px" type="text" name="Textbox2" />
+    <input
+      id="Textbox2"
+      style="color:firebrick;height:40px;width:120px"
+      type="text"
+      name="Textbox2"
+    />
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest34" style="height:56px;width:104px">
     <select id="Dropdownlist2" style="color:firebrick;height:40px;width:120px" name="Dropdownlist2">
-      <option value="Item1" />Item1
-		<option value="Item2" />Item2
+      <option value="Item1" />
 
-	</select>
+      Item1
+		<option
+       value="Item2" />
+
+      Item2
+
+	</select
+    >
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest35" style="height:56px;width:104px">
     <select id="Listbox2" style="color:firebrick;height:40px;width:120px" size="4" name="Listbox2">
-      <option value="Item1" />Item1
-		<option value="Item2" />Item2
+      <option value="Item1" />
 
-	</select>
+      Item1
+		<option
+       value="Item2" />
+
+      Item2
+
+	</select
+    >
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest36" style="height:56px;width:104px">
     <table id="Radiobuttonlist2" style="color:firebrick;height:40px;width:120px" border="0">
@@ -90,7 +161,10 @@
       </tr>
     </table>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest37" style="height:56px;width:104px">
     <table id="Checkboxlist2" style="color:firebrick;height:40px;width:120px" border="0">
@@ -108,22 +182,25 @@
       </tr>
     </table>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
-  <div id="GHTSubTest38" style="height:56px;width:104px">
-  </div>
-  <div id="GHTSubTest39" style="height:56px;width:104px">
-  </div>
-  <div id="GHTSubTest40" style="height:56px;width:104px">
-  </div>
-  <div id="GHTSubTest41" style="height:56px;width:104px">
-  </div>
-  <div id="GHTSubTest42" style="height:56px;width:104px">
-  </div>
-  <div id="GHTSubTest43" style="height:56px;width:104px">
-  </div>
+  <div id="GHTSubTest38" style="height:56px;width:104px"></div>
+  <div id="GHTSubTest39" style="height:56px;width:104px"></div>
+  <div id="GHTSubTest40" style="height:56px;width:104px"></div>
+  <div id="GHTSubTest41" style="height:56px;width:104px"></div>
+  <div id="GHTSubTest42" style="height:56px;width:104px"></div>
+  <div id="GHTSubTest43" style="height:56px;width:104px"></div>
   <div id="GHTSubTest44" style="height:56px;width:104px">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;color:firebrick;height:40px;width:120px" rules="all" id="Datagrid3">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;color:firebrick;height:40px;width:120px"
+      rules="all"
+      id="Datagrid3"
+    >
       <tr>
         <td>Item</td>
       </tr>
@@ -147,10 +224,19 @@
       </tr>
     </table>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest45" style="height:56px;width:104px">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;color:firebrick;height:40px;width:120px" rules="all" id="Datagrid4">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;color:firebrick;height:40px;width:120px"
+      rules="all"
+      id="Datagrid4"
+    >
       <tr>
         <td>Item</td>
       </tr>
@@ -175,7 +261,12 @@
     </table>
   </div>
   <div id="GHTSubTest46" style="height:56px;width:104px">
-    <table id="Datalist3" cellspacing="0" border="0" style="border-collapse:collapse;color:firebrick;height:40px;width:120px">
+    <table
+      id="Datalist3"
+      cellspacing="0"
+      border="0"
+      style="border-collapse:collapse;color:firebrick;height:40px;width:120px"
+    >
       <tr>
         <td>
           <b>
@@ -235,10 +326,18 @@
       </tr>
     </table>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest47" style="height:56px;width:104px">
-    <table id="Datalist4" cellspacing="0" border="0" style="border-collapse:collapse;color:firebrick;height:40px;width:120px">
+    <table
+      id="Datalist4"
+      cellspacing="0"
+      border="0"
+      style="border-collapse:collapse;color:firebrick;height:40px;width:120px"
+    >
       <tr>
         <td>
           <b>
@@ -308,7 +407,10 @@
       </tr>
     </table>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest49" style="height:56px;width:104px">
     <table id="Table6" style="color:firebrick;height:40px;width:120px" border="0">
@@ -320,7 +422,10 @@
       </tr>
     </table>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest50" style="height:56px;width:104px">
     <table id="Table7" style="color:firebrick;height:40px;width:120px" border="0">
@@ -332,7 +437,10 @@
       </tr>
     </table>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest51" style="height:56px;width:104px">
     <table id="Table8" style="color:firebrick;height:40px;width:120px" border="0">
@@ -344,7 +452,10 @@
       </tr>
     </table>
     <span>
-      <br />Key: COLOR Value: firebrick</span>
+      <br />
+
+      Key: COLOR Value: firebrick</span
+    >
   </div>
   <div id="GHTSubTest1" testname="System.Web.UI.WebControls.Button: Default attributes">
     <input value="" style="addedstyleattribute:value" type="submit" name="ctrl_0" id="ctrl_0" />
@@ -355,26 +466,33 @@
     </span>
   </div>
   <div id="GHTSubTest3" testname="System.Web.UI.WebControls.HyperLink: Default attributes">
-    <a id="ctrl_2" style="addedstyleattribute:value">
-    </a>
+    <a id="ctrl_2" style="addedstyleattribute:value"></a>
   </div>
   <div id="GHTSubTest4" testname="System.Web.UI.WebControls.Image: Default attributes">
     <img id="ctrl_3" alt="" border="0" style="addedstyleattribute:value" />
   </div>
   <div id="GHTSubTest5" testname="System.Web.UI.WebControls.ImageButton: Default attributes">
-    <input id="ctrl_4" alt="" border="0" style="addedstyleattribute:value" type="image" name="ctrl_4" />
+    <input
+      id="ctrl_4"
+      alt=""
+      border="0"
+      style="addedstyleattribute:value"
+      type="image"
+      name="ctrl_4"
+    />
   </div>
   <div id="GHTSubTest6" testname="System.Web.UI.WebControls.Label: Default attributes">
-    <span id="ctrl_5" style="addedstyleattribute:value">
-    </span>
+    <span id="ctrl_5" style="addedstyleattribute:value"></span>
   </div>
   <div id="GHTSubTest7" testname="System.Web.UI.WebControls.LinkButton: Default attributes">
-    <a href="javascript:__doPostBack('ctrl_6','')" id="ctrl_6" style="addedstyleattribute:value">
-    </a>
+    <a
+      href="javascript:__doPostBack('ctrl_6','')"
+      id="ctrl_6"
+      style="addedstyleattribute:value"
+    ></a>
   </div>
   <div id="GHTSubTest8" testname="System.Web.UI.WebControls.Panel: Default attributes">
-    <div id="ctrl_7" style="addedstyleattribute:value">
-    </div>
+    <div id="ctrl_7" style="addedstyleattribute:value"></div>
   </div>
   <div id="GHTSubTest9" testname="System.Web.UI.WebControls.RadioButton: Default attributes">
     <span style="addedstyleattribute:value">
@@ -386,21 +504,45 @@
   </div>
   <div id="GHTSubTest11" testname="System.Web.UI.WebControls.DropDownList: Default attributes">
     <select id="ctrl_10" style="addedstyleattribute:value" name="ctrl_10">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest12" testname="System.Web.UI.WebControls.ListBox: Default attributes">
     <select id="ctrl_11" style="addedstyleattribute:value" size="4" name="ctrl_11">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest13" testname="System.Web.UI.WebControls.RadioButtonList: Default attributes">
     <table id="ctrl_12" style="addedstyleattribute:value" border="0">
@@ -459,7 +601,13 @@
     </table>
   </div>
   <div id="GHTSubTest15" testname="System.Web.UI.WebControls.DataGrid: Default attributes">
-    <table border="1" cellspacing="0" style="addedstyleattribute:value;border-collapse:collapse" rules="all" id="ctrl_14">
+    <table
+      border="1"
+      cellspacing="0"
+      style="addedstyleattribute:value;border-collapse:collapse"
+      rules="all"
+      id="ctrl_14"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -507,7 +655,12 @@
     </table>
   </div>
   <div id="GHTSubTest17" testname="System.Web.UI.WebControls.DataList: Default attributes">
-    <table id="ctrl_17" cellspacing="0" border="0" style="addedstyleattribute:value;border-collapse:collapse">
+    <table
+      id="ctrl_17"
+      cellspacing="0"
+      border="0"
+      style="addedstyleattribute:value;border-collapse:collapse"
+    >
       <tr>
         <td>
           <div>

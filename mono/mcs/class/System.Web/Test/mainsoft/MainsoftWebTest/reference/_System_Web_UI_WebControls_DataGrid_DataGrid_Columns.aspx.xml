@@ -59,9 +59,15 @@
       </tr>
     </table>
     <span>
-      <br />System.Web.UI.WebControls.DataGridColumnCollection</span>
+      <br />
+
+      System.Web.UI.WebControls.DataGridColumnCollection</span
+    >
     <span>
-      <br />0</span>
+      <br />
+
+      0</span
+    >
   </div>
   <div id="GHTSubTest2" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid2">
@@ -153,8 +159,14 @@
       </tr>
     </table>
     <span>
-      <br />System.Web.UI.WebControls.DataGridColumnCollection</span>
+      <br />
+
+      System.Web.UI.WebControls.DataGridColumnCollection</span
+    >
     <span>
-      <br />1</span>
+      <br />
+
+      1</span
+    >
   </div>
 </testresults>

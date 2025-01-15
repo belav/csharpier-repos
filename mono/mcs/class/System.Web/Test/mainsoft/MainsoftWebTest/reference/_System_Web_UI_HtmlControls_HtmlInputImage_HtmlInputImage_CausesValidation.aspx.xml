@@ -6,6 +6,9 @@
   <div id="GHTSubTest2" style="height:56px;width:553px">
     <input id="Image2" src="/test.img" type="image" name="Image2" value="value of ImageInput2" />
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
 </testresults>

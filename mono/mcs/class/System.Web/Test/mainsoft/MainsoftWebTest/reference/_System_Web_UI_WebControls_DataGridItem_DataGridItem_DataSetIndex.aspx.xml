@@ -230,7 +230,11 @@
       </tr>
       <tr>
         <td colspan="3">
-          <a href="javascript:__doPostBack('DataGrid2$_ctl9$_ctl0','')">&lt;</a>&amp;nbsp;<a href="javascript:__doPostBack('DataGrid2$_ctl9$_ctl1','')">&gt;</a></td>
+          <a href="javascript:__doPostBack('DataGrid2$_ctl9$_ctl0','')">&lt;</a>
+
+          &amp;nbsp;<a
+           href="javascript:__doPostBack('DataGrid2$_ctl9$_ctl1','')">&gt;</a>
+        </td>
         <td>-1</td>
       </tr>
     </table>

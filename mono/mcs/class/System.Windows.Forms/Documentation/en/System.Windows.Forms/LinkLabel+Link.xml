@@ -44,7 +44,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Link (int start, int length, object linkData);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Link (int start, int length, object linkData);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

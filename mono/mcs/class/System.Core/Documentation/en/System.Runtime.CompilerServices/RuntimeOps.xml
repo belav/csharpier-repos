@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RuntimeOps" FullName="System.Runtime.CompilerServices.RuntimeOps">
   <TypeSignature Language="C#" Value="public static class RuntimeOps" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit RuntimeOps extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract sealed beforefieldinit RuntimeOps extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -27,8 +30,14 @@
   </Docs>
   <Members>
     <Member MemberName="CreateRuntimeVariables">
-      <MemberSignature Language="C#" Value="public static System.Runtime.CompilerServices.IRuntimeVariables CreateRuntimeVariables ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Runtime.CompilerServices.IRuntimeVariables CreateRuntimeVariables() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Runtime.CompilerServices.IRuntimeVariables CreateRuntimeVariables ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Runtime.CompilerServices.IRuntimeVariables CreateRuntimeVariables() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,8 +67,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateRuntimeVariables">
-      <MemberSignature Language="C#" Value="public static System.Runtime.CompilerServices.IRuntimeVariables CreateRuntimeVariables (object[] data, long[] indexes);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Runtime.CompilerServices.IRuntimeVariables CreateRuntimeVariables(object[] data, int64[] indexes) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Runtime.CompilerServices.IRuntimeVariables CreateRuntimeVariables (object[] data, long[] indexes);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Runtime.CompilerServices.IRuntimeVariables CreateRuntimeVariables(object[] data, int64[] indexes) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -90,14 +105,26 @@
           <para>An interface to access variables.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The closure array.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The closure array.</param
+        >
         <param name="indexes">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of indicies into the closure array where variables are found.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of indicies into the closure array where variables are found.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ExpandoCheckVersion">
-      <MemberSignature Language="C#" Value="public static bool ExpandoCheckVersion (System.Dynamic.ExpandoObject expando, object version);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool ExpandoCheckVersion(class System.Dynamic.ExpandoObject expando, object version) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool ExpandoCheckVersion (System.Dynamic.ExpandoObject expando, object version);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool ExpandoCheckVersion(class System.Dynamic.ExpandoObject expando, object version) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -128,14 +155,26 @@
           <para>Returns true if the version is equal; otherwise, false.</para>
         </returns>
         <param name="expando">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Expando object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Expando object.</param
+        >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />The version to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The version to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ExpandoPromoteClass">
-      <MemberSignature Language="C#" Value="public static void ExpandoPromoteClass (System.Dynamic.ExpandoObject expando, object oldClass, object newClass);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void ExpandoPromoteClass(class System.Dynamic.ExpandoObject expando, object oldClass, object newClass) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void ExpandoPromoteClass (System.Dynamic.ExpandoObject expando, object oldClass, object newClass);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void ExpandoPromoteClass(class System.Dynamic.ExpandoObject expando, object oldClass, object newClass) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -163,16 +202,31 @@
           <para>Promotes an Expando object from one class to a new class.</para>
         </summary>
         <param name="expando">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Expando object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Expando object.</param
+        >
         <param name="oldClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />The old class of the Expando object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The old class of the Expando object.</param
+        >
         <param name="newClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new class of the Expando object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new class of the Expando object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ExpandoTryDeleteValue">
-      <MemberSignature Language="C#" Value="public static bool ExpandoTryDeleteValue (System.Dynamic.ExpandoObject expando, object indexClass, int index, string name, bool ignoreCase);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool ExpandoTryDeleteValue(class System.Dynamic.ExpandoObject expando, object indexClass, int32 index, string name, bool ignoreCase) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool ExpandoTryDeleteValue (System.Dynamic.ExpandoObject expando, object indexClass, int index, string name, bool ignoreCase);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool ExpandoTryDeleteValue(class System.Dynamic.ExpandoObject expando, object indexClass, int32 index, string name, bool ignoreCase) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -206,20 +260,41 @@
           <para>true if the item was successfully removed; otherwise, false.</para>
         </returns>
         <param name="expando">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expando object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expando object.</param
+        >
         <param name="indexClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />The class of the expando object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The class of the expando object.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the member.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the member.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the member.</param
+        >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if the name should be matched ignoring case; false otherwise.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if the name should be matched ignoring case; false otherwise.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ExpandoTryGetValue">
-      <MemberSignature Language="C#" Value="public static bool ExpandoTryGetValue (System.Dynamic.ExpandoObject expando, object indexClass, int index, string name, bool ignoreCase, out object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool ExpandoTryGetValue(class System.Dynamic.ExpandoObject expando, object indexClass, int32 index, string name, bool ignoreCase, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool ExpandoTryGetValue (System.Dynamic.ExpandoObject expando, object indexClass, int index, string name, bool ignoreCase, out object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool ExpandoTryGetValue(class System.Dynamic.ExpandoObject expando, object indexClass, int32 index, string name, bool ignoreCase, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -241,7 +316,7 @@
         <Parameter Name="index" Type="System.Int32" />
         <Parameter Name="name" Type="System.String" />
         <Parameter Name="ignoreCase" Type="System.Boolean" />
-        <Parameter Name="value" Type="System.Object&amp;" RefType="out" />
+        <Parameter Name="value" Type="System.Object&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="expando">To be added.</param>
@@ -256,8 +331,14 @@
       </Docs>
     </Member>
     <Member MemberName="ExpandoTrySetValue">
-      <MemberSignature Language="C#" Value="public static object ExpandoTrySetValue (System.Dynamic.ExpandoObject expando, object indexClass, int index, object value, string name, bool ignoreCase);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig object ExpandoTrySetValue(class System.Dynamic.ExpandoObject expando, object indexClass, int32 index, object value, string name, bool ignoreCase) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static object ExpandoTrySetValue (System.Dynamic.ExpandoObject expando, object indexClass, int index, object value, string name, bool ignoreCase);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig object ExpandoTrySetValue(class System.Dynamic.ExpandoObject expando, object indexClass, int32 index, object value, string name, bool ignoreCase) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -292,22 +373,46 @@
           <para>Returns the index for the set member.</para>
         </returns>
         <param name="expando">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expando object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expando object.</param
+        >
         <param name="indexClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />The class of the expando object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The class of the expando object.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the member.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the member.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the member.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the member.</param
+        >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the member.</param
+        >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if the name should be matched ignoring case; false otherwise.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if the name should be matched ignoring case; false otherwise.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="MergeRuntimeVariables">
-      <MemberSignature Language="C#" Value="public static System.Runtime.CompilerServices.IRuntimeVariables MergeRuntimeVariables (System.Runtime.CompilerServices.IRuntimeVariables first, System.Runtime.CompilerServices.IRuntimeVariables second, int[] indexes);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Runtime.CompilerServices.IRuntimeVariables MergeRuntimeVariables(class System.Runtime.CompilerServices.IRuntimeVariables first, class System.Runtime.CompilerServices.IRuntimeVariables second, int32[] indexes) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Runtime.CompilerServices.IRuntimeVariables MergeRuntimeVariables (System.Runtime.CompilerServices.IRuntimeVariables first, System.Runtime.CompilerServices.IRuntimeVariables second, int[] indexes);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Runtime.CompilerServices.IRuntimeVariables MergeRuntimeVariables(class System.Runtime.CompilerServices.IRuntimeVariables first, class System.Runtime.CompilerServices.IRuntimeVariables second, int32[] indexes) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -339,16 +444,31 @@
           <para>The merged runtime variables.</para>
         </returns>
         <param name="first">
-          <attribution license="cc4" from="Microsoft" modified="false" />The first list.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The first list.</param
+        >
         <param name="second">
-          <attribution license="cc4" from="Microsoft" modified="false" />The second list.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The second list.</param
+        >
         <param name="indexes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index array indicating which list to get variables from.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index array indicating which list to get variables from.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Quote">
-      <MemberSignature Language="C#" Value="public static System.Linq.Expressions.Expression Quote (System.Linq.Expressions.Expression expression, object hoistedLocals, object[] locals);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Linq.Expressions.Expression Quote(class System.Linq.Expressions.Expression expression, object hoistedLocals, object[] locals) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Linq.Expressions.Expression Quote (System.Linq.Expressions.Expression expression, object hoistedLocals, object[] locals);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Linq.Expressions.Expression Quote(class System.Linq.Expressions.Expression expression, object hoistedLocals, object[] locals) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -380,11 +500,20 @@
           <para>The quoted expression.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />The expression to quote.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The expression to quote.</param
+        >
         <param name="hoistedLocals">
-          <attribution license="cc4" from="Microsoft" modified="false" />The hoisted local state provided by the compiler.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The hoisted local state provided by the compiler.</param
+        >
         <param name="locals">
-          <attribution license="cc4" from="Microsoft" modified="false" />The actual hoisted local values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The actual hoisted local values.</param
+        >
       </Docs>
     </Member>
   </Members>

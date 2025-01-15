@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="MenuCommandsChangedEventArgs" FullName="System.ComponentModel.Design.MenuCommandsChangedEventArgs">
+<Type
+  Name="MenuCommandsChangedEventArgs"
+  FullName="System.ComponentModel.Design.MenuCommandsChangedEventArgs"
+>
   <TypeSignature Language="C#" Value="public class MenuCommandsChangedEventArgs : EventArgs" />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
@@ -18,12 +21,20 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public MenuCommandsChangedEventArgs (System.ComponentModel.Design.MenuCommandsChangedType changeType, System.ComponentModel.Design.MenuCommand command);" />
+      <MemberSignature
+        Language="C#"
+        Value="public MenuCommandsChangedEventArgs (System.ComponentModel.Design.MenuCommandsChangedType changeType, System.ComponentModel.Design.MenuCommand command);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -36,16 +47,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" />
+
+             class.</para
+          >
         </summary>
         <param name="changeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of change.</param
+        >
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />The menu command.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The menu command.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ChangeType">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.Design.MenuCommandsChangedType ChangeType { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.Design.MenuCommandsChangedType ChangeType { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -58,12 +83,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the type of change that caused <see cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" /> to be raised.</para>
+          <para
+            >Gets the type of change that caused <see
+             cref="E:System.ComponentModel.Design.MenuCommandService.MenuCommandsChanged" />
+
+             to be raised.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Command">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.Design.MenuCommand Command { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.Design.MenuCommand Command { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

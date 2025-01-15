@@ -1,5 +1,11 @@
-<Type Name="ScrollableControl+DockPaddingEdgesConverter" FullName="System.Windows.Forms.ScrollableControl+DockPaddingEdgesConverter">
-  <TypeSignature Language="C#" Value="public class ScrollableControl.DockPaddingEdgesConverter : System.ComponentModel.TypeConverter" />
+<Type
+  Name="ScrollableControl+DockPaddingEdgesConverter"
+  FullName="System.Windows.Forms.ScrollableControl+DockPaddingEdgesConverter"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ScrollableControl.DockPaddingEdgesConverter : System.ComponentModel.TypeConverter"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -28,7 +34,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetProperties">
-      <MemberSignature Language="C#" Value="public override System.ComponentModel.PropertyDescriptorCollection GetProperties (System.ComponentModel.ITypeDescriptorContext context, object value, Attribute[] attributes);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.ComponentModel.PropertyDescriptorCollection GetProperties (System.ComponentModel.ITypeDescriptorContext context, object value, Attribute[] attributes);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.ComponentModel.PropertyDescriptorCollection</ReturnType>
@@ -52,7 +61,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetPropertiesSupported">
-      <MemberSignature Language="C#" Value="public override bool GetPropertiesSupported (System.ComponentModel.ITypeDescriptorContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool GetPropertiesSupported (System.ComponentModel.ITypeDescriptorContext context);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>

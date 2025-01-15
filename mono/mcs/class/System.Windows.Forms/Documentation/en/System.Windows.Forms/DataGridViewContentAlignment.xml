@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataGridViewContentAlignment" FullName="System.Windows.Forms.DataGridViewContentAlignment">
+<Type
+  Name="DataGridViewContentAlignment"
+  FullName="System.Windows.Forms.DataGridViewContentAlignment"
+>
   <TypeSignature Language="C#" Value="public enum DataGridViewContentAlignment" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -12,11 +15,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.Alignment" /> property.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="P:System.Windows.Forms.DataGridViewCellStyle.Alignment" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines constants that indicate the alignment of content within a <see cref="T:System.Windows.Forms.DataGridView" /> cell.</para>
+      <para
+        >Defines constants that indicate the alignment of content within a <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         cell.</para
+      >
     </summary>
   </Docs>
   <Members>

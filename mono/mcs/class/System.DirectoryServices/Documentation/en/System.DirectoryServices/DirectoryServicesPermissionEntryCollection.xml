@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DirectoryServicesPermissionEntryCollection" FullName="System.DirectoryServices.DirectoryServicesPermissionEntryCollection">
-  <TypeSignature Language="C#" Value="public class DirectoryServicesPermissionEntryCollection : System.Collections.CollectionBase, System.Collections.IList, System.Collections.ICollection, System.Collections.IEnumerable" />
+<Type
+  Name="DirectoryServicesPermissionEntryCollection"
+  FullName="System.DirectoryServices.DirectoryServicesPermissionEntryCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DirectoryServicesPermissionEntryCollection : System.Collections.CollectionBase, System.Collections.IList, System.Collections.ICollection, System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.DirectoryServices</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../msfinal.pub")</AttributeName>
@@ -75,7 +80,10 @@
   </Attributes>
   <Members>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public int Add(System.DirectoryServices.DirectoryServicesPermissionEntry entry)" />
+      <MemberSignature
+        Language="C#"
+        Value="public int Add(System.DirectoryServices.DirectoryServicesPermissionEntry entry)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -88,58 +96,96 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Appends the specified <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> object to this collection.          </para>
+          <para
+            >Appends the specified <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+             object to this collection.          </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The zero-based index of the added <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> object that is appended to this collection.</para>
+          <para
+            >The zero-based index of the added <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+             object that is appended to this collection.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public void AddRange(System.DirectoryServices.DirectoryServicesPermissionEntry[] entries)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddRange(System.DirectoryServices.DirectoryServicesPermissionEntry[] entries)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="entries" Type="System.DirectoryServices.DirectoryServicesPermissionEntry[]" />
+        <Parameter
+          Name="entries"
+          Type="System.DirectoryServices.DirectoryServicesPermissionEntry[]"
+        />
       </Parameters>
       <Docs>
         <param name="entries">To be added.</param>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Appends the contents of the specified <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> array to this collection.          </para>
+          <para
+            >Appends the contents of the specified <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+             array to this collection.          </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public void AddRange(System.DirectoryServices.DirectoryServicesPermissionEntryCollection entries)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddRange(System.DirectoryServices.DirectoryServicesPermissionEntryCollection entries)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="entries" Type="System.DirectoryServices.DirectoryServicesPermissionEntryCollection" />
+        <Parameter
+          Name="entries"
+          Type="System.DirectoryServices.DirectoryServicesPermissionEntryCollection"
+        />
       </Parameters>
       <Docs>
         <param name="entries">To be added.</param>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Appends the contents of the specified <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntryCollection" /> object to this collection.          </para>
+          <para
+            >Appends the contents of the specified <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntryCollection" />
+
+             object to this collection.          </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo(System.DirectoryServices.DirectoryServicesPermissionEntry[] copy_to, int index)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo(System.DirectoryServices.DirectoryServicesPermissionEntry[] copy_to, int index)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="copy_to" Type="System.DirectoryServices.DirectoryServicesPermissionEntry[]" />
+        <Parameter
+          Name="copy_to"
+          Type="System.DirectoryServices.DirectoryServicesPermissionEntry[]"
+        />
         <Parameter Name="index" Type="System.Int32" />
       </Parameters>
       <Docs>
@@ -147,14 +193,25 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies all <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> objects in this collection to the specified array, starting at the specified index in the target array.          </para>
+          <para
+            >Copies all <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+             objects in this collection to the specified array, starting at the specified index in the target array.          </para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in the array where this method starts copying this collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in the array where this method starts copying this collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Contains">
-      <MemberSignature Language="C#" Value="public bool Contains(System.DirectoryServices.DirectoryServicesPermissionEntry entry)" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Contains(System.DirectoryServices.DirectoryServicesPermissionEntry entry)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -167,16 +224,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines if the specified <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> object is in this collection.          </para>
+          <para
+            >Determines if the specified <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+             object is in this collection.          </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the specified <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> object is in this collection; otherwise, false.</para>
+          <para
+            >true if the specified <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+             object is in this collection; otherwise, false.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="IndexOf">
-      <MemberSignature Language="C#" Value="public int IndexOf(System.DirectoryServices.DirectoryServicesPermissionEntry entry)" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IndexOf(System.DirectoryServices.DirectoryServicesPermissionEntry entry)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -189,16 +259,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the index of the first occurrence of the specified <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> object in this collection.          </para>
+          <para
+            >Returns the index of the first occurrence of the specified <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+             object in this collection.          </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The zero-based index of the first matching object.  Returns -1 if no member of this collection is identical to the <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> object.</para>
+          <para
+            >The zero-based index of the first matching object.  Returns -1 if no member of this collection is identical to the <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+             object.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert(int pos, System.DirectoryServices.DirectoryServicesPermissionEntry entry)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert(int pos, System.DirectoryServices.DirectoryServicesPermissionEntry entry)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -213,12 +296,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Inserts the specified <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> into this collection at the specified index.          </para>
+          <para
+            >Inserts the specified <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+             into this collection at the specified index.          </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public void Remove(System.DirectoryServices.DirectoryServicesPermissionEntry entry)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Remove(System.DirectoryServices.DirectoryServicesPermissionEntry entry)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -231,12 +322,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the first occurrence of an object in this collection that is identical to the specified <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> object.          </para>
+          <para
+            >Removes the first occurrence of an object in this collection that is identical to the specified <see
+             cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+             object.          </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.DirectoryServicesPermissionEntry Item[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.DirectoryServicesPermissionEntry Item[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.DirectoryServices.DirectoryServicesPermissionEntry</ReturnType>
@@ -256,7 +355,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains a strongly-typed collection of <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" /> objects.          </para>
+      <para
+        >Contains a strongly-typed collection of <see
+         cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+
+         objects.          </para
+      >
     </summary>
   </Docs>
 </Type>

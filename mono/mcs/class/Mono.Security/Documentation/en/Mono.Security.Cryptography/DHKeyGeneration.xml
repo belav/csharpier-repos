@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+
+     for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Enum</BaseTypeName>
   </Base>
@@ -21,8 +26,7 @@
       <ReturnValue>
         <ReturnType>Mono.Security.Cryptography.DHKeyGeneration</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Returns dynamically generated values for P and G. Unlike the Sophie Germain or DSA key generation methods, this method does not ensure that the selected prime offers an adequate security level.</summary>
         <remarks>To be added</remarks>
@@ -38,8 +42,7 @@
       <ReturnValue>
         <ReturnType>Mono.Security.Cryptography.DHKeyGeneration</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Returns values for P and G that are hard coded in this library. Contrary to what your intuition may tell you, using these hard coded values is perfectly safe. The values of the P and G parameters are taken from 'The OAKLEY Key Determination Protocol' [RFC2412]. This is the prefered key generation method, because it is very fast and very safe. Because this method uses fixed values for the P and G parameters, not all bit sizes are supported. The current implementation supports bit sizes of 768, 1024 and 1536.</summary>
         <remarks>To be added</remarks>

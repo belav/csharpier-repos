@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ManagedInstallerClass" FullName="System.Configuration.Install.ManagedInstallerClass">
-  <TypeSignature Language="C#" Value="public class ManagedInstallerClass : System.Configuration.Install.IManagedInstaller" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ManagedInstallerClass : System.Configuration.Install.IManagedInstaller"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Configuration.Install</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -38,7 +41,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Configuration.Install.ManagedInstallerClass" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Configuration.Install.ManagedInstallerClass" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -59,10 +67,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Handles the functionality of the <format type="text/html"><a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a></format>.</para>
+          <para
+            >Handles the functionality of the <format
+             type="text/html">
+              <a href="3f9d0533-f895-4897-b4ea-528284e0241d">Installer Tool (Installutil.exe)</a>
+            </format>
+
+            .</para
+          >
         </summary>
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments passed to the Installer Tool.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments passed to the Installer Tool.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -70,7 +88,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="System.Configuration.Install.IManagedInstaller.ManagedInstall">
-      <MemberSignature Language="C#" Value="int IManagedInstaller.ManagedInstall (string argString, int hInstall);" />
+      <MemberSignature
+        Language="C#"
+        Value="int IManagedInstaller.ManagedInstall (string argString, int hInstall);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -86,20 +107,39 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Configuration.Install.ManagedInstallerClass" /> instance is cast to an <see cref="T:System.Configuration.Install.IManagedInstaller" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Configuration.Install.ManagedInstallerClass" />
+
+             instance is cast to an <see
+             cref="T:System.Configuration.Install.IManagedInstaller" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For a description of this member, see <see cref="M:System.Configuration.Install.IManagedInstaller.ManagedInstall(System.String,System.Int32)" />.</para>
+          <para
+            >For a description of this member, see <see
+             cref="M:System.Configuration.Install.IManagedInstaller.ManagedInstall(System.String,System.Int32)" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The return code for installutil.exe. A successful installation returns 0. Other values indicate failure.</para>
         </returns>
         <param name="argString">
-          <attribution license="cc4" from="Microsoft" modified="false" />The command line to install.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The command line to install.</param
+        >
         <param name="hInstall">
-          <attribution license="cc4" from="Microsoft" modified="false" />The handle to the installation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The handle to the installation.</param
+        >
       </Docs>
     </Member>
   </Members>

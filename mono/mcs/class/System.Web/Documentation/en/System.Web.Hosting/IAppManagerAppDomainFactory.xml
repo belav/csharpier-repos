@@ -19,7 +19,15 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines a method used to create an <see cref="T:System.AppDomain" /> instance for a Web-application manager and a method used to stop all <see cref="T:System.AppDomain" /> instances for a Web-application manager.</para>
+      <para
+        >Defines a method used to create an <see
+         cref="T:System.AppDomain" />
+
+         instance for a Web-application manager and a method used to stop all <see
+         cref="T:System.AppDomain" />
+
+         instances for a Web-application manager.</para
+      >
     </summary>
   </Docs>
   <Members>

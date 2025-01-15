@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ContractOptionAttribute" FullName="System.Diagnostics.Contracts.ContractOptionAttribute">
+<Type
+  Name="ContractOptionAttribute"
+  FullName="System.Diagnostics.Contracts.ContractOptionAttribute"
+>
   <TypeSignature Language="C#" Value="public sealed class ContractOptionAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ContractOptionAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ContractOptionAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -96,8 +102,14 @@ public override MyMethod(int x) {
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ContractOptionAttribute (string category, string setting, bool enabled);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string category, string setting, bool enabled) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ContractOptionAttribute (string category, string setting, bool enabled);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string category, string setting, bool enabled) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -111,19 +123,39 @@ public override MyMethod(int x) {
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractOptionAttribute" /> class by using the provided category, setting, and enable/disable value.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.Contracts.ContractOptionAttribute" />
+
+             class by using the provided category, setting, and enable/disable value.</para
+          >
         </summary>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />The category for the option to be set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The category for the option to be set.</param
+        >
         <param name="setting">
-          <attribution license="cc4" from="Microsoft" modified="false" />The option setting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The option setting.</param
+        >
         <param name="enabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to enable the option; false to disable the option.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to enable the option; false to disable the option.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ContractOptionAttribute (string category, string setting, string value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string category, string setting, string value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ContractOptionAttribute (string category, string setting, string value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string category, string setting, string value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -136,7 +168,12 @@ public override MyMethod(int x) {
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>There are only two category/setting options, and they can be set by either of the constructor overloads. You can use this overload with the same settings as the <see cref="M:System.Diagnostics.Contracts.ContractOptionAttribute.#ctor(System.String,System.String,System.Boolean)" /> overload by specifying "true" or "false" in string format; for example:</para>
+          <para
+            >There are only two category/setting options, and they can be set by either of the constructor overloads. You can use this overload with the same settings as the <see
+             cref="M:System.Diagnostics.Contracts.ContractOptionAttribute.#ctor(System.String,System.String,System.Boolean)" />
+
+             overload by specifying "true" or "false" in string format; for example:</para
+          >
           <code>[ContractOption("contract", "inheritance", “false”)]
 class MyConcurrentList&lt;T&gt; : IList&lt;T&gt; {
    ...
@@ -145,14 +182,28 @@ class MyConcurrentList&lt;T&gt; : IList&lt;T&gt; {
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractOptionAttribute" /> class by using the provided category, setting, and value.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.Contracts.ContractOptionAttribute" />
+
+             class by using the provided category, setting, and value.</para
+          >
         </summary>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />The category of the option to be set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The category of the option to be set.</param
+        >
         <param name="setting">
-          <attribution license="cc4" from="Microsoft" modified="false" />The option setting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The option setting.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value for the setting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value for the setting.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Category">

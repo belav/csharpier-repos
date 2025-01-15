@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DecoderReplacementFallback" FullName="System.Text.DecoderReplacementFallback">
-  <TypeSignature Language="C#" Value="public sealed class DecoderReplacementFallback : System.Text.DecoderFallback" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed beforefieldinit DecoderReplacementFallback extends System.Text.DecoderFallback" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DecoderReplacementFallback : System.Text.DecoderFallback"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed beforefieldinit DecoderReplacementFallback extends System.Text.DecoderFallback"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,8 +21,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. If an input byte sequence cannot be converted to an output character, a <see cref="T:System.Text.DecoderReplacementFallback" /> object emits a replacement string into the output to represent the original input byte sequence. The conversion process then continues to decode the remainder of the original input. </para>
-      <para>The value of a <see cref="T:System.Text.DecoderReplacementFallback" /> object is the replacement string used to initialize that object.</para>
+      <para
+        >A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. If an input byte sequence cannot be converted to an output character, a <see
+         cref="T:System.Text.DecoderReplacementFallback" />
+
+         object emits a replacement string into the output to represent the original input byte sequence. The conversion process then continues to decode the remainder of the original input. </para
+      >
+      <para
+        >The value of a <see
+         cref="T:System.Text.DecoderReplacementFallback" />
+
+         object is the replacement string used to initialize that object.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -26,7 +42,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public DecoderReplacementFallback ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,17 +56,33 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By default, the replacement string that is the value of this <see cref="T:System.Text.DecoderReplacementFallback" /> object is "?".</para>
+          <para
+            >By default, the replacement string that is the value of this <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             object is "?".</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Text.DecoderReplacementFallback" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DecoderReplacementFallback (string replacement);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string replacement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DecoderReplacementFallback (string replacement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string replacement) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -60,19 +95,41 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="replacement" /> parameter initializes the replacement string that is the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object. A commonly used value is the Unicode "Replacement Character" (U+FFFD), which is specifically intended to replace an incoming character having a value that is unknown or unrepresentable in Unicode.</para>
+          <para
+            >The <paramref
+             name="replacement" />
+
+             parameter initializes the replacement string that is the value of the <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             object. A commonly used value is the Unicode "Replacement Character" (U+FFFD), which is specifically intended to replace an incoming character having a value that is unknown or unrepresentable in Unicode.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Text.DecoderReplacementFallback" /> class using a specified replacement string.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             class using a specified replacement string.</para
+          >
         </summary>
         <param name="replacement">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string that is emitted in a decoding operation in place of an input byte sequence that cannot be decoded.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string that is emitted in a decoding operation in place of an input byte sequence that cannot be decoded.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateFallbackBuffer">
-      <MemberSignature Language="C#" Value="public override System.Text.DecoderFallbackBuffer CreateFallbackBuffer ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Text.DecoderFallbackBuffer CreateFallbackBuffer() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Text.DecoderFallbackBuffer CreateFallbackBuffer ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Text.DecoderFallbackBuffer CreateFallbackBuffer() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -87,11 +144,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a <see cref="T:System.Text.DecoderFallbackBuffer" /> object that is initialized with the replacement string of this <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para>
+          <para
+            >Creates a <see
+             cref="T:System.Text.DecoderFallbackBuffer" />
+
+             object that is initialized with the replacement string of this <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Text.DecoderFallbackBuffer" /> object that specifies a string to use instead of the original decoding operation input.</para>
+          <para
+            >A <see
+             cref="T:System.Text.DecoderFallbackBuffer" />
+
+             object that specifies a string to use instead of the original decoding operation input.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -112,13 +182,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the replacement string that is the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para>
+          <para
+            >Gets the replacement string that is the value of the <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -135,19 +213,50 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether the value of a specified object is equal to the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para>
+          <para
+            >Indicates whether the value of a specified object is equal to the <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if <paramref name="value" /> is a <see cref="T:System.Text.DecoderReplacementFallback" /> object having a <see cref="P:System.Text.DecoderReplacementFallback.DefaultString" /> property that is equal to the <see cref="P:System.Text.DecoderReplacementFallback.DefaultString" /> property of the current <see cref="T:System.Text.DecoderReplacementFallback" /> object; otherwise, false. </para>
+          <para
+            >true if <paramref
+             name="value" />
+
+             is a <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             object having a <see
+             cref="P:System.Text.DecoderReplacementFallback.DefaultString" />
+
+             property that is equal to the <see
+             cref="P:System.Text.DecoderReplacementFallback.DefaultString" />
+
+             property of the current <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             object; otherwise, false. </para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Text.DecoderReplacementFallback" /> object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Text.DecoderReplacementFallback" />
+
+           object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -161,11 +270,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value of a <see cref="T:System.Text.DecoderReplacementFallback" /> object is the value of its <see cref="P:System.Text.DecoderReplacementFallback.DefaultString" /> property.</para>
+          <para
+            >The value of a <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             object is the value of its <see
+             cref="P:System.Text.DecoderReplacementFallback.DefaultString" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves the hash code for the value of the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para>
+          <para
+            >Retrieves the hash code for the value of the <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -190,7 +312,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of characters in the replacement string for the <see cref="T:System.Text.DecoderReplacementFallback" /> object.</para>
+          <para
+            >Gets the number of characters in the replacement string for the <see
+             cref="T:System.Text.DecoderReplacementFallback" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>

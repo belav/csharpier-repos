@@ -1,16 +1,12 @@
 ﻿<Project>
-
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.props))\Directory.Build.props" />
-
   <PropertyGroup>
     <!--
       Workaround for "Use executable flags in Microsoft.NET.Test.Sdk" (https://github.com/Microsoft/vstest/issues/792).
       Remove when fixed.
     -->
     <HasRuntimeOutput>true</HasRuntimeOutput>
-
   </PropertyGroup>
-
   <!-- Temporarary until all of aspnet/WebSocket's dependencies have been merged into this repo -->
   <PropertyGroup>
     <MicrosoftAspNetCoreAspNetCoreModuleVersion>2.2.0</MicrosoftAspNetCoreAspNetCoreModuleVersion>
@@ -23,5 +19,4 @@
     <MicrosoftAspNetCoreServerKestrelVersion>2.2.0</MicrosoftAspNetCoreServerKestrelVersion>
     <MicrosoftAspNetCoreStaticFilesVersion>2.2.0</MicrosoftAspNetCoreStaticFilesVersion>
   </PropertyGroup>
-
 </Project>

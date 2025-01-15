@@ -17,7 +17,12 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains attributes of an associated <see cref="T:System.Drawing.Imaging.Metafile" />. Not inheritable.</para>
+      <para
+        >Contains attributes of an associated <see
+         cref="T:System.Drawing.Imaging.Metafile" />
+
+        . Not inheritable.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -32,7 +37,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Drawing.Rectangle" /> that bounds the associated <see cref="T:System.Drawing.Imaging.Metafile" />.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Drawing.Rectangle" />
+
+             that bounds the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -51,7 +64,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the horizontal resolution, in dots per inch, of the associated <see cref="T:System.Drawing.Imaging.Metafile" />.</para>
+          <para
+            >Gets the horizontal resolution, in dots per inch, of the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -70,7 +88,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the vertical resolution, in dots per inch, of the associated <see cref="T:System.Drawing.Imaging.Metafile" />.</para>
+          <para
+            >Gets the vertical resolution, in dots per inch, of the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -108,11 +131,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is device dependent.</para>
+          <para
+            >Returns a value that indicates whether the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is device dependent.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is device dependent; otherwise, false.</para>
+          <para
+            >true if the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is device dependent; otherwise, false.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -131,11 +164,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Windows enhanced metafile format.</para>
+          <para
+            >Returns a value that indicates whether the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Windows enhanced metafile format.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Windows enhanced metafile format; otherwise, false.</para>
+          <para
+            >true if the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Windows enhanced metafile format; otherwise, false.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -154,11 +197,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Windows enhanced metafile format or the Windows enhanced metafile plus format.</para>
+          <para
+            >Returns a value that indicates whether the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Windows enhanced metafile format or the Windows enhanced metafile plus format.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Windows enhanced metafile format or the Windows enhanced metafile plus format; otherwise, false.</para>
+          <para
+            >true if the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Windows enhanced metafile format or the Windows enhanced metafile plus format; otherwise, false.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -177,11 +230,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Windows enhanced metafile plus format.</para>
+          <para
+            >Returns a value that indicates whether the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Windows enhanced metafile plus format.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Windows enhanced metafile plus format; otherwise, false.</para>
+          <para
+            >true if the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Windows enhanced metafile plus format; otherwise, false.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -200,11 +263,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Dual enhanced metafile format. This format supports both the enhanced and the enhanced plus format.</para>
+          <para
+            >Returns a value that indicates whether the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Dual enhanced metafile format. This format supports both the enhanced and the enhanced plus format.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Dual enhanced metafile format; otherwise, false.</para>
+          <para
+            >true if the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Dual enhanced metafile format; otherwise, false.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -223,11 +296,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" /> supports only the Windows enhanced metafile plus format.</para>
+          <para
+            >Returns a value that indicates whether the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             supports only the Windows enhanced metafile plus format.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the associated <see cref="T:System.Drawing.Imaging.Metafile" /> supports only the Windows enhanced metafile plus format; otherwise, false.</para>
+          <para
+            >true if the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             supports only the Windows enhanced metafile plus format; otherwise, false.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -246,11 +329,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Windows metafile format.</para>
+          <para
+            >Returns a value that indicates whether the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Windows metafile format.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Windows metafile format; otherwise, false.</para>
+          <para
+            >true if the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Windows metafile format; otherwise, false.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -269,11 +362,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Windows placeable metafile format.</para>
+          <para
+            >Returns a value that indicates whether the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Windows placeable metafile format.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the associated <see cref="T:System.Drawing.Imaging.Metafile" /> is in the Windows placeable metafile format; otherwise, false.</para>
+          <para
+            >true if the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+             is in the Windows placeable metafile format; otherwise, false.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -292,7 +395,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the logical horizontal resolution, in dots per inch, of the associated <see cref="T:System.Drawing.Imaging.Metafile" />.</para>
+          <para
+            >Gets the logical horizontal resolution, in dots per inch, of the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -311,7 +419,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the logical vertical resolution, in dots per inch, of the associated <see cref="T:System.Drawing.Imaging.Metafile" />.</para>
+          <para
+            >Gets the logical vertical resolution, in dots per inch, of the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -330,7 +443,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the size, in bytes, of the associated <see cref="T:System.Drawing.Imaging.Metafile" />.</para>
+          <para
+            >Gets the size, in bytes, of the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -339,7 +457,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Type">
-      <MemberSignature Language="C#" Value="public System.Drawing.Imaging.MetafileType Type { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Imaging.MetafileType Type { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.MetafileType</ReturnType>
@@ -349,7 +470,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the type of the associated <see cref="T:System.Drawing.Imaging.Metafile" />.</para>
+          <para
+            >Gets the type of the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -368,7 +494,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the version number of the associated <see cref="T:System.Drawing.Imaging.Metafile" />.</para>
+          <para
+            >Gets the version number of the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -377,7 +508,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WmfHeader">
-      <MemberSignature Language="C#" Value="public System.Drawing.Imaging.MetaHeader WmfHeader { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Imaging.MetaHeader WmfHeader { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Imaging.MetaHeader</ReturnType>
@@ -387,7 +521,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the Windows metafile (WMF) header file for the associated <see cref="T:System.Drawing.Imaging.Metafile" />.</para>
+          <para
+            >Gets the Windows metafile (WMF) header file for the associated <see
+             cref="T:System.Drawing.Imaging.Metafile" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

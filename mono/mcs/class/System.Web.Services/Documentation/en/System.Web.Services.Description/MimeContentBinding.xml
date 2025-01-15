@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MimeContentBinding" FullName="System.Web.Services.Description.MimeContentBinding">
-  <TypeSignature Language="C#" Value="public sealed class MimeContentBinding : System.Web.Services.Description.ServiceDescriptionFormatExtension" Maintainer="auto" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class MimeContentBinding : System.Web.Services.Description.ServiceDescriptionFormatExtension"
+    Maintainer="auto"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -24,11 +27,28 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For more information about specifying protocols for XML Web services, see <format type="text/html"><a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C">[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a></format>. For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para>
+      <para
+        >For more information about specifying protocols for XML Web services, see <format
+         type="text/html">
+          <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
+            >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
+          >
+        </format>
+
+        . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents an extensibility element added to an <see cref="T:System.Web.Services.Description.InputBinding" /> or an <see cref="T:System.Web.Services.Description.OutputBinding" /> within an XML Web service, specifying the MIME format for the body of the HTTP transmission. This class cannot be inherited.</para>
+      <para
+        >Represents an extensibility element added to an <see
+         cref="T:System.Web.Services.Description.InputBinding" />
+
+         or an <see
+         cref="T:System.Web.Services.Description.OutputBinding" />
+
+         within an XML Web service, specifying the MIME format for the body of the HTTP transmission. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -41,7 +61,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Description.MimeContentBinding" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Description.MimeContentBinding" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -60,7 +85,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the URI for the XML namespace of the <see cref="T:System.Web.Services.Description.MimeContentBinding" /> class. This field is constant.</para>
+          <para
+            >Specifies the URI for the XML namespace of the <see
+             cref="T:System.Web.Services.Description.MimeContentBinding" />
+
+             class. This field is constant.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +110,15 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the name of the <see cref="T:System.Web.Services.Description.MessagePart" /> to which the <see cref="T:System.Web.Services.Description.MimeContentBinding" /> applies.</para>
+          <para
+            >Gets or sets the name of the <see
+             cref="T:System.Web.Services.Description.MessagePart" />
+
+             to which the <see
+             cref="T:System.Web.Services.Description.MimeContentBinding" />
+
+             applies.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

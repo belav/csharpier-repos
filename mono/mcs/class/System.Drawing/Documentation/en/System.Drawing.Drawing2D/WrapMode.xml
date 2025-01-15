@@ -15,7 +15,17 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Brushes use this enumeration to determine how shapes are filled. To see examples of the effects the <see cref="T:System.Drawing.Drawing2D.WrapMode" /> enumeration values have on a tiled image, see <format type="text/html"><a href="6d407891-6e5c-4495-a546-3da5604e9fb8">How To: Tile a Shape with an Image</a></format>.</para>
+      <para
+        >Brushes use this enumeration to determine how shapes are filled. To see examples of the effects the <see
+         cref="T:System.Drawing.Drawing2D.WrapMode" />
+
+         enumeration values have on a tiled image, see <format
+         type="text/html">
+          <a href="6d407891-6e5c-4495-a546-3da5604e9fb8">How To: Tile a Shape with an Image</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

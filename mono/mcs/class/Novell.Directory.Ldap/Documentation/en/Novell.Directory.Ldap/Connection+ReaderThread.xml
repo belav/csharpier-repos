@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -47,7 +46,10 @@
   <Interfaces />
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ReaderThread(Novell.Directory.Ldap.Connection enclosingInstance)" />
+      <MemberSignature
+        Language="C#"
+        Value="public ReaderThread(Novell.Directory.Ldap.Connection enclosingInstance)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="enclosingInstance" Type="Novell.Directory.Ldap.Connection" />
@@ -71,7 +73,10 @@
       </Docs>
     </Member>
     <Member MemberName="Enclosing_Instance">
-      <MemberSignature Language="C#" Value="public Novell.Directory.Ldap.Connection Enclosing_Instance { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Novell.Directory.Ldap.Connection Enclosing_Instance { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Connection</ReturnType>

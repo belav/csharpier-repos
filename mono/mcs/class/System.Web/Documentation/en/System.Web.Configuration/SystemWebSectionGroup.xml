@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SystemWebSectionGroup" FullName="System.Web.Configuration.SystemWebSectionGroup">
-  <TypeSignature Language="C#" Value="public sealed class SystemWebSectionGroup : System.Configuration.ConfigurationSectionGroup" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SystemWebSectionGroup : System.Configuration.ConfigurationSectionGroup"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.SystemWebSectionGroup" /> class refers to the system.web group within a configuration file. You can use this type to access any of the sections contained in this group.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.SystemWebSectionGroup" />
+
+         class refers to the system.web group within a configuration file. You can use this type to access any of the sections contained in this group.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,11 +37,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor is called by the ASP.NET configuration system and is not intended to be used directly from your code. You can obtain an instance of the <see cref="T:System.Web.Configuration.SystemWebSectionGroup" /> class by using the <see cref="M:System.Configuration.Configuration.GetSectionGroup(System.String)" /> method.</para>
+          <para
+            >This constructor is called by the ASP.NET configuration system and is not intended to be used directly from your code. You can obtain an instance of the <see
+             cref="T:System.Web.Configuration.SystemWebSectionGroup" />
+
+             class by using the <see
+             cref="M:System.Configuration.Configuration.GetSectionGroup(System.String)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of <see cref="T:System.Web.Configuration.SystemWebSectionGroup" />.</para>
+          <para
+            >Creates a new instance of <see
+             cref="T:System.Web.Configuration.SystemWebSectionGroup" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -41,7 +62,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AnonymousIdentification">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.AnonymousIdentificationSection AnonymousIdentification { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.AnonymousIdentificationSection AnonymousIdentification { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -56,7 +80,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.AnonymousIdentificationSection" /> object refers to the anonymousIdentification section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
+
+             object refers to the anonymousIdentification section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -68,7 +97,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Authentication">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.AuthenticationSection Authentication { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.AuthenticationSection Authentication { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -83,7 +115,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.AuthenticationSection" /> object refers to the authentication section of the configuration file.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.AuthenticationSection" />
+
+             object refers to the authentication section of the configuration file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -95,7 +132,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Authorization">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.AuthorizationSection Authorization { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.AuthorizationSection Authorization { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -110,7 +150,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.AuthorizationSection" /> object refers to the authorization section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.AuthorizationSection" />
+
+             object refers to the authorization section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -122,7 +167,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BrowserCaps">
-      <MemberSignature Language="C#" Value="public System.Configuration.DefaultSection BrowserCaps { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.DefaultSection BrowserCaps { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -137,7 +185,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Configuration.DefaultSection" /> object refers to the browserCaps section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Configuration.DefaultSection" />
+
+             object refers to the browserCaps section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -149,7 +202,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ClientTarget">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.ClientTargetSection ClientTarget { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.ClientTargetSection ClientTarget { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -164,7 +220,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.ClientTargetSection" /> object refers to the clientTarget section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.ClientTargetSection" />
+
+             object refers to the clientTarget section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -176,7 +237,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Compilation">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.CompilationSection Compilation { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.CompilationSection Compilation { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -191,7 +255,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.CompilationSection" /> object refers to the compilation section of the configuration file.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.CompilationSection" />
+
+             object refers to the compilation section of the configuration file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -203,7 +272,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CustomErrors">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.CustomErrorsSection CustomErrors { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.CustomErrorsSection CustomErrors { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -218,7 +290,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.CustomErrorsSection" /> object refers to the customErrors section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.CustomErrorsSection" />
+
+             object refers to the customErrors section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -230,7 +307,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Deployment">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.DeploymentSection Deployment { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.DeploymentSection Deployment { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -245,7 +325,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.DeploymentSection" /> object refers to the deployement section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.DeploymentSection" />
+
+             object refers to the deployement section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -257,7 +342,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DeviceFilters">
-      <MemberSignature Language="C#" Value="public System.Configuration.DefaultSection DeviceFilters { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.DefaultSection DeviceFilters { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -272,7 +360,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Configuration.DefaultSection" /> object refers to the deviceFilters section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Configuration.DefaultSection" />
+
+             object refers to the deviceFilters section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -284,7 +377,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Globalization">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.GlobalizationSection Globalization { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.GlobalizationSection Globalization { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -299,7 +395,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.GlobalizationSection" /> object refers to the globalization section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.GlobalizationSection" />
+
+             object refers to the globalization section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -311,7 +412,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="HealthMonitoring">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.HealthMonitoringSection HealthMonitoring { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.HealthMonitoringSection HealthMonitoring { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -326,7 +430,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.HealthMonitoringSection" /> object refers to the healthMonitoring section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+             object refers to the healthMonitoring section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -338,7 +447,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="HostingEnvironment">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.HostingEnvironmentSection HostingEnvironment { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.HostingEnvironmentSection HostingEnvironment { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -362,7 +474,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="HttpCookies">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.HttpCookiesSection HttpCookies { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.HttpCookiesSection HttpCookies { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -377,7 +492,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.HttpCookiesSection" /> object refers to the httpCookies section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.HttpCookiesSection" />
+
+             object refers to the httpCookies section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -389,7 +509,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="HttpHandlers">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.HttpHandlersSection HttpHandlers { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.HttpHandlersSection HttpHandlers { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -404,7 +527,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.HttpHandlersSection" /> object refers to the httpHandlers section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.HttpHandlersSection" />
+
+             object refers to the httpHandlers section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -416,7 +544,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="HttpModules">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.HttpModulesSection HttpModules { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.HttpModulesSection HttpModules { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -431,7 +562,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.HttpModulesSection" /> object refers to the httpModules section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.HttpModulesSection" />
+
+             object refers to the httpModules section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -443,7 +579,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="HttpRuntime">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.HttpRuntimeSection HttpRuntime { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.HttpRuntimeSection HttpRuntime { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -458,7 +597,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.HttpRuntimeSection" /> object refers to the httpRuntime section of the configuration file.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.HttpRuntimeSection" />
+
+             object refers to the httpRuntime section of the configuration file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -470,7 +614,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Identity">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.IdentitySection Identity { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.IdentitySection Identity { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -485,7 +632,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.IdentitySection" /> object refers to the identity section of the configuration file.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.IdentitySection" />
+
+             object refers to the identity section of the configuration file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -497,7 +649,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MachineKey">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.MachineKeySection MachineKey { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.MachineKeySection MachineKey { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -512,7 +667,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.MachineKeySection" /> object refers to the machineKey section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.MachineKeySection" />
+
+             object refers to the machineKey section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -524,7 +684,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Membership">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.MembershipSection Membership { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.MembershipSection Membership { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -539,7 +702,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.MembershipSection" /> object refers to the membership section of the configuration file.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.MembershipSection" />
+
+             object refers to the membership section of the configuration file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -551,7 +719,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MobileControls">
-      <MemberSignature Language="C#" Value="public System.Configuration.ConfigurationSection MobileControls { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.ConfigurationSection MobileControls { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -575,7 +746,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Pages">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.PagesSection Pages { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.PagesSection Pages { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -590,7 +764,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.PagesSection" /> object refers to the pages section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.PagesSection" />
+
+             object refers to the pages section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -602,7 +781,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ProcessModel">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.ProcessModelSection ProcessModel { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.ProcessModelSection ProcessModel { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -617,7 +799,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.ProcessModelSection" /> object refers to the processModel section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.ProcessModelSection" />
+
+             object refers to the processModel section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -629,7 +816,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Profile">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.ProfileSection Profile { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.ProfileSection Profile { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -644,7 +834,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.ProfileSection" /> object refers to the profile section of the configuration file.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.ProfileSection" />
+
+             object refers to the profile section of the configuration file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -656,7 +851,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Protocols">
-      <MemberSignature Language="C#" Value="public System.Configuration.DefaultSection Protocols { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.DefaultSection Protocols { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -680,7 +878,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RoleManager">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.RoleManagerSection RoleManager { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.RoleManagerSection RoleManager { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -695,7 +896,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.RoleManagerSection" /> object refers to the roleManager section of the configuration file.</para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.RoleManagerSection" />
+
+             object refers to the roleManager section of the configuration file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -707,7 +913,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SecurityPolicy">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.SecurityPolicySection SecurityPolicy { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.SecurityPolicySection SecurityPolicy { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -722,7 +931,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.SecurityPolicySection" /> object refers to the securityPolicy section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.SecurityPolicySection" />
+
+             object refers to the securityPolicy section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -734,7 +948,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SessionState">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.SessionStateSection SessionState { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.SessionStateSection SessionState { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -749,7 +966,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.SessionStateSection" /> object refers to the sessionState section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.SessionStateSection" />
+
+             object refers to the sessionState section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -761,7 +983,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SiteMap">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.SiteMapSection SiteMap { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.SiteMapSection SiteMap { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -776,7 +1001,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.SiteMapSection" /> object refers to the siteMap section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.SiteMapSection" />
+
+             object refers to the siteMap section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -788,7 +1018,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Trace">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.TraceSection Trace { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.TraceSection Trace { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -803,7 +1036,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.TraceSection" /> object refers to the trace section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.TraceSection" />
+
+             object refers to the trace section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -815,7 +1053,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Trust">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.TrustSection Trust { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.TrustSection Trust { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -830,7 +1071,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.Configuration.TrustSection" /> object refers to the trust section of the configuration file. </para>
+          <para
+            >The <see
+             cref="T:System.Web.Configuration.TrustSection" />
+
+             object refers to the trust section of the configuration file. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -842,7 +1088,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="UrlMappings">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.UrlMappingsSection UrlMappings { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.UrlMappingsSection UrlMappings { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -866,7 +1115,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WebControls">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.WebControlsSection WebControls { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.WebControlsSection WebControls { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -890,7 +1142,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WebParts">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.WebPartsSection WebParts { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.WebPartsSection WebParts { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -914,7 +1169,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WebServices">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.WebServicesSection WebServices { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.WebServicesSection WebServices { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -938,7 +1196,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="XhtmlConformance">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.XhtmlConformanceSection XhtmlConformance { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.XhtmlConformanceSection XhtmlConformance { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>

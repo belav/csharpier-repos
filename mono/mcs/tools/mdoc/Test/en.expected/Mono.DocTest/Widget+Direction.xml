@@ -1,6 +1,9 @@
 <Type Name="Widget+Direction" FullName="Mono.DocTest.Widget+Direction">
   <TypeSignature Language="C#" Value="protected internal enum Widget.Direction" />
-  <TypeSignature Language="ILAsm" Value=".class nested protected auto ansi sealed Widget/Direction extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested protected auto ansi sealed Widget/Direction extends System.Enum"
+  />
   <TypeSignature Language="DocId" Value="T:Mono.DocTest.Widget.Direction" />
   <TypeSignature Language="VB.NET" Value="Protected Friend Enum Widget.Direction" />
   <TypeSignature Language="C++ CLI" Value="public protected enum class Widget::Direction" />
@@ -25,7 +28,10 @@
   <Members>
     <Member MemberName="East">
       <MemberSignature Language="C#" Value="East" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.DocTest.Widget/Direction East = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.DocTest.Widget/Direction East = int32(2)"
+      />
       <MemberSignature Language="DocId" Value="F:Mono.DocTest.Widget.Direction.East" />
       <MemberSignature Language="VB.NET" Value="East" />
       <MemberSignature Language="F#" Value="East = 2" Usage="Mono.DocTest.Widget.Direction.East" />
@@ -46,10 +52,17 @@
     </Member>
     <Member MemberName="North">
       <MemberSignature Language="C#" Value="North" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.DocTest.Widget/Direction North = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.DocTest.Widget/Direction North = int32(0)"
+      />
       <MemberSignature Language="DocId" Value="F:Mono.DocTest.Widget.Direction.North" />
       <MemberSignature Language="VB.NET" Value="North" />
-      <MemberSignature Language="F#" Value="North = 0" Usage="Mono.DocTest.Widget.Direction.North" />
+      <MemberSignature
+        Language="F#"
+        Value="North = 0"
+        Usage="Mono.DocTest.Widget.Direction.North"
+      />
       <MemberSignature Language="C++ CLI" Value="North" />
       <MemberSignature Language="C++ CX" Value="North" />
       <MemberSignature Language="C++ WINRT" Value="North" />
@@ -67,10 +80,17 @@
     </Member>
     <Member MemberName="South">
       <MemberSignature Language="C#" Value="South" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.DocTest.Widget/Direction South = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.DocTest.Widget/Direction South = int32(1)"
+      />
       <MemberSignature Language="DocId" Value="F:Mono.DocTest.Widget.Direction.South" />
       <MemberSignature Language="VB.NET" Value="South" />
-      <MemberSignature Language="F#" Value="South = 1" Usage="Mono.DocTest.Widget.Direction.South" />
+      <MemberSignature
+        Language="F#"
+        Value="South = 1"
+        Usage="Mono.DocTest.Widget.Direction.South"
+      />
       <MemberSignature Language="C++ CLI" Value="South" />
       <MemberSignature Language="C++ CX" Value="South" />
       <MemberSignature Language="C++ WINRT" Value="South" />
@@ -88,7 +108,10 @@
     </Member>
     <Member MemberName="West">
       <MemberSignature Language="C#" Value="West" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.DocTest.Widget/Direction West = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.DocTest.Widget/Direction West = int32(3)"
+      />
       <MemberSignature Language="DocId" Value="F:Mono.DocTest.Widget.Direction.West" />
       <MemberSignature Language="VB.NET" Value="West" />
       <MemberSignature Language="F#" Value="West = 3" Usage="Mono.DocTest.Widget.Direction.West" />

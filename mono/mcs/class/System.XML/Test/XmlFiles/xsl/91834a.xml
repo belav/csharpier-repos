@@ -1,14 +1,20 @@
 <doc>
-    <entry name="XML"> 
+  <entry name="XML"
+    > 
         Extensible Markup language
-        <details> Great stuffs </details>
-    </entry>
-    <entry name="XSLT"> 
+        <details
+    > Great stuffs </details>
+  </entry>
+  <entry name="XSLT"
+    > 
         eXtensible Stylesheet and Transformation language
-        <details> Great stuffs </details>
-    </entry>
-    <entry name="XPATH"> 
+        <details
+    > Great stuffs </details>
+  </entry>
+  <entry name="XPATH"
+    > 
         X Path Language
-        <details> Great stuffs </details>
-    </entry>
+        <details
+    > Great stuffs </details>
+  </entry>
 </doc>

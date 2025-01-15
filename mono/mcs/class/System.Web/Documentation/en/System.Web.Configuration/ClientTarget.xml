@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ClientTarget" FullName="System.Web.Configuration.ClientTarget">
-  <TypeSignature Language="C#" Value="public sealed class ClientTarget : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ClientTarget : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,11 +16,53 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.ClientTarget" /> class refers to elements that are added in the clientTarget section of the configuration file.</para>
-      <para>The <see cref="T:System.Web.Configuration.ClientTarget" /> class belongs to a group that includes the <see cref="T:System.Web.Configuration.ClientTargetCollection" /> class and the <see cref="T:System.Web.Configuration.ClientTargetSection" /> class.</para>
-      <para>The <see cref="T:System.Web.Configuration.ClientTarget" /> class contains two properties identifying a client browser, also named user agent. One property is the alias associated with the client browser identified by the second property. ASP.NET uses this information to render server controls in a page. </para>
-      <para>For information about how the user agent or its alias is used programmatically, see the <see cref="P:System.Web.UI.Page.ClientTarget" /> property. For information about how the user agent or its alias is used declaratively, see <format type="text/html"><a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a></format>.</para>
-      <para>If the <see cref="P:System.Web.UI.Page.ClientTarget" /> property is not set, the <see cref="T:System.Web.HttpBrowserCapabilities" /> object that is associated with the <see cref="P:System.Web.UI.Page.Request" /> property reflects the capabilities of the client browser. (It reflects the capabilities of the browser type, but not necessarily the settings in a specific instance of that browser.) If the property is set, the client browser detection is disabled and the page uses browser capabilities that are associated with the user agent string that you define. You can set this property to any valid user agent string.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.ClientTarget" />
+
+         class refers to elements that are added in the clientTarget section of the configuration file.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.ClientTarget" />
+
+         class belongs to a group that includes the <see
+         cref="T:System.Web.Configuration.ClientTargetCollection" />
+
+         class and the <see
+         cref="T:System.Web.Configuration.ClientTargetSection" />
+
+         class.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.ClientTarget" />
+
+         class contains two properties identifying a client browser, also named user agent. One property is the alias associated with the client browser identified by the second property. ASP.NET uses this information to render server controls in a page. </para
+      >
+      <para
+        >For information about how the user agent or its alias is used programmatically, see the <see
+         cref="P:System.Web.UI.Page.ClientTarget" />
+
+         property. For information about how the user agent or its alias is used declaratively, see <format
+         type="text/html">
+          <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
+        </format>
+
+        .</para
+      >
+      <para
+        >If the <see
+         cref="P:System.Web.UI.Page.ClientTarget" />
+
+         property is not set, the <see
+         cref="T:System.Web.HttpBrowserCapabilities" />
+
+         object that is associated with the <see
+         cref="P:System.Web.UI.Page.Request" />
+
+         property reflects the capabilities of the client browser. (It reflects the capabilities of the browser type, but not necessarily the settings in a specific instance of that browser.) If the property is set, the client browser detection is disabled and the page uses browser capabilities that are associated with the user agent string that you define. You can set this property to any valid user agent string.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -26,7 +71,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ClientTarget (string alias, string userAgent);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ClientTarget (string alias, string userAgent);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="alias" Type="System.String" />
@@ -37,12 +85,23 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.ClientTarget" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.ClientTarget" />
+
+             class.</para
+          >
         </summary>
         <param name="alias">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name used to refer to a specific user agent.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name used to refer to a specific user agent.</param
+        >
         <param name="userAgent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The user agent's identification name.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The user agent's identification name.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -67,7 +126,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.ClientTarget.Alias" /> property refers to the alias attribute of the add element in the clientTarget section of the configuration file.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.ClientTarget.Alias" />
+
+             property refers to the alias attribute of the add element in the clientTarget section of the configuration file.</para
+          >
           <para>The ASP.NET configuration defaults include the following aliases:</para>
           <list type="bullet">
             <item>
@@ -88,7 +152,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -122,7 +189,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.ClientTarget.UserAgent" /> property refers to the userAgent attribute of the add element in the clientTarget section of the configuration file.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.ClientTarget.UserAgent" />
+
+             property refers to the userAgent attribute of the add element in the clientTarget section of the configuration file.</para
+          >
           <para>The ASP.NET configuration defaults allow customizing pages for various Microsoft Internet Explorer versions. Among them you find the alias uplevel, which tells ASP.NET to send the client HTML and ECMAScript supported by Internet Explorer 4.0 and later, and downlevel, which tells ASP.NET to limit the HTML and script to that supported by earlier browsers than Internet Explorer 4.0.</para>
         </remarks>
         <summary>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ProjectStartedEventHandler" FullName="Microsoft.Build.Framework.ProjectStartedEventHandler">
-  <TypeSignature Language="C#" Value="public delegate void ProjectStartedEventHandler(object sender, ProjectStartedEventArgs e);" />
+<Type
+  Name="ProjectStartedEventHandler"
+  FullName="Microsoft.Build.Framework.ProjectStartedEventHandler"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public delegate void ProjectStartedEventHandler(object sender, ProjectStartedEventArgs e);"
+  />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Build.Framework</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -22,7 +28,12 @@
     <since version="2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the method that will handle the <see cref="E:Microsoft.Build.Framework.IEventSource.ProjectStarted" /> event of a build. </para>
+      <para
+        >Represents the method that will handle the <see
+         cref="E:Microsoft.Build.Framework.IEventSource.ProjectStarted" />
+
+         event of a build. </para
+      >
     </summary>
   </Docs>
 </Type>

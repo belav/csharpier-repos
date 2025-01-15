@@ -13,10 +13,59 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Drawing.BufferedGraphicsManager" /> class allows you to implement custom double buffering for your graphics. Graphics that use double buffering can reduce or eliminate flicker that is caused by redrawing a display surface.</para>
-      <para>This class has one static property, <see cref="P:System.Drawing.BufferedGraphicsManager.Current" />, which returns the main <see cref="T:System.Drawing.BufferedGraphicsContext" /> for the current application domain. The <see cref="T:System.Drawing.BufferedGraphicsContext" /> class creates <see cref="T:System.Drawing.BufferedGraphics" /> instances that can be used to draw buffered graphics.</para>
-      <para>The <see cref="T:System.Drawing.BufferedGraphics" /> class has no public constructor and must be created by the <see cref="T:System.Drawing.BufferedGraphicsContext" /> object for an application domain using its <see cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" /> method. You can retrieve the <see cref="T:System.Drawing.BufferedGraphicsContext" /> object for the current application domain from the static <see cref="P:System.Drawing.BufferedGraphicsManager.Current" /> property.</para>
-      <para>For more information on double buffering, see <format type="text/html"><a href="4F6FEF99-0972-436E-9D73-0167E4033F71">[&lt;topic://vbconDoubleBuffering&gt;]</a></format>, <see cref="T:System.Drawing.BufferedGraphics" />, and <see cref="T:System.Drawing.BufferedGraphicsContext" />.</para>
+      <para
+        >The <see
+         cref="T:System.Drawing.BufferedGraphicsManager" />
+
+         class allows you to implement custom double buffering for your graphics. Graphics that use double buffering can reduce or eliminate flicker that is caused by redrawing a display surface.</para
+      >
+      <para
+        >This class has one static property, <see
+         cref="P:System.Drawing.BufferedGraphicsManager.Current" />
+
+        , which returns the main <see
+         cref="T:System.Drawing.BufferedGraphicsContext" />
+
+         for the current application domain. The <see
+         cref="T:System.Drawing.BufferedGraphicsContext" />
+
+         class creates <see
+         cref="T:System.Drawing.BufferedGraphics" />
+
+         instances that can be used to draw buffered graphics.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Drawing.BufferedGraphics" />
+
+         class has no public constructor and must be created by the <see
+         cref="T:System.Drawing.BufferedGraphicsContext" />
+
+         object for an application domain using its <see
+         cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+
+         method. You can retrieve the <see
+         cref="T:System.Drawing.BufferedGraphicsContext" />
+
+         object for the current application domain from the static <see
+         cref="P:System.Drawing.BufferedGraphicsManager.Current" />
+
+         property.</para
+      >
+      <para
+        >For more information on double buffering, see <format
+         type="text/html">
+          <a href="4F6FEF99-0972-436E-9D73-0167E4033F71">[&lt;topic://vbconDoubleBuffering&gt;]</a>
+        </format>
+
+        , <see
+         cref="T:System.Drawing.BufferedGraphics" />
+
+        , and <see
+         cref="T:System.Drawing.BufferedGraphicsContext" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +74,10 @@
   </Docs>
   <Members>
     <Member MemberName="Current">
-      <MemberSignature Language="C#" Value="public static System.Drawing.BufferedGraphicsContext Current { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.BufferedGraphicsContext Current { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.BufferedGraphicsContext</ReturnType>
@@ -35,11 +87,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Within an application the <see cref="P:System.Drawing.BufferedGraphicsManager.Current" /> property always returns the same <see cref="T:System.Drawing.BufferedGraphicsContext" /> object.</para>
+          <para
+            >Within an application the <see
+             cref="P:System.Drawing.BufferedGraphicsManager.Current" />
+
+             property always returns the same <see
+             cref="T:System.Drawing.BufferedGraphicsContext" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Drawing.BufferedGraphicsContext" /> for the current application domain.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Drawing.BufferedGraphicsContext" />
+
+             for the current application domain.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

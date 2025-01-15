@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SetIndexBinder" FullName="System.Dynamic.SetIndexBinder">
-  <TypeSignature Language="C#" Value="public abstract class SetIndexBinder : System.Dynamic.DynamicMetaObjectBinder" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit SetIndexBinder extends System.Dynamic.DynamicMetaObjectBinder" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class SetIndexBinder : System.Dynamic.DynamicMetaObjectBinder"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit SetIndexBinder extends System.Dynamic.DynamicMetaObjectBinder"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -19,8 +25,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected SetIndexBinder (System.Dynamic.CallInfo callInfo);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Dynamic.CallInfo callInfo) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected SetIndexBinder (System.Dynamic.CallInfo callInfo);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Dynamic.CallInfo callInfo) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -32,15 +44,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Dynamic.SetIndexBinder" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Dynamic.SetIndexBinder" />
+
+            .</para
+          >
         </summary>
         <param name="callInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The signature of the arguments at the call site.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The signature of the arguments at the call site.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Bind">
-      <MemberSignature Language="C#" Value="public override sealed System.Dynamic.DynamicMetaObject Bind (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Dynamic.DynamicMetaObject Bind(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject[] args) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override sealed System.Dynamic.DynamicMetaObject Bind (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject[] args);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Dynamic.DynamicMetaObject Bind(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject[] args) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -60,17 +86,31 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Dynamic.DynamicMetaObject" /> representing the result of the binding.</para>
+          <para
+            >The <see
+             cref="T:System.Dynamic.DynamicMetaObject" />
+
+             representing the result of the binding.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target of the dynamic set index operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The target of the dynamic set index operation.</param
+        >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of arguments of the dynamic set index operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of arguments of the dynamic set index operation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CallInfo">
       <MemberSignature Language="C#" Value="public System.Dynamic.CallInfo CallInfo { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Dynamic.CallInfo CallInfo" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Dynamic.CallInfo CallInfo"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -88,8 +128,14 @@
       </Docs>
     </Member>
     <Member MemberName="FallbackSetIndex">
-      <MemberSignature Language="C#" Value="public System.Dynamic.DynamicMetaObject FallbackSetIndex (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject[] indexes, System.Dynamic.DynamicMetaObject value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Dynamic.DynamicMetaObject FallbackSetIndex(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject[] indexes, class System.Dynamic.DynamicMetaObject value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Dynamic.DynamicMetaObject FallbackSetIndex (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject[] indexes, System.Dynamic.DynamicMetaObject value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Dynamic.DynamicMetaObject FallbackSetIndex(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject[] indexes, class System.Dynamic.DynamicMetaObject value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -110,19 +156,39 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Dynamic.DynamicMetaObject" /> representing the result of the binding.</para>
+          <para
+            >The <see
+             cref="T:System.Dynamic.DynamicMetaObject" />
+
+             representing the result of the binding.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target of the dynamic set index operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The target of the dynamic set index operation.</param
+        >
         <param name="indexes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments of the dynamic set index operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments of the dynamic set index operation.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to set to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to set to the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="FallbackSetIndex">
-      <MemberSignature Language="C#" Value="public abstract System.Dynamic.DynamicMetaObject FallbackSetIndex (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject[] indexes, System.Dynamic.DynamicMetaObject value, System.Dynamic.DynamicMetaObject errorSuggestion);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Dynamic.DynamicMetaObject FallbackSetIndex(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject[] indexes, class System.Dynamic.DynamicMetaObject value, class System.Dynamic.DynamicMetaObject errorSuggestion) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Dynamic.DynamicMetaObject FallbackSetIndex (System.Dynamic.DynamicMetaObject target, System.Dynamic.DynamicMetaObject[] indexes, System.Dynamic.DynamicMetaObject value, System.Dynamic.DynamicMetaObject errorSuggestion);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Dynamic.DynamicMetaObject FallbackSetIndex(class System.Dynamic.DynamicMetaObject target, class System.Dynamic.DynamicMetaObject[] indexes, class System.Dynamic.DynamicMetaObject value, class System.Dynamic.DynamicMetaObject errorSuggestion) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -144,16 +210,33 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Dynamic.DynamicMetaObject" /> representing the result of the binding.</para>
+          <para
+            >The <see
+             cref="T:System.Dynamic.DynamicMetaObject" />
+
+             representing the result of the binding.</para
+          >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target of the dynamic set index operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The target of the dynamic set index operation.</param
+        >
         <param name="indexes">
-          <attribution license="cc4" from="Microsoft" modified="false" />The arguments of the dynamic set index operation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The arguments of the dynamic set index operation.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to set to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to set to the collection.</param
+        >
         <param name="errorSuggestion">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding result to use if binding fails, or null.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The binding result to use if binding fails, or null.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReturnType">

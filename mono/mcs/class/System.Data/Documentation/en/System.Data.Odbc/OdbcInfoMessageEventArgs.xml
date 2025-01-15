@@ -13,16 +13,32 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" /> event contains an <see cref="T:System.Data.Odbc.OdbcErrorCollection" /> collection with warnings sent from the data source.</para>
+      <para
+        >The <see
+         cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
+
+         event contains an <see
+         cref="T:System.Data.Odbc.OdbcErrorCollection" />
+
+         collection with warnings sent from the data source.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="Errors">
-      <MemberSignature Language="C#" Value="public System.Data.Odbc.OdbcErrorCollection Errors { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.Odbc.OdbcErrorCollection Errors { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Odbc.OdbcErrorCollection</ReturnType>
@@ -50,7 +66,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is a wrapper for the <see cref="P:System.Data.Odbc.OdbcError.Message" /> property of the first <see cref="T:System.Data.Odbc.OdbcError" /> in the <see cref="P:System.Data.Odbc.OdbcInfoMessageEventArgs.Errors" /> collection.</para>
+          <para
+            >This is a wrapper for the <see
+             cref="P:System.Data.Odbc.OdbcError.Message" />
+
+             property of the first <see
+             cref="T:System.Data.Odbc.OdbcError" />
+
+             in the <see
+             cref="P:System.Data.Odbc.OdbcInfoMessageEventArgs.Errors" />
+
+             collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -73,11 +100,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves a string representation of the <see cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" /> event.</para>
+          <para
+            >Retrieves a string representation of the <see
+             cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
+
+             event.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string representing the <see cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" /> event.</para>
+          <para
+            >A string representing the <see
+             cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
+
+             event.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>

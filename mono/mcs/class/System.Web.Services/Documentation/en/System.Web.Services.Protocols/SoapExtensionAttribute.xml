@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SoapExtensionAttribute" FullName="System.Web.Services.Protocols.SoapExtensionAttribute">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public abstract class SoapExtensionAttribute : Attribute" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public abstract class SoapExtensionAttribute : Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -16,7 +19,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>XML Web service methods created using ASP.NET can be configured to run with a SOAP extension by applying an attribute to the XML Web service method. When a custom extension attribute is added to an XML Web service method or a method on a client proxy class, ASP.NET invokes the associated extension at the appropriate time. An extension attribute is a custom attribute class deriving from <see cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />. Derived attributes must override the <see cref="P:System.Web.Services.Protocols.SoapExtensionAttribute.ExtensionType" /> property to return the type of extension that is associated with the attribute.</para>
+      <para
+        >XML Web service methods created using ASP.NET can be configured to run with a SOAP extension by applying an attribute to the XML Web service method. When a custom extension attribute is added to an XML Web service method or a method on a client proxy class, ASP.NET invokes the associated extension at the appropriate time. An extension attribute is a custom attribute class deriving from <see
+         cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />
+
+        . Derived attributes must override the <see
+         cref="P:System.Web.Services.Protocols.SoapExtensionAttribute.ExtensionType" />
+
+         property to return the type of extension that is associated with the attribute.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -33,7 +44,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -51,11 +67,21 @@
         <value>To be added: an object of type 'Type'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Derived classes must override the <see cref="P:System.Web.Services.Protocols.SoapExtensionAttribute.ExtensionType" /> property to return the type of the SOAP extension.</para>
+          <para
+            >Derived classes must override the <see
+             cref="P:System.Web.Services.Protocols.SoapExtensionAttribute.ExtensionType" />
+
+             property to return the type of the SOAP extension.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, gets the <see cref="T:System.Type" /> of the SOAP extension.</para>
+          <para
+            >When overridden in a derived class, gets the <see
+             cref="T:System.Type" />
+
+             of the SOAP extension.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

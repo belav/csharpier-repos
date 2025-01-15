@@ -1,6 +1,9 @@
-<Type Name="GenericBase&lt;U&gt;" FullName="Mono.DocTest.Generic.GenericBase&lt;U&gt;">
-  <TypeSignature Language="C#" Value="public class GenericBase&lt;U&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit GenericBase`1&lt;U&gt; extends System.Object" />
+<Type Name="GenericBase<U>" FullName="Mono.DocTest.Generic.GenericBase<U>">
+  <TypeSignature Language="C#" Value="public class GenericBase<U>" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit GenericBase`1<U> extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>DocTest</AssemblyName>
   </AssemblyInfo>
@@ -19,7 +22,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public GenericBase ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters />
       <Docs>
@@ -27,9 +33,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="BaseMethod&lt;S&gt;">
-      <MemberSignature Language="C#" Value="public U BaseMethod&lt;S&gt; (S genericParameter);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !U BaseMethod&lt;S&gt;(!!S genericParameter) cil managed" />
+    <Member MemberName="BaseMethod<S>">
+      <MemberSignature Language="C#" Value="public U BaseMethod<S> (S genericParameter);" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !U BaseMethod<S>(!!S genericParameter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>U</ReturnType>
@@ -67,8 +76,14 @@
       </Docs>
     </Member>
     <Member MemberName="ItemChanged">
-      <MemberSignature Language="C#" Value="public event Action&lt;Mono.DocTest.Generic.MyList&lt;U&gt;,Mono.DocTest.Generic.MyList&lt;U&gt;.Helper&lt;U,U&gt;&gt; ItemChanged;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.Action`2&lt;class Mono.DocTest.Generic.MyList`1&lt;!U&gt;, class Mono.DocTest.Generic.MyList`1/Helper`2&lt;!U, !U, !U&gt;&gt; ItemChanged" />
+      <MemberSignature
+        Language="C#"
+        Value="public event Action<Mono.DocTest.Generic.MyList<U>,Mono.DocTest.Generic.MyList<U>.Helper<U,U>> ItemChanged;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".event class System.Action`2<class Mono.DocTest.Generic.MyList`1<!U>, class Mono.DocTest.Generic.MyList`1/Helper`2<!U, !U, !U>> ItemChanged"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>System.Action&lt;Mono.DocTest.Generic.MyList&lt;U&gt;,Mono.DocTest.Generic.MyList&lt;U&gt;+Helper&lt;U,U&gt;&gt;</ReturnType>
@@ -79,8 +94,14 @@
       </Docs>
     </Member>
     <Member MemberName="MyEvent">
-      <MemberSignature Language="C#" Value="public event EventHandler&lt;Mono.DocTest.Generic.GenericBase&lt;U&gt;.FooEventArgs&gt; MyEvent;" />
-      <MemberSignature Language="ILAsm" Value=".event class System.EventHandler`1&lt;class Mono.DocTest.Generic.GenericBase`1/FooEventArgs&lt;!U&gt;&gt; MyEvent" />
+      <MemberSignature
+        Language="C#"
+        Value="public event EventHandler<Mono.DocTest.Generic.GenericBase<U>.FooEventArgs> MyEvent;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".event class System.EventHandler`1<class Mono.DocTest.Generic.GenericBase`1/FooEventArgs<!U>> MyEvent"
+      />
       <MemberType>Event</MemberType>
       <ReturnValue>
         <ReturnType>System.EventHandler&lt;Mono.DocTest.Generic.GenericBase&lt;U&gt;+FooEventArgs&gt;</ReturnType>
@@ -91,14 +112,20 @@
       </Docs>
     </Member>
     <Member MemberName="op_Explicit">
-      <MemberSignature Language="C#" Value="public static explicit operator U (Mono.DocTest.Generic.GenericBase&lt;U&gt; list);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname !U op_Explicit(class Mono.DocTest.Generic.GenericBase`1&lt;!U&gt; list) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static explicit operator U (Mono.DocTest.Generic.GenericBase<U> list);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname !U op_Explicit(class Mono.DocTest.Generic.GenericBase`1<!U> list) cil managed"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>U</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="list" Type="Mono.DocTest.Generic.GenericBase&lt;U&gt;" />
+        <Parameter Name="list" Type="Mono.DocTest.Generic.GenericBase<U>" />
       </Parameters>
       <Docs>
         <param name="list">To be added.</param>
@@ -108,8 +135,14 @@
       </Docs>
     </Member>
     <Member MemberName="StaticField1">
-      <MemberSignature Language="C#" Value="public static readonly Mono.DocTest.Generic.GenericBase&lt;U&gt; StaticField1;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly class Mono.DocTest.Generic.GenericBase`1&lt;!U&gt; StaticField1" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Mono.DocTest.Generic.GenericBase<U> StaticField1;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static initonly class Mono.DocTest.Generic.GenericBase`1<!U> StaticField1"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>Mono.DocTest.Generic.GenericBase&lt;U&gt;</ReturnType>

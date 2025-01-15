@@ -19,7 +19,10 @@
       </Docs>
     </Member>
     <Member MemberName="AddProvider">
-      <MemberSignature Language="C#" Value="public void AddProvider (Commons.Xml.Nvdl.NvdlValidationProvider provider);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddProvider (Commons.Xml.Nvdl.NvdlValidationProvider provider);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -34,7 +37,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetGenerator">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Nvdl.NvdlValidatorGenerator GetGenerator (Commons.Xml.Nvdl.NvdlValidate validate, string inheritSchemaType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Nvdl.NvdlValidatorGenerator GetGenerator (Commons.Xml.Nvdl.NvdlValidate validate, string inheritSchemaType);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlValidatorGenerator</ReturnType>

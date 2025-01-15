@@ -15,11 +15,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A <see cref="T:System.Drawing.Pen" /> object has width. The center point of this pen width is aligned relative to the line being drawn depending on the alignment value. A <see cref="T:System.Drawing.Pen" /> object can be positioned to draw inside of a line or centered over the line.</para>
+      <para
+        >A <see
+         cref="T:System.Drawing.Pen" />
+
+         object has width. The center point of this pen width is aligned relative to the line being drawn depending on the alignment value. A <see
+         cref="T:System.Drawing.Pen" />
+
+         object can be positioned to draw inside of a line or centered over the line.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the alignment of a <see cref="T:System.Drawing.Pen" /> object in relation to the theoretical, zero-width line.</para>
+      <para
+        >Specifies the alignment of a <see
+         cref="T:System.Drawing.Pen" />
+
+         object in relation to the theoretical, zero-width line.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -34,7 +47,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that the <see cref="T:System.Drawing.Pen" /> object is centered over the theoretical line.</para>
+          <para
+            >Specifies that the <see
+             cref="T:System.Drawing.Pen" />
+
+             object is centered over the theoretical line.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -53,7 +71,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that the <see cref="T:System.Drawing.Pen" /> is positioned on the inside of the theoretical line.</para>
+          <para
+            >Specifies that the <see
+             cref="T:System.Drawing.Pen" />
+
+             is positioned on the inside of the theoretical line.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -72,7 +95,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the <see cref="T:System.Drawing.Pen" /> is positioned to the left of the theoretical line.</para>
+          <para
+            >Specifies the <see
+             cref="T:System.Drawing.Pen" />
+
+             is positioned to the left of the theoretical line.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -91,7 +119,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the <see cref="T:System.Drawing.Pen" /> is positioned on the outside of the theoretical line.</para>
+          <para
+            >Specifies the <see
+             cref="T:System.Drawing.Pen" />
+
+             is positioned on the outside of the theoretical line.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -110,7 +143,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the <see cref="T:System.Drawing.Pen" /> is positioned to the right of the theoretical line.</para>
+          <para
+            >Specifies the <see
+             cref="T:System.Drawing.Pen" />
+
+             is positioned to the right of the theoretical line.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

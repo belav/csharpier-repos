@@ -12,7 +12,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" /> object is used by the <see cref="T:System.Windows.Forms.NumericUpDown" /> control to optionally provide acceleration when incrementing or decrementing the control through a large quantity of numbers.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+
+         object is used by the <see
+         cref="T:System.Windows.Forms.NumericUpDown" />
+
+         control to optionally provide acceleration when incrementing or decrementing the control through a large quantity of numbers.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -21,7 +29,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NumericUpDownAcceleration (int seconds, decimal increment);" />
+      <MemberSignature
+        Language="C#"
+        Value="public NumericUpDownAcceleration (int seconds, decimal increment);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -34,12 +45,23 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+
+             class.</para
+          >
         </summary>
         <param name="seconds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of seconds the up or down button is pressed before the acceleration starts. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of seconds the up or down button is pressed before the acceleration starts. </param
+        >
         <param name="increment">
-          <attribution license="cc4" from="Microsoft" modified="false" />The quantity the value displayed in the control should be incremented or decremented during acceleration.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The quantity the value displayed in the control should be incremented or decremented during acceleration.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Increment">

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TcpStatistics" FullName="System.Net.NetworkInformation.TcpStatistics">
   <TypeSignature Language="C#" Value="public abstract class TcpStatistics" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit TcpStatistics extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit TcpStatistics extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,8 +18,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Instances of this class are returned by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv4Statistics" /> and <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv6Statistics" /> methods, to give applications access to TCP traffic information.</para>
-      <para>The information in this class correlates to the management information objects described in <see cref="http://www.ietf.org/rfc/rfc2012.txt">http://www.ietf.org/rfc/rfc2012.txt</see>.</para>
+      <para
+        >Instances of this class are returned by the <see
+         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv4Statistics" />
+
+         and <see
+         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetTcpIPv6Statistics" />
+
+         methods, to give applications access to TCP traffic information.</para
+      >
+      <para
+        >The information in this class correlates to the management information objects described in <see
+         cref="http://www.ietf.org/rfc/rfc2012.txt">http://www.ietf.org/rfc/rfc2012.txt</see>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -26,7 +42,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected TcpStatistics ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,11 +56,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor can be called only by classes that derive from the <see cref="T:System.Net.NetworkInformation.TcpStatistics" /> class.</para>
+          <para
+            >This constructor can be called only by classes that derive from the <see
+             cref="T:System.Net.NetworkInformation.TcpStatistics" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.TcpStatistics" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.TcpStatistics" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -160,7 +189,10 @@
       </Docs>
     </Member>
     <Member MemberName="FailedConnectionAttempts">
-      <MemberSignature Language="C#" Value="public abstract long FailedConnectionAttempts { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long FailedConnectionAttempts { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance int64 FailedConnectionAttempts" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -208,8 +240,14 @@
       </Docs>
     </Member>
     <Member MemberName="MaximumTransmissionTimeout">
-      <MemberSignature Language="C#" Value="public abstract long MaximumTransmissionTimeout { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 MaximumTransmissionTimeout" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long MaximumTransmissionTimeout { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 MaximumTransmissionTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -223,7 +261,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer can be set to any value between the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" /> value and the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" /> value.</para>
+          <para
+            >TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer can be set to any value between the <see
+             cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" />
+
+             value and the <see
+             cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" />
+
+             value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -232,8 +278,14 @@
       </Docs>
     </Member>
     <Member MemberName="MinimumTransmissionTimeout">
-      <MemberSignature Language="C#" Value="public abstract long MinimumTransmissionTimeout { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int64 MinimumTransmissionTimeout" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract long MinimumTransmissionTimeout { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance int64 MinimumTransmissionTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -247,7 +299,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer The timer can be set to any value between the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" /> value and the <see cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" /> value.</para>
+          <para
+            >TCP starts a retransmission timer when each outbound segment is passed to the network layer (IP). If no acknowledgement is received for the data in the segment before the timer expires, the segment is retransmitted. The timer The timer can be set to any value between the <see
+             cref="P:System.Net.NetworkInformation.TcpStatistics.MinimumTransmissionTimeOut" />
+
+             value and the <see
+             cref="P:System.Net.NetworkInformation.TcpStatistics.MaximumTransmissionTimeOut" />
+
+             value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

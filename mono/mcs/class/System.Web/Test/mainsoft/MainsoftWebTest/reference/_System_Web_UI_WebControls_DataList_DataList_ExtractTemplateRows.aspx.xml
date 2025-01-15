@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <testresults name="">
   <div id="GHTSubTest1" style="height:310px;width:280px">
-    <table id="DataList1" cellspacing="0" border="1" bordercolor="Black" style="border-collapse:collapse;border-color:black;border-style:solid" rules="all">
+    <table
+      id="DataList1"
+      cellspacing="0"
+      border="1"
+      bordercolor="Black"
+      style="border-collapse:collapse;border-color:black;border-style:solid"
+      rules="all"
+    >
       <tr>
         <td>
           <table id="DataList1__ctl0_Table1" border="1" rules="all" style="background-color:Blue">
@@ -61,7 +68,14 @@
     </table>
   </div>
   <div id="GHTSubTest2" style="height:250px;width:280px">
-    <table id="DataList2" cellspacing="0" border="1" bordercolor="Black" style="border-collapse:collapse;border-color:black;border-style:solid" rules="all">
+    <table
+      id="DataList2"
+      cellspacing="0"
+      border="1"
+      bordercolor="Black"
+      style="border-collapse:collapse;border-color:black;border-style:solid"
+      rules="all"
+    >
       <tr>
         <td>Item 0</td>
         <td>$1.23</td>
@@ -97,7 +111,14 @@
     </table>
   </div>
   <div id="GHTSubTest3" style="height:256px;width:280px">
-    <table id="DataList3" cellspacing="0" border="1" bordercolor="Black" style="border-collapse:collapse;border-color:black;border-style:solid" rules="all">
+    <table
+      id="DataList3"
+      cellspacing="0"
+      border="1"
+      bordercolor="Black"
+      style="border-collapse:collapse;border-color:black;border-style:solid"
+      rules="all"
+    >
       <tr>
         <td>Item 0</td>
         <td>$1.23</td>
@@ -133,7 +154,14 @@
     </table>
   </div>
   <div id="GHTSubTest4" style="height:710px;width:120px">
-    <table id="DataList4" cellspacing="0" border="1" bordercolor="Black" style="border-collapse:collapse;border-color:black;border-style:solid" rules="all">
+    <table
+      id="DataList4"
+      cellspacing="0"
+      border="1"
+      bordercolor="Black"
+      style="border-collapse:collapse;border-color:black;border-style:solid"
+      rules="all"
+    >
       <tr>
         <td>
           <table id="DataList4__ctl0_Table2" border="1" rules="all">
@@ -147,8 +175,16 @@
             </tr>
           </table>
           <p>
-            <input value="Button" type="submit" name="DataList4:_ctl0:Button1" id="DataList4__ctl0_Button1" />
-            <img id="DataList4__ctl0_Image1" alt="" border="0" />Palin Text</p>
+            <input
+              value="Button"
+              type="submit"
+              name="DataList4:_ctl0:Button1"
+              id="DataList4__ctl0_Button1"
+            />
+            <img id="DataList4__ctl0_Image1" alt="" border="0" />
+
+            Palin Text</p
+          >
           <div ms_positioning="FlowLayout" style="display:inline;height:26px;width:146px">
             <strong>
               <em>
@@ -174,8 +210,16 @@
             </tr>
           </table>
           <p>
-            <input value="Button" type="submit" name="DataList4:_ctl1:Button1" id="DataList4__ctl1_Button1" />
-            <img id="DataList4__ctl1_Image1" alt="" border="0" />Palin Text</p>
+            <input
+              value="Button"
+              type="submit"
+              name="DataList4:_ctl1:Button1"
+              id="DataList4__ctl1_Button1"
+            />
+            <img id="DataList4__ctl1_Image1" alt="" border="0" />
+
+            Palin Text</p
+          >
           <div ms_positioning="FlowLayout" style="display:inline;height:26px;width:146px">
             <strong>
               <em>
@@ -201,8 +245,16 @@
             </tr>
           </table>
           <p>
-            <input value="Button" type="submit" name="DataList4:_ctl2:Button1" id="DataList4__ctl2_Button1" />
-            <img id="DataList4__ctl2_Image1" alt="" border="0" />Palin Text</p>
+            <input
+              value="Button"
+              type="submit"
+              name="DataList4:_ctl2:Button1"
+              id="DataList4__ctl2_Button1"
+            />
+            <img id="DataList4__ctl2_Image1" alt="" border="0" />
+
+            Palin Text</p
+          >
           <div ms_positioning="FlowLayout" style="display:inline;height:26px;width:146px">
             <strong>
               <em>
@@ -228,8 +280,16 @@
             </tr>
           </table>
           <p>
-            <input value="Button" type="submit" name="DataList4:_ctl3:Button1" id="DataList4__ctl3_Button1" />
-            <img id="DataList4__ctl3_Image1" alt="" border="0" />Palin Text</p>
+            <input
+              value="Button"
+              type="submit"
+              name="DataList4:_ctl3:Button1"
+              id="DataList4__ctl3_Button1"
+            />
+            <img id="DataList4__ctl3_Image1" alt="" border="0" />
+
+            Palin Text</p
+          >
           <div ms_positioning="FlowLayout" style="display:inline;height:26px;width:146px">
             <strong>
               <em>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="FilterUIHintAttribute" FullName="System.ComponentModel.DataAnnotations.FilterUIHintAttribute">
+<Type
+  Name="FilterUIHintAttribute"
+  FullName="System.ComponentModel.DataAnnotations.FilterUIHintAttribute"
+>
   <TypeSignature Language="C#" Value="public sealed class FilterUIHintAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit FilterUIHintAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit FilterUIHintAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ComponentModel.DataAnnotations</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -25,7 +31,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public FilterUIHintAttribute (string filterUIHint);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string filterUIHint) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string filterUIHint) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,15 +46,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.FilterUIHintAttribute" /> class by using the filter UI hint.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.FilterUIHintAttribute" />
+
+             class by using the filter UI hint.</para
+          >
         </summary>
         <param name="filterUIHint">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the control to use for filtering.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the control to use for filtering.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public FilterUIHintAttribute (string filterUIHint, string presentationLayer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string filterUIHint, string presentationLayer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public FilterUIHintAttribute (string filterUIHint, string presentationLayer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string filterUIHint, string presentationLayer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,17 +81,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.FilterUIHintAttribute" /> class by using the filter UI hint and presentation layer name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.FilterUIHintAttribute" />
+
+             class by using the filter UI hint and presentation layer name.</para
+          >
         </summary>
         <param name="filterUIHint">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the control to use for filtering.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the control to use for filtering.</param
+        >
         <param name="presentationLayer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the presentation layer that supports this control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the presentation layer that supports this control.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public FilterUIHintAttribute (string filterUIHint, string presentationLayer, object[] controlParameters);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string filterUIHint, string presentationLayer, object[] controlParameters) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public FilterUIHintAttribute (string filterUIHint, string presentationLayer, object[] controlParameters);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string filterUIHint, string presentationLayer, object[] controlParameters) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -88,19 +128,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.FilterUIHintAttribute" /> class by using the filter UI hint, presentation layer name, and control parameters.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.DataAnnotations.FilterUIHintAttribute" />
+
+             class by using the filter UI hint, presentation layer name, and control parameters.</para
+          >
         </summary>
         <param name="filterUIHint">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the control to use for filtering.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the control to use for filtering.</param
+        >
         <param name="presentationLayer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the presentation layer that supports this control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the presentation layer that supports this control.</param
+        >
         <param name="controlParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />The list of parameters for the control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The list of parameters for the control.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ControlParameters">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IDictionary&lt;string,object&gt; ControlParameters { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IDictionary`2&lt;string, object&gt; ControlParameters" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IDictionary<string,object> ControlParameters { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.IDictionary`2<string, object> ControlParameters"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -119,7 +179,10 @@
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -143,7 +206,10 @@
           <para />
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to compare with this attribute instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to compare with this attribute instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="FilterUIHint">
@@ -167,7 +233,10 @@
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -16,7 +16,10 @@
   </Docs>
   <Members>
     <Member MemberName="BuildProjectFile">
-      <MemberSignature Language="C#" Value="public bool BuildProjectFile (string projectFileName, string[] targetNames, System.Collections.IDictionary globalProperties, System.Collections.IDictionary targetOutputs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool BuildProjectFile (string projectFileName, string[] targetNames, System.Collections.IDictionary globalProperties, System.Collections.IDictionary targetOutputs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -31,9 +34,25 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="targetNames" />, <paramref name="globalProperties" />, and <paramref name="targetOutputs" /> parameters can be null.</para>
+          <para
+            >The <paramref
+             name="targetNames" />
+
+            , <paramref
+             name="globalProperties" />
+
+            , and <paramref
+             name="targetOutputs" />
+
+             parameters can be null.</para
+          >
           <para>If no targets are specified, vstecmsbuild builds the default targets of the project.</para>
-          <para>Target outputs are returned as <see cref="T:Microsoft.Build.Framework.ITaskItem" /> arrays indexed by target name.</para>
+          <para
+            >Target outputs are returned as <see
+             cref="T:Microsoft.Build.Framework.ITaskItem" />
+
+             arrays indexed by target name.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -44,13 +63,28 @@
           <para>true if the build was successful; otherwise, false.</para>
         </returns>
         <param name="projectFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the project file to build.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the project file to build.</param
+        >
         <param name="targetNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />The names of the target in the project to build. Separate multiple targets with a semicolon (;).</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The names of the target in the project to build. Separate multiple targets with a semicolon (;).</param
+        >
         <param name="globalProperties">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Collections.IDictionary" /> of additional global properties to apply to the project. The key and value must be String data types.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Collections.IDictionary" />
+
+           of additional global properties to apply to the project. The key and value must be String data types.</param
+        >
         <param name="targetOutputs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The outputs of each specified target.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The outputs of each specified target.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -114,7 +148,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogCustomEvent">
-      <MemberSignature Language="C#" Value="public void LogCustomEvent (Microsoft.Build.Framework.CustomBuildEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogCustomEvent (Microsoft.Build.Framework.CustomBuildEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -130,14 +167,20 @@
           <para>Raises a custom event to all registered loggers.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogErrorEvent">
-      <MemberSignature Language="C#" Value="public void LogErrorEvent (Microsoft.Build.Framework.BuildErrorEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogErrorEvent (Microsoft.Build.Framework.BuildErrorEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -153,14 +196,20 @@
           <para>Raises an error event to all registered loggers.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogMessageEvent">
-      <MemberSignature Language="C#" Value="public void LogMessageEvent (Microsoft.Build.Framework.BuildMessageEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogMessageEvent (Microsoft.Build.Framework.BuildMessageEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -176,14 +225,20 @@
           <para>Raises a message event to all registered loggers.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="LogWarningEvent">
-      <MemberSignature Language="C#" Value="public void LogWarningEvent (Microsoft.Build.Framework.BuildWarningEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void LogWarningEvent (Microsoft.Build.Framework.BuildWarningEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -199,7 +254,10 @@
           <para>Raises a warning event to all registered loggers.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />The event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

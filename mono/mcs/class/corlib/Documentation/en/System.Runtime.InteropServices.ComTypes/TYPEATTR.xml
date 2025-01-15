@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TYPEATTR" FullName="System.Runtime.InteropServices.ComTypes.TYPEATTR">
   <TypeSignature Language="C#" Value="public struct TYPEATTR" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential sealed beforefieldinit TYPEATTR extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential sealed beforefieldinit TYPEATTR extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,7 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For additional information about TYPEATTR, see the MSDN Library.</para>
-      <para>The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html"><a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a></format>.</para>
+      <para
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
+         type="text/html">
+          <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -209,8 +219,14 @@
       </Docs>
     </Member>
     <Member MemberName="idldescType">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.IDLDESC idldescType;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.IDLDESC idldescType" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.IDLDESC idldescType;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.IDLDESC idldescType"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -279,7 +295,10 @@
     </Member>
     <Member MemberName="MEMBER_ID_NIL">
       <MemberSignature Language="C#" Value="public const int MEMBER_ID_NIL = -1;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal int32 MEMBER_ID_NIL = (-1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal int32 MEMBER_ID_NIL = (-1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -297,7 +316,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A constant used with the <see cref="F:System.Runtime.InteropServices.TYPEATTR.memidConstructor" /> and <see cref="F:System.Runtime.InteropServices.TYPEATTR.memidDestructor" /> fields.</para>
+          <para
+            >A constant used with the <see
+             cref="F:System.Runtime.InteropServices.TYPEATTR.memidConstructor" />
+
+             and <see
+             cref="F:System.Runtime.InteropServices.TYPEATTR.memidDestructor" />
+
+             fields.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -320,7 +347,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>ID of constructor, or <see cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" /> if none.</para>
+          <para
+            >ID of constructor, or <see
+             cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" />
+
+             if none.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -343,13 +375,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>ID of destructor, or <see cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" /> if none.</para>
+          <para
+            >ID of destructor, or <see
+             cref="F:System.Runtime.InteropServices.TYPEATTR.MEMBER_ID_NIL" />
+
+             if none.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="tdescAlias">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.TYPEDESC tdescAlias;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.TYPEDESC tdescAlias" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.TYPEDESC tdescAlias;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.TYPEDESC tdescAlias"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -366,13 +409,27 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <see cref="F:System.Runtime.InteropServices.TYPEATTR.typekind" /> == <see cref="F:System.Runtime.InteropServices.TYPEKIND.TKIND_ALIAS" />, specifies the type for which this type is an alias.</para>
+          <para
+            >If <see
+             cref="F:System.Runtime.InteropServices.TYPEATTR.typekind" />
+
+             == <see
+             cref="F:System.Runtime.InteropServices.TYPEKIND.TKIND_ALIAS" />
+
+            , specifies the type for which this type is an alias.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="typekind">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.TYPEKIND typekind;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.TYPEKIND typekind" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.TYPEKIND typekind;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.TYPEKIND typekind"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -389,7 +446,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Runtime.InteropServices.TYPEKIND" /> value describing the type this information describes.</para>
+          <para
+            >A <see
+             cref="T:System.Runtime.InteropServices.TYPEKIND" />
+
+             value describing the type this information describes.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -440,8 +502,14 @@
       </Docs>
     </Member>
     <Member MemberName="wTypeFlags">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.TYPEFLAGS wTypeFlags;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.TYPEFLAGS wTypeFlags" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.TYPEFLAGS wTypeFlags;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.TYPEFLAGS wTypeFlags"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -458,7 +526,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Runtime.InteropServices.TYPEFLAGS" /> value describing this information.</para>
+          <para
+            >A <see
+             cref="T:System.Runtime.InteropServices.TYPEFLAGS" />
+
+             value describing this information.</para
+          >
         </summary>
       </Docs>
     </Member>

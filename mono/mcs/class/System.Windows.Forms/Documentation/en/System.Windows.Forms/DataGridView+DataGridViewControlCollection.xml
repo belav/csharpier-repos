@@ -1,5 +1,11 @@
-<Type Name="DataGridView+DataGridViewControlCollection" FullName="System.Windows.Forms.DataGridView+DataGridViewControlCollection">
-  <TypeSignature Language="C#" Value="public class DataGridView.DataGridViewControlCollection : System.Windows.Forms.Control.ControlCollection" />
+<Type
+  Name="DataGridView+DataGridViewControlCollection"
+  FullName="System.Windows.Forms.DataGridView+DataGridViewControlCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DataGridView.DataGridViewControlCollection : System.Windows.Forms.Control.ControlCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,7 +25,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DataGridViewControlCollection (System.Windows.Forms.DataGridView owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DataGridViewControlCollection (System.Windows.Forms.DataGridView owner);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -49,7 +58,10 @@
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo (System.Windows.Forms.Control[] array, int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo (System.Windows.Forms.Control[] array, int index);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -69,7 +81,10 @@
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, System.Windows.Forms.Control value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, System.Windows.Forms.Control value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -89,7 +104,10 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public override void Remove (System.Windows.Forms.Control value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Remove (System.Windows.Forms.Control value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

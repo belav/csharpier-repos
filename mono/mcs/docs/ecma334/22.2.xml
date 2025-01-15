@@ -1,6 +1,32 @@
 <?xml version="1.0"?>
 <clause number="22.2" title="Delegate instantiation">
-  <paragraph>An instance of a delegate is created by a <non_terminal where="14.5.10.3">delegate-creation-expression</non_terminal> (<hyperlink>14.5.10.3</hyperlink>). The newly created delegate instance then refers to either: <list><list_item> The static method referenced in the <non_terminal where="14.5.10.3">delegate-creation-expression</non_terminal>, or </list_item><list_item> The target object (which cannot be null) and instance method referenced in the  <non_terminal where="14.5.10.3">delegate-creation-expression</non_terminal>, or </list_item><list_item> Another delegate <example>[Example: For example: <code_example><![CDATA[
+  <paragraph
+    >An instance of a delegate is created by a <non_terminal
+     where="14.5.10.3">delegate-creation-expression</non_terminal>
+
+     (<hyperlink
+    >14.5.10.3</hyperlink>
+
+    ). The newly created delegate instance then refers to either: <list
+    >
+      <list_item
+        > The static method referenced in the <non_terminal
+         where="14.5.10.3">delegate-creation-expression</non_terminal>
+
+        , or </list_item
+      >
+      <list_item
+        > The target object (which cannot be null) and instance method referenced in the  <non_terminal
+         where="14.5.10.3">delegate-creation-expression</non_terminal>
+
+        , or </list_item
+      >
+      <list_item
+        > Another delegate <example
+
+          >[Example: For example: <code_example
+          >
+            <![CDATA[
 delegate void D(int x);  
 class Test  
 {  
@@ -16,6 +42,16 @@ class Demo
       D cd3 = new D(cd2);    // another delegate  
    }  
 }  
-]]></code_example>end example]</example> </list_item></list></paragraph>
-  <paragraph>Once instantiated, delegate instances always refer to the same target object and method. <note>[Note: Remember, when two delegates are combined, or one is removed from another, a new delegate results with its own invocation list; the invocation lists of the delegates combined or removed remain unchanged. end note]</note> </paragraph>
+]]>
+          </code_example>
+
+          end example]</example
+        >
+      </list_item>
+    </list>
+  </paragraph>
+  <paragraph
+    >Once instantiated, delegate instances always refer to the same target object and method. <note
+    >[Note: Remember, when two delegates are combined, or one is removed from another, a new delegate results with its own invocation list; the invocation lists of the delegates combined or removed remain unchanged. end note]</note>
+  </paragraph>
 </clause>

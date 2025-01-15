@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <NoWarn>$(NoWarn);CA2249</NoWarn>
@@ -10,17 +9,17 @@
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
     <IsPackable>true</IsPackable>
     <PackageDescription>Provides types that support using XML configuration files (app.config). This package exists only to support migrating existing .NET Framework code that already uses System.Configuration. When writing new code, use another configuration system instead, such as Microsoft.Extensions.Configuration.</PackageDescription>
-
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
-    <IsPartialFacadeAssembly Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">true</IsPartialFacadeAssembly>
+    <IsPartialFacadeAssembly
+      Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
+      >true</IsPartialFacadeAssembly
+    >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true'">
     <Compile Include="System\Configuration\DictionarySectionHandler.cs" />
     <Compile Include="System\Configuration\DpapiProtectedConfigurationProvider.cs" />
@@ -254,17 +253,25 @@
     <Compile Include="System\Configuration\XmlUtil.cs" />
     <Compile Include="System\Configuration\XmlUtilWriter.cs" />
     <Compile Include="System\Drawing\Configuration\SystemDrawingSection.cs" />
-    <Compile Include="$(CommonPath)System\Security\IdentityHelper.cs" Link="Common\System\Security\IdentityHelper.cs" />
+    <Compile
+      Include="$(CommonPath)System\Security\IdentityHelper.cs"
+      Link="Common\System\Security\IdentityHelper.cs"
+    />
     <Compile Include="System\Configuration\SettingsProperty.cs" />
     <Compile Include="System\Configuration\SettingsPropertyValue.cs" />
     <Compile Include="System\Configuration\SettingsSerializeAs.cs" />
     <Compile Include="System\Configuration\NoSettingsVersionUpgradeAttribute.cs" />
     <Compile Include="System\UriIdnScope.cs" />
-    <Compile Include="$(CommonPath)System\IO\TempFileCollection.cs" Link="Common\System\IO\TempFileCollection.cs" />
+    <Compile
+      Include="$(CommonPath)System\IO\TempFileCollection.cs"
+      Link="Common\System\IO\TempFileCollection.cs"
+    />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\UnconditionalSuppressMessageAttribute.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\UnconditionalSuppressMessageAttribute.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
+    />
   </ItemGroup>
-  
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <Compile Include="System\Diagnostics\DiagnosticsConfiguration.cs" />
     <Compile Include="System\Diagnostics\FilterElement.cs" />
@@ -277,22 +284,20 @@
     <Compile Include="System\Diagnostics\TypedElement.cs" />
     <Compile Include="System\Diagnostics\TraceUtils.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <ProjectReference Include="$(LibrariesProjectRoot)System.Diagnostics.EventLog\src\System.Diagnostics.EventLog.csproj" />
   </ItemGroup>
-
   <!-- This reference is for the System.Security.PermissionSet class, which is implemented in corelib, so the reference is only necessary for netstandard. -->
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Security.Permissions\src\System.Security.Permissions.csproj" PrivateAssets="all" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Security.Permissions\src\System.Security.Permissions.csproj"
+      PrivateAssets="all"
+    />
   </ItemGroup>
-
   <ItemGroup Condition="'$(IsPartialFacadeAssembly)' != 'true'">
     <ProjectReference Include="$(LibrariesProjectRoot)System.Security.Cryptography.ProtectedData\src\System.Security.Cryptography.ProtectedData.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <Reference Include="System.Configuration" />
   </ItemGroup>
-
 </Project>

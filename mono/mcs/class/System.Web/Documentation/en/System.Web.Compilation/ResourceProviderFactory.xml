@@ -14,7 +14,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Web.Compilation.ResourceProviderFactory" /> is an abstract class that serves as the base class for objects that return global and local resource providers. Classes must derive from <see cref="T:System.Web.Compilation.ResourceProviderFactory" /> to implement its functionality.</para>
+        <see cref="T:System.Web.Compilation.ResourceProviderFactory" />
+
+         is an abstract class that serves as the base class for objects that return global and local resource providers. Classes must derive from <see
+         cref="T:System.Web.Compilation.ResourceProviderFactory" />
+
+         to implement its functionality.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,7 +36,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance of an abstract class cannot be created. Classes that derive from <see cref="T:System.Web.Compilation.ResourceProviderFactory" /> can implement a constructor to set any default values.</para>
+          <para
+            >An instance of an abstract class cannot be created. Classes that derive from <see
+             cref="T:System.Web.Compilation.ResourceProviderFactory" />
+
+             can implement a constructor to set any default values.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -42,7 +53,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateGlobalResourceProvider">
-      <MemberSignature Language="C#" Value="public abstract System.Web.Compilation.IResourceProvider CreateGlobalResourceProvider (string classKey);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Web.Compilation.IResourceProvider CreateGlobalResourceProvider (string classKey);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Compilation.IResourceProvider</ReturnType>
@@ -54,7 +68,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, this method returns an <see cref="T:System.Web.Compilation.IResourceProvider" /> object for the given <paramref name="classKey" /> parameter. The method could be implemented such that <paramref name="classKey" /> is the name of a .resx file in the App_GlobalResources folder.</para>
+          <para
+            >When overridden in a derived class, this method returns an <see
+             cref="T:System.Web.Compilation.IResourceProvider" />
+
+             object for the given <paramref
+             name="classKey" />
+
+             parameter. The method could be implemented such that <paramref
+             name="classKey" />
+
+             is the name of a .resx file in the App_GlobalResources folder.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -65,14 +90,20 @@
           <para>A global resource provider.</para>
         </returns>
         <param name="classKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the resource class.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the resource class.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateLocalResourceProvider">
-      <MemberSignature Language="C#" Value="public abstract System.Web.Compilation.IResourceProvider CreateLocalResourceProvider (string virtualPath);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Web.Compilation.IResourceProvider CreateLocalResourceProvider (string virtualPath);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Compilation.IResourceProvider</ReturnType>
@@ -84,7 +115,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, this method returns an <see cref="T:System.Web.Compilation.IResourceProvider" /> object for the given <paramref name="virtualPath" /> parameter. The method could be implemented such that <paramref name="virtualPath" /> maps to a resource file.</para>
+          <para
+            >When overridden in a derived class, this method returns an <see
+             cref="T:System.Web.Compilation.IResourceProvider" />
+
+             object for the given <paramref
+             name="virtualPath" />
+
+             parameter. The method could be implemented such that <paramref
+             name="virtualPath" />
+
+             maps to a resource file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -95,7 +137,10 @@
           <para>A local resource provider.</para>
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path to a resource file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path to a resource file.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

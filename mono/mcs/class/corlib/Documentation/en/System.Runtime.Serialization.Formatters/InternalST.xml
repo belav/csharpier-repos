@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="InternalST" FullName="System.Runtime.Serialization.Formatters.InternalST">
   <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class InternalST" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit InternalST extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit InternalST extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -22,7 +25,14 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The trace message is printed during, serialization, remoting and when running <format type="text/html"><a href="40f6f8c8-b80c-4e9f-a920-31bcd0cf45c5">Soapsuds Tool (Soapsuds.exe)</a></format>.</para>
+      <para
+        >The trace message is printed during, serialization, remoting and when running <format
+         type="text/html">
+          <a href="40f6f8c8-b80c-4e9f-a920-31bcd0cf45c5">Soapsuds Tool (Soapsuds.exe)</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -32,7 +42,10 @@
   <Members>
     <Member MemberName="InfoSoap">
       <MemberSignature Language="C#" Value="public static void InfoSoap (object[] messages);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void InfoSoap(object[] messages) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void InfoSoap(object[] messages) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -63,12 +76,21 @@
           <para>Prints SOAP trace messages.</para>
         </summary>
         <param name="messages">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of trace messages to print.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of trace messages to print.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="LoadAssemblyFromString">
-      <MemberSignature Language="C#" Value="public static System.Reflection.Assembly LoadAssemblyFromString (string assemblyString);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Reflection.Assembly LoadAssemblyFromString(string assemblyString) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Reflection.Assembly LoadAssemblyFromString (string assemblyString);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Reflection.Assembly LoadAssemblyFromString(string assemblyString) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -89,15 +111,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Reflection.Assembly" /> to debug.</para>
+          <para
+            >The <see
+             cref="T:System.Reflection.Assembly" />
+
+             to debug.</para
+          >
         </returns>
         <param name="assemblyString">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the assembly to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the assembly to load.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SerializationSetValue">
-      <MemberSignature Language="C#" Value="public static void SerializationSetValue (System.Reflection.FieldInfo fi, object target, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SerializationSetValue(class System.Reflection.FieldInfo fi, object target, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SerializationSetValue (System.Reflection.FieldInfo fi, object target, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void SerializationSetValue(class System.Reflection.FieldInfo fi, object target, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -119,16 +155,31 @@
           <para>Sets the value of a field.</para>
         </summary>
         <param name="fi">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Reflection.FieldInfo" /> containing data about the target field.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Reflection.FieldInfo" />
+
+           containing data about the target field.</param
+        >
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The field to change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The field to change.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to set.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to set.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Soap">
       <MemberSignature Language="C#" Value="public static void Soap (object[] messages);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Soap(object[] messages) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void Soap(object[] messages) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -159,12 +210,21 @@
           <para>Processes the specified array of messages.</para>
         </summary>
         <param name="messages">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of messages to process.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of messages to process.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SoapAssert">
-      <MemberSignature Language="C#" Value="public static void SoapAssert (bool condition, string message);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SoapAssert(bool condition, string message) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SoapAssert (bool condition, string message);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void SoapAssert(bool condition, string message) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -190,14 +250,23 @@
           <para>Asserts the specified message.</para>
         </summary>
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />A Boolean value to use when asserting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A Boolean value to use when asserting.</param
+        >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The message to use when asserting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The message to use when asserting.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SoapCheckEnabled">
       <MemberSignature Language="C#" Value="public static bool SoapCheckEnabled ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool SoapCheckEnabled() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool SoapCheckEnabled() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

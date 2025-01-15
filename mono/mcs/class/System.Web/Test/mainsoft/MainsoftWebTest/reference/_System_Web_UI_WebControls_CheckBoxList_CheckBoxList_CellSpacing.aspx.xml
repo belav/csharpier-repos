@@ -86,6 +86,9 @@
   </div>
   <div id="GHTSubTest4" testname="Negative CellSpacing value">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

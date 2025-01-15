@@ -1,10 +1,12 @@
-<Type Name="NamingContextConstants" FullName="Novell.Directory.Ldap.Extensions.NamingContextConstants">
+<Type
+  Name="NamingContextConstants"
+  FullName="Novell.Directory.Ldap.Extensions.NamingContextConstants"
+>
   <TypeSignature Language="C#" Value="public class NamingContextConstants" />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -368,7 +370,10 @@
       </Docs>
     </Member>
     <Member MemberName="ABORT_NAMING_CONTEXT_OP_REQ">
-      <MemberSignature Language="C#" Value="public static const string ABORT_NAMING_CONTEXT_OP_REQ" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string ABORT_NAMING_CONTEXT_OP_REQ"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -380,7 +385,10 @@
       </Docs>
     </Member>
     <Member MemberName="ABORT_NAMING_CONTEXT_OP_RES">
-      <MemberSignature Language="C#" Value="public static const string ABORT_NAMING_CONTEXT_OP_RES" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string ABORT_NAMING_CONTEXT_OP_RES"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -416,7 +424,10 @@
       </Docs>
     </Member>
     <Member MemberName="GET_EFFECTIVE_PRIVILEGES_REQ">
-      <MemberSignature Language="C#" Value="public static const string GET_EFFECTIVE_PRIVILEGES_REQ" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string GET_EFFECTIVE_PRIVILEGES_REQ"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -428,7 +439,10 @@
       </Docs>
     </Member>
     <Member MemberName="GET_EFFECTIVE_PRIVILEGES_RES">
-      <MemberSignature Language="C#" Value="public static const string GET_EFFECTIVE_PRIVILEGES_RES" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string GET_EFFECTIVE_PRIVILEGES_RES"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -440,7 +454,10 @@
       </Docs>
     </Member>
     <Member MemberName="SET_REPLICATION_FILTER_REQ">
-      <MemberSignature Language="C#" Value="public static const string SET_REPLICATION_FILTER_REQ" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string SET_REPLICATION_FILTER_REQ"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -452,7 +469,10 @@
       </Docs>
     </Member>
     <Member MemberName="SET_REPLICATION_FILTER_RES">
-      <MemberSignature Language="C#" Value="public static const string SET_REPLICATION_FILTER_RES" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string SET_REPLICATION_FILTER_RES"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -464,7 +484,10 @@
       </Docs>
     </Member>
     <Member MemberName="GET_REPLICATION_FILTER_REQ">
-      <MemberSignature Language="C#" Value="public static const string GET_REPLICATION_FILTER_REQ" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string GET_REPLICATION_FILTER_REQ"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -476,7 +499,10 @@
       </Docs>
     </Member>
     <Member MemberName="GET_REPLICATION_FILTER_RES">
-      <MemberSignature Language="C#" Value="public static const string GET_REPLICATION_FILTER_RES" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string GET_REPLICATION_FILTER_RES"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -488,7 +514,10 @@
       </Docs>
     </Member>
     <Member MemberName="CREATE_ORPHAN_NAMING_CONTEXT_REQ">
-      <MemberSignature Language="C#" Value="public static const string CREATE_ORPHAN_NAMING_CONTEXT_REQ" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string CREATE_ORPHAN_NAMING_CONTEXT_REQ"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -500,7 +529,10 @@
       </Docs>
     </Member>
     <Member MemberName="CREATE_ORPHAN_NAMING_CONTEXT_RES">
-      <MemberSignature Language="C#" Value="public static const string CREATE_ORPHAN_NAMING_CONTEXT_RES" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string CREATE_ORPHAN_NAMING_CONTEXT_RES"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -512,7 +544,10 @@
       </Docs>
     </Member>
     <Member MemberName="REMOVE_ORPHAN_NAMING_CONTEXT_REQ">
-      <MemberSignature Language="C#" Value="public static const string REMOVE_ORPHAN_NAMING_CONTEXT_REQ" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string REMOVE_ORPHAN_NAMING_CONTEXT_REQ"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -524,7 +559,10 @@
       </Docs>
     </Member>
     <Member MemberName="REMOVE_ORPHAN_NAMING_CONTEXT_RES">
-      <MemberSignature Language="C#" Value="public static const string REMOVE_ORPHAN_NAMING_CONTEXT_RES" />
+      <MemberSignature
+        Language="C#"
+        Value="public static const string REMOVE_ORPHAN_NAMING_CONTEXT_RES"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>

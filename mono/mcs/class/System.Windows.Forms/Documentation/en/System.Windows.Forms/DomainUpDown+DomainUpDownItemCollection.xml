@@ -1,5 +1,11 @@
-<Type Name="DomainUpDown+DomainUpDownItemCollection" FullName="System.Windows.Forms.DomainUpDown+DomainUpDownItemCollection">
-  <TypeSignature Language="C#" Value="public class DomainUpDown.DomainUpDownItemCollection : System.Collections.ArrayList" />
+<Type
+  Name="DomainUpDown+DomainUpDownItemCollection"
+  FullName="System.Windows.Forms.DomainUpDown+DomainUpDownItemCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DomainUpDown.DomainUpDownItemCollection : System.Collections.ArrayList"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -35,7 +41,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public override void Insert (int index, object item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Insert (int index, object item);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

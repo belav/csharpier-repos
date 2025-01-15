@@ -28,7 +28,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Windows.Forms.ICommandExecutor.Execute" /> method is not called on classes that exist outside the .NET Framework.</para>
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.ICommandExecutor.Execute" />
+
+             method is not called on classes that exist outside the .NET Framework.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

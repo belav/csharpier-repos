@@ -32,7 +32,8 @@
 As you can see, the bottom row is always [0 0 1]. The Cairo.Matrix implementation deals with the top 6 values only.
 </para>
       <example>
-        <code lang="C#">
+        <code lang="C#"
+          >
 Cairo.Graphics g;
 Matrix matrix;
 
@@ -64,7 +65,8 @@ if (cs == Cairo.Status.Success) {
 	m.TransformPoint (ref point2x, ref point2Y);
 	// ...
 } 
- </code>
+ </code
+        >
       </example>
     </remarks>
   </Docs>
@@ -83,7 +85,10 @@ if (cs == Cairo.Status.Success) {
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Matrix (double xx, double yx, double xy, double yy, double x0, double y0);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Matrix (double xx, double yx, double xy, double yy, double x0, double y0);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="xx" Type="System.Double" />
@@ -117,7 +122,10 @@ if (cs == Cairo.Status.Success) {
       <Parameters />
       <Docs>
         <summary>Returns a clone of the matrix</summary>
-        <returns>The clone matrix as a <see cref="t:System.Object" /></returns>
+        <returns
+          >The clone matrix as a <see
+           cref="t:System.Object" />
+        </returns>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -158,12 +166,20 @@ if (cs == Cairo.Status.Success) {
       <Parameters />
       <Docs>
         <summary>Returns a hash representing the matrix</summary>
-        <returns>A hash as an <see cref="t:System.Int32" /> representing the matrix</returns>
+        <returns
+          >A hash as an <see
+           cref="t:System.Int32" />
+
+           representing the matrix</returns
+        >
         <remarks />
       </Docs>
     </Member>
     <Member MemberName="Init">
-      <MemberSignature Language="C#" Value="public void Init (double xx, double yx, double xy, double yy, double x0, double y0);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Init (double xx, double yx, double xy, double yy, double x0, double y0);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -183,10 +199,20 @@ if (cs == Cairo.Status.Success) {
         <param name="yy">yy component of the affine transformation</param>
         <param name="x0">X translation component of the affine transformation</param>
         <param name="y0">Y translation component of the affine transformation</param>
-        <summary>Sets the matrix to be the affine transformation given by xx, yx, xy, yy, x0, y0. The transformation is given by:
+        <summary
+          >Sets the matrix to be the affine transformation given by xx, yx, xy, yy, x0, y0. The transformation is given by:
 
 
-<list type="bullet"><item><term>x_new = xx * x + xy * y + x0;</term></item><item><term>y_new = yx * x + yy * y + y0;</term></item></list></summary>
+<list
+           type="bullet">
+            <item>
+              <term>x_new = xx * x + xy * y + x0;</term>
+            </item>
+            <item>
+              <term>y_new = yx * x + yy * y + y0;</term>
+            </item>
+          </list>
+        </summary>
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -220,8 +246,10 @@ if (cs == Cairo.Status.Success) {
         <Parameter Name="radians" Type="System.Double" />
       </Parameters>
       <Docs>
-        <param name="radians">Angle of rotation, in radians. The direction of rotation is defined such that positive angles rotate in the direction from the positive X axis toward the positive Y axis. With the default axis orientation of cairo, positive angles rotate in a clockwise direction.
-</param>
+        <param name="radians"
+          >Angle of rotation, in radians. The direction of rotation is defined such that positive angles rotate in the direction from the positive X axis toward the positive Y axis. With the default axis orientation of cairo, positive angles rotate in a clockwise direction.
+</param
+        >
         <summary>Initialize the matrix to a transformation that rotates by the specified radians value.</summary>
         <remarks />
       </Docs>
@@ -283,7 +311,15 @@ if (cs == Cairo.Status.Success) {
       <Docs>
         <summary>Changes matrix to be the inverse of its original value. Not all transformation matrices have inverses; if the matrix collapses points together (it is degenerate), then it has no inverse and this function will fail.
 </summary>
-        <returns>If the matrix has an inverse, modifies the matrix to be the inverse matrix and returns <see cref="T:Cairo.Status " />.Success. Otherwise, return <see cref="T:Cairo.Status" />.InvalidMatrix if the matrix is invalid.</returns>
+        <returns
+          >If the matrix has an inverse, modifies the matrix to be the inverse matrix and returns <see
+           cref="T:Cairo.Status " />
+
+          .Success. Otherwise, return <see
+           cref="T:Cairo.Status" />
+
+          .InvalidMatrix if the matrix is invalid.</returns
+        >
         <remarks>None.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -328,7 +364,10 @@ if (cs == Cairo.Status.Success) {
       </AssemblyInfo>
     </Member>
     <Member MemberName="Multiply">
-      <MemberSignature Language="C#" Value="public static Cairo.Matrix Multiply (Cairo.Matrix a, Cairo.Matrix b);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Cairo.Matrix Multiply (Cairo.Matrix a, Cairo.Matrix b);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Cairo.Matrix</ReturnType>
@@ -350,7 +389,10 @@ if (cs == Cairo.Status.Success) {
       </AssemblyInfo>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (Cairo.Matrix lhs, Cairo.Matrix rhs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (Cairo.Matrix lhs, Cairo.Matrix rhs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -372,7 +414,10 @@ if (cs == Cairo.Status.Success) {
       </AssemblyInfo>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (Cairo.Matrix lhs, Cairo.Matrix rhs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (Cairo.Matrix lhs, Cairo.Matrix rhs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -403,8 +448,10 @@ if (cs == Cairo.Status.Success) {
         <Parameter Name="radians" Type="System.Double" />
       </Parameters>
       <Docs>
-        <param name="radians">angle of rotation, in radians. The direction of rotation is defined such that positive angles rotate in the direction from the positive X axis toward the positive Y axis. With the default axis orientation of cairo, positive angles rotate in a clockwise direction.
-</param>
+        <param name="radians"
+          >angle of rotation, in radians. The direction of rotation is defined such that positive angles rotate in the direction from the positive X axis toward the positive Y axis. With the default axis orientation of cairo, positive angles rotate in a clockwise direction.
+</param
+        >
         <summary>Applies rotation by radians to the transformation in the matrix. The effect of the new transformation is to first rotate the coordinates by radians, then apply the original transformation to the coordinates.</summary>
         <remarks />
       </Docs>
@@ -452,24 +499,39 @@ if (cs == Cairo.Status.Success) {
       </Docs>
     </Member>
     <Member MemberName="TransformDistance">
-      <MemberSignature Language="C#" Value="public void TransformDistance (ref double dx, ref double dy);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void TransformDistance (ref double dx, ref double dy);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="dx" Type="System.Double&amp;" RefType="ref" />
-        <Parameter Name="dy" Type="System.Double&amp;" RefType="ref" />
+        <Parameter Name="dx" Type="System.Double&" RefType="ref" />
+        <Parameter Name="dy" Type="System.Double&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="dx">X component of a distance vector. An in/out parameter.</param>
         <param name="dy">Y component of a distance vector. An in/out parameter.</param>
-        <summary>Transforms the distance vector (dx,@y) by @matrix. This is similar to cairo_matrix_transform() except that the translation components of the transformation are ignored. The calculation of the returned vector is as follows:
+        <summary
+          >Transforms the distance vector (dx,@y) by @matrix. This is similar to cairo_matrix_transform() except that the translation components of the transformation are ignored. The calculation of the returned vector is as follows:
 
-<list type="bullet"><item><term>dx2 = dx1 * a + dy1 * c;</term></item><item><term>dy2 = dx1 * b + dy1 * d;</term></item></list>
+<list
+           type="bullet">
+            <item>
+              <term>dx2 = dx1 * a + dy1 * c;</term>
+            </item>
+            <item>
+              <term>dy2 = dx1 * b + dy1 * d;</term>
+            </item>
+          </list>
+
+          
 
  Affine transformations are position invariant, so the same vector always transforms to the same vector. If (x1,y1) transforms to (x2,y2) then (x1+@x1,y1+dy1) will transform to (x1+dx2,y1+dy2) for all values of x1 and x2.
-</summary>
+</summary
+        >
         <remarks>None.</remarks>
       </Docs>
       <AssemblyInfo>
@@ -478,14 +540,17 @@ if (cs == Cairo.Status.Success) {
       </AssemblyInfo>
     </Member>
     <Member MemberName="TransformPoint">
-      <MemberSignature Language="C#" Value="public void TransformPoint (ref double x, ref double y);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void TransformPoint (ref double x, ref double y);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="x" Type="System.Double&amp;" RefType="ref" />
-        <Parameter Name="y" Type="System.Double&amp;" RefType="ref" />
+        <Parameter Name="x" Type="System.Double&" RefType="ref" />
+        <Parameter Name="y" Type="System.Double&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="x">X position. An in/out parameter.</param>

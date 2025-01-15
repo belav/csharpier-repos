@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="OnSerializingAttribute" FullName="System.Runtime.Serialization.OnSerializingAttribute">
   <TypeSignature Language="C#" Value="public sealed class OnSerializingAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit OnSerializingAttribute extends System.Attribute" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit OnSerializingAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -23,11 +26,32 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the <see cref="T:System.Runtime.Serialization.OnSerializingAttribute" /> to manipulate the object before serialization occurs. </para>
-      <para>To use the <see cref="T:System.Runtime.Serialization.OnSerializingAttribute" />, the method must contain a <see cref="T:System.Runtime.Serialization.StreamingContext" /> parameter. The attribute marks the method to be called by the serialization infrastructure and the <see cref="T:System.Runtime.Serialization.StreamingContext" /> provides additional data about the type of serialization taking place.  The usage is shown in the following code:</para>
+      <para
+        >Use the <see
+         cref="T:System.Runtime.Serialization.OnSerializingAttribute" />
+
+         to manipulate the object before serialization occurs. </para
+      >
+      <para
+        >To use the <see
+         cref="T:System.Runtime.Serialization.OnSerializingAttribute" />
+
+        , the method must contain a <see
+         cref="T:System.Runtime.Serialization.StreamingContext" />
+
+         parameter. The attribute marks the method to be called by the serialization infrastructure and the <see
+         cref="T:System.Runtime.Serialization.StreamingContext" />
+
+         provides additional data about the type of serialization taking place.  The usage is shown in the following code:</para
+      >
       <para>code reference: System.Runtime.Serialization.OnSerialization#2</para>
       <block subset="none" type="note">
-        <para>In your code, you can use the word OnSerializing instead of the longer <see cref="T:System.Runtime.Serialization.OnSerializingAttribute" />.</para>
+        <para
+          >In your code, you can use the word OnSerializing instead of the longer <see
+           cref="T:System.Runtime.Serialization.OnSerializingAttribute" />
+
+          .</para
+        >
       </block>
     </remarks>
     <summary>
@@ -38,7 +62,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public OnSerializingAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -50,7 +77,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Serialization.OnSerializingAttribute" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Serialization.OnSerializingAttribute" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>

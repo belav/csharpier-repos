@@ -18,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ContentDefinition (string id, string content, string designTimeHtml);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ContentDefinition (string id, string content, string designTimeHtml);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -32,14 +35,28 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Web.UI.Design.ContentDefinition" /> class.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Web.UI.Design.ContentDefinition" />
+
+             class.</para
+          >
         </summary>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string identifier for the content.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string identifier for the content.</param
+        >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />The default HTML markup content.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The default HTML markup content.</param
+        >
         <param name="designTimeHtml">
-          <attribution license="cc4" from="Microsoft" modified="false" />The design-time HTML markup content.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The design-time HTML markup content.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ContentPlaceHolderID">
@@ -56,7 +73,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the ID of the <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" /> control that is associated with the current content.</para>
+          <para
+            >Gets the ID of the <see
+             cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+             control that is associated with the current content.</para
+          >
         </summary>
       </Docs>
     </Member>

@@ -2,103 +2,275 @@
 <testresults name="">
   <div id="GHTSubTest1" testname="Existing table">
     <select id="_ctrl0" size="4" name="_ctrl0">
-      <option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
+      <option value="0" />
 
-	</select>
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+
+	</select
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
   <div id="GHTSubTest2" testname="Null">
     <select id="_ctrl1" size="4" name="_ctrl1">
-      <option value="a" />a
-		<option value="b" />b
-		<option value="c" />c
-		<option value="d" />d
-		<option value="e" />e
-		<option value="f" />f
-		<option value="g" />g
-		<option value="h" />h
-		<option value="i" />i
-		<option value="j" />j
+      <option value="a" />
 
-	</select>
+      a
+		<option
+       value="b" />
+
+      b
+		<option
+       value="c" />
+
+      c
+		<option
+       value="d" />
+
+      d
+		<option
+       value="e" />
+
+      e
+		<option
+       value="f" />
+
+      f
+		<option
+       value="g" />
+
+      g
+		<option
+       value="h" />
+
+      h
+		<option
+       value="i" />
+
+      i
+		<option
+       value="j" />
+
+      j
+
+	</select
+    >
   </div>
   <div id="GHTSubTest3" testname="Non existing table in a dataset">
-    <select id="_ctrl2" size="4" name="_ctrl2">
-    </select>
+    <select id="_ctrl2" size="4" name="_ctrl2"></select>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest4" testname="DataSource is not a dataset">
     <select id="_ctrl3" size="4" name="_ctrl3">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
   </div>
   <div id="GHTSubTest5" testname="Existing table">
     <select id="_ctrl4" name="_ctrl4">
-      <option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
-		<option value="0" />0
+      <option value="0" />
 
-	</select>
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+		<option
+       value="0" />
+
+      0
+
+	</select
+    >
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
   <div id="GHTSubTest6" testname="Null">
     <select id="_ctrl5" name="_ctrl5">
-      <option value="a" />a
-		<option value="b" />b
-		<option value="c" />c
-		<option value="d" />d
-		<option value="e" />e
-		<option value="f" />f
-		<option value="g" />g
-		<option value="h" />h
-		<option value="i" />i
-		<option value="j" />j
+      <option value="a" />
 
-	</select>
+      a
+		<option
+       value="b" />
+
+      b
+		<option
+       value="c" />
+
+      c
+		<option
+       value="d" />
+
+      d
+		<option
+       value="e" />
+
+      e
+		<option
+       value="f" />
+
+      f
+		<option
+       value="g" />
+
+      g
+		<option
+       value="h" />
+
+      h
+		<option
+       value="i" />
+
+      i
+		<option
+       value="j" />
+
+      j
+
+	</select
+    >
   </div>
   <div id="GHTSubTest7" testname="Non existing table in a dataset">
-    <select id="_ctrl6" name="_ctrl6">
-    </select>
+    <select id="_ctrl6" name="_ctrl6"></select>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest8" testname="DataSource is not a dataset">
     <select id="_ctrl7" name="_ctrl7">
-      <option value="1aaa" />1aaa
-		<option value="2bbb" />2bbb
-		<option value="3ccc" />3ccc
-		<option value="4ddd" />4ddd
-		<option value="5eee" />5eee
-		<option value="6fff" />6fff
-		<option value="7ggg" />7ggg
+      <option value="1aaa" />
 
-	</select>
+      1aaa
+		<option
+       value="2bbb" />
+
+      2bbb
+		<option
+       value="3ccc" />
+
+      3ccc
+		<option
+       value="4ddd" />
+
+      4ddd
+		<option
+       value="5eee" />
+
+      5eee
+		<option
+       value="6fff" />
+
+      6fff
+		<option
+       value="7ggg" />
+
+      7ggg
+
+	</select
+    >
   </div>
   <div id="GHTSubTest9" testname="Existing table">
     <table id="_ctrl8" border="0">
@@ -164,7 +336,10 @@
       </tr>
     </table>
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
   <div id="GHTSubTest10" testname="Null">
     <table id="_ctrl9" border="0">
@@ -231,10 +406,12 @@
     </table>
   </div>
   <div id="GHTSubTest11" testname="Non existing table in a dataset">
-    <table id="_ctrl10" border="0">
-    </table>
+    <table id="_ctrl10" border="0"></table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest12" testname="DataSource is not a dataset">
     <table id="_ctrl11" border="0">
@@ -346,7 +523,10 @@
       </tr>
     </table>
     <span>
-      <br />Test Passed.</span>
+      <br />
+
+      Test Passed.</span
+    >
   </div>
   <div id="GHTSubTest14" testname="Null">
     <table id="_ctrl13" border="0">
@@ -413,10 +593,12 @@
     </table>
   </div>
   <div id="GHTSubTest15" testname="Non existing table in a dataset">
-    <table id="_ctrl14" border="0">
-    </table>
+    <table id="_ctrl14" border="0"></table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest16" testname="DataSource is not a dataset">
     <table id="_ctrl15" border="0">

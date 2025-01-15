@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="BasicProfileViolationEnumerator" FullName="System.Web.Services.Description.BasicProfileViolationEnumerator">
-  <TypeSignature Language="C#" Value="public class BasicProfileViolationEnumerator : System.Collections.Generic.IEnumerator&lt;System.Web.Services.Description.BasicProfileViolation&gt;" />
+<Type
+  Name="BasicProfileViolationEnumerator"
+  FullName="System.Web.Services.Description.BasicProfileViolationEnumerator"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class BasicProfileViolationEnumerator : System.Collections.Generic.IEnumerator<System.Web.Services.Description.BasicProfileViolation>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -17,34 +23,56 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Enumerates the elements in a <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />.</para>
+      <para
+        >Enumerates the elements in a <see
+         cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BasicProfileViolationEnumerator (System.Web.Services.Description.BasicProfileViolationCollection collection);" />
+      <MemberSignature
+        Language="C#"
+        Value="public BasicProfileViolationEnumerator (System.Web.Services.Description.BasicProfileViolationCollection collection);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="collection" Type="System.Web.Services.Description.BasicProfileViolationCollection" />
+        <Parameter
+          Name="collection"
+          Type="System.Web.Services.Description.BasicProfileViolationCollection"
+        />
       </Parameters>
       <Docs>
         <param name="collection">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Web.Services.Description.BasicProfileViolationEnumerator.Current" /> is set to -1.</para>
+            <see cref="P:System.Web.Services.Description.BasicProfileViolationEnumerator.Current" />
+
+             is set to -1.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Current">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Description.BasicProfileViolation Current { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Description.BasicProfileViolation Current { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -60,7 +88,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the current <see cref="T:System.Web.Services.Description.BasicProfileViolation" /> element in the <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />.</para>
+          <para
+            >Gets the current <see
+             cref="T:System.Web.Services.Description.BasicProfileViolation" />
+
+             element in the <see
+             cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -78,7 +114,15 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases all resources used by the current instance of the <see cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" /> class.Releases all resources used by the <see cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />. </para>
+          <para
+            >Releases all resources used by the current instance of the <see
+             cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
+
+             class.Releases all resources used by the <see
+             cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
+
+            . </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -96,7 +140,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Enumerates to the next element in the <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />.</para>
+          <para
+            >Enumerates to the next element in the <see
+             cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -105,7 +154,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerator.Current">
-      <MemberSignature Language="C#" Value="object System.Collections.IEnumerator.Current { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IEnumerator.Current { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -118,7 +170,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the current element in the <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />. </para>
+          <para
+            >Gets the current element in the <see
+             cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+            . </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -136,7 +193,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the enumerator to its initial position, which is before the first element in the <see cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />.</para>
+          <para
+            >Sets the enumerator to its initial position, which is before the first element in the <see
+             cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

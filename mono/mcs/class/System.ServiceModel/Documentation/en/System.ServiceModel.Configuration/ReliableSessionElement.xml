@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ReliableSessionElement" FullName="System.ServiceModel.Configuration.ReliableSessionElement">
-  <TypeSignature Language="C#" Value="public sealed class ReliableSessionElement : System.ServiceModel.Configuration.BindingElementExtensionElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ReliableSessionElement extends System.ServiceModel.Configuration.BindingElementExtensionElement" />
+<Type
+  Name="ReliableSessionElement"
+  FullName="System.ServiceModel.Configuration.ReliableSessionElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ReliableSessionElement : System.ServiceModel.Configuration.BindingElementExtensionElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ReliableSessionElement extends System.ServiceModel.Configuration.BindingElementExtensionElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +32,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ReliableSessionElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +45,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ReliableSessionElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.ReliableSessionElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AcknowledgementInterval">
-      <MemberSignature Language="C#" Value="public TimeSpan AcknowledgementInterval { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan AcknowledgementInterval" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan AcknowledgementInterval { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan AcknowledgementInterval"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -65,8 +88,14 @@
       </Docs>
     </Member>
     <Member MemberName="ApplyConfiguration">
-      <MemberSignature Language="C#" Value="public override void ApplyConfiguration (System.ServiceModel.Channels.BindingElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void ApplyConfiguration(class System.ServiceModel.Channels.BindingElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void ApplyConfiguration (System.ServiceModel.Channels.BindingElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void ApplyConfiguration(class System.ServiceModel.Channels.BindingElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -88,7 +117,10 @@
     </Member>
     <Member MemberName="BindingElementType">
       <MemberSignature Language="C#" Value="public override Type BindingElementType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type BindingElementType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type BindingElementType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -106,8 +138,14 @@
       </Docs>
     </Member>
     <Member MemberName="CopyFrom">
-      <MemberSignature Language="C#" Value="public override void CopyFrom (System.ServiceModel.Configuration.ServiceModelExtensionElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void CopyFrom(class System.ServiceModel.Configuration.ServiceModelExtensionElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void CopyFrom (System.ServiceModel.Configuration.ServiceModelExtensionElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void CopyFrom(class System.ServiceModel.Configuration.ServiceModelExtensionElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -116,7 +154,10 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="element" Type="System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+        <Parameter
+          Name="element"
+          Type="System.ServiceModel.Configuration.ServiceModelExtensionElement"
+        />
       </Parameters>
       <Docs>
         <param name="element">To be added.</param>
@@ -128,8 +169,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateBindingElement">
-      <MemberSignature Language="C#" Value="protected override System.ServiceModel.Channels.BindingElement CreateBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.ServiceModel.Channels.BindingElement CreateBindingElement() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.ServiceModel.Channels.BindingElement CreateBindingElement ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance class System.ServiceModel.Channels.BindingElement CreateBindingElement() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -170,7 +217,10 @@
     </Member>
     <Member MemberName="InactivityTimeout">
       <MemberSignature Language="C#" Value="public TimeSpan InactivityTimeout { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan InactivityTimeout" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan InactivityTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -194,13 +244,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.TimeSpan" /> value that specifies the maximum duration the channel allows the other communicating party not to send any messages before faulting the channel.</para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.TimeSpan" />
+
+             value that specifies the maximum duration the channel allows the other communicating party not to send any messages before faulting the channel.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="InitializeFrom">
-      <MemberSignature Language="C#" Value="protected override void InitializeFrom (System.ServiceModel.Channels.BindingElement element);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance void InitializeFrom(class System.ServiceModel.Channels.BindingElement element) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void InitializeFrom (System.ServiceModel.Channels.BindingElement element);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance void InitializeFrom(class System.ServiceModel.Channels.BindingElement element) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -338,8 +399,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -354,8 +421,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReliableMessagingVersion">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.ReliableMessagingVersion ReliableMessagingVersion { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.ReliableMessagingVersion ReliableMessagingVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.ReliableMessagingVersion ReliableMessagingVersion { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.ReliableMessagingVersion ReliableMessagingVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

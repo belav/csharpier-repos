@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="PerformanceCountersElement" FullName="System.Net.Configuration.PerformanceCountersElement">
-  <TypeSignature Language="C#" Value="public sealed class PerformanceCountersElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed PerformanceCountersElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="PerformanceCountersElement"
+  FullName="System.Net.Configuration.PerformanceCountersElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class PerformanceCountersElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed PerformanceCountersElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,7 +24,16 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class corresponds to the <format type="text/html"><a href="3afa1586-e1b8-473d-8985-c3fc90cf561b">&lt;performanceCounter&gt; Element (Network Settings)</a></format> configuration element. This class provides programmatic access to information that can be stored in configuration files.</para>
+      <para
+        >This class corresponds to the <format
+         type="text/html">
+          <a href="3afa1586-e1b8-473d-8985-c3fc90cf561b"
+            >&lt;performanceCounter&gt; Element (Network Settings)</a
+          >
+        </format>
+
+         configuration element. This class provides programmatic access to information that can be stored in configuration files.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +43,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public PerformanceCountersElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,7 +58,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Instantiates a <see cref="T:System.Net.Configuration.PerformanceCountersElement" /> object.</para>
+          <para
+            >Instantiates a <see
+             cref="T:System.Net.Configuration.PerformanceCountersElement" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -71,8 +97,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

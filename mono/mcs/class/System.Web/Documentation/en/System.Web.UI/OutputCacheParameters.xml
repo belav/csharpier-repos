@@ -13,11 +13,40 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.OutputCacheParameters" /> class is not used by ASP.NET page or control developers. It provides a data structure used to store cache settings parsed from an <format type="text/html"><a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a></format> page directive by ASP.NET page and control parsers such as <see cref="T:System.Web.UI.PageParser" /> and <see cref="T:System.Web.UI.TemplateControlParser" />. The <see cref="T:System.Web.UI.OutputCacheParameters" /> object is used with the <see cref="M:System.Web.UI.Page.InitOutputCache(System.Web.UI.OutputCacheSettings)" /> method to initialize the output cache for a page and its contents at run time.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.OutputCacheParameters" />
+
+         class is not used by ASP.NET page or control developers. It provides a data structure used to store cache settings parsed from an <format
+         type="text/html">
+          <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
+        </format>
+
+         page directive by ASP.NET page and control parsers such as <see
+         cref="T:System.Web.UI.PageParser" />
+
+         and <see
+         cref="T:System.Web.UI.TemplateControlParser" />
+
+        . The <see
+         cref="T:System.Web.UI.OutputCacheParameters" />
+
+         object is used with the <see
+         cref="M:System.Web.UI.Page.InitOutputCache(System.Web.UI.OutputCacheSettings)" />
+
+         method to initialize the output cache for a page and its contents at run time.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Encapsulates the output cache initialization settings parsed from an <format type="text/html"><a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a></format> page directive by ASP.NET. This class cannot be inherited.</para>
+      <para
+        >Encapsulates the output cache initialization settings parsed from an <format
+         type="text/html">
+          <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
+        </format>
+
+         page directive by ASP.NET. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +59,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.OutputCacheParameters" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.OutputCacheParameters" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -52,7 +86,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets an <see cref="T:System.Web.Configuration.OutputCacheProfile" /> name that is associated with the settings of the output cache entry.</para>
+          <para
+            >Gets or sets an <see
+             cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+             name that is associated with the settings of the output cache entry.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -98,7 +137,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Location">
-      <MemberSignature Language="C#" Value="public System.Web.UI.OutputCacheLocation Location { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.OutputCacheLocation Location { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.OutputCacheLocation</ReturnType>
@@ -146,7 +188,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.OutputCacheParameters.SqlDependency" /> string identifies databases and tables according to the name of a SQL Server cache dependency in your configuration (typically added using the &lt;sqlcachedependency&gt; configuration elements). If you use SQL Server 2005, you can set the <see cref="P:System.Web.UI.OutputCacheParameters.SqlDependency" /> property to "CommandNotification", which instructs ASP.NET to create row-level dependencies for all SQL commands issued within the context of the current ASP.NET page.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.OutputCacheParameters.SqlDependency" />
+
+             string identifies databases and tables according to the name of a SQL Server cache dependency in your configuration (typically added using the &lt;sqlcachedependency&gt; configuration elements). If you use SQL Server 2005, you can set the <see
+             cref="P:System.Web.UI.OutputCacheParameters.SqlDependency" />
+
+             property to "CommandNotification", which instructs ASP.NET to create row-level dependencies for all SQL commands issued within the context of the current ASP.NET page.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -172,7 +222,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When this property is set to multiple character sets, the output cache contains a different version of the requested document for each specified set.</para>
           <para>
-            <see cref="P:System.Web.UI.OutputCacheParameters.VaryByContentEncoding" /> is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html"><a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a></format>.</para>
+            <see cref="P:System.Web.UI.OutputCacheParameters.VaryByContentEncoding" />
+
+             is introduced in the .NET Framework version 3.5.  For more information, see <format
+             type="text/html">
+              <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -210,7 +268,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you specify "browser" for this property, the cache entry will be varied by browser type and major version number. If a custom string is entered, you must override the <see cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" /> method in your application's Global.asax file.</para>
+          <para
+            >If you specify "browser" for this property, the cache entry will be varied by browser type and major version number. If a custom string is entered, you must override the <see
+             cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" />
+
+             method in your application's Global.asax file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

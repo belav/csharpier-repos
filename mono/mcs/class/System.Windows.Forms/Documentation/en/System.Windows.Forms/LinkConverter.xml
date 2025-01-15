@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="LinkConverter" FullName="System.Windows.Forms.LinkConverter">
-  <TypeSignature Language="C#" Value="public class LinkConverter : System.ComponentModel.TypeConverter" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LinkConverter : System.ComponentModel.TypeConverter"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -12,11 +15,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the <see cref="T:System.Windows.Forms.LinkConverter" /> class to convert links of one type to another type, and to access standard values and subordinate properties. Access this class through <see cref="T:System.ComponentModel.TypeDescriptor" />.</para>
+      <para
+        >Use the <see
+         cref="T:System.Windows.Forms.LinkConverter" />
+
+         class to convert links of one type to another type, and to access standard values and subordinate properties. Access this class through <see
+         cref="T:System.ComponentModel.TypeDescriptor" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides a type converter for <see cref="T:System.Windows.Forms.LinkLabel.Link" /> objects.</para>
+      <para
+        >Provides a type converter for <see
+         cref="T:System.Windows.Forms.LinkLabel.Link" />
+
+         objects.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -31,12 +47,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.LinkConverter" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.LinkConverter" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CanConvertFrom">
-      <MemberSignature Language="C#" Value="public override bool CanConvertFrom (System.ComponentModel.ITypeDescriptorContext context, Type sourceType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool CanConvertFrom (System.ComponentModel.ITypeDescriptorContext context, Type sourceType);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -52,20 +76,45 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves a value that determines if this <see cref="T:System.Windows.Forms.LinkConverter" /> can convert an object having the specified context and source type to the native type of the <see cref="T:System.Windows.Forms.LinkConverter" />.</para>
+          <para
+            >Retrieves a value that determines if this <see
+             cref="T:System.Windows.Forms.LinkConverter" />
+
+             can convert an object having the specified context and source type to the native type of the <see
+             cref="T:System.Windows.Forms.LinkConverter" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if this <see cref="T:System.Windows.Forms.LinkConverter" /> can convert the specified object; otherwise, false. </para>
+          <para
+            >true if this <see
+             cref="T:System.Windows.Forms.LinkConverter" />
+
+             can convert the specified object; otherwise, false. </para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> providing contextual information about the object to be converted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           providing contextual information about the object to be converted.</param
+        >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the object to be converted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the object to be converted.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CanConvertTo">
-      <MemberSignature Language="C#" Value="public override bool CanConvertTo (System.ComponentModel.ITypeDescriptorContext context, Type destinationType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool CanConvertTo (System.ComponentModel.ITypeDescriptorContext context, Type destinationType);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -81,20 +130,42 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Retrieves a value that determines if this <see cref="T:System.Windows.Forms.LinkConverter" /> can convert an object having the specified context to the specified type.</para>
+          <para
+            >Retrieves a value that determines if this <see
+             cref="T:System.Windows.Forms.LinkConverter" />
+
+             can convert an object having the specified context to the specified type.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if this <see cref="T:System.Windows.Forms.LinkConverter" /> can convert the specified object; otherwise, false. </para>
+          <para
+            >true if this <see
+             cref="T:System.Windows.Forms.LinkConverter" />
+
+             can convert the specified object; otherwise, false. </para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> providing contextual information about the object to be converted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           providing contextual information about the object to be converted.</param
+        >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type to convert the object to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type to convert the object to.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ConvertFrom">
-      <MemberSignature Language="C#" Value="public override object ConvertFrom (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object ConvertFrom (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -111,22 +182,45 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts the specified object to the native type of the <see cref="T:System.Windows.Forms.LinkConverter" />.</para>
+          <para
+            >Converts the specified object to the native type of the <see
+             cref="T:System.Windows.Forms.LinkConverter" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The converted object.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> providing contextual information about the object to be converted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           providing contextual information about the object to be converted.</param
+        >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />Cultural attributes of the object to be converted. If this parameter is null, the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" /> property value is used.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Cultural attributes of the object to be converted. If this parameter is null, the <see
+           cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+           property value is used.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to be converted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to be converted.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ConvertTo">
-      <MemberSignature Language="C#" Value="public override object ConvertTo (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object ConvertTo (System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -143,7 +237,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The most common conversion is from one <see cref="T:System.String" /> to another <see cref="T:System.String" />. The default implementation calls <see cref="M:System.Object.ToString" /> on the object if the object is valid and if the <paramref name="destinationType" /> is <see cref="T:System.String" />.</para>
+          <para
+            >The most common conversion is from one <see
+             cref="T:System.String" />
+
+             to another <see
+             cref="T:System.String" />
+
+            . The default implementation calls <see
+             cref="M:System.Object.ToString" />
+
+             on the object if the object is valid and if the <paramref
+             name="destinationType" />
+
+             is <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -154,13 +265,31 @@
           <para>The converted object.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.ComponentModel.ITypeDescriptorContext" /> providing contextual information about the object to be converted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+           providing contextual information about the object to be converted.</param
+        >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />Cultural attributes of the object to be converted. If this parameter is null, the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" /> property value is used.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Cultural attributes of the object to be converted. If this parameter is null, the <see
+           cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+           property value is used.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to be converted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to be converted.</param
+        >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type to convert the object to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type to convert the object to.</param
+        >
       </Docs>
     </Member>
   </Members>

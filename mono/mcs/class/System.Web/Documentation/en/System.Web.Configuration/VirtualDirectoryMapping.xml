@@ -19,7 +19,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public VirtualDirectoryMapping (string physicalDirectory, bool isAppRoot);" />
+      <MemberSignature
+        Language="C#"
+        Value="public VirtualDirectoryMapping (string physicalDirectory, bool isAppRoot);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="physicalDirectory" Type="System.String" />
@@ -30,19 +33,33 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> class based on supplied parameters.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             class based on supplied parameters.</para
+          >
         </summary>
         <param name="physicalDirectory">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string value that specifies the absolute path to a physical directory.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string value that specifies the absolute path to a physical directory.</param
+        >
         <param name="isAppRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />A Boolean value that indicates whether the virtual directory is the application root of the Web application.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A Boolean value that indicates whether the virtual directory is the application root of the Web application.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public VirtualDirectoryMapping (string physicalDirectory, bool isAppRoot, string configFileBaseName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public VirtualDirectoryMapping (string physicalDirectory, bool isAppRoot, string configFileBaseName);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="physicalDirectory" Type="System.String" />
@@ -54,14 +71,28 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> class based on supplied parameters.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             class based on supplied parameters.</para
+          >
         </summary>
         <param name="physicalDirectory">
-          <attribution license="cc4" from="Microsoft" modified="false" />A string value that specifies the absolute path to a physical directory.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A string value that specifies the absolute path to a physical directory.</param
+        >
         <param name="isAppRoot">
-          <attribution license="cc4" from="Microsoft" modified="false" />A Boolean value that indicates whether the virtual directory is the application root of the Web application.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A Boolean value that indicates whether the virtual directory is the application root of the Web application.</param
+        >
         <param name="configFileBaseName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the configuration file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the configuration file.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

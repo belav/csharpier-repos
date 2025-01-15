@@ -15,7 +15,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For more information on printing, see the <see cref="N:System.Drawing.Printing" /> namespace overview.</para>
+      <para
+        >For more information on printing, see the <see
+         cref="N:System.Drawing.Printing" />
+
+         namespace overview.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

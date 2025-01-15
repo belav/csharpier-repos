@@ -18,12 +18,22 @@
     <since version="2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a single <format type="text/html"><a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a></format> element in an vstecmsbuild project. </para>
+      <para
+        >Represents a single <format
+         type="text/html">
+          <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
+        </format>
+
+         element in an vstecmsbuild project. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="AddNewTask">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildTask AddNewTask (string taskName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildTask AddNewTask (string taskName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildTask</ReturnType>
@@ -36,14 +46,43 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the specified <format type="text/html"><a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a></format> element to the <format type="text/html"><a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a></format> element.</para>
+          <para
+            >Adds the specified <format
+             type="text/html">
+              <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
+            </format>
+
+             element to the <format
+             type="text/html">
+              <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
+            </format>
+
+             element.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:Microsoft.Build.BuildEngine.BuildTask" /> object represents a child <unmanagedCodeEntityReference>Task</unmanagedCodeEntityReference> element of the <unmanagedCodeEntityReference>Target</unmanagedCodeEntityReference> element.</para>
+          <para
+            >A <see
+             cref="T:Microsoft.Build.BuildEngine.BuildTask" />
+
+             object represents a child <unmanagedCodeEntityReference
+            >Task</unmanagedCodeEntityReference>
+
+             element of the <unmanagedCodeEntityReference
+            >Target</unmanagedCodeEntityReference>
+
+             element.</para
+          >
         </returns>
         <param name="taskName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:Microsoft.Build.BuildEngine.BuildTask" /> object that represents the Task element to add to the Target element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:Microsoft.Build.BuildEngine.BuildTask" />
+
+           object that represents the Task element to add to the Target element.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -61,7 +100,17 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> attribute value of the <format type="text/html"><a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a></format> element.</para>
+          <para
+            >Gets the <unmanagedCodeEntityReference
+            >Condition</unmanagedCodeEntityReference>
+
+             attribute value of the <format
+             type="text/html">
+              <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
+            </format>
+
+             element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +129,17 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <unmanagedCodeEntityReference>DependsOnTargets</unmanagedCodeEntityReference> attribute value of the <format type="text/html"><a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a></format> element, which is a semicolon-separated list.</para>
+          <para
+            >Gets the <unmanagedCodeEntityReference
+            >DependsOnTargets</unmanagedCodeEntityReference>
+
+             attribute value of the <format
+             type="text/html">
+              <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
+            </format>
+
+             element, which is a semicolon-separated list.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -88,7 +147,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerator GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -98,16 +160,56 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method allows the caller to use the foreach statement of the C# language (for each in vbprvb) to iterate through the individual <see cref="T:Microsoft.Build.BuildEngine.BuildTask" /> objects in the <see cref="T:Microsoft.Build.BuildEngine.Target" />.</para>
-          <para>A <see cref="T:Microsoft.Build.BuildEngine.BuildTask" /> object represents a child <format type="text/html"><a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a></format> element of the <unmanagedCodeEntityReference>Target</unmanagedCodeEntityReference> element.</para>
+          <para
+            >This method allows the caller to use the foreach statement of the C# language (for each in vbprvb) to iterate through the individual <see
+             cref="T:Microsoft.Build.BuildEngine.BuildTask" />
+
+             objects in the <see
+             cref="T:Microsoft.Build.BuildEngine.Target" />
+
+            .</para
+          >
+          <para
+            >A <see
+             cref="T:Microsoft.Build.BuildEngine.BuildTask" />
+
+             object represents a child <format
+             type="text/html">
+              <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
+            </format>
+
+             element of the <unmanagedCodeEntityReference
+            >Target</unmanagedCodeEntityReference>
+
+             element.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an enumerator that iterates through the <see cref="T:Microsoft.Build.BuildEngine.BuildTask" /> objects in the <see cref="T:Microsoft.Build.BuildEngine.Target" />.</para>
+          <para
+            >Gets an enumerator that iterates through the <see
+             cref="T:Microsoft.Build.BuildEngine.BuildTask" />
+
+             objects in the <see
+             cref="T:Microsoft.Build.BuildEngine.Target" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IEnumerator" /> for the <see cref="T:Microsoft.Build.BuildEngine.BuildTask" /> objects in the <see cref="T:Microsoft.Build.BuildEngine.Target" />.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IEnumerator" />
+
+             for the <see
+             cref="T:Microsoft.Build.BuildEngine.BuildTask" />
+
+             objects in the <see
+             cref="T:Microsoft.Build.BuildEngine.Target" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -126,7 +228,14 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <format type="text/html"><a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a></format> element was imported into the project.</para>
+          <para
+            >Gets a value indicating whether the <format
+             type="text/html">
+              <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
+            </format>
+
+             element was imported into the project.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -145,7 +254,17 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <unmanagedCodeEntityReference>Name</unmanagedCodeEntityReference> attribute value of the <format type="text/html"><a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a></format> element.</para>
+          <para
+            >Gets the <unmanagedCodeEntityReference
+            >Name</unmanagedCodeEntityReference>
+
+             attribute value of the <format
+             type="text/html">
+              <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
+            </format>
+
+             element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -153,7 +272,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RemoveTask">
-      <MemberSignature Language="C#" Value="public void RemoveTask (Microsoft.Build.BuildEngine.BuildTask buildTask);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RemoveTask (Microsoft.Build.BuildEngine.BuildTask buildTask);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -166,11 +288,34 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:Microsoft.Build.BuildEngine.BuildTask" /> object represents a child <unmanagedCodeEntityReference>Task</unmanagedCodeEntityReference> element of the <unmanagedCodeEntityReference>Target</unmanagedCodeEntityReference> element.</para>
+          <para
+            >A <see
+             cref="T:Microsoft.Build.BuildEngine.BuildTask" />
+
+             object represents a child <unmanagedCodeEntityReference
+            >Task</unmanagedCodeEntityReference>
+
+             element of the <unmanagedCodeEntityReference
+            >Target</unmanagedCodeEntityReference>
+
+             element.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the specified <format type="text/html"><a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a></format> element from the <format type="text/html"><a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a></format> element.</para>
+          <para
+            >Removes the specified <format
+             type="text/html">
+              <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
+            </format>
+
+             element from the <format
+             type="text/html">
+              <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
+            </format>
+
+             element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

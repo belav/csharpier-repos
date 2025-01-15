@@ -15,7 +15,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The quality level is inversely proportional to the amount of time spent rendering. This mode does not affect text. To set the text rendering quality, use the <see cref="T:System.Drawing.Text.TextRenderingHint" /> enumeration.</para>
+      <para
+        >The quality level is inversely proportional to the amount of time spent rendering. This mode does not affect text. To set the text rendering quality, use the <see
+         cref="T:System.Drawing.Text.TextRenderingHint" />
+
+         enumeration.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

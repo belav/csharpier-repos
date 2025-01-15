@@ -159,8 +159,14 @@
       </tr>
     </table>
     <span>
-      <br />System.Web.UI.WebControls.DataGridItemCollection</span>
+      <br />
+
+      System.Web.UI.WebControls.DataGridItemCollection</span
+    >
     <span>
-      <br />30</span>
+      <br />
+
+      30</span
+    >
   </div>
 </testresults>

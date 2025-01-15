@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DataContractResolver" FullName="System.Runtime.Serialization.DataContractResolver">
   <TypeSignature Language="C#" Value="public abstract class DataContractResolver" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit DataContractResolver extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit DataContractResolver extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Serialization</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,9 +16,21 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Developers should be careful about what data is being sent over the wire. You can use transport or message security to secure that data. crdefault see <format type="text/html"><a href="05d73638-30a9-43b4-8c86-f27f57b6eef1">Security</a></format>.</para>
+      <para
+        >Developers should be careful about what data is being sent over the wire. You can use transport or message security to secure that data. crdefault see <format
+         type="text/html">
+          <a href="05d73638-30a9-43b4-8c86-f27f57b6eef1">Security</a>
+        </format>
+
+        .</para
+      >
       <block subset="none" type="note">
-        <para>Only use <see cref="T:System.Runtime.Serialization.DataContractResolver" /> if you are completely sure of what information is being serialized. Malicious types can cause unexpected behavior.</para>
+        <para
+          >Only use <see
+           cref="T:System.Runtime.Serialization.DataContractResolver" />
+
+           if you are completely sure of what information is being serialized. Malicious types can cause unexpected behavior.</para
+        >
       </block>
     </remarks>
     <summary>
@@ -26,7 +41,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected DataContractResolver ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -36,13 +54,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataContractResolver" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Serialization.DataContractResolver" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ResolveName">
-      <MemberSignature Language="C#" Value="public abstract Type ResolveName (string typeName, string typeNamespace, Type declaredType, System.Runtime.Serialization.DataContractResolver knownTypeResolver);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Type ResolveName(string typeName, string typeNamespace, class System.Type declaredType, class System.Runtime.Serialization.DataContractResolver knownTypeResolver) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract Type ResolveName (string typeName, string typeNamespace, Type declaredType, System.Runtime.Serialization.DataContractResolver knownTypeResolver);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Type ResolveName(string typeName, string typeNamespace, class System.Type declaredType, class System.Runtime.Serialization.DataContractResolver knownTypeResolver) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -54,12 +83,20 @@
         <Parameter Name="typeName" Type="System.String" />
         <Parameter Name="typeNamespace" Type="System.String" />
         <Parameter Name="declaredType" Type="System.Type" />
-        <Parameter Name="knownTypeResolver" Type="System.Runtime.Serialization.DataContractResolver" />
+        <Parameter
+          Name="knownTypeResolver"
+          Type="System.Runtime.Serialization.DataContractResolver"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you want to use the known type resolution logic inside your implementation, a reference to it is passed in as the <paramref name="knownTypeResolver" /> parameter.</para>
+          <para
+            >If you want to use the known type resolution logic inside your implementation, a reference to it is passed in as the <paramref
+             name="knownTypeResolver" />
+
+             parameter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,18 +107,36 @@
           <para>The type the xsi:type name and namespace is mapped to. </para>
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The xsi:type name to map.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The xsi:type name to map.</param
+        >
         <param name="typeNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />The xsi:type namespace to map.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The xsi:type namespace to map.</param
+        >
         <param name="declaredType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type declared in the data contract.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type declared in the data contract.</param
+        >
         <param name="knownTypeResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />The known type resolver.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The known type resolver.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="TryResolveType">
-      <MemberSignature Language="C#" Value="public abstract bool TryResolveType (Type type, Type declaredType, System.Runtime.Serialization.DataContractResolver knownTypeResolver, out System.Xml.XmlDictionaryString typeName, out System.Xml.XmlDictionaryString typeNamespace);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool TryResolveType(class System.Type type, class System.Type declaredType, class System.Runtime.Serialization.DataContractResolver knownTypeResolver, class System.Xml.XmlDictionaryString typeName, class System.Xml.XmlDictionaryString typeNamespace) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool TryResolveType (Type type, Type declaredType, System.Runtime.Serialization.DataContractResolver knownTypeResolver, out System.Xml.XmlDictionaryString typeName, out System.Xml.XmlDictionaryString typeNamespace);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool TryResolveType(class System.Type type, class System.Type declaredType, class System.Runtime.Serialization.DataContractResolver knownTypeResolver, class System.Xml.XmlDictionaryString typeName, class System.Xml.XmlDictionaryString typeNamespace) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -92,9 +147,12 @@
       <Parameters>
         <Parameter Name="type" Type="System.Type" />
         <Parameter Name="declaredType" Type="System.Type" />
-        <Parameter Name="knownTypeResolver" Type="System.Runtime.Serialization.DataContractResolver" />
-        <Parameter Name="typeName" Type="System.Xml.XmlDictionaryString&amp;" RefType="out" />
-        <Parameter Name="typeNamespace" Type="System.Xml.XmlDictionaryString&amp;" RefType="out" />
+        <Parameter
+          Name="knownTypeResolver"
+          Type="System.Runtime.Serialization.DataContractResolver"
+        />
+        <Parameter Name="typeName" Type="System.Xml.XmlDictionaryString&" RefType="out" />
+        <Parameter Name="typeNamespace" Type="System.Xml.XmlDictionaryString&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="type">To be added.</param>

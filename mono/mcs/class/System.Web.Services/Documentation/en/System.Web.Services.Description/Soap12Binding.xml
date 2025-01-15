@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="Soap12Binding" FullName="System.Web.Services.Description.Soap12Binding">
-  <TypeSignature Language="C#" Value="public sealed class Soap12Binding : System.Web.Services.Description.SoapBinding" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class Soap12Binding : System.Web.Services.Description.SoapBinding"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -39,7 +42,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Services.Description.Soap12Binding" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Services.Description.Soap12Binding" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

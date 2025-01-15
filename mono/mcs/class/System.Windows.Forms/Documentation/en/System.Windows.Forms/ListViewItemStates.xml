@@ -17,11 +17,30 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="P:System.Windows.Forms.DrawListViewItemEventArgs.State" /> and <see cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ItemState" /> properties. For more information, see the <see cref="E:System.Windows.Forms.ListView.DrawItem" /> and <see cref="E:System.Windows.Forms.ListView.DrawSubItem" /> events.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="P:System.Windows.Forms.DrawListViewItemEventArgs.State" />
+
+         and <see
+         cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ItemState" />
+
+         properties. For more information, see the <see
+         cref="E:System.Windows.Forms.ListView.DrawItem" />
+
+         and <see
+         cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+
+         events.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines constants that represent the possible states of a <see cref="T:System.Windows.Forms.ListViewItem" />.</para>
+      <para
+        >Defines constants that represent the possible states of a <see
+         cref="T:System.Windows.Forms.ListViewItem" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>

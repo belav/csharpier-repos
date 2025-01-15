@@ -11,8 +11,7 @@
   <Interfaces />
   <Docs>
     <summary>Extends Pattern to create a solid pattern consisting of a solid color and an optional alpha value. </summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -43,8 +42,7 @@
         <param name="color">Color to use for the solid pattern.</param>
         <param name="solid">Whether this should ignore the alpha channel.</param>
         <summary>Creates a SolidPattern pattern from the given Color, you can specify whether to ignore the alpha channel.</summary>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -64,8 +62,7 @@
         <param name="g">Green component, between 0 and 1.</param>
         <param name="b">Blue component, between 0 and 1.</param>
         <summary>Creates a SolidPattern pattern from the given RGB components.</summary>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
         <since version="Mono-1.2.5" />
       </Docs>
       <AssemblyInfo>
@@ -74,7 +71,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SolidPattern (double r, double g, double b, double a);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SolidPattern (double r, double g, double b, double a);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="r" Type="System.Double" />

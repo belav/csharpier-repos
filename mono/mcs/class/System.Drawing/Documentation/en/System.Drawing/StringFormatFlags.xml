@@ -21,9 +21,20 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Drawing.StringFormatFlags" /> is used by the <see cref="T:System.Drawing.StringFormat" /> class.</para>
+        <see cref="T:System.Drawing.StringFormatFlags" />
+
+         is used by the <see
+         cref="T:System.Drawing.StringFormat" />
+
+         class.</para
+      >
       <block subset="none" type="note">
-        <para>The <see cref="F:System.Drawing.StringFormatFlags.FitBlackBox" /> field was misnamed and its behavior is similar to the NoFitBlackBox field in the original GDI+ implementation.</para>
+        <para
+          >The <see
+           cref="F:System.Drawing.StringFormatFlags.FitBlackBox" />
+
+           field was misnamed and its behavior is similar to the NoFitBlackBox field in the original GDI+ implementation.</para
+        >
       </block>
     </remarks>
     <summary>
@@ -138,7 +149,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Includes the trailing space at the end of each line. By default the boundary rectangle returned by the <see cref="Overload:System.Drawing.Graphics.MeasureString" /> method excludes the space at the end of each line. Set this flag to include that space in measurement.</para>
+          <para
+            >Includes the trailing space at the end of each line. By default the boundary rectangle returned by the <see
+             cref="Overload:System.Drawing.Graphics.MeasureString" />
+
+             method excludes the space at the end of each line. Set this flag to include that space in measurement.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

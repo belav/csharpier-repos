@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServiceDescriptionImportStyle" FullName="System.Web.Services.Description.ServiceDescriptionImportStyle">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public enum ServiceDescriptionImportStyle" />
+<Type
+  Name="ServiceDescriptionImportStyle"
+  FullName="System.Web.Services.Description.ServiceDescriptionImportStyle"
+>
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public enum ServiceDescriptionImportStyle"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -29,8 +35,7 @@
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.ServiceDescriptionImportStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -54,8 +59,7 @@
       <ReturnValue>
         <ReturnType>System.Web.Services.Description.ServiceDescriptionImportStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>

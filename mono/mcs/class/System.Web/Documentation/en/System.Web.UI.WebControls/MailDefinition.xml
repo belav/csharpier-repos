@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MailDefinition" FullName="System.Web.UI.WebControls.MailDefinition">
-  <TypeSignature Language="C#" Value="public sealed class MailDefinition : System.Web.UI.IStateManager" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class MailDefinition : System.Web.UI.IStateManager"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -22,11 +25,60 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.MailDefinition" /> class can be used by controls to create a <see cref="T:System.Net.Mail.MailMessage" /> object from a text file or a string that contains the body of the e-mail message. Use the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> class to simplify creating predefined e-mail messages to be sent by a control. If you want to send e-mail not using a control, see the <see cref="N:System.Net.Mail" /> class.</para>
-      <para>You can make text substitutions in the body of the e-mail message by passing to the <see cref="M:System.Web.UI.WebControls.MailDefinition.CreateMailMessage(System.String,System.Collections.IDictionary,System.Web.UI.Control)" /> method an <see cref="T:System.Collections.IDictionary" /> instance that maps strings to their replacements.</para>
-      <para>The <see cref="T:System.Net.Mail.MailMessage" /> object created by the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> class is sent using the <see cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" /> method of the <see cref="T:System.Net.Mail.SmtpClient" /> class. To be able to send e-mail, you must configure an SMTP mail server in your Web.config file. For more information, see the <format type="text/html"><a href="220b0329-e384-4e0c-86b4-0945ad17efd9">&lt;SMTP&gt; element</a></format>.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+         class can be used by controls to create a <see
+         cref="T:System.Net.Mail.MailMessage" />
+
+         object from a text file or a string that contains the body of the e-mail message. Use the <see
+         cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+         class to simplify creating predefined e-mail messages to be sent by a control. If you want to send e-mail not using a control, see the <see
+         cref="N:System.Net.Mail" />
+
+         class.</para
+      >
+      <para
+        >You can make text substitutions in the body of the e-mail message by passing to the <see
+         cref="M:System.Web.UI.WebControls.MailDefinition.CreateMailMessage(System.String,System.Collections.IDictionary,System.Web.UI.Control)" />
+
+         method an <see
+         cref="T:System.Collections.IDictionary" />
+
+         instance that maps strings to their replacements.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Net.Mail.MailMessage" />
+
+         object created by the <see
+         cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+         class is sent using the <see
+         cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" />
+
+         method of the <see
+         cref="T:System.Net.Mail.SmtpClient" />
+
+         class. To be able to send e-mail, you must configure an SMTP mail server in your Web.config file. For more information, see the <format
+         type="text/html">
+          <a href="220b0329-e384-4e0c-86b4-0945ad17efd9">&lt;SMTP&gt; element</a>
+        </format>
+
+        .</para
+      >
       <block subset="none" type="note">
-        <para>The <see cref="T:System.Web.UI.WebControls.MailDefinition" /> class does not support data binding. Properties of the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> class cannot be bound to data using the &lt;%#   %&gt; data-binding expression syntax.</para>
+        <para
+          >The <see
+           cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+           class does not support data binding. Properties of the <see
+           cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+           class cannot be bound to data using the &lt;%#   %&gt; data-binding expression syntax.</para
+        >
       </block>
     </remarks>
     <summary>
@@ -44,7 +96,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -70,9 +127,45 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" /> property specifies the location of the text file to use for the body of the e-mail message.</para>
-          <para>The <see cref="M:System.Web.UI.WebControls.MailDefinition.CreateMailMessage(System.String,System.Collections.IDictionary,System.Web.UI.Control)" /> method uses its <paramref name="owner" /> parameter to map the <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" /> property to a path on the server. If the <paramref name="owner" /> parameter points to a control on an .aspx page or to the page itself, the <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" /> property points to a text file in the same directory as the .aspx page. For example, if the .aspx page is located at C:\inetpub\wwwroot\default.aspx, the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> control looks for the text file in the directory C:\inetpub\wwwroot.</para>
-          <para>If the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> class is used in a user control contained in an .ascx file, the <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" /> property points to a text file located in the same directory as the user control. For example, if the .aspx page is located at C:\inetpub\wwwroot\default.aspx and the user control is at C:\inetpub\wwwroot\controls\control.aspx, the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> object looks for the text file in the directory C:\inetpub\wwwroot\controls.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+             property specifies the location of the text file to use for the body of the e-mail message.</para
+          >
+          <para
+            >The <see
+             cref="M:System.Web.UI.WebControls.MailDefinition.CreateMailMessage(System.String,System.Collections.IDictionary,System.Web.UI.Control)" />
+
+             method uses its <paramref
+             name="owner" />
+
+             parameter to map the <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+             property to a path on the server. If the <paramref
+             name="owner" />
+
+             parameter points to a control on an .aspx page or to the page itself, the <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+             property points to a text file in the same directory as the .aspx page. For example, if the .aspx page is located at C:\inetpub\wwwroot\default.aspx, the <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             control looks for the text file in the directory C:\inetpub\wwwroot.</para
+          >
+          <para
+            >If the <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             class is used in a user control contained in an .ascx file, the <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+             property points to a text file located in the same directory as the user control. For example, if the .aspx page is located at C:\inetpub\wwwroot\default.aspx and the user control is at C:\inetpub\wwwroot\controls\control.aspx, the <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             object looks for the text file in the directory C:\inetpub\wwwroot\controls.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -102,8 +195,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.WebControls.MailDefinition.CC" /> property contains a list of additional recipients of the e-mail message.</para>
-          <para>If the <see cref="P:System.Web.UI.WebControls.MailDefinition.CC" /> property contains an improperly formed e-mail address, the <see cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" /> method throws an <see cref="T:System.Web.HttpException" /> exception and the e-mail message is not sent.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.CC" />
+
+             property contains a list of additional recipients of the e-mail message.</para
+          >
+          <para
+            >If the <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.CC" />
+
+             property contains an improperly formed e-mail address, the <see
+             cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" />
+
+             method throws an <see
+             cref="T:System.Web.HttpException" />
+
+             exception and the e-mail message is not sent.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -115,7 +224,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateMailMessage">
-      <MemberSignature Language="C#" Value="public System.Net.Mail.MailMessage CreateMailMessage (string recipients, System.Collections.IDictionary replacements, System.Web.UI.Control owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Mail.MailMessage CreateMailMessage (string recipients, System.Collections.IDictionary replacements, System.Web.UI.Control owner);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Net.Mail.MailMessage</ReturnType>
@@ -129,11 +241,69 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.WebControls.MailDefinition.CreateMailMessage(System.String,System.Collections.IDictionary,System.Web.UI.Control)" /> method creates a new <see cref="T:System.Net.Mail.MailMessage" /> object that can be sent using the <see cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" /> method.</para>
-          <para>The <see cref="P:System.Web.Mail.MailMessage.BodyFormat" /> property must be set to indicate whether the mail message should be formatted as plain text (<see cref="F:System.Web.Mail.MailFormat.Text" />) or HTML (<see cref="F:System.Web.Mail.MailFormat.Html" />). </para>
-          <para>The <paramref name="recipients" /> parameter contains a comma-separated list of recipients of the e-mail message. If the <paramref name="recipients" /> parameter contains an improperly formatted Internet e-mail address, the <see cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" /> method throws an <see cref="T:System.Web.HttpException" /> exception and the e-mail message is not sent.</para>
-          <para>The <paramref name="replacements" /> parameter is an <see cref="T:System.Collections.IDictionary" /> instance that contains a list of strings to substitute. Strings are replaced in the order in which they were added to the <see cref="T:System.Collections.IDictionary" /> collection, and they can overwrite earlier replacements.</para>
-          <para>The <paramref name="owner" /> parameter indicates which control is the parent of the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> control. It determines which directory to search for the text file specified in the <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" /> property.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.WebControls.MailDefinition.CreateMailMessage(System.String,System.Collections.IDictionary,System.Web.UI.Control)" />
+
+             method creates a new <see
+             cref="T:System.Net.Mail.MailMessage" />
+
+             object that can be sent using the <see
+             cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" />
+
+             method.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Web.Mail.MailMessage.BodyFormat" />
+
+             property must be set to indicate whether the mail message should be formatted as plain text (<see
+             cref="F:System.Web.Mail.MailFormat.Text" />
+
+            ) or HTML (<see
+             cref="F:System.Web.Mail.MailFormat.Html" />
+
+            ). </para
+          >
+          <para
+            >The <paramref
+             name="recipients" />
+
+             parameter contains a comma-separated list of recipients of the e-mail message. If the <paramref
+             name="recipients" />
+
+             parameter contains an improperly formatted Internet e-mail address, the <see
+             cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" />
+
+             method throws an <see
+             cref="T:System.Web.HttpException" />
+
+             exception and the e-mail message is not sent.</para
+          >
+          <para
+            >The <paramref
+             name="replacements" />
+
+             parameter is an <see
+             cref="T:System.Collections.IDictionary" />
+
+             instance that contains a list of strings to substitute. Strings are replaced in the order in which they were added to the <see
+             cref="T:System.Collections.IDictionary" />
+
+             collection, and they can overwrite earlier replacements.</para
+          >
+          <para
+            >The <paramref
+             name="owner" />
+
+             parameter indicates which control is the parent of the <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             control. It determines which directory to search for the text file specified in the <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -144,18 +314,39 @@
           <para>The e-mail message from a text file.</para>
         </returns>
         <param name="recipients">
-          <attribution license="cc4" from="Microsoft" modified="false" />A comma-separated list of message recipients.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A comma-separated list of message recipients.</param
+        >
         <param name="replacements">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Collections.IDictionary" /> containing a list of strings and their replacement strings.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Collections.IDictionary" />
+
+           containing a list of strings and their replacement strings.</param
+        >
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Control" /> that owns this <see cref="T:System.Web.UI.WebControls.MailDefinition" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Control" />
+
+           that owns this <see
+           cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateMailMessage">
-      <MemberSignature Language="C#" Value="public System.Net.Mail.MailMessage CreateMailMessage (string recipients, System.Collections.IDictionary replacements, string body, System.Web.UI.Control owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Mail.MailMessage CreateMailMessage (string recipients, System.Collections.IDictionary replacements, string body, System.Web.UI.Control owner);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Net.Mail.MailMessage</ReturnType>
@@ -170,11 +361,63 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.UI.WebControls.MailDefinition.CreateMailMessage(System.String,System.Collections.IDictionary,System.Web.UI.Control)" /> method creates a new <see cref="T:System.Net.Mail.MailMessage" /> object that can be sent with the <see cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" /> method.</para>
-          <para>The <paramref name="recipients" /> parameter contains a comma-separated list of recipients of the e-mail message. If the <paramref name="recipients" /> parameter contains an improperly formatted Internet e-mail address, the <see cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" /> method throws an <see cref="T:System.Web.HttpException" /> exception and the e-mail message is not sent.</para>
-          <para>The <paramref name="replacements" /> parameter is an <see cref="T:System.Collections.IDictionary" /> instance that contains a list of strings to substitute. Strings are replaced in the order in which they were added to the <see cref="T:System.Collections.IDictionary" /> collection, and they can overwrite earlier replacements.</para>
-          <para>The <paramref name="body" /> parameter contains the text of the e-mail message. </para>
-          <para>The <paramref name="owner" /> parameter indicates which control is the parent of the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> control. It determines which directory to search for the text file specified in the <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" /> property.</para>
+          <para
+            >The <see
+             cref="M:System.Web.UI.WebControls.MailDefinition.CreateMailMessage(System.String,System.Collections.IDictionary,System.Web.UI.Control)" />
+
+             method creates a new <see
+             cref="T:System.Net.Mail.MailMessage" />
+
+             object that can be sent with the <see
+             cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" />
+
+             method.</para
+          >
+          <para
+            >The <paramref
+             name="recipients" />
+
+             parameter contains a comma-separated list of recipients of the e-mail message. If the <paramref
+             name="recipients" />
+
+             parameter contains an improperly formatted Internet e-mail address, the <see
+             cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" />
+
+             method throws an <see
+             cref="T:System.Web.HttpException" />
+
+             exception and the e-mail message is not sent.</para
+          >
+          <para
+            >The <paramref
+             name="replacements" />
+
+             parameter is an <see
+             cref="T:System.Collections.IDictionary" />
+
+             instance that contains a list of strings to substitute. Strings are replaced in the order in which they were added to the <see
+             cref="T:System.Collections.IDictionary" />
+
+             collection, and they can overwrite earlier replacements.</para
+          >
+          <para
+            >The <paramref
+             name="body" />
+
+             parameter contains the text of the e-mail message. </para
+          >
+          <para
+            >The <paramref
+             name="owner" />
+
+             parameter indicates which control is the parent of the <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             control. It determines which directory to search for the text file specified in the <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -185,20 +428,44 @@
           <para>The e-mail message with replacements from a text file.</para>
         </returns>
         <param name="recipients">
-          <attribution license="cc4" from="Microsoft" modified="false" />The comma-separated list of recipients.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The comma-separated list of recipients.</param
+        >
         <param name="replacements">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Collections.IDictionary" /> containing a list of strings and their replacement strings.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Collections.IDictionary" />
+
+           containing a list of strings and their replacement strings.</param
+        >
         <param name="body">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text of the e-mail message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text of the e-mail message.</param
+        >
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Control" /> that owns this <see cref="T:System.Web.UI.WebControls.MailDefinition" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Control" />
+
+           that owns this <see
+           cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="EmbeddedObjects">
-      <MemberSignature Language="C#" Value="public System.Web.UI.WebControls.EmbeddedMailObjectsCollection EmbeddedObjects { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.WebControls.EmbeddedMailObjectsCollection EmbeddedObjects { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -219,11 +486,30 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" /> items in the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" /> collection returned by the <see cref="P:System.Web.UI.WebControls.MailDefinition.EmbeddedObjects" /> property represent items to embed in an e-mail message. These items can include image files such as company logos or other graphics.</para>
+          <para
+            >The <see
+             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+
+             items in the <see
+             cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+             collection returned by the <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.EmbeddedObjects" />
+
+             property represent items to embed in an e-mail message. These items can include image files such as company logos or other graphics.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" /> instances, typically used to embed images in a <see cref="T:System.Web.UI.WebControls.MailDefinition" /> object before sending an e-mail to a user.</para>
+          <para
+            >Gets a collection of <see
+             cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+
+             instances, typically used to embed images in a <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             object before sending an e-mail to a user.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -249,7 +535,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.WebControls.MailDefinition.From" /> property contains the e-mail address of the sender of the e-mail message. If the <see cref="P:System.Web.UI.WebControls.MailDefinition.From" /> property is left blank, or contains an improperly formed e-mail address, the <see cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" /> method throws an <see cref="T:System.Web.HttpException" /> exception and the e-mail message is not sent.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.From" />
+
+             property contains the e-mail address of the sender of the e-mail message. If the <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.From" />
+
+             property is left blank, or contains an improperly formed e-mail address, the <see
+             cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" />
+
+             method throws an <see
+             cref="T:System.Web.HttpException" />
+
+             exception and the e-mail message is not sent.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -279,7 +579,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Web.UI.WebControls.MailDefinition.IsBodyHtml" /> property to specify whether the body of the e-mail message contains plain text or HTML markup.</para>
+          <para
+            >Use the <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.IsBodyHtml" />
+
+             property to specify whether the body of the e-mail message contains plain text or HTML markup.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -291,7 +596,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Priority">
-      <MemberSignature Language="C#" Value="public System.Net.Mail.MailPriority Priority { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Mail.MailPriority Priority { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -306,7 +614,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.WebControls.MailDefinition.Priority" /> property indicates the relative priority of the e-mail message.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.Priority" />
+
+             property indicates the relative priority of the e-mail message.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -336,7 +649,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.WebControls.MailDefinition.Subject" /> property is used as the subject line of the e-mail message. It can be left empty.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.WebControls.MailDefinition.Subject" />
+
+             property is used as the subject line of the e-mail message. It can be left empty.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -348,7 +666,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="System.Web.UI.IStateManager.IsTrackingViewState">
-      <MemberSignature Language="C#" Value="bool System.Web.UI.IStateManager.IsTrackingViewState { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Web.UI.IStateManager.IsTrackingViewState { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -360,9 +681,28 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> instance is cast to an <see cref="T:System.Web.UI.IStateManager" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             instance is cast to an <see
+             cref="T:System.Web.UI.IStateManager" />
+
+             interface.</para
+          >
           <block subset="none" type="note">
-            <para>The <see cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" /> and <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" /> properties are not saved in the <see cref="P:System.Web.UI.Control.ViewState" /> property.</para>
+            <para
+              >The <see
+               cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+               and <see
+               cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+
+               properties are not saved in the <see
+               cref="P:System.Web.UI.Control.ViewState" />
+
+               property.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -387,11 +727,24 @@
         <param name="state">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> instance is cast to an <see cref="T:System.Web.UI.IStateManager" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             instance is cast to an <see
+             cref="T:System.Web.UI.IStateManager" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Restores view-state information from a previous page request that was saved by the <see cref="M:System.Web.UI.IStateManager.SaveViewState" /> method.</para>
+          <para
+            >Restores view-state information from a previous page request that was saved by the <see
+             cref="M:System.Web.UI.IStateManager.SaveViewState" />
+
+             method.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -408,7 +761,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> instance is cast to an <see cref="T:System.Web.UI.IStateManager" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             instance is cast to an <see
+             cref="T:System.Web.UI.IStateManager" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -433,11 +794,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.MailDefinition" /> instance is cast to an <see cref="T:System.Web.UI.IStateManager" /> interface.</para>
+          <para
+            >This member is an explicit interface member implementation. It can be used only when the <see
+             cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+             instance is cast to an <see
+             cref="T:System.Web.UI.IStateManager" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Causes tracking of view-state changes to the server control so they can be stored in the server control's <see cref="T:System.Web.UI.StateBag" /> object.</para>
+          <para
+            >Causes tracking of view-state changes to the server control so they can be stored in the server control's <see
+             cref="T:System.Web.UI.StateBag" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>

@@ -12,9 +12,48 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.TableCaptionAlign" /> enumeration represents the horizontal or vertical placement of the HTML caption element in controls that can be rendered as tables, such as <see cref="T:System.Web.UI.WebControls.Table" />, <see cref="T:System.Web.UI.WebControls.GridView" />, <see cref="T:System.Web.UI.WebControls.DetailsView" />, or <see cref="T:System.Web.UI.WebControls.Calendar" />. For example, the <see cref="P:System.Web.UI.WebControls.Table.CaptionAlign" /> property uses these enumeration values to set the caption alignment in a <see cref="T:System.Web.UI.WebControls.Table" /> control. </para>
-      <para>If you specify <see cref="F:System.Web.UI.WebControls.TableCaptionAlign.NotSet" />, the browser in which the control is rendered determines where to align the caption.</para>
-      <para>The <see cref="P:System.Web.UI.WebControls.Table.CaptionAlign" /> property specifies the position of the caption element with respect to controls that can be rendered as tables. The <see cref="P:System.Web.UI.WebControls.Table.Caption" /> property specifies the text to display in the caption element. Assistive technology devices can use the description provided by the <see cref="P:System.Web.UI.WebControls.Table.Caption" /> property to make the control more accessible. For example, a screen reader device might read the caption to the user to provide them with a description of the table.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.TableCaptionAlign" />
+
+         enumeration represents the horizontal or vertical placement of the HTML caption element in controls that can be rendered as tables, such as <see
+         cref="T:System.Web.UI.WebControls.Table" />
+
+        , <see
+         cref="T:System.Web.UI.WebControls.GridView" />
+
+        , <see
+         cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        , or <see
+         cref="T:System.Web.UI.WebControls.Calendar" />
+
+        . For example, the <see
+         cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
+
+         property uses these enumeration values to set the caption alignment in a <see
+         cref="T:System.Web.UI.WebControls.Table" />
+
+         control. </para
+      >
+      <para
+        >If you specify <see
+         cref="F:System.Web.UI.WebControls.TableCaptionAlign.NotSet" />
+
+        , the browser in which the control is rendered determines where to align the caption.</para
+      >
+      <para
+        >The <see
+         cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
+
+         property specifies the position of the caption element with respect to controls that can be rendered as tables. The <see
+         cref="P:System.Web.UI.WebControls.Table.Caption" />
+
+         property specifies the text to display in the caption element. Assistive technology devices can use the description provided by the <see
+         cref="P:System.Web.UI.WebControls.Table.Caption" />
+
+         property to make the control more accessible. For example, a screen reader device might read the caption to the user to provide them with a description of the table.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

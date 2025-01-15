@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DISPPARAMS" FullName="System.Runtime.InteropServices.DISPPARAMS">
   <TypeSignature Maintainer="auto" Language="C#" Value="public struct DISPPARAMS" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential sealed beforefieldinit DISPPARAMS extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential sealed beforefieldinit DISPPARAMS extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -26,7 +29,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use <see cref="T:System.Runtime.InteropServices.ComTypes.DISPPARAMS" /> instead.</para>
+      <para
+        >Use <see
+         cref="T:System.Runtime.InteropServices.ComTypes.DISPPARAMS" />
+
+         instead.</para
+      >
     </summary>
   </Docs>
   <Members>

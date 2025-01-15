@@ -1,6 +1,12 @@
 <Type Name="Statvfs" FullName="Mono.Unix.Native.Statvfs">
-  <TypeSignature Language="C#" Value="public struct Statvfs : IEquatable&lt;Mono.Unix.Native.Statvfs&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit Statvfs extends System.ValueType implements class System.IEquatable`1&lt;valuetype Mono.Unix.Native.Statvfs&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public struct Statvfs : IEquatable<Mono.Unix.Native.Statvfs>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit Statvfs extends System.ValueType implements class System.IEquatable`1<valuetype Mono.Unix.Native.Statvfs>"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Posix</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -26,15 +32,17 @@
   </Attributes>
   <Docs>
     <summary>File system statistics.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
     <altmember cref="M:Mono.Unix.Native.Syscall.fstatvfs" />
     <altmember cref="M:Mono.Unix.Native.Syscall.statvfs" />
   </Docs>
   <Members>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public bool Equals (Mono.Unix.Native.Statvfs value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype Mono.Unix.Native.Statvfs value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Equals(valuetype Mono.Unix.Native.Statvfs value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -56,7 +64,10 @@
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -123,7 +134,12 @@
         <ReturnType>System.UInt64</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>Size of filesystem in <see cref="F:Mono.Unix.Native.Statvfs.f_frsize" /> units.</summary>
+        <summary
+          >Size of filesystem in <see
+           cref="F:Mono.Unix.Native.Statvfs.f_frsize" />
+
+           units.</summary
+        >
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -197,7 +213,10 @@
     </Member>
     <Member MemberName="f_flag">
       <MemberSignature Language="C#" Value="public Mono.Unix.Native.MountFlags f_flag;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype Mono.Unix.Native.MountFlags f_flag" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype Mono.Unix.Native.MountFlags f_flag"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -265,7 +284,10 @@
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -283,8 +305,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (Mono.Unix.Native.Statvfs lhs, Mono.Unix.Native.Statvfs rhs);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype Mono.Unix.Native.Statvfs lhs, valuetype Mono.Unix.Native.Statvfs rhs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (Mono.Unix.Native.Statvfs lhs, Mono.Unix.Native.Statvfs rhs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Equality(valuetype Mono.Unix.Native.Statvfs lhs, valuetype Mono.Unix.Native.Statvfs rhs) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -307,8 +335,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (Mono.Unix.Native.Statvfs lhs, Mono.Unix.Native.Statvfs rhs);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype Mono.Unix.Native.Statvfs lhs, valuetype Mono.Unix.Native.Statvfs rhs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (Mono.Unix.Native.Statvfs lhs, Mono.Unix.Native.Statvfs rhs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Inequality(valuetype Mono.Unix.Native.Statvfs lhs, valuetype Mono.Unix.Native.Statvfs rhs) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

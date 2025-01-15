@@ -14,7 +14,14 @@
     <since version="2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a single <format type="text/html"><a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a></format> element in an vstecmsbuild project.</para>
+      <para
+        >Represents a single <format
+         type="text/html">
+          <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
+        </format>
+
+         element in an vstecmsbuild project.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +37,17 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> attribute value of the <format type="text/html"><a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a></format> element.</para>
+          <para
+            >Gets the <unmanagedCodeEntityReference
+            >Condition</unmanagedCodeEntityReference>
+
+             attribute value of the <format
+             type="text/html">
+              <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
+            </format>
+
+             element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -49,7 +66,17 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the fully qualified path of the file specified in the <unmanagedCodeEntityReference>Name</unmanagedCodeEntityReference> attribute of the <format type="text/html"><a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a></format> element.</para>
+          <para
+            >Gets the fully qualified path of the file specified in the <unmanagedCodeEntityReference
+            >Name</unmanagedCodeEntityReference>
+
+             attribute of the <format
+             type="text/html">
+              <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
+            </format>
+
+             element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,7 +95,14 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <format type="text/html"><a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a></format> element was imported into the project.</para>
+          <para
+            >Gets a value indicating whether the <format
+             type="text/html">
+              <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
+            </format>
+
+             element was imported into the project.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -87,7 +121,17 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <unmanagedCodeEntityReference>Project</unmanagedCodeEntityReference> attribute value of the <format type="text/html"><a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a></format> element.</para>
+          <para
+            >Gets or sets the <unmanagedCodeEntityReference
+            >Project</unmanagedCodeEntityReference>
+
+             attribute value of the <format
+             type="text/html">
+              <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
+            </format>
+
+             element.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+Status" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+Status">
+<Type
+  Name="VisualStyleElement+Status"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+Status"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.Status" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

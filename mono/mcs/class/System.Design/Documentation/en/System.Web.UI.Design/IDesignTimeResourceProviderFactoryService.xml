@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IDesignTimeResourceProviderFactoryService" FullName="System.Web.UI.Design.IDesignTimeResourceProviderFactoryService">
+<Type
+  Name="IDesignTimeResourceProviderFactoryService"
+  FullName="System.Web.UI.Design.IDesignTimeResourceProviderFactoryService"
+>
   <TypeSignature Language="C#" Value="public interface IDesignTimeResourceProviderFactoryService" />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
@@ -10,12 +13,20 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides an interface for creating a custom <see cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" /> class.</para>
+      <para
+        >Provides an interface for creating a custom <see
+         cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" />
+
+         class.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="GetFactory">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.DesignTimeResourceProviderFactory GetFactory ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.DesignTimeResourceProviderFactory GetFactory ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -28,7 +39,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a <see cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" /> object.</para>
+          <para
+            >Creates a <see
+             cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

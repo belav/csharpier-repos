@@ -13,8 +13,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.SystemInformation" /> class provides static properties that can be used to get information about the current system environment. The class provides access to information such as Windows display element sizes, operating system settings, network availability, and the capabilities of hardware installed on the system. This class cannot be instantiated.</para>
-      <para>For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at <see cref="">http://msdn.microsoft.com</see>.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.SystemInformation" />
+
+         class provides static properties that can be used to get information about the current system environment. The class provides access to information such as Windows display element sizes, operating system settings, network availability, and the capabilities of hardware installed on the system. This class cannot be instantiated.</para
+      >
+      <para
+        >For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at <see
+         cref="">http://msdn.microsoft.com</see>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -41,7 +51,10 @@
       </Docs>
     </Member>
     <Member MemberName="ArrangeDirection">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.ArrangeDirection ArrangeDirection { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.ArrangeDirection ArrangeDirection { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ArrangeDirection</ReturnType>
@@ -50,7 +63,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.ArrangeDirection" /> property indicates the direction in which minimized windows are arranged on the desktop or in a Multiple Document Interface (MDI) container.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.ArrangeDirection" />
+
+             property indicates the direction in which minimized windows are arranged on the desktop or in a Multiple Document Interface (MDI) container.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -63,7 +81,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ArrangeStartingPosition">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.ArrangeStartingPosition ArrangeStartingPosition { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.ArrangeStartingPosition ArrangeStartingPosition { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ArrangeStartingPosition</ReturnType>
@@ -72,11 +93,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.ArrangeStartingPosition" /> property indicates the corner of a screen or window in which the operating system begins to arrange minimized windows.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+             property indicates the corner of a screen or window in which the operating system begins to arrange minimized windows.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets an <see cref="T:System.Windows.Forms.ArrangeStartingPosition" /> value that indicates the starting position from which the operating system arranges minimized windows.</para>
+          <para
+            >Gets an <see
+             cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+             value that indicates the starting position from which the operating system arranges minimized windows.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -85,7 +116,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BootMode">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.BootMode BootMode { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.BootMode BootMode { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.BootMode</ReturnType>
@@ -94,11 +128,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.BootMode" /> property indicates whether the operating system was started in a normal or safe boot mode.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.BootMode" />
+
+             property indicates whether the operating system was started in a normal or safe boot mode.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Windows.Forms.BootMode" /> value that indicates the boot mode the system was started in.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Windows.Forms.BootMode" />
+
+             value that indicates the boot mode the system was started in.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -107,7 +151,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Border3DSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size Border3DSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size Border3DSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -116,9 +163,33 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.Border3DSize" /> property indicates the thickness, in pixels, of a three-dimensional (3-D) style system control border.</para>
-          <para>The <see cref="P:System.Drawing.Size.Width" /> property of the <see cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />  property indicates the width of a vertical 3-D border. The <see cref="P:System.Drawing.Size.Height" /> property of the <see cref="P:System.Windows.Forms.SystemInformation.Border3DSize" /> property indicates the height of a horizontal 3-D border.</para>
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.BorderSize" /> property indicates the thickness of a window or system control border that is not a 3-D style border.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
+
+             property indicates the thickness, in pixels, of a three-dimensional (3-D) style system control border.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Drawing.Size.Width" />
+
+             property of the <see
+             cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
+
+              property indicates the width of a vertical 3-D border. The <see
+             cref="P:System.Drawing.Size.Height" />
+
+             property of the <see
+             cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
+
+             property indicates the height of a horizontal 3-D border.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+
+             property indicates the thickness of a window or system control border that is not a 3-D style border.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -149,7 +220,10 @@
       </Docs>
     </Member>
     <Member MemberName="BorderSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size BorderSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size BorderSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -158,9 +232,36 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.BorderSize" /> property indicates the thickness of a flat-style system control border in pixels.</para>
-          <para>The <see cref="P:System.Drawing.Size.Width" /> property of the <see cref="P:System.Windows.Forms.SystemInformation.BorderSize" /> property indicates the width of a vertical flat-style border. The <see cref="P:System.Drawing.Size.Height" /> property of the <see cref="P:System.Windows.Forms.SystemInformation.BorderSize" /> property indicates the height of a horizontal flat-style border.</para>
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.Border3DSize" /> property of the <see cref="T:System.Windows.Forms.SystemInformation" /> class indicates the thickness of a three-dimensional (3-D) style window or system control border.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+
+             property indicates the thickness of a flat-style system control border in pixels.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Drawing.Size.Width" />
+
+             property of the <see
+             cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+
+             property indicates the width of a vertical flat-style border. The <see
+             cref="P:System.Drawing.Size.Height" />
+
+             property of the <see
+             cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+
+             property indicates the height of a horizontal flat-style border.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
+
+             property of the <see
+             cref="T:System.Windows.Forms.SystemInformation" />
+
+             class indicates the thickness of a three-dimensional (3-D) style window or system control border.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -173,7 +274,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CaptionButtonSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size CaptionButtonSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size CaptionButtonSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -182,7 +286,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.CaptionButtonSize" /> property indicates the standard dimensions of a button in the title bar of a window.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.CaptionButtonSize" />
+
+             property indicates the standard dimensions of a button in the title bar of a window.</para
+          >
           <para>The value of this property can be used to ensure that a button is properly sized to fit within the title bar of a window. Window caption buttons should be sized less than or equal to the standard dimensions for window caption buttons to ensure that they can be displayed in view correctly.</para>
         </remarks>
         <summary>
@@ -205,7 +314,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.CaptionHeight" /> property indicates the height of the standard window title bar area, in pixels.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.CaptionHeight" />
+
+             property indicates the height of the standard window title bar area, in pixels.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -269,8 +383,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.ComputerName" /> property retrieves the NetBIOS name of the local computer. This is accomplished with a call into the native System Information function GetComputerName. This name is established at system startup, when the system reads it from the registry. If the local computer is a node in a cluster, <see cref="P:System.Windows.Forms.SystemInformation.ComputerName" /> returns the name of the cluster virtual server.</para>
-          <para>You can use the <see cref="P:System.Windows.Forms.SystemInformation.ComputerName" /> method to determine the name of the computer that is displayed to other users on a network.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
+
+             property retrieves the NetBIOS name of the local computer. This is accomplished with a call into the native System Information function GetComputerName. This name is established at system startup, when the system reads it from the registry. If the local computer is a node in a cluster, <see
+             cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
+
+             returns the name of the cluster virtual server.</para
+          >
+          <para
+            >You can use the <see
+             cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
+
+             method to determine the name of the computer that is displayed to other users on a network.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -283,7 +410,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CursorSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size CursorSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size CursorSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -314,7 +444,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.DbcsEnabled" /> property indicates whether the current operating system supports DBCS.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.DbcsEnabled" />
+
+             property indicates whether the current operating system supports DBCS.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -346,7 +481,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DoubleClickSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size DoubleClickSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size DoubleClickSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -355,8 +493,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.DoubleClickSize" /> property indicates the size of a rectangular area centered around the point at which the last click occurred. To cause a double-click, a second click must occur within the area of the rectangle before the double-click time elapses.</para>
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.DoubleClickTime" /> property indicates the maximum number of milliseconds that can elapse before a second click for the second click to cause a double-click.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.DoubleClickSize" />
+
+             property indicates the size of a rectangular area centered around the point at which the last click occurred. To cause a double-click, a second click must occur within the area of the rectangle before the double-click time elapses.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.DoubleClickTime" />
+
+             property indicates the maximum number of milliseconds that can elapse before a second click for the second click to cause a double-click.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -379,7 +527,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A double-click is a series of two clicks of the mouse button, the second occurring within a specified length of time after, and within a specified distance from, the first. The double-click time is the maximum number of milliseconds that can elapse between the first and second click of a double-click.</para>
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.DoubleClickSize" /> property indicates the size of a rectangular area centered around the point at which the last click occurred. To cause a double-click, a second click must occur within the area of the rectangle before the double-click time elapses.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.DoubleClickSize" />
+
+             property indicates the size of a rectangular area centered around the point at which the last click occurred. To cause a double-click, a second click must occur within the area of the rectangle before the double-click time elapses.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -423,7 +576,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.DragSize" /> property indicates the size, in pixels, of a rectangle centered around the point at which the mouse button was pressed. Windows uses the rectangle as a boundary within which it does not start a drag operation.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.DragSize" />
+
+             property indicates the size, in pixels, of a rectangle centered around the point at which the mouse button was pressed. Windows uses the rectangle as a boundary within which it does not start a drag operation.</para
+          >
           <para>A user can hold a mouse button down and move the mouse within this area before a drag operation begins, which enables the user to click and release the mouse button easily without unintentionally starting a drag operation.</para>
         </remarks>
         <summary>
@@ -437,7 +595,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FixedFrameBorderSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size FixedFrameBorderSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size FixedFrameBorderSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -446,8 +607,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" /> property indicates the thickness of the frame, in pixels, around the perimeter of a window that has a caption but is not sizable.</para>
-          <para>The <see cref="P:System.Drawing.Size.Width" /> property of <see cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" /> is the height of the horizontal border and the <see cref="P:System.Drawing.Size.Height" /> property of <see cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" /> is the width of the vertical border.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
+
+             property indicates the thickness of the frame, in pixels, around the perimeter of a window that has a caption but is not sizable.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Drawing.Size.Width" />
+
+             property of <see
+             cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
+
+             is the height of the horizontal border and the <see
+             cref="P:System.Drawing.Size.Height" />
+
+             property of <see
+             cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
+
+             is the width of the vertical border.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -496,7 +676,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.FontSmoothingType" /> property returns a value that indicates the type of currently active font smoothing.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.FontSmoothingType" />
+
+             property returns a value that indicates the type of currently active font smoothing.</para
+          >
           <para>The following table indicates the meaning of the values returned by this property: </para>
           <list type="table">
             <listheader>
@@ -545,7 +730,10 @@
       </Docs>
     </Member>
     <Member MemberName="FrameBorderSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size FrameBorderSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size FrameBorderSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -554,8 +742,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.FrameBorderSize" /> property indicates the width and height of the resizing border for a window.</para>
-          <para>The <see cref="P:System.Drawing.Size.Width" /> value of this property is the width of a vertical resizing border. The <see cref="P:System.Drawing.Size.Height" /> value of this property is the height of a horizontal resizing border.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.FrameBorderSize" />
+
+             property indicates the width and height of the resizing border for a window.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Drawing.Size.Width" />
+
+             value of this property is the width of a vertical resizing border. The <see
+             cref="P:System.Drawing.Size.Height" />
+
+             value of this property is the height of a horizontal resizing border.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -606,7 +807,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.HorizontalFocusThickness" /> property indicates the width of the left and right edges of the system focus rectangle, in pixels. The system focus rectangle is used to draw user's attention to a window or area by displaying a rectangular highlighted outline.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.HorizontalFocusThickness" />
+
+             property indicates the width of the left and right edges of the system focus rectangle, in pixels. The system focus rectangle is used to draw user's attention to a window or area by displaying a rectangular highlighted outline.</para
+          >
           <block subset="none" type="note">
             <para>This is supported only on Windows XP and the Windows Server 2003 family.</para>
           </block>
@@ -618,7 +824,10 @@
       </Docs>
     </Member>
     <Member MemberName="HorizontalResizeBorderThickness">
-      <MemberSignature Language="C#" Value="public static int HorizontalResizeBorderThickness { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int HorizontalResizeBorderThickness { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -630,7 +839,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.HorizontalResizeBorderThickness" /> property indicates the width of the vertical sizing border around the perimeter of a window being resized.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.HorizontalResizeBorderThickness" />
+
+             property indicates the width of the vertical sizing border around the perimeter of a window being resized.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -639,7 +853,10 @@
       </Docs>
     </Member>
     <Member MemberName="HorizontalScrollBarArrowWidth">
-      <MemberSignature Language="C#" Value="public static int HorizontalScrollBarArrowWidth { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int HorizontalScrollBarArrowWidth { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -677,7 +894,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="HorizontalScrollBarThumbWidth">
-      <MemberSignature Language="C#" Value="public static int HorizontalScrollBarThumbWidth { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int HorizontalScrollBarThumbWidth { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -686,7 +906,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.HorizontalScrollBarThumbWidth" /> property indicates the width of the scroll box used to indicate scroll bar position and to drag the scroll bar to a new position. The scroll box is also called the thumb box.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.HorizontalScrollBarThumbWidth" />
+
+             property indicates the width of the scroll box used to indicate scroll bar position and to drag the scroll bar to a new position. The scroll box is also called the thumb box.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -711,7 +936,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IconHorizontalSpacing" /> property indicates the width of the space for an icon in large icon view. The system uses this distance to arrange icons in large icon view.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IconHorizontalSpacing" />
+
+             property indicates the width of the space for an icon in large icon view. The system uses this distance to arrange icons in large icon view.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -739,7 +969,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IconSpacingSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size IconSpacingSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size IconSpacingSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -748,7 +981,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IconSpacingSize" /> property indicates the size of the grid rectangle that each icon fits into when the system arranges them in a large-icon view. This value is always greater than or equal to <see cref="P:System.Windows.Forms.SystemInformation.IconSize" />.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IconSpacingSize" />
+
+             property indicates the size of the grid rectangle that each icon fits into when the system arranges them in a large-icon view. This value is always greater than or equal to <see
+             cref="P:System.Windows.Forms.SystemInformation.IconSize" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -773,7 +1014,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IconVerticalSpacing" /> property indicates the height of the space for an icon in large icon view. The system uses this distance to arrange icons in large icon view.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IconVerticalSpacing" />
+
+             property indicates the height of the space for an icon in large icon view. The system uses this distance to arrange icons in large icon view.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -782,7 +1028,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsActiveWindowTrackingEnabled">
-      <MemberSignature Language="C#" Value="public static bool IsActiveWindowTrackingEnabled { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsActiveWindowTrackingEnabled { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -794,7 +1043,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsActiveWindowTrackingEnabled" /> property indicates whether active window tracking is enabled. Active window tracking causes any window the mouse is directly over to become the active window.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsActiveWindowTrackingEnabled" />
+
+             property indicates whether active window tracking is enabled. Active window tracking causes any window the mouse is directly over to become the active window.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -806,7 +1060,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsComboBoxAnimationEnabled">
-      <MemberSignature Language="C#" Value="public static bool IsComboBoxAnimationEnabled { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsComboBoxAnimationEnabled { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -818,7 +1075,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsComboBoxAnimationEnabled" /> property indicates whether the slide-open effect for system control combo boxes is enabled.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsComboBoxAnimationEnabled" />
+
+             property indicates whether the slide-open effect for system control combo boxes is enabled.</para
+          >
           <para>When the slide-open effect for system control combo boxes is enabled, the drop down menu of a combo box slides into view when it is displayed, instead of being immediately fully drawn in view.</para>
           <block subset="none" type="note">
             <para>This property is supported only on Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
@@ -905,7 +1167,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsHotTrackingEnabled" /> property indicates whether hot tracking of user-interface elements is enabled. Hot tracking means that when the cursor moves over an item, it is highlighted but not selected.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsHotTrackingEnabled" />
+
+             property indicates whether hot tracking of user-interface elements is enabled. Hot tracking means that when the cursor moves over an item, it is highlighted but not selected.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -917,7 +1184,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsIconTitleWrappingEnabled">
-      <MemberSignature Language="C#" Value="public static bool IsIconTitleWrappingEnabled { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsIconTitleWrappingEnabled { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -947,7 +1217,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsKeyboardPreferred" /> property indicates whether the user has indicated a preference for keyboard-based input interfaces.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsKeyboardPreferred" />
+
+             property indicates whether the user has indicated a preference for keyboard-based input interfaces.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -959,7 +1234,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsListBoxSmoothScrollingEnabled">
-      <MemberSignature Language="C#" Value="public static bool IsListBoxSmoothScrollingEnabled { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsListBoxSmoothScrollingEnabled { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -971,7 +1249,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsListBoxSmoothScrollingEnabled" /> property indicates whether the smooth-scrolling effect for system control list boxes is enabled.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsListBoxSmoothScrollingEnabled" />
+
+             property indicates whether the smooth-scrolling effect for system control list boxes is enabled.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -995,8 +1278,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" /> property indicates whether either of the fade or slide animation features of system control menus is enabled.</para>
-          <para>If the value of this property is true, the <see cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" /> property indicates whether menus use fade or slide animation.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
+
+             property indicates whether either of the fade or slide animation features of system control menus is enabled.</para
+          >
+          <para
+            >If the value of this property is true, the <see
+             cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" />
+
+             property indicates whether menus use fade or slide animation.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -1020,10 +1313,23 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" /> property indicates whether a menu uses fade animation, if menu animation is enabled. The <see cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" /> property indicates whether menu animation is enabled.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" />
+
+             property indicates whether a menu uses fade animation, if menu animation is enabled. The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
+
+             property indicates whether menu animation is enabled.</para
+          >
           <para>If menu animation is enabled and the value of this property is true, menus use fade animation. If menu animation is enabled and the value of this property is false, menus use slide animation. If menu animation is disabled, the value of this property is meaningless.</para>
           <block subset="none" type="note">
-            <para>If the value of the <see cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" /> is false, the value of this property is meaningless.</para>
+            <para
+              >If the value of the <see
+               cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
+
+               is false, the value of this property is meaningless.</para
+            >
           </block>
           <block subset="none" type="note">
             <para>This property is supported only on Windows 2000, Windows XP, and the Windows Server 2003 family. On other platforms, this property returns false.</para>
@@ -1036,7 +1342,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsMinimizeRestoreAnimationEnabled">
-      <MemberSignature Language="C#" Value="public static bool IsMinimizeRestoreAnimationEnabled { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsMinimizeRestoreAnimationEnabled { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1048,7 +1357,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsMinimizeRestoreAnimationEnabled" /> property indicates whether the window minimize and restore sequence is animated.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsMinimizeRestoreAnimationEnabled" />
+
+             property indicates whether the window minimize and restore sequence is animated.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1069,7 +1383,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsSelectionFadeEnabled" /> property indicates whether the selection fade effect is enabled. The selection fade effect causes a menu item selected by the user to remain on the screen briefly while fading out after the menu is dismissed.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsSelectionFadeEnabled" />
+
+             property indicates whether the selection fade effect is enabled. The selection fade effect causes a menu item selected by the user to remain on the screen briefly while fading out after the menu is dismissed.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows 2000, Windows XP, and the Windows Server 2003 family. On other platforms, this property returns false.</para>
           </block>
@@ -1093,7 +1412,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsSnapToDefaultEnabled" /> property indicates whether the snap-to-default-button feature is enabled. If the feature is enabled, the mouse cursor automatically moves to the default button, such as <ui>OK</ui> or <ui>Apply</ui>, of a dialog box.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsSnapToDefaultEnabled" />
+
+             property indicates whether the snap-to-default-button feature is enabled. If the feature is enabled, the mouse cursor automatically moves to the default button, such as <ui
+            >OK</ui>
+
+             or <ui
+            >Apply</ui>
+
+            , of a dialog box.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1102,7 +1432,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsTitleBarGradientEnabled">
-      <MemberSignature Language="C#" Value="public static bool IsTitleBarGradientEnabled { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsTitleBarGradientEnabled { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1114,7 +1447,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsTitleBarGradientEnabled" /> property indicates whether the background of window title bars are drawn using a gradient fill effect.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsTitleBarGradientEnabled" />
+
+             property indicates whether the background of window title bars are drawn using a gradient fill effect.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -1126,7 +1464,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsToolTipAnimationEnabled">
-      <MemberSignature Language="C#" Value="public static bool IsToolTipAnimationEnabled { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool IsToolTipAnimationEnabled { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1138,14 +1479,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.IsToolTipAnimationEnabled" /> property indicates whether ToolTips can fade or slide into view.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.IsToolTipAnimationEnabled" />
+
+             property indicates whether ToolTips can fade or slide into view.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows 2000, Windows XP, and the Windows Server 2003 family. On other platforms, this property returns false.</para>
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether <see cref="T:System.Windows.Forms.ToolTip" /> animation is enabled.</para>
+          <para
+            >Gets a value indicating whether <see
+             cref="T:System.Windows.Forms.ToolTip" />
+
+             animation is enabled.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -1159,7 +1510,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.KanjiWindowHeight" /> property indicates the height of the Kanji window on operating systems that support DBCS. The <see cref="P:System.Windows.Forms.SystemInformation.DbcsEnabled" /> property indicates whether the operating system supports DBCS.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.KanjiWindowHeight" />
+
+             property indicates the height of the Kanji window on operating systems that support DBCS. The <see
+             cref="P:System.Windows.Forms.SystemInformation.DbcsEnabled" />
+
+             property indicates whether the operating system supports DBCS.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1185,7 +1544,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property indicates the amount of time that elapses after a key is pressed and held down until keystroke repeat messages are sent by the operating system. This value is in the range from 0 (approximately 250 millisecond delay) through 3 (approximately 1 second delay). The actual delay associated with each value may vary depending on the hardware.</para>
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.KeyboardSpeed" /> property indicates the repeat speed setting that determines the length of time between each keystroke repeat message sent by the operating system.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.KeyboardSpeed" />
+
+             property indicates the repeat speed setting that determines the length of time between each keystroke repeat message sent by the operating system.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1207,7 +1571,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property indicates the time between each keystroke repeat message that is sent when a user presses and holds a key down. This is a value in the range from 0 (approximately 2.5 repetitions per second) through 31 (approximately 30 repetitions per second). The actual repeat rates are hardware-dependent and may vary from a linear scale by as much as 20%.</para>
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.KeyboardDelay" /> property indicates the length of time after a key is pressed and held down before keystroke repeat messages are sent by the operating system.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.KeyboardDelay" />
+
+             property indicates the length of time after a key is pressed and held down before keystroke repeat messages are sent by the operating system.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1216,7 +1585,10 @@
       </Docs>
     </Member>
     <Member MemberName="MaxWindowTrackSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size MaxWindowTrackSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size MaxWindowTrackSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -1225,7 +1597,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" /> property indicates the maximum dimensions to which a user can drag resize a window. The value returned by <see cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" /> refers to the dimensions of the entire desktop. </para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" />
+
+             property indicates the maximum dimensions to which a user can drag resize a window. The value returned by <see
+             cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" />
+
+             refers to the dimensions of the entire desktop. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1250,7 +1630,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MenuAccessKeysUnderlined" /> property indicates whether the menu shortcut keys are underlined in menu text even when the menu has not been activated or received focus.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MenuAccessKeysUnderlined" />
+
+             property indicates whether the menu shortcut keys are underlined in menu text even when the menu has not been activated or received focus.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -1262,7 +1647,10 @@
       </Docs>
     </Member>
     <Member MemberName="MenuBarButtonSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size MenuBarButtonSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size MenuBarButtonSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1274,7 +1662,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Drawing.Size.Width" /> value of this property indicates the default width for a button on a menu-bar, in pixels. The <see cref="P:System.Drawing.Size.Height" /> value of this property indicates the height of a menu bar, in pixels.</para>
+          <para
+            >The <see
+             cref="P:System.Drawing.Size.Width" />
+
+             value of this property indicates the default width for a button on a menu-bar, in pixels. The <see
+             cref="P:System.Drawing.Size.Height" />
+
+             value of this property indicates the height of a menu bar, in pixels.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1283,7 +1679,10 @@
       </Docs>
     </Member>
     <Member MemberName="MenuButtonSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size MenuButtonSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size MenuButtonSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -1305,7 +1704,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MenuCheckSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size MenuCheckSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size MenuCheckSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -1314,7 +1716,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MenuCheckSize" /> property indicates the size of the image used by Windows to display a check mark area next to a selected menu item.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MenuCheckSize" />
+
+             property indicates the size of the image used by Windows to display a check mark area next to a selected menu item.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1336,7 +1743,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MenuFont" /> property indicates the font used to display text on menus.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MenuFont" />
+
+             property indicates the font used to display text on menus.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1358,7 +1770,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MenuHeight" /> property indicates the height that is currently defined by Windows for a menu bar.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MenuHeight" />
+
+             property indicates the height that is currently defined by Windows for a menu bar.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1383,7 +1800,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MenuShowDelay" /> property indicates the time, in milliseconds, that the system waits before displaying a cascaded shortcut menu when the mouse cursor is over a submenu item.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MenuShowDelay" />
+
+             property indicates the time, in milliseconds, that the system waits before displaying a cascaded shortcut menu when the mouse cursor is over a submenu item.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1401,7 +1823,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MidEastEnabled" /> property indicates whether the operating system is enabled for the Hebrew and Arabic languages.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MidEastEnabled" />
+
+             property indicates whether the operating system is enabled for the Hebrew and Arabic languages.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1414,7 +1841,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MinimizedWindowSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size MinimizedWindowSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size MinimizedWindowSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -1423,7 +1853,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MinimizedWindowSize" /> property indicates the size of the area occupied by a normal minimized window.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MinimizedWindowSize" />
+
+             property indicates the size of the area occupied by a normal minimized window.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1436,7 +1871,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MinimizedWindowSpacingSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size MinimizedWindowSpacingSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size MinimizedWindowSpacingSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -1445,8 +1883,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MinimizedWindowSpacingSize" /> property indicates the size, in pixels, of an arrangement grid cell for a minimized window. Each minimized window fits into a rectangle this size when arranged.</para>
-          <para>The value of this property is always greater than or equal to the value of the <see cref="P:System.Windows.Forms.SystemInformation.MinimumWindowSize" /> property.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MinimizedWindowSpacingSize" />
+
+             property indicates the size, in pixels, of an arrangement grid cell for a minimized window. Each minimized window fits into a rectangle this size when arranged.</para
+          >
+          <para
+            >The value of this property is always greater than or equal to the value of the <see
+             cref="P:System.Windows.Forms.SystemInformation.MinimumWindowSize" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1459,7 +1907,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MinimumWindowSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size MinimumWindowSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size MinimumWindowSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -1468,7 +1919,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MinimumWindowSize" /> property indicates the dimensions specified by Windows as the minimum size for a window. You can use this property to limit the resizing of windows to dimensions not exceeding either dimension returned by this property.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MinimumWindowSize" />
+
+             property indicates the dimensions specified by Windows as the minimum size for a window. You can use this property to limit the resizing of windows to dimensions not exceeding either dimension returned by this property.</para
+          >
           <block subset="none" type="note">
             <para>Developers of applications capable of resizing windows may want to use the value of this property to ensure that the application does not attempt to resize the window to a lesser width or height, since the dimensions of the window would be limited by the system.</para>
           </block>
@@ -1484,7 +1940,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MinWindowTrackSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size MinWindowTrackSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size MinWindowTrackSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -1493,8 +1952,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MinWindowTrackSize" /> property indicates the default smallest window size that can be produced by using the borders to size the window.</para>
-          <para>The user cannot drag the window frame to a size smaller than these dimensions. A <see cref="T:System.Windows.Forms.Form" /> can override these values by setting the <see cref="P:System.Windows.Forms.Form.MinimumSize" /> property.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MinWindowTrackSize" />
+
+             property indicates the default smallest window size that can be produced by using the borders to size the window.</para
+          >
+          <para
+            >The user cannot drag the window frame to a size smaller than these dimensions. A <see
+             cref="T:System.Windows.Forms.Form" />
+
+             can override these values by setting the <see
+             cref="P:System.Windows.Forms.Form.MinimumSize" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1516,7 +1988,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MonitorCount" /> property indicates the number of monitors currently recognized by the operating system. This property returns a value greater than one only if multiple monitors are currently recognized by the operating system.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MonitorCount" />
+
+             property indicates the number of monitors currently recognized by the operating system. This property returns a value greater than one only if multiple monitors are currently recognized by the operating system.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -1532,7 +2009,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MonitorsSameDisplayFormat">
-      <MemberSignature Language="C#" Value="public static bool MonitorsSameDisplayFormat { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool MonitorsSameDisplayFormat { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -1541,8 +2021,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MonitorsSameDisplayFormat" /> indicates whether all monitors currently recognized by the operating system are using the same pixel color format.</para>
-          <para>Pixel formats define the data structure used to encode pixel color and luminosity information. The <see cref="T:System.Drawing.Imaging.PixelFormat" /> enumeration indicates a set of standard pixel color formats. Pixel values can be encoded in a variety of formats, with differing color value ranges and bit precisions, and differing positions of bits in a pixel data format structure.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MonitorsSameDisplayFormat" />
+
+             indicates whether all monitors currently recognized by the operating system are using the same pixel color format.</para
+          >
+          <para
+            >Pixel formats define the data structure used to encode pixel color and luminosity information. The <see
+             cref="T:System.Drawing.Imaging.PixelFormat" />
+
+             enumeration indicates a set of standard pixel color formats. Pixel values can be encoded in a variety of formats, with differing color value ranges and bit precisions, and differing positions of bits in a pixel data format structure.</para
+          >
           <block subset="none" type="note">
             <para>Two displays can have the same bit depth but different color formats.</para>
           </block>
@@ -1570,8 +2060,18 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MouseButtons" /> property indicates the number of mouse buttons recognized on the currently installed mouse.</para>
-          <para>You can use <see cref="P:System.Windows.Forms.SystemInformation.MouseButtons" /> property to toggle additional functionality for users with more or less than the standard number of mouse buttons supported by your application.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MouseButtons" />
+
+             property indicates the number of mouse buttons recognized on the currently installed mouse.</para
+          >
+          <para
+            >You can use <see
+             cref="P:System.Windows.Forms.SystemInformation.MouseButtons" />
+
+             property to toggle additional functionality for users with more or less than the standard number of mouse buttons supported by your application.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1603,7 +2103,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MouseHoverSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size MouseHoverSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size MouseHoverSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -1613,8 +2116,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" /> property indicates the size of the rectangle within which the mouse pointer has to stay for the mouse hover time before a mouse hover message is generated.</para>
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverTime" /> property indicates the time, in milliseconds, that a mouse pointer must remain within an area the size of the <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" /> property in order to generate a mouse hover message.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+
+             property indicates the size of the rectangle within which the mouse pointer has to stay for the mouse hover time before a mouse hover message is generated.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MouseHoverTime" />
+
+             property indicates the time, in milliseconds, that a mouse pointer must remain within an area the size of the <see
+             cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+
+             property in order to generate a mouse hover message.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1636,8 +2152,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverTime" /> property indicates the amount of time, in milliseconds, that a mouse pointer must remain within an area the size of the <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" /> property in order to generate a mouse hover message.</para>
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" /> property indicates the size of the rectangle within which the mouse pointer has to stay for the mouse hover time before a mouse hover message is generated.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MouseHoverTime" />
+
+             property indicates the amount of time, in milliseconds, that a mouse pointer must remain within an area the size of the <see
+             cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+
+             property in order to generate a mouse hover message.</para
+          >
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+
+             property indicates the size of the rectangle within which the mouse pointer has to stay for the mouse hover time before a mouse hover message is generated.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1658,7 +2187,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MousePresent" /> property indicates whether a pointing device is present or installed on the system. This is usually the case, so <see cref="P:System.Windows.Forms.SystemInformation.MousePresent" /> almost always returns true.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MousePresent" />
+
+             property indicates whether a pointing device is present or installed on the system. This is usually the case, so <see
+             cref="P:System.Windows.Forms.SystemInformation.MousePresent" />
+
+             almost always returns true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1709,7 +2246,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MouseWheelPresent" /> property indicates whether the system recognizes a mouse wheel on the current mouse.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MouseWheelPresent" />
+
+             property indicates whether the system recognizes a mouse wheel on the current mouse.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows NT 4.0 or later, Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -1755,9 +2297,22 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.MouseWheelScrollLines" /> property indicates how many lines to scroll, by default, in a multi-line control that has a scroll bar. The corresponding Platform SDK system-wide parameters are SPI_GETWHEELSCROLLLINES and SPI_SETWHEELSCROLLLINES. For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at <see cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.MouseWheelScrollLines" />
+
+             property indicates how many lines to scroll, by default, in a multi-line control that has a scroll bar. The corresponding Platform SDK system-wide parameters are SPI_GETWHEELSCROLLLINES and SPI_SETWHEELSCROLLLINES. For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at <see
+             cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            .</para
+          >
           <block subset="none" type="note">
-            <para>Be sure to handle the special case that occurs if the "One screen at a time" mouse option is selected. In this case, the <see cref="P:System.Windows.Forms.SystemInformation.MouseWheelScrollLines" /> property has a value of -1.</para>
+            <para
+              >Be sure to handle the special case that occurs if the "One screen at a time" mouse option is selected. In this case, the <see
+               cref="P:System.Windows.Forms.SystemInformation.MouseWheelScrollLines" />
+
+               property has a value of -1.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1780,7 +2335,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Mouse wheel operations that occur through a <see cref="T:System.Windows.Forms.Control" /> object work even if the operating system does not natively support the wheel.</para>
+          <para
+            >Mouse wheel operations that occur through a <see
+             cref="T:System.Windows.Forms.Control" />
+
+             object work even if the operating system does not natively support the wheel.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows NT 4.0 or later, Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -1805,9 +2365,19 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.Network" /> property indicates whether the system has a currently established network connection.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.Network" />
+
+             property indicates whether the system has a currently established network connection.</para
+          >
           <block subset="none" type="note">
-            <para>This property always returns true on all Windows platforms supported by the .NET Framework. Use the <see cref="N:System.Net.NetworkInformation" /> namespace to retrieve more accurate network status.</para>
+            <para
+              >This property always returns true on all Windows platforms supported by the .NET Framework. Use the <see
+               cref="N:System.Net.NetworkInformation" />
+
+               namespace to retrieve more accurate network status.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1830,7 +2400,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.PenWindows" /> property indicates whether the Microsoft Windows for Pen Computing extensions are installed.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.PenWindows" />
+
+             property indicates whether the Microsoft Windows for Pen Computing extensions are installed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1843,7 +2418,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PopupMenuAlignment">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.LeftRightAlignment PopupMenuAlignment { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.LeftRightAlignment PopupMenuAlignment { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1861,7 +2439,10 @@
       </Docs>
     </Member>
     <Member MemberName="PowerStatus">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.PowerStatus PowerStatus { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.PowerStatus PowerStatus { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1879,7 +2460,10 @@
       </Docs>
     </Member>
     <Member MemberName="PrimaryMonitorMaximizedWindowSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size PrimaryMonitorMaximizedWindowSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size PrimaryMonitorMaximizedWindowSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -1898,7 +2482,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PrimaryMonitorSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size PrimaryMonitorSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size PrimaryMonitorSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -1907,7 +2494,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.PrimaryMonitorSize" /> property indicates the dimensions of the current video mode of the primary display adapter.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.PrimaryMonitorSize" />
+
+             property indicates the dimensions of the current video mode of the primary display adapter.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1939,7 +2531,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ScreenOrientation">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.ScreenOrientation ScreenOrientation { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.ScreenOrientation ScreenOrientation { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1966,7 +2561,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.Secure" /> property indicates whether a Security Manager is available from the operating system. Windows NT and Windows 2000 provide a Security Manager to determine access to the operating system registry and to the file system. Windows 98 does not provide a Security Manager.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.Secure" />
+
+             property indicates whether a Security Manager is available from the operating system. Windows NT and Windows 2000 provide a Security Manager to determine access to the operating system registry and to the file system. Windows 98 does not provide a Security Manager.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1988,7 +2588,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.ShowSounds" /> property indicates whether a user preference has been set that indicates the user prefers visual information displays for audio events.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.ShowSounds" />
+
+             property indicates whether a user preference has been set that indicates the user prefers visual information displays for audio events.</para
+          >
           <para>You can use this property to provide accessibility mode features to an application.</para>
         </remarks>
         <summary>
@@ -2020,7 +2625,10 @@
       </Docs>
     </Member>
     <Member MemberName="SmallCaptionButtonSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size SmallCaptionButtonSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size SmallCaptionButtonSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2032,7 +2640,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.SmallCaptionButtonSize" /> property indicates the width, in pixels, of small caption buttons, and the height, in pixels, of small captions.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.SmallCaptionButtonSize" />
+
+             property indicates the width, in pixels, of small caption buttons, and the height, in pixels, of small captions.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2041,7 +2654,10 @@
       </Docs>
     </Member>
     <Member MemberName="SmallIconSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size SmallIconSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size SmallIconSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -2050,7 +2666,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.SmallIconSize" /> property indicates the size of small icons in Windows. Small icons typically appear in window captions and in the small icon view in Windows Explorer.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.SmallIconSize" />
+
+             property indicates the size of small icons in Windows. Small icons typically appear in window captions and in the small icon view in Windows Explorer.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2075,7 +2696,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.TerminalServerSession" /> property indicates whether the calling process is associated with a Terminal Services client session.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.TerminalServerSession" />
+
+             property indicates whether the calling process is associated with a Terminal Services client session.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows NT 4.0 SP4 or later, Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -2087,7 +2713,10 @@
       </Docs>
     </Member>
     <Member MemberName="ToolWindowCaptionButtonSize">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Size ToolWindowCaptionButtonSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Size ToolWindowCaptionButtonSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -2096,7 +2725,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.ToolWindowCaptionButtonSize" /> property indicates the dimensions of the buttons placed in the caption of a tool window. You can use this property when adding your own custom buttons to the caption in a tool window.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.ToolWindowCaptionButtonSize" />
+
+             property indicates the dimensions of the buttons placed in the caption of a tool window. You can use this property when adding your own custom buttons to the caption in a tool window.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2156,7 +2790,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.SystemInformation.IsComboBoxAnimationEnabled" /> </para>
+                  <see cref="P:System.Windows.Forms.SystemInformation.IsComboBoxAnimationEnabled" />
+                </para>
               </term>
               <description>
                 <para>Indicates whether the slide-open effect for combo boxes is enabled. </para>
@@ -2165,7 +2800,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.SystemInformation.IsTitleBarGradientEnabled" /> </para>
+                  <see cref="P:System.Windows.Forms.SystemInformation.IsTitleBarGradientEnabled" />
+                </para>
               </term>
               <description>
                 <para>Indicates whether the gradient effect for window title bars is enabled. </para>
@@ -2174,7 +2810,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.SystemInformation.IsHotTrackingEnabled" /> </para>
+                  <see cref="P:System.Windows.Forms.SystemInformation.IsHotTrackingEnabled" />
+                </para>
               </term>
               <description>
                 <para>Indicates whether hot tracking of user-interface elements, such as menu names on menu bars, is enabled. </para>
@@ -2183,7 +2820,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.SystemInformation.IsListBoxSmoothScrollingEnabled" /> </para>
+                  <see cref="P:System.Windows.Forms.SystemInformation.IsListBoxSmoothScrollingEnabled" />
+                </para>
               </term>
               <description>
                 <para>Indicates whether the smooth-scrolling effect for list boxes is enabled. </para>
@@ -2192,7 +2830,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" /> </para>
+                  <see cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
+                </para>
               </term>
               <description>
                 <para>Indicates whether menu fade or slide animation features are enabled. </para>
@@ -2201,7 +2840,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.SystemInformation.MenuAccessKeysUnderlined" /> </para>
+                  <see cref="P:System.Windows.Forms.SystemInformation.MenuAccessKeysUnderlined" />
+                </para>
               </term>
               <description>
                 <para>Indicates whether menu access keys are always underlined. </para>
@@ -2210,7 +2850,8 @@
             <item>
               <term>
                 <para>
-                  <see cref="P:System.Windows.Forms.SystemInformation.IsSelectionFadeEnabled" /> </para>
+                  <see cref="P:System.Windows.Forms.SystemInformation.IsSelectionFadeEnabled" />
+                </para>
               </term>
               <description>
                 <para>Indicates whether the selection fade effect is enabled. </para>
@@ -2272,7 +2913,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the <see cref="P:System.Windows.Forms.SystemInformation.UserInteractive" /> property is false, do not display any modal dialogs or message boxes, as there is no graphical user interface for the user to interact with.</para>
+          <para
+            >When the <see
+             cref="P:System.Windows.Forms.SystemInformation.UserInteractive" />
+
+             property is false, do not display any modal dialogs or message boxes, as there is no graphical user interface for the user to interact with.</para
+          >
           <para>This property is false only when called from a service process or from a Web application.</para>
           <block subset="none" type="note">
             <para>This property is supported only on Windows NT 3.51 or later, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
@@ -2325,7 +2971,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.VerticalFocusThickness" /> property indicates the height, in pixels, of the top and bottom edges of the system focus rectangle. The system focus rectangle is used to draw user's attention to a window or area by displaying a rectangular highlighted outline.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.VerticalFocusThickness" />
+
+             property indicates the height, in pixels, of the top and bottom edges of the system focus rectangle. The system focus rectangle is used to draw user's attention to a window or area by displaying a rectangular highlighted outline.</para
+          >
           <block subset="none" type="note">
             <para>This property is supported only on Windows XP, and the Windows Server 2003 family.</para>
           </block>
@@ -2337,7 +2988,10 @@
       </Docs>
     </Member>
     <Member MemberName="VerticalResizeBorderThickness">
-      <MemberSignature Language="C#" Value="public static int VerticalResizeBorderThickness { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int VerticalResizeBorderThickness { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2349,7 +3003,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.VerticalResizeBorderThickness" /> property indicates the height of the horizontal sizing border around the perimeter of a window being resized.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.VerticalResizeBorderThickness" />
+
+             property indicates the height of the horizontal sizing border around the perimeter of a window being resized.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2358,7 +3017,10 @@
       </Docs>
     </Member>
     <Member MemberName="VerticalScrollBarArrowHeight">
-      <MemberSignature Language="C#" Value="public static int VerticalScrollBarArrowHeight { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int VerticalScrollBarArrowHeight { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -2367,7 +3029,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.VerticalScrollBarArrowHeight" /> property indicates the height of the arrow bitmap on the vertical scroll bar system control.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.VerticalScrollBarArrowHeight" />
+
+             property indicates the height of the arrow bitmap on the vertical scroll bar system control.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2380,7 +3047,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="VerticalScrollBarThumbHeight">
-      <MemberSignature Language="C#" Value="public static int VerticalScrollBarThumbHeight { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int VerticalScrollBarThumbHeight { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -2389,7 +3059,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.VerticalScrollBarThumbHeight" /> property indicates the height of the scroll box used to indicate scroll bar position and to drag the scroll bar to a new position. The scroll box is also called the thumb box.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.VerticalScrollBarThumbHeight" />
+
+             property indicates the height of the scroll box used to indicate scroll bar position and to drag the scroll bar to a new position. The scroll box is also called the thumb box.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2421,7 +3096,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="VirtualScreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Rectangle VirtualScreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Rectangle VirtualScreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Rectangle</ReturnType>
@@ -2430,10 +3108,23 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.VirtualScreen" /> property indicates the bounds of the entire desktop on a multi-monitor system. You can use this property to determine the maximum visual space available on a system that has multiple monitors installed.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.VirtualScreen" />
+
+             property indicates the bounds of the entire desktop on a multi-monitor system. You can use this property to determine the maximum visual space available on a system that has multiple monitors installed.</para
+          >
           <para>The position coordinates of the rectangle indicate the position offset, in pixels, of the upper left corner of the virtual screen area relative to the upper left corner of the onscreen area of the primary display. The size values of the rectangle indicate the size of the virtual screen area.</para>
           <block subset="none" type="note">
-            <para>The <see cref="P:System.Drawing.Rectangle.X" /> position coordinate of the rectangle is negative when the virtual screen starts to the left of the left edge of the primary display. The <see cref="P:System.Drawing.Rectangle.Y" /> coordinate of the rectangle is negative when the virtual screen starts above the top edge of the primary display.</para>
+            <para
+              >The <see
+               cref="P:System.Drawing.Rectangle.X" />
+
+               position coordinate of the rectangle is negative when the virtual screen starts to the left of the left edge of the primary display. The <see
+               cref="P:System.Drawing.Rectangle.Y" />
+
+               coordinate of the rectangle is negative when the virtual screen starts above the top edge of the primary display.</para
+            >
           </block>
           <block subset="none" type="note">
             <para>This property is supported only on Windows 98, Windows Millennium Edition, Windows 2000, Windows XP, and the Windows Server 2003 family.</para>
@@ -2450,7 +3141,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WorkingArea">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Rectangle WorkingArea { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Rectangle WorkingArea { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Rectangle</ReturnType>
@@ -2459,9 +3153,20 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.SystemInformation.WorkingArea" /> property indicates the bounds of the screen that can be used by applications. The working area is the desktop area of the display, excluding taskbars, docked windows, and docked tool bars.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.SystemInformation.WorkingArea" />
+
+             property indicates the bounds of the screen that can be used by applications. The working area is the desktop area of the display, excluding taskbars, docked windows, and docked tool bars.</para
+          >
           <para>
-            <see cref="P:System.Windows.Forms.SystemInformation.WorkingArea" /> always returns the work area of the primary monitor. If you need the work area of a monitor in a multiple display environment, you can call one of the overloads of <see cref="M:System.Windows.Forms.Screen.GetWorkingArea(System.Windows.Forms.Control)" />.</para>
+            <see cref="P:System.Windows.Forms.SystemInformation.WorkingArea" />
+
+             always returns the work area of the primary monitor. If you need the work area of a monitor in a multiple display environment, you can call one of the overloads of <see
+             cref="M:System.Windows.Forms.Screen.GetWorkingArea(System.Windows.Forms.Control)" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

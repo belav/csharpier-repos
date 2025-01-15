@@ -11,13 +11,34 @@
     <SelfContained>false</SelfContained>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build" Version="$(RefOnlyMicrosoftBuildVersion)" ExcludeAssets="Runtime" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Build.Framework" Version="$(RefOnlyMicrosoftBuildFrameworkVersion)" ExcludeAssets="Runtime" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="$(RefOnlyMicrosoftBuildTasksCoreVersion)" ExcludeAssets="Runtime" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Build.Locator" Version="$(MicrosoftBuildLocatorVersion)" PrivateAssets="All" />
+    <PackageReference
+      Include="Microsoft.Build"
+      Version="$(RefOnlyMicrosoftBuildVersion)"
+      ExcludeAssets="Runtime"
+      PrivateAssets="All"
+    />
+    <PackageReference
+      Include="Microsoft.Build.Framework"
+      Version="$(RefOnlyMicrosoftBuildFrameworkVersion)"
+      ExcludeAssets="Runtime"
+    />
+    <PackageReference
+      Include="Microsoft.Build.Tasks.Core"
+      Version="$(RefOnlyMicrosoftBuildTasksCoreVersion)"
+      ExcludeAssets="Runtime"
+      PrivateAssets="All"
+    />
+    <PackageReference
+      Include="Microsoft.Build.Locator"
+      Version="$(MicrosoftBuildLocatorVersion)"
+      PrivateAssets="All"
+    />
     <PackageReference Include="System.Text.Json" Version="$(SystemTextJsonVersion)" />
     <PackageReference Include="System.CommandLine" Version="$(SystemCommandLineVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="$(MicrosoftExtensionsLoggingConsoleVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging.Console"
+      Version="$(MicrosoftExtensionsLoggingConsoleVersion)"
+    />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
   <ItemGroup>
@@ -28,18 +49,19 @@
     <PublicAPI Include="PublicAPI.Shipped.txt" />
     <PublicAPI Include="PublicAPI.Unshipped.txt" />
   </ItemGroup>
-  
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.LanguageServer" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.Workspaces.MSBuild.UnitTests" />
-    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" Key="$(MoqPublicKey)" LoadsWithinVisualStudio="false" />
+    <InternalsVisibleTo
+      Include="DynamicProxyGenAssembly2"
+      Key="$(MoqPublicKey)"
+      LoadsWithinVisualStudio="false"
+    />
   </ItemGroup>
-  
   <ItemGroup>
     <None Include="Rpc\Readme.md" />
   </ItemGroup>
-  
   <ItemGroup>
     <EmbeddedResource Update="WorkspaceMSBuildBuildHostResources.resx" GenerateSource="true" />
   </ItemGroup>

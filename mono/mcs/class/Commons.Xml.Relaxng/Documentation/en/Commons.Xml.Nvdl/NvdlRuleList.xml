@@ -1,5 +1,8 @@
 <Type Name="NvdlRuleList" FullName="Commons.Xml.Nvdl.NvdlRuleList">
-  <TypeSignature Language="C#" Value="public class NvdlRuleList : System.Collections.CollectionBase" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NvdlRuleList : System.Collections.CollectionBase"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -54,7 +57,10 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Nvdl.NvdlRule Item[int i] { set; get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Nvdl.NvdlRule Item[int i] { set; get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlRule</ReturnType>

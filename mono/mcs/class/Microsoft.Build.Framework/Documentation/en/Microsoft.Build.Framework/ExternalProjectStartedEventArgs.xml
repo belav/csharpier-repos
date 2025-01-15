@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ExternalProjectStartedEventArgs" FullName="Microsoft.Build.Framework.ExternalProjectStartedEventArgs">
-  <TypeSignature Language="C#" Value="public class ExternalProjectStartedEventArgs : Microsoft.Build.Framework.CustomBuildEventArgs" />
+<Type
+  Name="ExternalProjectStartedEventArgs"
+  FullName="Microsoft.Build.Framework.ExternalProjectStartedEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ExternalProjectStartedEventArgs : Microsoft.Build.Framework.CustomBuildEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Build.Framework</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,7 +20,12 @@
     <since version="2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.CustomEventRaised" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:Microsoft.Build.Framework.IEventSource.CustomEventRaised" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -27,7 +38,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.ExternalProjectStartedEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Framework.ExternalProjectStartedEventArgs" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -35,7 +51,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ExternalProjectStartedEventArgs (string message, string helpKeyword, string senderName, string projectFile, string targetNames);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ExternalProjectStartedEventArgs (string message, string helpKeyword, string senderName, string projectFile, string targetNames);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -49,18 +68,38 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.ExternalProjectFinishedEventArgs" /> class, with the specified values.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Framework.ExternalProjectFinishedEventArgs" />
+
+             class, with the specified values.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text of the event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text of the event.</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Help keyword associated with the event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Help keyword associated with the event.</param
+        >
         <param name="senderName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source of the event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The source of the event.</param
+        >
         <param name="projectFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />The project file name.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The project file name.</param
+        >
         <param name="targetNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />The names of the targets to build in the external project. This can be a null reference (Nothing in vbprvb) if the external project is being built with the default targets.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The names of the targets to build in the external project. This can be a null reference (Nothing in vbprvb) if the external project is being built with the default targets.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

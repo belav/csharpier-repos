@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ICustomTypeDescriptor" FullName="System.ComponentModel.ICustomTypeDescriptor">
   <TypeSignature Language="C#" Maintainer="auto" Value="public interface ICustomTypeDescriptor" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ICustomTypeDescriptor" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract ICustomTypeDescriptor"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -15,11 +18,43 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface allows an object to provide type information about itself. Typically, this interface is used when an object needs dynamic type information. In contrast, the <see cref="T:System.ComponentModel.TypeDescriptor" /> class provides static type information that is obtained from metadata.</para>
-      <para>For example, <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> is used in the dnprdnshort to provide type information for COM objects. COM objects do not support properties or attributes. Therefore, the dnprdnshort uses <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> to implement properties and attributes for COM objects. </para>
-      <para>To provide dynamic custom type information, a class can implement <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> or derive from the <see cref="T:System.ComponentModel.CustomTypeDescriptor" /> class, which provides a simple implementation of this interface.</para>
+      <para
+        >The <see
+         cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+         interface allows an object to provide type information about itself. Typically, this interface is used when an object needs dynamic type information. In contrast, the <see
+         cref="T:System.ComponentModel.TypeDescriptor" />
+
+         class provides static type information that is obtained from metadata.</para
+      >
+      <para
+        >For example, <see
+         cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+         is used in the dnprdnshort to provide type information for COM objects. COM objects do not support properties or attributes. Therefore, the dnprdnshort uses <see
+         cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+         to implement properties and attributes for COM objects. </para
+      >
+      <para
+        >To provide dynamic custom type information, a class can implement <see
+         cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+         or derive from the <see
+         cref="T:System.ComponentModel.CustomTypeDescriptor" />
+
+         class, which provides a simple implementation of this interface.</para
+      >
       <block subset="none" type="note">
-        <para>There is no design-time support for data binding to objects that implement the <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface. In addition, when binding to a runtime instance of <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />, the public properties of the underlying type are ignored.</para>
+        <para
+          >There is no design-time support for data binding to objects that implement the <see
+           cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+           interface. In addition, when binding to a runtime instance of <see
+           cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+          , the public properties of the underlying type are ignored.</para
+        >
       </block>
     </remarks>
     <summary>
@@ -29,8 +64,14 @@
   </Docs>
   <Members>
     <Member MemberName="GetAttributes">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.AttributeCollection GetAttributes ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ComponentModel.AttributeCollection GetAttributes() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.AttributeCollection GetAttributes ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ComponentModel.AttributeCollection GetAttributes() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -45,7 +86,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The return value is never null.</para>
-          <para>Implementers can return an empty <see cref="T:System.ComponentModel.AttributeCollection" /> if no custom attributes are specified for an object.</para>
+          <para
+            >Implementers can return an empty <see
+             cref="T:System.ComponentModel.AttributeCollection" />
+
+             if no custom attributes are specified for an object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -53,13 +99,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.ComponentModel.AttributeCollection" /> containing the attributes for this object.</para>
+          <para
+            >An <see
+             cref="T:System.ComponentModel.AttributeCollection" />
+
+             containing the attributes for this object.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetClassName">
       <MemberSignature Language="C#" Value="public string GetClassName ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetClassName() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string GetClassName() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -73,7 +127,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If null is returned, use the type name from the <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" /> method.</para>
+          <para
+            >If null is returned, use the type name from the <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -87,7 +146,10 @@
     </Member>
     <Member MemberName="GetComponentName">
       <MemberSignature Language="C#" Value="public string GetComponentName ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetComponentName() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string GetComponentName() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -114,8 +176,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetConverter">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.TypeConverter GetConverter ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ComponentModel.TypeConverter GetConverter() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.TypeConverter GetConverter ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ComponentModel.TypeConverter GetConverter() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -129,7 +197,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If null is returned, use the default <see cref="T:System.ComponentModel.TypeConverter" />.</para>
+          <para
+            >If null is returned, use the default <see
+             cref="T:System.ComponentModel.TypeConverter" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -137,13 +210,27 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.TypeConverter" /> that is the converter for this object, or null if there is no <see cref="T:System.ComponentModel.TypeConverter" /> for this object.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.TypeConverter" />
+
+             that is the converter for this object, or null if there is no <see
+             cref="T:System.ComponentModel.TypeConverter" />
+
+             for this object.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetDefaultEvent">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.EventDescriptor GetDefaultEvent ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ComponentModel.EventDescriptor GetDefaultEvent() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.EventDescriptor GetDefaultEvent ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ComponentModel.EventDescriptor GetDefaultEvent() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -162,13 +249,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.ComponentModel.EventDescriptor" /> that represents the default event for this object, or null if this object does not have events.</para>
+          <para
+            >An <see
+             cref="T:System.ComponentModel.EventDescriptor" />
+
+             that represents the default event for this object, or null if this object does not have events.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetDefaultProperty">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.PropertyDescriptor GetDefaultProperty ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ComponentModel.PropertyDescriptor GetDefaultProperty() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.PropertyDescriptor GetDefaultProperty ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ComponentModel.PropertyDescriptor GetDefaultProperty() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -187,13 +285,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the default property for this object, or null if this object does not have properties.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.PropertyDescriptor" />
+
+             that represents the default property for this object, or null if this object does not have properties.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetEditor">
       <MemberSignature Language="C#" Value="public object GetEditor (Type editorBaseType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object GetEditor(class System.Type editorBaseType) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object GetEditor(class System.Type editorBaseType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -209,7 +315,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The type of the <paramref name="editorBaseType" /> parameter is usually <see cref="T:System.Drawing.Design.UITypeEditor" />, but you can also use other types (for example, <see cref="T:System.ComponentModel.ComponentEditor" /> and <see cref="T:System.ComponentModel.InstanceCreationEditor" />).</para>
+          <para
+            >The type of the <paramref
+             name="editorBaseType" />
+
+             parameter is usually <see
+             cref="T:System.Drawing.Design.UITypeEditor" />
+
+            , but you can also use other types (for example, <see
+             cref="T:System.ComponentModel.ComponentEditor" />
+
+             and <see
+             cref="T:System.ComponentModel.InstanceCreationEditor" />
+
+            ).</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -217,15 +337,32 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Object" /> of the specified type that is the editor for this object, or null if the editor cannot be found.</para>
+          <para
+            >An <see
+             cref="T:System.Object" />
+
+             of the specified type that is the editor for this object, or null if the editor cannot be found.</para
+          >
         </returns>
         <param name="editorBaseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Type" /> that represents the editor for this object. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Type" />
+
+           that represents the editor for this object. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.EventDescriptorCollection GetEvents ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ComponentModel.EventDescriptorCollection GetEvents() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.EventDescriptorCollection GetEvents ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ComponentModel.EventDescriptorCollection GetEvents() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -240,7 +377,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The events for this instance can differ from the set of events that the class provides. For example, if the component is site-based, the site can add or remove additional events.</para>
-          <para>Implementors can return <see cref="F:System.ComponentModel.EventDescriptorCollection.Empty" /> if no properties are specified. This method should never return null.</para>
+          <para
+            >Implementors can return <see
+             cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />
+
+             if no properties are specified. This method should never return null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -248,13 +390,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the events for this component instance.</para>
+          <para
+            >An <see
+             cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+             that represents the events for this component instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.EventDescriptorCollection GetEvents (Attribute[] arr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ComponentModel.EventDescriptorCollection GetEvents(class System.Attribute[] arr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.EventDescriptorCollection GetEvents (Attribute[] arr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ComponentModel.EventDescriptorCollection GetEvents(class System.Attribute[] arr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -272,7 +425,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The events for this instance can differ from the set of events that the class provides. For example, if the component is site-based, the site can add or remove additional events.</para>
-          <para>If an <see cref="T:System.Attribute" /> is specified in the <paramref name="attributes" /> array and the event does not have an instance of the class for that attribute, the returned array includes the event if the <see cref="T:System.Attribute" /> is the default event.</para>
+          <para
+            >If an <see
+             cref="T:System.Attribute" />
+
+             is specified in the <paramref
+             name="attributes" />
+
+             array and the event does not have an instance of the class for that attribute, the returned array includes the event if the <see
+             cref="T:System.Attribute" />
+
+             is the default event.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -280,13 +444,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.ComponentModel.EventDescriptorCollection" /> that represents the filtered events for this component instance.</para>
+          <para
+            >An <see
+             cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+             that represents the filtered events for this component instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.PropertyDescriptorCollection GetProperties ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ComponentModel.PropertyDescriptorCollection GetProperties() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.PropertyDescriptorCollection GetProperties ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ComponentModel.PropertyDescriptorCollection GetProperties() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -301,7 +476,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The properties for this instance can differ from the set of properties that the class provides. For example, if the component is sited, the site can add or remove additional properties.</para>
-          <para>Implementers can return <see cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" /> if no properties are specified. This method should never return null.</para>
+          <para
+            >Implementers can return <see
+             cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />
+
+             if no properties are specified. This method should never return null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -309,13 +489,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the properties for this component instance.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+             that represents the properties for this component instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.PropertyDescriptorCollection GetProperties (Attribute[] arr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ComponentModel.PropertyDescriptorCollection GetProperties(class System.Attribute[] arr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.PropertyDescriptorCollection GetProperties (Attribute[] arr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ComponentModel.PropertyDescriptorCollection GetProperties(class System.Attribute[] arr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -333,8 +524,24 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The properties for this instance can differ from the set of properties that the class provides. For example, if the component is sited, the site can add or remove additional properties.</para>
-          <para>If an <see cref="T:System.Attribute" /> is specified in the <paramref name="attributes" /> array and the property does not have an instance of the class for that attribute, the returned collection will include the property if the <see cref="T:System.Attribute" /> is the default property.</para>
-          <para>For filtering rules, see <see cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />. </para>
+          <para
+            >If an <see
+             cref="T:System.Attribute" />
+
+             is specified in the <paramref
+             name="attributes" />
+
+             array and the property does not have an instance of the class for that attribute, the returned collection will include the property if the <see
+             cref="T:System.Attribute" />
+
+             is the default property.</para
+          >
+          <para
+            >For filtering rules, see <see
+             cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -342,13 +549,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" /> that represents the filtered properties for this component instance.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+             that represents the filtered properties for this component instance.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetPropertyOwner">
-      <MemberSignature Language="C#" Value="public object GetPropertyOwner (System.ComponentModel.PropertyDescriptor pd);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object GetPropertyOwner(class System.ComponentModel.PropertyDescriptor pd) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public object GetPropertyOwner (System.ComponentModel.PropertyDescriptor pd);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object GetPropertyOwner(class System.ComponentModel.PropertyDescriptor pd) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -364,10 +582,29 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" /> method retrieves the object that contains the property member that is described by <see cref="T:System.ComponentModel.PropertyDescriptor" /> parameter. Typically, this object is required for the <see cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)" /> and <see cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" /> methods.</para>
+          <para
+            >The <see
+             cref="M:System.ComponentModel.ICustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" />
+
+             method retrieves the object that contains the property member that is described by <see
+             cref="T:System.ComponentModel.PropertyDescriptor" />
+
+             parameter. Typically, this object is required for the <see
+             cref="M:System.ComponentModel.PropertyDescriptor.GetValue(System.Object)" />
+
+             and <see
+             cref="M:System.ComponentModel.PropertyDescriptor.SetValue(System.Object,System.Object)" />
+
+             methods.</para
+          >
           <para>This method should return an object that you can use as follows: </para>
           <code> pd.GetValue(GetPropertyOwner(myPd));</code>
-          <para>If myPd is null, your implementation of the <see cref="T:System.ComponentModel.ICustomTypeDescriptor" /> interface should return the default object (typically, the base object that exposes the properties and attributes).</para>
+          <para
+            >If myPd is null, your implementation of the <see
+             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+             interface should return the default object (typically, the base object that exposes the properties and attributes).</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -375,10 +612,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Object" /> that represents the owner of the specified property.</para>
+          <para
+            >An <see
+             cref="T:System.Object" />
+
+             that represents the owner of the specified property.</para
+          >
         </returns>
         <param name="pd">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.ComponentModel.PropertyDescriptor" /> that represents the property whose owner is to be found. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.ComponentModel.PropertyDescriptor" />
+
+           that represents the property whose owner is to be found. </param
+        >
       </Docs>
     </Member>
   </Members>

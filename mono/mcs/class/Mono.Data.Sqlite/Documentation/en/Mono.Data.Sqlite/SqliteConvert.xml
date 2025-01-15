@@ -1,6 +1,9 @@
 <Type Name="SqliteConvert" FullName="Mono.Data.Sqlite.SqliteConvert">
   <TypeSignature Language="C#" Value="public abstract class SqliteConvert" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit SqliteConvert extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit SqliteConvert extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,8 +20,14 @@
   </Docs>
   <Members>
     <Member MemberName="Split">
-      <MemberSignature Language="C#" Value="public static string[] Split (string source, char separator);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string[] Split(string source, char separator) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string[] Split (string source, char separator);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig string[] Split(string source, char separator) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,24 +46,62 @@
             Smart method of splitting a string.  Skips quoted elements, removes the quotes.
             </summary>
         <returns>A string array of the split up elements</returns>
-        <remarks>
+        <remarks
+          >
             This split function works somewhat like the String.Split() function in that it breaks apart a string into
             pieces and returns the pieces as an array.  The primary differences are:
-            <list type="bullet"><item><description>Only one character can be provided as a separator character</description></item><item><description>Quoted text inside the string is skipped over when searching for the separator, and the quotes are removed.</description></item></list>
-            Thus, if splitting the following string looking for a comma:<br />
-            One,Two, "Three, Four", Five<br /><br />
-            The resulting array would contain<br />
-            [0] One<br />
-            [1] Two<br />
-            [2] Three, Four<br />
-            [3] Five<br /><br />
+            <list
+           type="bullet">
+            <item>
+              <description>Only one character can be provided as a separator character</description>
+            </item>
+            <item>
+              <description>Quoted text inside the string is skipped over when searching for the separator, and the quotes are removed.</description>
+            </item>
+          </list>
+
+          
+            Thus, if splitting the following string looking for a comma:<br
+           />
+
+          
+            One,Two, "Three, Four", Five<br
+           />
+          <br />
+
+          
+            The resulting array would contain<br
+           />
+
+          
+            [0] One<br
+           />
+
+          
+            [1] Two<br
+           />
+
+          
+            [2] Three, Four<br
+           />
+
+          
+            [3] Five<br
+           />
+          <br />
+
+          
             Note that the leading and trailing spaces were removed from each item during the split.
-            </remarks>
+            </remarks
+        >
       </Docs>
     </Member>
     <Member MemberName="ToBoolean">
       <MemberSignature Language="C#" Value="public static bool ToBoolean (object source);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool ToBoolean(object source) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool ToBoolean(object source) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -76,7 +123,10 @@
     </Member>
     <Member MemberName="ToBoolean">
       <MemberSignature Language="C#" Value="public static bool ToBoolean (string source);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool ToBoolean(string source) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool ToBoolean(string source) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -101,7 +151,10 @@
     </Member>
     <Member MemberName="ToDateTime">
       <MemberSignature Language="C#" Value="public DateTime ToDateTime (double julianDay);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.DateTime ToDateTime(float64 julianDay) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance valuetype System.DateTime ToDateTime(float64 julianDay) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -123,7 +176,10 @@
     </Member>
     <Member MemberName="ToDateTime">
       <MemberSignature Language="C#" Value="public DateTime ToDateTime (string dateText);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance valuetype System.DateTime ToDateTime(string dateText) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance valuetype System.DateTime ToDateTime(string dateText) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -135,7 +191,9 @@
         <Parameter Name="dateText" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="dateText">The string containing either a Tick value, a JulianDay double, or an ISO8601-format string</param>
+        <param name="dateText"
+          >The string containing either a Tick value, a JulianDay double, or an ISO8601-format string</param
+        >
         <summary>
             Converts a string into a DateTime, using the current DateTimeFormat specified for the connection when it was opened.
             </summary>
@@ -155,7 +213,10 @@
     </Member>
     <Member MemberName="ToJulianDay">
       <MemberSignature Language="C#" Value="public double ToJulianDay (DateTime value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance float64 ToJulianDay(valuetype System.DateTime value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance float64 ToJulianDay(valuetype System.DateTime value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -177,7 +238,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public string ToString (DateTime dateValue);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance string ToString(valuetype System.DateTime dateValue) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance string ToString(valuetype System.DateTime dateValue) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -198,8 +262,14 @@
       </Docs>
     </Member>
     <Member MemberName="ToString">
-      <MemberSignature Language="C#" Value="public virtual string ToString (IntPtr nativestring, int nativestringlen);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string ToString(native int nativestring, int32 nativestringlen) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string ToString (IntPtr nativestring, int nativestringlen);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string ToString(native int nativestring, int32 nativestringlen) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -212,7 +282,9 @@
         <Parameter Name="nativestringlen" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="nativestring">The pointer to the memory where the UTF-8 string is encoded</param>
+        <param name="nativestring"
+          >The pointer to the memory where the UTF-8 string is encoded</param
+        >
         <param name="nativestringlen">The number of bytes to decode</param>
         <summary>
             Converts a UTF-8 encoded IntPtr of the specified length into a .NET string
@@ -223,7 +295,10 @@
     </Member>
     <Member MemberName="ToUTF8">
       <MemberSignature Language="C#" Value="public byte[] ToUTF8 (DateTime dateTimeValue);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] ToUTF8(valuetype System.DateTime dateTimeValue) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance unsigned int8[] ToUTF8(valuetype System.DateTime dateTimeValue) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -248,7 +323,10 @@
     </Member>
     <Member MemberName="ToUTF8">
       <MemberSignature Language="C#" Value="public static byte[] ToUTF8 (string sourceText);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig unsigned int8[] ToUTF8(string sourceText) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig unsigned int8[] ToUTF8(string sourceText) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -269,8 +347,14 @@
       </Docs>
     </Member>
     <Member MemberName="UTF8ToString">
-      <MemberSignature Language="C#" Value="public static string UTF8ToString (IntPtr nativestring, int nativestringlen);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string UTF8ToString(native int nativestring, int32 nativestringlen) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string UTF8ToString (IntPtr nativestring, int nativestringlen);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig string UTF8ToString(native int nativestring, int32 nativestringlen) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -283,7 +367,9 @@
         <Parameter Name="nativestringlen" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="nativestring">The pointer to the memory where the UTF-8 string is encoded</param>
+        <param name="nativestring"
+          >The pointer to the memory where the UTF-8 string is encoded</param
+        >
         <param name="nativestringlen">The number of bytes to decode</param>
         <summary>
             Converts a UTF-8 encoded IntPtr of the specified length into a .NET string

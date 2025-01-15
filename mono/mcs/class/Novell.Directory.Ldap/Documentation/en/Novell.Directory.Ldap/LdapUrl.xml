@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -79,7 +78,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapUrl(string host, int port, string dn, string[] attrNames, int scope, string filter, string[] extensions)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapUrl(string host, int port, string dn, string[] attrNames, int scope, string filter, string[] extensions)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="host" Type="System.String" />
@@ -103,7 +105,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapUrl(string host, int port, string dn, string[] attrNames, int scope, string filter, string[] extensions, bool secure)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapUrl(string host, int port, string dn, string[] attrNames, int scope, string filter, string[] extensions, bool secure)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="host" Type="System.String" />
@@ -199,7 +204,10 @@
       </Docs>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator Attributes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator Attributes { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>

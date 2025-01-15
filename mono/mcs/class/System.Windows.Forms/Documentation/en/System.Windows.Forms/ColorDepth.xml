@@ -12,11 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="P:System.Windows.Forms.ImageList.ColorDepth" /> property of the <see cref="T:System.Windows.Forms.ImageList" /> class.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="P:System.Windows.Forms.ImageList.ColorDepth" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.ImageList" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the number of colors used to display an image in an <see cref="T:System.Windows.Forms.ImageList" /> control.</para>
+      <para
+        >Specifies the number of colors used to display an image in an <see
+         cref="T:System.Windows.Forms.ImageList" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>

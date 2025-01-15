@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RecipientInfo" FullName="System.Security.Cryptography.Pkcs.RecipientInfo">
   <TypeSignature Language="C#" Value="public abstract class RecipientInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit RecipientInfo extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit RecipientInfo extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Security</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,11 +18,33 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This is an abstract class that cannot be instantiated.  It is inherited by the <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" /> and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" /> classes.</para>
+      <para
+        >This is an abstract class that cannot be instantiated.  It is inherited by the <see
+         cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+
+         and <see
+         cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+         classes.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" /> class represents information about a CMS/PKCS #7 message recipient. The <see cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" /> class is an abstract class inherited by the <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" /> and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" /> classes.</para>
+      <para
+        >The <see
+         cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+
+         class represents information about a CMS/PKCS #7 message recipient. The <see
+         cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+
+         class is an abstract class inherited by the <see
+         cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+
+         and <see
+         cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+         classes.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -39,17 +64,36 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is an abstract property overridden by <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" /> and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />.</para>
+          <para
+            >This is an abstract property overridden by <see
+             cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+
+             and <see
+             cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.EncryptedKey" /> abstract property retrieves the encrypted recipient keying material.</para>
+          <para
+            >The <see
+             cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.EncryptedKey" />
+
+             abstract property retrieves the encrypted recipient keying material.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="KeyEncryptionAlgorithm">
-      <MemberSignature Language="C#" Value="public abstract System.Security.Cryptography.Pkcs.AlgorithmIdentifier KeyEncryptionAlgorithm { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.Pkcs.AlgorithmIdentifier KeyEncryptionAlgorithm" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Security.Cryptography.Pkcs.AlgorithmIdentifier KeyEncryptionAlgorithm { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.Pkcs.AlgorithmIdentifier KeyEncryptionAlgorithm"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -63,17 +107,36 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is an abstract property overridden by <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" /> and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />.</para>
+          <para
+            >This is an abstract property overridden by <see
+             cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+
+             and <see
+             cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.KeyEncryptionAlgorithm" /> abstract property retrieves the algorithm used to perform the key establishment.</para>
+          <para
+            >The <see
+             cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.KeyEncryptionAlgorithm" />
+
+             abstract property retrieves the algorithm used to perform the key establishment.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="RecipientIdentifier">
-      <MemberSignature Language="C#" Value="public abstract System.Security.Cryptography.Pkcs.SubjectIdentifier RecipientIdentifier { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.Pkcs.SubjectIdentifier RecipientIdentifier" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Security.Cryptography.Pkcs.SubjectIdentifier RecipientIdentifier { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.Pkcs.SubjectIdentifier RecipientIdentifier"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -87,17 +150,36 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is an abstract property overridden by <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" /> and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />.</para>
+          <para
+            >This is an abstract property overridden by <see
+             cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+
+             and <see
+             cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.RecipientIdentifier" /> abstract property retrieves the identifier of the recipient.</para>
+          <para
+            >The <see
+             cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.RecipientIdentifier" />
+
+             abstract property retrieves the identifier of the recipient.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Type">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.Pkcs.RecipientInfoType Type { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Cryptography.Pkcs.RecipientInfoType Type" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.Pkcs.RecipientInfoType Type { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Cryptography.Pkcs.RecipientInfoType Type"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -112,7 +194,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.Type" /> property retrieves the type of the recipient. The type of the recipient determines which of two major protocols is used to establish a key between the originator and the recipient of a CMS/PKCS #7 message.</para>
+          <para
+            >The <see
+             cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.Type" />
+
+             property retrieves the type of the recipient. The type of the recipient determines which of two major protocols is used to establish a key between the originator and the recipient of a CMS/PKCS #7 message.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -132,12 +219,28 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is an abstract property overridden by <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" /> and <see cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />.</para>
+          <para
+            >This is an abstract property overridden by <see
+             cref="T:System.Security.Cryptography.Pkcs.KeyAgreeRecipientInfo" />
+
+             and <see
+             cref="T:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo" />
+
+            .</para
+          >
           <para>The version determines whether the message is a PKCS #7 message or a CMS message. CMS is a newer superset of PKCS #7.</para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.Version" /> abstract property retrieves the version of the recipient information. Derived classes automatically set this property for their objects, and the value indicates whether it is using PKCS #7 or Cryptographic Message Syntax (CMS) to protect messages. The version also implies whether the <see cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" /> object establishes a cryptographic key by a key agreement algorithm or a key transport algorithm.</para>
+          <para
+            >The <see
+             cref="P:System.Security.Cryptography.Pkcs.RecipientInfo.Version" />
+
+             abstract property retrieves the version of the recipient information. Derived classes automatically set this property for their objects, and the value indicates whether it is using PKCS #7 or Cryptographic Message Syntax (CMS) to protect messages. The version also implies whether the <see
+             cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+
+             object establishes a cryptographic key by a key agreement algorithm or a key transport algorithm.</para
+          >
         </summary>
       </Docs>
     </Member>

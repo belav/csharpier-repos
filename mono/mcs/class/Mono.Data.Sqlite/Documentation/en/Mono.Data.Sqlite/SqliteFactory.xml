@@ -1,6 +1,12 @@
 <Type Name="SqliteFactory" FullName="Mono.Data.Sqlite.SqliteFactory">
-  <TypeSignature Language="C#" Value="public sealed class SqliteFactory : System.Data.Common.DbProviderFactory, IServiceProvider" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SqliteFactory extends System.Data.Common.DbProviderFactory implements class System.IServiceProvider" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqliteFactory : System.Data.Common.DbProviderFactory, IServiceProvider"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed SqliteFactory extends System.Data.Common.DbProviderFactory implements class System.IServiceProvider"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -22,7 +28,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteFactory ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,8 +43,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateCommand">
-      <MemberSignature Language="C#" Value="public override System.Data.Common.DbCommand CreateCommand ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Data.Common.DbCommand CreateCommand() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.Common.DbCommand CreateCommand ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Data.Common.DbCommand CreateCommand() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -53,8 +68,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateCommandBuilder">
-      <MemberSignature Language="C#" Value="public override System.Data.Common.DbCommandBuilder CreateCommandBuilder ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Data.Common.DbCommandBuilder CreateCommandBuilder() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.Common.DbCommandBuilder CreateCommandBuilder ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Data.Common.DbCommandBuilder CreateCommandBuilder() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -72,8 +93,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateConnection">
-      <MemberSignature Language="C#" Value="public override System.Data.Common.DbConnection CreateConnection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Data.Common.DbConnection CreateConnection() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.Common.DbConnection CreateConnection ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Data.Common.DbConnection CreateConnection() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -91,8 +118,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateConnectionStringBuilder">
-      <MemberSignature Language="C#" Value="public override System.Data.Common.DbConnectionStringBuilder CreateConnectionStringBuilder ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Data.Common.DbConnectionStringBuilder CreateConnectionStringBuilder() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.Common.DbConnectionStringBuilder CreateConnectionStringBuilder ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Data.Common.DbConnectionStringBuilder CreateConnectionStringBuilder() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -110,8 +143,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateDataAdapter">
-      <MemberSignature Language="C#" Value="public override System.Data.Common.DbDataAdapter CreateDataAdapter ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Data.Common.DbDataAdapter CreateDataAdapter() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.Common.DbDataAdapter CreateDataAdapter ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Data.Common.DbDataAdapter CreateDataAdapter() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -129,8 +168,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateParameter">
-      <MemberSignature Language="C#" Value="public override System.Data.Common.DbParameter CreateParameter ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Data.Common.DbParameter CreateParameter() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.Common.DbParameter CreateParameter ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Data.Common.DbParameter CreateParameter() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -148,8 +193,14 @@
       </Docs>
     </Member>
     <Member MemberName="Instance">
-      <MemberSignature Language="C#" Value="public static readonly Mono.Data.Sqlite.SqliteFactory Instance;" />
-      <MemberSignature Language="ILAsm" Value=".field public static initonly class Mono.Data.Sqlite.SqliteFactory Instance" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Mono.Data.Sqlite.SqliteFactory Instance;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static initonly class Mono.Data.Sqlite.SqliteFactory Instance"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -165,8 +216,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.IServiceProvider.GetService">
-      <MemberSignature Language="C#" Value="object IServiceProvider.GetService (Type serviceType);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance object System.IServiceProvider.GetService(class System.Type serviceType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="object IServiceProvider.GetService (Type serviceType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance object System.IServiceProvider.GetService(class System.Type serviceType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

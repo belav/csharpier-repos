@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ClientViaBehavior" FullName="System.ServiceModel.Description.ClientViaBehavior">
-  <TypeSignature Language="C#" Value="public class ClientViaBehavior : System.ServiceModel.Description.IEndpointBehavior" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ClientViaBehavior extends System.Object implements class System.ServiceModel.Description.IEndpointBehavior" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ClientViaBehavior : System.ServiceModel.Description.IEndpointBehavior"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ClientViaBehavior extends System.Object implements class System.ServiceModel.Description.IEndpointBehavior"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,19 +23,45 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>If such a behavior exists in the behavior collection on a client endpoint, the transport uses the URI that it provides, while all the other channel layers in the stack use the <see cref="T:System.ServiceModel.EndpointAddress" /> provided at <see cref="T:System.ServiceModel.ChannelFactory" /> construction time. This <see cref="T:System.ServiceModel.EndpointAddress" /> also becomes the WS-Addressing To header.</para>
+      <para
+        >If such a behavior exists in the behavior collection on a client endpoint, the transport uses the URI that it provides, while all the other channel layers in the stack use the <see
+         cref="T:System.ServiceModel.EndpointAddress" />
+
+         provided at <see
+         cref="T:System.ServiceModel.ChannelFactory" />
+
+         construction time. This <see
+         cref="T:System.ServiceModel.EndpointAddress" />
+
+         also becomes the WS-Addressing To header.</para
+      >
       <para>Use this behavior when the immediate network destination is not the intended processor of the message to enable multiple-hop conversations when the calling application does not necessarily know the ultimate destination or when the destination Via header is not an address.</para>
-      <para>You can also set this value using the <format type="text/html"><a href="c27ee94e-babd-459b-9574-2a6d67d11314">&lt;clientVia&gt;</a></format> element in a client application configuration file.</para>
+      <para
+        >You can also set this value using the <format
+         type="text/html">
+          <a href="c27ee94e-babd-459b-9574-2a6d67d11314">&lt;clientVia&gt;</a>
+        </format>
+
+         element in a client application configuration file.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ServiceModel.Description.ClientViaBehavior" /> is used by clients to specify the URI for which the transport channel should be created. </para>
+      <para
+        >The <see
+         cref="T:System.ServiceModel.Description.ClientViaBehavior" />
+
+         is used by clients to specify the URI for which the transport channel should be created. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ClientViaBehavior (Uri uri);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri uri) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri uri) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -41,15 +73,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ClientViaBehavior" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.ClientViaBehavior" />
+
+             class. </para
+          >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URI for which the transport channel should be created.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URI for which the transport channel should be created.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters">
-      <MemberSignature Language="C#" Value="void IEndpointBehavior.AddBindingParameters (System.ServiceModel.Description.ServiceEndpoint endpoint, System.ServiceModel.Channels.BindingParameterCollection parameters);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters(class System.ServiceModel.Description.ServiceEndpoint endpoint, class System.ServiceModel.Channels.BindingParameterCollection parameters) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IEndpointBehavior.AddBindingParameters (System.ServiceModel.Description.ServiceEndpoint endpoint, System.ServiceModel.Channels.BindingParameterCollection parameters);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters(class System.ServiceModel.Description.ServiceEndpoint endpoint, class System.ServiceModel.Channels.BindingParameterCollection parameters) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -59,7 +105,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="endpoint" Type="System.ServiceModel.Description.ServiceEndpoint" />
-        <Parameter Name="parameters" Type="System.ServiceModel.Channels.BindingParameterCollection" />
+        <Parameter
+          Name="parameters"
+          Type="System.ServiceModel.Channels.BindingParameterCollection"
+        />
       </Parameters>
       <Docs>
         <param name="endpoint">To be added.</param>
@@ -72,8 +121,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior">
-      <MemberSignature Language="C#" Value="void IEndpointBehavior.ApplyClientBehavior (System.ServiceModel.Description.ServiceEndpoint endpoint, System.ServiceModel.Dispatcher.ClientRuntime behavior);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(class System.ServiceModel.Description.ServiceEndpoint endpoint, class System.ServiceModel.Dispatcher.ClientRuntime behavior) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IEndpointBehavior.ApplyClientBehavior (System.ServiceModel.Description.ServiceEndpoint endpoint, System.ServiceModel.Dispatcher.ClientRuntime behavior);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(class System.ServiceModel.Description.ServiceEndpoint endpoint, class System.ServiceModel.Dispatcher.ClientRuntime behavior) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -90,15 +145,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the <see cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Via" /> to the URI for which the transport channel is created.</para>
+          <para
+            >Sets the <see
+             cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Via" />
+
+             to the URI for which the transport channel is created.</para
+          >
         </summary>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" /> for which the client behavior is to be applied.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+           for which the client behavior is to be applied.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior">
-      <MemberSignature Language="C#" Value="void IEndpointBehavior.ApplyDispatchBehavior (System.ServiceModel.Description.ServiceEndpoint endpoint, System.ServiceModel.Dispatcher.EndpointDispatcher dispatcher);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(class System.ServiceModel.Description.ServiceEndpoint endpoint, class System.ServiceModel.Dispatcher.EndpointDispatcher dispatcher) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IEndpointBehavior.ApplyDispatchBehavior (System.ServiceModel.Description.ServiceEndpoint endpoint, System.ServiceModel.Dispatcher.EndpointDispatcher dispatcher);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(class System.ServiceModel.Description.ServiceEndpoint endpoint, class System.ServiceModel.Dispatcher.EndpointDispatcher dispatcher) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -115,7 +187,12 @@
         <param name="dispatcher">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Throws an <see cref="T:System.InvalidOperationException" /> because this operation should not be performed at the client end.</para>
+          <para
+            >Throws an <see
+             cref="T:System.InvalidOperationException" />
+
+             because this operation should not be performed at the client end.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -124,8 +201,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IEndpointBehavior.Validate">
-      <MemberSignature Language="C#" Value="void IEndpointBehavior.Validate (System.ServiceModel.Description.ServiceEndpoint endpoint);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IEndpointBehavior.Validate(class System.ServiceModel.Description.ServiceEndpoint endpoint) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IEndpointBehavior.Validate (System.ServiceModel.Description.ServiceEndpoint endpoint);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IEndpointBehavior.Validate(class System.ServiceModel.Description.ServiceEndpoint endpoint) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -159,7 +242,14 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can also set this value using the <format type="text/html"><a href="c27ee94e-babd-459b-9574-2a6d67d11314">&lt;clientVia&gt;</a></format> element in a client application configuration file.</para>
+          <para
+            >You can also set this value using the <format
+             type="text/html">
+              <a href="c27ee94e-babd-459b-9574-2a6d67d11314">&lt;clientVia&gt;</a>
+            </format>
+
+             element in a client application configuration file.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

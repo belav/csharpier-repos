@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="PeerResolverBindingElement" FullName="System.ServiceModel.Channels.PeerResolverBindingElement">
-  <TypeSignature Language="C#" Value="public abstract class PeerResolverBindingElement : System.ServiceModel.Channels.BindingElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit PeerResolverBindingElement extends System.ServiceModel.Channels.BindingElement" />
+<Type
+  Name="PeerResolverBindingElement"
+  FullName="System.ServiceModel.Channels.PeerResolverBindingElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class PeerResolverBindingElement : System.ServiceModel.Channels.BindingElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit PeerResolverBindingElement extends System.ServiceModel.Channels.BindingElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,7 +22,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class defines the abstract base class for all binding elements used to create peer resolver objects. For specific implementations of this class, please see the documentation for <see cref="T:System.ServiceModel.Channels.PnrpPeerResolverBindingElement" /> and <see cref="T:System.ServiceModel.Channels.PeerCustomResolverBindingElement" />.</para>
+      <para
+        >This class defines the abstract base class for all binding elements used to create peer resolver objects. For specific implementations of this class, please see the documentation for <see
+         cref="T:System.ServiceModel.Channels.PnrpPeerResolverBindingElement" />
+
+         and <see
+         cref="T:System.ServiceModel.Channels.PeerCustomResolverBindingElement" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -23,7 +40,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected PeerResolverBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +53,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new default instance of the <see cref="T:System.ServiceModel.Channels.PeerResolverBindingElement" /> class. </para>
+          <para
+            >Initializes a new default instance of the <see
+             cref="T:System.ServiceModel.Channels.PeerResolverBindingElement" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected PeerResolverBindingElement (System.ServiceModel.Channels.PeerResolverBindingElement other);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.PeerResolverBindingElement other) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected PeerResolverBindingElement (System.ServiceModel.Channels.PeerResolverBindingElement other);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.PeerResolverBindingElement other) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -51,16 +82,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.PeerResolverBindingElement" /> class by duplicating the provided <see cref="T:System.ServiceModel.Channels.PeerResolverBindingElement" /> object.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.PeerResolverBindingElement" />
+
+             class by duplicating the provided <see
+             cref="T:System.ServiceModel.Channels.PeerResolverBindingElement" />
+
+             object.</para
+          >
         </summary>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.ServiceModel.Channels.PeerResolverBindingElement" /> object to copy when creating this class instance.</param>
+          <see cref="T:System.ServiceModel.Channels.PeerResolverBindingElement" />
+
+           object to copy when creating this class instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreatePeerResolver">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.PeerResolver CreatePeerResolver ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ServiceModel.PeerResolver CreatePeerResolver() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.PeerResolver CreatePeerResolver ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ServiceModel.PeerResolver CreatePeerResolver() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -78,13 +126,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.ServiceModel.PeerResolver" /> object that is used to perform peer name to address resolution. The settings on the peer resolver must be defined on the binding element. </para>
+            <see cref="T:System.ServiceModel.PeerResolver" />
+
+             object that is used to perform peer name to address resolution. The settings on the peer resolver must be defined on the binding element. </para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="ReferralPolicy">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.PeerResolvers.PeerReferralPolicy ReferralPolicy { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.PeerResolvers.PeerReferralPolicy ReferralPolicy" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.PeerResolvers.PeerReferralPolicy ReferralPolicy { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.PeerResolvers.PeerReferralPolicy ReferralPolicy"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

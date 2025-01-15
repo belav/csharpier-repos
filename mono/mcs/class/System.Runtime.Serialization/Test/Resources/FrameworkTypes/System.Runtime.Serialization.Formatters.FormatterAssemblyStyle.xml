@@ -1,1 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><FormatterAssemblyStyle xmlns="http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Formatters">Simple</FormatterAssemblyStyle>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FormatterAssemblyStyle
+  xmlns="http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Formatters"
+  >Simple</FormatterAssemblyStyle
+>

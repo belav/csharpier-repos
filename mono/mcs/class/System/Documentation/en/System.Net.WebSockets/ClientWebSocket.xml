@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ClientWebSocket" FullName="System.Net.WebSockets.ClientWebSocket">
-  <TypeSignature Language="C#" Value="public class ClientWebSocket : System.Net.WebSockets.WebSocket, IDisposable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ClientWebSocket extends System.Net.WebSockets.WebSocket implements class System.IDisposable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class ClientWebSocket : System.Net.WebSockets.WebSocket, IDisposable"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ClientWebSocket extends System.Net.WebSockets.WebSocket implements class System.IDisposable"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,8 +23,16 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Some of the classes and class elements in the <see cref="N:System.Net.WebSockets" /> namespace are supported on Windows 7, Windows Vista SP2, and Windows Server 2008. However, the only public implementations of client and server WebSockets are supported on Windows 8 and Windows Server 2012. The class elements in the <see cref="N:System.Net.WebSockets" /> namespace that are supported on Windows 7, Windows Vista SP2, and Windows Server 2008 are abstract class elements. This allows an application developer to inherit and extend these abstract class classes and class elements with an actual implementation of client WebSockets.
-</para>
+      <para
+        >Some of the classes and class elements in the <see
+         cref="N:System.Net.WebSockets" />
+
+         namespace are supported on Windows 7, Windows Vista SP2, and Windows Server 2008. However, the only public implementations of client and server WebSockets are supported on Windows 8 and Windows Server 2012. The class elements in the <see
+         cref="N:System.Net.WebSockets" />
+
+         namespace that are supported on Windows 7, Windows Vista SP2, and Windows Server 2008 are abstract class elements. This allows an application developer to inherit and extend these abstract class classes and class elements with an actual implementation of client WebSockets.
+</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -28,7 +42,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ClientWebSocket ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -38,13 +55,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> class.</para>
+          <para
+            >Creates an instance of the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Abort">
       <MemberSignature Language="C#" Value="public override void Abort ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Abort() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Abort() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -67,8 +92,14 @@
       </Docs>
     </Member>
     <Member MemberName="CloseAsync">
-      <MemberSignature Language="C#" Value="public override System.Threading.Tasks.Task CloseAsync (System.Net.WebSockets.WebSocketCloseStatus closeStatus, string statusDescription, System.Threading.CancellationToken cancellationToken);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task CloseAsync(valuetype System.Net.WebSockets.WebSocketCloseStatus closeStatus, string statusDescription, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Threading.Tasks.Task CloseAsync (System.Net.WebSockets.WebSocketCloseStatus closeStatus, string statusDescription, System.Threading.CancellationToken cancellationToken);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task CloseAsync(valuetype System.Net.WebSockets.WebSocketCloseStatus closeStatus, string statusDescription, valuetype System.Threading.CancellationToken cancellationToken) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -92,28 +123,61 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" /> object will complete after the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance is closed.</para>
+          <para
+            >This operation will not block. The returned <see
+             cref="T:System.Threading.Tasks.Task" />
+
+             object will complete after the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance is closed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Close the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance as an asynchronous operation.</para>
+          <para
+            >Close the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance as an asynchronous operation.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Threading.Tasks.Task" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Threading.Tasks.Task" />
+
+            .</para
+          >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="closeStatus">
-          <attribution license="cc4" from="Microsoft" modified="false" />The WebSocket close status.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The WebSocket close status.</param
+        >
         <param name="statusDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />A description of the close status.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A description of the close status.</param
+        >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />A cancellation token used to propagate notification that this  operation should be canceled.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A cancellation token used to propagate notification that this  operation should be canceled.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CloseOutputAsync">
-      <MemberSignature Language="C#" Value="public override System.Threading.Tasks.Task CloseOutputAsync (System.Net.WebSockets.WebSocketCloseStatus closeStatus, string statusDescription, System.Threading.CancellationToken cancellationToken);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task CloseOutputAsync(valuetype System.Net.WebSockets.WebSocketCloseStatus closeStatus, string statusDescription, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Threading.Tasks.Task CloseOutputAsync (System.Net.WebSockets.WebSocketCloseStatus closeStatus, string statusDescription, System.Threading.CancellationToken cancellationToken);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task CloseOutputAsync(valuetype System.Net.WebSockets.WebSocketCloseStatus closeStatus, string statusDescription, valuetype System.Threading.CancellationToken cancellationToken) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -137,28 +201,61 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />  object will complete after the output on the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance is closed.</para>
+          <para
+            >This operation will not block. The returned <see
+             cref="T:System.Threading.Tasks.Task" />
+
+              object will complete after the output on the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance is closed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Close the output for the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance as an asynchronous operation.</para>
+          <para
+            >Close the output for the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance as an asynchronous operation.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Threading.Tasks.Task" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Threading.Tasks.Task" />
+
+            .</para
+          >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="closeStatus">
-          <attribution license="cc4" from="Microsoft" modified="false" />The WebSocket close status.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The WebSocket close status.</param
+        >
         <param name="statusDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />A description of the close status.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A description of the close status.</param
+        >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />A cancellation token used to propagate notification that this  operation should be canceled.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A cancellation token used to propagate notification that this  operation should be canceled.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CloseStatus">
-      <MemberSignature Language="C#" Value="public override Nullable&lt;System.Net.WebSockets.WebSocketCloseStatus&gt; CloseStatus { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.Net.WebSockets.WebSocketCloseStatus&gt; CloseStatus" />
+      <MemberSignature
+        Language="C#"
+        Value="public override Nullable<System.Net.WebSockets.WebSocketCloseStatus> CloseStatus { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<valuetype System.Net.WebSockets.WebSocketCloseStatus> CloseStatus"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -171,12 +268,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the reason why the close handshake was initiated on <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance.</para>
+          <para
+            >Gets the reason why the close handshake was initiated on <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CloseStatusDescription">
-      <MemberSignature Language="C#" Value="public override string CloseStatusDescription { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override string CloseStatusDescription { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance string CloseStatusDescription" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -190,13 +295,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a description of the reason why the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance was closed.</para>
+          <para
+            >Gets a description of the reason why the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance was closed.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ConnectAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ConnectAsync (Uri uri, System.Threading.CancellationToken cancellationToken);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task ConnectAsync(class System.Uri uri, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Threading.Tasks.Task ConnectAsync (Uri uri, System.Threading.CancellationToken cancellationToken);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Threading.Tasks.Task ConnectAsync(class System.Uri uri, valuetype System.Threading.CancellationToken cancellationToken) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -219,9 +335,22 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Net.WebSockets.ClientWebSocket.ConnectAsync(System.Uri,System.Threading.CancellationToken)" />  method initiates the WebSocket handshake with a remote network destination, and then negotiates the sub-protocol.</para>
+          <para
+            >The <see
+             cref="M:System.Net.WebSockets.ClientWebSocket.ConnectAsync(System.Uri,System.Threading.CancellationToken)" />
+
+              method initiates the WebSocket handshake with a remote network destination, and then negotiates the sub-protocol.</para
+          >
           <para>For plain WebSocket connections, use the ws:// scheme in the uri. For secure WebSocket connections over TLS/SSL, use the wss:// scheme.</para>
-          <para>This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />  object will complete after the connect request on the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance has completed.</para>
+          <para
+            >This operation will not block. The returned <see
+             cref="T:System.Threading.Tasks.Task" />
+
+              object will complete after the connect request on the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance has completed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -229,18 +358,32 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Threading.Tasks.Task" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Threading.Tasks.Task" />
+
+            .</para
+          >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />The URI of the WebSocket server to connect to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The URI of the WebSocket server to connect to.</param
+        >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />A cancellation token used to propagate notification that the  operation should be canceled.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A cancellation token used to propagate notification that the  operation should be canceled.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="public override void Dispose ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Dispose() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Dispose() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -253,13 +396,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases the unmanaged resources used by the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance.</para>
+          <para
+            >Releases the unmanaged resources used by the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Options">
-      <MemberSignature Language="C#" Value="public System.Net.WebSockets.ClientWebSocketOptions Options { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.WebSockets.ClientWebSocketOptions Options" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.WebSockets.ClientWebSocketOptions Options { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.WebSockets.ClientWebSocketOptions Options"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -272,13 +426,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the WebSocket options for the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance.</para>
+          <para
+            >Gets the WebSocket options for the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ReceiveAsync">
-      <MemberSignature Language="C#" Value="public override System.Threading.Tasks.Task&lt;System.Net.WebSockets.WebSocketReceiveResult&gt; ReceiveAsync (ArraySegment&lt;byte&gt; buffer, System.Threading.CancellationToken cancellationToken);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task`1&lt;class System.Net.WebSockets.WebSocketReceiveResult&gt; ReceiveAsync(valuetype System.ArraySegment`1&lt;unsigned int8&gt; buffer, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Threading.Tasks.Task<System.Net.WebSockets.WebSocketReceiveResult> ReceiveAsync (ArraySegment<byte> buffer, System.Threading.CancellationToken cancellationToken);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task`1<class System.Net.WebSockets.WebSocketReceiveResult> ReceiveAsync(valuetype System.ArraySegment`1<unsigned int8> buffer, valuetype System.Threading.CancellationToken cancellationToken) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -287,32 +452,62 @@
         <ReturnType>System.Threading.Tasks.Task&lt;System.Net.WebSockets.WebSocketReceiveResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="buffer" Type="System.ArraySegment&lt;System.Byte&gt;" />
+        <Parameter Name="buffer" Type="System.ArraySegment<System.Byte>" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" /> object will complete after the receive request on the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance has completed.</para>
+          <para
+            >This operation will not block. The returned <see
+             cref="T:System.Threading.Tasks.Task`1" />
+
+             object will complete after the receive request on the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance has completed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Receive data on <see cref="T:System.Net.WebSockets.ClientWebSocket" /> as an asynchronous operation.</para>
+          <para
+            >Receive data on <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             as an asynchronous operation.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Threading.Tasks.Task`1" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Threading.Tasks.Task`1" />
+
+            .</para
+          >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The buffer to receive the response.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The buffer to receive the response.</param
+        >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />A cancellation token used to propagate notification that this  operation should be canceled.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A cancellation token used to propagate notification that this  operation should be canceled.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SendAsync">
-      <MemberSignature Language="C#" Value="public override System.Threading.Tasks.Task SendAsync (ArraySegment&lt;byte&gt; buffer, System.Net.WebSockets.WebSocketMessageType messageType, bool endOfMessage, System.Threading.CancellationToken cancellationToken);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task SendAsync(valuetype System.ArraySegment`1&lt;unsigned int8&gt; buffer, valuetype System.Net.WebSockets.WebSocketMessageType messageType, bool endOfMessage, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Threading.Tasks.Task SendAsync (ArraySegment<byte> buffer, System.Net.WebSockets.WebSocketMessageType messageType, bool endOfMessage, System.Threading.CancellationToken cancellationToken);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Threading.Tasks.Task SendAsync(valuetype System.ArraySegment`1<unsigned int8> buffer, valuetype System.Net.WebSockets.WebSocketMessageType messageType, bool endOfMessage, valuetype System.Threading.CancellationToken cancellationToken) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -321,7 +516,7 @@
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="buffer" Type="System.ArraySegment&lt;System.Byte&gt;" />
+        <Parameter Name="buffer" Type="System.ArraySegment<System.Byte>" />
         <Parameter Name="messageType" Type="System.Net.WebSockets.WebSocketMessageType" />
         <Parameter Name="endOfMessage" Type="System.Boolean" />
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
@@ -329,30 +524,66 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />  object will complete after the send request on the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance has completed.</para>
+          <para
+            >This operation will not block. The returned <see
+             cref="T:System.Threading.Tasks.Task" />
+
+              object will complete after the send request on the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance has completed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Send data on <see cref="T:System.Net.WebSockets.ClientWebSocket" /> as an asynchronous operation.</para>
+          <para
+            >Send data on <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             as an asynchronous operation.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns <see cref="T:System.Threading.Tasks.Task" />.</para>
+          <para
+            >Returns <see
+             cref="T:System.Threading.Tasks.Task" />
+
+            .</para
+          >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The buffer containing the message to be sent.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The buffer containing the message to be sent.</param
+        >
         <param name="messageType">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether the buffer is clear text or in a binary format.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether the buffer is clear text or in a binary format.</param
+        >
         <param name="endOfMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether this is the final asynchronous send. Set to true if this is the final send; false otherwise.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether this is the final asynchronous send. Set to true if this is the final send; false otherwise.</param
+        >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />A cancellation token used to propagate notification that this  operation should be canceled.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A cancellation token used to propagate notification that this  operation should be canceled.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="State">
-      <MemberSignature Language="C#" Value="public override System.Net.WebSockets.WebSocketState State { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.WebSockets.WebSocketState State" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Net.WebSockets.WebSocketState State { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.WebSockets.WebSocketState State"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -365,7 +596,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Get the WebSocket state of the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance.</para>
+          <para
+            >Get the WebSocket state of the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -384,7 +620,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the supported WebSocket sub-protocol for the <see cref="T:System.Net.WebSockets.ClientWebSocket" /> instance.</para>
+          <para
+            >Gets the supported WebSocket sub-protocol for the <see
+             cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>

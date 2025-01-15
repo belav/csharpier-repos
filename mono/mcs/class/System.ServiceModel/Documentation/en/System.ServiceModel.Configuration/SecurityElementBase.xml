@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SecurityElementBase" FullName="System.ServiceModel.Configuration.SecurityElementBase">
-  <TypeSignature Language="C#" Value="public class SecurityElementBase : System.ServiceModel.Configuration.BindingElementExtensionElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SecurityElementBase extends System.ServiceModel.Configuration.BindingElementExtensionElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public class SecurityElementBase : System.ServiceModel.Configuration.BindingElementExtensionElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit SecurityElementBase extends System.ServiceModel.Configuration.BindingElementExtensionElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +26,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SecurityElementBase ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -32,8 +41,14 @@
       </Docs>
     </Member>
     <Member MemberName="AllowSerializedSigningTokenOnReply">
-      <MemberSignature Language="C#" Value="public bool AllowSerializedSigningTokenOnReply { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool AllowSerializedSigningTokenOnReply" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool AllowSerializedSigningTokenOnReply { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool AllowSerializedSigningTokenOnReply"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -56,8 +71,14 @@
       </Docs>
     </Member>
     <Member MemberName="AuthenticationMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.AuthenticationMode AuthenticationMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Configuration.AuthenticationMode AuthenticationMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.AuthenticationMode AuthenticationMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Configuration.AuthenticationMode AuthenticationMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -81,7 +102,10 @@
     </Member>
     <Member MemberName="BindingElementType">
       <MemberSignature Language="C#" Value="public override Type BindingElementType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type BindingElementType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type BindingElementType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -99,8 +123,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateBindingElement">
-      <MemberSignature Language="C#" Value="protected override System.ServiceModel.Channels.BindingElement CreateBindingElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig virtual instance class System.ServiceModel.Channels.BindingElement CreateBindingElement() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.ServiceModel.Channels.BindingElement CreateBindingElement ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyorassemblyhidebysig virtual instance class System.ServiceModel.Channels.BindingElement CreateBindingElement() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -117,13 +147,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A custom <see cref="T:System.ServiceModel.Channels.BindingElement" /> object.</para>
+          <para
+            >A custom <see
+             cref="T:System.ServiceModel.Channels.BindingElement" />
+
+             object.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="DefaultAlgorithmSuite">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.SecurityAlgorithmSuite DefaultAlgorithmSuite { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.SecurityAlgorithmSuite DefaultAlgorithmSuite" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.SecurityAlgorithmSuite DefaultAlgorithmSuite { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.SecurityAlgorithmSuite DefaultAlgorithmSuite"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -173,8 +214,14 @@
       </Docs>
     </Member>
     <Member MemberName="IssuedTokenParameters">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.IssuedTokenParametersElement IssuedTokenParameters { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.IssuedTokenParametersElement IssuedTokenParameters" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.IssuedTokenParametersElement IssuedTokenParameters { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.IssuedTokenParametersElement IssuedTokenParameters"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -197,8 +244,14 @@
       </Docs>
     </Member>
     <Member MemberName="KeyEntropyMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.SecurityKeyEntropyMode KeyEntropyMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Security.SecurityKeyEntropyMode KeyEntropyMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.SecurityKeyEntropyMode KeyEntropyMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Security.SecurityKeyEntropyMode KeyEntropyMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -221,8 +274,14 @@
       </Docs>
     </Member>
     <Member MemberName="LocalClientSettings">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.LocalClientSecuritySettingsElement LocalClientSettings { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.LocalClientSecuritySettingsElement LocalClientSettings" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.LocalClientSecuritySettingsElement LocalClientSettings { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.LocalClientSecuritySettingsElement LocalClientSettings"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -245,8 +304,14 @@
       </Docs>
     </Member>
     <Member MemberName="LocalServiceSettings">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.LocalServiceSecuritySettingsElement LocalServiceSettings { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.LocalServiceSecuritySettingsElement LocalServiceSettings" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.LocalServiceSecuritySettingsElement LocalServiceSettings { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.LocalServiceSecuritySettingsElement LocalServiceSettings"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -269,8 +334,14 @@
       </Docs>
     </Member>
     <Member MemberName="MessageProtectionOrder">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.MessageProtectionOrder MessageProtectionOrder { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Security.MessageProtectionOrder MessageProtectionOrder" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.MessageProtectionOrder MessageProtectionOrder { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Security.MessageProtectionOrder MessageProtectionOrder"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -293,8 +364,14 @@
       </Docs>
     </Member>
     <Member MemberName="MessageSecurityVersion">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.MessageSecurityVersion MessageSecurityVersion { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.MessageSecurityVersion MessageSecurityVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.MessageSecurityVersion MessageSecurityVersion { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.MessageSecurityVersion MessageSecurityVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -320,8 +397,14 @@
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -334,7 +417,18 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" /> instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" /> objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" /> objects of this configuration element.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+
+             instance that contains a collection of <see
+             cref="T:System.Configuration.ConfigurationProperty" />
+
+             objects that can be attributes or <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             objects of this configuration element.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -363,8 +457,14 @@
       </Docs>
     </Member>
     <Member MemberName="RequireSecurityContextCancellation">
-      <MemberSignature Language="C#" Value="public bool RequireSecurityContextCancellation { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool RequireSecurityContextCancellation" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool RequireSecurityContextCancellation { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool RequireSecurityContextCancellation"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -387,8 +487,14 @@
       </Docs>
     </Member>
     <Member MemberName="RequireSignatureConfirmation">
-      <MemberSignature Language="C#" Value="public bool RequireSignatureConfirmation { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool RequireSignatureConfirmation" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool RequireSignatureConfirmation { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool RequireSignatureConfirmation"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -411,8 +517,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityHeaderLayout">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.SecurityHeaderLayout SecurityHeaderLayout { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Channels.SecurityHeaderLayout SecurityHeaderLayout" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.SecurityHeaderLayout SecurityHeaderLayout { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Channels.SecurityHeaderLayout SecurityHeaderLayout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

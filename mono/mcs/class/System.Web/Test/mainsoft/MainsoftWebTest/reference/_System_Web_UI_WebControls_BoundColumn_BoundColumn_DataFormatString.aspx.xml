@@ -62,9 +62,15 @@
       <br />
     </span>
     <span>
-      <br />slkdjflkfslkjf slkfjsl ks jlflks d</span>
+      <br />
+
+      slkdjflkfslkjf slkfjsl ks jlflks d</span
+    >
     <span>
-      <br />{0:c2}</span>
+      <br />
+
+      {0:c2}</span
+    >
   </div>
   <div id="Ghtsubtest2" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid2">

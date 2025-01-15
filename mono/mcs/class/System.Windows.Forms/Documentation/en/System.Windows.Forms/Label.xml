@@ -34,10 +34,71 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.Label" /> controls are typically used to provide descriptive text for a control. For example, you can use a <see cref="T:System.Windows.Forms.Label" /> to add descriptive text for a <see cref="T:System.Windows.Forms.TextBox" /> control to inform the user about the type of data expected in the control. <see cref="T:System.Windows.Forms.Label" /> controls can also be used to add descriptive text to a <see cref="T:System.Windows.Forms.Form" /> to provide the user with helpful information. For example, you can add a <see cref="T:System.Windows.Forms.Label" /> to the top of a <see cref="T:System.Windows.Forms.Form" /> that provides instructions to the user on how to input data in the controls on the form. <see cref="T:System.Windows.Forms.Label" /> controls can be also used to display run time information on the status of an application. For example, you can add a <see cref="T:System.Windows.Forms.Label" /> control to a form to display the status of each file as a list of files is processed.</para>
-      <para>A <see cref="T:System.Windows.Forms.Label" /> participates in the tab order of a form, but does not receive focus (the next control in the tab order receives focus). For example, if the <see cref="P:System.Windows.Forms.Label.UseMnemonic" /> property is set to true, and a mnemonic character—the first character after an ampersand (&amp;)—is specified in the <see cref="P:System.Windows.Forms.Control.Text" /> property of the control, when a user presses ALT+ the mnemonic key, focus moves to the next control in the tab order. This feature provides keyboard navigation for a form. In addition to displaying text, the <see cref="T:System.Windows.Forms.Label" /> control can also display an image using the <see cref="P:System.Windows.Forms.Label.Image" /> property, or a combination of the <see cref="P:System.Windows.Forms.Label.ImageIndex" /> and <see cref="P:System.Windows.Forms.Label.ImageList" /> properties.</para>
+        <see cref="T:System.Windows.Forms.Label" />
+
+         controls are typically used to provide descriptive text for a control. For example, you can use a <see
+         cref="T:System.Windows.Forms.Label" />
+
+         to add descriptive text for a <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         control to inform the user about the type of data expected in the control. <see
+         cref="T:System.Windows.Forms.Label" />
+
+         controls can also be used to add descriptive text to a <see
+         cref="T:System.Windows.Forms.Form" />
+
+         to provide the user with helpful information. For example, you can add a <see
+         cref="T:System.Windows.Forms.Label" />
+
+         to the top of a <see
+         cref="T:System.Windows.Forms.Form" />
+
+         that provides instructions to the user on how to input data in the controls on the form. <see
+         cref="T:System.Windows.Forms.Label" />
+
+         controls can be also used to display run time information on the status of an application. For example, you can add a <see
+         cref="T:System.Windows.Forms.Label" />
+
+         control to a form to display the status of each file as a list of files is processed.</para
+      >
+      <para
+        >A <see
+         cref="T:System.Windows.Forms.Label" />
+
+         participates in the tab order of a form, but does not receive focus (the next control in the tab order receives focus). For example, if the <see
+         cref="P:System.Windows.Forms.Label.UseMnemonic" />
+
+         property is set to true, and a mnemonic character—the first character after an ampersand (&amp;)—is specified in the <see
+         cref="P:System.Windows.Forms.Control.Text" />
+
+         property of the control, when a user presses ALT+ the mnemonic key, focus moves to the next control in the tab order. This feature provides keyboard navigation for a form. In addition to displaying text, the <see
+         cref="T:System.Windows.Forms.Label" />
+
+         control can also display an image using the <see
+         cref="P:System.Windows.Forms.Label.Image" />
+
+         property, or a combination of the <see
+         cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+         and <see
+         cref="P:System.Windows.Forms.Label.ImageList" />
+
+         properties.</para
+      >
       <block subset="none" type="note">
-        <para>A <see cref="T:System.Windows.Forms.Label" /> can be made transparent by setting its <see cref="P:System.Windows.Forms.Control.BackColor" /> property to Color.Transparent. When you use a transparent label, use only the current device coordinate system to draw on the container, or the <see cref="T:System.Windows.Forms.Label" /> background might paint improperly.</para>
+        <para
+          >A <see
+           cref="T:System.Windows.Forms.Label" />
+
+           can be made transparent by setting its <see
+           cref="P:System.Windows.Forms.Control.BackColor" />
+
+           property to Color.Transparent. When you use a transparent label, use only the current device coordinate system to draw on the container, or the <see
+           cref="T:System.Windows.Forms.Label" />
+
+           background might paint improperly.</para
+        >
       </block>
     </remarks>
     <summary>
@@ -53,11 +114,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By default, a label is displayed with its <see cref="P:System.Windows.Forms.Label.AutoSize" /> property set to false and with its <see cref="P:System.Windows.Forms.Label.BorderStyle" /> property set to BorderStyle.None.</para>
+          <para
+            >By default, a label is displayed with its <see
+             cref="P:System.Windows.Forms.Label.AutoSize" />
+
+             property set to false and with its <see
+             cref="P:System.Windows.Forms.Label.BorderStyle" />
+
+             property set to BorderStyle.None.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.Label" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -89,14 +163,47 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Set <see cref="P:System.Windows.Forms.Label.AutoEllipsis" /> to true to display text that extends beyond the width of the <see cref="T:System.Windows.Forms.Label" /> when the user passes over the control with the mouse. If <see cref="P:System.Windows.Forms.Label.AutoSize" /> is true, the label will grow to fit the text and an ellipsis will not appear.</para>
+          <para
+            >Set <see
+             cref="P:System.Windows.Forms.Label.AutoEllipsis" />
+
+             to true to display text that extends beyond the width of the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             when the user passes over the control with the mouse. If <see
+             cref="P:System.Windows.Forms.Label.AutoSize" />
+
+             is true, the label will grow to fit the text and an ellipsis will not appear.</para
+          >
           <block subset="none" type="note">
-            <para>If the font is taller than the height of the <see cref="T:System.Windows.Forms.Label" /> and <see cref="P:System.Windows.Forms.Label.AutoEllipsis" /> is true, you must set <see cref="P:System.Windows.Forms.Label.AutoSize" /> to false for text to be drawn.</para>
+            <para
+              >If the font is taller than the height of the <see
+               cref="T:System.Windows.Forms.Label" />
+
+               and <see
+               cref="P:System.Windows.Forms.Label.AutoEllipsis" />
+
+               is true, you must set <see
+               cref="P:System.Windows.Forms.Label.AutoSize" />
+
+               to false for text to be drawn.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the ellipsis character (...) appears at the right edge of the <see cref="T:System.Windows.Forms.Label" />, denoting that the <see cref="T:System.Windows.Forms.Label" /> text extends beyond the specified length of the <see cref="T:System.Windows.Forms.Label" />.</para>
+          <para
+            >Gets or sets a value indicating whether the ellipsis character (...) appears at the right edge of the <see
+             cref="T:System.Windows.Forms.Label" />
+
+            , denoting that the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             text extends beyond the specified length of the <see
+             cref="T:System.Windows.Forms.Label" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -130,9 +237,28 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When this property is set to true, the <see cref="T:System.Windows.Forms.Label" /> adjusts its width to display its entire contents. This property is typically set to true when you use a <see cref="T:System.Windows.Forms.Label" /> control to display various lengths of text, such as the status of an application process. You can also use this property when the application will display text in various languages, and the size of the text might increase or decrease based on the language settings in Windows.</para>
+          <para
+            >When this property is set to true, the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             adjusts its width to display its entire contents. This property is typically set to true when you use a <see
+             cref="T:System.Windows.Forms.Label" />
+
+             control to display various lengths of text, such as the status of an application process. You can also use this property when the application will display text in various languages, and the size of the text might increase or decrease based on the language settings in Windows.</para
+          >
           <block subset="none" type="note">
-            <para>If the font is taller than the height of the <see cref="T:System.Windows.Forms.Label" /> and <see cref="P:System.Windows.Forms.Label.AutoEllipsis" /> is true, you must set <see cref="P:System.Windows.Forms.Label.AutoSize" /> to false for text to be drawn.</para>
+            <para
+              >If the font is taller than the height of the <see
+               cref="T:System.Windows.Forms.Label" />
+
+               and <see
+               cref="P:System.Windows.Forms.Label.AutoEllipsis" />
+
+               is true, you must set <see
+               cref="P:System.Windows.Forms.Label.AutoSize" />
+
+               to false for text to be drawn.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -154,11 +280,23 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.Label.AutoSize" /> property changes.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.Label.AutoSize" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -175,7 +313,10 @@
       </Attributes>
     </Member>
     <Member MemberName="BackgroundImage">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Image BackgroundImage { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Image BackgroundImage { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -228,7 +369,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the <see cref="P:System.Windows.Forms.Label.BackgroundImage" /> property changes. </para>
+          <para
+            >Occurs when the <see
+             cref="P:System.Windows.Forms.Label.BackgroundImage" />
+
+             property changes. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -237,7 +383,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BackgroundImageLayout">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.ImageLayout BackgroundImageLayout { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.ImageLayout BackgroundImageLayout { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -266,7 +415,10 @@
       </Docs>
     </Member>
     <Member MemberName="BackgroundImageLayoutChanged">
-      <MemberSignature Language="C#" Value="public event EventHandler BackgroundImageLayoutChanged;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event EventHandler BackgroundImageLayoutChanged;"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -289,12 +441,20 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the <see cref="P:System.Windows.Forms.Label.BackgroundImageLayout" /> property changes.</para>
+          <para
+            >Occurs when the <see
+             cref="P:System.Windows.Forms.Label.BackgroundImageLayout" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="BorderStyle">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.BorderStyle BorderStyle { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.BorderStyle BorderStyle { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -311,7 +471,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use this property to add a border to the control. This property is typically used to differentiate a <see cref="T:System.Windows.Forms.Label" /> that labels another control from a <see cref="T:System.Windows.Forms.Label" /> that displays the status of a process in an application.</para>
+          <para
+            >You can use this property to add a border to the control. This property is typically used to differentiate a <see
+             cref="T:System.Windows.Forms.Label" />
+
+             that labels another control from a <see
+             cref="T:System.Windows.Forms.Label" />
+
+             that displays the status of a process in an application.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -324,7 +492,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CalcImageRenderBounds">
-      <MemberSignature Language="C#" Value="protected System.Drawing.Rectangle CalcImageRenderBounds (System.Drawing.Image image, System.Drawing.Rectangle r, System.Drawing.ContentAlignment align);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected System.Drawing.Rectangle CalcImageRenderBounds (System.Drawing.Image image, System.Drawing.Rectangle r, System.Drawing.ContentAlignment align);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Rectangle</ReturnType>
@@ -337,22 +508,58 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use this method within a derived class of <see cref="T:System.Windows.Forms.Label" />, to determine the size and location of an image to draw within the <see cref="T:System.Windows.Forms.Label" /> control based on its location within the control. The location of the image is based on the value of the control's <see cref="P:System.Windows.Forms.Label.ImageAlign" /> property.</para>
+          <para
+            >You can use this method within a derived class of <see
+             cref="T:System.Windows.Forms.Label" />
+
+            , to determine the size and location of an image to draw within the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             control based on its location within the control. The location of the image is based on the value of the control's <see
+             cref="P:System.Windows.Forms.Label.ImageAlign" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines the size and location of an image drawn within the <see cref="T:System.Windows.Forms.Label" /> control based on the alignment of the control.</para>
+          <para
+            >Determines the size and location of an image drawn within the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             control based on the alignment of the control.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Rectangle" /> that represents the size and location of the specified image within the control.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Rectangle" />
+
+             that represents the size and location of the specified image within the control.</para
+          >
         </returns>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Image" /> used to determine size and location when drawn within the control. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Image" />
+
+           used to determine size and location when drawn within the control. </param
+        >
         <param name="r">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Rectangle" /> that represents the area to draw the image in. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that represents the area to draw the image in. </param
+        >
         <param name="align">
-          <attribution license="cc4" from="Microsoft" modified="false" />The alignment of content within the control. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The alignment of content within the control. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -360,7 +567,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateAccessibilityInstance">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.AccessibleObject CreateAccessibilityInstance ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.AccessibleObject CreateAccessibilityInstance ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.AccessibleObject</ReturnType>
@@ -374,7 +584,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Windows.Forms.AccessibleObject" /> for the control.</para>
+          <para
+            >A new <see
+             cref="T:System.Windows.Forms.AccessibleObject" />
+
+             for the control.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -383,7 +598,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateParams">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.CreateParams CreateParams { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.CreateParams CreateParams { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.CreateParams</ReturnType>
@@ -402,7 +620,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DefaultImeMode">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.ImeMode DefaultImeMode { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.ImeMode DefaultImeMode { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ImeMode</ReturnType>
@@ -421,7 +642,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DefaultMargin">
-      <MemberSignature Language="C#" Value="protected override System.Windows.Forms.Padding DefaultMargin { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Windows.Forms.Padding DefaultMargin { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -439,7 +663,10 @@
       </Docs>
     </Member>
     <Member MemberName="DefaultSize">
-      <MemberSignature Language="C#" Value="protected override System.Drawing.Size DefaultSize { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Drawing.Size DefaultSize { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Size</ReturnType>
@@ -469,15 +696,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" /> method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
-          <para>When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.Label" /> references. This method invokes the Dispose method of each referenced object.</para>
+          <para
+            >This method is called by the public Dispose method and the <see
+             cref="M:System.Object.Finalize" />
+
+             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
+             name="disposing" />
+
+             parameter set to true. <see
+             cref="M:System.Object.Finalize" />
+
+             invokes Dispose with <paramref
+             name="disposing" />
+
+             set to false.</para
+          >
+          <para
+            >When the <paramref
+             name="disposing" />
+
+             parameter is true, this method releases all resources held by any managed objects that this <see
+             cref="T:System.Windows.Forms.Label" />
+
+             references. This method invokes the Dispose method of each referenced object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.Label" /> and optionally releases the managed resources. </para>
+          <para
+            >Releases the unmanaged resources used by the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             and optionally releases the managed resources. </para
+          >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -485,7 +742,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DrawImage">
-      <MemberSignature Language="C#" Value="protected void DrawImage (System.Drawing.Graphics g, System.Drawing.Image image, System.Drawing.Rectangle r, System.Drawing.ContentAlignment align);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected void DrawImage (System.Drawing.Graphics g, System.Drawing.Image image, System.Drawing.Rectangle r, System.Drawing.ContentAlignment align);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -500,16 +760,45 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Draws an <see cref="T:System.Drawing.Image" /> within the specified bounds.</para>
+          <para
+            >Draws an <see
+             cref="T:System.Drawing.Image" />
+
+             within the specified bounds.</para
+          >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> surface on which to draw. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           surface on which to draw. </param
+        >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Image" /> to draw. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Image" />
+
+           to draw. </param
+        >
         <param name="r">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> bounds to draw within. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           bounds to draw within. </param
+        >
         <param name="align">
-          <attribution license="cc4" from="Microsoft" modified="false" />The alignment of the image to draw within the <see cref="T:System.Windows.Forms.Label" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The alignment of the image to draw within the <see
+           cref="T:System.Windows.Forms.Label" />
+
+          . </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -517,7 +806,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FlatStyle">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.FlatStyle FlatStyle { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.FlatStyle FlatStyle { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -531,9 +823,52 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the <see cref="P:System.Windows.Forms.Label.FlatStyle" /> property is set to FlatStyle.System, any values assigned to the <see cref="P:System.Windows.Forms.Label.ImageList" />, <see cref="P:System.Windows.Forms.Label.Image" />, <see cref="P:System.Windows.Forms.Label.ImageIndex" />, and <see cref="P:System.Windows.Forms.Label.ImageAlign" /> properties are ignored. In addition, the <see cref="P:System.Windows.Forms.Label.TextAlign" /> property ignores any property values that are not vertical property settings. Horizontally aligned settings of the <see cref="P:System.Windows.Forms.Label.TextAlign" /> property are aligned to the top of the control. For example, if you set the <see cref="P:System.Windows.Forms.Label.TextAlign" /> property to ContentAlignment.TopCenter, ContentAlignment.MiddleCenter, or ContentAlignment.BottomCenter, when the <see cref="P:System.Windows.Forms.Label.FlatStyle" /> property is set to FlatStyle.System, the text in the <see cref="T:System.Windows.Forms.Label" /> control will be aligned to the top and center locations within the bounds of the control.</para>
+          <para
+            >When the <see
+             cref="P:System.Windows.Forms.Label.FlatStyle" />
+
+             property is set to FlatStyle.System, any values assigned to the <see
+             cref="P:System.Windows.Forms.Label.ImageList" />
+
+            , <see
+             cref="P:System.Windows.Forms.Label.Image" />
+
+            , <see
+             cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+            , and <see
+             cref="P:System.Windows.Forms.Label.ImageAlign" />
+
+             properties are ignored. In addition, the <see
+             cref="P:System.Windows.Forms.Label.TextAlign" />
+
+             property ignores any property values that are not vertical property settings. Horizontally aligned settings of the <see
+             cref="P:System.Windows.Forms.Label.TextAlign" />
+
+             property are aligned to the top of the control. For example, if you set the <see
+             cref="P:System.Windows.Forms.Label.TextAlign" />
+
+             property to ContentAlignment.TopCenter, ContentAlignment.MiddleCenter, or ContentAlignment.BottomCenter, when the <see
+             cref="P:System.Windows.Forms.Label.FlatStyle" />
+
+             property is set to FlatStyle.System, the text in the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             control will be aligned to the top and center locations within the bounds of the control.</para
+          >
           <block subset="none" type="note">
-            <para>In the .NET Framework version 1.1, setting the <see cref="P:System.Windows.Forms.Label.FlatStyle" /> property to FlatStyle.System does not cause the value of the <see cref="P:System.Windows.Forms.Label.TextAlign" /> property to be ignored. In addition, the property has no effect in the derived class, <see cref="T:System.Windows.Forms.LinkLabel" />.</para>
+            <para
+              >In the .NET Framework version 1.1, setting the <see
+               cref="P:System.Windows.Forms.Label.FlatStyle" />
+
+               property to FlatStyle.System does not cause the value of the <see
+               cref="P:System.Windows.Forms.Label.TextAlign" />
+
+               property to be ignored. In addition, the property has no effect in the derived class, <see
+               cref="T:System.Windows.Forms.LinkLabel" />
+
+              .</para
+            >
           </block>
         </remarks>
         <summary>
@@ -547,7 +882,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetPreferredSize">
-      <MemberSignature Language="C#" Value="public override System.Drawing.Size GetPreferredSize (System.Drawing.Size proposedSize);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Drawing.Size GetPreferredSize (System.Drawing.Size proposedSize);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -566,10 +904,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An ordered pair of type <see cref="T:System.Drawing.Size" /> representing the width and height of a rectangle.</para>
+          <para
+            >An ordered pair of type <see
+             cref="T:System.Drawing.Size" />
+
+             representing the width and height of a rectangle.</para
+          >
         </returns>
         <param name="proposedSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />The custom-sized area for a control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The custom-sized area for a control.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Image">
@@ -587,11 +933,36 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.Label.Image" /> property cannot be used at the same time as the <see cref="P:System.Windows.Forms.Label.ImageList" /> and <see cref="P:System.Windows.Forms.Label.ImageIndex" /> properties. When the <see cref="P:System.Windows.Forms.Label.Image" /> property is used to display an image, the <see cref="P:System.Windows.Forms.Label.ImageList" /> and <see cref="P:System.Windows.Forms.Label.ImageIndex" /> properties are automatically set to their default settings.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.Label.Image" />
+
+             property cannot be used at the same time as the <see
+             cref="P:System.Windows.Forms.Label.ImageList" />
+
+             and <see
+             cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+             properties. When the <see
+             cref="P:System.Windows.Forms.Label.Image" />
+
+             property is used to display an image, the <see
+             cref="P:System.Windows.Forms.Label.ImageList" />
+
+             and <see
+             cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+             properties are automatically set to their default settings.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the image that is displayed on a <see cref="T:System.Windows.Forms.Label" />.</para>
+          <para
+            >Gets or sets the image that is displayed on a <see
+             cref="T:System.Windows.Forms.Label" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -600,7 +971,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ImageAlign">
-      <MemberSignature Language="C#" Value="public System.Drawing.ContentAlignment ImageAlign { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.ContentAlignment ImageAlign { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -617,7 +991,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property enables you to align an image within the boundaries of the <see cref="T:System.Windows.Forms.Label" /> control to ensure that the image is properly displayed. You can add an image to a <see cref="T:System.Windows.Forms.Label" /> using the <see cref="P:System.Windows.Forms.Label.Image" /> property or the <see cref="P:System.Windows.Forms.Label.ImageList" /> and <see cref="P:System.Windows.Forms.Label.ImageIndex" /> properties. Images displayed in the control cannot be stretched or shrunk to fill the control if the control is larger or smaller than the image.</para>
+          <para
+            >This property enables you to align an image within the boundaries of the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             control to ensure that the image is properly displayed. You can add an image to a <see
+             cref="T:System.Windows.Forms.Label" />
+
+             using the <see
+             cref="P:System.Windows.Forms.Label.Image" />
+
+             property or the <see
+             cref="P:System.Windows.Forms.Label.ImageList" />
+
+             and <see
+             cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+             properties. Images displayed in the control cannot be stretched or shrunk to fill the control if the control is larger or smaller than the image.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -656,11 +1047,36 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.Label.ImageIndex" /> and the <see cref="P:System.Windows.Forms.Label.ImageList" /> properties cannot be used at the same time as the <see cref="P:System.Windows.Forms.Label.Image" /> property. When the <see cref="P:System.Windows.Forms.Label.ImageIndex" /> property and <see cref="P:System.Windows.Forms.Label.ImageList" /> properties are used to display an image, the <see cref="P:System.Windows.Forms.Label.Image" /> property is automatically set to null.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+             and the <see
+             cref="P:System.Windows.Forms.Label.ImageList" />
+
+             properties cannot be used at the same time as the <see
+             cref="P:System.Windows.Forms.Label.Image" />
+
+             property. When the <see
+             cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+             property and <see
+             cref="P:System.Windows.Forms.Label.ImageList" />
+
+             properties are used to display an image, the <see
+             cref="P:System.Windows.Forms.Label.Image" />
+
+             property is automatically set to null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the index value of the image displayed on the <see cref="T:System.Windows.Forms.Label" />.</para>
+          <para
+            >Gets or sets the index value of the image displayed on the <see
+             cref="T:System.Windows.Forms.Label" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -698,16 +1114,32 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.Label.ImageKey" /> property specifies the image from the image list to display on the <see cref="T:System.Windows.Forms.Label" />.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.Label.ImageKey" />
+
+             property specifies the image from the image list to display on the <see
+             cref="T:System.Windows.Forms.Label" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the key accessor for the image in the <see cref="P:System.Windows.Forms.Label.ImageList" />.</para>
+          <para
+            >Gets or sets the key accessor for the image in the <see
+             cref="P:System.Windows.Forms.Label.ImageList" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ImageList">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ImageList ImageList { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ImageList ImageList { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -724,14 +1156,56 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.Label.ImageIndex" /> and the <see cref="P:System.Windows.Forms.Label.ImageList" /> properties cannot be used at the same time as the <see cref="P:System.Windows.Forms.Label.Image" /> property. When the <see cref="P:System.Windows.Forms.Label.ImageIndex" /> property and <see cref="P:System.Windows.Forms.Label.ImageList" /> properties are used to display an image, the <see cref="P:System.Windows.Forms.Label.Image" /> property is set to null.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+             and the <see
+             cref="P:System.Windows.Forms.Label.ImageList" />
+
+             properties cannot be used at the same time as the <see
+             cref="P:System.Windows.Forms.Label.Image" />
+
+             property. When the <see
+             cref="P:System.Windows.Forms.Label.ImageIndex" />
+
+             property and <see
+             cref="P:System.Windows.Forms.Label.ImageList" />
+
+             properties are used to display an image, the <see
+             cref="P:System.Windows.Forms.Label.Image" />
+
+             property is set to null.</para
+          >
           <block subset="none" type="note">
-            <para>The <see cref="T:System.Windows.Forms.Label" /> will not be garbage collected if its <see cref="P:System.Windows.Forms.Label.ImageList" /> is still referenced elsewhere. Set the <see cref="P:System.Windows.Forms.Label.ImageList" /> property of the <see cref="T:System.Windows.Forms.Label" /> to null to enable efficient garbage collection.</para>
+            <para
+              >The <see
+               cref="T:System.Windows.Forms.Label" />
+
+               will not be garbage collected if its <see
+               cref="P:System.Windows.Forms.Label.ImageList" />
+
+               is still referenced elsewhere. Set the <see
+               cref="P:System.Windows.Forms.Label.ImageList" />
+
+               property of the <see
+               cref="T:System.Windows.Forms.Label" />
+
+               to null to enable efficient garbage collection.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Windows.Forms.ImageList" /> that contains the images to display in the <see cref="T:System.Windows.Forms.Label" /> control.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Windows.Forms.ImageList" />
+
+             that contains the images to display in the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -740,7 +1214,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ImeMode">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ImeMode ImeMode { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ImeMode ImeMode { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -790,7 +1267,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the <see cref="P:System.Windows.Forms.Label.ImeMode" /> property changes.</para>
+          <para
+            >Occurs when the <see
+             cref="P:System.Windows.Forms.Label.ImeMode" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -799,7 +1281,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="KeyDown">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.KeyEventHandler KeyDown;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.KeyEventHandler KeyDown;"
+      />
       <MemberType>Event</MemberType>
       <Attributes>
         <Attribute>
@@ -828,7 +1313,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="KeyPress">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.KeyPressEventHandler KeyPress;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.KeyPressEventHandler KeyPress;"
+      />
       <MemberType>Event</MemberType>
       <Attributes>
         <Attribute>
@@ -857,7 +1345,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="KeyUp">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.KeyEventHandler KeyUp;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.KeyEventHandler KeyUp;"
+      />
       <MemberType>Event</MemberType>
       <Attributes>
         <Attribute>
@@ -886,7 +1377,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnAutoSizeChanged">
-      <MemberSignature Language="C#" Value="protected virtual void OnAutoSizeChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnAutoSizeChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -904,7 +1398,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnEnabledChanged">
-      <MemberSignature Language="C#" Value="protected override void OnEnabledChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnEnabledChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -916,10 +1413,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.EnabledChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.EnabledChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -939,10 +1447,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.FontChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -950,7 +1469,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnHandleDestroyed">
-      <MemberSignature Language="C#" Value="protected override void OnHandleDestroyed (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnHandleDestroyed (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -962,15 +1484,38 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.Label.OnHandleDestroyed(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.Label.OnHandleDestroyed(System.EventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.HandleDestroyed" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.HandleDestroyed" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -990,10 +1535,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.MouseEnter" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.MouseEnter" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1013,17 +1569,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.MouseLeave" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.MouseLeave" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnPaddingChanged">
-      <MemberSignature Language="C#" Value="protected override void OnPaddingChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnPaddingChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1038,14 +1608,28 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.PaddingChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.PaddingChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnPaint">
-      <MemberSignature Language="C#" Value="protected override void OnPaint (System.Windows.Forms.PaintEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnPaint (System.Windows.Forms.PaintEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1057,10 +1641,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.Paint" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.Paint" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.PaintEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1068,7 +1663,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnParentChanged">
-      <MemberSignature Language="C#" Value="protected override void OnParentChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnParentChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1080,10 +1678,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.ParentChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.ParentChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1091,7 +1700,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRightToLeftChanged">
-      <MemberSignature Language="C#" Value="protected override void OnRightToLeftChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRightToLeftChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1105,19 +1717,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.Label.OnRightToLeftChanged(System.EventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.Label.OnRightToLeftChanged(System.EventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.RightToLeftChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.RightToLeftChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnTextAlignChanged">
-      <MemberSignature Language="C#" Value="protected virtual void OnTextAlignChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual void OnTextAlignChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1128,14 +1766,32 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a></format>.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Label.TextAlignChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Label.TextAlignChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1155,10 +1811,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.TextChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.TextChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1166,7 +1833,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnVisibleChanged">
-      <MemberSignature Language="C#" Value="protected override void OnVisibleChanged (EventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnVisibleChanged (EventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1178,10 +1848,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.Control.VisibleChanged" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.Control.VisibleChanged" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.EventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1209,9 +1890,34 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property returns the height that the control should be in order to properly display text, based on the font assigned to the control. You can use this property along with the <see cref="P:System.Windows.Forms.Label.PreferredWidth" /> property to ensure that the text in the <see cref="T:System.Windows.Forms.Label" /> control is displayed properly. You can use the <see cref="P:System.Windows.Forms.Label.AutoSize" /> property to automatically adjust the height and the width of the <see cref="T:System.Windows.Forms.Label" /> control, based on the text and font size.</para>
+          <para
+            >This property returns the height that the control should be in order to properly display text, based on the font assigned to the control. You can use this property along with the <see
+             cref="P:System.Windows.Forms.Label.PreferredWidth" />
+
+             property to ensure that the text in the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             control is displayed properly. You can use the <see
+             cref="P:System.Windows.Forms.Label.AutoSize" />
+
+             property to automatically adjust the height and the width of the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             control, based on the text and font size.</para
+          >
           <block subset="none" type="note">
-            <para>If the <see cref="P:System.Windows.Forms.Label.BorderStyle" /> property of the <see cref="T:System.Windows.Forms.Label" /> control is set to BorderStyle.None, the value returned by <see cref="P:System.Windows.Forms.Label.PreferredHeight" /> property will be larger due to the lack of borders.</para>
+            <para
+              >If the <see
+               cref="P:System.Windows.Forms.Label.BorderStyle" />
+
+               property of the <see
+               cref="T:System.Windows.Forms.Label" />
+
+               control is set to BorderStyle.None, the value returned by <see
+               cref="P:System.Windows.Forms.Label.PreferredHeight" />
+
+               property will be larger due to the lack of borders.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1245,9 +1951,40 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property returns the length of the text string, but does not take line wrapping into consideration. For example, a text string that measures 300 pixels wide could be displayed as three lines in a <see cref="T:System.Windows.Forms.Label" /> that is only 100 pixels wide. The <see cref="P:System.Windows.Forms.Label.PreferredWidth" /> property still returns 300 pixels. You can use this property, along with the <see cref="P:System.Windows.Forms.Label.PreferredHeight" /> property, to ensure that the text in the <see cref="T:System.Windows.Forms.Label" /> control is displayed properly. You can use the <see cref="P:System.Windows.Forms.Label.AutoSize" /> property to automatically adjust the height and the width of the <see cref="T:System.Windows.Forms.Label" /> control based on the text and font size.</para>
+          <para
+            >This property returns the length of the text string, but does not take line wrapping into consideration. For example, a text string that measures 300 pixels wide could be displayed as three lines in a <see
+             cref="T:System.Windows.Forms.Label" />
+
+             that is only 100 pixels wide. The <see
+             cref="P:System.Windows.Forms.Label.PreferredWidth" />
+
+             property still returns 300 pixels. You can use this property, along with the <see
+             cref="P:System.Windows.Forms.Label.PreferredHeight" />
+
+             property, to ensure that the text in the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             control is displayed properly. You can use the <see
+             cref="P:System.Windows.Forms.Label.AutoSize" />
+
+             property to automatically adjust the height and the width of the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             control based on the text and font size.</para
+          >
           <block subset="none" type="note">
-            <para>If the <see cref="P:System.Windows.Forms.Label.BorderStyle" /> property of the <see cref="T:System.Windows.Forms.Label" /> control is set to BorderStyle.None, the value returned by <see cref="P:System.Windows.Forms.Label.PreferredWidth" /> property will be larger due to the lack of borders.</para>
+            <para
+              >If the <see
+               cref="P:System.Windows.Forms.Label.BorderStyle" />
+
+               property of the <see
+               cref="T:System.Windows.Forms.Label" />
+
+               control is set to BorderStyle.None, the value returned by <see
+               cref="P:System.Windows.Forms.Label.PreferredWidth" />
+
+               property will be larger due to the lack of borders.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -1261,7 +1998,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ProcessMnemonic">
-      <MemberSignature Language="C#" Value="protected override bool ProcessMnemonic (char charCode);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool ProcessMnemonic (char charCode);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -1280,7 +2020,10 @@
           <para>true if the character was processed as a mnemonic by the control; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The character to process.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The character to process.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1288,7 +2031,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RenderTransparent">
-      <MemberSignature Language="C#" Value="protected virtual bool RenderTransparent { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual bool RenderTransparent { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -1301,7 +2047,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether the container control background is rendered on the <see cref="T:System.Windows.Forms.Label" />.</para>
+          <para
+            >Indicates whether the container control background is rendered on the <see
+             cref="T:System.Windows.Forms.Label" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1315,7 +2066,10 @@
       </Attributes>
     </Member>
     <Member MemberName="SetBoundsCore">
-      <MemberSignature Language="C#" Value="protected override void SetBoundsCore (int x, int y, int width, int height, System.Windows.Forms.BoundsSpecified specified);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void SetBoundsCore (int x, int y, int width, int height, System.Windows.Forms.BoundsSpecified specified);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1330,22 +2084,63 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you set the <see cref="P:System.Windows.Forms.Label.AutoSize" /> property to true, the label will be sized to fit the contents of the label. If you set <see cref="P:System.Windows.Forms.Label.AutoSize" /> to false after calling the <see cref="M:System.Windows.Forms.Label.SetBoundsCore(System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Forms.BoundsSpecified)" /> method, the label will receive the dimensions you specified in the call.</para>
+          <para
+            >If you set the <see
+             cref="P:System.Windows.Forms.Label.AutoSize" />
+
+             property to true, the label will be sized to fit the contents of the label. If you set <see
+             cref="P:System.Windows.Forms.Label.AutoSize" />
+
+             to false after calling the <see
+             cref="M:System.Windows.Forms.Label.SetBoundsCore(System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Forms.BoundsSpecified)" />
+
+             method, the label will receive the dimensions you specified in the call.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Sets the specified bounds of the label.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new <see cref="P:System.Windows.Forms.Control.Left" /> property value of the control. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new <see
+           cref="P:System.Windows.Forms.Control.Left" />
+
+           property value of the control. </param
+        >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new <see cref="P:System.Windows.Forms.Control.Top" /> property value of the control. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new <see
+           cref="P:System.Windows.Forms.Control.Top" />
+
+           property value of the control. </param
+        >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new <see cref="P:System.Windows.Forms.Control.Width" /> property value of the control. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new <see
+           cref="P:System.Windows.Forms.Control.Width" />
+
+           property value of the control. </param
+        >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new <see cref="P:System.Windows.Forms.Control.Height" /> property value of the control. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new <see
+           cref="P:System.Windows.Forms.Control.Height" />
+
+           property value of the control. </param
+        >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" /> values. For any parameter not specified, the current value will be used. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitwise combination of the <see
+           cref="T:System.Windows.Forms.BoundsSpecified" />
+
+           values. For any parameter not specified, the current value will be used. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1373,11 +2168,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.Label.TabStop" /> property is not relevant for the <see cref="T:System.Windows.Forms.Label" /> class, so setting <see cref="P:System.Windows.Forms.Label.TabStop" /> to true has no effect. </para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.Label.TabStop" />
+
+             property is not relevant for the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             class, so setting <see
+             cref="P:System.Windows.Forms.Label.TabStop" />
+
+             to true has no effect. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the user can tab to the <see cref="T:System.Windows.Forms.Label" />. This property is not used by this class.</para>
+          <para
+            >Gets or sets a value indicating whether the user can tab to the <see
+             cref="T:System.Windows.Forms.Label" />
+
+            . This property is not used by this class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1406,7 +2217,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the <see cref="P:System.Windows.Forms.Label.TabStop" /> property changes.</para>
+          <para
+            >Occurs when the <see
+             cref="P:System.Windows.Forms.Label.TabStop" />
+
+             property changes.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1443,7 +2259,10 @@
       </Attributes>
     </Member>
     <Member MemberName="TextAlign">
-      <MemberSignature Language="C#" Value="public virtual System.Drawing.ContentAlignment TextAlign { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Drawing.ContentAlignment TextAlign { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -1460,7 +2279,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can use this property to align the text within a label to match the layout of controls on your form. For example, if your controls are located to the right edge of the labels, you can set the <see cref="P:System.Windows.Forms.Label.TextAlign" /> property to one of the right-aligned horizontal alignments (<see cref="F:System.Drawing.ContentAlignment.TopRight" />, <see cref="F:System.Drawing.ContentAlignment.MiddleRight" />, <see cref="F:System.Drawing.ContentAlignment.BottomRight" />) and the text will be aligned with the right edge of the labels to align with your controls.</para>
+          <para
+            >You can use this property to align the text within a label to match the layout of controls on your form. For example, if your controls are located to the right edge of the labels, you can set the <see
+             cref="P:System.Windows.Forms.Label.TextAlign" />
+
+             property to one of the right-aligned horizontal alignments (<see
+             cref="F:System.Drawing.ContentAlignment.TopRight" />
+
+            , <see
+             cref="F:System.Drawing.ContentAlignment.MiddleRight" />
+
+            , <see
+             cref="F:System.Drawing.ContentAlignment.BottomRight" />
+
+            ) and the text will be aligned with the right edge of the labels to align with your controls.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1481,11 +2314,23 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information about handling events, see <format type="text/html"><a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a></format>.</para>
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the value of the <see cref="P:System.Windows.Forms.Label.TextAlign" /> property has changed.</para>
+          <para
+            >Occurs when the value of the <see
+             cref="P:System.Windows.Forms.Label.TextAlign" />
+
+             property has changed.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1504,11 +2349,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a string that represents the current <see cref="T:System.Windows.Forms.Label" />.</para>
+          <para
+            >Returns a string that represents the current <see
+             cref="T:System.Windows.Forms.Label" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string that represents the current <see cref="T:System.Windows.Forms.Label" />.</para>
+          <para
+            >A string that represents the current <see
+             cref="T:System.Windows.Forms.Label" />
+
+            .</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -1527,12 +2382,45 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see cref="T:System.Windows.Forms.TextRenderer" /> class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see cref="T:System.Drawing.Graphics" /> class. In most cases, if your application is not being upgraded from net_v10_short or net_v11_short, it is recommended that you leave UseCompatibleTextRendering set to the default value of false.</para>
-          <para>The ndptecgdi based <see cref="T:System.Windows.Forms.TextRenderer" /> class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see cref="T:System.Drawing.Graphics" /> class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see cref="T:System.Drawing.Graphics" /> class to render text, this could cause the text for controls that use <see cref="T:System.Windows.Forms.TextRenderer" /> to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" /> method with a parameter of true.</para>
+          <para
+            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see
+             cref="T:System.Windows.Forms.TextRenderer" />
+
+             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
+             cref="T:System.Drawing.Graphics" />
+
+             class. In most cases, if your application is not being upgraded from net_v10_short or net_v11_short, it is recommended that you leave UseCompatibleTextRendering set to the default value of false.</para
+          >
+          <para
+            >The ndptecgdi based <see
+             cref="T:System.Windows.Forms.TextRenderer" />
+
+             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
+             cref="T:System.Drawing.Graphics" />
+
+             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see
+             cref="T:System.Drawing.Graphics" />
+
+             class to render text, this could cause the text for controls that use <see
+             cref="T:System.Windows.Forms.TextRenderer" />
+
+             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
+             cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+
+             method with a parameter of true.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value that determines whether to use the <see cref="T:System.Drawing.Graphics" /> class (ndptecgdiplus) or the <see cref="T:System.Windows.Forms.TextRenderer" /> class (ndptecgdi) to render text.</para>
+          <para
+            >Gets or sets a value that determines whether to use the <see
+             cref="T:System.Drawing.Graphics" />
+
+             class (ndptecgdiplus) or the <see
+             cref="T:System.Windows.Forms.TextRenderer" />
+
+             class (ndptecgdi) to render text.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1559,11 +2447,30 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="P:System.Windows.Forms.Label.UseMnemonic" /> property is set to true and a mnemonic character (a character preceded by the ampersand) is defined in the <see cref="P:System.Windows.Forms.Control.Text" /> property of the <see cref="T:System.Windows.Forms.Label" />, pressing ALT+ the mnemonic character sets the focus to the control that follows the <see cref="T:System.Windows.Forms.Label" /> in the tab order. You can use this property to provide proper keyboard navigation to the controls on your form.</para>
+          <para
+            >If the <see
+             cref="P:System.Windows.Forms.Label.UseMnemonic" />
+
+             property is set to true and a mnemonic character (a character preceded by the ampersand) is defined in the <see
+             cref="P:System.Windows.Forms.Control.Text" />
+
+             property of the <see
+             cref="T:System.Windows.Forms.Label" />
+
+            , pressing ALT+ the mnemonic character sets the focus to the control that follows the <see
+             cref="T:System.Windows.Forms.Label" />
+
+             in the tab order. You can use this property to provide proper keyboard navigation to the controls on your form.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a value indicating whether the control interprets an ampersand character (&amp;) in the control's <see cref="P:System.Windows.Forms.Control.Text" /> property to be an access key prefix character.</para>
+          <para
+            >Gets or sets a value indicating whether the control interprets an ampersand character (&amp;) in the control's <see
+             cref="P:System.Windows.Forms.Control.Text" />
+
+             property to be an access key prefix character.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1572,13 +2479,16 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WndProc">
-      <MemberSignature Language="C#" Value="protected override void WndProc (ref System.Windows.Forms.Message m);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void WndProc (ref System.Windows.Forms.Message m);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="m" Type="System.Windows.Forms.Message&amp;" RefType="ref" />
+        <Parameter Name="m" Type="System.Windows.Forms.Message&" RefType="ref" />
       </Parameters>
       <Docs>
         <param name="m">To be added.</param>

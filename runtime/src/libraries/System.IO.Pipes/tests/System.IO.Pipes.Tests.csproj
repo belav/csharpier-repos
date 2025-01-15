@@ -22,18 +22,39 @@
     <Compile Include="PipeStream.ProtectedMethods.Tests.cs" />
     <Compile Include="PipeStreamConformanceTests.cs" />
     <Compile Include="UnifiedErrorHandlingTests.cs" />
-    <Compile Include="$(CommonTestPath)System\Threading\Tasks\TaskTimeoutExtensions.cs" Link="Common\System\Threading\Tasks\TaskTimeoutExtensions.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Threading\Tasks\TaskTimeoutExtensions.cs"
+      Link="Common\System\Threading\Tasks\TaskTimeoutExtensions.cs"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile Include="NamedPipeTests\NamedPipeTest.CurrentUserOnly.Windows.cs" />
     <Compile Include="NamedPipeTests\NamedPipeTest.RunAsClient.Windows.cs" />
     <Compile Include="InteropTest.Windows.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.CancelIoEx.cs" Link="Common\Interop\Windows\Interop.CancelIoEx.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.LoadLibraryEx_IntPtr.cs" Link="Common\Interop\Windows\Interop.LoadLibraryEx_IntPtr.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Errors.cs" Link="Common\Interop\Windows\Interop.Errors.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs" Link="Common\Interop\Windows\Interop.Libraries.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.GetNamedPipeHandleState.cs" Link="Common\Interop\Windows\Interop.GetNamedPipeHandleState.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.MaxLengths.cs" Link="Common\Interop\Windows\Interop.MaxLengths.cs" />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.CancelIoEx.cs"
+      Link="Common\Interop\Windows\Interop.CancelIoEx.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.LoadLibraryEx_IntPtr.cs"
+      Link="Common\Interop\Windows\Interop.LoadLibraryEx_IntPtr.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Errors.cs"
+      Link="Common\Interop\Windows\Interop.Errors.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
+      Link="Common\Interop\Windows\Interop.Libraries.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.GetNamedPipeHandleState.cs"
+      Link="Common\Interop\Windows\Interop.GetNamedPipeHandleState.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.MaxLengths.cs"
+      Link="Common\Interop\Windows\Interop.MaxLengths.cs"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix'">
     <Compile Include="NamedPipeTests\NamedPipeTest.CurrentUserOnly.Unix.cs" />

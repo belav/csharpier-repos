@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="WindowsRuntimeMarshal" FullName="System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal">
+<Type
+  Name="WindowsRuntimeMarshal"
+  FullName="System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal"
+>
   <TypeSignature Language="C#" Value="public static class WindowsRuntimeMarshal" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit WindowsRuntimeMarshal extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract sealed beforefieldinit WindowsRuntimeMarshal extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,9 +24,15 @@
     </summary>
   </Docs>
   <Members>
-    <Member MemberName="AddEventHandler&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public static void AddEventHandler&lt;T&gt; (Func&lt;T,System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt; addMethod, Action&lt;System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt; removeMethod, T handler);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void AddEventHandler&lt;T&gt;(class System.Func`2&lt;!!T, valuetype System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt; addMethod, class System.Action`1&lt;valuetype System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt; removeMethod, !!T handler) cil managed" />
+    <Member MemberName="AddEventHandler<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public static void AddEventHandler<T> (Func<T,System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken> addMethod, Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken> removeMethod, T handler);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void AddEventHandler<T>(class System.Func`2<!!T, valuetype System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken> addMethod, class System.Action`1<valuetype System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken> removeMethod, !!T handler) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -32,8 +44,14 @@
         <TypeParameter Name="T" />
       </TypeParameters>
       <Parameters>
-        <Parameter Name="addMethod" Type="System.Func&lt;T,System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt;" />
-        <Parameter Name="removeMethod" Type="System.Action&lt;System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt;" />
+        <Parameter
+          Name="addMethod"
+          Type="System.Func<T,System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>"
+        />
+        <Parameter
+          Name="removeMethod"
+          Type="System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>"
+        />
         <Parameter Name="handler" Type="T" />
       </Parameters>
       <Docs>
@@ -47,7 +65,10 @@
     </Member>
     <Member MemberName="FreeHString">
       <MemberSignature Language="C#" Value="public static void FreeHString (IntPtr ptr);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void FreeHString(native int ptr) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void FreeHString(native int ptr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -62,15 +83,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Frees the specified wrt <see cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>. </para>
+          <para
+            >Frees the specified wrt <see
+             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+            . </para
+          >
         </summary>
         <param name="ptr">
-          <attribution license="cc4" from="Microsoft" modified="false" />The address of the <see cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see> to free.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The address of the <see
+           cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+           to free.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetActivationFactory">
-      <MemberSignature Language="C#" Value="public static System.Runtime.InteropServices.WindowsRuntime.IActivationFactory GetActivationFactory (Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Runtime.InteropServices.WindowsRuntime.IActivationFactory GetActivationFactory(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Runtime.InteropServices.WindowsRuntime.IActivationFactory GetActivationFactory (Type type);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Runtime.InteropServices.WindowsRuntime.IActivationFactory GetActivationFactory(class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -84,7 +122,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>In addition to the exceptions in the Exceptions section, any <unmanagedCodeEntityReference>HRESULT</unmanagedCodeEntityReference> other than <unmanagedCodeEntityReference>S_OK</unmanagedCodeEntityReference> that is returned by the underlying factory method will be marshaled as an exception. </para>
+          <para
+            >In addition to the exceptions in the Exceptions section, any <unmanagedCodeEntityReference
+            >HRESULT</unmanagedCodeEntityReference>
+
+             other than <unmanagedCodeEntityReference
+            >S_OK</unmanagedCodeEntityReference>
+
+             that is returned by the underlying factory method will be marshaled as an exception. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -95,12 +141,21 @@
           <para>An object that implements the activation factory interface. </para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The wrt type to get the activation factory interface for. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The wrt type to get the activation factory interface for. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="PtrToStringHString">
-      <MemberSignature Language="C#" Value="public static string PtrToStringHString (IntPtr ptr);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig string PtrToStringHString(native int ptr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string PtrToStringHString (IntPtr ptr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig string PtrToStringHString(native int ptr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -115,19 +170,50 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a managed string that contains a copy of the specified wrt <see cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>. </para>
+          <para
+            >Returns a managed string that contains a copy of the specified wrt <see
+             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+            . </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A managed string that contains a copy of the <see cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see> if <paramref name="ptr" /> is not <see cref="F:System.IntPtr.Zero" />; otherwise, <see cref="F:System.String.Empty" />. </para>
+          <para
+            >A managed string that contains a copy of the <see
+             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+             if <paramref
+             name="ptr" />
+
+             is not <see
+             cref="F:System.IntPtr.Zero" />
+
+            ; otherwise, <see
+             cref="F:System.String.Empty" />
+
+            . </para
+          >
         </returns>
         <param name="ptr">
-          <attribution license="cc4" from="Microsoft" modified="false" />An unmanaged pointer to the <see cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see> to copy. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An unmanaged pointer to the <see
+           cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+           to copy. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoveAllEventHandlers">
-      <MemberSignature Language="C#" Value="public static void RemoveAllEventHandlers (Action&lt;System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt; removeMethod);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void RemoveAllEventHandlers(class System.Action`1&lt;valuetype System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt; removeMethod) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void RemoveAllEventHandlers (Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken> removeMethod);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void RemoveAllEventHandlers(class System.Action`1<valuetype System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken> removeMethod) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -136,7 +222,10 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="removeMethod" Type="System.Action&lt;System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt;" />
+        <Parameter
+          Name="removeMethod"
+          Type="System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -145,12 +234,21 @@
           <para>Removes all the event handlers that can be removed by using the specified method. </para>
         </summary>
         <param name="removeMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />A delegate that represents the method that removes event handlers from the wrt event. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A delegate that represents the method that removes event handlers from the wrt event. </param
+        >
       </Docs>
     </Member>
-    <Member MemberName="RemoveEventHandler&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public static void RemoveEventHandler&lt;T&gt; (Action&lt;System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt; removeMethod, T handler);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void RemoveEventHandler&lt;T&gt;(class System.Action`1&lt;valuetype System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt; removeMethod, !!T handler) cil managed" />
+    <Member MemberName="RemoveEventHandler<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public static void RemoveEventHandler<T> (Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken> removeMethod, T handler);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void RemoveEventHandler<T>(class System.Action`1<valuetype System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken> removeMethod, !!T handler) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -162,7 +260,10 @@
         <TypeParameter Name="T" />
       </TypeParameters>
       <Parameters>
-        <Parameter Name="removeMethod" Type="System.Action&lt;System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken&gt;" />
+        <Parameter
+          Name="removeMethod"
+          Type="System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>"
+        />
         <Parameter Name="handler" Type="T" />
       </Parameters>
       <Docs>
@@ -175,7 +276,10 @@
     </Member>
     <Member MemberName="StringToHString">
       <MemberSignature Language="C#" Value="public static IntPtr StringToHString (string s);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig native int StringToHString(string s) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig native int StringToHString(string s) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -189,18 +293,48 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.FreeHString(System.IntPtr)" /> method to release the <see cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see> when you are done using it. </para>
+          <para
+            >Use the <see
+             cref="M:System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.FreeHString(System.IntPtr)" />
+
+             method to release the <see
+             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+             when you are done using it. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Allocates a wrt <see cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see> and copies the specified managed string to it. </para>
+          <para
+            >Allocates a wrt <see
+             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+             and copies the specified managed string to it. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An unmanaged pointer to the new <see cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>, or <see cref="F:System.IntPtr.Zero" /> if <paramref name="s" /> is <see cref="F:System.String.Empty" />. </para>
+          <para
+            >An unmanaged pointer to the new <see
+             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+
+            , or <see
+             cref="F:System.IntPtr.Zero" />
+
+             if <paramref
+             name="s" />
+
+             is <see
+             cref="F:System.String.Empty" />
+
+            . </para
+          >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />The managed string to copy. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The managed string to copy. </param
+        >
       </Docs>
     </Member>
   </Members>

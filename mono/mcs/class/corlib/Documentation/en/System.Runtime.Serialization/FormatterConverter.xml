@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="FormatterConverter" FullName="System.Runtime.Serialization.FormatterConverter">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class FormatterConverter : System.Runtime.Serialization.IFormatterConverter" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit FormatterConverter extends System.Object implements class System.Runtime.Serialization.IFormatterConverter" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class FormatterConverter : System.Runtime.Serialization.IFormatterConverter"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit FormatterConverter extends System.Object implements class System.Runtime.Serialization.IFormatterConverter"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -27,13 +34,27 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a base implementation of the <see cref="T:System.Runtime.Serialization.IFormatterConverter" /> interface that uses the <see cref="T:System.Convert" /> class and the <see cref="T:System.IConvertible" /> interface.</para>
+      <para
+        >Represents a base implementation of the <see
+         cref="T:System.Runtime.Serialization.IFormatterConverter" />
+
+         interface that uses the <see
+         cref="T:System.Convert" />
+
+         class and the <see
+         cref="T:System.IConvertible" />
+
+         interface.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public FormatterConverter ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -46,13 +67,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Runtime.Serialization.FormatterConverter" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Runtime.Serialization.FormatterConverter" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Convert">
       <MemberSignature Language="C#" Value="public object Convert (object value, Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object Convert(object value, class System.Type type) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object Convert(object value, class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -70,21 +99,52 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts a value to the given <see cref="T:System.Type" />.</para>
+          <para
+            >Converts a value to the given <see
+             cref="T:System.Type" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> into which <paramref name="value" /> is converted. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           into which <paramref
+           name="value" />
+
+           is converted. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Convert">
-      <MemberSignature Language="C#" Value="public object Convert (object value, TypeCode typeCode);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object Convert(object value, valuetype System.TypeCode typeCode) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public object Convert (object value, TypeCode typeCode);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object Convert(object value, valuetype System.TypeCode typeCode) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -102,21 +162,49 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts a value to the given <see cref="T:System.TypeCode" />.</para>
+          <para
+            >Converts a value to the given <see
+             cref="T:System.TypeCode" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" />, or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+            , or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
         <param name="typeCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.TypeCode" /> into which <paramref name="value" /> is converted. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.TypeCode" />
+
+           into which <paramref
+           name="value" />
+
+           is converted. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToBoolean">
       <MemberSignature Language="C#" Value="public bool ToBoolean (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool ToBoolean(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool ToBoolean(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -132,23 +220,59 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToBoolean(System.Object)" /> method instead. For more information, see <see cref="T:System.Boolean" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.) </para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToBoolean(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.Boolean" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .) </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts a value to a <see cref="T:System.Boolean" />.</para>
+          <para
+            >Converts a value to a <see
+             cref="T:System.Boolean" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToByte">
       <MemberSignature Language="C#" Value="public byte ToByte (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance unsigned int8 ToByte(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance unsigned int8 ToByte(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -164,7 +288,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToByte(System.Object)" /> method instead. For more information, see <see cref="T:System.Byte" />, <see cref="T:System.Convert" /> and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToByte(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.Byte" />
+
+            , <see
+             cref="T:System.Convert" />
+
+             and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -172,15 +313,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToChar">
       <MemberSignature Language="C#" Value="public char ToChar (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance char ToChar(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance char ToChar(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -196,7 +351,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToChar(System.Object)" /> method instead. For more information, see <see cref="T:System.Char" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToChar(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.Char" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -204,15 +376,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToDateTime">
       <MemberSignature Language="C#" Value="public DateTime ToDateTime (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.DateTime ToDateTime(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance valuetype System.DateTime ToDateTime(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -228,23 +414,59 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToDateTime(System.DateTime)" /> method instead. For more information, see <see cref="T:System.DateTime" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToDateTime(System.DateTime)" />
+
+             method instead. For more information, see <see
+             cref="T:System.DateTime" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts a value to a <see cref="T:System.DateTime" />.</para>
+          <para
+            >Converts a value to a <see
+             cref="T:System.DateTime" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToDecimal">
       <MemberSignature Language="C#" Value="public decimal ToDecimal (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Decimal ToDecimal(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance valuetype System.Decimal ToDecimal(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -260,23 +482,59 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToDecimal(System.Object)" /> method instead. For more information, see <see cref="T:System.Decimal" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToDecimal(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.Decimal" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts a value to a <see cref="T:System.Decimal" />.</para>
+          <para
+            >Converts a value to a <see
+             cref="T:System.Decimal" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToDouble">
       <MemberSignature Language="C#" Value="public double ToDouble (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance float64 ToDouble(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance float64 ToDouble(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -292,7 +550,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToDouble(System.Object)" /> method instead. For more information, see <see cref="T:System.Double" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToDouble(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.Double" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -300,15 +575,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToInt16">
       <MemberSignature Language="C#" Value="public short ToInt16 (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int16 ToInt16(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int16 ToInt16(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -324,7 +613,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToInt16(System.Object)" /> method instead. For more information, see <see cref="T:System.Int16" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToInt16(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.Int16" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -332,15 +638,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToInt32">
       <MemberSignature Language="C#" Value="public int ToInt32 (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 ToInt32(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int32 ToInt32(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -356,7 +676,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToInt32(System.Object)" /> method instead. For more information, see <see cref="T:System.Int32" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToInt32(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.Int32" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -364,15 +701,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToInt64">
       <MemberSignature Language="C#" Value="public long ToInt64 (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int64 ToInt64(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int64 ToInt64(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -388,7 +739,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToInt64(System.Object)" /> method instead. For more information, see <see cref="T:System.Int64" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToInt64(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.Int64" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -396,15 +764,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToSByte">
       <MemberSignature Language="C#" Value="public sbyte ToSByte (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int8 ToSByte(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance int8 ToSByte(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -425,23 +807,59 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToSByte(System.Object)" /> method instead. For more information, see <see cref="T:System.SByte" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToSByte(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.SByte" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts a value to a <see cref="T:System.SByte" />.</para>
+          <para
+            >Converts a value to a <see
+             cref="T:System.SByte" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToSingle">
       <MemberSignature Language="C#" Value="public float ToSingle (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance float32 ToSingle(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance float32 ToSingle(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -457,7 +875,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToSingle(System.Object)" /> method instead. For more information, see <see cref="T:System.Single" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToSingle(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.Single" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -465,15 +900,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public string ToString (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string ToString(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string ToString(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -489,23 +938,59 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToString(System.Object)" /> method instead. For more information, see <see cref="T:System.String" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToString(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.String" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts the specified object to a <see cref="T:System.String" />.</para>
+          <para
+            >Converts the specified object to a <see
+             cref="T:System.String" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToUInt16">
       <MemberSignature Language="C#" Value="public ushort ToUInt16 (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance unsigned int16 ToUInt16(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance unsigned int16 ToUInt16(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -526,7 +1011,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToUInt16(System.Object)" /> method instead. For more information, see <see cref="T:System.UInt16" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToUInt16(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.UInt16" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -534,15 +1036,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToUInt32">
       <MemberSignature Language="C#" Value="public uint ToUInt32 (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance unsigned int32 ToUInt32(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance unsigned int32 ToUInt32(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -563,7 +1079,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToUInt32(System.Object)" /> method instead. For more information, see <see cref="T:System.UInt32" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToUInt32(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.UInt32" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -571,15 +1104,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="ToUInt64">
       <MemberSignature Language="C#" Value="public ulong ToUInt64 (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance unsigned int64 ToUInt64(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance unsigned int64 ToUInt64(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -600,7 +1147,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToUInt64(System.Object)" /> method instead. For more information, see <see cref="T:System.UInt64" />, <see cref="T:System.Convert" />, and <see cref="T:System.ValueType" />.</para>
+          <para
+            >This method uses the invariant culture (see <see
+             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            ). To use the current culture or to specify a culture, use the <see
+             cref="M:System.Convert.ToUInt64(System.Object)" />
+
+             method instead. For more information, see <see
+             cref="T:System.UInt64" />
+
+            , <see
+             cref="T:System.Convert" />
+
+            , and <see
+             cref="T:System.ValueType" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -608,10 +1172,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The converted <paramref name="value" /> or null if the <paramref name="type" /> parameter is null.</para>
+          <para
+            >The converted <paramref
+             name="value" />
+
+             or null if the <paramref
+             name="type" />
+
+             parameter is null.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to convert. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to convert. </param
+        >
       </Docs>
     </Member>
   </Members>

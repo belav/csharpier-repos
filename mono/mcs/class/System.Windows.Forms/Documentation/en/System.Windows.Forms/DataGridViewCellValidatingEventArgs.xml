@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataGridViewCellValidatingEventArgs" FullName="System.Windows.Forms.DataGridViewCellValidatingEventArgs">
-  <TypeSignature Language="C#" Value="public class DataGridViewCellValidatingEventArgs : System.ComponentModel.CancelEventArgs" />
+<Type
+  Name="DataGridViewCellValidatingEventArgs"
+  FullName="System.Windows.Forms.DataGridViewCellValidatingEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DataGridViewCellValidatingEventArgs : System.ComponentModel.CancelEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,12 +19,45 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="E:System.Windows.Forms.DataGridView.CellValidating" /> event lets you cancel changes to the current cell when the new value is not valid. Use the <see cref="P:System.Windows.Forms.DataGridViewCellValidatingEventArgs.FormattedValue" /> property to determine the current value. To determine the state of the current cell, use the <see cref="P:System.Windows.Forms.DataGridViewCellValidatingEventArgs.RowIndex" /> and <see cref="P:System.Windows.Forms.DataGridViewCellValidatingEventArgs.ColumnIndex" /> properties to access the cell through the <see cref="P:System.Windows.Forms.DataGridView.Rows" /> collection. To cancel the change, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> property to true. </para>
-      <para>When this event is canceled in data-bound mode, the new value is not pushed to the underlying data source. When this event is canceled in virtual mode, the <see cref="E:System.Windows.Forms.DataGridView.CellValuePushed" /> event will not be raised.</para>
+      <para
+        >The <see
+         cref="E:System.Windows.Forms.DataGridView.CellValidating" />
+
+         event lets you cancel changes to the current cell when the new value is not valid. Use the <see
+         cref="P:System.Windows.Forms.DataGridViewCellValidatingEventArgs.FormattedValue" />
+
+         property to determine the current value. To determine the state of the current cell, use the <see
+         cref="P:System.Windows.Forms.DataGridViewCellValidatingEventArgs.RowIndex" />
+
+         and <see
+         cref="P:System.Windows.Forms.DataGridViewCellValidatingEventArgs.ColumnIndex" />
+
+         properties to access the cell through the <see
+         cref="P:System.Windows.Forms.DataGridView.Rows" />
+
+         collection. To cancel the change, set the <see
+         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+         property to true. </para
+      >
+      <para
+        >When this event is canceled in data-bound mode, the new value is not pushed to the underlying data source. When this event is canceled in virtual mode, the <see
+         cref="E:System.Windows.Forms.DataGridView.CellValuePushed" />
+
+         event will not be raised.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.DataGridView.CellValidating" /> event of a <see cref="T:System.Windows.Forms.DataGridView" /> control. </para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.DataGridView.CellValidating" />
+
+         event of a <see
+         cref="T:System.Windows.Forms.DataGridView" />
+
+         control. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -52,7 +91,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The text entered by the user through the user interface (UI) becomes the <see cref="P:System.Windows.Forms.DataGridViewCellValidatingEventArgs.FormattedValue" /> property value. This is the value that you can validate before it is parsed into the cell <see cref="P:System.Windows.Forms.DataGridViewCell.Value" /> property value.</para>
+          <para
+            >The text entered by the user through the user interface (UI) becomes the <see
+             cref="P:System.Windows.Forms.DataGridViewCellValidatingEventArgs.FormattedValue" />
+
+             property value. This is the value that you can validate before it is parsed into the cell <see
+             cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+
+             property value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

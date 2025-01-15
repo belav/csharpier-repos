@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="HttpModuleActionCollection" FullName="System.Web.Configuration.HttpModuleActionCollection">
-  <TypeSignature Language="C#" Value="public sealed class HttpModuleActionCollection : System.Configuration.ConfigurationElementCollection" />
+<Type
+  Name="HttpModuleActionCollection"
+  FullName="System.Web.Configuration.HttpModuleActionCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class HttpModuleActionCollection : System.Configuration.ConfigurationElementCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,11 +24,27 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.HttpModuleActionCollection" /> collection allows access to the <see cref="T:System.Web.Configuration.HttpModuleAction" /> elements of the <see cref="T:System.Web.Configuration.HttpModulesSection" /> section.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.HttpModuleActionCollection" />
+
+         collection allows access to the <see
+         cref="T:System.Web.Configuration.HttpModuleAction" />
+
+         elements of the <see
+         cref="T:System.Web.Configuration.HttpModulesSection" />
+
+         section.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a collection of <see cref="T:System.Web.Configuration.HttpModuleAction" /> objects. This class cannot be inherited.</para>
+      <para
+        >Represents a collection of <see
+         cref="T:System.Web.Configuration.HttpModuleAction" />
+
+         objects. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -34,11 +56,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor creates a non-initialized instance of the <see cref="T:System.Web.Configuration.HttpModuleActionCollection" /> object.</para>
+          <para
+            >This constructor creates a non-initialized instance of the <see
+             cref="T:System.Web.Configuration.HttpModuleActionCollection" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpModuleActionCollection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.HttpModuleActionCollection" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -46,7 +78,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (System.Web.Configuration.HttpModuleAction httpModuleAction);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (System.Web.Configuration.HttpModuleAction httpModuleAction);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -59,11 +94,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds an <see cref="T:System.Web.Configuration.HttpModuleAction" /> object to the collection.</para>
+          <para
+            >Adds an <see
+             cref="T:System.Web.Configuration.HttpModuleAction" />
+
+             object to the collection.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds an <see cref="T:System.Web.Configuration.HttpModuleAction" /> object to the collection.</para>
+          <para
+            >Adds an <see
+             cref="T:System.Web.Configuration.HttpModuleAction" />
+
+             object to the collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -85,7 +130,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all <see cref="T:System.Web.Configuration.HttpModuleAction" /> objects from the collection.</para>
+          <para
+            >Removes all <see
+             cref="T:System.Web.Configuration.HttpModuleAction" />
+
+             objects from the collection.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -93,7 +143,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CreateNewElement">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationElement CreateNewElement ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationElement</ReturnType>
@@ -107,11 +160,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new <see cref="T:System.Configuration.ConfigurationElement" /> object for the collection.</para>
+          <para
+            >Creates a new <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             object for the collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new <see cref="T:System.Configuration.ConfigurationElement" /> object.</para>
+          <para
+            >A new <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             object.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -119,7 +182,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetElementKey">
-      <MemberSignature Language="C#" Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override object GetElementKey (System.Configuration.ConfigurationElement element);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -135,21 +201,43 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the element key for a specified <see cref="T:System.Configuration.ConfigurationElement" /> object.</para>
+          <para
+            >Gets the element key for a specified <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Object" />, which acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement" /> object. </para>
+          <para
+            >An <see
+             cref="T:System.Object" />
+
+            , which acts as the key for the specified <see
+             cref="T:System.Configuration.ConfigurationElement" />
+
+             object. </para
+          >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Configuration.ConfigurationElement" /> whose key is returned.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Configuration.ConfigurationElement" />
+
+           whose key is returned.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="IndexOf">
-      <MemberSignature Language="C#" Value="public int IndexOf (System.Web.Configuration.HttpModuleAction action);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IndexOf (System.Web.Configuration.HttpModuleAction action);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -161,25 +249,44 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Before using this method, you must identify an <see cref="T:System.Web.Configuration.HttpModuleAction" /> module with the proper name and type. You can then use this module object to get its collection index.</para>
+          <para
+            >Before using this method, you must identify an <see
+             cref="T:System.Web.Configuration.HttpModuleAction" />
+
+             module with the proper name and type. You can then use this module object to get its collection index.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the collection index of the specified <see cref="T:System.Web.Configuration.HttpModuleAction" /> module.</para>
+          <para
+            >Gets the collection index of the specified <see
+             cref="T:System.Web.Configuration.HttpModuleAction" />
+
+             module.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The collection index value for the specified module.</para>
         </returns>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.HttpModuleAction" /> module for which to get the collection index.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.HttpModuleAction" />
+
+           module for which to get the collection index.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsElementRemovable">
-      <MemberSignature Language="C#" Value="protected override bool IsElementRemovable (System.Configuration.ConfigurationElement element);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool IsElementRemovable (System.Configuration.ConfigurationElement element);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -202,14 +309,23 @@
           <para>true if the element is removable.</para>
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Configuration.ConfigurationElement" /> element whose removable property is queried.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Configuration.ConfigurationElement" />
+
+           element whose removable property is queried.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.HttpModuleAction this[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.HttpModuleAction this[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.HttpModuleAction</ReturnType>
@@ -229,7 +345,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -261,17 +380,31 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes an <see cref="T:System.Web.Configuration.HttpModuleAction" /> object from the collection.</para>
+          <para
+            >Removes an <see
+             cref="T:System.Web.Configuration.HttpModuleAction" />
+
+             object from the collection.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key that identifies the <see cref="T:System.Web.Configuration.HttpModuleAction" /> object to remove from the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key that identifies the <see
+           cref="T:System.Web.Configuration.HttpModuleAction" />
+
+           object to remove from the collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public void Remove (System.Web.Configuration.HttpModuleAction action);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Remove (System.Web.Configuration.HttpModuleAction action);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -287,10 +420,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes an <see cref="T:System.Web.Configuration.HttpModuleAction" /> object from the collection.</para>
+          <para
+            >Removes an <see
+             cref="T:System.Web.Configuration.HttpModuleAction" />
+
+             object from the collection.</para
+          >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.HttpModuleAction" /> module to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.HttpModuleAction" />
+
+           module to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -313,10 +457,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes an <see cref="T:System.Web.Configuration.HttpModuleAction" /> module at the specified index from the collection.</para>
+          <para
+            >Removes an <see
+             cref="T:System.Web.Configuration.HttpModuleAction" />
+
+             module at the specified index from the collection.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the <see cref="T:System.Web.Configuration.HttpModuleAction" /> module to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the <see
+           cref="T:System.Web.Configuration.HttpModuleAction" />
+
+           module to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

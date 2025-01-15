@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="NameValueFileSectionHandler" FullName="System.Configuration.NameValueFileSectionHandler">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class NameValueFileSectionHandler : System.Configuration.IConfigurationSectionHandler" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit NameValueFileSectionHandler extends System.Object implements class System.Configuration.IConfigurationSectionHandler" />
+<Type
+  Name="NameValueFileSectionHandler"
+  FullName="System.Configuration.NameValueFileSectionHandler"
+>
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class NameValueFileSectionHandler : System.Configuration.IConfigurationSectionHandler"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit NameValueFileSectionHandler extends System.Object implements class System.Configuration.IConfigurationSectionHandler"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -22,7 +32,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The file attribute of the &lt;appSettings&gt; section specifies a relative path to an external file that contains custom application-configuration settings. The details provided in the file act as an &lt;appSettings&gt; section in the configuration file. The file is accessed using the <see cref="T:System.Configuration.NameValueFileSectionHandler" /> class. The file's root element must match the section referring to it. </para>
+      <para
+        >The file attribute of the &lt;appSettings&gt; section specifies a relative path to an external file that contains custom application-configuration settings. The details provided in the file act as an &lt;appSettings&gt; section in the configuration file. The file is accessed using the <see
+         cref="T:System.Configuration.NameValueFileSectionHandler" />
+
+         class. The file's root element must match the section referring to it. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -32,7 +47,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NameValueFileSectionHandler ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -45,13 +63,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Configuration.NameValueFileSectionHandler" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Configuration.NameValueFileSectionHandler" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public object Create (object parent, object configContext, System.Xml.XmlNode section);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object Create(object parent, object configContext, class System.Xml.XmlNode section) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public object Create (object parent, object configContext, System.Xml.XmlNode section);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object Create(object parent, object configContext, class System.Xml.XmlNode section) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -69,7 +98,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="parent" /> object parameter acts as the configuration settings in the corresponding parent configuration section. The <paramref name="configContext" /> object parameter is the virtual path for which the configuration section handler computes configuration values. Normally this parameter is reserved and is null. The <paramref name="section" /> parameter is the <see cref="T:System.Xml.XmlNode" /> that contains the configuration information to be handled. The <paramref name="section" /> parameter provides direct access to the XML contents of the configuration section.</para>
+          <para
+            >The <paramref
+             name="parent" />
+
+             object parameter acts as the configuration settings in the corresponding parent configuration section. The <paramref
+             name="configContext" />
+
+             object parameter is the virtual path for which the configuration section handler computes configuration values. Normally this parameter is reserved and is null. The <paramref
+             name="section" />
+
+             parameter is the <see
+             cref="T:System.Xml.XmlNode" />
+
+             that contains the configuration information to be handled. The <paramref
+             name="section" />
+
+             parameter provides direct access to the XML contents of the configuration section.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -80,11 +126,20 @@
           <para>A configuration object.</para>
         </returns>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parent object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parent object.</param
+        >
         <param name="configContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />The configuration context object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The configuration context object.</param
+        >
         <param name="section">
-          <attribution license="cc4" from="Microsoft" modified="false" />The section XML node.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The section XML node.</param
+        >
       </Docs>
     </Member>
   </Members>

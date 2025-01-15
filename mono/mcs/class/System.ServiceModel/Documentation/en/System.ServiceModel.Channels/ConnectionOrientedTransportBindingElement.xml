@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ConnectionOrientedTransportBindingElement" FullName="System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement">
-  <TypeSignature Language="C#" Value="public abstract class ConnectionOrientedTransportBindingElement : System.ServiceModel.Channels.TransportBindingElement, System.ServiceModel.Description.IPolicyExportExtension, System.ServiceModel.Description.IWsdlExportExtension" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ConnectionOrientedTransportBindingElement extends System.ServiceModel.Channels.TransportBindingElement implements class System.ServiceModel.Description.IPolicyExportExtension, class System.ServiceModel.Description.IWsdlExportExtension" />
+<Type
+  Name="ConnectionOrientedTransportBindingElement"
+  FullName="System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class ConnectionOrientedTransportBindingElement : System.ServiceModel.Channels.TransportBindingElement, System.ServiceModel.Description.IPolicyExportExtension, System.ServiceModel.Description.IWsdlExportExtension"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit ConnectionOrientedTransportBindingElement extends System.ServiceModel.Channels.TransportBindingElement implements class System.ServiceModel.Description.IPolicyExportExtension, class System.ServiceModel.Description.IWsdlExportExtension"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,17 +29,36 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class is documented to give a more complete understanding of the transports hierarchy and is not expected to be directly called. The constructor is internal to avoid direct construction and invocation. The public properties of this binding element can be called from the derived classes <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" /> and <see cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />.</para>
+      <para
+        >This class is documented to give a more complete understanding of the transports hierarchy and is not expected to be directly called. The constructor is internal to avoid direct construction and invocation. The public properties of this binding element can be called from the derived classes <see
+         cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+
+         and <see
+         cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>An abstract class that supplements the base <see cref="T:System.ServiceModel.Channels.TransportBindingElement" /> with additional properties that are common to connection-oriented transports such as TCP and named pipes.  </para>
+      <para
+        >An abstract class that supplements the base <see
+         cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+
+         with additional properties that are common to connection-oriented transports such as TCP and named pipes.  </para
+      >
     </summary>
   </Docs>
   <Members>
-    <Member MemberName="CanBuildChannelFactory&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public override bool CanBuildChannelFactory&lt;TChannel&gt; (System.ServiceModel.Channels.BindingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool CanBuildChannelFactory&lt;TChannel&gt;(class System.ServiceModel.Channels.BindingContext context) cil managed" />
+    <Member MemberName="CanBuildChannelFactory<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public override bool CanBuildChannelFactory<TChannel> (System.ServiceModel.Channels.BindingContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool CanBuildChannelFactory<TChannel>(class System.ServiceModel.Channels.BindingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -48,7 +76,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You should call this method before trying to create a channel factory.</para>
-          <para>If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" /> this method returns true only when in buffered mode. If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IRequestChannel" /> this method returns true only when in streaming mode.</para>
+          <para
+            >If <paramref
+             name="TChannel" />
+
+             is <see
+             cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+
+             this method returns true only when in buffered mode. If <paramref
+             name="TChannel" />
+
+             is <see
+             cref="T:System.ServiceModel.Channels.IRequestChannel" />
+
+             this method returns true only when in streaming mode.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -59,14 +101,29 @@
           <para>true if a channel factory can be built; otherwise false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.BindingContext" />
+
+           for the channel.</param
+        >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of channel to check.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of channel to check.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="CanBuildChannelListener&lt;TChannel&gt;">
-      <MemberSignature Language="C#" Value="public override bool CanBuildChannelListener&lt;TChannel&gt; (System.ServiceModel.Channels.BindingContext context) where TChannel : class, System.ServiceModel.Channels.IChannel;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool CanBuildChannelListener&lt;class (class System.ServiceModel.Channels.IChannel) TChannel&gt;(class System.ServiceModel.Channels.BindingContext context) cil managed" />
+    <Member MemberName="CanBuildChannelListener<TChannel>">
+      <MemberSignature
+        Language="C#"
+        Value="public override bool CanBuildChannelListener<TChannel> (System.ServiceModel.Channels.BindingContext context) where TChannel : class, System.ServiceModel.Channels.IChannel;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool CanBuildChannelListener<class (class System.ServiceModel.Channels.IChannel) TChannel>(class System.ServiceModel.Channels.BindingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -89,7 +146,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You should call this method before trying to create a channel listener.</para>
-          <para>If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" /> this method returns true only when in buffered mode. If <paramref name="TChannel" /> is <see cref="T:System.ServiceModel.Channels.IReplyChannel" /> this method returns true only when in streaming mode.</para>
+          <para
+            >If <paramref
+             name="TChannel" />
+
+             is <see
+             cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+
+             this method returns true only when in buffered mode. If <paramref
+             name="TChannel" />
+
+             is <see
+             cref="T:System.ServiceModel.Channels.IReplyChannel" />
+
+             this method returns true only when in streaming mode.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -100,14 +171,29 @@
           <para>true if a channel listener can be built; otherwise false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Channels.BindingContext" /> for the channel.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Channels.BindingContext" />
+
+           for the channel.</param
+        >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of channel to check.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of channel to check.</typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="ChannelInitializationTimeout">
-      <MemberSignature Language="C#" Value="public TimeSpan ChannelInitializationTimeout { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan ChannelInitializationTimeout" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeSpan ChannelInitializationTimeout { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan ChannelInitializationTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -123,7 +209,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a <see cref="T:System.TimeSpan" /> that determines the maximum time a channel can be in the initialization status before being disconnected.  </para>
+          <para
+            >Gets or sets a <see
+             cref="T:System.TimeSpan" />
+
+             that determines the maximum time a channel can be in the initialization status before being disconnected.  </para
+          >
         </summary>
       </Docs>
     </Member>
@@ -149,9 +240,15 @@
         </summary>
       </Docs>
     </Member>
-    <Member MemberName="GetProperty&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public override T GetProperty&lt;T&gt; (System.ServiceModel.Channels.BindingContext context) where T : class;" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance !!T GetProperty&lt;class T&gt;(class System.ServiceModel.Channels.BindingContext context) cil managed" />
+    <Member MemberName="GetProperty<T>">
+      <MemberSignature
+        Language="C#"
+        Value="public override T GetProperty<T> (System.ServiceModel.Channels.BindingContext context) where T : class;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance !!T GetProperty<class T>(class System.ServiceModel.Channels.BindingContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -174,7 +271,18 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method receives a binding context as an input parameter, which represents the stack of binding elements.</para>
           <para>Each binding element in the stack can handle the inquiry itself, delegate the inquiry, or a combination of the two. Each binding element can modify the context if it delegates the inquiry. However, a transport binding element handles the inquiry itself.</para>
-          <para>This method is implemented by binding elements as well as by the run-time objects such as <see cref="T:System.ServiceModel.Channels.IChannelFactory" />, <see cref="T:System.ServiceModel.Channels.IChannelListener" />, and <see cref="T:System.ServiceModel.Channels.IChannel" />.</para>
+          <para
+            >This method is implemented by binding elements as well as by the run-time objects such as <see
+             cref="T:System.ServiceModel.Channels.IChannelFactory" />
+
+            , <see
+             cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+            , and <see
+             cref="T:System.ServiceModel.Channels.IChannel" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -182,17 +290,34 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <paramref name="T" /> object from the binding stack, if present.</para>
+          <para
+            >A <paramref
+             name="T" />
+
+             object from the binding stack, if present.</para
+          >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The binding context.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The binding context.</param
+        >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />Type of the property.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Type of the property.</typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="HostNameComparisonMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.HostNameComparisonMode HostNameComparisonMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.HostNameComparisonMode HostNameComparisonMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.HostNameComparisonMode HostNameComparisonMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.HostNameComparisonMode HostNameComparisonMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -204,7 +329,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See the <see cref="T:System.ServiceModel.HostnameComparisonMode" /> enumeration for further values and their descriptions.</para>
+          <para
+            >See the <see
+             cref="T:System.ServiceModel.HostnameComparisonMode" />
+
+             enumeration for further values and their descriptions.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -227,8 +357,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For streamed messages this property only applies to the message headers; for buffered messages it applies to the entire message. </para>
-          <para>The value of this property must be less than or equal to <see cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" /> and must be larger than the size of the headers of the message or the channel throws an exception. </para>
-          <para>If you receive more data than you can buffer the channel throws a <see cref="T:System.ServiceModel.CommunicationException" />, which contains a <see cref="T:System.ServiceModel.QuotaExceededException" /> as an inner exception.  </para>
+          <para
+            >The value of this property must be less than or equal to <see
+             cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+             and must be larger than the size of the headers of the message or the channel throws an exception. </para
+          >
+          <para
+            >If you receive more data than you can buffer the channel throws a <see
+             cref="T:System.ServiceModel.CommunicationException" />
+
+            , which contains a <see
+             cref="T:System.ServiceModel.QuotaExceededException" />
+
+             as an inner exception.  </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -238,7 +381,10 @@
     </Member>
     <Member MemberName="MaxOutputDelay">
       <MemberSignature Language="C#" Value="public TimeSpan MaxOutputDelay { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan MaxOutputDelay" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan MaxOutputDelay"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -250,7 +396,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <see cref="P:System.ServiceModel.Channels.MessageProperties.AllowOutputBatching" /> is false then this property is ignored for that message.</para>
+          <para
+            >If <see
+             cref="P:System.ServiceModel.Channels.MessageProperties.AllowOutputBatching" />
+
+             is false then this property is ignored for that message.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -272,7 +423,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property limits the number of channels that the server can have waiting on a listener. When MaxPendingAccepts is too low, there will be a small interval of time in which all of the waiting channels have started servicing connections, but no new channels have begun listening. A connection can arrive during this interval and will fail because nothing is waiting for it on the server. This property can be configured by setting the <see cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.MaxPendingConnections" /> property to a larger number. </para>
+          <para
+            >This property limits the number of channels that the server can have waiting on a listener. When MaxPendingAccepts is too low, there will be a small interval of time in which all of the waiting channels have started servicing connections, but no new channels have begun listening. A connection can arrive during this interval and will fail because nothing is waiting for it on the server. This property can be configured by setting the <see
+             cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.MaxPendingConnections" />
+
+             property to a larger number. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -304,8 +460,14 @@
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IPolicyExportExtension.ExportPolicy">
-      <MemberSignature Language="C#" Value="void IPolicyExportExtension.ExportPolicy (System.ServiceModel.Description.MetadataExporter exporter, System.ServiceModel.Description.PolicyConversionContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IPolicyExportExtension.ExportPolicy(class System.ServiceModel.Description.MetadataExporter exporter, class System.ServiceModel.Description.PolicyConversionContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IPolicyExportExtension.ExportPolicy (System.ServiceModel.Description.MetadataExporter exporter, System.ServiceModel.Description.PolicyConversionContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IPolicyExportExtension.ExportPolicy(class System.ServiceModel.Description.MetadataExporter exporter, class System.ServiceModel.Description.PolicyConversionContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -321,23 +483,74 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method writes binding-related statements into the WSDL information exposed by a particular contract and is used by indigo1 to communicate to clients the existence of this custom binding element in the binding stack.</para>
-          <para>This method takes two parameters: the <see cref="T:System.ServiceModel.Description.MetadataExporter" /> and <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> objects. Use the <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />, <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />, and <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" /> methods to obtain collections of policy assertions that have already been exported at various scopes. Then use this method to add your own policy assertions to the appropriate collection.</para>
-          <para>The <see cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" /> property exposes the <see cref="T:System.ServiceModel.Description.ContractDescription" /> for the endpoint that is being exported. This allows this method to correctly scope their exported policy assertions. For example, security attributes in code may add behaviors to the <see cref="T:System.ServiceModel.Description.ContractDescription" /> that indicate where security policy assertions should be added.</para>
-          <para>Once custom policy assertions have been attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" /> interface.</para>
+          <para
+            >This method takes two parameters: the <see
+             cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+             and <see
+             cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+             objects. Use the <see
+             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />
+
+            , <see
+             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
+
+            , and <see
+             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+
+             methods to obtain collections of policy assertions that have already been exported at various scopes. Then use this method to add your own policy assertions to the appropriate collection.</para
+          >
+          <para
+            >The <see
+             cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" />
+
+             property exposes the <see
+             cref="T:System.ServiceModel.Description.ContractDescription" />
+
+             for the endpoint that is being exported. This allows this method to correctly scope their exported policy assertions. For example, security attributes in code may add behaviors to the <see
+             cref="T:System.ServiceModel.Description.ContractDescription" />
+
+             that indicate where security policy assertions should be added.</para
+          >
+          <para
+            >Once custom policy assertions have been attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see
+             cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+             interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Exports a custom policy assertion about bindings.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Description.MetadataExporter" /> that you can use to modify the exporting process.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+           that you can use to modify the exporting process.</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" /> that you can use to insert your custom policy assertion.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+           that you can use to insert your custom policy assertion.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportContract">
-      <MemberSignature Language="C#" Value="void IWsdlExportExtension.ExportContract (System.ServiceModel.Description.WsdlExporter exporter, System.ServiceModel.Description.WsdlContractConversionContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IWsdlExportExtension.ExportContract(class System.ServiceModel.Description.WsdlExporter exporter, class System.ServiceModel.Description.WsdlContractConversionContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IWsdlExportExtension.ExportContract (System.ServiceModel.Description.WsdlExporter exporter, System.ServiceModel.Description.WsdlContractConversionContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IWsdlExportExtension.ExportContract(class System.ServiceModel.Description.WsdlExporter exporter, class System.ServiceModel.Description.WsdlContractConversionContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -347,7 +560,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="exporter" Type="System.ServiceModel.Description.WsdlExporter" />
-        <Parameter Name="context" Type="System.ServiceModel.Description.WsdlContractConversionContext" />
+        <Parameter
+          Name="context"
+          Type="System.ServiceModel.Description.WsdlContractConversionContext"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -356,14 +572,29 @@
           <para>Writes custom Web Services Description Language (WSDL) elements into the generated WSDL for a contract.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+           that exports the contract information.</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />Provides mappings from exported WSDL elements to the contract description.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Provides mappings from exported WSDL elements to the contract description.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint">
-      <MemberSignature Language="C#" Value="void IWsdlExportExtension.ExportEndpoint (System.ServiceModel.Description.WsdlExporter exporter, System.ServiceModel.Description.WsdlEndpointConversionContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(class System.ServiceModel.Description.WsdlExporter exporter, class System.ServiceModel.Description.WsdlEndpointConversionContext context) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="void IWsdlExportExtension.ExportEndpoint (System.ServiceModel.Description.WsdlExporter exporter, System.ServiceModel.Description.WsdlEndpointConversionContext context);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance void System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(class System.ServiceModel.Description.WsdlExporter exporter, class System.ServiceModel.Description.WsdlEndpointConversionContext context) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -373,7 +604,10 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="exporter" Type="System.ServiceModel.Description.WsdlExporter" />
-        <Parameter Name="context" Type="System.ServiceModel.Description.WsdlEndpointConversionContext" />
+        <Parameter
+          Name="context"
+          Type="System.ServiceModel.Description.WsdlEndpointConversionContext"
+        />
       </Parameters>
       <Docs>
         <param name="context">To be added.</param>
@@ -383,12 +617,24 @@
           <para>Writes custom Web Services Description Language (WSDL) elements into the generated WSDL for an endpoint.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Description.WsdlExporter" /> that exports the contract information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+           that exports the contract information.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="TransferMode">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.TransferMode TransferMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.TransferMode TransferMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.TransferMode TransferMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.TransferMode TransferMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

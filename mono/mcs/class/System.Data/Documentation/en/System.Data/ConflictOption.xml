@@ -61,7 +61,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>All update and delete statements include only <see cref="P:System.Data.DataTable.PrimaryKey" /> columns in the WHERE clause. If no <see cref="P:System.Data.DataTable.PrimaryKey" /> is defined, all searchable columns are included in the WHERE clause. This is equivalent to OverwriteChangesUpdate | OverwriteChangesDelete.</para>
+          <para
+            >All update and delete statements include only <see
+             cref="P:System.Data.DataTable.PrimaryKey" />
+
+             columns in the WHERE clause. If no <see
+             cref="P:System.Data.DataTable.PrimaryKey" />
+
+             is defined, all searchable columns are included in the WHERE clause. This is equivalent to OverwriteChangesUpdate | OverwriteChangesDelete.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

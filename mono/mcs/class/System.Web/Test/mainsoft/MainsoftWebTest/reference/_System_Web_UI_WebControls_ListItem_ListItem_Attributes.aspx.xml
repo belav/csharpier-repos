@@ -2,16 +2,28 @@
 <testresults name="">
   <div id="GHTSubTest1" style="height:120px;width:553px">
     <select id="ListBox1" style="height:64px;width:56px" size="4" name="ListBox1">
-      <option value="0" />item 0
-		<option value="1" />item 1
-		<option value="2" />item 2
+      <option value="0" />
 
-	</select>
+      item 0
+		<option
+       value="1" />
+
+      item 1
+		<option
+       value="2" />
+
+      item 2
+
+	</select
+    >
     <p />
   </div>
   <div id="GHTSubTest2" testname="Attributes Keys count">
     <span>
-      <br />0</span>
+      <br />
+
+      0</span
+    >
   </div>
   <div id="GHTSubTest3" testname="Attributes Values count">
     <span>
@@ -21,13 +33,15 @@
   <div id="GHTSubTest4" testname="Attributes Keys+Values ">
     <span>
       <br />
-      <attributecontainer>
-      </attributecontainer>
+      <attributecontainer></attributecontainer>
     </span>
   </div>
   <div id="GHTSubTest5" testname="Attributes Keys count">
     <span>
-      <br />1</span>
+      <br />
+
+      1</span
+    >
   </div>
   <div id="GHTSubTest6" testname="Attributes Values count">
     <span>
@@ -37,13 +51,15 @@
   <div id="GHTSubTest7" testname="Attributes Keys+Values ">
     <span>
       <br />
-      <attributecontainer attributekey="AttributeValue">
-      </attributecontainer>
+      <attributecontainer attributekey="AttributeValue"></attributecontainer>
     </span>
   </div>
   <div id="GHTSubTest8" testname="Attributes Keys count">
     <span>
-      <br />13</span>
+      <br />
+
+      13</span
+    >
   </div>
   <div id="GHTSubTest9" testname="Attributes Values count">
     <span>
@@ -53,8 +69,21 @@
   <div id="GHTSubTest10" testname="Attributes Keys+Values ">
     <span>
       <br />
-      <attributecontainer attributekey5="AttributeValue5" attributekey4="AttributeValue4" attributekey7="AttributeValue7" attributekey6="AttributeValue6" attributekey9="AttributeValue9" attributekey8="AttributeValue8" attributekey1="AttributeValue1" attributekey10="AttributeValue10" attributekey11="AttributeValue11" attributekey2="AttributeValue2" attributekey13="AttributeValue13" attributekey3="AttributeValue3" attributekey12="AttributeValue12">
-      </attributecontainer>
+      <attributecontainer
+        attributekey5="AttributeValue5"
+        attributekey4="AttributeValue4"
+        attributekey7="AttributeValue7"
+        attributekey6="AttributeValue6"
+        attributekey9="AttributeValue9"
+        attributekey8="AttributeValue8"
+        attributekey1="AttributeValue1"
+        attributekey10="AttributeValue10"
+        attributekey11="AttributeValue11"
+        attributekey2="AttributeValue2"
+        attributekey13="AttributeValue13"
+        attributekey3="AttributeValue3"
+        attributekey12="AttributeValue12"
+      ></attributecontainer>
     </span>
   </div>
 </testresults>

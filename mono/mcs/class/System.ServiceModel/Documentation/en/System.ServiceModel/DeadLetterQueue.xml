@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DeadLetterQueue" FullName="System.ServiceModel.DeadLetterQueue">
   <TypeSignature Language="C#" Value="public enum DeadLetterQueue" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed DeadLetterQueue extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed DeadLetterQueue extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -12,16 +15,36 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The dead-letter queue is a queue on the queue manager of the sending application for expired messages that have failed to be delivered. The <see cref="T:System.ServiceModel.DeadLetterQueue" /> enumeration specifies the type of dead-letter queue to use. The values are:</para>
+      <para
+        >The dead-letter queue is a queue on the queue manager of the sending application for expired messages that have failed to be delivered. The <see
+         cref="T:System.ServiceModel.DeadLetterQueue" />
+
+         enumeration specifies the type of dead-letter queue to use. The values are:</para
+      >
       <list type="bullet">
         <item>
-          <para>None: No dead-letter queue is required. If a message fails delivery, no record of it is maintained in the dead-letter queue. This is the default value when <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> is set to false.</para>
+          <para
+            >None: No dead-letter queue is required. If a message fails delivery, no record of it is maintained in the dead-letter queue. This is the default value when <see
+             cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />
+
+             is set to false.</para
+          >
         </item>
         <item>
-          <para>System: The system-wide, dead-letter queue is used to record messages that fail delivery. MSMQ has a transactional, system, dead-letter queue and a non-transactional, system, dead-letter queue to record expired messages that failed delivery from transactional and non-transactional queues, respectively. This is the default value when <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" /> is set to true.</para>
+          <para
+            >System: The system-wide, dead-letter queue is used to record messages that fail delivery. MSMQ has a transactional, system, dead-letter queue and a non-transactional, system, dead-letter queue to record expired messages that failed delivery from transactional and non-transactional queues, respectively. This is the default value when <see
+             cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />
+
+             is set to true.</para
+          >
         </item>
         <item>
-          <para>Custom: The queue specified in the <see cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" /> is used to record messages that fail delivery.</para>
+          <para
+            >Custom: The queue specified in the <see
+             cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" />
+
+             is used to record messages that fail delivery.</para
+          >
         </item>
       </list>
       <para>A message can fail to reach the receiving application for any of the following reasons: </para>
@@ -45,7 +68,12 @@
           <para>The message storage quota of the target computer or the storage quota of the destination queue is exceeded, or there is no available storage space on the target computer when the message arrives.</para>
         </item>
         <item>
-          <para>The sender does not have the <see cref="http://go.microsoft.com/fwlink/?LinkID=96167">access rights</see> required to place the message in the destination queue.</para>
+          <para
+            >The sender does not have the <see
+             cref="http://go.microsoft.com/fwlink/?LinkID=96167">access rights</see>
+
+             required to place the message in the destination queue.</para
+          >
         </item>
         <item>
           <para>The digital signature attached to the message is not valid.</para>
@@ -66,7 +94,10 @@
   <Members>
     <Member MemberName="Custom">
       <MemberSignature Language="C#" Value="Custom" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.DeadLetterQueue Custom = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.DeadLetterQueue Custom = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -83,7 +114,10 @@
     </Member>
     <Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.DeadLetterQueue None = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.DeadLetterQueue None = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -100,7 +134,10 @@
     </Member>
     <Member MemberName="System">
       <MemberSignature Language="C#" Value="System" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.DeadLetterQueue System = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.DeadLetterQueue System = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

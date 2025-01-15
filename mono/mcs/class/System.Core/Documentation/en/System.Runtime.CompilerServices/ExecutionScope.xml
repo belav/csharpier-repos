@@ -12,7 +12,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Runtime.CompilerServices.ExecutionScope" /> type is used by the expression tree compiler, which is an internal component of the vbteclinq expression tree API, and by the dynamic methods that it generates.</para>
+      <para
+        >The <see
+         cref="T:System.Runtime.CompilerServices.ExecutionScope" />
+
+         type is used by the expression tree compiler, which is an internal component of the vbteclinq expression tree API, and by the dynamic methods that it generates.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -21,7 +26,10 @@
   </Docs>
   <Members>
     <Member MemberName="CreateDelegate">
-      <MemberSignature Language="C#" Value="public Delegate CreateDelegate (int indexLambda, object[] locals);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Delegate CreateDelegate (int indexLambda, object[] locals);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -41,12 +49,23 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Delegate" /> that can execute a dynamically generated method.</para>
+          <para
+            >A <see
+             cref="T:System.Delegate" />
+
+             that can execute a dynamically generated method.</para
+          >
         </returns>
         <param name="indexLambda">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the object that stores information about associated lambda expression of the dynamic method.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the object that stores information about associated lambda expression of the dynamic method.</param
+        >
         <param name="locals">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array that contains the hoisted local variables from the parent context.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array that contains the hoisted local variables from the parent context.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateHoistedLocals">
@@ -89,7 +108,10 @@
       </Docs>
     </Member>
     <Member MemberName="IsolateExpression">
-      <MemberSignature Language="C#" Value="public System.Linq.Expressions.Expression IsolateExpression (System.Linq.Expressions.Expression expression, object[] locals);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Linq.Expressions.Expression IsolateExpression (System.Linq.Expressions.Expression expression, object[] locals);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -112,9 +134,15 @@
           <para>An expression tree that does not contain external parameter references.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />An expression tree to free of external parameter references.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An expression tree to free of external parameter references.</param
+        >
         <param name="locals">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array that contains the hoisted local variables.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array that contains the hoisted local variables.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Locals">
@@ -135,7 +163,10 @@
       </Docs>
     </Member>
     <Member MemberName="Parent">
-      <MemberSignature Language="C#" Value="public System.Runtime.CompilerServices.ExecutionScope Parent;" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.CompilerServices.ExecutionScope Parent;"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>

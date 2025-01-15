@@ -17,12 +17,48 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.ScrollBars" /> enumeration represents the visibility and position of the scroll bars in a <see cref="T:System.Web.UI.WebControls.Panel" /> control. The <see cref="P:System.Web.UI.WebControls.Panel.ScrollBars" /> property uses these enumeration values to specify the type of scroll bars to display in a <see cref="T:System.Web.UI.WebControls.Panel" /> control. The default value for the <see cref="P:System.Web.UI.WebControls.Panel.ScrollBars" /> property is None, indicating that no scroll bars are shown.</para>
-      <para>If you specify Auto for the <see cref="P:System.Web.UI.WebControls.Panel.ScrollBars" /> property, scroll bars are automatically shown when the size of the content in a <see cref="T:System.Web.UI.WebControls.Panel" /> control exceeds the size of the <see cref="T:System.Web.UI.WebControls.Panel" /> control. For example, if a <see cref="T:System.Web.UI.WebControls.Panel" /> control contains a table, and the panel is not wide enough to display all the rows in the table, a vertical scroll bar is shown. If the size of the table exceeds the height and width of the panel, both vertical and horizontal scroll bars are shown.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.ScrollBars" />
+
+         enumeration represents the visibility and position of the scroll bars in a <see
+         cref="T:System.Web.UI.WebControls.Panel" />
+
+         control. The <see
+         cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
+
+         property uses these enumeration values to specify the type of scroll bars to display in a <see
+         cref="T:System.Web.UI.WebControls.Panel" />
+
+         control. The default value for the <see
+         cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
+
+         property is None, indicating that no scroll bars are shown.</para
+      >
+      <para
+        >If you specify Auto for the <see
+         cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
+
+         property, scroll bars are automatically shown when the size of the content in a <see
+         cref="T:System.Web.UI.WebControls.Panel" />
+
+         control exceeds the size of the <see
+         cref="T:System.Web.UI.WebControls.Panel" />
+
+         control. For example, if a <see
+         cref="T:System.Web.UI.WebControls.Panel" />
+
+         control contains a table, and the panel is not wide enough to display all the rows in the table, a vertical scroll bar is shown. If the size of the table exceeds the height and width of the panel, both vertical and horizontal scroll bars are shown.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the visibility and position of scroll bars in a <see cref="T:System.Web.UI.WebControls.Panel" /> control.</para>
+      <para
+        >Specifies the visibility and position of scroll bars in a <see
+         cref="T:System.Web.UI.WebControls.Panel" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>

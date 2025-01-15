@@ -1,5 +1,8 @@
 <Type Name="NvdlContext" FullName="Commons.Xml.Nvdl.NvdlContext">
-  <TypeSignature Language="C#" Value="public class NvdlContext : Commons.Xml.Nvdl.NvdlAttributable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NvdlContext : Commons.Xml.Nvdl.NvdlAttributable"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -43,7 +46,10 @@
       </Docs>
     </Member>
     <Member MemberName="NestedMode">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Nvdl.NvdlNestedMode NestedMode { set; get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Nvdl.NvdlNestedMode NestedMode { set; get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlNestedMode</ReturnType>

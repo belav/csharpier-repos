@@ -12,6 +12,9 @@
   <div id="GHTSubTest4" style="height:96px;width:553px">
     <p id="myParagraph2">text in paragraph2</p>
     <span>
-      <br />P</span>
+      <br />
+
+      P</span
+    >
   </div>
 </testresults>

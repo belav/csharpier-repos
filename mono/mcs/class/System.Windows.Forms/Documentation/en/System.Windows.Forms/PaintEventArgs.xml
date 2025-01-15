@@ -17,17 +17,46 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="E:System.Windows.Forms.Control.Paint" /> event occurs when a control is redrawn. A <see cref="T:System.Windows.Forms.PaintEventArgs" /> specifies the <see cref="P:System.Windows.Forms.PaintEventArgs.Graphics" /> to use to paint the control and the <see cref="P:System.Windows.Forms.PaintEventArgs.ClipRectangle" /> in which to paint.</para>
-      <para>For information about the event model, see <format type="text/html"><a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a></format>.</para>
+      <para
+        >The <see
+         cref="E:System.Windows.Forms.Control.Paint" />
+
+         event occurs when a control is redrawn. A <see
+         cref="T:System.Windows.Forms.PaintEventArgs" />
+
+         specifies the <see
+         cref="P:System.Windows.Forms.PaintEventArgs.Graphics" />
+
+         to use to paint the control and the <see
+         cref="P:System.Windows.Forms.PaintEventArgs.ClipRectangle" />
+
+         in which to paint.</para
+      >
+      <para
+        >For information about the event model, see <format
+         type="text/html">
+          <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Windows.Forms.Control.Paint" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Windows.Forms.Control.Paint" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public PaintEventArgs (System.Drawing.Graphics graphics, System.Drawing.Rectangle clipRect);" />
+      <MemberSignature
+        Language="C#"
+        Value="public PaintEventArgs (System.Drawing.Graphics graphics, System.Drawing.Rectangle clipRect);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="graphics" Type="System.Drawing.Graphics" />
@@ -36,16 +65,44 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Drawing.Graphics" /> identified by the <paramref name="graphics" /> parameter is disposed when the <see cref="T:System.Windows.Forms.PaintEventArgs" /> is disposed.</para>
+          <para
+            >The <see
+             cref="T:System.Drawing.Graphics" />
+
+             identified by the <paramref
+             name="graphics" />
+
+             parameter is disposed when the <see
+             cref="T:System.Windows.Forms.PaintEventArgs" />
+
+             is disposed.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.PaintEventArgs" /> class with the specified graphics and clipping rectangle.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.PaintEventArgs" />
+
+             class with the specified graphics and clipping rectangle.</para
+          >
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> used to paint the item. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           used to paint the item. </param
+        >
         <param name="clipRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> that represents the rectangle in which to paint. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           that represents the rectangle in which to paint. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -53,7 +110,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ClipRectangle">
-      <MemberSignature Language="C#" Value="public System.Drawing.Rectangle ClipRectangle { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Rectangle ClipRectangle { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Rectangle</ReturnType>
@@ -81,14 +141,63 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Call <see cref="M:System.Windows.Forms.PaintEventArgs.Dispose" /> when you are finished using the <see cref="T:System.Windows.Forms.PaintEventArgs" />. The <see cref="M:System.Windows.Forms.PaintEventArgs.Dispose" /> method leaves the <see cref="T:System.Windows.Forms.PaintEventArgs" /> in an unusable state. After calling <see cref="M:System.Windows.Forms.PaintEventArgs.Dispose" />, you must release all references to the <see cref="T:System.Windows.Forms.PaintEventArgs" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Windows.Forms.PaintEventArgs" /> was occupying. For more information, see <format type="text/html"><a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a></format> and <format type="text/html"><a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a></format>. </para>
+          <para
+            >Call <see
+             cref="M:System.Windows.Forms.PaintEventArgs.Dispose" />
+
+             when you are finished using the <see
+             cref="T:System.Windows.Forms.PaintEventArgs" />
+
+            . The <see
+             cref="M:System.Windows.Forms.PaintEventArgs.Dispose" />
+
+             method leaves the <see
+             cref="T:System.Windows.Forms.PaintEventArgs" />
+
+             in an unusable state. After calling <see
+             cref="M:System.Windows.Forms.PaintEventArgs.Dispose" />
+
+            , you must release all references to the <see
+             cref="T:System.Windows.Forms.PaintEventArgs" />
+
+             so the garbage collector can reclaim the memory that the <see
+             cref="T:System.Windows.Forms.PaintEventArgs" />
+
+             was occupying. For more information, see <format
+             type="text/html">
+              <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
+            </format>
+
+            . </para
+          >
           <block subset="none" type="note">
-            <para>Always call <see cref="M:System.Windows.Forms.PaintEventArgs.Dispose" /> before you release your last reference to the <see cref="T:System.Windows.Forms.PaintEventArgs" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Windows.Forms.PaintEventArgs" /> object's Finalize method.</para>
+            <para
+              >Always call <see
+               cref="M:System.Windows.Forms.PaintEventArgs.Dispose" />
+
+               before you release your last reference to the <see
+               cref="T:System.Windows.Forms.PaintEventArgs" />
+
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
+               cref="T:System.Windows.Forms.PaintEventArgs" />
+
+               object's Finalize method.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases all resources used by the <see cref="T:System.Windows.Forms.PaintEventArgs" />.</para>
+          <para
+            >Releases all resources used by the <see
+             cref="T:System.Windows.Forms.PaintEventArgs" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -108,15 +217,48 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" /> method. Dispose() invokes the protected <see cref="M:System.Windows.Forms.PaintEventArgs.Dispose(System.Boolean)" /> method with the <paramref name="disposing" /> parameter set to true. <see cref="M:System.Object.Finalize" /> invokes Dispose with <paramref name="disposing" /> set to false.</para>
-          <para>When the <paramref name="disposing" /> parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.PaintEventArgs" /> references. This method invokes the Dispose() method of each referenced object.</para>
+          <para
+            >This method is called by the public Dispose() method and the <see
+             cref="M:System.Object.Finalize" />
+
+             method. Dispose() invokes the protected <see
+             cref="M:System.Windows.Forms.PaintEventArgs.Dispose(System.Boolean)" />
+
+             method with the <paramref
+             name="disposing" />
+
+             parameter set to true. <see
+             cref="M:System.Object.Finalize" />
+
+             invokes Dispose with <paramref
+             name="disposing" />
+
+             set to false.</para
+          >
+          <para
+            >When the <paramref
+             name="disposing" />
+
+             parameter is true, this method releases all resources held by any managed objects that this <see
+             cref="T:System.Windows.Forms.PaintEventArgs" />
+
+             references. This method invokes the Dispose() method of each referenced object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.PaintEventArgs" /> and optionally releases the managed resources.</para>
+          <para
+            >Releases the unmanaged resources used by the <see
+             cref="T:System.Windows.Forms.PaintEventArgs" />
+
+             and optionally releases the managed resources.</para
+          >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to release both managed and unmanaged resources; false to release only unmanaged resources. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

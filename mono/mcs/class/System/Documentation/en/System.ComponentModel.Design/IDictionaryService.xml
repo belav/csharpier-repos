@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IDictionaryService" FullName="System.ComponentModel.Design.IDictionaryService">
   <TypeSignature Language="C#" Maintainer="auto" Value="public interface IDictionaryService" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IDictionaryService" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IDictionaryService"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -25,7 +28,10 @@
   <Members>
     <Member MemberName="GetKey">
       <MemberSignature Language="C#" Value="public object GetKey (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object GetKey(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object GetKey(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -49,12 +55,18 @@
           <para>The associated key, or null if no key exists.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to look up in the dictionary. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to look up in the dictionary. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetValue">
       <MemberSignature Language="C#" Value="public object GetValue (object key);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object GetValue(object key) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object GetValue(object key) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -78,12 +90,18 @@
           <para>The associated value, or null if no value exists.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The key to look up the value for. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The key to look up the value for. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetValue">
       <MemberSignature Language="C#" Value="public void SetValue (object key, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetValue(object key, object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void SetValue(object key, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -104,9 +122,15 @@
           <para>Sets the specified key-value pair.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object to use as the key to associate the value with. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object to use as the key to associate the value with. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to store. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to store. </param
+        >
       </Docs>
     </Member>
   </Members>

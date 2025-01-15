@@ -1,5 +1,8 @@
 <Type Name="TimeZoneInfo+AdjustmentRule" FullName="System.TimeZoneInfo+AdjustmentRule">
-  <TypeSignature Language="C#" Value="public sealed class TimeZoneInfo.AdjustmentRule : IEquatable&lt;TimeZoneInfo.AdjustmentRule&gt;, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class TimeZoneInfo.AdjustmentRule : IEquatable<TimeZoneInfo.AdjustmentRule>, System.Runtime.Serialization.IDeserializationCallback, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -24,7 +27,10 @@
   </Docs>
   <Members>
     <Member MemberName="CreateAdjustmentRule">
-      <MemberSignature Language="C#" Value="public static TimeZoneInfo.AdjustmentRule CreateAdjustmentRule (DateTime dateStart, DateTime dateEnd, TimeSpan daylightDelta, TimeZoneInfo.TransitionTime daylightTransitionStart, TimeZoneInfo.TransitionTime daylightTransitionEnd);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static TimeZoneInfo.AdjustmentRule CreateAdjustmentRule (DateTime dateStart, DateTime dateEnd, TimeSpan daylightDelta, TimeZoneInfo.TransitionTime daylightTransitionStart, TimeZoneInfo.TransitionTime daylightTransitionEnd);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -96,7 +102,10 @@
       </Docs>
     </Member>
     <Member MemberName="DaylightTransitionEnd">
-      <MemberSignature Language="C#" Value="public TimeZoneInfo.TransitionTime DaylightTransitionEnd { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeZoneInfo.TransitionTime DaylightTransitionEnd { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -111,7 +120,10 @@
       </Docs>
     </Member>
     <Member MemberName="DaylightTransitionStart">
-      <MemberSignature Language="C#" Value="public TimeZoneInfo.TransitionTime DaylightTransitionStart { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public TimeZoneInfo.TransitionTime DaylightTransitionStart { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -126,7 +138,10 @@
       </Docs>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public bool Equals (TimeZoneInfo.AdjustmentRule other);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Equals (TimeZoneInfo.AdjustmentRule other);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>
@@ -161,7 +176,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>3.5.0.0</AssemblyVersion>

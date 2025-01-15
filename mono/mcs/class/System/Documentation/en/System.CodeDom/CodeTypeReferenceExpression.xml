@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="CodeTypeReferenceExpression" FullName="System.CodeDom.CodeTypeReferenceExpression">
-  <TypeSignature Language="C#" Value="public class CodeTypeReferenceExpression : System.CodeDom.CodeExpression" Maintainer="auto" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit CodeTypeReferenceExpression extends System.CodeDom.CodeExpression" />
+  <TypeSignature
+    Language="C#"
+    Value="public class CodeTypeReferenceExpression : System.CodeDom.CodeExpression"
+    Maintainer="auto"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit CodeTypeReferenceExpression extends System.CodeDom.CodeExpression"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -27,8 +34,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> can be used to reference a particular data type.</para>
-      <para>The <see cref="P:System.CodeDom.CodeTypeReferenceExpression.Type" /> property specifies the data type to reference.</para>
+        <see cref="T:System.CodeDom.CodeTypeReferenceExpression" />
+
+         can be used to reference a particular data type.</para
+      >
+      <para
+        >The <see
+         cref="P:System.CodeDom.CodeTypeReferenceExpression.Type" />
+
+         property specifies the data type to reference.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -38,7 +53,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CodeTypeReferenceExpression ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -51,13 +69,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.CodeDom.CodeTypeReferenceExpression" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CodeTypeReferenceExpression (System.CodeDom.CodeTypeReference type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.CodeDom.CodeTypeReference type) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public CodeTypeReferenceExpression (System.CodeDom.CodeTypeReference type);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.CodeDom.CodeTypeReference type) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -72,15 +101,29 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class using the specified type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.CodeDom.CodeTypeReferenceExpression" />
+
+             class using the specified type.</para
+          >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.CodeDom.CodeTypeReference" /> that indicates the data type to reference. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.CodeDom.CodeTypeReference" />
+
+           that indicates the data type to reference. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CodeTypeReferenceExpression (string type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string type) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string type) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -95,15 +138,26 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class using the specified data type name.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.CodeDom.CodeTypeReferenceExpression" />
+
+             class using the specified data type name.</para
+          >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the data type to reference. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the data type to reference. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CodeTypeReferenceExpression (Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type type) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -118,15 +172,29 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeReferenceExpression" /> class using the specified data type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.CodeDom.CodeTypeReferenceExpression" />
+
+             class using the specified data type.</para
+          >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />An instance of the data type to reference. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An instance of the data type to reference. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Type">
-      <MemberSignature Language="C#" Value="public System.CodeDom.CodeTypeReference Type { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.CodeDom.CodeTypeReference Type" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.CodeDom.CodeTypeReference Type { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.CodeDom.CodeTypeReference Type"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -136,8 +204,7 @@
       <ReturnValue>
         <ReturnType>System.CodeDom.CodeTypeReference</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'CodeTypeReference'</value>
         <remarks>To be added</remarks>

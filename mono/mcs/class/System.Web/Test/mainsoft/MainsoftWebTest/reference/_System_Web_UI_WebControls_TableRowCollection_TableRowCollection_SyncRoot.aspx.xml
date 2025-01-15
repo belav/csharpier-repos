@@ -2,6 +2,9 @@
 <testresults name="">
   <div id="GHTSubTest1" testname="Check SyncRoot, should be true">
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
 </testresults>

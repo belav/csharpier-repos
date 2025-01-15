@@ -4,7 +4,13 @@
     <input value="" type="submit" name="ctrl_0" id="ctrl_0" />
   </div>
   <div id="GHTSubTest2" testname="System.Web.UI.WebControls.Button: Modified style">
-    <input value="" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px" type="submit" name="ctrl_1" id="ctrl_1" />
+    <input
+      value=""
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+      type="submit"
+      name="ctrl_1"
+      id="ctrl_1"
+    />
   </div>
   <div id="GHTSubTest3" testname="System.Web.UI.WebControls.CheckBox: Default style">
     <input id="ctrl_2" type="checkbox" name="ctrl_2" />
@@ -15,48 +21,63 @@
     </span>
   </div>
   <div id="GHTSubTest5" testname="System.Web.UI.WebControls.HyperLink: Default style">
-    <a id="ctrl_4">
-    </a>
+    <a id="ctrl_4"></a>
   </div>
   <div id="GHTSubTest6" testname="System.Web.UI.WebControls.HyperLink: Modified style">
-    <a id="ctrl_5" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px">
-    </a>
+    <a
+      id="ctrl_5"
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+    ></a>
   </div>
   <div id="GHTSubTest7" testname="System.Web.UI.WebControls.Image: Default style">
     <img id="ctrl_6" alt="" border="0" />
   </div>
   <div id="GHTSubTest8" testname="System.Web.UI.WebControls.Image: Modified style">
-    <img id="ctrl_7" alt="" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px" />
+    <img
+      id="ctrl_7"
+      alt=""
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+    />
   </div>
   <div id="GHTSubTest9" testname="System.Web.UI.WebControls.ImageButton: Default style">
     <input id="ctrl_8" alt="" border="0" type="image" name="ctrl_8" />
   </div>
   <div id="GHTSubTest10" testname="System.Web.UI.WebControls.ImageButton: Modified style">
-    <input id="ctrl_9" alt="" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px" type="image" name="ctrl_9" />
+    <input
+      id="ctrl_9"
+      alt=""
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+      type="image"
+      name="ctrl_9"
+    />
   </div>
   <div id="GHTSubTest11" testname="System.Web.UI.WebControls.Label: Default style">
-    <span id="ctrl_10">
-    </span>
+    <span id="ctrl_10"></span>
   </div>
   <div id="GHTSubTest12" testname="System.Web.UI.WebControls.Label: Modified style">
-    <span id="ctrl_11" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px">
-    </span>
+    <span
+      id="ctrl_11"
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+    ></span>
   </div>
   <div id="GHTSubTest13" testname="System.Web.UI.WebControls.LinkButton: Default style">
-    <a href="javascript:__doPostBack('ctrl_12','')" id="ctrl_12">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_12','')" id="ctrl_12"></a>
   </div>
   <div id="GHTSubTest14" testname="System.Web.UI.WebControls.LinkButton: Modified style">
-    <a href="javascript:__doPostBack('ctrl_13','')" id="ctrl_13" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px">
-    </a>
+    <a
+      href="javascript:__doPostBack('ctrl_13','')"
+      id="ctrl_13"
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+    ></a>
   </div>
   <div id="GHTSubTest15" testname="System.Web.UI.WebControls.Panel: Default style">
-    <div id="ctrl_14">
-    </div>
+    <div id="ctrl_14"></div>
   </div>
   <div id="GHTSubTest16" testname="System.Web.UI.WebControls.Panel: Modified style">
-    <div id="ctrl_15" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px">
-    </div>
+    <div
+      id="ctrl_15"
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+    ></div>
   </div>
   <div id="GHTSubTest17" testname="System.Web.UI.WebControls.RadioButton: Default style">
     <input id="ctrl_16" type="radio" name="ctrl_16" value="ctrl_16" />
@@ -70,43 +91,105 @@
     <input id="ctrl_18" type="text" name="ctrl_18" />
   </div>
   <div id="GHTSubTest20" testname="System.Web.UI.WebControls.TextBox: Modified style">
-    <input id="ctrl_19" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px" type="text" name="ctrl_19" />
+    <input
+      id="ctrl_19"
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+      type="text"
+      name="ctrl_19"
+    />
   </div>
   <div id="GHTSubTest21" testname="System.Web.UI.WebControls.DropDownList: Default style">
     <select id="ctrl_20" name="ctrl_20">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest22" testname="System.Web.UI.WebControls.DropDownList: Modified style">
-    <select id="ctrl_21" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px" name="ctrl_21">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+    <select
+      id="ctrl_21"
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+      name="ctrl_21"
+    >
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest23" testname="System.Web.UI.WebControls.ListBox: Default style">
     <select id="ctrl_22" size="4" name="ctrl_22">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest24" testname="System.Web.UI.WebControls.ListBox: Modified style">
-    <select id="ctrl_23" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px" size="4" name="ctrl_23">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+    <select
+      id="ctrl_23"
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+      size="4"
+      name="ctrl_23"
+    >
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest25" testname="System.Web.UI.WebControls.RadioButtonList: Default style">
     <table id="ctrl_24" border="0">
@@ -137,7 +220,12 @@
     </table>
   </div>
   <div id="GHTSubTest26" testname="System.Web.UI.WebControls.RadioButtonList: Modified style">
-    <table id="ctrl_25" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px" border="0" bordercolor="DeepSkyBlue">
+    <table
+      id="ctrl_25"
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+      border="0"
+      bordercolor="DeepSkyBlue"
+    >
       <tr>
         <td>
           <input id="ctrl_25_0" type="radio" name="ctrl_25" value="1" />
@@ -193,7 +281,12 @@
     </table>
   </div>
   <div id="GHTSubTest28" testname="System.Web.UI.WebControls.CheckBoxList: Modified style">
-    <table id="ctrl_27" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px" border="0" bordercolor="DeepSkyBlue">
+    <table
+      id="ctrl_27"
+      style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+      border="0"
+      bordercolor="DeepSkyBlue"
+    >
       <tr>
         <td>
           <input id="ctrl_27_0" type="checkbox" name="ctrl_27:0" />
@@ -245,7 +338,14 @@
     </table>
   </div>
   <div id="GHTSubTest30" testname="System.Web.UI.WebControls.DataGrid: Modified style">
-    <table border="2" cellspacing="0" style="background-color:fuchsia;border-collapse:collapse;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px" bordercolor="DeepSkyBlue" rules="all" id="ctrl_29">
+    <table
+      border="2"
+      cellspacing="0"
+      style="background-color:fuchsia;border-collapse:collapse;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+      bordercolor="DeepSkyBlue"
+      rules="all"
+      id="ctrl_29"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -298,7 +398,10 @@
         <td>Id</td>
         <td>Description</td>
       </tr>
-      <tr id="ctrl_32_ctrl_33" style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px">
+      <tr
+        id="ctrl_32_ctrl_33"
+        style="background-color:fuchsia;border-color:deepskyblue;border-style:ridge;border-width:2px;color:indianred;font-family:new roman times;font-size:larger;font-style:italic;font-weight:bold;height:30px;text-decoration:line-through overline underline;width:40px"
+      >
         <td>1</td>
         <td>aaaa</td>
       </tr>

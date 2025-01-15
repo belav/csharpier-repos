@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ServiceContractGenerator" FullName="System.ServiceModel.Description.ServiceContractGenerator">
+<Type
+  Name="ServiceContractGenerator"
+  FullName="System.ServiceModel.Description.ServiceContractGenerator"
+>
   <TypeSignature Language="C#" Value="public class ServiceContractGenerator" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ServiceContractGenerator extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ServiceContractGenerator extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,17 +19,36 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" /> to create tools or to modify the default contract generation process using an <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" />.</para>
+      <para
+        >Use the <see
+         cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+
+         to create tools or to modify the default contract generation process using an <see
+         cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" /> type generates service contract code and binding configurations from <see cref="T:System.ServiceModel.Description.ServiceEndpoint" /> description objects.</para>
+      <para
+        >The <see
+         cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+
+         type generates service contract code and binding configurations from <see
+         cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+         description objects.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ServiceContractGenerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,13 +58,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" /> class with a new <see cref="T:System.CodeDom.CodeCompileUnit" /> instance.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+
+             class with a new <see
+             cref="T:System.CodeDom.CodeCompileUnit" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ServiceContractGenerator (System.CodeDom.CodeCompileUnit ccu);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.CodeDom.CodeCompileUnit ccu) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ServiceContractGenerator (System.CodeDom.CodeCompileUnit ccu);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.CodeDom.CodeCompileUnit ccu) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -52,13 +91,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" /> class with the specified <see cref="T:System.CodeDom.CodeCompileUnit" /> instance.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+
+             class with the specified <see
+             cref="T:System.CodeDom.CodeCompileUnit" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ServiceContractGenerator (System.Configuration.Configuration config);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Configuration.Configuration config) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ServiceContractGenerator (System.Configuration.Configuration config);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Configuration.Configuration config) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -71,13 +124,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" /> class with the specified <see cref="T:System.Configuration.Configuration" /> instance.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+
+             class with the specified <see
+             cref="T:System.Configuration.Configuration" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ServiceContractGenerator (System.CodeDom.CodeCompileUnit ccu, System.Configuration.Configuration config);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.CodeDom.CodeCompileUnit ccu, class System.Configuration.Configuration config) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ServiceContractGenerator (System.CodeDom.CodeCompileUnit ccu, System.Configuration.Configuration config);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.CodeDom.CodeCompileUnit ccu, class System.Configuration.Configuration config) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -92,13 +159,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" /> class with the specified <see cref="T:System.CodeDom.CodeCompileUnit" /> instance and the specified <see cref="T:System.Configuration.Configuration" /> instance.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+
+             class with the specified <see
+             cref="T:System.CodeDom.CodeCompileUnit" />
+
+             instance and the specified <see
+             cref="T:System.Configuration.Configuration" />
+
+             instance.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Configuration">
-      <MemberSignature Language="C#" Value="public System.Configuration.Configuration Configuration { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.Configuration Configuration" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Configuration.Configuration Configuration { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.Configuration Configuration"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -111,13 +195,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Configuration.Configuration" /> instance that contains the generated binding configurations.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Configuration.Configuration" />
+
+             instance that contains the generated binding configurations.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Errors">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;System.ServiceModel.Description.MetadataConversionError&gt; Errors { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.Collection`1&lt;class System.ServiceModel.Description.MetadataConversionError&gt; Errors" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.Collection<System.ServiceModel.Description.MetadataConversionError> Errors { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.Collection`1<class System.ServiceModel.Description.MetadataConversionError> Errors"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -133,13 +228,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of <see cref="T:System.ServiceModel.Description.MetadataConversionError" /> objects generated when generating service contract code and endpoint configurations.</para>
+          <para
+            >Gets a collection of <see
+             cref="T:System.ServiceModel.Description.MetadataConversionError" />
+
+             objects generated when generating service contract code and endpoint configurations.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GenerateBinding">
-      <MemberSignature Language="C#" Value="public void GenerateBinding (System.ServiceModel.Channels.Binding binding, out string bindingSectionName, out string configurationName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void GenerateBinding(class System.ServiceModel.Channels.Binding binding, string bindingSectionName, string configurationName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GenerateBinding (System.ServiceModel.Channels.Binding binding, out string bindingSectionName, out string configurationName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void GenerateBinding(class System.ServiceModel.Channels.Binding binding, string bindingSectionName, string configurationName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -149,8 +255,8 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="binding" Type="System.ServiceModel.Channels.Binding" />
-        <Parameter Name="bindingSectionName" Type="System.String&amp;" RefType="out" />
-        <Parameter Name="configurationName" Type="System.String&amp;" RefType="out" />
+        <Parameter Name="bindingSectionName" Type="System.String&" RefType="out" />
+        <Parameter Name="configurationName" Type="System.String&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="binding">To be added.</param>
@@ -161,8 +267,14 @@
       </Docs>
     </Member>
     <Member MemberName="GenerateServiceContractType">
-      <MemberSignature Language="C#" Value="public System.CodeDom.CodeTypeReference GenerateServiceContractType (System.ServiceModel.Description.ContractDescription contractDescription);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.CodeDom.CodeTypeReference GenerateServiceContractType(class System.ServiceModel.Description.ContractDescription contractDescription) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.CodeDom.CodeTypeReference GenerateServiceContractType (System.ServiceModel.Description.ContractDescription contractDescription);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.CodeDom.CodeTypeReference GenerateServiceContractType(class System.ServiceModel.Description.ContractDescription contractDescription) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -171,28 +283,58 @@
         <ReturnType>System.CodeDom.CodeTypeReference</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="contractDescription" Type="System.ServiceModel.Description.ContractDescription" />
+        <Parameter
+          Name="contractDescription"
+          Type="System.ServiceModel.Description.ContractDescription"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Other code artifacts may also get generated as specified by using the <see cref="P:System.ServiceModel.Description.ServiceContractGenerator.Options" /> property.</para>
+          <para
+            >Other code artifacts may also get generated as specified by using the <see
+             cref="P:System.ServiceModel.Description.ServiceContractGenerator.Options" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Generates a service contract type from the specified <see cref="T:System.ServiceModel.Description.ContractDescription" /> instance.</para>
+          <para
+            >Generates a service contract type from the specified <see
+             cref="T:System.ServiceModel.Description.ContractDescription" />
+
+             instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.CodeDom.CodeTypeReference" /> instance for the generated contract type.</para>
+          <para
+            >A <see
+             cref="T:System.CodeDom.CodeTypeReference" />
+
+             instance for the generated contract type.</para
+          >
         </returns>
         <param name="contractDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ServiceModel.Description.ContractDescription" /> to use to generate the contract type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ServiceModel.Description.ContractDescription" />
+
+           to use to generate the contract type.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GenerateServiceEndpoint">
-      <MemberSignature Language="C#" Value="public System.CodeDom.CodeTypeReference GenerateServiceEndpoint (System.ServiceModel.Description.ServiceEndpoint endpoint, out System.ServiceModel.Configuration.ChannelEndpointElement channelElement);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.CodeDom.CodeTypeReference GenerateServiceEndpoint(class System.ServiceModel.Description.ServiceEndpoint endpoint, class System.ServiceModel.Configuration.ChannelEndpointElement channelElement) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.CodeDom.CodeTypeReference GenerateServiceEndpoint (System.ServiceModel.Description.ServiceEndpoint endpoint, out System.ServiceModel.Configuration.ChannelEndpointElement channelElement);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.CodeDom.CodeTypeReference GenerateServiceEndpoint(class System.ServiceModel.Description.ServiceEndpoint endpoint, class System.ServiceModel.Configuration.ChannelEndpointElement channelElement) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -202,7 +344,11 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="endpoint" Type="System.ServiceModel.Description.ServiceEndpoint" />
-        <Parameter Name="channelElement" Type="System.ServiceModel.Configuration.ChannelEndpointElement&amp;" RefType="out" />
+        <Parameter
+          Name="channelElement"
+          Type="System.ServiceModel.Configuration.ChannelEndpointElement&"
+          RefType="out"
+        />
       </Parameters>
       <Docs>
         <param name="endpoint">To be added.</param>
@@ -213,8 +359,14 @@
       </Docs>
     </Member>
     <Member MemberName="NamespaceMappings">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.Dictionary&lt;string,string&gt; NamespaceMappings { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.Dictionary`2&lt;string, string&gt; NamespaceMappings" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.Dictionary<string,string> NamespaceMappings { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.Dictionary`2<string, string> NamespaceMappings"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -237,8 +389,14 @@
       </Docs>
     </Member>
     <Member MemberName="Options">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Description.ServiceContractGenerationOptions Options { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ServiceModel.Description.ServiceContractGenerationOptions Options" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Description.ServiceContractGenerationOptions Options { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.ServiceModel.Description.ServiceContractGenerationOptions Options"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -250,7 +408,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this property to specify various options for code generation. This enumeration has a <see cref="T:System.FlagsAttribute" /> attribute that allows a bitwise combination of its member values.</para>
+          <para
+            >Use this property to specify various options for code generation. This enumeration has a <see
+             cref="T:System.FlagsAttribute" />
+
+             attribute that allows a bitwise combination of its member values.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -259,8 +422,14 @@
       </Docs>
     </Member>
     <Member MemberName="ReferencedTypes">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.Dictionary&lt;System.ServiceModel.Description.ContractDescription,Type&gt; ReferencedTypes { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.Dictionary`2&lt;class System.ServiceModel.Description.ContractDescription, class System.Type&gt; ReferencedTypes" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.Dictionary<System.ServiceModel.Description.ContractDescription,Type> ReferencedTypes { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.Dictionary`2<class System.ServiceModel.Description.ContractDescription, class System.Type> ReferencedTypes"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -281,8 +450,14 @@
       </Docs>
     </Member>
     <Member MemberName="TargetCompileUnit">
-      <MemberSignature Language="C#" Value="public System.CodeDom.CodeCompileUnit TargetCompileUnit { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.CodeDom.CodeCompileUnit TargetCompileUnit" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.CodeDom.CodeCompileUnit TargetCompileUnit { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.CodeDom.CodeCompileUnit TargetCompileUnit"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -295,7 +470,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the target <see cref="T:System.CodeDom.CodeCompileUnit" /> object for generating service contract code.</para>
+          <para
+            >Gets the target <see
+             cref="T:System.CodeDom.CodeCompileUnit" />
+
+             object for generating service contract code.</para
+          >
         </summary>
       </Docs>
     </Member>

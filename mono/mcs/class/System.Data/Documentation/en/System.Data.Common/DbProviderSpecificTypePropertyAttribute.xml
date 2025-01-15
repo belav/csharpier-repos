@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DbProviderSpecificTypePropertyAttribute" FullName="System.Data.Common.DbProviderSpecificTypePropertyAttribute">
-  <TypeSignature Language="C#" Value="public sealed class DbProviderSpecificTypePropertyAttribute : Attribute" />
+<Type
+  Name="DbProviderSpecificTypePropertyAttribute"
+  FullName="System.Data.Common.DbProviderSpecificTypePropertyAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DbProviderSpecificTypePropertyAttribute : Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,8 +24,27 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.Common.DbProviderSpecificTypePropertyAttribute" /> is used by a provider writer to designate a provider-specific type parameter property which is not inherited from the <see cref="T:System.Data.Common.DbParameter" /> base class. The <see cref="P:System.Data.SqlClient.SqlParameter.SqlDbType" /> property of a <see cref="T:System.Data.SqlClient.SqlParameter" /> is an example of a provider-specific type property not found in DbParameter.</para>
-      <para>A provider writer can apply DbProviderSpecificTypePropertyAttribute(true) to indicate a provider-specific data type parameter property. This allows for its discovery using reflection, which enables code generation tools, such as those used in Visual Studio, to generate code geared to a specific provider. The <see cref="P:System.Data.Common.DbProviderSpecificTypePropertyAttribute.IsProviderSpecificTypeProperty" /> property returns true if the property has been set, otherwise false. </para>
+      <para
+        >The <see
+         cref="T:System.Data.Common.DbProviderSpecificTypePropertyAttribute" />
+
+         is used by a provider writer to designate a provider-specific type parameter property which is not inherited from the <see
+         cref="T:System.Data.Common.DbParameter" />
+
+         base class. The <see
+         cref="P:System.Data.SqlClient.SqlParameter.SqlDbType" />
+
+         property of a <see
+         cref="T:System.Data.SqlClient.SqlParameter" />
+
+         is an example of a provider-specific type property not found in DbParameter.</para
+      >
+      <para
+        >A provider writer can apply DbProviderSpecificTypePropertyAttribute(true) to indicate a provider-specific data type parameter property. This allows for its discovery using reflection, which enables code generation tools, such as those used in Visual Studio, to generate code geared to a specific provider. The <see
+         cref="P:System.Data.Common.DbProviderSpecificTypePropertyAttribute.IsProviderSpecificTypeProperty" />
+
+         property returns true if the property has been set, otherwise false. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -28,7 +53,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DbProviderSpecificTypePropertyAttribute (bool isProviderSpecificTypeProperty);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DbProviderSpecificTypePropertyAttribute (bool isProviderSpecificTypeProperty);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="isProviderSpecificTypeProperty" Type="System.Boolean" />
@@ -38,10 +66,18 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of a <see cref="T:System.Data.Common.DbProviderSpecificTypePropertyAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of a <see
+             cref="T:System.Data.Common.DbProviderSpecificTypePropertyAttribute" />
+
+             class.</para
+          >
         </summary>
         <param name="isProviderSpecificTypeProperty">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether this property is a provider-specific property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether this property is a provider-specific property.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

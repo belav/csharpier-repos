@@ -12,11 +12,27 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.ListView.Alignment" /> property and the <see cref="M:System.Windows.Forms.ListView.ArrangeIcons(System.Windows.Forms.ListViewAlignment)" /> method of the <see cref="T:System.Windows.Forms.ListView" /> control.</para>
+      <para
+        >Use the members of this enumeration to set the value of the <see
+         cref="P:System.Windows.Forms.ListView.Alignment" />
+
+         property and the <see
+         cref="M:System.Windows.Forms.ListView.ArrangeIcons(System.Windows.Forms.ListViewAlignment)" />
+
+         method of the <see
+         cref="T:System.Windows.Forms.ListView" />
+
+         control.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies how items align in the <see cref="T:System.Windows.Forms.ListView" />.</para>
+      <para
+        >Specifies how items align in the <see
+         cref="T:System.Windows.Forms.ListView" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -46,7 +62,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Items are aligned to the left of the <see cref="T:System.Windows.Forms.ListView" /> control.</para>
+          <para
+            >Items are aligned to the left of the <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +101,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Items are aligned to the top of the <see cref="T:System.Windows.Forms.ListView" /> control.</para>
+          <para
+            >Items are aligned to the top of the <see
+             cref="T:System.Windows.Forms.ListView" />
+
+             control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

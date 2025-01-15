@@ -1,5 +1,8 @@
 <Type Name="KeyContainerCollection" FullName="Mono.Configuration.Crypto.KeyContainerCollection">
-  <TypeSignature Language="C#" Value="public class KeyContainerCollection : System.Collections.Generic.ICollection&lt;Mono.Configuration.Crypto.KeyContainer&gt;, System.Collections.Generic.IEnumerable&lt;Mono.Configuration.Crypto.KeyContainer&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public class KeyContainerCollection : System.Collections.Generic.ICollection<Mono.Configuration.Crypto.KeyContainer>, System.Collections.Generic.IEnumerable<Mono.Configuration.Crypto.KeyContainer>"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Configuration.Crypto</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -36,7 +39,10 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (Mono.Configuration.Crypto.KeyContainer item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (Mono.Configuration.Crypto.KeyContainer item);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -69,7 +75,10 @@
       </Docs>
     </Member>
     <Member MemberName="Contains">
-      <MemberSignature Language="C#" Value="public bool Contains (Mono.Configuration.Crypto.KeyContainer item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Contains (Mono.Configuration.Crypto.KeyContainer item);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -107,7 +116,10 @@
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo (Mono.Configuration.Crypto.KeyContainer[] array, int arrayIndex);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo (Mono.Configuration.Crypto.KeyContainer[] array, int arrayIndex);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -142,7 +154,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerator&lt;Mono.Configuration.Crypto.KeyContainer&gt; GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IEnumerator<Mono.Configuration.Crypto.KeyContainer> GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -173,7 +188,10 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public Mono.Configuration.Crypto.KeyContainer this[string name] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Configuration.Crypto.KeyContainer this[string name] { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -192,7 +210,10 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public bool Remove (Mono.Configuration.Crypto.KeyContainer item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Remove (Mono.Configuration.Crypto.KeyContainer item);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -210,8 +231,11 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.IEnumerable&lt;Mono.Configuration.Crypto.KeyContainer&gt;.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.Generic.IEnumerator&lt;Mono.Configuration.Crypto.KeyContainer&gt; IEnumerable&lt;KeyContainer&gt;.GetEnumerator ();" />
+    <Member MemberName="System.Collections.Generic.IEnumerable<Mono.Configuration.Crypto.KeyContainer>.GetEnumerator">
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.Generic.IEnumerator<Mono.Configuration.Crypto.KeyContainer> IEnumerable<KeyContainer>.GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -227,7 +251,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">
-      <MemberSignature Language="C#" Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="System.Collections.IEnumerator IEnumerable.GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

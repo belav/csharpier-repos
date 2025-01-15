@@ -10,22 +10,16 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
 
 ***********************************************************************************************
 -->
-
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
-    <PropertyGroup>
-        <NoConfig>true</NoConfig>
-        <MyType>Empty</MyType>
-    </PropertyGroup>
-
-    <!-- NuGet should add the VB Runtime -->
-
-    <PropertyGroup>
-        <PortableEnableXamlTargets>true</PortableEnableXamlTargets>
-    </PropertyGroup>
-
-    <Import Project="Microsoft.Portable.Common.targets" />
-    <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
-    <Import Project="..\Microsoft.Portable.Core.targets" />
-
+  <PropertyGroup>
+    <NoConfig>true</NoConfig>
+    <MyType>Empty</MyType>
+  </PropertyGroup>
+  <!-- NuGet should add the VB Runtime -->
+  <PropertyGroup>
+    <PortableEnableXamlTargets>true</PortableEnableXamlTargets>
+  </PropertyGroup>
+  <Import Project="Microsoft.Portable.Common.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\Microsoft.Portable.Core.targets" />
 </Project>

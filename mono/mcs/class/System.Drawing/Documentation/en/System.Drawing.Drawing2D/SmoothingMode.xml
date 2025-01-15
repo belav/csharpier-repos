@@ -16,14 +16,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="F:System.Drawing.Drawing2D.SmoothingMode.Default" />, <see cref="F:System.Drawing.Drawing2D.SmoothingMode.None" />, and <see cref="F:System.Drawing.Drawing2D.SmoothingMode.HighSpeed" /> are equivalent and specify rendering without smoothing applied.</para>
+        <see cref="F:System.Drawing.Drawing2D.SmoothingMode.Default" />
+
+        , <see
+         cref="F:System.Drawing.Drawing2D.SmoothingMode.None" />
+
+        , and <see
+         cref="F:System.Drawing.Drawing2D.SmoothingMode.HighSpeed" />
+
+         are equivalent and specify rendering without smoothing applied.</para
+      >
       <para>
-        <see cref="F:System.Drawing.Drawing2D.SmoothingMode.AntiAlias" /> and <see cref="F:System.Drawing.Drawing2D.SmoothingMode.HighQuality" /> are equivalent and specify rendering with smoothing applied.</para>
+        <see cref="F:System.Drawing.Drawing2D.SmoothingMode.AntiAlias" />
+
+         and <see
+         cref="F:System.Drawing.Drawing2D.SmoothingMode.HighQuality" />
+
+         are equivalent and specify rendering with smoothing applied.</para
+      >
       <block subset="none" type="note">
-        <para>When the <see cref="P:System.Drawing.Graphics.SmoothingMode" /> property is specified by using the <see cref="T:System.Drawing.Drawing2D.SmoothingMode" /> enumeration, it does not affect text. To set the text rendering quality, use the <see cref="P:System.Drawing.Graphics.TextRenderingHint" /> property and the <see cref="T:System.Drawing.Text.TextRenderingHint" /> enumeration.</para>
+        <para
+          >When the <see
+           cref="P:System.Drawing.Graphics.SmoothingMode" />
+
+           property is specified by using the <see
+           cref="T:System.Drawing.Drawing2D.SmoothingMode" />
+
+           enumeration, it does not affect text. To set the text rendering quality, use the <see
+           cref="P:System.Drawing.Graphics.TextRenderingHint" />
+
+           property and the <see
+           cref="T:System.Drawing.Text.TextRenderingHint" />
+
+           enumeration.</para
+        >
       </block>
       <block subset="none" type="note">
-        <para>When the <see cref="P:System.Drawing.Graphics.SmoothingMode" /> property is specified by using the <see cref="T:System.Drawing.Drawing2D.SmoothingMode" /> enumeration, it does not affect areas filled by a path gradient brush. Areas filled by using a <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" /> object are rendered the same way (aliased) regardless of the setting for the <see cref="P:System.Drawing.Graphics.SmoothingMode" /> property.</para>
+        <para
+          >When the <see
+           cref="P:System.Drawing.Graphics.SmoothingMode" />
+
+           property is specified by using the <see
+           cref="T:System.Drawing.Drawing2D.SmoothingMode" />
+
+           enumeration, it does not affect areas filled by a path gradient brush. Areas filled by using a <see
+           cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+
+           object are rendered the same way (aliased) regardless of the setting for the <see
+           cref="P:System.Drawing.Graphics.SmoothingMode" />
+
+           property.</para
+        >
       </block>
     </remarks>
     <summary>

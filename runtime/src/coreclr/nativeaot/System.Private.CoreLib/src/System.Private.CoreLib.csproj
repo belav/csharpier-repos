@@ -4,7 +4,6 @@
     <!-- AD0001 : https://github.com/dotnet/runtime/issues/90356 -->
     <NoWarn>$(NoWarn);AD0001</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <ILLinkSubstitutionsXmls Include="ILLink\ILLink.Substitutions.xml" />
     <ILLinkLinkAttributesXmls Include="ILLink\ILLink.LinkAttributes.xml" />
@@ -12,7 +11,6 @@
   <ItemGroup Condition="'$(TargetsUnix)'=='true'">
     <ILLinkSubstitutionsXmls Include="ILLink\ILLink.Substitutions.Unix.xml" />
   </ItemGroup>
-
   <!-- Note that various places in SPCL depend on this resource name i.e. TplEventSource -->
   <ItemGroup Label="Embedded Resources">
     <EmbeddedResource Include="$(LibrariesProjectRoot)\System.Private.CoreLib\src\Resources\Strings.resx">
@@ -20,14 +18,12 @@
       <ClassName>System.SR</ClassName>
     </EmbeddedResource>
   </ItemGroup>
-
   <PropertyGroup>
     <DefineConstants>SYSTEM_PRIVATE_CORELIB;$(DefineConstants)</DefineConstants>
     <SkipCommonResourcesIncludes>true</SkipCommonResourcesIncludes>
     <FeatureNativeAot>true</FeatureNativeAot>
     <RuntimeBasePath>..\..\Runtime.Base\src\</RuntimeBasePath>
   </PropertyGroup>
-
   <PropertyGroup>
     <FeaturePortableThreadPool>true</FeaturePortableThreadPool>
   </PropertyGroup>
@@ -38,7 +34,6 @@
     <FeatureHardwareIntrinsics>true</FeatureHardwareIntrinsics>
     <FeatureSharedLowLevelLock>true</FeatureSharedLowLevelLock>
   </PropertyGroup>
-
   <!-- Sources -->
   <ItemGroup>
     <Compile Include="$(CompilerCommonPath)\Internal\Runtime\DehydratedData.cs">
@@ -201,20 +196,38 @@
     <Compile Include="System\Runtime\TypeLoaderExports.cs" />
     <Compile Include="System\Runtime\ThunkPool.cs" />
     <Compile Include="System\Runtime\InitializeFinalizerThread.cs" />
-    <Compile Include="System\Runtime\InteropServices\ComEventsHelper.NativeAot.cs" Condition="'$(FeatureCominterop)' == 'true'" />
-    <Compile Include="System\Runtime\InteropServices\ComWrappers.NativeAot.cs" Condition="'$(FeatureComWrappers)' == 'true'" />
+    <Compile
+      Include="System\Runtime\InteropServices\ComEventsHelper.NativeAot.cs"
+      Condition="'$(FeatureCominterop)' == 'true'"
+    />
+    <Compile
+      Include="System\Runtime\InteropServices\ComWrappers.NativeAot.cs"
+      Condition="'$(FeatureComWrappers)' == 'true'"
+    />
     <Compile Include="System\Runtime\InteropServices\GCHandle.NativeAot.cs" />
     <Compile Include="System\Runtime\InteropServices\InteropExtensions.cs" />
     <Compile Include="System\Runtime\InteropServices\NativeFunctionPointerWrapper.cs" />
     <Compile Include="System\Runtime\InteropServices\NativeLibrary.NativeAot.cs" />
     <Compile Include="System\Runtime\InteropServices\PInvokeMarshal.cs" />
     <Compile Include="System\Runtime\InteropServices\Marshal.NativeAot.cs" />
-    <Compile Include="System\Runtime\InteropServices\Marshal.Com.cs" Condition="'$(FeatureCominterop)' == 'true'" />
+    <Compile
+      Include="System\Runtime\InteropServices\Marshal.Com.cs"
+      Condition="'$(FeatureCominterop)' == 'true'"
+    />
     <Compile Include="System\Runtime\InteropServices\MemoryMarshal.NativeAot.cs" />
-    <Compile Include="System\Runtime\InteropServices\TrackerObjectManager.NativeAot.cs" Condition="'$(FeatureComWrappers)' == 'true'" />    
-    <Compile Include="System\Runtime\InteropServices\ObjectiveCMarshal.NativeAot.cs" Condition="'$(FeatureObjCMarshal)' == 'true'" />
+    <Compile
+      Include="System\Runtime\InteropServices\TrackerObjectManager.NativeAot.cs"
+      Condition="'$(FeatureComWrappers)' == 'true'"
+    />
+    <Compile
+      Include="System\Runtime\InteropServices\ObjectiveCMarshal.NativeAot.cs"
+      Condition="'$(FeatureObjCMarshal)' == 'true'"
+    />
     <Compile Include="System\Runtime\InteropServices\UnsafeGCHandle.cs" />
-    <Compile Include="System\Runtime\Intrinsics\X86\X86Base.NativeAot.cs" Condition="'$(SupportsX86Intrinsics)' == 'true'" />
+    <Compile
+      Include="System\Runtime\Intrinsics\X86\X86Base.NativeAot.cs"
+      Condition="'$(SupportsX86Intrinsics)' == 'true'"
+    />
     <Compile Include="System\Runtime\JitInfo.NativeAot.cs" />
     <Compile Include="System\Runtime\Loader\AssemblyLoadContext.NativeAot.cs" />
     <Compile Include="System\String.NativeAot.cs" />
@@ -276,7 +289,7 @@
     </Compile>
     <Compile Include="$(CommonPath)\Interop\Windows\Ole32\Interop.CoGetContextToken.cs">
       <Link>Interop\Windows\Ole32\Interop.CoGetContextToken.cs</Link>
-    </Compile>    
+    </Compile>
     <Compile Include="$(CommonPath)\Interop\Windows\OleAut32\Interop.VariantClear.cs">
       <Link>Interop\Windows\OleAut32\Interop.VariantClear.cs</Link>
     </Compile>
@@ -505,12 +518,19 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(InPlaceRuntime)' == 'true'">
     <DefineConstants>INPLACE_RUNTIME;$(DefineConstants)</DefineConstants>
-    <DefineConstants Condition="'$(Platform)' == 'arm'">FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
-    <DefineConstants Condition="'$(Platform)' == 'armel'">FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
-    <DefineConstants Condition="'$(Platform)' == 'wasm'">FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants>
-
+    <DefineConstants Condition="'$(Platform)' == 'arm'"
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
+    >
+    <DefineConstants Condition="'$(Platform)' == 'armel'"
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
+    >
+    <DefineConstants Condition="'$(Platform)' == 'wasm'"
+      >FEATURE_64BIT_ALIGNMENT;$(DefineConstants)</DefineConstants
+    >
     <IntermediatesDir>$(ArtifactsObjDir)\coreclr\$(TargetOS).$(TargetArchitecture).$(CoreCLRConfiguration)</IntermediatesDir>
-    <IntermediatesDir Condition="'$(Ninja)' == 'false' and $([MSBuild]::IsOsPlatform('Windows'))">$(IntermediatesDir)\ide</IntermediatesDir>
+    <IntermediatesDir Condition="'$(Ninja)' == 'false' and $([MSBuild]::IsOsPlatform('Windows'))"
+      >$(IntermediatesDir)\ide</IntermediatesDir
+    >
   </PropertyGroup>
   <ItemGroup Condition="'$(InPlaceRuntime)' == 'true'">
     <Compile Include="$(RuntimeBasePath)System\Runtime\CachedInterfaceDispatch.cs">
@@ -553,13 +573,17 @@
   <ItemGroup Condition="'$(InPlaceRuntime)' == 'true'">
     <Compile Include="$(IntermediatesDir)\nativeaot\Runtime\Full\AsmOffsets.cs" />
   </ItemGroup>
-
-  <Import Project="$(LibrariesProjectRoot)\System.Private.CoreLib\src\System.Private.CoreLib.Shared.projitems" Label="Shared" />
-
+  <Import
+    Project="$(LibrariesProjectRoot)\System.Private.CoreLib\src\System.Private.CoreLib.Shared.projitems"
+    Label="Shared"
+  />
   <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)\System.Private.CoreLib\gen\System.Private.CoreLib.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)\System.Private.CoreLib\gen\System.Private.CoreLib.Generators.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <!-- This is the T4 template service and is added by VS anytime you modify a T4 template. Required for .tt files. -->
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />

@@ -3,8 +3,7 @@
   <TypeSignature Language="C#" Maintainer="auto" Value="public abstract class HttpWorkerRequest" />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -12,8 +11,7 @@
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Attributes>
     <Attribute>
       <AttributeName>System.Runtime.InteropServices.ComVisible(false)</AttributeName>
@@ -22,7 +20,27 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>In most cases, your code will not deal with <see cref="T:System.Web.HttpWorkerRequest" /> directly because request and response data are exposed through the <see cref="T:System.Web.HttpRequest" /> and <see cref="T:System.Web.HttpResponse" /> classes. Some internal ASP.NET classes extend this class. If your code implements its own hosting environment, it will need to extend this class to call the <see cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" /> method. In addition, your code could create a derived class for the purpose of child-request execution within a given application in order to pass its instance to <see cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" />. In this case, the derived class should keep a reference to the current <see cref="T:System.Web.HttpWorkerRequest" /> and delegate most of the methods to it.</para>
+      <para
+        >In most cases, your code will not deal with <see
+         cref="T:System.Web.HttpWorkerRequest" />
+
+         directly because request and response data are exposed through the <see
+         cref="T:System.Web.HttpRequest" />
+
+         and <see
+         cref="T:System.Web.HttpResponse" />
+
+         classes. Some internal ASP.NET classes extend this class. If your code implements its own hosting environment, it will need to extend this class to call the <see
+         cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" />
+
+         method. In addition, your code could create a derived class for the purpose of child-request execution within a given application in order to pass its instance to <see
+         cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" />
+
+        . In this case, the derived class should keep a reference to the current <see
+         cref="T:System.Web.HttpWorkerRequest" />
+
+         and delegate most of the methods to it.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -38,11 +56,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.HttpWorkerRequest.#ctor" /> constructor is the default constructor for the <see cref="T:System.Web.HttpWorkerRequest" /> class.</para>
+          <para
+            >The <see
+             cref="M:System.Web.HttpWorkerRequest.#ctor" />
+
+             constructor is the default constructor for the <see
+             cref="T:System.Web.HttpWorkerRequest" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.HttpWorkerRequest" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.HttpWorkerRequest" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -80,7 +111,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Used by the runtime to notify the <see cref="T:System.Web.HttpWorkerRequest" /> that request processing for the current request is complete.</para>
+          <para
+            >Used by the runtime to notify the <see
+             cref="T:System.Web.HttpWorkerRequest" />
+
+             that request processing for the current request is complete.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -89,7 +125,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FlushResponse">
-      <MemberSignature Language="C#" Value="public abstract void FlushResponse (bool finalFlush);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void FlushResponse (bool finalFlush);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -104,7 +143,10 @@
           <para>Sends all pending response data to the client.</para>
         </summary>
         <param name="finalFlush">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if this is the last time response data will be flushed; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if this is the last time response data will be flushed; otherwise, false. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -213,7 +255,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If no certificate is sent, the <see cref="P:System.Web.HttpRequest.ClientCertificate" /> collection returns empty.</para>
+          <para
+            >If no certificate is sent, the <see
+             cref="P:System.Web.HttpRequest.ClientCertificate" />
+
+             collection returns empty.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -230,7 +277,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetClientCertificateBinaryIssuer">
-      <MemberSignature Language="C#" Value="public virtual byte[] GetClientCertificateBinaryIssuer ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual byte[] GetClientCertificateBinaryIssuer ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -263,7 +313,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, returns the <see cref="T:System.Text.Encoding" /> object in which the client certificate was encoded. </para>
+          <para
+            >When overridden in a derived class, returns the <see
+             cref="T:System.Text.Encoding" />
+
+             object in which the client certificate was encoded. </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -276,7 +331,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetClientCertificatePublicKey">
-      <MemberSignature Language="C#" Value="public virtual byte[] GetClientCertificatePublicKey ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual byte[] GetClientCertificatePublicKey ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -299,7 +357,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetClientCertificateValidFrom">
-      <MemberSignature Language="C#" Value="public virtual DateTime GetClientCertificateValidFrom ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual DateTime GetClientCertificateValidFrom ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.DateTime</ReturnType>
@@ -313,7 +374,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.DateTime" /> object representing when the certificate becomes valid.</para>
+          <para
+            >A <see
+             cref="T:System.DateTime" />
+
+             object representing when the certificate becomes valid.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -322,7 +388,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetClientCertificateValidUntil">
-      <MemberSignature Language="C#" Value="public virtual DateTime GetClientCertificateValidUntil ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual DateTime GetClientCertificateValidUntil ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.DateTime</ReturnType>
@@ -336,7 +405,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.DateTime" /> object representing the date that the certificate expires.</para>
+          <para
+            >A <see
+             cref="T:System.DateTime" />
+
+             object representing the date that the certificate expires.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -460,7 +534,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetKnownRequestHeader">
-      <MemberSignature Language="C#" Value="public virtual string GetKnownRequestHeader (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string GetKnownRequestHeader (int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -469,12 +546,19 @@
         <Parameter Name="index" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <remarks>For example to obtain the value of the Content-Length header, you can use:
+        <remarks
+          >For example to obtain the value of the Content-Length header, you can use:
 
 
-<example><code lang="C#">
+<example
+          >
+            <code lang="C#"
+              >
     string value = worker_request.GetKnownRequestHeader (HttpWorkerRequest.HeaderContentLength);
-  </code></example></remarks>
+  </code
+            >
+          </example>
+        </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns the standard HTTP request header that corresponds to the specified index.</para>
@@ -484,7 +568,13 @@
           <para>The HTTP request header.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the header. For example, the <see cref="F:System.Web.HttpWorkerRequest.HeaderAllow" /> field. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the header. For example, the <see
+           cref="F:System.Web.HttpWorkerRequest.HeaderAllow" />
+
+           field. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -492,7 +582,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetKnownRequestHeaderIndex">
-      <MemberSignature Language="C#" Value="public static int GetKnownRequestHeaderIndex (string header);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int GetKnownRequestHeaderIndex (string header);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -508,10 +601,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The index number of the HTTP request header specified in the <paramref name="header" /> parameter.</para>
+          <para
+            >The index number of the HTTP request header specified in the <paramref
+             name="header" />
+
+             parameter.</para
+          >
         </returns>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the header. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the header. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -519,7 +620,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetKnownRequestHeaderName">
-      <MemberSignature Language="C#" Value="public static string GetKnownRequestHeaderName (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetKnownRequestHeaderName (int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -535,10 +639,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The name of the HTTP request header specified in the <paramref name="index" /> parameter.</para>
+          <para
+            >The name of the HTTP request header specified in the <paramref
+             name="index" />
+
+             parameter.</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index number of the header. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index number of the header. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -546,7 +658,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetKnownResponseHeaderIndex">
-      <MemberSignature Language="C#" Value="public static int GetKnownResponseHeaderIndex (string header);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int GetKnownResponseHeaderIndex (string header);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -562,10 +677,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The index number of the HTTP response header specified in the <paramref name="header" /> parameter.</para>
+          <para
+            >The index number of the HTTP response header specified in the <paramref
+             name="header" />
+
+             parameter.</para
+          >
         </returns>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the HTTP header. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the HTTP header. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -573,7 +696,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetKnownResponseHeaderName">
-      <MemberSignature Language="C#" Value="public static string GetKnownResponseHeaderName (int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetKnownResponseHeaderName (int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -589,10 +715,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The name of the HTTP response header specified in the <paramref name="index" /> parameter.</para>
+          <para
+            >The name of the HTTP response header specified in the <paramref
+             name="index" />
+
+             parameter.</para
+          >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index number of the header. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index number of the header. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -676,10 +810,24 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <remarks>This method should be invoked prior to calling <see cref="M:System.Web.HttpWorkerRequest.ReadEntityBody(byte[], int)" /> as the web server implementing this class might have loaded some data in advance.
-<para>
-See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see cref="M:System.Web.HttpWorkerRequest.IsEntireEntityBodyIsPreloaded()" />.
-</para></remarks>
+        <remarks
+          >This method should be invoked prior to calling <see
+           cref="M:System.Web.HttpWorkerRequest.ReadEntityBody(byte[], int)" />
+
+           as the web server implementing this class might have loaded some data in advance.
+<para
+
+            >
+See also: <see
+             cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.IsEntireEntityBodyIsPreloaded()" />
+
+            .
+</para
+          >
+        </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns the portion of the HTTP request body that has already been read.</para>
@@ -695,7 +843,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetPreloadedEntityBody">
-      <MemberSignature Language="C#" Value="public virtual int GetPreloadedEntityBody (byte[] buffer, int offset);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual int GetPreloadedEntityBody (byte[] buffer, int offset);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -718,9 +869,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>The portion of the HTTP request body that has been read.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data to read.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data to read.</param
+        >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte offset at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte offset at which to begin reading.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetPreloadedEntityBodyLength">
@@ -760,7 +917,12 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>HTTPS if the <see cref="M:System.Web.HttpWorkerRequest.IsSecure" /> method is true, otherwise HTTP.</para>
+          <para
+            >HTTPS if the <see
+             cref="M:System.Web.HttpWorkerRequest.IsSecure" />
+
+             method is true, otherwise HTTP.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -953,7 +1115,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetServerVariable">
-      <MemberSignature Language="C#" Value="public virtual string GetServerVariable (string name);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string GetServerVariable (string name);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -972,7 +1137,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>The requested server variable.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the requested server variable. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the requested server variable. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -980,7 +1148,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetStatusDescription">
-      <MemberSignature Language="C#" Value="public static string GetStatusDescription (int code);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string GetStatusDescription (int code);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -996,10 +1167,18 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The status description. For example, <see cref="M:System.Web.HttpWorkerRequest.GetStatusDescription(System.Int32)" /> (404) returns "Not Found".</para>
+          <para
+            >The status description. For example, <see
+             cref="M:System.Web.HttpWorkerRequest.GetStatusDescription(System.Int32)" />
+
+             (404) returns "Not Found".</para
+          >
         </returns>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />The HTTP status code. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The HTTP status code. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1029,7 +1208,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </Docs>
     </Member>
     <Member MemberName="GetUnknownRequestHeader">
-      <MemberSignature Language="C#" Value="public virtual string GetUnknownRequestHeader (string name);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string GetUnknownRequestHeader (string name);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -1048,7 +1230,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>The header value.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header name. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The header name. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1056,7 +1241,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetUnknownRequestHeaders">
-      <MemberSignature Language="C#" Value="public virtual string[][] GetUnknownRequestHeaders ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string[][] GetUnknownRequestHeaders ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String[][]</ReturnType>
@@ -1183,9 +1371,18 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </ReturnValue>
       <Parameters />
       <Docs>
-        <remarks>See also: <see cref="M:System.Web.HttpWorkerRequest.IsEntireEntityBodyIsPreloaded()" /> ,
-<see cref="M:System.Web.HttpWorkerRequest.GetPreloadedEntityBody()" /> and
-<see cref="M:System.Web.HttpWorkerRequest.ReadEntityBody(byte[], int)" /></remarks>
+        <remarks
+          >See also: <see
+           cref="M:System.Web.HttpWorkerRequest.IsEntireEntityBodyIsPreloaded()" />
+
+           ,
+<see
+           cref="M:System.Web.HttpWorkerRequest.GetPreloadedEntityBody()" />
+
+           and
+<see
+           cref="M:System.Web.HttpWorkerRequest.ReadEntityBody(byte[], int)" />
+        </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns a value indicating whether the request contains body data.</para>
@@ -1210,7 +1407,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1233,7 +1438,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1256,7 +1469,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1279,7 +1500,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1302,7 +1531,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1325,7 +1562,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1348,7 +1593,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1371,7 +1624,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1394,7 +1655,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1417,7 +1686,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1440,7 +1717,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1463,7 +1748,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1486,7 +1779,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1509,7 +1810,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1532,7 +1841,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1555,7 +1872,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1578,7 +1903,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1601,7 +1934,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1624,7 +1965,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1647,7 +1996,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1670,7 +2027,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1693,7 +2058,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1716,7 +2089,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1739,7 +2120,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1762,7 +2151,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1785,7 +2182,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1808,7 +2213,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1831,7 +2244,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1854,7 +2275,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1877,7 +2306,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1900,7 +2337,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1923,7 +2368,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1946,7 +2399,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1969,7 +2430,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1992,7 +2461,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2015,7 +2492,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2038,7 +2523,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2061,7 +2554,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2084,7 +2585,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2107,7 +2616,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2130,7 +2647,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2176,7 +2701,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2199,7 +2732,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2222,7 +2763,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2245,7 +2794,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2268,7 +2825,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2291,7 +2856,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2314,7 +2887,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2337,7 +2918,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2360,7 +2949,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2397,7 +2994,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="IsEntireEntityBodyIsPreloaded">
-      <MemberSignature Language="C#" Value="public virtual bool IsEntireEntityBodyIsPreloaded ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IsEntireEntityBodyIsPreloaded ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -2462,7 +3062,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="MachineInstallDirectory">
-      <MemberSignature Language="C#" Value="public virtual string MachineInstallDirectory { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual string MachineInstallDirectory { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -2497,10 +3100,18 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The physical path that corresponds to the virtual path specified in the <paramref name="virtualPath" /> parameter.</para>
+          <para
+            >The physical path that corresponds to the virtual path specified in the <paramref
+             name="virtualPath" />
+
+             parameter.</para
+          >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The virtual path. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2508,7 +3119,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="ReadEntityBody">
-      <MemberSignature Language="C#" Value="public virtual int ReadEntityBody (byte[] buffer, int size);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual int ReadEntityBody (byte[] buffer, int size);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -2532,9 +3146,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>The number of bytes read.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte array to read data into. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte array to read data into. </param
+        >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of bytes to read. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of bytes to read. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2542,7 +3162,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="ReadEntityBody">
-      <MemberSignature Language="C#" Value="public virtual int ReadEntityBody (byte[] buffer, int offset, int size);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual int ReadEntityBody (byte[] buffer, int offset, int size);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2570,11 +3193,20 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>The number of bytes read.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte array to read data into.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte array to read data into.</param
+        >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte offset at which to begin reading.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte offset at which to begin reading.</param
+        >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of bytes to read.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of bytes to read.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ReasonCachePolicy">
@@ -2648,7 +3280,12 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies a reason for the request. The default value is <see cref="F:System.Web.HttpWorkerRequest.ReasonResponseCacheMiss" />.</para>
+          <para
+            >Specifies a reason for the request. The default value is <see
+             cref="F:System.Web.HttpWorkerRequest.ReasonResponseCacheMiss" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2707,7 +3344,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2751,7 +3396,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" /> and <see cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" /> methods.</para>
+          <para
+            >The .NET Framework assigns an index number to each standard HTTP header type, for use in the <see
+             cref="M:System.Web.HttpWorkerRequest.GetKnownRequestHeader(System.Int32)" />
+
+             and <see
+             cref="M:System.Web.HttpWorkerRequest.SendKnownResponseHeader(System.Int32,System.String)" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2777,7 +3430,27 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you are implementing your own hosting environment, you may to override this property to return the location of your environment's root configuration file. An example of this is the <see cref="T:System.Web.Hosting.SimpleWorkerRequest" /> class which provides a simple implementation of the <see cref="T:System.Web.HttpWorkerRequest" />. The <see cref="P:System.Web.Hosting.SimpleWorkerRequest.RootWebConfigPath" /> property of <see cref="T:System.Web.Hosting.SimpleWorkerRequest" /> class overrides the <see cref="P:System.Web.HttpWorkerRequest.RootWebConfigPath" /> property of <see cref="T:System.Web.HttpWorkerRequest" /> class.</para>
+          <para
+            >If you are implementing your own hosting environment, you may to override this property to return the location of your environment's root configuration file. An example of this is the <see
+             cref="T:System.Web.Hosting.SimpleWorkerRequest" />
+
+             class which provides a simple implementation of the <see
+             cref="T:System.Web.HttpWorkerRequest" />
+
+            . The <see
+             cref="P:System.Web.Hosting.SimpleWorkerRequest.RootWebConfigPath" />
+
+             property of <see
+             cref="T:System.Web.Hosting.SimpleWorkerRequest" />
+
+             class overrides the <see
+             cref="P:System.Web.HttpWorkerRequest.RootWebConfigPath" />
+
+             property of <see
+             cref="T:System.Web.HttpWorkerRequest" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2786,7 +3459,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </Docs>
     </Member>
     <Member MemberName="SendCalculatedContentLength">
-      <MemberSignature Language="C#" Value="public virtual void SendCalculatedContentLength (int contentLength);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void SendCalculatedContentLength (int contentLength);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -2797,7 +3473,12 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the content length is not explicitly set, this method enables the <see cref="T:System.Web.HttpWorkerRequest" /> instance to add a Content-Length HTTP header to the response.</para>
+          <para
+            >When the content length is not explicitly set, this method enables the <see
+             cref="T:System.Web.HttpWorkerRequest" />
+
+             instance to add a Content-Length HTTP header to the response.</para
+          >
           <para>Use this overload to set the Content-Length header when the length of the response message body is less than or equal to 2 GB.</para>
         </remarks>
         <summary>
@@ -2805,7 +3486,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>Adds a Content-Length HTTP header to the response for message bodies that are less than or equal to 2 GB.</para>
         </summary>
         <param name="contentLength">
-          <attribution license="cc4" from="Microsoft" modified="false" />The length of the response, in bytes.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The length of the response, in bytes.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2813,7 +3497,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="SendCalculatedContentLength">
-      <MemberSignature Language="C#" Value="public virtual void SendCalculatedContentLength (long contentLength);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void SendCalculatedContentLength (long contentLength);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -2827,7 +3514,18 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When the content length is not explicitly set, this method enables the <see cref="T:System.Web.HttpWorkerRequest" /> instance to add a Content-Length HTTP header to the response. The default implementation calls the overload that takes a <paramref name="contentLength" /> parameter of type <see cref="T:System.Int32" />.</para>
+          <para
+            >When the content length is not explicitly set, this method enables the <see
+             cref="T:System.Web.HttpWorkerRequest" />
+
+             instance to add a Content-Length HTTP header to the response. The default implementation calls the overload that takes a <paramref
+             name="contentLength" />
+
+             parameter of type <see
+             cref="T:System.Int32" />
+
+            .</para
+          >
           <para>Use this overload to specify the response for message bodies greater than 2 GB.</para>
         </remarks>
         <summary>
@@ -2835,11 +3533,17 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>Adds a Content-Length HTTP header to the response for message bodies that are greater than 2 GB.</para>
         </summary>
         <param name="contentLength">
-          <attribution license="cc4" from="Microsoft" modified="false" />The length of the response, in bytes.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The length of the response, in bytes.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SendKnownResponseHeader">
-      <MemberSignature Language="C#" Value="public abstract void SendKnownResponseHeader (int index, string value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void SendKnownResponseHeader (int index, string value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -2855,9 +3559,18 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>Adds a standard HTTP header to the response.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The header index. For example, <see cref="F:System.Web.HttpWorkerRequest.HeaderContentLength" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The header index. For example, <see
+           cref="F:System.Web.HttpWorkerRequest.HeaderContentLength" />
+
+          . </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the header. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the header. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2865,7 +3578,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="SendResponseFromFile">
-      <MemberSignature Language="C#" Value="public abstract void SendResponseFromFile (IntPtr handle, long offset, long length);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void SendResponseFromFile (IntPtr handle, long offset, long length);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -2882,11 +3598,20 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>Adds the contents of the specified file to the response and specifies the starting position in the file and the number of bytes to send.</para>
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />The handle of the file to send. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The handle of the file to send. </param
+        >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The starting position in the file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The starting position in the file. </param
+        >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to send. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to send. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2894,7 +3619,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="SendResponseFromFile">
-      <MemberSignature Language="C#" Value="public abstract void SendResponseFromFile (string filename, long offset, long length);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void SendResponseFromFile (string filename, long offset, long length);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -2911,11 +3639,20 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>Adds the contents of the specified file to the response and specifies the starting position in the file and the number of bytes to send.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the file to send. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the file to send. </param
+        >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />The starting position in the file. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The starting position in the file. </param
+        >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to send. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to send. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2923,7 +3660,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="SendResponseFromMemory">
-      <MemberSignature Language="C#" Value="public abstract void SendResponseFromMemory (byte[] data, int length);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void SendResponseFromMemory (byte[] data, int length);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -2939,9 +3679,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>Adds the specified number of bytes from a byte array to the response.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />The byte array to send. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The byte array to send. </param
+        >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to send, starting at the first byte. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to send, starting at the first byte. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2949,7 +3695,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="SendResponseFromMemory">
-      <MemberSignature Language="C#" Value="public virtual void SendResponseFromMemory (IntPtr data, int length);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void SendResponseFromMemory (IntPtr data, int length);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -2965,9 +3714,15 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>Adds the specified number of bytes from a block of memory to the response.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />An unmanaged pointer to the block of memory. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An unmanaged pointer to the block of memory. </param
+        >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />The number of bytes to send. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The number of bytes to send. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -2975,7 +3730,10 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
       </AssemblyInfo>
     </Member>
     <Member MemberName="SendStatus">
-      <MemberSignature Language="C#" Value="public abstract void SendStatus (int statusCode, string statusDescription);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void SendStatus (int statusCode, string statusDescription);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -2989,15 +3747,24 @@ See also: <see cref="M:System.Web.HttpWorkerRequest.HasEntityBody()" /> and <see
           <para>
 This methods sends the HTTP status response to the client.  
 </para>
-You should call this method before writing any other headers.</remarks>
+
+          
+You should call this method before writing any other headers.</remarks
+        >
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Specifies the HTTP status code and status description of the response, such as SendStatus(200, "Ok").</para>
         </summary>
         <param name="statusCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The status code to send </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The status code to send </param
+        >
         <param name="statusDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />The status description to send. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The status description to send. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3005,7 +3772,10 @@ You should call this method before writing any other headers.</remarks>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SendUnknownResponseHeader">
-      <MemberSignature Language="C#" Value="public abstract void SendUnknownResponseHeader (string name, string value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void SendUnknownResponseHeader (string name, string value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -3021,9 +3791,15 @@ You should call this method before writing any other headers.</remarks>
           <para>Adds a nonstandard HTTP header to the response.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the header to send. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the header to send. </param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the header. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the header. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -3031,7 +3807,10 @@ You should call this method before writing any other headers.</remarks>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetEndOfSendNotification">
-      <MemberSignature Language="C#" Value="public virtual void SetEndOfSendNotification (System.Web.HttpWorkerRequest.EndOfSendNotification callback, object extraData);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void SetEndOfSendNotification (System.Web.HttpWorkerRequest.EndOfSendNotification callback, object extraData);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -3041,7 +3820,9 @@ You should call this method before writing any other headers.</remarks>
         <Parameter Name="extraData" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="callback">To be added: an object of type 'HttpWorkerRequest+EndOfSendNotification'</param>
+        <param name="callback"
+          >To be added: an object of type 'HttpWorkerRequest+EndOfSendNotification'</param
+        >
         <param name="extraData">To be added: an object of type 'object'</param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>

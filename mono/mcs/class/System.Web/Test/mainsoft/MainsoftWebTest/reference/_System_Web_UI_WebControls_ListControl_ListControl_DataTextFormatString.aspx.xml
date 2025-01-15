@@ -2,63 +2,151 @@
 <testresults name="">
   <div id="GHTSubTest1" testname="string.empty">
     <select id="_ctrl0" size="4" name="_ctrl0">
-      <option value="aaa" />aaa
-		<option value="bbb" />bbb
-		<option value="ccc" />ccc
-		<option value="ddd" />ddd
-		<option value="eee" />eee
-		<option value="fff" />fff
-		<option value="ggg" />ggg
+      <option value="aaa" />
 
-	</select>
+      aaa
+		<option
+       value="bbb" />
+
+      bbb
+		<option
+       value="ccc" />
+
+      ccc
+		<option
+       value="ddd" />
+
+      ddd
+		<option
+       value="eee" />
+
+      eee
+		<option
+       value="fff" />
+
+      fff
+		<option
+       value="ggg" />
+
+      ggg
+
+	</select
+    >
   </div>
   <div id="GHTSubTest2" testname="Valid format">
     <select id="_ctrl1" size="4" name="_ctrl1">
-      <option value="format aaa format" />format aaa format
-		<option value="format bbb format" />format bbb format
-		<option value="format ccc format" />format ccc format
-		<option value="format ddd format" />format ddd format
-		<option value="format eee format" />format eee format
-		<option value="format fff format" />format fff format
-		<option value="format ggg format" />format ggg format
+      <option value="format aaa format" />
 
-	</select>
+      format aaa format
+		<option
+       value="format bbb format" />
+
+      format bbb format
+		<option
+       value="format ccc format" />
+
+      format ccc format
+		<option
+       value="format ddd format" />
+
+      format ddd format
+		<option
+       value="format eee format" />
+
+      format eee format
+		<option
+       value="format fff format" />
+
+      format fff format
+		<option
+       value="format ggg format" />
+
+      format ggg format
+
+	</select
+    >
   </div>
   <div id="GHTSubTest3" testname="Invalid format">
-    <select id="_ctrl2" size="4" name="_ctrl2">
-    </select>
+    <select id="_ctrl2" size="4" name="_ctrl2"></select>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest4" testname="string.empty">
     <select id="_ctrl3" name="_ctrl3">
-      <option value="aaa" />aaa
-		<option value="bbb" />bbb
-		<option value="ccc" />ccc
-		<option value="ddd" />ddd
-		<option value="eee" />eee
-		<option value="fff" />fff
-		<option value="ggg" />ggg
+      <option value="aaa" />
 
-	</select>
+      aaa
+		<option
+       value="bbb" />
+
+      bbb
+		<option
+       value="ccc" />
+
+      ccc
+		<option
+       value="ddd" />
+
+      ddd
+		<option
+       value="eee" />
+
+      eee
+		<option
+       value="fff" />
+
+      fff
+		<option
+       value="ggg" />
+
+      ggg
+
+	</select
+    >
   </div>
   <div id="GHTSubTest5" testname="Valid format">
     <select id="_ctrl4" name="_ctrl4">
-      <option value="format aaa format" />format aaa format
-		<option value="format bbb format" />format bbb format
-		<option value="format ccc format" />format ccc format
-		<option value="format ddd format" />format ddd format
-		<option value="format eee format" />format eee format
-		<option value="format fff format" />format fff format
-		<option value="format ggg format" />format ggg format
+      <option value="format aaa format" />
 
-	</select>
+      format aaa format
+		<option
+       value="format bbb format" />
+
+      format bbb format
+		<option
+       value="format ccc format" />
+
+      format ccc format
+		<option
+       value="format ddd format" />
+
+      format ddd format
+		<option
+       value="format eee format" />
+
+      format eee format
+		<option
+       value="format fff format" />
+
+      format fff format
+		<option
+       value="format ggg format" />
+
+      format ggg format
+
+	</select
+    >
   </div>
   <div id="GHTSubTest6" testname="Invalid format">
-    <select id="_ctrl5" name="_ctrl5">
-    </select>
+    <select id="_ctrl5" name="_ctrl5"></select>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest7" testname="string.empty">
     <table id="_ctrl6" border="0">
@@ -153,10 +241,12 @@
     </table>
   </div>
   <div id="GHTSubTest9" testname="Invalid format">
-    <table id="_ctrl8" border="0">
-    </table>
+    <table id="_ctrl8" border="0"></table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest10" testname="string.empty">
     <table id="_ctrl9" border="0">
@@ -251,9 +341,11 @@
     </table>
   </div>
   <div id="GHTSubTest12" testname="Invalid format">
-    <table id="_ctrl11" border="0">
-    </table>
+    <table id="_ctrl11" border="0"></table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

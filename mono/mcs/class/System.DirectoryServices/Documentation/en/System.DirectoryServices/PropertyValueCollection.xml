@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="PropertyValueCollection" FullName="System.DirectoryServices.PropertyValueCollection">
-  <TypeSignature Language="C#" Value="public class PropertyValueCollection : System.Collections.CollectionBase, System.Collections.IList, System.Collections.ICollection, System.Collections.IEnumerable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class PropertyValueCollection : System.Collections.CollectionBase, System.Collections.IList, System.Collections.ICollection, System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.DirectoryServices</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../msfinal.pub")</AttributeName>
@@ -87,14 +89,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Appends the specified <see cref="T:System.DirectoryServices.PropertyValueCollection" /> object to this collection.</para>
+          <para
+            >Appends the specified <see
+             cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+             object to this collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The zero-based index of the <see cref="T:System.DirectoryServices.PropertyValueCollection" /> object that is appended to this collection.</para>
+          <para
+            >The zero-based index of the <see
+             cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+             object that is appended to this collection.</para
+          >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.DirectoryServices.PropertyValueCollection" />  object to append to this collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+            object to append to this collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AddRange">
@@ -111,12 +129,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Appends the contents of the specified <see cref="T:System.DirectoryServices.PropertyValueCollection" /> object to this collection.</para>
+          <para
+            >Appends the contents of the specified <see
+             cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+             object to this collection.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public void AddRange(System.DirectoryServices.PropertyValueCollection coll)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddRange(System.DirectoryServices.PropertyValueCollection coll)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -129,7 +155,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Appends the contents of the <see cref="T:System.DirectoryServices.PropertyValueCollection" /> object to this collection.</para>
+          <para
+            >Appends the contents of the <see
+             cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+             object to this collection.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -153,7 +184,10 @@
           <para>The zero-based index of the specified property value. If the object is not found, the return value is -1.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property value to find.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property value to find.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Insert">
@@ -173,9 +207,15 @@
           <para>Inserts a property value into this collection at a specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index at which to insert the property value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index at which to insert the property value.</param
+        >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property value to insert.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property value to insert.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Remove">
@@ -191,7 +231,15 @@
         <param name="value">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When working with a multi-valued string property value, the <see cref="M:System.DirectoryServices.PropertyValueCollection.Remove" /> method will successfully remove the correct item. However, identifying the correct items by name is difficult with a multi-valued DNWithString property value (as the DNWithString COM class, which is used to store the DNWithString items, has 2 string properties representing the item). The way to remove such items is to find the object in the collection (by looping thru all the items), then call the <see cref="M:System.DirectoryServices.PropertyValueCollection.Remove" /> function with the object's pointer that you just found.  This is illustrated in the example below.</para>
+          <para
+            >When working with a multi-valued string property value, the <see
+             cref="M:System.DirectoryServices.PropertyValueCollection.Remove" />
+
+             method will successfully remove the correct item. However, identifying the correct items by name is difficult with a multi-valued DNWithString property value (as the DNWithString COM class, which is used to store the DNWithString items, has 2 string properties representing the item). The way to remove such items is to find the object in the collection (by looping thru all the items), then call the <see
+             cref="M:System.DirectoryServices.PropertyValueCollection.Remove" />
+
+             function with the object's pointer that you just found.  This is illustrated in the example below.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -212,14 +260,25 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether the specified <see cref="T:System.DirectoryServices.PropertyValueCollection" /> object is in this collection.</para>
+          <para
+            >Determines whether the specified <see
+             cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+             object is in this collection.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if the specified property belongs to this collection; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.DirectoryServices.PropertyValueCollection" /> object to search for in this collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+           object to search for in this collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
@@ -237,10 +296,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Copies all <see cref="T:System.DirectoryServices.PropertyValueCollection" /> objects in this collection to the specified array, starting at the specified index in the target array.</para>
+          <para
+            >Copies all <see
+             cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+             objects in this collection to the specified array, starting at the specified index in the target array.</para
+          >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> where this method starts copying this collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           where this method starts copying this collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Value">
@@ -282,7 +352,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains the values of a <see cref="T:System.DirectoryServices.DirectoryEntry" /> property.</para>
+      <para
+        >Contains the values of a <see
+         cref="T:System.DirectoryServices.DirectoryEntry" />
+
+         property.</para
+      >
     </summary>
   </Docs>
 </Type>

@@ -247,7 +247,10 @@
       </Docs>
     </Member>
     <Member MemberName="Time">
-      <MemberSignature Language="C#" Value="public static TimeSpan Time (Mono.CSharp.InteractiveBase.Simple a);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static TimeSpan Time (Mono.CSharp.InteractiveBase.Simple a);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>

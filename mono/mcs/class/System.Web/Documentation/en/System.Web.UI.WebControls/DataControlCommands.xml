@@ -13,8 +13,24 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.DataControlCommands" /> class contains public fields for data-bound control command names. The class constructor is private, so you cannot create an instance of the class. However, because it only contains const string resources, you can use the class constructor and its public fields just as you would any static class.</para>
-      <para>Using the command names of the <see cref="T:System.Web.UI.WebControls.DataControlCommands" /> class enables all the ASP.NET data-bound controls and their respective designer classes to use the same string resources for common commands, such as "Edit" or "Update", and to correctly handle events that are posted by an <see cref="T:System.Web.UI.IPostBackEventHandler" /> instance. The following classes use <see cref="T:System.Web.UI.WebControls.DataControlCommands" />:</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.DataControlCommands" />
+
+         class contains public fields for data-bound control command names. The class constructor is private, so you cannot create an instance of the class. However, because it only contains const string resources, you can use the class constructor and its public fields just as you would any static class.</para
+      >
+      <para
+        >Using the command names of the <see
+         cref="T:System.Web.UI.WebControls.DataControlCommands" />
+
+         class enables all the ASP.NET data-bound controls and their respective designer classes to use the same string resources for common commands, such as "Edit" or "Update", and to correctly handle events that are posted by an <see
+         cref="T:System.Web.UI.IPostBackEventHandler" />
+
+         instance. The following classes use <see
+         cref="T:System.Web.UI.WebControls.DataControlCommands" />
+
+        :</para
+      >
       <list type="bullet">
         <item>
           <para>
@@ -65,7 +81,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.WebControls.DataControlCommands" /> class contains public fields that all ASP.NET data-bound controls use, to promote a consistent user interface (UI). This class cannot be inherited.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.WebControls.DataControlCommands" />
+
+         class contains public fields that all ASP.NET data-bound controls use, to promote a consistent user interface (UI). This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>

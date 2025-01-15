@@ -13,8 +13,27 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A <see cref="T:System.Web.ParserError" /> object represents an error that is created when an <see cref="T:System.Web.HttpParseException" /> exception is thrown. A parser error object can contain error message text, a virtual path to the file where the error occurred, and the subsequent line number of the error in that file. If more than one parser error occurs or you want to store multiple parser errors in a centralized location, use the <see cref="T:System.Web.ParserErrorCollection" /> object. </para>
-      <para>A parser error is of the type <see cref="T:System.Web.HttpException" />. For more information on exceptions and how to handle them, go to <see cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>.</para>
+      <para
+        >A <see
+         cref="T:System.Web.ParserError" />
+
+         object represents an error that is created when an <see
+         cref="T:System.Web.HttpParseException" />
+
+         exception is thrown. A parser error object can contain error message text, a virtual path to the file where the error occurred, and the subsequent line number of the error in that file. If more than one parser error occurs or you want to store multiple parser errors in a centralized location, use the <see
+         cref="T:System.Web.ParserErrorCollection" />
+
+         object. </para
+      >
+      <para
+        >A parser error is of the type <see
+         cref="T:System.Web.HttpException" />
+
+        . For more information on exceptions and how to handle them, go to <see
+         cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -31,7 +50,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.ParserError" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.ParserError" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -39,7 +63,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ParserError (string errorText, string virtualPath, int line);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ParserError (string errorText, string virtualPath, int line);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="errorText" Type="System.String" />
@@ -50,29 +77,72 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="M:System.Web.ParserError.#ctor(System.String,System.String,System.Int32)" /> constructor to initialize a <see cref="T:System.Web.ParserError" /> object with custom settings. The <see cref="M:System.Web.ParserError.#ctor(System.String,System.String,System.Int32)" /> constructor has the following properties: </para>
+          <para
+            >Use the <see
+             cref="M:System.Web.ParserError.#ctor(System.String,System.String,System.Int32)" />
+
+             constructor to initialize a <see
+             cref="T:System.Web.ParserError" />
+
+             object with custom settings. The <see
+             cref="M:System.Web.ParserError.#ctor(System.String,System.String,System.Int32)" />
+
+             constructor has the following properties: </para
+          >
           <list type="bullet">
             <item>
-              <para>The <see cref="P:System.Web.ParserError.ErrorText" /> property, which is a string containing the error message that is related to the parser error. </para>
+              <para
+                >The <see
+                 cref="P:System.Web.ParserError.ErrorText" />
+
+                 property, which is a string containing the error message that is related to the parser error. </para
+              >
             </item>
             <item>
-              <para>The <see cref="P:System.Web.ParserError.VirtualPath" /> property, which is a read-only string that specifies the virtual path of the file that contains the parser error. </para>
+              <para
+                >The <see
+                 cref="P:System.Web.ParserError.VirtualPath" />
+
+                 property, which is a read-only string that specifies the virtual path of the file that contains the parser error. </para
+              >
             </item>
             <item>
-              <para>The <see cref="P:System.Web.ParserError.Line" /> property, which is the line number within the file at which this <see cref="T:System.Web.ParserError" /> object was thrown.</para>
+              <para
+                >The <see
+                 cref="P:System.Web.ParserError.Line" />
+
+                 property, which is the line number within the file at which this <see
+                 cref="T:System.Web.ParserError" />
+
+                 object was thrown.</para
+              >
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.ParserError" /> class by using the specified error text, virtual path, and source line number.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.ParserError" />
+
+             class by using the specified error text, virtual path, and source line number.</para
+          >
         </summary>
         <param name="errorText">
-          <attribution license="cc4" from="Microsoft" modified="false" />The error message text.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The error message text.</param
+        >
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path of the file being parsed when the error occurred.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The virtual path of the file being parsed when the error occurred.</param
+        >
         <param name="line">
-          <attribution license="cc4" from="Microsoft" modified="false" />The line number of the error source.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The line number of the error source.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -89,11 +159,24 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.Web.ParserError.ErrorText" /> property to provide a programmer-defined error message for parser errors for display in a <see cref="T:System.Web.ParserError" /> object.</para>
+          <para
+            >Use the <see
+             cref="P:System.Web.ParserError.ErrorText" />
+
+             property to provide a programmer-defined error message for parser errors for display in a <see
+             cref="T:System.Web.ParserError" />
+
+             object.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets a string that represents the error for the <see cref="T:System.Web.ParserError" /> object.</para>
+          <para
+            >Gets or sets a string that represents the error for the <see
+             cref="T:System.Web.ParserError" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -111,7 +194,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.ParserError.Line" /> property is the line number within the file at which this <see cref="T:System.Web.ParserError" /> object was thrown.</para>
+          <para
+            >The <see
+             cref="P:System.Web.ParserError.Line" />
+
+             property is the line number within the file at which this <see
+             cref="T:System.Web.ParserError" />
+
+             object was thrown.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

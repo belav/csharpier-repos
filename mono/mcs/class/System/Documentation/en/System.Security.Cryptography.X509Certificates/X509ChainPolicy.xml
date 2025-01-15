@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="X509ChainPolicy" FullName="System.Security.Cryptography.X509Certificates.X509ChainPolicy">
+<Type
+  Name="X509ChainPolicy"
+  FullName="System.Security.Cryptography.X509Certificates.X509ChainPolicy"
+>
   <TypeSignature Language="C#" Value="public sealed class X509ChainPolicy" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit X509ChainPolicy extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit X509ChainPolicy extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,7 +21,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Each <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> object can have an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" /> property that specifies the policy to be used in the verification process. Note that only <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" /> objects can construct an <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" /> object.</para>
+      <para
+        >Each <see
+         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+         object can have an <see
+         cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+
+         property that specifies the policy to be used in the verification process. Note that only <see
+         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+         objects can construct an <see
+         cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+
+         object.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +45,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public X509ChainPolicy ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -37,13 +60,24 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ApplicationPolicy">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.OidCollection ApplicationPolicy { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.OidCollection ApplicationPolicy" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.OidCollection ApplicationPolicy { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.OidCollection ApplicationPolicy"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -67,8 +101,14 @@
       </Docs>
     </Member>
     <Member MemberName="CertificatePolicy">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.OidCollection CertificatePolicy { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.OidCollection CertificatePolicy" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.OidCollection CertificatePolicy { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.OidCollection CertificatePolicy"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -91,8 +131,14 @@
       </Docs>
     </Member>
     <Member MemberName="ExtraStore">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.X509Certificates.X509Certificate2Collection ExtraStore { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Security.Cryptography.X509Certificates.X509Certificate2Collection ExtraStore" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.X509Certificates.X509Certificate2Collection ExtraStore { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Security.Cryptography.X509Certificates.X509Certificate2Collection ExtraStore"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -116,7 +162,10 @@
     </Member>
     <Member MemberName="Reset">
       <MemberSignature Language="C#" Value="public void Reset ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Reset() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Reset() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -134,13 +183,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Resets the <see cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" /> members to their default values.</para>
+          <para
+            >Resets the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+
+             members to their default values.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="RevocationFlag">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.X509Certificates.X509RevocationFlag RevocationFlag { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Cryptography.X509Certificates.X509RevocationFlag RevocationFlag" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.X509Certificates.X509RevocationFlag RevocationFlag { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Cryptography.X509Certificates.X509RevocationFlag RevocationFlag"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -154,7 +214,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property uses values from the <see cref="T:System.Security.Cryptography.X509Certificates.X509RevocationFlag" /> enumeration. <see cref="F:System.Security.Cryptography.X509Certificates.X509RevocationFlag.ExcludeRoot" /> is the default value.</para>
+          <para
+            >This property uses values from the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509RevocationFlag" />
+
+             enumeration. <see
+             cref="F:System.Security.Cryptography.X509Certificates.X509RevocationFlag.ExcludeRoot" />
+
+             is the default value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -163,8 +231,14 @@
       </Docs>
     </Member>
     <Member MemberName="RevocationMode">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.X509Certificates.X509RevocationMode RevocationMode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Cryptography.X509Certificates.X509RevocationMode RevocationMode" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.X509Certificates.X509RevocationMode RevocationMode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Cryptography.X509Certificates.X509RevocationMode RevocationMode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -178,7 +252,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property uses values from the <see cref="T:System.Security.Cryptography.X509Certificates.X509RevocationMode" /> enumeration. <see cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.Online" /> is the default value.</para>
+          <para
+            >This property uses values from the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509RevocationMode" />
+
+             enumeration. <see
+             cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.Online" />
+
+             is the default value.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -188,7 +270,10 @@
     </Member>
     <Member MemberName="UrlRetrievalTimeout">
       <MemberSignature Language="C#" Value="public TimeSpan UrlRetrievalTimeout { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan UrlRetrievalTimeout" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.TimeSpan UrlRetrievalTimeout"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -211,8 +296,14 @@
       </Docs>
     </Member>
     <Member MemberName="VerificationFlags">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.X509Certificates.X509VerificationFlags VerificationFlags { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Cryptography.X509Certificates.X509VerificationFlags VerificationFlags" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.X509Certificates.X509VerificationFlags VerificationFlags { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Cryptography.X509Certificates.X509VerificationFlags VerificationFlags"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -226,7 +317,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property returns values from the <see cref="T:System.Security.Cryptography.X509Certificates.X509VerificationFlags" /> enumeration.</para>
+          <para
+            >This property returns values from the <see
+             cref="T:System.Security.Cryptography.X509Certificates.X509VerificationFlags" />
+
+             enumeration.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -236,7 +332,10 @@
     </Member>
     <Member MemberName="VerificationTime">
       <MemberSignature Language="C#" Value="public DateTime VerificationTime { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.DateTime VerificationTime" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.DateTime VerificationTime"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

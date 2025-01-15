@@ -12,10 +12,11 @@
     <RunAnalyzers>false</RunAnalyzers>
     <DefineConstants>NETSTANDARD2_0</DefineConstants>
   </PropertyGroup>
-
   <Import Project="ILVerification.projitems" />
-
   <ItemGroup>
-    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
+    <PackageReference
+      Include="System.Reflection.Metadata"
+      Version="$(SystemReflectionMetadataVersion)"
+    />
   </ItemGroup>
 </Project>

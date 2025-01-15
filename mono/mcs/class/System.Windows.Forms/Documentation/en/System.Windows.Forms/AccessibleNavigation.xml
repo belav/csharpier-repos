@@ -14,7 +14,10 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Accessible navigation directions are either spatial (up, down, left, and right) or logical (first child, last child, next, and previous). Logical directions are used when clients navigate from one user interface element to another within the same container.</para>
       <para>
-        <see cref="T:System.Windows.Forms.AccessibleObject" /> uses this enumeration.</para>
+        <see cref="T:System.Windows.Forms.AccessibleObject" />
+
+         uses this enumeration.</para
+      >
       <para>For more information about the accessibility application, search for the "Microsoft Active Accessibility" topic in the MSDN library.</para>
     </remarks>
     <summary>

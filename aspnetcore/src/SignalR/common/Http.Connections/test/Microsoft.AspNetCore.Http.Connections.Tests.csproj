@@ -1,11 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <!-- EXTEXP0003: MetricCollector is experimental -->
     <NoWarn>$(NoWarn);EXTEXP0003</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)Buffers.Testing\**\*.cs" />
     <Compile Include="$(SharedSourceRoot)SyncPoint\SyncPoint.cs" />
@@ -13,11 +11,9 @@
     <Compile Include="$(SharedSourceRoot)Metrics\TestMeterFactory.cs" LinkBase="shared" />
     <Compile Include="$(SignalRSharedSourceRoot)EphemeralDataProtectionProvider.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(SignalRTestUtilsProject)" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Authentication.Core" />
     <Reference Include="Microsoft.AspNetCore.Authentication" />
@@ -30,5 +26,4 @@
     <Reference Include="Microsoft.Extensions.Diagnostics.Testing" />
     <Reference Include="Newtonsoft.Json" />
   </ItemGroup>
-
 </Project>

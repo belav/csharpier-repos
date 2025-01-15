@@ -13,16 +13,44 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" /> class also provides data for the <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />, <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />, and <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" /> methods.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+
+         class also provides data for the <see
+         cref="M:System.Windows.Forms.ToolStripRenderer.DrawImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+        , <see
+         cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+        , and <see
+         cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+         methods.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />, <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />, and <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" /> methods. </para>
+      <para
+        >Provides data for the <see
+         cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+        , <see
+         cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+        , and <see
+         cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+         methods. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStrip toolStrip);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStrip toolStrip);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="g" Type="System.Drawing.Graphics" />
@@ -33,19 +61,45 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" /> class for the specified <see cref="T:System.Windows.Forms.ToolStrip" /> and using the specified <see cref="T:System.Drawing.Graphics" />. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+
+             class for the specified <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+             and using the specified <see
+             cref="T:System.Drawing.Graphics" />
+
+            . </para
+          >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> to use for painting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           to use for painting.</param
+        >
         <param name="toolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ToolStrip" /> to paint.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ToolStrip" />
+
+           to paint.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStrip toolStrip, System.Drawing.Rectangle affectedBounds, System.Drawing.Color backColor);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripRenderEventArgs (System.Drawing.Graphics g, System.Windows.Forms.ToolStrip toolStrip, System.Drawing.Rectangle affectedBounds, System.Drawing.Color backColor);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="g" Type="System.Drawing.Graphics" />
@@ -58,23 +112,67 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" /> class for the specified <see cref="T:System.Windows.Forms.ToolStrip" />, using the specified <see cref="T:System.Drawing.Graphics" /> to paint the specified bounds with the specified <see cref="T:System.Drawing.Color" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+
+             class for the specified <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+            , using the specified <see
+             cref="T:System.Drawing.Graphics" />
+
+             to paint the specified bounds with the specified <see
+             cref="T:System.Drawing.Color" />
+
+            .</para
+          >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Graphics" /> to use for painting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Graphics" />
+
+           to use for painting.</param
+        >
         <param name="toolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.ToolStrip" /> to paint.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.ToolStrip" />
+
+           to paint.</param
+        >
         <param name="affectedBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Rectangle" /> representing the bounds of the area to be painted.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Rectangle" />
+
+           representing the bounds of the area to be painted.</param
+        >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Color" /> that the background of the <see cref="T:System.Windows.Forms.ToolStrip" /> is painted with.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Color" />
+
+           that the background of the <see
+           cref="T:System.Windows.Forms.ToolStrip" />
+
+           is painted with.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AffectedBounds">
-      <MemberSignature Language="C#" Value="public System.Drawing.Rectangle AffectedBounds { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Rectangle AffectedBounds { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Rectangle</ReturnType>
@@ -85,7 +183,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Drawing.Rectangle" /> representing the bounds of the area to be painted. </para>
+          <para
+            >Gets the <see
+             cref="T:System.Drawing.Rectangle" />
+
+             representing the bounds of the area to be painted. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -104,7 +207,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Drawing.Color" /> that the background of the <see cref="T:System.Windows.Forms.ToolStrip" /> is painted with.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Drawing.Color" />
+
+             that the background of the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+             is painted with.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -112,7 +223,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ConnectedArea">
-      <MemberSignature Language="C#" Value="public System.Drawing.Rectangle ConnectedArea { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Rectangle ConnectedArea { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Rectangle</ReturnType>
@@ -122,11 +236,39 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the <see cref="T:System.Windows.Forms.ToolStrip" /> is not a <see cref="T:System.Windows.Forms.ToolStripDropDown" /> or the <see cref="P:System.Windows.Forms.ToolStripDropDown.OwnerItem" /> is null, the <see cref="P:System.Windows.Forms.ToolStripRenderEventArgs.ConnectedArea" /> property returns an empty <see cref="T:System.Drawing.Rectangle" />.</para>
+          <para
+            >If the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+             is not a <see
+             cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+             or the <see
+             cref="P:System.Windows.Forms.ToolStripDropDown.OwnerItem" />
+
+             is null, the <see
+             cref="P:System.Windows.Forms.ToolStripRenderEventArgs.ConnectedArea" />
+
+             property returns an empty <see
+             cref="T:System.Drawing.Rectangle" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Drawing.Rectangle" /> representing the overlap area between a <see cref="T:System.Windows.Forms.ToolStripDropDown" /> and its <see cref="P:System.Windows.Forms.ToolStripDropDown.OwnerItem" />.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Drawing.Rectangle" />
+
+             representing the overlap area between a <see
+             cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+             and its <see
+             cref="P:System.Windows.Forms.ToolStripDropDown.OwnerItem" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -145,7 +287,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Drawing.Graphics" /> used to paint.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Drawing.Graphics" />
+
+             used to paint.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -153,7 +300,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ToolStrip">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ToolStrip ToolStrip { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ToolStrip ToolStrip { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ToolStrip</ReturnType>
@@ -164,7 +314,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.ToolStrip" /> to be painted.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.ToolStrip" />
+
+             to be painted.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

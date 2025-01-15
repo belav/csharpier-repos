@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ExtensionCollection&lt;T&gt;" FullName="System.ServiceModel.ExtensionCollection&lt;T&gt;">
-  <TypeSignature Language="C#" Value="public sealed class ExtensionCollection&lt;T&gt; : System.Collections.Generic.SynchronizedCollection&lt;System.ServiceModel.IExtension&lt;T&gt;&gt;, System.Collections.Generic.ICollection&lt;System.ServiceModel.IExtension&lt;T&gt;&gt;, System.Collections.Generic.IEnumerable&lt;System.ServiceModel.IExtension&lt;T&gt;&gt;, System.ServiceModel.IExtensionCollection&lt;T&gt; where T : IExtensibleObject&lt;T&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ExtensionCollection`1&lt;(class System.ServiceModel.IExtensibleObject`1&lt;!T&gt;) T&gt; extends System.Collections.Generic.SynchronizedCollection`1&lt;class System.ServiceModel.IExtension`1&lt;!T&gt;&gt; implements class System.Collections.Generic.ICollection`1&lt;class System.ServiceModel.IExtension`1&lt;!T&gt;&gt;, class System.Collections.Generic.IEnumerable`1&lt;class System.ServiceModel.IExtension`1&lt;!T&gt;&gt;, class System.Collections.IEnumerable, class System.ServiceModel.IExtensionCollection`1&lt;!T&gt;" />
+<Type Name="ExtensionCollection<T>" FullName="System.ServiceModel.ExtensionCollection<T>">
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ExtensionCollection<T> : System.Collections.Generic.SynchronizedCollection<System.ServiceModel.IExtension<T>>, System.Collections.Generic.ICollection<System.ServiceModel.IExtension<T>>, System.Collections.Generic.IEnumerable<System.ServiceModel.IExtension<T>>, System.ServiceModel.IExtensionCollection<T> where T : IExtensibleObject<T>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ExtensionCollection`1<(class System.ServiceModel.IExtensibleObject`1<!T>) T> extends System.Collections.Generic.SynchronizedCollection`1<class System.ServiceModel.IExtension`1<!T>> implements class System.Collections.Generic.ICollection`1<class System.ServiceModel.IExtension`1<!T>>, class System.Collections.Generic.IEnumerable`1<class System.ServiceModel.IExtension`1<!T>>, class System.Collections.IEnumerable, class System.ServiceModel.IExtensionCollection`1<!T>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,7 +40,18 @@
     <typeparam name="T">To be added.</typeparam>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Typically, implementations of <see cref="T:System.ServiceModel.IExtensibleObject`1" /> return an <see cref="T:System.ServiceModel.ExtensionCollection`1" /> from the <see cref="P:System.ServiceModel.IExtensibleObject`1.Extensions" /> property.</para>
+      <para
+        >Typically, implementations of <see
+         cref="T:System.ServiceModel.IExtensibleObject`1" />
+
+         return an <see
+         cref="T:System.ServiceModel.ExtensionCollection`1" />
+
+         from the <see
+         cref="P:System.ServiceModel.IExtensibleObject`1.Extensions" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -44,7 +61,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ExtensionCollection (T owner);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T owner) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T owner) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -59,8 +79,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ExtensionCollection (T owner, object syncRoot);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T owner, object syncRoot) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ExtensionCollection (T owner, object syncRoot);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T owner, object syncRoot) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -78,7 +104,10 @@
     </Member>
     <Member MemberName="ClearItems">
       <MemberSignature Language="C#" Value="protected override void ClearItems ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void ClearItems() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void ClearItems() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -92,9 +121,12 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Find&lt;E&gt;">
-      <MemberSignature Language="C#" Value="public E Find&lt;E&gt; ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !!E Find&lt;E&gt;() cil managed" />
+    <Member MemberName="Find<E>">
+      <MemberSignature Language="C#" Value="public E Find<E> ();" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance !!E Find<E>() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -117,12 +149,21 @@
           <para>An extension of the type sought, or null if no extensions implement the type. If more than one extension implements the type, the most recently added is returned.</para>
         </returns>
         <typeparam name="E">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of extension sought.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of extension sought.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="FindAll&lt;E&gt;">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.Collection&lt;E&gt; FindAll&lt;E&gt; ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.ObjectModel.Collection`1&lt;!!E&gt; FindAll&lt;E&gt;() cil managed" />
+    <Member MemberName="FindAll<E>">
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.Collection<E> FindAll<E> ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Collections.ObjectModel.Collection`1<!!E> FindAll<E>() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -145,12 +186,21 @@
           <para>A collection of extensions of the type sought. If no extensions implement this type, a non-null empty collection is returned.</para>
         </returns>
         <typeparam name="E">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type for which the collection of extensions is sought.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type for which the collection of extensions is sought.</typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="InsertItem">
-      <MemberSignature Language="C#" Value="protected override void InsertItem (int index, System.ServiceModel.IExtension&lt;T&gt; item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void InsertItem(int32 index, class System.ServiceModel.IExtension`1&lt;!T&gt; item) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void InsertItem (int index, System.ServiceModel.IExtension<T> item);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void InsertItem(int32 index, class System.ServiceModel.IExtension`1<!T> item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -160,7 +210,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="index" Type="System.Int32" />
-        <Parameter Name="item" Type="System.ServiceModel.IExtension&lt;T&gt;" />
+        <Parameter Name="item" Type="System.ServiceModel.IExtension<T>" />
       </Parameters>
       <Docs>
         <param name="index">To be added.</param>
@@ -171,7 +221,10 @@
     </Member>
     <Member MemberName="RemoveItem">
       <MemberSignature Language="C#" Value="protected override void RemoveItem (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void RemoveItem(int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void RemoveItem(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -189,8 +242,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetItem">
-      <MemberSignature Language="C#" Value="protected override void SetItem (int index, System.ServiceModel.IExtension&lt;T&gt; item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void SetItem(int32 index, class System.ServiceModel.IExtension`1&lt;!T&gt; item) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void SetItem (int index, System.ServiceModel.IExtension<T> item);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void SetItem(int32 index, class System.ServiceModel.IExtension`1<!T> item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -200,7 +259,7 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="index" Type="System.Int32" />
-        <Parameter Name="item" Type="System.ServiceModel.IExtension&lt;T&gt;" />
+        <Parameter Name="item" Type="System.ServiceModel.IExtension<T>" />
       </Parameters>
       <Docs>
         <param name="index">To be added.</param>
@@ -209,9 +268,15 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="System.Collections.Generic.ICollection&lt;System.ServiceModel.IExtension&lt;T&gt;&gt;.IsReadOnly">
-      <MemberSignature Language="C#" Value="bool System.Collections.Generic.ICollection&lt;System.ServiceModel.IExtension&lt;T&gt;&gt;.IsReadOnly { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance bool System.Collections.Generic.ICollection&lt;System.ServiceModel.IExtension&lt;T&gt;&gt;.IsReadOnly" />
+    <Member MemberName="System.Collections.Generic.ICollection<System.ServiceModel.IExtension<T>>.IsReadOnly">
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.Generic.ICollection<System.ServiceModel.IExtension<T>>.IsReadOnly { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance bool System.Collections.Generic.ICollection<System.ServiceModel.IExtension<T>>.IsReadOnly"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

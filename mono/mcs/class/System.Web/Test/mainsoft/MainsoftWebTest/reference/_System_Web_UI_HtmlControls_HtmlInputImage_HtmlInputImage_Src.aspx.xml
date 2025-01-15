@@ -9,11 +9,17 @@
   <div id="GHTSubTest3" style="height:56px;width:553px">
     <input id="Image3" src="/image.jpg" type="image" name="Image3" value="value of ImageInput3" />
     <span>
-      <br />/image.jpg</span>
+      <br />
+
+      /image.jpg</span
+    >
   </div>
   <div id="GHTSubTest4" style="height:56px;width:553px">
     <input id="Image4" src="123" type="image" name="Image4" value="value of ImageInput4" />
     <span>
-      <br />123</span>
+      <br />
+
+      123</span
+    >
   </div>
 </testresults>

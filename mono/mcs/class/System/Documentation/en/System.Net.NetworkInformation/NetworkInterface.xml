@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NetworkInterface" FullName="System.Net.NetworkInformation.NetworkInterface">
   <TypeSignature Language="C#" Value="public abstract class NetworkInterface" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit NetworkInterface extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit NetworkInterface extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,7 +18,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This class encapsulates data for network interfaces, also known as adapters, on the local computer. You do not create instances of this class; the <see cref="M:System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces" /> method returns an array that contains one instance of this class for each network interface on the local computer.</para>
+      <para
+        >This class encapsulates data for network interfaces, also known as adapters, on the local computer. You do not create instances of this class; the <see
+         cref="M:System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces" />
+
+         method returns an array that contains one instance of this class for each network interface on the local computer.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +33,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected NetworkInterface ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -36,11 +47,21 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor can be called only by classes that derive from the <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> class.</para>
+          <para
+            >This constructor can be called only by classes that derive from the <see
+             cref="T:System.Net.NetworkInformation.NetworkInterface" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Net.NetworkInformation.NetworkInterface" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -69,8 +90,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetAllNetworkInterfaces">
-      <MemberSignature Language="C#" Value="public static System.Net.NetworkInformation.NetworkInterface[] GetAllNetworkInterfaces ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Net.NetworkInformation.NetworkInterface[] GetAllNetworkInterfaces() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Net.NetworkInformation.NetworkInterface[] GetAllNetworkInterfaces ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Net.NetworkInformation.NetworkInterface[] GetAllNetworkInterfaces() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -92,13 +119,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> array that contains objects that describe the available network interfaces, or an empty array if no interfaces are detected.</para>
+          <para
+            >A <see
+             cref="T:System.Net.NetworkInformation.NetworkInterface" />
+
+             array that contains objects that describe the available network interfaces, or an empty array if no interfaces are detected.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetIPProperties">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.IPInterfaceProperties GetIPProperties ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Net.NetworkInformation.IPInterfaceProperties GetIPProperties() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.IPInterfaceProperties GetIPProperties ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Net.NetworkInformation.IPInterfaceProperties GetIPProperties() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -120,13 +158,24 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Net.NetworkInformation.IPInterfaceProperties" /> object that describes this network interface.</para>
+          <para
+            >An <see
+             cref="T:System.Net.NetworkInformation.IPInterfaceProperties" />
+
+             object that describes this network interface.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetIPv4Statistics">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.IPv4InterfaceStatistics GetIPv4Statistics ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Net.NetworkInformation.IPv4InterfaceStatistics GetIPv4Statistics() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.IPv4InterfaceStatistics GetIPv4Statistics ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Net.NetworkInformation.IPv4InterfaceStatistics GetIPv4Statistics() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -141,17 +190,30 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the IPv4 statistics for this <see cref="T:System.Net.NetworkInformation.NetworkInterface" /> instance.</para>
+          <para
+            >Gets the IPv4 statistics for this <see
+             cref="T:System.Net.NetworkInformation.NetworkInterface" />
+
+             instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Net.NetworkInformation.IPv4InterfaceStatistics" /> object.</para>
+          <para
+            >An <see
+             cref="T:System.Net.NetworkInformation.IPv4InterfaceStatistics" />
+
+             object.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetIsNetworkAvailable">
       <MemberSignature Language="C#" Value="public static bool GetIsNetworkAvailable ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool GetIsNetworkAvailable() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool GetIsNetworkAvailable() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -183,8 +245,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetPhysicalAddress">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.PhysicalAddress GetPhysicalAddress ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Net.NetworkInformation.PhysicalAddress GetPhysicalAddress() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.PhysicalAddress GetPhysicalAddress ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Net.NetworkInformation.PhysicalAddress GetPhysicalAddress() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -206,7 +274,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Net.NetworkInformation.PhysicalAddress" /> object that contains the physical address.</para>
+          <para
+            >A <see
+             cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+
+             object that contains the physical address.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -248,7 +321,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether the network interface is set to only receive data packets.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether the network interface is set to only receive data packets.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -273,8 +351,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The index of the loopback interface is usually 1, but you cannot rely on this. Use the <see cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" /> property to get the correct value.</para>
-          <para>A network interface may have different interface indexes for the IPv4 and IPv6 loopback interface. The <see cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" /> property only returns the IPv4 loopback interface. </para>
+          <para
+            >The index of the loopback interface is usually 1, but you cannot rely on this. Use the <see
+             cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" />
+
+             property to get the correct value.</para
+          >
+          <para
+            >A network interface may have different interface indexes for the IPv4 and IPv6 loopback interface. The <see
+             cref="P:System.Net.NetworkInformation.NetworkInterface.LoopbackInterfaceIndex" />
+
+             property only returns the IPv4 loopback interface. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -304,8 +392,14 @@
       </Docs>
     </Member>
     <Member MemberName="NetworkInterfaceType">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.NetworkInterfaceType NetworkInterfaceType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.NetworkInformation.NetworkInterfaceType NetworkInterfaceType" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.NetworkInterfaceType NetworkInterfaceType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.NetworkInformation.NetworkInterfaceType NetworkInterfaceType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -319,8 +413,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The interface types are described in detail in the <see cref="T:System.Net.NetworkInformation.NetworkInterfaceType" /> enumeration documentation. </para>
-          <para>This property only returns a subset of the possible values defined in the <see cref="T:System.Net.NetworkInformation.NetworkInterfaceType" /> enumeration. The possible values include the following:</para>
+          <para
+            >The interface types are described in detail in the <see
+             cref="T:System.Net.NetworkInformation.NetworkInterfaceType" />
+
+             enumeration documentation. </para
+          >
+          <para
+            >This property only returns a subset of the possible values defined in the <see
+             cref="T:System.Net.NetworkInformation.NetworkInterfaceType" />
+
+             enumeration. The possible values include the following:</para
+          >
           <list type="bullet">
             <item>
               <para>
@@ -366,8 +470,14 @@
       </Docs>
     </Member>
     <Member MemberName="OperationalStatus">
-      <MemberSignature Language="C#" Value="public abstract System.Net.NetworkInformation.OperationalStatus OperationalStatus { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Net.NetworkInformation.OperationalStatus OperationalStatus" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.Net.NetworkInformation.OperationalStatus OperationalStatus { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Net.NetworkInformation.OperationalStatus OperationalStatus"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -381,7 +491,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The operational status values are described in detail in the <see cref="T:System.Net.NetworkInformation.OperationalStatus" /> enumeration documentation.</para>
+          <para
+            >The operational status values are described in detail in the <see
+             cref="T:System.Net.NetworkInformation.OperationalStatus" />
+
+             enumeration documentation.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -414,8 +529,14 @@
       </Docs>
     </Member>
     <Member MemberName="Supports">
-      <MemberSignature Language="C#" Value="public abstract bool Supports (System.Net.NetworkInformation.NetworkInterfaceComponent networkInterfaceComponent);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Supports(valuetype System.Net.NetworkInformation.NetworkInterfaceComponent networkInterfaceComponent) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool Supports (System.Net.NetworkInformation.NetworkInterfaceComponent networkInterfaceComponent);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Supports(valuetype System.Net.NetworkInformation.NetworkInterfaceComponent networkInterfaceComponent) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -425,21 +546,35 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="networkInterfaceComponent" Type="System.Net.NetworkInformation.NetworkInterfaceComponent" />
+        <Parameter
+          Name="networkInterfaceComponent"
+          Type="System.Net.NetworkInformation.NetworkInterfaceComponent"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether the interface supports the specified protocol.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether the interface supports the specified protocol.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if the specified protocol is supported; otherwise, false.</para>
         </returns>
         <param name="networkInterfaceComponent">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Net.NetworkInformation.NetworkInterfaceComponent" /> value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Net.NetworkInformation.NetworkInterfaceComponent" />
+
+           value.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SupportsMulticast">
@@ -462,7 +597,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether the network interface is enabled to receive multicast packets.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+             value that indicates whether the network interface is enabled to receive multicast packets.</para
+          >
         </summary>
       </Docs>
     </Member>

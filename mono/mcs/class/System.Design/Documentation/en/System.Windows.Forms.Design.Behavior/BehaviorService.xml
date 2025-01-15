@@ -16,9 +16,56 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>When the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> is created, it adds a transparent window over the designer frame. The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> can then use this window to render user interface elements, called <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects, as well as catch all mouse messages. In this way, the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> can control designer behavior. </para>
-      <para>The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> class supports a behavior stack, onto which <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> objects can be pushed. When a message is intercepted through the transparent window, the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> can send the message to the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> at the top of the stack. This enables different user interface modes depending on the currently pushed <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />. The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> is used to render all <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects, such as selection borders, sizing handles, and smart tags. The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> also controls many design-time behaviors, such as using snaplines, dragging, and selecting.</para>
-      <para>For more information, see <format type="text/html"><a href="7c60cc41-4324-46b5-b444-b39eda7cb33f">Behavior Service Overview</a></format>.</para>
+      <para
+        >When the <see
+         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+         is created, it adds a transparent window over the designer frame. The <see
+         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+         can then use this window to render user interface elements, called <see
+         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+         objects, as well as catch all mouse messages. In this way, the <see
+         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+         can control designer behavior. </para
+      >
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+         class supports a behavior stack, onto which <see
+         cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+         objects can be pushed. When a message is intercepted through the transparent window, the <see
+         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+         can send the message to the <see
+         cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+         at the top of the stack. This enables different user interface modes depending on the currently pushed <see
+         cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+        . The <see
+         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+         is used to render all <see
+         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+         objects, such as selection borders, sizing handles, and smart tags. The <see
+         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+         also controls many design-time behaviors, such as using snaplines, dragging, and selecting.</para
+      >
+      <para
+        >For more information, see <format
+         type="text/html">
+          <a href="7c60cc41-4324-46b5-b444-b39eda7cb33f">Behavior Service Overview</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +74,10 @@
   </Docs>
   <Members>
     <Member MemberName="Adorners">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection Adorners { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection Adorners { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -39,16 +89,35 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" /> property provides access to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" /> managed by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
+
+             property provides access to the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+             managed by the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AdornerWindowGraphics">
-      <MemberSignature Language="C#" Value="public System.Drawing.Graphics AdornerWindowGraphics { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Graphics AdornerWindowGraphics { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -61,12 +130,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Drawing.Graphics" /> for the adorner window.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Drawing.Graphics" />
+
+             for the adorner window.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AdornerWindowPointToScreen">
-      <MemberSignature Language="C#" Value="public System.Drawing.Point AdornerWindowPointToScreen (System.Drawing.Point p);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Point AdornerWindowPointToScreen (System.Drawing.Point p);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -81,18 +158,37 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Translates a <see cref="T:System.Drawing.Point" /> in the adorner window to screen coordinates.</para>
+          <para
+            >Translates a <see
+             cref="T:System.Drawing.Point" />
+
+             in the adorner window to screen coordinates.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The transformed <see cref="T:System.Drawing.Point" /> value, in screen coordinates.</para>
+          <para
+            >The transformed <see
+             cref="T:System.Drawing.Point" />
+
+             value, in screen coordinates.</para
+          >
         </returns>
         <param name="p">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Point" /> value to transform.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Point" />
+
+           value to transform.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AdornerWindowToScreen">
-      <MemberSignature Language="C#" Value="public System.Drawing.Point AdornerWindowToScreen ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Point AdornerWindowToScreen ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -114,7 +210,10 @@
       </Docs>
     </Member>
     <Member MemberName="BeginDrag">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.Design.Behavior.BehaviorDragDropEventHandler BeginDrag;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.Design.Behavior.BehaviorDragDropEventHandler BeginDrag;"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -125,17 +224,40 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> raises the <see cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.BeginDrag" /> event immediately before it starts a drag-and-drop operation.</para>
-          <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+             raises the <see
+             cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.BeginDrag" />
+
+             event immediately before it starts a drag-and-drop operation.</para
+          >
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> starts a drag-and-drop operation.</para>
+          <para
+            >Occurs when the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+             starts a drag-and-drop operation.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ControlRectInAdornerWindow">
-      <MemberSignature Language="C#" Value="public System.Drawing.Rectangle ControlRectInAdornerWindow (System.Windows.Forms.Control c);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Rectangle ControlRectInAdornerWindow (System.Windows.Forms.Control c);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -149,22 +271,55 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The adorner window is a transparent window that resides on top of the designer's frame. This window is used by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> to intercept all messages. It also serves as a unified canvas on which to paint a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />.</para>
+          <para
+            >The adorner window is a transparent window that resides on top of the designer's frame. This window is used by the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+             to intercept all messages. It also serves as a unified canvas on which to paint a <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the bounding <see cref="T:System.Drawing.Rectangle" /> of a <see cref="T:System.Windows.Forms.Control" />.</para>
+          <para
+            >Returns the bounding <see
+             cref="T:System.Drawing.Rectangle" />
+
+             of a <see
+             cref="T:System.Windows.Forms.Control" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The bounding <see cref="T:System.Drawing.Rectangle" /> of a <see cref="T:System.Windows.Forms.Control" /> translated to the adorner window coordinates.</para>
+          <para
+            >The bounding <see
+             cref="T:System.Drawing.Rectangle" />
+
+             of a <see
+             cref="T:System.Windows.Forms.Control" />
+
+             translated to the adorner window coordinates.</para
+          >
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.Control" /> to translate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.Control" />
+
+           to translate.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ControlToAdornerWindow">
-      <MemberSignature Language="C#" Value="public System.Drawing.Point ControlToAdornerWindow (System.Windows.Forms.Control c);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Point ControlToAdornerWindow (System.Windows.Forms.Control c);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -179,18 +334,40 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the location of a <see cref="T:System.Windows.Forms.Control" /> translated to adorner window coordinates.</para>
+          <para
+            >Returns the location of a <see
+             cref="T:System.Windows.Forms.Control" />
+
+             translated to adorner window coordinates.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Point" /> value indicating the location of <paramref name="c" /> in adorner window coordinates.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Point" />
+
+             value indicating the location of <paramref
+             name="c" />
+
+             in adorner window coordinates.</para
+          >
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.Control" /> to translate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.Control" />
+
+           to translate.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CurrentBehavior">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.Design.Behavior.Behavior CurrentBehavior { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.Design.Behavior.Behavior CurrentBehavior { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -203,7 +380,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> at the top of the behavior stack without removing it.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+             at the top of the behavior stack without removing it.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -220,19 +402,71 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Call <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" /> when you are finished using the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />. The <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" /> method leaves the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> in an unusable state. After calling <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />, you must release all references to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> so the garbage collector can reclaim the memory that the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> was occupying. For more information, see <format type="text/html"><a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a></format> and <format type="text/html"><a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a></format>. </para>
+          <para
+            >Call <see
+             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
+
+             when you are finished using the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            . The <see
+             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
+
+             method leaves the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+             in an unusable state. After calling <see
+             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
+
+            , you must release all references to the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+             so the garbage collector can reclaim the memory that the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+             was occupying. For more information, see <format
+             type="text/html">
+              <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
+            </format>
+
+             and <format
+             type="text/html">
+              <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
+            </format>
+
+            . </para
+          >
           <block subset="none" type="note">
-            <para>Always call <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" /> before you release your last reference to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> object's Finalize method.</para>
+            <para
+              >Always call <see
+               cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
+
+               before you release your last reference to the <see
+               cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
+               cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+               object's Finalize method.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Releases all resources used by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />. </para>
+          <para
+            >Releases all resources used by the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            . </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="EndDrag">
-      <MemberSignature Language="C#" Value="public event System.Windows.Forms.Design.Behavior.BehaviorDragDropEventHandler EndDrag;" />
+      <MemberSignature
+        Language="C#"
+        Value="public event System.Windows.Forms.Design.Behavior.BehaviorDragDropEventHandler EndDrag;"
+      />
       <MemberType>Event</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -243,17 +477,40 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> raises the <see cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" /> event immediately after the drag operation is complete.</para>
-          <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+             raises the <see
+             cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" />
+
+             event immediately after the drag operation is complete.</para
+          >
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Occurs when the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" /> completes a drag operation.</para>
+          <para
+            >Occurs when the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+             completes a drag operation.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetNextBehavior">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.Design.Behavior.Behavior GetNextBehavior (System.Windows.Forms.Design.Behavior.Behavior behavior);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.Design.Behavior.Behavior GetNextBehavior (System.Windows.Forms.Design.Behavior.Behavior behavior);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -268,14 +525,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> immediately after the given <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> in the behavior stack.</para>
+          <para
+            >Returns the <see
+             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+             immediately after the given <see
+             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+             in the behavior stack.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> immediately after <paramref name="behavior" /> in the behavior stack, or null if there is no following behavior.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+             immediately after <paramref
+             name="behavior" />
+
+             in the behavior stack, or null if there is no following behavior.</para
+          >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> preceding the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> to be returned.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+           preceding the <see
+           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+           to be returned.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Invalidate">
@@ -291,16 +573,35 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Calling the <see cref="Overload:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate" /> method forces a refresh of all <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" /> objects and, in turn, all <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" /> objects.</para>
+          <para
+            >Calling the <see
+             cref="Overload:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate" />
+
+             method forces a refresh of all <see
+             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+             objects and, in turn, all <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+             objects.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Invalidates the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />.</para>
+          <para
+            >Invalidates the adorner window of the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Invalidate">
-      <MemberSignature Language="C#" Value="public void Invalidate (System.Drawing.Rectangle rect);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Invalidate (System.Drawing.Rectangle rect);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -314,14 +615,33 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate(System.Drawing.Rectangle)" /> method will force a refresh of all <see cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" /> and, in turn, all <see cref="P:System.Windows.Forms.Design.Behavior.Adorner.Glyphs" />.</para>
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate(System.Drawing.Rectangle)" />
+
+             method will force a refresh of all <see
+             cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
+
+             and, in turn, all <see
+             cref="P:System.Windows.Forms.Design.Behavior.Adorner.Glyphs" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Invalidates, within the adorner window, the specified area of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />.</para>
+          <para
+            >Invalidates, within the adorner window, the specified area of the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            .</para
+          >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The rectangular area to invalidate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The rectangular area to invalidate.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Invalidate">
@@ -339,18 +659,40 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate(System.Drawing.Region)" /> method will force a refresh of all <see cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" /> and, in turn, all <see cref="P:System.Windows.Forms.Design.Behavior.Adorner.Glyphs" />.</para>
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate(System.Drawing.Region)" />
+
+             method will force a refresh of all <see
+             cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
+
+             and, in turn, all <see
+             cref="P:System.Windows.Forms.Design.Behavior.Adorner.Glyphs" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Invalidates, within the adorner window, the specified area of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />.</para>
+          <para
+            >Invalidates, within the adorner window, the specified area of the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            .</para
+          >
         </summary>
         <param name="r">
-          <attribution license="cc4" from="Microsoft" modified="false" />The region to invalidate.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The region to invalidate.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="MapAdornerWindowPoint">
-      <MemberSignature Language="C#" Value="public System.Drawing.Point MapAdornerWindowPoint (IntPtr handle, System.Drawing.Point pt);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Point MapAdornerWindowPoint (IntPtr handle, System.Drawing.Point pt);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -370,16 +712,33 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Drawing.Point" /> in the adorner window coordinates.</para>
+          <para
+            >A <see
+             cref="T:System.Drawing.Point" />
+
+             in the adorner window coordinates.</para
+          >
         </returns>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />An adorner window's handle.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An adorner window's handle.</param
+        >
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Drawing.Point" /> in a handle's coordinate system.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Drawing.Point" />
+
+           in a handle's coordinate system.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="PopBehavior">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.Design.Behavior.Behavior PopBehavior (System.Windows.Forms.Design.Behavior.Behavior behavior);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.Design.Behavior.Behavior PopBehavior (System.Windows.Forms.Design.Behavior.Behavior behavior);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -393,22 +752,49 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes the current <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> from the behavior stack internally maintained by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />.</para>
+          <para
+            >Removes the current <see
+             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+             from the behavior stack internally maintained by the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes and returns the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> at the top of the stack.</para>
+          <para
+            >Removes and returns the <see
+             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+             at the top of the stack.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> that was removed from the stack.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+             that was removed from the stack.</para
+          >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> to remove from the stack.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+           to remove from the stack.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="PushBehavior">
-      <MemberSignature Language="C#" Value="public void PushBehavior (System.Windows.Forms.Design.Behavior.Behavior behavior);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void PushBehavior (System.Windows.Forms.Design.Behavior.Behavior behavior);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -422,18 +808,40 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushBehavior(System.Windows.Forms.Design.Behavior.Behavior)" /> method is often performed by means of a hit-tested <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />.</para>
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushBehavior(System.Windows.Forms.Design.Behavior.Behavior)" />
+
+             method is often performed by means of a hit-tested <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Pushes a <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> onto the behavior stack.</para>
+          <para
+            >Pushes a <see
+             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+             onto the behavior stack.</para
+          >
         </summary>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> to push.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+           to push.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="PushCaptureBehavior">
-      <MemberSignature Language="C#" Value="public void PushCaptureBehavior (System.Windows.Forms.Design.Behavior.Behavior behavior);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void PushCaptureBehavior (System.Windows.Forms.Design.Behavior.Behavior behavior);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -447,18 +855,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Pushing a capture behavior is often done through a hit-tested <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />. If a behavior calls the <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushCaptureBehavior(System.Windows.Forms.Design.Behavior.Behavior)" /> method and mouse capture is lost, the behavior's <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnLoseCapture(System.Windows.Forms.Design.Behavior.Glyph,System.EventArgs)" /> method is called.</para>
+          <para
+            >Pushing a capture behavior is often done through a hit-tested <see
+             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            . If a behavior calls the <see
+             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushCaptureBehavior(System.Windows.Forms.Design.Behavior.Behavior)" />
+
+             method and mouse capture is lost, the behavior's <see
+             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnLoseCapture(System.Windows.Forms.Design.Behavior.Glyph,System.EventArgs)" />
+
+             method is called.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Pushes a <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> onto the behavior stack and assigns mouse capture to the behavior.</para>
+          <para
+            >Pushes a <see
+             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+             onto the behavior stack and assigns mouse capture to the behavior.</para
+          >
         </summary>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" /> to push.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+
+           to push.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ScreenToAdornerWindow">
-      <MemberSignature Language="C#" Value="public System.Drawing.Point ScreenToAdornerWindow (System.Drawing.Point p);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Drawing.Point ScreenToAdornerWindow (System.Drawing.Point p);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -473,14 +906,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Translates a point in screen coordinates into the adorner window coordinates of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />.</para>
+          <para
+            >Translates a point in screen coordinates into the adorner window coordinates of the <see
+             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The transformed <see cref="T:System.Drawing.Point" /> value, in adorner window coordinates.</para>
+          <para
+            >The transformed <see
+             cref="T:System.Drawing.Point" />
+
+             value, in adorner window coordinates.</para
+          >
         </returns>
         <param name="p">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Drawing.Point" /> value to transform.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Drawing.Point" />
+
+           value to transform.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Synchronize">
@@ -495,7 +944,14 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>For more information about handling events, see <format type="text/html"><a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a></format>. </para>
+          <para
+            >For more information about handling events, see <format
+             type="text/html">
+              <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

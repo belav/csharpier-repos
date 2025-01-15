@@ -13,7 +13,6 @@
     <Compile Include="$(TestSourceFolder)..\..\..\..\System.Runtime.Serialization.Xml\tests\SerializationTypes.RuntimeOnly.cs" />
     <Compile Include="$(TestSourceFolder)..\XmlSerializerTests.cs" />
     <Compile Include="$(TestSourceFolder)..\XmlSerializerTests.RuntimeOnly.cs" />
-
     <TrimmerRootDescriptor Include="$(ILLinkDescriptorsPath)ILLink.Descriptors.Serialization.xml" />
   </ItemGroup>
 </Project>

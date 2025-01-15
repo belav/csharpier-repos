@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TypeDelegator" FullName="System.Reflection.TypeDelegator">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class TypeDelegator : System.Reflection.TypeInfo" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable beforefieldinit TypeDelegator extends System.Reflection.TypeInfo implements class System.Reflection.IReflectableType" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class TypeDelegator : System.Reflection.TypeInfo"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable beforefieldinit TypeDelegator extends System.Reflection.TypeInfo implements class System.Reflection.IReflectableType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -13,8 +20,7 @@
   <Base>
     <BaseTypeName>System.Reflection.TypeInfo</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Attributes>
     <Attribute>
       <AttributeName>System.Runtime.InteropServices.ComVisible(true)</AttributeName>
@@ -23,26 +29,193 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Derive from this type and override only those members you have to provide customization in, plus any members that are required by your program and not already implemented by <see cref="T:System.Reflection.TypeDelegator" />.</para>
+      <para
+        >Derive from this type and override only those members you have to provide customization in, plus any members that are required by your program and not already implemented by <see
+         cref="T:System.Reflection.TypeDelegator" />
+
+        .</para
+      >
       <para>
-        <see cref="T:System.Reflection.TypeDelegator" /> derives from <see cref="T:System.Type" /> and implements most of the properties and methods of <see cref="T:System.Type" />. For each member it implements, <see cref="T:System.Reflection.TypeDelegator" /> automatically delegates to the corresponding member of an internal <see cref="T:System.Type" /> object, which is supplied as an argument to the constructor. This internal <see cref="T:System.Type" /> object is exposed to deriving classes by the protected <see cref="F:System.Reflection.TypeDelegator.typeImpl" /> field. </para>
+        <see cref="T:System.Reflection.TypeDelegator" />
+
+         derives from <see
+         cref="T:System.Type" />
+
+         and implements most of the properties and methods of <see
+         cref="T:System.Type" />
+
+        . For each member it implements, <see
+         cref="T:System.Reflection.TypeDelegator" />
+
+         automatically delegates to the corresponding member of an internal <see
+         cref="T:System.Type" />
+
+         object, which is supplied as an argument to the constructor. This internal <see
+         cref="T:System.Type" />
+
+         object is exposed to deriving classes by the protected <see
+         cref="F:System.Reflection.TypeDelegator.typeImpl" />
+
+         field. </para
+      >
       <block subset="none" type="note">
-        <para>Some members of <see cref="T:System.Reflection.TypeDelegator" /> have implementations even though the members themselves are simply inherited from <see cref="T:System.Type" />. In these cases, the implementation is provided by an overridden protected method that has a name that ends in "Impl". For example, the implementation for all overloads of the <see cref="Overload:System.Reflection.TypeDelegator.GetMethod" /> method is supplied by the overridden <see cref="M:System.Reflection.TypeDelegator.GetMethodImpl(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Reflection.CallingConventions,System.Type[],System.Reflection.ParameterModifier[])" /> method. The implementation for inherited properties such as <see cref="P:System.Type.IsPublic" /> and <see cref="P:System.Type.IsNestedAssembly" /> is provided by the overridden <see cref="M:System.Reflection.TypeDelegator.GetAttributeFlagsImpl" /> method. </para>
+        <para
+          >Some members of <see
+           cref="T:System.Reflection.TypeDelegator" />
+
+           have implementations even though the members themselves are simply inherited from <see
+           cref="T:System.Type" />
+
+          . In these cases, the implementation is provided by an overridden protected method that has a name that ends in "Impl". For example, the implementation for all overloads of the <see
+           cref="Overload:System.Reflection.TypeDelegator.GetMethod" />
+
+           method is supplied by the overridden <see
+           cref="M:System.Reflection.TypeDelegator.GetMethodImpl(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Reflection.CallingConventions,System.Type[],System.Reflection.ParameterModifier[])" />
+
+           method. The implementation for inherited properties such as <see
+           cref="P:System.Type.IsPublic" />
+
+           and <see
+           cref="P:System.Type.IsNestedAssembly" />
+
+           is provided by the overridden <see
+           cref="M:System.Reflection.TypeDelegator.GetAttributeFlagsImpl" />
+
+           method. </para
+        >
       </block>
-      <para>Deriving classes can provide a public constructor that takes a <see cref="T:System.Type" /> object as its parameter and simply passes that object to the <see cref="M:System.Reflection.TypeDelegator.#ctor(System.Type)" /> constructor, or can set the internal <see cref="T:System.Type" /> object in some other way. </para>
-      <para>If a deriving class uses a member that is not implemented by <see cref="T:System.Reflection.TypeDelegator" />, it must override that member and provide an implementation. The simplest implementation is to call the corresponding member on the internal <see cref="T:System.Type" /> object exposed by the <see cref="F:System.Reflection.TypeDelegator.typeImpl" /> field, but you can provide any implementation your application requires. It is not necessary to override these members if they are not used by your application or by library functions your application calls (for example, by the <see cref="M:System.CodeDom.CodeTypeReference.#ctor(System.Type)" /> constructor).</para>
-      <para>The following virtual methods (Overridable methods in Visual Basic) of <see cref="T:System.Type" /> are not implemented by <see cref="T:System.Reflection.TypeDelegator" />: <see cref="M:System.Type.MakeGenericType(System.Type[])" />, <see cref="M:System.Type.GetGenericTypeDefinition" />, <see cref="M:System.Type.GetGenericArguments" />, <see cref="M:System.Type.GetGenericParameterConstraints" />, <see cref="M:System.Type.MakeArrayType" />, <see cref="M:System.Type.MakeByRefType" />, <see cref="M:System.Type.MakePointerType" />, <see cref="M:System.Type.GetEnumNames" />, <see cref="M:System.Type.GetEnumValues" />, <see cref="M:System.Type.GetEnumUnderlyingType" />, <see cref="M:System.Type.GetTypeCodeImpl" />, <see cref="M:System.Type.IsEnumDefined(System.Object)" />, <see cref="M:System.Type.IsEquivalentTo(System.Type)" />.</para>
-      <para>The following virtual properties (Overridable properties in Visual Basic) of <see cref="T:System.Type" /> are not implemented by <see cref="T:System.Reflection.TypeDelegator" />: <see cref="P:System.Type.IsGenericType" />, <see cref="P:System.Type.IsGenericTypeDefinition" />, <see cref="P:System.Type.IsGenericParameter" />, <see cref="P:System.Type.ContainsGenericParameters" />, <see cref="P:System.Type.DeclaringMethod" />, <see cref="P:System.Type.GenericParameterAttributes" />, <see cref="P:System.Type.GenericParameterPosition" />, <see cref="P:System.Type.IsSecurityCritical" />, <see cref="P:System.Type.IsSecuritySafeCritical" />, <see cref="P:System.Type.IsSecurityTransparent" />.</para>
+      <para
+        >Deriving classes can provide a public constructor that takes a <see
+         cref="T:System.Type" />
+
+         object as its parameter and simply passes that object to the <see
+         cref="M:System.Reflection.TypeDelegator.#ctor(System.Type)" />
+
+         constructor, or can set the internal <see
+         cref="T:System.Type" />
+
+         object in some other way. </para
+      >
+      <para
+        >If a deriving class uses a member that is not implemented by <see
+         cref="T:System.Reflection.TypeDelegator" />
+
+        , it must override that member and provide an implementation. The simplest implementation is to call the corresponding member on the internal <see
+         cref="T:System.Type" />
+
+         object exposed by the <see
+         cref="F:System.Reflection.TypeDelegator.typeImpl" />
+
+         field, but you can provide any implementation your application requires. It is not necessary to override these members if they are not used by your application or by library functions your application calls (for example, by the <see
+         cref="M:System.CodeDom.CodeTypeReference.#ctor(System.Type)" />
+
+         constructor).</para
+      >
+      <para
+        >The following virtual methods (Overridable methods in Visual Basic) of <see
+         cref="T:System.Type" />
+
+         are not implemented by <see
+         cref="T:System.Reflection.TypeDelegator" />
+
+        : <see
+         cref="M:System.Type.MakeGenericType(System.Type[])" />
+
+        , <see
+         cref="M:System.Type.GetGenericTypeDefinition" />
+
+        , <see
+         cref="M:System.Type.GetGenericArguments" />
+
+        , <see
+         cref="M:System.Type.GetGenericParameterConstraints" />
+
+        , <see
+         cref="M:System.Type.MakeArrayType" />
+
+        , <see
+         cref="M:System.Type.MakeByRefType" />
+
+        , <see
+         cref="M:System.Type.MakePointerType" />
+
+        , <see
+         cref="M:System.Type.GetEnumNames" />
+
+        , <see
+         cref="M:System.Type.GetEnumValues" />
+
+        , <see
+         cref="M:System.Type.GetEnumUnderlyingType" />
+
+        , <see
+         cref="M:System.Type.GetTypeCodeImpl" />
+
+        , <see
+         cref="M:System.Type.IsEnumDefined(System.Object)" />
+
+        , <see
+         cref="M:System.Type.IsEquivalentTo(System.Type)" />
+
+        .</para
+      >
+      <para
+        >The following virtual properties (Overridable properties in Visual Basic) of <see
+         cref="T:System.Type" />
+
+         are not implemented by <see
+         cref="T:System.Reflection.TypeDelegator" />
+
+        : <see
+         cref="P:System.Type.IsGenericType" />
+
+        , <see
+         cref="P:System.Type.IsGenericTypeDefinition" />
+
+        , <see
+         cref="P:System.Type.IsGenericParameter" />
+
+        , <see
+         cref="P:System.Type.ContainsGenericParameters" />
+
+        , <see
+         cref="P:System.Type.DeclaringMethod" />
+
+        , <see
+         cref="P:System.Type.GenericParameterAttributes" />
+
+        , <see
+         cref="P:System.Type.GenericParameterPosition" />
+
+        , <see
+         cref="P:System.Type.IsSecurityCritical" />
+
+        , <see
+         cref="P:System.Type.IsSecuritySafeCritical" />
+
+        , <see
+         cref="P:System.Type.IsSecurityTransparent" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Wraps a <see cref="T:System.Type" /> object and delegates methods to that Type.</para>
+      <para
+        >Wraps a <see
+         cref="T:System.Type" />
+
+         object and delegates methods to that Type.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected TypeDelegator ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -55,13 +228,21 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Reflection.TypeDelegator" /> class with default properties.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Reflection.TypeDelegator" />
+
+             class with default properties.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public TypeDelegator (Type delegatingType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type delegatingType) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type delegatingType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -79,15 +260,32 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Reflection.TypeDelegator" /> class specifying the encapsulating instance.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Reflection.TypeDelegator" />
+
+             class specifying the encapsulating instance.</para
+          >
         </summary>
         <param name="delegatingType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The instance of the class <see cref="T:System.Type" /> that encapsulates the call to the method of an object. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The instance of the class <see
+           cref="T:System.Type" />
+
+           that encapsulates the call to the method of an object. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Assembly">
-      <MemberSignature Language="C#" Value="public override System.Reflection.Assembly Assembly { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Reflection.Assembly Assembly" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.Assembly Assembly { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Reflection.Assembly Assembly"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -110,7 +308,10 @@
       </Docs>
     </Member>
     <Member MemberName="AssemblyQualifiedName">
-      <MemberSignature Language="C#" Value="public override string AssemblyQualifiedName { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override string AssemblyQualifiedName { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance string AssemblyQualifiedName" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -146,7 +347,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The base type is the type from which this type directly inherits. Since the <see cref="T:System.Object" /> class type is the ultimate base class of all the other types, it is the only type that does not have a base type. In this case, null is returned as the base type of the Object type.</para>
+          <para
+            >The base type is the type from which this type directly inherits. Since the <see
+             cref="T:System.Object" />
+
+             class type is the ultimate base class of all the other types, it is the only type that does not have a base type. In this case, null is returned as the base type of the Object type.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -179,8 +385,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetAttributeFlagsImpl">
-      <MemberSignature Language="C#" Value="protected override System.Reflection.TypeAttributes GetAttributeFlagsImpl ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance valuetype System.Reflection.TypeAttributes GetAttributeFlagsImpl() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Reflection.TypeAttributes GetAttributeFlagsImpl ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance valuetype System.Reflection.TypeAttributes GetAttributeFlagsImpl() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -207,8 +419,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetConstructorImpl">
-      <MemberSignature Language="C#" Value="protected override System.Reflection.ConstructorInfo GetConstructorImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Reflection.CallingConventions callConvention, Type[] types, System.Reflection.ParameterModifier[] modifiers);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Reflection.ConstructorInfo GetConstructorImpl(valuetype System.Reflection.BindingFlags bindingAttr, class System.Reflection.Binder binder, valuetype System.Reflection.CallingConventions callConvention, class System.Type[] types, valuetype System.Reflection.ParameterModifier[] modifiers) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Reflection.ConstructorInfo GetConstructorImpl (System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Reflection.CallingConventions callConvention, Type[] types, System.Reflection.ParameterModifier[] modifiers);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.Reflection.ConstructorInfo GetConstructorImpl(valuetype System.Reflection.BindingFlags bindingAttr, class System.Reflection.Binder binder, valuetype System.Reflection.CallingConventions callConvention, class System.Type[] types, valuetype System.Reflection.ParameterModifier[] modifiers) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -228,7 +446,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="callConvention" /> parameter indicates the calling convention for the entry point. If no calling convention is specified, a default <see cref="T:System.Reflection.CallingConventions" /> value of Standard is used.</para>
+          <para
+            >The <paramref
+             name="callConvention" />
+
+             parameter indicates the calling convention for the entry point. If no calling convention is specified, a default <see
+             cref="T:System.Reflection.CallingConventions" />
+
+             value of Standard is used.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -239,20 +465,50 @@
           <para>A ConstructorInfo object for the method that matches the specified criteria, or null if a match cannot be found.</para>
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref name="binder" /> is null, the default binder is used. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref
+           name="binder" />
+
+           is null, the default binder is used. </param
+        >
         <param name="callConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />The calling conventions. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The calling conventions. </param
+        >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type Type containing a list of the parameter number, order, and types. Types cannot be null; use an appropriate GetMethod method or an empty array to search for a method without parameters. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type Type containing a list of the parameter number, order, and types. Types cannot be null; use an appropriate GetMethod method or an empty array to search for a method without parameters. </param
+        >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type ParameterModifier having the same length as the <paramref name="types" /> array, whose elements represent the attributes associated with the parameters of the method to get. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type ParameterModifier having the same length as the <paramref
+           name="types" />
+
+           array, whose elements represent the attributes associated with the parameters of the method to get. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetConstructors">
-      <MemberSignature Language="C#" Value="public override System.Reflection.ConstructorInfo[] GetConstructors (System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.ConstructorInfo[] GetConstructors(valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.ConstructorInfo[] GetConstructors (System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.ConstructorInfo[] GetConstructors(valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -277,19 +533,39 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of <see cref="T:System.Reflection.ConstructorInfo" /> objects representing constructors defined for the type wrapped by the current <see cref="T:System.Reflection.TypeDelegator" />.</para>
+          <para
+            >Returns an array of <see
+             cref="T:System.Reflection.ConstructorInfo" />
+
+             objects representing constructors defined for the type wrapped by the current <see
+             cref="T:System.Reflection.TypeDelegator" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An array of type ConstructorInfo containing the specified constructors defined for this class. If no constructors are defined, an empty array is returned. Depending on the value of a specified parameter, only public constructors or both public and non-public constructors will be returned.</para>
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
-      <MemberSignature Language="C#" Value="public override object[] GetCustomAttributes (bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object[] GetCustomAttributes(bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object[] GetCustomAttributes (bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object[] GetCustomAttributes(bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -313,12 +589,21 @@
           <para>An array of objects containing all the custom attributes defined for this type.</para>
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether to search this type's inheritance chain to find the attributes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether to search this type's inheritance chain to find the attributes. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetCustomAttributes">
-      <MemberSignature Language="C#" Value="public override object[] GetCustomAttributes (Type attributeType, bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object[] GetCustomAttributes(class System.Type attributeType, bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object[] GetCustomAttributes (Type attributeType, bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object[] GetCustomAttributes(class System.Type attributeType, bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -340,17 +625,31 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of objects containing the custom attributes defined in this type that match the <paramref name="attributeType" /> parameter, specifying whether to search the type's inheritance chain, or null if no custom attributes are defined on this type.</para>
+          <para
+            >An array of objects containing the custom attributes defined in this type that match the <paramref
+             name="attributeType" />
+
+             parameter, specifying whether to search the type's inheritance chain, or null if no custom attributes are defined on this type.</para
+          >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of custom attributes identified by type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of custom attributes identified by type.</param
+        >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether to search this type's inheritance chain to find the attributes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether to search this type's inheritance chain to find the attributes. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetElementType">
       <MemberSignature Language="C#" Value="public override Type GetElementType ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Type GetElementType() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Type GetElementType() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -365,17 +664,36 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the <see cref="T:System.Type" /> of the object encompassed or referred to by the current array, pointer or ByRef.</para>
+          <para
+            >Returns the <see
+             cref="T:System.Type" />
+
+             of the object encompassed or referred to by the current array, pointer or ByRef.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Type" /> of the object encompassed or referred to by the current array, pointer or ByRef, or null if the current <see cref="T:System.Type" /> is not an array, a pointer or a ByRef.</para>
+          <para
+            >The <see
+             cref="T:System.Type" />
+
+             of the object encompassed or referred to by the current array, pointer or ByRef, or null if the current <see
+             cref="T:System.Type" />
+
+             is not an array, a pointer or a ByRef.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="GetEvent">
-      <MemberSignature Language="C#" Value="public override System.Reflection.EventInfo GetEvent (string name, System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.EventInfo GetEvent(string name, valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.EventInfo GetEvent (string name, System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.EventInfo GetEvent(string name, valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -392,7 +710,18 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <paramref name="bindingAttr" /> is <see cref="T:System.Reflection.BindingFlags" />.IgnoreCase, the case of the <paramref name="name" /> parameter is ignored.</para>
+          <para
+            >If <paramref
+             name="bindingAttr" />
+
+             is <see
+             cref="T:System.Reflection.BindingFlags" />
+
+            .IgnoreCase, the case of the <paramref
+             name="name" />
+
+             parameter is ignored.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -400,17 +729,37 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Reflection.EventInfo" /> object representing the event declared or inherited by this type with the specified name. This method returns null if no such event is found.</para>
+          <para
+            >An <see
+             cref="T:System.Reflection.EventInfo" />
+
+             object representing the event declared or inherited by this type with the specified name. This method returns null if no such event is found.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the event to get. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the event to get. </param
+        >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
-      <MemberSignature Language="C#" Value="public override System.Reflection.EventInfo[] GetEvents ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.EventInfo[] GetEvents() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.EventInfo[] GetEvents ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.EventInfo[] GetEvents() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -425,7 +774,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of <see cref="T:System.Reflection.EventInfo" /> objects representing all the public events declared or inherited by the current TypeDelegator.</para>
+          <para
+            >Returns an array of <see
+             cref="T:System.Reflection.EventInfo" />
+
+             objects representing all the public events declared or inherited by the current TypeDelegator.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -434,8 +788,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetEvents">
-      <MemberSignature Language="C#" Value="public override System.Reflection.EventInfo[] GetEvents (System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.EventInfo[] GetEvents(valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.EventInfo[] GetEvents (System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.EventInfo[] GetEvents(valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -452,19 +812,41 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the events specified in <paramref name="bindingAttr" /> that are declared or inherited by the current TypeDelegator.</para>
+          <para
+            >Returns the events specified in <paramref
+             name="bindingAttr" />
+
+             that are declared or inherited by the current TypeDelegator.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of type EventInfo containing the events specified in <paramref name="bindingAttr" />. If there are no events, an empty array is returned.</para>
+          <para
+            >An array of type EventInfo containing the events specified in <paramref
+             name="bindingAttr" />
+
+            . If there are no events, an empty array is returned.</para
+          >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetField">
-      <MemberSignature Language="C#" Value="public override System.Reflection.FieldInfo GetField (string name, System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.FieldInfo GetField(string name, valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.FieldInfo GetField (string name, System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.FieldInfo GetField(string name, valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -481,25 +863,53 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use a <paramref name="bindingAttr" /> of <see cref="T:System.Reflection.BindingFlags" />.NonPublic to return all public and nonpublic fields. Use BindingFlags.IgnoreCase to ignore the case of the fields, as the search is case-sensitive by default.</para>
+          <para
+            >Use a <paramref
+             name="bindingAttr" />
+
+             of <see
+             cref="T:System.Reflection.BindingFlags" />
+
+            .NonPublic to return all public and nonpublic fields. Use BindingFlags.IgnoreCase to ignore the case of the fields, as the search is case-sensitive by default.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.Reflection.FieldInfo" /> object representing the field with the specified name.</para>
+          <para
+            >Returns a <see
+             cref="T:System.Reflection.FieldInfo" />
+
+             object representing the field with the specified name.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A FieldInfo object representing the field declared or inherited by this TypeDelegator with the specified name. Returns null if no such field is found.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the field to find. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the field to find. </param
+        >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetFields">
-      <MemberSignature Language="C#" Value="public override System.Reflection.FieldInfo[] GetFields (System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.FieldInfo[] GetFields(valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.FieldInfo[] GetFields (System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.FieldInfo[] GetFields(valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -515,24 +925,57 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Reflection.TypeDelegator.GetFields(System.Reflection.BindingFlags)" /> method does not return fields in a particular order, such as alphabetical or declaration order. Your code must not depend on the order in which fields are returned, because that order can vary.</para>
-          <para>Use a <paramref name="bindingAttr" /> of <see cref="T:System.Reflection.BindingFlags" />.NonPublic to return all public and nonpublic fields.</para>
+          <para
+            >The <see
+             cref="M:System.Reflection.TypeDelegator.GetFields(System.Reflection.BindingFlags)" />
+
+             method does not return fields in a particular order, such as alphabetical or declaration order. Your code must not depend on the order in which fields are returned, because that order can vary.</para
+          >
+          <para
+            >Use a <paramref
+             name="bindingAttr" />
+
+             of <see
+             cref="T:System.Reflection.BindingFlags" />
+
+            .NonPublic to return all public and nonpublic fields.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of <see cref="T:System.Reflection.FieldInfo" /> objects representing the data fields defined for the type wrapped by the current <see cref="T:System.Reflection.TypeDelegator" />.</para>
+          <para
+            >Returns an array of <see
+             cref="T:System.Reflection.FieldInfo" />
+
+             objects representing the data fields defined for the type wrapped by the current <see
+             cref="T:System.Reflection.TypeDelegator" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An array of type FieldInfo containing the fields declared or inherited by the current TypeDelegator. An empty array is returned if there are no matched fields.</para>
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetInterface">
-      <MemberSignature Language="C#" Value="public override Type GetInterface (string name, bool ignoreCase);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Type GetInterface(string name, bool ignoreCase) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override Type GetInterface (string name, bool ignoreCase);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Type GetInterface(string name, bool ignoreCase) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -550,21 +993,38 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the specified interface implemented by the type wrapped by the current <see cref="T:System.Reflection.TypeDelegator" />.</para>
+          <para
+            >Returns the specified interface implemented by the type wrapped by the current <see
+             cref="T:System.Reflection.TypeDelegator" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A Type object representing the interface implemented (directly or indirectly) by the current class with the fully qualified name matching the specified name. If no interface that matches name is found, null is returned.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The fully qualified name of the interface implemented by the current class. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The fully qualified name of the interface implemented by the current class. </param
+        >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />true if the case is to be ignored; otherwise, false. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true if the case is to be ignored; otherwise, false. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetInterfaceMap">
-      <MemberSignature Language="C#" Value="public override System.Reflection.InterfaceMapping GetInterfaceMap (Type interfaceType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance valuetype System.Reflection.InterfaceMapping GetInterfaceMap(class System.Type interfaceType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.InterfaceMapping GetInterfaceMap (Type interfaceType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance valuetype System.Reflection.InterfaceMapping GetInterfaceMap(class System.Type interfaceType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -593,15 +1053,32 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Reflection.InterfaceMapping" /> object representing the interface mapping for <paramref name="interfaceType" />.</para>
+          <para
+            >An <see
+             cref="T:System.Reflection.InterfaceMapping" />
+
+             object representing the interface mapping for <paramref
+             name="interfaceType" />
+
+            .</para
+          >
         </returns>
         <param name="interfaceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> of the interface to retrieve a mapping of. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           of the interface to retrieve a mapping of. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetInterfaces">
       <MemberSignature Language="C#" Value="public override Type[] GetInterfaces ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Type[] GetInterfaces() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Type[] GetInterfaces() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -625,8 +1102,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetMember">
-      <MemberSignature Language="C#" Value="public override System.Reflection.MemberInfo[] GetMember (string name, System.Reflection.MemberTypes type, System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.MemberInfo[] GetMember(string name, valuetype System.Reflection.MemberTypes type, valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.MemberInfo[] GetMember (string name, System.Reflection.MemberTypes type, System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.MemberInfo[] GetMember(string name, valuetype System.Reflection.MemberTypes type, valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -644,27 +1127,64 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <paramref name="bindingAttr" /> is <see cref="T:System.Reflection.BindingFlags" />.NonPublic, all the members will be considered. If there are no matches, an empty array is returned.</para>
+          <para
+            >If <paramref
+             name="bindingAttr" />
+
+             is <see
+             cref="T:System.Reflection.BindingFlags" />
+
+            .NonPublic, all the members will be considered. If there are no matches, an empty array is returned.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns members (properties, methods, constructors, fields, events, and nested types) specified by the given <paramref name="name" />, <paramref name="type" />, and <paramref name="bindingAttr" />.</para>
+          <para
+            >Returns members (properties, methods, constructors, fields, events, and nested types) specified by the given <paramref
+             name="name" />
+
+            , <paramref
+             name="type" />
+
+            , and <paramref
+             name="bindingAttr" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An array of type MemberInfo containing all the members of the current class and its base class meeting the specified criteria.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member to get. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the member to get. </param
+        >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of members to get. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of members to get. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetMembers">
-      <MemberSignature Language="C#" Value="public override System.Reflection.MemberInfo[] GetMembers (System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.MemberInfo[] GetMembers(valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.MemberInfo[] GetMembers (System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.MemberInfo[] GetMembers(valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -680,23 +1200,53 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <paramref name="bindingAttr" /> is <see cref="T:System.Reflection.BindingFlags" />.NonPublic, all the members will be considered. If there are no matches, an empty array is returned.</para>
+          <para
+            >If <paramref
+             name="bindingAttr" />
+
+             is <see
+             cref="T:System.Reflection.BindingFlags" />
+
+            .NonPublic, all the members will be considered. If there are no matches, an empty array is returned.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns members specified by <paramref name="bindingAttr" />.</para>
+          <para
+            >Returns members specified by <paramref
+             name="bindingAttr" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An array of type MemberInfo containing all the members of the current class and its base classes that meet the <paramref name="bindingAttr" /> filter.</para>
+          <para
+            >An array of type MemberInfo containing all the members of the current class and its base classes that meet the <paramref
+             name="bindingAttr" />
+
+             filter.</para
+          >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetMethodImpl">
-      <MemberSignature Language="C#" Value="protected override System.Reflection.MethodInfo GetMethodImpl (string name, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Reflection.CallingConventions callConvention, Type[] types, System.Reflection.ParameterModifier[] modifiers);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Reflection.MethodInfo GetMethodImpl(string name, valuetype System.Reflection.BindingFlags bindingAttr, class System.Reflection.Binder binder, valuetype System.Reflection.CallingConventions callConvention, class System.Type[] types, valuetype System.Reflection.ParameterModifier[] modifiers) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Reflection.MethodInfo GetMethodImpl (string name, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, System.Reflection.CallingConventions callConvention, Type[] types, System.Reflection.ParameterModifier[] modifiers);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.Reflection.MethodInfo GetMethodImpl(string name, valuetype System.Reflection.BindingFlags bindingAttr, class System.Reflection.Binder binder, valuetype System.Reflection.CallingConventions callConvention, class System.Type[] types, valuetype System.Reflection.ParameterModifier[] modifiers) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -717,7 +1267,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="callConvention" /> parameter indicates the calling convention for the entry point. If no <see cref="T:System.Reflection.CallingConventions" /> is specified, a default CallingConventions value of Standard is used.</para>
+          <para
+            >The <paramref
+             name="callConvention" />
+
+             parameter indicates the calling convention for the entry point. If no <see
+             cref="T:System.Reflection.CallingConventions" />
+
+             is specified, a default CallingConventions value of Standard is used.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -728,22 +1286,55 @@
           <para>A MethodInfoInfo object for the implementation method that matches the specified criteria, or null if a match cannot be found.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The method name. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The method name. </param
+        >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref name="binder" /> is null, the default binder is used. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If <paramref
+           name="binder" />
+
+           is null, the default binder is used. </param
+        >
         <param name="callConvention">
-          <attribution license="cc4" from="Microsoft" modified="false" />The calling conventions. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The calling conventions. </param
+        >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type Type containing a list of the parameter number, order, and types. Types cannot be null; use an appropriate GetMethod method or an empty array to search for a method without parameters. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type Type containing a list of the parameter number, order, and types. Types cannot be null; use an appropriate GetMethod method or an empty array to search for a method without parameters. </param
+        >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type ParameterModifier having the same length as the <paramref name="types" /> array, whose elements represent the attributes associated with the parameters of the method to get. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type ParameterModifier having the same length as the <paramref
+           name="types" />
+
+           array, whose elements represent the attributes associated with the parameters of the method to get. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetMethods">
-      <MemberSignature Language="C#" Value="public override System.Reflection.MethodInfo[] GetMethods (System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.MethodInfo[] GetMethods(valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.MethodInfo[] GetMethods (System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.MethodInfo[] GetMethods(valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -760,19 +1351,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of <see cref="T:System.Reflection.MethodInfo" /> objects representing specified methods of the type wrapped by the current <see cref="T:System.Reflection.TypeDelegator" />.</para>
+          <para
+            >Returns an array of <see
+             cref="T:System.Reflection.MethodInfo" />
+
+             objects representing specified methods of the type wrapped by the current <see
+             cref="T:System.Reflection.TypeDelegator" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An array of MethodInfo objects representing the methods defined on this TypeDelegator.</para>
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetNestedType">
-      <MemberSignature Language="C#" Value="public override Type GetNestedType (string name, System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Type GetNestedType(string name, valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override Type GetNestedType (string name, System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Type GetNestedType(string name, valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -790,21 +1401,47 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a nested type specified by <paramref name="name" /> and in <paramref name="bindingAttr" /> that are declared or inherited by the type represented by the current <see cref="T:System.Reflection.TypeDelegator" />.</para>
+          <para
+            >Returns a nested type specified by <paramref
+             name="name" />
+
+             and in <paramref
+             name="bindingAttr" />
+
+             that are declared or inherited by the type represented by the current <see
+             cref="T:System.Reflection.TypeDelegator" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A Type object representing the nested type.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The nested type's name. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The nested type's name. </param
+        >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetNestedTypes">
-      <MemberSignature Language="C#" Value="public override Type[] GetNestedTypes (System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Type[] GetNestedTypes(valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override Type[] GetNestedTypes (System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Type[] GetNestedTypes(valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -821,19 +1458,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the nested types specified in <paramref name="bindingAttr" /> that are declared or inherited by the type wrapped by the current <see cref="T:System.Reflection.TypeDelegator" />.</para>
+          <para
+            >Returns the nested types specified in <paramref
+             name="bindingAttr" />
+
+             that are declared or inherited by the type wrapped by the current <see
+             cref="T:System.Reflection.TypeDelegator" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An array of type Type containing the nested types.</para>
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetProperties">
-      <MemberSignature Language="C#" Value="public override System.Reflection.PropertyInfo[] GetProperties (System.Reflection.BindingFlags bindingAttr);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Reflection.PropertyInfo[] GetProperties(valuetype System.Reflection.BindingFlags bindingAttr) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.PropertyInfo[] GetProperties (System.Reflection.BindingFlags bindingAttr);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Reflection.PropertyInfo[] GetProperties(valuetype System.Reflection.BindingFlags bindingAttr) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -850,19 +1507,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an array of <see cref="T:System.Reflection.PropertyInfo" /> objects representing properties of the type wrapped by the current <see cref="T:System.Reflection.TypeDelegator" />.</para>
+          <para
+            >Returns an array of <see
+             cref="T:System.Reflection.PropertyInfo" />
+
+             objects representing properties of the type wrapped by the current <see
+             cref="T:System.Reflection.TypeDelegator" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An array of PropertyInfo objects representing properties defined on this TypeDelegator.</para>
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetPropertyImpl">
-      <MemberSignature Language="C#" Value="protected override System.Reflection.PropertyInfo GetPropertyImpl (string name, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, Type returnType, Type[] types, System.Reflection.ParameterModifier[] modifiers);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Reflection.PropertyInfo GetPropertyImpl(string name, valuetype System.Reflection.BindingFlags bindingAttr, class System.Reflection.Binder binder, class System.Type returnType, class System.Type[] types, valuetype System.Reflection.ParameterModifier[] modifiers) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Reflection.PropertyInfo GetPropertyImpl (string name, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, Type returnType, Type[] types, System.Reflection.ParameterModifier[] modifiers);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.Reflection.PropertyInfo GetPropertyImpl(string name, valuetype System.Reflection.BindingFlags bindingAttr, class System.Reflection.Binder binder, class System.Type returnType, class System.Type[] types, valuetype System.Reflection.ParameterModifier[] modifiers) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -888,20 +1565,52 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.Reflection.PropertyInfo" /> object for the property that matches the specified criteria, or null if a match cannot be found.</para>
+          <para
+            >A <see
+             cref="T:System.Reflection.PropertyInfo" />
+
+             object for the property that matches the specified criteria, or null if a match cannot be found.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property to get. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property to get. </param
+        >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see cref="T:System.Reflection.BindingFlags" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A bitmask that affects the way in which the search is conducted. The value is a combination of zero or more bit flags from <see
+           cref="T:System.Reflection.BindingFlags" />
+
+          . </param
+        >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref name="binder" /> is null, the default binder is used. See <see cref="T:System.Reflection.Binder" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref
+           name="binder" />
+
+           is null, the default binder is used. See <see
+           cref="T:System.Reflection.Binder" />
+
+          . </param
+        >
         <param name="returnType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The return type of the property. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The return type of the property. </param
+        >
         <param name="types">
-          <attribution license="cc4" from="Microsoft" modified="false" />A list of parameter types. The list represents the number, order, and types of the parameters. Types cannot be null; use an appropriate GetMethod method or an empty array to search for a method without parameters. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A list of parameter types. The list represents the number, order, and types of the parameters. Types cannot be null; use an appropriate GetMethod method or an empty array to search for a method without parameters. </param
+        >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of the same length as types with elements that represent the attributes associated with the parameters of the method to get. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of the same length as types with elements that represent the attributes associated with the parameters of the method to get. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="GUID">
@@ -930,7 +1639,10 @@
     </Member>
     <Member MemberName="HasElementTypeImpl">
       <MemberSignature Language="C#" Value="protected override bool HasElementTypeImpl ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool HasElementTypeImpl() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool HasElementTypeImpl() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -945,17 +1657,36 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the current <see cref="T:System.Type" /> encompasses or refers to another type; that is, whether the current <see cref="T:System.Type" /> is an array, a pointer or a ByRef.</para>
+          <para
+            >Gets a value indicating whether the current <see
+             cref="T:System.Type" />
+
+             encompasses or refers to another type; that is, whether the current <see
+             cref="T:System.Type" />
+
+             is an array, a pointer or a ByRef.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Type" /> is an array, a pointer or a ByRef; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Type" />
+
+             is an array, a pointer or a ByRef; otherwise, false.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="InvokeMember">
-      <MemberSignature Language="C#" Value="public override object InvokeMember (string name, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, object target, object[] args, System.Reflection.ParameterModifier[] modifiers, System.Globalization.CultureInfo culture, string[] namedParameters);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object InvokeMember(string name, valuetype System.Reflection.BindingFlags invokeAttr, class System.Reflection.Binder binder, object target, object[] args, valuetype System.Reflection.ParameterModifier[] modifiers, class System.Globalization.CultureInfo culture, string[] namedParameters) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override object InvokeMember (string name, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, object target, object[] args, System.Reflection.ParameterModifier[] modifiers, System.Globalization.CultureInfo culture, string[] namedParameters);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object InvokeMember(string name, valuetype System.Reflection.BindingFlags invokeAttr, class System.Reflection.Binder binder, object target, object[] args, valuetype System.Reflection.ParameterModifier[] modifiers, class System.Globalization.CultureInfo culture, string[] namedParameters) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -988,14 +1719,32 @@
             </item>
           </list>
           <para>The binder will find all the matching methods. These methods are found based upon the type of binding requested (BindingFlags.MethodInvoke, BindingFlags.GetProperties, and so on). The set of methods is filtered by the name, number of arguments, and a set of search modifiers defined in the binder.</para>
-          <para>After the method is selected, it will be invoked. Accessibility is checked at that point. The search may control which set of methods are searched based upon the accessibility attribute associated with the method. The <see cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" /> method is responsible for selecting the method to be invoked. The default binder selects the most specific match.</para>
+          <para
+            >After the method is selected, it will be invoked. Accessibility is checked at that point. The search may control which set of methods are searched based upon the accessibility attribute associated with the method. The <see
+             cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" />
+
+             method is responsible for selecting the method to be invoked. The default binder selects the most specific match.</para
+          >
           <block subset="none" type="note">
             <para>Access restrictions are ignored for fully trusted code. That is, private constructors, methods, fields, and properties can be accessed and invoked using reflection whenever the code is fully trusted.</para>
           </block>
           <para>Currently, InvokeMember performs the Microsoft .NET Framework reflection semantics for every type of object.</para>
-          <para>If the member specified by name is an array and the BindingFlags.GetField flag is set on <paramref name="invokeAttr" />, the <paramref name="args" /> array specifies the elements whose values are to be returned. For example, the following call through Type object t returns the value of the first element of the string array MyArray, which is a member of the calling object: </para>
+          <para
+            >If the member specified by name is an array and the BindingFlags.GetField flag is set on <paramref
+             name="invokeAttr" />
+
+            , the <paramref
+             name="args" />
+
+             array specifies the elements whose values are to be returned. For example, the following call through Type object t returns the value of the first element of the string array MyArray, which is a member of the calling object: </para
+          >
           <para>String ret = (String) t.InvokeMember ("MyArray", BindingFlags.GetField, null, this, new Variant[]{0}); </para>
-          <para>You can use InvokeMember to set one or more elements of a member array. All elements are set to the same value. The <paramref name="args" /> array must be formatted as follows: </para>
+          <para
+            >You can use InvokeMember to set one or more elements of a member array. All elements are set to the same value. The <paramref
+             name="args" />
+
+             array must be formatted as follows: </para
+          >
           <code>{index1,
     index2,, value}</code>
           <para>For example, to set the first member of MyArray from the previous example, the syntax is as follows: </para>
@@ -1011,26 +1760,80 @@
           <para>An Object representing the return value of the invoked member.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the member to invoke. This may be a constructor, method, property, or field. If an empty string ("") is passed, the default member is invoked. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the member to invoke. This may be a constructor, method, property, or field. If an empty string ("") is passed, the default member is invoked. </param
+        >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />The invocation attribute. This must be one of the following <see cref="T:System.Reflection.BindingFlags" /> : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag must be set. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The invocation attribute. This must be one of the following <see
+           cref="T:System.Reflection.BindingFlags" />
+
+           : InvokeMethod, CreateInstance, Static, GetField, SetField, GetProperty, or SetProperty. A suitable invocation attribute must be specified. If a static member is to be invoked, the Static flag must be set. </param
+        >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref name="binder" /> is null, the default binder is used. See <see cref="T:System.Reflection.Binder" />. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref
+           name="binder" />
+
+           is null, the default binder is used. See <see
+           cref="T:System.Reflection.Binder" />
+
+          . </param
+        >
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object on which to invoke the specified member. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object on which to invoke the specified member. </param
+        >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type Object that contains the number, order, and type of the parameters of the member to be invoked. If <paramref name="args" /> contains an uninitialized Object, it is treated as empty, which, with the default binder, can be widened to 0, 0.0 or a string. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type Object that contains the number, order, and type of the parameters of the member to be invoked. If <paramref
+           name="args" />
+
+           contains an uninitialized Object, it is treated as empty, which, with the default binder, can be widened to 0, 0.0 or a string. </param
+        >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type ParameterModifer that is the same length as <paramref name="args" />, with elements that represent the attributes associated with the arguments of the member to be invoked. A parameter has attributes associated with it in the member's signature. For ByRef, use ParameterModifer.ByRef, and for none, use ParameterModifer.None. The default binder does exact matching on these. Attributes such as In and InOut are not used in binding, and can be viewed using ParameterInfo. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type ParameterModifer that is the same length as <paramref
+           name="args" />
+
+          , with elements that represent the attributes associated with the arguments of the member to be invoked. A parameter has attributes associated with it in the member's signature. For ByRef, use ParameterModifer.ByRef, and for none, use ParameterModifer.None. The default binder does exact matching on these. Attributes such as In and InOut are not used in binding, and can be viewed using ParameterInfo. </param
+        >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />An instance of CultureInfo used to govern the coercion of types. This is necessary, for example, to convert a string that represents 1000 to a Double value, since 1000 is represented differently by different cultures. If <paramref name="culture" /> is null, the CultureInfo for the current thread's CultureInfo is used. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An instance of CultureInfo used to govern the coercion of types. This is necessary, for example, to convert a string that represents 1000 to a Double value, since 1000 is represented differently by different cultures. If <paramref
+           name="culture" />
+
+           is null, the CultureInfo for the current thread's CultureInfo is used. </param
+        >
         <param name="namedParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type String containing parameter names that match up, starting at element zero, with the <paramref name="args" /> array. There must be no holes in the array. If <paramref name="args" />. Length is greater than <paramref name="namedParameters" />. Length, the remaining parameters are filled in order. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type String containing parameter names that match up, starting at element zero, with the <paramref
+           name="args" />
+
+           array. There must be no holes in the array. If <paramref
+           name="args" />
+
+          . Length is greater than <paramref
+           name="namedParameters" />
+
+          . Length, the remaining parameters are filled in order. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsArrayImpl">
       <MemberSignature Language="C#" Value="protected override bool IsArrayImpl ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool IsArrayImpl() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool IsArrayImpl() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1045,17 +1848,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the <see cref="T:System.Type" /> is an array.</para>
+          <para
+            >Returns a value that indicates whether the <see
+             cref="T:System.Type" />
+
+             is an array.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Type" /> is an array; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Type" />
+
+             is an array; otherwise, false.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="IsAssignableFrom">
-      <MemberSignature Language="C#" Value="public override bool IsAssignableFrom (System.Reflection.TypeInfo typeInfo);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsAssignableFrom(class System.Reflection.TypeInfo typeInfo) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool IsAssignableFrom (System.Reflection.TypeInfo typeInfo);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsAssignableFrom(class System.Reflection.TypeInfo typeInfo) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -1077,12 +1896,18 @@
           <para>true if the specified type can be assigned to this type; otherwise, false.</para>
         </returns>
         <param name="typeInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type to check.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type to check.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsByRefImpl">
       <MemberSignature Language="C#" Value="protected override bool IsByRefImpl ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool IsByRefImpl() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool IsByRefImpl() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1097,17 +1922,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the <see cref="T:System.Type" /> is passed by reference.</para>
+          <para
+            >Returns a value that indicates whether the <see
+             cref="T:System.Type" />
+
+             is passed by reference.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Type" /> is passed by reference; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Type" />
+
+             is passed by reference; otherwise, false.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="IsCOMObjectImpl">
       <MemberSignature Language="C#" Value="protected override bool IsCOMObjectImpl ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool IsCOMObjectImpl() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool IsCOMObjectImpl() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1122,16 +1960,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the <see cref="T:System.Type" /> is a COM object.</para>
+          <para
+            >Returns a value that indicates whether the <see
+             cref="T:System.Type" />
+
+             is a COM object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Type" /> is a COM object; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Type" />
+
+             is a COM object; otherwise, false.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="IsConstructedGenericType">
-      <MemberSignature Language="C#" Value="public override bool IsConstructedGenericType { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool IsConstructedGenericType { get; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance bool IsConstructedGenericType" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -1150,8 +2001,14 @@
       </Docs>
     </Member>
     <Member MemberName="IsDefined">
-      <MemberSignature Language="C#" Value="public override bool IsDefined (Type attributeType, bool inherit);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool IsDefined(class System.Type attributeType, bool inherit) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool IsDefined (Type attributeType, bool inherit);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool IsDefined(class System.Type attributeType, bool inherit) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1169,21 +2026,40 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates whether a custom attribute identified by <paramref name="attributeType" /> is defined.</para>
+          <para
+            >Indicates whether a custom attribute identified by <paramref
+             name="attributeType" />
+
+             is defined.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if a custom attribute identified by <paramref name="attributeType" /> is defined; otherwise, false.</para>
+          <para
+            >true if a custom attribute identified by <paramref
+             name="attributeType" />
+
+             is defined; otherwise, false.</para
+          >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />Specifies whether to search this type's inheritance chain to find the attributes. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Specifies whether to search this type's inheritance chain to find the attributes. </param
+        >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of custom attributes identified by type. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of custom attributes identified by type. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IsPointerImpl">
       <MemberSignature Language="C#" Value="protected override bool IsPointerImpl ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool IsPointerImpl() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool IsPointerImpl() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1198,17 +2074,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the <see cref="T:System.Type" /> is a pointer.</para>
+          <para
+            >Returns a value that indicates whether the <see
+             cref="T:System.Type" />
+
+             is a pointer.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Type" /> is a pointer; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Type" />
+
+             is a pointer; otherwise, false.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="IsPrimitiveImpl">
       <MemberSignature Language="C#" Value="protected override bool IsPrimitiveImpl ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool IsPrimitiveImpl() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool IsPrimitiveImpl() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1223,17 +2112,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a value that indicates whether the <see cref="T:System.Type" /> is one of the primitive types.</para>
+          <para
+            >Returns a value that indicates whether the <see
+             cref="T:System.Type" />
+
+             is one of the primitive types.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>true if the <see cref="T:System.Type" /> is one of the primitive types; otherwise, false.</para>
+          <para
+            >true if the <see
+             cref="T:System.Type" />
+
+             is one of the primitive types; otherwise, false.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="IsValueTypeImpl">
       <MemberSignature Language="C#" Value="protected override bool IsValueTypeImpl ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool IsValueTypeImpl() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance bool IsValueTypeImpl() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1272,7 +2174,14 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The tokens obtained using this property can be passed to the unmanaged reflection API. For more information, see <format type="text/html"><a href="0c5bb9de-0cf6-438d-ba47-134e6c775fb8">The Unmanaged Reflection API</a></format>. </para>
+          <para
+            >The tokens obtained using this property can be passed to the unmanaged reflection API. For more information, see <format
+             type="text/html">
+              <a href="0c5bb9de-0cf6-438d-ba47-134e6c775fb8">The Unmanaged Reflection API</a>
+            </format>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1281,8 +2190,14 @@
       </Docs>
     </Member>
     <Member MemberName="Module">
-      <MemberSignature Language="C#" Value="public override System.Reflection.Module Module { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Reflection.Module Module" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Reflection.Module Module { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Reflection.Module Module"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1320,7 +2235,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A string containing the name of the current TypeDelegator. Only the simple name, not the fully qualified name, is returned. To get the name and the path, use <see cref="P:System.Reflection.TypeDelegator.FullName" />.</para>
+          <para
+            >A string containing the name of the current TypeDelegator. Only the simple name, not the fully qualified name, is returned. To get the name and the path, use <see
+             cref="P:System.Reflection.TypeDelegator.FullName" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1344,7 +2264,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property gets a string containing the namespace of the current TypeDelegator. For example, if the TypeDelegator is <see cref="T:System.Reflection.TypeFilter" />, the returned namespace is <see cref="N:System.Reflection" />.</para>
+          <para
+            >This property gets a string containing the namespace of the current TypeDelegator. For example, if the TypeDelegator is <see
+             cref="T:System.Reflection.TypeFilter" />
+
+            , the returned namespace is <see
+             cref="N:System.Reflection" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1353,8 +2281,14 @@
       </Docs>
     </Member>
     <Member MemberName="TypeHandle">
-      <MemberSignature Language="C#" Value="public override RuntimeTypeHandle TypeHandle { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.RuntimeTypeHandle TypeHandle" />
+      <MemberSignature
+        Language="C#"
+        Value="public override RuntimeTypeHandle TypeHandle { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.RuntimeTypeHandle TypeHandle"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1399,7 +2333,10 @@
     </Member>
     <Member MemberName="UnderlyingSystemType">
       <MemberSignature Language="C#" Value="public override Type UnderlyingSystemType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Type UnderlyingSystemType" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Type UnderlyingSystemType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1414,7 +2351,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the underlying <see cref="T:System.Type" /> that represents the implemented type.</para>
+          <para
+            >Gets the underlying <see
+             cref="T:System.Type" />
+
+             that represents the implemented type.</para
+          >
         </summary>
       </Docs>
     </Member>

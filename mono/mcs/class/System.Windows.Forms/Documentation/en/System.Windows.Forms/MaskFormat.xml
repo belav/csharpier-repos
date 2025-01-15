@@ -12,11 +12,27 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by <see cref="P:System.Windows.Forms.MaskedTextBox.CutCopyMaskFormat" /> and <see cref="P:System.Windows.Forms.MaskedTextBox.TextMaskFormat" /> to control how text is returned—in the first case, by performing a cut and copy operation, and in the second place, by using the <see cref="P:System.Windows.Forms.MaskedTextBox.Text" /> property.</para>
+      <para
+        >This enumeration is used by <see
+         cref="P:System.Windows.Forms.MaskedTextBox.CutCopyMaskFormat" />
+
+         and <see
+         cref="P:System.Windows.Forms.MaskedTextBox.TextMaskFormat" />
+
+         to control how text is returned—in the first case, by performing a cut and copy operation, and in the second place, by using the <see
+         cref="P:System.Windows.Forms.MaskedTextBox.Text" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines how to format the text inside of a <see cref="T:System.Windows.Forms.MaskedTextBox" />.</para>
+      <para
+        >Defines how to format the text inside of a <see
+         cref="T:System.Windows.Forms.MaskedTextBox" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>

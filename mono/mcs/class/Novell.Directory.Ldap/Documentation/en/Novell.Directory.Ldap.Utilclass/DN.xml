@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -81,7 +80,10 @@
       </Docs>
     </Member>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public bool Equals(Novell.Directory.Ldap.Utilclass.DN toDN)" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Equals(Novell.Directory.Ldap.Utilclass.DN toDN)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -126,7 +128,10 @@
       </Docs>
     </Member>
     <Member MemberName="isDescendantOf">
-      <MemberSignature Language="C#" Value="public virtual bool isDescendantOf(Novell.Directory.Ldap.Utilclass.DN containerDN)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool isDescendantOf(Novell.Directory.Ldap.Utilclass.DN containerDN)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -142,7 +147,10 @@
       </Docs>
     </Member>
     <Member MemberName="addRDN">
-      <MemberSignature Language="C#" Value="public virtual void addRDN(Novell.Directory.Ldap.Utilclass.RDN rdn)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void addRDN(Novell.Directory.Ldap.Utilclass.RDN rdn)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -157,7 +165,10 @@
       </Docs>
     </Member>
     <Member MemberName="addRDNToFront">
-      <MemberSignature Language="C#" Value="public virtual void addRDNToFront(Novell.Directory.Ldap.Utilclass.RDN rdn)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void addRDNToFront(Novell.Directory.Ldap.Utilclass.RDN rdn)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -172,7 +183,10 @@
       </Docs>
     </Member>
     <Member MemberName="addRDNToBack">
-      <MemberSignature Language="C#" Value="public virtual void addRDNToBack(Novell.Directory.Ldap.Utilclass.RDN rdn)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void addRDNToBack(Novell.Directory.Ldap.Utilclass.RDN rdn)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -187,7 +201,10 @@
       </Docs>
     </Member>
     <Member MemberName="RDNs">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.ArrayList RDNs { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.ArrayList RDNs { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ArrayList</ReturnType>
@@ -199,7 +216,10 @@
       </Docs>
     </Member>
     <Member MemberName="Parent">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Utilclass.DN Parent { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Utilclass.DN Parent { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Utilclass.DN</ReturnType>

@@ -30,7 +30,10 @@
       </tr>
     </table>
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
   <div id="GHTSubTest4" testname="System.Web.UI.WebControls.TableCell: Set True.">
     <table border="0">
@@ -62,7 +65,10 @@
       </tr>
     </table>
     <span>
-      <br />True</span>
+      <br />
+
+      True</span
+    >
   </div>
   <div id="GHTSubTest7" testname="System.Web.UI.WebControls.DataListItem: Set True.">
     <table id="ctrl_6" cellspacing="0" border="0" style="border-collapse:collapse">

@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <clause number="8.7.9" title="Destructors" informative="true">
   <paragraph>A destructor is a member that implements the actions required to destruct an instance of a class. Destructors cannot have parameters, they cannot have accessibility modifiers, and they cannot be called explicitly. The destructor for an instance is called automatically during garbage collection. </paragraph>
-  <paragraph>The example <code_example><![CDATA[
+  <paragraph
+    >The example <code_example
+    >
+      <![CDATA[
 using System;  
 class Point  
 {  
@@ -17,5 +20,9 @@ class Point
       return string.Format("({0}, {1})", x, y);  
    }  
 }  
-]]></code_example>shows a Point class with a destructor. </paragraph>
+]]>
+    </code_example>
+
+    shows a Point class with a destructor. </paragraph
+  >
 </clause>

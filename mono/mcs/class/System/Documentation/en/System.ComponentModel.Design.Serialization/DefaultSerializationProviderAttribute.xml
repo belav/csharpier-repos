@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DefaultSerializationProviderAttribute" FullName="System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute">
-  <TypeSignature Language="C#" Value="public sealed class DefaultSerializationProviderAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit DefaultSerializationProviderAttribute extends System.Attribute" />
+<Type
+  Name="DefaultSerializationProviderAttribute"
+  FullName="System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class DefaultSerializationProviderAttribute : Attribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit DefaultSerializationProviderAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,17 +28,33 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>To be a default serialization provider, a class must implement the <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" /> interface and have an empty constructor. The class itself can be internal to the assembly. This class cannot be inherited.</para>
+      <para
+        >To be a default serialization provider, a class must implement the <see
+         cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" />
+
+         interface and have an empty constructor. The class itself can be internal to the assembly. This class cannot be inherited.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" /> attribute is placed on a serializer to indicate the class to use as a default provider of that type of serializer. </para>
+      <para
+        >The <see
+         cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" />
+
+         attribute is placed on a serializer to indicate the class to use as a default provider of that type of serializer. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DefaultSerializationProviderAttribute (string providerTypeName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string providerTypeName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DefaultSerializationProviderAttribute (string providerTypeName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string providerTypeName) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -42,15 +67,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" /> class with the named provider type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" />
+
+             class with the named provider type.</para
+          >
         </summary>
         <param name="providerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the serialization provider type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the serialization provider type.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DefaultSerializationProviderAttribute (Type providerType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type providerType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public DefaultSerializationProviderAttribute (Type providerType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type providerType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -63,10 +102,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" /> class with the given provider type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" />
+
+             class with the given provider type.</para
+          >
         </summary>
         <param name="providerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> of the serialization provider.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           of the serialization provider.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ProviderTypeName">

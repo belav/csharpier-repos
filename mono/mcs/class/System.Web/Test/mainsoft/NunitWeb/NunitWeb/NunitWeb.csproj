@@ -56,8 +56,7 @@
     <Compile Include="WebTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <EmbeddedResource Include="Resources\MyPage.aspx.cs">
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MyPage.aspx.cs"></EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Web.config" />
@@ -65,14 +64,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\My.master" />
-    <EmbeddedResource Include="Resources\MyPageWithMaster.aspx"/>
-    <EmbeddedResource Include ="Resources\Global.asax">
+    <EmbeddedResource Include="Resources\MyPageWithMaster.aspx" />
+    <EmbeddedResource Include="Resources\Global.asax">
       <LogicalName>Global.asax</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include ="Resources\My.ashx">
+    <EmbeddedResource Include="Resources\My.ashx">
       <LogicalName>My.ashx</LogicalName>
     </EmbeddedResource>
-
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MainsoftWebTest\HtmlCompare.csproj">

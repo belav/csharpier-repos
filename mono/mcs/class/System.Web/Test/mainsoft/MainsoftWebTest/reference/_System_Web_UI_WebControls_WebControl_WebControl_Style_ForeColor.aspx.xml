@@ -13,7 +13,14 @@
     <input value="" style="color:transparent" type="submit" name="ctrl_3" id="ctrl_3" />
   </div>
   <div id="GHTSubTest5" testname="System.Web.UI.WebControls.Button: Set color and CssClass.">
-    <input value="" style="color:forestgreen" type="submit" name="ctrl_4" class="CssClass1" id="ctrl_4" />
+    <input
+      value=""
+      style="color:forestgreen"
+      type="submit"
+      name="ctrl_4"
+      class="CssClass1"
+      id="ctrl_4"
+    />
   </div>
   <div id="GHTSubTest6" testname="System.Web.UI.WebControls.CheckBox: Set color once">
     <span style="color:cyan">
@@ -41,24 +48,19 @@
     </span>
   </div>
   <div id="GHTSubTest11" testname="System.Web.UI.WebControls.HyperLink: Set color once">
-    <a id="ctrl_10" style="color:cyan">
-    </a>
+    <a id="ctrl_10" style="color:cyan"></a>
   </div>
   <div id="GHTSubTest12" testname="System.Web.UI.WebControls.HyperLink: Set color twice">
-    <a id="ctrl_11" style="color:purple">
-    </a>
+    <a id="ctrl_11" style="color:purple"></a>
   </div>
   <div id="GHTSubTest13" testname="System.Web.UI.WebControls.HyperLink: Set empty color.">
-    <a id="ctrl_12">
-    </a>
+    <a id="ctrl_12"></a>
   </div>
   <div id="GHTSubTest14" testname="System.Web.UI.WebControls.HyperLink: Set transparent color.">
-    <a id="ctrl_13" style="color:transparent">
-    </a>
+    <a id="ctrl_13" style="color:transparent"></a>
   </div>
   <div id="GHTSubTest15" testname="System.Web.UI.WebControls.HyperLink: Set color and CssClass.">
-    <a id="ctrl_14" style="color:forestgreen" class="CssClass1">
-    </a>
+    <a id="ctrl_14" style="color:forestgreen" class="CssClass1"></a>
   </div>
   <div id="GHTSubTest16" testname="System.Web.UI.WebControls.Image: Set color once">
     <img id="ctrl_15" alt="" border="0" style="color:cyan" />
@@ -88,67 +90,65 @@
     <input id="ctrl_23" alt="" border="0" style="color:transparent" type="image" name="ctrl_23" />
   </div>
   <div id="GHTSubTest25" testname="System.Web.UI.WebControls.ImageButton: Set color and CssClass.">
-    <input id="ctrl_24" alt="" border="0" style="color:forestgreen" type="image" name="ctrl_24" class="CssClass1" />
+    <input
+      id="ctrl_24"
+      alt=""
+      border="0"
+      style="color:forestgreen"
+      type="image"
+      name="ctrl_24"
+      class="CssClass1"
+    />
   </div>
   <div id="GHTSubTest26" testname="System.Web.UI.WebControls.Label: Set color once">
-    <span id="ctrl_25" style="color:cyan">
-    </span>
+    <span id="ctrl_25" style="color:cyan"></span>
   </div>
   <div id="GHTSubTest27" testname="System.Web.UI.WebControls.Label: Set color twice">
-    <span id="ctrl_26" style="color:purple">
-    </span>
+    <span id="ctrl_26" style="color:purple"></span>
   </div>
   <div id="GHTSubTest28" testname="System.Web.UI.WebControls.Label: Set empty color.">
-    <span id="ctrl_27">
-    </span>
+    <span id="ctrl_27"></span>
   </div>
   <div id="GHTSubTest29" testname="System.Web.UI.WebControls.Label: Set transparent color.">
-    <span id="ctrl_28" style="color:transparent">
-    </span>
+    <span id="ctrl_28" style="color:transparent"></span>
   </div>
   <div id="GHTSubTest30" testname="System.Web.UI.WebControls.Label: Set color and CssClass.">
-    <span id="ctrl_29" style="color:forestgreen" class="CssClass1">
-    </span>
+    <span id="ctrl_29" style="color:forestgreen" class="CssClass1"></span>
   </div>
   <div id="GHTSubTest31" testname="System.Web.UI.WebControls.LinkButton: Set color once">
-    <a href="javascript:__doPostBack('ctrl_30','')" id="ctrl_30" style="color:cyan">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_30','')" id="ctrl_30" style="color:cyan"></a>
   </div>
   <div id="GHTSubTest32" testname="System.Web.UI.WebControls.LinkButton: Set color twice">
-    <a href="javascript:__doPostBack('ctrl_31','')" id="ctrl_31" style="color:purple">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_31','')" id="ctrl_31" style="color:purple"></a>
   </div>
   <div id="GHTSubTest33" testname="System.Web.UI.WebControls.LinkButton: Set empty color.">
-    <a href="javascript:__doPostBack('ctrl_32','')" id="ctrl_32">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_32','')" id="ctrl_32"></a>
   </div>
   <div id="GHTSubTest34" testname="System.Web.UI.WebControls.LinkButton: Set transparent color.">
-    <a href="javascript:__doPostBack('ctrl_33','')" id="ctrl_33" style="color:transparent">
-    </a>
+    <a href="javascript:__doPostBack('ctrl_33','')" id="ctrl_33" style="color:transparent"></a>
   </div>
   <div id="GHTSubTest35" testname="System.Web.UI.WebControls.LinkButton: Set color and CssClass.">
-    <a href="javascript:__doPostBack('ctrl_34','')" id="ctrl_34" style="color:forestgreen" class="CssClass1">
-    </a>
+    <a
+      href="javascript:__doPostBack('ctrl_34','')"
+      id="ctrl_34"
+      style="color:forestgreen"
+      class="CssClass1"
+    ></a>
   </div>
   <div id="GHTSubTest36" testname="System.Web.UI.WebControls.Panel: Set color once">
-    <div id="ctrl_35" style="color:cyan">
-    </div>
+    <div id="ctrl_35" style="color:cyan"></div>
   </div>
   <div id="GHTSubTest37" testname="System.Web.UI.WebControls.Panel: Set color twice">
-    <div id="ctrl_36" style="color:purple">
-    </div>
+    <div id="ctrl_36" style="color:purple"></div>
   </div>
   <div id="GHTSubTest38" testname="System.Web.UI.WebControls.Panel: Set empty color.">
-    <div id="ctrl_37">
-    </div>
+    <div id="ctrl_37"></div>
   </div>
   <div id="GHTSubTest39" testname="System.Web.UI.WebControls.Panel: Set transparent color.">
-    <div id="ctrl_38" style="color:transparent">
-    </div>
+    <div id="ctrl_38" style="color:transparent"></div>
   </div>
   <div id="GHTSubTest40" testname="System.Web.UI.WebControls.Panel: Set color and CssClass.">
-    <div id="ctrl_39" style="color:forestgreen" class="CssClass1">
-    </div>
+    <div id="ctrl_39" style="color:forestgreen" class="CssClass1"></div>
   </div>
   <div id="GHTSubTest41" testname="System.Web.UI.WebControls.RadioButton: Set color once">
     <span style="color:cyan">
@@ -192,93 +192,213 @@
   </div>
   <div id="GHTSubTest51" testname="System.Web.UI.WebControls.DropDownList: Set color once">
     <select id="ctrl_50" style="color:cyan" name="ctrl_50">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest52" testname="System.Web.UI.WebControls.DropDownList: Set color twice">
     <select id="ctrl_51" style="color:purple" name="ctrl_51">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest53" testname="System.Web.UI.WebControls.DropDownList: Set empty color.">
     <select id="ctrl_52" name="ctrl_52">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest54" testname="System.Web.UI.WebControls.DropDownList: Set transparent color.">
     <select id="ctrl_53" style="color:transparent" name="ctrl_53">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest55" testname="System.Web.UI.WebControls.DropDownList: Set color and CssClass.">
     <select id="ctrl_54" style="color:forestgreen" name="ctrl_54" class="CssClass1">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest56" testname="System.Web.UI.WebControls.ListBox: Set color once">
     <select id="ctrl_55" style="color:cyan" size="4" name="ctrl_55">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest57" testname="System.Web.UI.WebControls.ListBox: Set color twice">
     <select id="ctrl_56" style="color:purple" size="4" name="ctrl_56">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest58" testname="System.Web.UI.WebControls.ListBox: Set empty color.">
     <select id="ctrl_57" size="4" name="ctrl_57">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest59" testname="System.Web.UI.WebControls.ListBox: Set transparent color.">
     <select id="ctrl_58" style="color:transparent" size="4" name="ctrl_58">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest60" testname="System.Web.UI.WebControls.ListBox: Set color and CssClass.">
     <select id="ctrl_59" style="color:forestgreen" size="4" name="ctrl_59" class="CssClass1">
-      <option value="1" />aaaa
-		<option value="2" />bbbb
-		<option value="3" />cccc
-		<option value="4" />dddd
+      <option value="1" />
 
-	</select>
+      aaaa
+		<option
+       value="2" />
+
+      bbbb
+		<option
+       value="3" />
+
+      cccc
+		<option
+       value="4" />
+
+      dddd
+
+	</select
+    >
   </div>
   <div id="GHTSubTest61" testname="System.Web.UI.WebControls.RadioButtonList: Set color once">
     <table id="ctrl_60" style="color:cyan" border="0">
@@ -364,7 +484,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest64" testname="System.Web.UI.WebControls.RadioButtonList: Set transparent color.">
+  <div
+    id="GHTSubTest64"
+    testname="System.Web.UI.WebControls.RadioButtonList: Set transparent color."
+  >
     <table id="ctrl_63" style="color:transparent" border="0">
       <tr>
         <td>
@@ -392,7 +515,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest65" testname="System.Web.UI.WebControls.RadioButtonList: Set color and CssClass.">
+  <div
+    id="GHTSubTest65"
+    testname="System.Web.UI.WebControls.RadioButtonList: Set color and CssClass."
+  >
     <table id="ctrl_64" style="color:forestgreen" border="0" class="CssClass1">
       <tr>
         <td>
@@ -561,7 +687,13 @@
     </table>
   </div>
   <div id="GHTSubTest71" testname="System.Web.UI.WebControls.DataGrid: Set color once">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;color:cyan" rules="all" id="ctrl_70">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;color:cyan"
+      rules="all"
+      id="ctrl_70"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -585,7 +717,13 @@
     </table>
   </div>
   <div id="GHTSubTest72" testname="System.Web.UI.WebControls.DataGrid: Set color twice">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;color:purple" rules="all" id="ctrl_71">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;color:purple"
+      rules="all"
+      id="ctrl_71"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -633,7 +771,13 @@
     </table>
   </div>
   <div id="GHTSubTest74" testname="System.Web.UI.WebControls.DataGrid: Set transparent color.">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;color:transparent" rules="all" id="ctrl_73">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;color:transparent"
+      rules="all"
+      id="ctrl_73"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>
@@ -657,7 +801,14 @@
     </table>
   </div>
   <div id="GHTSubTest75" testname="System.Web.UI.WebControls.DataGrid: Set color and CssClass.">
-    <table border="1" cellspacing="0" style="border-collapse:collapse;color:forestgreen" rules="all" class="CssClass1" id="ctrl_74">
+    <table
+      border="1"
+      cellspacing="0"
+      style="border-collapse:collapse;color:forestgreen"
+      rules="all"
+      class="CssClass1"
+      id="ctrl_74"
+    >
       <tr>
         <td>Id</td>
         <td>Description</td>

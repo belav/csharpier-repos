@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DBDataPermissionAttribute" FullName="System.Data.Common.DBDataPermissionAttribute">
-  <TypeSignature Language="C#" Value="public abstract class DBDataPermissionAttribute : System.Security.Permissions.CodeAccessSecurityAttribute" Maintainer="auto" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class DBDataPermissionAttribute : System.Security.Permissions.CodeAccessSecurityAttribute"
+    Maintainer="auto"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -27,7 +31,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected DBDataPermissionAttribute (System.Security.Permissions.SecurityAction action);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected DBDataPermissionAttribute (System.Security.Permissions.SecurityAction action);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -37,10 +44,18 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.Common.DBDataPermissionAttribute" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.Common.DBDataPermissionAttribute" />
+
+            .</para
+          >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the security action values representing an action that can be performed by declarative security.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the security action values representing an action that can be performed by declarative security.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -53,8 +68,7 @@
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'bool'</value>
         <remarks>To be added</remarks>
@@ -91,7 +105,10 @@
       </Docs>
     </Member>
     <Member MemberName="KeyRestrictionBehavior">
-      <MemberSignature Language="C#" Value="public System.Data.KeyRestrictionBehavior KeyRestrictionBehavior { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.KeyRestrictionBehavior KeyRestrictionBehavior { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -105,7 +122,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Identifies whether the list of connection string parameters identified by the <see cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictions" /> property are the only connection string parameters allowed.</para>
+          <para
+            >Identifies whether the list of connection string parameters identified by the <see
+             cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictions" />
+
+             property are the only connection string parameters allowed.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -123,9 +145,24 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Connection string parameters are identified in the form &lt;parameter name&gt;=. Multiple parameters can be specified, delimited using a semicolon (;). The connection string parameters listed may be identified as either the only additional parameters allowed or additional parameters that are not allowed using the <see cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" /> property.</para>
-          <para>If no key restrictions are specified, and the <see cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" /> property is set to AllowOnly, no additional connection string parameters are allowed.</para>
-          <para>If no key restrictions are specified, and the <see cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" /> property is set to PreventUsage, additional connection string parameters are allowed. If more than one rule is set for the same connection string, the more restrictive rule is selected during the permission check.</para>
+          <para
+            >Connection string parameters are identified in the form &lt;parameter name&gt;=. Multiple parameters can be specified, delimited using a semicolon (;). The connection string parameters listed may be identified as either the only additional parameters allowed or additional parameters that are not allowed using the <see
+             cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" />
+
+             property.</para
+          >
+          <para
+            >If no key restrictions are specified, and the <see
+             cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" />
+
+             property is set to AllowOnly, no additional connection string parameters are allowed.</para
+          >
+          <para
+            >If no key restrictions are specified, and the <see
+             cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" />
+
+             property is set to PreventUsage, additional connection string parameters are allowed. If more than one rule is set for the same connection string, the more restrictive rule is selected during the permission check.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

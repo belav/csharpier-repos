@@ -10,6 +10,6 @@
           <GenericArgument Name="System.Globalization.UnicodeCategory,System.Globalization" />
         </Method>
       </Type>
-    </Assembly>    
+    </Assembly>
   </Application>
 </Directives>

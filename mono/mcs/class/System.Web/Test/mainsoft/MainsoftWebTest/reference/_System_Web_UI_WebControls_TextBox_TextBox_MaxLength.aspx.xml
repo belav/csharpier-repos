@@ -19,19 +19,19 @@
     <input maxlength="100" type="password" name="TextBox4" id="TextBox4" />
   </div>
   <div id="GHTSubTest9" style="height:32px;width:168px">
-    <textarea id="TextBox9" name="TextBox9">
-    </textarea>
+    <textarea id="TextBox9" name="TextBox9"></textarea>
   </div>
   <div id="GHTSubTest8" style="height:32px;width:168px">
-    <textarea id="TextBox8" name="TextBox8">
-    </textarea>
+    <textarea id="TextBox8" name="TextBox8"></textarea>
   </div>
   <div id="GHTSubTest7" style="height:32px;width:168px">
-    <textarea id="TextBox7" name="TextBox7">
-    </textarea>
+    <textarea id="TextBox7" name="TextBox7"></textarea>
   </div>
   <div id="GHTSubTest10" testname="Negative MaxLength value">
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
 </testresults>

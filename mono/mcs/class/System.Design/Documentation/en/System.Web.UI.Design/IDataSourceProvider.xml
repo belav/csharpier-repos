@@ -10,7 +10,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A class that is able to provide a data source can implement this interface to enable access to its data source by objects that use the <see cref="T:System.Web.UI.Design.IDataSourceProvider" /> interface. This interface is used by the <see cref="T:System.Web.UI.Design.DataFieldConverter" /> and <see cref="T:System.Web.UI.Design.DataMemberConverter" /> classes.</para>
+      <para
+        >A class that is able to provide a data source can implement this interface to enable access to its data source by objects that use the <see
+         cref="T:System.Web.UI.Design.IDataSourceProvider" />
+
+         interface. This interface is used by the <see
+         cref="T:System.Web.UI.Design.DataFieldConverter" />
+
+         and <see
+         cref="T:System.Web.UI.Design.DataMemberConverter" />
+
+         classes.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -19,7 +30,10 @@
   </Docs>
   <Members>
     <Member MemberName="GetResolvedSelectedDataSource">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerable GetResolvedSelectedDataSource ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerable GetResolvedSelectedDataSource ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerable</ReturnType>
@@ -33,7 +47,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The selected data member from the selected data source, if the control allows the user to select an <see cref="T:System.ComponentModel.IListSource" /> (such as a <see cref="T:System.Data.DataSet" />) for the data source, and provides a DataMember property to select a particular list (or <see cref="T:System.Data.DataTable" />) within the data source.</para>
+          <para
+            >The selected data member from the selected data source, if the control allows the user to select an <see
+             cref="T:System.ComponentModel.IListSource" />
+
+             (such as a <see
+             cref="T:System.Data.DataSet" />
+
+            ) for the data source, and provides a DataMember property to select a particular list (or <see
+             cref="T:System.Data.DataTable" />
+
+            ) within the data source.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>

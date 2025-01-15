@@ -14,12 +14,20 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents a set of static methods for creating one or more instances of <see cref="T:System.Data.Common.DbProviderFactory" /> classes.</para>
+      <para
+        >Represents a set of static methods for creating one or more instances of <see
+         cref="T:System.Data.Common.DbProviderFactory" />
+
+         classes.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName="GetFactory">
-      <MemberSignature Language="C#" Value="public static System.Data.Common.DbProviderFactory GetFactory (System.Data.DataRow providerRow);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.Common.DbProviderFactory GetFactory (System.Data.DataRow providerRow);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbProviderFactory</ReturnType>
@@ -31,26 +39,56 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="providerRow" /> parameter corresponds to the <see cref="T:System.Data.DataRow" /> of a table returned by <see cref="M:System.Data.Common.DbProviderFactories.GetFactoryClasses" />.</para>
+          <para
+            >The <paramref
+             name="providerRow" />
+
+             parameter corresponds to the <see
+             cref="T:System.Data.DataRow" />
+
+             of a table returned by <see
+             cref="M:System.Data.Common.DbProviderFactories.GetFactoryClasses" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an instance of a <see cref="T:System.Data.Common.DbProviderFactory" />.</para>
+          <para
+            >Returns an instance of a <see
+             cref="T:System.Data.Common.DbProviderFactory" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance of a <see cref="T:System.Data.Common.DbProviderFactory" /> for a specified <see cref="T:System.Data.DataRow" />.</para>
+          <para
+            >An instance of a <see
+             cref="T:System.Data.Common.DbProviderFactory" />
+
+             for a specified <see
+             cref="T:System.Data.DataRow" />
+
+            .</para
+          >
         </returns>
         <param name="providerRow">
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <see cref="T:System.Data.DataRow" /> containing the provider's configuration information.</param>
+          <see cref="T:System.Data.DataRow" />
+
+           containing the provider's configuration information.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetFactory">
-      <MemberSignature Language="C#" Value="public static System.Data.Common.DbProviderFactory GetFactory (string providerInvariantName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.Common.DbProviderFactory GetFactory (string providerInvariantName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.Common.DbProviderFactory</ReturnType>
@@ -62,25 +100,49 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <paramref name="providerInvariantName" /> parameter corresponds to the InvariantName column of a table returned by <see cref="M:System.Data.Common.DbProviderFactories.GetFactoryClasses" />.</para>
+          <para
+            >The <paramref
+             name="providerInvariantName" />
+
+             parameter corresponds to the InvariantName column of a table returned by <see
+             cref="M:System.Data.Common.DbProviderFactories.GetFactoryClasses" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns an instance of a <see cref="T:System.Data.Common.DbProviderFactory" />.</para>
+          <para
+            >Returns an instance of a <see
+             cref="T:System.Data.Common.DbProviderFactory" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance of a <see cref="T:System.Data.Common.DbProviderFactory" /> for a specified provider name.</para>
+          <para
+            >An instance of a <see
+             cref="T:System.Data.Common.DbProviderFactory" />
+
+             for a specified provider name.</para
+          >
         </returns>
         <param name="providerInvariantName">
-          <attribution license="cc4" from="Microsoft" modified="false" />Invariant name of a provider.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Invariant name of a provider.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetFactoryClasses">
-      <MemberSignature Language="C#" Value="public static System.Data.DataTable GetFactoryClasses ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Data.DataTable GetFactoryClasses ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.DataTable</ReturnType>
@@ -91,11 +153,27 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.Data.DataTable" /> that contains information about all installed providers that implement <see cref="T:System.Data.Common.DbProviderFactory" />.</para>
+          <para
+            >Returns a <see
+             cref="T:System.Data.DataTable" />
+
+             that contains information about all installed providers that implement <see
+             cref="T:System.Data.Common.DbProviderFactory" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.Data.DataTable" /> containing <see cref="T:System.Data.DataRow" /> objects that contain the following data. </para>
+          <para
+            >Returns a <see
+             cref="T:System.Data.DataTable" />
+
+             containing <see
+             cref="T:System.Data.DataRow" />
+
+             objects that contain the following data. </para
+          >
           <list type="table">
             <listheader>
               <item>

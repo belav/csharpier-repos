@@ -12,7 +12,6 @@
     <MonoEnableLLVM>true</MonoEnableLLVM>
     <BundlesResources>false</BundlesResources>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>

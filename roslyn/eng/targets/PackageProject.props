@@ -3,15 +3,12 @@
   <!-- 
     Include this props file in projects that build meta-packages.
   -->
-
   <PropertyGroup>
     <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <SkipCopyBuildProduct>true</SkipCopyBuildProduct>
-
     <!-- Remove once https://github.com/NuGet/Home/issues/8583 is fixed -->
     <NoWarn>$(NoWarn);NU5128</NoWarn>
-
     <IsShippingAssembly>false</IsShippingAssembly>
   </PropertyGroup>
 </Project>

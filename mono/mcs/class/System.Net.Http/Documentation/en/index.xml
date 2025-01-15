@@ -84,7 +84,11 @@
       <Type Name="EntityTagHeaderValue" Kind="Class" />
       <Type Name="HttpContentHeaders" Kind="Class" />
       <Type Name="HttpHeaders" Kind="Class" />
-      <Type Name="HttpHeaderValueCollection`1" DisplayName="HttpHeaderValueCollection&lt;T&gt;" Kind="Class" />
+      <Type
+        Name="HttpHeaderValueCollection`1"
+        DisplayName="HttpHeaderValueCollection<T>"
+        Kind="Class"
+      />
       <Type Name="HttpRequestHeaders" Kind="Class" />
       <Type Name="HttpResponseHeaders" Kind="Class" />
       <Type Name="MediaTypeHeaderValue" Kind="Class" />

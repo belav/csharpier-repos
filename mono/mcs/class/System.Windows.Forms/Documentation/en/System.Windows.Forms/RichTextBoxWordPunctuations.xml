@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="RichTextBoxWordPunctuations" FullName="System.Windows.Forms.RichTextBoxWordPunctuations">
+<Type
+  Name="RichTextBoxWordPunctuations"
+  FullName="System.Windows.Forms.RichTextBoxWordPunctuations"
+>
   <TypeSignature Language="C#" Value="public enum RichTextBoxWordPunctuations" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -13,7 +16,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the types of punctuation tables that can be used with the <see cref="T:System.Windows.Forms.RichTextBox" /> control's word-wrapping and word-breaking features.</para>
+      <para
+        >Specifies the types of punctuation tables that can be used with the <see
+         cref="T:System.Windows.Forms.RichTextBox" />
+
+         control's word-wrapping and word-breaking features.</para
+      >
     </summary>
   </Docs>
   <Members>

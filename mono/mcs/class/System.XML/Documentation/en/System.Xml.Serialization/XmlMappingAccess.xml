@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlMappingAccess" FullName="System.Xml.Serialization.XmlMappingAccess">
   <TypeSignature Language="C#" Value="public enum XmlMappingAccess" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed XmlMappingAccess extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed XmlMappingAccess extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,7 +22,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="Overload:System.Xml.Serialization.XmlSchemaImporter.ImportMembersMapping" /> when generating code for serialization and deserialization methods. The value specifies whether the schema importer generates write methods for mappings with write access, and read methods for mappings with read access. This minimizes the generation of serialization code.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="Overload:System.Xml.Serialization.XmlSchemaImporter.ImportMembersMapping" />
+
+         when generating code for serialization and deserialization methods. The value specifies whether the schema importer generates write methods for mappings with write access, and read methods for mappings with read access. This minimizes the generation of serialization code.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -29,7 +37,10 @@
   <Members>
     <Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Xml.Serialization.XmlMappingAccess None = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Xml.Serialization.XmlMappingAccess None = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -48,7 +59,10 @@
     </Member>
     <Member MemberName="Read">
       <MemberSignature Language="C#" Value="Read" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Xml.Serialization.XmlMappingAccess Read = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Xml.Serialization.XmlMappingAccess Read = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -67,7 +81,10 @@
     </Member>
     <Member MemberName="Write">
       <MemberSignature Language="C#" Value="Write" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Xml.Serialization.XmlMappingAccess Write = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Xml.Serialization.XmlMappingAccess Write = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

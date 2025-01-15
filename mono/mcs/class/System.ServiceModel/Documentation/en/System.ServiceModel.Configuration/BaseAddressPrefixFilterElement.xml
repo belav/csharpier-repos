@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="BaseAddressPrefixFilterElement" FullName="System.ServiceModel.Configuration.BaseAddressPrefixFilterElement">
-  <TypeSignature Language="C#" Value="public sealed class BaseAddressPrefixFilterElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed BaseAddressPrefixFilterElement extends System.Configuration.ConfigurationElement" />
+<Type
+  Name="BaseAddressPrefixFilterElement"
+  FullName="System.ServiceModel.Configuration.BaseAddressPrefixFilterElement"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class BaseAddressPrefixFilterElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed BaseAddressPrefixFilterElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -42,7 +51,10 @@ http://test2.fabrikam.com/Service.svc</code>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public BaseAddressPrefixFilterElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -52,13 +64,21 @@ http://test2.fabrikam.com/Service.svc</code>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BaseAddressPrefixFilterElement" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.BaseAddressPrefixFilterElement" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public BaseAddressPrefixFilterElement (Uri prefix);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri prefix) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri prefix) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -70,10 +90,18 @@ http://test2.fabrikam.com/Service.svc</code>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BaseAddressPrefixFilterElement" /> class with a specific URI.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.BaseAddressPrefixFilterElement" />
+
+             class with a specific URI.</para
+          >
         </summary>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />A filter that causes the service to listen on all URIs that start with this specific prefix. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A filter that causes the service to listen on all URIs that start with this specific prefix. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="Prefix">
@@ -101,8 +129,14 @@ http://test2.fabrikam.com/Service.svc</code>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

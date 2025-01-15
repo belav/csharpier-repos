@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="LabelTarget" FullName="System.Linq.Expressions.LabelTarget">
   <TypeSignature Language="C#" Value="public sealed class LabelTarget" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit LabelTarget extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit LabelTarget extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -14,7 +17,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Used to represent the target of a <see cref="T:System.Linq.Expressions.GotoExpression" />.</para>
+      <para
+        >Used to represent the target of a <see
+         cref="T:System.Linq.Expressions.GotoExpression" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -42,7 +50,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -55,11 +66,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.</para>
+          <para
+            >Returns a <see
+             cref="T:System.String" />
+
+             that represents the current <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.String" /> that represents the current <see cref="T:System.Object" />.</para>
+          <para
+            >A <see
+             cref="T:System.String" />
+
+             that represents the current <see
+             cref="T:System.Object" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -78,7 +105,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The type of value that is passed when jumping to the label (or <see cref="T:System.Void" /> if no value should be passed).</para>
+          <para
+            >The type of value that is passed when jumping to the label (or <see
+             cref="T:System.Void" />
+
+             if no value should be passed).</para
+          >
         </summary>
       </Docs>
     </Member>

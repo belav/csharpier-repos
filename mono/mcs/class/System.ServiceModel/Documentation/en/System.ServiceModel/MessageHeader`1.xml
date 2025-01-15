@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="MessageHeader&lt;T&gt;" FullName="System.ServiceModel.MessageHeader&lt;T&gt;">
-  <TypeSignature Language="C#" Value="public class MessageHeader&lt;T&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit MessageHeader`1&lt;T&gt; extends System.Object" />
+<Type Name="MessageHeader<T>" FullName="System.ServiceModel.MessageHeader<T>">
+  <TypeSignature Language="C#" Value="public class MessageHeader<T>" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit MessageHeader`1<T> extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,7 +20,12 @@
     <typeparam name="T">To be added.</typeparam>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A message header contains optional metadata that describe a message, encapsulated by the <see cref="T:System.ServiceModel.Channels.Message" /> class.  </para>
+      <para
+        >A message header contains optional metadata that describe a message, encapsulated by the <see
+         cref="T:System.ServiceModel.Channels.Message" />
+
+         class.  </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -27,7 +35,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public MessageHeader ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -37,13 +48,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeader`1" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.MessageHeader`1" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public MessageHeader (T content);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T content) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T content) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -58,8 +77,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public MessageHeader (T content, bool must_understand, string actor, bool relay);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T content, bool must_understand, string actor, bool relay) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public MessageHeader (T content, bool must_understand, string actor, bool relay);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(!T content, bool must_understand, string actor, bool relay) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -121,8 +146,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetUntypedHeader">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.MessageHeader GetUntypedHeader (string name, string ns);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.ServiceModel.Channels.MessageHeader GetUntypedHeader(string name, string ns) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.MessageHeader GetUntypedHeader (string name, string ns);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.ServiceModel.Channels.MessageHeader GetUntypedHeader(string name, string ns) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -145,9 +176,15 @@
           <para>A message header with the specified namespace and local name.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The local name of the header XML element</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The local name of the header XML element</param
+        >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />The namespace URI of the header XML element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The namespace URI of the header XML element.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="MustUnderstand">

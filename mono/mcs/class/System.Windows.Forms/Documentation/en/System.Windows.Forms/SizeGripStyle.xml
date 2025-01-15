@@ -12,11 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.Form.SizeGripStyle" /> property of the <see cref="T:System.Windows.Forms.Form" />.</para>
+      <para
+        >Use the members of this enumeration to set the value of the <see
+         cref="P:System.Windows.Forms.Form.SizeGripStyle" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.Form" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the style of the sizing grip on a <see cref="T:System.Windows.Forms.Form" />.</para>
+      <para
+        >Specifies the style of the sizing grip on a <see
+         cref="T:System.Windows.Forms.Form" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>

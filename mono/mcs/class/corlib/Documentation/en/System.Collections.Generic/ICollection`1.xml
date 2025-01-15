@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ICollection&lt;T&gt;" FullName="System.Collections.Generic.ICollection&lt;T&gt;">
-  <TypeSignature Language="C#" Value="public interface ICollection&lt;T&gt; : System.Collections.Generic.IEnumerable&lt;T&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ICollection`1&lt;T&gt; implements class System.Collections.Generic.IEnumerable`1&lt;!T&gt;, class System.Collections.IEnumerable" />
+<Type Name="ICollection<T>" FullName="System.Collections.Generic.ICollection<T>">
+  <TypeSignature
+    Language="C#"
+    Value="public interface ICollection<T> : System.Collections.Generic.IEnumerable<T>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract ICollection`1<T> implements class System.Collections.Generic.IEnumerable`1<!T>, class System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,9 +26,57 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Collections.Generic.ICollection`1" /> interface is the base interface for classes in the <see cref="N:System.Collections.Generic" /> namespace.</para>
-      <para>The <see cref="T:System.Collections.Generic.ICollection`1" /> interface extends <see cref="T:System.Collections.Generic.IEnumerable`1" />; <see cref="T:System.Collections.Generic.IDictionary`2" /> and <see cref="T:System.Collections.Generic.IList`1" /> are more specialized interfaces that extend <see cref="T:System.Collections.Generic.ICollection`1" />. A <see cref="T:System.Collections.Generic.IDictionary`2" /> implementation is a collection of key/value pairs, like the <see cref="T:System.Collections.Generic.Dictionary`2" /> class. A <see cref="T:System.Collections.Generic.IList`1" /> implementation is a collection of values, and its members can be accessed by index, like the <see cref="T:System.Collections.Generic.List`1" /> class.</para>
-      <para>If neither the <see cref="T:System.Collections.Generic.IDictionary`2" /> interface nor the <see cref="T:System.Collections.Generic.IList`1" /> interface meet the requirements of the required collection, derive the new collection class from the <see cref="T:System.Collections.Generic.ICollection`1" /> interface instead for more flexibility.</para>
+      <para
+        >The <see
+         cref="T:System.Collections.Generic.ICollection`1" />
+
+         interface is the base interface for classes in the <see
+         cref="N:System.Collections.Generic" />
+
+         namespace.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Collections.Generic.ICollection`1" />
+
+         interface extends <see
+         cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        ; <see
+         cref="T:System.Collections.Generic.IDictionary`2" />
+
+         and <see
+         cref="T:System.Collections.Generic.IList`1" />
+
+         are more specialized interfaces that extend <see
+         cref="T:System.Collections.Generic.ICollection`1" />
+
+        . A <see
+         cref="T:System.Collections.Generic.IDictionary`2" />
+
+         implementation is a collection of key/value pairs, like the <see
+         cref="T:System.Collections.Generic.Dictionary`2" />
+
+         class. A <see
+         cref="T:System.Collections.Generic.IList`1" />
+
+         implementation is a collection of values, and its members can be accessed by index, like the <see
+         cref="T:System.Collections.Generic.List`1" />
+
+         class.</para
+      >
+      <para
+        >If neither the <see
+         cref="T:System.Collections.Generic.IDictionary`2" />
+
+         interface nor the <see
+         cref="T:System.Collections.Generic.IList`1" />
+
+         interface meet the requirements of the required collection, derive the new collection class from the <see
+         cref="T:System.Collections.Generic.ICollection`1" />
+
+         interface instead for more flexibility.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -32,7 +86,10 @@
   <Members>
     <Member MemberName="Add">
       <MemberSignature Language="C#" Value="public void Add (T item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Add(!T item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Add(!T item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -51,12 +108,17 @@
         </summary>
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
-        <exception cref="System.NotSupportedException">The current collection is read-only.</exception>
+        <exception cref="System.NotSupportedException"
+          >The current collection is read-only.</exception
+        >
       </Docs>
     </Member>
     <Member MemberName="Clear">
       <MemberSignature Language="C#" Value="public void Clear ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Clear() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void Clear() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -68,21 +130,34 @@
       <Parameters />
       <Docs>
         <since version=".NET 2.0" />
-        <exception cref="System.NotSupportedException">The current collection is read-only.</exception>
+        <exception cref="System.NotSupportedException"
+          >The current collection is read-only.</exception
+        >
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="P:System.Collections.Generic.ICollection`1.Count" /> must be set to 0, and references to other objects from elements of the collection must be released.</para>
+            <see cref="P:System.Collections.Generic.ICollection`1.Count" />
+
+             must be set to 0, and references to other objects from elements of the collection must be released.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1" />.</para>
+          <para
+            >Removes all items from the <see
+             cref="T:System.Collections.Generic.ICollection`1" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Contains">
       <MemberSignature Language="C#" Value="public bool Contains (T item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Contains(!T item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Contains(!T item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -100,7 +175,13 @@
           <para>Determines whether the current collection contains a specific value.</para>
         </summary>
         <returns>
-          <see langword="true" />, if item is found in the current collection; otherwise, <see langword="false" />.</returns>
+          <see langword="true" />
+
+          , if item is found in the current collection; otherwise, <see
+           langword="false" />
+
+          .</returns
+        >
         <remarks>
           <para>Implementations of this interface can vary in how they determine equality of objects; for example, some types use the default comparer, while others allow the user to specify the comparer to be used.</para>
         </remarks>
@@ -109,7 +190,10 @@
     </Member>
     <Member MemberName="CopyTo">
       <MemberSignature Language="C#" Value="public void CopyTo (T[] array, int arrayIndex);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void CopyTo(!T[] array, int32 arrayIndex) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void CopyTo(!T[] array, int32 arrayIndex) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -123,29 +207,73 @@
         <Parameter Name="arrayIndex" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="array">A one-dimensional, zero-based <see cref="T:System.Array" /> that is the destination of the elements copied from the current instance.</param>
+        <param name="array"
+          >A one-dimensional, zero-based <see
+           cref="T:System.Array" />
+
+           that is the destination of the elements copied from the current instance.</param
+        >
         <param name="arrayIndex">To be added.</param>
         <summary>
-          <para>Copies the elements of the current collection to a <see cref="T:System.Array" />, starting at the specified index.</para>
+          <para
+            >Copies the elements of the current collection to a <see
+             cref="T:System.Array" />
+
+            , starting at the specified index.</para
+          >
         </summary>
         <remarks>
           <para>This operation overwrites the current contents of the array.</para>
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="array" /> is <see langword="null" />.</exception>
+          <paramref name="array" />
+
+           is <see
+           langword="null" />
+
+          .</exception
+        >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <paramref name="index" /> &lt; 0.</exception>
+          <paramref name="index" />
+
+           &lt; 0.</exception
+        >
         <exception cref="T:System.ArgumentException">
           <para>
-            <paramref name="array" /> has more than one dimension.</para>
+            <paramref name="array" />
+
+             has more than one dimension.</para
+          >
           <para>-or-</para>
           <para>
-            <paramref name="index" /> is greater than or equal to <paramref name="array" />.Length.</para>
+            <paramref name="index" />
+
+             is greater than or equal to <paramref
+             name="array" />
+
+            .Length.</para
+          >
           <para>-or-</para>
-          <para> The sum of <paramref name="index" /> and the <see cref="P:System.Collections.ICollection.Count" /> of the current instance is greater than <paramref name="array" />.Length.</para>
+          <para
+            > The sum of <paramref
+             name="index" />
+
+             and the <see
+             cref="P:System.Collections.ICollection.Count" />
+
+             of the current instance is greater than <paramref
+             name="array" />
+
+            .Length.</para
+          >
           <para>-or-</para>
-          <para>Type <see langword="T" /> is not assignable to the element type of the destination array.</para>
+          <para
+            >Type <see
+             langword="T" />
+
+             is not assignable to the element type of the destination array.</para
+          >
         </exception>
       </Docs>
     </Member>
@@ -162,8 +290,13 @@
       </ReturnValue>
       <Docs>
         <value>
-          <para>A <see cref="T:System.Int32" /> that indicates the number of elements contained in the current
-   instance.</para>
+          <para
+            >A <see
+             cref="T:System.Int32" />
+
+             that indicates the number of elements contained in the current
+   instance.</para
+          >
         </value>
         <remarks>
           <para>This property is read-only.</para>
@@ -171,7 +304,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1" />.</para>
+          <para
+            >Gets the number of elements contained in the <see
+             cref="T:System.Collections.Generic.ICollection`1" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -189,7 +327,13 @@
       <Docs>
         <value>
           <para>
-            <see langword="true" />, if the current collection is read-only; otherwise, <see langword="false" />.</para>
+            <see langword="true" />
+
+            , if the current collection is read-only; otherwise, <see
+             langword="false" />
+
+            .</para
+          >
         </value>
         <since version=".NET 2.0" />
         <remarks>
@@ -198,13 +342,21 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1" /> is read-only.</para>
+          <para
+            >Gets a value indicating whether the <see
+             cref="T:System.Collections.Generic.ICollection`1" />
+
+             is read-only.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Remove">
       <MemberSignature Language="C#" Value="public bool Remove (T item);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Remove(!T item) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Remove(!T item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -222,13 +374,32 @@
           <para>Removes the first occurrence of an item from the current collection.</para>
         </summary>
         <returns>
-          <see langword="true" />, if <paramref name="item" /> was removed from the current collection; <see langword="false" /> if <paramref name="item" /> was not found in the current collection.</returns>
+          <see langword="true" />
+
+          , if <paramref
+           name="item" />
+
+           was removed from the current collection; <see
+           langword="false" />
+
+           if <paramref
+           name="item" />
+
+           was not found in the current collection.</returns
+        >
         <remarks>
-          <para>If <paramref name="item" /> was found, but cannot be removed for some reason, some unspecified exception is thrown.</para>
+          <para
+            >If <paramref
+             name="item" />
+
+             was found, but cannot be removed for some reason, some unspecified exception is thrown.</para
+          >
           <para>Implementations of this interface can vary in how they determine equality of objects; for example, some types use the default comparer, while others allow the user to specify the comparer to be used.</para>
         </remarks>
         <since version=".NET 2.0" />
-        <exception cref="System.NotSupportedException">The current collection is read-only.</exception>
+        <exception cref="System.NotSupportedException"
+          >The current collection is read-only.</exception
+        >
       </Docs>
     </Member>
   </Members>

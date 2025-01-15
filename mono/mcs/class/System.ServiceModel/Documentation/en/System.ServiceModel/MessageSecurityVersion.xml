@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="MessageSecurityVersion" FullName="System.ServiceModel.MessageSecurityVersion">
   <TypeSignature Language="C#" Value="public abstract class MessageSecurityVersion" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract MessageSecurityVersion extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract MessageSecurityVersion extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -15,7 +18,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class is the extensibility point for customizing token serialization. </para>
       <para>This class is a singleton that provides information about the versions of the security specifications, (WS-Security, WS-Trust, WS-Secure Conversation and WS-Security Policy), that must be supported by a binding.</para>
-      <para>The class contains seven static properties, each of which returns an instance of this class. Each of these properties represents a different combination of security specification versions. The instances of this class are used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class. If you pass the <see cref="P:System.ServiceModel.MessageSecurityVersion.Default" /> property, you create a standard version of the binding element. To create a non-standard version, pass the property that matches your version.</para>
+      <para
+        >The class contains seven static properties, each of which returns an instance of this class. Each of these properties represents a different combination of security specification versions. The instances of this class are used as parameters in the Create…CertificateBindingElement method calls on the <see
+         cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+         class. If you pass the <see
+         cref="P:System.ServiceModel.MessageSecurityVersion.Default" />
+
+         property, you create a standard version of the binding element. To create a non-standard version, pass the property that matches your version.</para
+      >
       <para>The class also contains abstract properties that are implemented by the previous instances.</para>
     </remarks>
     <summary>
@@ -25,8 +36,14 @@
   </Docs>
   <Members>
     <Member MemberName="BasicSecurityProfileVersion">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.Security.BasicSecurityProfileVersion BasicSecurityProfileVersion { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.BasicSecurityProfileVersion BasicSecurityProfileVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.Security.BasicSecurityProfileVersion BasicSecurityProfileVersion { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.BasicSecurityProfileVersion BasicSecurityProfileVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -47,8 +64,14 @@
       </Docs>
     </Member>
     <Member MemberName="Default">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.MessageSecurityVersion Default { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.MessageSecurityVersion Default" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.MessageSecurityVersion Default { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.MessageSecurityVersion Default"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -61,7 +84,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default security specifications are WS-Security 1.1, WS-Trust of February 2005, WS-SecureConversation of February 2005 and WS-SecurityPolicy 1.1.</para>
-          <para>This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
+          <para
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
+             cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -70,8 +98,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecureConversationVersion">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.SecureConversationVersion SecureConversationVersion { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.SecureConversationVersion SecureConversationVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.SecureConversationVersion SecureConversationVersion { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.SecureConversationVersion SecureConversationVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -92,8 +126,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityPolicyVersion">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.Security.SecurityPolicyVersion SecurityPolicyVersion { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.SecurityPolicyVersion SecurityPolicyVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.Security.SecurityPolicyVersion SecurityPolicyVersion { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.SecurityPolicyVersion SecurityPolicyVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -114,8 +154,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityTokenVersion">
-      <MemberSignature Language="C#" Value="public abstract System.IdentityModel.Selectors.SecurityTokenVersion SecurityTokenVersion { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.IdentityModel.Selectors.SecurityTokenVersion SecurityTokenVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.IdentityModel.Selectors.SecurityTokenVersion SecurityTokenVersion { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.IdentityModel.Selectors.SecurityTokenVersion SecurityTokenVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -128,7 +174,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is implemented by the instances of this class returned by the seven static properties. Each implementation represents a different combination of specification versions and so returns a different value for this property.</para>
-          <para>This property is used to query a token serializer factory interface defined in <see cref="T:System.IdentityModel.Selectors.SecurityTokenVersion" /> for a token serializer instance capable of serializing tokens.</para>
+          <para
+            >This property is used to query a token serializer factory interface defined in <see
+             cref="T:System.IdentityModel.Selectors.SecurityTokenVersion" />
+
+             for a token serializer instance capable of serializing tokens.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -137,8 +188,14 @@
       </Docs>
     </Member>
     <Member MemberName="SecurityVersion">
-      <MemberSignature Language="C#" Value="public abstract System.ServiceModel.Security.SecurityVersion SecurityVersion { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.SecurityVersion SecurityVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ServiceModel.Security.SecurityVersion SecurityVersion { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.SecurityVersion SecurityVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -159,8 +216,14 @@
       </Docs>
     </Member>
     <Member MemberName="TrustVersion">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Security.TrustVersion TrustVersion { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Security.TrustVersion TrustVersion" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Security.TrustVersion TrustVersion { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Security.TrustVersion TrustVersion"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -181,8 +244,14 @@
       </Docs>
     </Member>
     <Member MemberName="WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -194,7 +263,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
+          <para
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
+             cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -203,8 +277,14 @@
       </Docs>
     </Member>
     <Member MemberName="WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -216,7 +296,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
+          <para
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
+             cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -225,8 +310,14 @@
       </Docs>
     </Member>
     <Member MemberName="WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -238,7 +329,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
+          <para
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
+             cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -247,8 +343,14 @@
       </Docs>
     </Member>
     <Member MemberName="WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -260,7 +362,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
+          <para
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
+             cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -269,8 +376,14 @@
       </Docs>
     </Member>
     <Member MemberName="WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -282,7 +395,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
+          <para
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
+             cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -291,8 +409,14 @@
       </Docs>
     </Member>
     <Member MemberName="WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10">
-      <MemberSignature Language="C#" Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10 { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10 { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class System.ServiceModel.MessageSecurityVersion WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -304,7 +428,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" /> class.</para>
+          <para
+            >This static property returns an instance of this class. The instance of this class is used as parameters in the Create…CertificateBindingElement method calls on the <see
+             cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

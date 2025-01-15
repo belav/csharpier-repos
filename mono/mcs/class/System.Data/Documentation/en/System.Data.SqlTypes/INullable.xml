@@ -17,7 +17,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>All the <see cref="N:System.Data.SqlTypes" /> objects and structures implement the INullable interface. </para>
+      <para
+        >All the <see
+         cref="N:System.Data.SqlTypes" />
+
+         objects and structures implement the INullable interface. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -31,7 +36,15 @@
         <value>To be added: an object of type 'bool'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The default value for any <see cref="N:System.Data.SqlTypes" /> instance is null. Use <see cref="P:System.Data.SqlTypes.INullable.IsNull" /> property to test for null values.</para>
+          <para
+            >The default value for any <see
+             cref="N:System.Data.SqlTypes" />
+
+             instance is null. Use <see
+             cref="P:System.Data.SqlTypes.INullable.IsNull" />
+
+             property to test for null values.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

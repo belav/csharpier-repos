@@ -1,5 +1,8 @@
 <Type Name="NvdlModeList" FullName="Commons.Xml.Nvdl.NvdlModeList">
-  <TypeSignature Language="C#" Value="public class NvdlModeList : System.Collections.CollectionBase" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NvdlModeList : System.Collections.CollectionBase"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -24,7 +27,10 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public void Add (Commons.Xml.Nvdl.NvdlModeBase item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Add (Commons.Xml.Nvdl.NvdlModeBase item);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -39,7 +45,10 @@
       </Docs>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public void Remove (Commons.Xml.Nvdl.NvdlModeBase item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Remove (Commons.Xml.Nvdl.NvdlModeBase item);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -54,7 +63,10 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Nvdl.NvdlModeBase Item[int i] { set; get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Nvdl.NvdlModeBase Item[int i] { set; get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlModeBase</ReturnType>

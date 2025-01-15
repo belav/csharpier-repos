@@ -1,4 +1,7 @@
-<Type Name="ToolTip+StandardTitle" FullName="System.Windows.Forms.VisualStyles.ToolTip+StandardTitle">
+<Type
+  Name="ToolTip+StandardTitle"
+  FullName="System.Windows.Forms.VisualStyles.ToolTip+StandardTitle"
+>
   <TypeSignature Language="C#" Value="public static class ToolTip.StandardTitle" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -15,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName="Normal">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.VisualStyleElement</ReturnType>

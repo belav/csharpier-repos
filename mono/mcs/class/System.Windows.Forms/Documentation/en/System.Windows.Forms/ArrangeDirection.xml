@@ -20,7 +20,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by the <see cref="P:System.Windows.Forms.SystemInformation.ArrangeDirection" /> property of the <see cref="T:System.Windows.Forms.SystemInformation" /> class.</para>
+      <para
+        >This enumeration is used by the <see
+         cref="P:System.Windows.Forms.SystemInformation.ArrangeDirection" />
+
+         property of the <see
+         cref="T:System.Windows.Forms.SystemInformation" />
+
+         class.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -37,7 +45,16 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Arranged vertically, from top to bottom. Valid with the <see cref="F:System.Windows.Forms.ArrangeStartingPosition.TopLeft" /> and <see cref="F:System.Windows.Forms.ArrangeStartingPosition.TopRight" /> <see cref="T:System.Windows.Forms.ArrangeStartingPosition" /> enumeration values.</para>
+          <para
+            >Arranged vertically, from top to bottom. Valid with the <see
+             cref="F:System.Windows.Forms.ArrangeStartingPosition.TopLeft" />
+
+             and <see
+             cref="F:System.Windows.Forms.ArrangeStartingPosition.TopRight" />
+            <see cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+             enumeration values.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -54,7 +71,16 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Arranged horizontally, from left to right. Valid with the <see cref="F:System.Windows.Forms.ArrangeStartingPosition.BottomRight" /> and <see cref="F:System.Windows.Forms.ArrangeStartingPosition.TopRight" /> <see cref="T:System.Windows.Forms.ArrangeStartingPosition" /> enumeration values.</para>
+          <para
+            >Arranged horizontally, from left to right. Valid with the <see
+             cref="F:System.Windows.Forms.ArrangeStartingPosition.BottomRight" />
+
+             and <see
+             cref="F:System.Windows.Forms.ArrangeStartingPosition.TopRight" />
+            <see cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+             enumeration values.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -71,7 +97,16 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Arranged horizontally, from right to left. Valid with the <see cref="F:System.Windows.Forms.ArrangeStartingPosition.BottomLeft" /> and <see cref="F:System.Windows.Forms.ArrangeStartingPosition.TopLeft" /> <see cref="T:System.Windows.Forms.ArrangeStartingPosition" /> enumeration values.</para>
+          <para
+            >Arranged horizontally, from right to left. Valid with the <see
+             cref="F:System.Windows.Forms.ArrangeStartingPosition.BottomLeft" />
+
+             and <see
+             cref="F:System.Windows.Forms.ArrangeStartingPosition.TopLeft" />
+            <see cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+             enumeration values.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -88,7 +123,16 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Arranged vertically, from bottom to top. Valid with the <see cref="F:System.Windows.Forms.ArrangeStartingPosition.BottomLeft" /> and <see cref="F:System.Windows.Forms.ArrangeStartingPosition.BottomRight" /> <see cref="T:System.Windows.Forms.ArrangeStartingPosition" /> enumeration values.</para>
+          <para
+            >Arranged vertically, from bottom to top. Valid with the <see
+             cref="F:System.Windows.Forms.ArrangeStartingPosition.BottomLeft" />
+
+             and <see
+             cref="F:System.Windows.Forms.ArrangeStartingPosition.BottomRight" />
+            <see cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+             enumeration values.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

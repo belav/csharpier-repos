@@ -59,11 +59,18 @@
       </tr>
       <tr>
         <td colspan="3">
-          <span>&lt;</span>&amp;nbsp;<a href="javascript:__doPostBack('DataGrid1$_ctl14$_ctl1','')">&gt;</a></td>
+          <span>&lt;</span>
+
+          &amp;nbsp;<a
+           href="javascript:__doPostBack('DataGrid1$_ctl14$_ctl1','')">&gt;</a>
+        </td>
       </tr>
     </table>
     <span>
-      <br />Bottom</span>
+      <br />
+
+      Bottom</span
+    >
   </div>
   <div id="GHTSubTest2" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid2">
@@ -124,11 +131,18 @@
       </tr>
       <tr>
         <td colspan="3">
-          <span>Prev Page</span>&amp;nbsp;<a href="javascript:__doPostBack('DataGrid2$_ctl14$_ctl1','')">&gt;</a></td>
+          <span>Prev Page</span>
+
+          &amp;nbsp;<a
+           href="javascript:__doPostBack('DataGrid2$_ctl14$_ctl1','')">&gt;</a>
+        </td>
       </tr>
     </table>
     <span>
-      <br />Prev Page</span>
+      <br />
+
+      Prev Page</span
+    >
   </div>
   <div id="GHTSubTest3" style="height:120px;width:553px">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="DataGrid3">
@@ -189,8 +203,11 @@
       </tr>
       <tr>
         <td colspan="3">
-          <span>
-          </span>&amp;nbsp;<a href="javascript:__doPostBack('DataGrid3$_ctl14$_ctl1','')">&gt;</a></td>
+          <span></span>
+
+          &amp;nbsp;<a
+           href="javascript:__doPostBack('DataGrid3$_ctl14$_ctl1','')">&gt;</a>
+        </td>
       </tr>
     </table>
     <span>
@@ -256,10 +273,20 @@
       </tr>
       <tr>
         <td colspan="3">
-          <span>1</span>&amp;nbsp;<a href="javascript:__doPostBack('DataGrid4$_ctl14$_ctl1','')">2</a>&amp;nbsp;<a href="javascript:__doPostBack('DataGrid4$_ctl14$_ctl2','')">3</a></td>
+          <span>1</span>
+
+          &amp;nbsp;<a
+           href="javascript:__doPostBack('DataGrid4$_ctl14$_ctl1','')">2</a>
+
+          &amp;nbsp;<a
+           href="javascript:__doPostBack('DataGrid4$_ctl14$_ctl2','')">3</a>
+        </td>
       </tr>
     </table>
     <span>
-      <br />Prev</span>
+      <br />
+
+      Prev</span
+    >
   </div>
 </testresults>

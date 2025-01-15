@@ -8,7 +8,6 @@
     <RootNamespace>Microsoft.CommonLanguageServerProtocol.Framework.UnitTests</RootNamespace>
     <RoslynProjectType>UnitTest</RoslynProjectType>
   </PropertyGroup>
-  
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\..\EditorFeatures\TestUtilities\Microsoft.CodeAnalysis.EditorFeatures.Test.Utilities.csproj" />
     <ProjectReference Include="..\Microsoft.CommonLanguageServerProtocol.Framework.Example\Microsoft.CommonLanguageServerProtocol.Framework.Example.csproj" />

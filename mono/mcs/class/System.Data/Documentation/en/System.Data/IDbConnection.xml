@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IDbConnection" FullName="System.Data.IDbConnection">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public interface IDbConnection : IDisposable" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public interface IDbConnection : IDisposable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -17,9 +21,46 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.IDbConnection" /> interface enables an inheriting class to implement a Connection class, which represents a unique session with a data source (for example, a network connection to a server). For more information about Connection classes, see <format type="text/html"><a href="9ABC3F92-1BE3-4E1A-B360-762DC689650E">[&lt;topic://cpconadonetconnections&gt;]</a></format>. </para>
-      <para>An application does not create an instance of the <see cref="T:System.Data.IDbConnection" /> interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.IDbConnection" />.</para>
-      <para>Classes that inherit <see cref="T:System.Data.IDbConnection" /> must implement all inherited members, and typically define additional members to add provider-specific functionality. For example, the <see cref="T:System.Data.IDbConnection" /> interface defines the <see cref="P:System.Data.IDbConnection.ConnectionTimeout" /> property. In turn, the <see cref="T:System.Data.SqlClient.SqlConnection" /> class inherits this property, and also defines the <see cref="P:System.Data.SqlClient.SqlConnection.PacketSize" /> property.</para>
+      <para
+        >The <see
+         cref="T:System.Data.IDbConnection" />
+
+         interface enables an inheriting class to implement a Connection class, which represents a unique session with a data source (for example, a network connection to a server). For more information about Connection classes, see <format
+         type="text/html">
+          <a href="9ABC3F92-1BE3-4E1A-B360-762DC689650E"
+            >[&lt;topic://cpconadonetconnections&gt;]</a
+          >
+        </format>
+
+        . </para
+      >
+      <para
+        >An application does not create an instance of the <see
+         cref="T:System.Data.IDbConnection" />
+
+         interface directly, but creates an instance of a class that inherits <see
+         cref="T:System.Data.IDbConnection" />
+
+        .</para
+      >
+      <para
+        >Classes that inherit <see
+         cref="T:System.Data.IDbConnection" />
+
+         must implement all inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
+         cref="T:System.Data.IDbConnection" />
+
+         interface defines the <see
+         cref="P:System.Data.IDbConnection.ConnectionTimeout" />
+
+         property. In turn, the <see
+         cref="T:System.Data.SqlClient.SqlConnection" />
+
+         class inherits this property, and also defines the <see
+         cref="P:System.Data.SqlClient.SqlConnection.PacketSize" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -28,7 +69,10 @@
   </Docs>
   <Members>
     <Member MemberName="BeginTransaction">
-      <MemberSignature Language="C#" Value="public System.Data.IDbTransaction BeginTransaction ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.IDbTransaction BeginTransaction ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.IDbTransaction</ReturnType>
@@ -37,7 +81,15 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Once the transaction has completed, you must explicitly commit or roll back the transaction by using the <see cref="M:System.Data.IDbTransaction.Commit" /> or <see cref="M:System.Data.IDbTransaction.Rollback" /> methods.</para>
+          <para
+            >Once the transaction has completed, you must explicitly commit or roll back the transaction by using the <see
+             cref="M:System.Data.IDbTransaction.Commit" />
+
+             or <see
+             cref="M:System.Data.IDbTransaction.Rollback" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -54,7 +106,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BeginTransaction">
-      <MemberSignature Language="C#" Value="public System.Data.IDbTransaction BeginTransaction (System.Data.IsolationLevel il);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.IDbTransaction BeginTransaction (System.Data.IsolationLevel il);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.IDbTransaction</ReturnType>
@@ -65,18 +120,37 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Once the transaction has completed, you must explicitly commit or roll back the transaction using the <see cref="M:System.Data.IDbTransaction.Commit" /> or <see cref="M:System.Data.IDbTransaction.Rollback" /> methods.</para>
+          <para
+            >Once the transaction has completed, you must explicitly commit or roll back the transaction using the <see
+             cref="M:System.Data.IDbTransaction.Commit" />
+
+             or <see
+             cref="M:System.Data.IDbTransaction.Rollback" />
+
+             methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Begins a database transaction with the specified <see cref="T:System.Data.IsolationLevel" /> value.</para>
+          <para
+            >Begins a database transaction with the specified <see
+             cref="T:System.Data.IsolationLevel" />
+
+             value.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An object representing the new transaction.</para>
         </returns>
         <param name="il">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Data.IsolationLevel" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Data.IsolationLevel" />
+
+           values. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -99,7 +173,10 @@
           <para>Changes the current database for an open Connection object.</para>
         </summary>
         <param name="databaseName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the database to use in place of the current database. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the database to use in place of the current database. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -116,7 +193,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Data.IDbConnection.Close" /> method rolls back any pending transactions. It then releases the connection to the connection pool, or closes the connection if connection pooling is disabled.</para>
+          <para
+            >The <see
+             cref="M:System.Data.IDbConnection.Close" />
+
+             method rolls back any pending transactions. It then releases the connection to the connection pool, or closes the connection if connection pooling is disabled.</para
+          >
           <para>An application can call Close more than one time without generating an exception.</para>
         </remarks>
         <summary>
@@ -135,8 +217,7 @@
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'string'</value>
         <remarks>
@@ -163,7 +244,12 @@
         <value>To be added: an object of type 'int'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A value of 0 indicates no limit to the wait time, rather than no wait time, and should be avoided in a <see cref="P:System.Data.IDbConnection.ConnectionString" /> because it would cause the connection attempt to wait indefinitely.</para>
+          <para
+            >A value of 0 indicates no limit to the wait time, rather than no wait time, and should be avoided in a <see
+             cref="P:System.Data.IDbConnection.ConnectionString" />
+
+             because it would cause the connection attempt to wait indefinitely.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -208,7 +294,12 @@
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The Database property can be dynamically updated by using the <see cref="M:System.Data.IDbConnection.ChangeDatabase(System.String)" /> method or by passing an SQL statement using one of the Execute methods. (Initially the database is set by means of the connection string.) If you change the current database using an SQL statement or the ChangeDatabase method, an informational message is sent and then the property is updated.</para>
+          <para
+            >The Database property can be dynamically updated by using the <see
+             cref="M:System.Data.IDbConnection.ChangeDatabase(System.String)" />
+
+             method or by passing an SQL statement using one of the Execute methods. (Initially the database is set by means of the connection string.) If you change the current database using an SQL statement or the ChangeDatabase method, an informational message is sent and then the property is updated.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

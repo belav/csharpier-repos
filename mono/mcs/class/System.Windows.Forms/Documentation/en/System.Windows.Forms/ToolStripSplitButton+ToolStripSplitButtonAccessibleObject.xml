@@ -1,5 +1,11 @@
-<Type Name="ToolStripSplitButton+ToolStripSplitButtonAccessibleObject" FullName="System.Windows.Forms.ToolStripSplitButton+ToolStripSplitButtonAccessibleObject">
-  <TypeSignature Language="C#" Value="public class ToolStripSplitButton.ToolStripSplitButtonAccessibleObject : System.Windows.Forms.ToolStripItem.ToolStripItemAccessibleObject" />
+<Type
+  Name="ToolStripSplitButton+ToolStripSplitButtonAccessibleObject"
+  FullName="System.Windows.Forms.ToolStripSplitButton+ToolStripSplitButtonAccessibleObject"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripSplitButton.ToolStripSplitButtonAccessibleObject : System.Windows.Forms.ToolStripItem.ToolStripItemAccessibleObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,7 +20,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripSplitButtonAccessibleObject (System.Windows.Forms.ToolStripSplitButton item);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripSplitButtonAccessibleObject (System.Windows.Forms.ToolStripSplitButton item);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

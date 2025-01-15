@@ -18,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ExceptionCollection (System.Collections.ArrayList exceptions);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ExceptionCollection (System.Collections.ArrayList exceptions);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -30,14 +33,28 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.ExceptionCollection" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.ExceptionCollection" />
+
+             class.</para
+          >
         </summary>
         <param name="exceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Exception" />, containing the objects to populate the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type <see
+           cref="T:System.Exception" />
+
+          , containing the objects to populate the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Exceptions">
-      <MemberSignature Language="C#" Value="public System.Collections.ArrayList Exceptions { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ArrayList Exceptions { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -50,12 +67,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the array of <see cref="T:System.Exception" /> objects that represent the collection of exceptions.</para>
+          <para
+            >Gets the array of <see
+             cref="T:System.Exception" />
+
+             objects that represent the collection of exceptions.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -71,12 +96,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> with the data needed to serialize the <see cref="T:System.ComponentModel.Design.ExceptionCollection" />.</para>
+          <para
+            >Populates a <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+             with the data needed to serialize the <see
+             cref="T:System.ComponentModel.Design.ExceptionCollection" />
+
+            .</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> to populate with data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+           to populate with data.</param
+        >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />) for this serialization.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The destination (see <see
+           cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          ) for this serialization.</param
+        >
       </Docs>
     </Member>
   </Members>

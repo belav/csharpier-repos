@@ -1,4 +1,7 @@
-<Type Name="ConnectionProviderCallback" FullName="System.Web.UI.WebControls.WebParts.ConnectionProviderCallback">
+<Type
+  Name="ConnectionProviderCallback"
+  FullName="System.Web.UI.WebControls.WebParts.ConnectionProviderCallback"
+>
   <TypeSignature Language="C#" Value="public delegate object ConnectionProviderCallback();" />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>

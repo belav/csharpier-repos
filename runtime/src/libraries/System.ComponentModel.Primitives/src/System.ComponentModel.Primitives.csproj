@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <!--
@@ -9,7 +8,6 @@
     <GenerateResxSourceIncludeDefaultValues>true</GenerateResxSourceIncludeDefaultValues>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\ComponentModel\ISynchronizeInvoke.cs" />
     <Compile Include="System\ComponentModel\BrowsableAttribute.cs" />
@@ -43,7 +41,6 @@
     <Compile Include="System\ComponentModel\RefreshPropertiesAttribute.cs" />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Collections.NonGeneric" />
     <Reference Include="System.ComponentModel" />
@@ -51,5 +48,4 @@
     <Reference Include="System.Runtime" />
     <Reference Include="System.Threading" />
   </ItemGroup>
-
 </Project>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="StateChangeEventArgs" FullName="System.Data.StateChangeEventArgs">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public sealed class StateChangeEventArgs : EventArgs" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public sealed class StateChangeEventArgs : EventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -16,7 +20,15 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The data is used by the StateChange property of the <see cref="T:System.Data.OleDb.OleDbConnection" /> and the StateChange property of the <see cref="T:System.Data.SqlClient.SqlConnection" />.</para>
+      <para
+        >The data is used by the StateChange property of the <see
+         cref="T:System.Data.OleDb.OleDbConnection" />
+
+         and the StateChange property of the <see
+         cref="T:System.Data.SqlClient.SqlConnection" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +37,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public StateChangeEventArgs (System.Data.ConnectionState originalState, System.Data.ConnectionState currentState);" />
+      <MemberSignature
+        Language="C#"
+        Value="public StateChangeEventArgs (System.Data.ConnectionState originalState, System.Data.ConnectionState currentState);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -36,12 +51,29 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Data.StateChangeEventArgs" /> class, when given the original state and the current state of the object.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Data.StateChangeEventArgs" />
+
+             class, when given the original state and the current state of the object.</para
+          >
         </summary>
         <param name="originalState">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Data.ConnectionState" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Data.ConnectionState" />
+
+           values. </param
+        >
         <param name="currentState">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Data.ConnectionState" /> values. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Data.ConnectionState" />
+
+           values. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -49,7 +81,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CurrentState">
-      <MemberSignature Language="C#" Value="public System.Data.ConnectionState CurrentState { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.ConnectionState CurrentState { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.ConnectionState</ReturnType>
@@ -68,7 +103,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OriginalState">
-      <MemberSignature Language="C#" Value="public System.Data.ConnectionState OriginalState { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Data.ConnectionState OriginalState { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Data.ConnectionState</ReturnType>

@@ -1,6 +1,9 @@
 <Type Name="ErrorCode" FullName="Mono.Debugger.Soft.ErrorCode">
   <TypeSignature Language="C#" Value="public enum ErrorCode" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed ErrorCode extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed ErrorCode extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Debugger.Soft</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -10,13 +13,15 @@
   </Base>
   <Docs>
     <summary>Error codes sent by debuggee using the wire protocol.</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName="ABSENT_INFORMATION">
       <MemberSignature Language="C#" Value="ABSENT_INFORMATION" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode ABSENT_INFORMATION = int32(105)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode ABSENT_INFORMATION = int32(105)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -30,7 +35,10 @@
     </Member>
     <Member MemberName="ERR_NO_INVOCATION">
       <MemberSignature Language="C#" Value="ERR_NO_INVOCATION" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode ERR_NO_INVOCATION = int32(104)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode ERR_NO_INVOCATION = int32(104)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -44,7 +52,10 @@
     </Member>
     <Member MemberName="ERR_UNLOADED">
       <MemberSignature Language="C#" Value="ERR_UNLOADED" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode ERR_UNLOADED = int32(103)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode ERR_UNLOADED = int32(103)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -58,7 +69,10 @@
     </Member>
     <Member MemberName="INVALID_ARGUMENT">
       <MemberSignature Language="C#" Value="INVALID_ARGUMENT" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode INVALID_ARGUMENT = int32(102)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode INVALID_ARGUMENT = int32(102)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -72,7 +86,10 @@
     </Member>
     <Member MemberName="INVALID_FIELDID">
       <MemberSignature Language="C#" Value="INVALID_FIELDID" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode INVALID_FIELDID = int32(25)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode INVALID_FIELDID = int32(25)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -86,7 +103,10 @@
     </Member>
     <Member MemberName="INVALID_FRAMEID">
       <MemberSignature Language="C#" Value="INVALID_FRAMEID" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode INVALID_FRAMEID = int32(30)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode INVALID_FRAMEID = int32(30)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -100,7 +120,10 @@
     </Member>
     <Member MemberName="INVALID_OBJECT">
       <MemberSignature Language="C#" Value="INVALID_OBJECT" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode INVALID_OBJECT = int32(20)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode INVALID_OBJECT = int32(20)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -114,7 +137,10 @@
     </Member>
     <Member MemberName="NO_SEQ_POINT_AT_IL_OFFSET">
       <MemberSignature Language="C#" Value="NO_SEQ_POINT_AT_IL_OFFSET" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode NO_SEQ_POINT_AT_IL_OFFSET = int32(106)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode NO_SEQ_POINT_AT_IL_OFFSET = int32(106)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -128,7 +154,10 @@
     </Member>
     <Member MemberName="NONE">
       <MemberSignature Language="C#" Value="NONE" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode NONE = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode NONE = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -142,7 +171,10 @@
     </Member>
     <Member MemberName="NOT_IMPLEMENTED">
       <MemberSignature Language="C#" Value="NOT_IMPLEMENTED" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode NOT_IMPLEMENTED = int32(100)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode NOT_IMPLEMENTED = int32(100)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -156,7 +188,10 @@
     </Member>
     <Member MemberName="NOT_SUSPENDED">
       <MemberSignature Language="C#" Value="NOT_SUSPENDED" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode NOT_SUSPENDED = int32(101)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype Mono.Debugger.Soft.ErrorCode NOT_SUSPENDED = int32(101)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

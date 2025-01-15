@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ToolStripProfessionalRenderer" FullName="System.Windows.Forms.ToolStripProfessionalRenderer">
-  <TypeSignature Language="C#" Value="public class ToolStripProfessionalRenderer : System.Windows.Forms.ToolStripRenderer" />
+<Type
+  Name="ToolStripProfessionalRenderer"
+  FullName="System.Windows.Forms.ToolStripProfessionalRenderer"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripProfessionalRenderer : System.Windows.Forms.ToolStripRenderer"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,11 +20,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> creates pens and brushes based on a replaceable color table called <see cref="T:System.Windows.Forms.ProfessionalColorTable" />.</para>
+        <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+
+         creates pens and brushes based on a replaceable color table called <see
+         cref="T:System.Windows.Forms.ProfessionalColorTable" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Handles the painting functionality for <see cref="T:System.Windows.Forms.ToolStrip" /> objects, applying a custom palette and a streamlined style.</para>
+      <para
+        >Handles the painting functionality for <see
+         cref="T:System.Windows.Forms.ToolStrip" />
+
+         objects, applying a custom palette and a streamlined style.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -31,7 +48,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -39,27 +61,47 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripProfessionalRenderer (System.Windows.Forms.ProfessionalColorTable professionalColorTable);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripProfessionalRenderer (System.Windows.Forms.ProfessionalColorTable professionalColorTable);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
-        <Parameter Name="professionalColorTable" Type="System.Windows.Forms.ProfessionalColorTable" />
+        <Parameter
+          Name="professionalColorTable"
+          Type="System.Windows.Forms.ProfessionalColorTable"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+
+             class. </para
+          >
         </summary>
         <param name="professionalColorTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.ProfessionalColorTable" /> to be used for painting.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.ProfessionalColorTable" />
+
+           to be used for painting.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="ColorTable">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.ProfessionalColorTable ColorTable { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.ProfessionalColorTable ColorTable { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ProfessionalColorTable</ReturnType>
@@ -78,7 +120,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderArrow">
-      <MemberSignature Language="C#" Value="protected override void OnRenderArrow (System.Windows.Forms.ToolStripArrowRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderArrow (System.Windows.Forms.ToolStripArrowRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -97,7 +142,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderButtonBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -116,7 +164,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderDropDownButtonBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderDropDownButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderDropDownButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -135,7 +186,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderGrip">
-      <MemberSignature Language="C#" Value="protected override void OnRenderGrip (System.Windows.Forms.ToolStripGripRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderGrip (System.Windows.Forms.ToolStripGripRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -154,7 +208,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderImageMargin">
-      <MemberSignature Language="C#" Value="protected override void OnRenderImageMargin (System.Windows.Forms.ToolStripRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderImageMargin (System.Windows.Forms.ToolStripRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -173,7 +230,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderItemCheck">
-      <MemberSignature Language="C#" Value="protected override void OnRenderItemCheck (System.Windows.Forms.ToolStripItemImageRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderItemCheck (System.Windows.Forms.ToolStripItemImageRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -192,7 +252,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderItemImage">
-      <MemberSignature Language="C#" Value="protected override void OnRenderItemImage (System.Windows.Forms.ToolStripItemImageRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderItemImage (System.Windows.Forms.ToolStripItemImageRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -211,7 +274,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderItemText">
-      <MemberSignature Language="C#" Value="protected override void OnRenderItemText (System.Windows.Forms.ToolStripItemTextRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderItemText (System.Windows.Forms.ToolStripItemTextRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -230,7 +296,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderLabelBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderLabelBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderLabelBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -249,7 +318,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderMenuItemBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderMenuItemBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderMenuItemBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -268,7 +340,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderOverflowButtonBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderOverflowButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderOverflowButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -287,7 +362,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderSeparator">
-      <MemberSignature Language="C#" Value="protected override void OnRenderSeparator (System.Windows.Forms.ToolStripSeparatorRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderSeparator (System.Windows.Forms.ToolStripSeparatorRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -306,7 +384,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderSplitButtonBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderSplitButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderSplitButtonBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -325,7 +406,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderToolStripBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderToolStripBackground (System.Windows.Forms.ToolStripRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderToolStripBackground (System.Windows.Forms.ToolStripRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -344,7 +428,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderToolStripBorder">
-      <MemberSignature Language="C#" Value="protected override void OnRenderToolStripBorder (System.Windows.Forms.ToolStripRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderToolStripBorder (System.Windows.Forms.ToolStripRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -363,7 +450,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderToolStripContentPanelBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderToolStripContentPanelBackground (System.Windows.Forms.ToolStripContentPanelRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderToolStripContentPanelBackground (System.Windows.Forms.ToolStripContentPanelRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -375,22 +465,48 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripContentPanelBackground(System.Windows.Forms.ToolStripContentPanelRenderEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripContentPanelBackground(System.Windows.Forms.ToolStripContentPanelRenderEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripContentPanelBackground" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripContentPanelBackground" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderToolStripPanelBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderToolStripPanelBackground (System.Windows.Forms.ToolStripPanelRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderToolStripPanelBackground (System.Windows.Forms.ToolStripPanelRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -402,22 +518,48 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripPanelBackground(System.Windows.Forms.ToolStripPanelRenderEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripPanelBackground(System.Windows.Forms.ToolStripPanelRenderEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripPanelBackground" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripPanelBackground" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="OnRenderToolStripStatusLabelBackground">
-      <MemberSignature Language="C#" Value="protected override void OnRenderToolStripStatusLabelBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void OnRenderToolStripStatusLabelBackground (System.Windows.Forms.ToolStripItemRenderEventArgs e);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -429,15 +571,38 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html"><a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a></format>.</para>
-          <para>The <see cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripStatusLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" /> method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para>
+          <para
+            >Raising an event invokes the event handler through a delegate. For more information, see <format
+             type="text/html">
+              <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
+            </format>
+
+            .</para
+          >
+          <para
+            >The <see
+             cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripStatusLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+
+             method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripStatusLabelBackground" /> event.</para>
+          <para
+            >Raises the <see
+             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripStatusLabelBackground" />
+
+             event.</para
+          >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" /> that contains the event data.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+           that contains the event data.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

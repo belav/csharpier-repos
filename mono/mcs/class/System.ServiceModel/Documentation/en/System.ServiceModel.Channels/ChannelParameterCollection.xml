@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ChannelParameterCollection" FullName="System.ServiceModel.Channels.ChannelParameterCollection">
-  <TypeSignature Language="C#" Value="public class ChannelParameterCollection : System.Collections.ObjectModel.Collection&lt;object&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ChannelParameterCollection extends System.Collections.ObjectModel.Collection`1&lt;object&gt;" />
+<Type
+  Name="ChannelParameterCollection"
+  FullName="System.ServiceModel.Channels.ChannelParameterCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ChannelParameterCollection : System.Collections.ObjectModel.Collection<object>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ChannelParameterCollection extends System.Collections.ObjectModel.Collection`1<object>"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -26,7 +35,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ChannelParameterCollection ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -39,13 +51,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
+
+             class.  </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ChannelParameterCollection (System.ServiceModel.Channels.IChannel channel);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.IChannel channel) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ChannelParameterCollection (System.ServiceModel.Channels.IChannel channel);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.ServiceModel.Channels.IChannel channel) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -56,19 +79,41 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An instance is created with <see cref="P:System.ServiceModel.Channels.ChannelParameterCollection.Channel" /> set to <paramref name="channel" />.</para>
+          <para
+            >An instance is created with <see
+             cref="P:System.ServiceModel.Channels.ChannelParameterCollection.Channel" />
+
+             set to <paramref
+             name="channel" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" /> class.  </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
+
+             class.  </para
+          >
         </summary>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The channel whose parameters are in this collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The channel whose parameters are in this collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Channel">
-      <MemberSignature Language="C#" Value="protected virtual System.ServiceModel.Channels.IChannel Channel { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Channels.IChannel Channel" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual System.ServiceModel.Channels.IChannel Channel { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Channels.IChannel Channel"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -80,7 +125,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property is set to <paramref name="channel" /> when <see cref="M:System.ServiceModel.Channels.ChannelParameterCollection.#ctor(System.ServiceModel.Channels.IChannel)" /> is called.</para>
+          <para
+            >This property is set to <paramref
+             name="channel" />
+
+             when <see
+             cref="M:System.ServiceModel.Channels.ChannelParameterCollection.#ctor(System.ServiceModel.Channels.IChannel)" />
+
+             is called.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -90,7 +143,10 @@
     </Member>
     <Member MemberName="ClearItems">
       <MemberSignature Language="C#" Value="protected override void ClearItems ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void ClearItems() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void ClearItems() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -108,8 +164,14 @@
       </Docs>
     </Member>
     <Member MemberName="InsertItem">
-      <MemberSignature Language="C#" Value="protected override void InsertItem (int index, object item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void InsertItem(int32 index, object item) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void InsertItem (int index, object item);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void InsertItem(int32 index, object item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -128,14 +190,26 @@
           <para>Inserts the specified item into the collection using the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The index of the item in the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The index of the item in the collection.</param
+        >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item to add to the collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item to add to the collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="PropagateChannelParameters">
-      <MemberSignature Language="C#" Value="public void PropagateChannelParameters (System.ServiceModel.Channels.IChannel innerChannel);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void PropagateChannelParameters(class System.ServiceModel.Channels.IChannel innerChannel) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void PropagateChannelParameters (System.ServiceModel.Channels.IChannel innerChannel);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void PropagateChannelParameters(class System.ServiceModel.Channels.IChannel innerChannel) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -150,15 +224,26 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the parameters in the current collection to a specified channel's <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />.</para>
+          <para
+            >Adds the parameters in the current collection to a specified channel's <see
+             cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
+
+            .</para
+          >
         </summary>
         <param name="innerChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />The channel that receives the current collection's parameters.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The channel that receives the current collection's parameters.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="RemoveItem">
       <MemberSignature Language="C#" Value="protected override void RemoveItem (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void RemoveItem(int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void RemoveItem(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -176,12 +261,21 @@
           <para>Removes a parameter from the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />Index of the parameter to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Index of the parameter to remove.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SetItem">
-      <MemberSignature Language="C#" Value="protected override void SetItem (int index, object item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void SetItem(int32 index, object item) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void SetItem (int index, object item);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void SetItem(int32 index, object item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -200,9 +294,15 @@
           <para>Replaces an item in the collection at a specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />Index of the item to replace.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Index of the item to replace.</param
+        >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />Value of the replacement item.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Value of the replacement item.</param
+        >
       </Docs>
     </Member>
   </Members>

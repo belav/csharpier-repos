@@ -13,7 +13,18 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.LayoutSettings" /> class is the base class for types that collect the various characteristics common to a specific user interface (UI) layout scheme, such as <see cref="T:System.Windows.Forms.TableLayoutSettings" /> and <see cref="T:System.Windows.Forms.FlowLayoutSettings" />.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.LayoutSettings" />
+
+         class is the base class for types that collect the various characteristics common to a specific user interface (UI) layout scheme, such as <see
+         cref="T:System.Windows.Forms.TableLayoutSettings" />
+
+         and <see
+         cref="T:System.Windows.Forms.FlowLayoutSettings" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -30,7 +41,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Windows.Forms.LayoutSettings" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Windows.Forms.LayoutSettings" />
+
+             class. </para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -38,7 +54,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LayoutEngine">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.Layout.LayoutEngine LayoutEngine { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.Layout.LayoutEngine LayoutEngine { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.Layout.LayoutEngine</ReturnType>
@@ -48,7 +67,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Windows.Forms.TableLayoutSettings.LayoutEngine" /> property is typically used in two contexts: the container that uses a layout scheme, and the child control of the container to which the layout scheme is applied.</para>
+          <para
+            >The <see
+             cref="P:System.Windows.Forms.TableLayoutSettings.LayoutEngine" />
+
+             property is typically used in two contexts: the container that uses a layout scheme, and the child control of the container to which the layout scheme is applied.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

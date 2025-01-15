@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="AuthorizationRule" FullName="System.Web.Configuration.AuthorizationRule">
-  <TypeSignature Language="C#" Value="public sealed class AuthorizationRule : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class AuthorizationRule : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,20 +16,49 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.AuthorizationRule" /> class provides a way to programmatically access and modify the authorization section of a configuration file.</para>
-      <para>This type is part of a group that includes the <see cref="T:System.Web.Configuration.AuthorizationSection" />, the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />, and the <see cref="T:System.Web.Configuration.AuthorizationRuleAction" /> types. </para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.AuthorizationRule" />
+
+         class provides a way to programmatically access and modify the authorization section of a configuration file.</para
+      >
+      <para
+        >This type is part of a group that includes the <see
+         cref="T:System.Web.Configuration.AuthorizationSection" />
+
+        , the <see
+         cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+
+        , and the <see
+         cref="T:System.Web.Configuration.AuthorizationRuleAction" />
+
+         types. </para
+      >
       <block subset="none" type="note">
-        <para>The <see cref="T:System.Web.Configuration.AuthorizationSection" /> can update the configuration information at any level in the configuration hierarchy.</para>
+        <para
+          >The <see
+           cref="T:System.Web.Configuration.AuthorizationSection" />
+
+           can update the configuration information at any level in the configuration hierarchy.</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.AuthorizationRule" /> class allows you to programmatically access and modify the authorization section of a configuration file. This class cannot be inherited.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.AuthorizationRule" />
+
+         class allows you to programmatically access and modify the authorization section of a configuration file. This class cannot be inherited.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public AuthorizationRule (System.Web.Configuration.AuthorizationRuleAction action);" />
+      <MemberSignature
+        Language="C#"
+        Value="public AuthorizationRule (System.Web.Configuration.AuthorizationRuleAction action);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="action" Type="System.Web.Configuration.AuthorizationRuleAction" />
@@ -35,21 +67,40 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.Configuration.AuthorizationRule.#ctor(System.Web.Configuration.AuthorizationRuleAction)" /> constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. </para>
+          <para
+            >The <see
+             cref="M:System.Web.Configuration.AuthorizationRule.#ctor(System.Web.Configuration.AuthorizationRuleAction)" />
+
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Web.Configuration.AuthorizationRule" /> class using the passed object. </para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             class using the passed object. </para
+          >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.Configuration.AuthorizationRule" /> object to use to initialize the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.Configuration.AuthorizationRule" />
+
+           object to use to initialize the new instance.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Action">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.AuthorizationRuleAction Action { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.AuthorizationRuleAction Action { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.AuthorizationRuleAction</ReturnType>
@@ -63,7 +114,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <see cref="T:System.Web.Configuration.AuthorizationRule" /> action.</para>
+          <para
+            >Gets or sets the <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             action.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -91,7 +147,10 @@
           <para>true if the objects are equal; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to compare with the current object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object to compare with the current object.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -160,7 +219,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PreSerialize">
-      <MemberSignature Language="C#" Value="protected override void PreSerialize (System.Xml.XmlWriter writer);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void PreSerialize (System.Xml.XmlWriter writer);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -179,7 +241,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>
@@ -190,7 +255,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the collection of the <see cref="T:System.Web.Configuration.AuthorizationRule" /> properties.</para>
+          <para
+            >Specifies the collection of the <see
+             cref="T:System.Web.Configuration.AuthorizationRule" />
+
+             properties.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -198,7 +268,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Reset">
-      <MemberSignature Language="C#" Value="protected override void Reset (System.Configuration.ConfigurationElement parentElement);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void Reset (System.Configuration.ConfigurationElement parentElement);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -233,7 +306,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Roles">
-      <MemberSignature Language="C#" Value="public System.Collections.Specialized.StringCollection Roles { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Specialized.StringCollection Roles { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -251,7 +327,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.AuthorizationRule.Roles" /> property is a list of roles that are granted or denied access to the resource. There must be at least one value in either the <see cref="P:System.Web.Configuration.AuthorizationRule.Users" /> property collection or the <see cref="P:System.Web.Configuration.AuthorizationRule.Roles" /> property collection, or both.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
+
+             property is a list of roles that are granted or denied access to the resource. There must be at least one value in either the <see
+             cref="P:System.Web.Configuration.AuthorizationRule.Users" />
+
+             property collection or the <see
+             cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
+
+             property collection, or both.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -263,7 +350,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SerializeElement">
-      <MemberSignature Language="C#" Value="protected override bool SerializeElement (System.Xml.XmlWriter writer, bool serializeCollectionKey);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override bool SerializeElement (System.Xml.XmlWriter writer, bool serializeCollectionKey);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -301,7 +391,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Unmerge">
-      <MemberSignature Language="C#" Value="protected override void Unmerge (System.Configuration.ConfigurationElement sourceElement, System.Configuration.ConfigurationElement parentElement, System.Configuration.ConfigurationSaveMode saveMode);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void Unmerge (System.Configuration.ConfigurationElement sourceElement, System.Configuration.ConfigurationElement parentElement, System.Configuration.ConfigurationSaveMode saveMode);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -324,7 +417,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Users">
-      <MemberSignature Language="C#" Value="public System.Collections.Specialized.StringCollection Users { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Specialized.StringCollection Users { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -342,7 +438,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.AuthorizationRule.Users" /> property is a list of users that are granted or denied access to the resource. There must be at least one value in either the <see cref="P:System.Web.Configuration.AuthorizationRule.Users" /> property collection or the <see cref="P:System.Web.Configuration.AuthorizationRule.Roles" /> property collection, or both.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.AuthorizationRule.Users" />
+
+             property is a list of users that are granted or denied access to the resource. There must be at least one value in either the <see
+             cref="P:System.Web.Configuration.AuthorizationRule.Users" />
+
+             property collection or the <see
+             cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
+
+             property collection, or both.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -354,7 +461,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Verbs">
-      <MemberSignature Language="C#" Value="public System.Collections.Specialized.StringCollection Verbs { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Specialized.StringCollection Verbs { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -372,7 +482,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.Configuration.AuthorizationRule.Verbs" /> property is a comma-separated list of HTTP transmission methods that are granted or denied access to the resource.</para>
+          <para
+            >The <see
+             cref="P:System.Web.Configuration.AuthorizationRule.Verbs" />
+
+             property is a comma-separated list of HTTP transmission methods that are granted or denied access to the resource.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

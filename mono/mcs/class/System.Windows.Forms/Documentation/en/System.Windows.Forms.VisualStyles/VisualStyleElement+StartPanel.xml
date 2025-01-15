@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+StartPanel" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+StartPanel">
+<Type
+  Name="VisualStyleElement+StartPanel"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+StartPanel"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.StartPanel" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

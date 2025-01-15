@@ -76,7 +76,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AuthenticatedAttributes">
-      <MemberSignature Language="C#" Value="public System.Collections.ArrayList AuthenticatedAttributes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ArrayList AuthenticatedAttributes { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ArrayList</ReturnType>
@@ -92,7 +95,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Certificate">
-      <MemberSignature Language="C#" Value="public Mono.Security.X509.X509Certificate Certificate { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.X509.X509Certificate Certificate { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509Certificate</ReturnType>
@@ -157,7 +163,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Key">
-      <MemberSignature Language="C#" Value="public System.Security.Cryptography.AsymmetricAlgorithm Key { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Security.Cryptography.AsymmetricAlgorithm Key { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Security.Cryptography.AsymmetricAlgorithm</ReturnType>
@@ -221,7 +230,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="UnauthenticatedAttributes">
-      <MemberSignature Language="C#" Value="public System.Collections.ArrayList UnauthenticatedAttributes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ArrayList UnauthenticatedAttributes { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ArrayList</ReturnType>

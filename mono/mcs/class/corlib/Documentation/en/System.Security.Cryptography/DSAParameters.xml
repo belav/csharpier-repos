@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DSAParameters" FullName="System.Security.Cryptography.DSAParameters">
   <TypeSignature Maintainer="auto" Language="C#" Value="public struct DSAParameters" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi serializable sealed beforefieldinit DSAParameters extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi serializable sealed beforefieldinit DSAParameters extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -23,7 +26,12 @@
     <remarks>To be added</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Contains the typical parameters for the <see cref="T:System.Security.Cryptography.DSA" /> algorithm.</para>
+      <para
+        >Contains the typical parameters for the <see
+         cref="T:System.Security.Cryptography.DSA" />
+
+         algorithm.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -44,7 +52,12 @@
         <remarks>It is possible to verify the primes p and q by using this parameter.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the counter for the <see cref="T:System.Security.Cryptography.DSA" /> algorithm.</para>
+          <para
+            >Specifies the counter for the <see
+             cref="T:System.Security.Cryptography.DSA" />
+
+             algorithm.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -65,7 +78,12 @@
         <remarks>The numbers P, Q and G may be shared for a group of users.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the G parameter for the <see cref="T:System.Security.Cryptography.DSA" /> algorithm.</para>
+          <para
+            >Specifies the G parameter for the <see
+             cref="T:System.Security.Cryptography.DSA" />
+
+             algorithm.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -86,7 +104,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the J parameter for the <see cref="T:System.Security.Cryptography.DSA" /> algorithm.</para>
+          <para
+            >Specifies the J parameter for the <see
+             cref="T:System.Security.Cryptography.DSA" />
+
+             algorithm.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -110,7 +133,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the P parameter for the <see cref="T:System.Security.Cryptography.DSA" /> algorithm.</para>
+          <para
+            >Specifies the P parameter for the <see
+             cref="T:System.Security.Cryptography.DSA" />
+
+             algorithm.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -134,7 +162,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the Q parameter for the <see cref="T:System.Security.Cryptography.DSA" /> algorithm.</para>
+          <para
+            >Specifies the Q parameter for the <see
+             cref="T:System.Security.Cryptography.DSA" />
+
+             algorithm.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -158,7 +191,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the seed for the <see cref="T:System.Security.Cryptography.DSA" /> algorithm.</para>
+          <para
+            >Specifies the seed for the <see
+             cref="T:System.Security.Cryptography.DSA" />
+
+             algorithm.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -180,13 +218,26 @@
           <para>
 X is a random 160 bits number (20 bytes). It's size doesn't vary with the length of the public key (512-1024 bits).
 </para>
-          <para>
-While this structure has the <see cref="T:System.SerializableAttribute" /> attribute the private key, X, is marked as <see cref="T:System.NonSerializesAttribute" /> so it's content cannot be divulged using serialization.
-</para>
+          <para
+            >
+While this structure has the <see
+             cref="T:System.SerializableAttribute" />
+
+             attribute the private key, X, is marked as <see
+             cref="T:System.NonSerializesAttribute" />
+
+             so it's content cannot be divulged using serialization.
+</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the X parameter for the <see cref="T:System.Security.Cryptography.DSA" /> algorithm.</para>
+          <para
+            >Specifies the X parameter for the <see
+             cref="T:System.Security.Cryptography.DSA" />
+
+             algorithm.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -207,7 +258,12 @@ While this structure has the <see cref="T:System.SerializableAttribute" /> attri
         <remarks>The public key, Y = G^X mod P.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the Y parameter for the <see cref="T:System.Security.Cryptography.DSA" /> algorithm.</para>
+          <para
+            >Specifies the Y parameter for the <see
+             cref="T:System.Security.Cryptography.DSA" />
+
+             algorithm.</para
+          >
         </summary>
       </Docs>
     </Member>

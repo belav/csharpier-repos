@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ContractArgumentValidatorAttribute" FullName="System.Diagnostics.Contracts.ContractArgumentValidatorAttribute">
-  <TypeSignature Language="C#" Value="public sealed class ContractArgumentValidatorAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ContractArgumentValidatorAttribute extends System.Attribute" />
+<Type
+  Name="ContractArgumentValidatorAttribute"
+  FullName="System.Diagnostics.Contracts.ContractArgumentValidatorAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ContractArgumentValidatorAttribute : Attribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ContractArgumentValidatorAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -46,7 +55,15 @@ Contract.EndContractBlock();
 }
 }
 </code>
-      <para>In addition to if-then-throw statements, the contract section of contract validator methods may contain calls to other contract validator methods. However, no other contracts (such as <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" />, or <see cref="M:System.Diagnostics.Contracts.Contract.Ensures(System.Boolean)" />) are allowed. Code that follows the EndContractBlock() call is ignored by all contract tools.The following example shows a range argument validator written in terms of an existing NotNull validator method.</para>
+      <para
+        >In addition to if-then-throw statements, the contract section of contract validator methods may contain calls to other contract validator methods. However, no other contracts (such as <see
+         cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" />
+
+        , or <see
+         cref="M:System.Diagnostics.Contracts.Contract.Ensures(System.Boolean)" />
+
+        ) are allowed. Code that follows the EndContractBlock() call is ignored by all contract tools.The following example shows a range argument validator written in terms of an existing NotNull validator method.</para
+      >
       <code>static class ValidationHelper 
 {
 [ContractArgumentValidator]
@@ -72,7 +89,15 @@ ValidationHelper .InRange(data, position , "data", " position ");
 Contract.Requires&lt;ArgumentOutOfRangeException&gt;(position &gt;= 0);
 Contract.Requires&lt;ArgumentOutOfRangeException&gt;(position &lt; data.Length);
 </code>
-      <para>In standard methods, calls to contract validator methods can be freely mixed with other contracts such as <see cref="M:System.Diagnostics.Contracts.Contract.Ensures(System.Boolean)" /> or <see cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" />.</para>
+      <para
+        >In standard methods, calls to contract validator methods can be freely mixed with other contracts such as <see
+         cref="M:System.Diagnostics.Contracts.Contract.Ensures(System.Boolean)" />
+
+         or <see
+         cref="M:System.Diagnostics.Contracts.Contract.Requires(System.Boolean)" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -82,7 +107,10 @@ Contract.Requires&lt;ArgumentOutOfRangeException&gt;(position &lt; data.Length);
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ContractArgumentValidatorAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -92,7 +120,12 @@ Contract.Requires&lt;ArgumentOutOfRangeException&gt;(position &lt; data.Length);
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractArgumentValidatorAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Diagnostics.Contracts.ContractArgumentValidatorAttribute" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>

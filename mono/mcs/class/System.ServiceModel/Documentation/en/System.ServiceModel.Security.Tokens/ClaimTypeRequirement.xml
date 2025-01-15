@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ClaimTypeRequirement" FullName="System.ServiceModel.Security.Tokens.ClaimTypeRequirement">
+<Type
+  Name="ClaimTypeRequirement"
+  FullName="System.ServiceModel.Security.Tokens.ClaimTypeRequirement"
+>
   <TypeSignature Language="C#" Value="public class ClaimTypeRequirement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ClaimTypeRequirement extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit ClaimTypeRequirement extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -23,7 +29,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public ClaimTypeRequirement (string claimType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string claimType) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string claimType) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -34,19 +43,38 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The predefined claim types can be found at   <see cref="T:System.IdentityModel.Claims.ClaimTypes" />.</para>
+          <para
+            >The predefined claim types can be found at   <see
+             cref="T:System.IdentityModel.Claims.ClaimTypes" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" /> class for a required claim of the specified type. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
+
+             class for a required claim of the specified type. </para
+          >
         </summary>
         <param name="claimType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The claim type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The claim type.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ClaimTypeRequirement (string claimType, bool isOptional);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string claimType, bool isOptional) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public ClaimTypeRequirement (string claimType, bool isOptional);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string claimType, bool isOptional) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -59,12 +87,23 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" /> class for a claim of the specified type. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
+
+             class for a claim of the specified type. </para
+          >
         </summary>
         <param name="claimType">
-          <attribution license="cc4" from="Microsoft" modified="false" />The claim type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The claim type.</param
+        >
         <param name="isOptional">
-          <attribution license="cc4" from="Microsoft" modified="false" />If false, the claim is required; otherwise, it is optional.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          If false, the claim is required; otherwise, it is optional.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="ClaimType">

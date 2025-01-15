@@ -12,12 +12,39 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by members such as <see cref="P:System.Windows.Forms.ListBox.DrawMode" /> in the <see cref="T:System.Windows.Forms.ListBox" />, <see cref="T:System.Windows.Forms.CheckedListBox" />, and <see cref="T:System.Windows.Forms.ComboBox" /> classes.</para>
+      <para
+        >This enumeration is used by members such as <see
+         cref="P:System.Windows.Forms.ListBox.DrawMode" />
+
+         in the <see
+         cref="T:System.Windows.Forms.ListBox" />
+
+        , <see
+         cref="T:System.Windows.Forms.CheckedListBox" />
+
+        , and <see
+         cref="T:System.Windows.Forms.ComboBox" />
+
+         classes.</para
+      >
       <para>You can override the drawing of some controls or certain elements. This enumeration is used to specify if a control is drawn by the operating system or if your own code handles the drawing of the control.</para>
       <block subset="none" type="note">
-        <para>The <see cref="T:System.Windows.Forms.CheckedListBox" /> class only supports <see cref="F:System.Windows.Forms.DrawMode.Normal" />; owner draw modes are ignored.</para>
+        <para
+          >The <see
+           cref="T:System.Windows.Forms.CheckedListBox" />
+
+           class only supports <see
+           cref="F:System.Windows.Forms.DrawMode.Normal" />
+
+          ; owner draw modes are ignored.</para
+        >
       </block>
-      <para>For more information about using the <see cref="T:System.Windows.Forms.DrawMode" /> enumeration, see the MeasureItem and DrawItem events, and the ItemHeight property.</para>
+      <para
+        >For more information about using the <see
+         cref="T:System.Windows.Forms.DrawMode" />
+
+         enumeration, see the MeasureItem and DrawItem events, and the ItemHeight property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

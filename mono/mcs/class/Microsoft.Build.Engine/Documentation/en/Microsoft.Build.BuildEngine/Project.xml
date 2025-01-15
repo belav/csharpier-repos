@@ -13,8 +13,24 @@
     <since version="2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A <see cref="T:Microsoft.Build.BuildEngine.Project" /> represents an vstecmsbuild project. It is a container for items, properties and targets. It can load project content from in-memory XML or from an XML file, and can save to an XML file, preserving most whitespace and all XML comments.</para>
-      <para>Every <see cref="T:Microsoft.Build.BuildEngine.Project" /> must be associated with an <see cref="T:Microsoft.Build.BuildEngine.Engine" /> to access shared information. During a build, the <see cref="T:Microsoft.Build.BuildEngine.Engine" /> object keeps track of which projects are currently building.</para>
+      <para
+        >A <see
+         cref="T:Microsoft.Build.BuildEngine.Project" />
+
+         represents an vstecmsbuild project. It is a container for items, properties and targets. It can load project content from in-memory XML or from an XML file, and can save to an XML file, preserving most whitespace and all XML comments.</para
+      >
+      <para
+        >Every <see
+         cref="T:Microsoft.Build.BuildEngine.Project" />
+
+         must be associated with an <see
+         cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+         to access shared information. During a build, the <see
+         cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+         object keeps track of which projects are currently building.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -31,7 +47,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.Project" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.BuildEngine.Project" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -39,7 +60,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Project (Microsoft.Build.BuildEngine.Engine engine);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Project (Microsoft.Build.BuildEngine.Engine engine);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="engine" Type="Microsoft.Build.BuildEngine.Engine" />
@@ -49,17 +73,34 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.Project" /> class using the supplied <see cref="T:Microsoft.Build.BuildEngine.Engine" />.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.BuildEngine.Project" />
+
+             class using the supplied <see
+             cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+            .</para
+          >
         </summary>
         <param name="engine">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:Microsoft.Build.BuildEngine.Engine" /> instance to use for creating the project in memory.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+           instance to use for creating the project in memory.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddNewImport">
-      <MemberSignature Language="C#" Value="public void AddNewImport (string importLocation, string importCondition);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddNewImport (string importLocation, string importCondition);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -75,7 +116,14 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Add an <format type="text/html"><a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a></format> element to the end of the project.</para>
+          <para
+            >Add an <format
+             type="text/html">
+              <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
+            </format>
+
+             element to the end of the project.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -83,7 +131,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddNewItem">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildItem AddNewItem (string itemName, string itemInclude);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildItem AddNewItem (string itemName, string itemInclude);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildItem</ReturnType>
@@ -100,23 +151,44 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the specified <format type="text/html"><a href="dcef5f91-0613-4bfc-8ee9-d7004bb6d3a9">Item</a></format> element to the project.</para>
+          <para
+            >Adds the specified <format
+             type="text/html">
+              <a href="dcef5f91-0613-4bfc-8ee9-d7004bb6d3a9">Item</a>
+            </format>
+
+             element to the project.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> containing the created item.</para>
+          <para
+            >A <see
+             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+             containing the created item.</para
+          >
         </returns>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the item collection to add the item to. Corresponds to the user-defined name of the Item element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the item collection to add the item to. Corresponds to the user-defined name of the Item element.</param
+        >
         <param name="itemInclude">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the Include attribute of the item.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the Include attribute of the item.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddNewItem">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildItem AddNewItem (string itemName, string itemInclude, bool treatItemIncludeAsLiteral);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildItem AddNewItem (string itemName, string itemInclude, bool treatItemIncludeAsLiteral);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildItem</ReturnType>
@@ -134,25 +206,52 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds the specified <format type="text/html"><a href="dcef5f91-0613-4bfc-8ee9-d7004bb6d3a9">Item</a></format> element to the project.</para>
+          <para
+            >Adds the specified <format
+             type="text/html">
+              <a href="dcef5f91-0613-4bfc-8ee9-d7004bb6d3a9">Item</a>
+            </format>
+
+             element to the project.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:Microsoft.Build.BuildEngine.BuildItem" /> containing the created item.</para>
+          <para
+            >A <see
+             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+             containing the created item.</para
+          >
         </returns>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the item collection to add the item to. Corresponds to the user-defined name of the Item element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the item collection to add the item to. Corresponds to the user-defined name of the Item element.</param
+        >
         <param name="itemInclude">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value of the Include attribute of the item.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value of the Include attribute of the item.</param
+        >
         <param name="treatItemIncludeAsLiteral">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to treat the <paramref name="itemInclude" /> parameter as a literal value; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to treat the <paramref
+           name="itemInclude" />
+
+           parameter as a literal value; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddNewItemGroup">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildItemGroup AddNewItemGroup ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildItemGroup AddNewItemGroup ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildItemGroup</ReturnType>
@@ -163,11 +262,23 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a new <format type="text/html"><a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a></format> element to the project.</para>
+          <para
+            >Adds a new <format
+             type="text/html">
+              <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
+            </format>
+
+             element to the project.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" /> containing the created item group.</para>
+          <para
+            >A <see
+             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+             containing the created item group.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -175,7 +286,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddNewPropertyGroup">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildPropertyGroup AddNewPropertyGroup (bool insertAtEndOfProject);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildPropertyGroup AddNewPropertyGroup (bool insertAtEndOfProject);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildPropertyGroup</ReturnType>
@@ -188,21 +302,39 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a new <format type="text/html"><a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a></format> element to the project.</para>
+          <para
+            >Adds a new <format
+             type="text/html">
+              <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
+            </format>
+
+             element to the project.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" /> containing the created property group.</para>
+          <para
+            >A <see
+             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+             containing the created property group.</para
+          >
         </returns>
         <param name="insertAtEndOfProject">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to insert the PropertyGroup at the end of the project; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to insert the PropertyGroup at the end of the project; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddNewUsingTaskFromAssemblyFile">
-      <MemberSignature Language="C#" Value="public void AddNewUsingTaskFromAssemblyFile (string taskName, string assemblyFile);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddNewUsingTaskFromAssemblyFile (string taskName, string assemblyFile);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -216,19 +348,35 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a new <format type="text/html"><a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a></format> element with the specified assembly file.</para>
+          <para
+            >Adds a new <format
+             type="text/html">
+              <a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a>
+            </format>
+
+             element with the specified assembly file.</para
+          >
         </summary>
         <param name="taskName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the task to reference from the assembly. Corresponds to the TaskName attribute of the UsingTask element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the task to reference from the assembly. Corresponds to the TaskName attribute of the UsingTask element.</param
+        >
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />The file path to the assembly. Corresponds to the AssemblyFile attribute of the UsingTask element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The file path to the assembly. Corresponds to the AssemblyFile attribute of the UsingTask element.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddNewUsingTaskFromAssemblyName">
-      <MemberSignature Language="C#" Value="public void AddNewUsingTaskFromAssemblyName (string taskName, string assemblyName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddNewUsingTaskFromAssemblyName (string taskName, string assemblyName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -242,12 +390,25 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Adds a new <format type="text/html"><a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a></format> element with the specified assembly name.</para>
+          <para
+            >Adds a new <format
+             type="text/html">
+              <a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a>
+            </format>
+
+             element with the specified assembly name.</para
+          >
         </summary>
         <param name="taskName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the task to reference from the assembly. Corresponds to the TaskName attribute of the UsingTask element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the task to reference from the assembly. Corresponds to the TaskName attribute of the UsingTask element.</param
+        >
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the assembly to load. Corresponds to the AssemblyName attribute of the UsingTask element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the assembly to load. Corresponds to the AssemblyName attribute of the UsingTask element.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -297,7 +458,10 @@
           <para>true if the build was successful; otherwise, false.</para>
         </returns>
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The target to build.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The target to build.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -324,14 +488,20 @@
           <para>true if the build was successful; otherwise, false.</para>
         </returns>
         <param name="targetNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />The list of targets to build. This parameter can be a null reference (Nothing in vbprvb) to build the default targets.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The list of targets to build. This parameter can be a null reference (Nothing in vbprvb) to build the default targets.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Build">
-      <MemberSignature Language="C#" Value="public bool Build (string[] targetNames, System.Collections.IDictionary targetOutputs);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Build (string[] targetNames, System.Collections.IDictionary targetOutputs);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -352,16 +522,25 @@
           <para>true if the build was successful; otherwise, false.</para>
         </returns>
         <param name="targetNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />The list of targets to build. This parameter can be a null reference (Nothing in vbprvb) to build the default targets.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The list of targets to build. This parameter can be a null reference (Nothing in vbprvb) to build the default targets.</param
+        >
         <param name="targetOutputs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The outputs of the built targets. This parameter can be a null reference (Nothing) if outputs are not needed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The outputs of the built targets. This parameter can be a null reference (Nothing) if outputs are not needed.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Build">
-      <MemberSignature Language="C#" Value="public bool Build (string[] targetNames, System.Collections.IDictionary targetOutputs, Microsoft.Build.BuildEngine.BuildSettings buildFlags);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Build (string[] targetNames, System.Collections.IDictionary targetOutputs, Microsoft.Build.BuildEngine.BuildSettings buildFlags);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -383,11 +562,23 @@
           <para>true if the build was successful; otherwise, false.</para>
         </returns>
         <param name="targetNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />The list of targets to build. This parameter can be a null reference (Nothing in vbprvb) to build the default targets.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The list of targets to build. This parameter can be a null reference (Nothing in vbprvb) to build the default targets.</param
+        >
         <param name="targetOutputs">
-          <attribution license="cc4" from="Microsoft" modified="false" />The outputs of the built targets. This parameter can be a null reference (Nothing) if outputs are not needed.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The outputs of the built targets. This parameter can be a null reference (Nothing) if outputs are not needed.</param
+        >
         <param name="buildFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:Microsoft.Build.BuildEngine.BuildSettings" /> to apply to the build.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:Microsoft.Build.BuildEngine.BuildSettings" />
+
+           to apply to the build.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -404,7 +595,15 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By default, this property uses value of the <see cref="P:Microsoft.Build.BuildEngine.Engine.BuildEnabled" /> property of the project's <see cref="P:Microsoft.Build.BuildEngine.Project.ParentEngine" />.</para>
+          <para
+            >By default, this property uses value of the <see
+             cref="P:Microsoft.Build.BuildEngine.Engine.BuildEnabled" />
+
+             property of the project's <see
+             cref="P:Microsoft.Build.BuildEngine.Project.ParentEngine" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -427,7 +626,17 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <unmanagedCodeEntityReference>DefaultTargets</unmanagedCodeEntityReference> attribute of the <format type="text/html"><a href="d1cda56a-dbef-4109-9201-39e962e3f653">Project</a></format> element in the vstecmsbuild project.</para>
+          <para
+            >Gets or sets the <unmanagedCodeEntityReference
+            >DefaultTargets</unmanagedCodeEntityReference>
+
+             attribute of the <format
+             type="text/html">
+              <a href="d1cda56a-dbef-4109-9201-39e962e3f653">Project</a>
+            </format>
+
+             element in the vstecmsbuild project.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -454,7 +663,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="EvaluatedItems">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildItemGroup EvaluatedItems { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildItemGroup EvaluatedItems { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildItemGroup</ReturnType>
@@ -464,7 +676,12 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The returned <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" /> contains all the evaluated items in the project after wildcard and property expansion. The items in this property represent the actual items used during the build process. This property value is generated every time something in the project changes. Changes to existing items in this collection will be reflected the next time the project is saved, but adding or deleting items will not impact the project.</para>
+          <para
+            >The returned <see
+             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+             contains all the evaluated items in the project after wildcard and property expansion. The items in this property represent the actual items used during the build process. This property value is generated every time something in the project changes. Changes to existing items in this collection will be reflected the next time the project is saved, but adding or deleting items will not impact the project.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -476,7 +693,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="EvaluatedItemsIgnoringCondition">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildItemGroup EvaluatedItemsIgnoringCondition { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildItemGroup EvaluatedItemsIgnoringCondition { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildItemGroup</ReturnType>
@@ -486,11 +706,31 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The returned <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" /> contains all items in the project after wildcard and property expansion, including those that were not used during the build process due to <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference> attributes evaluating to false. This property value is only generated when certain changes occur, such as a new <format type="text/html"><a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a></format> element being added to the project. Adding or deleting items from this property does not impact the project.</para>
+          <para
+            >The returned <see
+             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+             contains all items in the project after wildcard and property expansion, including those that were not used during the build process due to <unmanagedCodeEntityReference
+            >Condition</unmanagedCodeEntityReference>
+
+             attributes evaluating to false. This property value is only generated when certain changes occur, such as a new <format
+             type="text/html">
+              <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
+            </format>
+
+             element being added to the project. Adding or deleting items from this property does not impact the project.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of all items in a project, even those not used in the build process because a <format type="text/html"><a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a></format> attribute evaluated to false.</para>
+          <para
+            >Gets a collection of all items in a project, even those not used in the build process because a <format
+             type="text/html">
+              <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a>
+            </format>
+
+             attribute evaluated to false.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -498,7 +738,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="EvaluatedProperties">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildPropertyGroup EvaluatedProperties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildPropertyGroup EvaluatedProperties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildPropertyGroup</ReturnType>
@@ -508,9 +751,19 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The returned <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" /> contains all the evaluated properties in the project after performing condition evaluation and property expansion. The properties in this collection include global properties, environment variables, reserved properties, and imported properties. Changes to existing properties in this collection will be reflected the next time the project is saved, but adding or deleting properties will not impact the project.</para>
+          <para
+            >The returned <see
+             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+             contains all the evaluated properties in the project after performing condition evaluation and property expansion. The properties in this collection include global properties, environment variables, reserved properties, and imported properties. Changes to existing properties in this collection will be reflected the next time the project is saved, but adding or deleting properties will not impact the project.</para
+          >
           <block subset="none" type="note">
-            <para>Cloning a <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" /> can negatively impact performance. Only use a copy of this property when it is strictly necessary.</para>
+            <para
+              >Cloning a <see
+               cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+               can negatively impact performance. Only use a copy of this property when it is strictly necessary.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -545,7 +798,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetConditionedPropertyValues">
-      <MemberSignature Language="C#" Value="public string[] GetConditionedPropertyValues (string propertyName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string[] GetConditionedPropertyValues (string propertyName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String[]</ReturnType>
@@ -557,7 +813,14 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method generates the list of possible values by inspecting all of the <format type="text/html"><a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a></format> attributes in the project that involve the property.</para>
+          <para
+            >This method generates the list of possible values by inspecting all of the <format
+             type="text/html">
+              <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a>
+            </format>
+
+             attributes in the project that involve the property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -568,14 +831,20 @@
           <para>The list of possible values for the property.</para>
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property to use when generating the list of possible values.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property to use when generating the list of possible values.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetEvaluatedItemsByName">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildItemGroup GetEvaluatedItemsByName (string itemName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildItemGroup GetEvaluatedItemsByName (string itemName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildItemGroup</ReturnType>
@@ -592,17 +861,28 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" /> containing all of the evaluated items belonging to the specified item collection.</para>
+          <para
+            >A <see
+             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+             containing all of the evaluated items belonging to the specified item collection.</para
+          >
         </returns>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the item collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the item collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetEvaluatedItemsByNameIgnoringCondition">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildItemGroup GetEvaluatedItemsByNameIgnoringCondition (string itemName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildItemGroup GetEvaluatedItemsByNameIgnoringCondition (string itemName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildItemGroup</ReturnType>
@@ -619,17 +899,33 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" /> containing all items belonging to the specified item collection, even those not used in the build process because a <format type="text/html"><a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a></format> attribute evaluated to false..</para>
+          <para
+            >A <see
+             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+             containing all items belonging to the specified item collection, even those not used in the build process because a <format
+             type="text/html">
+              <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">Condition</a>
+            </format>
+
+             attribute evaluated to false..</para
+          >
         </returns>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the specified item collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the specified item collection.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetEvaluatedProperty">
-      <MemberSignature Language="C#" Value="public string GetEvaluatedProperty (string propertyName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string GetEvaluatedProperty (string propertyName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -641,7 +937,12 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If you need to retrieve a large number of property values, use the <see cref="P:Microsoft.Build.BuildEngine.Project.EvaluatedProperties" /> property.</para>
+          <para
+            >If you need to retrieve a large number of property values, use the <see
+             cref="P:Microsoft.Build.BuildEngine.Project.EvaluatedProperties" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -652,7 +953,10 @@
           <para>The value of the specified property.</para>
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -672,21 +976,39 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a string value of the XML from the specified element in the <format type="text/html"><a href="f95f312f-ff92-41eb-9469-ad99e236a307">ProjectExtensions</a></format> element.</para>
+          <para
+            >Returns a string value of the XML from the specified element in the <format
+             type="text/html">
+              <a href="f95f312f-ff92-41eb-9469-ad99e236a307">ProjectExtensions</a>
+            </format>
+
+             element.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The string value of the specified element in the <unmanagedCodeEntityReference>ProjectExtensions</unmanagedCodeEntityReference> element of the project.</para>
+          <para
+            >The string value of the specified element in the <unmanagedCodeEntityReference
+            >ProjectExtensions</unmanagedCodeEntityReference>
+
+             element of the project.</para
+          >
         </returns>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the element in the ProjectExtensions element to return.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the element in the ProjectExtensions element to return.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="GlobalProperties">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildPropertyGroup GlobalProperties { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildPropertyGroup GlobalProperties { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildPropertyGroup</ReturnType>
@@ -696,7 +1018,17 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Global properties are properties set with the <system>/property</system> switch on the command line, or properties set by the integrated development environment before invoking vstecmsbuild. For more information, see <format type="text/html"><a href="edaa65ec-ab8a-42a1-84cb-d76d5b2f4584">MSBuild Command Line Reference</a></format>.</para>
+          <para
+            >Global properties are properties set with the <system
+            >/property</system>
+
+             switch on the command line, or properties set by the integrated development environment before invoking vstecmsbuild. For more information, see <format
+             type="text/html">
+              <a href="edaa65ec-ab8a-42a1-84cb-d76d5b2f4584">MSBuild Command Line Reference</a>
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -708,7 +1040,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Imports">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.ImportCollection Imports { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.ImportCollection Imports { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.ImportCollection</ReturnType>
@@ -718,7 +1053,14 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Imported projects are specified by the <format type="text/html"><a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a></format> element in the project.</para>
+          <para
+            >Imported projects are specified by the <format
+             type="text/html">
+              <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
+            </format>
+
+             element in the project.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -741,7 +1083,17 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the <unmanagedCodeEntityReference>InitialTargets</unmanagedCodeEntityReference> attribute of the <format type="text/html"><a href="d1cda56a-dbef-4109-9201-39e962e3f653">Project</a></format> element in the vstecmsbuild project.</para>
+          <para
+            >Gets or sets the <unmanagedCodeEntityReference
+            >InitialTargets</unmanagedCodeEntityReference>
+
+             attribute of the <format
+             type="text/html">
+              <a href="d1cda56a-dbef-4109-9201-39e962e3f653">Project</a>
+            </format>
+
+             element in the vstecmsbuild project.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -787,7 +1139,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ItemGroups">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildItemGroupCollection ItemGroups { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildItemGroupCollection ItemGroups { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildItemGroupCollection</ReturnType>
@@ -797,11 +1152,23 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" /> returned by this property contains the item groups in this project and all imported projects.</para>
+          <para
+            >The <see
+             cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
+
+             returned by this property contains the item groups in this project and all imported projects.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of the item groups specified with the <format type="text/html"><a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a></format> element in the project.</para>
+          <para
+            >Gets a collection of the item groups specified with the <format
+             type="text/html">
+              <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
+            </format>
+
+             element in the project.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -822,10 +1189,24 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Loads the contents of the specified <see cref="T:System.IO.TextReader" /> into the <see cref="T:Microsoft.Build.BuildEngine.Project" /> object.</para>
+          <para
+            >Loads the contents of the specified <see
+             cref="T:System.IO.TextReader" />
+
+             into the <see
+             cref="T:Microsoft.Build.BuildEngine.Project" />
+
+             object.</para
+          >
         </summary>
         <param name="textReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.IO.TextReader" /> to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.IO.TextReader" />
+
+           to load.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -845,10 +1226,18 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Loads the contents of the specified project file into the <see cref="T:Microsoft.Build.BuildEngine.Project" /> object.</para>
+          <para
+            >Loads the contents of the specified project file into the <see
+             cref="T:Microsoft.Build.BuildEngine.Project" />
+
+             object.</para
+          >
         </summary>
         <param name="projectFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The project file to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The project file to load.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -868,10 +1257,18 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Loads the contents of the specified string into the <see cref="T:Microsoft.Build.BuildEngine.Project" /> object.</para>
+          <para
+            >Loads the contents of the specified string into the <see
+             cref="T:Microsoft.Build.BuildEngine.Project" />
+
+             object.</para
+          >
         </summary>
         <param name="projectXml">
-          <attribution license="cc4" from="Microsoft" modified="false" />The string of XML to load.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The string of XML to load.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -889,7 +1286,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the <see cref="P:Microsoft.Build.BuildEngine.Project.IsDirty" /> property of the project to true.</para>
+          <para
+            >Sets the <see
+             cref="P:Microsoft.Build.BuildEngine.Project.IsDirty" />
+
+             property of the project to true.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -897,7 +1299,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ParentEngine">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.Engine ParentEngine { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.Engine ParentEngine { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.Engine</ReturnType>
@@ -908,7 +1313,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:Microsoft.Build.BuildEngine.Engine" /> that builds the project.</para>
+          <para
+            >Gets the <see
+             cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+             that builds the project.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -916,7 +1326,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PropertyGroups">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.BuildPropertyGroupCollection PropertyGroups { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.BuildPropertyGroupCollection PropertyGroups { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.BuildPropertyGroupCollection</ReturnType>
@@ -926,11 +1339,23 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroupCollection" /> returned by this property contains the property groups in this project and all imported projects.</para>
+          <para
+            >The <see
+             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroupCollection" />
+
+             returned by this property contains the property groups in this project and all imported projects.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of the property groups specified with the <format type="text/html"><a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a></format> element in the project.</para>
+          <para
+            >Gets a collection of the property groups specified with the <format
+             type="text/html">
+              <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
+            </format>
+
+             element in the project.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -976,7 +1401,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RemoveItem">
-      <MemberSignature Language="C#" Value="public void RemoveItem (Microsoft.Build.BuildEngine.BuildItem itemToRemove);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RemoveItem (Microsoft.Build.BuildEngine.BuildItem itemToRemove);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -992,14 +1420,20 @@
           <para>Removes the specified item from the project.</para>
         </summary>
         <param name="itemToRemove">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item to remove from the project.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item to remove from the project.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RemoveItemGroup">
-      <MemberSignature Language="C#" Value="public void RemoveItemGroup (Microsoft.Build.BuildEngine.BuildItemGroup itemGroupToRemove);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RemoveItemGroup (Microsoft.Build.BuildEngine.BuildItemGroup itemGroupToRemove);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1015,14 +1449,20 @@
           <para>Removes the specified item group from the project.</para>
         </summary>
         <param name="itemGroupToRemove">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item group to remove from the project.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item group to remove from the project.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RemoveItemGroupsWithMatchingCondition">
-      <MemberSignature Language="C#" Value="public void RemoveItemGroupsWithMatchingCondition (string matchingCondition);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RemoveItemGroupsWithMatchingCondition (string matchingCondition);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1036,7 +1476,14 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all item groups with the specified <format type="text/html"><a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">condition</a></format> from the project, but does not modify imported projects.</para>
+          <para
+            >Removes all item groups with the specified <format
+             type="text/html">
+              <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">condition</a>
+            </format>
+
+             from the project, but does not modify imported projects.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1060,20 +1507,29 @@
           <para>Removes all items in the specified item collection from the project, but does not modify imported projects.</para>
         </summary>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The item collection to remove.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The item collection to remove.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RemovePropertyGroup">
-      <MemberSignature Language="C#" Value="public void RemovePropertyGroup (Microsoft.Build.BuildEngine.BuildPropertyGroup propertyGroupToRemove);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RemovePropertyGroup (Microsoft.Build.BuildEngine.BuildPropertyGroup propertyGroupToRemove);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="propertyGroupToRemove" Type="Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+        <Parameter
+          Name="propertyGroupToRemove"
+          Type="Microsoft.Build.BuildEngine.BuildPropertyGroup"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
@@ -1083,14 +1539,20 @@
           <para>Removes the specified property group from the project.</para>
         </summary>
         <param name="propertyGroupToRemove">
-          <attribution license="cc4" from="Microsoft" modified="false" />The property group to remove from the project.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The property group to remove from the project.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="RemovePropertyGroupsWithMatchingCondition">
-      <MemberSignature Language="C#" Value="public void RemovePropertyGroupsWithMatchingCondition (string matchCondition);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RemovePropertyGroupsWithMatchingCondition (string matchCondition);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1103,10 +1565,20 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Removes all property groups with the specified <format type="text/html"><a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">condition</a></format> from the project, but does not modify imported projects.</para>
+          <para
+            >Removes all property groups with the specified <format
+             type="text/html">
+              <a href="9d7aa308-b667-48ed-b4c9-a61e49eb0a85">condition</a>
+            </format>
+
+             from the project, but does not modify imported projects.</para
+          >
         </summary>
         <param name="matchCondition">
-          <attribution license="cc4" from="Microsoft" modified="false" />The condition to match when removing property groups.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The condition to match when removing property groups.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1132,7 +1604,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Save">
-      <MemberSignature Language="C#" Value="public void Save (System.IO.TextWriter outTextWriter);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Save (System.IO.TextWriter outTextWriter);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1146,7 +1621,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Saves the project in the specified <see cref="T:System.IO.TextWriter" /> object.</para>
+          <para
+            >Saves the project in the specified <see
+             cref="T:System.IO.TextWriter" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1170,14 +1650,20 @@
           <para>Saves the project to the specified file.</para>
         </summary>
         <param name="projectFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the file in which to save the project.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the file in which to save the project.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Save">
-      <MemberSignature Language="C#" Value="public void Save (string projectFileName, System.Text.Encoding encoding);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Save (string projectFileName, System.Text.Encoding encoding);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1194,9 +1680,18 @@
           <para>Saves the project in the specified file with the specified encoding.</para>
         </summary>
         <param name="projectFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the file in which to save the project.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the file in which to save the project.</param
+        >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Text.Encoding" /> value with which to save the file.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Text.Encoding" />
+
+           value with which to save the file.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -1222,7 +1717,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetImportedProperty">
-      <MemberSignature Language="C#" Value="public void SetImportedProperty (string propertyName, string propertyValue, string condition, Microsoft.Build.BuildEngine.Project importProject);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetImportedProperty (string propertyName, string propertyValue, string condition, Microsoft.Build.BuildEngine.Project importProject);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1241,20 +1739,38 @@
           <para>Sets the value of a property in the specified imported project.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property to change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property to change.</param
+        >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign the property.</param
+        >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
+        >
         <param name="importProject">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:Microsoft.Build.BuildEngine.Project" /> that contains the specified property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:Microsoft.Build.BuildEngine.Project" />
+
+           that contains the specified property.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetImportedProperty">
-      <MemberSignature Language="C#" Value="public void SetImportedProperty (string propertyName, string propertyValue, string condition, Microsoft.Build.BuildEngine.Project importedProject, Microsoft.Build.BuildEngine.PropertyPosition position);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetImportedProperty (string propertyName, string propertyValue, string condition, Microsoft.Build.BuildEngine.Project importedProject, Microsoft.Build.BuildEngine.PropertyPosition position);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1274,22 +1790,46 @@
           <para>Sets the value of a property in the specified imported project.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property to change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property to change.</param
+        >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign the property.</param
+        >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
+        >
         <param name="importedProject">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:Microsoft.Build.BuildEngine.Project" /> that contains the specified property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:Microsoft.Build.BuildEngine.Project" />
+
+           that contains the specified property.</param
+        >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:Microsoft.Build.BuildEngine.PropertyPosition" /> value indicating the location to insert the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+
+           value indicating the location to insert the property.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetImportedProperty">
-      <MemberSignature Language="C#" Value="public void SetImportedProperty (string propertyName, string propertyValue, string condition, Microsoft.Build.BuildEngine.Project importedProject, Microsoft.Build.BuildEngine.PropertyPosition position, bool treatPropertyValueAsLiteral);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetImportedProperty (string propertyName, string propertyValue, string condition, Microsoft.Build.BuildEngine.Project importedProject, Microsoft.Build.BuildEngine.PropertyPosition position, bool treatPropertyValueAsLiteral);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1313,24 +1853,54 @@
           <para>Sets the value of a property in the specified imported project.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property to change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property to change.</param
+        >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign the property.</param
+        >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
+        >
         <param name="importedProject">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:Microsoft.Build.BuildEngine.Project" /> that contains the specified property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:Microsoft.Build.BuildEngine.Project" />
+
+           that contains the specified property.</param
+        >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:Microsoft.Build.BuildEngine.PropertyPosition" /> value indicating the location to insert the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+
+           value indicating the location to insert the property.</param
+        >
         <param name="treatPropertyValueAsLiteral">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to treat the <paramref name="propertyValue" /> parameter as a literal value; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to treat the <paramref
+           name="propertyValue" />
+
+           parameter as a literal value; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetProjectExtensions">
-      <MemberSignature Language="C#" Value="public void SetProjectExtensions (string id, string xmlText);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetProjectExtensions (string id, string xmlText);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1345,17 +1915,30 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Sets the <format type="text/html"><a href="f95f312f-ff92-41eb-9469-ad99e236a307">ProjectExtensions</a></format> element of the project with the specified element name and content.</para>
+          <para
+            >Sets the <format
+             type="text/html">
+              <a href="f95f312f-ff92-41eb-9469-ad99e236a307">ProjectExtensions</a>
+            </format>
+
+             element of the project with the specified element name and content.</para
+          >
         </summary>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the XML element to create as a child of the ProjectExtensions element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the XML element to create as a child of the ProjectExtensions element.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetProperty">
-      <MemberSignature Language="C#" Value="public void SetProperty (string propertyName, string propertyValue);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetProperty (string propertyName, string propertyValue);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1372,16 +1955,25 @@
           <para>Sets the value of the specified property.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property to change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property to change.</param
+        >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign the property.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetProperty">
-      <MemberSignature Language="C#" Value="public void SetProperty (string propertyName, string propertyValue, string condition);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetProperty (string propertyName, string propertyValue, string condition);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1399,18 +1991,30 @@
           <para>Sets the value of the specified property.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property to change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property to change.</param
+        >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign the property.</param
+        >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetProperty">
-      <MemberSignature Language="C#" Value="public void SetProperty (string propertyName, string propertyValue, string condition, Microsoft.Build.BuildEngine.PropertyPosition position);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetProperty (string propertyName, string propertyValue, string condition, Microsoft.Build.BuildEngine.PropertyPosition position);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1426,27 +2030,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="M:Microsoft.Build.BuildEngine.Project.SetProperty(System.String,System.String,System.String,Microsoft.Build.BuildEngine.PropertyPosition)" /> is called from the integrated development environment (IDE) to set a particular property at the project level. This method searches the existing property groups for a property with this name. If one is found, it changes its value. Otherwise, it either adds a new property to that property group, or adds a new property group to the project. <see cref="M:Microsoft.Build.BuildEngine.Project.SetProperty(System.String,System.String,System.String,Microsoft.Build.BuildEngine.PropertyPosition)" /> uses the <paramref name="condition" /> parameter to determine the name of the property group place it in.</para>
+            <see cref="M:Microsoft.Build.BuildEngine.Project.SetProperty(System.String,System.String,System.String,Microsoft.Build.BuildEngine.PropertyPosition)" />
+
+             is called from the integrated development environment (IDE) to set a particular property at the project level. This method searches the existing property groups for a property with this name. If one is found, it changes its value. Otherwise, it either adds a new property to that property group, or adds a new property group to the project. <see
+             cref="M:Microsoft.Build.BuildEngine.Project.SetProperty(System.String,System.String,System.String,Microsoft.Build.BuildEngine.PropertyPosition)" />
+
+             uses the <paramref
+             name="condition" />
+
+             parameter to determine the name of the property group place it in.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Sets the value of the specified property.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property to change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property to change.</param
+        >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign the property.</param
+        >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
+        >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:Microsoft.Build.BuildEngine.PropertyPosition" /> value indicating the location to insert the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+
+           value indicating the location to insert the property.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="SetProperty">
-      <MemberSignature Language="C#" Value="public void SetProperty (string propertyName, string propertyValue, string condition, Microsoft.Build.BuildEngine.PropertyPosition position, bool treatPropertyValueAsLiteral);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void SetProperty (string propertyName, string propertyValue, string condition, Microsoft.Build.BuildEngine.PropertyPosition position, bool treatPropertyValueAsLiteral);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1466,22 +2097,46 @@
           <para>Sets the value of the specified property.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property to change.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property to change.</param
+        >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to assign the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to assign the property.</param
+        >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The condition to use on the property. Corresponds to the Condition attribute of the Property element.</param
+        >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:Microsoft.Build.BuildEngine.PropertyPosition" /> value indicating the location to insert the property.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:Microsoft.Build.BuildEngine.PropertyPosition" />
+
+           value indicating the location to insert the property.</param
+        >
         <param name="treatPropertyValueAsLiteral">
-          <attribution license="cc4" from="Microsoft" modified="false" />true to treat the <paramref name="propertyValue" /> parameter as a literal value; otherwise, false.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          true to treat the <paramref
+           name="propertyValue" />
+
+           parameter as a literal value; otherwise, false.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Targets">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.TargetCollection Targets { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.TargetCollection Targets { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.TargetCollection</ReturnType>
@@ -1491,7 +2146,14 @@
         <since version="2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Targets are specified by the <format type="text/html"><a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a></format> element in the project.</para>
+          <para
+            >Targets are specified by the <format
+             type="text/html">
+              <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
+            </format>
+
+             element in the project.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1514,7 +2176,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.DateTime" /> object indicating the time the project was last changed in a way that required it to be saved to a file.</para>
+          <para
+            >Gets a <see
+             cref="T:System.DateTime" />
+
+             object indicating the time the project was last changed in a way that required it to be saved to a file.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -1522,7 +2189,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="UsingTasks">
-      <MemberSignature Language="C#" Value="public Microsoft.Build.BuildEngine.UsingTaskCollection UsingTasks { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.Build.BuildEngine.UsingTaskCollection UsingTasks { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.Build.BuildEngine.UsingTaskCollection</ReturnType>
@@ -1533,7 +2203,14 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a collection of the <format type="text/html"><a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a></format> elements in the project.</para>
+          <para
+            >Gets a collection of the <format
+             type="text/html">
+              <a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a>
+            </format>
+
+             elements in the project.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

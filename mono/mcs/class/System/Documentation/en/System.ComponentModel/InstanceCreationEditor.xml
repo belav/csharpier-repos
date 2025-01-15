@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="InstanceCreationEditor" FullName="System.ComponentModel.InstanceCreationEditor">
   <TypeSignature Language="C#" Value="public abstract class InstanceCreationEditor" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit InstanceCreationEditor extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi abstract beforefieldinit InstanceCreationEditor extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -14,17 +17,39 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Usually, the text specified by <see cref="P:System.ComponentModel.InstanceCreationEditor.Text" /> is displayed on the drop-down box from the <see cref="T:System.Windows.Forms.PropertyGrid" /> as a link or button. When clicked, the <see cref="M:System.ComponentModel.InstanceCreationEditor.CreateInstance(System.ComponentModel.ITypeDescriptorContext,System.Type)" /> method is called with the <see cref="T:System.Type" /> of the object to create.</para>
+      <para
+        >Usually, the text specified by <see
+         cref="P:System.ComponentModel.InstanceCreationEditor.Text" />
+
+         is displayed on the drop-down box from the <see
+         cref="T:System.Windows.Forms.PropertyGrid" />
+
+         as a link or button. When clicked, the <see
+         cref="M:System.ComponentModel.InstanceCreationEditor.CreateInstance(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+
+         method is called with the <see
+         cref="T:System.Type" />
+
+         of the object to create.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Creates an instance of a particular type of property from a drop-down box within the <see cref="T:System.Windows.Forms.PropertyGrid" />. </para>
+      <para
+        >Creates an instance of a particular type of property from a drop-down box within the <see
+         cref="T:System.Windows.Forms.PropertyGrid" />
+
+        . </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="protected InstanceCreationEditor ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -35,13 +60,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.InstanceCreationEditor" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.InstanceCreationEditor" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
-      <MemberSignature Language="C#" Value="public abstract object CreateInstance (System.ComponentModel.ITypeDescriptorContext context, Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object CreateInstance(class System.ComponentModel.ITypeDescriptorContext context, class System.Type type) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract object CreateInstance (System.ComponentModel.ITypeDescriptorContext context, Type type);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object CreateInstance(class System.ComponentModel.ITypeDescriptorContext context, class System.Type type) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -66,7 +102,10 @@
           <para>An instance of the specified type or null.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />The context information.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The context information.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Text">

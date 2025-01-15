@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="WebConfigurationFileMap" FullName="System.Web.Configuration.WebConfigurationFileMap">
-  <TypeSignature Language="C#" Value="public sealed class WebConfigurationFileMap : System.Configuration.ConfigurationFileMap" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class WebConfigurationFileMap : System.Configuration.ConfigurationFileMap"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,8 +16,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class is used to specify the Web configuration file hierarchy. By default, the configuration system uses the IIS metabase to determine the Web file hierarchy. If IIS is not installed, or if an application targets a version of the .NET Framework that is not the latest version that is installed on the server, the <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class provides a means to define a custom hierarchy.</para>
-      <para>The <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class can specify a single path or multiple paths related to configuration files.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+         class is used to specify the Web configuration file hierarchy. By default, the configuration system uses the IIS metabase to determine the Web file hierarchy. If IIS is not installed, or if an application targets a version of the .NET Framework that is not the latest version that is installed on the server, the <see
+         cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+         class provides a means to define a custom hierarchy.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+         class can specify a single path or multiple paths related to configuration files.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -31,7 +47,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of the <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class.</para>
+          <para
+            >Creates a new instance of the <see
+             cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -50,11 +71,21 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new instance of a <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class with the same value as the existing instance.</para>
+          <para
+            >Creates a new instance of a <see
+             cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+             class with the same value as the existing instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A new instance of a <see cref="T:System.Web.Configuration.WebConfigurationFileMap" /> class.</para>
+          <para
+            >A new instance of a <see
+             cref="T:System.Web.Configuration.WebConfigurationFileMap" />
+
+             class.</para
+          >
         </returns>
       </Docs>
       <AssemblyInfo>
@@ -62,7 +93,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="VirtualDirectories">
-      <MemberSignature Language="C#" Value="public System.Web.Configuration.VirtualDirectoryMappingCollection VirtualDirectories { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Configuration.VirtualDirectoryMappingCollection VirtualDirectories { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Configuration.VirtualDirectoryMappingCollection</ReturnType>
@@ -72,7 +106,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The virtual directories of a Web application may not necessarily map to the physical directories on the server. The <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" /> class is independent of IIS.</para>
+          <para
+            >The virtual directories of a Web application may not necessarily map to the physical directories on the server. The <see
+             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+
+             class is independent of IIS.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

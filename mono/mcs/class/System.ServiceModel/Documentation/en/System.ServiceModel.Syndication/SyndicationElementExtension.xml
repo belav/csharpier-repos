@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SyndicationElementExtension" FullName="System.ServiceModel.Syndication.SyndicationElementExtension">
+<Type
+  Name="SyndicationElementExtension"
+  FullName="System.ServiceModel.Syndication.SyndicationElementExtension"
+>
   <TypeSignature Language="C#" Value="public class SyndicationElementExtension" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit SyndicationElementExtension extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit SyndicationElementExtension extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -41,7 +47,15 @@
           </para>
         </item>
       </list>
-      <para>The syndication object model makes this extensibility easier using <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />, which can be placed in a <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtensionCollection" />.</para>
+      <para
+        >The syndication object model makes this extensibility easier using <see
+         cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+        , which can be placed in a <see
+         cref="T:System.ServiceModel.Syndication.SyndicationElementExtensionCollection" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -50,8 +64,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SyndicationElementExtension (object dataContractExtension);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(object dataContractExtension) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SyndicationElementExtension (object dataContractExtension);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(object dataContractExtension) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -63,15 +83,29 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified object.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+             class with the specified object.</para
+          >
         </summary>
         <param name="dataContractExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data contract object used to initialize the extension. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data contract object used to initialize the extension. </param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SyndicationElementExtension (System.Xml.XmlReader xmlReader);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.XmlReader xmlReader) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SyndicationElementExtension (System.Xml.XmlReader xmlReader);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Xml.XmlReader xmlReader) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -83,38 +117,78 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+             class. </para
+          >
         </summary>
         <param name="xmlReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlReader" /> that contains the content of the new <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlReader" />
+
+           that contains the content of the new <see
+           cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+          .</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SyndicationElementExtension (object dataContractExtension, System.Runtime.Serialization.XmlObjectSerializer dataContractSerializer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(object dataContractExtension, class System.Runtime.Serialization.XmlObjectSerializer dataContractSerializer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SyndicationElementExtension (object dataContractExtension, System.Runtime.Serialization.XmlObjectSerializer dataContractSerializer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(object dataContractExtension, class System.Runtime.Serialization.XmlObjectSerializer dataContractSerializer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="dataContractExtension" Type="System.Object" />
-        <Parameter Name="dataContractSerializer" Type="System.Runtime.Serialization.XmlObjectSerializer" />
+        <Parameter
+          Name="dataContractSerializer"
+          Type="System.Runtime.Serialization.XmlObjectSerializer"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified object and data contract serializer.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+             class with the specified object and data contract serializer.</para
+          >
         </summary>
         <param name="dataContractExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data contract object used to initialize the extension.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data contract object used to initialize the extension.</param
+        >
         <param name="dataContractSerializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data contract serializer to use.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data contract serializer to use.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SyndicationElementExtension (object xmlSerializerExtension, System.Xml.Serialization.XmlSerializer serializer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(object xmlSerializerExtension, class System.Xml.Serialization.XmlSerializer serializer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SyndicationElementExtension (object xmlSerializerExtension, System.Xml.Serialization.XmlSerializer serializer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(object xmlSerializerExtension, class System.Xml.Serialization.XmlSerializer serializer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -127,17 +201,34 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified object and XML serializer.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+             class with the specified object and XML serializer.</para
+          >
         </summary>
         <param name="xmlSerializerExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object used to initialize the extension.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object used to initialize the extension.</param
+        >
         <param name="serializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The XML serializer to use.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The XML serializer to use.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SyndicationElementExtension (string outerName, string outerNamespace, object dataContractExtension);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string outerName, string outerNamespace, object dataContractExtension) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SyndicationElementExtension (string outerName, string outerNamespace, object dataContractExtension);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string outerName, string outerNamespace, object dataContractExtension) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -151,19 +242,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified outer name, outer namespace, and object.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+             class with the specified outer name, outer namespace, and object.</para
+          >
         </summary>
         <param name="outerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the enclosing XML element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the enclosing XML element.</param
+        >
         <param name="outerNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />The namespace of the enclosing XML element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The namespace of the enclosing XML element.</param
+        >
         <param name="dataContractExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object used to initialize the extension.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object used to initialize the extension.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SyndicationElementExtension (string outerName, string outerNamespace, object dataContractExtension, System.Runtime.Serialization.XmlObjectSerializer dataContractSerializer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string outerName, string outerNamespace, object dataContractExtension, class System.Runtime.Serialization.XmlObjectSerializer dataContractSerializer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SyndicationElementExtension (string outerName, string outerNamespace, object dataContractExtension, System.Runtime.Serialization.XmlObjectSerializer dataContractSerializer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string outerName, string outerNamespace, object dataContractExtension, class System.Runtime.Serialization.XmlObjectSerializer dataContractSerializer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -172,27 +283,50 @@
         <Parameter Name="outerName" Type="System.String" />
         <Parameter Name="outerNamespace" Type="System.String" />
         <Parameter Name="dataContractExtension" Type="System.Object" />
-        <Parameter Name="dataContractSerializer" Type="System.Runtime.Serialization.XmlObjectSerializer" />
+        <Parameter
+          Name="dataContractSerializer"
+          Type="System.Runtime.Serialization.XmlObjectSerializer"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" /> class with the specified outer name, outer namespace, object, and data contract serializer.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+             class with the specified outer name, outer namespace, object, and data contract serializer.</para
+          >
         </summary>
         <param name="outerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the enclosing XML element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the enclosing XML element.</param
+        >
         <param name="outerNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />The namespace of the enclosing XML element.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The namespace of the enclosing XML element.</param
+        >
         <param name="dataContractExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object used to initialize the extension.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The object used to initialize the extension.</param
+        >
         <param name="dataContractSerializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data contract serializer to use.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data contract serializer to use.</param
+        >
       </Docs>
     </Member>
-    <Member MemberName="GetObject&lt;TExtension&gt;">
-      <MemberSignature Language="C#" Value="public TExtension GetObject&lt;TExtension&gt; ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!TExtension GetObject&lt;TExtension&gt;() cil managed" />
+    <Member MemberName="GetObject<TExtension>">
+      <MemberSignature Language="C#" Value="public TExtension GetObject<TExtension> ();" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !!TExtension GetObject<TExtension>() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -215,12 +349,21 @@
           <para>An object of the specified type that contains the element extension.</para>
         </returns>
         <typeparam name="TExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the extension to retrieve.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the extension to retrieve.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="GetObject&lt;TExtension&gt;">
-      <MemberSignature Language="C#" Value="public TExtension GetObject&lt;TExtension&gt; (System.Runtime.Serialization.XmlObjectSerializer serializer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!TExtension GetObject&lt;TExtension&gt;(class System.Runtime.Serialization.XmlObjectSerializer serializer) cil managed" />
+    <Member MemberName="GetObject<TExtension>">
+      <MemberSignature
+        Language="C#"
+        Value="public TExtension GetObject<TExtension> (System.Runtime.Serialization.XmlObjectSerializer serializer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !!TExtension GetObject<TExtension>(class System.Runtime.Serialization.XmlObjectSerializer serializer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -245,14 +388,29 @@
           <para>An object of the specified type that contains the element extension.</para>
         </returns>
         <param name="serializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" /> to use.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+           to use.</param
+        >
         <typeparam name="TExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the extension to retrieve.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the extension to retrieve.</typeparam
+        >
       </Docs>
     </Member>
-    <Member MemberName="GetObject&lt;TExtension&gt;">
-      <MemberSignature Language="C#" Value="public TExtension GetObject&lt;TExtension&gt; (System.Xml.Serialization.XmlSerializer serializer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance !!TExtension GetObject&lt;TExtension&gt;(class System.Xml.Serialization.XmlSerializer serializer) cil managed" />
+    <Member MemberName="GetObject<TExtension>">
+      <MemberSignature
+        Language="C#"
+        Value="public TExtension GetObject<TExtension> (System.Xml.Serialization.XmlSerializer serializer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance !!TExtension GetObject<TExtension>(class System.Xml.Serialization.XmlSerializer serializer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -277,14 +435,26 @@
           <para>An object of the specified type that contains the element extension.</para>
         </returns>
         <param name="serializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.Serialization.XmlSerializer" /> to use.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.Serialization.XmlSerializer" />
+
+           to use.</param
+        >
         <typeparam name="TExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />The type of the extension to retrieve.</typeparam>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The type of the extension to retrieve.</typeparam
+        >
       </Docs>
     </Member>
     <Member MemberName="GetReader">
       <MemberSignature Language="C#" Value="public System.Xml.XmlReader GetReader ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Xml.XmlReader GetReader() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Xml.XmlReader GetReader() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -297,11 +467,27 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Xml.XmlReader" /> associated with the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Xml.XmlReader" />
+
+             associated with the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Xml.XmlReader" /> associated with the <see cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />.</para>
+          <para
+            >The <see
+             cref="T:System.Xml.XmlReader" />
+
+             associated with the <see
+             cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+            .</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -357,7 +543,10 @@
     </Member>
     <Member MemberName="WriteTo">
       <MemberSignature Language="C#" Value="public void WriteTo (System.Xml.XmlWriter writer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void WriteTo(class System.Xml.XmlWriter writer) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void WriteTo(class System.Xml.XmlWriter writer) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -372,10 +561,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Writes the current extension to the specified <see cref="T:System.Xml.XmlWriter" />.</para>
+          <para
+            >Writes the current extension to the specified <see
+             cref="T:System.Xml.XmlWriter" />
+
+            .</para
+          >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Xml.XmlWriter" /> to write to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Xml.XmlWriter" />
+
+           to write to.</param
+        >
       </Docs>
     </Member>
   </Members>

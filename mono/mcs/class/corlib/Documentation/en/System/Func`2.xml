@@ -1,6 +1,9 @@
-<Type Name="Func&lt;T,TResult&gt;" FullName="System.Func&lt;T,TResult&gt;">
-  <TypeSignature Language="C#" Value="public delegate TResult Func&lt;in T,out TResult&gt;(T arg);" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed Func`2&lt;- T, + TResult&gt; extends System.MulticastDelegate" />
+<Type Name="Func<T,TResult>" FullName="System.Func<T,TResult>">
+  <TypeSignature Language="C#" Value="public delegate TResult Func<in T,out TResult>(T arg);" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed Func`2<- T, + TResult> extends System.MulticastDelegate"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>

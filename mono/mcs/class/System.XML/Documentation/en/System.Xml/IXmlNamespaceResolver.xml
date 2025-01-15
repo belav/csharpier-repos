@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IXmlNamespaceResolver" FullName="System.Xml.IXmlNamespaceResolver">
   <TypeSignature Language="C#" Value="public interface IXmlNamespaceResolver" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IXmlNamespaceResolver" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IXmlNamespaceResolver"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,8 +21,14 @@
   </Docs>
   <Members>
     <Member MemberName="GetNamespacesInScope">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IDictionary&lt;string,string&gt; GetNamespacesInScope (System.Xml.XmlNamespaceScope scope);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IDictionary`2&lt;string, string&gt; GetNamespacesInScope(valuetype System.Xml.XmlNamespaceScope scope) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.IDictionary<string,string> GetNamespacesInScope (System.Xml.XmlNamespaceScope scope);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.Collections.Generic.IDictionary`2<string, string> GetNamespacesInScope(valuetype System.Xml.XmlNamespaceScope scope) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -36,7 +45,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The collection is keyed by prefix and can be used to enumerate the namespaces currently in scope. The collection is a disconnected copy of the current namespace list.</para>
-          <para>The following table lists the <see cref="T:System.Xml.XmlNamespaceScope" /> values and how it affects the whether or not the default and built-in namespaces are returned by the <see cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" /> method.</para>
+          <para
+            >The following table lists the <see
+             cref="T:System.Xml.XmlNamespaceScope" />
+
+             values and how it affects the whether or not the default and built-in namespaces are returned by the <see
+             cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+
+             method.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -110,15 +127,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IDictionary" /> that contains the current in-scope namespaces.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IDictionary" />
+
+             that contains the current in-scope namespaces.</para
+          >
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />An <see cref="T:System.Xml.XmlNamespaceScope" /> value that specifies the type of namespace nodes to return.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An <see
+           cref="T:System.Xml.XmlNamespaceScope" />
+
+           value that specifies the type of namespace nodes to return.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="LookupNamespace">
       <MemberSignature Language="C#" Value="public string LookupNamespace (string prefix);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string LookupNamespace(string prefix) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string LookupNamespace(string prefix) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -137,7 +168,12 @@
           <block subset="none" type="note">
             <para>Namespace URI-to-prefix mappings can change from node to node in an XML document. You cannot depend on the result of a lookup being consistent from one node to the next.</para>
           </block>
-          <para>The following table describes how the default and built-in namespaces are handled by the <see cref="M:System.Xml.IXmlNamespaceResolver.LookupNamespace(System.String)" /> method.</para>
+          <para
+            >The following table describes how the default and built-in namespaces are handled by the <see
+             cref="M:System.Xml.IXmlNamespaceResolver.LookupNamespace(System.String)" />
+
+             method.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -192,12 +228,18 @@
           <para>The namespace URI that is mapped to the prefix; null if the prefix is not mapped to a namespace URI.</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />The prefix whose namespace URI you wish to find.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The prefix whose namespace URI you wish to find.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="LookupPrefix">
       <MemberSignature Language="C#" Value="public string LookupPrefix (string namespaceName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string LookupPrefix(string namespaceName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance string LookupPrefix(string namespaceName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -217,7 +259,12 @@
           <block subset="none" type="note">
             <para>Namespace URI to prefix mappings can change from node to node in an XML document. You cannot depend on the result of a lookup being consistent from one node to the next.</para>
           </block>
-          <para>The following table describes how the default and built-in namespaces are handled by the <see cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" /> method.</para>
+          <para
+            >The following table describes how the default and built-in namespaces are handled by the <see
+             cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" />
+
+             method.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -264,7 +311,10 @@
           <para>The prefix that is mapped to the namespace URI; null if the namespace URI is not mapped to a prefix.</para>
         </returns>
         <param name="namespaceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The namespace URI whose prefix you wish to find.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The namespace URI whose prefix you wish to find.</param
+        >
       </Docs>
     </Member>
   </Members>

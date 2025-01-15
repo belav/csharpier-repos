@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="PerformanceCounterInstanceLifetime" FullName="System.Diagnostics.PerformanceCounterInstanceLifetime">
+<Type
+  Name="PerformanceCounterInstanceLifetime"
+  FullName="System.Diagnostics.PerformanceCounterInstanceLifetime"
+>
   <TypeSignature Language="C#" Value="public enum PerformanceCounterInstanceLifetime" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed PerformanceCounterInstanceLifetime extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed PerformanceCounterInstanceLifetime extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,9 +19,28 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The default behavior is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />, which specifies the removal of the performance counter instance when no counters are using the process category.</para>
+      <para
+        >The default behavior is <see
+         cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+        , which specifies the removal of the performance counter instance when no counters are using the process category.</para
+      >
       <block subset="none" type="note">
-        <para>If the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryType" /> property is <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />, the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" /> value for the performance counter must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />.</para>
+        <para
+          >If the <see
+           cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryType" />
+
+           property is <see
+           cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
+
+          , the <see
+           cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+
+           value for the performance counter must be <see
+           cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+
+          .</para
+        >
       </block>
     </remarks>
     <summary>
@@ -26,7 +51,10 @@
   <Members>
     <Member MemberName="Global">
       <MemberSignature Language="C#" Value="Global" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Diagnostics.PerformanceCounterInstanceLifetime Global = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Diagnostics.PerformanceCounterInstanceLifetime Global = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -44,7 +72,10 @@
     </Member>
     <Member MemberName="Process">
       <MemberSignature Language="C#" Value="Process" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Diagnostics.PerformanceCounterInstanceLifetime Process = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Diagnostics.PerformanceCounterInstanceLifetime Process = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

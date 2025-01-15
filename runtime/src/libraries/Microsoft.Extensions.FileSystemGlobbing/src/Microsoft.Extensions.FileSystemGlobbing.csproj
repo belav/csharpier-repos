@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <EnableDefaultItems>true</EnableDefaultItems>
@@ -7,12 +6,11 @@
     <IsPackable>true</IsPackable>
     <PackageDescription>File system globbing to find files matching a specified pattern.</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
-    <Compile Include="$(CoreLibSharedDir)\System\Numerics\Hashing\HashHelpers.cs"
-             Link="System\Numerics\Hashing\HashHelpers.cs" />
-    <Compile Include="$(CommonPath)System\ThrowHelper.cs"
-             Link="Common\System\ThrowHelper.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)\System\Numerics\Hashing\HashHelpers.cs"
+      Link="System\Numerics\Hashing\HashHelpers.cs"
+    />
+    <Compile Include="$(CommonPath)System\ThrowHelper.cs" Link="Common\System\ThrowHelper.cs" />
   </ItemGroup>
-
 </Project>

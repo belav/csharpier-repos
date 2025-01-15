@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SqlUserDefinedAggregateAttribute" FullName="Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute">
-  <TypeSignature Language="C#" Value="public sealed class SqlUserDefinedAggregateAttribute : Attribute" />
+<Type
+  Name="SqlUserDefinedAggregateAttribute"
+  FullName="Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqlUserDefinedAggregateAttribute : Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -18,7 +24,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>SQL Server creates a user-defined aggregate that is bound to the class definition that has the <see cref="T:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute" /> custom attribute. Every user-defined aggregate must be annotated with this attribute.</para>
+      <para
+        >SQL Server creates a user-defined aggregate that is bound to the class definition that has the <see
+         cref="T:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute" />
+
+         custom attribute. Every user-defined aggregate must be annotated with this attribute.</para
+      >
       <para>See "CLR User-Defined Aggregates" in SQL Server 2005 Books Online for more information on user-defined aggregates and examples.</para>
     </remarks>
     <summary>
@@ -28,7 +39,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqlUserDefinedAggregateAttribute (Microsoft.SqlServer.Server.Format f);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqlUserDefinedAggregateAttribute (Microsoft.SqlServer.Server.Format f);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="f" Type="Microsoft.SqlServer.Server.Format" />
@@ -47,7 +61,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Format">
-      <MemberSignature Language="C#" Value="public Microsoft.SqlServer.Server.Format Format { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Microsoft.SqlServer.Server.Format Format { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Microsoft.SqlServer.Server.Format</ReturnType>
@@ -58,7 +75,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The serialization format as a <see cref="T:Microsoft.SqlServer.Server.Format" />.</para>
+          <para
+            >The serialization format as a <see
+             cref="T:Microsoft.SqlServer.Server.Format" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -170,10 +192,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property does not have to be specified for Native format serialization. </para>
-          <para>You must specify the <see cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" /> property with the UserDefined serialization <see cref="T:Microsoft.SqlServer.Server.Format" />. </para>
-          <para>The maximum allowed value for this property is specified by the <see cref="F:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSizeValue" /> field.</para>
+          <para
+            >You must specify the <see
+             cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />
+
+             property with the UserDefined serialization <see
+             cref="T:Microsoft.SqlServer.Server.Format" />
+
+            . </para
+          >
+          <para
+            >The maximum allowed value for this property is specified by the <see
+             cref="F:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSizeValue" />
+
+             field.</para
+          >
           <para>The maximum size allowed is 2 gigabytes (GB). You can specify a number from 1 to 8000 bytes, or -1 to represent a value larger than 8000 bytes, up to 2 gigabytes.</para>
-          <para>For an aggregate with user-defined serialization specified, <see cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" /> refers to the total size of the serialized data. Consider an aggregate serializing a string of 10 characters (<see cref="T:System.Char" />). When the string is serialized using a <see cref="T:System.IO.BinaryWriter" />, the total size of the serialized string is 22 bytes: 2 bytes per Unicode UTF-16 character, multiplied by the maximum number of characters, plus 2 control bytes of overhead incurred from serializing a binary stream. So, when determining the value of <see cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />, the total size of the serialized data must be considered: the size of the data serialized in binary form plus the overhead incurred by serialization.</para>
+          <para
+            >For an aggregate with user-defined serialization specified, <see
+             cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />
+
+             refers to the total size of the serialized data. Consider an aggregate serializing a string of 10 characters (<see
+             cref="T:System.Char" />
+
+            ). When the string is serialized using a <see
+             cref="T:System.IO.BinaryWriter" />
+
+            , the total size of the serialized string is 22 bytes: 2 bytes per Unicode UTF-16 character, multiplied by the maximum number of characters, plus 2 control bytes of overhead incurred from serializing a binary stream. So, when determining the value of <see
+             cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />
+
+            , the total size of the serialized data must be considered: the size of the data serialized in binary form plus the overhead incurred by serialization.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -195,7 +244,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Int32" /> value representing the maximum size of the aggregate instance.</para>
+          <para
+            >An <see
+             cref="T:System.Int32" />
+
+             value representing the maximum size of the aggregate instance.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

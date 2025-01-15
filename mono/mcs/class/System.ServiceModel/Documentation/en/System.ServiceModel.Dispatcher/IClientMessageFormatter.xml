@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IClientMessageFormatter" FullName="System.ServiceModel.Dispatcher.IClientMessageFormatter">
+<Type
+  Name="IClientMessageFormatter"
+  FullName="System.ServiceModel.Dispatcher.IClientMessageFormatter"
+>
   <TypeSignature Language="C#" Value="public interface IClientMessageFormatter" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IClientMessageFormatter" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IClientMessageFormatter"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -10,8 +16,18 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Implement the <see cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" /> interface to create a custom client formatter that serializes objects into messages and deserializes messages into objects for a particular operation.</para>
-      <para>Attach custom indigo1 client formatters to the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" /> property to handle this conversion explicitly.</para>
+      <para
+        >Implement the <see
+         cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
+
+         interface to create a custom client formatter that serializes objects into messages and deserializes messages into objects for a particular operation.</para
+      >
+      <para
+        >Attach custom indigo1 client formatters to the <see
+         cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
+
+         property to handle this conversion explicitly.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -20,8 +36,14 @@
   </Docs>
   <Members>
     <Member MemberName="DeserializeReply">
-      <MemberSignature Language="C#" Value="public object DeserializeReply (System.ServiceModel.Channels.Message message, object[] paremeters);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object DeserializeReply(class System.ServiceModel.Channels.Message message, object[] paremeters) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public object DeserializeReply (System.ServiceModel.Channels.Message message, object[] paremeters);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object DeserializeReply(class System.ServiceModel.Channels.Message message, object[] paremeters) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -48,12 +70,21 @@
           <para>The return value of the operation.</para>
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The inbound message.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The inbound message.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SerializeRequest">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Channels.Message SerializeRequest (System.ServiceModel.Channels.MessageVersion version, object[] inputs);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Channels.Message SerializeRequest(class System.ServiceModel.Channels.MessageVersion version, object[] inputs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Channels.Message SerializeRequest (System.ServiceModel.Channels.MessageVersion version, object[] inputs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance class System.ServiceModel.Channels.Message SerializeRequest(class System.ServiceModel.Channels.MessageVersion version, object[] inputs) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -74,7 +105,15 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Converts an <see cref="T:System.Object" /> array into an outbound <see cref="T:System.ServiceModel.Channels.Message" />. </para>
+          <para
+            >Converts an <see
+             cref="T:System.Object" />
+
+             array into an outbound <see
+             cref="T:System.ServiceModel.Channels.Message" />
+
+            . </para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

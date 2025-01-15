@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="PropertyCollection" FullName="System.DirectoryServices.PropertyCollection">
-  <TypeSignature Language="C#" Value="public class PropertyCollection : System.Collections.IDictionary, System.Collections.ICollection, System.Collections.IEnumerable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class PropertyCollection : System.Collections.IDictionary, System.Collections.ICollection, System.Collections.IEnumerable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.DirectoryServices</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../msfinal.pub")</AttributeName>
@@ -97,7 +99,10 @@
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo(System.DirectoryServices.PropertyValueCollection[] array, int index)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo(System.DirectoryServices.PropertyValueCollection[] array, int index)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -113,9 +118,21 @@
           <para>Copies the all objects in this collection to an array, starting at the specified index in the target array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />The array of <see cref="T:System.DirectoryServices.PropertyValueCollection" /> objects that receives the elements of this collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The array of <see
+           cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+           objects that receives the elements of this collection.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The zero-based index in <paramref name="array" /> where this method starts copying this collection.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The zero-based index in <paramref
+           name="array" />
+
+           where this method starts copying this collection.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Contains">
@@ -138,11 +155,17 @@
           <para>The return value is true if the specified property belongs to this collection; otherwise, false.</para>
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the property to find.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the property to find.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IDictionaryEnumerator GetEnumerator()" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IDictionaryEnumerator GetEnumerator()"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IDictionaryEnumerator</ReturnType>
@@ -156,7 +179,12 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Collections.IDictionaryEnumerator" /> that you can use to iterate through this collection.</para>
+          <para
+            >An <see
+             cref="T:System.Collections.IDictionaryEnumerator" />
+
+             that you can use to iterate through this collection.</para
+          >
         </returns>
       </Docs>
     </Member>
@@ -170,7 +198,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The Internet Information Services (IIS), and WinNT providers do not currently support <see cref="P:System.DirectoryServices.PropertyCollection.Count" />, so each will throw a <see cref="T:System.NotSupportedException" />.</para>
+          <para
+            >The Internet Information Services (IIS), and WinNT providers do not currently support <see
+             cref="P:System.DirectoryServices.PropertyCollection.Count" />
+
+            , so each will throw a <see
+             cref="T:System.NotSupportedException" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -179,7 +215,10 @@
       </Docs>
     </Member>
     <Member MemberName="PropertyNames">
-      <MemberSignature Language="C#" Value="public System.Collections.ICollection PropertyNames { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ICollection PropertyNames { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ICollection</ReturnType>
@@ -188,7 +227,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When accessing members of the <see cref="P:System.DirectoryServices.PropertyCollection.PropertyNames" /> property, a <see cref="T:System.Runtime.InteropServices.COMException" /> might be thrown due to an error while accessing the underlying interface.</para>
+          <para
+            >When accessing members of the <see
+             cref="P:System.DirectoryServices.PropertyCollection.PropertyNames" />
+
+             property, a <see
+             cref="T:System.Runtime.InteropServices.COMException" />
+
+             might be thrown due to an error while accessing the underlying interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -197,7 +244,10 @@
       </Docs>
     </Member>
     <Member MemberName="Values">
-      <MemberSignature Language="C#" Value="public System.Collections.ICollection Values { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ICollection Values { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ICollection</ReturnType>
@@ -206,7 +256,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When accessing members of the <see cref="P:System.DirectoryServices.PropertyCollection.Values" /> property, a <see cref="T:System.Runtime.InteropServices.COMException" /> exception might be thrown due to an error while accessing the underlying interface.</para>
+          <para
+            >When accessing members of the <see
+             cref="P:System.DirectoryServices.PropertyCollection.Values" />
+
+             property, a <see
+             cref="T:System.Runtime.InteropServices.COMException" />
+
+             exception might be thrown due to an error while accessing the underlying interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -215,7 +273,10 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.PropertyValueCollection Item[string propertyName] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.PropertyValueCollection Item[string propertyName] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.DirectoryServices.PropertyValueCollection</ReturnType>
@@ -235,7 +296,15 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.DirectoryServices.PropertyCollection" /> class contains the properties of a <see cref="T:System.DirectoryServices.DirectoryEntry" />.</para>
+      <para
+        >The <see
+         cref="T:System.DirectoryServices.PropertyCollection" />
+
+         class contains the properties of a <see
+         cref="T:System.DirectoryServices.DirectoryEntry" />
+
+        .</para
+      >
     </summary>
   </Docs>
 </Type>

@@ -1,5 +1,11 @@
-<Type Name="AxHost+TypeLibraryTimeStampAttribute" FullName="System.Windows.Forms.AxHost+TypeLibraryTimeStampAttribute">
-  <TypeSignature Language="C#" Value="public sealed class AxHost.TypeLibraryTimeStampAttribute : Attribute" />
+<Type
+  Name="AxHost+TypeLibraryTimeStampAttribute"
+  FullName="System.Windows.Forms.AxHost+TypeLibraryTimeStampAttribute"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class AxHost.TypeLibraryTimeStampAttribute : Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -20,7 +26,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TypeLibraryTimeStampAttribute (string timestamp);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TypeLibraryTimeStampAttribute (string timestamp);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="timestamp" Type="System.String" />

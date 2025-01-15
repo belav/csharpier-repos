@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NativeOverlapped" FullName="System.Threading.NativeOverlapped">
   <TypeSignature Maintainer="auto" Language="C#" Value="public struct NativeOverlapped" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit NativeOverlapped extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit NativeOverlapped extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -22,7 +25,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Threading.NativeOverlapped" />.NET Framework value type represents an unmanaged version of the Win32 OVERLAPPED structure. The layout of this structure must be identical to OVERLAPPED. Four additional DWORDs are reserved at the end.</para>
+      <para
+        >The <see
+         cref="T:System.Threading.NativeOverlapped" />
+
+        .NET Framework value type represents an unmanaged version of the Win32 OVERLAPPED structure. The layout of this structure must be identical to OVERLAPPED. Four additional DWORDs are reserved at the end.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

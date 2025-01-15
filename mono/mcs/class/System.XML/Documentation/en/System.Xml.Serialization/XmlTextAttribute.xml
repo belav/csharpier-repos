@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlTextAttribute" FullName="System.Xml.Serialization.XmlTextAttribute">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class XmlTextAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XmlTextAttribute extends System.Attribute" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class XmlTextAttribute : Attribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XmlTextAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -22,13 +29,90 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> belongs to a family of attributes that controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" /> serializes and deserializes an object (through its <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" /> and <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" /> methods). For a complete list of similar attributes, see <format type="text/html"><a href="414b820f-a696-4206-b576-2711d85490c7">Attributes That Control XML Serialization</a></format>.</para>
-      <para>Only one instance of the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> class can be applied in a class.</para>
-      <para>You can apply the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> to public fields and public read/write properties that return primitive and enumeration types.</para>
-      <para>You can apply the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> to a field or property that returns an array of strings. You can also apply the attribute to an array of type <see cref="T:System.Object" /> but you must set the <see cref="P:System.Xml.Serialization.XmlTextAttribute.Type" /> property to string. In that case, any strings inserted into the array are serialized as XML text.</para>
-      <para>The <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> can also be applied to a field that returns an <see cref="T:System.Xml.XmlNode" /> or an array of <see cref="T:System.Xml.XmlNode" /> objects.</para>
-      <para>By default, the <see cref="T:System.Xml.Serialization.XmlSerializer" /> serializes a class member as an XML element. However, if you apply the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> to a member, the <see cref="T:System.Xml.Serialization.XmlSerializer" /> translates its value into XML text. This means that the value is encoded into the content of an XML element.</para>
-      <para>The <format type="text/html"><a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a></format> occasionally generates the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> when creating classes from an XML Schema definition (XSD) file. This occurs when the schema contains a complexType with mixed content; in that case, the corresponding class contains a member that returns a string array to which the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> is applied. For example, when the Xml Schema Definition tool processes this schema: </para>
+      <para
+        >The <see
+         cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+         belongs to a family of attributes that controls how the <see
+         cref="T:System.Xml.Serialization.XmlSerializer" />
+
+         serializes and deserializes an object (through its <see
+         cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
+
+         and <see
+         cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+         methods). For a complete list of similar attributes, see <format
+         type="text/html">
+          <a href="414b820f-a696-4206-b576-2711d85490c7"
+            >Attributes That Control XML Serialization</a
+          >
+        </format>
+
+        .</para
+      >
+      <para
+        >Only one instance of the <see
+         cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+         class can be applied in a class.</para
+      >
+      <para
+        >You can apply the <see
+         cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+         to public fields and public read/write properties that return primitive and enumeration types.</para
+      >
+      <para
+        >You can apply the <see
+         cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+         to a field or property that returns an array of strings. You can also apply the attribute to an array of type <see
+         cref="T:System.Object" />
+
+         but you must set the <see
+         cref="P:System.Xml.Serialization.XmlTextAttribute.Type" />
+
+         property to string. In that case, any strings inserted into the array are serialized as XML text.</para
+      >
+      <para
+        >The <see
+         cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+         can also be applied to a field that returns an <see
+         cref="T:System.Xml.XmlNode" />
+
+         or an array of <see
+         cref="T:System.Xml.XmlNode" />
+
+         objects.</para
+      >
+      <para
+        >By default, the <see
+         cref="T:System.Xml.Serialization.XmlSerializer" />
+
+         serializes a class member as an XML element. However, if you apply the <see
+         cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+         to a member, the <see
+         cref="T:System.Xml.Serialization.XmlSerializer" />
+
+         translates its value into XML text. This means that the value is encoded into the content of an XML element.</para
+      >
+      <para
+        >The <format
+         type="text/html">
+          <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
+        </format>
+
+         occasionally generates the <see
+         cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+         when creating classes from an XML Schema definition (XSD) file. This occurs when the schema contains a complexType with mixed content; in that case, the corresponding class contains a member that returns a string array to which the <see
+         cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+         is applied. For example, when the Xml Schema Definition tool processes this schema: </para
+      >
       <code> &lt;xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="" 
  xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
    &lt;xs:element name="LinkList" type="LinkList" /&gt;
@@ -42,20 +126,40 @@
  &lt;/xs:schema&gt;</code>
       <para>the following class is generated (extra spaces and remarks have been removed): </para>
       <para>code reference: XmlTextAttribute#0</para>
-      <para>For more information about using attributes, see <format type="text/html"><a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a></format>.</para>
+      <para
+        >For more information about using attributes, see <format
+         type="text/html">
+          <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
+        </format>
+
+        .</para
+      >
       <block subset="none" type="note">
-        <para>You can use the word XmlText in your code instead of the longer <see cref="T:System.Xml.Serialization.XmlTextAttribute" />.</para>
+        <para
+          >You can use the word XmlText in your code instead of the longer <see
+           cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+          .</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Indicates to the <see cref="T:System.Xml.Serialization.XmlSerializer" /> that the member must be treated as XML text when the class that contains it is serialized or deserialized.</para>
+      <para
+        >Indicates to the <see
+         cref="T:System.Xml.Serialization.XmlSerializer" />
+
+         that the member must be treated as XML text when the class that contains it is serialized or deserialized.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XmlTextAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -67,17 +171,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can override the way that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> serializes a public field or public read/write property by creating an <see cref="T:System.Xml.Serialization.XmlAttributes" />, and setting its <see cref="P:System.Xml.Serialization.XmlAttributes.XmlText" /> property to an <see cref="T:System.Xml.Serialization.XmlTextAttribute" />. For more details, see the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" /> class.</para>
+          <para
+            >You can override the way that the <see
+             cref="T:System.Xml.Serialization.XmlSerializer" />
+
+             serializes a public field or public read/write property by creating an <see
+             cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            , and setting its <see
+             cref="P:System.Xml.Serialization.XmlAttributes.XmlText" />
+
+             property to an <see
+             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+            . For more details, see the <see
+             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XmlTextAttribute (Type type);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type type) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Type type) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -91,14 +220,42 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can override the way that the <see cref="T:System.Xml.Serialization.XmlSerializer" /> serializes a public field or public read/write property by creating an <see cref="T:System.Xml.Serialization.XmlAttributes" />, and setting its <see cref="P:System.Xml.Serialization.XmlAttributes.XmlText" /> property to an <see cref="T:System.Xml.Serialization.XmlTextAttribute" />. For more details, see the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" /> class.</para>
+          <para
+            >You can override the way that the <see
+             cref="T:System.Xml.Serialization.XmlSerializer" />
+
+             serializes a public field or public read/write property by creating an <see
+             cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            , and setting its <see
+             cref="P:System.Xml.Serialization.XmlAttributes.XmlText" />
+
+             property to an <see
+             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+            . For more details, see the <see
+             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+             class.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+             class.</para
+          >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Type" /> of the member to be serialized. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Type" />
+
+           of the member to be serialized. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="DataType">
@@ -118,11 +275,63 @@
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Setting the <see cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" /> property to an XML Schema simple data type affects the format of the generated XML. For example, setting the property to "date" causes the generated text to be formatted in the general date style, for example: 2001-08-31. By contrast, setting the property to "dateTime" results in a specific instant as defined by the International Organization for Standardization document 8601, "Representations of Dates and Times", for example: 2001-08-15T06:59:11.0508456-07:00.</para>
-          <para>The effect of setting the <see cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" /> property can also be seen when using the <format type="text/html"><a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a></format> to generate the XML Schema for a compiled file. For more information on using the tool, see <format type="text/html"><a href="3c03f855-f931-47ff-bbc6-50c0367a16e4">The XML Schema Definition Tool and XML Serialization</a></format>. </para>
+          <para
+            >Setting the <see
+             cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" />
+
+             property to an XML Schema simple data type affects the format of the generated XML. For example, setting the property to "date" causes the generated text to be formatted in the general date style, for example: 2001-08-31. By contrast, setting the property to "dateTime" results in a specific instant as defined by the International Organization for Standardization document 8601, "Representations of Dates and Times", for example: 2001-08-15T06:59:11.0508456-07:00.</para
+          >
+          <para
+            >The effect of setting the <see
+             cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" />
+
+             property can also be seen when using the <format
+             type="text/html">
+              <a href="a6e6e65c-347f-4494-9457-653bf29baac2"
+                >XML Schema Definition Tool (Xsd.exe)</a
+              >
+            </format>
+
+             to generate the XML Schema for a compiled file. For more information on using the tool, see <format
+             type="text/html">
+              <a href="3c03f855-f931-47ff-bbc6-50c0367a16e4"
+                >The XML Schema Definition Tool and XML Serialization</a
+              >
+            </format>
+
+            . </para
+          >
           <para>The following table lists the XML Schema simple data types with their .NET equivalents.</para>
-          <para>For the XML Schema base64Binary and hexBinary data types, use an array of <see cref="T:System.Byte" /> structures, and apply a <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> with the <see cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" /> set to "base64Binary" or "hexBinary", as appropriate. For the XML Schema time and date data types, use the <see cref="T:System.DateTime" /> type and apply the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> with the <see cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" /> set to "date" or "time".</para>
-          <para>For every XML Schema data type that is mapped to a string, apply the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> with its <see cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" /> property set to the XML Schema data type. Note that this does not change the serialization format, only the schema for the member.</para>
+          <para
+            >For the XML Schema base64Binary and hexBinary data types, use an array of <see
+             cref="T:System.Byte" />
+
+             structures, and apply a <see
+             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+             with the <see
+             cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" />
+
+             set to "base64Binary" or "hexBinary", as appropriate. For the XML Schema time and date data types, use the <see
+             cref="T:System.DateTime" />
+
+             type and apply the <see
+             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+             with the <see
+             cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" />
+
+             set to "date" or "time".</para
+          >
+          <para
+            >For every XML Schema data type that is mapped to a string, apply the <see
+             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+             with its <see
+             cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" />
+
+             property set to the XML Schema data type. Note that this does not change the serialization format, only the schema for the member.</para
+          >
           <block subset="none" type="note">
             <para>The property is case-sensitive, so you must set it exactly to one of the XML Schema data types.</para>
           </block>
@@ -147,7 +356,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -155,7 +365,12 @@
                 <para>base64Binary </para>
               </term>
               <description>
-                <para>Array of <see cref="T:System.Byte" /> objects </para>
+                <para
+                  >Array of <see
+                   cref="T:System.Byte" />
+
+                   objects </para
+                >
               </description>
             </item>
             <item>
@@ -164,7 +379,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Boolean" /> </para>
+                  <see cref="T:System.Boolean" />
+                </para>
               </description>
             </item>
             <item>
@@ -173,7 +389,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.SByte" /> </para>
+                  <see cref="T:System.SByte" />
+                </para>
               </description>
             </item>
             <item>
@@ -182,7 +399,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.DateTime" /> </para>
+                  <see cref="T:System.DateTime" />
+                </para>
               </description>
             </item>
             <item>
@@ -191,7 +409,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.DateTime" /> </para>
+                  <see cref="T:System.DateTime" />
+                </para>
               </description>
             </item>
             <item>
@@ -200,7 +419,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Decimal" /> </para>
+                  <see cref="T:System.Decimal" />
+                </para>
               </description>
             </item>
             <item>
@@ -209,7 +429,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Double" /> </para>
+                  <see cref="T:System.Double" />
+                </para>
               </description>
             </item>
             <item>
@@ -218,7 +439,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -227,7 +449,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -236,7 +459,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Single" /> </para>
+                  <see cref="T:System.Single" />
+                </para>
               </description>
             </item>
             <item>
@@ -245,7 +469,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -254,7 +479,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -263,7 +489,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -272,7 +499,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -281,7 +509,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -289,7 +518,12 @@
                 <para>hexBinary </para>
               </term>
               <description>
-                <para>Array of <see cref="T:System.Byte" /> objects </para>
+                <para
+                  >Array of <see
+                   cref="T:System.Byte" />
+
+                   objects </para
+                >
               </description>
             </item>
             <item>
@@ -298,7 +532,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -307,7 +542,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -316,7 +552,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -325,7 +562,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Int32" /> </para>
+                  <see cref="T:System.Int32" />
+                </para>
               </description>
             </item>
             <item>
@@ -334,7 +572,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -343,7 +582,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -352,7 +592,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Int64" /> </para>
+                  <see cref="T:System.Int64" />
+                </para>
               </description>
             </item>
             <item>
@@ -361,7 +602,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -370,7 +612,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -379,7 +622,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -388,7 +632,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -397,7 +642,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -406,7 +652,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -415,7 +662,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -424,7 +672,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -433,7 +682,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -442,7 +692,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -451,7 +702,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Xml.XmlQualifiedName" /> </para>
+                  <see cref="T:System.Xml.XmlQualifiedName" />
+                </para>
               </description>
             </item>
             <item>
@@ -460,7 +712,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -469,7 +722,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -478,7 +732,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Int16" /> </para>
+                  <see cref="T:System.Int16" />
+                </para>
               </description>
             </item>
             <item>
@@ -487,7 +742,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.DateTime" /> </para>
+                  <see cref="T:System.DateTime" />
+                </para>
               </description>
             </item>
             <item>
@@ -496,7 +752,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.String" /> </para>
+                  <see cref="T:System.String" />
+                </para>
               </description>
             </item>
             <item>
@@ -505,7 +762,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.Byte" /> </para>
+                  <see cref="T:System.Byte" />
+                </para>
               </description>
             </item>
             <item>
@@ -514,7 +772,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.UInt32" /> </para>
+                  <see cref="T:System.UInt32" />
+                </para>
               </description>
             </item>
             <item>
@@ -523,7 +782,8 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.UInt64" /> </para>
+                  <see cref="T:System.UInt64" />
+                </para>
               </description>
             </item>
             <item>
@@ -532,14 +792,20 @@
               </term>
               <description>
                 <para>
-                  <see cref="T:System.UInt16" /> </para>
+                  <see cref="T:System.UInt16" />
+                </para>
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the XML Schema definition language (XSD) data type of the text generated by the <see cref="T:System.Xml.Serialization.XmlSerializer" />.</para>
+          <para
+            >Gets or sets the XML Schema definition language (XSD) data type of the text generated by the <see
+             cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -560,9 +826,36 @@
         <value>To be added: an object of type 'System.Type'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Type" /> property can only be set to primitive types and enumerations.</para>
-          <para>The <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> can also be applied to a field that returns an <see cref="T:System.Xml.XmlNode" /> or an array of <see cref="T:System.Xml.XmlNode" /> objects.</para>
-          <para>You can apply the <see cref="T:System.Xml.Serialization.XmlTextAttribute" /> to a field or property that returns an array of strings. You can also apply the attribute to an array of type <see cref="T:System.Object" /> but you must set the <see cref="P:System.Xml.Serialization.XmlTextAttribute.Type" /> property to string. In that case, any strings inserted into the array are serialized as XML text.</para>
+          <para
+            >The <see
+             cref="T:System.Type" />
+
+             property can only be set to primitive types and enumerations.</para
+          >
+          <para
+            >The <see
+             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+             can also be applied to a field that returns an <see
+             cref="T:System.Xml.XmlNode" />
+
+             or an array of <see
+             cref="T:System.Xml.XmlNode" />
+
+             objects.</para
+          >
+          <para
+            >You can apply the <see
+             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+             to a field or property that returns an array of strings. You can also apply the attribute to an array of type <see
+             cref="T:System.Object" />
+
+             but you must set the <see
+             cref="P:System.Xml.Serialization.XmlTextAttribute.Type" />
+
+             property to string. In that case, any strings inserted into the array are serialized as XML text.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

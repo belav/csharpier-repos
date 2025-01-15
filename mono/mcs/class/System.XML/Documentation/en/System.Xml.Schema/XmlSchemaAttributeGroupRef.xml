@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="XmlSchemaAttributeGroupRef" FullName="System.Xml.Schema.XmlSchemaAttributeGroupRef">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public class XmlSchemaAttributeGroupRef : System.Xml.Schema.XmlSchemaAnnotated" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit XmlSchemaAttributeGroupRef extends System.Xml.Schema.XmlSchemaAnnotated" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public class XmlSchemaAttributeGroupRef : System.Xml.Schema.XmlSchemaAnnotated"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit XmlSchemaAttributeGroupRef extends System.Xml.Schema.XmlSchemaAnnotated"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Xml</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -21,13 +28,21 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the attributeGroup element with the ref attribute from the XML Schema as specified by the <see cref="http://go.microsoft.com/fwlink/?LinkId=49454">World Wide Web Consortium (W3C)</see>. AttributesGroupRef is the reference for an attributeGroup, name property contains the attribute group being referenced. </para>
+      <para
+        >Represents the attributeGroup element with the ref attribute from the XML Schema as specified by the <see
+         cref="http://go.microsoft.com/fwlink/?LinkId=49454">World Wide Web Consortium (W3C)</see>
+
+        . AttributesGroupRef is the reference for an attributeGroup, name property contains the attribute group being referenced. </para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public XmlSchemaAttributeGroupRef ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -40,13 +55,24 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaAttributeGroupRef" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Xml.Schema.XmlSchemaAttributeGroupRef" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="RefName">
-      <MemberSignature Language="C#" Value="public System.Xml.XmlQualifiedName RefName { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Xml.XmlQualifiedName RefName" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Xml.XmlQualifiedName RefName { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Xml.XmlQualifiedName RefName"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

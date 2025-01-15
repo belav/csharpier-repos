@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BuildStartedEventArgs" FullName="Microsoft.Build.Framework.BuildStartedEventArgs">
-  <TypeSignature Language="C#" Value="public class BuildStartedEventArgs : Microsoft.Build.Framework.BuildStatusEventArgs" />
+  <TypeSignature
+    Language="C#"
+    Value="public class BuildStartedEventArgs : Microsoft.Build.Framework.BuildStatusEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>Microsoft.Build.Framework</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -17,7 +20,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.BuildStarted" /> event. </para>
+      <para
+        >Provides data for the <see
+         cref="E:Microsoft.Build.Framework.IEventSource.BuildStarted" />
+
+         event. </para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +38,12 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.BuildStartedEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Framework.BuildStartedEventArgs" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -38,7 +51,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BuildStartedEventArgs (string message, string helpKeyword);" />
+      <MemberSignature
+        Language="C#"
+        Value="public BuildStartedEventArgs (string message, string helpKeyword);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -49,12 +65,23 @@
         <since version="2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.BuildStartedEventArgs" /> class with the specified message and Help keyword.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:Microsoft.Build.Framework.BuildStartedEventArgs" />
+
+             class with the specified message and Help keyword.</para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The text of the event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The text of the event.</param
+        >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />The Help keyword associated with the event.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The Help keyword associated with the event.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

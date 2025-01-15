@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DbProviderFactoriesConfigurationHandler" FullName="System.Data.Common.DbProviderFactoriesConfigurationHandler">
-  <TypeSignature Language="C#" Value="public class DbProviderFactoriesConfigurationHandler : System.Configuration.IConfigurationSectionHandler" />
+<Type
+  Name="DbProviderFactoriesConfigurationHandler"
+  FullName="System.Data.Common.DbProviderFactoriesConfigurationHandler"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DbProviderFactoriesConfigurationHandler : System.Configuration.IConfigurationSectionHandler"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Data</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -39,7 +45,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public virtual object Create (object parent, object configContext, System.Xml.XmlNode section);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual object Create (object parent, object configContext, System.Xml.XmlNode section);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -61,11 +70,20 @@
           <para>This type supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </returns>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />This type supports the .NET Framework infrastructure and is not intended to be used directly from your code.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          This type supports the .NET Framework infrastructure and is not intended to be used directly from your code.</param
+        >
         <param name="configContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />This type supports the .NET Framework infrastructure and is not intended to be used directly from your code.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          This type supports the .NET Framework infrastructure and is not intended to be used directly from your code.</param
+        >
         <param name="section">
-          <attribution license="cc4" from="Microsoft" modified="false" />This type supports the .NET Framework infrastructure and is not intended to be used directly from your code.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          This type supports the .NET Framework infrastructure and is not intended to be used directly from your code.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

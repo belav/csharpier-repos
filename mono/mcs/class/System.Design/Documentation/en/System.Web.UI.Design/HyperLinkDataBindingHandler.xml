@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="HyperLinkDataBindingHandler" FullName="System.Web.UI.Design.HyperLinkDataBindingHandler">
-  <TypeSignature Language="C#" Value="public class HyperLinkDataBindingHandler : System.Web.UI.Design.DataBindingHandler" />
+<Type
+  Name="HyperLinkDataBindingHandler"
+  FullName="System.Web.UI.Design.HyperLinkDataBindingHandler"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class HyperLinkDataBindingHandler : System.Web.UI.Design.DataBindingHandler"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -26,7 +32,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes an instance of the <see cref="T:System.Web.UI.Design.HyperLinkDataBindingHandler" /> class.</para>
+          <para
+            >Initializes an instance of the <see
+             cref="T:System.Web.UI.Design.HyperLinkDataBindingHandler" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -35,7 +46,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DataBindControl">
-      <MemberSignature Language="C#" Value="public override void DataBindControl (System.ComponentModel.Design.IDesignerHost designerHost, System.Web.UI.Control control);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void DataBindControl (System.ComponentModel.Design.IDesignerHost designerHost, System.Web.UI.Control control);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -47,16 +61,45 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This method determines whether the <see cref="P:System.Web.UI.WebControls.HyperLink.Text" /> and <see cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" /> properties of the <see cref="T:System.Web.UI.WebControls.HyperLink" /> control are data-bound. If the <see cref="P:System.Web.UI.WebControls.HyperLink.Text" /> property is data-bound, this method sets the value of the property to "DataBound". If the <see cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" /> property is data-bound, this method sets the value of the property to a text string so the control will have the appearance of a working hyperlink.</para>
+          <para
+            >This method determines whether the <see
+             cref="P:System.Web.UI.WebControls.HyperLink.Text" />
+
+             and <see
+             cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
+
+             properties of the <see
+             cref="T:System.Web.UI.WebControls.HyperLink" />
+
+             control are data-bound. If the <see
+             cref="P:System.Web.UI.WebControls.HyperLink.Text" />
+
+             property is data-bound, this method sets the value of the property to "DataBound". If the <see
+             cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
+
+             property is data-bound, this method sets the value of the property to a text string so the control will have the appearance of a working hyperlink.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Resolves design-time data-binding for the specified control.</para>
         </summary>
         <param name="designerHost">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.ComponentModel.Design.IDesignerHost" /> for the document that contains the control. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+           for the document that contains the control. </param
+        >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Control" /> to data bind. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Control" />
+
+           to data bind. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

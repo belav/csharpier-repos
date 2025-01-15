@@ -10,7 +10,10 @@
       </tr>
     </table>
     <span>
-      <br />0</span>
+      <br />
+
+      0</span
+    >
   </div>
   <div id="GHTSubTest2" testname="System.Web.UI.WebControls.TableRow: Set 'Bottom'.">
     <table border="0">
@@ -52,7 +55,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest6" testname="System.Web.UI.WebControls.TableRow: Throws exception for illegal VerticalAlign values.">
+  <div
+    id="GHTSubTest6"
+    testname="System.Web.UI.WebControls.TableRow: Throws exception for illegal VerticalAlign values."
+  >
     <table border="0">
       <tr>
         <th>Header cell</th>
@@ -62,7 +68,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest7" testname="System.Web.UI.WebControls.TableCell: Test default value.">
     <table border="0">
@@ -74,7 +83,10 @@
       </tr>
     </table>
     <span>
-      <br />0</span>
+      <br />
+
+      0</span
+    >
   </div>
   <div id="GHTSubTest8" testname="System.Web.UI.WebControls.TableCell: Set 'Bottom'.">
     <table border="0">
@@ -116,7 +128,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest12" testname="System.Web.UI.WebControls.TableCell: Throws exception for illegal VerticalAlign values.">
+  <div
+    id="GHTSubTest12"
+    testname="System.Web.UI.WebControls.TableCell: Throws exception for illegal VerticalAlign values."
+  >
     <table border="0">
       <tr>
         <th>Header cell</th>
@@ -126,7 +141,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected ArgumentException exception was caught.</span>
+      <br />
+
+      Test passed. Expected ArgumentException exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest13" testname="System.Web.UI.WebControls.DataListItem: Test default value.">
     <table id="ctrl_12" cellspacing="0" border="0" style="border-collapse:collapse">

@@ -16,14 +16,90 @@
       <block subset="none" type="note">
         <para>Not all browsers support the AutoComplete feature. Check with your browser to determine compatibility.</para>
       </block>
-      <para>To control the behavior of the AutoComplete feature for a <see cref="T:System.Web.UI.WebControls.TextBox" /> control, you use the <see cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" /> property. The <see cref="T:System.Web.UI.WebControls.AutoCompleteType" /> enumeration is used to represent the values that you can apply to the <see cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" /> property.</para>
-      <para>By default, the <see cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" /> property for a <see cref="T:System.Web.UI.WebControls.TextBox" /> control is set to AutoCompleteType.None. With this setting, the <see cref="T:System.Web.UI.WebControls.TextBox" /> control shares the list with other <see cref="T:System.Web.UI.WebControls.TextBox" /> controls with the same <see cref="P:System.Web.UI.Control.ID" /> across different pages. You can also share a list among <see cref="T:System.Web.UI.WebControls.TextBox" /> controls based on a category instead of based on an <see cref="P:System.Web.UI.Control.ID" />. When you set the <see cref="T:System.Web.UI.WebControls.AutoCompleteType" /> property to one of the category values (such as AutoCompleteType.FirstName or AutoCompleteType.LastName), all <see cref="T:System.Web.UI.WebControls.TextBox" /> controls with the same category share the same list. You can disable the AutoComplete feature for a <see cref="T:System.Web.UI.WebControls.TextBox" /> control by setting the <see cref="T:System.Web.UI.WebControls.AutoCompleteType" /> property to AutoCompleteType.Disabled.</para>
-      <para>Refer to your browser documentation for details on configuring and enabling the AutoComplete feature. For example, to enable the AutoComplete feature in Internet Explorer version 5 or later, from the <ui>Tools</ui> menu, choose <ui>Internet Options</ui>. Then choose the <ui>Content</ui> tab. Choose the <ui>AutoComplete</ui> button to view and modify options for the AutoComplete feature.</para>
-      <para>For more information on the AutoComplete feature in Internet Explorer, search for <see cref="http://msdn.microsoft.com/library/default.asp?url=/workshop/author/forms/autocomplete_ovr.asp">Using AutoComplete in HTML Forms</see> in the MSDN Library at http://msdn.microsoft.com/library.</para>
+      <para
+        >To control the behavior of the AutoComplete feature for a <see
+         cref="T:System.Web.UI.WebControls.TextBox" />
+
+         control, you use the <see
+         cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" />
+
+         property. The <see
+         cref="T:System.Web.UI.WebControls.AutoCompleteType" />
+
+         enumeration is used to represent the values that you can apply to the <see
+         cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" />
+
+         property.</para
+      >
+      <para
+        >By default, the <see
+         cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" />
+
+         property for a <see
+         cref="T:System.Web.UI.WebControls.TextBox" />
+
+         control is set to AutoCompleteType.None. With this setting, the <see
+         cref="T:System.Web.UI.WebControls.TextBox" />
+
+         control shares the list with other <see
+         cref="T:System.Web.UI.WebControls.TextBox" />
+
+         controls with the same <see
+         cref="P:System.Web.UI.Control.ID" />
+
+         across different pages. You can also share a list among <see
+         cref="T:System.Web.UI.WebControls.TextBox" />
+
+         controls based on a category instead of based on an <see
+         cref="P:System.Web.UI.Control.ID" />
+
+        . When you set the <see
+         cref="T:System.Web.UI.WebControls.AutoCompleteType" />
+
+         property to one of the category values (such as AutoCompleteType.FirstName or AutoCompleteType.LastName), all <see
+         cref="T:System.Web.UI.WebControls.TextBox" />
+
+         controls with the same category share the same list. You can disable the AutoComplete feature for a <see
+         cref="T:System.Web.UI.WebControls.TextBox" />
+
+         control by setting the <see
+         cref="T:System.Web.UI.WebControls.AutoCompleteType" />
+
+         property to AutoCompleteType.Disabled.</para
+      >
+      <para
+        >Refer to your browser documentation for details on configuring and enabling the AutoComplete feature. For example, to enable the AutoComplete feature in Internet Explorer version 5 or later, from the <ui
+        >Tools</ui>
+
+         menu, choose <ui
+        >Internet Options</ui>
+
+        . Then choose the <ui
+        >Content</ui>
+
+         tab. Choose the <ui
+        >AutoComplete</ui>
+
+         button to view and modify options for the AutoComplete feature.</para
+      >
+      <para
+        >For more information on the AutoComplete feature in Internet Explorer, search for <see
+
+          cref="http://msdn.microsoft.com/library/default.asp?url=/workshop/author/forms/autocomplete_ovr.asp"
+          >Using AutoComplete in HTML Forms</see
+        >
+
+         in the MSDN Library at http://msdn.microsoft.com/library.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the values that control the behavior of the AutoComplete feature in a <see cref="T:System.Web.UI.WebControls.TextBox" /> control.</para>
+      <para
+        >Represents the values that control the behavior of the AutoComplete feature in a <see
+         cref="T:System.Web.UI.WebControls.TextBox" />
+
+         control.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -224,7 +300,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The AutoComplete feature is disabled for the <see cref="T:System.Web.UI.WebControls.TextBox" /> control.</para>
+          <para
+            >The AutoComplete feature is disabled for the <see
+             cref="T:System.Web.UI.WebControls.TextBox" />
+
+             control.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -496,7 +577,18 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>No category is associated with the <see cref="T:System.Web.UI.WebControls.TextBox" /> control. All <see cref="T:System.Web.UI.WebControls.TextBox" /> controls with the same <see cref="P:System.Web.UI.Control.ID" /> share the same value list.</para>
+          <para
+            >No category is associated with the <see
+             cref="T:System.Web.UI.WebControls.TextBox" />
+
+             control. All <see
+             cref="T:System.Web.UI.WebControls.TextBox" />
+
+             controls with the same <see
+             cref="P:System.Web.UI.Control.ID" />
+
+             share the same value list.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

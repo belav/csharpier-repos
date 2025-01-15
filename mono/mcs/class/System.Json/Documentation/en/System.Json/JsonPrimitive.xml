@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="JsonPrimitive" FullName="System.Json.JsonPrimitive">
   <TypeSignature Language="C#" Value="public class JsonPrimitive : System.Json.JsonValue" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit JsonPrimitive extends System.Json.JsonValue" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit JsonPrimitive extends System.Json.JsonValue"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Json</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +23,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (bool value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(bool value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -32,15 +38,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Boolean" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.Boolean" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Boolean" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Boolean" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (byte value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int8 value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -52,15 +75,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with the specified <see cref="T:System.Byte" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with the specified <see
+             cref="T:System.Byte" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Byte" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Byte" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (char value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(char value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(char value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -72,15 +112,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with the specified <see cref="T:System.Char" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with the specified <see
+             cref="T:System.Char" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Char" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Char" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (DateTime value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.DateTime value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.DateTime value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -92,15 +149,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.DateTime" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.DateTime" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.DateTime" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.DateTime" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (DateTimeOffset value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.DateTimeOffset value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.DateTimeOffset value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -112,15 +186,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.DateTimeOffset" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.DateTimeOffset" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.DateTimeOffset" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.DateTimeOffset" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (decimal value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Decimal value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Decimal value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -132,15 +223,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Decimal" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.Decimal" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Decimal" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Decimal" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (double value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(float64 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(float64 value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -152,15 +260,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Double" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.Double" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Double" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Double" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (Guid value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Guid value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Guid value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -172,15 +297,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Guid" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.Guid" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Guid" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Guid" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (short value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int16 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int16 value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -192,15 +334,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Int16" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.Int16" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Int16" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Int16" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (int value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int32 value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -212,15 +371,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Int32" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.Int32" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Int32" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Int32" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (long value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int64 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int64 value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -232,15 +408,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Int64" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.Int64" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Int64" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Int64" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (sbyte value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(int8 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(int8 value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -252,15 +445,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.SByte" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.SByte" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.SByte" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.SByte" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (float value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(float32 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(float32 value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -272,15 +482,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Single" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.Single" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Single" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Single" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (string value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -292,15 +519,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.String" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.String" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.String" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.String" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (TimeSpan value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.TimeSpan value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.TimeSpan value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -316,7 +560,10 @@
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (ushort value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int16 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int16 value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -328,15 +575,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.UInt16" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.UInt16" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.UInt16" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.UInt16" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (uint value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int32 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int32 value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -348,15 +612,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.UInt32" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.UInt32" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.UInt32" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.UInt32" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (ulong value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int64 value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(unsigned int64 value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -368,15 +649,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.UInt64" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.UInt64" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.UInt64" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.UInt64" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public JsonPrimitive (Uri value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Uri value) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -388,15 +686,35 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Json.JsonPrimitive" /> class with a specified <see cref="T:System.Uri" /> type.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             class with a specified <see
+             cref="T:System.Uri" />
+
+             type.</para
+          >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Uri" /> object that initializes the new instance.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Uri" />
+
+           object that initializes the new instance.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="JsonType">
-      <MemberSignature Language="C#" Value="public override System.Json.JsonType JsonType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Json.JsonType JsonType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Json.JsonType JsonType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Json.JsonType JsonType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -409,13 +727,21 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the JsonType that is associated with this <see cref="T:System.Json.JsonPrimitive" /> object.</para>
+          <para
+            >Gets the JsonType that is associated with this <see
+             cref="T:System.Json.JsonPrimitive" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Save">
       <MemberSignature Language="C#" Value="public override void Save (System.IO.Stream stream);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Save(class System.IO.Stream stream) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Save(class System.IO.Stream stream) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

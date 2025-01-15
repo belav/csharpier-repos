@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="OpenWriteCompletedEventArgs" FullName="System.Net.OpenWriteCompletedEventArgs">
-  <TypeSignature Language="C#" Value="public class OpenWriteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit OpenWriteCompletedEventArgs extends System.ComponentModel.AsyncCompletedEventArgs" />
+  <TypeSignature
+    Language="C#"
+    Value="public class OpenWriteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit OpenWriteCompletedEventArgs extends System.ComponentModel.AsyncCompletedEventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,11 +21,21 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Instances of this class are passed to <see cref="T:System.Net.OpenWriteCompletedEventHandler" /> methods.</para>
+      <para
+        >Instances of this class are passed to <see
+         cref="T:System.Net.OpenWriteCompletedEventHandler" />
+
+         methods.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.Net.WebClient.OpenWriteCompleted" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.Net.WebClient.OpenWriteCompleted" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -39,7 +55,27 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You should check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" /> and <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" /> properties before using the stream returned by this property. If the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" /> property's value is an <see cref="T:System.Exception" /> object or the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" /> property's value is true, the asynchronous operation did not complete correctly and the <see cref="P:System.Net.OpenWriteCompletedEventArgs.Result" /> property's value will not be valid.</para>
+          <para
+            >You should check the <see
+             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+
+             and <see
+             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+
+             properties before using the stream returned by this property. If the <see
+             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+
+             property's value is an <see
+             cref="T:System.Exception" />
+
+             object or the <see
+             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+
+             property's value is true, the asynchronous operation did not complete correctly and the <see
+             cref="P:System.Net.OpenWriteCompletedEventArgs.Result" />
+
+             property's value will not be valid.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

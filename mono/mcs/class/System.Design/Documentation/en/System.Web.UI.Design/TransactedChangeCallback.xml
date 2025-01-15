@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TransactedChangeCallback" FullName="System.Web.UI.Design.TransactedChangeCallback">
-  <TypeSignature Language="C#" Value="public delegate bool TransactedChangeCallback(object context);" />
+  <TypeSignature
+    Language="C#"
+    Value="public delegate bool TransactedChangeCallback(object context);"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,7 +23,15 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>A delegate that refers to a method in a custom <see cref="T:System.ComponentModel.Design.DesignerActionList" /> object that is to be called by the <see cref="Overload:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange" /> method for implementing property changes in the designer's associated control.</para>
+      <para
+        >A delegate that refers to a method in a custom <see
+         cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+         object that is to be called by the <see
+         cref="Overload:System.Web.UI.Design.ControlDesigner.InvokeTransactedChange" />
+
+         method for implementing property changes in the designer's associated control.</para
+      >
     </summary>
   </Docs>
 </Type>

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IdentityElement" FullName="System.ServiceModel.Configuration.IdentityElement">
-  <TypeSignature Language="C#" Value="public sealed class IdentityElement : System.Configuration.ConfigurationElement" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit IdentityElement extends System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class IdentityElement : System.Configuration.ConfigurationElement"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit IdentityElement extends System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -20,7 +26,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public IdentityElement ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,13 +39,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.IdentityElement" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ServiceModel.Configuration.IdentityElement" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Certificate">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.CertificateElement Certificate { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.CertificateElement Certificate" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.CertificateElement Certificate { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.CertificateElement Certificate"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -59,8 +79,14 @@
       </Docs>
     </Member>
     <Member MemberName="CertificateReference">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.CertificateReferenceElement CertificateReference { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.CertificateReferenceElement CertificateReference" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.CertificateReferenceElement CertificateReference { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.CertificateReferenceElement CertificateReference"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -83,8 +109,14 @@
       </Docs>
     </Member>
     <Member MemberName="Dns">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.DnsElement Dns { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.DnsElement Dns" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.DnsElement Dns { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.DnsElement Dns"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -107,8 +139,14 @@
       </Docs>
     </Member>
     <Member MemberName="InitializeFrom">
-      <MemberSignature Language="C#" Value="public void InitializeFrom (System.ServiceModel.EndpointIdentity identity);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void InitializeFrom(class System.ServiceModel.EndpointIdentity identity) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void InitializeFrom (System.ServiceModel.EndpointIdentity identity);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void InitializeFrom(class System.ServiceModel.EndpointIdentity identity) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -126,12 +164,21 @@
           <para>Initializes this configuration element with the content of the specified object.</para>
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />The endpoint identity.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The endpoint identity.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Configuration.ConfigurationPropertyCollection Properties"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -146,8 +193,14 @@
       </Docs>
     </Member>
     <Member MemberName="Rsa">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.RsaElement Rsa { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.RsaElement Rsa" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.RsaElement Rsa { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.RsaElement Rsa"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -170,8 +223,14 @@
       </Docs>
     </Member>
     <Member MemberName="ServicePrincipalName">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.ServicePrincipalNameElement ServicePrincipalName { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.ServicePrincipalNameElement ServicePrincipalName" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.ServicePrincipalNameElement ServicePrincipalName { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.ServicePrincipalNameElement ServicePrincipalName"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -194,8 +253,14 @@
       </Docs>
     </Member>
     <Member MemberName="UserPrincipalName">
-      <MemberSignature Language="C#" Value="public System.ServiceModel.Configuration.UserPrincipalNameElement UserPrincipalName { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ServiceModel.Configuration.UserPrincipalNameElement UserPrincipalName" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ServiceModel.Configuration.UserPrincipalNameElement UserPrincipalName { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ServiceModel.Configuration.UserPrincipalNameElement UserPrincipalName"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

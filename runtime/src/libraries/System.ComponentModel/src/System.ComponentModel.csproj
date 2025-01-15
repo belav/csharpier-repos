@@ -1,11 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\IServiceProvider.cs" />
     <Compile Include="System\ComponentModel\CancelEventArgs.cs" />
@@ -13,9 +11,7 @@
     <Compile Include="System\ComponentModel\IEditableObject.cs" />
     <Compile Include="System\ComponentModel\IRevertibleChangeTracking.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Runtime" />
   </ItemGroup>
-
 </Project>

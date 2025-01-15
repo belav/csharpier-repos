@@ -21,7 +21,14 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The IAdviseSink interface enables containers and other objects to receive notifications of data changes, and view changes and compound-document changes occurring in objects of interest. </para>
       <para>For more information about the IAdviseSink interface, see the MSDN Library.</para>
-      <para>The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html"><a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a></format>.</para>
+      <para
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
+         type="text/html">
+          <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -31,7 +38,10 @@
   <Members>
     <Member MemberName="OnClose">
       <MemberSignature Language="C#" Value="public void OnClose ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnClose() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void OnClose() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -44,7 +54,12 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="M:System.Runtime.InteropServices.ComTypes.IAdviseSink.OnClose" /> notification indicates that an object is making the transition from the running state to the loaded state, so its container can take appropriate measures to ensure orderly shutdown. For example, an object handler must release its pointer to the object.</para>
+          <para
+            >An <see
+             cref="M:System.Runtime.InteropServices.ComTypes.IAdviseSink.OnClose" />
+
+             notification indicates that an object is making the transition from the running state to the loaded state, so its container can take appropriate measures to ensure orderly shutdown. For example, an object handler must release its pointer to the object.</para
+          >
           <para>For more information about IAdviseSink::OnClose, see the MSDN Library.</para>
         </remarks>
         <summary>
@@ -54,8 +69,14 @@
       </Docs>
     </Member>
     <Member MemberName="OnDataChange">
-      <MemberSignature Language="C#" Value="public void OnDataChange (ref System.Runtime.InteropServices.ComTypes.FORMATETC format, ref System.Runtime.InteropServices.ComTypes.STGMEDIUM stgmedium);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnDataChange(valuetype System.Runtime.InteropServices.ComTypes.FORMATETC format, valuetype System.Runtime.InteropServices.ComTypes.STGMEDIUM stgmedium) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void OnDataChange (ref System.Runtime.InteropServices.ComTypes.FORMATETC format, ref System.Runtime.InteropServices.ComTypes.STGMEDIUM stgmedium);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void OnDataChange(valuetype System.Runtime.InteropServices.ComTypes.FORMATETC format, valuetype System.Runtime.InteropServices.ComTypes.STGMEDIUM stgmedium) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -65,8 +86,16 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="format" Type="System.Runtime.InteropServices.ComTypes.FORMATETC&amp;" RefType="ref" />
-        <Parameter Name="stgmedium" Type="System.Runtime.InteropServices.ComTypes.STGMEDIUM&amp;" RefType="ref" />
+        <Parameter
+          Name="format"
+          Type="System.Runtime.InteropServices.ComTypes.FORMATETC&"
+          RefType="ref"
+        />
+        <Parameter
+          Name="stgmedium"
+          Type="System.Runtime.InteropServices.ComTypes.STGMEDIUM&"
+          RefType="ref"
+        />
       </Parameters>
       <Docs>
         <param name="format">To be added.</param>
@@ -76,8 +105,14 @@
       </Docs>
     </Member>
     <Member MemberName="OnRename">
-      <MemberSignature Language="C#" Value="public void OnRename (System.Runtime.InteropServices.ComTypes.IMoniker moniker);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnRename(class System.Runtime.InteropServices.ComTypes.IMoniker moniker) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void OnRename (System.Runtime.InteropServices.ComTypes.IMoniker moniker);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void OnRename(class System.Runtime.InteropServices.ComTypes.IMoniker moniker) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -99,12 +134,18 @@
           <para>Notifies all registered advisory sinks that the object has been renamed. This method is called by a server.</para>
         </summary>
         <param name="moniker">
-          <attribution license="cc4" from="Microsoft" modified="false" />A pointer to the IMoniker interface on the new full moniker of the object.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A pointer to the IMoniker interface on the new full moniker of the object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="OnSave">
       <MemberSignature Language="C#" Value="public void OnSave ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnSave() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void OnSave() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -127,7 +168,10 @@
     </Member>
     <Member MemberName="OnViewChange">
       <MemberSignature Language="C#" Value="public void OnViewChange (int aspect, int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnViewChange(int32 aspect, int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance void OnViewChange(int32 aspect, int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -150,9 +194,18 @@
           <para>Notifies an object's registered advisory sinks that its view has changed. This method is called by a server.</para>
         </summary>
         <param name="aspect">
-          <attribution license="cc4" from="Microsoft" modified="false" />The aspect, or view, of the object. Contains a value taken from the <see cref="T:System.Runtime.InteropServices.ComTypes.DVASPECT" /> enumeration.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The aspect, or view, of the object. Contains a value taken from the <see
+           cref="T:System.Runtime.InteropServices.ComTypes.DVASPECT" />
+
+           enumeration.</param
+        >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />The portion of the view that has changed. Currently, only -1 is valid.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The portion of the view that has changed. Currently, only -1 is valid.</param
+        >
       </Docs>
     </Member>
   </Members>

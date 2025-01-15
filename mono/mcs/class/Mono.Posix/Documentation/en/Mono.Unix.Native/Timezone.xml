@@ -1,6 +1,12 @@
 <Type Name="Timezone" FullName="Mono.Unix.Native.Timezone">
-  <TypeSignature Language="C#" Value="public struct Timezone : IEquatable&lt;Mono.Unix.Native.Timezone&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit Timezone extends System.ValueType implements class System.IEquatable`1&lt;valuetype Mono.Unix.Native.Timezone&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public struct Timezone : IEquatable<Mono.Unix.Native.Timezone>"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit Timezone extends System.ValueType implements class System.IEquatable`1<valuetype Mono.Unix.Native.Timezone>"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Posix</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -37,8 +43,14 @@
   </Docs>
   <Members>
     <Member MemberName="Equals">
-      <MemberSignature Language="C#" Value="public bool Equals (Mono.Unix.Native.Timezone value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Equals(valuetype Mono.Unix.Native.Timezone value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Equals (Mono.Unix.Native.Timezone value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance bool Equals(valuetype Mono.Unix.Native.Timezone value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -60,7 +72,10 @@
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -82,7 +97,10 @@
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -100,8 +118,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (Mono.Unix.Native.Timezone lhs, Mono.Unix.Native.Timezone rhs);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Equality(valuetype Mono.Unix.Native.Timezone lhs, valuetype Mono.Unix.Native.Timezone rhs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (Mono.Unix.Native.Timezone lhs, Mono.Unix.Native.Timezone rhs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Equality(valuetype Mono.Unix.Native.Timezone lhs, valuetype Mono.Unix.Native.Timezone rhs) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -124,8 +148,14 @@
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (Mono.Unix.Native.Timezone lhs, Mono.Unix.Native.Timezone rhs);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig specialname bool op_Inequality(valuetype Mono.Unix.Native.Timezone lhs, valuetype Mono.Unix.Native.Timezone rhs) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (Mono.Unix.Native.Timezone lhs, Mono.Unix.Native.Timezone rhs);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig specialname bool op_Inequality(valuetype Mono.Unix.Native.Timezone lhs, valuetype Mono.Unix.Native.Timezone rhs) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

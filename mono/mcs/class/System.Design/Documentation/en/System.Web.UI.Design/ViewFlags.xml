@@ -17,7 +17,12 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Indicates which features are enabled with the <see cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" /> method of a designer.</para>
+      <para
+        >Indicates which features are enabled with the <see
+         cref="M:System.Web.UI.Design.ControlDesigner.SetViewFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
+
+         method of a designer.</para
+      >
     </summary>
   </Docs>
   <Members>

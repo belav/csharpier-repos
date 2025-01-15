@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HttpParseException" FullName="System.Web.HttpParseException">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public sealed class HttpParseException : System.Web.HttpException" />
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public sealed class HttpParseException : System.Web.HttpException"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -12,12 +15,21 @@
   <Base>
     <BaseTypeName>System.Web.HttpException</BaseTypeName>
   </Base>
-  <Interfaces>
-  </Interfaces>
+  <Interfaces></Interfaces>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.HttpParseException" /> class is an HTTP-specific exception class that enables ASP.NET to output parser exception information. For more information on throwing and handling exceptions, see <format type="text/html"><a href="f99a1d29-a2a8-47af-9707-9909f9010735">Handling and Throwing Exceptions</a></format>. </para>
+      <para
+        >The <see
+         cref="T:System.Web.HttpParseException" />
+
+         class is an HTTP-specific exception class that enables ASP.NET to output parser exception information. For more information on throwing and handling exceptions, see <format
+         type="text/html">
+          <a href="f99a1d29-a2a8-47af-9707-9909f9010735">Handling and Throwing Exceptions</a>
+        </format>
+
+        . </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -36,7 +48,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.HttpParseException" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -53,14 +70,25 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class with a specified error message. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.HttpParseException" />
+
+             class with a specified error message. </para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception message to specify when the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception message to specify when the error occurs.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HttpParseException (string message, Exception innerException);" />
+      <MemberSignature
+        Language="C#"
+        Value="public HttpParseException (string message, Exception innerException);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -73,16 +101,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class with a specified error message and a reference to the inner. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.HttpParseException" />
+
+             class with a specified error message and a reference to the inner. </para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception message to specify when the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception message to specify when the error occurs.</param
+        >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception that is the cause of the current exception. If the <paramref name="innerException" /> parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception that is the cause of the current exception. If the <paramref
+           name="innerException" />
+
+           parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HttpParseException (string message, Exception innerException, string virtualPath, string sourceCode, int line);" />
+      <MemberSignature
+        Language="C#"
+        Value="public HttpParseException (string message, Exception innerException, string virtualPath, string sourceCode, int line);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -98,18 +143,41 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.HttpParseException" /> class with specific information about the source code being compiled and the line number on which the exception occurred. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.HttpParseException" />
+
+             class with specific information about the source code being compiled and the line number on which the exception occurred. </para
+          >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception message to specify when the error occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception message to specify when the error occurs.</param
+        >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />The exception that is the cause of the current exception. If <paramref name="innerException" /> is not null, the current exception is raised in a catch block that handles the inner exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The exception that is the cause of the current exception. If <paramref
+           name="innerException" />
+
+           is not null, the current exception is raised in a catch block that handles the inner exception.</param
+        >
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />The virtual path for the exception.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The virtual path for the exception.</param
+        >
         <param name="sourceCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />The source code being compiled when the exception occurs.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The source code being compiled when the exception occurs.</param
+        >
         <param name="line">
-          <attribution license="cc4" from="Microsoft" modified="false" />The line number on which the exception occurred.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The line number on which the exception occurred.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="FileName">
@@ -122,7 +190,12 @@
         <value>To be added: an object of type 'string'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.HttpParseException.FileName" /> property returns the physical path to the source file that has the error unless the physical path is null, in which case it returns null.</para>
+          <para
+            >The <see
+             cref="P:System.Web.HttpParseException.FileName" />
+
+             property returns the physical path to the source file that has the error unless the physical path is null, in which case it returns null.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -135,7 +208,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext ctx);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void GetObjectData (System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext ctx);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -151,14 +227,33 @@
         <param name="ctx">To be added.</param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="M:System.Web.HttpParseException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" /> method sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the SerializationInfo transmitted over the stream.</para>
+          <para
+            >The <see
+             cref="M:System.Web.HttpParseException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+             method sets a <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+             object with all the exception object data targeted for serialization. During deserialization, the exception is reconstituted from the SerializationInfo transmitted over the stream.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" /> object with information about the exception.</para>
+          <para
+            >When overridden in a derived class, sets the <see
+             cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+             object with information about the exception.</para
+          >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Runtime.Serialization.SerializationInfo" /> that holds the serialized object data about the exception being thrown.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+           that holds the serialized object data about the exception being thrown.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Line">
@@ -181,7 +276,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ParserErrors">
-      <MemberSignature Language="C#" Value="public System.Web.ParserErrorCollection ParserErrors { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.ParserErrorCollection ParserErrors { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

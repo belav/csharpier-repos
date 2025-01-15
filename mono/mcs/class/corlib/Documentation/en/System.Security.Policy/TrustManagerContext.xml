@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="TrustManagerContext" FullName="System.Security.Policy.TrustManagerContext">
   <TypeSignature Language="C#" Value="public class TrustManagerContext" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit TrustManagerContext extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit TrustManagerContext extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -20,17 +23,33 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>For a list of initial property values for an instance of the <see cref="T:System.Security.Policy.TrustManagerContext" /> class, see the <see cref="M:System.Security.Policy.TrustManagerContext.#ctor" /> constructor. </para>
+      <para
+        >For a list of initial property values for an instance of the <see
+         cref="T:System.Security.Policy.TrustManagerContext" />
+
+         class, see the <see
+         cref="M:System.Security.Policy.TrustManagerContext.#ctor" />
+
+         constructor. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Represents the context for the trust manager to consider when making the decision to run an application, and when setting up the security on a new <see cref="T:System.AppDomain" /> in which to run an application.</para>
+      <para
+        >Represents the context for the trust manager to consider when making the decision to run an application, and when setting up the security on a new <see
+         cref="T:System.AppDomain" />
+
+         in which to run an application.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public TrustManagerContext ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -41,7 +60,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The following table shows the initial property values for a new instance of the <see cref="T:System.Security.Policy.TrustManagerContext" /> class.</para>
+          <para
+            >The following table shows the initial property values for a new instance of the <see
+             cref="T:System.Security.Policy.TrustManagerContext" />
+
+             class.</para
+          >
           <list type="table">
             <listheader>
               <item>
@@ -119,13 +143,24 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Policy.TrustManagerContext" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Policy.TrustManagerContext" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TrustManagerContext (System.Security.Policy.TrustManagerUIContext uiContext);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Policy.TrustManagerUIContext uiContext) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public TrustManagerContext (System.Security.Policy.TrustManagerUIContext uiContext);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Security.Policy.TrustManagerUIContext uiContext) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -138,18 +173,40 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor initializes the properties to the same settings as the default constructor, with the exception of the <see cref="P:System.Security.Policy.TrustManagerContext.UIContext" /> property, which is set to the value that is passed in.</para>
+          <para
+            >This constructor initializes the properties to the same settings as the default constructor, with the exception of the <see
+             cref="P:System.Security.Policy.TrustManagerContext.UIContext" />
+
+             property, which is set to the value that is passed in.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Policy.TrustManagerContext" /> class using the specified <see cref="T:System.Security.Policy.TrustManagerUIContext" /> object. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Policy.TrustManagerContext" />
+
+             class using the specified <see
+             cref="T:System.Security.Policy.TrustManagerUIContext" />
+
+             object. </para
+          >
         </summary>
         <param name="uiContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.Security.Policy.TrustManagerUIContext" /> values that specifies the type of trust manager user interface to use. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.Security.Policy.TrustManagerUIContext" />
+
+           values that specifies the type of trust manager user interface to use. </param
+        >
       </Docs>
     </Member>
     <Member MemberName="IgnorePersistedDecision">
-      <MemberSignature Language="C#" Value="public virtual bool IgnorePersistedDecision { get; set; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual bool IgnorePersistedDecision { get; set; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance bool IgnorePersistedDecision" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -164,7 +221,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If true, the <see cref="T:System.Security.Policy.ApplicationSecurityManager" /> ignores persisted decisions for the application and calls the trust manager. If false, the <see cref="T:System.Security.Policy.ApplicationSecurityManager" /> uses cached decisions, if available.</para>
+          <para
+            >If true, the <see
+             cref="T:System.Security.Policy.ApplicationSecurityManager" />
+
+             ignores persisted decisions for the application and calls the trust manager. If false, the <see
+             cref="T:System.Security.Policy.ApplicationSecurityManager" />
+
+             uses cached decisions, if available.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -188,7 +253,15 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This flag is set to true if the host might call the trust manager numerous times for trust decisions for this application. If true, the trust manager should cache any state that might improve the speed of future calls to the <see cref="M:System.Security.Policy.IApplicationTrustManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" /> method. This property is set to false if the host does not expect to call the trust manager again for the current <see cref="T:System.AppDomain" />.</para>
+          <para
+            >This flag is set to true if the host might call the trust manager numerous times for trust decisions for this application. If true, the trust manager should cache any state that might improve the speed of future calls to the <see
+             cref="M:System.Security.Policy.IApplicationTrustManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
+
+             method. This property is set to false if the host does not expect to call the trust manager again for the current <see
+             cref="T:System.AppDomain" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -245,8 +318,14 @@
       </Docs>
     </Member>
     <Member MemberName="PreviousApplicationIdentity">
-      <MemberSignature Language="C#" Value="public virtual ApplicationIdentity PreviousApplicationIdentity { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.ApplicationIdentity PreviousApplicationIdentity" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual ApplicationIdentity PreviousApplicationIdentity { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.ApplicationIdentity PreviousApplicationIdentity"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -266,8 +345,14 @@
       </Docs>
     </Member>
     <Member MemberName="UIContext">
-      <MemberSignature Language="C#" Value="public virtual System.Security.Policy.TrustManagerUIContext UIContext { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Policy.TrustManagerUIContext UIContext" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Security.Policy.TrustManagerUIContext UIContext { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Policy.TrustManagerUIContext UIContext"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -281,7 +366,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Security.Policy.TrustManagerContext.UIContext" /> property is intended to recommend the user interface the trust manager should provide for the trust decision. A trust manager can decide to use a different interface.</para>
+          <para
+            >The <see
+             cref="P:System.Security.Policy.TrustManagerContext.UIContext" />
+
+             property is intended to recommend the user interface the trust manager should provide for the trust decision. A trust manager can decide to use a different interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

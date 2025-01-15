@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="FUNCDESC" FullName="System.Runtime.InteropServices.ComTypes.FUNCDESC">
   <TypeSignature Language="C#" Value="public struct FUNCDESC" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit FUNCDESC extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit FUNCDESC extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -16,7 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For additional information about FUNCDESC, see the MSDN Library.</para>
-      <para>The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html"><a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a></format>.</para>
+      <para
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
+         type="text/html">
+          <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,8 +35,14 @@
   </Docs>
   <Members>
     <Member MemberName="callconv">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.CALLCONV callconv;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.CALLCONV callconv" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.CALLCONV callconv;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.CALLCONV callconv"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -117,8 +133,14 @@
       </Docs>
     </Member>
     <Member MemberName="elemdescFunc">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.ELEMDESC elemdescFunc;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.ELEMDESC elemdescFunc" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.ELEMDESC elemdescFunc;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.ELEMDESC elemdescFunc"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -140,8 +162,14 @@
       </Docs>
     </Member>
     <Member MemberName="funckind">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.FUNCKIND funckind;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.FUNCKIND funckind" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.FUNCKIND funckind;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.FUNCKIND funckind"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -163,8 +191,14 @@
       </Docs>
     </Member>
     <Member MemberName="invkind">
-      <MemberSignature Language="C#" Value="public System.Runtime.InteropServices.ComTypes.INVOKEKIND invkind;" />
-      <MemberSignature Language="ILAsm" Value=".field public valuetype System.Runtime.InteropServices.ComTypes.INVOKEKIND invkind" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.InteropServices.ComTypes.INVOKEKIND invkind;"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public valuetype System.Runtime.InteropServices.ComTypes.INVOKEKIND invkind"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -204,7 +238,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates the size of <see cref="F:System.Runtime.InteropServices.FUNCDESC.cParams" />.</para>
+          <para
+            >Indicates the size of <see
+             cref="F:System.Runtime.InteropServices.FUNCDESC.cParams" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -273,7 +312,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the offset in the VTBL for <see cref="F:System.Runtime.InteropServices.FUNCKIND.FUNC_VIRTUAL" />.</para>
+          <para
+            >Specifies the offset in the VTBL for <see
+             cref="F:System.Runtime.InteropServices.FUNCKIND.FUNC_VIRTUAL" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -296,7 +340,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Indicates the <see cref="T:System.Runtime.InteropServices.FUNCFLAGS" /> of a function.</para>
+          <para
+            >Indicates the <see
+             cref="T:System.Runtime.InteropServices.FUNCFLAGS" />
+
+             of a function.</para
+          >
         </summary>
       </Docs>
     </Member>

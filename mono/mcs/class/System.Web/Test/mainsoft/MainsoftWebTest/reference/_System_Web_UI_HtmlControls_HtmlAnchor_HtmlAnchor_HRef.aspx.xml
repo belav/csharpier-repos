@@ -12,16 +12,25 @@
   <div id="GhtSubTest4" style="height:59px;width:553px">
     <a href="http://localhost/ght" id="anchor4" name="anchor4">Anchor4</a>
     <span>
-      <br />http://localhost/ght</span>
+      <br />
+
+      http://localhost/ght</span
+    >
   </div>
   <div id="GhtSubTest5" style="height:59px;width:553px">
-    <a href="http://lo!@#$%^&amp;*()calhost/ght" id="anchor5" name="anchor5">Anchor5</a>
+    <a href="http://lo!@#$%^&*()calhost/ght" id="anchor5" name="anchor5">Anchor5</a>
     <span>
-      <br />http://lo!@#$%^&amp;*()calhost/ght</span>
+      <br />
+
+      http://lo!@#$%^&amp;*()calhost/ght</span
+    >
   </div>
   <div id="GhtSubTest6" style="height:59px;width:553px">
     <a href="123" id="anchor6" name="anchor5">Anchor6</a>
     <span>
-      <br />123</span>
+      <br />
+
+      123</span
+    >
   </div>
 </testresults>

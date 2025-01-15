@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="SoapServerFormatterSink" FullName="System.Runtime.Remoting.Channels.SoapServerFormatterSink">
-  <TypeSignature Language="C#" Maintainer="auto" Value="public class SoapServerFormatterSink : System.Runtime.Remoting.Channels.IServerChannelSink" />
+<Type
+  Name="SoapServerFormatterSink"
+  FullName="System.Runtime.Remoting.Channels.SoapServerFormatterSink"
+>
+  <TypeSignature
+    Language="C#"
+    Maintainer="auto"
+    Value="public class SoapServerFormatterSink : System.Runtime.Remoting.Channels.IServerChannelSink"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Remoting</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -20,7 +27,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The request stream propagates from the server transport sink through the server channel sinks until it reaches the appropriate formatter sink. The formatter sink deserializes the message and passes it through the pipeline. A special dispatch sink is inserted at the end of the channel sink chain by <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.CreateServerChannelSinkChain(System.Runtime.Remoting.Channels.IServerChannelSinkProvider,System.Runtime.Remoting.Channels.IChannelReceiver)" /> method, which is called by server channels to create the server channel sink chains. When the message reaches the dispatch sink, the dispatch sink passes the message to the remoting infrastructure.</para>
+      <para
+        >The request stream propagates from the server transport sink through the server channel sinks until it reaches the appropriate formatter sink. The formatter sink deserializes the message and passes it through the pipeline. A special dispatch sink is inserted at the end of the channel sink chain by <see
+         cref="M:System.Runtime.Remoting.Channels.ChannelServices.CreateServerChannelSinkChain(System.Runtime.Remoting.Channels.IServerChannelSinkProvider,System.Runtime.Remoting.Channels.IChannelReceiver)" />
+
+         method, which is called by server channels to create the server channel sink chains. When the message reaches the dispatch sink, the dispatch sink passes the message to the remoting infrastructure.</para
+      >
       <list type="table">
         <listheader>
           <item>
@@ -53,32 +65,59 @@
             <para>typeFilterLevel </para>
           </term>
           <description>
-            <para>A string value specifying the level of automatic deserialization a server channel attempts. Supported values are Low (the default) and Full. For details about deserialization levels, see <format type="text/html"><a href="313A0E88-5B2B-4A17-8391-0DDF9F7A787B">[&lt;topic://cpconAutomaticDeserializationInNETRemoting&gt;]</a></format>.</para>
+            <para
+              >A string value specifying the level of automatic deserialization a server channel attempts. Supported values are Low (the default) and Full. For details about deserialization levels, see <format
+               type="text/html">
+                <a href="313A0E88-5B2B-4A17-8391-0DDF9F7A787B"
+                  >[&lt;topic://cpconAutomaticDeserializationInNETRemoting&gt;]</a
+                >
+              </format>
+
+              .</para
+            >
             <para>This property is supported only by the .NET Framework version 1.1 on the following platforms: Windows 98, Windows NT 4.0, Windows Millennium Edition, Windows 2000, Windows XP Home Edition, Windows XP Professional, and Windows Server 2003 family. </para>
           </description>
         </item>
       </list>
       <block subset="none" type="note">
-        <para>Using an instance of this object with untrusted data or across an unsecure channel is a security risk. Use this object only with trusted data and across a secure channel. For more information, see <see cref="http://go.microsoft.com/fwlink/?LinkId=330378">Untrusted Data Security Risks</see>.</para>
+        <para
+          >Using an instance of this object with untrusted data or across an unsecure channel is a security risk. Use this object only with trusted data and across a secure channel. For more information, see <see
+           cref="http://go.microsoft.com/fwlink/?LinkId=330378">Untrusted Data Security Risks</see>
+
+          .</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides the implementation for a server formatter sink that uses the <see cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />.</para>
+      <para
+        >Provides the implementation for a server formatter sink that uses the <see
+         cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SoapServerFormatterSink (System.Runtime.Remoting.Channels.SoapServerFormatterSink.Protocol protocol, System.Runtime.Remoting.Channels.IServerChannelSink nextSink, System.Runtime.Remoting.Channels.IChannelReceiver receiver);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SoapServerFormatterSink (System.Runtime.Remoting.Channels.SoapServerFormatterSink.Protocol protocol, System.Runtime.Remoting.Channels.IServerChannelSink nextSink, System.Runtime.Remoting.Channels.IChannelReceiver receiver);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
-        <Parameter Name="protocol" Type="System.Runtime.Remoting.Channels.SoapServerFormatterSink+Protocol" />
+        <Parameter
+          Name="protocol"
+          Type="System.Runtime.Remoting.Channels.SoapServerFormatterSink+Protocol"
+        />
         <Parameter Name="nextSink" Type="System.Runtime.Remoting.Channels.IServerChannelSink" />
         <Parameter Name="receiver" Type="System.Runtime.Remoting.Channels.IChannelReceiver" />
       </Parameters>
       <Docs>
-        <param name="protocol">To be added: an object of type 'SoapServerFormatterSink+Protocol'</param>
+        <param name="protocol"
+          >To be added: an object of type 'SoapServerFormatterSink+Protocol'</param
+        >
         <param name="nextSink">To be added: an object of type 'IServerChannelSink'</param>
         <param name="receiver">To be added: an object of type 'IChannelReceiver'</param>
         <summary>To be added</summary>
@@ -90,13 +129,19 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AsyncProcessResponse">
-      <MemberSignature Language="C#" Value="public void AsyncProcessResponse (System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack sinkStack, object state, System.Runtime.Remoting.Messaging.IMessage msg, System.Runtime.Remoting.Channels.ITransportHeaders headers, System.IO.Stream stream);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AsyncProcessResponse (System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack sinkStack, object state, System.Runtime.Remoting.Messaging.IMessage msg, System.Runtime.Remoting.Channels.ITransportHeaders headers, System.IO.Stream stream);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="sinkStack" Type="System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack" />
+        <Parameter
+          Name="sinkStack"
+          Type="System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack"
+        />
         <Parameter Name="state" Type="System.Object" />
         <Parameter Name="msg" Type="System.Runtime.Remoting.Messaging.IMessage" />
         <Parameter Name="headers" Type="System.Runtime.Remoting.Channels.ITransportHeaders" />
@@ -109,15 +154,30 @@
           <para>Requests processing from the current sink of the response from a method call sent asynchronously.</para>
         </summary>
         <param name="sinkStack">
-          <attribution license="cc4" from="Microsoft" modified="false" />A stack of sinks leading back to the server transport sink. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A stack of sinks leading back to the server transport sink. </param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />Information associated with the current sink, generated on the request side, and needed on the response side. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Information associated with the current sink, generated on the request side, and needed on the response side. </param
+        >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />The response message. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The response message. </param
+        >
         <param name="headers">
-          <attribution license="cc4" from="Microsoft" modified="false" />The headers to add to the return message heading to the client. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The headers to add to the return message heading to the client. </param
+        >
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />The stream heading back to the transport sink. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The stream heading back to the transport sink. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -125,13 +185,19 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetResponseStream">
-      <MemberSignature Language="C#" Value="public System.IO.Stream GetResponseStream (System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack sinkStack, object state, System.Runtime.Remoting.Messaging.IMessage msg, System.Runtime.Remoting.Channels.ITransportHeaders headers);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.IO.Stream GetResponseStream (System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack sinkStack, object state, System.Runtime.Remoting.Messaging.IMessage msg, System.Runtime.Remoting.Channels.ITransportHeaders headers);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.IO.Stream</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="sinkStack" Type="System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack" />
+        <Parameter
+          Name="sinkStack"
+          Type="System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack"
+        />
         <Parameter Name="state" Type="System.Object" />
         <Parameter Name="msg" Type="System.Runtime.Remoting.Messaging.IMessage" />
         <Parameter Name="headers" Type="System.Runtime.Remoting.Channels.ITransportHeaders" />
@@ -143,20 +209,42 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns the <see cref="T:System.IO.Stream" /> onto which the provided response message is to be serialized.</para>
+          <para
+            >Returns the <see
+             cref="T:System.IO.Stream" />
+
+             onto which the provided response message is to be serialized.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.IO.Stream" /> onto which the provided response message is to be serialized.</para>
+          <para
+            >The <see
+             cref="T:System.IO.Stream" />
+
+             onto which the provided response message is to be serialized.</para
+          >
         </returns>
         <param name="sinkStack">
-          <attribution license="cc4" from="Microsoft" modified="false" />A stack of sinks leading back to the server transport sink. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A stack of sinks leading back to the server transport sink. </param
+        >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />Information associated with the current sink, generated on the request side, and needed on the response side. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          Information associated with the current sink, generated on the request side, and needed on the response side. </param
+        >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />The response message that is to be serialized. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The response message that is to be serialized. </param
+        >
         <param name="headers">
-          <attribution license="cc4" from="Microsoft" modified="false" />The headers to put in the response stream to the client. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The headers to put in the response stream to the client. </param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -164,7 +252,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NextChannelSink">
-      <MemberSignature Language="C#" Value="public System.Runtime.Remoting.Channels.IServerChannelSink NextChannelSink { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Remoting.Channels.IServerChannelSink NextChannelSink { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Runtime.Remoting.Channels.IServerChannelSink</ReturnType>
@@ -174,7 +265,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the next <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSink" /> in the sink chain.</para>
+          <para
+            >Gets the next <see
+             cref="T:System.Runtime.Remoting.Channels.IServerChannelSink" />
+
+             in the sink chain.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -183,27 +279,50 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ProcessMessage">
-      <MemberSignature Language="C#" Value="public System.Runtime.Remoting.Channels.ServerProcessing ProcessMessage (System.Runtime.Remoting.Channels.IServerChannelSinkStack sinkStack, System.Runtime.Remoting.Messaging.IMessage requestMsg, System.Runtime.Remoting.Channels.ITransportHeaders requestHeaders, System.IO.Stream requestStream, out System.Runtime.Remoting.Messaging.IMessage responseMsg, out System.Runtime.Remoting.Channels.ITransportHeaders responseHeaders, out System.IO.Stream responseStream);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Remoting.Channels.ServerProcessing ProcessMessage (System.Runtime.Remoting.Channels.IServerChannelSinkStack sinkStack, System.Runtime.Remoting.Messaging.IMessage requestMsg, System.Runtime.Remoting.Channels.ITransportHeaders requestHeaders, System.IO.Stream requestStream, out System.Runtime.Remoting.Messaging.IMessage responseMsg, out System.Runtime.Remoting.Channels.ITransportHeaders responseHeaders, out System.IO.Stream responseStream);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Runtime.Remoting.Channels.ServerProcessing</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="sinkStack" Type="System.Runtime.Remoting.Channels.IServerChannelSinkStack" />
+        <Parameter
+          Name="sinkStack"
+          Type="System.Runtime.Remoting.Channels.IServerChannelSinkStack"
+        />
         <Parameter Name="requestMsg" Type="System.Runtime.Remoting.Messaging.IMessage" />
-        <Parameter Name="requestHeaders" Type="System.Runtime.Remoting.Channels.ITransportHeaders" />
+        <Parameter
+          Name="requestHeaders"
+          Type="System.Runtime.Remoting.Channels.ITransportHeaders"
+        />
         <Parameter Name="requestStream" Type="System.IO.Stream" />
-        <Parameter Name="responseMsg" Type="System.Runtime.Remoting.Messaging.IMessage&amp;" RefType="out" />
-        <Parameter Name="responseHeaders" Type="System.Runtime.Remoting.Channels.ITransportHeaders&amp;" RefType="out" />
-        <Parameter Name="responseStream" Type="System.IO.Stream&amp;" RefType="out" />
+        <Parameter
+          Name="responseMsg"
+          Type="System.Runtime.Remoting.Messaging.IMessage&"
+          RefType="out"
+        />
+        <Parameter
+          Name="responseHeaders"
+          Type="System.Runtime.Remoting.Channels.ITransportHeaders&"
+          RefType="out"
+        />
+        <Parameter Name="responseStream" Type="System.IO.Stream&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="sinkStack">To be added: an object of type 'IServerChannelSinkStack'</param>
-        <param name="requestMsg">To be added: an object of type 'Runtime.Remoting.Messaging.IMessage'</param>
+        <param name="requestMsg"
+          >To be added: an object of type 'Runtime.Remoting.Messaging.IMessage'</param
+        >
         <param name="requestHeaders">To be added: an object of type 'ITransportHeaders'</param>
         <param name="requestStream">To be added: an object of type 'IO.Stream'</param>
-        <param name="responseMsg">To be added: an object of type 'Runtime.Remoting.Messaging.IMessage&amp;'</param>
-        <param name="responseHeaders">To be added: an object of type 'ITransportHeaders&amp;'</param>
+        <param name="responseMsg"
+          >To be added: an object of type 'Runtime.Remoting.Messaging.IMessage&amp;'</param
+        >
+        <param name="responseHeaders"
+          >To be added: an object of type 'ITransportHeaders&amp;'</param
+        >
         <param name="responseStream">To be added: an object of type 'IO.Stream&amp;'</param>
         <summary>To be added</summary>
         <returns>To be added: an object of type 'ServerProcessing'</returns>
@@ -215,7 +334,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="public System.Collections.IDictionary Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IDictionary Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IDictionary</ReturnType>
@@ -225,7 +347,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Collections.IDictionary" /> of properties for the current channel sink.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Collections.IDictionary" />
+
+             of properties for the current channel sink.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -234,7 +361,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="TypeFilterLevel">
-      <MemberSignature Language="C#" Value="public System.Runtime.Serialization.Formatters.TypeFilterLevel TypeFilterLevel { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Runtime.Serialization.Formatters.TypeFilterLevel TypeFilterLevel { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -252,7 +382,16 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Supported values are Low (the default) and Full. For details about deserialization levels, see <format type="text/html"><a href="313a0e88-5b2b-4a17-8391-0ddf9f7a787b">Automatic Deserialization in .NET Remoting</a></format>.</para>
+          <para
+            >Supported values are Low (the default) and Full. For details about deserialization levels, see <format
+             type="text/html">
+              <a href="313a0e88-5b2b-4a17-8391-0ddf9f7a787b"
+                >Automatic Deserialization in .NET Remoting</a
+              >
+            </format>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

@@ -20,7 +20,15 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Defines a map for converting colors. Several methods of the <see cref="T:System.Drawing.Imaging.ImageAttributes" /> class adjust image colors by using a color-remap table, which is an array of <see cref="T:System.Drawing.Imaging.ColorMap" /> structures. Not inheritable.</para>
+      <para
+        >Defines a map for converting colors. Several methods of the <see
+         cref="T:System.Drawing.Imaging.ImageAttributes" />
+
+         class adjust image colors by using a color-remap table, which is an array of <see
+         cref="T:System.Drawing.Imaging.ColorMap" />
+
+         structures. Not inheritable.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -33,7 +41,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Drawing.Imaging.ColorMap" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Drawing.Imaging.ColorMap" />
+
+             class.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -47,14 +60,18 @@
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'Drawing.Color'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the new <see cref="T:System.Drawing.Color" /> structure to which to convert.</para>
+          <para
+            >Gets or sets the new <see
+             cref="T:System.Drawing.Color" />
+
+             structure to which to convert.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,14 +85,18 @@
       <ReturnValue>
         <ReturnType>System.Drawing.Color</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <value>To be added: an object of type 'Drawing.Color'</value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the existing <see cref="T:System.Drawing.Color" /> structure to be converted.</para>
+          <para
+            >Gets or sets the existing <see
+             cref="T:System.Drawing.Color" />
+
+             structure to be converted.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

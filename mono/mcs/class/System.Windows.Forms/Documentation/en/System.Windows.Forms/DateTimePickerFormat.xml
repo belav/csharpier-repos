@@ -12,14 +12,24 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>This enumeration is used by members such as <see cref="P:System.Windows.Forms.DateTimePicker.Format" />.</para>
+      <para
+        >This enumeration is used by members such as <see
+         cref="P:System.Windows.Forms.DateTimePicker.Format" />
+
+        .</para
+      >
       <block subset="none" type="note">
         <para>The actual date/time formats are determined by the date, time, and regional settings set in the user's operating system.</para>
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the date and time format the <see cref="T:System.Windows.Forms.DateTimePicker" /> control displays.</para>
+      <para
+        >Specifies the date and time format the <see
+         cref="T:System.Windows.Forms.DateTimePicker" />
+
+         control displays.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -32,7 +42,15 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.DateTimePicker" /> control displays the date/time value in a custom format. For more information, see <see cref="P:System.Windows.Forms.DateTimePicker.CustomFormat" />.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.DateTimePicker" />
+
+             control displays the date/time value in a custom format. For more information, see <see
+             cref="P:System.Windows.Forms.DateTimePicker.CustomFormat" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -49,7 +67,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.DateTimePicker" /> control displays the date/time value in the long date format set by the user's operating system.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.DateTimePicker" />
+
+             control displays the date/time value in the long date format set by the user's operating system.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -66,7 +89,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.DateTimePicker" /> control displays the date/time value in the short date format set by the user's operating system.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.DateTimePicker" />
+
+             control displays the date/time value in the short date format set by the user's operating system.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -83,7 +111,12 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Windows.Forms.DateTimePicker" /> control displays the date/time value in the time format set by the user's operating system.</para>
+          <para
+            >The <see
+             cref="T:System.Windows.Forms.DateTimePicker" />
+
+             control displays the date/time value in the time format set by the user's operating system.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

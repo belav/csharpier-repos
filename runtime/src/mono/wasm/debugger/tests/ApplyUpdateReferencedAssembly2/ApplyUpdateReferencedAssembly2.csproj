@@ -13,15 +13,12 @@
     <PublishTrimmed>false</PublishTrimmed>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <EmbedAllSources>true</EmbedAllSources>
-
     <!-- FIXME: issue -->
     <DisableSourceLink>true</DisableSourceLink>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="MethodBody2.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <!-- This package from https://github.com/dotnet/hotreload-utils provides
          targets that read the json delta script and generates deltas based on the baseline assembly and the modified sources.
@@ -30,6 +27,9 @@
          Deltas will be emitted next to the output assembly.  Deltas will be copied when the current
          project is referenced from other other projects.
     -->
-    <PackageReference Include="Microsoft.DotNet.HotReload.Utils.Generator.BuildTool" Version="$(MicrosoftDotNetHotReloadUtilsGeneratorBuildToolVersion)" />
+    <PackageReference
+      Include="Microsoft.DotNet.HotReload.Utils.Generator.BuildTool"
+      Version="$(MicrosoftDotNetHotReloadUtilsGeneratorBuildToolVersion)"
+    />
   </ItemGroup>
 </Project>

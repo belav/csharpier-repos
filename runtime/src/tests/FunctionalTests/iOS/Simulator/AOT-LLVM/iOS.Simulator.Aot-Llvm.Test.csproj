@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk" TreatAsLocalProperty="MonoForceInterpreter">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <MonoForceInterpreter>false</MonoForceInterpreter>
@@ -13,7 +12,6 @@
     <EnableAggressiveTrimming>true</EnableAggressiveTrimming>
     <MonoEnableLLVM>true</MonoEnableLLVM>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>

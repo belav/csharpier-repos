@@ -12,7 +12,15 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Windows.Forms.VisualStyles.HitTestCode" /> values represent the return values of the <see cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.HitTestBackground" /> method.</para>
+      <para
+        >The <see
+         cref="T:System.Windows.Forms.VisualStyles.HitTestCode" />
+
+         values represent the return values of the <see
+         cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.HitTestBackground" />
+
+         method.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />

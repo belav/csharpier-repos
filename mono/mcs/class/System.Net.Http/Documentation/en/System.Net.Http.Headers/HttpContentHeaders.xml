@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="HttpContentHeaders" FullName="System.Net.Http.Headers.HttpContentHeaders">
-  <TypeSignature Language="C#" Value="public sealed class HttpContentHeaders : System.Net.Http.Headers.HttpHeaders" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit HttpContentHeaders extends System.Net.Http.Headers.HttpHeaders" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class HttpContentHeaders : System.Net.Http.Headers.HttpHeaders"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit HttpContentHeaders extends System.Net.Http.Headers.HttpHeaders"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Net.Http</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -19,8 +25,14 @@
   </Docs>
   <Members>
     <Member MemberName="Allow">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.ICollection&lt;string&gt; Allow { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.ICollection`1&lt;string&gt; Allow" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.ICollection<string> Allow { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.ICollection`1<string> Allow"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -38,8 +50,14 @@
       </Docs>
     </Member>
     <Member MemberName="ContentDisposition">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.ContentDispositionHeaderValue ContentDisposition { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.ContentDispositionHeaderValue ContentDisposition" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.ContentDispositionHeaderValue ContentDisposition { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.ContentDispositionHeaderValue ContentDisposition"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -57,8 +75,14 @@
       </Docs>
     </Member>
     <Member MemberName="ContentEncoding">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.ICollection&lt;string&gt; ContentEncoding { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.ICollection`1&lt;string&gt; ContentEncoding" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.ICollection<string> ContentEncoding { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.ICollection`1<string> ContentEncoding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -76,8 +100,14 @@
       </Docs>
     </Member>
     <Member MemberName="ContentLanguage">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.ICollection&lt;string&gt; ContentLanguage { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.ICollection`1&lt;string&gt; ContentLanguage" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.ICollection<string> ContentLanguage { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.Generic.ICollection`1<string> ContentLanguage"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -95,8 +125,11 @@
       </Docs>
     </Member>
     <Member MemberName="ContentLength">
-      <MemberSignature Language="C#" Value="public Nullable&lt;long&gt; ContentLength { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; ContentLength" />
+      <MemberSignature Language="C#" Value="public Nullable<long> ContentLength { get; set; }" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<int64> ContentLength"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -115,7 +148,10 @@
     </Member>
     <Member MemberName="ContentLocation">
       <MemberSignature Language="C#" Value="public Uri ContentLocation { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Uri ContentLocation" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Uri ContentLocation"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -152,8 +188,14 @@
       </Docs>
     </Member>
     <Member MemberName="ContentRange">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.ContentRangeHeaderValue ContentRange { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.ContentRangeHeaderValue ContentRange" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.ContentRangeHeaderValue ContentRange { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.ContentRangeHeaderValue ContentRange"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -171,8 +213,14 @@
       </Docs>
     </Member>
     <Member MemberName="ContentType">
-      <MemberSignature Language="C#" Value="public System.Net.Http.Headers.MediaTypeHeaderValue ContentType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.Http.Headers.MediaTypeHeaderValue ContentType" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.Http.Headers.MediaTypeHeaderValue ContentType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.Http.Headers.MediaTypeHeaderValue ContentType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -190,8 +238,14 @@
       </Docs>
     </Member>
     <Member MemberName="Expires">
-      <MemberSignature Language="C#" Value="public Nullable&lt;DateTimeOffset&gt; Expires { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; Expires" />
+      <MemberSignature
+        Language="C#"
+        Value="public Nullable<DateTimeOffset> Expires { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<valuetype System.DateTimeOffset> Expires"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -209,8 +263,14 @@
       </Docs>
     </Member>
     <Member MemberName="LastModified">
-      <MemberSignature Language="C#" Value="public Nullable&lt;DateTimeOffset&gt; LastModified { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;valuetype System.DateTimeOffset&gt; LastModified" />
+      <MemberSignature
+        Language="C#"
+        Value="public Nullable<DateTimeOffset> LastModified { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1<valuetype System.DateTimeOffset> LastModified"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

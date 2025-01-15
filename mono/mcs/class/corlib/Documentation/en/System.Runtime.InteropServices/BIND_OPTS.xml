@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="BIND_OPTS" FullName="System.Runtime.InteropServices.BIND_OPTS">
   <TypeSignature Maintainer="auto" Language="C#" Value="public struct BIND_OPTS" />
-  <TypeSignature Language="ILAsm" Value=".class public sequential ansi sealed beforefieldinit BIND_OPTS extends System.ValueType" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public sequential ansi sealed beforefieldinit BIND_OPTS extends System.ValueType"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -26,7 +29,12 @@
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use <see cref="T:System.Runtime.InteropServices.ComTypes.BIND_OPTS" /> instead.</para>
+      <para
+        >Use <see
+         cref="T:System.Runtime.InteropServices.ComTypes.BIND_OPTS" />
+
+         instead.</para
+      >
     </summary>
   </Docs>
   <Members>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="ActiveDesignSurfaceChangedEventArgs" FullName="System.ComponentModel.Design.ActiveDesignSurfaceChangedEventArgs">
-  <TypeSignature Language="C#" Value="public class ActiveDesignSurfaceChangedEventArgs : EventArgs" />
+<Type
+  Name="ActiveDesignSurfaceChangedEventArgs"
+  FullName="System.ComponentModel.Design.ActiveDesignSurfaceChangedEventArgs"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ActiveDesignSurfaceChangedEventArgs : EventArgs"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,12 +19,20 @@
     <remarks>To be added.</remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Provides data for the <see cref="E:System.ComponentModel.Design.DesignSurfaceManager.ActiveDesignSurfaceChanged" /> event.</para>
+      <para
+        >Provides data for the <see
+         cref="E:System.ComponentModel.Design.DesignSurfaceManager.ActiveDesignSurfaceChanged" />
+
+         event.</para
+      >
     </summary>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ActiveDesignSurfaceChangedEventArgs (System.ComponentModel.Design.DesignSurface oldSurface, System.ComponentModel.Design.DesignSurface newSurface);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ActiveDesignSurfaceChangedEventArgs (System.ComponentModel.Design.DesignSurface oldSurface, System.ComponentModel.Design.DesignSurface newSurface);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -31,16 +45,30 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.ActiveDesignSurfaceChangedEventArgs" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.ActiveDesignSurfaceChangedEventArgs" />
+
+             class.</para
+          >
         </summary>
         <param name="oldSurface">
-          <attribution license="cc4" from="Microsoft" modified="false" />The design surface that is losing activation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The design surface that is losing activation.</param
+        >
         <param name="newSurface">
-          <attribution license="cc4" from="Microsoft" modified="false" />The design surface that is gaining activation.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The design surface that is gaining activation.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="NewSurface">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.Design.DesignSurface NewSurface { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.Design.DesignSurface NewSurface { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -58,7 +86,10 @@
       </Docs>
     </Member>
     <Member MemberName="OldSurface">
-      <MemberSignature Language="C#" Value="public System.ComponentModel.Design.DesignSurface OldSurface { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.ComponentModel.Design.DesignSurface OldSurface { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

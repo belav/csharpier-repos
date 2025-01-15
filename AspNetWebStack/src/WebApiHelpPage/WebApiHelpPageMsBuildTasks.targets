@@ -1,6 +1,14 @@
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\tools\WebStack.tasks.targets"/>
-  <UsingTask TaskName="NuGetPack" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+<Project
+  ToolsVersion="4.0"
+  DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
+  <Import Project="..\..\tools\WebStack.tasks.targets" />
+  <UsingTask
+    TaskName="NuGetPack"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="$(CodeTaskFactoryAssemblyFile)"
+  >
     <ParameterGroup>
       <NuGetExe ParameterType="System.String" Required="true" />
       <Source ParameterType="System.String" Required="true" />
@@ -64,7 +72,11 @@
       </Code>
     </Task>
   </UsingTask>
-  <UsingTask TaskName="ConvertToNuGetTransformationFiles" TaskFactory="CodeTaskFactory" AssemblyFile="$(CodeTaskFactoryAssemblyFile)">
+  <UsingTask
+    TaskName="ConvertToNuGetTransformationFiles"
+    TaskFactory="CodeTaskFactory"
+    AssemblyFile="$(CodeTaskFactoryAssemblyFile)"
+  >
     <ParameterGroup>
       <OutputPath ParameterType="System.String" Required="true" />
       <OriginalNamespaceToken ParameterType="System.String" Required="true" />

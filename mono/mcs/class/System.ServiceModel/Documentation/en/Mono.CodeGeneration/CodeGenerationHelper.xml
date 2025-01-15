@@ -1,6 +1,9 @@
 <Type Name="CodeGenerationHelper" FullName="Mono.CodeGeneration.CodeGenerationHelper">
   <TypeSignature Language="C#" Value="public class CodeGenerationHelper" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit CodeGenerationHelper extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit CodeGenerationHelper extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,7 +19,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CodeGenerationHelper ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -28,8 +34,14 @@
       </Docs>
     </Member>
     <Member MemberName="GenerateMethodCall">
-      <MemberSignature Language="C#" Value="public static void GenerateMethodCall (System.Reflection.Emit.ILGenerator gen, Mono.CodeGeneration.CodeExpression target, Mono.CodeGeneration.CodeMethod method, Mono.CodeGeneration.CodeExpression[] parameters);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void GenerateMethodCall(class System.Reflection.Emit.ILGenerator gen, class Mono.CodeGeneration.CodeExpression target, class Mono.CodeGeneration.CodeMethod method, class Mono.CodeGeneration.CodeExpression[] parameters) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void GenerateMethodCall (System.Reflection.Emit.ILGenerator gen, Mono.CodeGeneration.CodeExpression target, Mono.CodeGeneration.CodeMethod method, Mono.CodeGeneration.CodeExpression[] parameters);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void GenerateMethodCall(class System.Reflection.Emit.ILGenerator gen, class Mono.CodeGeneration.CodeExpression target, class Mono.CodeGeneration.CodeMethod method, class Mono.CodeGeneration.CodeExpression[] parameters) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -59,8 +71,14 @@
       </Docs>
     </Member>
     <Member MemberName="GenerateMethodCall">
-      <MemberSignature Language="C#" Value="public static void GenerateMethodCall (System.Reflection.Emit.ILGenerator gen, Mono.CodeGeneration.CodeExpression target, System.Reflection.MethodBase method, Mono.CodeGeneration.CodeExpression[] parameters);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void GenerateMethodCall(class System.Reflection.Emit.ILGenerator gen, class Mono.CodeGeneration.CodeExpression target, class System.Reflection.MethodBase method, class Mono.CodeGeneration.CodeExpression[] parameters) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void GenerateMethodCall (System.Reflection.Emit.ILGenerator gen, Mono.CodeGeneration.CodeExpression target, System.Reflection.MethodBase method, Mono.CodeGeneration.CodeExpression[] parameters);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void GenerateMethodCall(class System.Reflection.Emit.ILGenerator gen, class Mono.CodeGeneration.CodeExpression target, class System.Reflection.MethodBase method, class Mono.CodeGeneration.CodeExpression[] parameters) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -91,7 +109,10 @@
     </Member>
     <Member MemberName="GeneratePrimitiveValue">
       <MemberSignature Language="C#" Value="public static void GeneratePrimitiveValue ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void GeneratePrimitiveValue() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void GeneratePrimitiveValue() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -106,8 +127,14 @@
       </Docs>
     </Member>
     <Member MemberName="GenerateSafeConversion">
-      <MemberSignature Language="C#" Value="public static void GenerateSafeConversion (System.Reflection.Emit.ILGenerator gen, Type targetType, Type sourceType);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void GenerateSafeConversion(class System.Reflection.Emit.ILGenerator gen, class System.Type targetType, class System.Type sourceType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void GenerateSafeConversion (System.Reflection.Emit.ILGenerator gen, Type targetType, Type sourceType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void GenerateSafeConversion(class System.Reflection.Emit.ILGenerator gen, class System.Type targetType, class System.Type sourceType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -129,8 +156,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetMethodException">
-      <MemberSignature Language="C#" Value="public static Exception GetMethodException (System.Reflection.MethodBase method, string msg);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Exception GetMethodException(class System.Reflection.MethodBase method, string msg) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Exception GetMethodException (System.Reflection.MethodBase method, string msg);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class System.Exception GetMethodException(class System.Reflection.MethodBase method, string msg) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -152,7 +185,10 @@
     </Member>
     <Member MemberName="IsNumber">
       <MemberSignature Language="C#" Value="public static bool IsNumber (Type t);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool IsNumber(class System.Type t) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig bool IsNumber(class System.Type t) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -171,8 +207,14 @@
       </Docs>
     </Member>
     <Member MemberName="LoadFromPtr">
-      <MemberSignature Language="C#" Value="public static void LoadFromPtr (System.Reflection.Emit.ILGenerator ig, Type t);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void LoadFromPtr(class System.Reflection.Emit.ILGenerator ig, class System.Type t) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void LoadFromPtr (System.Reflection.Emit.ILGenerator ig, Type t);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void LoadFromPtr(class System.Reflection.Emit.ILGenerator ig, class System.Type t) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -192,8 +234,14 @@
       </Docs>
     </Member>
     <Member MemberName="SaveToPtr">
-      <MemberSignature Language="C#" Value="public static void SaveToPtr (System.Reflection.Emit.ILGenerator ig, Type t);" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void SaveToPtr(class System.Reflection.Emit.ILGenerator ig, class System.Type t) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static void SaveToPtr (System.Reflection.Emit.ILGenerator ig, Type t);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig void SaveToPtr(class System.Reflection.Emit.ILGenerator ig, class System.Type t) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

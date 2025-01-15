@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="AesManaged" FullName="System.Security.Cryptography.AesManaged">
-  <TypeSignature Language="C#" Value="public sealed class AesManaged : System.Security.Cryptography.Aes" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit AesManaged extends System.Security.Cryptography.Aes" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class AesManaged : System.Security.Cryptography.Aes"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit AesManaged extends System.Security.Cryptography.Aes"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -13,9 +19,19 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The AES algorithm is essentially the Rijndael symmetric algorithm with a fixed block size and iteration count. This class functions the same way as the <see cref="T:System.Security.Cryptography.RijndaelManaged" /> class but limits blocks to 128 bits and does not allow feedback modes.</para>
+      <para
+        >The AES algorithm is essentially the Rijndael symmetric algorithm with a fixed block size and iteration count. This class functions the same way as the <see
+         cref="T:System.Security.Cryptography.RijndaelManaged" />
+
+         class but limits blocks to 128 bits and does not allow feedback modes.</para
+      >
       <block subset="none" type="note">
-        <para>If the Windows security policy setting for Federal Information Processing Standards (FIPS)-compliant algorithms is enabled, using this algorithm throws a <see cref="T:System.Security.Cryptography.CryptographicException" />.</para>
+        <para
+          >If the Windows security policy setting for Federal Information Processing Standards (FIPS)-compliant algorithms is enabled, using this algorithm throws a <see
+           cref="T:System.Security.Cryptography.CryptographicException" />
+
+          .</para
+        >
       </block>
     </remarks>
     <summary>
@@ -26,7 +42,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public AesManaged ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -36,13 +55,24 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AesManaged" /> class. </para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Security.Cryptography.AesManaged" />
+
+             class. </para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CreateDecryptor">
-      <MemberSignature Language="C#" Value="public override System.Security.Cryptography.ICryptoTransform CreateDecryptor ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.Cryptography.ICryptoTransform CreateDecryptor() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.Cryptography.ICryptoTransform CreateDecryptor ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.Cryptography.ICryptoTransform CreateDecryptor() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -64,8 +94,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateDecryptor">
-      <MemberSignature Language="C#" Value="public override System.Security.Cryptography.ICryptoTransform CreateDecryptor (byte[] key, byte[] iv);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.Cryptography.ICryptoTransform CreateDecryptor(unsigned int8[] key, unsigned int8[] iv) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.Cryptography.ICryptoTransform CreateDecryptor (byte[] key, byte[] iv);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.Cryptography.ICryptoTransform CreateDecryptor(unsigned int8[] key, unsigned int8[] iv) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -88,14 +124,26 @@
           <para>A symmetric decryptor object.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The secret key to use for the symmetric algorithm.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The secret key to use for the symmetric algorithm.</param
+        >
         <param name="iv">
-          <attribution license="cc4" from="Microsoft" modified="false" />The initialization vector to use for the symmetric algorithm.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The initialization vector to use for the symmetric algorithm.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CreateEncryptor">
-      <MemberSignature Language="C#" Value="public override System.Security.Cryptography.ICryptoTransform CreateEncryptor ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.Cryptography.ICryptoTransform CreateEncryptor() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.Cryptography.ICryptoTransform CreateEncryptor ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.Cryptography.ICryptoTransform CreateEncryptor() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -117,8 +165,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateEncryptor">
-      <MemberSignature Language="C#" Value="public override System.Security.Cryptography.ICryptoTransform CreateEncryptor (byte[] key, byte[] iv);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Security.Cryptography.ICryptoTransform CreateEncryptor(unsigned int8[] key, unsigned int8[] iv) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.Cryptography.ICryptoTransform CreateEncryptor (byte[] key, byte[] iv);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Security.Cryptography.ICryptoTransform CreateEncryptor(unsigned int8[] key, unsigned int8[] iv) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -141,14 +195,23 @@
           <para>A symmetric encryptor object.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />The secret key to use for the symmetric algorithm.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The secret key to use for the symmetric algorithm.</param
+        >
         <param name="iv">
-          <attribution license="cc4" from="Microsoft" modified="false" />The initialization vector to use for the symmetric algorithm.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The initialization vector to use for the symmetric algorithm.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -183,7 +246,7 @@
           <block subset="none" type="note">
             <para>Because this algorithm does not support feedback modes, using this property is discouraged.</para>
           </block>
-          <para> </para>
+          <para></para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -193,7 +256,10 @@
     </Member>
     <Member MemberName="GenerateIV">
       <MemberSignature Language="C#" Value="public override void GenerateIV ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void GenerateIV() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void GenerateIV() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -212,7 +278,10 @@
     </Member>
     <Member MemberName="GenerateKey">
       <MemberSignature Language="C#" Value="public override void GenerateKey ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void GenerateKey() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void GenerateKey() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -290,8 +359,14 @@
       </Docs>
     </Member>
     <Member MemberName="Mode">
-      <MemberSignature Language="C#" Value="public override System.Security.Cryptography.CipherMode Mode { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Cryptography.CipherMode Mode" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.Cryptography.CipherMode Mode { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Cryptography.CipherMode Mode"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -303,7 +378,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="F:System.Security.Cryptography.CipherMode.CFB" /> and <see cref="F:System.Security.Cryptography.CipherMode.OFB" /> modes are not supported.</para>
+          <para
+            >The <see
+             cref="F:System.Security.Cryptography.CipherMode.CFB" />
+
+             and <see
+             cref="F:System.Security.Cryptography.CipherMode.OFB" />
+
+             modes are not supported.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -312,8 +395,14 @@
       </Docs>
     </Member>
     <Member MemberName="Padding">
-      <MemberSignature Language="C#" Value="public override System.Security.Cryptography.PaddingMode Padding { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Security.Cryptography.PaddingMode Padding" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Security.Cryptography.PaddingMode Padding { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Security.Cryptography.PaddingMode Padding"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

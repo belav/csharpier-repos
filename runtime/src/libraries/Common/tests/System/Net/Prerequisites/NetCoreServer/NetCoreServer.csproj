@@ -1,20 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>$(_TargetFrameworkForXHarness)</TargetFramework>
-    <TargetFramework Condition="'$(TargetFramework)' == ''">$(AspNetCoreAppCurrent)</TargetFramework>
+    <TargetFramework Condition="'$(TargetFramework)' == ''"
+      >$(AspNetCoreAppCurrent)</TargetFramework
+    >
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <OutputType>Exe</OutputType>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
-
-    <DefineConstants Condition="'$(GenevaTelemetry)' == 'true'">$(DefineConstants);GENEVA_TELEMETRY</DefineConstants>
+    <DefineConstants Condition="'$(GenevaTelemetry)' == 'true'"
+      >$(DefineConstants);GENEVA_TELEMETRY</DefineConstants
+    >
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(GenevaTelemetry)' == 'true'">
     <PackageReference Include="OpenTelemetry" Version="1.2.0-rc2" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.2.0-rc2" />
@@ -22,7 +22,6 @@
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc9" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Handlers\DeflateHandler.cs" />
     <Compile Include="Handlers\EchoHandler.cs" />

@@ -7,13 +7,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DllImportPathTest.cs" />
-
-    <CLRTestBashEnvironmentVariable Include="LD_LIBRARY_PATH" Value="$LD_LIBRARY_PATH:$%28pwd)/Subdirectory" />
+    <CLRTestBashEnvironmentVariable
+      Include="LD_LIBRARY_PATH"
+      Value="$LD_LIBRARY_PATH:$%28pwd)/Subdirectory"
+    />
   </ItemGroup>
   <PropertyGroup>
-    <PathEnvSetupCommands><![CDATA[
+    <PathEnvSetupCommands>
+      <![CDATA[
       mkdir Subdirectory
-      ]]></PathEnvSetupCommands>
+      ]]>
+    </PathEnvSetupCommands>
     <CLRTestBashPreCommands>$(CLRTestBashPreCommands);$(PathEnvSetupCommands)</CLRTestBashPreCommands>
   </PropertyGroup>
   <ItemGroup>

@@ -1,10 +1,12 @@
 <Type Name="RfcLdapResult" FullName="Novell.Directory.Ldap.Rfc2251.RfcLdapResult">
-  <TypeSignature Language="C#" Value="public class RfcLdapResult : Novell.Directory.Ldap.Asn1.Asn1Sequence, Novell.Directory.Ldap.Rfc2251.RfcResponse, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class RfcLdapResult : Novell.Directory.Ldap.Asn1.Asn1Sequence, Novell.Directory.Ldap.Rfc2251.RfcResponse, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -54,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcLdapResult(Novell.Directory.Ldap.Asn1.Asn1Enumerated resultCode, Novell.Directory.Ldap.Rfc2251.RfcLdapDN matchedDN, Novell.Directory.Ldap.Rfc2251.RfcLdapString errorMessage)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcLdapResult(Novell.Directory.Ldap.Asn1.Asn1Enumerated resultCode, Novell.Directory.Ldap.Rfc2251.RfcLdapDN matchedDN, Novell.Directory.Ldap.Rfc2251.RfcLdapString errorMessage)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="resultCode" Type="Novell.Directory.Ldap.Asn1.Asn1Enumerated" />
@@ -70,7 +75,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcLdapResult(Novell.Directory.Ldap.Asn1.Asn1Enumerated resultCode, Novell.Directory.Ldap.Rfc2251.RfcLdapDN matchedDN, Novell.Directory.Ldap.Rfc2251.RfcLdapString errorMessage, Novell.Directory.Ldap.Rfc2251.RfcReferral referral)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcLdapResult(Novell.Directory.Ldap.Asn1.Asn1Enumerated resultCode, Novell.Directory.Ldap.Rfc2251.RfcLdapDN matchedDN, Novell.Directory.Ldap.Rfc2251.RfcLdapString errorMessage, Novell.Directory.Ldap.Rfc2251.RfcReferral referral)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="resultCode" Type="Novell.Directory.Ldap.Asn1.Asn1Enumerated" />
@@ -88,7 +96,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcLdapResult(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcLdapResult(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>
@@ -121,7 +132,10 @@
       </Docs>
     </Member>
     <Member MemberName="getResultCode">
-      <MemberSignature Language="C#" Value="public Novell.Directory.Ldap.Asn1.Asn1Enumerated getResultCode()" />
+      <MemberSignature
+        Language="C#"
+        Value="public Novell.Directory.Ldap.Asn1.Asn1Enumerated getResultCode()"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1Enumerated</ReturnType>
@@ -134,7 +148,10 @@
       </Docs>
     </Member>
     <Member MemberName="getMatchedDN">
-      <MemberSignature Language="C#" Value="public Novell.Directory.Ldap.Rfc2251.RfcLdapDN getMatchedDN()" />
+      <MemberSignature
+        Language="C#"
+        Value="public Novell.Directory.Ldap.Rfc2251.RfcLdapDN getMatchedDN()"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Rfc2251.RfcLdapDN</ReturnType>
@@ -147,7 +164,10 @@
       </Docs>
     </Member>
     <Member MemberName="getErrorMessage">
-      <MemberSignature Language="C#" Value="public Novell.Directory.Ldap.Rfc2251.RfcLdapString getErrorMessage()" />
+      <MemberSignature
+        Language="C#"
+        Value="public Novell.Directory.Ldap.Rfc2251.RfcLdapString getErrorMessage()"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Rfc2251.RfcLdapString</ReturnType>
@@ -160,7 +180,10 @@
       </Docs>
     </Member>
     <Member MemberName="getReferral">
-      <MemberSignature Language="C#" Value="public Novell.Directory.Ldap.Rfc2251.RfcReferral getReferral()" />
+      <MemberSignature
+        Language="C#"
+        Value="public Novell.Directory.Ldap.Rfc2251.RfcReferral getReferral()"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Rfc2251.RfcReferral</ReturnType>

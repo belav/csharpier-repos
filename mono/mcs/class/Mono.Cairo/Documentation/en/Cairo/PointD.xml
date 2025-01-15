@@ -30,7 +30,12 @@ gr.Rectangle ( new PointD (0, 0), 1, 1);
       <Docs>
         <param name="x">To be added.</param>
         <param name="y">To be added.</param>
-        <summary>Default constructor accepting a pair of coordinates in <see cref="T:System.Double" /> format.</summary>
+        <summary
+          >Default constructor accepting a pair of coordinates in <see
+           cref="T:System.Double" />
+
+           format.</summary
+        >
         <remarks />
       </Docs>
       <AssemblyInfo>
@@ -47,8 +52,7 @@ gr.Rectangle ( new PointD (0, 0), 1, 1);
       <Docs>
         <summary>Access to the X coordinate.</summary>
         <value>The X coordinate</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -64,8 +68,7 @@ gr.Rectangle ( new PointD (0, 0), 1, 1);
       <Docs>
         <summary>Access to the Y coordinate.</summary>
         <value>The Y coordinate</value>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

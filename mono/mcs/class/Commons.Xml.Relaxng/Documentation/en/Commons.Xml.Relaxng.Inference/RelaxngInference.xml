@@ -19,7 +19,10 @@
       </Docs>
     </Member>
     <Member MemberName="InferSchema">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Relaxng.RelaxngGrammar InferSchema (System.Xml.XmlReader xmlReader);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Relaxng.RelaxngGrammar InferSchema (System.Xml.XmlReader xmlReader);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngGrammar</ReturnType>
@@ -35,7 +38,10 @@
       </Docs>
     </Member>
     <Member MemberName="InferSchema">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Relaxng.RelaxngGrammar InferSchema (System.Xml.XmlReader xmlReader, Commons.Xml.Relaxng.RelaxngGrammar grammar);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Relaxng.RelaxngGrammar InferSchema (System.Xml.XmlReader xmlReader, Commons.Xml.Relaxng.RelaxngGrammar grammar);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngGrammar</ReturnType>
@@ -53,7 +59,10 @@
       </Docs>
     </Member>
     <Member MemberName="Occurrence">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Relaxng.Inference.RelaxngInference+InferenceOption Occurrence { set; get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Relaxng.Inference.RelaxngInference+InferenceOption Occurrence { set; get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.Inference.RelaxngInference+InferenceOption</ReturnType>
@@ -65,7 +74,10 @@
       </Docs>
     </Member>
     <Member MemberName="TypeInference">
-      <MemberSignature Language="C#" Value="public Commons.Xml.Relaxng.Inference.RelaxngInference+InferenceOption TypeInference { set; get; };" />
+      <MemberSignature
+        Language="C#"
+        Value="public Commons.Xml.Relaxng.Inference.RelaxngInference+InferenceOption TypeInference { set; get; };"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.Inference.RelaxngInference+InferenceOption</ReturnType>

@@ -7,7 +7,6 @@
     <RuntimeIdentifier>wasi-wasm</RuntimeIdentifier>
     <UseMonoRuntime>true</UseMonoRuntime>
     <TrimMode Condition="'$(TrimMode)' == ''">partial</TrimMode>
-
     <_WasmBuildCoreDependsOn>
         _InitializeCommonProperties;
         _PrepareForAfterBuild;
@@ -17,7 +16,6 @@
     <WasmBuildAppDependsOn>
       $(_WasmBuildCoreDependsOn)
     </WasmBuildAppDependsOn>
-
     <WasmNestedPublishAppDependsOn>
       _PrepareForNestedPublish;
       $(_WasmBuildCoreDependsOn)

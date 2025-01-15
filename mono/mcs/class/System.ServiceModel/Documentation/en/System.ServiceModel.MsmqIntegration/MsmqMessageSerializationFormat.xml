@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="MsmqMessageSerializationFormat" FullName="System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat">
+<Type
+  Name="MsmqMessageSerializationFormat"
+  FullName="System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat"
+>
   <TypeSignature Language="C#" Value="public enum MsmqMessageSerializationFormat" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed MsmqMessageSerializationFormat extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed MsmqMessageSerializationFormat extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -12,7 +18,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The default value is <see cref="F:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat.Xml" />.</para>
+      <para
+        >The default value is <see
+         cref="F:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat.Xml" />
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -22,7 +33,10 @@
   <Members>
     <Member MemberName="ActiveX">
       <MemberSignature Language="C#" Value="ActiveX" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat ActiveX = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat ActiveX = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -39,7 +53,10 @@
     </Member>
     <Member MemberName="Binary">
       <MemberSignature Language="C#" Value="Binary" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat Binary = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat Binary = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -50,13 +67,21 @@
       <Docs>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" /> is used to serialize the object.</para>
+          <para
+            >The <see
+             cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+             is used to serialize the object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="ByteArray">
       <MemberSignature Language="C#" Value="ByteArray" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat ByteArray = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat ByteArray = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -73,7 +98,10 @@
     </Member>
     <Member MemberName="Stream">
       <MemberSignature Language="C#" Value="Stream" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat Stream = int32(4)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat Stream = int32(4)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -90,7 +118,10 @@
     </Member>
     <Member MemberName="Xml">
       <MemberSignature Language="C#" Value="Xml" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat Xml = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat Xml = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -102,7 +133,10 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
-            <see cref="T:System.Xml.Serialization.XmlSerializer" /> is used to serialize the object.</para>
+            <see cref="T:System.Xml.Serialization.XmlSerializer" />
+
+             is used to serialize the object.</para
+          >
         </summary>
       </Docs>
     </Member>

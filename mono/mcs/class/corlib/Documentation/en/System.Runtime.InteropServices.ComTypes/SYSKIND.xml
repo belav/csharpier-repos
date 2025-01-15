@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="SYSKIND" FullName="System.Runtime.InteropServices.ComTypes.SYSKIND">
   <TypeSignature Language="C#" Value="public enum SYSKIND" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi serializable sealed SYSKIND extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi serializable sealed SYSKIND extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,7 +18,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For additional information about the SYSKIND enumeration, see the MSDN Library.</para>
-      <para>The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html"><a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a></format>.</para>
+      <para
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
+         type="text/html">
+          <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
+        </format>
+
+        .</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +35,10 @@
   <Members>
     <Member MemberName="SYS_MAC">
       <MemberSignature Language="C#" Value="SYS_MAC" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.SYSKIND SYS_MAC = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.SYSKIND SYS_MAC = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -44,7 +57,10 @@
     </Member>
     <Member MemberName="SYS_WIN16">
       <MemberSignature Language="C#" Value="SYS_WIN16" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.SYSKIND SYS_WIN16 = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.SYSKIND SYS_WIN16 = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -63,7 +79,10 @@
     </Member>
     <Member MemberName="SYS_WIN32">
       <MemberSignature Language="C#" Value="SYS_WIN32" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.SYSKIND SYS_WIN32 = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.SYSKIND SYS_WIN32 = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -82,7 +101,10 @@
     </Member>
     <Member MemberName="SYS_WIN64">
       <MemberSignature Language="C#" Value="SYS_WIN64" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.SYSKIND SYS_WIN64 = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Runtime.InteropServices.ComTypes.SYSKIND SYS_WIN64 = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

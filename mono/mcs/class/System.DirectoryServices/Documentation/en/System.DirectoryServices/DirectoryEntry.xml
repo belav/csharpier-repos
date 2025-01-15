@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="DirectoryEntry" FullName="System.DirectoryServices.DirectoryEntry">
-  <TypeSignature Language="C#" Value="public class DirectoryEntry : System.ComponentModel.Component, System.ComponentModel.IComponent, System.IDisposable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class DirectoryEntry : System.ComponentModel.Component, System.ComponentModel.IComponent, System.IDisposable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.DirectoryServices</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../msfinal.pub")</AttributeName>
@@ -79,7 +81,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectoryEntry" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -92,14 +99,36 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This constructor enables a program to use the methods and properties of the <see cref="T:System.DirectoryServices.DirectoryEntry" /> class on a native Active Directory Domain Services object that implements the IADs interface through a native API. For more information about the IADs interface, see the topic <see cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp">IADs</see> in the MSDN Library at <see cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>.</para>
+          <para
+            >This constructor enables a program to use the methods and properties of the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             class on a native Active Directory Domain Services object that implements the IADs interface through a native API. For more information about the IADs interface, see the topic <see
+
+              cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp"
+              >IADs</see
+            >
+
+             in the MSDN Library at <see
+             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectoryEntry" /> class that binds to the specified native Active Directory Domain Services object.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             class that binds to the specified native Active Directory Domain Services object.</para
+          >
         </summary>
         <param name="adsObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the native Active Directory Domain Services object to bind to.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the native Active Directory Domain Services object to bind to.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -112,14 +141,31 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectoryEntry" /> class that binds this instance to the node in Active Directory Domain Services located at the specified path.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             class that binds this instance to the node in Active Directory Domain Services located at the specified path.</para
+          >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path at which to bind the <see cref="M:System.DirectoryServices.DirectoryEntry.#ctor(System.String)" /> to the directory. The <see cref="P:System.DirectoryServices.DirectoryEntry.Path" /> property is initialized to this value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path at which to bind the <see
+           cref="M:System.DirectoryServices.DirectoryEntry.#ctor(System.String)" />
+
+           to the directory. The <see
+           cref="P:System.DirectoryServices.DirectoryEntry.Path" />
+
+           property is initialized to this value.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DirectoryEntry(string path, string username, string password)" />
+      <MemberSignature
+        Language="C#"
+        Value="public DirectoryEntry(string path, string username, string password)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="path" Type="System.String" />
@@ -132,14 +178,28 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectoryEntry" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             class.</para
+          >
         </summary>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />The user name to use when authenticating the client. The <see cref="P:System.DirectoryServices.DirectoryEntry.Username" /> property is initialized to this value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The user name to use when authenticating the client. The <see
+           cref="P:System.DirectoryServices.DirectoryEntry.Username" />
+
+           property is initialized to this value.</param
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DirectoryEntry(string path, string username, string password, System.DirectoryServices.AuthenticationTypes authenticationType)" />
+      <MemberSignature
+        Language="C#"
+        Value="public DirectoryEntry(string path, string username, string password, System.DirectoryServices.AuthenticationTypes authenticationType)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="path" Type="System.String" />
@@ -153,12 +213,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.DirectoryServices.DirectoryEntry" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             class.</para
+          >
         </summary>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />The user name to use when authenticating the client. The <see cref="P:System.DirectoryServices.DirectoryEntry.Username" /> property is initialized to this value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The user name to use when authenticating the client. The <see
+           cref="P:System.DirectoryServices.DirectoryEntry.Username" />
+
+           property is initialized to this value.</param
+        >
         <param name="authenticationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />One of the <see cref="T:System.DirectoryServices.AuthenticationTypes" /> values. The <see cref="P:System.DirectoryServices.DirectoryEntry.AuthenticationType" /> property is initialized to this value.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          One of the <see
+           cref="T:System.DirectoryServices.AuthenticationTypes" />
+
+           values. The <see
+           cref="P:System.DirectoryServices.DirectoryEntry.AuthenticationType" />
+
+           property is initialized to this value.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Close">
@@ -172,16 +252,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Call this method to release unmanaged system resources, without waiting for garbage collection.</para>
-          <para>Following a call to <see cref="M:System.DirectoryServices.DirectoryEntry.Close" />, any operations on the <see cref="T:System.DirectoryServices.DirectoryEntry" /> might raise exceptions.</para>
+          <para
+            >Following a call to <see
+             cref="M:System.DirectoryServices.DirectoryEntry.Close" />
+
+            , any operations on the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             might raise exceptions.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Closes the <see cref="T:System.DirectoryServices.DirectoryEntry" /> object and releases any system resources that are associated with this component.</para>
+          <para
+            >Closes the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object and releases any system resources that are associated with this component.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.DirectoryEntry CopyTo(System.DirectoryServices.DirectoryEntry newParent)" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.DirectoryEntry CopyTo(System.DirectoryServices.DirectoryEntry newParent)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.DirectoryServices.DirectoryEntry</ReturnType>
@@ -192,8 +288,21 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <see cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" /> is true, call <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> on the new object to make the copy permanent.</para>
-          <para>The Lightweight Directory Access Protocol (LDAP) provider does not currently support the <see cref="M:System.DirectoryServices.DirectoryEntry.CopyTo(System.DirectoryServices.DirectoryEntry)" /> method.</para>
+          <para
+            >If <see
+             cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+             is true, call <see
+             cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+             on the new object to make the copy permanent.</para
+          >
+          <para
+            >The Lightweight Directory Access Protocol (LDAP) provider does not currently support the <see
+             cref="M:System.DirectoryServices.DirectoryEntry.CopyTo(System.DirectoryServices.DirectoryEntry)" />
+
+             method.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -201,10 +310,21 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.DirectoryServices.DirectoryEntry" /> object that represents the copy of this entry as a child of the new parent.</para>
+          <para
+            >A <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object that represents the copy of this entry as a child of the new parent.</para
+          >
         </returns>
         <param name="newParent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The distinguished name of the <see cref="T:System.DirectoryServices.DirectoryEntry" /> object that will be the parent for the copy that is being created.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The distinguished name of the <see
+           cref="T:System.DirectoryServices.DirectoryEntry" />
+
+           object that will be the parent for the copy that is being created.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DeleteTree">
@@ -226,7 +346,15 @@
           </format>
           <list type="bullet">
             <item>
-              <para>Use <see cref="T:System.DirectoryServices.DirectoryServicesPermission" /> for deleting entries from the Active Directory Domain Services hierarchy. Associated enumeration: <see cref="T:System.DirectoryServices.DirectoryServicesPermissionAccess" />.</para>
+              <para
+                >Use <see
+                 cref="T:System.DirectoryServices.DirectoryServicesPermission" />
+
+                 for deleting entries from the Active Directory Domain Services hierarchy. Associated enumeration: <see
+                 cref="T:System.DirectoryServices.DirectoryServicesPermissionAccess" />
+
+                .</para
+              >
             </item>
           </list>
         </remarks>
@@ -256,11 +384,17 @@
           <para>true if the specified path represents a valid entry in the directory service; otherwise, false.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />The path of the entry to verify.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The path of the entry to verify.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="MoveTo">
-      <MemberSignature Language="C#" Value="public void MoveTo(System.DirectoryServices.DirectoryEntry newParent)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void MoveTo(System.DirectoryServices.DirectoryEntry newParent)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -271,18 +405,37 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <see cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" /> is true, call the <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> method on the new object to make the move permanent.</para>
+          <para
+            >If <see
+             cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+             is true, call the <see
+             cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+             method on the new object to make the move permanent.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Moves this <see cref="T:System.DirectoryServices.DirectoryEntry" /> object to the specified parent.</para>
+          <para
+            >Moves this <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object to the specified parent.</para
+          >
         </summary>
         <param name="newParent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parent to which you want to move this entry.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parent to which you want to move this entry.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="MoveTo">
-      <MemberSignature Language="C#" Value="public void MoveTo(System.DirectoryServices.DirectoryEntry newParent, string newName)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void MoveTo(System.DirectoryServices.DirectoryEntry newParent, string newName)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -294,16 +447,35 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If <see cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" /> is true, call <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> on the new object to make the move permanent.</para>
+          <para
+            >If <see
+             cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+             is true, call <see
+             cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+             on the new object to make the move permanent.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Moves this <see cref="T:System.DirectoryServices.DirectoryEntry" /> object to the specified parent and changes its name to the specified value.</para>
+          <para
+            >Moves this <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object to the specified parent and changes its name to the specified value.</para
+          >
         </summary>
         <param name="newParent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parent to which you want to move this entry.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parent to which you want to move this entry.</param
+        >
         <param name="newName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new name of this entry.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new name of this entry.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Rename">
@@ -321,18 +493,37 @@
           <block subset="none" type="note">
             <para>This will also affect the path that is used to refer to this entry.</para>
           </block>
-          <para>If <see cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" /> is true, be sure to call the <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> method on the new object to make the move permanent.</para>
+          <para
+            >If <see
+             cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+             is true, be sure to call the <see
+             cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+             method on the new object to make the move permanent.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Changes the name of this <see cref="T:System.DirectoryServices.DirectoryEntry" /> object.</para>
+          <para
+            >Changes the name of this <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object.</para
+          >
         </summary>
         <param name="newName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The new name of the entry.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The new name of the entry.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Invoke">
-      <MemberSignature Language="C#" Value="public object Invoke(string methodName, object[] args)" />
+      <MemberSignature
+        Language="C#"
+        Value="public object Invoke(string methodName, object[] args)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -350,7 +541,24 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the return value of the native method implements the IADs interface, a corresponding <see cref="T:System.DirectoryServices.DirectoryEntry" /> is returned. For more information about the IADs interface, see the topic <see cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp">IADs</see> in the MSDN Library at <see cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp">http://msdn.microsoft.com/library</see>.</para>
+          <para
+            >If the return value of the native method implements the IADs interface, a corresponding <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             is returned. For more information about the IADs interface, see the topic <see
+
+              cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp"
+              >IADs</see
+            >
+
+             in the MSDN Library at <see
+
+              cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp"
+              >http://msdn.microsoft.com/library</see
+            >
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -361,13 +569,25 @@
           <para>The return value of the invoked method.</para>
         </returns>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the method to invoke.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the method to invoke.</param
+        >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Object" /> objects that contains the arguments of the method to invoke.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type <see
+           cref="T:System.Object" />
+
+           objects that contains the arguments of the method to invoke.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.DirectoryEntry CopyTo(System.DirectoryServices.DirectoryEntry newParent, string newName)" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.DirectoryEntry CopyTo(System.DirectoryServices.DirectoryEntry newParent, string newName)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.DirectoryServices.DirectoryEntry</ReturnType>
@@ -380,20 +600,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The Lightweight Directory Access Protocol (LDAP) provider does not currently support this method.</para>
-          <para>If <see cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" /> is true, call <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> on the new object to make the copy permanent.</para>
+          <para
+            >If <see
+             cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+             is true, call <see
+             cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+             on the new object to make the copy permanent.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a copy of this <see cref="T:System.DirectoryServices.DirectoryEntry" /> object, as a child of the specified parent <see cref="T:System.DirectoryServices.DirectoryEntry" /> object, with the specified new name.</para>
+          <para
+            >Creates a copy of this <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object, as a child of the specified parent <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object, with the specified new name.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A renamed copy of this entry as a child of the specified parent.</para>
         </returns>
         <param name="newParent">
-          <attribution license="cc4" from="Microsoft" modified="false" />The DN of the <see cref="T:System.DirectoryServices.DirectoryEntry" /> object that will be the parent for the copy that is being created.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The DN of the <see
+           cref="T:System.DirectoryServices.DirectoryEntry" />
+
+           object that will be the parent for the copy that is being created.</param
+        >
         <param name="newName">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the copy of this entry.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the copy of this entry.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="CommitChanges">
@@ -406,17 +651,43 @@
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By default, changes to properties are made locally to a cache, and property values to be read are cached after the first read. For more information, see <see cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />.</para>
-          <para>Changes made to the cache include changes to the properties as well as calls to <see cref="M:System.DirectoryServices.DirectoryEntries.Add(System.String,System.String)" /> (if this is the newly created entry).</para>
+          <para
+            >By default, changes to properties are made locally to a cache, and property values to be read are cached after the first read. For more information, see <see
+             cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+            .</para
+          >
+          <para
+            >Changes made to the cache include changes to the properties as well as calls to <see
+             cref="M:System.DirectoryServices.DirectoryEntries.Add(System.String,System.String)" />
+
+             (if this is the newly created entry).</para
+          >
           <block subset="none" type="note">
-            <para> If you call <see cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" /> before calling <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />, any uncommitted changes to the property cache will be lost.</para>
+            <para
+              > If you call <see
+               cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />
+
+               before calling <see
+               cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+              , any uncommitted changes to the property cache will be lost.</para
+            >
           </block>
           <format type="text/html">
             <h2>Security</h2>
           </format>
           <list type="bullet">
             <item>
-              <para>Use the <see cref="T:System.DirectoryServices.DirectoryServicesPermission" /> class for reading, writing, deleting, changing, and adding to the Active Directory Domain Services hierarchy. Associated enumeration: <see cref="T:System.DirectoryServices.DirectoryServicesPermissionAccess" />.</para>
+              <para
+                >Use the <see
+                 cref="T:System.DirectoryServices.DirectoryServicesPermission" />
+
+                 class for reading, writing, deleting, changing, and adding to the Active Directory Domain Services hierarchy. Associated enumeration: <see
+                 cref="T:System.DirectoryServices.DirectoryServicesPermissionAccess" />
+
+                .</para
+              >
             </item>
           </list>
         </remarks>
@@ -437,12 +708,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
-            <para>Any uncommitted changes to the property cache will be lost. Use the <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> method to persist changes to the directory store.</para>
+            <para
+              >Any uncommitted changes to the property cache will be lost. Use the <see
+               cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+               method to persist changes to the directory store.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Loads the property values for this <see cref="T:System.DirectoryServices.DirectoryEntry" /> object into the property cache.</para>
+          <para
+            >Loads the property values for this <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object into the property cache.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -460,7 +741,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
-            <para>Any uncommitted changes to the property cache will be lost. Use <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> to persist changes to the directory store.</para>
+            <para
+              >Any uncommitted changes to the property cache will be lost. Use <see
+               cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+               to persist changes to the directory store.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -470,7 +756,10 @@
       </Docs>
     </Member>
     <Member MemberName="AuthenticationType">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.AuthenticationTypes AuthenticationType { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.AuthenticationTypes AuthenticationType { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -487,7 +776,15 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Prior to dnprdnlong, the default value is <see cref="F:System.DirectoryServices.AuthenticationTypes.None" />. Beginning with dnprdnlong, the default value is <see cref="F:System.DirectoryServices.AuthenticationTypes.Secure" />.</para>
+          <para
+            >Prior to dnprdnlong, the default value is <see
+             cref="F:System.DirectoryServices.AuthenticationTypes.None" />
+
+            . Beginning with dnprdnlong, the default value is <see
+             cref="F:System.DirectoryServices.AuthenticationTypes.Secure" />
+
+            .</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -496,7 +793,10 @@
       </Docs>
     </Member>
     <Member MemberName="Children">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.DirectoryEntries Children { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.DirectoryEntries Children { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -517,9 +817,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The child entries are only the immediate children of this node.</para>
-          <para>Use this property to find, retrieve, or create a directory entry in the hierarchy. This property is a collection that, along with the usual iteration capabilities, provides an <see cref="M:System.DirectoryServices.DirectoryEntries.Add(System.String,System.String)" /> method through which you add a node to the collection directly below the parent node that you are currently bound to. When adding a node to the collection, you must specify a name for the new node and the name of a schema template that you want to associate with the node. For example, you might want to use a schema titled "Computer" to add new computers to the hierarchy.</para>
+          <para
+            >Use this property to find, retrieve, or create a directory entry in the hierarchy. This property is a collection that, along with the usual iteration capabilities, provides an <see
+             cref="M:System.DirectoryServices.DirectoryEntries.Add(System.String,System.String)" />
+
+             method through which you add a node to the collection directly below the parent node that you are currently bound to. When adding a node to the collection, you must specify a name for the new node and the name of a schema template that you want to associate with the node. For example, you might want to use a schema titled "Computer" to add new computers to the hierarchy.</para
+          >
           <block subset="none" type="note">
-            <para>By default, changes are made locally to a cache. After you modify or add a node, you must call the <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> method to commit your changes in order for them to be saved to the tree. If you call <see cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" /> before calling <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />, any uncommitted changes to the property cache will be lost. For more information, see the <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> and <see cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" /> methods, and the <see cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" /> property.</para>
+            <para
+              >By default, changes are made locally to a cache. After you modify or add a node, you must call the <see
+               cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+               method to commit your changes in order for them to be saved to the tree. If you call <see
+               cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />
+
+               before calling <see
+               cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+              , any uncommitted changes to the property cache will be lost. For more information, see the <see
+               cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+               and <see
+               cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />
+
+               methods, and the <see
+               cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+               property.</para
+            >
           </block>
         </remarks>
         <summary>
@@ -549,11 +874,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When binding to an object in Active Directory Domain Services, use the <see cref="P:System.DirectoryServices.DirectoryEntry.NativeGuid" /> property.</para>
+          <para
+            >When binding to an object in Active Directory Domain Services, use the <see
+             cref="P:System.DirectoryServices.DirectoryEntry.NativeGuid" />
+
+             property.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the GUID of the <see cref="T:System.DirectoryServices.DirectoryEntry" />.</para>
+          <para
+            >Gets the GUID of the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -578,7 +913,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This name, along with <see cref="P:System.DirectoryServices.DirectoryEntry.SchemaClassName" />, distinguishes this entry from its siblings and must be unique among its siblings in each container.</para>
+          <para
+            >This name, along with <see
+             cref="P:System.DirectoryServices.DirectoryEntry.SchemaClassName" />
+
+            , distinguishes this entry from its siblings and must be unique among its siblings in each container.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -587,7 +927,10 @@
       </Docs>
     </Member>
     <Member MemberName="Parent">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.DirectoryEntry Parent { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.DirectoryEntry Parent { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -633,14 +976,29 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use the <see cref="P:System.DirectoryServices.DirectoryEntry.NativeGuid" /> property when binding an object in Active Directory Domain Services.</para>
+          <para
+            >Use the <see
+             cref="P:System.DirectoryServices.DirectoryEntry.NativeGuid" />
+
+             property when binding an object in Active Directory Domain Services.</para
+          >
           <block subset="none" type="note">
-            <para>The Lightweight Directory Access Protocol (LDAP) provider returns the globally unique identifier of a <see cref="T:System.DirectoryServices.DirectoryEntry" /> in a different format than the Internet Information Services (IIS), Novell NetWare Directory Server (NDS), and WinNT providers.</para>
+            <para
+              >The Lightweight Directory Access Protocol (LDAP) provider returns the globally unique identifier of a <see
+               cref="T:System.DirectoryServices.DirectoryEntry" />
+
+               in a different format than the Internet Information Services (IIS), Novell NetWare Directory Server (NDS), and WinNT providers.</para
+            >
           </block>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the GUID of the <see cref="T:System.DirectoryServices.DirectoryEntry" />, as returned from the provider.</para>
+          <para
+            >Gets the GUID of the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            , as returned from the provider.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -665,8 +1023,27 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Use this property to cast the native Active Directory Domain Services object, which implements the IADs interface, when you want to use a COM interface. For more information about the IADs interface, see the topic <see cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp">IADs</see> in the MSDN Library at <see cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp">http://msdn.microsoft.com/library</see>.</para>
-          <para>This object is for advanced scenarios that cannot be accomplished with the <see cref="N:System.DirectoryServices" /> classes alone. To use it, you need to import one of the COM interfaces from the IADs family, then cast this property to that interface.</para>
+          <para
+            >Use this property to cast the native Active Directory Domain Services object, which implements the IADs interface, when you want to use a COM interface. For more information about the IADs interface, see the topic <see
+
+              cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp"
+              >IADs</see
+            >
+
+             in the MSDN Library at <see
+
+              cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp"
+              >http://msdn.microsoft.com/library</see
+            >
+
+            .</para
+          >
+          <para
+            >This object is for advanced scenarios that cannot be accomplished with the <see
+             cref="N:System.DirectoryServices" />
+
+             classes alone. To use it, you need to import one of the COM interfaces from the IADs family, then cast this property to that interface.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -692,10 +1069,37 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>By default, changes to properties are made locally to a cache, and property values to be read are cached after the first read. When the <see cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" /> property is true, access to the <see cref="T:System.DirectoryServices.DirectoryEntry" /> object's properties is faster. Setting this to false will cause the cache to be committed after each operation.</para>
-          <para>If the <see cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" /> property is true and you want to commit cached changes, call the <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> method. To update values in the cache after changes to the directory are made, call the <see cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" /> method.</para>
+          <para
+            >By default, changes to properties are made locally to a cache, and property values to be read are cached after the first read. When the <see
+             cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+             property is true, access to the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object's properties is faster. Setting this to false will cause the cache to be committed after each operation.</para
+          >
+          <para
+            >If the <see
+             cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+             property is true and you want to commit cached changes, call the <see
+             cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+             method. To update values in the cache after changes to the directory are made, call the <see
+             cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />
+
+             method.</para
+          >
           <block subset="none" type="note">
-            <para>If you call <see cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" /> before calling <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />, any uncommitted changes to the property cache will be lost.</para>
+            <para
+              >If you call <see
+               cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />
+
+               before calling <see
+               cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+              , any uncommitted changes to the property cache will be lost.</para
+            >
           </block>
           <block subset="none" type="note">
             <para>The Internet Information Services (IIS) provider does not support committing the cache after each operation.</para>
@@ -728,7 +1132,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can set the <see cref="P:System.DirectoryServices.DirectoryEntry.Username" /> and <see cref="P:System.DirectoryServices.DirectoryEntry.Password" /> properties to specify alternate credentials with which to access the information in Active Directory Domain Services. Any other <see cref="T:System.DirectoryServices.DirectoryEntry" /> objects retrieved from this instance (for example, through <see cref="P:System.DirectoryServices.DirectoryEntry.Children" />) are automatically created with the same alternate credentials.</para>
+          <para
+            >You can set the <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Username" />
+
+             and <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Password" />
+
+             properties to specify alternate credentials with which to access the information in Active Directory Domain Services. Any other <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             objects retrieved from this instance (for example, through <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Children" />
+
+            ) are automatically created with the same alternate credentials.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -760,7 +1178,21 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You can set the <see cref="P:System.DirectoryServices.DirectoryEntry.Username" /> and <see cref="P:System.DirectoryServices.DirectoryEntry.Password" /> in order to specify alternate credentials with which to access the information in Active Directory Domain Services. Any other <see cref="T:System.DirectoryServices.DirectoryEntry" /> objects retrieved from this instance (for example, through <see cref="P:System.DirectoryServices.DirectoryEntry.Children" />) are automatically created with the same alternate credentials.</para>
+          <para
+            >You can set the <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Username" />
+
+             and <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Password" />
+
+             in order to specify alternate credentials with which to access the information in Active Directory Domain Services. Any other <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             objects retrieved from this instance (for example, through <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Children" />
+
+            ) are automatically created with the same alternate credentials.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -792,23 +1224,75 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.DirectoryServices.DirectoryEntry.Path" /> property uniquely identifies this entry in a networked environment. This entry can always be retrieved using this <see cref="P:System.DirectoryServices.DirectoryEntry.Path" />.</para>
-          <para>Setting the <see cref="P:System.DirectoryServices.DirectoryEntry.Path" /> retrieves a new entry from the directory store; it does not change the path of the currently bound entry.</para>
-          <para>The classes associated with the <see cref="T:System.DirectoryServices.DirectoryEntry" /> component can be used with any of the Active Directory Domain Services service providers. Some of the current providers are Internet Information Services (IIS), Lightweight Directory Access Protocol (LDAP), Novell NetWare Directory Service (NDS), and WinNT.</para>
+          <para
+            >The <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Path" />
+
+             property uniquely identifies this entry in a networked environment. This entry can always be retrieved using this <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Path" />
+
+            .</para
+          >
+          <para
+            >Setting the <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Path" />
+
+             retrieves a new entry from the directory store; it does not change the path of the currently bound entry.</para
+          >
+          <para
+            >The classes associated with the <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             component can be used with any of the Active Directory Domain Services service providers. Some of the current providers are Internet Information Services (IIS), Lightweight Directory Access Protocol (LDAP), Novell NetWare Directory Service (NDS), and WinNT.</para
+          >
           <block subset="none" type="note">
-            <para>The section of the <see cref="P:System.DirectoryServices.DirectoryEntry.Path" /> that identifies the provider (precedes "://") is case-sensitive. For example, "LDAP://" or "WinNT://".</para>
+            <para
+              >The section of the <see
+               cref="P:System.DirectoryServices.DirectoryEntry.Path" />
+
+               that identifies the provider (precedes "://") is case-sensitive. For example, "LDAP://" or "WinNT://".</para
+            >
           </block>
-          <para>The syntax for the <see cref="P:System.DirectoryServices.DirectoryEntry.Path" /> property varies according to the provider. Some common scenarios are:</para>
+          <para
+            >The syntax for the <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Path" />
+
+             property varies according to the provider. Some common scenarios are:</para
+          >
           <para>WinNT</para>
           <list type="bullet">
             <item>
-              <para>Connect to a group on a computer. For example, "WinNT<userInputLocalizable>://&lt;domain name&gt;/&lt;computer name&gt;/&lt;group name&gt;</userInputLocalizable>". If you are connecting to a local computer, "WinNT://<userInputLocalizable>&lt;computer name&gt;/&lt;group name&gt;</userInputLocalizable>".</para>
+              <para
+                >Connect to a group on a computer. For example, "WinNT<userInputLocalizable
+                >://&lt;domain name&gt;/&lt;computer name&gt;/&lt;group name&gt;</userInputLocalizable>
+
+                ". If you are connecting to a local computer, "WinNT://<userInputLocalizable
+                >&lt;computer name&gt;/&lt;group name&gt;</userInputLocalizable>
+
+                ".</para
+              >
             </item>
             <item>
-              <para>Connect to a user on a computer. For example, "WinNT://<userInputLocalizable>&lt;domain name&gt;/&lt;computer name&gt;/&lt;user name&gt;</userInputLocalizable>". If you are connecting to a local computer, "WinNT://<userInputLocalizable>&lt;computer name&gt;/&lt;user name&gt;</userInputLocalizable>".</para>
+              <para
+                >Connect to a user on a computer. For example, "WinNT://<userInputLocalizable
+                >&lt;domain name&gt;/&lt;computer name&gt;/&lt;user name&gt;</userInputLocalizable>
+
+                ". If you are connecting to a local computer, "WinNT://<userInputLocalizable
+                >&lt;computer name&gt;/&lt;user name&gt;</userInputLocalizable>
+
+                ".</para
+              >
             </item>
             <item>
-              <para>Connect to services on a computer. For example, "WinNT://<userInputLocalizable>&lt;domain name&gt;/&lt;computer name&gt;/&lt;service name&gt;</userInputLocalizable>". If you are connecting to a local computer, "WinNT://<userInputLocalizable>&lt;computer name&gt;/&lt;service name&gt;</userInputLocalizable>".</para>
+              <para
+                >Connect to services on a computer. For example, "WinNT://<userInputLocalizable
+                >&lt;domain name&gt;/&lt;computer name&gt;/&lt;service name&gt;</userInputLocalizable>
+
+                ". If you are connecting to a local computer, "WinNT://<userInputLocalizable
+                >&lt;computer name&gt;/&lt;service name&gt;</userInputLocalizable>
+
+                ".</para
+              >
             </item>
             <item>
               <para>Discover all domains on the network. For example, "WinNT:" The domains can be found by enumerating the children of this entry.</para>
@@ -835,16 +1319,35 @@
           <para>To bind to the current domain using LDAP, use the path "LDAP://RootDSE", then get the default naming context and rebind the entry. For example:</para>
           <code>String str = ent.Properties["defaultNamingContext"][0];
 DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
-          <para>For more information, see the documentation for your provider and the topic <see cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/using_adsi.asp">Using Active Directory Service Interfaces</see> in the MSDN Library at <see cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>. </para>
+          <para
+            >For more information, see the documentation for your provider and the topic <see
+
+              cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/using_adsi.asp"
+              >Using Active Directory Service Interfaces</see
+            >
+
+             in the MSDN Library at <see
+             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            . </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the path for this <see cref="T:System.DirectoryServices.DirectoryEntry" />.</para>
+          <para
+            >Gets or sets the path for this <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.PropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.PropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -864,13 +1367,43 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>If the property is not initialized, <see cref="P:System.DirectoryServices.DirectoryEntry.Properties" /> calls the ADSI interface <see cref="http://msdn2.microsoft.com/en-us/library/aa746347.aspx">IADs::Get</see> method to retrieve the value from the cache. If the underling cache has not been loaded, <see cref="http://msdn2.microsoft.com/en-us/library/aa746347.aspx">IADs::Get</see> implicitly calls <see cref="http://msdn2.microsoft.com/en-us/library/aa746349.aspx">IADs::GetInfo</see>. This method loads the values of the supported properties that have not been set in the cache from the underlying directory store. Subsequent calls to <see cref="P:System.DirectoryServices.DirectoryEntry.Properties" /> retrieves the property values in the cache only. To control property cache loading, call <see cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />. </para>
+          <para
+            >If the property is not initialized, <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Properties" />
+
+             calls the ADSI interface <see
+             cref="http://msdn2.microsoft.com/en-us/library/aa746347.aspx">IADs::Get</see>
+
+             method to retrieve the value from the cache. If the underling cache has not been loaded, <see
+             cref="http://msdn2.microsoft.com/en-us/library/aa746347.aspx">IADs::Get</see>
+
+             implicitly calls <see
+             cref="http://msdn2.microsoft.com/en-us/library/aa746349.aspx">IADs::GetInfo</see>
+
+            . This method loads the values of the supported properties that have not been set in the cache from the underlying directory store. Subsequent calls to <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Properties" />
+
+             retrieves the property values in the cache only. To control property cache loading, call <see
+             cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />
+
+            . </para
+          >
           <para />
-          <para>Note   The <see cref="P:System.DirectoryServices.DirectoryEntry.Properties" /> property is not supported for use with the Active Directory Client Extension (DSClient) for WinNt4Family. </para>
+          <para
+            >Note   The <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Properties" />
+
+             property is not supported for use with the Active Directory Client Extension (DSClient) for WinNt4Family. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the Active Directory Domain Services properties for this <see cref="T:System.DirectoryServices.DirectoryEntry" /> object.</para>
+          <para
+            >Gets the Active Directory Domain Services properties for this <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
@@ -895,17 +1428,38 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This is the same as the <see cref="P:System.DirectoryServices.DirectoryEntry.Name" /> property of the <see cref="P:System.DirectoryServices.DirectoryEntry.SchemaEntry" /> property.</para>
-          <para>A <see cref="T:System.DirectoryServices.DirectoryEntry" /> object's schema defines its properties and methods.</para>
+          <para
+            >This is the same as the <see
+             cref="P:System.DirectoryServices.DirectoryEntry.Name" />
+
+             property of the <see
+             cref="P:System.DirectoryServices.DirectoryEntry.SchemaEntry" />
+
+             property.</para
+          >
+          <para
+            >A <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object's schema defines its properties and methods.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the name of the schema class for this <see cref="T:System.DirectoryServices.DirectoryEntry" /> object.</para>
+          <para
+            >Gets the name of the schema class for this <see
+             cref="T:System.DirectoryServices.DirectoryEntry" />
+
+             object.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SchemaEntry">
-      <MemberSignature Language="C#" Value="public System.DirectoryServices.DirectoryEntry SchemaEntry { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.DirectoryServices.DirectoryEntry SchemaEntry { get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -938,20 +1492,62 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Use this class for binding to objects, or reading and updating attributes. <see cref="T:System.DirectoryServices.DirectoryEntry" />, along with helper classes, provides support for life-cycle management and navigation methods. These include creating, deleting, renaming, moving a child node, and enumerating children. After you modify a node, you must commit your changes in order for them to be saved to the tree. For more information, see the <see cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" /> property.</para>
+      <para
+        >Use this class for binding to objects, or reading and updating attributes. <see
+         cref="T:System.DirectoryServices.DirectoryEntry" />
+
+        , along with helper classes, provides support for life-cycle management and navigation methods. These include creating, deleting, renaming, moving a child node, and enumerating children. After you modify a node, you must commit your changes in order for them to be saved to the tree. For more information, see the <see
+         cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+         property.</para
+      >
       <para>
-        <see cref="T:System.DirectoryServices.DirectoryEntry" /> can be used to access regular entries and some, but not all, information from schema entries.</para>
+        <see cref="T:System.DirectoryServices.DirectoryEntry" />
+
+         can be used to access regular entries and some, but not all, information from schema entries.</para
+      >
       <para>The Active Directory Domain Services hierarchy contains up to several thousand nodes. Each node represents an object, such as a network printer or a user in a domain. Corporate networks constantly change as new employees are hired and objects such as network printers and computers are added. Active Directory Service Interfaces (ADSI) technology provides ways to programmatically add these objects to the directory tree.</para>
-      <para>To create a directory entry in the hierarchy, use the <see cref="P:System.DirectoryServices.DirectoryEntry.Children" /> property. The <see cref="P:System.DirectoryServices.DirectoryEntry.Children" /> property is a collection that provides an <see cref="M:System.DirectoryServices.DirectoryEntries.Add(System.String,System.String)" /> method, through which you add a node to the collection directly below the parent node that you are currently bound to. When adding a node to the collection, you must specify a name for the new node and the name of a schema template that you want to associate with the node. For example, you might want to use a schema titled "Computer" to add new computers to the hierarchy.</para>
-      <para>This class also contains attribute caching, which can be useful for optimizing network traffic. To use attribute caching, see the <see cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" /> property.</para>
-      <para>The classes associated with the <see cref="T:System.DirectoryServices.DirectoryEntry" /> component can be used with any of the Active Directory Domain Services service providers. Some of the current providers are Internet Information Services (IIS), Lightweight Directory Access Protocol (LDAP), Novell NetWare Directory Service (NDS), and WinNT.</para>
+      <para
+        >To create a directory entry in the hierarchy, use the <see
+         cref="P:System.DirectoryServices.DirectoryEntry.Children" />
+
+         property. The <see
+         cref="P:System.DirectoryServices.DirectoryEntry.Children" />
+
+         property is a collection that provides an <see
+         cref="M:System.DirectoryServices.DirectoryEntries.Add(System.String,System.String)" />
+
+         method, through which you add a node to the collection directly below the parent node that you are currently bound to. When adding a node to the collection, you must specify a name for the new node and the name of a schema template that you want to associate with the node. For example, you might want to use a schema titled "Computer" to add new computers to the hierarchy.</para
+      >
+      <para
+        >This class also contains attribute caching, which can be useful for optimizing network traffic. To use attribute caching, see the <see
+         cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+         property.</para
+      >
+      <para
+        >The classes associated with the <see
+         cref="T:System.DirectoryServices.DirectoryEntry" />
+
+         component can be used with any of the Active Directory Domain Services service providers. Some of the current providers are Internet Information Services (IIS), Lightweight Directory Access Protocol (LDAP), Novell NetWare Directory Service (NDS), and WinNT.</para
+      >
       <block subset="none" type="note">
-        <para>It is assumed that you have a general understanding of Active Directory Domain Services before using this class. For more information, see the <see cref="N:System.DirectoryServices" /> namespace overview.</para>
+        <para
+          >It is assumed that you have a general understanding of Active Directory Domain Services before using this class. For more information, see the <see
+           cref="N:System.DirectoryServices" />
+
+           namespace overview.</para
+        >
       </block>
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.DirectoryServices.DirectoryEntry" /> class encapsulates a node or object in the Active Directory Domain Services hierarchy.</para>
+      <para
+        >The <see
+         cref="T:System.DirectoryServices.DirectoryEntry" />
+
+         class encapsulates a node or object in the Active Directory Domain Services hierarchy.</para
+      >
     </summary>
   </Docs>
 </Type>

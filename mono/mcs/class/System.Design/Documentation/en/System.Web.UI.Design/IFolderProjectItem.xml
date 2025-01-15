@@ -15,7 +15,10 @@
   </Docs>
   <Members>
     <Member MemberName="AddDocument">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.IDocumentProjectItem AddDocument (string name, byte[] content);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.IDocumentProjectItem AddDocument (string name, byte[] content);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -35,16 +38,33 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Web.UI.Design.IDocumentProjectItem" /> representing the added document.</para>
+          <para
+            >An <see
+             cref="T:System.Web.UI.Design.IDocumentProjectItem" />
+
+             representing the added document.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the document.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the document.</param
+        >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />An array of type <see cref="T:System.Byte" /> containing the document contents.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          An array of type <see
+           cref="T:System.Byte" />
+
+           containing the document contents.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="AddFolder">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.IFolderProjectItem AddFolder (string name);" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.IFolderProjectItem AddFolder (string name);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -63,14 +83,25 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Web.UI.Design.IFolderProjectItem" /> representing the new folder.</para>
+          <para
+            >An <see
+             cref="T:System.Web.UI.Design.IFolderProjectItem" />
+
+             representing the new folder.</para
+          >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name for the new folder.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name for the new folder.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Children">
-      <MemberSignature Language="C#" Value="public System.Collections.ICollection Children { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ICollection Children { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ProfileSettings" FullName="System.Web.Configuration.ProfileSettings">
-  <TypeSignature Language="C#" Value="public sealed class ProfileSettings : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ProfileSettings : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -13,7 +16,12 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Configuration.ProfileSettings" /> class provides a way to programmatically access and modify the profiles element of the healthMonitoring section of a configuration file.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Configuration.ProfileSettings" />
+
+         class provides a way to programmatically access and modify the profiles element of the healthMonitoring section of a configuration file.</para
+      >
       <para>Event profiles determine how events are collected by ASP.NET and raised to providers. </para>
     </remarks>
     <summary>
@@ -62,7 +70,10 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.Int32.MaxValue" />.</para>
+                  <see cref="F:System.Int32.MaxValue" />
+
+                  .</para
+                >
               </description>
             </item>
             <item>
@@ -83,24 +94,41 @@
               </term>
               <description>
                 <para>
-                  <see cref="F:System.TimeSpan.Zero" />.</para>
+                  <see cref="F:System.TimeSpan.Zero" />
+
+                  .</para
+                >
               </description>
             </item>
           </list>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.ProfileSettings" /> class. using the specified name for the new instance of the class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.ProfileSettings" />
+
+             class. using the specified name for the new instance of the class.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object to create.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.ProfileSettings" />
+
+           object to create.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ProfileSettings (string name, int minInstances, int maxLimit, TimeSpan minInterval);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ProfileSettings (string name, int minInstances, int maxLimit, TimeSpan minInterval);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
@@ -138,23 +166,49 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.ProfileSettings" /> class, using specified settings for the new instance of the class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.ProfileSettings" />
+
+             class, using specified settings for the new instance of the class.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object to create.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.ProfileSettings" />
+
+           object to create.</param
+        >
         <param name="minInstances">
-          <attribution license="cc4" from="Microsoft" modified="false" />The minimum number of event occurrences before the event is raised to the provider. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The minimum number of event occurrences before the event is raised to the provider. </param
+        >
         <param name="maxLimit">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of times events of the same type are raised.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of times events of the same type are raised.</param
+        >
         <param name="minInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.TimeSpan" /> that specifies the minimum length of the interval between the times when two events of the same type are raised.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.TimeSpan" />
+
+           that specifies the minimum length of the interval between the times when two events of the same type are raised.</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ProfileSettings (string name, int minInstances, int maxLimit, TimeSpan minInterval, string custom);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ProfileSettings (string name, int minInstances, int maxLimit, TimeSpan minInterval, string custom);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
@@ -168,18 +222,47 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Web.Configuration.BufferModeSettings" /> class, using the specified settings for the new instance of the class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.Web.Configuration.BufferModeSettings" />
+
+             class, using the specified settings for the new instance of the class.</para
+          >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />The name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object to create.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The name of the <see
+           cref="T:System.Web.Configuration.ProfileSettings" />
+
+           object to create.</param
+        >
         <param name="minInstances">
-          <attribution license="cc4" from="Microsoft" modified="false" />The minimum number of event occurrences before the event is raised to the provider. </param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The minimum number of event occurrences before the event is raised to the provider. </param
+        >
         <param name="maxLimit">
-          <attribution license="cc4" from="Microsoft" modified="false" />The maximum number of times events of the same type are raised.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The maximum number of times events of the same type are raised.</param
+        >
         <param name="minInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />A <see cref="T:System.TimeSpan" /> that specifies the minimum interval between two events of the same type.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A <see
+           cref="T:System.TimeSpan" />
+
+           that specifies the minimum interval between two events of the same type.</param
+        >
         <param name="custom">
-          <attribution license="cc4" from="Microsoft" modified="false" />The fully qualified type of a custom class that implements <see cref="T:System.Web.Management.IWebEventCustomEvaluator" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The fully qualified type of a custom class that implements <see
+           cref="T:System.Web.Management.IWebEventCustomEvaluator" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -205,7 +288,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the fully qualified type of a custom class that implements the <see cref="T:System.Web.Management.IWebEventCustomEvaluator" /> interface.</para>
+          <para
+            >Gets or sets the fully qualified type of a custom class that implements the <see
+             cref="T:System.Web.Management.IWebEventCustomEvaluator" />
+
+             interface.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -234,7 +322,12 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property must have a value greater than zero. The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" />. Invalid values may cause an exception to be thrown when the configuration section is saved. </para>
+          <para
+            >This property must have a value greater than zero. The value can be made infinite by setting it to <see
+             cref="F:System.Int32.MaxValue" />
+
+            . Invalid values may cause an exception to be thrown when the configuration section is saved. </para
+          >
           <para>This property specifies the maximum number of times an event of the same type will be raised. For example if the value is 10, the event will be raised 10 times and ignored thereafter.</para>
         </remarks>
         <summary>
@@ -265,8 +358,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>This property must have a value greater than zero. The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" />. Invalid values may cause an exception to be thrown when the configuration section is saved. </para>
-          <para>This property specifies the minimum number of times an event occurs before an event is raised to the provider. For example, a value of 5 means that ASP.NET will not raise an event to the provider until the fifth instance of the event occurs. If the value is infinite (<see cref="F:System.Int32.MaxValue" />), then no event will be raised to the provider.</para>
+          <para
+            >This property must have a value greater than zero. The value can be made infinite by setting it to <see
+             cref="F:System.Int32.MaxValue" />
+
+            . Invalid values may cause an exception to be thrown when the configuration section is saved. </para
+          >
+          <para
+            >This property specifies the minimum number of times an event occurs before an event is raised to the provider. For example, a value of 5 means that ASP.NET will not raise an event to the provider until the fifth instance of the event occurs. If the value is infinite (<see
+             cref="F:System.Int32.MaxValue" />
+
+            ), then no event will be raised to the provider.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -296,8 +399,18 @@
         <since version=".NET 2.0" />
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The value can be made infinite by setting it to <see cref="F:System.Int32.MaxValue" />. Invalid values may cause an exception when the configuration section is saved. </para>
-          <para>If the value is <see cref="F:System.TimeSpan.Zero" />, then there is no minimum interval.</para>
+          <para
+            >The value can be made infinite by setting it to <see
+             cref="F:System.Int32.MaxValue" />
+
+            . Invalid values may cause an exception when the configuration section is saved. </para
+          >
+          <para
+            >If the value is <see
+             cref="F:System.TimeSpan.Zero" />
+
+            , then there is no minimum interval.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -331,7 +444,12 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets or sets the name of the <see cref="T:System.Web.Configuration.ProfileSettings" /> object.</para>
+          <para
+            >Gets or sets the name of the <see
+             cref="T:System.Web.Configuration.ProfileSettings" />
+
+             object.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -339,7 +457,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>

@@ -11,8 +11,7 @@
   <Interfaces />
   <Docs>
     <summary>Microsoft Windows surface support</summary>
-    <remarks>
-    </remarks>
+    <remarks></remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -23,9 +22,13 @@
       </Parameters>
       <Docs>
         <param name="hdc">To be added.</param>
-        <summary>Creates a new Win32Surface from a valid <paramref name="hdc" />.</summary>
-        <remarks>
-        </remarks>
+        <summary
+          >Creates a new Win32Surface from a valid <paramref
+           name="hdc" />
+
+          .</summary
+        >
+        <remarks></remarks>
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

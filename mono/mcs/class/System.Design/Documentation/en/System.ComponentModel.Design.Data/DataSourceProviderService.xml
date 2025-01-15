@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DataSourceProviderService" FullName="System.ComponentModel.Design.Data.DataSourceProviderService">
+<Type
+  Name="DataSourceProviderService"
+  FullName="System.ComponentModel.Design.Data.DataSourceProviderService"
+>
   <TypeSignature Language="C#" Value="public abstract class DataSourceProviderService" />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
@@ -33,12 +36,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DataSourceProviderService" /> class.</para>
+          <para
+            >Initializes a new instance of the <see
+             cref="T:System.ComponentModel.Design.Data.DataSourceProviderService" />
+
+             class.</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="AddDataSourceInstance">
-      <MemberSignature Language="C#" Value="public abstract object AddDataSourceInstance (System.ComponentModel.Design.IDesignerHost host, System.ComponentModel.Design.Data.DataSourceDescriptor dataSourceDescriptor);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract object AddDataSourceInstance (System.ComponentModel.Design.IDesignerHost host, System.ComponentModel.Design.Data.DataSourceDescriptor dataSourceDescriptor);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -48,12 +59,23 @@
       </ReturnValue>
       <Parameters>
         <Parameter Name="host" Type="System.ComponentModel.Design.IDesignerHost" />
-        <Parameter Name="dataSourceDescriptor" Type="System.ComponentModel.Design.Data.DataSourceDescriptor" />
+        <Parameter
+          Name="dataSourceDescriptor"
+          Type="System.ComponentModel.Design.Data.DataSourceDescriptor"
+        />
       </Parameters>
       <Docs>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>You should only call the <see cref="M:System.ComponentModel.Design.Data.DataSourceProviderService.AddDataSourceInstance(System.ComponentModel.Design.IDesignerHost,System.ComponentModel.Design.Data.DataSourceDescriptor)" /> method on data sources that are designable for example, if the<see cref="P:System.ComponentModel.Design.Data.DataSourceDescriptor.IsDesignable" /> value is true.</para>
+          <para
+            >You should only call the <see
+             cref="M:System.ComponentModel.Design.Data.DataSourceProviderService.AddDataSourceInstance(System.ComponentModel.Design.IDesignerHost,System.ComponentModel.Design.Data.DataSourceDescriptor)" />
+
+             method on data sources that are designable for example, if the<see
+             cref="P:System.ComponentModel.Design.Data.DataSourceDescriptor.IsDesignable" />
+
+             value is true.</para
+          >
           <para>This method enables the service implementer to perform custom actions when a data source is added to the design surface.</para>
         </remarks>
         <summary>
@@ -62,16 +84,30 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>An <see cref="T:System.Object" /> representing an instance of the added data source.</para>
+          <para
+            >An <see
+             cref="T:System.Object" />
+
+             representing an instance of the added data source.</para
+          >
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />The designer host.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The designer host.</param
+        >
         <param name="dataSourceDescriptor">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data source.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data source.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="GetDataSources">
-      <MemberSignature Language="C#" Value="public abstract System.ComponentModel.Design.Data.DataSourceGroupCollection GetDataSources ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ComponentModel.Design.Data.DataSourceGroupCollection GetDataSources ();"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -88,12 +124,20 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" />, or null if there are no data sources at the EnvDTE.Project level.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.Design.Data.DataSourceGroupCollection" />
+
+            , or null if there are no data sources at the EnvDTE.Project level.</para
+          >
         </returns>
       </Docs>
     </Member>
     <Member MemberName="InvokeAddNewDataSource">
-      <MemberSignature Language="C#" Value="public abstract System.ComponentModel.Design.Data.DataSourceGroup InvokeAddNewDataSource (System.Windows.Forms.IWin32Window parentWindow, System.Windows.Forms.FormStartPosition startPosition);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract System.ComponentModel.Design.Data.DataSourceGroup InvokeAddNewDataSource (System.Windows.Forms.IWin32Window parentWindow, System.Windows.Forms.FormStartPosition startPosition);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -109,20 +153,39 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, invokes the <ui>Add New Data Source Wizard</ui>.</para>
+          <para
+            >When overridden in a derived class, invokes the <ui
+            >Add New Data Source Wizard</ui>
+
+            .</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>A <see cref="T:System.ComponentModel.Design.Data.DataSourceGroup" /> collection of newly added data sources, or null if no data sources are added.</para>
+          <para
+            >A <see
+             cref="T:System.ComponentModel.Design.Data.DataSourceGroup" />
+
+             collection of newly added data sources, or null if no data sources are added.</para
+          >
         </returns>
         <param name="parentWindow">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parent window.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parent window.</param
+        >
         <param name="startPosition">
-          <attribution license="cc4" from="Microsoft" modified="false" />The initial position of a form.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The initial position of a form.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="InvokeConfigureDataSource">
-      <MemberSignature Language="C#" Value="public abstract bool InvokeConfigureDataSource (System.Windows.Forms.IWin32Window parentWindow, System.Windows.Forms.FormStartPosition startPosition, System.ComponentModel.Design.Data.DataSourceDescriptor dataSourceDescriptor);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool InvokeConfigureDataSource (System.Windows.Forms.IWin32Window parentWindow, System.Windows.Forms.FormStartPosition startPosition, System.ComponentModel.Design.Data.DataSourceDescriptor dataSourceDescriptor);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -133,28 +196,48 @@
       <Parameters>
         <Parameter Name="parentWindow" Type="System.Windows.Forms.IWin32Window" />
         <Parameter Name="startPosition" Type="System.Windows.Forms.FormStartPosition" />
-        <Parameter Name="dataSourceDescriptor" Type="System.ComponentModel.Design.Data.DataSourceDescriptor" />
+        <Parameter
+          Name="dataSourceDescriptor"
+          Type="System.ComponentModel.Design.Data.DataSourceDescriptor"
+        />
       </Parameters>
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, invokes the <ui>Configure Data Source</ui> dialog box on the specified data source.</para>
+          <para
+            >When overridden in a derived class, invokes the <ui
+            >Configure Data Source</ui>
+
+             dialog box on the specified data source.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>true if any changes were made to that data source; otherwise, false.</para>
         </returns>
         <param name="parentWindow">
-          <attribution license="cc4" from="Microsoft" modified="false" />The parent window.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The parent window.</param
+        >
         <param name="startPosition">
-          <attribution license="cc4" from="Microsoft" modified="false" />The initial position of a form.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The initial position of a form.</param
+        >
         <param name="dataSourceDescriptor">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data source.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data source.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="NotifyDataSourceComponentAdded">
-      <MemberSignature Language="C#" Value="public abstract void NotifyDataSourceComponentAdded (object dsc);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract void NotifyDataSourceComponentAdded (object dsc);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -172,11 +255,17 @@
           <para>When overridden in a derived class, notifies the service that a component representing a data source was added to the design surface.</para>
         </summary>
         <param name="dsc">
-          <attribution license="cc4" from="Microsoft" modified="false" />The data source component.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The data source component.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="SupportsAddNewDataSource">
-      <MemberSignature Language="C#" Value="public abstract bool SupportsAddNewDataSource { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool SupportsAddNewDataSource { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -189,12 +278,20 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, gets the value indicating whether the service supports adding a new data source using <see cref="M:System.ComponentModel.Design.Data.DataSourceProviderService.InvokeAddNewDataSource(System.Windows.Forms.IWin32Window,System.Windows.Forms.FormStartPosition)" />.</para>
+          <para
+            >When overridden in a derived class, gets the value indicating whether the service supports adding a new data source using <see
+             cref="M:System.ComponentModel.Design.Data.DataSourceProviderService.InvokeAddNewDataSource(System.Windows.Forms.IWin32Window,System.Windows.Forms.FormStartPosition)" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>
     <Member MemberName="SupportsConfigureDataSource">
-      <MemberSignature Language="C#" Value="public abstract bool SupportsConfigureDataSource { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract bool SupportsConfigureDataSource { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -207,7 +304,12 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>When overridden in a derived class, gets the value indicating whether the service supports configuring data sources using <see cref="M:System.ComponentModel.Design.Data.DataSourceProviderService.InvokeConfigureDataSource(System.Windows.Forms.IWin32Window,System.Windows.Forms.FormStartPosition,System.ComponentModel.Design.Data.DataSourceDescriptor)" />.</para>
+          <para
+            >When overridden in a derived class, gets the value indicating whether the service supports configuring data sources using <see
+             cref="M:System.ComponentModel.Design.Data.DataSourceProviderService.InvokeConfigureDataSource(System.Windows.Forms.IWin32Window,System.Windows.Forms.FormStartPosition,System.ComponentModel.Design.Data.DataSourceDescriptor)" />
+
+            .</para
+          >
         </summary>
       </Docs>
     </Member>

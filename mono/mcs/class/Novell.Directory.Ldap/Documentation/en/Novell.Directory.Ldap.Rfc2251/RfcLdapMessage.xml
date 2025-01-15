@@ -1,10 +1,12 @@
 <Type Name="RfcLdapMessage" FullName="Novell.Directory.Ldap.Rfc2251.RfcLdapMessage">
-  <TypeSignature Language="C#" Value="public class RfcLdapMessage : Novell.Directory.Ldap.Asn1.Asn1Sequence, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class RfcLdapMessage : Novell.Directory.Ldap.Asn1.Asn1Sequence, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +53,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcLdapMessage(Novell.Directory.Ldap.Rfc2251.RfcRequest op)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcLdapMessage(Novell.Directory.Ldap.Rfc2251.RfcRequest op)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="op" Type="Novell.Directory.Ldap.Rfc2251.RfcRequest" />
@@ -63,7 +68,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcLdapMessage(Novell.Directory.Ldap.Rfc2251.RfcRequest op, Novell.Directory.Ldap.Rfc2251.RfcControls controls)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcLdapMessage(Novell.Directory.Ldap.Rfc2251.RfcRequest op, Novell.Directory.Ldap.Rfc2251.RfcControls controls)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="op" Type="Novell.Directory.Ldap.Rfc2251.RfcRequest" />
@@ -77,7 +85,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcLdapMessage(Novell.Directory.Ldap.Asn1.Asn1Sequence op)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcLdapMessage(Novell.Directory.Ldap.Asn1.Asn1Sequence op)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="op" Type="Novell.Directory.Ldap.Asn1.Asn1Sequence" />
@@ -89,7 +100,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcLdapMessage(Novell.Directory.Ldap.Asn1.Asn1Sequence op, Novell.Directory.Ldap.Rfc2251.RfcControls controls)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcLdapMessage(Novell.Directory.Ldap.Asn1.Asn1Sequence op, Novell.Directory.Ldap.Rfc2251.RfcControls controls)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="op" Type="Novell.Directory.Ldap.Asn1.Asn1Sequence" />
@@ -103,7 +117,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RfcLdapMessage(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len)" />
+      <MemberSignature
+        Language="C#"
+        Value="public RfcLdapMessage(Novell.Directory.Ldap.Asn1.Asn1Decoder dec, System.IO.Stream in_Renamed, int len)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>
@@ -124,7 +141,10 @@
       </Docs>
     </Member>
     <Member MemberName="getRequest">
-      <MemberSignature Language="C#" Value="public Novell.Directory.Ldap.Rfc2251.RfcRequest getRequest()" />
+      <MemberSignature
+        Language="C#"
+        Value="public Novell.Directory.Ldap.Rfc2251.RfcRequest getRequest()"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Rfc2251.RfcRequest</ReturnType>
@@ -150,7 +170,10 @@
       </Docs>
     </Member>
     <Member MemberName="dupMessage">
-      <MemberSignature Language="C#" Value="public object dupMessage(string dn, string filter, bool reference)" />
+      <MemberSignature
+        Language="C#"
+        Value="public object dupMessage(string dn, string filter, bool reference)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Object</ReturnType>
@@ -194,7 +217,10 @@
       </Docs>
     </Member>
     <Member MemberName="Response">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Asn1.Asn1Object Response { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Asn1.Asn1Object Response { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1Object</ReturnType>
@@ -206,7 +232,10 @@
       </Docs>
     </Member>
     <Member MemberName="Controls">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Rfc2251.RfcControls Controls { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Rfc2251.RfcControls Controls { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Rfc2251.RfcControls</ReturnType>
@@ -230,7 +259,10 @@
       </Docs>
     </Member>
     <Member MemberName="RequestingMessage">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapMessage RequestingMessage { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapMessage RequestingMessage { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapMessage</ReturnType>

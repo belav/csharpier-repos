@@ -5,20 +5,19 @@
     <!-- Running Crossgen2 under GCStress takes too long -->
     <GCStressIncompatible>true</GCStressIncompatible>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
-
     <!-- Crossgen2 currently targets x64 and ARM64 only -->
-    <DisableProjectBuild Condition="'$(TargetArchitecture)' != 'x64' and '$(TargetArchitecture)' != 'arm64'">true</DisableProjectBuild>
+    <DisableProjectBuild
+      Condition="'$(TargetArchitecture)' != 'x64' and '$(TargetArchitecture)' != 'arm64'"
+      >true</DisableProjectBuild
+    >
     <!-- We skip the ReadyToRun tests when sanitized due to build complexity -->
     <DisableProjectBuild Condition="'$(EnableNativeSanitizers)' != ''">true</DisableProjectBuild>
-
     <!-- This is an explicit crossgen test -->
     <CrossGenTest>false</CrossGenTest>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Root.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="FolderA/FolderA.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -31,9 +30,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </ProjectReference>
   </ItemGroup>
-
   <PropertyGroup>
-    <CLRTestBatchPreCommands><![CDATA[
+    <CLRTestBatchPreCommands>
+      <![CDATA[
 $(CLRTestBatchPreCommands)
 
     set __ResponseFile=%scriptPath%\multifolder.rsp
@@ -82,8 +81,10 @@ $(CLRTestBatchPreCommands)
     set DOTNET_NativeImageSearchPaths=%scriptPath%
     set DOTNET_GCName=!__gcStandaloneModeToRestore!
 
-]]></CLRTestBatchPreCommands>
-    <CLRTestBashPreCommands><![CDATA[
+]]>
+    </CLRTestBatchPreCommands>
+    <CLRTestBashPreCommands>
+      <![CDATA[
 $(CLRTestBashPreCommands)
 
     __OutputDir=$PWD
@@ -126,6 +127,7 @@ $(CLRTestBashPreCommands)
     ExePath=multifolder/multifolder.dll
     export DOTNET_NativeImageSearchPaths=$__OutputDir
 
-]]></CLRTestBashPreCommands>
+]]>
+    </CLRTestBashPreCommands>
   </PropertyGroup>
 </Project>

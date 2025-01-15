@@ -12,8 +12,10 @@
     <Compile Include="..\..\System.Runtime\tests\System.Threading.Tasks.Tests\System.Runtime.CompilerServices\ConfiguredAsyncDisposable.cs">
       <Link>System.Runtime\tests\System.Threading.Tasks.Tests\System.Runtime.CompilerServices\ConfiguredAsyncDisposable.cs</Link>
     </Compile>
-    <Compile Include="..\..\System.Runtime\tests\System.Threading.Tasks.Extensions.Tests\ManualResetValueTaskSourceTests.cs"
-             Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
+    <Compile
+      Include="..\..\System.Runtime\tests\System.Threading.Tasks.Extensions.Tests\ManualResetValueTaskSourceTests.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'"
+    >
       <Link>System.Runtime\tests\System.Threading.Tasks.Extensions.Tests\ManualResetValueTaskSourceTests.cs</Link>
     </Compile>
   </ItemGroup>

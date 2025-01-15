@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="ProtocolElement" FullName="System.Web.Services.Configuration.ProtocolElement">
-  <TypeSignature Language="C#" Value="public sealed class ProtocolElement : System.Configuration.ConfigurationElement" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ProtocolElement : System.Configuration.ConfigurationElement"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web.Services</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -35,7 +38,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ProtocolElement (System.Web.Services.Configuration.WebServiceProtocols protocol);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ProtocolElement (System.Web.Services.Configuration.WebServiceProtocols protocol);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="protocol" Type="System.Web.Services.Configuration.WebServiceProtocols" />
@@ -45,17 +51,31 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates an instance of this class, and initializes the <see cref="P:System.Web.Services.Configuration.ProtocolElement.Name" /> property.</para>
+          <para
+            >Creates an instance of this class, and initializes the <see
+             cref="P:System.Web.Services.Configuration.ProtocolElement.Name" />
+
+             property.</para
+          >
         </summary>
         <param name="protocol">
-          <attribution license="cc4" from="Microsoft" modified="false" />The value to initialize <see cref="P:System.Web.Services.Configuration.ProtocolElement.Name" />.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The value to initialize <see
+           cref="P:System.Web.Services.Configuration.ProtocolElement.Name" />
+
+          .</param
+        >
       </Docs>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
     <Member MemberName="Name">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Configuration.WebServiceProtocols Name { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Configuration.WebServiceProtocols Name { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -79,7 +99,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Properties">
-      <MemberSignature Language="C#" Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Configuration.ConfigurationPropertyCollection Properties { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Configuration.ConfigurationPropertyCollection</ReturnType>

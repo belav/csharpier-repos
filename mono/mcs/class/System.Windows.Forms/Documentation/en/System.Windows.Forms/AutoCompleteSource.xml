@@ -13,7 +13,15 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the source for <see cref="T:System.Windows.Forms.ComboBox" /> and <see cref="T:System.Windows.Forms.TextBox" /> automatic completion functionality.</para>
+      <para
+        >Specifies the source for <see
+         cref="T:System.Windows.Forms.ComboBox" />
+
+         and <see
+         cref="T:System.Windows.Forms.TextBox" />
+
+         automatic completion functionality.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -27,7 +35,18 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the equivalent of <see cref="F:System.Windows.Forms.AutoCompleteSource.FileSystem" /> and <see cref="F:System.Windows.Forms.AutoCompleteSource.AllUrl" /> as the source. This is the default value when <see cref="T:System.Windows.Forms.AutoCompleteMode" /> has been set to a value other than the default.</para>
+          <para
+            >Specifies the equivalent of <see
+             cref="F:System.Windows.Forms.AutoCompleteSource.FileSystem" />
+
+             and <see
+             cref="F:System.Windows.Forms.AutoCompleteSource.AllUrl" />
+
+             as the source. This is the default value when <see
+             cref="T:System.Windows.Forms.AutoCompleteMode" />
+
+             has been set to a value other than the default.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -44,7 +63,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies the equivalent of <see cref="F:System.Windows.Forms.AutoCompleteSource.HistoryList" /> and <see cref="F:System.Windows.Forms.AutoCompleteSource.RecentlyUsedList" /> as the source.</para>
+          <para
+            >Specifies the equivalent of <see
+             cref="F:System.Windows.Forms.AutoCompleteSource.HistoryList" />
+
+             and <see
+             cref="F:System.Windows.Forms.AutoCompleteSource.RecentlyUsedList" />
+
+             as the source.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -61,7 +88,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies strings from a built-in <see cref="T:System.Windows.Forms.AutoCompleteStringCollection" /> as the source.</para>
+          <para
+            >Specifies strings from a built-in <see
+             cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+             as the source.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -129,7 +161,12 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that the items of the <see cref="T:System.Windows.Forms.ComboBox" /> represent the source.</para>
+          <para
+            >Specifies that the items of the <see
+             cref="T:System.Windows.Forms.ComboBox" />
+
+             represent the source.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -146,7 +183,15 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that no <see cref="T:System.Windows.Forms.AutoCompleteSource" /> is currently in use. This is the default value of <see cref="T:System.Windows.Forms.AutoCompleteSource" />.</para>
+          <para
+            >Specifies that no <see
+             cref="T:System.Windows.Forms.AutoCompleteSource" />
+
+             is currently in use. This is the default value of <see
+             cref="T:System.Windows.Forms.AutoCompleteSource" />
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

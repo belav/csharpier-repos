@@ -37,7 +37,7 @@
       <Type Name="CommandSet" Kind="Class" />
       <Type Name="HelpCommand" Kind="Class" />
       <Type Name="Option" Kind="Class" />
-      <Type Name="OptionAction`2" DisplayName="OptionAction&lt;TKey,TValue&gt;" Kind="Delegate" />
+      <Type Name="OptionAction`2" DisplayName="OptionAction<TKey,TValue>" Kind="Delegate" />
       <Type Name="OptionContext" Kind="Class" />
       <Type Name="OptionException" Kind="Class" />
       <Type Name="OptionSet" Kind="Class" />

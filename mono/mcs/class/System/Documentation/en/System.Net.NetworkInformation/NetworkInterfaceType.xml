@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="NetworkInterfaceType" FullName="System.Net.NetworkInformation.NetworkInterfaceType">
   <TypeSignature Language="C#" Value="public enum NetworkInterfaceType" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed NetworkInterfaceType extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed NetworkInterfaceType extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -15,7 +18,12 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Network interfaces, also known as network adapters, connect a computer to a network. The interface type defines the transmission media that provides network connectivity.</para>
-      <para>This enumeration defines the values returned by the <see cref="P:System.Net.NetworkInformation.NetworkInterface.NetworkInterfaceType" /> property.</para>
+      <para
+        >This enumeration defines the values returned by the <see
+         cref="P:System.Net.NetworkInformation.NetworkInterface.NetworkInterfaceType" />
+
+         property.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +33,10 @@
   <Members>
     <Member MemberName="AsymmetricDsl">
       <MemberSignature Language="C#" Value="AsymmetricDsl" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType AsymmetricDsl = int32(94)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType AsymmetricDsl = int32(94)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -44,7 +55,10 @@
     </Member>
     <Member MemberName="Atm">
       <MemberSignature Language="C#" Value="Atm" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Atm = int32(37)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Atm = int32(37)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -63,7 +77,10 @@
     </Member>
     <Member MemberName="BasicIsdn">
       <MemberSignature Language="C#" Value="BasicIsdn" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType BasicIsdn = int32(20)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType BasicIsdn = int32(20)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -82,7 +99,10 @@
     </Member>
     <Member MemberName="Ethernet">
       <MemberSignature Language="C#" Value="Ethernet" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Ethernet = int32(6)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Ethernet = int32(6)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -101,7 +121,10 @@
     </Member>
     <Member MemberName="Ethernet3Megabit">
       <MemberSignature Language="C#" Value="Ethernet3Megabit" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Ethernet3Megabit = int32(26)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Ethernet3Megabit = int32(26)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -120,7 +143,10 @@
     </Member>
     <Member MemberName="FastEthernetFx">
       <MemberSignature Language="C#" Value="FastEthernetFx" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType FastEthernetFx = int32(69)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType FastEthernetFx = int32(69)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -139,7 +165,10 @@
     </Member>
     <Member MemberName="FastEthernetT">
       <MemberSignature Language="C#" Value="FastEthernetT" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType FastEthernetT = int32(62)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType FastEthernetT = int32(62)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -158,7 +187,10 @@
     </Member>
     <Member MemberName="Fddi">
       <MemberSignature Language="C#" Value="Fddi" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Fddi = int32(15)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Fddi = int32(15)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -177,7 +209,10 @@
     </Member>
     <Member MemberName="GenericModem">
       <MemberSignature Language="C#" Value="GenericModem" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType GenericModem = int32(48)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType GenericModem = int32(48)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -196,7 +231,10 @@
     </Member>
     <Member MemberName="GigabitEthernet">
       <MemberSignature Language="C#" Value="GigabitEthernet" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType GigabitEthernet = int32(117)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType GigabitEthernet = int32(117)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -215,7 +253,10 @@
     </Member>
     <Member MemberName="HighPerformanceSerialBus">
       <MemberSignature Language="C#" Value="HighPerformanceSerialBus" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType HighPerformanceSerialBus = int32(144)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType HighPerformanceSerialBus = int32(144)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -234,7 +275,10 @@
     </Member>
     <Member MemberName="IPOverAtm">
       <MemberSignature Language="C#" Value="IPOverAtm" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType IPOverAtm = int32(114)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType IPOverAtm = int32(114)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -253,7 +297,10 @@
     </Member>
     <Member MemberName="Isdn">
       <MemberSignature Language="C#" Value="Isdn" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Isdn = int32(63)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Isdn = int32(63)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -272,7 +319,10 @@
     </Member>
     <Member MemberName="Loopback">
       <MemberSignature Language="C#" Value="Loopback" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Loopback = int32(24)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Loopback = int32(24)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -291,7 +341,10 @@
     </Member>
     <Member MemberName="MultiRateSymmetricDsl">
       <MemberSignature Language="C#" Value="MultiRateSymmetricDsl" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType MultiRateSymmetricDsl = int32(143)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType MultiRateSymmetricDsl = int32(143)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -310,7 +363,10 @@
     </Member>
     <Member MemberName="Ppp">
       <MemberSignature Language="C#" Value="Ppp" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Ppp = int32(23)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Ppp = int32(23)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -329,7 +385,10 @@
     </Member>
     <Member MemberName="PrimaryIsdn">
       <MemberSignature Language="C#" Value="PrimaryIsdn" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType PrimaryIsdn = int32(21)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType PrimaryIsdn = int32(21)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -348,7 +407,10 @@
     </Member>
     <Member MemberName="RateAdaptDsl">
       <MemberSignature Language="C#" Value="RateAdaptDsl" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType RateAdaptDsl = int32(95)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType RateAdaptDsl = int32(95)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -367,7 +429,10 @@
     </Member>
     <Member MemberName="Slip">
       <MemberSignature Language="C#" Value="Slip" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Slip = int32(28)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Slip = int32(28)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -386,7 +451,10 @@
     </Member>
     <Member MemberName="SymmetricDsl">
       <MemberSignature Language="C#" Value="SymmetricDsl" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType SymmetricDsl = int32(96)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType SymmetricDsl = int32(96)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -405,7 +473,10 @@
     </Member>
     <Member MemberName="TokenRing">
       <MemberSignature Language="C#" Value="TokenRing" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType TokenRing = int32(9)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType TokenRing = int32(9)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -424,7 +495,10 @@
     </Member>
     <Member MemberName="Tunnel">
       <MemberSignature Language="C#" Value="Tunnel" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Tunnel = int32(131)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Tunnel = int32(131)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -443,7 +517,10 @@
     </Member>
     <Member MemberName="Unknown">
       <MemberSignature Language="C#" Value="Unknown" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Unknown = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Unknown = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -462,7 +539,10 @@
     </Member>
     <Member MemberName="VeryHighSpeedDsl">
       <MemberSignature Language="C#" Value="VeryHighSpeedDsl" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType VeryHighSpeedDsl = int32(97)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType VeryHighSpeedDsl = int32(97)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -481,7 +561,10 @@
     </Member>
     <Member MemberName="Wireless80211">
       <MemberSignature Language="C#" Value="Wireless80211" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Wireless80211 = int32(71)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Net.NetworkInformation.NetworkInterfaceType Wireless80211 = int32(71)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

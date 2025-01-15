@@ -12,10 +12,31 @@
     <since version=".NET 2.0" />
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>When a control is bound to a data source using a <see cref="T:System.Windows.Forms.Binding" /> object, you can specify when an update to the data source will occur using the <see cref="T:System.Windows.Forms.DataSourceUpdateMode" /> enumeration.</para>
-      <para>When the update mode is <see cref="F:System.Windows.Forms.DataSourceUpdateMode.Never" />, you can force the data source to be updated by using the <see cref="M:System.Windows.Forms.Binding.WriteValue" /> method.</para>
+      <para
+        >When a control is bound to a data source using a <see
+         cref="T:System.Windows.Forms.Binding" />
+
+         object, you can specify when an update to the data source will occur using the <see
+         cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+         enumeration.</para
+      >
+      <para
+        >When the update mode is <see
+         cref="F:System.Windows.Forms.DataSourceUpdateMode.Never" />
+
+        , you can force the data source to be updated by using the <see
+         cref="M:System.Windows.Forms.Binding.WriteValue" />
+
+         method.</para
+      >
       <block subset="none" type="note">
-        <para>Even when the update mode is set to <see cref="F:System.Windows.Forms.DataSourceUpdateMode.Never" />, the data source will be updated when the binding is first created, so at that least one update will always occur.</para>
+        <para
+          >Even when the update mode is set to <see
+           cref="F:System.Windows.Forms.DataSourceUpdateMode.Never" />
+
+          , the data source will be updated when the binding is first created, so at that least one update will always occur.</para
+        >
       </block>
     </remarks>
     <summary>

@@ -28,7 +28,10 @@
       </tr>
     </table>
     <span>
-      <br />0</span>
+      <br />
+
+      0</span
+    >
   </div>
   <div id="GHTSubTest2" testname="System.Web.UI.WebControls.RadioButtonList: Set 'Both'">
     <table id="ctrl_1" border="1" rules="all">
@@ -142,7 +145,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest6" testname="System.Web.UI.WebControls.RadioButtonList: Causes ArgumentException if set to a non-valid GridLine value.">
+  <div
+    id="GHTSubTest6"
+    testname="System.Web.UI.WebControls.RadioButtonList: Causes ArgumentException if set to a non-valid GridLine value."
+  >
     <table id="ctrl_5" border="0">
       <tr>
         <td>
@@ -170,7 +176,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest7" testname="System.Web.UI.WebControls.CheckBoxList: Default value">
     <table id="ctrl_6" border="0">
@@ -200,7 +209,10 @@
       </tr>
     </table>
     <span>
-      <br />0</span>
+      <br />
+
+      0</span
+    >
   </div>
   <div id="GHTSubTest8" testname="System.Web.UI.WebControls.CheckBoxList: Set 'Both'">
     <table id="ctrl_7" border="1" rules="all">
@@ -314,7 +326,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest12" testname="System.Web.UI.WebControls.CheckBoxList: Causes ArgumentException if set to a non-valid GridLine value.">
+  <div
+    id="GHTSubTest12"
+    testname="System.Web.UI.WebControls.CheckBoxList: Causes ArgumentException if set to a non-valid GridLine value."
+  >
     <table id="ctrl_11" border="0">
       <tr>
         <td>
@@ -342,7 +357,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest13" testname="System.Web.UI.WebControls.DataGrid: Default value">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="ctrl_12">
@@ -368,7 +386,10 @@
       </tr>
     </table>
     <span>
-      <br />3</span>
+      <br />
+
+      3</span
+    >
   </div>
   <div id="GHTSubTest14" testname="System.Web.UI.WebControls.DataGrid: Set 'Both'">
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="ctrl_13">
@@ -466,7 +487,10 @@
       </tr>
     </table>
   </div>
-  <div id="GHTSubTest18" testname="System.Web.UI.WebControls.DataGrid: Causes ArgumentException if set to a non-valid GridLine value.">
+  <div
+    id="GHTSubTest18"
+    testname="System.Web.UI.WebControls.DataGrid: Causes ArgumentException if set to a non-valid GridLine value."
+  >
     <table border="1" cellspacing="0" style="border-collapse:collapse" rules="all" id="ctrl_17">
       <tr>
         <td>Id</td>
@@ -490,7 +514,10 @@
       </tr>
     </table>
     <span>
-      <br />Test passed. Expected exception was caught.</span>
+      <br />
+
+      Test passed. Expected exception was caught.</span
+    >
   </div>
   <div id="GHTSubTest19" testname="System.Web.UI.WebControls.DataList: Default value">
     <table id="ctrl_18" cellspacing="0" border="0" style="border-collapse:collapse">

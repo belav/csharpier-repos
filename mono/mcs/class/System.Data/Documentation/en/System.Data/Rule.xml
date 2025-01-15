@@ -15,16 +15,62 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Data.Rule" /> values are set to the <see cref="P:System.Data.ForeignKeyConstraint.UpdateRule" /> and the <see cref="P:System.Data.ForeignKeyConstraint.DeleteRule" /> properties of a <see cref="T:System.Data.ForeignKeyConstraint" /> object found in a <see cref="T:System.Data.DataTable" /> object's <see cref="T:System.Data.ConstraintCollection" />.</para>
-      <para>The <see cref="T:System.Data.Rule" /> values determine the action that occurs when a value in a column is either deleted or updated. Of the two, deleting a value is the more critical and demanding of attention when setting a rule.</para>
+      <para
+        >The <see
+         cref="T:System.Data.Rule" />
+
+         values are set to the <see
+         cref="P:System.Data.ForeignKeyConstraint.UpdateRule" />
+
+         and the <see
+         cref="P:System.Data.ForeignKeyConstraint.DeleteRule" />
+
+         properties of a <see
+         cref="T:System.Data.ForeignKeyConstraint" />
+
+         object found in a <see
+         cref="T:System.Data.DataTable" />
+
+         object's <see
+         cref="T:System.Data.ConstraintCollection" />
+
+        .</para
+      >
+      <para
+        >The <see
+         cref="T:System.Data.Rule" />
+
+         values determine the action that occurs when a value in a column is either deleted or updated. Of the two, deleting a value is the more critical and demanding of attention when setting a rule.</para
+      >
       <para>In the case where a value is deleted, Cascade specifies that all rows containing that value are also deleted. SetNull specifies that values in all child columns are set to null values. SetDefault specifies that all child columns be set to the default value for the column. None specifies that no action will occur, but exceptions are generated.</para>
       <para>In the case where a value is updated, Cascade specifies that all child columns are likewise updated with the new value. SetNull specifies that all child columns be set to null values. SetDefault specifies that all child column values be set to the default value. None specifies that no action be taken, but exceptions are generated.</para>
-      <para>Constraints on a <see cref="T:System.Data.DataSet" /> are not enforced unless the <see cref="P:System.Data.DataSet.EnforceConstraints" /> property is true.</para>
-      <para>When the <see cref="M:System.Data.DataTable.AcceptChanges" /> method is called, the <see cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" /> further determines what action occurs.</para>
+      <para
+        >Constraints on a <see
+         cref="T:System.Data.DataSet" />
+
+         are not enforced unless the <see
+         cref="P:System.Data.DataSet.EnforceConstraints" />
+
+         property is true.</para
+      >
+      <para
+        >When the <see
+         cref="M:System.Data.DataTable.AcceptChanges" />
+
+         method is called, the <see
+         cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
+
+         further determines what action occurs.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Indicates the action that occurs when a <see cref="T:System.Data.ForeignKeyConstraint" /> is enforced.</para>
+      <para
+        >Indicates the action that occurs when a <see
+         cref="T:System.Data.ForeignKeyConstraint" />
+
+         is enforced.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -77,7 +123,12 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Set values in related rows to the value contained in the <see cref="P:System.Data.DataColumn.DefaultValue" /> property.</para>
+          <para
+            >Set values in related rows to the value contained in the <see
+             cref="P:System.Data.DataColumn.DefaultValue" />
+
+             property.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

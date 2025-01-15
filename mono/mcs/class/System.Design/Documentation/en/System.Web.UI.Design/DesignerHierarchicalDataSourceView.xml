@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="DesignerHierarchicalDataSourceView" FullName="System.Web.UI.Design.DesignerHierarchicalDataSourceView">
+<Type
+  Name="DesignerHierarchicalDataSourceView"
+  FullName="System.Web.UI.Design.DesignerHierarchicalDataSourceView"
+>
   <TypeSignature Language="C#" Value="public abstract class DesignerHierarchicalDataSourceView" />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>
@@ -12,7 +15,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" /> class is used by developers of custom data source designers.</para>
+      <para
+        >The <see
+         cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" />
+
+         class is used by developers of custom data source designers.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -21,7 +29,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="protected DesignerHierarchicalDataSourceView (System.Web.UI.Design.IHierarchicalDataSourceDesigner owner, string viewPath);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected DesignerHierarchicalDataSourceView (System.Web.UI.Design.IHierarchicalDataSourceDesigner owner, string viewPath);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -34,16 +45,33 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initiates a new instance of the <see cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" /> class.</para>
+          <para
+            >Initiates a new instance of the <see
+             cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" />
+
+             class.</para
+          >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />The <see cref="T:System.Web.UI.Design.IHierarchicalDataSourceDesigner" /> that is the designer for the associated control.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          The <see
+           cref="T:System.Web.UI.Design.IHierarchicalDataSourceDesigner" />
+
+           that is the designer for the associated control.</param
+        >
         <param name="viewPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />A unique path to the block of data to use for the view.</param>
+          <attribution license="cc4" from="Microsoft" modified="false" />
+
+          A unique path to the block of data to use for the view.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="DataSourceDesigner">
-      <MemberSignature Language="C#" Value="public System.Web.UI.Design.IHierarchicalDataSourceDesigner DataSourceDesigner { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.UI.Design.IHierarchicalDataSourceDesigner DataSourceDesigner { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -61,7 +89,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetDesignTimeData">
-      <MemberSignature Language="C#" Value="public virtual System.Web.UI.IHierarchicalEnumerable GetDesignTimeData (out bool isSampleData);" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Web.UI.IHierarchicalEnumerable GetDesignTimeData (out bool isSampleData);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -70,7 +101,7 @@
         <ReturnType>System.Web.UI.IHierarchicalEnumerable</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="isSampleData" Type="System.Boolean&amp;" RefType="out" />
+        <Parameter Name="isSampleData" Type="System.Boolean&" RefType="out" />
       </Parameters>
       <Docs>
         <param name="isSampleData">To be added.</param>
@@ -92,7 +123,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The specific nature of the <see cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Path" /> property is determined by the nature of the data. For XML data, it would be an XPath query, but for other kinds of data it could be a URL or some other unique identifying path.</para>
+          <para
+            >The specific nature of the <see
+             cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Path" />
+
+             property is determined by the nature of the data. For XML data, it would be an XPath query, but for other kinds of data it could be a URL or some other unique identifying path.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -101,7 +137,10 @@
       </Docs>
     </Member>
     <Member MemberName="Schema">
-      <MemberSignature Language="C#" Value="public virtual System.Web.UI.Design.IDataSourceSchema Schema { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Web.UI.Design.IDataSourceSchema Schema { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -113,7 +152,12 @@
         <value>To be added.</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>The <see cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Schema" /> property allows the control designer of a data-bound control to provide intelligent choices based on the design-time data source view that is selected for data binding.</para>
+          <para
+            >The <see
+             cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Schema" />
+
+             property allows the control designer of a data-bound control to provide intelligent choices based on the design-time data source view that is selected for data binding.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
