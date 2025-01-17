@@ -27,124 +27,124 @@
 
 
 using System;
-using System.Dynamic;
-using System.Data.Common;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
+using System.Dynamic;
 
 namespace WebMatrix.Data
 {
-	public sealed class DynamicRecord : DynamicObject, ICustomTypeDescriptor
-	{
-		readonly Dictionary<string, object> fields;
+    public sealed class DynamicRecord : DynamicObject, ICustomTypeDescriptor
+    {
+        readonly Dictionary<string, object> fields;
 
-		internal DynamicRecord (Dictionary<string, object> fields)
-		{
-			this.fields = fields;
-			Columns = new List<string> (fields.Keys).AsReadOnly ();
-		}
+        internal DynamicRecord(Dictionary<string, object> fields)
+        {
+            this.fields = fields;
+            Columns = new List<string>(fields.Keys).AsReadOnly();
+        }
 
-		public IList<string> Columns {
-			get;
-			private set;
-		}
+        public IList<string> Columns { get; private set; }
 
-		public object this[string name] {
-			get {
-				var retval = fields[name];
+        public object this[string name]
+        {
+            get
+            {
+                var retval = fields[name];
 
-				if (retval == DBNull.Value)
-					return null;
+                if (retval == DBNull.Value)
+                    return null;
 
-				return retval;
-			}
-		}
+                return retval;
+            }
+        }
 
-		public object this[int index] {
-			get {				
-				var retval = fields[Columns[index]];
+        public object this[int index]
+        {
+            get
+            {
+                var retval = fields[Columns[index]];
 
-				if (retval == DBNull.Value)
-					return null;
+                if (retval == DBNull.Value)
+                    return null;
 
-				return retval;
-			}
-		}
+                return retval;
+            }
+        }
 
-		public override IEnumerable<string> GetDynamicMemberNames ()
-		{
-			return fields.Keys;
-		}
+        public override IEnumerable<string> GetDynamicMemberNames()
+        {
+            return fields.Keys;
+        }
 
-		public override bool TryGetMember (GetMemberBinder binder, out object result)
-		{
-			bool success = fields.TryGetValue (binder.Name, out result);
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            bool success = fields.TryGetValue(binder.Name, out result);
 
-			if (result == DBNull.Value)
-				result = null;
+            if (result == DBNull.Value)
+                result = null;
 
-			return success;
-		}
+            return success;
+        }
 
-		AttributeCollection ICustomTypeDescriptor.GetAttributes ()
-		{
-			return null;
-		}
+        AttributeCollection ICustomTypeDescriptor.GetAttributes()
+        {
+            return null;
+        }
 
-		string ICustomTypeDescriptor.GetClassName ()
-		{
-			return null;
-		}
+        string ICustomTypeDescriptor.GetClassName()
+        {
+            return null;
+        }
 
-		string ICustomTypeDescriptor.GetComponentName ()
-		{
-			return null;
-		}
+        string ICustomTypeDescriptor.GetComponentName()
+        {
+            return null;
+        }
 
-		TypeConverter ICustomTypeDescriptor.GetConverter ()
-		{
-			return null;
-		}
+        TypeConverter ICustomTypeDescriptor.GetConverter()
+        {
+            return null;
+        }
 
-		EventDescriptor ICustomTypeDescriptor.GetDefaultEvent ()
-		{
-			return null;
-		}
+        EventDescriptor ICustomTypeDescriptor.GetDefaultEvent()
+        {
+            return null;
+        }
 
-		PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty ()
-		{
-			return null;
-		}
+        PropertyDescriptor ICustomTypeDescriptor.GetDefaultProperty()
+        {
+            return null;
+        }
 
-		Object ICustomTypeDescriptor.GetEditor (Type editorBaseType)
-		{
-			return null;
-		}
+        Object ICustomTypeDescriptor.GetEditor(Type editorBaseType)
+        {
+            return null;
+        }
 
-		Object ICustomTypeDescriptor.GetPropertyOwner (PropertyDescriptor pd)
-		{
-			return null;
-		}
+        Object ICustomTypeDescriptor.GetPropertyOwner(PropertyDescriptor pd)
+        {
+            return null;
+        }
 
-		EventDescriptorCollection ICustomTypeDescriptor.GetEvents ()
-		{
-			return null;
-		}
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents()
+        {
+            return null;
+        }
 
-		EventDescriptorCollection ICustomTypeDescriptor.GetEvents (Attribute[] attributes)
-		{
-			return null;
-		}
+        EventDescriptorCollection ICustomTypeDescriptor.GetEvents(Attribute[] attributes)
+        {
+            return null;
+        }
 
-		PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties ()
-		{
-			return null;
-		}
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
+        {
+            return null;
+        }
 
-		PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties (Attribute[] attributes)
-		{
-			return null;
-		}
-	}
+        PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
+        {
+            return null;
+        }
+    }
 }
-

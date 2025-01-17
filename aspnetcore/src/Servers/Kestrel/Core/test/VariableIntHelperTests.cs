@@ -14,7 +14,11 @@ public class VariableIntHelperTests
     [MemberData(nameof(IntegerData))]
     public void CheckDecoding(long expected, byte[] input)
     {
-        var decoded = VariableLengthIntegerHelper.GetInteger(new ReadOnlySequence<byte>(input), out _, out _);
+        var decoded = VariableLengthIntegerHelper.GetInteger(
+            new ReadOnlySequence<byte>(input),
+            out _,
+            out _
+        );
         Assert.Equal(expected, decoded);
     }
 
@@ -37,7 +41,10 @@ public class VariableIntHelperTests
         {
             var data = new TheoryData<long, byte[]>();
 
-            data.Add(151288809941952652, new byte[] { 0xc2, 0x19, 0x7c, 0x5e, 0xff, 0x14, 0xe8, 0x8c });
+            data.Add(
+                151288809941952652,
+                new byte[] { 0xc2, 0x19, 0x7c, 0x5e, 0xff, 0x14, 0xe8, 0x8c }
+            );
             data.Add(494878333, new byte[] { 0x9d, 0x7f, 0x3e, 0x7d });
             data.Add(15293, new byte[] { 0x7b, 0xbd });
             data.Add(37, new byte[] { 0x25 });

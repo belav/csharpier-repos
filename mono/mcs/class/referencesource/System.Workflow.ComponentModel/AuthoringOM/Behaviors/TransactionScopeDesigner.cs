@@ -1,15 +1,14 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Workflow.ComponentModel.Design;
-
 
     #region Class TransactionScopeActivityDesigner
 
@@ -23,10 +22,13 @@ namespace System.Workflow.ComponentModel.Design
                 foreach (DesignerView view in base.Views)
                 {
                     // disable the exceptions view and cancellation handler view
-                    Type activityType = view.UserData[SecondaryView.UserDataKey_ActivityType] as Type;
-                    if (activityType != null &&
-                        !typeof(CancellationHandlerActivity).IsAssignableFrom(activityType) &&
-                        !typeof(FaultHandlersActivity).IsAssignableFrom(activityType))
+                    Type activityType =
+                        view.UserData[SecondaryView.UserDataKey_ActivityType] as Type;
+                    if (
+                        activityType != null
+                        && !typeof(CancellationHandlerActivity).IsAssignableFrom(activityType)
+                        && !typeof(FaultHandlersActivity).IsAssignableFrom(activityType)
+                    )
                     {
                         views.Add(view);
                     }

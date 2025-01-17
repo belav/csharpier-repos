@@ -8,50 +8,168 @@ using Xunit;
 public struct VT
 {
     public ulong[,] ulong2darr;
-    public ulong[, ,] ulong3darr;
+    public ulong[,,] ulong3darr;
     public ulong[,] ulong2darr_b;
-    public ulong[, ,] ulong3darr_b;
+    public ulong[,,] ulong3darr_b;
 }
 
 public class CL
 {
-    public ulong[,] ulong2darr = { { 0, 1 }, { 0, 0 } };
-    public ulong[, ,] ulong3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    public ulong[,] ulong2darr_b = { { 0, 49 }, { 0, 0 } };
-    public ulong[, ,] ulong3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    public ulong[,] ulong2darr =
+    {
+        { 0, 1 },
+        { 0, 0 },
+    };
+    public ulong[,,] ulong3darr =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
+    public ulong[,] ulong2darr_b =
+    {
+        { 0, 49 },
+        { 0, 0 },
+    };
+    public ulong[,,] ulong3darr_b =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 49 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
 }
 
 public class ulongMDArrTest
 {
-
-    static ulong[,] ulong2darr = { { 0, 1 }, { 0, 0 } };
-    static ulong[, ,] ulong3darr = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-    static ulong[,] ulong2darr_b = { { 0, 49 }, { 0, 0 } };
-    static ulong[, ,] ulong3darr_b = { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+    static ulong[,] ulong2darr =
+    {
+        { 0, 1 },
+        { 0, 0 },
+    };
+    static ulong[,,] ulong3darr =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
+    static ulong[,] ulong2darr_b =
+    {
+        { 0, 49 },
+        { 0, 0 },
+    };
+    static ulong[,,] ulong3darr_b =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 49 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
 
     static ulong[][,] ja1 = new ulong[2][,];
-    static ulong[][, ,] ja2 = new ulong[2][, ,];
+    static ulong[][,,] ja2 = new ulong[2][,,];
     static ulong[][,] ja1_b = new ulong[2][,];
-    static ulong[][, ,] ja2_b = new ulong[2][, ,];
+    static ulong[][,,] ja2_b = new ulong[2][,,];
 
     [Fact]
     public static int TestEntryPoint()
     {
-
         bool pass = true;
 
         VT vt1;
-        vt1.ulong2darr = new ulong[,] { { 0, 1 }, { 0, 0 } };
-        vt1.ulong3darr = new ulong[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        vt1.ulong2darr_b = new ulong[,] { { 0, 49 }, { 0, 0 } };
-        vt1.ulong3darr_b = new ulong[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        vt1.ulong2darr = new ulong[,]
+        {
+            { 0, 1 },
+            { 0, 0 },
+        };
+        vt1.ulong3darr = new ulong[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
+        vt1.ulong2darr_b = new ulong[,]
+        {
+            { 0, 49 },
+            { 0, 0 },
+        };
+        vt1.ulong3darr_b = new ulong[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 49 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new ulong[,] { { 0, 1 }, { 0, 0 } };
-        ja2[1] = new ulong[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
-        ja1_b[0] = new ulong[,] { { 0, 49 }, { 0, 0 } };
-        ja2_b[1] = new ulong[,,] { { { 0, 0 } }, { { 0, 49 } }, { { 0, 0 } } };
+        ja1[0] = new ulong[,]
+        {
+            { 0, 1 },
+            { 0, 0 },
+        };
+        ja2[1] = new ulong[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
+        ja1_b[0] = new ulong[,]
+        {
+            { 0, 49 },
+            { 0, 0 },
+        };
+        ja2_b[1] = new ulong[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 49 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
 
         ulong result = 1;
 
@@ -1166,8 +1284,5 @@ public class ulongMDArrTest
             Console.WriteLine("PASSED");
             return 100;
         }
-
-
     }
-
 };

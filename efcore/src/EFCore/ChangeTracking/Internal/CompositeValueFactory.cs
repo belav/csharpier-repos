@@ -47,7 +47,10 @@ public class CompositeValueFactory : IDependentKeyValueFactory<IReadOnlyList<obj
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromBuffer(in ValueBuffer valueBuffer, [NotNullWhen(true)] out IReadOnlyList<object?>? key)
+    public virtual bool TryCreateFromBuffer(
+        in ValueBuffer valueBuffer,
+        [NotNullWhen(true)] out IReadOnlyList<object?>? key
+    )
     {
         var keyArray = new object[Properties.Count];
         for (var i = 0; i < keyArray.Length; i++)
@@ -72,8 +75,10 @@ public class CompositeValueFactory : IDependentKeyValueFactory<IReadOnlyList<obj
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out IReadOnlyList<object?>? key)
-        => TryCreateFromEntry(entry, (e, p) => e.GetCurrentValue(p), out key);
+    public virtual bool TryCreateFromCurrentValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out IReadOnlyList<object?>? key
+    ) => TryCreateFromEntry(entry, (e, p) => e.GetCurrentValue(p), out key);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,8 +86,10 @@ public class CompositeValueFactory : IDependentKeyValueFactory<IReadOnlyList<obj
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out IReadOnlyList<object?>? key)
-        => TryCreateFromEntry(entry, (e, p) => e.GetPreStoreGeneratedCurrentValue(p), out key);
+    public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out IReadOnlyList<object?>? key
+    ) => TryCreateFromEntry(entry, (e, p) => e.GetPreStoreGeneratedCurrentValue(p), out key);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -90,8 +97,10 @@ public class CompositeValueFactory : IDependentKeyValueFactory<IReadOnlyList<obj
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromOriginalValues(IUpdateEntry entry, [NotNullWhen(true)] out IReadOnlyList<object?>? key)
-        => TryCreateFromEntry(entry, (e, p) => e.GetOriginalValue(p), out key);
+    public virtual bool TryCreateFromOriginalValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out IReadOnlyList<object?>? key
+    ) => TryCreateFromEntry(entry, (e, p) => e.GetOriginalValue(p), out key);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -99,8 +108,10 @@ public class CompositeValueFactory : IDependentKeyValueFactory<IReadOnlyList<obj
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromRelationshipSnapshot(IUpdateEntry entry, [NotNullWhen(true)] out IReadOnlyList<object?>? key)
-        => TryCreateFromEntry(entry, (e, p) => e.GetRelationshipSnapshotValue(p), out key);
+    public virtual bool TryCreateFromRelationshipSnapshot(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out IReadOnlyList<object?>? key
+    ) => TryCreateFromEntry(entry, (e, p) => e.GetRelationshipSnapshotValue(p), out key);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -111,7 +122,8 @@ public class CompositeValueFactory : IDependentKeyValueFactory<IReadOnlyList<obj
     protected virtual bool TryCreateFromEntry(
         IUpdateEntry entry,
         Func<IUpdateEntry, IProperty, object?> getValue,
-        [NotNullWhen(true)] out IReadOnlyList<object?>? key)
+        [NotNullWhen(true)] out IReadOnlyList<object?>? key
+    )
     {
         var keyArray = new object[Properties.Count];
         for (var i = 0; i < keyArray.Length; i++)
@@ -136,8 +148,10 @@ public class CompositeValueFactory : IDependentKeyValueFactory<IReadOnlyList<obj
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object CreatePrincipalEquatableKey(IUpdateEntry entry, bool fromOriginalValues)
-        => throw new NotImplementedException();
+    public virtual object CreatePrincipalEquatableKey(
+        IUpdateEntry entry,
+        bool fromOriginalValues
+    ) => throw new NotImplementedException();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -145,8 +159,10 @@ public class CompositeValueFactory : IDependentKeyValueFactory<IReadOnlyList<obj
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object? CreateDependentEquatableKey(IUpdateEntry entry, bool fromOriginalValues)
-        => throw new NotImplementedException();
+    public virtual object? CreateDependentEquatableKey(
+        IUpdateEntry entry,
+        bool fromOriginalValues
+    ) => throw new NotImplementedException();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -154,8 +170,9 @@ public class CompositeValueFactory : IDependentKeyValueFactory<IReadOnlyList<obj
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected static IEqualityComparer<IReadOnlyList<object?>> CreateEqualityComparer(IReadOnlyList<IProperty> properties)
-        => new CompositeCustomComparer(properties.Select(p => p.GetKeyValueComparer()).ToList());
+    protected static IEqualityComparer<IReadOnlyList<object?>> CreateEqualityComparer(
+        IReadOnlyList<IProperty> properties
+    ) => new CompositeCustomComparer(properties.Select(p => p.GetKeyValueComparer()).ToList());
 
     private sealed class CompositeCustomComparer : IEqualityComparer<IReadOnlyList<object?>>
     {
@@ -187,8 +204,7 @@ public class CompositeValueFactory : IDependentKeyValueFactory<IReadOnlyList<obj
                 return false;
             }
 
-            if (x.Count != _valueCount
-                || y.Count != _valueCount)
+            if (x.Count != _valueCount || y.Count != _valueCount)
             {
                 return false;
             }

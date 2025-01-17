@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading;
-using System.Runtime;
 
 namespace SustainedLowLatencyTest
 {
@@ -45,10 +45,10 @@ namespace SustainedLowLatencyTest
                 threadArr[i] = new Thread(AllocateTempObjects);
                 threadArr[i].Start();
             }
-           
+
             t1.Start();
             t2.Start();
-            
+
             t1.Join();
             t2.Join();
             for (int i = 0; i < numThreads; i++)
@@ -63,96 +63,85 @@ namespace SustainedLowLatencyTest
             }
             Console.WriteLine("Test passed");
             return 100;
-
         }
 
-          public static void SetSLL(object threadInfoObj)
-          {
-              System.Threading.Thread.Sleep(50);
-             
-             Int64 counter = 0;
-              while (!failed &&(runForever || counter<iterations))
-              {
-                  counter++;
-                  GC.Collect(2, GCCollectionMode.Optimized, false);
+        public static void SetSLL(object threadInfoObj)
+        {
+            System.Threading.Thread.Sleep(50);
 
-                  for (int j = 0; j < 100; j++)
-                  {
-                     
-                      GCSettings.LatencyMode = initialMode;
-                      GCLatencyMode lmOrig = GCSettings.LatencyMode;
-                      if (lmOrig != initialMode)
-                      {
-                          Console.WriteLine("latency mode is {0}; expected {1}", lmOrig, initialMode);
-                          failed = true;
-                          break;
-                      }
-                      GCSettings.LatencyMode = GCLatencyMode.SustainedLowLatency;
+            Int64 counter = 0;
+            while (!failed && (runForever || counter < iterations))
+            {
+                counter++;
+                GC.Collect(2, GCCollectionMode.Optimized, false);
 
-                      GCLatencyMode lm = GCSettings.LatencyMode;
-                      //   Console.WriteLine(lm);
-                      if (lm != GCLatencyMode.SustainedLowLatency)
-                      {
-                          Console.WriteLine("latency mode is {0}; expected GCLatencyMode.SustainedLowLatency", lm);
-                          failed = true;
-                          break;
-                      }
-                  }
-             
-                  Thread.Sleep(100);
-              }
-              setSSLdone = true;
-          }
+                for (int j = 0; j < 100; j++)
+                {
+                    GCSettings.LatencyMode = initialMode;
+                    GCLatencyMode lmOrig = GCSettings.LatencyMode;
+                    if (lmOrig != initialMode)
+                    {
+                        Console.WriteLine("latency mode is {0}; expected {1}", lmOrig, initialMode);
+                        failed = true;
+                        break;
+                    }
+                    GCSettings.LatencyMode = GCLatencyMode.SustainedLowLatency;
 
+                    GCLatencyMode lm = GCSettings.LatencyMode;
+                    //   Console.WriteLine(lm);
+                    if (lm != GCLatencyMode.SustainedLowLatency)
+                    {
+                        Console.WriteLine(
+                            "latency mode is {0}; expected GCLatencyMode.SustainedLowLatency",
+                            lm
+                        );
+                        failed = true;
+                        break;
+                    }
+                }
 
-          public static void AllocateTempObjects(object threadInfoObj)
-          {
-              int listSize2 = 1000;
-              List<byte[]> tempList = new List<byte[]>();
-              while (!setSSLdone)
-              {
-                  byte[] temp = new byte[20];
-                  for (int i = 0; i < listSize2; i++)
-                  {
-                      tempList.Add(new byte[50]);
-                  }
-                  tempList.Clear();
-              }
+                Thread.Sleep(100);
+            }
+            setSSLdone = true;
+        }
 
-          }
+        public static void AllocateTempObjects(object threadInfoObj)
+        {
+            int listSize2 = 1000;
+            List<byte[]> tempList = new List<byte[]>();
+            while (!setSSLdone)
+            {
+                byte[] temp = new byte[20];
+                for (int i = 0; i < listSize2; i++)
+                {
+                    tempList.Add(new byte[50]);
+                }
+                tempList.Clear();
+            }
+        }
 
-          public static void Allocate(object threadInfoObj)
-          {
-              int ListSize = 300;
-              System.Random rnd = new Random(1122);
-             
-              int listSize2 = 1000;
-              List<byte[]> newList = new List<byte[]>(500+1000);
-              
+        public static void Allocate(object threadInfoObj)
+        {
+            int ListSize = 300;
+            System.Random rnd = new Random(1122);
 
-              while (!setSSLdone)
-              {
-                  for (int i = 0; i < ListSize; i++)
-                  {
-                      newList.Add(new byte[85000]);
-                      newList.Add(new byte[200]);
-                      Thread.Sleep(10);
-                  }
-                  for (int i = 0; i < listSize2; i++)
-                  {
-                      newList.Add(new byte[50]);
-                  }
-                  newList.Clear();
-              }
+            int listSize2 = 1000;
+            List<byte[]> newList = new List<byte[]>(500 + 1000);
 
-              
-         
-
-          }
-
-     
-}
-
-          
-      
+            while (!setSSLdone)
+            {
+                for (int i = 0; i < ListSize; i++)
+                {
+                    newList.Add(new byte[85000]);
+                    newList.Add(new byte[200]);
+                    Thread.Sleep(10);
+                }
+                for (int i = 0; i < listSize2; i++)
+                {
+                    newList.Add(new byte[50]);
+                }
+                newList.Clear();
+            }
+        }
+    }
 }

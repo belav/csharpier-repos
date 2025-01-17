@@ -22,8 +22,18 @@ namespace System.CodeDom.Compiler.Tests
         public static IEnumerable<object[]> Ctor_IDictionary_TestData()
         {
             yield return new object[] { new Dictionary<string, string>() };
-            yield return new object[] { new Dictionary<string, string>() { { "option", "value" } } };
-            yield return new object[] { new Dictionary<string, string>() { { "option1", "value1" }, { "option2", "value2" } } };
+            yield return new object[]
+            {
+                new Dictionary<string, string>() { { "option", "value" } },
+            };
+            yield return new object[]
+            {
+                new Dictionary<string, string>()
+                {
+                    { "option1", "value1" },
+                    { "option2", "value2" },
+                },
+            };
             yield return new object[] { new Dictionary<string, string>() { { "option", null } } };
         }
 
@@ -41,7 +51,10 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void Ctor_NullProviderOptions_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("providerOptions", () => new CSharpCodeProvider(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "providerOptions",
+                () => new CSharpCodeProvider(null)
+            );
         }
 
         [Fact]

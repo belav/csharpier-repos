@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,172 +36,207 @@ using System.Text;
 
 namespace System.ServiceModel.Dispatcher
 {
-	public sealed class ClientOperation
-	{
-		internal class ClientOperationCollection :
+    public sealed class ClientOperation
+    {
+        internal class ClientOperationCollection :
 #if MOBILE
-			KeyedCollection<string, ClientOperation>
+            KeyedCollection<string, ClientOperation>
 #else
-			SynchronizedKeyedCollection<string, ClientOperation>
+            SynchronizedKeyedCollection<string, ClientOperation>
 #endif
-		{
-			protected override string GetKeyForItem (ClientOperation o)
-			{
-				return o.Name;
-			}
-		}
+        {
+            protected override string GetKeyForItem(ClientOperation o)
+            {
+                return o.Name;
+            }
+        }
 
-		ClientRuntime parent;
-		string name, action, reply_action;
-		MethodInfo sync_method, begin_method, end_method;
-		bool deserialize_reply = true, serialize_request = true;
-		bool is_initiating, is_terminating, is_oneway;
-		IClientMessageFormatter formatter;
-		SynchronizedCollection<IParameterInspector> inspectors
-			= new SynchronizedCollection<IParameterInspector> ();
-		SynchronizedCollection<FaultContractInfo> fault_contract_infos = new SynchronizedCollection<FaultContractInfo> ();
+        ClientRuntime parent;
+        string name,
+            action,
+            reply_action;
+        MethodInfo sync_method,
+            begin_method,
+            end_method;
+        bool deserialize_reply = true,
+            serialize_request = true;
+        bool is_initiating,
+            is_terminating,
+            is_oneway;
+        IClientMessageFormatter formatter;
+        SynchronizedCollection<IParameterInspector> inspectors =
+            new SynchronizedCollection<IParameterInspector>();
+        SynchronizedCollection<FaultContractInfo> fault_contract_infos =
+            new SynchronizedCollection<FaultContractInfo>();
 
-		public ClientOperation (ClientRuntime parent,
-			string name, string action)
-		{
-			this.parent = parent;
-			this.name = name;
-			this.action = action;
-		}
+        public ClientOperation(ClientRuntime parent, string name, string action)
+        {
+            this.parent = parent;
+            this.name = name;
+            this.action = action;
+        }
 
-		public ClientOperation (ClientRuntime parent,
-			string name, string action, string replyAction)
-		{
-			this.parent = parent;
-			this.name = name;
-			this.action = action;
-			this.reply_action = replyAction;
-		}
+        public ClientOperation(ClientRuntime parent, string name, string action, string replyAction)
+        {
+            this.parent = parent;
+            this.name = name;
+            this.action = action;
+            this.reply_action = replyAction;
+        }
 
-		public string Action {
-			get { return action; }
-		}
+        public string Action
+        {
+            get { return action; }
+        }
 
-		public string ReplyAction {
-			get { return reply_action; }
-		}
+        public string ReplyAction
+        {
+            get { return reply_action; }
+        }
 
-		public MethodInfo BeginMethod {
-			get { return begin_method; }
-			set {
-				ThrowIfOpened ();
-				begin_method = value;
-			}
-		}
+        public MethodInfo BeginMethod
+        {
+            get { return begin_method; }
+            set
+            {
+                ThrowIfOpened();
+                begin_method = value;
+            }
+        }
 
-		public bool DeserializeReply {
-			get { return deserialize_reply; }
-			set {
-				ThrowIfOpened ();
-				deserialize_reply = value;
-			}
-		}
+        public bool DeserializeReply
+        {
+            get { return deserialize_reply; }
+            set
+            {
+                ThrowIfOpened();
+                deserialize_reply = value;
+            }
+        }
 
-		public MethodInfo EndMethod {
-			get { return end_method; }
-			set {
-				ThrowIfOpened ();
-				end_method = value;
-			}
-		}
+        public MethodInfo EndMethod
+        {
+            get { return end_method; }
+            set
+            {
+                ThrowIfOpened();
+                end_method = value;
+            }
+        }
 
-		public SynchronizedCollection<FaultContractInfo> FaultContractInfos {
-			get { return fault_contract_infos; }
-		}
+        public SynchronizedCollection<FaultContractInfo> FaultContractInfos
+        {
+            get { return fault_contract_infos; }
+        }
 
-		public IClientMessageFormatter Formatter {
-			get { return formatter; }
-			set {
-				ThrowIfOpened ();
-				formatter = value;
-			}
-		}
+        public IClientMessageFormatter Formatter
+        {
+            get { return formatter; }
+            set
+            {
+                ThrowIfOpened();
+                formatter = value;
+            }
+        }
 
-		public bool IsInitiating {
-			get { return is_initiating; }
-			set {
-				ThrowIfOpened ();
-				is_initiating = value;
-			}
-		}
+        public bool IsInitiating
+        {
+            get { return is_initiating; }
+            set
+            {
+                ThrowIfOpened();
+                is_initiating = value;
+            }
+        }
 
-		public bool IsOneWay {
-			get { return is_oneway; }
-			set {
-				ThrowIfOpened ();
-				is_oneway = value;
-			}
-		}
+        public bool IsOneWay
+        {
+            get { return is_oneway; }
+            set
+            {
+                ThrowIfOpened();
+                is_oneway = value;
+            }
+        }
 
-		public bool IsTerminating {
-			get { return is_terminating; }
-			set {
-				ThrowIfOpened ();
-				is_terminating = value;
-			}
-		}
+        public bool IsTerminating
+        {
+            get { return is_terminating; }
+            set
+            {
+                ThrowIfOpened();
+                is_terminating = value;
+            }
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		public SynchronizedCollection<IParameterInspector> ParameterInspectors {
-			get { return inspectors; }
-		}
+        public SynchronizedCollection<IParameterInspector> ParameterInspectors
+        {
+            get { return inspectors; }
+        }
 
-		public ClientRuntime Parent {
-			get { return parent; }
-		}
+        public ClientRuntime Parent
+        {
+            get { return parent; }
+        }
 
-		public bool SerializeRequest {
-			get { return serialize_request; }
-			set {
-				ThrowIfOpened ();
-				serialize_request = value;
-			}
-		}
+        public bool SerializeRequest
+        {
+            get { return serialize_request; }
+            set
+            {
+                ThrowIfOpened();
+                serialize_request = value;
+            }
+        }
 
-		public MethodInfo SyncMethod {
-			get { return sync_method; }
-			set {
-				ThrowIfOpened ();
-				sync_method = value;
-			}
-		}
+        public MethodInfo SyncMethod
+        {
+            get { return sync_method; }
+            set
+            {
+                ThrowIfOpened();
+                sync_method = value;
+            }
+        }
 
-		void ThrowIfOpened ()
-		{
-			// FIXME: get correct state
-			var state = CommunicationState.Created;
-			switch (state) {
-			case CommunicationState.Created:
-			case CommunicationState.Opening:
-				return;
-			}
-			throw new InvalidOperationException ("Cannot change this property after the service host is opened");
-		}
+        void ThrowIfOpened()
+        {
+            // FIXME: get correct state
+            var state = CommunicationState.Created;
+            switch (state)
+            {
+                case CommunicationState.Created:
+                case CommunicationState.Opening:
+                    return;
+            }
+            throw new InvalidOperationException(
+                "Cannot change this property after the service host is opened"
+            );
+        }
 
-		[MonoTODO]
-		public ICollection<IParameterInspector> ClientParameterInspectors {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public ICollection<IParameterInspector> ClientParameterInspectors
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public MethodInfo TaskMethod {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public MethodInfo TaskMethod
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public Type TaskTResult {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
-		
-	}
+        [MonoTODO]
+        public Type TaskTResult
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+    }
 }

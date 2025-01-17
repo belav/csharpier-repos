@@ -26,10 +26,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using Newtonsoft.Json.Serialization;
 #if !NET20
 using System.Linq;
 #endif
-using System.Text;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -40,7 +42,6 @@ using NUnit.Framework;
 #if !(NET20 || NET35 || DNXCORE50)
 using System.Runtime.Serialization.Json;
 #endif
-using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json.Tests.Serialization
 {
@@ -56,30 +57,37 @@ namespace Newtonsoft.Json.Tests.Serialization
                 protectedInternalField = "protected internal",
                 internalField = "internal",
                 PublicProperty = "private",
-                nonSerializedField = "Error"
+                nonSerializedField = "Error",
             };
 
 #if !(NET20 || NET35 || PORTABLE || DNXCORE50 || PORTABLE40)
             MemoryStream ms = new MemoryStream();
-            DataContractJsonSerializer dataContractJsonSerializer = new DataContractJsonSerializer(typeof(SerializableType));
+            DataContractJsonSerializer dataContractJsonSerializer = new DataContractJsonSerializer(
+                typeof(SerializableType)
+            );
             dataContractJsonSerializer.WriteObject(ms, serializableType);
 
             string dtJson = Encoding.UTF8.GetString(ms.ToArray());
-            string dtExpected = @"{""internalField"":""internal"",""privateField"":""private"",""protectedField"":""protected"",""protectedInternalField"":""protected internal"",""publicField"":""public""}";
+            string dtExpected =
+                @"{""internalField"":""internal"",""privateField"":""private"",""protectedField"":""protected"",""protectedInternalField"":""protected internal"",""publicField"":""public""}";
 
             Assert.AreEqual(dtExpected, dtJson);
 #endif
 
-            string expected = "{\"publicField\":\"public\",\"internalField\":\"internal\",\"protectedInternalField\":\"protected internal\",\"protectedField\":\"protected\",\"privateField\":\"private\"}";
-            string json = JsonConvert.SerializeObject(serializableType, new JsonSerializerSettings
-            {
-                ContractResolver = new DefaultContractResolver
+            string expected =
+                "{\"publicField\":\"public\",\"internalField\":\"internal\",\"protectedInternalField\":\"protected internal\",\"protectedField\":\"protected\",\"privateField\":\"private\"}";
+            string json = JsonConvert.SerializeObject(
+                serializableType,
+                new JsonSerializerSettings
                 {
+                    ContractResolver = new DefaultContractResolver
+                    {
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
-                    IgnoreSerializableAttribute = false
+                        IgnoreSerializableAttribute = false
 #endif
+                    },
                 }
-            });
+            );
 
             Assert.AreEqual(expected, json);
         }
@@ -95,12 +103,15 @@ namespace Newtonsoft.Json.Tests.Serialization
                 internalField = "internal",
                 PublicProperty = "private",
                 nonSerializedField = "Error",
-                inheritedTypeField = "inherited"
+                inheritedTypeField = "inherited",
             };
 
             string json = JsonConvert.SerializeObject(serializableType);
 
-            Assert.AreEqual(@"{""inheritedTypeField"":""inherited"",""publicField"":""public"",""PublicProperty"":""private""}", json);
+            Assert.AreEqual(
+                @"{""inheritedTypeField"":""inherited"",""publicField"":""public"",""PublicProperty"":""private""}",
+                json
+            );
         }
 #endif
     }
@@ -109,9 +120,8 @@ namespace Newtonsoft.Json.Tests.Serialization
     {
         public string inheritedTypeField;
 
-        public InheritedType(string protectedFieldValue) : base(protectedFieldValue)
-        {
-        }
+        public InheritedType(string protectedFieldValue)
+            : base(protectedFieldValue) { }
     }
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
@@ -147,11 +157,11 @@ namespace Newtonsoft.Json.Tests.Serialization
 
         public bool Equals(SerializableType other)
         {
-            return publicField == other.publicField &&
-                   internalField == other.internalField &&
-                   protectedInternalField == other.protectedInternalField &&
-                   protectedField == other.protectedField &&
-                   privateField == other.privateField;
+            return publicField == other.publicField
+                && internalField == other.internalField
+                && protectedInternalField == other.protectedInternalField
+                && protectedField == other.protectedField
+                && privateField == other.privateField;
         }
     }
 }

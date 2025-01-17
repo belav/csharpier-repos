@@ -30,12 +30,12 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public enum UpdateMode {
-		Background,
-		Foreground
-	}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public enum UpdateMode
+    {
+        Background,
+        Foreground,
+    }
 }
-

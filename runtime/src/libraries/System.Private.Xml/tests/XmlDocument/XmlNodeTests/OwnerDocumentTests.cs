@@ -14,6 +14,7 @@ namespace System.Xml.XmlDocumentTests
 
             Assert.Null(xmlDocument.OwnerDocument);
         }
+
         [Fact]
         public static void FromLoadedDocument()
         {

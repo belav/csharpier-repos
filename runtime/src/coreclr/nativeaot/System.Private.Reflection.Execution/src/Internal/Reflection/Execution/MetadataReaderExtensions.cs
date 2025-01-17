@@ -1,9 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using global::Internal.Metadata.NativeFormat;
 using global::System;
-
+using global::Internal.Metadata.NativeFormat;
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
@@ -16,7 +15,10 @@ namespace Internal.Reflection.Execution
         }
 
         // Useful for namespace Name string which can be a null handle.
-        public static string GetStringOrNull(this ConstantStringValueHandle handle, MetadataReader reader)
+        public static string GetStringOrNull(
+            this ConstantStringValueHandle handle,
+            MetadataReader reader
+        )
         {
             if (reader.IsNull(handle))
                 return null;

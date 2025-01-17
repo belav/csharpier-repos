@@ -9,7 +9,9 @@ namespace Profiler.Tests
 {
     class NonGCHeapTests
     {
-        static readonly Guid GcAllocateEventsProfilerGuid = new Guid("EF0D191C-3FC7-4311-88AF-E474CBEB2859");
+        static readonly Guid GcAllocateEventsProfilerGuid = new Guid(
+            "EF0D191C-3FC7-4311-88AF-E474CBEB2859"
+        );
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void AllocateNonGcHeapObjects()
@@ -25,15 +27,17 @@ namespace Profiler.Tests
 
             int gen = GC.GetGeneration("string7");
             if (gen != int.MaxValue)
-                throw new Exception("object is expected to be in a non-gc heap for this test to work");
+                throw new Exception(
+                    "object is expected to be in a non-gc heap for this test to work"
+                );
 
             GC.Collect();
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void Consume(object o) {}
+        static void Consume(object o) { }
 
-        public static int RunTest(String[] args) 
+        public static int RunTest(String[] args)
         {
             AllocateNonGcHeapObjects();
             Console.WriteLine("Test Passed");
@@ -47,9 +51,11 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "NonGCHeapAllocate",
-                                          profilerClsid: GcAllocateEventsProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "NonGCHeapAllocate",
+                profilerClsid: GcAllocateEventsProfilerGuid
+            );
         }
     }
 }

@@ -27,16 +27,16 @@ public class EnumTypeModelBinder : SimpleTypeModelBinder
     public EnumTypeModelBinder(
         bool suppressBindingUndefinedValueToEnumType,
         Type modelType,
-        ILoggerFactory loggerFactory)
-        : base(modelType, loggerFactory)
-    {
-    }
+        ILoggerFactory loggerFactory
+    )
+        : base(modelType, loggerFactory) { }
 
     /// <inheritdoc/>
     protected override void CheckModel(
         ModelBindingContext bindingContext,
         ValueProviderResult valueProviderResult,
-        object? model)
+        object? model
+    )
     {
         if (model == null)
         {
@@ -51,7 +51,9 @@ public class EnumTypeModelBinder : SimpleTypeModelBinder
             bindingContext.ModelState.TryAddModelError(
                 bindingContext.ModelName,
                 bindingContext.ModelMetadata.ModelBindingMessageProvider.ValueIsInvalidAccessor(
-                    valueProviderResult.ToString()));
+                    valueProviderResult.ToString()
+                )
+            );
         }
     }
 
@@ -77,10 +79,9 @@ public class EnumTypeModelBinder : SimpleTypeModelBinder
             // Invalid Scenarios:
             // 1. valueProviderResult="2,10", model=12, underlying=12, converted=12
             //
-            var underlying = Convert.ChangeType(
-                model,
-                Enum.GetUnderlyingType(modelType),
-                CultureInfo.InvariantCulture).ToString();
+            var underlying = Convert
+                .ChangeType(model, Enum.GetUnderlyingType(modelType), CultureInfo.InvariantCulture)
+                .ToString();
             var converted = model.ToString();
             return !string.Equals(underlying, converted, StringComparison.OrdinalIgnoreCase);
         }

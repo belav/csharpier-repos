@@ -1,31 +1,30 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Reflection;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.ComponentModel.Design.Serialization;
-
-using System.Workflow.Runtime;
+using System.Text;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Serialization;
+using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
+using System.Xml;
 
 namespace System.Workflow.Runtime.Tracking
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class SqlTrackingQuery
     {
         string _connectionString = null;
 
-        public SqlTrackingQuery()
-        {
-        }
+        public SqlTrackingQuery() { }
 
         public SqlTrackingQuery(string connectionString)
         {
@@ -45,7 +44,10 @@ namespace System.Workflow.Runtime.Tracking
             }
         }
 
-        public bool TryGetWorkflow(Guid workflowInstanceId, out SqlTrackingWorkflowInstance workflowInstance)
+        public bool TryGetWorkflow(
+            Guid workflowInstanceId,
+            out SqlTrackingWorkflowInstance workflowInstance
+        )
         {
             SqlCommand cmd = BuildCommand(workflowInstanceId);
             SqlDataReader reader = null;
@@ -53,7 +55,6 @@ namespace System.Workflow.Runtime.Tracking
 
             try
             {
-
                 cmd.Connection = GetConnection();
                 reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 //
@@ -71,7 +72,11 @@ namespace System.Workflow.Runtime.Tracking
                 if (null != reader)
                     reader.Close();
 
-                if (null != cmd && null != cmd.Connection && ConnectionState.Closed != cmd.Connection.State)
+                if (
+                    null != cmd
+                    && null != cmd.Connection
+                    && ConnectionState.Closed != cmd.Connection.State
+                )
                     cmd.Connection.Close();
             }
         }
@@ -112,7 +117,11 @@ namespace System.Workflow.Runtime.Tracking
                 if (null != reader)
                     reader.Close();
 
-                if (null != cmd && null != cmd.Connection && ConnectionState.Closed != cmd.Connection.State)
+                if (
+                    null != cmd
+                    && null != cmd.Connection
+                    && ConnectionState.Closed != cmd.Connection.State
+                )
                     cmd.Connection.Close();
             }
 
@@ -124,7 +133,10 @@ namespace System.Workflow.Runtime.Tracking
             return SqlTrackingQuery.BuildInstance(reader, _connectionString);
         }
 
-        internal static SqlTrackingWorkflowInstance BuildInstance(SqlDataReader reader, string connectionString)
+        internal static SqlTrackingWorkflowInstance BuildInstance(
+            SqlDataReader reader,
+            string connectionString
+        )
         {
             if (null == reader)
                 throw new ArgumentNullException("reader");
@@ -144,7 +156,8 @@ namespace System.Workflow.Runtime.Tracking
             // Xaml only workflows do not have types
             if (!reader.IsDBNull(6))
             {
-                string fullName = reader.GetString(6), assemblyName = reader.GetString(7);
+                string fullName = reader.GetString(6),
+                    assemblyName = reader.GetString(7);
                 inst.WorkflowType = Type.GetType(fullName + ", " + assemblyName, true, false);
             }
 
@@ -192,7 +205,10 @@ namespace System.Workflow.Runtime.Tracking
                 cmd.Parameters.Add(param);
                 //
                 // If one of the range values is set we have a date range constraint
-                if (DateTime.MinValue != opt.StatusMinDateTime || DateTime.MaxValue != opt.StatusMaxDateTime)
+                if (
+                    DateTime.MinValue != opt.StatusMinDateTime
+                    || DateTime.MaxValue != opt.StatusMaxDateTime
+                )
                 {
                     param = new SqlParameter();
                     param.ParameterName = "@StatusMinDateTime";
@@ -254,7 +270,7 @@ namespace System.Workflow.Runtime.Tracking
                     writer.WriteElementString("QualifiedName", art.QualifiedName);
                     writer.WriteElementString("FieldName", art.FieldName);
                     //
-                    // If data value is null don't write the node as 
+                    // If data value is null don't write the node as
                     // the proc sees no DataValue node as null and matches null rows.
                     // This allows us to match null, "", and positive length strings
                     if (null != art.DataValue)
@@ -280,10 +296,13 @@ namespace System.Workflow.Runtime.Tracking
         }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class SqlTrackingQueryOptions
     {
-        private DateTime _min = DateTime.MinValue, _max = DateTime.MaxValue;
+        private DateTime _min = DateTime.MinValue,
+            _max = DateTime.MaxValue;
         private WorkflowStatus? _status = new Nullable<WorkflowStatus>();
         private Type _type = null;
         private List<TrackingDataItemValue> _dataItems = new List<TrackingDataItemValue>();

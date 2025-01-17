@@ -28,7 +28,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
             }
 
-            internal SyntaxTokenWithTrivia(SyntaxKind kind, GreenNode leading, GreenNode trailing, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations)
+            internal SyntaxTokenWithTrivia(
+                SyntaxKind kind,
+                GreenNode leading,
+                GreenNode trailing,
+                DiagnosticInfo[] diagnostics,
+                SyntaxAnnotation[] annotations
+            )
                 : base(kind, diagnostics, annotations)
             {
                 if (leading != null)
@@ -55,22 +61,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             public override SyntaxToken TokenWithLeadingTrivia(GreenNode trivia)
             {
-                return new SyntaxTokenWithTrivia(this.Kind, trivia, this.TrailingField, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxTokenWithTrivia(
+                    this.Kind,
+                    trivia,
+                    this.TrailingField,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             public override SyntaxToken TokenWithTrailingTrivia(GreenNode trivia)
             {
-                return new SyntaxTokenWithTrivia(this.Kind, this.LeadingField, trivia, this.GetDiagnostics(), this.GetAnnotations());
+                return new SyntaxTokenWithTrivia(
+                    this.Kind,
+                    this.LeadingField,
+                    trivia,
+                    this.GetDiagnostics(),
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[] diagnostics)
             {
-                return new SyntaxTokenWithTrivia(this.Kind, this.LeadingField, this.TrailingField, diagnostics, this.GetAnnotations());
+                return new SyntaxTokenWithTrivia(
+                    this.Kind,
+                    this.LeadingField,
+                    this.TrailingField,
+                    diagnostics,
+                    this.GetAnnotations()
+                );
             }
 
             internal override GreenNode SetAnnotations(SyntaxAnnotation[] annotations)
             {
-                return new SyntaxTokenWithTrivia(this.Kind, this.LeadingField, this.TrailingField, this.GetDiagnostics(), annotations);
+                return new SyntaxTokenWithTrivia(
+                    this.Kind,
+                    this.LeadingField,
+                    this.TrailingField,
+                    this.GetDiagnostics(),
+                    annotations
+                );
             }
         }
     }

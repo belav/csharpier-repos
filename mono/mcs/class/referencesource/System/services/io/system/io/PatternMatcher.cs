@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="PatternMatcher.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.IO {
-    using System.Text;
-
-    using System.Diagnostics;
-
+namespace System.IO
+{
     using System;
-    using Microsoft.Win32;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Text;
+    using Microsoft.Win32;
 
-    internal static class PatternMatcher {
+    internal static class PatternMatcher
+    {
         /// <devdoc>
         ///     Private constants (directly from C header files)
         /// </devdoc>
@@ -23,7 +23,7 @@ namespace System.IO {
         private const char ANSI_DOS_STAR = '>';
         private const char ANSI_DOS_QM = '<';
         private const char DOS_DOT = '"';
-        
+
         /// <devdoc>
         ///     Tells whether a given name matches the expression given with a strict (i.e. UNIX like)
         ///     semantics.  This code is a port of unmanaged code.  Original code comment follows:
@@ -111,7 +111,8 @@ namespace System.IO {
         ///            by the input Expression and FALSE otherwise.
         ///
         /// </devdoc>
-        public static bool StrictMatchPattern(string expression, string name) {
+        public static bool StrictMatchPattern(string expression, string name)
+        {
             int nameOffset;
             int exprOffset;
             int length;
@@ -140,7 +141,8 @@ namespace System.IO {
             //  defined by the regular expression.
             //
 
-            if (name == null || name.Length == 0 || expression == null || expression.Length == 0) {
+            if (name == null || name.Length == 0 || expression == null || expression.Length == 0)
+            {
                 return false;
             }
 
@@ -148,26 +150,39 @@ namespace System.IO {
             //  Special case by far the most common wild card search of * or *.*
             //
 
-            if (expression.Equals("*") || expression.Equals("*.*")) {
+            if (expression.Equals("*") || expression.Equals("*.*"))
+            {
                 return true;
             }
 
             // If this class is ever exposed for generic use,
-            // we need to make sure that name doesn't contain wildcards. Currently 
+            // we need to make sure that name doesn't contain wildcards. Currently
             // the only component that calls this method is FileSystemWatcher and
             // it will never pass a name that contains a wildcard.
-            
+
 
             //
             //  Also special case expressions of the form *X.  With this and the prior
             //  case we have covered virtually all normal queries.
             //
-            if (expression[0] == '*' && expression.IndexOf('*', 1) == -1) {
+            if (expression[0] == '*' && expression.IndexOf('*', 1) == -1)
+            {
                 int rightLength = expression.Length - 1;
                 // if name is shorter that the stuff to the right of * in expression, we don't
                 // need to do the string compare, otherwise we compare rightlength characters
                 // and the end of both strings.
-                if (name.Length >= rightLength && String.Compare(expression, 1, name, name.Length - rightLength, rightLength, StringComparison.OrdinalIgnoreCase) == 0) {
+                if (
+                    name.Length >= rightLength
+                    && String.Compare(
+                        expression,
+                        1,
+                        name,
+                        name.Length - rightLength,
+                        rightLength,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
+                {
                     return true;
                 }
             }
@@ -227,20 +242,24 @@ namespace System.IO {
             nameOffset = 0;
             maxState = expression.Length * 2;
 
-            while (! nameFinished) {
-                if (nameOffset < name.Length) {
+            while (!nameFinished)
+            {
+                if (nameOffset < name.Length)
+                {
                     nameChar = name[nameOffset];
                     length = 1;
                     nameOffset++;
                 }
-                else {
+                else
+                {
                     nameFinished = true;
 
                     //
                     //  if we have already exhasted the expression, C#.  Don't
                     //  continue.
                     //
-                    if (previousMatches[matchesCount - 1] == maxState) {
+                    if (previousMatches[matchesCount - 1] == maxState)
+                    {
                         break;
                     }
                 }
@@ -253,8 +272,8 @@ namespace System.IO {
                 destCount = 0;
                 previousDestCount = 0;
 
-                while (srcCount < matchesCount) {
-
+                while (srcCount < matchesCount)
+                {
                     //
                     //  We have to carry on our expression analysis as far as possible
                     //  for each character of name, so we loop here until the
@@ -266,8 +285,10 @@ namespace System.IO {
                     exprOffset = ((previousMatches[srcCount++] + 1) / 2);
                     length = 0;
 
-                    while (true) {
-                        if ( exprOffset == expression.Length ) {
+                    while (true)
+                    {
+                        if (exprOffset == expression.Length)
+                        {
                             break;
                         }
 
@@ -280,7 +301,8 @@ namespace System.IO {
 
                         currentState = exprOffset * 2;
 
-                        if (exprOffset == expression.Length) {
+                        if (exprOffset == expression.Length)
+                        {
                             currentMatches[destCount++] = maxState;
                             break;
                         }
@@ -295,9 +317,10 @@ namespace System.IO {
                         //  some pool if this is the case.  Yuk!
                         //
 
-                        if (destCount >= MATCHES_ARRAY_SIZE - 2) {
+                        if (destCount >= MATCHES_ARRAY_SIZE - 2)
+                        {
                             int newSize = currentMatches.Length * 2;
-                            int [] tmp = new int[newSize];
+                            int[] tmp = new int[newSize];
                             Array.Copy(currentMatches, tmp, currentMatches.Length);
                             currentMatches = tmp;
 
@@ -310,7 +333,8 @@ namespace System.IO {
                         //  * matches any character zero or more times.
                         //
 
-                        if (exprChar == '*') {
+                        if (exprChar == '*')
+                        {
                             currentMatches[destCount++] = currentState;
                             currentMatches[destCount++] = (currentState + 1);
                             continue;
@@ -320,35 +344,41 @@ namespace System.IO {
                         //  DOS_STAR matches any character except . zero or more times.
                         //
 
-                        if (exprChar == ANSI_DOS_STAR) {
+                        if (exprChar == ANSI_DOS_STAR)
+                        {
                             bool iCanEatADot = false;
 
                             //
                             //  If we are at a period, determine if we are allowed to
                             //  consume it, ie. make sure it is not the last one.
                             //
-                            if (!nameFinished && (nameChar == '.') ) {
+                            if (!nameFinished && (nameChar == '.'))
+                            {
                                 char tmpChar;
                                 int offset;
 
                                 int nameLength = name.Length;
-                                for (offset = nameOffset; offset < nameLength; offset ++ ) {
+                                for (offset = nameOffset; offset < nameLength; offset++)
+                                {
                                     tmpChar = name[offset];
                                     length = 1;
 
-                                    if (tmpChar == '.') {
+                                    if (tmpChar == '.')
+                                    {
                                         iCanEatADot = true;
                                         break;
                                     }
                                 }
                             }
 
-                            if (nameFinished || (nameChar != '.') || iCanEatADot) {
+                            if (nameFinished || (nameChar != '.') || iCanEatADot)
+                            {
                                 currentMatches[destCount++] = currentState;
                                 currentMatches[destCount++] = (currentState + 1);
                                 continue;
-                            } else {
-
+                            }
+                            else
+                            {
                                 //
                                 //  We are at a period.  We can only match zero
                                 //  characters (ie. the epsilon transition).
@@ -371,9 +401,10 @@ namespace System.IO {
                         //  don't match, but look at the next expression.  Otherwise
                         //  we match a single character.
                         //
-                        if (exprChar == ANSI_DOS_QM) {
-
-                            if (nameFinished || (nameChar == '.') ) {
+                        if (exprChar == ANSI_DOS_QM)
+                        {
+                            if (nameFinished || (nameChar == '.'))
+                            {
                                 continue;
                             }
 
@@ -385,13 +416,15 @@ namespace System.IO {
                         //  A DOS_DOT can match either a period, or zero characters
                         //  beyond the end of name.
                         //
-                        if (exprChar == DOS_DOT) {
-
-                            if (nameFinished) {
+                        if (exprChar == DOS_DOT)
+                        {
+                            if (nameFinished)
+                            {
                                 continue;
                             }
 
-                            if (nameChar == '.') {
+                            if (nameChar == '.')
+                            {
                                 currentMatches[destCount++] = currentState;
                                 break;
                             }
@@ -401,14 +434,16 @@ namespace System.IO {
                         //  From this point on a name character is required to even
                         //  continue, let alone make a match.
                         //
-                        if (nameFinished) {
+                        if (nameFinished)
+                        {
                             break;
                         }
 
                         //
                         //  If this expression was a '?' we can match it once.
                         //
-                        if (exprChar == '?') {
+                        if (exprChar == '?')
+                        {
                             currentMatches[destCount++] = currentState;
                             break;
                         }
@@ -416,7 +451,8 @@ namespace System.IO {
                         //
                         //  Finally, check if the expression char matches the name char
                         //
-                        if (exprChar == nameChar) {
+                        if (exprChar == nameChar)
+                        {
                             currentMatches[destCount++] = currentState;
                             break;
                         }
@@ -429,7 +465,6 @@ namespace System.IO {
                         break;
                     }
 
-
                     //
                     //  Prevent duplication in the destination array.
                     //
@@ -439,10 +474,16 @@ namespace System.IO {
                     //  array.  This guarentees non-duplication in the dest. array.
                     //
 
-                    if ((srcCount < matchesCount) && (previousDestCount < destCount) ) {
-                        while (previousDestCount < destCount) {
+                    if ((srcCount < matchesCount) && (previousDestCount < destCount))
+                    {
+                        while (previousDestCount < destCount)
+                        {
                             int previousLength = previousMatches.Length;
-                            while ((srcCount < previousLength) && (previousMatches[srcCount] < currentMatches[previousDestCount])) {
+                            while (
+                                (srcCount < previousLength)
+                                && (previousMatches[srcCount] < currentMatches[previousDestCount])
+                            )
+                            {
                                 srcCount += 1;
                             }
                             previousDestCount += 1;
@@ -455,7 +496,8 @@ namespace System.IO {
                 //  to bail.
                 //
 
-                if ( destCount == 0 ) {
+                if (destCount == 0)
+                {
                     return false;
                 }
 

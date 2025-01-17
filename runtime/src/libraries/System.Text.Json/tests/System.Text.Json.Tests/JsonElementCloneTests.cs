@@ -109,7 +109,8 @@ namespace System.Text.Json.Tests
     }
   ]
 }",
-                JsonValueKind.Object);
+                JsonValueKind.Object
+            );
         }
 
         [Fact]
@@ -145,12 +146,14 @@ false,
 
 null
 ]",
-                JsonValueKind.Array);
+                JsonValueKind.Array
+            );
         }
 
         private static void CloneAtInner(string innerJson, JsonValueKind valueType)
         {
-            string json = $"{{ \"obj\": [ {{ \"not target\": true, \"target\": {innerJson} }}, 5 ] }}";
+            string json =
+                $"{{ \"obj\": [ {{ \"not target\": true, \"target\": {innerJson} }}, 5 ] }}";
 
             JsonElement clone;
 
@@ -166,16 +169,18 @@ null
 
         internal static JsonDocument SniffDocument(this JsonElement element)
         {
-            return (JsonDocument)typeof(JsonElement)
-                .GetField("_parent", BindingFlags.Instance | BindingFlags.NonPublic)
-                .GetValue(element);
+            return (JsonDocument)
+                typeof(JsonElement)
+                    .GetField("_parent", BindingFlags.Instance | BindingFlags.NonPublic)
+                    .GetValue(element);
         }
 
         internal static bool IsDisposable(this JsonDocument document)
         {
-            return (bool)typeof(JsonDocument)
-                .GetProperty("IsDisposable", BindingFlags.Instance | BindingFlags.NonPublic)
-                .GetValue(document);
+            return (bool)
+                typeof(JsonDocument)
+                    .GetProperty("IsDisposable", BindingFlags.Instance | BindingFlags.NonPublic)
+                    .GetValue(document);
         }
     }
 }

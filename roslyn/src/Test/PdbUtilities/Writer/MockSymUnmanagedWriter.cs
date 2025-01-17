@@ -13,9 +13,14 @@ namespace Roslyn.Test.Utilities
 {
     internal class MockSymUnmanagedWriter : SymUnmanagedWriter
     {
-        private Exception MakeException() => new SymUnmanagedWriterException("MockSymUnmanagedWriter error message");
+        private Exception MakeException() =>
+            new SymUnmanagedWriterException("MockSymUnmanagedWriter error message");
 
-        public override int DocumentTableCapacity { get => throw MakeException(); set => throw MakeException(); }
+        public override int DocumentTableCapacity
+        {
+            get => throw MakeException();
+            set => throw MakeException();
+        }
 
         public override void Dispose()
         {
@@ -42,22 +47,47 @@ namespace Roslyn.Test.Utilities
             throw MakeException();
         }
 
-        public override int DefineDocument(string name, Guid language, Guid vendor, Guid type, Guid algorithmId, ReadOnlySpan<byte> checksum, ReadOnlySpan<byte> source)
+        public override int DefineDocument(
+            string name,
+            Guid language,
+            Guid vendor,
+            Guid type,
+            Guid algorithmId,
+            ReadOnlySpan<byte> checksum,
+            ReadOnlySpan<byte> source
+        )
         {
             throw MakeException();
         }
 
-        public override bool DefineLocalConstant(string name, object value, int constantSignatureToken)
+        public override bool DefineLocalConstant(
+            string name,
+            object value,
+            int constantSignatureToken
+        )
         {
             throw MakeException();
         }
 
-        public override void DefineLocalVariable(int index, string name, int attributes, int localSignatureToken)
+        public override void DefineLocalVariable(
+            int index,
+            string name,
+            int attributes,
+            int localSignatureToken
+        )
         {
             throw MakeException();
         }
 
-        public override void DefineSequencePoints(int documentIndex, int count, int[] offsets, int[] startLines, int[] startColumns, int[] endLines, int[] endColumns)
+        public override void DefineSequencePoints(
+            int documentIndex,
+            int count,
+            int[] offsets,
+            int[] startLines,
+            int[] startColumns,
+            int[] endLines,
+            int[] endColumns
+        )
         {
             throw MakeException();
         }
@@ -72,7 +102,14 @@ namespace Roslyn.Test.Utilities
             throw MakeException();
         }
 
-        public override void MapTokenToSourceSpan(int token, int documentIndex, int startLine, int startColumn, int endLine, int endColumn)
+        public override void MapTokenToSourceSpan(
+            int token,
+            int documentIndex,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        )
         {
             throw MakeException();
         }
@@ -92,7 +129,13 @@ namespace Roslyn.Test.Utilities
             throw MakeException();
         }
 
-        public override void SetAsyncInfo(int moveNextMethodToken, int kickoffMethodToken, int catchHandlerOffset, ReadOnlySpan<int> yieldOffsets, ReadOnlySpan<int> resumeOffsets)
+        public override void SetAsyncInfo(
+            int moveNextMethodToken,
+            int kickoffMethodToken,
+            int catchHandlerOffset,
+            ReadOnlySpan<int> yieldOffsets,
+            ReadOnlySpan<int> resumeOffsets
+        )
         {
             throw MakeException();
         }
@@ -127,7 +170,13 @@ namespace Roslyn.Test.Utilities
             throw MakeException();
         }
 
-        public override void AddCompilerInfo(ushort major, ushort minor, ushort build, ushort revision, string name)
+        public override void AddCompilerInfo(
+            ushort major,
+            ushort minor,
+            ushort build,
+            ushort revision,
+            string name
+        )
         {
             throw MakeException();
         }

@@ -52,7 +52,9 @@ internal partial class EndpointHtmlRenderer : StaticHtmlRenderer, IComponentPrer
         : base(serviceProvider, loggerFactory)
     {
         _services = serviceProvider;
-        _options = serviceProvider.GetRequiredService<IOptions<RazorComponentsServiceOptions>>().Value;
+        _options = serviceProvider
+            .GetRequiredService<IOptions<RazorComponentsServiceOptions>>()
+            .Value;
     }
 
     internal HttpContext? HttpContext => _httpContext;
@@ -65,7 +67,9 @@ internal partial class EndpointHtmlRenderer : StaticHtmlRenderer, IComponentPrer
         }
         else if (_httpContext != httpContext)
         {
-            throw new InvalidOperationException("The HttpContext cannot change value once assigned.");
+            throw new InvalidOperationException(
+                "The HttpContext cannot change value once assigned."
+            );
         }
     }
 
@@ -73,38 +77,59 @@ internal partial class EndpointHtmlRenderer : StaticHtmlRenderer, IComponentPrer
         HttpContext httpContext,
         [DynamicallyAccessedMembers(Component)] Type? componentType = null,
         string? handler = null,
-        IFormCollection? form = null)
+        IFormCollection? form = null
+    )
     {
-        var navigationManager = (IHostEnvironmentNavigationManager)httpContext.RequestServices.GetRequiredService<NavigationManager>();
-        navigationManager?.Initialize(GetContextBaseUri(httpContext.Request), GetFullUri(httpContext.Request));
+        var navigationManager = (IHostEnvironmentNavigationManager)
+            httpContext.RequestServices.GetRequiredService<NavigationManager>();
+        navigationManager?.Initialize(
+            GetContextBaseUri(httpContext.Request),
+            GetFullUri(httpContext.Request)
+        );
 
-        if (httpContext.RequestServices.GetService<AuthenticationStateProvider>() is IHostEnvironmentAuthenticationStateProvider authenticationStateProvider)
+        if (
+            httpContext.RequestServices.GetService<AuthenticationStateProvider>()
+            is IHostEnvironmentAuthenticationStateProvider authenticationStateProvider
+        )
         {
             var authenticationState = new AuthenticationState(httpContext.User);
-            authenticationStateProvider.SetAuthenticationState(Task.FromResult(authenticationState));
+            authenticationStateProvider.SetAuthenticationState(
+                Task.FromResult(authenticationState)
+            );
         }
 
         if (handler != null && form != null)
         {
-            httpContext.RequestServices.GetRequiredService<HttpContextFormDataProvider>()
+            httpContext
+                .RequestServices.GetRequiredService<HttpContextFormDataProvider>()
                 .SetFormData(handler, new FormCollectionReadOnlyDictionary(form), form.Files);
         }
 
-        if (httpContext.RequestServices.GetService<AntiforgeryStateProvider>() is EndpointAntiforgeryStateProvider antiforgery)
+        if (
+            httpContext.RequestServices.GetService<AntiforgeryStateProvider>()
+            is EndpointAntiforgeryStateProvider antiforgery
+        )
         {
             antiforgery.SetRequestContext(httpContext);
         }
 
         // It's important that this is initialized since a component might try to restore state during prerendering
         // (which will obviously not work, but should not fail)
-        var componentApplicationLifetime = httpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
-        await componentApplicationLifetime.RestoreStateAsync(new PrerenderComponentApplicationStore());
+        var componentApplicationLifetime =
+            httpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        await componentApplicationLifetime.RestoreStateAsync(
+            new PrerenderComponentApplicationStore()
+        );
 
         if (componentType != null)
         {
             // Saving RouteData to avoid routing twice in Router component
-            var routingStateProvider = httpContext.RequestServices.GetRequiredService<EndpointRoutingStateProvider>();
-            routingStateProvider.RouteData = new RouteData(componentType, httpContext.GetRouteData().Values);
+            var routingStateProvider =
+                httpContext.RequestServices.GetRequiredService<EndpointRoutingStateProvider>();
+            routingStateProvider.RouteData = new RouteData(
+                componentType,
+                httpContext.GetRouteData().Values
+            );
             if (httpContext.GetEndpoint() is RouteEndpoint endpoint)
             {
                 routingStateProvider.RouteData.Template = endpoint.RoutePattern.RawText;
@@ -112,8 +137,11 @@ internal partial class EndpointHtmlRenderer : StaticHtmlRenderer, IComponentPrer
         }
     }
 
-    protected override ComponentState CreateComponentState(int componentId, IComponent component, ComponentState? parentComponentState)
-        => new EndpointComponentState(this, componentId, component, parentComponentState);
+    protected override ComponentState CreateComponentState(
+        int componentId,
+        IComponent component,
+        ComponentState? parentComponentState
+    ) => new EndpointComponentState(this, componentId, component, parentComponentState);
 
     protected override void AddPendingTask(ComponentState? componentState, Task task)
     {
@@ -169,7 +197,8 @@ internal partial class EndpointHtmlRenderer : StaticHtmlRenderer, IComponentPrer
             request.Host,
             request.PathBase,
             request.Path,
-            request.QueryString);
+            request.QueryString
+        );
     }
 
     private static string GetContextBaseUri(HttpRequest request)
@@ -181,7 +210,8 @@ internal partial class EndpointHtmlRenderer : StaticHtmlRenderer, IComponentPrer
         return result.EndsWith('/') ? result : result += "/";
     }
 
-    private sealed class FormCollectionReadOnlyDictionary : IReadOnlyDictionary<string, StringValues>
+    private sealed class FormCollectionReadOnlyDictionary
+        : IReadOnlyDictionary<string, StringValues>
     {
         private readonly IFormCollection _form;
         private List<StringValues>? _values;

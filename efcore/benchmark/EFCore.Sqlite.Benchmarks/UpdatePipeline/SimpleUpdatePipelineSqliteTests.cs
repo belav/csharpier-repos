@@ -11,25 +11,25 @@ public class SimpleUpdatePipelineSqliteTests : SimpleUpdatePipelineTests
 {
     public class Insert : InsertBase
     {
-        public override OrdersFixtureBase CreateFixture()
-            => new OrdersSqliteFixture("Perf_UpdatePipeline_Simple");
+        public override OrdersFixtureBase CreateFixture() =>
+            new OrdersSqliteFixture("Perf_UpdatePipeline_Simple");
     }
 
     public class Update : UpdateBase
     {
-        public override OrdersFixtureBase CreateFixture()
-            => new OrdersSqliteFixture("Perf_UpdatePipeline_Simple");
+        public override OrdersFixtureBase CreateFixture() =>
+            new OrdersSqliteFixture("Perf_UpdatePipeline_Simple");
     }
 
     public class Delete : DeleteBase
     {
-        public override OrdersFixtureBase CreateFixture()
-            => new OrdersSqliteFixture("Perf_UpdatePipeline_Simple");
+        public override OrdersFixtureBase CreateFixture() =>
+            new OrdersSqliteFixture("Perf_UpdatePipeline_Simple");
     }
 
     public class Mixed : MixedBase
     {
-        public override OrdersFixtureBase CreateFixture()
-            => new OrdersSqliteFixture("Perf_UpdatePipeline_Simple");
+        public override OrdersFixtureBase CreateFixture() =>
+            new OrdersSqliteFixture("Perf_UpdatePipeline_Simple");
     }
 }

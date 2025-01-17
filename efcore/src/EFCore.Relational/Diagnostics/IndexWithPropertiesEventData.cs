@@ -33,7 +33,8 @@ public class IndexWithPropertiesEventData : EventData
         string property1Name,
         List<(string Table, string? Schema)> tablesMappedToProperty1,
         string property2Name,
-        List<(string Table, string? Schema)> tablesMappedToProperty2)
+        List<(string Table, string? Schema)> tablesMappedToProperty2
+    )
         : base(eventDefinition, messageGenerator)
     {
         EntityType = entityType;

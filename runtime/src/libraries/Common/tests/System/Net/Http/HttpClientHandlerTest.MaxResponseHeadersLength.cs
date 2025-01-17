@@ -3,31 +3,32 @@
 
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Test.Common;
-#if !WINHTTPHANDLER_TEST
-using System.Net.Quic;
-#endif
 using System.Net.Sockets;
+using System.Net.Test.Common;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
 using Xunit.Abstractions;
+#if !WINHTTPHANDLER_TEST
+using System.Net.Quic;
+#endif
 
 namespace System.Net.Http.Functional.Tests
 {
     using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif
 
-    public abstract class HttpClientHandler_MaxResponseHeadersLength_Test : HttpClientHandlerTestBase
+    public abstract class HttpClientHandler_MaxResponseHeadersLength_Test
+        : HttpClientHandlerTestBase
     {
         private const int Http3ExcessiveLoad = 0x107;
 
-        public HttpClientHandler_MaxResponseHeadersLength_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_MaxResponseHeadersLength_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [InlineData(0)]
@@ -36,7 +37,10 @@ namespace System.Net.Http.Functional.Tests
         {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => handler.MaxResponseHeadersLength = invalidValue);
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "value",
+                    () => handler.MaxResponseHeadersLength = invalidValue
+                );
             }
         }
 
@@ -56,16 +60,20 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public async Task SetAfterUse_Throws()
         {
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpClientHandler handler = CreateHttpClientHandler();
-                using HttpClient client = CreateHttpClient(handler);
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpClientHandler handler = CreateHttpClientHandler();
+                    using HttpClient client = CreateHttpClient(handler);
 
-                handler.MaxResponseHeadersLength = 1;
-                (await client.GetStreamAsync(uri)).Dispose();
-                Assert.Throws<InvalidOperationException>(() => handler.MaxResponseHeadersLength = 1);
-            },
-            server => server.AcceptConnectionSendResponseAndCloseAsync());
+                    handler.MaxResponseHeadersLength = 1;
+                    (await client.GetStreamAsync(uri)).Dispose();
+                    Assert.Throws<InvalidOperationException>(
+                        () => handler.MaxResponseHeadersLength = 1
+                    );
+                },
+                server => server.AcceptConnectionSendResponseAndCloseAsync()
+            );
         }
 
         [Theory]
@@ -76,28 +84,49 @@ namespace System.Net.Http.Functional.Tests
             using HttpClientHandler handler = CreateHttpClientHandler();
             handler.MaxResponseHeadersLength = maxResponseHeadersLength;
 
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpClient client = CreateHttpClient(handler);
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpClient client = CreateHttpClient(handler);
 
-                Exception e = await Assert.ThrowsAsync<HttpRequestException>(() => client.GetAsync(uri));
-                if (!IsWinHttpHandler)
+                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                        () => client.GetAsync(uri)
+                    );
+                    if (!IsWinHttpHandler)
+                    {
+                        Assert.Contains(
+                            (handler.MaxResponseHeadersLength * 1024).ToString(),
+                            e.ToString()
+                        );
+                    }
+                },
+                async server =>
                 {
-                    Assert.Contains((handler.MaxResponseHeadersLength * 1024).ToString(), e.ToString());
-                }
-            },
-            async server =>
-            {
-                try
-                {
-                    await server.HandleRequestAsync(headers: new[] { new HttpHeaderData("Foo", new string('a', handler.MaxResponseHeadersLength * 1024)) });
-                }
-                // Client can respond by closing/aborting the underlying stream while we are still sending the headers, ignore these exceptions
-                catch (IOException ex) when (ex.InnerException is SocketException se && se.SocketErrorCode == SocketError.Shutdown) { }
+                    try
+                    {
+                        await server.HandleRequestAsync(
+                            headers: new[]
+                            {
+                                new HttpHeaderData(
+                                    "Foo",
+                                    new string('a', handler.MaxResponseHeadersLength * 1024)
+                                ),
+                            }
+                        );
+                    }
+                    // Client can respond by closing/aborting the underlying stream while we are still sending the headers, ignore these exceptions
+                    catch (IOException ex)
+                        when (ex.InnerException is SocketException se
+                            && se.SocketErrorCode == SocketError.Shutdown
+                        ) { }
 #if !WINHTTPHANDLER_TEST
-                catch (QuicException ex) when (ex.QuicError == QuicError.StreamAborted && ex.ApplicationErrorCode == Http3ExcessiveLoad) {}
+                    catch (QuicException ex)
+                        when (ex.QuicError == QuicError.StreamAborted
+                            && ex.ApplicationErrorCode == Http3ExcessiveLoad
+                        ) { }
 #endif
-            });
+                }
+            );
         }
 
         [Theory]
@@ -106,50 +135,66 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(1, 100)]
         [InlineData(1, 1024)]
         [InlineData(int.MaxValue / 800, 100 * 1024)] // Capped at int.MaxValue
-        public async Task ThresholdExceeded_ThrowsException(int? maxResponseHeadersLength, int headersLengthEstimate)
+        public async Task ThresholdExceeded_ThrowsException(
+            int? maxResponseHeadersLength,
+            int headersLengthEstimate
+        )
         {
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpClientHandler handler = CreateHttpClientHandler();
-
-                if (maxResponseHeadersLength.HasValue)
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    handler.MaxResponseHeadersLength = maxResponseHeadersLength.Value;
-                }
+                    using HttpClientHandler handler = CreateHttpClientHandler();
 
-                using HttpClient client = CreateHttpClient(handler);
-
-                if (headersLengthEstimate < handler.MaxResponseHeadersLength * 1024L)
-                {
-                    await client.GetAsync(uri);
-                }
-                else
-                {
-                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(() => client.GetAsync(uri));
-                    if (!IsWinHttpHandler)
+                    if (maxResponseHeadersLength.HasValue)
                     {
-                        Assert.Contains((handler.MaxResponseHeadersLength * 1024).ToString(), e.ToString());
+                        handler.MaxResponseHeadersLength = maxResponseHeadersLength.Value;
                     }
-                }
-            },
-            async server =>
-            {
-                var headers = new List<HttpHeaderData>();
-                for (int i = 0; i <= headersLengthEstimate / 500; i++)
-                {
-                    headers.Add(new HttpHeaderData($"Custom-{i}", new string('a', 480)));
-                }
 
-                try
+                    using HttpClient client = CreateHttpClient(handler);
+
+                    if (headersLengthEstimate < handler.MaxResponseHeadersLength * 1024L)
+                    {
+                        await client.GetAsync(uri);
+                    }
+                    else
+                    {
+                        Exception e = await Assert.ThrowsAsync<HttpRequestException>(
+                            () => client.GetAsync(uri)
+                        );
+                        if (!IsWinHttpHandler)
+                        {
+                            Assert.Contains(
+                                (handler.MaxResponseHeadersLength * 1024).ToString(),
+                                e.ToString()
+                            );
+                        }
+                    }
+                },
+                async server =>
                 {
-                    await server.HandleRequestAsync(headers: headers);
-                }
-                // Client can respond by closing/aborting the underlying stream while we are still sending the headers, ignore these exceptions
-                catch (IOException ex) when (ex.InnerException is SocketException se && se.SocketErrorCode == SocketError.Shutdown) { }
+                    var headers = new List<HttpHeaderData>();
+                    for (int i = 0; i <= headersLengthEstimate / 500; i++)
+                    {
+                        headers.Add(new HttpHeaderData($"Custom-{i}", new string('a', 480)));
+                    }
+
+                    try
+                    {
+                        await server.HandleRequestAsync(headers: headers);
+                    }
+                    // Client can respond by closing/aborting the underlying stream while we are still sending the headers, ignore these exceptions
+                    catch (IOException ex)
+                        when (ex.InnerException is SocketException se
+                            && se.SocketErrorCode == SocketError.Shutdown
+                        ) { }
 #if !WINHTTPHANDLER_TEST
-                catch (QuicException ex) when (ex.QuicError == QuicError.StreamAborted && ex.ApplicationErrorCode == Http3ExcessiveLoad) {}
+                    catch (QuicException ex)
+                        when (ex.QuicError == QuicError.StreamAborted
+                            && ex.ApplicationErrorCode == Http3ExcessiveLoad
+                        ) { }
 #endif
-            });
+                }
+            );
         }
     }
 }

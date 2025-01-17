@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
-public interface INonexistentService
-{
-}
+public interface INonexistentService { }

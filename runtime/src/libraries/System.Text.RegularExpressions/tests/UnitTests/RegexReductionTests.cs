@@ -243,7 +243,10 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("[\u0000-AF-\uFFFF]", "[^B-E]")]
         // Large loop patterns
         [InlineData("a*a*a*a*a*a*a*b*b*?a+a*", "a*b*b*?a+")]
-        [InlineData("a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "a{0,30}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")]
+        [InlineData(
+            "a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?a?aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "a{0,30}aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        )]
         // Group elimination
         [InlineData("(?:(?:(?:(?:(?:(?:a*))))))", "a*")]
         // Nested loops
@@ -277,8 +280,14 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("this|this", "this")]
         [InlineData("this|this|this", "this")]
         [InlineData("hello there|hello again|hello|hello|hello|hello", "hello(?> there| again|)")]
-        [InlineData("hello there|hello again|hello|hello|hello|hello|hello world", "hello(?> there| again|)")]
-        [InlineData("hello there|hello again|hello|hello|hello|hello|hello world|hello", "hello(?> there| again|)")]
+        [InlineData(
+            "hello there|hello again|hello|hello|hello|hello|hello world",
+            "hello(?> there| again|)"
+        )]
+        [InlineData(
+            "hello there|hello again|hello|hello|hello|hello|hello world|hello",
+            "hello(?> there| again|)"
+        )]
         [InlineData("ab|cd|||ef", "ab|cd|")]
         [InlineData("|ab|cd|e||f", "")]
         [InlineData("ab|cd|||||||||||ef", "ab|cd|")]
@@ -287,7 +296,10 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("abcd(?:(?i:e)|(?i:f))", "abcd(?i:[ef])")]
         [InlineData("(?i:abcde)|(?i:abcdf)", "(?i:abcd[ef])")]
         [InlineData("xyz(?:(?i:abcde)|(?i:abcdf))", "xyz(?i:abcd[ef])")]
-        [InlineData("bonjour|hej|ciao|shalom|zdravo|pozdrav|hallo|hola|hello|hey|witam|tere|bonjou|salam|helo|sawubona", "(?>bonjou(?>r|)|h(?>e(?>j|(?>l(?>lo|o)|y))|allo|ola)|ciao|s(?>halom|a(?>lam|wubona))|zdravo|pozdrav|witam|tere)")]
+        [InlineData(
+            "bonjour|hej|ciao|shalom|zdravo|pozdrav|hallo|hola|hello|hey|witam|tere|bonjou|salam|helo|sawubona",
+            "(?>bonjou(?>r|)|h(?>e(?>j|(?>l(?>lo|o)|y))|allo|ola)|ciao|s(?>halom|a(?>lam|wubona))|zdravo|pozdrav|witam|tere)"
+        )]
         [InlineData("\\w\\d123|\\w\\dabc", "\\w\\d(?:123|abc)")]
         [InlineData("(a)(?(1)b)", "(a)(?(1)b|)")]
         [InlineData("(abc)(?(1)def)", "(abc)(?(1)def|)")]
@@ -366,8 +378,12 @@ namespace System.Text.RegularExpressions.Tests
         {
             // NOTE: RegexNode.ToString is only compiled into debug builds, so DEBUG is currently set on the unit tests project.
 
-            string actualStr = RegexParser.Parse(actual, RegexOptions.None, CultureInfo.InvariantCulture).Root.ToString();
-            string expectedStr = RegexParser.Parse(expected, RegexOptions.None, CultureInfo.InvariantCulture).Root.ToString();
+            string actualStr = RegexParser
+                .Parse(actual, RegexOptions.None, CultureInfo.InvariantCulture)
+                .Root.ToString();
+            string expectedStr = RegexParser
+                .Parse(expected, RegexOptions.None, CultureInfo.InvariantCulture)
+                .Root.ToString();
             if (actualStr != expectedStr)
             {
                 throw Xunit.Sdk.EqualException.ForMismatchedValues(expectedStr, actualStr);
@@ -499,8 +515,12 @@ namespace System.Text.RegularExpressions.Tests
         {
             // NOTE: RegexNode.ToString is only compiled into debug builds, so DEBUG is currently set on the unit tests project.
 
-            string actualStr = RegexParser.Parse(actual, RegexOptions.None, CultureInfo.InvariantCulture).Root.ToString();
-            string expectedStr = RegexParser.Parse(expected, RegexOptions.None, CultureInfo.InvariantCulture).Root.ToString();
+            string actualStr = RegexParser
+                .Parse(actual, RegexOptions.None, CultureInfo.InvariantCulture)
+                .Root.ToString();
+            string expectedStr = RegexParser
+                .Parse(expected, RegexOptions.None, CultureInfo.InvariantCulture)
+                .Root.ToString();
             if (actualStr == expectedStr)
             {
                 throw Xunit.Sdk.NotEqualException.ForEqualValues(expectedStr, actualStr);
@@ -545,17 +565,37 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(@"((a{1,2}){4}){3,7}", 0, 12, 56)]
         [InlineData(@"((a{1,2}){4}?){3,7}", 0, 12, 56)]
         [InlineData(@"\b\w{4}\b", 0, 4, 4)]
-        [InlineData(@"\b\w{4}\b", (int)RegexOptions.ECMAScript,  4, 4)]
+        [InlineData(@"\b\w{4}\b", (int)RegexOptions.ECMAScript, 4, 4)]
         [InlineData(@"abcd(?=efgh)efgh", 0, 8, 8)]
         [InlineData(@"abcd(?<=cd)efgh", 0, 8, 8)]
         [InlineData(@"abcd(?!ab)efgh", 0, 8, 8)]
         [InlineData(@"abcd(?<!ef)efgh", 0, 8, 8)]
         [InlineData(@"(a{1073741824}){2}", 0, 2147483646, null)] // min length max is bound to int.MaxValue - 1 for convenience in other places where we need to be able to add 1 without risk of overflow
         [InlineData(@"a{1073741824}b{1073741824}", 0, 2147483646, null)]
-        [InlineData(@"((((((((((((((((((((((((((((((ab|cd+)|ef+)|gh+)|ij+)|kl+)|mn+)|op+)|qr+)|st+)|uv+)|wx+)|yz+)|01+)|23+)|45+)|67+)|89+)|AB+)|CD+)|EF+)|GH+)|IJ+)|KL+)|MN+)|OP+)|QR+)|ST+)|UV+)|WX+)|YZ)", 0, 2, null)]
-        [InlineData(@"(YZ+|(WX+|(UV+|(ST+|(QR+|(OP+|(MN+|(KL+|(IJ+|(GH+|(EF+|(CD+|(AB+|(89+|(67+|(45+|(23+|(01+|(yz+|(wx+|(uv+|(st+|(qr+|(op+|(mn+|(kl+|(ij+|(gh+|(ef+|(de+|(a|bc+)))))))))))))))))))))))))))))))", 0, 1, null)]
-        [InlineData(@"a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(ab|cd+)|ef+)|gh+)|ij+)|kl+)|mn+)|op+)|qr+)|st+)|uv+)|wx+)|yz+)|01+)|23+)|45+)|67+)|89+)|AB+)|CD+)|EF+)|GH+)|IJ+)|KL+)|MN+)|OP+)|QR+)|ST+)|UV+)|WX+)|YZ+)", 0, 3, null)]
-        [InlineData(@"(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((a)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))", 0, 1, 1)]
+        [InlineData(
+            @"((((((((((((((((((((((((((((((ab|cd+)|ef+)|gh+)|ij+)|kl+)|mn+)|op+)|qr+)|st+)|uv+)|wx+)|yz+)|01+)|23+)|45+)|67+)|89+)|AB+)|CD+)|EF+)|GH+)|IJ+)|KL+)|MN+)|OP+)|QR+)|ST+)|UV+)|WX+)|YZ)",
+            0,
+            2,
+            null
+        )]
+        [InlineData(
+            @"(YZ+|(WX+|(UV+|(ST+|(QR+|(OP+|(MN+|(KL+|(IJ+|(GH+|(EF+|(CD+|(AB+|(89+|(67+|(45+|(23+|(01+|(yz+|(wx+|(uv+|(st+|(qr+|(op+|(mn+|(kl+|(ij+|(gh+|(ef+|(de+|(a|bc+)))))))))))))))))))))))))))))))",
+            0,
+            1,
+            null
+        )]
+        [InlineData(
+            @"a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(a(ab|cd+)|ef+)|gh+)|ij+)|kl+)|mn+)|op+)|qr+)|st+)|uv+)|wx+)|yz+)|01+)|23+)|45+)|67+)|89+)|AB+)|CD+)|EF+)|GH+)|IJ+)|KL+)|MN+)|OP+)|QR+)|ST+)|UV+)|WX+)|YZ+)",
+            0,
+            3,
+            null
+        )]
+        [InlineData(
+            @"(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((a)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))",
+            0,
+            1,
+            1
+        )]
         [InlineData(@"(?(\d)\d{3}|\d)", 0, 1, 3)]
         [InlineData(@"(?(\d{7})\d{3}|\d{2})", 0, 2, 3)]
         [InlineData(@"(?(\d{7})\d{2}|\d{3})", 0, 2, 3)]
@@ -576,17 +616,32 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(@"^\A\Gabc", (int)RegexOptions.Multiline, 3, null)]
         [InlineData(@"abc            def", (int)RegexOptions.IgnorePatternWhitespace, 6, 6)]
         [InlineData(@"abcdef", (int)RegexOptions.RightToLeft, 6, null)]
-        public void MinMaxLengthIsCorrect(string pattern, int options, int expectedMin, int? expectedMax)
+        public void MinMaxLengthIsCorrect(
+            string pattern,
+            int options,
+            int expectedMin,
+            int? expectedMax
+        )
         {
-            RegexTree tree = RegexParser.Parse(pattern, (RegexOptions)options, CultureInfo.InvariantCulture);
+            RegexTree tree = RegexParser.Parse(
+                pattern,
+                (RegexOptions)options,
+                CultureInfo.InvariantCulture
+            );
 
             Assert.Equal(expectedMin, tree.FindOptimizations.MinRequiredLength);
 
-            if (!pattern.EndsWith("$", StringComparison.Ordinal) &&
-                !pattern.EndsWith(@"\Z", StringComparison.OrdinalIgnoreCase))
+            if (
+                !pattern.EndsWith("$", StringComparison.Ordinal)
+                && !pattern.EndsWith(@"\Z", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 // MaxPossibleLength is currently only computed/stored if there's a trailing End{Z} anchor as the max length is otherwise unused
-                tree = RegexParser.Parse($"(?:{pattern})$", (RegexOptions)options, CultureInfo.InvariantCulture);
+                tree = RegexParser.Parse(
+                    $"(?:{pattern})$",
+                    (RegexOptions)options,
+                    CultureInfo.InvariantCulture
+                );
             }
 
             Assert.Equal(expectedMax, tree.FindOptimizations.MaxPossibleLength);
@@ -596,18 +651,30 @@ namespace System.Text.RegularExpressions.Tests
         public void MinMaxLengthIsCorrect_HugeDepth()
         {
             const int Depth = 10_000;
-            RegexTree tree = RegexParser.Parse($"{new string('(', Depth)}a{new string(')', Depth)}$", 0, CultureInfo.InvariantCulture); // too deep for analysis on some platform default stack sizes
+            RegexTree tree = RegexParser.Parse(
+                $"{new string('(', Depth)}a{new string(')', Depth)}$",
+                0,
+                CultureInfo.InvariantCulture
+            ); // too deep for analysis on some platform default stack sizes
 
             int minRequiredLength = tree.FindOptimizations.MinRequiredLength;
 
             Assert.True(
-                minRequiredLength == 1 /* successfully analyzed */ || minRequiredLength == 0 /* ran out of stack space to complete analysis */,
-                $"Expected 1 or 0, got {minRequiredLength}");
+                minRequiredLength == 1 /* successfully analyzed */
+                    || minRequiredLength
+                        == 0 /* ran out of stack space to complete analysis */
+                ,
+                $"Expected 1 or 0, got {minRequiredLength}"
+            );
 
             int? maxPossibleLength = tree.FindOptimizations.MaxPossibleLength;
             Assert.True(
-                maxPossibleLength == 1 /* successfully analyzed */ || maxPossibleLength is null /* ran out of stack space to complete analysis */,
-                $"Expected 1 or null, got {maxPossibleLength}");
+                maxPossibleLength == 1 /* successfully analyzed */
+                    || maxPossibleLength
+                        is null /* ran out of stack space to complete analysis */
+                ,
+                $"Expected 1 or null, got {maxPossibleLength}"
+            );
         }
 
         [Theory]
@@ -618,12 +685,20 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("(?mi)abc", (int)RegexOptions.IgnoreCase | (int)RegexOptions.Multiline)]
         [InlineData("(?im)abc", (int)RegexOptions.IgnoreCase | (int)RegexOptions.Multiline)]
         [InlineData("(?i)ab(?m)c", (int)RegexOptions.IgnoreCase | (int)RegexOptions.Multiline)]
-        [InlineData("(?xmi)abc", (int)RegexOptions.IgnoreCase | (int)RegexOptions.IgnorePatternWhitespace | (int)RegexOptions.Multiline)]
+        [InlineData(
+            "(?xmi)abc",
+            (int)RegexOptions.IgnoreCase
+                | (int)RegexOptions.IgnorePatternWhitespace
+                | (int)RegexOptions.Multiline
+        )]
         [InlineData("(?s)abc", (int)RegexOptions.Singleline)]
         [InlineData("(?-simx)abc", (int)RegexOptions.None)]
         public void FoundOptionsInPatternIsCorrect(string pattern, int expectedOptions)
         {
-            RegexOptions foundOptions = RegexParser.ParseOptionsInPattern(pattern, RegexOptions.None);
+            RegexOptions foundOptions = RegexParser.ParseOptionsInPattern(
+                pattern,
+                RegexOptions.None
+            );
             Assert.Equal((RegexOptions)expectedOptions, foundOptions);
         }
     }

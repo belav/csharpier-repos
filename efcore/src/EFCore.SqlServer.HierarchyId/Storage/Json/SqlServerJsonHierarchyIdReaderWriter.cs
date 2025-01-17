@@ -16,15 +16,15 @@ public sealed class SqlServerJsonHierarchyIdReaderWriter : JsonValueReaderWriter
     /// </summary>
     public static SqlServerJsonHierarchyIdReaderWriter Instance { get; } = new();
 
-    private SqlServerJsonHierarchyIdReaderWriter()
-    {
-    }
+    private SqlServerJsonHierarchyIdReaderWriter() { }
 
     /// <inheritdoc />
-    public override HierarchyId FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => new(manager.CurrentReader.GetString()!);
+    public override HierarchyId FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => new(manager.CurrentReader.GetString()!);
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, HierarchyId value)
-        => writer.WriteStringValue(value.ToString());
+    public override void ToJsonTyped(Utf8JsonWriter writer, HierarchyId value) =>
+        writer.WriteStringValue(value.ToString());
 }

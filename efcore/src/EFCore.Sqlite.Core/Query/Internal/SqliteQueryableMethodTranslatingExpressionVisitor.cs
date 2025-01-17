@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQueryableMethodTranslatingExpressionVisitor
+public class SqliteQueryableMethodTranslatingExpressionVisitor
+    : RelationalQueryableMethodTranslatingExpressionVisitor
 {
     private readonly IRelationalTypeMappingSource _typeMappingSource;
     private readonly SqliteSqlExpressionFactory _sqlExpressionFactory;
@@ -30,13 +31,16 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     public SqliteQueryableMethodTranslatingExpressionVisitor(
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
         RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies,
-        QueryCompilationContext queryCompilationContext)
+        QueryCompilationContext queryCompilationContext
+    )
         : base(dependencies, relationalDependencies, queryCompilationContext)
     {
         _typeMappingSource = relationalDependencies.TypeMappingSource;
-        _sqlExpressionFactory = (SqliteSqlExpressionFactory)relationalDependencies.SqlExpressionFactory;
+        _sqlExpressionFactory = (SqliteSqlExpressionFactory)
+            relationalDependencies.SqlExpressionFactory;
 
-        _areJsonFunctionsSupported = new Version(new SqliteConnection().ServerVersion) >= new Version(3, 38);
+        _areJsonFunctionsSupported =
+            new Version(new SqliteConnection().ServerVersion) >= new Version(3, 38);
     }
 
     /// <summary>
@@ -46,7 +50,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqliteQueryableMethodTranslatingExpressionVisitor(
-        SqliteQueryableMethodTranslatingExpressionVisitor parentVisitor)
+        SqliteQueryableMethodTranslatingExpressionVisitor parentVisitor
+    )
         : base(parentVisitor)
     {
         _typeMappingSource = parentVisitor._typeMappingSource;
@@ -61,8 +66,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor()
-        => new SqliteQueryableMethodTranslatingExpressionVisitor(this);
+    protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor() =>
+        new SqliteQueryableMethodTranslatingExpressionVisitor(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -70,29 +75,44 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override ShapedQueryExpression? TranslateAny(ShapedQueryExpression source, LambdaExpression? predicate)
+    protected override ShapedQueryExpression? TranslateAny(
+        ShapedQueryExpression source,
+        LambdaExpression? predicate
+    )
     {
         // Simplify x.Array.Any() => json_array_length(x.Array) > 0 instead of WHERE EXISTS (SELECT 1 FROM json_each(x.Array))
-        if (predicate is null
-            && source.QueryExpression is SelectExpression
-            {
-                Tables: [TableValuedFunctionExpression { Name: "json_each", Schema: null, IsBuiltIn: true, Arguments: [var array] }],
-                GroupBy: [],
-                Having: null,
-                IsDistinct: false,
-                Limit: null,
-                Offset: null
-            })
+        if (
+            predicate is null
+            && source.QueryExpression
+                is SelectExpression
+                {
+                    Tables: [
+                        TableValuedFunctionExpression
+                        {
+                            Name: "json_each",
+                            Schema: null,
+                            IsBuiltIn: true,
+                            Arguments: [var array]
+                        },
+                    ],
+                    GroupBy: [],
+                    Having: null,
+                    IsDistinct: false,
+                    Limit: null,
+                    Offset: null
+                }
+        )
         {
-            var translation =
-                _sqlExpressionFactory.GreaterThan(
-                    _sqlExpressionFactory.Function(
-                        "json_array_length",
-                        new[] { array },
-                        nullable: true,
-                        argumentsPropagateNullability: new[] { true },
-                        typeof(int)),
-                    _sqlExpressionFactory.Constant(0));
+            var translation = _sqlExpressionFactory.GreaterThan(
+                _sqlExpressionFactory.Function(
+                    "json_array_length",
+                    new[] { array },
+                    nullable: true,
+                    argumentsPropagateNullability: new[] { true },
+                    typeof(int)
+                ),
+                _sqlExpressionFactory.Constant(0)
+            );
 
             return source.UpdateQueryExpression(_sqlExpressionFactory.Select(translation));
         }
@@ -109,7 +129,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     protected override ShapedQueryExpression? TranslateOrderBy(
         ShapedQueryExpression source,
         LambdaExpression keySelector,
-        bool ascending)
+        bool ascending
+    )
     {
         var translation = base.TranslateOrderBy(source, keySelector, ascending);
         if (translation == null)
@@ -119,13 +140,16 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
 
         var orderingExpression = ((SelectExpression)translation.QueryExpression).Orderings.Last();
         var orderingExpressionType = GetProviderType(orderingExpression.Expression);
-        if (orderingExpressionType == typeof(DateTimeOffset)
+        if (
+            orderingExpressionType == typeof(DateTimeOffset)
             || orderingExpressionType == typeof(decimal)
             || orderingExpressionType == typeof(TimeSpan)
-            || orderingExpressionType == typeof(ulong))
+            || orderingExpressionType == typeof(ulong)
+        )
         {
             throw new NotSupportedException(
-                SqliteStrings.OrderByNotSupported(orderingExpressionType.ShortDisplayName()));
+                SqliteStrings.OrderByNotSupported(orderingExpressionType.ShortDisplayName())
+            );
         }
 
         return translation;
@@ -140,7 +164,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     protected override ShapedQueryExpression? TranslateThenBy(
         ShapedQueryExpression source,
         LambdaExpression keySelector,
-        bool ascending)
+        bool ascending
+    )
     {
         var translation = base.TranslateThenBy(source, keySelector, ascending);
         if (translation == null)
@@ -150,13 +175,16 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
 
         var orderingExpression = ((SelectExpression)translation.QueryExpression).Orderings.Last();
         var orderingExpressionType = GetProviderType(orderingExpression.Expression);
-        if (orderingExpressionType == typeof(DateTimeOffset)
+        if (
+            orderingExpressionType == typeof(DateTimeOffset)
             || orderingExpressionType == typeof(decimal)
             || orderingExpressionType == typeof(TimeSpan)
-            || orderingExpressionType == typeof(ulong))
+            || orderingExpressionType == typeof(ulong)
+        )
         {
             throw new NotSupportedException(
-                SqliteStrings.OrderByNotSupported(orderingExpressionType.ShortDisplayName()));
+                SqliteStrings.OrderByNotSupported(orderingExpressionType.ShortDisplayName())
+            );
         }
 
         return translation;
@@ -168,26 +196,41 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override ShapedQueryExpression? TranslateCount(ShapedQueryExpression source, LambdaExpression? predicate)
+    protected override ShapedQueryExpression? TranslateCount(
+        ShapedQueryExpression source,
+        LambdaExpression? predicate
+    )
     {
         // Simplify x.Array.Count() => json_array_length(x.Array) instead of SELECT COUNT(*) FROM json_each(x.Array)
-        if (predicate is null
-            && source.QueryExpression is SelectExpression
-            {
-                Tables: [TableValuedFunctionExpression { Name: "json_each", Schema: null, IsBuiltIn: true, Arguments: [var array] }],
-                GroupBy: [],
-                Having: null,
-                IsDistinct: false,
-                Limit: null,
-                Offset: null
-            })
+        if (
+            predicate is null
+            && source.QueryExpression
+                is SelectExpression
+                {
+                    Tables: [
+                        TableValuedFunctionExpression
+                        {
+                            Name: "json_each",
+                            Schema: null,
+                            IsBuiltIn: true,
+                            Arguments: [var array]
+                        },
+                    ],
+                    GroupBy: [],
+                    Having: null,
+                    IsDistinct: false,
+                    Limit: null,
+                    Offset: null
+                }
+        )
         {
             var translation = _sqlExpressionFactory.Function(
                 "json_array_length",
                 new[] { array },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true },
-                typeof(int));
+                typeof(int)
+            );
 
             return source.UpdateQueryExpression(_sqlExpressionFactory.Select(translation));
         }
@@ -204,18 +247,24 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     protected override ShapedQueryExpression? TranslatePrimitiveCollection(
         SqlExpression sqlExpression,
         IProperty? property,
-        string tableAlias)
+        string tableAlias
+    )
     {
         // Support for JSON functions (e.g. json_each) was added in Sqlite 3.38.0 (2022-02-22, see https://www.sqlite.org/json1.html).
         // This determines whether we have json_each, which is needed to query into JSON columns.
         if (!_areJsonFunctionsSupported)
         {
-            AddTranslationErrorDetails(SqliteStrings.QueryingIntoJsonCollectionsNotSupported(new SqliteConnection().ServerVersion));
+            AddTranslationErrorDetails(
+                SqliteStrings.QueryingIntoJsonCollectionsNotSupported(
+                    new SqliteConnection().ServerVersion
+                )
+            );
 
             return null;
         }
 
-        var elementTypeMapping = (RelationalTypeMapping?)sqlExpression.TypeMapping?.ElementTypeMapping;
+        var elementTypeMapping = (RelationalTypeMapping?)
+            sqlExpression.TypeMapping?.ElementTypeMapping;
         var elementClrType = sqlExpression.Type.GetSequenceType();
         var jsonEachExpression = new JsonEachExpression(tableAlias, sqlExpression);
 
@@ -234,7 +283,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
             isElementNullable,
             identifierColumnName: "key",
             identifierColumnType: typeof(int),
-            identifierColumnTypeMapping: _typeMappingSource.FindMapping(typeof(int)));
+            identifierColumnTypeMapping: _typeMappingSource.FindMapping(typeof(int))
+        );
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
         // If we have a collection column, we know the type mapping at this point (as opposed to parameters, whose type mapping will get
@@ -255,17 +305,24 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
                     "key",
                     typeof(int),
                     typeMapping: _typeMappingSource.FindMapping(typeof(int)),
-                    columnNullable: false),
-                ascending: true));
+                    columnNullable: false
+                ),
+                ascending: true
+            )
+        );
 
         Expression shaperExpression = new ProjectionBindingExpression(
-            selectExpression, new ProjectionMember(), elementClrType.MakeNullable());
+            selectExpression,
+            new ProjectionMember(),
+            elementClrType.MakeNullable()
+        );
 
         if (elementClrType != shaperExpression.Type)
         {
             Check.DebugAssert(
                 elementClrType.MakeNullable() == shaperExpression.Type,
-                "expression.Type must be nullable of targetType");
+                "expression.Type must be nullable of targetType"
+            );
 
             shaperExpression = Expression.Convert(shaperExpression, elementClrType);
         }
@@ -279,7 +336,9 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override ShapedQueryExpression TransformJsonQueryToTable(JsonQueryExpression jsonQueryExpression)
+    protected override ShapedQueryExpression TransformJsonQueryToTable(
+        JsonQueryExpression jsonQueryExpression
+    )
     {
         var entityType = jsonQueryExpression.EntityType;
         var textTypeMapping = _typeMappingSource.FindMapping(typeof(string));
@@ -287,8 +346,13 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
         // TODO: Refactor this out
         // Calculate the table alias for the json_each expression based on the last named path segment
         // (or the JSON column name if there are none)
-        var lastNamedPathSegment = jsonQueryExpression.Path.LastOrDefault(ps => ps.PropertyName is not null);
-        var tableAlias = char.ToLowerInvariant((lastNamedPathSegment.PropertyName ?? jsonQueryExpression.JsonColumn.Name)[0]).ToString();
+        var lastNamedPathSegment = jsonQueryExpression.Path.LastOrDefault(ps =>
+            ps.PropertyName is not null
+        );
+        var tableAlias = char.ToLowerInvariant(
+                (lastNamedPathSegment.PropertyName ?? jsonQueryExpression.JsonColumn.Name)[0]
+            )
+            .ToString();
 
         // Handling a non-primitive JSON array is complicated on SQLite; unlike SQL Server OPENJSON and PostgreSQL jsonb_to_recordset,
         // SQLite's json_each can only project elements of the array, and not properties within those elements. For example:
@@ -308,7 +372,11 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
         // with a member for each JSON property that needs to be projected. We then wrap it with a SelectExpression the projects a proper
         // EntityProjectionExpression.
 
-        var jsonEachExpression = new JsonEachExpression(tableAlias, jsonQueryExpression.JsonColumn, jsonQueryExpression.Path);
+        var jsonEachExpression = new JsonEachExpression(
+            tableAlias,
+            jsonQueryExpression.JsonColumn,
+            jsonQueryExpression.Path
+        );
 
 #pragma warning disable EF1001 // Internal EF Core API usage.
         var selectExpression = new SelectExpression(
@@ -316,7 +384,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
             jsonEachExpression,
             "key",
             typeof(int),
-            _typeMappingSource.FindMapping(typeof(int))!);
+            _typeMappingSource.FindMapping(typeof(int))!
+        );
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
         selectExpression.AppendOrdering(
@@ -326,16 +395,26 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
                     "key",
                     typeof(int),
                     typeMapping: _typeMappingSource.FindMapping(typeof(int)),
-                    columnNullable: false),
-                ascending: true));
+                    columnNullable: false
+                ),
+                ascending: true
+            )
+        );
 
         var propertyJsonScalarExpression = new Dictionary<ProjectionMember, Expression>();
 
         var jsonColumn = selectExpression.CreateColumnExpression(
-            jsonEachExpression, "value", typeof(string), _typeMappingSource.FindMapping(typeof(string))); // TODO: nullable?
+            jsonEachExpression,
+            "value",
+            typeof(string),
+            _typeMappingSource.FindMapping(typeof(string))
+        ); // TODO: nullable?
 
         var containerColumnName = entityType.GetContainerColumnName();
-        Check.DebugAssert(containerColumnName is not null, "JsonQueryExpression to entity type without a container column name");
+        Check.DebugAssert(
+            containerColumnName is not null,
+            "JsonQueryExpression to entity type without a container column name"
+        );
 
         // First step: build a SelectExpression that will execute json_each and project all properties and navigations out, e.g.
         // (SELECT value ->> 'a' AS a, value ->> 'b' AS b FROM json_each(c."JsonColumn", '$.Something.SomeCollection')
@@ -348,34 +427,46 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
                 // HACK: currently the only way to project multiple values from a SelectExpression is to simulate a Select out to an anonymous
                 // type; this requires the MethodInfos of the anonymous type properties, from which the projection alias gets taken.
                 // So we create fake members to hold the JSON property name for the alias.
-                var projectionMember = new ProjectionMember().Append(new FakeMemberInfo(jsonPropertyName));
+                var projectionMember = new ProjectionMember().Append(
+                    new FakeMemberInfo(jsonPropertyName)
+                );
 
                 propertyJsonScalarExpression[projectionMember] = new JsonScalarExpression(
                     jsonColumn,
                     new[] { new PathSegment(property.GetJsonPropertyName()!) },
                     property.ClrType.UnwrapNullableType(),
                     property.GetRelationalTypeMapping(),
-                    property.IsNullable);
+                    property.IsNullable
+                );
             }
         }
 
-        foreach (var navigation in GetAllNavigationsInHierarchy(jsonQueryExpression.EntityType)
-                     .Where(
-                         n => n.ForeignKey.IsOwnership
-                             && n.TargetEntityType.IsMappedToJson()
-                             && n.ForeignKey.PrincipalToDependent == n))
+        foreach (
+            var navigation in GetAllNavigationsInHierarchy(jsonQueryExpression.EntityType)
+                .Where(n =>
+                    n.ForeignKey.IsOwnership
+                    && n.TargetEntityType.IsMappedToJson()
+                    && n.ForeignKey.PrincipalToDependent == n
+                )
+        )
         {
             var jsonNavigationName = navigation.TargetEntityType.GetJsonPropertyName();
-            Check.DebugAssert(jsonNavigationName is not null, "Invalid navigation found on JSON-mapped entity");
+            Check.DebugAssert(
+                jsonNavigationName is not null,
+                "Invalid navigation found on JSON-mapped entity"
+            );
 
-            var projectionMember = new ProjectionMember().Append(new FakeMemberInfo(jsonNavigationName));
+            var projectionMember = new ProjectionMember().Append(
+                new FakeMemberInfo(jsonNavigationName)
+            );
 
             propertyJsonScalarExpression[projectionMember] = new JsonScalarExpression(
                 jsonColumn,
                 new[] { new PathSegment(jsonNavigationName) },
                 typeof(string),
                 textTypeMapping,
-                !navigation.ForeignKey.IsRequiredDependent);
+                !navigation.ForeignKey.IsRequiredDependent
+            );
         }
 
         selectExpression.ReplaceProjection(propertyJsonScalarExpression);
@@ -394,7 +485,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
             subquery,
             "key",
             typeof(int),
-            _typeMappingSource.FindMapping(typeof(int))!);
+            _typeMappingSource.FindMapping(typeof(int))!
+        );
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
         newOuterSelectExpression.AppendOrdering(
@@ -404,8 +496,11 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
                     "key",
                     typeof(int),
                     typeMapping: _typeMappingSource.FindMapping(typeof(int)),
-                    columnNullable: false),
-                ascending: true));
+                    columnNullable: false
+                ),
+                ascending: true
+            )
+        );
 
         return new ShapedQueryExpression(
             newOuterSelectExpression,
@@ -414,16 +509,23 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
                 new ProjectionBindingExpression(
                     newOuterSelectExpression,
                     new ProjectionMember(),
-                    typeof(ValueBuffer)),
-                false));
+                    typeof(ValueBuffer)
+                ),
+                false
+            )
+        );
 
         // TODO: Move these to IEntityType?
-        static IEnumerable<IProperty> GetAllPropertiesInHierarchy(IEntityType entityType)
-            => entityType.GetAllBaseTypes().Concat(entityType.GetDerivedTypesInclusive())
+        static IEnumerable<IProperty> GetAllPropertiesInHierarchy(IEntityType entityType) =>
+            entityType
+                .GetAllBaseTypes()
+                .Concat(entityType.GetDerivedTypesInclusive())
                 .SelectMany(t => t.GetDeclaredProperties());
 
-        static IEnumerable<INavigation> GetAllNavigationsInHierarchy(IEntityType entityType)
-            => entityType.GetAllBaseTypes().Concat(entityType.GetDerivedTypesInclusive())
+        static IEnumerable<INavigation> GetAllNavigationsInHierarchy(IEntityType entityType) =>
+            entityType
+                .GetAllBaseTypes()
+                .Concat(entityType.GetDerivedTypesInclusive())
                 .SelectMany(t => t.GetDeclaredNavigations());
     }
 
@@ -436,55 +538,77 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     protected override ShapedQueryExpression? TranslateElementAtOrDefault(
         ShapedQueryExpression source,
         Expression index,
-        bool returnDefault)
+        bool returnDefault
+    )
     {
-        if (!returnDefault
-            && source.QueryExpression is SelectExpression
-            {
-                Tables:
-                [
-                    TableValuedFunctionExpression
-                    {
-                        Name: "json_each", Schema: null, IsBuiltIn: true, Arguments: [var jsonArrayColumn]
-                    } jsonEachExpression
-                ],
-                GroupBy: [],
-                Having: null,
-                IsDistinct: false,
-                Orderings: [{ Expression: ColumnExpression { Name: "key" } orderingColumn, IsAscending: true }],
-                Limit: null,
-                Offset: null
-            } selectExpression
+        if (
+            !returnDefault
+            && source.QueryExpression
+                is SelectExpression
+                {
+                    Tables: [
+                        TableValuedFunctionExpression
+                        {
+                            Name: "json_each",
+                            Schema: null,
+                            IsBuiltIn: true,
+                            Arguments: [var jsonArrayColumn]
+                        } jsonEachExpression,
+                    ],
+                    GroupBy: [],
+                    Having: null,
+                    IsDistinct: false,
+                    Orderings: [
+                        {
+                            Expression: ColumnExpression { Name: "key" } orderingColumn,
+                            IsAscending: true
+                        },
+                    ],
+                    Limit: null,
+                    Offset: null
+                } selectExpression
             && orderingColumn.Table == jsonEachExpression
-            && TranslateExpression(index) is { } translatedIndex)
+            && TranslateExpression(index) is { } translatedIndex
+        )
         {
             // Index on JSON array
 
             // Extract the column projected out of the source, and simplify the subquery to a simple JsonScalarExpression
             var shaperExpression = source.ShaperExpression;
-            if (shaperExpression is UnaryExpression { NodeType: ExpressionType.Convert } unaryExpression
+            if (
+                shaperExpression
+                    is UnaryExpression { NodeType: ExpressionType.Convert } unaryExpression
                 && unaryExpression.Operand.Type.IsNullableType()
-                && unaryExpression.Operand.Type.UnwrapNullableType() == unaryExpression.Type)
+                && unaryExpression.Operand.Type.UnwrapNullableType() == unaryExpression.Type
+            )
             {
                 shaperExpression = unaryExpression.Operand;
             }
 
-            if (shaperExpression is ProjectionBindingExpression projectionBindingExpression
-                && selectExpression.GetProjection(projectionBindingExpression) is ColumnExpression projectionColumn)
+            if (
+                shaperExpression is ProjectionBindingExpression projectionBindingExpression
+                && selectExpression.GetProjection(projectionBindingExpression)
+                    is ColumnExpression projectionColumn
+            )
             {
                 SqlExpression translation = new JsonScalarExpression(
                     jsonArrayColumn,
                     new[] { new PathSegment(translatedIndex) },
                     projectionColumn.Type,
                     projectionColumn.TypeMapping,
-                    projectionColumn.IsNullable);
+                    projectionColumn.IsNullable
+                );
 
                 // If we have a type mapping (i.e. translating over a column rather than a parameter), apply any necessary server-side
                 // conversions.
                 if (projectionColumn.TypeMapping is not null)
                 {
                     translation = ApplyJsonSqlConversion(
-                        translation, _sqlExpressionFactory, projectionColumn.TypeMapping, projectionColumn.IsNullable);
+                        translation,
+                        _sqlExpressionFactory,
+                        projectionColumn.TypeMapping,
+                        projectionColumn.IsNullable
+                    );
                 }
 
                 return source.UpdateQueryExpression(_sqlExpressionFactory.Select(translation));
@@ -502,31 +626,37 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     /// </summary>
     protected override bool IsNaturallyOrdered(SelectExpression selectExpression)
     {
-        return selectExpression is
-            {
-                Tables: [var mainTable, ..],
-                Orderings:
-                [
-                    {
-                        Expression: ColumnExpression { Name: "key", Table: var orderingTable } orderingColumn,
-                        IsAscending: true
-                    }
-                ]
-            }
+        return selectExpression
+                is {
+                    Tables: [var mainTable, ..],
+                    Orderings: [
+                        {
+                            Expression: ColumnExpression
+                            {
+                                Name: "key",
+                                Table: var orderingTable
+                            } orderingColumn,
+                            IsAscending: true
+                        },
+                    ]
+                }
             && orderingTable == mainTable
             && IsJsonEachKeyColumn(orderingColumn);
 
-        bool IsJsonEachKeyColumn(ColumnExpression orderingColumn)
-            => orderingColumn.Table is JsonEachExpression
-                || (orderingColumn.Table is SelectExpression subquery
-                    && subquery.Projection.FirstOrDefault(p => p.Alias == "key")?.Expression is ColumnExpression projectedColumn
-                    && IsJsonEachKeyColumn(projectedColumn));
+        bool IsJsonEachKeyColumn(ColumnExpression orderingColumn) =>
+            orderingColumn.Table is JsonEachExpression
+            || (
+                orderingColumn.Table is SelectExpression subquery
+                && subquery.Projection.FirstOrDefault(p => p.Alias == "key")?.Expression
+                    is ColumnExpression projectedColumn
+                && IsJsonEachKeyColumn(projectedColumn)
+            );
     }
 
-    private static Type GetProviderType(SqlExpression expression)
-        => expression.TypeMapping?.Converter?.ProviderClrType
-            ?? expression.TypeMapping?.ClrType
-            ?? expression.Type;
+    private static Type GetProviderType(SqlExpression expression) =>
+        expression.TypeMapping?.Converter?.ProviderClrType
+        ?? expression.TypeMapping?.ClrType
+        ?? expression.Type;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -536,9 +666,17 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     /// </summary>
     protected override Expression ApplyInferredTypeMappings(
         Expression expression,
-        IReadOnlyDictionary<(TableExpressionBase, string), RelationalTypeMapping?> inferredTypeMappings)
-        => new SqliteInferredTypeMappingApplier(
-            RelationalDependencies.Model, _typeMappingSource, _sqlExpressionFactory, inferredTypeMappings).Visit(expression);
+        IReadOnlyDictionary<
+            (TableExpressionBase, string),
+            RelationalTypeMapping?
+        > inferredTypeMappings
+    ) =>
+        new SqliteInferredTypeMappingApplier(
+            RelationalDependencies.Model,
+            _typeMappingSource,
+            _sqlExpressionFactory,
+            inferredTypeMappings
+        ).Visit(expression);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -550,7 +688,10 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
     {
         private readonly IRelationalTypeMappingSource _typeMappingSource;
         private readonly SqliteSqlExpressionFactory _sqlExpressionFactory;
-        private Dictionary<TableExpressionBase, RelationalTypeMapping>? _currentSelectInferredTypeMappings;
+        private Dictionary<
+            TableExpressionBase,
+            RelationalTypeMapping
+        >? _currentSelectInferredTypeMappings;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -562,7 +703,11 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
             IModel model,
             IRelationalTypeMappingSource typeMappingSource,
             SqliteSqlExpressionFactory sqlExpressionFactory,
-            IReadOnlyDictionary<(TableExpressionBase, string), RelationalTypeMapping?> inferredTypeMappings)
+            IReadOnlyDictionary<
+                (TableExpressionBase, string),
+                RelationalTypeMapping?
+            > inferredTypeMappings
+        )
             : base(model, sqlExpressionFactory, inferredTypeMappings)
         {
             (_typeMappingSource, _sqlExpressionFactory) = (typeMappingSource, sqlExpressionFactory);
@@ -578,8 +723,17 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
         {
             switch (expression)
             {
-                case TableValuedFunctionExpression { Name: "json_each", Schema: null, IsBuiltIn: true } jsonEachExpression
-                    when TryGetInferredTypeMapping(jsonEachExpression, "value", out var typeMapping):
+                case TableValuedFunctionExpression
+                {
+                    Name: "json_each",
+                    Schema: null,
+                    IsBuiltIn: true
+                } jsonEachExpression
+                    when TryGetInferredTypeMapping(
+                        jsonEachExpression,
+                        "value",
+                        out var typeMapping
+                    ):
                     return ApplyTypeMappingsOnJsonEachExpression(jsonEachExpression, typeMapping);
 
                 // Above, we applied the type mapping to the parameter that json_each accepts as an argument.
@@ -588,20 +742,38 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
                 // in the immediate SelectExpression, and continue visiting down (see ColumnExpression visitation below).
                 case SelectExpression selectExpression:
                 {
-                    Dictionary<TableExpressionBase, RelationalTypeMapping>? previousSelectInferredTypeMappings = null;
+                    Dictionary<
+                        TableExpressionBase,
+                        RelationalTypeMapping
+                    >? previousSelectInferredTypeMappings = null;
 
                     foreach (var table in selectExpression.Tables)
                     {
-                        if (table is TableValuedFunctionExpression { Name: "json_each", Schema: null, IsBuiltIn: true } jsonEachExpression
-                            && TryGetInferredTypeMapping(jsonEachExpression, "value", out var inferredTypeMapping))
+                        if (
+                            table
+                                is TableValuedFunctionExpression
+                                {
+                                    Name: "json_each",
+                                    Schema: null,
+                                    IsBuiltIn: true
+                                } jsonEachExpression
+                            && TryGetInferredTypeMapping(
+                                jsonEachExpression,
+                                "value",
+                                out var inferredTypeMapping
+                            )
+                        )
                         {
                             if (previousSelectInferredTypeMappings is null)
                             {
-                                previousSelectInferredTypeMappings = _currentSelectInferredTypeMappings;
-                                _currentSelectInferredTypeMappings = new Dictionary<TableExpressionBase, RelationalTypeMapping>();
+                                previousSelectInferredTypeMappings =
+                                    _currentSelectInferredTypeMappings;
+                                _currentSelectInferredTypeMappings =
+                                    new Dictionary<TableExpressionBase, RelationalTypeMapping>();
                             }
 
-                            _currentSelectInferredTypeMappings![jsonEachExpression] = inferredTypeMapping;
+                            _currentSelectInferredTypeMappings![jsonEachExpression] =
+                                inferredTypeMapping;
                         }
                     }
 
@@ -616,12 +788,17 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
                 // opposed to parameter collections, where the type mapping needs to be inferred). This is in order to apply SQL conversion
                 // logic later in the process, see note in TranslateCollection.
                 case ColumnExpression { Name: "value" } columnExpression
-                    when _currentSelectInferredTypeMappings?.TryGetValue(columnExpression.Table, out var inferredTypeMapping) is true:
+                    when _currentSelectInferredTypeMappings?.TryGetValue(
+                        columnExpression.Table,
+                        out var inferredTypeMapping
+                    )
+                        is true:
                     return ApplyJsonSqlConversion(
                         columnExpression.ApplyTypeMapping(inferredTypeMapping),
                         _sqlExpressionFactory,
                         inferredTypeMapping,
-                        columnExpression.IsNullable);
+                        columnExpression.IsNullable
+                    );
 
                 default:
                     return base.VisitExtension(expression);
@@ -636,7 +813,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
         /// </summary>
         protected virtual TableValuedFunctionExpression ApplyTypeMappingsOnJsonEachExpression(
             TableValuedFunctionExpression jsonEachExpression,
-            RelationalTypeMapping inferredTypeMapping)
+            RelationalTypeMapping inferredTypeMapping
+        )
         {
             // Constant queryables are translated to VALUES, no need for JSON.
             // Column queryables have their type mapping from the model, so we don't ever need to apply an inferred mapping on them.
@@ -645,15 +823,24 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
                 return jsonEachExpression;
             }
 
-            if (_typeMappingSource.FindMapping(parameterExpression.Type, Model, inferredTypeMapping) is not SqliteStringTypeMapping
-                parameterTypeMapping)
+            if (
+                _typeMappingSource.FindMapping(parameterExpression.Type, Model, inferredTypeMapping)
+                is not SqliteStringTypeMapping parameterTypeMapping
+            )
             {
-                throw new InvalidOperationException("Type mapping for 'string' could not be found or was not a SqliteStringTypeMapping");
+                throw new InvalidOperationException(
+                    "Type mapping for 'string' could not be found or was not a SqliteStringTypeMapping"
+                );
             }
 
-            Check.DebugAssert(parameterTypeMapping.ElementTypeMapping != null, "Collection type mapping missing element mapping.");
+            Check.DebugAssert(
+                parameterTypeMapping.ElementTypeMapping != null,
+                "Collection type mapping missing element mapping."
+            );
 
-            return jsonEachExpression.Update(new[] { parameterExpression.ApplyTypeMapping(parameterTypeMapping) });
+            return jsonEachExpression.Update(
+                new[] { parameterExpression.ApplyTypeMapping(parameterTypeMapping) }
+            );
         }
     }
 
@@ -665,13 +852,20 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
         SqlExpression expression,
         SqliteSqlExpressionFactory sqlExpressionFactory,
         RelationalTypeMapping typeMapping,
-        bool isNullable)
-        => typeMapping switch
+        bool isNullable
+    ) =>
+        typeMapping switch
         {
-            ByteArrayTypeMapping
-                => sqlExpressionFactory.Function("unhex", new[] { expression }, isNullable, new[] { true }, typeof(byte[]), typeMapping),
+            ByteArrayTypeMapping => sqlExpressionFactory.Function(
+                "unhex",
+                new[] { expression },
+                isNullable,
+                new[] { true },
+                typeof(byte[]),
+                typeMapping
+            ),
 
-            _ => expression
+            _ => expression,
         };
 
     private sealed class FakeMemberInfo : MemberInfo
@@ -683,22 +877,19 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor : RelationalQuery
 
         public override string Name { get; }
 
-        public override object[] GetCustomAttributes(bool inherit)
-            => throw new NotSupportedException();
+        public override object[] GetCustomAttributes(bool inherit) =>
+            throw new NotSupportedException();
 
-        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
-            => throw new NotSupportedException();
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+            throw new NotSupportedException();
 
-        public override bool IsDefined(Type attributeType, bool inherit)
-            => throw new NotSupportedException();
+        public override bool IsDefined(Type attributeType, bool inherit) =>
+            throw new NotSupportedException();
 
-        public override Type? DeclaringType
-            => throw new NotSupportedException();
+        public override Type? DeclaringType => throw new NotSupportedException();
 
-        public override MemberTypes MemberType
-            => throw new NotSupportedException();
+        public override MemberTypes MemberType => throw new NotSupportedException();
 
-        public override Type? ReflectedType
-            => throw new NotSupportedException();
+        public override Type? ReflectedType => throw new NotSupportedException();
     }
 }

@@ -24,7 +24,11 @@ namespace System.Text.Json.Serialization.Tests
 
         private class Int32NullConverter_SpecialCaseNull : JsonConverter<int>
         {
-            public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override int Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
@@ -34,7 +38,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                int value,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
@@ -49,9 +57,19 @@ namespace System.Text.Json.Serialization.Tests
 
             // Serializer throws JsonException if null is assigned to value that can't be null.
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>("null", options));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ClassWithInt>(@"{""MyInt"":null}", options));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<List<int>>("[null]", options));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<string, int>>(@"{""MyInt"":null}", options));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ClassWithInt>(@"{""MyInt"":null}", options)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<List<int>>("[null]", options)
+            );
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<Dictionary<string, int>>(
+                        @"{""MyInt"":null}",
+                        options
+                    )
+            );
         }
 
         private class Int32NullConverter_OptOut : Int32NullConverter_SpecialCaseNull
@@ -96,7 +114,11 @@ namespace System.Text.Json.Serialization.Tests
 
         private class PointStructConverter_SpecialCaseNull : JsonConverter<Point_2D_Struct>
         {
-            public override Point_2D_Struct Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Point_2D_Struct Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
@@ -106,7 +128,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, Point_2D_Struct value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Point_2D_Struct value,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
@@ -120,11 +146,29 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new PointStructConverter_OptOut());
 
             // Serializer throws JsonException if null is assigned to value that can't be null.
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Point_2D_Struct>("null", options));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ClassWithPoint>(@"{""MyPoint"":null}", options));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ImmutableClassWithPoint>(@"{""MyPoint"":null}", options));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<List<Point_2D_Struct>>("[null]", options));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<string, Point_2D_Struct>>(@"{""MyPoint"":null}", options));
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<Point_2D_Struct>("null", options)
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<ClassWithPoint>(@"{""MyPoint"":null}", options)
+            );
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<ImmutableClassWithPoint>(
+                        @"{""MyPoint"":null}",
+                        options
+                    )
+            );
+            Assert.Throws<JsonException>(
+                () => JsonSerializer.Deserialize<List<Point_2D_Struct>>("[null]", options)
+            );
+            Assert.Throws<JsonException>(
+                () =>
+                    JsonSerializer.Deserialize<Dictionary<string, Point_2D_Struct>>(
+                        @"{""MyPoint"":null}",
+                        options
+                    )
+            );
         }
 
         private class PointStructConverter_OptOut : PointStructConverter_SpecialCaseNull
@@ -187,7 +231,11 @@ namespace System.Text.Json.Serialization.Tests
 
         private class NullableInt32NullConverter_SpecialCaseNull : JsonConverter<int?>
         {
-            public override int? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override int? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
@@ -197,7 +245,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, int? value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                int? value,
+                JsonSerializerOptions options
+            )
             {
                 if (!value.HasValue)
                 {
@@ -226,7 +278,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal("null", JsonSerializer.Serialize(val, options));
         }
 
-        private class NullableInt32NullConverter_NullOptOut : NullableInt32NullConverter_SpecialCaseNull
+        private class NullableInt32NullConverter_NullOptOut
+            : NullableInt32NullConverter_SpecialCaseNull
         {
             public override bool HandleNull => false;
         }
@@ -253,7 +306,11 @@ namespace System.Text.Json.Serialization.Tests
 
         private class UriNullConverter_SpecialCaseNull : JsonConverter<Uri>
         {
-            public override Uri Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Uri Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
@@ -263,7 +320,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, Uri value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Uri value,
+                JsonSerializerOptions options
+            )
             {
                 if (value == null)
                 {
@@ -330,7 +391,11 @@ namespace System.Text.Json.Serialization.Tests
 
         private class PointClassConverter_SpecialCaseNull : JsonConverter<Point_2D>
         {
-            public override Point_2D Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Point_2D Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
@@ -340,7 +405,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, Point_2D value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Point_2D value,
+                JsonSerializerOptions options
+            )
             {
                 if (value == null)
                 {
@@ -367,7 +436,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(-1, obj.Y);
 
             obj = null;
-            JsonTestHelper.AssertJsonEqual(@"{""X"":-1,""Y"":-1}", JsonSerializer.Serialize(obj, options));
+            JsonTestHelper.AssertJsonEqual(
+                @"{""X"":-1,""Y"":-1}",
+                JsonSerializer.Serialize(obj, options)
+            );
         }
 
         private class PointClassConverter_NullOptIn : PointClassConverter_SpecialCaseNull
@@ -382,7 +454,10 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new UriNullConverter_NullOptIn());
 
             // Converter is called - JsonIgnoreCondition.WhenWritingDefault does not apply to deserialization.
-            ClassWithIgnoredUri obj = JsonSerializer.Deserialize<ClassWithIgnoredUri>(@"{""MyUri"":null}", options);
+            ClassWithIgnoredUri obj = JsonSerializer.Deserialize<ClassWithIgnoredUri>(
+                @"{""MyUri"":null}",
+                options
+            );
             Assert.Equal(new Uri("https://default"), obj.MyUri);
 
             obj.MyUri = null;
@@ -405,30 +480,56 @@ namespace System.Text.Json.Serialization.Tests
 
             // Using serializer overload in Release mode uses a writer with SkipValidation = true.
             var writerOptions = new JsonWriterOptions { SkipValidation = false };
-            using (Utf8JsonWriter writer = new Utf8JsonWriter(new ArrayBufferWriter<byte>(), writerOptions))
+            using (
+                Utf8JsonWriter writer = new Utf8JsonWriter(
+                    new ArrayBufferWriter<byte>(),
+                    writerOptions
+                )
+            )
             {
-                Assert.Throws<JsonException>(() => JsonSerializer.Serialize(writer, new ClassWithUri(), options));
+                Assert.Throws<JsonException>(
+                    () => JsonSerializer.Serialize(writer, new ClassWithUri(), options)
+                );
             }
 
-            using (Utf8JsonWriter writer = new Utf8JsonWriter(new ArrayBufferWriter<byte>(), writerOptions))
+            using (
+                Utf8JsonWriter writer = new Utf8JsonWriter(
+                    new ArrayBufferWriter<byte>(),
+                    writerOptions
+                )
+            )
             {
-                Assert.Throws<JsonException>(() => JsonSerializer.Serialize(new StructWithObject(), options));
+                Assert.Throws<JsonException>(
+                    () => JsonSerializer.Serialize(new StructWithObject(), options)
+                );
             }
         }
 
         private class BadUriConverter : UriNullConverter_NullOptIn
         {
-            public override void Write(Utf8JsonWriter writer, Uri value, JsonSerializerOptions options) { }
+            public override void Write(
+                Utf8JsonWriter writer,
+                Uri value,
+                JsonSerializerOptions options
+            ) { }
         }
 
         private class BadObjectConverter : JsonConverter<object>
         {
-            public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override object Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
 
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartObject();
                 writer.WritePropertyName("hello");
@@ -442,7 +543,6 @@ namespace System.Text.Json.Serialization.Tests
         {
             public Uri MyUri { get; set; }
         }
-
 
         private class StructWithObject
         {
@@ -470,7 +570,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new ObjectConverter());
 
-            List<object> list = new List<object> {  null };
+            List<object> list = new List<object> { null };
             Assert.Equal(@"[""NullObject""]", JsonSerializer.Serialize(list, options));
 
             list = JsonSerializer.Deserialize<List<object>>("[null]", options);
@@ -485,7 +585,11 @@ namespace System.Text.Json.Serialization.Tests
 
         public class ObjectConverter : JsonConverter<object>
         {
-            public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override object Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.Null)
                 {
@@ -495,7 +599,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new NotSupportedException();
             }
 
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            )
             {
                 if (value == null)
                 {
@@ -515,13 +623,16 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions
             {
                 IgnoreNullValues = true,
-                Converters = { new UriToNullConverter() }
+                Converters = { new UriToNullConverter() },
             };
 
             // Baseline - null values ignored, converter is not called.
             string json = @"{""MyUri"":null}";
 
-            ClassWithInitializedUri obj = JsonSerializer.Deserialize<ClassWithInitializedUri>(json, options);
+            ClassWithInitializedUri obj = JsonSerializer.Deserialize<ClassWithInitializedUri>(
+                json,
+                options
+            );
             Assert.Equal(new Uri("https://microsoft.com"), obj.MyUri);
 
             // Test - setter is called if payload is not null and converter returns null.
@@ -537,9 +648,17 @@ namespace System.Text.Json.Serialization.Tests
 
         public class UriToNullConverter : JsonConverter<Uri>
         {
-            public override Uri Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => null;
+            public override Uri Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => null;
 
-            public override void Write(Utf8JsonWriter writer, Uri value, JsonSerializerOptions options) => throw new NotImplementedException();
+            public override void Write(
+                Utf8JsonWriter writer,
+                Uri value,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
 
             public override bool HandleNull => true;
         }

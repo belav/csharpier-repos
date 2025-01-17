@@ -21,24 +21,36 @@ namespace System.Runtime.InteropServices.ObjectiveC
             System.StubHelpers.StubHelpers.SetPendingExceptionObject(exception);
         }
 
-        [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ObjCMarshal_TrySetGlobalMessageSendCallback")]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [LibraryImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "ObjCMarshal_TrySetGlobalMessageSendCallback"
+        )]
+        [return: MarshalAs(UnmanagedType.Bool)]
         private static partial bool TrySetGlobalMessageSendCallback(
             MessageSendFunction msgSendFunction,
-            IntPtr func);
+            IntPtr func
+        );
 
-        [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ObjCMarshal_TryInitializeReferenceTracker")]
+        [LibraryImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "ObjCMarshal_TryInitializeReferenceTracker"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static unsafe partial bool TryInitializeReferenceTracker(
             delegate* unmanaged<void> beginEndCallback,
             delegate* unmanaged<IntPtr, int> isReferencedCallback,
-            delegate* unmanaged<IntPtr, void> trackedObjectEnteredFinalization);
+            delegate* unmanaged<IntPtr, void> trackedObjectEnteredFinalization
+        );
 
-        [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ObjCMarshal_CreateReferenceTrackingHandle")]
+        [LibraryImport(
+            RuntimeHelpers.QCall,
+            EntryPoint = "ObjCMarshal_CreateReferenceTrackingHandle"
+        )]
         private static partial IntPtr CreateReferenceTrackingHandleInternal(
             ObjectHandleOnStack obj,
             out int memInSizeT,
-            out IntPtr mem);
+            out IntPtr mem
+        );
 
         internal static bool AvailableUnhandledExceptionPropagation()
         {
@@ -48,7 +60,8 @@ namespace System.Runtime.InteropServices.ObjectiveC
         internal static unsafe void* InvokeUnhandledExceptionPropagation(
             Exception exception,
             object methodInfoStub,
-            out IntPtr context)
+            out IntPtr context
+        )
         {
             context = IntPtr.Zero;
             if (s_unhandledExceptionPropagationHandler == null)
@@ -56,7 +69,11 @@ namespace System.Runtime.InteropServices.ObjectiveC
 
             Debug.Assert(methodInfoStub is RuntimeMethodInfoStub);
             var runtimeHandle = new RuntimeMethodHandle((RuntimeMethodInfoStub)methodInfoStub);
-            var callback = s_unhandledExceptionPropagationHandler(exception, runtimeHandle, out context);
+            var callback = s_unhandledExceptionPropagationHandler(
+                exception,
+                runtimeHandle,
+                out context
+            );
             if (callback != null)
                 return callback;
 

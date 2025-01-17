@@ -17,13 +17,18 @@ namespace System.Linq.Expressions.Tests
         public static void SelfApplication(bool useInterpreter)
         {
             // Expression<X> f = x => {};
-            Expression<X> f = Expression.Lambda<X>(Expression.Empty(), Expression.Parameter(typeof(X)));
+            Expression<X> f = Expression.Lambda<X>(
+                Expression.Empty(),
+                Expression.Parameter(typeof(X))
+            );
             LambdaExpression a = Expression.Lambda(Expression.Invoke(f, f));
 
             a.Compile(useInterpreter).DynamicInvoke();
 
             ParameterExpression it = Expression.Parameter(f.Type);
-            LambdaExpression b = Expression.Lambda(Expression.Invoke(Expression.Lambda(Expression.Invoke(it, it), it), f));
+            LambdaExpression b = Expression.Lambda(
+                Expression.Invoke(Expression.Lambda(Expression.Invoke(it, it), it), f)
+            );
 
             b.Compile(useInterpreter).DynamicInvoke();
         }
@@ -54,7 +59,10 @@ namespace System.Linq.Expressions.Tests
             {
                 ConstantExpression ind0 = Expression.Constant(this);
                 MemberExpression fld = Expression.PropertyOrField(ind0, "DoItA");
-                BlockExpression block = Expression.Block(typeof(void), Expression.Invoke(fld, ind0));
+                BlockExpression block = Expression.Block(
+                    typeof(void),
+                    Expression.Invoke(fld, ind0)
+                );
                 return Expression.Lambda<Action>(block).Compile(_preferInterpretation);
             }
 
@@ -98,7 +106,10 @@ namespace System.Linq.Expressions.Tests
             InvocationExpression e1 = Expression.Invoke(Expression.Parameter(typeof(Action), "f"));
             Assert.Equal("Invoke(f)", e1.ToString());
 
-            InvocationExpression e2 = Expression.Invoke(Expression.Parameter(typeof(Action<int>), "f"), Expression.Parameter(typeof(int), "x"));
+            InvocationExpression e2 = Expression.Invoke(
+                Expression.Parameter(typeof(Action<int>), "f"),
+                Expression.Parameter(typeof(int), "x")
+            );
             Assert.Equal("Invoke(f, x)", e2.ToString());
         }
 
@@ -106,39 +117,59 @@ namespace System.Linq.Expressions.Tests
         public static void GetArguments()
         {
             VerifyGetArguments(Expression.Invoke(Expression.Default(typeof(Action))));
-            VerifyGetArguments(Expression.Invoke(Expression.Default(typeof(Action<int>)), Expression.Constant(0)));
+            VerifyGetArguments(
+                Expression.Invoke(Expression.Default(typeof(Action<int>)), Expression.Constant(0))
+            );
             VerifyGetArguments(
                 Expression.Invoke(
                     Expression.Default(typeof(Action<int, int>)),
-                    Enumerable.Range(0, 2).Select(i => Expression.Constant(i))));
+                    Enumerable.Range(0, 2).Select(i => Expression.Constant(i))
+                )
+            );
             VerifyGetArguments(
                 Expression.Invoke(
                     Expression.Default(typeof(Action<int, int, int>)),
-                    Enumerable.Range(0, 3).Select(i => Expression.Constant(i))));
+                    Enumerable.Range(0, 3).Select(i => Expression.Constant(i))
+                )
+            );
             VerifyGetArguments(
                 Expression.Invoke(
                     Expression.Default(typeof(Action<int, int, int, int>)),
-                    Enumerable.Range(0, 4).Select(i => Expression.Constant(i))));
+                    Enumerable.Range(0, 4).Select(i => Expression.Constant(i))
+                )
+            );
             VerifyGetArguments(
                 Expression.Invoke(
                     Expression.Default(typeof(Action<int, int, int, int, int>)),
-                    Enumerable.Range(0, 5).Select(i => Expression.Constant(i))));
+                    Enumerable.Range(0, 5).Select(i => Expression.Constant(i))
+                )
+            );
             VerifyGetArguments(
                 Expression.Invoke(
                     Expression.Default(typeof(Action<int, int, int, int, int, int>)),
-                    Enumerable.Range(0, 6).Select(i => Expression.Constant(i))));
+                    Enumerable.Range(0, 6).Select(i => Expression.Constant(i))
+                )
+            );
             VerifyGetArguments(
                 Expression.Invoke(
                     Expression.Default(typeof(Action<int, int, int, int, int, int, int>)),
-                    Enumerable.Range(0, 7).Select(i => Expression.Constant(i))));
+                    Enumerable.Range(0, 7).Select(i => Expression.Constant(i))
+                )
+            );
         }
 
         private static void VerifyGetArguments(InvocationExpression invoke)
         {
             var args = invoke.Arguments;
             Assert.Equal(args.Count, invoke.ArgumentCount);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => invoke.GetArgument(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => invoke.GetArgument(args.Count));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => invoke.GetArgument(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => invoke.GetArgument(args.Count)
+            );
             for (int i = 0; i != args.Count; ++i)
             {
                 Assert.Same(args[i], invoke.GetArgument(i));
@@ -150,32 +181,74 @@ namespace System.Linq.Expressions.Tests
         public static void ArgumentCountMismatchLambda()
         {
             Expression<Func<int, int, int>> adder = (x, y) => x + y;
-            Assert.Throws<InvalidOperationException>(() => Expression.Invoke(adder, Expression.Constant(1)));
-            Assert.Throws<InvalidOperationException>(() => Expression.Invoke(adder, Expression.Constant(1), Expression.Constant(1), Expression.Constant(1)));
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.Invoke(adder, Expression.Constant(1))
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.Invoke(
+                        adder,
+                        Expression.Constant(1),
+                        Expression.Constant(1),
+                        Expression.Constant(1)
+                    )
+            );
         }
 
         [Fact]
         public static void ArgumentTypeMismatchLambda()
         {
             Expression<Func<int, int, int>> adder = (x, y) => x + y;
-            AssertExtensions.Throws<ArgumentException>("arg1", () => Expression.Invoke(adder, Expression.Constant(1), Expression.Constant(1L)));
-            AssertExtensions.Throws<ArgumentException>("arg0", () => Expression.Invoke(adder, Expression.Constant(1L), Expression.Constant(1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "arg1",
+                () => Expression.Invoke(adder, Expression.Constant(1), Expression.Constant(1L))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "arg0",
+                () => Expression.Invoke(adder, Expression.Constant(1L), Expression.Constant(1))
+            );
         }
 
         [Fact]
         public static void ArgumentCountMismatchDelegate()
         {
             Func<int, int, int> adder = (x, y) => x + y;
-            Assert.Throws<InvalidOperationException>(() => Expression.Invoke(Expression.Constant(adder), Expression.Constant(1)));
-            Assert.Throws<InvalidOperationException>(() => Expression.Invoke(Expression.Constant(adder), Expression.Constant(1), Expression.Constant(1), Expression.Constant(1)));
+            Assert.Throws<InvalidOperationException>(
+                () => Expression.Invoke(Expression.Constant(adder), Expression.Constant(1))
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    Expression.Invoke(
+                        Expression.Constant(adder),
+                        Expression.Constant(1),
+                        Expression.Constant(1),
+                        Expression.Constant(1)
+                    )
+            );
         }
 
         [Fact]
         public static void ArgumentTypeMismatchDelegate()
         {
             Func<int, int, int> adder = (x, y) => x + y;
-            AssertExtensions.Throws<ArgumentException>("arg1", () => Expression.Invoke(Expression.Constant(adder), Expression.Constant(1), Expression.Constant(1L)));
-            AssertExtensions.Throws<ArgumentException>("arg0", () => Expression.Invoke(Expression.Constant(adder), Expression.Constant(1L), Expression.Constant(1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "arg1",
+                () =>
+                    Expression.Invoke(
+                        Expression.Constant(adder),
+                        Expression.Constant(1),
+                        Expression.Constant(1L)
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "arg0",
+                () =>
+                    Expression.Invoke(
+                        Expression.Constant(adder),
+                        Expression.Constant(1L),
+                        Expression.Constant(1)
+                    )
+            );
         }
 
         [Fact]
@@ -185,7 +258,7 @@ namespace System.Linq.Expressions.Tests
             Expression lhs = Expression.Constant(1);
             Expression rhs = Expression.Constant(2);
             var invoke = Expression.Invoke(adder, lhs, rhs);
-            Assert.Same(invoke, invoke.Update(adder, new[] {lhs, rhs}));
+            Assert.Same(invoke, invoke.Update(adder, new[] { lhs, rhs }));
         }
 
         [Fact]
@@ -218,18 +291,23 @@ namespace System.Linq.Expressions.Tests
 
                 ParameterExpression instance = Expression.Parameter(delegateType);
 
-                yield return new object[] {Expression.Invoke(instance, Enumerable.Repeat(Expression.Constant(0), i))};
+                yield return new object[]
+                {
+                    Expression.Invoke(instance, Enumerable.Repeat(Expression.Constant(0), i)),
+                };
             }
         }
 
         private class ParameterChangingVisitor : ExpressionVisitor
         {
-            protected override Expression VisitParameter(ParameterExpression node) => Expression.Parameter(node.Type);
+            protected override Expression VisitParameter(ParameterExpression node) =>
+                Expression.Parameter(node.Type);
         }
 
         private class ParameterAndConstantChangingVisitor : ParameterChangingVisitor
         {
-            protected override Expression VisitConstant(ConstantExpression node) => Expression.Constant(node.Value, node.Type);
+            protected override Expression VisitConstant(ConstantExpression node) =>
+                Expression.Constant(node.Value, node.Type);
         }
 
         [Theory, MemberData(nameof(InvocationExpressions))]
@@ -244,15 +322,51 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(invoke, new ParameterAndConstantChangingVisitor().Visit(invoke));
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [ClassData(typeof(CompilationTypes))]
         public static void InvokePrivateDelegate(bool useInterpreter)
         {
-            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder module = assembly.DefineDynamicModule("Name");
-            TypeBuilder builder = module.DefineType("Type", TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed | TypeAttributes.AnsiClass | TypeAttributes.AutoClass, typeof(MulticastDelegate));
-            builder.DefineConstructor(MethodAttributes.RTSpecialName | MethodAttributes.HideBySig | MethodAttributes.Public, CallingConventions.Standard, new[] { typeof(object), typeof(IntPtr) }).SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
-            builder.DefineMethod("Invoke", MethodAttributes.Private | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual, typeof(int), Type.EmptyTypes).SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
+            TypeBuilder builder = module.DefineType(
+                "Type",
+                TypeAttributes.Class
+                    | TypeAttributes.NotPublic
+                    | TypeAttributes.Sealed
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.AutoClass,
+                typeof(MulticastDelegate)
+            );
+            builder
+                .DefineConstructor(
+                    MethodAttributes.RTSpecialName
+                        | MethodAttributes.HideBySig
+                        | MethodAttributes.Public,
+                    CallingConventions.Standard,
+                    new[] { typeof(object), typeof(IntPtr) }
+                )
+                .SetImplementationFlags(
+                    MethodImplAttributes.Runtime | MethodImplAttributes.Managed
+                );
+            builder
+                .DefineMethod(
+                    "Invoke",
+                    MethodAttributes.Private
+                        | MethodAttributes.HideBySig
+                        | MethodAttributes.NewSlot
+                        | MethodAttributes.Virtual,
+                    typeof(int),
+                    Type.EmptyTypes
+                )
+                .SetImplementationFlags(
+                    MethodImplAttributes.Runtime | MethodImplAttributes.Managed
+                );
             Type delType = builder.CreateTypeInfo();
             LambdaExpression lambda = Expression.Lambda(delType, Expression.Constant(42));
             Delegate del = lambda.Compile(useInterpreter);
@@ -262,15 +376,51 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(42, invFunc());
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [ClassData(typeof(CompilationTypes))]
         public static void InvokePrivateDelegateTypeLambda(bool useInterpreter)
         {
-            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Name"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Name"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder module = assembly.DefineDynamicModule("Name");
-            TypeBuilder builder = module.DefineType("Type", TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed | TypeAttributes.AnsiClass | TypeAttributes.AutoClass, typeof(MulticastDelegate));
-            builder.DefineConstructor(MethodAttributes.RTSpecialName | MethodAttributes.HideBySig | MethodAttributes.Public, CallingConventions.Standard, new[] { typeof(object), typeof(IntPtr) }).SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
-            builder.DefineMethod("Invoke", MethodAttributes.Private | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual, typeof(int), Type.EmptyTypes).SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
+            TypeBuilder builder = module.DefineType(
+                "Type",
+                TypeAttributes.Class
+                    | TypeAttributes.NotPublic
+                    | TypeAttributes.Sealed
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.AutoClass,
+                typeof(MulticastDelegate)
+            );
+            builder
+                .DefineConstructor(
+                    MethodAttributes.RTSpecialName
+                        | MethodAttributes.HideBySig
+                        | MethodAttributes.Public,
+                    CallingConventions.Standard,
+                    new[] { typeof(object), typeof(IntPtr) }
+                )
+                .SetImplementationFlags(
+                    MethodImplAttributes.Runtime | MethodImplAttributes.Managed
+                );
+            builder
+                .DefineMethod(
+                    "Invoke",
+                    MethodAttributes.Private
+                        | MethodAttributes.HideBySig
+                        | MethodAttributes.NewSlot
+                        | MethodAttributes.Virtual,
+                    typeof(int),
+                    Type.EmptyTypes
+                )
+                .SetImplementationFlags(
+                    MethodImplAttributes.Runtime | MethodImplAttributes.Managed
+                );
             Type delType = builder.CreateTypeInfo();
             LambdaExpression lambda = Expression.Lambda(delType, Expression.Constant(42));
             var invoke = Expression.Invoke(lambda);
@@ -286,14 +436,24 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression refParam = Expression.Parameter(typeof(int).MakeByRefType());
             ParameterExpression param = Expression.Parameter(typeof(List<int>));
-            Func<List<int>, List<int>> func = Expression.Lambda<Func<List<int>, List<int>>>(
+            Func<List<int>, List<int>> func = Expression
+                .Lambda<Func<List<int>, List<int>>>(
                     Expression.Block(
                         Expression.Invoke(
                             Expression.Lambda<RefIntAction>(
-                                Expression.AddAssign(refParam, Expression.Constant(2)), refParam),
+                                Expression.AddAssign(refParam, Expression.Constant(2)),
+                                refParam
+                            ),
                             Expression.MakeIndex(
-                                param, typeof(List<int>).GetProperty("Item"), new[] {Expression.Constant(0)})), param),
-                    param)
+                                param,
+                                typeof(List<int>).GetProperty("Item"),
+                                new[] { Expression.Constant(0) }
+                            )
+                        ),
+                        param
+                    ),
+                    param
+                )
                 .Compile(useInterpreter);
             List<int> list = new List<int> { 9 };
             Assert.Equal(11, func(list)[0]);

@@ -78,7 +78,13 @@ namespace System.Text.RegularExpressions
                 }
 
                 // If a default was specified that's not a TimeSpan, throw.
-                throw new InvalidCastException(SR.Format(SR.IllegalDefaultRegexMatchTimeoutInAppDomain, DefaultMatchTimeout_ConfigKeyName, defaultTimeout));
+                throw new InvalidCastException(
+                    SR.Format(
+                        SR.IllegalDefaultRegexMatchTimeoutInAppDomain,
+                        DefaultMatchTimeout_ConfigKeyName,
+                        defaultTimeout
+                    )
+                );
             }
 
             // If default timeout is outside the valid range, throw. As this is used in the static cctor, it will result in a TypeInitializationException
@@ -89,7 +95,13 @@ namespace System.Text.RegularExpressions
             }
             catch (ArgumentOutOfRangeException)
             {
-                throw new ArgumentOutOfRangeException(SR.Format(SR.IllegalDefaultRegexMatchTimeoutInAppDomain, DefaultMatchTimeout_ConfigKeyName, defaultMatchTimeOut));
+                throw new ArgumentOutOfRangeException(
+                    SR.Format(
+                        SR.IllegalDefaultRegexMatchTimeoutInAppDomain,
+                        DefaultMatchTimeout_ConfigKeyName,
+                        defaultMatchTimeOut
+                    )
+                );
             }
 
             return defaultMatchTimeOut;

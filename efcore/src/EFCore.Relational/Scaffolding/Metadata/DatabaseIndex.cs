@@ -43,6 +43,5 @@ public class DatabaseIndex : Annotatable
     public virtual string? Filter { get; set; }
 
     /// <inheritdoc />
-    public override string ToString()
-        => Name ?? "<UNKNOWN>";
+    public override string ToString() => Name ?? "<UNKNOWN>";
 }

@@ -14,17 +14,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         private static class CompletionSymbolDisplay
         {
-            public static string ToDisplayString(ISymbol symbol)
-                => symbol switch
+            public static string ToDisplayString(ISymbol symbol) =>
+                symbol switch
                 {
                     IEventSymbol eventSymbol => ToDisplayString(eventSymbol),
                     IPropertySymbol propertySymbol => ToDisplayString(propertySymbol),
                     IMethodSymbol methodSymbol => ToDisplayString(methodSymbol),
-                    _ => "" // This shouldn't happen.
+                    _ => "", // This shouldn't happen.
                 };
 
-            private static string ToDisplayString(IEventSymbol symbol)
-                => symbol.Name;
+            private static string ToDisplayString(IEventSymbol symbol) => symbol.Name;
 
             private static string ToDisplayString(IPropertySymbol symbol)
             {
@@ -60,7 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     case MethodKind.UserDefinedOperator:
                     case MethodKind.BuiltinOperator:
                         AppendOperatorKeywords(symbol, builder);
-                        builder.Append(SyntaxFacts.GetText(SyntaxFacts.GetOperatorKind(symbol.MetadataName)));
+                        builder.Append(
+                            SyntaxFacts.GetText(SyntaxFacts.GetOperatorKind(symbol.MetadataName))
+                        );
                         break;
                     case MethodKind.Conversion:
                         AppendOperatorKeywords(symbol, builder);
@@ -84,26 +85,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 }
             }
 
-            private static void AddParameters(ImmutableArray<IParameterSymbol> parameters, StringBuilder builder)
+            private static void AddParameters(
+                ImmutableArray<IParameterSymbol> parameters,
+                StringBuilder builder
+            )
             {
-                builder.AppendJoinedValues(", ", parameters, static (parameter, builder) =>
-                {
-                    builder.Append(parameter.RefKind switch
+                builder.AppendJoinedValues(
+                    ", ",
+                    parameters,
+                    static (parameter, builder) =>
                     {
-                        RefKind.Out => "out ",
-                        RefKind.Ref => "ref ",
-                        RefKind.In => "in ",
-                        _ => ""
-                    });
+                        builder.Append(
+                            parameter.RefKind switch
+                            {
+                                RefKind.Out => "out ",
+                                RefKind.Ref => "ref ",
+                                RefKind.In => "in ",
+                                _ => "",
+                            }
+                        );
 
-                    if (parameter.IsParams)
-                    {
-                        builder.Append("params ");
+                        if (parameter.IsParams)
+                        {
+                            builder.Append("params ");
+                        }
+
+                        AddType(parameter.Type, builder);
+                        builder.Append($" {parameter.Name.EscapeIdentifier()}");
                     }
-
-                    AddType(parameter.Type, builder);
-                    builder.Append($" {parameter.Name.EscapeIdentifier()}");
-                });
+                );
             }
 
             private static void AddTypeArguments(IMethodSymbol symbol, StringBuilder builder)
@@ -111,7 +121,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 if (symbol.TypeArguments.Length > 0)
                 {
                     builder.Append('<');
-                    builder.AppendJoinedValues(", ", symbol.TypeArguments, static (symbol, builder) => builder.Append(symbol.Name.EscapeIdentifier()));
+                    builder.AppendJoinedValues(
+                        ", ",
+                        symbol.TypeArguments,
+                        static (symbol, builder) => builder.Append(symbol.Name.EscapeIdentifier())
+                    );
                     builder.Append('>');
                 }
             }

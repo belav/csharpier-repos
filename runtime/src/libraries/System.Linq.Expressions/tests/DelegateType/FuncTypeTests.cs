@@ -10,13 +10,19 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullTypeList()
         {
-            AssertExtensions.Throws<ArgumentNullException>("typeArgs", () => Expression.GetFuncType(default(Type[])));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeArgs",
+                () => Expression.GetFuncType(default(Type[]))
+            );
         }
 
         [Fact]
         public void NullInTypeList()
         {
-            AssertExtensions.Throws<ArgumentNullException>("typeArgs", () => Expression.GetFuncType(typeof(int), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeArgs",
+                () => Expression.GetFuncType(typeof(int), null)
+            );
         }
 
         [Theory, MemberData(nameof(ValidTypeArgs), true)]
@@ -65,8 +71,14 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(VoidTypeArgs), true)]
         public void UnsuccessfulGetFuncType(Type[] typeArgs)
         {
-            string paramName = typeArgs.Any(t => t == typeof(void)) || typeArgs.Count(t => t.IsPointer) == 1 ? null : "typeArgs";
-            AssertExtensions.Throws<ArgumentException>(paramName, () => Expression.GetFuncType(typeArgs));
+            string paramName =
+                typeArgs.Any(t => t == typeof(void)) || typeArgs.Count(t => t.IsPointer) == 1
+                    ? null
+                    : "typeArgs";
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                () => Expression.GetFuncType(typeArgs)
+            );
         }
 
         [Theory]

@@ -30,7 +30,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
     {
         private readonly List<Address> _resolvedAddresses;
 
-        internal Request(string moduleName, RequestSignature signature, Guid languageId = default(Guid))
+        internal Request(
+            string moduleName,
+            RequestSignature signature,
+            Guid languageId = default(Guid)
+        )
         {
             ModuleName = moduleName;
             Signature = signature;

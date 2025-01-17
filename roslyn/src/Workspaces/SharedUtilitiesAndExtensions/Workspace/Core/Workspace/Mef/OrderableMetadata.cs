@@ -29,7 +29,11 @@ namespace Microsoft.CodeAnalysis
             this.Name = (string?)data.GetValueOrDefault("Name");
         }
 
-        public OrderableMetadata(string? name, IEnumerable<string>? after = null, IEnumerable<string>? before = null)
+        public OrderableMetadata(
+            string? name,
+            IEnumerable<string>? after = null,
+            IEnumerable<string>? before = null
+        )
         {
             this.AfterTyped = after ?? SpecializedCollections.EmptyEnumerable<string>();
             this.BeforeTyped = before ?? SpecializedCollections.EmptyEnumerable<string>();

@@ -11,9 +11,16 @@ internal static class RerouteHelper
     internal const string GlobalRouteBuilderKey = "__GlobalEndpointRouteBuilder";
     internal const string UseRoutingKey = "__UseRouting";
 
-    internal static RequestDelegate Reroute(IApplicationBuilder app, object routeBuilder, RequestDelegate next)
+    internal static RequestDelegate Reroute(
+        IApplicationBuilder app,
+        object routeBuilder,
+        RequestDelegate next
+    )
     {
-        if (app.Properties.TryGetValue(UseRoutingKey, out var useRouting) && useRouting is Func<IApplicationBuilder, IApplicationBuilder> useRoutingFunc)
+        if (
+            app.Properties.TryGetValue(UseRoutingKey, out var useRouting)
+            && useRouting is Func<IApplicationBuilder, IApplicationBuilder> useRoutingFunc
+        )
         {
             var builder = app.New();
             // use the old routing pipeline if it exists so we preserve all the routes and matching logic

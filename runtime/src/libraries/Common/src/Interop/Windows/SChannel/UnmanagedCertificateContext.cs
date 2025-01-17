@@ -10,7 +10,10 @@ namespace System.Net
 {
     internal static partial class UnmanagedCertificateContext
     {
-        internal static void GetRemoteCertificatesFromStoreContext(SafeFreeCertContext certContext, X509Certificate2Collection collection)
+        internal static void GetRemoteCertificatesFromStoreContext(
+            SafeFreeCertContext certContext,
+            X509Certificate2Collection collection
+        )
         {
             if (certContext.IsInvalid)
             {

@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Syntax
         /// position in the supplied syntax tree and the set of diagnostics (warnings)
         /// whose reporting should either be suppressed or enabled at this position.
         /// </summary>
-        protected abstract WarningStateMapEntry[] CreateWarningStateMapEntries(SyntaxTree syntaxTree);
+        protected abstract WarningStateMapEntry[] CreateWarningStateMapEntries(
+            SyntaxTree syntaxTree
+        );
 
         /// <summary>
         /// Returns the reporting state for the supplied diagnostic id at the supplied position
@@ -79,11 +81,16 @@ namespace Microsoft.CodeAnalysis.Syntax
                 this.SpecificWarningOption = ImmutableDictionary.Create<string, TWarningState>();
             }
 
-            public WarningStateMapEntry(int position, TWarningState general, ImmutableDictionary<string, TWarningState> specific)
+            public WarningStateMapEntry(
+                int position,
+                TWarningState general,
+                ImmutableDictionary<string, TWarningState> specific
+            )
             {
                 this.Position = position;
                 this.GeneralWarningOption = general;
-                this.SpecificWarningOption = specific ?? ImmutableDictionary.Create<string, TWarningState>();
+                this.SpecificWarningOption =
+                    specific ?? ImmutableDictionary.Create<string, TWarningState>();
             }
 
             public int CompareTo(WarningStateMapEntry other)

@@ -20,7 +20,10 @@ CREATE TABLE "__EFMigrationsHistory" (
     "ProductVersion" TEXT NOT NULL
 );
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
@@ -35,7 +38,10 @@ CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
     "ProductVersion" TEXT NOT NULL
 );
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
@@ -48,28 +54,35 @@ CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
 DELETE FROM "__EFMigrationsHistory"
 WHERE "MigrationId" = 'Migration1';
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
     public void GetInsertScript_works()
     {
-        var sql = CreateHistoryRepository().GetInsertScript(
-            new HistoryRow("Migration1", "7.0.0"));
+        var sql = CreateHistoryRepository().GetInsertScript(new HistoryRow("Migration1", "7.0.0"));
 
         Assert.Equal(
             """
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
 VALUES ('Migration1', '7.0.0');
 
-""", sql, ignoreLineEndingDifferences: true);
+""",
+            sql,
+            ignoreLineEndingDifferences: true
+        );
     }
 
     [ConditionalFact]
     public void GetBeginIfNotExistsScript_works()
     {
         var repository = CreateHistoryRepository();
-        var ex = Assert.Throws<NotSupportedException>(() => repository.GetBeginIfNotExistsScript("Migration1"));
+        var ex = Assert.Throws<NotSupportedException>(
+            () => repository.GetBeginIfNotExistsScript("Migration1")
+        );
 
         Assert.Equal(SqliteStrings.MigrationScriptGenerationNotSupported, ex.Message);
     }
@@ -78,7 +91,9 @@ VALUES ('Migration1', '7.0.0');
     public void GetBeginIfExistsScript_works()
     {
         var repository = CreateHistoryRepository();
-        var ex = Assert.Throws<NotSupportedException>(() => repository.GetBeginIfExistsScript("Migration1"));
+        var ex = Assert.Throws<NotSupportedException>(
+            () => repository.GetBeginIfExistsScript("Migration1")
+        );
 
         Assert.Equal(SqliteStrings.MigrationScriptGenerationNotSupported, ex.Message);
     }
@@ -92,7 +107,6 @@ VALUES ('Migration1', '7.0.0');
         Assert.Equal(SqliteStrings.MigrationScriptGenerationNotSupported, ex.Message);
     }
 
-    private static IHistoryRepository CreateHistoryRepository()
-        => SqliteTestHelpers.Instance.CreateContextServices()
-            .GetRequiredService<IHistoryRepository>();
+    private static IHistoryRepository CreateHistoryRepository() =>
+        SqliteTestHelpers.Instance.CreateContextServices().GetRequiredService<IHistoryRepository>();
 }

@@ -15,11 +15,13 @@ namespace System.ServiceModel
         WSMessageEncoding messageEncoding = BasicHttpBindingDefaults.MessageEncoding;
         BasicHttpsSecurity basicHttpsSecurity;
 
-        public BasicHttpsBinding() : this(BasicHttpsSecurity.DefaultMode) { }
+        public BasicHttpsBinding()
+            : this(BasicHttpsSecurity.DefaultMode) { }
 
-        public BasicHttpsBinding(string configurationName) : this() 
-        { 
-            this.ApplyConfiguration(configurationName); 
+        public BasicHttpsBinding(string configurationName)
+            : this()
+        {
+            this.ApplyConfiguration(configurationName);
         }
 
         public BasicHttpsBinding(BasicHttpsSecurityMode securityMode)
@@ -32,24 +34,13 @@ namespace System.ServiceModel
         [DefaultValue(WSMessageEncoding.Text)]
         public WSMessageEncoding MessageEncoding
         {
-            get 
-            {
-                return this.messageEncoding;
-            }
-
-            set 
-            {
-                this.messageEncoding = value;
-            }
+            get { return this.messageEncoding; }
+            set { this.messageEncoding = value; }
         }
 
         public BasicHttpsSecurity Security
         {
-            get
-            {
-                return this.basicHttpsSecurity;
-            }
-
+            get { return this.basicHttpsSecurity; }
             set
             {
                 if (value == null)
@@ -63,10 +54,7 @@ namespace System.ServiceModel
 
         internal override BasicHttpSecurity BasicHttpSecurity
         {
-            get 
-            {
-                return this.basicHttpsSecurity.BasicHttpSecurity;
-            }
+            get { return this.basicHttpsSecurity.BasicHttpSecurity; }
         }
 
         internal override EnvelopeVersion GetEnvelopeVersion()
@@ -74,13 +62,27 @@ namespace System.ServiceModel
             return EnvelopeVersion.Soap11;
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingParameterCollection parameters)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingParameterCollection parameters
+        )
         {
-            if ((this.BasicHttpSecurity.Mode == BasicHttpSecurityMode.Transport ||
-                this.BasicHttpSecurity.Mode == BasicHttpSecurityMode.TransportCredentialOnly) &&
-                this.BasicHttpSecurity.Transport.ClientCredentialType == HttpClientCredentialType.InheritedFromHost)
+            if (
+                (
+                    this.BasicHttpSecurity.Mode == BasicHttpSecurityMode.Transport
+                    || this.BasicHttpSecurity.Mode == BasicHttpSecurityMode.TransportCredentialOnly
+                )
+                && this.BasicHttpSecurity.Transport.ClientCredentialType
+                    == HttpClientCredentialType.InheritedFromHost
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.HttpClientCredentialTypeInvalid, this.BasicHttpSecurity.Transport.ClientCredentialType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpClientCredentialTypeInvalid,
+                            this.BasicHttpSecurity.Transport.ClientCredentialType
+                        )
+                    )
+                );
             }
 
             return base.BuildChannelFactory<TChannel>(parameters);
@@ -100,7 +102,10 @@ namespace System.ServiceModel
                 bindingElements.Add(wsSecurity);
             }
             // add encoding (text or mtom)
-            WSMessageEncodingHelper.SyncUpEncodingBindingElementProperties(this.TextMessageEncodingBindingElement, this.MtomMessageEncodingBindingElement);
+            WSMessageEncodingHelper.SyncUpEncodingBindingElementProperties(
+                this.TextMessageEncodingBindingElement,
+                this.MtomMessageEncodingBindingElement
+            );
             if (this.MessageEncoding == WSMessageEncoding.Text)
                 bindingElements.Add(this.TextMessageEncodingBindingElement);
             else if (this.MessageEncoding == WSMessageEncoding.Mtom)
@@ -120,16 +125,20 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            BasicHttpsBindingCollectionElement section = BasicHttpsBindingCollectionElement.GetBindingCollectionElement();
+            BasicHttpsBindingCollectionElement section =
+                BasicHttpsBindingCollectionElement.GetBindingCollectionElement();
             BasicHttpsBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new ConfigurationErrorsException(
                         SR.GetString(
-                                SR.ConfigInvalidBindingConfigurationName,
-                                 configurationName,
-                                 ConfigurationStrings.BasicHttpsBindingCollectionElementName)));
+                            SR.ConfigInvalidBindingConfigurationName,
+                            configurationName,
+                            ConfigurationStrings.BasicHttpsBindingCollectionElementName
+                        )
+                    )
+                );
             }
             else
             {

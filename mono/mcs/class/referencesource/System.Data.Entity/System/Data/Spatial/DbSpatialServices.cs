@@ -14,26 +14,26 @@ namespace System.Data.Spatial
     /// <summary>
     /// A provider-independent service API for geospatial (Geometry/Geography) type support.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     [Serializable]
     public abstract class DbSpatialServices
     {
-        private static readonly Singleton<DbSpatialServices> defaultServices = new Singleton<DbSpatialServices>(LoadDefaultServices);
+        private static readonly Singleton<DbSpatialServices> defaultServices =
+            new Singleton<DbSpatialServices>(LoadDefaultServices);
 
         public static DbSpatialServices Default
         {
-            get
-            {
-                return defaultServices.Value;
-            }
+            get { return defaultServices.Value; }
         }
 
-        protected DbSpatialServices()
-        {
-        }
+        protected DbSpatialServices() { }
 
-        // For CTP1 use the SQL types whenever they are available.   
-        // in future we will have to consider providing a more pluggable 
+        // For CTP1 use the SQL types whenever they are available.
+        // in future we will have to consider providing a more pluggable
         // story here so that users can specify what spatial services they want to use by default.
         static DbSpatialServices LoadDefaultServices()
         {
@@ -56,7 +56,10 @@ namespace System.Data.Spatial
         /// <param name="providerValue"></param>
         /// <returns>A new <see cref="DbGeography"/> instance that contains the specified <paramref name="providerValue"/> and uses the specified <paramref name="spatialServices"/> as its spatial implementation</returns>
         /// <exception cref="ArgumentNullException"><paramref name="spatialServices"/> or <paramref name="providerValue"/> is null.</exception>
-        protected static DbGeography CreateGeography(DbSpatialServices spatialServices, object providerValue)
+        protected static DbGeography CreateGeography(
+            DbSpatialServices spatialServices,
+            object providerValue
+        )
         {
             spatialServices.CheckNull("spatialServices");
             providerValue.CheckNull("providerValue");
@@ -92,7 +95,7 @@ namespace System.Data.Spatial
         #region Geography Constructors - well known binary
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> value based on the specified well known binary value. 
+        /// Creates a new <see cref="DbGeography"/> value based on the specified well known binary value.
         /// </summary>
         /// <param name="wellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
         /// <returns>A new DbGeography value as defined by the well known binary value with the default DbGeography coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
@@ -100,101 +103,175 @@ namespace System.Data.Spatial
         public abstract DbGeography GeographyFromBinary(byte[] wellKnownBinary);
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="wellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="wellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeography GeographyFromBinary(byte[] wellKnownBinary, int coordinateSystemId);
+        public abstract DbGeography GeographyFromBinary(
+            byte[] wellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> line value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> line value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="lineWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="lineWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeography GeographyLineFromBinary(byte[] lineWellKnownBinary, int coordinateSystemId);
+        public abstract DbGeography GeographyLineFromBinary(
+            byte[] lineWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> point value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> point value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="pointWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="pointWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeography GeographyPointFromBinary(byte[] pointWellKnownBinary, int coordinateSystemId);
+        public abstract DbGeography GeographyPointFromBinary(
+            byte[] pointWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> polygon value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> polygon value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="polygonWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="polygonWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeography GeographyPolygonFromBinary(byte[] polygonWellKnownBinary, int coordinateSystemId);
+        public abstract DbGeography GeographyPolygonFromBinary(
+            byte[] polygonWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> multiline value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> multiline value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiLineWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiLineWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MultiLine", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "multiLine", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeography GeographyMultiLineFromBinary(byte[] multiLineWellKnownBinary, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "MultiLine",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "multiLine",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeography GeographyMultiLineFromBinary(
+            byte[] multiLineWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> multipoint value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> multipoint value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiPointWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiPointWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MultiPoint", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "multiPoint", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeography GeographyMultiPointFromBinary(byte[] multiPointWellKnownBinary, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "MultiPoint",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "multiPoint",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeography GeographyMultiPointFromBinary(
+            byte[] multiPointWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> multipolygon value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> multipolygon value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiPolygonWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiPolygonWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeography GeographyMultiPolygonFromBinary(byte[] multiPolygonWellKnownBinary, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeography GeographyMultiPolygonFromBinary(
+            byte[] multiPolygonWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> collection value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> collection value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="geographyCollectionWellKnownBinary">A byte array that contains a well known binary representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyCollectionWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeography GeographyCollectionFromBinary(byte[] geographyCollectionWellKnownBinary, int coordinateSystemId);
+        public abstract DbGeography GeographyCollectionFromBinary(
+            byte[] geographyCollectionWellKnownBinary,
+            int coordinateSystemId
+        );
 
         #endregion
 
         #region Geography Constructors - well known text
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> value based on the specified well known text value. 
+        /// Creates a new <see cref="DbGeography"/> value based on the specified well known text value.
         /// </summary>
         /// <param name="wellKnownText">A string that contains a well known text representation of the geography value.</param>
         /// <returns>A new DbGeography value as defined by the well known text value with the default DbGeography coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
@@ -202,7 +279,7 @@ namespace System.Data.Spatial
         public abstract DbGeography GeographyFromText(string wellKnownText);
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="wellKnownText">A string that contains a well known text representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
@@ -212,84 +289,155 @@ namespace System.Data.Spatial
         public abstract DbGeography GeographyFromText(string wellKnownText, int coordinateSystemId);
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> line value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> line value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="lineWellKnownText">A string that contains a well known text representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="lineWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeography GeographyLineFromText(string lineWellKnownText, int coordinateSystemId);
+        public abstract DbGeography GeographyLineFromText(
+            string lineWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> point value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> point value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="pointWellKnownText">A string that contains a well known text representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="pointWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeography GeographyPointFromText(string pointWellKnownText, int coordinateSystemId);
+        public abstract DbGeography GeographyPointFromText(
+            string pointWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> polygon value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> polygon value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="polygonWellKnownText">A string that contains a well known text representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="polygonWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeography GeographyPolygonFromText(string polygonWellKnownText, int coordinateSystemId);
+        public abstract DbGeography GeographyPolygonFromText(
+            string polygonWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> multiline value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> multiline value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiLineWellKnownText">A string that contains a well known text representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiLineWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MultiLine", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "multiLine", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeography GeographyMultiLineFromText(string multiLineWellKnownText, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "MultiLine",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "multiLine",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeography GeographyMultiLineFromText(
+            string multiLineWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> multipoint value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> multipoint value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiPointWellKnownText">A string that contains a well known text representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiPointWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MultiPoint", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "multiPoint", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeography GeographyMultiPointFromText(string multiPointWellKnownText, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "MultiPoint",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "multiPoint",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeography GeographyMultiPointFromText(
+            string multiPointWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> multipolygon value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> multipolygon value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiPolygonWellKnownText">A string that contains a well known text representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiPolygonWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeography GeographyMultiPolygonFromText(string multiPolygonWellKnownText, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeography GeographyMultiPolygonFromText(
+            string multiPolygonWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeography"/> collection value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeography"/> collection value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="geographyCollectionWellKnownText">A string that contains a well known text representation of the geography value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeography value should use.</param>
         /// <returns>A new DbGeography value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyCollectionWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeography GeographyCollectionFromText(string geographyCollectionWellKnownText, int coordinateSystemId);
+        public abstract DbGeography GeographyCollectionFromText(
+            string geographyCollectionWellKnownText,
+            int coordinateSystemId
+        );
 
         #endregion
 
@@ -301,7 +449,11 @@ namespace System.Data.Spatial
         /// <param name="geographyMarkup">A string that contains a Geometry Markup Language (GML) representation of the geography value.</param>
         /// <returns>A new DbGeography value as defined by the GML value with the default DbGeography coordinate system identifier (SRID) (<see cref="DbGeography.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyMarkup"/> is null.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gml")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Gml"
+        )]
         public abstract DbGeography GeographyFromGml(string geographyMarkup);
 
         /// <summary>
@@ -312,8 +464,15 @@ namespace System.Data.Spatial
         /// <returns>A new DbGeography value as defined by the GML value with the specified coordinate system identifier (SRID).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyMarkup"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gml")]
-        public abstract DbGeography GeographyFromGml(string geographyMarkup, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Gml"
+        )]
+        public abstract DbGeography GeographyFromGml(
+            string geographyMarkup,
+            int coordinateSystemId
+        );
 
         #endregion
 
@@ -396,8 +555,12 @@ namespace System.Data.Spatial
         /// <param name="geographyValue">The geography value for which the GML should be generated.</param>
         /// <returns>A string containing the GML representation of this DbGeography value.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyValue"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geographyValue"/> is not compatible with this spatial services implementation.</exception> 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gml")]
+        /// <exception cref="ArgumentException"><paramref name="geographyValue"/> is not compatible with this spatial services implementation.</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Gml"
+        )]
         public abstract string AsGml(DbGeography geographyValue);
 
         #endregion
@@ -421,7 +584,7 @@ namespace System.Data.Spatial
         /// <param name="otherGeography">The second geography value to compare for disjointness.</param>
         /// <returns><c>true</c> if <paramref name="geographyValue"/> is disjoint from <paramref name="otherGeography"/>; otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is not compatible with this spatial services implementation.</exception>         
+        /// <exception cref="ArgumentException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is not compatible with this spatial services implementation.</exception>
         public abstract bool Disjoint(DbGeography geographyValue, DbGeography otherGeography);
 
         /// <summary>
@@ -431,7 +594,7 @@ namespace System.Data.Spatial
         /// <param name="otherGeography">The second geography value to compare for intersection.</param>
         /// <returns><c>true</c> if <paramref name="geographyValue"/> intersects <paramref name="otherGeography"/>; otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is not compatible with this spatial services implementation.</exception> 
+        /// <exception cref="ArgumentException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is not compatible with this spatial services implementation.</exception>
         public abstract bool Intersects(DbGeography geographyValue, DbGeography otherGeography);
 
         #endregion
@@ -455,7 +618,7 @@ namespace System.Data.Spatial
         /// <param name="otherGeography">The second geography value.</param>
         /// <returns>A double value that specifies the distance between the two closest points in <paramref name="geographyValue"/> and <paramref name="otherGeography"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is not compatible with this spatial services implementation.</exception> 
+        /// <exception cref="ArgumentException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is not compatible with this spatial services implementation.</exception>
         public abstract double Distance(DbGeography geographyValue, DbGeography otherGeography);
 
         /// <summary>
@@ -466,7 +629,10 @@ namespace System.Data.Spatial
         /// <returns>A new DbGeography value representing the intersection of <paramref name="geographyValue"/> and <paramref name="otherGeography"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is not compatible with this spatial services implementation.</exception>
-        public abstract DbGeography Intersection(DbGeography geographyValue, DbGeography otherGeography);
+        public abstract DbGeography Intersection(
+            DbGeography geographyValue,
+            DbGeography otherGeography
+        );
 
         /// <summary>
         /// Computes the union of two <see cref="DbGeography"/> values.
@@ -486,7 +652,10 @@ namespace System.Data.Spatial
         /// <returns>A new DbGeography value representing the difference of <paramref name="geographyValue"/> and <paramref name="otherGeography"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is not compatible with this spatial services implementation.</exception>
-        public abstract DbGeography Difference(DbGeography geographyValue, DbGeography otherGeography);
+        public abstract DbGeography Difference(
+            DbGeography geographyValue,
+            DbGeography otherGeography
+        );
 
         /// <summary>
         /// Computes the symmetric difference of two <see cref="DbGeography"/> values.
@@ -496,7 +665,10 @@ namespace System.Data.Spatial
         /// <returns>A new DbGeography value representing the symmetric difference of <paramref name="geographyValue"/> and <paramref name="otherGeography"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="geographyValue"/> or <paramref name="otherGeography"/> is not compatible with this spatial services implementation.</exception>
-        public abstract DbGeography SymmetricDifference(DbGeography geographyValue, DbGeography otherGeography);
+        public abstract DbGeography SymmetricDifference(
+            DbGeography geographyValue,
+            DbGeography otherGeography
+        );
 
         #endregion
 
@@ -650,7 +822,10 @@ namespace System.Data.Spatial
         /// <param name="providerValue"></param>
         /// <returns>A new <see cref="DbGeometry"/> instance that contains the specified <paramref name="providerValue"/> and uses the specified <paramref name="spatialServices"/> as its spatial implementation</returns>
         /// <exception cref="ArgumentNullException"><paramref name="spatialServices"/> or <paramref name="providerValue"/> is null.</exception>
-        protected static DbGeometry CreateGeometry(DbSpatialServices spatialServices, object providerValue)
+        protected static DbGeometry CreateGeometry(
+            DbSpatialServices spatialServices,
+            object providerValue
+        )
         {
             spatialServices.CheckNull("spatialServices");
             providerValue.CheckNull("providerValue");
@@ -686,7 +861,7 @@ namespace System.Data.Spatial
         #region Geometry Constructors - well known binary
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> value based on the specified well known binary value. 
+        /// Creates a new <see cref="DbGeometry"/> value based on the specified well known binary value.
         /// </summary>
         /// <param name="wellKnownBinary">A byte array that contains a well known binary representation of the geometry value.</param>
         /// <returns>A new DbGeometry value as defined by the well known binary value with the default DbGeometry coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
@@ -694,101 +869,175 @@ namespace System.Data.Spatial
         public abstract DbGeometry GeometryFromBinary(byte[] wellKnownBinary);
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="wellKnownBinary">A byte array that contains a well known binary representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="wellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeometry GeometryFromBinary(byte[] wellKnownBinary, int coordinateSystemId);
+        public abstract DbGeometry GeometryFromBinary(
+            byte[] wellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> line value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> line value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="lineWellKnownBinary">A byte array that contains a well known binary representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="lineWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeometry GeometryLineFromBinary(byte[] lineWellKnownBinary, int coordinateSystemId);
+        public abstract DbGeometry GeometryLineFromBinary(
+            byte[] lineWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> point value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> point value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="pointWellKnownBinary">A byte array that contains a well known binary representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="pointWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeometry GeometryPointFromBinary(byte[] pointWellKnownBinary, int coordinateSystemId);
+        public abstract DbGeometry GeometryPointFromBinary(
+            byte[] pointWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> polygon value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> polygon value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="polygonWellKnownBinary">A byte array that contains a well known binary representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="polygonWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeometry GeometryPolygonFromBinary(byte[] polygonWellKnownBinary, int coordinateSystemId);
+        public abstract DbGeometry GeometryPolygonFromBinary(
+            byte[] polygonWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> multiline value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> multiline value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiLineWellKnownBinary">A byte array that contains a well known binary representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiLineWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MultiLine", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "multiLine", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeometry GeometryMultiLineFromBinary(byte[] multiLineWellKnownBinary, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "MultiLine",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "multiLine",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeometry GeometryMultiLineFromBinary(
+            byte[] multiLineWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> multipoint value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> multipoint value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiPointWellKnownBinary">A byte array that contains a well known binary representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiPointWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MultiPoint", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "multiPoint", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeometry GeometryMultiPointFromBinary(byte[] multiPointWellKnownBinary, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "MultiPoint",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "multiPoint",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeometry GeometryMultiPointFromBinary(
+            byte[] multiPointWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> multipolygon value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> multipolygon value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiPolygonWellKnownBinary">A byte array that contains a well known binary representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiPolygonWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeometry GeometryMultiPolygonFromBinary(byte[] multiPolygonWellKnownBinary, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeometry GeometryMultiPolygonFromBinary(
+            byte[] multiPolygonWellKnownBinary,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> collection value based on the specified well known binary value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> collection value based on the specified well known binary value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="geometryCollectionWellKnownBinary">A byte array that contains a well known binary representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known binary value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryCollectionWellKnownBinary"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeometry GeometryCollectionFromBinary(byte[] geometryCollectionWellKnownBinary, int coordinateSystemId);
+        public abstract DbGeometry GeometryCollectionFromBinary(
+            byte[] geometryCollectionWellKnownBinary,
+            int coordinateSystemId
+        );
 
         #endregion
 
-        #region Geometry Constructors - well known text 
+        #region Geometry Constructors - well known text
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> value based on the specified well known text value. 
+        /// Creates a new <see cref="DbGeometry"/> value based on the specified well known text value.
         /// </summary>
         /// <param name="wellKnownText">A string that contains a well known text representation of the geometry value.</param>
         /// <returns>A new DbGeometry value as defined by the well known text value with the default DbGeometry coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
@@ -796,7 +1045,7 @@ namespace System.Data.Spatial
         public abstract DbGeometry GeometryFromText(string wellKnownText);
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="wellKnownText">A string that contains a well known text representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
@@ -806,84 +1055,155 @@ namespace System.Data.Spatial
         public abstract DbGeometry GeometryFromText(string wellKnownText, int coordinateSystemId);
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> line value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> line value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="lineWellKnownText">A string that contains a well known text representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="lineWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeometry GeometryLineFromText(string lineWellKnownText, int coordinateSystemId);
+        public abstract DbGeometry GeometryLineFromText(
+            string lineWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> point value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> point value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="pointWellKnownText">A string that contains a well known text representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="pointWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeometry GeometryPointFromText(string pointWellKnownText, int coordinateSystemId);
+        public abstract DbGeometry GeometryPointFromText(
+            string pointWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> polygon value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> polygon value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="polygonWellKnownText">A string that contains a well known text representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="polygonWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeometry GeometryPolygonFromText(string polygonWellKnownText, int coordinateSystemId);
+        public abstract DbGeometry GeometryPolygonFromText(
+            string polygonWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> multiline value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> multiline value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiLineWellKnownText">A string that contains a well known text representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiLineWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MultiLine", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "multiLine", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeometry GeometryMultiLineFromText(string multiLineWellKnownText, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "MultiLine",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "multiLine",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeometry GeometryMultiLineFromText(
+            string multiLineWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> multipoint value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> multipoint value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiPointWellKnownText">A string that contains a well known text representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiPointWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MultiPoint", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "multiPoint", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeometry GeometryMultiPointFromText(string multiPointWellKnownText, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "MultiPoint",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "multiPoint",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeometry GeometryMultiPointFromText(
+            string multiPointWellKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> multipolygon value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> multipolygon value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="multiPolygonKnownText">A string that contains a well known text representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="multiPolygonKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "Match OGC, EDM")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "multi", Justification = "Match OGC, EDM")]
-        public abstract DbGeometry GeometryMultiPolygonFromText(string multiPolygonKnownText, int coordinateSystemId);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Multi",
+            Justification = "Match OGC, EDM"
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "multi",
+            Justification = "Match OGC, EDM"
+        )]
+        public abstract DbGeometry GeometryMultiPolygonFromText(
+            string multiPolygonKnownText,
+            int coordinateSystemId
+        );
 
         /// <summary>
-        /// Creates a new <see cref="DbGeometry"/> collection value based on the specified well known text value and coordinate system identifier (SRID). 
+        /// Creates a new <see cref="DbGeometry"/> collection value based on the specified well known text value and coordinate system identifier (SRID).
         /// </summary>
         /// <param name="geometryCollectionWellKnownText">A string that contains a well known text representation of the geometry value.</param>
         /// <param name="coordinateSystemId">The identifier of the coordinate system that the new DbGeometry value should use.</param>
         /// <returns>A new DbGeometry value as defined by the well known text value with the specified coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryCollectionWellKnownText"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        public abstract DbGeometry GeometryCollectionFromText(string geometryCollectionWellKnownText, int coordinateSystemId);
+        public abstract DbGeometry GeometryCollectionFromText(
+            string geometryCollectionWellKnownText,
+            int coordinateSystemId
+        );
 
         #endregion
 
@@ -895,7 +1215,11 @@ namespace System.Data.Spatial
         /// <param name="geometryMarkup">A string that contains a Geography Markup Language (GML) representation of the geometry value.</param>
         /// <returns>A new DbGeometry value as defined by the GML value with the default DbGeometry coordinate system identifier (SRID) (<see cref="DbGeometry.DefaultCoordinateSystemId"/>).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryMarkup"/> is null.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gml")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Gml"
+        )]
         public abstract DbGeometry GeometryFromGml(string geometryMarkup);
 
         /// <summary>
@@ -906,7 +1230,11 @@ namespace System.Data.Spatial
         /// <returns>A new DbGeometry value as defined by the GML value with the specified coordinate system identifier (SRID).</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryMarkup"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="coordinateSystemId"/> is not valid.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gml")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Gml"
+        )]
         public abstract DbGeometry GeometryFromGml(string geometryMarkup, int coordinateSystemId);
 
         #endregion
@@ -1026,8 +1354,12 @@ namespace System.Data.Spatial
         /// <param name="geometryValue">The geometry value for which the GML should be generated.</param>
         /// <returns>A string containing the GML representation of this DbGeometry value.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> is not compatible with this spatial services implementation.</exception> 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gml")]
+        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> is not compatible with this spatial services implementation.</exception>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Gml"
+        )]
         public abstract string AsGml(DbGeometry geometryValue);
 
         #endregion
@@ -1051,7 +1383,7 @@ namespace System.Data.Spatial
         /// <param name="otherGeometry">The second geometry value to compare for disjointness.</param>
         /// <returns><c>true</c> if <paramref name="geometryValue"/> is disjoint from <paramref name="otherGeometry"/>; otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception>         
+        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception>
         public abstract bool Disjoint(DbGeometry geometryValue, DbGeometry otherGeometry);
 
         /// <summary>
@@ -1061,7 +1393,7 @@ namespace System.Data.Spatial
         /// <param name="otherGeometry">The second geometry value to compare for intersection.</param>
         /// <returns><c>true</c> if <paramref name="geometryValue"/> intersects <paramref name="otherGeometry"/>; otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception> 
+        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception>
         public abstract bool Intersects(DbGeometry geometryValue, DbGeometry otherGeometry);
 
         /// <summary>
@@ -1071,7 +1403,7 @@ namespace System.Data.Spatial
         /// <param name="otherGeometry">The second geometry value.</param>
         /// <returns><c>true</c> if <paramref name="geometryValue"/> touches <paramref name="otherGeometry"/>; otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception> 
+        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception>
         public abstract bool Touches(DbGeometry geometryValue, DbGeometry otherGeometry);
 
         /// <summary>
@@ -1081,7 +1413,7 @@ namespace System.Data.Spatial
         /// <param name="otherGeometry">The second geometry value.</param>
         /// <returns><c>true</c> if <paramref name="geometryValue"/> crosses <paramref name="otherGeometry"/>; otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception> 
+        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception>
         public abstract bool Crosses(DbGeometry geometryValue, DbGeometry otherGeometry);
 
         /// <summary>
@@ -1101,7 +1433,7 @@ namespace System.Data.Spatial
         /// <param name="otherGeometry">The second geometry value.</param>
         /// <returns><c>true</c> if <paramref name="geometryValue"/> contains <paramref name="otherGeometry"/>; otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception> 
+        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception>
         public abstract bool Contains(DbGeometry geometryValue, DbGeometry otherGeometry);
 
         /// <summary>
@@ -1111,7 +1443,7 @@ namespace System.Data.Spatial
         /// <param name="otherGeometry">The second geometry value.</param>
         /// <returns><c>true</c> if <paramref name="geometryValue"/> overlaps <paramref name="otherGeometry"/>; otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception> 
+        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception>
         public abstract bool Overlaps(DbGeometry geometryValue, DbGeometry otherGeometry);
 
         /// <summary>
@@ -1123,8 +1455,12 @@ namespace System.Data.Spatial
         /// <param name="matrix">A string that contains the text representation of the (DE-9IM) intersection pattern that defines the relation.</param>
         /// <returns><c>true</c> if this <paramref name="geometryValue"/> value relates to <paramref name="otherGeometry"/> according to the specified intersection pattern matrix; otherwise <c>false</c>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/>, <paramref name="otherGeometry"/> or <paramref name="matrix"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception> 
-        public abstract bool Relate(DbGeometry geometryValue, DbGeometry otherGeometry, string matrix);
+        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception>
+        public abstract bool Relate(
+            DbGeometry geometryValue,
+            DbGeometry otherGeometry,
+            string matrix
+        );
 
         #endregion
 
@@ -1147,7 +1483,7 @@ namespace System.Data.Spatial
         /// <param name="otherGeometry">The second geometry value.</param>
         /// <returns>A double value that specifies the distance between the two closest points in <paramref name="geometryValue"/> and <paramref name="otherGeometry"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception> 
+        /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception>
         public abstract double Distance(DbGeometry geometryValue, DbGeometry otherGeometry);
 
         /// </summary>
@@ -1197,7 +1533,10 @@ namespace System.Data.Spatial
         /// <returns>A new DbGeometry value representing the symmetric difference between <paramref name="geometryValue"/> and <paramref name="otherGeometry"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="geometryValue"/> or <paramref name="otherGeometry"/> is not compatible with this spatial services implementation.</exception>
-        public abstract DbGeometry SymmetricDifference(DbGeometry geometryValue, DbGeometry otherGeometry);
+        public abstract DbGeometry SymmetricDifference(
+            DbGeometry geometryValue,
+            DbGeometry otherGeometry
+        );
 
         #endregion
 
@@ -1251,7 +1590,7 @@ namespace System.Data.Spatial
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="geometryValue"/> is not compatible with this spatial services implementation.</exception>
-         public abstract double? GetElevation(DbGeometry geometryValue);
+        public abstract double? GetElevation(DbGeometry geometryValue);
 
         /// <summary>
         /// Returns the M (Measure) coordinate of the given <see cref="DbGeometry"/> value, if it represents a point.
@@ -1354,7 +1693,12 @@ namespace System.Data.Spatial
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="geometryValue"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="geometryValue"/> is not compatible with this spatial services implementation.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Centroid", Justification = "Naming convention prescribed by OGC specification")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Centroid",
+            Justification = "Naming convention prescribed by OGC specification"
+        )]
         public abstract DbGeometry GetCentroid(DbGeometry geometryValue);
 
         /// <summary>

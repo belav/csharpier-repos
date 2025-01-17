@@ -34,7 +34,8 @@ public static class ChangeTrackerExtensions
     public static string ToDebugString(
         this ChangeTracker changeTracker,
         ChangeTrackerDebugStringOptions options = ChangeTrackerDebugStringOptions.LongDefault,
-        int indent = 0)
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
@@ -42,7 +43,9 @@ public static class ChangeTrackerExtensions
         try
         {
             var stateManager = changeTracker.Context.GetService<IStateManager>();
-            foreach (var entry in stateManager.Entries.OrderBy(e => e, EntityEntryComparer.Instance))
+            foreach (
+                var entry in stateManager.Entries.OrderBy(e => e, EntityEntryComparer.Instance)
+            )
             {
                 builder.Append(indentString).AppendLine(entry.ToDebugString(options, indent));
             }
@@ -76,7 +79,10 @@ public static class ChangeTrackerExtensions
                 return 1;
             }
 
-            var result = StringComparer.InvariantCulture.Compare(x.EntityType.Name, y.EntityType.Name);
+            var result = StringComparer.InvariantCulture.Compare(
+                x.EntityType.Name,
+                y.EntityType.Name
+            );
             if (result != 0)
             {
                 return result;

@@ -6,11 +6,15 @@ using System.Runtime.CompilerServices;
 
 namespace System.Diagnostics.Tracing
 {
-    [EventSource(Guid = "8E9F5090-2D75-4d03-8A81-E5AFBF85DAF1", Name = "System.Diagnostics.Eventing.FrameworkEventSource")]
+    [EventSource(
+        Guid = "8E9F5090-2D75-4d03-8A81-E5AFBF85DAF1",
+        Name = "System.Diagnostics.Eventing.FrameworkEventSource"
+    )]
     [EventSourceAutoGenerate]
     internal sealed partial class FrameworkEventSource : EventSource
     {
-        private const string EventSourceSuppressMessage = "Parameters to this method are primitive and are trimmer safe";
+        private const string EventSourceSuppressMessage =
+            "Parameters to this method are primitive and are trimmer safe";
         public static readonly FrameworkEventSource Log = new FrameworkEventSource();
 
         // Keyword definitions.  These represent logical groups of events that can be turned on and off independently
@@ -35,10 +39,21 @@ namespace System.Diagnostics.Tracing
         private FrameworkEventSource(int _) { }
 
         // optimized for common signatures (used by the ThreadTransferSend/Receive events)
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
         [NonEvent]
-        private unsafe void WriteEvent(int eventId, long arg1, int arg2, string? arg3, bool arg4, int arg5, int arg6)
+        private unsafe void WriteEvent(
+            int eventId,
+            long arg1,
+            int arg2,
+            string? arg3,
+            bool arg4,
+            int arg5,
+            int arg6
+        )
         {
             if (IsEnabled())
             {
@@ -70,8 +85,11 @@ namespace System.Diagnostics.Tracing
         }
 
         // optimized for common signatures (used by the ThreadTransferSend/Receive events)
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = EventSourceSuppressMessage)]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = EventSourceSuppressMessage
+        )]
         [NonEvent]
         private unsafe void WriteEvent(int eventId, long arg1, int arg2, string? arg3)
         {
@@ -95,7 +113,11 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-        [Event(30, Level = EventLevel.Verbose, Keywords = Keywords.ThreadPool | Keywords.ThreadTransfer)]
+        [Event(
+            30,
+            Level = EventLevel.Verbose,
+            Keywords = Keywords.ThreadPool | Keywords.ThreadTransfer
+        )]
         public void ThreadPoolEnqueueWork(long workID)
         {
             WriteEvent(30, workID);
@@ -107,9 +129,14 @@ namespace System.Diagnostics.Tracing
         // easier to use for association, though there may be collisions.
         [NonEvent]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public void ThreadPoolEnqueueWorkObject(object workID) => ThreadPoolEnqueueWork(workID.GetHashCode());
+        public void ThreadPoolEnqueueWorkObject(object workID) =>
+            ThreadPoolEnqueueWork(workID.GetHashCode());
 
-        [Event(31, Level = EventLevel.Verbose, Keywords = Keywords.ThreadPool | Keywords.ThreadTransfer)]
+        [Event(
+            31,
+            Level = EventLevel.Verbose,
+            Keywords = Keywords.ThreadPool | Keywords.ThreadTransfer
+        )]
         public void ThreadPoolDequeueWork(long workID)
         {
             WriteEvent(31, workID);
@@ -121,7 +148,8 @@ namespace System.Diagnostics.Tracing
         // easier to use for association, though there may be collisions.
         [NonEvent]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public void ThreadPoolDequeueWorkObject(object workID) => ThreadPoolDequeueWork(workID.GetHashCode());
+        public void ThreadPoolDequeueWorkObject(object workID) =>
+            ThreadPoolDequeueWork(workID.GetHashCode());
 
         // id -   represents a correlation ID that allows correlation of two activities, one stamped by
         //        ThreadTransferSend, the other by ThreadTransferReceive
@@ -131,16 +159,35 @@ namespace System.Diagnostics.Tracing
         //        3 - WinRT dispatch operations
         // info - any additional information user code might consider interesting
         // intInfo1/2 - any additional integer information user code might consider interesting
-        [Event(150, Level = EventLevel.Informational, Keywords = Keywords.ThreadTransfer, Task = Tasks.ThreadTransfer, Opcode = EventOpcode.Send)]
-        public void ThreadTransferSend(long id, int kind, string info, bool multiDequeues, int intInfo1, int intInfo2)
+        [Event(
+            150,
+            Level = EventLevel.Informational,
+            Keywords = Keywords.ThreadTransfer,
+            Task = Tasks.ThreadTransfer,
+            Opcode = EventOpcode.Send
+        )]
+        public void ThreadTransferSend(
+            long id,
+            int kind,
+            string info,
+            bool multiDequeues,
+            int intInfo1,
+            int intInfo2
+        )
         {
             WriteEvent(150, id, kind, info, multiDequeues, intInfo1, intInfo2);
         }
 
         // id - is a managed object's hash code
         [NonEvent]
-        public void ThreadTransferSendObj(object id, int kind, string info, bool multiDequeues, int intInfo1, int intInfo2) =>
-            ThreadTransferSend(id.GetHashCode(), kind, info, multiDequeues, intInfo1, intInfo2);
+        public void ThreadTransferSendObj(
+            object id,
+            int kind,
+            string info,
+            bool multiDequeues,
+            int intInfo1,
+            int intInfo2
+        ) => ThreadTransferSend(id.GetHashCode(), kind, info, multiDequeues, intInfo1, intInfo2);
 
         // id -   represents a correlation ID that allows correlation of two activities, one stamped by
         //        ThreadTransferSend, the other by ThreadTransferReceive
@@ -153,7 +200,13 @@ namespace System.Diagnostics.Tracing
         //        2 - managed async IO operations (FileStream, PipeStream, a.o.)
         //        3 - WinRT dispatch operations
         // info - any additional information user code might consider interesting
-        [Event(151, Level = EventLevel.Informational, Keywords = Keywords.ThreadTransfer, Task = Tasks.ThreadTransfer, Opcode = EventOpcode.Receive)]
+        [Event(
+            151,
+            Level = EventLevel.Informational,
+            Keywords = Keywords.ThreadTransfer,
+            Task = Tasks.ThreadTransfer,
+            Opcode = EventOpcode.Receive
+        )]
         public void ThreadTransferReceive(long id, int kind, string? info)
         {
             WriteEvent(151, id, kind, info);

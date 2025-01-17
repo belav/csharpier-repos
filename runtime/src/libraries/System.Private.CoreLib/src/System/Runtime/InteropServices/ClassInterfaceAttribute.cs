@@ -10,6 +10,7 @@ namespace System.Runtime.InteropServices
         {
             Value = classInterfaceType;
         }
+
         public ClassInterfaceAttribute(short classInterfaceType)
         {
             Value = (ClassInterfaceType)classInterfaceType;

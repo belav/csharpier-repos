@@ -13,8 +13,10 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteRandomTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo MethodInfo
-        = typeof(DbFunctionsExtensions).GetMethod(nameof(DbFunctionsExtensions.Random), new[] { typeof(DbFunctions) })!;
+    private static readonly MethodInfo MethodInfo = typeof(DbFunctionsExtensions).GetMethod(
+        nameof(DbFunctionsExtensions.Random),
+        new[] { typeof(DbFunctions) }
+    )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -36,12 +38,14 @@ public class SqliteRandomTranslator : IMethodCallTranslator
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual SqlExpression? Translate(
-            SqlExpression? instance,
-            MethodInfo method,
-            IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        SqlExpression? instance,
+        MethodInfo method,
+        IReadOnlyList<SqlExpression> arguments,
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
         // Issue #15586: Query: TypeCompatibility chart for inference.
-        => MethodInfo.Equals(method)
+        =>
+        MethodInfo.Equals(method)
             ? _sqlExpressionFactory.Function(
                 "abs",
                 new SqlExpression[]
@@ -52,11 +56,14 @@ public class SqliteRandomTranslator : IMethodCallTranslator
                             Enumerable.Empty<SqlExpression>(),
                             nullable: false,
                             argumentsPropagateNullability: Enumerable.Empty<bool>(),
-                            method.ReturnType),
-                        _sqlExpressionFactory.Constant(9223372036854780000.0))
+                            method.ReturnType
+                        ),
+                        _sqlExpressionFactory.Constant(9223372036854780000.0)
+                    ),
                 },
                 nullable: false,
                 argumentsPropagateNullability: Enumerable.Empty<bool>(),
-                method.ReturnType)
+                method.ReturnType
+            )
             : null;
 }

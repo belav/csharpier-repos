@@ -17,8 +17,17 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal abstract class AbstractObjectInitializerCompletionProvider : LSPCompletionProvider
     {
-        protected abstract Tuple<ITypeSymbol, Location>? GetInitializedType(Document document, SemanticModel semanticModel, int position, CancellationToken cancellationToken);
-        protected abstract HashSet<string> GetInitializedMembers(SyntaxTree tree, int position, CancellationToken cancellationToken);
+        protected abstract Tuple<ITypeSymbol, Location>? GetInitializedType(
+            Document document,
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        );
+        protected abstract HashSet<string> GetInitializedMembers(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken
+        );
         protected abstract string EscapeIdentifier(ISymbol symbol);
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
@@ -27,8 +36,13 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             var position = context.Position;
             var cancellationToken = context.CancellationToken;
 
-            var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
-            if (GetInitializedType(document, semanticModel, position, cancellationToken) is not var (type, initializerLocation))
+            var semanticModel = await document
+                .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                .ConfigureAwait(false);
+            if (
+                GetInitializedType(document, semanticModel, position, cancellationToken)
+                is not var (type, initializerLocation)
+            )
             {
                 return;
             }
@@ -53,18 +67,30 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             // Find the members that can be initialized. If we have a NamedTypeSymbol, also get the overridden members.
             IEnumerable<ISymbol> members = semanticModel.LookupSymbols(position, initializedType);
-            members = members.Where(m => IsInitializable(m, enclosing) &&
-                                         m.CanBeReferencedByName &&
-                                         IsLegalFieldOrProperty(m) &&
-                                         !m.IsImplicitlyDeclared);
+            members = members.Where(m =>
+                IsInitializable(m, enclosing)
+                && m.CanBeReferencedByName
+                && IsLegalFieldOrProperty(m)
+                && !m.IsImplicitlyDeclared
+            );
 
             // Filter out those members that have already been typed
-            var alreadyTypedMembers = GetInitializedMembers(semanticModel.SyntaxTree, position, cancellationToken);
+            var alreadyTypedMembers = GetInitializedMembers(
+                semanticModel.SyntaxTree,
+                position,
+                cancellationToken
+            );
             var uninitializedMembers = members.Where(m => !alreadyTypedMembers.Contains(m.Name));
 
             // Sort the members by name so if we preselect one, it'll be stable
-            uninitializedMembers = uninitializedMembers.Where(m => m.IsEditorBrowsable(context.CompletionOptions.HideAdvancedMembers, semanticModel.Compilation))
-                                                       .OrderBy(m => m.Name);
+            uninitializedMembers = uninitializedMembers
+                .Where(m =>
+                    m.IsEditorBrowsable(
+                        context.CompletionOptions.HideAdvancedMembers,
+                        semanticModel.Compilation
+                    )
+                )
+                .OrderBy(m => m.Name);
 
             var firstUnitializedRequiredMember = true;
 
@@ -76,25 +102,47 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 // with a bunch of members.
                 if (firstUnitializedRequiredMember && uninitializedMember.IsRequired())
                 {
-                    rules = rules.WithSelectionBehavior(CompletionItemSelectionBehavior.HardSelection).WithMatchPriority(MatchPriority.Preselect);
+                    rules = rules
+                        .WithSelectionBehavior(CompletionItemSelectionBehavior.HardSelection)
+                        .WithMatchPriority(MatchPriority.Preselect);
                     firstUnitializedRequiredMember = false;
                 }
 
-                context.AddItem(SymbolCompletionItem.CreateWithSymbolId(
-                    displayText: EscapeIdentifier(uninitializedMember),
-                    displayTextSuffix: "",
-                    insertionText: null,
-                    symbols: ImmutableArray.Create(uninitializedMember),
-                    contextPosition: initializerLocation.SourceSpan.Start,
-                    inlineDescription: uninitializedMember.IsRequired() ? FeaturesResources.Required : null,
-                    rules: rules));
+                context.AddItem(
+                    SymbolCompletionItem.CreateWithSymbolId(
+                        displayText: EscapeIdentifier(uninitializedMember),
+                        displayTextSuffix: "",
+                        insertionText: null,
+                        symbols: ImmutableArray.Create(uninitializedMember),
+                        contextPosition: initializerLocation.SourceSpan.Start,
+                        inlineDescription: uninitializedMember.IsRequired()
+                            ? FeaturesResources.Required
+                            : null,
+                        rules: rules
+                    )
+                );
             }
         }
 
-        internal override Task<CompletionDescription> GetDescriptionWorkerAsync(Document document, CompletionItem item, CompletionOptions options, SymbolDescriptionOptions displayOptions, CancellationToken cancellationToken)
-            => SymbolCompletionItem.GetDescriptionAsync(item, document, displayOptions, cancellationToken);
+        internal override Task<CompletionDescription> GetDescriptionWorkerAsync(
+            Document document,
+            CompletionItem item,
+            CompletionOptions options,
+            SymbolDescriptionOptions displayOptions,
+            CancellationToken cancellationToken
+        ) =>
+            SymbolCompletionItem.GetDescriptionAsync(
+                item,
+                document,
+                displayOptions,
+                cancellationToken
+            );
 
-        protected abstract Task<bool> IsExclusiveAsync(Document document, int position, CancellationToken cancellationToken);
+        protected abstract Task<bool> IsExclusiveAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
 
         private static bool IsLegalFieldOrProperty(ISymbol symbol)
         {
@@ -103,19 +151,23 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 || CanSupportObjectInitializer(symbol);
         }
 
-        private static readonly CompletionItemRules s_rules = CompletionItemRules.Create(enterKeyRule: EnterKeyRule.Never);
+        private static readonly CompletionItemRules s_rules = CompletionItemRules.Create(
+            enterKeyRule: EnterKeyRule.Never
+        );
 
         protected virtual bool IsInitializable(ISymbol member, INamedTypeSymbol containingType)
         {
-            return
-                !member.IsStatic &&
-                member.MatchesKind(SymbolKind.Field, SymbolKind.Property) &&
-                member.IsAccessibleWithin(containingType);
+            return !member.IsStatic
+                && member.MatchesKind(SymbolKind.Field, SymbolKind.Property)
+                && member.IsAccessibleWithin(containingType);
         }
 
         private static bool CanSupportObjectInitializer(ISymbol symbol)
         {
-            Debug.Assert(!symbol.IsWriteableFieldOrProperty(), "Assertion failed - expected writable field/property check before calling this method.");
+            Debug.Assert(
+                !symbol.IsWriteableFieldOrProperty(),
+                "Assertion failed - expected writable field/property check before calling this method."
+            );
 
             if (symbol is IFieldSymbol fieldSymbol)
             {

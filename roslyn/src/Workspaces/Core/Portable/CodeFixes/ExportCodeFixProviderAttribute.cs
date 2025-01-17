@@ -17,13 +17,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public sealed class ExportCodeFixProviderAttribute : ExportAttribute
     {
-        private static readonly string[] s_defaultDocumentKinds = [nameof(TextDocumentKind.Document)];
-        private static readonly string[] s_documentKindNames = Enum.GetNames(typeof(TextDocumentKind));
+        private static readonly string[] s_defaultDocumentKinds =
+        [
+            nameof(TextDocumentKind.Document),
+        ];
+        private static readonly string[] s_documentKindNames = Enum.GetNames(
+            typeof(TextDocumentKind)
+        );
 
         private string[] _documentKinds;
 
         /// <summary>
-        /// Optional name of the <see cref="CodeFixProvider"/>.  
+        /// Optional name of the <see cref="CodeFixProvider"/>.
         /// </summary>
         [DisallowNull]
         public string? Name { get; set; }
@@ -51,8 +56,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 {
                     if (kind == null || !s_documentKindNames.Contains(kind))
                     {
-                        var message = string.Format(WorkspacesResources.Unexpected_value_0_in_DocumentKinds_array,
-                            arg0: kind?.ToString() ?? "null");
+                        var message = string.Format(
+                            WorkspacesResources.Unexpected_value_0_in_DocumentKinds_array,
+                            arg0: kind?.ToString() ?? "null"
+                        );
                         throw new ArgumentException(message);
                     }
                 }
@@ -75,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// <param name="additionalLanguages">Additional languages to which the code fix provider applies. See <see cref="LanguageNames"/>.</param>
         public ExportCodeFixProviderAttribute(
             string firstLanguage,
-            params string[] additionalLanguages)
+            params string[] additionalLanguages
+        )
             : base(typeof(CodeFixProvider))
         {
             if (additionalLanguages == null)

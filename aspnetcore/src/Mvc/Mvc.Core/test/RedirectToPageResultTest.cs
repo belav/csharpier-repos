@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -20,10 +20,7 @@ public class RedirectToPageResultTest
     public async Task ExecuteResultAsync_ThrowsOnNullUrl()
     {
         // Arrange
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = CreateServices() };
 
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
 
@@ -36,7 +33,8 @@ public class RedirectToPageResultTest
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
             () => result.ExecuteResultAsync(actionContext),
-            "No page named '/some-page' matches the supplied values.");
+            "No page named '/some-page' matches the supplied values."
+        );
     }
 
     [Theory]
@@ -49,18 +47,22 @@ public class RedirectToPageResultTest
 
         var httpContext = new Mock<HttpContext>();
         var httpResponse = new Mock<HttpResponse>();
-        httpContext.SetupGet(c => c.RequestServices)
-            .Returns(CreateServices());
-        httpContext.SetupGet(c => c.Response)
-            .Returns(httpResponse.Object);
+        httpContext.SetupGet(c => c.RequestServices).Returns(CreateServices());
+        httpContext.SetupGet(c => c.Response).Returns(httpResponse.Object);
 
         var actionContext = new ActionContext(
             httpContext.Object,
             new RouteData(),
-            new ActionDescriptor());
+            new ActionDescriptor()
+        );
 
         var urlHelper = GetUrlHelper(actionContext, expectedUrl);
-        var result = new RedirectToPageResult("/MyPage", null, new { id = 10, test = "value" }, permanentRedirect)
+        var result = new RedirectToPageResult(
+            "/MyPage",
+            null,
+            new { id = 10, test = "value" },
+            permanentRedirect
+        )
         {
             UrlHelper = urlHelper,
         };
@@ -76,10 +78,7 @@ public class RedirectToPageResultTest
     public async Task ExecuteResultAsync_LocalRelativePaths()
     {
         // Arrange
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = CreateServices() };
 
         var pageContext = new ActionContext
         {
@@ -93,7 +92,8 @@ public class RedirectToPageResultTest
         UrlRouteContext context = null;
         var urlHelper = new Mock<IUrlHelper>();
         urlHelper.SetupGet(h => h.ActionContext).Returns(pageContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext c) => context = c)
             .Returns("some-value");
         var values = new { test = "test-value" };
@@ -109,7 +109,8 @@ public class RedirectToPageResultTest
         // Assert
         Assert.NotNull(context);
         Assert.Null(context.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(context.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(context.Values),
             value =>
             {
                 Assert.Equal("test", value.Key);
@@ -124,7 +125,8 @@ public class RedirectToPageResultTest
             {
                 Assert.Equal("handler", value.Key);
                 Assert.Equal("page-handler", value.Value);
-            });
+            }
+        );
         Assert.Equal("ftp", context.Protocol);
         Assert.Equal("test-fragment", context.Fragment);
     }
@@ -133,10 +135,7 @@ public class RedirectToPageResultTest
     public async Task ExecuteResultAsync_WithAllParameters()
     {
         // Arrange
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = CreateServices() };
 
         var pageContext = new ActionContext
         {
@@ -147,11 +146,18 @@ public class RedirectToPageResultTest
         UrlRouteContext context = null;
         var urlHelper = new Mock<IUrlHelper>();
         urlHelper.SetupGet(h => h.ActionContext).Returns(pageContext);
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext c) => context = c)
             .Returns("some-value");
         var values = new { test = "test-value" };
-        var result = new RedirectToPageResult("/MyPage", "page-handler", values, true, "test-fragment")
+        var result = new RedirectToPageResult(
+            "/MyPage",
+            "page-handler",
+            values,
+            true,
+            "test-fragment"
+        )
         {
             UrlHelper = urlHelper.Object,
             Protocol = "ftp",
@@ -163,7 +169,8 @@ public class RedirectToPageResultTest
         // Assert
         Assert.NotNull(context);
         Assert.Null(context.RouteName);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(context.Values),
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(context.Values),
             value =>
             {
                 Assert.Equal("test", value.Key);
@@ -178,7 +185,8 @@ public class RedirectToPageResultTest
             {
                 Assert.Equal("handler", value.Key);
                 Assert.Equal("page-handler", value.Value);
-            });
+            }
+        );
         Assert.Equal("ftp", context.Protocol);
         Assert.Equal("test-fragment", context.Fragment);
     }
@@ -190,47 +198,39 @@ public class RedirectToPageResultTest
         var expected = "path/to/this-page";
         var httpContext = new Mock<HttpContext>();
         var httpResponse = new Mock<HttpResponse>();
-        httpContext.SetupGet(c => c.Response)
-            .Returns(httpResponse.Object);
-        httpContext.SetupGet(c => c.RequestServices)
-            .Returns(CreateServices());
-        var routeData = new RouteData
-        {
-            Values =
-                {
-                    ["page"] = expected,
-                }
-        };
+        httpContext.SetupGet(c => c.Response).Returns(httpResponse.Object);
+        httpContext.SetupGet(c => c.RequestServices).Returns(CreateServices());
+        var routeData = new RouteData { Values = { ["page"] = expected } };
 
         var actionContext = new ActionContext(
             httpContext.Object,
             routeData,
-            new ActionDescriptor());
+            new ActionDescriptor()
+        );
 
         UrlRouteContext context = null;
         var urlHelper = new Mock<IUrlHelper>();
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext c) => context = c)
             .Returns("some-value");
-        urlHelper.SetupGet(h => h.ActionContext)
-            .Returns(actionContext);
+        urlHelper.SetupGet(h => h.ActionContext).Returns(actionContext);
         var pageName = (string)null;
-        var result = new RedirectToPageResult(pageName)
-        {
-            UrlHelper = urlHelper.Object,
-        };
+        var result = new RedirectToPageResult(pageName) { UrlHelper = urlHelper.Object };
 
         // Act
         await result.ExecuteResultAsync(actionContext);
 
         // Assert
         Assert.NotNull(context);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(context.Values),
-           value =>
-           {
-               Assert.Equal("page", value.Key);
-               Assert.Equal(expected, value.Value);
-           });
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(context.Values),
+            value =>
+            {
+                Assert.Equal("page", value.Key);
+                Assert.Equal(expected, value.Value);
+            }
+        );
     }
 
     [Fact]
@@ -240,59 +240,53 @@ public class RedirectToPageResultTest
         var expected = "path/to/this-page";
         var httpContext = new Mock<HttpContext>();
         var httpResponse = new Mock<HttpResponse>();
-        httpContext.SetupGet(c => c.Response)
-            .Returns(httpResponse.Object);
-        httpContext.SetupGet(c => c.RequestServices)
-            .Returns(CreateServices());
-        var routeData = new RouteData
-        {
-            Values =
-                {
-                    ["page"] = expected,
-                    ["handler"] = "delete",
-                }
-        };
+        httpContext.SetupGet(c => c.Response).Returns(httpResponse.Object);
+        httpContext.SetupGet(c => c.RequestServices).Returns(CreateServices());
+        var routeData = new RouteData { Values = { ["page"] = expected, ["handler"] = "delete" } };
 
         var actionContext = new ActionContext(
             httpContext.Object,
             routeData,
-            new ActionDescriptor());
+            new ActionDescriptor()
+        );
 
         UrlRouteContext context = null;
         var urlHelper = new Mock<IUrlHelper>();
-        urlHelper.Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
+        urlHelper
+            .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
             .Callback((UrlRouteContext c) => context = c)
             .Returns("some-value");
-        urlHelper.SetupGet(h => h.ActionContext)
-            .Returns(actionContext);
+        urlHelper.SetupGet(h => h.ActionContext).Returns(actionContext);
         var pageName = (string)null;
-        var result = new RedirectToPageResult(pageName)
-        {
-            UrlHelper = urlHelper.Object,
-        };
+        var result = new RedirectToPageResult(pageName) { UrlHelper = urlHelper.Object };
 
         // Act
         await result.ExecuteResultAsync(actionContext);
 
         // Assert
         Assert.NotNull(context);
-        Assert.Collection(Assert.IsType<RouteValueDictionary>(context.Values),
-           value =>
-           {
-               Assert.Equal("page", value.Key);
-               Assert.Equal(expected, value.Value);
-           },
-           value =>
-           {
-               Assert.Equal("handler", value.Key);
-               Assert.Null(value.Value);
-           });
+        Assert.Collection(
+            Assert.IsType<RouteValueDictionary>(context.Values),
+            value =>
+            {
+                Assert.Equal("page", value.Key);
+                Assert.Equal(expected, value.Value);
+            },
+            value =>
+            {
+                Assert.Equal("handler", value.Key);
+                Assert.Null(value.Value);
+            }
+        );
     }
 
     private static IServiceProvider CreateServices(IUrlHelperFactory factory = null)
     {
         var services = new ServiceCollection();
-        services.AddSingleton<IActionResultExecutor<RedirectToPageResult>, RedirectToPageResultExecutor>();
+        services.AddSingleton<
+            IActionResultExecutor<RedirectToPageResult>,
+            RedirectToPageResultExecutor
+        >();
 
         if (factory != null)
         {

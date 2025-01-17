@@ -10,8 +10,7 @@ public static class Program
         var host = Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webHostBuilder =>
             {
-                webHostBuilder
-                    .UseStartup<Startup>();
+                webHostBuilder.UseStartup<Startup>();
             })
             .Build();
 

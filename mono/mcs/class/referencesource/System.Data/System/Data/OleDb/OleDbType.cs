@@ -6,10 +6,10 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.OleDb {
-
-    public enum OleDbType {
-
+namespace System.Data.OleDb
+{
+    public enum OleDbType
+    {
         BigInt = 20,
 
         Binary = 128,
@@ -85,4 +85,3 @@ namespace System.Data.OleDb {
         WChar = 130,
     }
 }
-

@@ -28,6 +28,6 @@ namespace System.Activities.DurableInstancing
         Uri,
         UShort,
         XmlQualifiedName,
-        Unavailable = 99
+        Unavailable = 99,
     }
 }

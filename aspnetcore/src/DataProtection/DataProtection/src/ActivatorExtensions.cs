@@ -19,7 +19,9 @@ internal static class ActivatorExtensions
     /// Creates an instance of <paramref name="implementationTypeName"/> and ensures
     /// that it is assignable to <typeparamref name="T"/>.
     /// </summary>
-    public static T CreateInstance<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(this IActivator activator, string implementationTypeName)
+    public static T CreateInstance<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+    >(this IActivator activator, string implementationTypeName)
         where T : class
     {
         ArgumentNullThrowHelper.ThrowIfNull(implementationTypeName);

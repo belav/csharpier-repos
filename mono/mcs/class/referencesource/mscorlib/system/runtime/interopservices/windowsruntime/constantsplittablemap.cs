@@ -1,19 +1,18 @@
 ﻿///----------- ----------- ----------- ----------- ----------- -----------
 /// <copyright file="ConstantSplittableMap.cs" company="Microsoft">
 ///     Copyright (c) Microsoft Corporation.  All rights reserved.
-/// </copyright>                               
+/// </copyright>
 ///
 /// <owner>gpaperin</owner>
 ///----------- ----------- ----------- ----------- ----------- -----------
 
 
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
-
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -24,7 +23,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     /// This map is backed by a sorted array. Thus, split operations are O(1) and enumerations are fast;
     /// however, look-up in the map are O(log n).
     /// </summary>
-    /// <typeparam name="TKey">Type of objects that act as keys.</typeparam>    
+    /// <typeparam name="TKey">Type of objects that act as keys.</typeparam>
     /// <typeparam name="TValue">Type of objects that act as entries / values.</typeparam>
     [Serializable]
     [DebuggerDisplay("Count = {Count}")]
@@ -38,10 +37,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             {
                 return keyComparator.Compare(x.Key, y.Key);
             }
-        }  // private class KeyValuePairComparator
+        } // private class KeyValuePairComparator
 
-
-        private static readonly KeyValuePairComparator keyValuePairComparator = new KeyValuePairComparator();
+        private static readonly KeyValuePairComparator keyValuePairComparator =
+            new KeyValuePairComparator();
 
         private readonly KeyValuePair<TKey, TValue>[] items;
         private readonly int firstItemIndex;
@@ -65,7 +64,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
             if (((UInt32)Int32.MaxValue) < data.Size)
             {
-                Exception e = new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CollectionBackingDictionaryTooLarge"));
+                Exception e = new InvalidOperationException(
+                    Environment.GetResourceString(
+                        "InvalidOperation_CollectionBackingDictionaryTooLarge"
+                    )
+                );
                 e.SetErrorCode(__HResults.E_BOUNDS);
                 throw e;
             }
@@ -77,16 +80,21 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             this.items = CreateKeyValueArray(size, data.GetEnumerator());
         }
 
-
-        private ConstantSplittableMap(KeyValuePair<TKey, TValue>[] items, Int32 firstItemIndex, Int32 lastItemIndex)
+        private ConstantSplittableMap(
+            KeyValuePair<TKey, TValue>[] items,
+            Int32 firstItemIndex,
+            Int32 lastItemIndex
+        )
         {
             this.items = items;
             this.firstItemIndex = firstItemIndex;
             this.lastItemIndex = lastItemIndex;
         }
 
-        
-        private KeyValuePair<TKey, TValue>[] CreateKeyValueArray(Int32 count, IEnumerator<KeyValuePair<TKey, TValue>> data)
+        private KeyValuePair<TKey, TValue>[] CreateKeyValueArray(
+            Int32 count,
+            IEnumerator<KeyValuePair<TKey, TValue>> data
+        )
         {
             KeyValuePair<TKey, TValue>[] kvArray = new KeyValuePair<TKey, TValue>[count];
 
@@ -99,7 +107,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return kvArray;
         }
 
-        private KeyValuePair<TKey, TValue>[] CreateKeyValueArray(Int32 count, IEnumerator<IKeyValuePair<TKey, TValue>> data)
+        private KeyValuePair<TKey, TValue>[] CreateKeyValueArray(
+            Int32 count,
+            IEnumerator<IKeyValuePair<TKey, TValue>> data
+        )
         {
             KeyValuePair<TKey, TValue>[] kvArray = new KeyValuePair<TKey, TValue>[count];
 
@@ -115,21 +126,16 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return kvArray;
         }
 
-
-        public int Count {
-            get {
-                return lastItemIndex - firstItemIndex + 1;
-            }
+        public int Count
+        {
+            get { return lastItemIndex - firstItemIndex + 1; }
         }
-
 
         // [CLSCompliant(false)]
-        public UInt32 Size {
-            get {
-                return (UInt32)(lastItemIndex - firstItemIndex + 1);
-            }
+        public UInt32 Size
+        {
+            get { return (UInt32)(lastItemIndex - firstItemIndex + 1); }
         }
-
 
         public TValue Lookup(TKey key)
         {
@@ -138,14 +144,15 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
             if (!found)
             {
-                Exception e = new KeyNotFoundException(Environment.GetResourceString("Arg_KeyNotFound"));
+                Exception e = new KeyNotFoundException(
+                    Environment.GetResourceString("Arg_KeyNotFound")
+                );
                 e.SetErrorCode(__HResults.E_BOUNDS);
                 throw e;
             }
 
             return value;
         }
-
 
         public bool HasKey(TKey key)
         {
@@ -158,18 +165,21 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             return ((IEnumerable<IKeyValuePair<TKey, TValue>>)this).GetEnumerator();
         }
-        
+
         public IIterator<IKeyValuePair<TKey, TValue>> First()
         {
             return new EnumeratorToIteratorAdapter<IKeyValuePair<TKey, TValue>>(GetEnumerator());
         }
-        
+
         public IEnumerator<IKeyValuePair<TKey, TValue>> GetEnumerator()
         {
             return new IKeyValuePairEnumerator(items, firstItemIndex, lastItemIndex);
         }
-        
-        public void Split(out IMapView<TKey, TValue> firstPartition, out IMapView<TKey, TValue> secondPartition)
+
+        public void Split(
+            out IMapView<TKey, TValue> firstPartition,
+            out IMapView<TKey, TValue> secondPartition
+        )
         {
             if (Count < 2)
             {
@@ -181,22 +191,44 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             int pivot = (Int32)(((Int64)firstItemIndex + (Int64)lastItemIndex) / (Int64)2);
 
             firstPartition = new ConstantSplittableMap<TKey, TValue>(items, firstItemIndex, pivot);
-            secondPartition = new ConstantSplittableMap<TKey, TValue>(items, pivot + 1, lastItemIndex);
+            secondPartition = new ConstantSplittableMap<TKey, TValue>(
+                items,
+                pivot + 1,
+                lastItemIndex
+            );
         }
 
         #region IReadOnlyDictionary members
 
         public bool ContainsKey(TKey key)
         {
-            KeyValuePair<TKey, TValue> searchKey = new KeyValuePair<TKey, TValue>(key, default(TValue));
-            int index = Array.BinarySearch(items, firstItemIndex, Count, searchKey, keyValuePairComparator);
+            KeyValuePair<TKey, TValue> searchKey = new KeyValuePair<TKey, TValue>(
+                key,
+                default(TValue)
+            );
+            int index = Array.BinarySearch(
+                items,
+                firstItemIndex,
+                Count,
+                searchKey,
+                keyValuePairComparator
+            );
             return index >= 0;
         }
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            KeyValuePair<TKey, TValue> searchKey = new KeyValuePair<TKey, TValue>(key, default(TValue));
-            int index = Array.BinarySearch(items, firstItemIndex, Count, searchKey, keyValuePairComparator);
+            KeyValuePair<TKey, TValue> searchKey = new KeyValuePair<TKey, TValue>(
+                key,
+                default(TValue)
+            );
+            int index = Array.BinarySearch(
+                items,
+                firstItemIndex,
+                Count,
+                searchKey,
+                keyValuePairComparator
+            );
 
             if (index < 0)
             {
@@ -208,22 +240,19 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return true;
         }
 
-        public TValue this[TKey key] {
-            get {
-                return Lookup(key);
-            }
+        public TValue this[TKey key]
+        {
+            get { return Lookup(key); }
         }
 
-        public IEnumerable<TKey> Keys {
-            get {
-                throw new NotImplementedException("NYI");
-            }
+        public IEnumerable<TKey> Keys
+        {
+            get { throw new NotImplementedException("NYI"); }
         }
 
-        public IEnumerable<TValue> Values {
-            get {
-                throw new NotImplementedException("NYI");
-            }
+        public IEnumerable<TValue> Values
+        {
+            get { throw new NotImplementedException("NYI"); }
         }
 
         #endregion IReadOnlyDictionary members
@@ -262,18 +291,25 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 return false;
             }
 
-            public IKeyValuePair<TKey, TValue> Current {
-                get {
-                    if (_current < _start) throw new InvalidOperationException(Environment.GetResourceString(ResId.InvalidOperation_EnumNotStarted));
-                    if (_current > _end) throw new InvalidOperationException(Environment.GetResourceString(ResId.InvalidOperation_EnumEnded));
+            public IKeyValuePair<TKey, TValue> Current
+            {
+                get
+                {
+                    if (_current < _start)
+                        throw new InvalidOperationException(
+                            Environment.GetResourceString(ResId.InvalidOperation_EnumNotStarted)
+                        );
+                    if (_current > _end)
+                        throw new InvalidOperationException(
+                            Environment.GetResourceString(ResId.InvalidOperation_EnumEnded)
+                        );
                     return new CLRIKeyValuePairImpl<TKey, TValue>(ref _array[_current]);
                 }
             }
 
-            Object IEnumerator.Current {
-                get {
-                    return Current;
-                }
+            Object IEnumerator.Current
+            {
+                get { return Current; }
             }
 
             void IEnumerator.Reset()
@@ -281,13 +317,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
                 _current = _start - 1;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         #endregion IKeyValuePair Enumerator
-
-    }  // internal ConstantSplittableMap<TKey, TValue>
-
-}  // namespace System.Runtime.InteropServices.WindowsRuntime
+    } // internal ConstantSplittableMap<TKey, TValue>
+} // namespace System.Runtime.InteropServices.WindowsRuntime

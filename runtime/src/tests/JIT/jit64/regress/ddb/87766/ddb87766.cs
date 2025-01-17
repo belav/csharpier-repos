@@ -27,10 +27,11 @@ public class VInline
     {
         int i = 0;
         GetI1(ref i); //here's the ldloca, passing the address of i as the arg
-        i = i / _fi2;    //fi2 == 0 so this should always cause an exception
+        i = i / _fi2; //fi2 == 0 so this should always cause an exception
         return i;
     }
 }
+
 public class VIMain
 {
     [Fact]
@@ -41,11 +42,11 @@ public class VIMain
         int ival = 2;
         try
         {
-            ival = vi.Accumulate(ival);  //this call should throw a divide by zero exception
+            ival = vi.Accumulate(ival); //this call should throw a divide by zero exception
         }
         catch (DivideByZeroException e)
         {
-            Console.WriteLine("exception stack trace: " + e.StackTrace.ToString());  //display the stack trace
+            Console.WriteLine("exception stack trace: " + e.StackTrace.ToString()); //display the stack trace
             if (e.StackTrace.ToString().Contains("Accumulate"))
             {
                 Console.WriteLine("Fail, method Accumulate NOT inlined.");
@@ -60,4 +61,3 @@ public class VIMain
         return ret;
     }
 }
-

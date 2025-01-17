@@ -14,12 +14,17 @@ namespace System.Workflow.ComponentModel.Compiler
             if (activity == null)
                 return validationErrors;
 
-            ICollection<string> synchronizationHandles = activity.GetValue(Activity.SynchronizationHandlesProperty) as ICollection<string>;
+            ICollection<string> synchronizationHandles =
+                activity.GetValue(Activity.SynchronizationHandlesProperty) as ICollection<string>;
             if (synchronizationHandles != null)
             {
                 foreach (string handle in synchronizationHandles)
                 {
-                    ValidationError error = ValidationHelpers.ValidateIdentifier("SynchronizationHandles", manager, handle);
+                    ValidationError error = ValidationHelpers.ValidateIdentifier(
+                        "SynchronizationHandles",
+                        manager,
+                        handle
+                    );
                     if (error != null)
                         validationErrors.Add(error);
                 }

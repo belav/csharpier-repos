@@ -1,15 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="LicenseProvider.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-    using Microsoft.Win32;
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Runtime.Remoting;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <include file='doc\LicenseProvider.uex' path='docs/doc[@for="LicenseProvider"]/*' />
     /// <devdoc>
@@ -18,12 +19,16 @@ namespace System.ComponentModel {
     [HostProtection(SharedState = true)]
     public abstract class LicenseProvider
     {
-
         /// <include file='doc\LicenseProvider.uex' path='docs/doc[@for="LicenseProvider.GetLicense"]/*' />
         /// <devdoc>
         ///    <para>When overridden in a derived class, gets a license for an <paramref name="instance "/>or <paramref name="type "/>
         ///       of component.</para>
         /// </devdoc>
-        public abstract License GetLicense(LicenseContext context, Type type, object instance, bool allowExceptions);
+        public abstract License GetLicense(
+            LicenseContext context,
+            Type type,
+            object instance,
+            bool allowExceptions
+        );
     }
 }

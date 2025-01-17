@@ -26,9 +26,15 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
             SVsServiceProvider serviceProvider,
             VisualStudioWorkspace workspace,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, glyphService, serviceProvider, workspace, streamingPresenter, listenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                glyphService,
+                serviceProvider,
+                workspace,
+                streamingPresenter,
+                listenerProvider
+            ) { }
     }
 }

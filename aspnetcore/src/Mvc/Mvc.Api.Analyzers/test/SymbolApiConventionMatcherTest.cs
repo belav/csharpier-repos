@@ -254,7 +254,10 @@ public class SymbolApiConventionMatcherTest
     [Theory]
     [InlineData("candid", "id")]
     [InlineData("canDid", "id")]
-    public void IsNameMatch_WithSuffix_ReturnFalse_IfNameIsNotProperSuffix(string name, string conventionName)
+    public void IsNameMatch_WithSuffix_ReturnFalse_IfNameIsNotProperSuffix(
+        string name,
+        string conventionName
+    )
     {
         // Act
         var result = IsNameMatch(name, conventionName, SymbolApiConventionNameMatchBehavior.Suffix);
@@ -275,7 +278,11 @@ public class SymbolApiConventionMatcherTest
         var conventionTypeSymbol = compilation.GetTypeByMetadataName(conventionType.FullName);
 
         // Act
-        var result = IsTypeMatch(typeSymbol, conventionTypeSymbol, SymbolApiConventionTypeMatchBehavior.Any);
+        var result = IsTypeMatch(
+            typeSymbol,
+            conventionTypeSymbol,
+            SymbolApiConventionTypeMatchBehavior.Any
+        );
 
         // Assert
         Assert.True(result);
@@ -291,7 +298,11 @@ public class SymbolApiConventionMatcherTest
         var conventionType = compilation.GetTypeByMetadataName(BaseTypeName);
 
         // Act
-        var result = IsTypeMatch(type, conventionType, SymbolApiConventionTypeMatchBehavior.AssignableFrom);
+        var result = IsTypeMatch(
+            type,
+            conventionType,
+            SymbolApiConventionTypeMatchBehavior.AssignableFrom
+        );
 
         // Assert
         Assert.True(result);
@@ -307,7 +318,11 @@ public class SymbolApiConventionMatcherTest
         var conventionType = compilation.GetTypeByMetadataName(BaseTypeName);
 
         // Act
-        var result = IsTypeMatch(type, conventionType, SymbolApiConventionTypeMatchBehavior.AssignableFrom);
+        var result = IsTypeMatch(
+            type,
+            conventionType,
+            SymbolApiConventionTypeMatchBehavior.AssignableFrom
+        );
 
         // Assert
         Assert.True(result);
@@ -323,7 +338,11 @@ public class SymbolApiConventionMatcherTest
         var conventionType = compilation.GetTypeByMetadataName(DerivedTypeName);
 
         // Act
-        var result = IsTypeMatch(type, conventionType, SymbolApiConventionTypeMatchBehavior.AssignableFrom);
+        var result = IsTypeMatch(
+            type,
+            conventionType,
+            SymbolApiConventionTypeMatchBehavior.AssignableFrom
+        );
 
         // Assert
         Assert.False(result);
@@ -339,7 +358,11 @@ public class SymbolApiConventionMatcherTest
         var conventionType = compilation.GetTypeByMetadataName(BaseTypeName);
 
         // Act
-        var result = IsTypeMatch(type, conventionType, SymbolApiConventionTypeMatchBehavior.AssignableFrom);
+        var result = IsTypeMatch(
+            type,
+            conventionType,
+            SymbolApiConventionTypeMatchBehavior.AssignableFrom
+        );
 
         // Assert
         Assert.False(result);
@@ -430,7 +453,8 @@ public class SymbolApiConventionMatcherTest
         var testController = compilation.GetTypeByMetadataName(TestControllerName);
         var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
         var method = (IMethodSymbol)testController.GetMembers(methodName).First();
-        var conventionMethod = (IMethodSymbol)testConvention.GetMembers(conventionMethodName).First();
+        var conventionMethod = (IMethodSymbol)
+            testConvention.GetMembers(conventionMethodName).First();
 
         // Act
         var result = IsMatch(symbolCache, method, conventionMethod);
@@ -448,7 +472,9 @@ public class SymbolApiConventionMatcherTest
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
         var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
-        var method = testConvention.GetMembers(nameof(TestConvention.MethodWithoutMatchBehavior)).First();
+        var method = testConvention
+            .GetMembers(nameof(TestConvention.MethodWithoutMatchBehavior))
+            .First();
 
         // Act
         var result = GetNameMatchBehavior(symbolCache, method);
@@ -466,7 +492,9 @@ public class SymbolApiConventionMatcherTest
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
         var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
-        var method = testConvention.GetMembers(nameof(TestConvention.MethodWithRandomAttributes)).First();
+        var method = testConvention
+            .GetMembers(nameof(TestConvention.MethodWithRandomAttributes))
+            .First();
 
         // Act
         var result = GetNameMatchBehavior(symbolCache, method);
@@ -521,7 +549,10 @@ public class SymbolApiConventionMatcherTest
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
         var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
-        var method = (IMethodSymbol)testConvention.GetMembers(nameof(TestConvention.MethodParameterWithRandomAttributes)).First();
+        var method = (IMethodSymbol)
+            testConvention
+                .GetMembers(nameof(TestConvention.MethodParameterWithRandomAttributes))
+                .First();
         var parameter = method.Parameters[0];
 
         // Act
@@ -540,7 +571,10 @@ public class SymbolApiConventionMatcherTest
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
         var testConvention = compilation.GetTypeByMetadataName(TestConventionName);
-        var method = (IMethodSymbol)testConvention.GetMembers(nameof(TestConvention.MethodWithAnyTypeMatchBehaviorParameter)).First();
+        var method = (IMethodSymbol)
+            testConvention
+                .GetMembers(nameof(TestConvention.MethodWithAnyTypeMatchBehaviorParameter))
+                .First();
         var parameter = method.Parameters[0];
 
         // Act
@@ -550,10 +584,15 @@ public class SymbolApiConventionMatcherTest
         Assert.Equal(expected, result);
     }
 
-    private Task<Compilation> GetCompilationAsync(string test = "SymbolApiConventionMatcherTestFile")
+    private Task<Compilation> GetCompilationAsync(
+        string test = "SymbolApiConventionMatcherTestFile"
+    )
     {
         var testSource = MvcTestSource.Read(GetType().Name, test);
-        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            new[] { testSource.Source }
+        );
 
         return project.GetCompilationAsync();
     }

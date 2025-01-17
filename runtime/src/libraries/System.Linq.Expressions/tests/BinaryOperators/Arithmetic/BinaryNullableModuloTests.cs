@@ -122,7 +122,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableFloatModuloTest(bool useInterpreter)
         {
-            float?[] array = { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN, null };
+            float?[] array =
+            {
+                0,
+                1,
+                -1,
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN,
+                null,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -135,7 +147,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableDoubleModuloTest(bool useInterpreter)
         {
-            double?[] array = { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN, null };
+            double?[] array =
+            {
+                0,
+                1,
+                -1,
+                double.MinValue,
+                double.MaxValue,
+                double.Epsilon,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN,
+                null,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -148,7 +172,15 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableDecimalModuloTest(bool useInterpreter)
         {
-            decimal?[] array = { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue, null };
+            decimal?[] array =
+            {
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue,
+                null,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -191,12 +223,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortModulo(ushort? a, ushort? b, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Modulo(
-                        Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Modulo(
+                    Expression.Constant(a, typeof(ushort?)),
+                    Expression.Constant(b, typeof(ushort?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -207,12 +240,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortModulo(short? a, short? b, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Modulo(
-                        Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Modulo(
+                    Expression.Constant(a, typeof(short?)),
+                    Expression.Constant(b, typeof(short?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -223,12 +257,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntModulo(uint? a, uint? b, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Modulo(
-                        Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Modulo(
+                    Expression.Constant(a, typeof(uint?)),
+                    Expression.Constant(b, typeof(uint?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -239,12 +274,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntModulo(int? a, int? b, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Modulo(
-                        Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Modulo(
+                    Expression.Constant(a, typeof(int?)),
+                    Expression.Constant(b, typeof(int?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -257,12 +293,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongModulo(ulong? a, ulong? b, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Modulo(
-                        Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Modulo(
+                    Expression.Constant(a, typeof(ulong?)),
+                    Expression.Constant(b, typeof(ulong?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -273,12 +310,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongModulo(long? a, long? b, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Modulo(
-                        Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Modulo(
+                    Expression.Constant(a, typeof(long?)),
+                    Expression.Constant(b, typeof(long?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)
@@ -291,12 +329,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatModulo(float? a, float? b, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Modulo(
-                        Expression.Constant(a, typeof(float?)),
-                        Expression.Constant(b, typeof(float?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Modulo(
+                    Expression.Constant(a, typeof(float?)),
+                    Expression.Constant(b, typeof(float?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a % b, f());
@@ -304,12 +343,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoubleModulo(double? a, double? b, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Modulo(
-                        Expression.Constant(a, typeof(double?)),
-                        Expression.Constant(b, typeof(double?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Modulo(
+                    Expression.Constant(a, typeof(double?)),
+                    Expression.Constant(b, typeof(double?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a % b, f());
@@ -317,12 +357,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalModulo(decimal? a, decimal? b, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Modulo(
-                        Expression.Constant(a, typeof(decimal?)),
-                        Expression.Constant(b, typeof(decimal?))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Modulo(
+                    Expression.Constant(a, typeof(decimal?)),
+                    Expression.Constant(b, typeof(decimal?))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             if (a.HasValue && b == 0)

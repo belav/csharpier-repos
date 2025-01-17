@@ -6,26 +6,32 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 public class TestProviderCodeGenerator : ProviderCodeGenerator
 {
     public TestProviderCodeGenerator(ProviderCodeGeneratorDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     public override MethodCallCodeFragment GenerateUseProvider(
         string connectionString,
-        MethodCallCodeFragment providerOptions)
-        => new(
+        MethodCallCodeFragment providerOptions
+    ) =>
+        new(
             _useTestProviderMethodInfo,
             providerOptions == null
                 ? new object[] { connectionString }
-                : new object[] { connectionString, new NestedClosureCodeFragment("x", providerOptions) });
+                : new object[]
+                {
+                    connectionString,
+                    new NestedClosureCodeFragment("x", providerOptions),
+                }
+        );
 
-    private static readonly MethodInfo _useTestProviderMethodInfo
-        = typeof(TestProviderCodeGenerator).GetRuntimeMethod(
-            nameof(UseTestProvider), new[] { typeof(DbContextOptionsBuilder), typeof(string), typeof(Action<object>) })!;
+    private static readonly MethodInfo _useTestProviderMethodInfo =
+        typeof(TestProviderCodeGenerator).GetRuntimeMethod(
+            nameof(UseTestProvider),
+            new[] { typeof(DbContextOptionsBuilder), typeof(string), typeof(Action<object>) }
+        )!;
 
     public static void UseTestProvider(
         DbContextOptionsBuilder optionsBuilder,
         string connectionString,
-        Action<object> optionsAction = null)
-        => throw new NotSupportedException();
+        Action<object> optionsAction = null
+    ) => throw new NotSupportedException();
 }

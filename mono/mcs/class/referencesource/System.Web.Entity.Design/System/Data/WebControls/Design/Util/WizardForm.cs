@@ -24,7 +24,6 @@ namespace System.Web.UI.Design.WebControls.Util
     /// </devdoc>
     internal abstract class WizardForm : TaskFormBase
     {
-
         private System.Windows.Forms.Button _nextButton;
         private System.Windows.Forms.Button _previousButton;
         private System.Windows.Forms.Button _cancelButton;
@@ -54,10 +53,7 @@ namespace System.Web.UI.Design.WebControls.Util
         /// </devdoc>
         public System.Windows.Forms.Button FinishButton
         {
-            get
-            {
-                return _finishButton;
-            }
+            get { return _finishButton; }
         }
 
         /// <devdoc>
@@ -65,10 +61,7 @@ namespace System.Web.UI.Design.WebControls.Util
         /// </devdoc>
         public System.Windows.Forms.Button NextButton
         {
-            get
-            {
-                return _nextButton;
-            }
+            get { return _nextButton; }
         }
 
         /// <devdoc>
@@ -76,10 +69,7 @@ namespace System.Web.UI.Design.WebControls.Util
         /// </devdoc>
         public System.Windows.Forms.Button PreviousButton
         {
-            get
-            {
-                return _previousButton;
-            }
+            get { return _previousButton; }
         }
 
         #region Designer generated code
@@ -89,7 +79,6 @@ namespace System.Web.UI.Design.WebControls.Util
         /// </summary>
         private void InitializeComponent()
         {
-
             this._wizardButtonsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this._previousButton = new System.Windows.Forms.Button();
             this._nextButton = new System.Windows.Forms.Button();
@@ -101,19 +90,40 @@ namespace System.Web.UI.Design.WebControls.Util
             this._wizardButtonsTableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
 
-            // 
+            //
             // _wizardButtonsTableLayoutPanel
-            // 
-            this._wizardButtonsTableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._wizardButtonsTableLayoutPanel.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        System.Windows.Forms.AnchorStyles.Bottom
+                        | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._wizardButtonsTableLayoutPanel.AutoSize = true;
             this._wizardButtonsTableLayoutPanel.ColumnCount = 7;
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 3F));
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F));
-            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
+            );
+            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 3F)
+            );
+            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
+            );
+            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F)
+            );
+            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
+            );
+            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 7F)
+            );
+            this._wizardButtonsTableLayoutPanel.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F)
+            );
             this._wizardButtonsTableLayoutPanel.Controls.Add(this._previousButton);
             this._wizardButtonsTableLayoutPanel.Controls.Add(this._dummyLabel1);
             this._wizardButtonsTableLayoutPanel.Controls.Add(this._nextButton);
@@ -125,11 +135,18 @@ namespace System.Web.UI.Design.WebControls.Util
             this._wizardButtonsTableLayoutPanel.Name = "_wizardButtonsTableLayoutPanel";
             this._wizardButtonsTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this._wizardButtonsTableLayoutPanel.Size = new System.Drawing.Size(317, 20);
-            this._wizardButtonsTableLayoutPanel.TabIndex = 100;            
-            // 
+            this._wizardButtonsTableLayoutPanel.TabIndex = 100;
+            //
             // _previousButton
-            // 
-            this._previousButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._previousButton.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        System.Windows.Forms.AnchorStyles.Left
+                        | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._previousButton.AutoSize = true;
             this._previousButton.Enabled = false;
             this._previousButton.Location = new System.Drawing.Point(0, 0);
@@ -138,18 +155,25 @@ namespace System.Web.UI.Design.WebControls.Util
             this._previousButton.Name = "_previousButton";
             this._previousButton.TabIndex = 10;
             this._previousButton.Click += new System.EventHandler(this.OnPreviousButtonClick);
-            // 
+            //
             // _dummyLabel1
-            // 
+            //
             this._dummyLabel1.Location = new System.Drawing.Point(75, 0);
             this._dummyLabel1.Margin = new System.Windows.Forms.Padding(0);
             this._dummyLabel1.Name = "_dummyLabel1";
             this._dummyLabel1.Size = new System.Drawing.Size(3, 0);
             this._dummyLabel1.TabIndex = 20;
-            // 
+            //
             // _nextButton
-            // 
-            this._nextButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._nextButton.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        System.Windows.Forms.AnchorStyles.Left
+                        | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._nextButton.AutoSize = true;
             this._nextButton.Location = new System.Drawing.Point(78, 0);
             this._nextButton.Margin = new System.Windows.Forms.Padding(0);
@@ -157,18 +181,25 @@ namespace System.Web.UI.Design.WebControls.Util
             this._nextButton.Name = "_nextButton";
             this._nextButton.TabIndex = 30;
             this._nextButton.Click += new System.EventHandler(this.OnNextButtonClick);
-            // 
+            //
             // _dummyLabel2
-            // 
+            //
             this._dummyLabel2.Location = new System.Drawing.Point(153, 0);
             this._dummyLabel2.Margin = new System.Windows.Forms.Padding(0);
             this._dummyLabel2.Name = "_dummyLabel2";
             this._dummyLabel2.Size = new System.Drawing.Size(7, 0);
             this._dummyLabel2.TabIndex = 40;
-            // 
+            //
             // _finishButton
-            // 
-            this._finishButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._finishButton.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        System.Windows.Forms.AnchorStyles.Left
+                        | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._finishButton.AutoSize = true;
             this._finishButton.Enabled = false;
             this._finishButton.Location = new System.Drawing.Point(160, 0);
@@ -177,18 +208,25 @@ namespace System.Web.UI.Design.WebControls.Util
             this._finishButton.Name = "_finishButton";
             this._finishButton.TabIndex = 50;
             this._finishButton.Click += new System.EventHandler(this.OnFinishButtonClick);
-            // 
+            //
             // _dummyLabel3
-            // 
+            //
             this._dummyLabel3.Location = new System.Drawing.Point(235, 0);
             this._dummyLabel3.Margin = new System.Windows.Forms.Padding(0);
             this._dummyLabel3.Name = "_dummyLabel3";
             this._dummyLabel3.Size = new System.Drawing.Size(7, 0);
             this._dummyLabel3.TabIndex = 60;
-            // 
+            //
             // _cancelButton
-            // 
-            this._cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._cancelButton.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        System.Windows.Forms.AnchorStyles.Left
+                        | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._cancelButton.AutoSize = true;
             this._cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this._cancelButton.Location = new System.Drawing.Point(242, 0);
@@ -197,13 +235,13 @@ namespace System.Web.UI.Design.WebControls.Util
             this._cancelButton.Name = "_cancelButton";
             this._cancelButton.TabIndex = 70;
             this._cancelButton.Click += new System.EventHandler(this.OnCancelButtonClick);
-            // 
+            //
             // TaskForm
-            // 
+            //
             this.AcceptButton = this._nextButton;
             this.CancelButton = this._cancelButton;
             this.Controls.Add(this._wizardButtonsTableLayoutPanel);
-            
+
             this._wizardButtonsTableLayoutPanel.ResumeLayout(false);
             this._wizardButtonsTableLayoutPanel.PerformLayout();
 
@@ -306,9 +344,7 @@ namespace System.Web.UI.Design.WebControls.Util
         /// <devdoc>
         /// Called when a panel is about to change.
         /// </devdoc>
-        protected virtual void OnPanelChanging(WizardPanelChangingEventArgs e)
-        {
-        }
+        protected virtual void OnPanelChanging(WizardPanelChangingEventArgs e) { }
 
         /// <devdoc>
         /// Click event handler for the Previous button.
@@ -410,4 +446,3 @@ namespace System.Web.UI.Design.WebControls.Util
         }
     }
 }
-

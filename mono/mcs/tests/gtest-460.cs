@@ -1,25 +1,19 @@
 public class Foo<T>
 {
-	protected class Bar<V>
-	{
-	}
+    protected class Bar<V> { }
 }
 
-public interface IBaz
-{
-}
+public interface IBaz { }
 
 public class FooImpl : Foo<IBaz>
 {
-	Bar<int> f;
+    Bar<int> f;
 
-	private class BarImpl : Bar<IBaz>
-	{
-	}
+    private class BarImpl : Bar<IBaz> { }
 
-	public static int Main ()
-	{
-		new FooImpl ();
-		return 0;
-	}
+    public static int Main()
+    {
+        new FooImpl();
+        return 0;
+    }
 }

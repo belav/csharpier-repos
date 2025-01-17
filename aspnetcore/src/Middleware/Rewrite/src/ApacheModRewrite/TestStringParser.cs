@@ -45,7 +45,12 @@ internal sealed class TestStringParser
                     // This is a server parameter, parse for a condition variable
                     if (!context.Next())
                     {
-                        throw new FormatException(Resources.FormatError_InputParserUnrecognizedParameter(testString, context.Index));
+                        throw new FormatException(
+                            Resources.FormatError_InputParserUnrecognizedParameter(
+                                testString,
+                                context.Index
+                            )
+                        );
                     }
                     ParseConditionParameter(context, results);
                     break;
@@ -54,7 +59,9 @@ internal sealed class TestStringParser
                     // and create a new Pattern Segment.
                     if (!context.Next())
                     {
-                        throw new FormatException(Resources.FormatError_InputParserNoBackreference(context.Index));
+                        throw new FormatException(
+                            Resources.FormatError_InputParserNoBackreference(context.Index)
+                        );
                     }
                     context.Mark();
                     if (context.Current >= '0' && context.Current <= '9')
@@ -68,7 +75,12 @@ internal sealed class TestStringParser
                     }
                     else
                     {
-                        throw new FormatException(Resources.FormatError_InputParserInvalidInteger(testString, context.Index));
+                        throw new FormatException(
+                            Resources.FormatError_InputParserInvalidInteger(
+                                testString,
+                                context.Index
+                            )
+                        );
                     }
                     break;
                 default:
@@ -88,7 +100,10 @@ internal sealed class TestStringParser
     /// <param name="context">The ParserContext</param>
     /// <param name="results">The List of results which the new condition parameter will be added.</param>
     /// <returns>true </returns>
-    private static void ParseConditionParameter(ParserContext context, IList<PatternSegment> results)
+    private static void ParseConditionParameter(
+        ParserContext context,
+        IList<PatternSegment> results
+    )
     {
         // Parse { }
         if (context.Current == OpenBrace)
@@ -97,14 +112,18 @@ internal sealed class TestStringParser
             if (!context.Next())
             {
                 // Dangling {
-                throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
+                throw new FormatException(
+                    Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                );
             }
             context.Mark();
             while (context.Current != CloseBrace)
             {
                 if (!context.Next())
                 {
-                    throw new FormatException(Resources.FormatError_InputParserMissingCloseBrace(context.Index));
+                    throw new FormatException(
+                        Resources.FormatError_InputParserMissingCloseBrace(context.Index)
+                    );
                 }
                 else if (context.Current == Colon)
                 {
@@ -135,7 +154,9 @@ internal sealed class TestStringParser
         else
         {
             // illegal escape of a character
-            throw new FormatException(Resources.FormatError_InputParserInvalidInteger(context.Template, context.Index));
+            throw new FormatException(
+                Resources.FormatError_InputParserInvalidInteger(context.Template, context.Index)
+            );
         }
     }
 

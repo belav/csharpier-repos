@@ -22,11 +22,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.EmbeddedLanguages.Json.LanguageServic
 
             static void MatchWorker(string value, JsonOptions? expectedOptions)
             {
-                Assert.True(JsonLanguageDetector.CommentDetector.TryMatch(value, out _, out var captures));
+                Assert.True(
+                    JsonLanguageDetector.CommentDetector.TryMatch(value, out _, out var captures)
+                );
 
                 if (expectedOptions != null)
                 {
-                    Assert.True(EmbeddedLanguageCommentOptions<JsonOptions>.TryGetOptions(captures!, out var actualOptions));
+                    Assert.True(
+                        EmbeddedLanguageCommentOptions<JsonOptions>.TryGetOptions(
+                            captures!,
+                            out var actualOptions
+                        )
+                    );
                     Assert.Equal(expectedOptions.Value, actualOptions);
                 }
             }
@@ -43,101 +50,90 @@ namespace Microsoft.CodeAnalysis.UnitTests.EmbeddedLanguages.Json.LanguageServic
 
             static void NoMatchWorker(string value)
             {
-                Assert.False(JsonLanguageDetector.CommentDetector.TryMatch(value, out _, out var stringOptions) &&
-                    EmbeddedLanguageCommentOptions<JsonOptions>.TryGetOptions(stringOptions, out _));
+                Assert.False(
+                    JsonLanguageDetector.CommentDetector.TryMatch(
+                        value,
+                        out _,
+                        out var stringOptions
+                    )
+                        && EmbeddedLanguageCommentOptions<JsonOptions>.TryGetOptions(
+                            stringOptions,
+                            out _
+                        )
+                );
             }
         }
 
         [Fact]
-        public void TestSimpleForm()
-            => Match("lang=json");
+        public void TestSimpleForm() => Match("lang=json");
 
         [Fact]
-        public void TestAllCaps()
-            => Match("lang=JSON");
+        public void TestAllCaps() => Match("lang=JSON");
 
         [Fact]
-        public void TestIncompleteForm1()
-            => NoMatch("lan=json");
+        public void TestIncompleteForm1() => NoMatch("lan=json");
 
         [Fact]
-        public void TestIncompleteForm2()
-            => NoMatch("lang=jso");
+        public void TestIncompleteForm2() => NoMatch("lang=jso");
 
         [Fact]
-        public void TestMissingEquals()
-            => NoMatch("lang json");
+        public void TestMissingEquals() => NoMatch("lang json");
 
         [Fact]
-        public void TestLanguageForm()
-            => Match("language=json");
+        public void TestLanguageForm() => Match("language=json");
 
         [Fact]
-        public void TestLanguageNotFullySpelled()
-            => NoMatch("languag=json");
+        public void TestLanguageNotFullySpelled() => NoMatch("languag=json");
 
         [Fact]
-        public void TestSpacesAroundEquals()
-            => Match("lang = json");
+        public void TestSpacesAroundEquals() => Match("lang = json");
 
         [Fact]
-        public void TestSpacesAroundPieces()
-            => Match(" lang=json ");
+        public void TestSpacesAroundPieces() => Match(" lang=json ");
 
         [Fact]
-        public void TestSpacesAroundPiecesAndEquals()
-            => Match(" lang = json ");
+        public void TestSpacesAroundPiecesAndEquals() => Match(" lang = json ");
 
         [Fact]
-        public void TestSpaceBetweenJsonAndNextWord()
-            => Match("lang=json here");
+        public void TestSpaceBetweenJsonAndNextWord() => Match("lang=json here");
 
         [Fact]
-        public void TestPeriodAtEnd()
-            => Match("lang=json.");
+        public void TestPeriodAtEnd() => Match("lang=json.");
 
         [Fact]
-        public void TestNotWithWordCharAtEnd()
-            => NoMatch("lang=jsonc");
+        public void TestNotWithWordCharAtEnd() => NoMatch("lang=jsonc");
 
         [Fact]
-        public void TestWithNoNWordBeforeStart1()
-            => NoMatch(":lang=json");
+        public void TestWithNoNWordBeforeStart1() => NoMatch(":lang=json");
 
         [Fact]
-        public void TestWithNoNWordBeforeStart2()
-            => NoMatch(": lang=json");
+        public void TestWithNoNWordBeforeStart2() => NoMatch(": lang=json");
 
         [Fact]
-        public void TestNotWithWordCharAtStart()
-            => NoMatch("clang=json");
+        public void TestNotWithWordCharAtStart() => NoMatch("clang=json");
 
         [Fact]
-        public void TestOption()
-            => Match("lang=json,strict", JsonOptions.Strict);
+        public void TestOption() => Match("lang=json,strict", JsonOptions.Strict);
 
         [Fact]
-        public void TestOptionWithSpaces()
-            => Match("lang=json , strict", JsonOptions.Strict);
+        public void TestOptionWithSpaces() => Match("lang=json , strict", JsonOptions.Strict);
 
         [Fact]
-        public void TestOptionFollowedByPeriod()
-            => Match("lang=json,strict. Explanation", JsonOptions.Strict);
+        public void TestOptionFollowedByPeriod() =>
+            Match("lang=json,strict. Explanation", JsonOptions.Strict);
 
         [Fact]
-        public void TestMultiOptionFollowedByPeriod()
-            => Match("lang=json,strict,Strict. Explanation", JsonOptions.Strict);
+        public void TestMultiOptionFollowedByPeriod() =>
+            Match("lang=json,strict,Strict. Explanation", JsonOptions.Strict);
 
         [Fact]
-        public void TestMultiOptionFollowedByPeriod_CaseInsensitive()
-            => Match("Language=Json,Strict. Explanation", JsonOptions.Strict);
+        public void TestMultiOptionFollowedByPeriod_CaseInsensitive() =>
+            Match("Language=Json,Strict. Explanation", JsonOptions.Strict);
 
         [Fact]
-        public void TestInvalidOption1()
-            => NoMatch("lang=json,ignore");
+        public void TestInvalidOption1() => NoMatch("lang=json,ignore");
 
         [Fact]
-        public void TestInvalidOption2()
-            => NoMatch("lang=json,strict,ignore");
+        public void TestInvalidOption2() => NoMatch("lang=json,strict,ignore");
     }
 }

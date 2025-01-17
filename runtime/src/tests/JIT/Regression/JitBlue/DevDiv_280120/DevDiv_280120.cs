@@ -12,7 +12,10 @@ using Xunit;
 public struct S
 {
     long m_fld;
-    int m_a, m_b, m_c, m_d;
+    int m_a,
+        m_b,
+        m_c,
+        m_d;
 
     [Fact]
     public static void TestEntryPoint()

@@ -22,7 +22,11 @@ internal sealed class MiddlewareFilterConfigurationProvider
         if (!HasParameterlessConstructor(configurationType))
         {
             throw new InvalidOperationException(
-                Resources.FormatMiddlewareFilterConfigurationProvider_CreateConfigureDelegate_CannotCreateType(configurationType, nameof(configurationType)));
+                Resources.FormatMiddlewareFilterConfigurationProvider_CreateConfigureDelegate_CannotCreateType(
+                    configurationType,
+                    nameof(configurationType)
+                )
+            );
         }
 
         var instance = Activator.CreateInstance(configurationType)!;
@@ -40,21 +44,23 @@ internal sealed class MiddlewareFilterConfigurationProvider
     {
         var methodName = "Configure";
 
-        var methods = startupType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static);
+        var methods = startupType.GetMethods(
+            BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static
+        );
         var selectedMethods = methods.Where(method => method.Name.Equals(methodName)).ToList();
         if (selectedMethods.Count > 1)
         {
             throw new InvalidOperationException(
-                Resources.FormatMiddewareFilter_ConfigureMethodOverload(methodName));
+                Resources.FormatMiddewareFilter_ConfigureMethodOverload(methodName)
+            );
         }
 
         var methodInfo = selectedMethods.FirstOrDefault();
         if (methodInfo == null)
         {
             throw new InvalidOperationException(
-                Resources.FormatMiddewareFilter_NoConfigureMethod(
-                    methodName,
-                    startupType.FullName));
+                Resources.FormatMiddewareFilter_NoConfigureMethod(methodName, startupType.FullName)
+            );
         }
 
         if (methodInfo.ReturnType != returnType)
@@ -63,7 +69,9 @@ internal sealed class MiddlewareFilterConfigurationProvider
                 Resources.FormatMiddlewareFilter_InvalidConfigureReturnType(
                     methodInfo.Name,
                     startupType.FullName,
-                    returnType.Name));
+                    returnType.Name
+                )
+            );
         }
         return methodInfo;
     }
@@ -103,7 +111,9 @@ internal sealed class MiddlewareFilterConfigurationProvider
                 {
                     try
                     {
-                        parameters[index] = serviceProvider.GetRequiredService(parameterInfo.ParameterType);
+                        parameters[index] = serviceProvider.GetRequiredService(
+                            parameterInfo.ParameterType
+                        );
                     }
                     catch (Exception ex)
                     {
@@ -112,8 +122,10 @@ internal sealed class MiddlewareFilterConfigurationProvider
                                 parameterInfo.ParameterType.FullName,
                                 parameterInfo.Name,
                                 MethodInfo.Name,
-                                MethodInfo.DeclaringType!.FullName),
-                            ex);
+                                MethodInfo.DeclaringType!.FullName
+                            ),
+                            ex
+                        );
                     }
                 }
             }

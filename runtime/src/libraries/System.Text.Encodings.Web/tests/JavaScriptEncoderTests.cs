@@ -16,14 +16,22 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void Factory_NullArgs_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => JavaScriptEncoder.Create((TextEncoderSettings)null));
-            Assert.Throws<ArgumentNullException>(() => JavaScriptEncoder.Create((UnicodeRange)null));
+            Assert.Throws<ArgumentNullException>(
+                () => JavaScriptEncoder.Create((TextEncoderSettings)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => JavaScriptEncoder.Create((UnicodeRange)null)
+            );
         }
 
         [Theory]
         [MemberData(nameof(EscapingTestData))]
         [MemberData(nameof(EscapingTestData_NonAscii))]
-        public unsafe void FindFirstCharacterToEncode(char replacementChar, JavaScriptEncoder encoder, bool requiresEscaping)
+        public unsafe void FindFirstCharacterToEncode(
+            char replacementChar,
+            JavaScriptEncoder encoder,
+            bool requiresEscaping
+        )
         {
             Assert.Equal(-1, encoder.FindFirstCharacterToEncodeUtf8(default));
             fixed (char* ptr = string.Empty)
@@ -55,10 +63,16 @@ namespace System.Text.Encodings.Web.Tests
                     string source = new string(changed);
                     sourceUtf8 = Encoding.UTF8.GetBytes(source);
 
-                    Assert.Equal(requiresEscaping ? i : -1, encoder.FindFirstCharacterToEncodeUtf8(sourceUtf8));
+                    Assert.Equal(
+                        requiresEscaping ? i : -1,
+                        encoder.FindFirstCharacterToEncodeUtf8(sourceUtf8)
+                    );
                     fixed (char* ptr = source)
                     {
-                        Assert.Equal(requiresEscaping ? i : -1, encoder.FindFirstCharacterToEncode(ptr, source.Length));
+                        Assert.Equal(
+                            requiresEscaping ? i : -1,
+                            encoder.FindFirstCharacterToEncode(ptr, source.Length)
+                        );
                     }
                 }
 
@@ -69,10 +83,16 @@ namespace System.Text.Encodings.Web.Tests
                     string source = new string(changed);
                     sourceUtf8 = Encoding.UTF8.GetBytes(source);
 
-                    Assert.Equal(requiresEscaping ? 0 : -1, encoder.FindFirstCharacterToEncodeUtf8(sourceUtf8));
+                    Assert.Equal(
+                        requiresEscaping ? 0 : -1,
+                        encoder.FindFirstCharacterToEncodeUtf8(sourceUtf8)
+                    );
                     fixed (char* ptr = source)
                     {
-                        Assert.Equal(requiresEscaping ? 0 : -1, encoder.FindFirstCharacterToEncode(ptr, source.Length));
+                        Assert.Equal(
+                            requiresEscaping ? 0 : -1,
+                            encoder.FindFirstCharacterToEncode(ptr, source.Length)
+                        );
                     }
                 }
             }
@@ -84,30 +104,59 @@ namespace System.Text.Encodings.Web.Tests
             {
                 return new List<object[]>
                 {
-                    new object[] { 'a', JavaScriptEncoder.Default, false },              // ASCII not escaped
-                    new object[] { '\u001F', JavaScriptEncoder.Default, true },          // control character within single byte range
-                    new object[] { '\u007F', JavaScriptEncoder.Default, true },          // control character, sbyte.MaxValue
-                    new object[] { '\u2000', JavaScriptEncoder.Default, true },          // space character outside single byte range
-                    new object[] { '\u00A2', JavaScriptEncoder.Default, true },          // non-ASCII but < 255
-                    new object[] { '\uA686', JavaScriptEncoder.Default, true },          // non-ASCII above short.MaxValue
-                    new object[] { '\u6C49', JavaScriptEncoder.Default, true },          // non-ASCII from chinese alphabet - multibyte
-                    new object[] { '"', JavaScriptEncoder.Default, true },               // ASCII but must always be escaped in JSON
-                    new object[] { '\\', JavaScriptEncoder.Default, true },              // ASCII but must always be escaped in JSON
-                    new object[] { '<', JavaScriptEncoder.Default, true },               // ASCII but escaped by default
-                    new object[] { '>', JavaScriptEncoder.Default, true },               // ASCII but escaped by default
-                    new object[] { '&', JavaScriptEncoder.Default, true },               // ASCII but escaped by default
-                    new object[] { '`', JavaScriptEncoder.Default, true },               // ASCII but escaped by default
-                    new object[] { '\'', JavaScriptEncoder.Default, true },              // ASCII but escaped by default
-                    new object[] { '+', JavaScriptEncoder.Default, true },               // ASCII but escaped by default
-                    new object[] { '\uFFFD', JavaScriptEncoder.Default, true },          // Default replacement character
-
+                    new object[] { 'a', JavaScriptEncoder.Default, false }, // ASCII not escaped
+                    new object[] { '\u001F', JavaScriptEncoder.Default, true }, // control character within single byte range
+                    new object[] { '\u007F', JavaScriptEncoder.Default, true }, // control character, sbyte.MaxValue
+                    new object[] { '\u2000', JavaScriptEncoder.Default, true }, // space character outside single byte range
+                    new object[] { '\u00A2', JavaScriptEncoder.Default, true }, // non-ASCII but < 255
+                    new object[] { '\uA686', JavaScriptEncoder.Default, true }, // non-ASCII above short.MaxValue
+                    new object[] { '\u6C49', JavaScriptEncoder.Default, true }, // non-ASCII from chinese alphabet - multibyte
+                    new object[] { '"', JavaScriptEncoder.Default, true }, // ASCII but must always be escaped in JSON
+                    new object[] { '\\', JavaScriptEncoder.Default, true }, // ASCII but must always be escaped in JSON
+                    new object[] { '<', JavaScriptEncoder.Default, true }, // ASCII but escaped by default
+                    new object[] { '>', JavaScriptEncoder.Default, true }, // ASCII but escaped by default
+                    new object[] { '&', JavaScriptEncoder.Default, true }, // ASCII but escaped by default
+                    new object[] { '`', JavaScriptEncoder.Default, true }, // ASCII but escaped by default
+                    new object[] { '\'', JavaScriptEncoder.Default, true }, // ASCII but escaped by default
+                    new object[] { '+', JavaScriptEncoder.Default, true }, // ASCII but escaped by default
+                    new object[] { '\uFFFD', JavaScriptEncoder.Default, true }, // Default replacement character
                     new object[] { 'a', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), false },
-                    new object[] { '\u001F', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
-                    new object[] { '\u007F', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
-                    new object[] { '\u2000', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
-                    new object[] { '\u00A2', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
-                    new object[] { '\uA686', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
-                    new object[] { '\u6C49', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
+                    new object[]
+                    {
+                        '\u001F',
+                        JavaScriptEncoder.Create(UnicodeRanges.BasicLatin),
+                        true,
+                    },
+                    new object[]
+                    {
+                        '\u007F',
+                        JavaScriptEncoder.Create(UnicodeRanges.BasicLatin),
+                        true,
+                    },
+                    new object[]
+                    {
+                        '\u2000',
+                        JavaScriptEncoder.Create(UnicodeRanges.BasicLatin),
+                        true,
+                    },
+                    new object[]
+                    {
+                        '\u00A2',
+                        JavaScriptEncoder.Create(UnicodeRanges.BasicLatin),
+                        true,
+                    },
+                    new object[]
+                    {
+                        '\uA686',
+                        JavaScriptEncoder.Create(UnicodeRanges.BasicLatin),
+                        true,
+                    },
+                    new object[]
+                    {
+                        '\u6C49',
+                        JavaScriptEncoder.Create(UnicodeRanges.BasicLatin),
+                        true,
+                    },
                     new object[] { '"', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
                     new object[] { '\\', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
                     new object[] { '<', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
@@ -116,14 +165,23 @@ namespace System.Text.Encodings.Web.Tests
                     new object[] { '`', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
                     new object[] { '\'', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
                     new object[] { '+', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
-                    new object[] { '\uFFFD', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin), true },
+                    new object[]
+                    {
+                        '\uFFFD',
+                        JavaScriptEncoder.Create(UnicodeRanges.BasicLatin),
+                        true,
+                    },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(EscapingTestData_NonAscii))]
-        public unsafe void FindFirstCharacterToEncode_NonAscii(char replacementChar, JavaScriptEncoder encoder, bool requiresEscaping)
+        public unsafe void FindFirstCharacterToEncode_NonAscii(
+            char replacementChar,
+            JavaScriptEncoder encoder,
+            bool requiresEscaping
+        )
         {
             var random = new Random(42);
             for (int dataLength = 1; dataLength < 50; dataLength++)
@@ -147,10 +205,16 @@ namespace System.Text.Encodings.Web.Tests
                     string source = baseStr.Insert(i, new string(replacementChar, 1));
                     sourceUtf8 = Encoding.UTF8.GetBytes(source);
 
-                    Assert.Equal(requiresEscaping ? i * 3 : -1, encoder.FindFirstCharacterToEncodeUtf8(sourceUtf8)); // Each CJK character expands to 3 utf-8 bytes.
+                    Assert.Equal(
+                        requiresEscaping ? i * 3 : -1,
+                        encoder.FindFirstCharacterToEncodeUtf8(sourceUtf8)
+                    ); // Each CJK character expands to 3 utf-8 bytes.
                     fixed (char* ptr = source)
                     {
-                        Assert.Equal(requiresEscaping ? i : -1, encoder.FindFirstCharacterToEncode(ptr, source.Length));
+                        Assert.Equal(
+                            requiresEscaping ? i : -1,
+                            encoder.FindFirstCharacterToEncode(ptr, source.Length)
+                        );
                     }
                 }
             }
@@ -178,7 +242,6 @@ namespace System.Text.Encodings.Web.Tests
                     new object[] { '\'', JavaScriptEncoder.Create(UnicodeRanges.All), true },
                     new object[] { '+', JavaScriptEncoder.Create(UnicodeRanges.All), true },
                     new object[] { '\uFFFD', JavaScriptEncoder.Create(UnicodeRanges.All), false },
-
                     new object[] { 'a', JavaScriptEncoder.UnsafeRelaxedJsonEscaping, false },
                     new object[] { '\u001F', JavaScriptEncoder.UnsafeRelaxedJsonEscaping, true },
                     new object[] { '\u007F', JavaScriptEncoder.UnsafeRelaxedJsonEscaping, true },
@@ -274,7 +337,10 @@ namespace System.Text.Encodings.Web.Tests
 
         [Theory]
         [MemberData(nameof(InvalidEscapingTestData))]
-        public unsafe void InvalidFindFirstCharacterToEncode(char replacementChar, JavaScriptEncoder encoder)
+        public unsafe void InvalidFindFirstCharacterToEncode(
+            char replacementChar,
+            JavaScriptEncoder encoder
+        )
         {
             var random = new Random(42);
             for (int dataLength = 0; dataLength < 47; dataLength++)
@@ -294,7 +360,7 @@ namespace System.Text.Encodings.Web.Tests
                     string source = new string(changed);
                     byte[] sourceUtf8 = new byte[baseStrUtf8.Length];
                     baseStrUtf8.AsSpan().CopyTo(sourceUtf8);
-                    sourceUtf8[i] = 0xC3;   // Invalid, first byte of a 2-byte utf-8 character
+                    sourceUtf8[i] = 0xC3; // Invalid, first byte of a 2-byte utf-8 character
 
                     Assert.Equal(i, encoder.FindFirstCharacterToEncodeUtf8(sourceUtf8));
                     fixed (char* ptr = source)
@@ -311,15 +377,12 @@ namespace System.Text.Encodings.Web.Tests
             {
                 return new List<object[]>
                 {
-                    new object[] { '\uD801', JavaScriptEncoder.Default },         // Invalid, high surrogate alone
-                    new object[] { '\uDC01', JavaScriptEncoder.Default },         // Invalid, low surrogate alone
-
+                    new object[] { '\uD801', JavaScriptEncoder.Default }, // Invalid, high surrogate alone
+                    new object[] { '\uDC01', JavaScriptEncoder.Default }, // Invalid, low surrogate alone
                     new object[] { '\uD801', JavaScriptEncoder.UnsafeRelaxedJsonEscaping },
                     new object[] { '\uDC01', JavaScriptEncoder.UnsafeRelaxedJsonEscaping },
-
                     new object[] { '\uD801', JavaScriptEncoder.Create(UnicodeRanges.All) },
                     new object[] { '\uDC01', JavaScriptEncoder.Create(UnicodeRanges.All) },
-
                     new object[] { '\uD801', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin) },
                     new object[] { '\uDC01', JavaScriptEncoder.Create(UnicodeRanges.BasicLatin) },
                 };
@@ -330,7 +393,10 @@ namespace System.Text.Encodings.Web.Tests
         public void TestSurrogate()
         {
             // Encode(string)
-            Assert.Equal("\\uD83D\\uDCA9", System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode("\U0001f4a9"));
+            Assert.Equal(
+                "\\uD83D\\uDCA9",
+                System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode("\U0001f4a9")
+            );
 
             // Encode(writer, string)
             using (var writer = new StringWriter())
@@ -342,12 +408,20 @@ namespace System.Text.Encodings.Web.Tests
             // Encode(Span, ...)
             Span<char> destination = new char[12];
             OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
-                "\U0001f4a9".AsSpan(), destination, out int charsConsumed, out int charsWritten, isFinalBlock: true);
+                "\U0001f4a9".AsSpan(),
+                destination,
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(2, charsConsumed);
             Assert.Equal(12, charsWritten);
-            Assert.Equal("\\uD83D\\uDCA9", new string(destination.Slice(0, charsWritten).ToArray()));
+            Assert.Equal(
+                "\\uD83D\\uDCA9",
+                new string(destination.Slice(0, charsWritten).ToArray())
+            );
         }
 
         [Fact]
@@ -359,7 +433,12 @@ namespace System.Text.Encodings.Web.Tests
 
             // Pass in destination + 100 to check for underwrite.
             OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
-                "\U0001f4a9".AsSpan(), destination.Slice(100, 12), out int charsConsumed, out int charsWritten, isFinalBlock: true);
+                "\U0001f4a9".AsSpan(),
+                destination.Slice(100, 12),
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(2, charsConsumed);
@@ -376,7 +455,12 @@ namespace System.Text.Encodings.Web.Tests
 
             // Overlap behavior is undefined but documented that it is not valid. Here we don't expect any issues.
             OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
-                destination.Slice(0, 2), destination, out int charsConsumed, out int charsWritten, isFinalBlock: true);
+                destination.Slice(0, 2),
+                destination,
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(2, charsConsumed);
@@ -388,7 +472,12 @@ namespace System.Text.Encodings.Web.Tests
         {
             Span<char> destination = new char[11];
             OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
-                "\U0001f4a9".AsSpan(), destination, out int charsConsumed, out int charsWritten, isFinalBlock: true);
+                "\U0001f4a9".AsSpan(),
+                destination,
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.DestinationTooSmall, status);
             Assert.Equal(0, charsConsumed);
@@ -399,7 +488,12 @@ namespace System.Text.Encodings.Web.Tests
         public void JavaScriptEncoder_NonEmptySource_EmptyDest_Throws()
         {
             OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
-                "\U0001f4a9".AsSpan(), destination: null, out int _, out int _, isFinalBlock: true);
+                "\U0001f4a9".AsSpan(),
+                destination: null,
+                out int _,
+                out int _,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.DestinationTooSmall, status);
         }
@@ -408,7 +502,12 @@ namespace System.Text.Encodings.Web.Tests
         public void JavaScriptEncoder_EmptySource_EmptyDest()
         {
             OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
-                "".AsSpan(), destination: null, out int _, out int _, isFinalBlock: true);
+                "".AsSpan(),
+                destination: null,
+                out int _,
+                out int _,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
         }
@@ -429,7 +528,12 @@ namespace System.Text.Encodings.Web.Tests
             // Encode(Span, ...)
             Span<char> destination = new char[12];
             OperationStatus status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
-                "".AsSpan(), destination, out int charsConsumed, out int charsWritten, isFinalBlock: true);
+                "".AsSpan(),
+                destination,
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(0, charsConsumed);
@@ -438,7 +542,12 @@ namespace System.Text.Encodings.Web.Tests
 
             destination = null; // null doesn't throw is no characters to encode
             status = System.Text.Encodings.Web.JavaScriptEncoder.Default.Encode(
-                "".AsSpan(), destination, out charsConsumed, out charsWritten, isFinalBlock: true);
+                "".AsSpan(),
+                destination,
+                out charsConsumed,
+                out charsWritten,
+                isFinalBlock: true
+            );
 
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(0, charsConsumed);
@@ -470,12 +579,25 @@ namespace System.Text.Encodings.Web.Tests
         public void Ctor_WithUnicodeRanges()
         {
             // Arrange
-            JavaScriptEncoder encoder = JavaScriptEncoder.Create(UnicodeRanges.Latin1Supplement, UnicodeRanges.MiscellaneousSymbols);
+            JavaScriptEncoder encoder = JavaScriptEncoder.Create(
+                UnicodeRanges.Latin1Supplement,
+                UnicodeRanges.MiscellaneousSymbols
+            );
 
             // Act & assert
             Assert.Equal(@"\u0061", encoder.Encode("a"));
-            Assert.Equal("\u00E9", encoder.Encode("\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */));
-            Assert.Equal("\u2601", encoder.Encode("\u2601" /* CLOUD */));
+            Assert.Equal(
+                "\u00E9",
+                encoder.Encode(
+                    "\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */
+                )
+            );
+            Assert.Equal(
+                "\u2601",
+                encoder.Encode(
+                    "\u2601" /* CLOUD */
+                )
+            );
         }
 
         [Fact]
@@ -486,8 +608,18 @@ namespace System.Text.Encodings.Web.Tests
 
             // Act & assert
             Assert.Equal("a", encoder.Encode("a"));
-            Assert.Equal(@"\u00E9", encoder.Encode("\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */));
-            Assert.Equal(@"\u2601", encoder.Encode("\u2601" /* CLOUD */));
+            Assert.Equal(
+                @"\u00E9",
+                encoder.Encode(
+                    "\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */
+                )
+            );
+            Assert.Equal(
+                @"\u2601",
+                encoder.Encode(
+                    "\u2601" /* CLOUD */
+                )
+            );
         }
 
         [Fact]
@@ -530,7 +662,10 @@ namespace System.Text.Encodings.Web.Tests
         [InlineData("\n", @"\n")]
         [InlineData("\t", @"\t")]
         [InlineData("\r", @"\r")]
-        public void JavaScriptEncode_AllRangesAllowed_StillEncodesForbiddenChars_Simple(string input, string expected)
+        public void JavaScriptEncode_AllRangesAllowed_StillEncodesForbiddenChars_Simple(
+            string input,
+            string expected
+        )
         {
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
@@ -559,13 +694,34 @@ namespace System.Text.Encodings.Web.Tests
                 }
                 else
                 {
-                    if (input == "\b") { expected = @"\b"; }
-                    else if (input == "\t") { expected = @"\t"; }
-                    else if (input == "\n") { expected = @"\n"; }
-                    else if (input == "\f") { expected = @"\f"; }
-                    else if (input == "\r") { expected = @"\r"; }
-                    else if (input == "\\") { expected = @"\\"; }
-                    else if (input == "`") { expected = @"\u0060"; }
+                    if (input == "\b")
+                    {
+                        expected = @"\b";
+                    }
+                    else if (input == "\t")
+                    {
+                        expected = @"\t";
+                    }
+                    else if (input == "\n")
+                    {
+                        expected = @"\n";
+                    }
+                    else if (input == "\f")
+                    {
+                        expected = @"\f";
+                    }
+                    else if (input == "\r")
+                    {
+                        expected = @"\r";
+                    }
+                    else if (input == "\\")
+                    {
+                        expected = @"\\";
+                    }
+                    else if (input == "`")
+                    {
+                        expected = @"\u0060";
+                    }
                     else
                     {
                         bool mustEncode = false;
@@ -609,7 +765,12 @@ namespace System.Text.Encodings.Web.Tests
             for (int i = 0x10000; i <= 0x10FFFF; i++)
             {
                 string input = char.ConvertFromUtf32(i);
-                string expected = string.Format(CultureInfo.InvariantCulture, @"\u{0:X4}\u{1:X4}", (uint)input[0], (uint)input[1]);
+                string expected = string.Format(
+                    CultureInfo.InvariantCulture,
+                    @"\u{0:X4}\u{1:X4}",
+                    (uint)input[0],
+                    (uint)input[1]
+                );
                 string retVal = encoder.Encode(input);
                 Assert.Equal(expected, retVal);
             }
@@ -628,7 +789,9 @@ namespace System.Text.Encodings.Web.Tests
             string input = new string(Enumerable.Range(0, 128).Select(i => (char)i).ToArray());
 
             // @"\u0000\u0001..\u007F", then replace certain specific code points
-            string expected = string.Concat(Enumerable.Range(0, 128).Select(i => FormattableString.Invariant($@"\u{i:X4}")));
+            string expected = string.Concat(
+                Enumerable.Range(0, 128).Select(i => FormattableString.Invariant($@"\u{i:X4}"))
+            );
 
             expected = expected.Replace(@"\u0008", @"\b"); // U+0008 BACKSPACE -> "\b"
             expected = expected.Replace(@"\u0009", @"\t"); // U+0009 CHARACTER TABULATION -> "\t"
@@ -677,7 +840,13 @@ namespace System.Text.Encodings.Web.Tests
 
             // OperationStatus-based Encode()
             Span<char> destination = new char[Expected.Length + 1];
-            OperationStatus status = encoder.Encode(Input.AsSpan(), destination, out int charsConsumed, out int charsWritten, isFinalBlock: true);
+            OperationStatus status = encoder.Encode(
+                Input.AsSpan(),
+                destination,
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(Input.Length, charsConsumed);
             Assert.Equal(Expected.Length, charsWritten);
@@ -701,7 +870,13 @@ namespace System.Text.Encodings.Web.Tests
             // OperationStatus-based Encode()
             OperationStatus status;
             Span<char> destination = new char[Expected.Length + 1];
-            status = encoder.Encode(Input.AsSpan(), destination, out int charsConsumed, out int charsWritten, isFinalBlock: true);
+            status = encoder.Encode(
+                Input.AsSpan(),
+                destination,
+                out int charsConsumed,
+                out int charsWritten,
+                isFinalBlock: true
+            );
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(Input.Length, charsConsumed);
             Assert.Equal(Expected.Length, charsWritten);
@@ -723,25 +898,49 @@ namespace System.Text.Encodings.Web.Tests
             OperationStatus status;
 
             // Just pass in the first two characters, making uD800 an unpaired high surrogate. Set isFinalBlock=false so we get NeedMoreData.
-            status = encoder.Encode(Input.AsSpan(0, 2), destination, out int charsConsumed1, out int charsWritten1, isFinalBlock: false);
+            status = encoder.Encode(
+                Input.AsSpan(0, 2),
+                destination,
+                out int charsConsumed1,
+                out int charsWritten1,
+                isFinalBlock: false
+            );
             Assert.Equal(OperationStatus.NeedMoreData, status);
             Assert.Equal(1, charsConsumed1);
             Assert.Equal(1, charsWritten1);
             Assert.Equal("a", new string(destination.Slice(0, charsWritten1).ToArray()));
 
             // Append additional data; keep IsFinalBlock=false
-            status = encoder.Encode(Input.AsSpan(charsConsumed1, 2), destination.Slice(charsWritten1), out int charsConsumed2, out int charsWritten2, isFinalBlock: false);
+            status = encoder.Encode(
+                Input.AsSpan(charsConsumed1, 2),
+                destination.Slice(charsWritten1),
+                out int charsConsumed2,
+                out int charsWritten2,
+                isFinalBlock: false
+            );
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(2, charsConsumed2);
             Assert.Equal(12, charsWritten2);
-            Assert.Equal(Expected, new string(destination.Slice(0, charsWritten1 + charsWritten2).ToArray()));
+            Assert.Equal(
+                Expected,
+                new string(destination.Slice(0, charsWritten1 + charsWritten2).ToArray())
+            );
 
             // Ensure isFinalBlock=true has the same result since there is no longer a trailing unpaired high surrogate.
-            status = encoder.Encode(Input.AsSpan(charsConsumed1, 2), destination.Slice(charsWritten1), out charsConsumed2, out charsWritten2, isFinalBlock: true);
+            status = encoder.Encode(
+                Input.AsSpan(charsConsumed1, 2),
+                destination.Slice(charsWritten1),
+                out charsConsumed2,
+                out charsWritten2,
+                isFinalBlock: true
+            );
             Assert.Equal(OperationStatus.Done, status);
             Assert.Equal(2, charsConsumed2);
             Assert.Equal(12, charsWritten2);
-            Assert.Equal(Expected, new string(destination.Slice(0, charsWritten1 + charsWritten2).ToArray()));
+            Assert.Equal(
+                Expected,
+                new string(destination.Slice(0, charsWritten1 + charsWritten2).ToArray())
+            );
         }
 
         [Fact]
@@ -771,31 +970,46 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.Default;
 
-            Assert.Throws<ArgumentNullException>(() => { encoder.Encode(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                encoder.Encode(null);
+            });
         }
 
         [Fact]
         public void JavaScriptEncode_WithCharsRequiringEncodingAtBeginning()
         {
-            Assert.Equal(@"\u0026Hello, there!", JavaScriptEncoder.Default.Encode("&Hello, there!"));
+            Assert.Equal(
+                @"\u0026Hello, there!",
+                JavaScriptEncoder.Default.Encode("&Hello, there!")
+            );
         }
 
         [Fact]
         public void JavaScriptEncode_WithCharsRequiringEncodingAtEnd()
         {
-            Assert.Equal(@"Hello, there!\u0026", JavaScriptEncoder.Default.Encode("Hello, there!&"));
+            Assert.Equal(
+                @"Hello, there!\u0026",
+                JavaScriptEncoder.Default.Encode("Hello, there!&")
+            );
         }
 
         [Fact]
         public void JavaScriptEncode_WithCharsRequiringEncodingInMiddle()
         {
-            Assert.Equal(@"Hello, \u0026there!", JavaScriptEncoder.Default.Encode("Hello, &there!"));
+            Assert.Equal(
+                @"Hello, \u0026there!",
+                JavaScriptEncoder.Default.Encode("Hello, &there!")
+            );
         }
 
         [Fact]
         public void JavaScriptEncode_WithCharsRequiringEncodingInterspersed()
         {
-            Assert.Equal(@"Hello, \u003Cthere\u003E!", JavaScriptEncoder.Default.Encode("Hello, <there>!"));
+            Assert.Equal(
+                @"Hello, \u003Cthere\u003E!",
+                JavaScriptEncoder.Default.Encode("Hello, <there>!")
+            );
         }
 
         [Fact]

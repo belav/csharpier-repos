@@ -16,11 +16,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
     public class MakeLocalFunctionStaticRefactoringTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new MakeLocalFunctionStaticCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new MakeLocalFunctionStaticCodeRefactoringProvider();
 
-        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
-        private static readonly ParseOptions CSharp8ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp72ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp8ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
 
         [Fact]
         public async Task ShouldNotTriggerForCSharp7()
@@ -39,7 +43,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }
                     }  
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp72ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp72ParseOptions)
+            );
         }
 
         [Fact]
@@ -59,7 +65,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }
                     }  
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact]
@@ -79,7 +87,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }
                     }  
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact]
@@ -99,7 +109,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }
                     }  
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38734")]
@@ -137,7 +149,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }
                     }  
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38734")]
@@ -175,7 +189,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }
                     }  
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38734")]
@@ -213,7 +229,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }
                     }  
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38734")]
@@ -251,7 +269,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }
                     }  
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -291,7 +311,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                         }
                     }  
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -326,7 +348,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
                     }  
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -362,7 +385,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -398,8 +423,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """
-, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -437,8 +463,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """
-, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -476,7 +503,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -512,7 +541,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -550,8 +581,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """
-, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -589,8 +621,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }
                 }
-                """
-, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -625,7 +658,8 @@ parseOptions: CSharp8ParseOptions);
                     }  
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact]
@@ -662,7 +696,8 @@ parseOptions: CSharp8ParseOptions);
                     }  
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46858")]
@@ -687,7 +722,9 @@ parseOptions: CSharp8ParseOptions);
                         }
                     }  
                 }
-                """, parameters: new TestParameters(parseOptions: CSharp8ParseOptions));
+                """,
+                parameters: new TestParameters(parseOptions: CSharp8ParseOptions)
+            );
         }
 
         [Fact]
@@ -732,13 +769,15 @@ parseOptions: CSharp8ParseOptions);
                     }  
                 }
                 """,
-parseOptions: CSharp8ParseOptions);
+                parseOptions: CSharp8ParseOptions
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/53179")]
         public async Task TestLocalFunctionAsTopLevelStatement()
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 int y = 10;
                 return AddLocal();
 
@@ -746,7 +785,8 @@ parseOptions: CSharp8ParseOptions);
                 {
                     return y;
                 }
-                """, """
+                """,
+                """
                 int y = 10;
                 return AddLocal(y);
 
@@ -754,8 +794,9 @@ parseOptions: CSharp8ParseOptions);
                 {
                     return y;
                 }
-                """, parseOptions: CSharp8ParseOptions);
+                """,
+                parseOptions: CSharp8ParseOptions
+            );
         }
     }
 }
-

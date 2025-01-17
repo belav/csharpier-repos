@@ -13,26 +13,33 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.NavigateTo
 {
-    internal abstract partial class AbstractNavigateToSearchService : IAdvancedNavigateToSearchService
+    internal abstract partial class AbstractNavigateToSearchService
+        : IAdvancedNavigateToSearchService
     {
-        public IImmutableSet<string> KindsProvided { get; } = ImmutableHashSet.Create(
-            NavigateToItemKind.Class,
-            NavigateToItemKind.Constant,
-            NavigateToItemKind.Delegate,
-            NavigateToItemKind.Enum,
-            NavigateToItemKind.EnumItem,
-            NavigateToItemKind.Event,
-            NavigateToItemKind.Field,
-            NavigateToItemKind.Interface,
-            NavigateToItemKind.Method,
-            NavigateToItemKind.Module,
-            NavigateToItemKind.Property,
-            NavigateToItemKind.Structure);
+        public IImmutableSet<string> KindsProvided { get; } =
+            ImmutableHashSet.Create(
+                NavigateToItemKind.Class,
+                NavigateToItemKind.Constant,
+                NavigateToItemKind.Delegate,
+                NavigateToItemKind.Enum,
+                NavigateToItemKind.EnumItem,
+                NavigateToItemKind.Event,
+                NavigateToItemKind.Field,
+                NavigateToItemKind.Interface,
+                NavigateToItemKind.Method,
+                NavigateToItemKind.Module,
+                NavigateToItemKind.Property,
+                NavigateToItemKind.Structure
+            );
 
         public bool CanFilter => true;
 
         private static Func<RoslynNavigateToItem, Task> GetOnItemFoundCallback(
-            Solution solution, Document? activeDocument, Func<Project, INavigateToSearchResult, Task> onResultFound, CancellationToken cancellationToken)
+            Solution solution,
+            Document? activeDocument,
+            Func<Project, INavigateToSearchResult, Task> onResultFound,
+            CancellationToken cancellationToken
+        )
         {
             return async item =>
             {
@@ -41,20 +48,31 @@ namespace Microsoft.CodeAnalysis.NavigateTo
                 // stale versions of a document, it should still be for documents that the host has asked about.
                 var project = solution.GetRequiredProject(item.DocumentId.ProjectId);
 
-                var result = await item.TryCreateSearchResultAsync(solution, activeDocument, cancellationToken).ConfigureAwait(false);
+                var result = await item.TryCreateSearchResultAsync(
+                        solution,
+                        activeDocument,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (result != null)
                     await onResultFound(project, result).ConfigureAwait(false);
             };
         }
 
-        private static PooledDisposer<PooledHashSet<T>> GetPooledHashSet<T>(IEnumerable<T> items, out PooledHashSet<T> instance)
+        private static PooledDisposer<PooledHashSet<T>> GetPooledHashSet<T>(
+            IEnumerable<T> items,
+            out PooledHashSet<T> instance
+        )
         {
             var disposer = PooledHashSet<T>.GetInstance(out instance);
             instance.AddRange(items);
             return disposer;
         }
 
-        private static PooledDisposer<PooledHashSet<T>> GetPooledHashSet<T>(ImmutableArray<T> items, out PooledHashSet<T> instance)
+        private static PooledDisposer<PooledHashSet<T>> GetPooledHashSet<T>(
+            ImmutableArray<T> items,
+            out PooledHashSet<T> instance
+        )
         {
             var disposer = PooledHashSet<T>.GetInstance(out instance);
             instance.AddRange(items);

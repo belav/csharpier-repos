@@ -11,16 +11,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class UndefKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public UndefKeywordRecommender()
-            : base(SyntaxKind.UndefKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.UndefKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
-            return
-                context.IsPreProcessorKeywordContext &&
-                syntaxTree.IsBeforeFirstToken(position, cancellationToken);
+            return context.IsPreProcessorKeywordContext
+                && syntaxTree.IsBeforeFirstToken(position, cancellationToken);
         }
     }
 }

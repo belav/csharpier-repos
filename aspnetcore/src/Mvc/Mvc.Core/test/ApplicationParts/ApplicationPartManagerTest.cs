@@ -14,18 +14,24 @@ public class ApplicationPartManagerTest
         manager.ApplicationParts.Add(new ViewComponentsPart("ViewComponentsPartB"));
         manager.ApplicationParts.Add(new ControllersPart("ControllersPartC"));
         manager.FeatureProviders.Add(
-            new ControllersFeatureProvider((f, v) => f.Values.Add($"ControllersFeatureProvider1{v}")));
+            new ControllersFeatureProvider(
+                (f, v) => f.Values.Add($"ControllersFeatureProvider1{v}")
+            )
+        );
         manager.FeatureProviders.Add(
-            new ControllersFeatureProvider((f, v) => f.Values.Add($"ControllersFeatureProvider2{v}")));
+            new ControllersFeatureProvider(
+                (f, v) => f.Values.Add($"ControllersFeatureProvider2{v}")
+            )
+        );
 
         var feature = new ControllersFeature();
         var expectedResults = new[]
         {
-                "ControllersFeatureProvider1ControllersPartA",
-                "ControllersFeatureProvider1ControllersPartC",
-                "ControllersFeatureProvider2ControllersPartA",
-                "ControllersFeatureProvider2ControllersPartC"
-            };
+            "ControllersFeatureProvider1ControllersPartA",
+            "ControllersFeatureProvider1ControllersPartC",
+            "ControllersFeatureProvider2ControllersPartA",
+            "ControllersFeatureProvider2ControllersPartC",
+        };
 
         // Act
         manager.PopulateFeature(feature);
@@ -41,9 +47,13 @@ public class ApplicationPartManagerTest
         var manager = new ApplicationPartManager();
         manager.ApplicationParts.Add(new ControllersPart("ControllersPart"));
         manager.FeatureProviders.Add(
-            new ControllersFeatureProvider((f, v) => f.Values.Add($"ControllersFeatureProvider{v}")));
+            new ControllersFeatureProvider((f, v) => f.Values.Add($"ControllersFeatureProvider{v}"))
+        );
         manager.FeatureProviders.Add(
-            new NotControllersedFeatureProvider((f, v) => f.Values.Add($"ViewComponentsFeatureProvider{v}")));
+            new NotControllersedFeatureProvider(
+                (f, v) => f.Values.Add($"ViewComponentsFeatureProvider{v}")
+            )
+        );
 
         var feature = new ControllersFeature();
         var expectedResults = new[] { "ControllersFeatureProviderControllersPart" };
@@ -62,7 +72,8 @@ public class ApplicationPartManagerTest
         var manager = new ApplicationPartManager();
         manager.ApplicationParts.Add(new ViewComponentsPart("ViewComponentsPart"));
         manager.FeatureProviders.Add(
-            new ControllersFeatureProvider((f, v) => f.Values.Add($"ControllersFeatureProvider{v}")));
+            new ControllersFeatureProvider((f, v) => f.Values.Add($"ControllersFeatureProvider{v}"))
+        );
 
         var feature = new ControllersFeature();
 
@@ -107,7 +118,8 @@ public class ApplicationPartManagerTest
         public IList<string> Values { get; } = new List<string>();
     }
 
-    private class NotControllersedFeatureProvider : IApplicationFeatureProvider<ViewComponentsFeature>
+    private class NotControllersedFeatureProvider
+        : IApplicationFeatureProvider<ViewComponentsFeature>
     {
         private readonly Action<ViewComponentsFeature, string> _operation;
 
@@ -116,7 +128,10 @@ public class ApplicationPartManagerTest
             _operation = operation;
         }
 
-        public void PopulateFeature(IEnumerable<ApplicationPart> parts, ViewComponentsFeature feature)
+        public void PopulateFeature(
+            IEnumerable<ApplicationPart> parts,
+            ViewComponentsFeature feature
+        )
         {
             foreach (var part in parts.OfType<ViewComponentsPart>())
             {

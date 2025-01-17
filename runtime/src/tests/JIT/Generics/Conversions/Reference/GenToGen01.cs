@@ -6,22 +6,36 @@ using System;
 using Xunit;
 
 public struct ValX0 { }
-public struct ValY0 { }
-public struct ValX1<T> { }
-public struct ValY1<T> { }
-public struct ValX2<T, U> { }
-public struct ValY2<T, U> { }
-public struct ValX3<T, U, V> { }
-public struct ValY3<T, U, V> { }
-public class RefX0 { }
-public class RefY0 { }
-public class RefX1<T> { }
-public class RefY1<T> { }
-public class RefX2<T, U> { }
-public class RefY2<T, U> { }
-public class RefX3<T, U, V> { }
-public class RefY3<T, U, V> { }
 
+public struct ValY0 { }
+
+public struct ValX1<T> { }
+
+public struct ValY1<T> { }
+
+public struct ValX2<T, U> { }
+
+public struct ValY2<T, U> { }
+
+public struct ValX3<T, U, V> { }
+
+public struct ValY3<T, U, V> { }
+
+public class RefX0 { }
+
+public class RefY0 { }
+
+public class RefX1<T> { }
+
+public class RefY1<T> { }
+
+public class RefX2<T, U> { }
+
+public class RefY2<T, U> { }
+
+public class RefX3<T, U, V> { }
+
+public class RefY3<T, U, V> { }
 
 public class GenBase<T>
 {
@@ -29,7 +43,6 @@ public class GenBase<T>
     {
         return typeof(GenBase<T>);
     }
-
 }
 
 public class Gen<T> : GenBase<T>
@@ -89,6 +102,7 @@ public class Test_GenToGen01
 {
     public static int counter = 0;
     public static bool result = true;
+
     public static void Eval(bool exp)
     {
         counter++;
@@ -97,7 +111,6 @@ public class Test_GenToGen01
             result = exp;
             Console.WriteLine("Test Failed at location: " + counter);
         }
-
     }
 
     [Fact]
@@ -113,10 +126,15 @@ public class Test_GenToGen01
         Eval(new Converter<string>().ToGenBaseOfT(new GenBase<int>(), true, null));
         Eval(new Converter<string>().ToGenOfT(new GenBase<int>(), true, null));
 
-
         Eval(new Converter<string>().ToGenOfT(new Gen<string>(), false, typeof(Gen<string>)));
         Eval(new Converter<string>().ToGenBaseOfT(new Gen<string>(), false, typeof(Gen<string>)));
-        Eval(new Converter<string>().ToGenBaseOfT(new GenBase<string>(), false, typeof(GenBase<string>)));
+        Eval(
+            new Converter<string>().ToGenBaseOfT(
+                new GenBase<string>(),
+                false,
+                typeof(GenBase<string>)
+            )
+        );
         Eval(new Converter<string>().ToGenOfT(new GenBase<string>(), true, null));
 
         Eval(new Converter<int>().ToGenOfT(new Gen<string>(), true, null));
@@ -135,5 +153,4 @@ public class Test_GenToGen01
             return 1;
         }
     }
-
 }

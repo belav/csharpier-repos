@@ -101,7 +101,11 @@ namespace System.MemoryTests
         [InlineData(new int[] { 1, 1, 2, 3 }, new int[] { 1, 2, 4 }, new int[] { 3 })]
         [InlineData(new int[] { 1, 1, 1, 2 }, new int[] { 1 }, new int[] { 2 })]
         [InlineData(new int[] { 1, 1, 1, 1 }, new int[] { 1 }, new int[0])]
-        public static void MemoryExtensions_TrimStart_Multi(int[] values, int[] trims, int[] expected)
+        public static void MemoryExtensions_TrimStart_Multi(
+            int[] values,
+            int[] trims,
+            int[] expected
+        )
         {
             Memory<int> memory = new Memory<int>(values).TrimStart(trims);
             Assert.True(System.Linq.Enumerable.SequenceEqual(expected, memory.ToArray()));
@@ -190,14 +194,16 @@ namespace System.MemoryTests
             }
 
             public static implicit operator Foo(int value) => new Foo { Value = value };
-            public static implicit operator int? (Foo foo) => foo?.Value;
+
+            public static implicit operator int?(Foo foo) => foo?.Value;
         }
 
-        public static IEnumerable<object[]> IdempotentValues => new object[][]
-        {
-            new object[1] { new Foo[] { } },
-            new object[1] { new Foo[] { null, 1, 2, 3, null, 2, 1, null } }
-        };
+        public static IEnumerable<object[]> IdempotentValues =>
+            new object[][]
+            {
+                new object[1] { new Foo[] { } },
+                new object[1] { new Foo[] { null, 1, 2, 3, null, 2, 1, null } },
+            };
 
         [Theory]
         [MemberData(nameof(IdempotentValues))]

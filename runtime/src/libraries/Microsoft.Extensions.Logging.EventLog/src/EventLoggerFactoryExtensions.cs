@@ -20,8 +20,14 @@ namespace Microsoft.Extensions.Logging
         /// <param name="factory">The extension method argument.</param>
         /// <param name="settings">The <see cref="EventLogSettings"/>.</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddEventLog(this ILoggingBuilder builder).", error: true)]
-        public static ILoggerFactory AddEventLog(this ILoggerFactory factory, EventLog.EventLogSettings settings)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddEventLog(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static ILoggerFactory AddEventLog(
+            this ILoggerFactory factory,
+            EventLog.EventLogSettings settings
+        )
         {
             ThrowHelper.ThrowIfNull(factory);
             ThrowHelper.ThrowIfNull(settings);
@@ -36,17 +42,27 @@ namespace Microsoft.Extensions.Logging
         /// <param name="factory">The extension method argument.</param>
         /// <param name="minLevel">The minimum <see cref="LogLevel"/> to be logged</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddEventLog(this ILoggingBuilder builder).", error: true)]
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddEventLog(this ILoggingBuilder builder).",
+            error: true
+        )]
         public static ILoggerFactory AddEventLog(this ILoggerFactory factory, LogLevel minLevel) =>
-            AddEventLog(factory, new EventLogSettings() { Filter = (_, logLevel) => logLevel >= minLevel });
+            AddEventLog(
+                factory,
+                new EventLogSettings() { Filter = (_, logLevel) => logLevel >= minLevel }
+            );
 
         /// <summary>
         /// Adds an event logger that is enabled for <see cref="LogLevel"/>.Information or higher.
         /// </summary>
         /// <param name="factory">The extension method argument.</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddEventLog(this ILoggingBuilder builder).", error: true)]
-        public static ILoggerFactory AddEventLog(this ILoggerFactory factory) => AddEventLog(factory, LogLevel.Information);
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddEventLog(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static ILoggerFactory AddEventLog(this ILoggerFactory factory) =>
+            AddEventLog(factory, LogLevel.Information);
 
         /// <summary>
         /// Adds an event logger named 'EventLog' to the factory.
@@ -57,7 +73,9 @@ namespace Microsoft.Extensions.Logging
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ILoggerProvider, EventLogLoggerProvider>());
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<ILoggerProvider, EventLogLoggerProvider>()
+            );
 
             return builder;
         }
@@ -68,12 +86,17 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The extension method argument.</param>
         /// <param name="settings">The <see cref="EventLogSettings"/>.</param>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
-        public static ILoggingBuilder AddEventLog(this ILoggingBuilder builder, EventLogSettings settings)
+        public static ILoggingBuilder AddEventLog(
+            this ILoggingBuilder builder,
+            EventLogSettings settings
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(settings);
 
-            builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<ILoggerProvider>(new EventLogLoggerProvider(settings)));
+            builder.Services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<ILoggerProvider>(new EventLogLoggerProvider(settings))
+            );
 
             return builder;
         }
@@ -84,7 +107,10 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The extension method argument.</param>
         /// <param name="configure">A delegate to configure the <see cref="EventLogSettings"/>.</param>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
-        public static ILoggingBuilder AddEventLog(this ILoggingBuilder builder, Action<EventLogSettings> configure)
+        public static ILoggingBuilder AddEventLog(
+            this ILoggingBuilder builder,
+            Action<EventLogSettings> configure
+        )
         {
             ThrowHelper.ThrowIfNull(configure);
 

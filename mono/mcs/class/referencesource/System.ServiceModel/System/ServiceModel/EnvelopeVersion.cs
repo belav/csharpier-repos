@@ -4,8 +4,8 @@
 namespace System.ServiceModel
 {
     using System.Runtime.Serialization;
-    using System.Xml;
     using System.ServiceModel.Channels;
+    using System.Xml;
 
     public sealed class EnvelopeVersion
     {
@@ -20,44 +20,53 @@ namespace System.ServiceModel
         string[] mustUnderstandActorValues;
         string senderFaultName;
         string receiverFaultName;
-        static EnvelopeVersion soap11 =
-            new EnvelopeVersion(
-                "",
-                "http://schemas.xmlsoap.org/soap/actor/next",
-                Message11Strings.Namespace,
-                XD.Message11Dictionary.Namespace,
-                Message11Strings.Actor,
-                XD.Message11Dictionary.Actor,
-                SR.Soap11ToStringFormat,
-                "Client",
-                "Server");
+        static EnvelopeVersion soap11 = new EnvelopeVersion(
+            "",
+            "http://schemas.xmlsoap.org/soap/actor/next",
+            Message11Strings.Namespace,
+            XD.Message11Dictionary.Namespace,
+            Message11Strings.Actor,
+            XD.Message11Dictionary.Actor,
+            SR.Soap11ToStringFormat,
+            "Client",
+            "Server"
+        );
 
-        static EnvelopeVersion soap12 =
-            new EnvelopeVersion(
-                "http://www.w3.org/2003/05/soap-envelope/role/ultimateReceiver",
-                "http://www.w3.org/2003/05/soap-envelope/role/next",
-                Message12Strings.Namespace,
-                XD.Message12Dictionary.Namespace,
-                Message12Strings.Role,
-                XD.Message12Dictionary.Role,
-                SR.Soap12ToStringFormat,
-                "Sender",
-                "Receiver");
+        static EnvelopeVersion soap12 = new EnvelopeVersion(
+            "http://www.w3.org/2003/05/soap-envelope/role/ultimateReceiver",
+            "http://www.w3.org/2003/05/soap-envelope/role/next",
+            Message12Strings.Namespace,
+            XD.Message12Dictionary.Namespace,
+            Message12Strings.Role,
+            XD.Message12Dictionary.Role,
+            SR.Soap12ToStringFormat,
+            "Sender",
+            "Receiver"
+        );
 
         static EnvelopeVersion none = new EnvelopeVersion(
-                null,
-                null,
-                MessageStrings.Namespace,
-                XD.MessageDictionary.Namespace,
-                null,
-                null,
-                SR.EnvelopeNoneToStringFormat,
-                "Sender",
-                "Receiver");
+            null,
+            null,
+            MessageStrings.Namespace,
+            XD.MessageDictionary.Namespace,
+            null,
+            null,
+            SR.EnvelopeNoneToStringFormat,
+            "Sender",
+            "Receiver"
+        );
 
-        EnvelopeVersion(string ultimateReceiverActor, string nextDestinationActorValue,
-            string ns, XmlDictionaryString dictionaryNs, string actor, XmlDictionaryString dictionaryActor,
-            string toStringFormat, string senderFaultName, string receiverFaultName)
+        EnvelopeVersion(
+            string ultimateReceiverActor,
+            string nextDestinationActorValue,
+            string ns,
+            XmlDictionaryString dictionaryNs,
+            string actor,
+            XmlDictionaryString dictionaryActor,
+            string toStringFormat,
+            string senderFaultName,
+            string receiverFaultName
+        )
         {
             this.toStringFormat = toStringFormat;
             this.ultimateDestinationActor = ultimateReceiverActor;
@@ -78,8 +87,18 @@ namespace System.ServiceModel
                 }
                 else
                 {
-                    mustUnderstandActorValues = new string[] { "", ultimateReceiverActor, nextDestinationActorValue };
-                    ultimateDestinationActorValues = new string[] { "", ultimateReceiverActor, nextDestinationActorValue };
+                    mustUnderstandActorValues = new string[]
+                    {
+                        "",
+                        ultimateReceiverActor,
+                        nextDestinationActorValue,
+                    };
+                    ultimateDestinationActorValues = new string[]
+                    {
+                        "",
+                        ultimateReceiverActor,
+                        nextDestinationActorValue,
+                    };
                 }
             }
         }
@@ -156,7 +175,9 @@ namespace System.ServiceModel
 
         internal bool IsUltimateDestinationActor(string actor)
         {
-            return actor.Length == 0 || actor == this.ultimateDestinationActor || actor == this.nextDestinationActorValue;
+            return actor.Length == 0
+                || actor == this.ultimateDestinationActor
+                || actor == this.nextDestinationActorValue;
         }
 
         public override string ToString()

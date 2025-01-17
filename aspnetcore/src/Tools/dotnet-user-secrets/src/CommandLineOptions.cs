@@ -25,7 +25,7 @@ public class CommandLineOptions
             Error = console.Error,
             Name = "dotnet user-secrets",
             FullName = "User Secrets Manager",
-            Description = "Manages user secrets"
+            Description = "Manages user secrets",
         };
 
         app.HelpOption();
@@ -33,16 +33,28 @@ public class CommandLineOptions
 
         var optionVerbose = app.VerboseOption();
 
-        var optionProject = app.Option("-p|--project <PROJECT>", "Path to project. Defaults to searching the current directory.",
-            CommandOptionType.SingleValue, inherited: true);
+        var optionProject = app.Option(
+            "-p|--project <PROJECT>",
+            "Path to project. Defaults to searching the current directory.",
+            CommandOptionType.SingleValue,
+            inherited: true
+        );
 
-        var optionConfig = app.Option("-c|--configuration <CONFIGURATION>", "The project configuration to use. Defaults to 'Debug'.",
-            CommandOptionType.SingleValue, inherited: true);
+        var optionConfig = app.Option(
+            "-c|--configuration <CONFIGURATION>",
+            "The project configuration to use. Defaults to 'Debug'.",
+            CommandOptionType.SingleValue,
+            inherited: true
+        );
 
         // the escape hatch if project evaluation fails, or if users want to alter a secret store other than the one
         // in the current project
-        var optionId = app.Option("--id", "The user secret ID to use.",
-            CommandOptionType.SingleValue, inherited: true);
+        var optionId = app.Option(
+            "--id",
+            "The user secret ID to use.",
+            CommandOptionType.SingleValue,
+            inherited: true
+        );
 
         var options = new CommandLineOptions();
 

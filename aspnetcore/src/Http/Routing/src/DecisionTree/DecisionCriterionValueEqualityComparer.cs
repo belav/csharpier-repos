@@ -3,7 +3,8 @@
 
 namespace Microsoft.AspNetCore.Routing.DecisionTree;
 
-internal sealed class DecisionCriterionValueEqualityComparer : IEqualityComparer<DecisionCriterionValue>
+internal sealed class DecisionCriterionValueEqualityComparer
+    : IEqualityComparer<DecisionCriterionValue>
 {
     public DecisionCriterionValueEqualityComparer(IEqualityComparer<object> innerComparer)
     {

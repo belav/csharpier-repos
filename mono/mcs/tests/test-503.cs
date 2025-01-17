@@ -1,15 +1,20 @@
 // Compiler options: -warnaserror
 
-class Foo {
-	public static int Main ()
-	{
-		for (;;) {
-			try {
-				break;
-			} catch {
-				continue;
-			}
-		}
-		return 0;
-	}
+class Foo
+{
+    public static int Main()
+    {
+        for (; ; )
+        {
+            try
+            {
+                break;
+            }
+            catch
+            {
+                continue;
+            }
+        }
+        return 0;
+    }
 }

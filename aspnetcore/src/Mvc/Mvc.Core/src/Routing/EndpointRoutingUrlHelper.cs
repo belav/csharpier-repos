@@ -22,7 +22,8 @@ internal sealed class EndpointRoutingUrlHelper : UrlHelperBase
     public EndpointRoutingUrlHelper(
         ActionContext actionContext,
         LinkGenerator linkGenerator,
-        EndpointDataSource endpointDataSource)
+        EndpointDataSource endpointDataSource
+    )
         : base(actionContext)
     {
         ArgumentNullException.ThrowIfNull(linkGenerator);
@@ -41,8 +42,9 @@ internal sealed class EndpointRoutingUrlHelper : UrlHelperBase
 
         if (urlActionContext.Action == null)
         {
-            if (!values.ContainsKey("action") &&
-                AmbientValues.TryGetValue("action", out var action))
+            if (
+                !values.ContainsKey("action") && AmbientValues.TryGetValue("action", out var action)
+            )
             {
                 values["action"] = action;
             }
@@ -54,8 +56,10 @@ internal sealed class EndpointRoutingUrlHelper : UrlHelperBase
 
         if (urlActionContext.Controller == null)
         {
-            if (!values.ContainsKey("controller") &&
-                AmbientValues.TryGetValue("controller", out var controller))
+            if (
+                !values.ContainsKey("controller")
+                && AmbientValues.TryGetValue("controller", out var controller)
+            )
             {
                 values["controller"] = controller;
             }
@@ -69,7 +73,10 @@ internal sealed class EndpointRoutingUrlHelper : UrlHelperBase
             ActionContext.HttpContext,
             routeName: null,
             values,
-            fragment: urlActionContext.Fragment == null ? FragmentString.Empty : new FragmentString("#" + urlActionContext.Fragment));
+            fragment: urlActionContext.Fragment == null
+                ? FragmentString.Empty
+                : new FragmentString("#" + urlActionContext.Fragment)
+        );
         return GenerateUrl(urlActionContext.Protocol, urlActionContext.Host, path);
     }
 
@@ -82,7 +89,10 @@ internal sealed class EndpointRoutingUrlHelper : UrlHelperBase
             ActionContext.HttpContext,
             routeContext.RouteName,
             routeContext.Values,
-            fragment: routeContext.Fragment == null ? FragmentString.Empty : new FragmentString("#" + routeContext.Fragment));
+            fragment: routeContext.Fragment == null
+                ? FragmentString.Empty
+                : new FragmentString("#" + routeContext.Fragment)
+        );
         return GenerateUrl(routeContext.Protocol, routeContext.Host, path);
     }
 

@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,102 +35,77 @@ using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Metadata;
 
-namespace System.Runtime.Remoting.Metadata {
+namespace System.Runtime.Remoting.Metadata
+{
+    [AttributeUsage(AttributeTargets.Method)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class SoapMethodAttribute : SoapAttribute
+    {
+        string _responseElement;
+        string _responseNamespace;
+        string _returnElement;
+        string _soapAction;
+        bool _useAttribute;
+        string _namespace;
 
-	[AttributeUsage (AttributeTargets.Method)]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapMethodAttribute : SoapAttribute
-	{
-		string _responseElement;
-		string _responseNamespace;
-		string _returnElement;
-		string _soapAction;
-		bool _useAttribute;
-		string _namespace;
-		
-		public SoapMethodAttribute ()
-		{
-		}
+        public SoapMethodAttribute() { }
 
-		public string ResponseXmlElementName {
-			get {
-				return _responseElement;
-			}
+        public string ResponseXmlElementName
+        {
+            get { return _responseElement; }
+            set { _responseElement = value; }
+        }
 
-			set {
-				_responseElement = value;
-			}
-		}
-		
-		public string ResponseXmlNamespace {
-			get {
-				return _responseNamespace;
-			}
+        public string ResponseXmlNamespace
+        {
+            get { return _responseNamespace; }
+            set { _responseNamespace = value; }
+        }
 
-			set {
-				_responseNamespace = value;
-			}
-		}
+        public string ReturnXmlElementName
+        {
+            get { return _returnElement; }
+            set { _returnElement = value; }
+        }
 
-		public string ReturnXmlElementName {
-			get {
-				return _returnElement;
-			}
+        public string SoapAction
+        {
+            get { return _soapAction; }
+            set { _soapAction = value; }
+        }
 
-			set {
-				_returnElement = value;
-			}
-		}
+        public override bool UseAttribute
+        {
+            get { return _useAttribute; }
+            set { _useAttribute = value; }
+        }
 
-		public string SoapAction {
-			get {
-				return _soapAction;
-			}
+        public override string XmlNamespace
+        {
+            get { return _namespace; }
+            set { _namespace = value; }
+        }
 
-			set {
-				_soapAction = value;
-			}
-		}
+        internal override void SetReflectionObject(object reflectionObject)
+        {
+            MethodBase mb = (MethodBase)reflectionObject;
 
-		public override bool UseAttribute {
-			get {
-				return _useAttribute;
-			}
+            if (_responseElement == null)
+                _responseElement = mb.Name + "Response";
 
-			set {
-				_useAttribute = value;
-			}
-		}
+            if (_responseNamespace == null)
+                _responseNamespace = SoapServices.GetXmlNamespaceForMethodResponse(mb);
 
-		public override string XmlNamespace {
-			get {
-				return _namespace;
-			}
+            if (_returnElement == null)
+                _returnElement = "return";
 
-			set {
-				_namespace = value;
-			}
-		}
-		
-		internal override void SetReflectionObject (object reflectionObject)
-		{
-			MethodBase mb = (MethodBase) reflectionObject;
-			
-			if (_responseElement == null)
-				_responseElement = mb.Name + "Response";
-				
-			if (_responseNamespace == null)
-				_responseNamespace = SoapServices.GetXmlNamespaceForMethodResponse (mb);
-				
-			if (_returnElement == null)
-				_returnElement = "return";
-				
-			if (_soapAction == null) {
-				_soapAction = SoapServices.GetXmlNamespaceForMethodCall (mb) + "#" + mb.Name;
-			}
-			
-			if (_namespace == null)
-				_namespace = SoapServices.GetXmlNamespaceForMethodCall (mb);
-		}
-	}
+            if (_soapAction == null)
+            {
+                _soapAction = SoapServices.GetXmlNamespaceForMethodCall(mb) + "#" + mb.Name;
+            }
+
+            if (_namespace == null)
+                _namespace = SoapServices.GetXmlNamespaceForMethodCall(mb);
+        }
+    }
 }

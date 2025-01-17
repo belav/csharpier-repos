@@ -1,5 +1,5 @@
 //
-// BufferModeSettingsTest.cs 
+// BufferModeSettingsTest.cs
 //	- unit tests for System.Web.Configuration.BufferModeSettings
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,73 +28,118 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Configuration;
-using System.Web.Configuration;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.Configuration {
+namespace MonoTests.System.Web.Configuration
+{
+    [TestFixture]
+    public class BufferModeSettingsTest
+    {
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void MaxBufferSize_validationFailure()
+        {
+            BufferModeSettings b = new BufferModeSettings(
+                "hi",
+                Int32.MaxValue,
+                1,
+                Int32.MaxValue,
+                TimeSpan.FromSeconds(1),
+                TimeSpan.Zero,
+                Int32.MaxValue
+            );
 
-	[TestFixture]
-	public class BufferModeSettingsTest  {
+            b.MaxBufferSize = 0;
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void MaxBufferSize_validationFailure ()
-		{
-			BufferModeSettings b = new BufferModeSettings ("hi", Int32.MaxValue, 1, Int32.MaxValue, TimeSpan.FromSeconds (1), TimeSpan.Zero, Int32.MaxValue);
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void MaxBufferThreads_validationFailure()
+        {
+            BufferModeSettings b = new BufferModeSettings(
+                "hi",
+                Int32.MaxValue,
+                1,
+                Int32.MaxValue,
+                TimeSpan.FromSeconds(1),
+                TimeSpan.Zero,
+                Int32.MaxValue
+            );
 
-			b.MaxBufferSize = 0;
-		}
+            b.MaxBufferThreads = 0;
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void MaxBufferThreads_validationFailure ()
-		{
-			BufferModeSettings b = new BufferModeSettings ("hi", Int32.MaxValue, 1, Int32.MaxValue, TimeSpan.FromSeconds (1), TimeSpan.Zero, Int32.MaxValue);
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void MaxFlushSize_validationFailure()
+        {
+            BufferModeSettings b = new BufferModeSettings(
+                "hi",
+                Int32.MaxValue,
+                1,
+                Int32.MaxValue,
+                TimeSpan.FromSeconds(1),
+                TimeSpan.Zero,
+                Int32.MaxValue
+            );
 
-			b.MaxBufferThreads = 0;
-		}
+            b.MaxFlushSize = 0;
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void MaxFlushSize_validationFailure ()
-		{
-			BufferModeSettings b = new BufferModeSettings ("hi", Int32.MaxValue, 1, Int32.MaxValue, TimeSpan.FromSeconds (1), TimeSpan.Zero, Int32.MaxValue);
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void Name_validationFailure()
+        {
+            BufferModeSettings b = new BufferModeSettings(
+                "hi",
+                Int32.MaxValue,
+                1,
+                Int32.MaxValue,
+                TimeSpan.FromSeconds(1),
+                TimeSpan.Zero,
+                Int32.MaxValue
+            );
 
-			b.MaxFlushSize = 0;
-		}
+            b.Name = "";
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void Name_validationFailure ()
-		{
-			BufferModeSettings b = new BufferModeSettings ("hi", Int32.MaxValue, 1, Int32.MaxValue, TimeSpan.FromSeconds (1), TimeSpan.Zero, Int32.MaxValue);
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void RegularFlushInterval_validationFailure()
+        {
+            BufferModeSettings b = new BufferModeSettings(
+                "hi",
+                Int32.MaxValue,
+                1,
+                Int32.MaxValue,
+                TimeSpan.FromSeconds(1),
+                TimeSpan.Zero,
+                Int32.MaxValue
+            );
 
-			b.Name = "";
-		}
+            b.RegularFlushInterval = TimeSpan.FromSeconds(-30);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void RegularFlushInterval_validationFailure ()
-		{
-			BufferModeSettings b = new BufferModeSettings ("hi", Int32.MaxValue, 1, Int32.MaxValue, TimeSpan.FromSeconds (1), TimeSpan.Zero, Int32.MaxValue);
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void UrgentFlushThreshold_validationFailure()
+        {
+            BufferModeSettings b = new BufferModeSettings(
+                "hi",
+                Int32.MaxValue,
+                1,
+                Int32.MaxValue,
+                TimeSpan.FromSeconds(1),
+                TimeSpan.Zero,
+                Int32.MaxValue
+            );
 
-			b.RegularFlushInterval = TimeSpan.FromSeconds (-30);
-		}
-
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void UrgentFlushThreshold_validationFailure ()
-		{
-			BufferModeSettings b = new BufferModeSettings ("hi", Int32.MaxValue, 1, Int32.MaxValue, TimeSpan.FromSeconds (1), TimeSpan.Zero, Int32.MaxValue);
-
-			b.UrgentFlushThreshold = 0;
-		}
-	}
-
+            b.UrgentFlushThreshold = 0;
+        }
+    }
 }
-

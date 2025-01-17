@@ -19,19 +19,33 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             return (int)CompilerOptions.LARGEST_OPTION_ID - 1;
         }
 
-        public void GetOptionInfoAt(int index, out CompilerOptions optionID, out string switchName, out string switchDescription, out uint flags)
-            => throw new NotImplementedException();
+        public void GetOptionInfoAt(
+            int index,
+            out CompilerOptions optionID,
+            out string switchName,
+            out string switchDescription,
+            out uint flags
+        ) => throw new NotImplementedException();
 
-        public void GetOptionInfoAtEx(int index, out CompilerOptions optionID, out string shortSwitchName, out string longSwitchName, out string descriptiveSwitchName, out string switchDescription, out uint flags)
-            => throw new NotImplementedException();
+        public void GetOptionInfoAtEx(
+            int index,
+            out CompilerOptions optionID,
+            out string shortSwitchName,
+            out string longSwitchName,
+            out string descriptiveSwitchName,
+            out string switchDescription,
+            out uint flags
+        ) => throw new NotImplementedException();
 
         public void ResetAllOptions()
         {
             ProjectSystemProjectOptionsProcessor[CompilerOptions.OPTID_CCSYMBOLS] = string.Empty;
             ProjectSystemProjectOptionsProcessor[CompilerOptions.OPTID_KEYFILE] = string.Empty;
             ProjectSystemProjectOptionsProcessor[CompilerOptions.OPTID_NOWARNLIST] = string.Empty;
-            ProjectSystemProjectOptionsProcessor[CompilerOptions.OPTID_WARNASERRORLIST] = string.Empty;
-            ProjectSystemProjectOptionsProcessor[CompilerOptions.OPTID_WARNNOTASERRORLIST] = string.Empty;
+            ProjectSystemProjectOptionsProcessor[CompilerOptions.OPTID_WARNASERRORLIST] =
+                string.Empty;
+            ProjectSystemProjectOptionsProcessor[CompilerOptions.OPTID_WARNNOTASERRORLIST] =
+                string.Empty;
             ProjectSystemProjectOptionsProcessor[CompilerOptions.OPTID_UNSAFE] = false;
             ProjectSystemProjectOptionsProcessor[CompilerOptions.OPTID_XML_DOCFILE] = string.Empty;
         }
@@ -53,8 +67,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             return VSConstants.S_OK;
         }
 
-        public void GetOption(CompilerOptions optionID, IntPtr variant)
-            => Marshal.GetNativeVariantForObject(ProjectSystemProjectOptionsProcessor[optionID], variant);
+        public void GetOption(CompilerOptions optionID, IntPtr variant) =>
+            Marshal.GetNativeVariantForObject(
+                ProjectSystemProjectOptionsProcessor[optionID],
+                variant
+            );
 
         public int CommitChanges(ref ICSError error)
         {
@@ -74,7 +91,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             return _warningNumberArrayPointer;
         }
 
-        public string GetWarnInfo(int warnIndex)
-            => throw new NotImplementedException();
+        public string GetWarnInfo(int warnIndex) => throw new NotImplementedException();
     }
 }

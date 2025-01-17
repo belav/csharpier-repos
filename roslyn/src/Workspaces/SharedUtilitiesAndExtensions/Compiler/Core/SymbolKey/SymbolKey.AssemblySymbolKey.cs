@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, IAssemblySymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                IAssemblySymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
                 var assemblyName = reader.ReadString();
                 var compilation = reader.Compilation;
@@ -41,7 +44,11 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                return CreateResolution(result, $"({nameof(AssemblySymbolKey)} '{assemblyName}' not found)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(AssemblySymbolKey)} '{assemblyName}' not found)",
+                    out failureReason
+                );
             }
         }
     }

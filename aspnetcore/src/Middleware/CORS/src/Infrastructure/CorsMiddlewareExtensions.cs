@@ -43,7 +43,8 @@ public static class CorsMiddlewareExtensions
     /// <returns>The original app parameter</returns>
     public static IApplicationBuilder UseCors(
         this IApplicationBuilder app,
-        Action<CorsPolicyBuilder> configurePolicy)
+        Action<CorsPolicyBuilder> configurePolicy
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(configurePolicy);

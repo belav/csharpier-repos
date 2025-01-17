@@ -7,7 +7,12 @@ using System.Net;
 namespace SslStress
 {
     [Flags]
-    public enum RunMode { server = 1, client = 2, both = server | client };
+    public enum RunMode
+    {
+        server = 1,
+        client = 2,
+        both = server | client,
+    };
 
     public class Configuration
     {

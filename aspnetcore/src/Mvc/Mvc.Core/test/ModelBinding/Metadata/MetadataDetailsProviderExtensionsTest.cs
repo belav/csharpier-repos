@@ -10,11 +10,11 @@ public class MetadataDetailsProviderExtensionsTest
     {
         // Arrange
         var list = new List<IMetadataDetailsProvider>
-            {
-                new FooMetadataDetailsProvider(),
-                new BarMetadataDetailsProvider(),
-                new FooMetadataDetailsProvider()
-            };
+        {
+            new FooMetadataDetailsProvider(),
+            new BarMetadataDetailsProvider(),
+            new FooMetadataDetailsProvider(),
+        };
 
         // Act
         list.RemoveType(typeof(FooMetadataDetailsProvider));
@@ -29,11 +29,11 @@ public class MetadataDetailsProviderExtensionsTest
     {
         // Arrange
         var list = new List<IMetadataDetailsProvider>
-            {
-                new FooMetadataDetailsProvider(),
-                new BarMetadataDetailsProvider(),
-                new FooMetadataDetailsProvider()
-            };
+        {
+            new FooMetadataDetailsProvider(),
+            new BarMetadataDetailsProvider(),
+            new FooMetadataDetailsProvider(),
+        };
 
         // Act
         list.RemoveType<FooMetadataDetailsProvider>();
@@ -43,11 +43,7 @@ public class MetadataDetailsProviderExtensionsTest
         Assert.IsType<BarMetadataDetailsProvider>(provider);
     }
 
-    private class FooMetadataDetailsProvider : IMetadataDetailsProvider
-    {
-    }
+    private class FooMetadataDetailsProvider : IMetadataDetailsProvider { }
 
-    private class BarMetadataDetailsProvider : IMetadataDetailsProvider
-    {
-    }
+    private class BarMetadataDetailsProvider : IMetadataDetailsProvider { }
 }

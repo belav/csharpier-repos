@@ -20,7 +20,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
             Value = value;
         }
 
-        public bool CanProduceStem { get { return false; } }
+        public bool CanProduceStem
+        {
+            get { return false; }
+        }
 
         public string Value { get; }
 

@@ -11,7 +11,11 @@ namespace System.Globalization.Tests
         public static IEnumerable<object[]> PercentGroupSizes_TestData()
         {
             yield return new object[] { NumberFormatInfo.InvariantInfo, new int[] { 3 } };
-            yield return new object[] { CultureInfo.GetCultureInfo("en-US").NumberFormat, new int[] { 3 } };
+            yield return new object[]
+            {
+                CultureInfo.GetCultureInfo("en-US").NumberFormat,
+                new int[] { 3 },
+            };
         }
 
         [Theory]
@@ -37,7 +41,11 @@ namespace System.Globalization.Tests
         public void PercentGroupSizes_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "PercentGroupSizes", () => format.PercentGroupSizes = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "PercentGroupSizes",
+                () => format.PercentGroupSizes = null
+            );
         }
 
         [Theory]
@@ -47,13 +55,19 @@ namespace System.Globalization.Tests
         public void PercentGroupSizes_SetInvalid_ThrowsArgumentException(int[] value)
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentException>("value", "PercentGroupSizes", () => format.PercentGroupSizes = value);
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                "PercentGroupSizes",
+                () => format.PercentGroupSizes = value
+            );
         }
 
         [Fact]
         public void PercentGroupSizes_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.PercentGroupSizes = new int[] { 1, 2, 3 });
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.PercentGroupSizes = new int[] { 1, 2, 3 }
+            );
         }
     }
 }

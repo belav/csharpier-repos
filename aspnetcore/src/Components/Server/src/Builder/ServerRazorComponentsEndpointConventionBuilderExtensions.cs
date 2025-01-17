@@ -15,9 +15,14 @@ public static class ServerRazorComponentsEndpointConventionBuilderExtensions
     /// Configures the application to support the <see cref="RenderMode.InteractiveServer"/> render mode.
     /// </summary>
     /// <returns>The <see cref="RazorComponentsEndpointConventionBuilder"/>.</returns>
-    public static RazorComponentsEndpointConventionBuilder AddInteractiveServerRenderMode(this RazorComponentsEndpointConventionBuilder builder)
+    public static RazorComponentsEndpointConventionBuilder AddInteractiveServerRenderMode(
+        this RazorComponentsEndpointConventionBuilder builder
+    )
     {
-        ComponentEndpointConventionBuilderHelper.AddRenderMode(builder, new InternalServerRenderMode());
+        ComponentEndpointConventionBuilderHelper.AddRenderMode(
+            builder,
+            new InternalServerRenderMode()
+        );
         return builder;
     }
 }

@@ -5,8 +5,8 @@ namespace Microsoft.AspNetCore.HttpLogging;
 
 internal interface ISystemDateTime
 {
-    /// <summary> 
+    /// <summary>
     /// Retrieves the date and time currently set for this machine.
-    /// </summary> 
+    /// </summary>
     DateTime Now { get; }
 }

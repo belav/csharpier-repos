@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using Microsoft.Extensions.Configuration.UserSecrets;
@@ -52,7 +52,10 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60584", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60584",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void AddUserSecrets_FindsAssemblyAttribute()
         {
             var randValue = Guid.NewGuid().ToString();
@@ -67,7 +70,10 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60584", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60584",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void AddUserSecrets_FindsAssemblyAttributeFromType()
         {
             var randValue = Guid.NewGuid().ToString();
@@ -84,17 +90,32 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
         [Fact]
         public void AddUserSecrets_ThrowsIfAssemblyAttributeFromType()
         {
-            var ex = Assert.Throws<InvalidOperationException>(() =>
-                new ConfigurationBuilder().AddUserSecrets<string>(optional: false));
-            Assert.Equal(SR.Format(SR.Error_Missing_UserSecretsIdAttribute, typeof(string).Assembly.GetName().Name),
-                ex.Message);
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => new ConfigurationBuilder().AddUserSecrets<string>(optional: false)
+            );
+            Assert.Equal(
+                SR.Format(
+                    SR.Error_Missing_UserSecretsIdAttribute,
+                    typeof(string).Assembly.GetName().Name
+                ),
+                ex.Message
+            );
 
-            ex = Assert.Throws<InvalidOperationException>(() =>
-                new ConfigurationBuilder().AddUserSecrets(typeof(JObject).Assembly, optional: false));
-            Assert.Equal(SR.Format(SR.Error_Missing_UserSecretsIdAttribute, typeof(JObject).Assembly.GetName().Name),
-                ex.Message);
+            ex = Assert.Throws<InvalidOperationException>(
+                () =>
+                    new ConfigurationBuilder().AddUserSecrets(
+                        typeof(JObject).Assembly,
+                        optional: false
+                    )
+            );
+            Assert.Equal(
+                SR.Format(
+                    SR.Error_Missing_UserSecretsIdAttribute,
+                    typeof(JObject).Assembly.GetName().Name
+                ),
+                ex.Message
+            );
         }
-
 
         [Fact]
         public void AddUserSecrets_DoesNotThrowsIfOptionalByDefault()
@@ -117,11 +138,19 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
                 File.Delete(secretPath);
             }
 
-            Assert.Throws<FileNotFoundException>(() => new ConfigurationBuilder().AddUserSecrets(Assembly.GetExecutingAssembly(), false).Build());
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    new ConfigurationBuilder()
+                        .AddUserSecrets(Assembly.GetExecutingAssembly(), false)
+                        .Build()
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60584", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60584",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void AddUserSecrets_With_SecretsId_Passed_Explicitly()
         {
             var userSecretsId = Guid.NewGuid().ToString();

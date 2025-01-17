@@ -1,6 +1,6 @@
-// 
+//
 // Copyright (c) 2006 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,75 +24,88 @@
 using System;
 using System.Data;
 using System.Data.OleDb;
-
 using MonoTests.System.Data.Utils;
-
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Data.OleDb
 {
-[TestFixture]
-public class OleDbDataReader_Close : GHTBase
-{
-	public static void Main()
-	{
-		OleDbDataReader_Close tc = new OleDbDataReader_Close();
-		Exception exp = null;
-		try
-		{
-			tc.BeginTest("DataReader.IsClosed");
-			tc.run();
-		}
-		catch(Exception ex){exp = ex;}
-		finally	{tc.EndTest(exp);}
-	}
+    [TestFixture]
+    public class OleDbDataReader_Close : GHTBase
+    {
+        public static void Main()
+        {
+            OleDbDataReader_Close tc = new OleDbDataReader_Close();
+            Exception exp = null;
+            try
+            {
+                tc.BeginTest("DataReader.IsClosed");
+                tc.run();
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                tc.EndTest(exp);
+            }
+        }
 
-	[Test]
-	public void run()
-	{
-		Exception exp = null;
+        [Test]
+        public void run()
+        {
+            Exception exp = null;
 
-		OleDbConnection con = new OleDbConnection(MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString);
-		con.Open();
-		OleDbCommand cmd = new OleDbCommand("Select * From Customers", con);
-		OleDbDataReader rdr = cmd.ExecuteReader();
+            OleDbConnection con = new OleDbConnection(
+                MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
+            );
+            con.Open();
+            OleDbCommand cmd = new OleDbCommand("Select * From Customers", con);
+            OleDbDataReader rdr = cmd.ExecuteReader();
 
-		try
-		{
-			BeginCase("before closing");
-			Compare(rdr.IsClosed ,false);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+            try
+            {
+                BeginCase("before closing");
+                Compare(rdr.IsClosed, false);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
+            try
+            {
+                BeginCase("after closing");
+                rdr.Close();
+                Compare(rdr.IsClosed, true);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
 
-		try
-		{
-			BeginCase("after closing");
-			rdr.Close();
-			Compare(rdr.IsClosed ,true);
-		} 
-		catch(Exception ex){exp = ex;}
-		finally{EndCase(exp); exp = null;}
+            if (con.State == ConnectionState.Open)
+                con.Close();
+        }
 
-		if (con.State == ConnectionState.Open) con.Close();
+        //public TestClass():base(true){}
 
+        //Activate this constructor to log Failures to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-	}
+        //Activate this constructor to log All to a log file
+        //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
-
-	//public TestClass():base(true){}
-
-	//Activate this constructor to log Failures to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, false){}
-
-	//Activate this constructor to log All to a log file
-	//public TestClass(System.IO.TextWriter tw):base(tw, true){}
-
-	//BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
-}
-
-
+        //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
+    }
 }

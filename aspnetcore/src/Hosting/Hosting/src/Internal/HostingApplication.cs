@@ -25,10 +25,18 @@ internal sealed class HostingApplication : IHttpApplication<HostingApplication.C
         DistributedContextPropagator propagator,
         IHttpContextFactory httpContextFactory,
         HostingEventSource eventSource,
-        HostingMetrics metrics)
+        HostingMetrics metrics
+    )
     {
         _application = application;
-        _diagnostics = new HostingApplicationDiagnostics(logger, diagnosticSource, activitySource, propagator, eventSource, metrics);
+        _diagnostics = new HostingApplicationDiagnostics(
+            logger,
+            diagnosticSource,
+            activitySource,
+            propagator,
+            eventSource,
+            metrics
+        );
         if (httpContextFactory is DefaultHttpContextFactory factory)
         {
             _defaultHttpContextFactory = factory;

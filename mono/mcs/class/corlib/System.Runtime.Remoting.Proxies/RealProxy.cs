@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,406 +34,470 @@
 
 using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
-using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Activation;
 using System.Runtime.Remoting.Contexts;
-using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Messaging;
 using System.Runtime.Serialization;
-using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace System.Runtime.Remoting.Proxies
 {
 #pragma warning disable 169, 649
-	[StructLayout (LayoutKind.Sequential)]
-	internal class TransparentProxy {
-		public RealProxy _rp;
-		Mono.RuntimeRemoteClassHandle _class;
-		bool _custom_type_info;
+    [StructLayout(LayoutKind.Sequential)]
+    internal class TransparentProxy
+    {
+        public RealProxy _rp;
+        Mono.RuntimeRemoteClassHandle _class;
+        bool _custom_type_info;
 
-		unsafe internal RuntimeType GetProxyType () {
-			RuntimeTypeHandle h = _class.ProxyClass.GetTypeHandle ();
-			return (RuntimeType)Type.GetTypeFromHandle (h);
-		}
+        internal unsafe RuntimeType GetProxyType()
+        {
+            RuntimeTypeHandle h = _class.ProxyClass.GetTypeHandle();
+            return (RuntimeType)Type.GetTypeFromHandle(h);
+        }
 
-		bool IsContextBoundObject {
-			get { return GetProxyType ().IsContextful; }
-		}
+        bool IsContextBoundObject
+        {
+            get { return GetProxyType().IsContextful; }
+        }
 
-		Context TargetContext {
-			get { return _rp._targetContext; }
-		}
+        Context TargetContext
+        {
+            get { return _rp._targetContext; }
+        }
 
-		bool InCurrentContext () {
-			return IsContextBoundObject && Object.ReferenceEquals (TargetContext, Thread.CurrentContext);
-		}
+        bool InCurrentContext()
+        {
+            return IsContextBoundObject
+                && Object.ReferenceEquals(TargetContext, Thread.CurrentContext);
+        }
 
-		internal object LoadRemoteFieldNew (IntPtr classPtr, IntPtr fieldPtr) {
-			Mono.RuntimeClassHandle classHandle = new Mono.RuntimeClassHandle (classPtr);
-			RuntimeFieldHandle fieldHandle = new RuntimeFieldHandle (fieldPtr);
-			RuntimeTypeHandle typeHandle = classHandle.GetTypeHandle ();
+        internal object LoadRemoteFieldNew(IntPtr classPtr, IntPtr fieldPtr)
+        {
+            Mono.RuntimeClassHandle classHandle = new Mono.RuntimeClassHandle(classPtr);
+            RuntimeFieldHandle fieldHandle = new RuntimeFieldHandle(fieldPtr);
+            RuntimeTypeHandle typeHandle = classHandle.GetTypeHandle();
 
-			FieldInfo field = FieldInfo.GetFieldFromHandle (fieldHandle);
+            FieldInfo field = FieldInfo.GetFieldFromHandle(fieldHandle);
 
-			if (InCurrentContext ()) {
-				object o = _rp._server;
-				return field.GetValue(o);
-			}
+            if (InCurrentContext())
+            {
+                object o = _rp._server;
+                return field.GetValue(o);
+            }
 
-			string typeName = Type.GetTypeFromHandle(typeHandle).FullName;
-			string fieldName = field.Name;
-			object[] inArgs = new object[] { typeName,
-							  fieldName };
-			object[] outArgsMsg = new object[1];
-			MethodInfo minfo = typeof(object).GetMethod("FieldGetter", BindingFlags.NonPublic | BindingFlags.Instance);
-			if (minfo == null)
-				throw new MissingMethodException ("System.Object", "FieldGetter");
-			MonoMethodMessage msg = new MonoMethodMessage (minfo, inArgs, outArgsMsg);
-			object[] outArgs;
-			Exception exc;
-			RealProxy.PrivateInvoke (_rp, msg, out exc, out outArgs);
-			if (exc != null)
-				throw exc;
-			return outArgs[0];
-		}
+            string typeName = Type.GetTypeFromHandle(typeHandle).FullName;
+            string fieldName = field.Name;
+            object[] inArgs = new object[] { typeName, fieldName };
+            object[] outArgsMsg = new object[1];
+            MethodInfo minfo = typeof(object).GetMethod(
+                "FieldGetter",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+            if (minfo == null)
+                throw new MissingMethodException("System.Object", "FieldGetter");
+            MonoMethodMessage msg = new MonoMethodMessage(minfo, inArgs, outArgsMsg);
+            object[] outArgs;
+            Exception exc;
+            RealProxy.PrivateInvoke(_rp, msg, out exc, out outArgs);
+            if (exc != null)
+                throw exc;
+            return outArgs[0];
+        }
 
-		internal void StoreRemoteField (IntPtr classPtr, IntPtr fieldPtr, object arg) {
-			Mono.RuntimeClassHandle classHandle = new Mono.RuntimeClassHandle (classPtr);
-			RuntimeFieldHandle fieldHandle = new RuntimeFieldHandle (fieldPtr);
-			RuntimeTypeHandle typeHandle = classHandle.GetTypeHandle ();
-			FieldInfo field = FieldInfo.GetFieldFromHandle (fieldHandle);
+        internal void StoreRemoteField(IntPtr classPtr, IntPtr fieldPtr, object arg)
+        {
+            Mono.RuntimeClassHandle classHandle = new Mono.RuntimeClassHandle(classPtr);
+            RuntimeFieldHandle fieldHandle = new RuntimeFieldHandle(fieldPtr);
+            RuntimeTypeHandle typeHandle = classHandle.GetTypeHandle();
+            FieldInfo field = FieldInfo.GetFieldFromHandle(fieldHandle);
 
-			if (InCurrentContext ()) {
-				object o = _rp._server;
-				field.SetValue (o, arg);
-				return;
-			}
+            if (InCurrentContext())
+            {
+                object o = _rp._server;
+                field.SetValue(o, arg);
+                return;
+            }
 
-			string typeName = Type.GetTypeFromHandle (typeHandle).FullName;
-			string fieldName = field.Name;
-			object [] inArgs = new object[] { typeName,
-							  fieldName,
-							  arg };
-			MethodInfo minfo = typeof(object).GetMethod ("FieldSetter", BindingFlags.NonPublic | BindingFlags.Instance);
-			if (minfo == null)
-				throw new MissingMethodException ("System.Object", "FieldSetter");
+            string typeName = Type.GetTypeFromHandle(typeHandle).FullName;
+            string fieldName = field.Name;
+            object[] inArgs = new object[] { typeName, fieldName, arg };
+            MethodInfo minfo = typeof(object).GetMethod(
+                "FieldSetter",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
+            if (minfo == null)
+                throw new MissingMethodException("System.Object", "FieldSetter");
 
-			MonoMethodMessage msg = new MonoMethodMessage (minfo, inArgs, null);
-			object [] outArgs;
-			Exception exc;
-			RealProxy.PrivateInvoke (_rp, msg, out exc, out outArgs);
-			if (exc != null)
-				throw exc;
-		}
-
-	}
+            MonoMethodMessage msg = new MonoMethodMessage(minfo, inArgs, null);
+            object[] outArgs;
+            Exception exc;
+            RealProxy.PrivateInvoke(_rp, msg, out exc, out outArgs);
+            if (exc != null)
+                throw exc;
+        }
+    }
 #pragma warning restore 169, 649
-	
-	[ComVisible (true)]
-	[StructLayout (LayoutKind.Sequential)]
-	public abstract class RealProxy {
-		// other classes visible to the runtime 
-		// derive from this class so keep these locals
-		// in sync with the definition RealProxy 
-		// in object-internals.h
-		
-#pragma warning disable 169, 414		
-		#region Sync with object-internals.h
-		Type class_to_proxy;
-		internal Context _targetContext;
-		internal MarshalByRefObject _server;
-		int _targetDomainId = -1;
-		internal string _targetUri;
-		internal Identity _objectIdentity;
-		Object _objTP;
-		object _stubData;
+
+    [ComVisible(true)]
+    [StructLayout(LayoutKind.Sequential)]
+    public abstract class RealProxy
+    {
+        // other classes visible to the runtime
+        // derive from this class so keep these locals
+        // in sync with the definition RealProxy
+        // in object-internals.h
+
+#pragma warning disable 169, 414
+        #region Sync with object-internals.h
+        Type class_to_proxy;
+        internal Context _targetContext;
+        internal MarshalByRefObject _server;
+        int _targetDomainId = -1;
+        internal string _targetUri;
+        internal Identity _objectIdentity;
+        Object _objTP;
+        object _stubData;
         #endregion
 #pragma warning restore 169, 414
 
-		protected RealProxy ()
-		{
-		}
+        protected RealProxy() { }
 
-		protected RealProxy (Type classToProxy) : this(classToProxy, IntPtr.Zero, null)
-		{
-		}
+        protected RealProxy(Type classToProxy)
+            : this(classToProxy, IntPtr.Zero, null) { }
 
-		internal RealProxy (Type classToProxy, ClientIdentity identity) : this(classToProxy, IntPtr.Zero, null)
-		{
-			_objectIdentity = identity;
-		}
+        internal RealProxy(Type classToProxy, ClientIdentity identity)
+            : this(classToProxy, IntPtr.Zero, null)
+        {
+            _objectIdentity = identity;
+        }
 
-		protected RealProxy (Type classToProxy, IntPtr stub, object stubData)
-		{
-			if (!classToProxy.IsMarshalByRef && !classToProxy.IsInterface)
-				throw new ArgumentException("object must be MarshalByRef");
+        protected RealProxy(Type classToProxy, IntPtr stub, object stubData)
+        {
+            if (!classToProxy.IsMarshalByRef && !classToProxy.IsInterface)
+                throw new ArgumentException("object must be MarshalByRef");
 
-			this.class_to_proxy = classToProxy;
+            this.class_to_proxy = classToProxy;
 
-			if (stub != IntPtr.Zero)
-				throw new NotSupportedException ("stub is not used in Mono");
-		}
+            if (stub != IntPtr.Zero)
+                throw new NotSupportedException("stub is not used in Mono");
+        }
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static Type InternalGetProxyType (object transparentProxy);
-		
-		public Type GetProxiedType() 
-		{
-			if (_objTP == null) {
-				if (class_to_proxy.IsInterface) return typeof(MarshalByRefObject);
-				else return class_to_proxy;
-			}
-			return InternalGetProxyType (_objTP);
-		}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern Type InternalGetProxyType(object transparentProxy);
 
-		public virtual ObjRef CreateObjRef (Type requestedType)
-		{
-			return RemotingServices.Marshal ((MarshalByRefObject) GetTransparentProxy(), null, requestedType);
-		}
+        public Type GetProxiedType()
+        {
+            if (_objTP == null)
+            {
+                if (class_to_proxy.IsInterface)
+                    return typeof(MarshalByRefObject);
+                else
+                    return class_to_proxy;
+            }
+            return InternalGetProxyType(_objTP);
+        }
 
-		public virtual void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			Object obj = GetTransparentProxy();
-			RemotingServices.GetObjectData (obj, info, context);            
-		}
-		
-		internal Identity ObjectIdentity
-		{
-			get { return _objectIdentity; }
-			set { _objectIdentity = value; }
-		}
-		
-		[MonoTODO]
-		public virtual IntPtr GetCOMIUnknown (bool fIsMarshalled)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public virtual void SetCOMIUnknown (IntPtr i)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public virtual IntPtr SupportsInterface (ref Guid iid)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public static object GetStubData (RealProxy rp)
-		{
-			return rp._stubData;
-		}
-		
-		public static void SetStubData (RealProxy rp, object stubData)
-		{
-			rp._stubData = stubData;
-		}
+        public virtual ObjRef CreateObjRef(Type requestedType)
+        {
+            return RemotingServices.Marshal(
+                (MarshalByRefObject)GetTransparentProxy(),
+                null,
+                requestedType
+            );
+        }
 
-		public abstract IMessage Invoke (IMessage msg);
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            Object obj = GetTransparentProxy();
+            RemotingServices.GetObjectData(obj, info, context);
+        }
 
-		/* this is called from unmanaged code */
-		internal static object PrivateInvoke (RealProxy rp, IMessage msg, out Exception exc,
-						      out object [] out_args)
-		{
-			MonoMethodMessage mMsg = (MonoMethodMessage) msg;
-			mMsg.LogicalCallContext = Thread.CurrentThread.GetMutableExecutionContext().LogicalCallContext;
-			CallType call_type = mMsg.CallType;
-			bool is_remproxy = (rp is RemotingProxy);
+        internal Identity ObjectIdentity
+        {
+            get { return _objectIdentity; }
+            set { _objectIdentity = value; }
+        }
 
-			out_args = null;
-			IMethodReturnMessage res_msg = null;
-			
-			if (call_type == CallType.BeginInvoke) 
-				// todo: set CallMessage in runtime instead
-				mMsg.AsyncResult.CallMessage = mMsg;
+        [MonoTODO]
+        public virtual IntPtr GetCOMIUnknown(bool fIsMarshalled)
+        {
+            throw new NotImplementedException();
+        }
 
-			if (call_type == CallType.EndInvoke)
-				res_msg = (IMethodReturnMessage)mMsg.AsyncResult.EndInvoke ();
+        [MonoTODO]
+        public virtual void SetCOMIUnknown(IntPtr i)
+        {
+            throw new NotImplementedException();
+        }
 
-			// Check for constructor msg
-			if (mMsg.MethodBase.IsConstructor) 
-			{
-				if (is_remproxy) 
-					res_msg = (IMethodReturnMessage) (rp as RemotingProxy).ActivateRemoteObject ((IMethodMessage) msg);
-				else 
-					msg = new ConstructionCall (rp.GetProxiedType ());
-			}
-				
-			if (null == res_msg) 
-			{
-				bool failed = false;
-				
-				try {
-					res_msg = (IMethodReturnMessage)rp.Invoke (msg);
-				} catch (Exception ex) {
-					failed = true;
-					if (call_type == CallType.BeginInvoke) {
-						// If async dispatch crashes, don't propagate the exception.
-						// The exception will be raised when calling EndInvoke.
-						mMsg.AsyncResult.SyncProcessMessage (new ReturnMessage (ex, msg as IMethodCallMessage));
-						res_msg = new ReturnMessage (null, null, 0, null, msg as IMethodCallMessage);
-					} else
-						throw;
-				}
-				
-				// Note, from begining this code used AsyncResult.IsCompleted for
-				// checking if it was a remoting or custom proxy, but in some
-				// cases the remoting proxy finish before the call returns
-				// causing this method to be called, therefore causing all kind of bugs.
-				if ((!is_remproxy) && call_type == CallType.BeginInvoke && !failed)
-				{
-					IMessage asyncMsg = null;
+        [MonoTODO]
+        public virtual IntPtr SupportsInterface(ref Guid iid)
+        {
+            throw new NotImplementedException();
+        }
 
-					// allow calltype EndInvoke to finish
-					asyncMsg = mMsg.AsyncResult.SyncProcessMessage (res_msg as IMessage);
-					out_args = res_msg.OutArgs;
-					res_msg = new ReturnMessage (asyncMsg, null, 0, null, res_msg as IMethodCallMessage);
-				}
-			}
-			
-			if (res_msg.LogicalCallContext != null && res_msg.LogicalCallContext.HasInfo) {
-				Thread.CurrentThread.GetMutableExecutionContext().LogicalCallContext.Merge (res_msg.LogicalCallContext);
-			}
+        public static object GetStubData(RealProxy rp)
+        {
+            return rp._stubData;
+        }
 
-			exc = res_msg.Exception;
+        public static void SetStubData(RealProxy rp, object stubData)
+        {
+            rp._stubData = stubData;
+        }
 
-			// todo: remove throw exception from the runtime invoke
-			if (null != exc) {
-				out_args = null;
-				throw exc.FixRemotingException();
-			}
-			else if (res_msg is IConstructionReturnMessage) {
-				if (out_args == null)
-					out_args = res_msg.OutArgs;
-			}
-			else if (mMsg.CallType == CallType.BeginInvoke) {
-				// We don't have OutArgs in this case.
-			}
-			else if (mMsg.CallType == CallType.Sync) {
-				out_args = ProcessResponse (res_msg, mMsg);
-			}
-			else if (mMsg.CallType == CallType.EndInvoke) {
-				out_args = ProcessResponse (res_msg, mMsg.AsyncResult.CallMessage);
-			}
-			else {
-				if (out_args == null)
-					out_args = res_msg.OutArgs;
-			}
+        public abstract IMessage Invoke(IMessage msg);
 
-			return res_msg.ReturnValue;
-		}
+        /* this is called from unmanaged code */
+        internal static object PrivateInvoke(
+            RealProxy rp,
+            IMessage msg,
+            out Exception exc,
+            out object[] out_args
+        )
+        {
+            MonoMethodMessage mMsg = (MonoMethodMessage)msg;
+            mMsg.LogicalCallContext = Thread
+                .CurrentThread.GetMutableExecutionContext()
+                .LogicalCallContext;
+            CallType call_type = mMsg.CallType;
+            bool is_remproxy = (rp is RemotingProxy);
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		internal extern virtual object InternalGetTransparentProxy (string className);
+            out_args = null;
+            IMethodReturnMessage res_msg = null;
 
-		public virtual object GetTransparentProxy () 
-		{
-			if (_objTP == null) 
-			{
-				string name;
-				IRemotingTypeInfo rti = this as IRemotingTypeInfo;
-				
-				if (rti != null) {
-					name = rti.TypeName;
-					if (name == null || name == typeof(MarshalByRefObject).AssemblyQualifiedName)
-						name = class_to_proxy.AssemblyQualifiedName;
-				}
-				else
-					name = class_to_proxy.AssemblyQualifiedName;
-					
-				_objTP = InternalGetTransparentProxy (name);
-			}
-			return _objTP;
-		}
+            if (call_type == CallType.BeginInvoke)
+                // todo: set CallMessage in runtime instead
+                mMsg.AsyncResult.CallMessage = mMsg;
 
-		[MonoTODO]
-		[ComVisible (true)]
-		public IConstructionReturnMessage InitializeServerObject(IConstructionCallMessage ctorMsg)
-		{
-			throw new NotImplementedException();
-		}
+            if (call_type == CallType.EndInvoke)
+                res_msg = (IMethodReturnMessage)mMsg.AsyncResult.EndInvoke();
 
-		protected void AttachServer(MarshalByRefObject s)
-		{
-			_server = s;
-		}
+            // Check for constructor msg
+            if (mMsg.MethodBase.IsConstructor)
+            {
+                if (is_remproxy)
+                    res_msg = (IMethodReturnMessage)
+                        (rp as RemotingProxy).ActivateRemoteObject((IMethodMessage)msg);
+                else
+                    msg = new ConstructionCall(rp.GetProxiedType());
+            }
 
-		protected MarshalByRefObject DetachServer()
-		{
-			MarshalByRefObject ob = _server;
-			_server = null;
-			return ob;
-		}
+            if (null == res_msg)
+            {
+                bool failed = false;
 
-		protected MarshalByRefObject GetUnwrappedServer()
-		{
-			return _server;
-		}
-		
-		internal void SetTargetDomain (int domainId)
-		{
-			_targetDomainId = domainId;
-		}
-		
-		// Called by the runtime
-		internal object GetAppDomainTarget ()
-		{
-			if (_server == null) {
-				ClientActivatedIdentity identity = RemotingServices.GetIdentityForUri (_targetUri) as ClientActivatedIdentity;
-				if (identity == null) throw new RemotingException ("Server for uri '" + _targetUri + "' not found");
-				_server = identity.GetServerObject ();
-			}
-			return _server;
-		}
+                try
+                {
+                    res_msg = (IMethodReturnMessage)rp.Invoke(msg);
+                }
+                catch (Exception ex)
+                {
+                    failed = true;
+                    if (call_type == CallType.BeginInvoke)
+                    {
+                        // If async dispatch crashes, don't propagate the exception.
+                        // The exception will be raised when calling EndInvoke.
+                        mMsg.AsyncResult.SyncProcessMessage(
+                            new ReturnMessage(ex, msg as IMethodCallMessage)
+                        );
+                        res_msg = new ReturnMessage(null, null, 0, null, msg as IMethodCallMessage);
+                    }
+                    else
+                        throw;
+                }
 
-		static object[] ProcessResponse (IMethodReturnMessage mrm, MonoMethodMessage call)
-		{
-			// Check return type
+                // Note, from begining this code used AsyncResult.IsCompleted for
+                // checking if it was a remoting or custom proxy, but in some
+                // cases the remoting proxy finish before the call returns
+                // causing this method to be called, therefore causing all kind of bugs.
+                if ((!is_remproxy) && call_type == CallType.BeginInvoke && !failed)
+                {
+                    IMessage asyncMsg = null;
 
-			MethodInfo mi = (MethodInfo) call.MethodBase;
-			if (mrm.ReturnValue != null && !mi.ReturnType.IsInstanceOfType (mrm.ReturnValue))
-				throw new InvalidCastException ("Return value has an invalid type");
+                    // allow calltype EndInvoke to finish
+                    asyncMsg = mMsg.AsyncResult.SyncProcessMessage(res_msg as IMessage);
+                    out_args = res_msg.OutArgs;
+                    res_msg = new ReturnMessage(
+                        asyncMsg,
+                        null,
+                        0,
+                        null,
+                        res_msg as IMethodCallMessage
+                    );
+                }
+            }
 
-			// Check out parameters
+            if (res_msg.LogicalCallContext != null && res_msg.LogicalCallContext.HasInfo)
+            {
+                Thread
+                    .CurrentThread.GetMutableExecutionContext()
+                    .LogicalCallContext.Merge(res_msg.LogicalCallContext);
+            }
 
-			
-			int no;
-			
-			if (call.NeedsOutProcessing (out no))
-			{
-				ParameterInfo[] parameters = mi.GetParameters();
-				object[] outArgs = new object [no];
-				int narg = 0;
-	
-				foreach (ParameterInfo par in parameters)
-				{
-					if (par.IsOut && !par.ParameterType.IsByRef)
-					{
-						// Special marshalling required
-						object outArg = par.Position < mrm.ArgCount ? mrm.GetArg (par.Position) : null;
-						if (outArg != null) {
-							object local = call.GetArg (par.Position);
-							if (local == null) throw new RemotingException ("Unexpected null value in local out parameter '" + par.Name + "'");
-							RemotingServices.UpdateOutArgObject (par, local, outArg);
-						}
-					}
-					else if (par.ParameterType.IsByRef)
-					{
-						object outArg = par.Position < mrm.ArgCount ? mrm.GetArg (par.Position) : null;
-						if (outArg != null && !par.ParameterType.GetElementType ().IsInstanceOfType (outArg))
-						{
-							throw new InvalidCastException ("Return argument '" + par.Name + "' has an invalid type");
-						}
-						outArgs [narg++] = outArg;
-					}
-				}
-				return outArgs;
-			}
-			else
-				return new object [0];
-		}
-	}
+            exc = res_msg.Exception;
+
+            // todo: remove throw exception from the runtime invoke
+            if (null != exc)
+            {
+                out_args = null;
+                throw exc.FixRemotingException();
+            }
+            else if (res_msg is IConstructionReturnMessage)
+            {
+                if (out_args == null)
+                    out_args = res_msg.OutArgs;
+            }
+            else if (mMsg.CallType == CallType.BeginInvoke)
+            {
+                // We don't have OutArgs in this case.
+            }
+            else if (mMsg.CallType == CallType.Sync)
+            {
+                out_args = ProcessResponse(res_msg, mMsg);
+            }
+            else if (mMsg.CallType == CallType.EndInvoke)
+            {
+                out_args = ProcessResponse(res_msg, mMsg.AsyncResult.CallMessage);
+            }
+            else
+            {
+                if (out_args == null)
+                    out_args = res_msg.OutArgs;
+            }
+
+            return res_msg.ReturnValue;
+        }
+
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern virtual object InternalGetTransparentProxy(string className);
+
+        public virtual object GetTransparentProxy()
+        {
+            if (_objTP == null)
+            {
+                string name;
+                IRemotingTypeInfo rti = this as IRemotingTypeInfo;
+
+                if (rti != null)
+                {
+                    name = rti.TypeName;
+                    if (name == null || name == typeof(MarshalByRefObject).AssemblyQualifiedName)
+                        name = class_to_proxy.AssemblyQualifiedName;
+                }
+                else
+                    name = class_to_proxy.AssemblyQualifiedName;
+
+                _objTP = InternalGetTransparentProxy(name);
+            }
+            return _objTP;
+        }
+
+        [MonoTODO]
+        [ComVisible(true)]
+        public IConstructionReturnMessage InitializeServerObject(IConstructionCallMessage ctorMsg)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected void AttachServer(MarshalByRefObject s)
+        {
+            _server = s;
+        }
+
+        protected MarshalByRefObject DetachServer()
+        {
+            MarshalByRefObject ob = _server;
+            _server = null;
+            return ob;
+        }
+
+        protected MarshalByRefObject GetUnwrappedServer()
+        {
+            return _server;
+        }
+
+        internal void SetTargetDomain(int domainId)
+        {
+            _targetDomainId = domainId;
+        }
+
+        // Called by the runtime
+        internal object GetAppDomainTarget()
+        {
+            if (_server == null)
+            {
+                ClientActivatedIdentity identity =
+                    RemotingServices.GetIdentityForUri(_targetUri) as ClientActivatedIdentity;
+                if (identity == null)
+                    throw new RemotingException("Server for uri '" + _targetUri + "' not found");
+                _server = identity.GetServerObject();
+            }
+            return _server;
+        }
+
+        static object[] ProcessResponse(IMethodReturnMessage mrm, MonoMethodMessage call)
+        {
+            // Check return type
+
+            MethodInfo mi = (MethodInfo)call.MethodBase;
+            if (mrm.ReturnValue != null && !mi.ReturnType.IsInstanceOfType(mrm.ReturnValue))
+                throw new InvalidCastException("Return value has an invalid type");
+
+            // Check out parameters
+
+
+            int no;
+
+            if (call.NeedsOutProcessing(out no))
+            {
+                ParameterInfo[] parameters = mi.GetParameters();
+                object[] outArgs = new object[no];
+                int narg = 0;
+
+                foreach (ParameterInfo par in parameters)
+                {
+                    if (par.IsOut && !par.ParameterType.IsByRef)
+                    {
+                        // Special marshalling required
+                        object outArg =
+                            par.Position < mrm.ArgCount ? mrm.GetArg(par.Position) : null;
+                        if (outArg != null)
+                        {
+                            object local = call.GetArg(par.Position);
+                            if (local == null)
+                                throw new RemotingException(
+                                    "Unexpected null value in local out parameter '"
+                                        + par.Name
+                                        + "'"
+                                );
+                            RemotingServices.UpdateOutArgObject(par, local, outArg);
+                        }
+                    }
+                    else if (par.ParameterType.IsByRef)
+                    {
+                        object outArg =
+                            par.Position < mrm.ArgCount ? mrm.GetArg(par.Position) : null;
+                        if (
+                            outArg != null
+                            && !par.ParameterType.GetElementType().IsInstanceOfType(outArg)
+                        )
+                        {
+                            throw new InvalidCastException(
+                                "Return argument '" + par.Name + "' has an invalid type"
+                            );
+                        }
+                        outArgs[narg++] = outArg;
+                    }
+                }
+                return outArgs;
+            }
+            else
+                return new object[0];
+        }
+    }
 }

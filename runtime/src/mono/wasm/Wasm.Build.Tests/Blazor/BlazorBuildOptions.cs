@@ -5,8 +5,7 @@
 
 namespace Wasm.Build.Tests;
 
-public record BlazorBuildOptions
-(
+public record BlazorBuildOptions(
     string Id,
     string Config,
     NativeFilesType ExpectedFileType = NativeFilesType.FromRuntimePack,

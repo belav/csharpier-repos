@@ -16,7 +16,10 @@ public class PreserveStateService : IDisposable
     public PreserveStateService(PersistentComponentState componentApplicationState)
     {
         _componentApplicationState = componentApplicationState;
-        _persistingSubscription = _componentApplicationState.RegisterOnPersisting(PersistState, RenderMode.InteractiveAuto);
+        _persistingSubscription = _componentApplicationState.RegisterOnPersisting(
+            PersistState,
+            RenderMode.InteractiveAuto
+        );
         TryRestoreState();
     }
 

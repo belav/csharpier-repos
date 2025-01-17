@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Microsoft.Test.ModuleCore
 {
@@ -24,13 +24,14 @@ namespace Microsoft.Test.ModuleCore
             SingleEnd,
             DoubleBegin,
             DoubleEnd,
-            End
+            End,
         }
 
         //Accessors
         //Note: You can override these if you want to leverage our parser (inherit), and change
         //some of the behavior (without reimplementing it).
         private static Tokens s_DefaultTokens = new Tokens();
+
         public class Tokens
         {
             public string Equal = "=";
@@ -38,7 +39,6 @@ namespace Microsoft.Test.ModuleCore
             public string SingleQuote = "'";
             public string DoubleQuote = "\"";
         }
-
 
         //Methods
         public static Dictionary<string, string> ParseKeywords(string str)
@@ -172,7 +172,9 @@ namespace Microsoft.Test.ModuleCore
                             break;
 
                         default:
-                            throw new TestFailedException("Unhandled State: " + StringEx.ToString(state));
+                            throw new TestFailedException(
+                                "Unhandled State: " + StringEx.ToString(state)
+                            );
                     }
                 }
 
@@ -199,7 +201,9 @@ namespace Microsoft.Test.ModuleCore
                         break;
 
                     default:
-                        throw new TestFailedException("Unhandled State: " + StringEx.ToString(state));
+                        throw new TestFailedException(
+                            "Unhandled State: " + StringEx.ToString(state)
+                        );
                 }
             }
             return keywords;

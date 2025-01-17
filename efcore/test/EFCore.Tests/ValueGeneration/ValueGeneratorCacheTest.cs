@@ -12,16 +12,23 @@ public class ValueGeneratorCacheTest
         var entityType = model.FindEntityType("Led");
         var property1 = entityType.FindProperty("Zeppelin");
         var property2 = entityType.FindProperty("Stairway");
-        var cache = InMemoryTestHelpers.Instance.CreateContextServices(model)
+        var cache = InMemoryTestHelpers
+            .Instance.CreateContextServices(model)
             .GetRequiredService<IValueGeneratorCache>();
 
         var generator1 = cache.GetOrAdd(property1, entityType, (p, et) => new GuidValueGenerator());
         Assert.NotNull(generator1);
-        Assert.Same(generator1, cache.GetOrAdd(property1, entityType, (p, et) => new GuidValueGenerator()));
+        Assert.Same(
+            generator1,
+            cache.GetOrAdd(property1, entityType, (p, et) => new GuidValueGenerator())
+        );
 
         var generator2 = cache.GetOrAdd(property2, entityType, (p, et) => new GuidValueGenerator());
         Assert.NotNull(generator2);
-        Assert.Same(generator2, cache.GetOrAdd(property2, entityType, (p, et) => new GuidValueGenerator()));
+        Assert.Same(
+            generator2,
+            cache.GetOrAdd(property2, entityType, (p, et) => new GuidValueGenerator())
+        );
         Assert.NotSame(generator1, generator2);
     }
 
@@ -29,7 +36,8 @@ public class ValueGeneratorCacheTest
     {
         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
         modelBuilder.Entity(
-            "Led", eb =>
+            "Led",
+            eb =>
             {
                 eb.Property<int>("Id");
                 eb.Property<Guid>("Zeppelin");
@@ -38,7 +46,8 @@ public class ValueGeneratorCacheTest
                 {
                     property.ValueGeneratedOnAdd();
                 }
-            });
+            }
+        );
 
         return modelBuilder.FinalizeModel();
     }

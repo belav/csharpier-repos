@@ -198,5 +198,5 @@ public enum HttpLoggingFields : long
     /// The HTTP Request <see cref="HttpRequest.QueryString"/> is not included with this flag as it may contain private information.
     /// If desired, it should be explicitly specified with <see cref="RequestQuery"/>.
     /// </remarks>
-    All = Request | Response | Duration
+    All = Request | Response | Duration,
 }

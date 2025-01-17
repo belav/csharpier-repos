@@ -14,15 +14,15 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
 // For now this is limited to server-side execution because we don't have the ability to set the
 // culture in client-side Blazor.
-public class ServerGlobalizationTest : GlobalizationTest<BasicTestAppServerSiteFixture<InternationalizationStartup>>
+public class ServerGlobalizationTest
+    : GlobalizationTest<BasicTestAppServerSiteFixture<InternationalizationStartup>>
 {
     public ServerGlobalizationTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<InternationalizationStartup> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {

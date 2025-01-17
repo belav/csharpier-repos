@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
@@ -21,7 +21,6 @@ namespace Interop.FunctionalTests;
 
 public class H2SpecTests : LoggedTest
 {
-
     [SkipOnArchitecture(Architecture.Arm64, Architecture.X86)] // The h2spec executable is an x64-binary
     [ConditionalTheory]
     [MemberData(nameof(H2SpecTestCases))]
@@ -33,16 +32,20 @@ public class H2SpecTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(IPAddress.Loopback, 0, listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http2;
-                            if (testCase.Https)
+                        options.Listen(
+                            IPAddress.Loopback,
+                            0,
+                            listenOptions =>
                             {
-                                listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                listenOptions.Protocols = HttpProtocols.Http2;
+                                if (testCase.Https)
+                                {
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                                }
                             }
-                        });
+                        );
                     })
-                .Configure(ConfigureHelloWorld);
+                    .Configure(ConfigureHelloWorld);
             })
             .ConfigureServices(AddTestLogging);
 
@@ -67,10 +70,9 @@ public class H2SpecTests : LoggedTest
 
             if (testCases == null || !testCases.Any())
             {
-                dataset.Add(new H2SpecTestCase()
-                {
-                    Skip = "Unable to detect test cases on this platform.",
-                });
+                dataset.Add(
+                    new H2SpecTestCase() { Skip = "Unable to detect test cases on this platform." }
+                );
                 return dataset;
             }
 
@@ -84,24 +86,28 @@ public class H2SpecTests : LoggedTest
                     skip = "https://github.com/dotnet/aspnetcore/issues/30373";
                 }
 
-                dataset.Add(new H2SpecTestCase
-                {
-                    Id = testcase.Item1,
-                    Description = testcase.Item2,
-                    Https = false,
-                    Skip = skip,
-                });
+                dataset.Add(
+                    new H2SpecTestCase
+                    {
+                        Id = testcase.Item1,
+                        Description = testcase.Item2,
+                        Https = false,
+                        Skip = skip,
+                    }
+                );
 
                 // https://github.com/dotnet/aspnetcore/issues/11301 We should use Skip but it's broken at the moment.
                 if (supportsAlpn)
                 {
-                    dataset.Add(new H2SpecTestCase
-                    {
-                        Id = testcase.Item1,
-                        Description = testcase.Item2,
-                        Https = true,
-                        Skip = skip,
-                    });
+                    dataset.Add(
+                        new H2SpecTestCase
+                        {
+                            Id = testcase.Item1,
+                            Description = testcase.Item2,
+                            Https = true,
+                            Skip = skip,
+                        }
+                    );
                 }
             }
 
@@ -112,9 +118,7 @@ public class H2SpecTests : LoggedTest
     public class H2SpecTestCase : IXunitSerializable
     {
         // For the serializer
-        public H2SpecTestCase()
-        {
-        }
+        public H2SpecTestCase() { }
 
         public string Id { get; set; }
         public string Description { get; set; }

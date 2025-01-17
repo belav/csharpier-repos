@@ -29,9 +29,7 @@ public abstract class NavigationEntry : MemberEntry
     /// </summary>
     [EntityFrameworkInternal]
     protected NavigationEntry(InternalEntityEntry internalEntry, string name, bool collection)
-        : this(internalEntry, GetNavigation(internalEntry, name), collection)
-    {
-    }
+        : this(internalEntry, GetNavigation(internalEntry, name), collection) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,46 +38,65 @@ public abstract class NavigationEntry : MemberEntry
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected NavigationEntry(InternalEntityEntry internalEntry, INavigationBase navigationBase, bool collection)
+    protected NavigationEntry(
+        InternalEntityEntry internalEntry,
+        INavigationBase navigationBase,
+        bool collection
+    )
         : base(internalEntry, navigationBase)
     {
-        if (collection
-            && !navigationBase.IsCollection)
+        if (collection && !navigationBase.IsCollection)
         {
             throw new InvalidOperationException(
                 CoreStrings.CollectionIsReference(
-                    navigationBase.Name, internalEntry.EntityType.DisplayName(),
-                    nameof(ChangeTracking.EntityEntry.Collection), nameof(ChangeTracking.EntityEntry.Reference)));
+                    navigationBase.Name,
+                    internalEntry.EntityType.DisplayName(),
+                    nameof(ChangeTracking.EntityEntry.Collection),
+                    nameof(ChangeTracking.EntityEntry.Reference)
+                )
+            );
         }
 
-        if (!collection
-            && navigationBase.IsCollection)
+        if (!collection && navigationBase.IsCollection)
         {
             throw new InvalidOperationException(
                 CoreStrings.ReferenceIsCollection(
-                    navigationBase.Name, internalEntry.EntityType.DisplayName(),
-                    nameof(ChangeTracking.EntityEntry.Reference), nameof(ChangeTracking.EntityEntry.Collection)));
+                    navigationBase.Name,
+                    internalEntry.EntityType.DisplayName(),
+                    nameof(ChangeTracking.EntityEntry.Reference),
+                    nameof(ChangeTracking.EntityEntry.Collection)
+                )
+            );
         }
     }
 
     private static INavigationBase GetNavigation(InternalEntityEntry internalEntry, string name)
     {
-        var navigation = (INavigationBase?)internalEntry.EntityType.FindNavigation(name)
+        var navigation =
+            (INavigationBase?)internalEntry.EntityType.FindNavigation(name)
             ?? internalEntry.EntityType.FindSkipNavigation(name);
 
         if (navigation == null)
         {
-            if (internalEntry.EntityType.FindProperty(name) != null
-                || internalEntry.EntityType.FindComplexProperty(name) != null)
+            if (
+                internalEntry.EntityType.FindProperty(name) != null
+                || internalEntry.EntityType.FindComplexProperty(name) != null
+            )
             {
                 throw new InvalidOperationException(
                     CoreStrings.NavigationIsProperty(
-                        name, internalEntry.EntityType.DisplayName(),
-                        nameof(ChangeTracking.EntityEntry.Reference), nameof(ChangeTracking.EntityEntry.Collection),
-                        nameof(ChangeTracking.EntityEntry.Property)));
+                        name,
+                        internalEntry.EntityType.DisplayName(),
+                        nameof(ChangeTracking.EntityEntry.Reference),
+                        nameof(ChangeTracking.EntityEntry.Collection),
+                        nameof(ChangeTracking.EntityEntry.Property)
+                    )
+                );
             }
 
-            throw new InvalidOperationException(CoreStrings.PropertyNotFound(name, internalEntry.EntityType.DisplayName()));
+            throw new InvalidOperationException(
+                CoreStrings.PropertyNotFound(name, internalEntry.EntityType.DisplayName())
+            );
         }
 
         return navigation;
@@ -147,7 +164,10 @@ public abstract class NavigationEntry : MemberEntry
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous save operation.</returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public abstract Task LoadAsync(LoadOptions options, CancellationToken cancellationToken = default);
+    public abstract Task LoadAsync(
+        LoadOptions options,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Returns the query that would be used by <see cref="Load()" /> to load entities referenced by
@@ -203,6 +223,5 @@ public abstract class NavigationEntry : MemberEntry
     /// <summary>
     ///     Gets the metadata that describes the facets of this property and how it maps to the database.
     /// </summary>
-    public new virtual INavigationBase Metadata
-        => (INavigationBase)base.Metadata;
+    public new virtual INavigationBase Metadata => (INavigationBase)base.Metadata;
 }

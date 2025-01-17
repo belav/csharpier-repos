@@ -11,8 +11,16 @@ namespace System.Reflection.Tests
     {
         public static IEnumerable<object[]> Properties_TestData()
         {
-            yield return new object[] { typeof(PI_BaseClass), nameof(PI_BaseClass.PublicGetPublicSetStaticProperty) };
-            yield return new object[] { typeof(PI_BaseClass), nameof(PI_BaseClass.PublicGetPublicSetProperty) };
+            yield return new object[]
+            {
+                typeof(PI_BaseClass),
+                nameof(PI_BaseClass.PublicGetPublicSetStaticProperty),
+            };
+            yield return new object[]
+            {
+                typeof(PI_BaseClass),
+                nameof(PI_BaseClass.PublicGetPublicSetProperty),
+            };
 
             // trick trimming into keeping the Length property
             if (string.Empty.Length > 0)
@@ -35,43 +43,155 @@ namespace System.Reflection.Tests
         [Fact]
         public void SetValue_CantWrite_ThrowsArgumentException()
         {
-            PropertyInfo property = TypeExtensions.GetProperty(typeof(PI_SubClass), nameof(PI_BaseClass.PublicGetPrivateSetProperty), Helpers.AllFlags);
+            PropertyInfo property = TypeExtensions.GetProperty(
+                typeof(PI_SubClass),
+                nameof(PI_BaseClass.PublicGetPrivateSetProperty),
+                Helpers.AllFlags
+            );
             Assert.False(property.CanWrite);
-            AssertExtensions.Throws<ArgumentException>(null, () => property.SetValue(new PI_SubClass(), 5));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => property.SetValue(new PI_SubClass(), 5)
+            );
         }
 
         [Theory]
         [ActiveIssue("https://github.com/mono/mono/issues/15319", TestRuntimes.Mono)]
-        [InlineData(typeof(PI_BaseClass), nameof(PI_BaseClass.PublicGetPublicSetProperty), true, false, true, false)]
-        [InlineData(typeof(PI_BaseClass), nameof(PI_BaseClass.PublicGetProperty1), true, false, false, false)]
-        [InlineData(typeof(PI_BaseClass), nameof(PI_BaseClass.PublicSetProperty), false, false, true, false)]
-        [InlineData(typeof(PI_BaseClass), "ProtectedGetProtectedSetProperty", true, true, true, true)]
-        [InlineData(typeof(PI_BaseClass), nameof(PI_BaseClass.PublicGetPublicSetStaticProperty), true, false, true, false)]
-        [InlineData(typeof(PI_BaseClass), "ProtectedGetProtectedSetStaticProperty", true, true, true, true)]
+        [InlineData(
+            typeof(PI_BaseClass),
+            nameof(PI_BaseClass.PublicGetPublicSetProperty),
+            true,
+            false,
+            true,
+            false
+        )]
+        [InlineData(
+            typeof(PI_BaseClass),
+            nameof(PI_BaseClass.PublicGetProperty1),
+            true,
+            false,
+            false,
+            false
+        )]
+        [InlineData(
+            typeof(PI_BaseClass),
+            nameof(PI_BaseClass.PublicSetProperty),
+            false,
+            false,
+            true,
+            false
+        )]
+        [InlineData(
+            typeof(PI_BaseClass),
+            "ProtectedGetProtectedSetProperty",
+            true,
+            true,
+            true,
+            true
+        )]
+        [InlineData(
+            typeof(PI_BaseClass),
+            nameof(PI_BaseClass.PublicGetPublicSetStaticProperty),
+            true,
+            false,
+            true,
+            false
+        )]
+        [InlineData(
+            typeof(PI_BaseClass),
+            "ProtectedGetProtectedSetStaticProperty",
+            true,
+            true,
+            true,
+            true
+        )]
         // Misc
-        [InlineData(typeof(PropertyInfoTests), nameof(PropertyInfoTests.GetSetProperty), true, false, true, false)]
-        [InlineData(typeof(PI_Interface), nameof(PI_Interface.GetSetProperty), true, false, true, false)]
-        [InlineData(typeof(PI_SubClass), nameof(PI_SubClass.PublicGetProperty2), true, false, false, false)]
-        [InlineData(typeof(PI_AbstractClass), nameof(PI_AbstractClass.PublicGetPublicSetProperty), true, false, true, false)]
-        [InlineData(typeof(PI_SubClass), nameof(PI_BaseClass.PublicGetPrivateSetProperty), true, false, false, false)]
-        public void GetGetMethod_GetSetMethod(Type type, string name, bool hasGetter, bool nonPublicGetter, bool hasSetter, bool nonPublicSetter)
+        [InlineData(
+            typeof(PropertyInfoTests),
+            nameof(PropertyInfoTests.GetSetProperty),
+            true,
+            false,
+            true,
+            false
+        )]
+        [InlineData(
+            typeof(PI_Interface),
+            nameof(PI_Interface.GetSetProperty),
+            true,
+            false,
+            true,
+            false
+        )]
+        [InlineData(
+            typeof(PI_SubClass),
+            nameof(PI_SubClass.PublicGetProperty2),
+            true,
+            false,
+            false,
+            false
+        )]
+        [InlineData(
+            typeof(PI_AbstractClass),
+            nameof(PI_AbstractClass.PublicGetPublicSetProperty),
+            true,
+            false,
+            true,
+            false
+        )]
+        [InlineData(
+            typeof(PI_SubClass),
+            nameof(PI_BaseClass.PublicGetPrivateSetProperty),
+            true,
+            false,
+            false,
+            false
+        )]
+        public void GetGetMethod_GetSetMethod(
+            Type type,
+            string name,
+            bool hasGetter,
+            bool nonPublicGetter,
+            bool hasSetter,
+            bool nonPublicSetter
+        )
         {
             PropertyInfo property = TypeExtensions.GetProperty(type, name, Helpers.AllFlags);
 
-            VerifyGetMethod(property, property.GetGetMethod(), hasGetter && !nonPublicGetter, nonPublicGetter);
+            VerifyGetMethod(
+                property,
+                property.GetGetMethod(),
+                hasGetter && !nonPublicGetter,
+                nonPublicGetter
+            );
             Assert.Equal(property.GetGetMethod(), property.GetGetMethod(false));
             VerifyGetMethod(property, property.GetGetMethod(true), hasGetter, nonPublicGetter);
 
-            VerifySetMethod(property, property.GetSetMethod(), hasSetter && !nonPublicSetter, nonPublicSetter);
+            VerifySetMethod(
+                property,
+                property.GetSetMethod(),
+                hasSetter && !nonPublicSetter,
+                nonPublicSetter
+            );
             Assert.Equal(property.GetSetMethod(), property.GetSetMethod(false));
             VerifySetMethod(property, property.GetSetMethod(true), hasSetter, nonPublicSetter);
 
-            Assert.Equal(ExcludeNulls(property.GetGetMethod(), property.GetSetMethod()), property.GetAccessors());
+            Assert.Equal(
+                ExcludeNulls(property.GetGetMethod(), property.GetSetMethod()),
+                property.GetAccessors()
+            );
             Assert.Equal(property.GetAccessors(), property.GetAccessors(false));
-            Assert.Equal(ExcludeNulls(property.GetGetMethod(true), property.GetSetMethod(true)), property.GetAccessors(true));
+            Assert.Equal(
+                ExcludeNulls(property.GetGetMethod(true), property.GetSetMethod(true)),
+                property.GetAccessors(true)
+            );
         }
 
-        private static void VerifyGetMethod(PropertyInfo property, MethodInfo method, bool exists, bool nonPublic)
+        private static void VerifyGetMethod(
+            PropertyInfo property,
+            MethodInfo method,
+            bool exists,
+            bool nonPublic
+        )
         {
             Assert.Equal(exists, method != null);
             if (exists)
@@ -85,7 +205,12 @@ namespace System.Reflection.Tests
             }
         }
 
-        private static void VerifySetMethod(PropertyInfo property, MethodInfo method, bool exists, bool nonPublic)
+        private static void VerifySetMethod(
+            PropertyInfo property,
+            MethodInfo method,
+            bool exists,
+            bool nonPublic
+        )
         {
             Assert.Equal(exists, method != null);
             if (exists)
@@ -95,7 +220,10 @@ namespace System.Reflection.Tests
                 Assert.Equal(!nonPublic, method.IsPublic);
 
                 Assert.Equal(typeof(void), method.ReturnType);
-                Assert.Equal(new Type[] { property.PropertyType }, method.GetParameters().Select(parameter => parameter.ParameterType));
+                Assert.Equal(
+                    new Type[] { property.PropertyType },
+                    method.GetParameters().Select(parameter => parameter.ParameterType)
+                );
             }
         }
 
@@ -104,19 +232,45 @@ namespace System.Reflection.Tests
             return array.Where(obj => obj != null);
         }
 
-        public int GetSetProperty { get { return 0; } set { } }
+        public int GetSetProperty
+        {
+            get { return 0; }
+            set { }
+        }
     }
 
     public class PI_BaseClass
     {
-        public static int PublicGetPublicSetStaticProperty { get { return 0; } set { } }
-        protected static int ProtectedGetProtectedSetStaticProperty { get { return 0; } set { } }
+        public static int PublicGetPublicSetStaticProperty
+        {
+            get { return 0; }
+            set { }
+        }
+        protected static int ProtectedGetProtectedSetStaticProperty
+        {
+            get { return 0; }
+            set { }
+        }
 
-        public int PublicGetPublicSetProperty { get { return 0; } set { } }
-        public int PublicGetProperty1 { get { return 0; } }
-        public int PublicSetProperty { set { } }
+        public int PublicGetPublicSetProperty
+        {
+            get { return 0; }
+            set { }
+        }
+        public int PublicGetProperty1
+        {
+            get { return 0; }
+        }
+        public int PublicSetProperty
+        {
+            set { }
+        }
 
-        protected int ProtectedGetProtectedSetProperty { get { return 0; } set { } }
+        protected int ProtectedGetProtectedSetProperty
+        {
+            get { return 0; }
+            set { }
+        }
         public int PublicGetPrivateSetProperty { get; private set; }
     }
 
@@ -127,11 +281,18 @@ namespace System.Reflection.Tests
 
     public class PI_SubClass : PI_BaseClass
     {
-        public int PublicGetProperty2 { get { return 0; } }
+        public int PublicGetProperty2
+        {
+            get { return 0; }
+        }
     }
 
     public class PI_AbstractClass
     {
-        public int PublicGetPublicSetProperty { get { return 0; } set { } }
+        public int PublicGetPublicSetProperty
+        {
+            get { return 0; }
+            set { }
+        }
     }
 }

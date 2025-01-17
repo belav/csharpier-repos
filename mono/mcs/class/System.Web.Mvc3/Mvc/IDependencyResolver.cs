@@ -1,7 +1,9 @@
-namespace System.Web.Mvc {
+namespace System.Web.Mvc
+{
     using System.Collections.Generic;
 
-    public interface IDependencyResolver {
+    public interface IDependencyResolver
+    {
         object GetService(Type serviceType);
         IEnumerable<object> GetServices(Type serviceType);
     }

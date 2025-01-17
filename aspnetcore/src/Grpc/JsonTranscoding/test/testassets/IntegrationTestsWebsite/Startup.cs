@@ -22,7 +22,12 @@ public class Startup
         // When the site is run from the test project these types will be injected
         // This will add a default types if the site is run standalone
         services.TryAddSingleton<DynamicEndpointDataSource>();
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IServiceMethodProvider<DynamicService>, DynamicServiceModelProvider>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IServiceMethodProvider<DynamicService>,
+                DynamicServiceModelProvider
+            >()
+        );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,7 +37,9 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.DataSources.Add(endpoints.ServiceProvider.GetRequiredService<DynamicEndpointDataSource>());
+            endpoints.DataSources.Add(
+                endpoints.ServiceProvider.GetRequiredService<DynamicEndpointDataSource>()
+            );
         });
     }
 }

@@ -150,7 +150,10 @@ public class OutputCachePolicyBuilderTests
         Assert.True(context.EnableOutputCaching);
         Assert.Contains("RouteA", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
         Assert.Contains("RouteC", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
-        Assert.DoesNotContain("RouteB", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
+        Assert.DoesNotContain(
+            "RouteB",
+            (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames
+        );
     }
 
     [Fact]
@@ -170,7 +173,10 @@ public class OutputCachePolicyBuilderTests
         Assert.True(context.EnableOutputCaching);
         Assert.Contains("RouteA", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
         Assert.Contains("RouteC", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
-        Assert.DoesNotContain("RouteB", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
+        Assert.DoesNotContain(
+            "RouteB",
+            (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames
+        );
     }
 
     [Fact]
@@ -184,13 +190,19 @@ public class OutputCachePolicyBuilderTests
         };
 
         var builder = new OutputCachePolicyBuilder();
-        var policy = builder.SetVaryByRouteValue("RouteB").SetVaryByRouteValue("RouteA", "RouteC").Build();
+        var policy = builder
+            .SetVaryByRouteValue("RouteB")
+            .SetVaryByRouteValue("RouteA", "RouteC")
+            .Build();
         await policy.CacheRequestAsync(context, cancellation: default);
 
         Assert.True(context.EnableOutputCaching);
         Assert.Contains("RouteA", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
         Assert.Contains("RouteC", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
-        Assert.DoesNotContain("RouteB", (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames);
+        Assert.DoesNotContain(
+            "RouteB",
+            (IEnumerable<string>)context.CacheVaryByRules.RouteValueNames
+        );
     }
 
     [Fact]
@@ -201,8 +213,12 @@ public class OutputCachePolicyBuilderTests
         var context3 = TestUtils.CreateUninitializedContext();
 
         var policy1 = new OutputCachePolicyBuilder().SetCacheKeyPrefix("tenant1").Build();
-        var policy2 = new OutputCachePolicyBuilder().SetCacheKeyPrefix(context => "tenant2").Build();
-        var policy3 = new OutputCachePolicyBuilder().SetCacheKeyPrefix((context, cancellationToken) => ValueTask.FromResult("tenant3")).Build();
+        var policy2 = new OutputCachePolicyBuilder()
+            .SetCacheKeyPrefix(context => "tenant2")
+            .Build();
+        var policy3 = new OutputCachePolicyBuilder()
+            .SetCacheKeyPrefix((context, cancellationToken) => ValueTask.FromResult("tenant3"))
+            .Build();
 
         await policy1.CacheRequestAsync(context1, cancellation: default);
         await policy2.CacheRequestAsync(context2, cancellation: default);
@@ -222,7 +238,10 @@ public class OutputCachePolicyBuilderTests
         var policy = builder
             .VaryByValue("shape", "circle")
             .VaryByValue(context => new KeyValuePair<string, string>("color", "blue"))
-            .VaryByValue((context, cancellationToken) => ValueTask.FromResult(new KeyValuePair<string, string>("size", "1m")))
+            .VaryByValue(
+                (context, cancellationToken) =>
+                    ValueTask.FromResult(new KeyValuePair<string, string>("size", "1m"))
+            )
             .Build();
 
         await policy.CacheRequestAsync(context, cancellation: default);
@@ -331,8 +350,12 @@ public class OutputCachePolicyBuilderTests
         // Each predicate should override the duration from the first base policy
         var options = new OutputCacheOptions();
         options.AddBasePolicy(build => build.Expire(TimeSpan.FromSeconds(1)));
-        options.AddBasePolicy(build => build.With(c => source == 1).Expire(TimeSpan.FromSeconds(2)));
-        options.AddBasePolicy(build => build.With(c => source == 2).Expire(TimeSpan.FromSeconds(3)));
+        options.AddBasePolicy(build =>
+            build.With(c => source == 1).Expire(TimeSpan.FromSeconds(2))
+        );
+        options.AddBasePolicy(build =>
+            build.With(c => source == 2).Expire(TimeSpan.FromSeconds(3))
+        );
 
         var context = TestUtils.CreateUninitializedContext(options: options);
 

@@ -3,7 +3,6 @@
 
 using System;
 using System.Linq.Expressions;
-
 using Xunit;
 
 namespace Moq.Tests.Matchers

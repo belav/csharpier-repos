@@ -13,7 +13,10 @@ namespace System.Activities
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
-    public sealed class RuntimeTransactionHandle : Handle, IExecutionProperty, IPropertyRegistrationCallback
+    public sealed class RuntimeTransactionHandle
+        : Handle,
+            IExecutionProperty,
+            IPropertyRegistrationCallback
     {
         ActivityExecutor executor;
 
@@ -29,9 +32,7 @@ namespace System.Activities
 
         Transaction rootTransaction;
 
-        public RuntimeTransactionHandle()
-        {
-        }
+        public RuntimeTransactionHandle() { }
 
         // This ctor is used when we want to make a transaction ambient
         // without enlisting.  This is desirable for scenarios like WorkflowInvoker
@@ -47,10 +48,7 @@ namespace System.Activities
 
         public bool AbortInstanceOnTransactionFailure
         {
-            get
-            {
-                return !this.doNotAbort;
-            }
+            get { return !this.doNotAbort; }
             set
             {
                 ThrowIfRegistered(SR.CannotChangeAbortInstanceFlagAfterPropertyRegistration);
@@ -60,11 +58,8 @@ namespace System.Activities
 
         public bool SuppressTransaction
         {
-            get
-            {
-                return this.isSuppressed;
-            }
-            set 
+            get { return this.isSuppressed; }
+            set
             {
                 ThrowIfRegistered(SR.CannotSuppressAlreadyRegisteredHandle);
                 this.isSuppressed = value;
@@ -126,23 +121,32 @@ namespace System.Activities
                 throw FxTrace.Exception.AsError(new InvalidOperationException(message));
             }
         }
-        
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "This method is designed to be called from activities with handle access.")]
+
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "This method is designed to be called from activities with handle access."
+        )]
         public Transaction GetCurrentTransaction(NativeActivityContext context)
         {
             return GetCurrentTransactionCore(context);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "This method is designed to be called from activities with handle access.")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "This method is designed to be called from activities with handle access."
+        )]
         public Transaction GetCurrentTransaction(CodeActivityContext context)
         {
             return GetCurrentTransactionCore(context);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "This method is designed to be called from activities with handle access.")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "This method is designed to be called from activities with handle access."
+        )]
         public Transaction GetCurrentTransaction(AsyncCodeActivityContext context)
         {
             return GetCurrentTransactionCore(context);
@@ -154,19 +158,25 @@ namespace System.Activities
             {
                 throw FxTrace.Exception.ArgumentNull("context");
             }
-            
+
             context.ThrowIfDisposed();
 
-            //If the transaction is a runtime transaction (i.e. an Invoke with ambient transaction case), then 
+            //If the transaction is a runtime transaction (i.e. an Invoke with ambient transaction case), then
             //we do not require that it be registered since the handle created for the root transaction is never registered.
             if (this.rootTransaction == null)
             {
-                this.ThrowIfNotRegistered(SR.RuntimeTransactionHandleNotRegisteredAsExecutionProperty("GetCurrentTransaction"));
+                this.ThrowIfNotRegistered(
+                    SR.RuntimeTransactionHandleNotRegisteredAsExecutionProperty(
+                        "GetCurrentTransaction"
+                    )
+                );
             }
 
             if (!this.isHandleInitialized)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
+                );
             }
 
             if (this.SuppressTransaction)
@@ -184,7 +194,10 @@ namespace System.Activities
 
             if (this.rootTransaction != null)
             {
-                Fx.Assert(this.Owner == null, "this.rootTransaction should only be set at the root");
+                Fx.Assert(
+                    this.Owner == null,
+                    "this.rootTransaction should only be set at the root"
+                );
                 this.executor.SetTransaction(this, this.rootTransaction, null, null);
             }
 
@@ -203,17 +216,30 @@ namespace System.Activities
             base.OnUninitialize(context);
         }
 
-        public void RequestTransactionContext(NativeActivityContext context, Action<NativeActivityTransactionContext, object> callback, object state)
+        public void RequestTransactionContext(
+            NativeActivityContext context,
+            Action<NativeActivityTransactionContext, object> callback,
+            object state
+        )
         {
             RequestOrRequireTransactionContextCore(context, callback, state, false);
         }
 
-        public void RequireTransactionContext(NativeActivityContext context, Action<NativeActivityTransactionContext, object> callback, object state)
+        public void RequireTransactionContext(
+            NativeActivityContext context,
+            Action<NativeActivityTransactionContext, object> callback,
+            object state
+        )
         {
             RequestOrRequireTransactionContextCore(context, callback, state, true);
         }
 
-        void RequestOrRequireTransactionContextCore(NativeActivityContext context, Action<NativeActivityTransactionContext, object> callback, object state, bool isRequires)
+        void RequestOrRequireTransactionContextCore(
+            NativeActivityContext context,
+            Action<NativeActivityTransactionContext, object> callback,
+            object state,
+            bool isRequires
+        )
         {
             if (context == null)
             {
@@ -224,40 +250,58 @@ namespace System.Activities
 
             if (context.HasRuntimeTransaction)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.RuntimeTransactionAlreadyExists));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.RuntimeTransactionAlreadyExists)
+                );
             }
 
             if (context.IsInNoPersistScope)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotSetRuntimeTransactionInNoPersist));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CannotSetRuntimeTransactionInNoPersist)
+                );
             }
 
             if (!this.isHandleInitialized)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
+                );
             }
 
             if (this.SuppressTransaction)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.RuntimeTransactionIsSuppressed));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.RuntimeTransactionIsSuppressed)
+                );
             }
 
             if (isRequires)
             {
                 if (context.RequiresTransactionContextWaiterExists)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.OnlyOneRequireTransactionContextAllowed));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.OnlyOneRequireTransactionContextAllowed)
+                    );
                 }
 
-                this.ThrowIfNotRegistered(SR.RuntimeTransactionHandleNotRegisteredAsExecutionProperty("RequireTransactionContext"));
+                this.ThrowIfNotRegistered(
+                    SR.RuntimeTransactionHandleNotRegisteredAsExecutionProperty(
+                        "RequireTransactionContext"
+                    )
+                );
             }
             else
             {
-                this.ThrowIfNotRegistered(SR.RuntimeTransactionHandleNotRegisteredAsExecutionProperty("RequestTransactionContext"));
+                this.ThrowIfNotRegistered(
+                    SR.RuntimeTransactionHandleNotRegisteredAsExecutionProperty(
+                        "RequestTransactionContext"
+                    )
+                );
             }
 
             context.RequestTransactionContext(isRequires, this, callback, state);
-        }   
+        }
 
         public void CompleteTransaction(NativeActivityContext context)
         {
@@ -280,28 +324,39 @@ namespace System.Activities
 
             if (this.rootTransaction != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotCompleteRuntimeOwnedTransaction));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CannotCompleteRuntimeOwnedTransaction)
+                );
             }
 
             if (!context.HasRuntimeTransaction)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.NoRuntimeTransactionExists));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.NoRuntimeTransactionExists)
+                );
             }
 
             if (!this.isHandleInitialized)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
+                );
             }
 
             if (this.SuppressTransaction)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.RuntimeTransactionIsSuppressed));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.RuntimeTransactionIsSuppressed)
+                );
             }
 
             context.CompleteTransaction(this, callback);
         }
 
-        [Fx.Tag.Throws(typeof(TransactionException), "The transaction for this property is in a state incompatible with TransactionScope.")]
+        [Fx.Tag.Throws(
+            typeof(TransactionException),
+            "The transaction for this property is in a state incompatible with TransactionScope."
+        )]
         void IExecutionProperty.SetupWorkflowThread()
         {
             if (this.SuppressTransaction)
@@ -312,7 +367,9 @@ namespace System.Activities
 
             if ((this.executor != null) && this.executor.HasRuntimeTransaction)
             {
-                this.scope = TransactionHelper.CreateTransactionScope(this.executor.CurrentTransaction);
+                this.scope = TransactionHelper.CreateTransactionScope(
+                    this.executor.CurrentTransaction
+                );
             }
         }
 
@@ -325,10 +382,13 @@ namespace System.Activities
         {
             if (!this.isHandleInitialized)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.UnInitializedRuntimeTransactionHandle)
+                );
             }
 
-            RuntimeTransactionHandle handle = (RuntimeTransactionHandle)context.FindProperty(typeof(RuntimeTransactionHandle).FullName);
+            RuntimeTransactionHandle handle = (RuntimeTransactionHandle)
+                context.FindProperty(typeof(RuntimeTransactionHandle).FullName);
             if (handle != null)
             {
                 if (handle.SuppressTransaction)

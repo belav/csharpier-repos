@@ -13,7 +13,8 @@ namespace System.Runtime.CompilerServices
     /// </summary>
     /// <typeparam name="T">The delegate type.</typeparam>
     [EditorBrowsable(EditorBrowsableState.Never), DebuggerStepThrough]
-    public class RuleCache<T> where T : class
+    public class RuleCache<T>
+        where T : class
     {
         private T[] _rules = Array.Empty<T>();
         private readonly object _cacheLock = new object();
@@ -98,7 +99,13 @@ namespace System.Runtime.CompilerServices
             }
 
             newRules[InsertPosition] = item;
-            Array.Copy(rules, InsertPosition, newRules, InsertPosition + 1, newLength - InsertPosition - 1);
+            Array.Copy(
+                rules,
+                InsertPosition,
+                newRules,
+                InsertPosition + 1,
+                newLength - InsertPosition - 1
+            );
             return newRules;
         }
     }

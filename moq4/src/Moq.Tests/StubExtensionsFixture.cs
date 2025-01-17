@@ -140,7 +140,7 @@ namespace Moq.Tests
             var mock = new Mock<IFoo> { DefaultValue = DefaultValue.Mock };
             mock.SetupAllProperties();
 
-            _ = mock.Object.Bar;  // this is the only difference between this test and the previous one
+            _ = mock.Object.Bar; // this is the only difference between this test and the previous one
 
             mock.Object.Bar = new Bar { Value = 1 };
             Assert.Equal(1, mock.Object.Bar.Value);
@@ -224,7 +224,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<AddWriteAccessToInterface>();
             mock.SetupAllProperties();
-            IWithReadOnlyProperty asReimplementedInterface = mock.As<IWithReadOnlyProperty>().Object;
+            IWithReadOnlyProperty asReimplementedInterface =
+                mock.As<IWithReadOnlyProperty>().Object;
 
             mock.Object.WriteAccessInDerived = "test";
 
@@ -292,7 +293,10 @@ namespace Moq.Tests
             */
         }
 
-        object GetValue() { return new object(); }
+        object GetValue()
+        {
+            return new object();
+        }
 
         public interface IFoo
         {
@@ -340,12 +344,18 @@ namespace Moq.Tests
 
         public class OverridesOnlySetter : WithAutoProperty
         {
-            public override object Property { set => base.Property = value; }
+            public override object Property
+            {
+                set => base.Property = value;
+            }
         }
 
         public class OverridesOnlyGetter : WithAutoProperty
         {
-            public override object Property { get => base.Property; }
+            public override object Property
+            {
+                get => base.Property;
+            }
         }
     }
 }

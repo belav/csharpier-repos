@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,101 +49,131 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public abstract partial class TransportElement
-		 : BindingElementExtensionElement
-	{
-		// Static Fields
-		ConfigurationPropertyCollection _properties;
+    public abstract partial class TransportElement : BindingElementExtensionElement
+    {
+        // Static Fields
+        ConfigurationPropertyCollection _properties;
 
-		protected TransportElement () {
-		}
+        protected TransportElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty(
+            "manualAddressing",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false
+        )]
+        public bool ManualAddressing
+        {
+            get { return (bool)base["manualAddressing"]; }
+            set { base["manualAddressing"] = value; }
+        }
 
-		[ConfigurationProperty ("manualAddressing",
-			 Options = ConfigurationPropertyOptions.None,
-			DefaultValue = false)]
-		public bool ManualAddressing {
-			get { return (bool) base ["manualAddressing"]; }
-			set { base ["manualAddressing"] = value; }
-		}
+        [ConfigurationProperty(
+            "maxBufferPoolSize",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "524288"
+        )]
+        [LongValidator(MinValue = 1, MaxValue = 9223372036854775807, ExcludeRange = false)]
+        public long MaxBufferPoolSize
+        {
+            get { return (long)base["maxBufferPoolSize"]; }
+            set { base["maxBufferPoolSize"] = value; }
+        }
 
-		[ConfigurationProperty ("maxBufferPoolSize",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "524288")]
-		[LongValidator (MinValue = 1,
-			 MaxValue = 9223372036854775807,
-			ExcludeRange = false)]
-		public long MaxBufferPoolSize {
-			get { return (long) base ["maxBufferPoolSize"]; }
-			set { base ["maxBufferPoolSize"] = value; }
-		}
+        [LongValidator(MinValue = 1, MaxValue = 9223372036854775807, ExcludeRange = false)]
+        [ConfigurationProperty(
+            "maxReceivedMessageSize",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "65536"
+        )]
+        public long MaxReceivedMessageSize
+        {
+            get { return (long)base["maxReceivedMessageSize"]; }
+            set { base["maxReceivedMessageSize"] = value; }
+        }
 
-		[LongValidator (MinValue = 1,
-			 MaxValue = 9223372036854775807,
-			ExcludeRange = false)]
-		[ConfigurationProperty ("maxReceivedMessageSize",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "65536")]
-		public long MaxReceivedMessageSize {
-			get { return (long) base ["maxReceivedMessageSize"]; }
-			set { base ["maxReceivedMessageSize"] = value; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
+                    _properties = new ConfigurationPropertyCollection();
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "manualAddressing",
+                            typeof(bool),
+                            "false",
+                            null,
+                            null,
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "maxBufferPoolSize",
+                            typeof(long),
+                            "524288",
+                            null,
+                            new LongValidator(1, 9223372036854775807, false),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "maxReceivedMessageSize",
+                            typeof(long),
+                            "65536",
+                            null,
+                            new LongValidator(1, 9223372036854775807, false),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                }
+                return _properties;
+            }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get {
-				if (_properties == null) {
-					_properties = new ConfigurationPropertyCollection ();
-					_properties.Add (new ConfigurationProperty ("manualAddressing", typeof (bool), "false", null, null, ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("maxBufferPoolSize", typeof (long), "524288", null, new LongValidator (1, 9223372036854775807, false), ConfigurationPropertyOptions.None));
-					_properties.Add (new ConfigurationProperty ("maxReceivedMessageSize", typeof (long), "65536", null, new LongValidator (1, 9223372036854775807, false), ConfigurationPropertyOptions.None));
-				}
-				return _properties;
-			}
-		}
+        public override void ApplyConfiguration(BindingElement bindingElement)
+        {
+            var b = (TransportBindingElement)bindingElement;
+            base.ApplyConfiguration(b);
+            b.ManualAddressing = ManualAddressing;
+            b.MaxBufferPoolSize = MaxBufferPoolSize;
+            b.MaxReceivedMessageSize = MaxReceivedMessageSize;
+        }
 
-		public override void ApplyConfiguration (BindingElement bindingElement)
-		{
-			var b = (TransportBindingElement) bindingElement;
-			base.ApplyConfiguration (b);
-			b.ManualAddressing = ManualAddressing;
-			b.MaxBufferPoolSize = MaxBufferPoolSize;
-			b.MaxReceivedMessageSize = MaxReceivedMessageSize;
-		}
+        public override void CopyFrom(ServiceModelExtensionElement from)
+        {
+            var e = (TransportElement)from;
+            base.CopyFrom(from);
+            ManualAddressing = e.ManualAddressing;
+            MaxBufferPoolSize = e.MaxBufferPoolSize;
+            MaxReceivedMessageSize = e.MaxReceivedMessageSize;
+        }
 
-		public override void CopyFrom (ServiceModelExtensionElement from)
-		{
-			var e = (TransportElement) from;
-			base.CopyFrom (from);
-			ManualAddressing = e.ManualAddressing;
-			MaxBufferPoolSize = e.MaxBufferPoolSize;
-			MaxReceivedMessageSize = e.MaxReceivedMessageSize;
-		}
+        protected internal override BindingElement CreateBindingElement()
+        {
+            var b = CreateDefaultBindingElement();
+            ApplyConfiguration(b);
+            return b;
+        }
 
-		protected internal override BindingElement CreateBindingElement ()
-		{
-			var b = CreateDefaultBindingElement ();
-			ApplyConfiguration (b);
-			return b;
-		}
+        protected abstract TransportBindingElement CreateDefaultBindingElement();
 
-		protected abstract TransportBindingElement CreateDefaultBindingElement ();
-
-		protected internal override void InitializeFrom (BindingElement bindingElement)
-		{
-			var b = (TransportBindingElement) bindingElement;
-			base.InitializeFrom (b);
-			ManualAddressing = b.ManualAddressing;
-			MaxBufferPoolSize = b.MaxBufferPoolSize;
-			MaxReceivedMessageSize = b.MaxReceivedMessageSize;
-		}
-	}
-
+        protected internal override void InitializeFrom(BindingElement bindingElement)
+        {
+            var b = (TransportBindingElement)bindingElement;
+            base.InitializeFrom(b);
+            ManualAddressing = b.ManualAddressing;
+            MaxBufferPoolSize = b.MaxBufferPoolSize;
+            MaxReceivedMessageSize = b.MaxReceivedMessageSize;
+        }
+    }
 }

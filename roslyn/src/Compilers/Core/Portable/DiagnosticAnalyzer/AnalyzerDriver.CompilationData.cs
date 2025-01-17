@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             public CompilationData(Compilation compilation)
             {
-                SemanticModelProvider = (CachingSemanticModelProvider)compilation.SemanticModelProvider!;
+                SemanticModelProvider = (CachingSemanticModelProvider)
+                    compilation.SemanticModelProvider!;
                 SuppressMessageAttributeState = new SuppressMessageAttributeState(compilation);
             }
 

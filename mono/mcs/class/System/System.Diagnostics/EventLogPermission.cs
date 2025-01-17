@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,79 +32,82 @@
 
 using System.Security.Permissions;
 
-namespace System.Diagnostics {
+namespace System.Diagnostics
+{
+    [Serializable]
+    public sealed class EventLogPermission : ResourcePermissionBase
+    {
+        EventLogPermissionEntryCollection innerCollection;
 
-	[Serializable]
-	public sealed class EventLogPermission : ResourcePermissionBase {
+        public EventLogPermission()
+        {
+            SetUp();
+        }
 
-		EventLogPermissionEntryCollection innerCollection;
+        public EventLogPermission(EventLogPermissionEntry[] permissionAccessEntries)
+        {
+            if (permissionAccessEntries == null)
+                throw new ArgumentNullException("permissionAccessEntries");
 
-		public EventLogPermission ()
-		{
-			SetUp ();
-		}
+            SetUp();
+            innerCollection = new EventLogPermissionEntryCollection(this);
+            innerCollection.AddRange(permissionAccessEntries);
+        }
 
-		public EventLogPermission (EventLogPermissionEntry[] permissionAccessEntries)
-		{
-			if (permissionAccessEntries == null)
-				throw new ArgumentNullException ("permissionAccessEntries");
+        public EventLogPermission(PermissionState state)
+            : base(state)
+        {
+            SetUp();
+        }
 
-			SetUp ();
-			innerCollection = new EventLogPermissionEntryCollection (this);
-			innerCollection.AddRange (permissionAccessEntries);
-		}
+        public EventLogPermission(EventLogPermissionAccess permissionAccess, string machineName)
+        {
+            SetUp();
+            innerCollection = new EventLogPermissionEntryCollection(this);
+            innerCollection.Add(new EventLogPermissionEntry(permissionAccess, machineName));
+        }
 
-		public EventLogPermission (PermissionState state)
-			: base (state)
-		{
-			SetUp ();
-		}
+        public EventLogPermissionEntryCollection PermissionEntries
+        {
+            get
+            {
+                if (innerCollection == null)
+                {
+                    // must be here to work with XML deserialization
+                    innerCollection = new EventLogPermissionEntryCollection(this);
+                }
+                return innerCollection;
+            }
+        }
 
-		public EventLogPermission (EventLogPermissionAccess permissionAccess, string machineName)
-		{
-			SetUp ();
-			innerCollection = new EventLogPermissionEntryCollection (this);
-			innerCollection.Add (new EventLogPermissionEntry (permissionAccess, machineName));
-		}
+        // private stuff
 
-		public EventLogPermissionEntryCollection PermissionEntries {
-			get {
-				if (innerCollection == null) {
-					// must be here to work with XML deserialization
-					innerCollection = new EventLogPermissionEntryCollection (this);
-				}
-				return innerCollection;
-			}
-		}
+        private void SetUp()
+        {
+            TagNames = new string[1] { "Machine" };
+            PermissionAccessType = typeof(EventLogPermissionAccess);
+        }
 
-		// private stuff
+        internal ResourcePermissionBaseEntry[] GetEntries()
+        {
+            return base.GetPermissionEntries();
+        }
 
-		private void SetUp () 
-		{
-			TagNames = new string [1] { "Machine" };
-			PermissionAccessType = typeof (EventLogPermissionAccess);
-		}
+        internal void ClearEntries()
+        {
+            base.Clear();
+        }
 
-		internal ResourcePermissionBaseEntry[] GetEntries ()
-		{
-			return base.GetPermissionEntries ();
-		}
+        internal void Add(object obj)
+        {
+            EventLogPermissionEntry elpe = (obj as EventLogPermissionEntry);
+            base.AddPermissionAccess(elpe.CreateResourcePermissionBaseEntry());
+        }
 
-		internal void ClearEntries ()
-		{
-			base.Clear ();
-		}
-
-		internal void Add (object obj) 
-		{
-			EventLogPermissionEntry elpe = (obj as EventLogPermissionEntry);
-			base.AddPermissionAccess (elpe.CreateResourcePermissionBaseEntry ());
-		}
-
-		internal void Remove (object obj) 
-		{
-			EventLogPermissionEntry elpe = (obj as EventLogPermissionEntry);
-			base.RemovePermissionAccess (elpe.CreateResourcePermissionBaseEntry ());
-		}
-	}
+        internal void Remove(object obj)
+        {
+            EventLogPermissionEntry elpe = (obj as EventLogPermissionEntry);
+            base.RemovePermissionAccess(elpe.CreateResourcePermissionBaseEntry());
+        }
+    }
 }

@@ -29,8 +29,8 @@ public class ContentResultTest
             Content = null,
             ContentType = new MediaTypeHeaderValue("text/plain")
             {
-                Encoding = Encoding.Unicode
-            }.ToString()
+                Encoding = Encoding.Unicode,
+            }.ToString(),
         };
         var httpContext = GetHttpContext();
         var actionContext = GetActionContext(httpContext);
@@ -42,70 +42,70 @@ public class ContentResultTest
         MediaTypeAssert.Equal("text/plain; charset=utf-16", httpContext.Response.ContentType);
     }
 
-    public static TheoryData<MediaTypeHeaderValue, string, string, string, byte[]> ContentResultContentTypeData
+    public static TheoryData<
+        MediaTypeHeaderValue,
+        string,
+        string,
+        string,
+        byte[]
+    > ContentResultContentTypeData
     {
         get
         {
             // contentType, content, responseContentType, expectedContentType, expectedData
             return new TheoryData<MediaTypeHeaderValue, string, string, string, byte[]>
+            {
                 {
-                    {
-                        null,
-                        "κόσμε",
-                        null,
-                        "text/plain; charset=utf-8",
-                        new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
-                    },
-                    {
-                        new MediaTypeHeaderValue("text/foo"),
-                        "κόσμε",
-                        null,
-                        "text/foo",
-                        new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
-                    },
-                    {
-                        MediaTypeHeaderValue.Parse("text/foo;p1=p1-value"),
-                        "κόσμε",
-                        null,
-                        "text/foo; p1=p1-value",
-                        new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
-                    },
-                    {
-                        new MediaTypeHeaderValue("text/foo") { Encoding = Encoding.ASCII },
-                        "abcd",
-                        null,
-                        "text/foo; charset=us-ascii",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
-                    {
-                        null,
-                        "abcd",
-                        "text/bar",
-                        "text/bar",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
-                    {
-                        null,
-                        "abcd",
-                        "application/xml; charset=us-ascii",
-                        "application/xml; charset=us-ascii",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
-                    {
-                        null,
-                        "abcd",
-                        "Invalid content type",
-                        "Invalid content type",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
-                    {
-                        new MediaTypeHeaderValue("text/foo") { Charset = "us-ascii" },
-                        "abcd",
-                        "text/bar",
-                        "text/foo; charset=us-ascii",
-                        new byte[] { 97, 98, 99, 100 }
-                    },
-                };
+                    null,
+                    "κόσμε",
+                    null,
+                    "text/plain; charset=utf-8",
+                    new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
+                },
+                {
+                    new MediaTypeHeaderValue("text/foo"),
+                    "κόσμε",
+                    null,
+                    "text/foo",
+                    new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
+                },
+                {
+                    MediaTypeHeaderValue.Parse("text/foo;p1=p1-value"),
+                    "κόσμε",
+                    null,
+                    "text/foo; p1=p1-value",
+                    new byte[] { 206, 186, 225, 189, 185, 207, 131, 206, 188, 206, 181 } //utf-8 without BOM
+                },
+                {
+                    new MediaTypeHeaderValue("text/foo") { Encoding = Encoding.ASCII },
+                    "abcd",
+                    null,
+                    "text/foo; charset=us-ascii",
+                    new byte[] { 97, 98, 99, 100 }
+                },
+                { null, "abcd", "text/bar", "text/bar", new byte[] { 97, 98, 99, 100 } },
+                {
+                    null,
+                    "abcd",
+                    "application/xml; charset=us-ascii",
+                    "application/xml; charset=us-ascii",
+                    new byte[] { 97, 98, 99, 100 }
+                },
+                {
+                    null,
+                    "abcd",
+                    "Invalid content type",
+                    "Invalid content type",
+                    new byte[] { 97, 98, 99, 100 }
+                },
+                {
+                    new MediaTypeHeaderValue("text/foo") { Charset = "us-ascii" },
+                    "abcd",
+                    "text/bar",
+                    "text/foo; charset=us-ascii",
+                    new byte[] { 97, 98, 99, 100 }
+                },
+            };
         }
     }
 
@@ -116,13 +116,14 @@ public class ContentResultTest
         string content,
         string responseContentType,
         string expectedContentType,
-        byte[] expectedContentData)
+        byte[] expectedContentData
+    )
     {
         // Arrange
         var contentResult = new ContentResult
         {
             Content = content,
-            ContentType = contentType?.ToString()
+            ContentType = contentType?.ToString(),
         };
         var httpContext = GetHttpContext();
         var memoryStream = new MemoryStream();
@@ -140,93 +141,201 @@ public class ContentResultTest
         Assert.Equal(expectedContentData.Length, httpContext.Response.ContentLength);
     }
 
-    public static TheoryData<string, string> ContentResult_WritesDataCorrectly_ForDifferentContentSizesData
+    public static TheoryData<
+        string,
+        string
+    > ContentResult_WritesDataCorrectly_ForDifferentContentSizesData
     {
         get
         {
             // content, contentType
             return new TheoryData<string, string>
+            {
+                { string.Empty, "text/plain; charset=utf-8" },
+                { new string('a', DefaultCharacterChunkSize), "text/plain; charset=utf-8" },
+                { new string('a', DefaultCharacterChunkSize - 1), "text/plain; charset=utf-8" },
+                { new string('a', DefaultCharacterChunkSize + 1), "text/plain; charset=utf-8" },
+                { new string('a', DefaultCharacterChunkSize - 2), "text/plain; charset=utf-8" },
+                { new string('a', DefaultCharacterChunkSize + 2), "text/plain; charset=utf-8" },
+                { new string('a', DefaultCharacterChunkSize - 3), "text/plain; charset=utf-8" },
+                { new string('a', DefaultCharacterChunkSize + 3), "text/plain; charset=utf-8" },
+                { new string('a', DefaultCharacterChunkSize * 2), "text/plain; charset=utf-8" },
+                { new string('a', DefaultCharacterChunkSize * 3), "text/plain; charset=utf-8" },
                 {
-                    {  string.Empty, "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize - 1), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize + 1), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize - 2), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize + 2), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize - 3), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize + 3), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize * 2), "text/plain; charset=utf-8" },
-                    {  new string('a', DefaultCharacterChunkSize * 3), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) - 1), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) - 2), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) - 3), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) + 1), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) + 2), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 2) + 3), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) - 1), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) - 2), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) - 3), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) + 1), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) + 2), "text/plain; charset=utf-8" },
-                    {  new string('a', (DefaultCharacterChunkSize * 3) + 3), "text/plain; charset=utf-8" },
-
-                    {  new string('色', DefaultCharacterChunkSize), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize - 1), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize + 1), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize - 2), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize + 2), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize - 3), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize + 3), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize * 2), "text/plain; charset=utf-16" },
-                    {  new string('色', DefaultCharacterChunkSize * 3), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 1), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 2), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 3), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 1), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 2), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 3), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 1), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 2), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 3), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 1), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 2), "text/plain; charset=utf-16" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 3), "text/plain; charset=utf-16" },
-
-                    {  new string('色', DefaultCharacterChunkSize), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize - 1), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize + 1), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize - 2), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize + 2), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize - 3), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize + 3), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize * 2), "text/plain; charset=utf-32" },
-                    {  new string('色', DefaultCharacterChunkSize * 3), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 1), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 2), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) - 3), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 1), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 2), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 2) + 3), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 1), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 2), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) - 3), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 1), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 2), "text/plain; charset=utf-32" },
-                    {  new string('色', (DefaultCharacterChunkSize * 3) + 3), "text/plain; charset=utf-32" },
-                };
+                    new string('a', (DefaultCharacterChunkSize * 2) - 1),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 2) - 2),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 2) - 3),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 2) + 1),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 2) + 2),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 2) + 3),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 3) - 1),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 3) - 2),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 3) - 3),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 3) + 1),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 3) + 2),
+                    "text/plain; charset=utf-8"
+                },
+                {
+                    new string('a', (DefaultCharacterChunkSize * 3) + 3),
+                    "text/plain; charset=utf-8"
+                },
+                { new string('色', DefaultCharacterChunkSize), "text/plain; charset=utf-16" },
+                { new string('色', DefaultCharacterChunkSize - 1), "text/plain; charset=utf-16" },
+                { new string('色', DefaultCharacterChunkSize + 1), "text/plain; charset=utf-16" },
+                { new string('色', DefaultCharacterChunkSize - 2), "text/plain; charset=utf-16" },
+                { new string('色', DefaultCharacterChunkSize + 2), "text/plain; charset=utf-16" },
+                { new string('色', DefaultCharacterChunkSize - 3), "text/plain; charset=utf-16" },
+                { new string('色', DefaultCharacterChunkSize + 3), "text/plain; charset=utf-16" },
+                { new string('色', DefaultCharacterChunkSize * 2), "text/plain; charset=utf-16" },
+                { new string('色', DefaultCharacterChunkSize * 3), "text/plain; charset=utf-16" },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) - 1),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) - 2),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) - 3),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) + 1),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) + 2),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) + 3),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) - 1),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) - 2),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) - 3),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) + 1),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) + 2),
+                    "text/plain; charset=utf-16"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) + 3),
+                    "text/plain; charset=utf-16"
+                },
+                { new string('色', DefaultCharacterChunkSize), "text/plain; charset=utf-32" },
+                { new string('色', DefaultCharacterChunkSize - 1), "text/plain; charset=utf-32" },
+                { new string('色', DefaultCharacterChunkSize + 1), "text/plain; charset=utf-32" },
+                { new string('色', DefaultCharacterChunkSize - 2), "text/plain; charset=utf-32" },
+                { new string('色', DefaultCharacterChunkSize + 2), "text/plain; charset=utf-32" },
+                { new string('色', DefaultCharacterChunkSize - 3), "text/plain; charset=utf-32" },
+                { new string('色', DefaultCharacterChunkSize + 3), "text/plain; charset=utf-32" },
+                { new string('色', DefaultCharacterChunkSize * 2), "text/plain; charset=utf-32" },
+                { new string('色', DefaultCharacterChunkSize * 3), "text/plain; charset=utf-32" },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) - 1),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) - 2),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) - 3),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) + 1),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) + 2),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 2) + 3),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) - 1),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) - 2),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) - 3),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) + 1),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) + 2),
+                    "text/plain; charset=utf-32"
+                },
+                {
+                    new string('色', (DefaultCharacterChunkSize * 3) + 3),
+                    "text/plain; charset=utf-32"
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(ContentResult_WritesDataCorrectly_ForDifferentContentSizesData))]
-    public async Task ContentResult_WritesDataCorrectly_ForDifferentContentSizes(string content, string contentType)
+    public async Task ContentResult_WritesDataCorrectly_ForDifferentContentSizes(
+        string content,
+        string contentType
+    )
     {
         // Arrange
-        var contentResult = new ContentResult
-        {
-            Content = content,
-            ContentType = contentType
-        };
+        var contentResult = new ContentResult { Content = content, ContentType = contentType };
         var httpContext = GetHttpContext();
         var memoryStream = new MemoryStream();
         httpContext.Response.Body = memoryStream;
@@ -248,9 +357,7 @@ public class ContentResultTest
         var routeData = new RouteData();
         routeData.Routers.Add(Mock.Of<IRouter>());
 
-        return new ActionContext(httpContext,
-                                routeData,
-                                new ActionDescriptor());
+        return new ActionContext(httpContext, routeData, new ActionDescriptor());
     }
 
     private static IServiceCollection CreateServices()
@@ -264,9 +371,15 @@ public class ContentResultTest
             .Returns(new char[DefaultCharacterChunkSize]);
 
         var services = new ServiceCollection();
-        services.AddSingleton<IActionResultExecutor<ContentResult>>(new ContentResultExecutor(
-            new Logger<ContentResultExecutor>(NullLoggerFactory.Instance),
-            new MemoryPoolHttpResponseStreamWriterFactory(ArrayPool<byte>.Shared, charArrayPool.Object)));
+        services.AddSingleton<IActionResultExecutor<ContentResult>>(
+            new ContentResultExecutor(
+                new Logger<ContentResultExecutor>(NullLoggerFactory.Instance),
+                new MemoryPoolHttpResponseStreamWriterFactory(
+                    ArrayPool<byte>.Shared,
+                    charArrayPool.Object
+                )
+            )
+        );
         services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
         return services;
     }

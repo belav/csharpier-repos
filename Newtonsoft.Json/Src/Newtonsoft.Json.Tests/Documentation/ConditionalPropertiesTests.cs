@@ -57,34 +57,37 @@ namespace Newtonsoft.Json.Tests.Documentation
         public Employee Manager { get; set; }
     }
 
-    #region ShouldSerializeContractResolver
+#region ShouldSerializeContractResolver
     public class ShouldSerializeContractResolver : DefaultContractResolver
     {
-        public new static readonly ShouldSerializeContractResolver Instance = new ShouldSerializeContractResolver();
+        public static new readonly ShouldSerializeContractResolver Instance =
+            new ShouldSerializeContractResolver();
 
-        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+        protected override JsonProperty CreateProperty(
+            MemberInfo member,
+            MemberSerialization memberSerialization
+        )
         {
             JsonProperty property = base.CreateProperty(member, memberSerialization);
 
             if (property.DeclaringType == typeof(Employee) && property.PropertyName == "Manager")
             {
-                property.ShouldSerialize =
-                    instance =>
-                    {
-                        Employee e = (Employee)instance;
-                        return e.Manager != e;
-                    };
+                property.ShouldSerialize = instance =>
+                {
+                    Employee e = (Employee)instance;
+                    return e.Manager != e;
+                };
             }
 
             return property;
         }
     }
-    #endregion
+#endregion
 
     [TestFixture]
     public class ConditionalPropertiesTests : TestFixtureBase
     {
-        #region EmployeeShouldSerializeExample
+#region EmployeeShouldSerializeExample
         public class Employee
         {
             public string Name { get; set; }
@@ -96,12 +99,12 @@ namespace Newtonsoft.Json.Tests.Documentation
                 return (Manager != this);
             }
         }
-        #endregion
+#endregion
 
         [Test]
         public void ShouldSerializeClassTest()
         {
-            #region ShouldSerializeClassTest
+#region ShouldSerializeClassTest
             Employee joe = new Employee();
             joe.Name = "Joe Employee";
             Employee mike = new Employee();
@@ -125,9 +128,10 @@ namespace Newtonsoft.Json.Tests.Documentation
             //     "Name": "Mike Manager"
             //   }
             // ]
-            #endregion
+#endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""Joe Employee"",
     ""Manager"": {
@@ -137,15 +141,19 @@ namespace Newtonsoft.Json.Tests.Documentation
   {
     ""Name"": ""Mike Manager""
   }
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void ShouldSerializeContractResolverTest()
         {
-            Newtonsoft.Json.Tests.Documentation.Employee joe = new Newtonsoft.Json.Tests.Documentation.Employee();
+            Newtonsoft.Json.Tests.Documentation.Employee joe =
+                new Newtonsoft.Json.Tests.Documentation.Employee();
             joe.Name = "Joe Employee";
-            Newtonsoft.Json.Tests.Documentation.Employee mike = new Newtonsoft.Json.Tests.Documentation.Employee();
+            Newtonsoft.Json.Tests.Documentation.Employee mike =
+                new Newtonsoft.Json.Tests.Documentation.Employee();
             mike.Name = "Mike Manager";
 
             joe.Manager = mike;
@@ -156,10 +164,12 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ContractResolver = ShouldSerializeContractResolver.Instance
-                });
+                    ContractResolver = ShouldSerializeContractResolver.Instance,
+                }
+            );
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Name"": ""Joe Employee"",
     ""Manager"": {
@@ -169,7 +179,9 @@ namespace Newtonsoft.Json.Tests.Documentation
   {
     ""Name"": ""Mike Manager""
   }
-]", json);
+]",
+                json
+            );
         }
     }
 }

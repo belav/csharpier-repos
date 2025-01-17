@@ -20,7 +20,9 @@ internal static class ChecksumValidator
         // Other files (view imports) may or may not have existed at the time of compilation,
         // so we may not have checksums for them.
         var checksums = item.GetChecksumMetadata();
-        return checksums.Any(c => string.Equals(item.Identifier, c.Identifier, StringComparison.OrdinalIgnoreCase));
+        return checksums.Any(c =>
+            string.Equals(item.Identifier, c.Identifier, StringComparison.OrdinalIgnoreCase)
+        );
     }
 
     // Validates that we can use an existing precompiled view by comparing checksums with files on
@@ -40,8 +42,9 @@ internal static class ChecksumValidator
         //
         // The presence of the main file with the same content is a very strong signal that you're in a
         // development scenario.
-        var primaryChecksum = checksums
-            .FirstOrDefault(c => string.Equals(item.Identifier, c.Identifier, StringComparison.OrdinalIgnoreCase));
+        var primaryChecksum = checksums.FirstOrDefault(c =>
+            string.Equals(item.Identifier, c.Identifier, StringComparison.OrdinalIgnoreCase)
+        );
         if (primaryChecksum == null)
         {
             // No primary checksum, assume valid.
@@ -55,9 +58,14 @@ internal static class ChecksumValidator
             return true;
         }
 
-        var sourceDocumentChecksum = ComputeChecksum(projectItem, primaryChecksum.ChecksumAlgorithm);
-        if (!string.Equals(sourceDocumentChecksum.algorithm, primaryChecksum.ChecksumAlgorithm) ||
-            !ChecksumsEqual(primaryChecksum.Checksum, sourceDocumentChecksum.checksum))
+        var sourceDocumentChecksum = ComputeChecksum(
+            projectItem,
+            primaryChecksum.ChecksumAlgorithm
+        );
+        if (
+            !string.Equals(sourceDocumentChecksum.algorithm, primaryChecksum.ChecksumAlgorithm)
+            || !ChecksumsEqual(primaryChecksum.Checksum, sourceDocumentChecksum.checksum)
+        )
         {
             // Main file exists, but checksums not equal.
             return false;
@@ -66,7 +74,13 @@ internal static class ChecksumValidator
         for (var i = 0; i < checksums.Count; i++)
         {
             var checksum = checksums[i];
-            if (string.Equals(item.Identifier, checksum.Identifier, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    item.Identifier,
+                    checksum.Identifier,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 // Ignore primary checksum on this pass.
                 continue;
@@ -80,8 +94,10 @@ internal static class ChecksumValidator
             }
 
             sourceDocumentChecksum = ComputeChecksum(importItem, checksum.ChecksumAlgorithm);
-            if (!string.Equals(sourceDocumentChecksum.algorithm, checksum.ChecksumAlgorithm) ||
-                !ChecksumsEqual(checksum.Checksum, sourceDocumentChecksum.checksum))
+            if (
+                !string.Equals(sourceDocumentChecksum.algorithm, checksum.ChecksumAlgorithm)
+                || !ChecksumsEqual(checksum.Checksum, sourceDocumentChecksum.checksum)
+            )
             {
                 // Import file exists, but checksums not equal.
                 return false;
@@ -91,7 +107,10 @@ internal static class ChecksumValidator
         return true;
     }
 
-    private static (byte[] checksum, string algorithm) ComputeChecksum(RazorProjectItem projectItem, string checksumAlgorithm)
+    private static (byte[] checksum, string algorithm) ComputeChecksum(
+        RazorProjectItem projectItem,
+        string checksumAlgorithm
+    )
     {
         ArgumentNullException.ThrowIfNull(projectItem);
 

@@ -14,11 +14,13 @@ namespace System.Security.Cryptography.X509Certificates
         internal static partial ICertificatePal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags);
+            X509KeyStorageFlags keyStorageFlags
+        );
 
         internal static partial ICertificatePal FromFile(
             string fileName,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags);
+            X509KeyStorageFlags keyStorageFlags
+        );
     }
 }

@@ -14,17 +14,21 @@ public class ControllerModelTest
     public void CopyConstructor_DoesDeepCopyOfOtherModels()
     {
         // Arrange
-        var controller = new ControllerModel(typeof(TestController).GetTypeInfo(),
-                                             new List<object>());
+        var controller = new ControllerModel(
+            typeof(TestController).GetTypeInfo(),
+            new List<object>()
+        );
 
-        var action = new ActionModel(typeof(TestController).GetMethod("Edit"),
-                                     new List<object>());
+        var action = new ActionModel(typeof(TestController).GetMethod("Edit"), new List<object>());
         controller.Actions.Add(action);
         action.Controller = controller;
 
-        controller.ControllerProperties.Add(new PropertyModel(
-            controller.ControllerType.AsType().GetProperty("TestProperty"),
-            new List<object>() { }));
+        controller.ControllerProperties.Add(
+            new PropertyModel(
+                controller.ControllerType.AsType().GetProperty("TestProperty"),
+                new List<object>() { }
+            )
+        );
 
         var route = new AttributeRouteModel(new HttpGetAttribute("api/Products"));
         controller.Selectors.Add(new SelectorModel() { AttributeRouteModel = route });
@@ -45,7 +49,10 @@ public class ControllerModelTest
         Assert.NotSame(route, controller2.Selectors[0].AttributeRouteModel);
         Assert.NotSame(apiExplorer, controller2.ApiExplorer);
 
-        Assert.NotSame(controller.Selectors[0].ActionConstraints, controller2.Selectors[0].ActionConstraints);
+        Assert.NotSame(
+            controller.Selectors[0].ActionConstraints,
+            controller2.Selectors[0].ActionConstraints
+        );
         Assert.NotSame(controller.Actions, controller2.Actions);
         Assert.NotSame(controller.Attributes, controller2.Attributes);
         Assert.NotSame(controller.Filters, controller2.Filters);
@@ -63,11 +70,8 @@ public class ControllerModelTest
         // Arrange
         var controller = new ControllerModel(
             typeof(TestController).GetTypeInfo(),
-            new List<object>()
-            {
-                    new HttpGetAttribute(),
-                    new MyFilterAttribute(),
-            });
+            new List<object>() { new HttpGetAttribute(), new MyFilterAttribute() }
+        );
 
         var selectorModel = new SelectorModel();
         selectorModel.ActionConstraints.Add(new HttpMethodActionConstraint(new string[] { "GET" }));
@@ -78,7 +82,11 @@ public class ControllerModelTest
         controller.RouteValues.Add("key", "value");
         controller.Properties.Add(new KeyValuePair<object, object>("test key", "test value"));
         controller.ControllerProperties.Add(
-            new PropertyModel(typeof(TestController).GetProperty("TestProperty"), new List<object>()));
+            new PropertyModel(
+                typeof(TestController).GetProperty("TestProperty"),
+                new List<object>()
+            )
+        );
 
         // Act
         var controller2 = new ControllerModel(controller);
@@ -86,10 +94,12 @@ public class ControllerModelTest
         // Assert
         foreach (var property in typeof(ControllerModel).GetProperties())
         {
-            if (property.Name.Equals("Actions") ||
-                property.Name.Equals("Selectors") ||
-                property.Name.Equals("ApiExplorer") ||
-                property.Name.Equals("ControllerProperties"))
+            if (
+                property.Name.Equals("Actions")
+                || property.Name.Equals("Selectors")
+                || property.Name.Equals("ApiExplorer")
+                || property.Name.Equals("ControllerProperties")
+            )
             {
                 // This test excludes other ApplicationModel objects on purpose because we deep copy them.
                 continue;
@@ -119,8 +129,10 @@ public class ControllerModelTest
                 // Ensure non-default value
                 Assert.NotEmpty((IDictionary<object, object>)value1);
             }
-            else if (property.PropertyType.IsValueType ||
-                Nullable.GetUnderlyingType(property.PropertyType) != null)
+            else if (
+                property.PropertyType.IsValueType
+                || Nullable.GetUnderlyingType(property.PropertyType) != null
+            )
             {
                 Assert.Equal(value1, value2);
 
@@ -146,14 +158,10 @@ public class ControllerModelTest
     {
         public string TestProperty { get; set; }
 
-        public void Edit()
-        {
-        }
+        public void Edit() { }
     }
 
-    private class MyFilterAttribute : Attribute, IFilterMetadata
-    {
-    }
+    private class MyFilterAttribute : Attribute, IFilterMetadata { }
 
     private class MyRouteValueAttribute : Attribute, IRouteValueProvider
     {

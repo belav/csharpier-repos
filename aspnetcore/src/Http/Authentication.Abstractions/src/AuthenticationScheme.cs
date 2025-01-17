@@ -17,7 +17,12 @@ public class AuthenticationScheme
     /// <param name="name">The name for the authentication scheme.</param>
     /// <param name="displayName">The display name for the authentication scheme.</param>
     /// <param name="handlerType">The <see cref="IAuthenticationHandler"/> type that handles this scheme.</param>
-    public AuthenticationScheme(string name, string? displayName, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type handlerType)
+    public AuthenticationScheme(
+        string name,
+        string? displayName,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type handlerType
+    )
     {
         ArgumentNullException.ThrowIfNull(name);
         ArgumentNullException.ThrowIfNull(handlerType);

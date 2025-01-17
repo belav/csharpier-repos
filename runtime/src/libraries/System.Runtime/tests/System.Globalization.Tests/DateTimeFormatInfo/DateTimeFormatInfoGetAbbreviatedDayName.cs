@@ -10,20 +10,44 @@ namespace System.Globalization.Tests
     {
         public static IEnumerable<object[]> GetAbbreviatedDayName_TestData()
         {
-            string[] englishAbbreviatedDayNames = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-            yield return new object[] { DateTimeFormatInfo.InvariantInfo, englishAbbreviatedDayNames };
-            yield return new object[] { new CultureInfo("en-US").DateTimeFormat, englishAbbreviatedDayNames };
+            string[] englishAbbreviatedDayNames = new string[]
+            {
+                "Sun",
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat",
+            };
+            yield return new object[]
+            {
+                DateTimeFormatInfo.InvariantInfo,
+                englishAbbreviatedDayNames,
+            };
+            yield return new object[]
+            {
+                new CultureInfo("en-US").DateTimeFormat,
+                englishAbbreviatedDayNames,
+            };
             yield return new object[] { new DateTimeFormatInfo(), englishAbbreviatedDayNames };
 
             if (!PlatformDetection.IsUbuntu)
             {
-                yield return new object[] { new CultureInfo("fr-FR").DateTimeFormat, DateTimeFormatInfoData.FrFRAbbreviatedDayNames() };
+                yield return new object[]
+                {
+                    new CultureInfo("fr-FR").DateTimeFormat,
+                    DateTimeFormatInfoData.FrFRAbbreviatedDayNames(),
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(GetAbbreviatedDayName_TestData))]
-        public void GetAbbreviatedDayName_Invoke_ReturnsExpected(DateTimeFormatInfo info, string[] expected)
+        public void GetAbbreviatedDayName_Invoke_ReturnsExpected(
+            DateTimeFormatInfo info,
+            string[] expected
+        )
         {
             DayOfWeek[] values = new DayOfWeek[]
             {
@@ -33,7 +57,7 @@ namespace System.Globalization.Tests
                 DayOfWeek.Wednesday,
                 DayOfWeek.Thursday,
                 DayOfWeek.Friday,
-                DayOfWeek.Saturday
+                DayOfWeek.Saturday,
             };
 
             for (int i = 0; i < values.Length; ++i)
@@ -45,10 +69,15 @@ namespace System.Globalization.Tests
         [Theory]
         [InlineData(DayOfWeek.Sunday - 1)]
         [InlineData(DayOfWeek.Saturday + 1)]
-        public void GetAbbreviatedDayName_Invalid_ThrowsArgumentOutOfRangeException(DayOfWeek dayofweek)
+        public void GetAbbreviatedDayName_Invalid_ThrowsArgumentOutOfRangeException(
+            DayOfWeek dayofweek
+        )
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("dayofweek", () => format.GetAbbreviatedDayName(dayofweek));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "dayofweek",
+                () => format.GetAbbreviatedDayName(dayofweek)
+            );
         }
     }
 }

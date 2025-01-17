@@ -22,7 +22,7 @@ namespace System.Diagnostics
 {
     internal sealed class AsyncStreamReader : IDisposable
     {
-        private const int DefaultBufferSize = 1024;  // Byte buffer size
+        private const int DefaultBufferSize = 1024; // Byte buffer size
 
         private readonly Stream _stream;
         private readonly Decoder _decoder;
@@ -47,7 +47,10 @@ namespace System.Diagnostics
         // in number of 16-bit characters, is set by bufferSize.
         internal AsyncStreamReader(Stream stream, Action<string?> callback, Encoding encoding)
         {
-            Debug.Assert(stream != null && encoding != null && callback != null, "Invalid arguments!");
+            Debug.Assert(
+                stream != null && encoding != null && callback != null,
+                "Invalid arguments!"
+            );
             Debug.Assert(stream.CanRead, "Stream must be readable!");
 
             _stream = stream;
@@ -94,7 +97,9 @@ namespace System.Diagnostics
             {
                 try
                 {
-                    int bytesRead = await _stream.ReadAsync(new Memory<byte>(_byteBuffer), _cts.Token).ConfigureAwait(false);
+                    int bytesRead = await _stream
+                        .ReadAsync(new Memory<byte>(_byteBuffer), _cts.Token)
+                        .ConfigureAwait(false);
                     if (bytesRead == 0)
                         break;
 
@@ -246,7 +251,10 @@ namespace System.Diagnostics
                 // Otherwise, let the exception propagate.
                 if (rethrowInNewThread)
                 {
-                    ThreadPool.QueueUserWorkItem(edi => ((ExceptionDispatchInfo)edi!).Throw(), ExceptionDispatchInfo.Capture(e));
+                    ThreadPool.QueueUserWorkItem(
+                        edi => ((ExceptionDispatchInfo)edi!).Throw(),
+                        ExceptionDispatchInfo.Capture(e)
+                    );
                     return true;
                 }
                 throw;

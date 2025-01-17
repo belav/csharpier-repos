@@ -42,9 +42,12 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
 
     public override string Title => "Add ProducesResponseType attributes.";
 
-    protected override async Task<Document> GetChangedDocumentAsync(CancellationToken cancellationToken)
+    protected override async Task<Document> GetChangedDocumentAsync(
+        CancellationToken cancellationToken
+    )
     {
-        var nullableContext = await CreateCodeActionContext(cancellationToken).ConfigureAwait(false);
+        var nullableContext = await CreateCodeActionContext(cancellationToken)
+            .ConfigureAwait(false);
         if (nullableContext == null)
         {
             return _document;
@@ -52,8 +55,15 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
 
         var context = nullableContext.Value;
 
-        var declaredResponseMetadata = SymbolApiResponseMetadataProvider.GetDeclaredResponseMetadata(context.SymbolCache, context.Method);
-        var errorResponseType = SymbolApiResponseMetadataProvider.GetErrorResponseType(context.SymbolCache, context.Method);
+        var declaredResponseMetadata =
+            SymbolApiResponseMetadataProvider.GetDeclaredResponseMetadata(
+                context.SymbolCache,
+                context.Method
+            );
+        var errorResponseType = SymbolApiResponseMetadataProvider.GetErrorResponseType(
+            context.SymbolCache,
+            context.Method
+        );
 
         var results = CalculateStatusCodesToApply(context, declaredResponseMetadata);
         if (results.Count == 0)
@@ -61,7 +71,9 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
             return _document;
         }
 
-        var documentEditor = await DocumentEditor.CreateAsync(_document, cancellationToken).ConfigureAwait(false);
+        var documentEditor = await DocumentEditor
+            .CreateAsync(_document, cancellationToken)
+            .ConfigureAwait(false);
 
         var addUsingDirective = false;
         foreach (var item in results.OrderBy(s => s.statusCode))
@@ -72,34 +84,56 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
             AttributeSyntax attributeSyntax;
             bool addUsing;
 
-            if (statusCode >= 400 && returnType != null && !SymbolEqualityComparer.Default.Equals(returnType, errorResponseType))
+            if (
+                statusCode >= 400
+                && returnType != null
+                && !SymbolEqualityComparer.Default.Equals(returnType, errorResponseType)
+            )
             {
                 // If a returnType was discovered and is different from the errorResponseType, use it in the result.
-                attributeSyntax = CreateProducesResponseTypeAttribute(context, statusCode, returnType, out addUsing);
+                attributeSyntax = CreateProducesResponseTypeAttribute(
+                    context,
+                    statusCode,
+                    returnType,
+                    out addUsing
+                );
             }
             else
             {
-                attributeSyntax = CreateProducesResponseTypeAttribute(context, statusCode, out addUsing);
+                attributeSyntax = CreateProducesResponseTypeAttribute(
+                    context,
+                    statusCode,
+                    out addUsing
+                );
             }
 
             documentEditor.AddAttribute(context.MethodSyntax, attributeSyntax);
             addUsingDirective |= addUsing;
         }
 
-        if (!declaredResponseMetadata.Any(m => m.IsDefault && SymbolEqualityComparer.Default.Equals(m.AttributeSource, context.Method)))
+        if (
+            !declaredResponseMetadata.Any(m =>
+                m.IsDefault
+                && SymbolEqualityComparer.Default.Equals(m.AttributeSource, context.Method)
+            )
+        )
         {
             // Add a ProducesDefaultResponseTypeAttribute if the method does not already have one.
-            documentEditor.AddAttribute(context.MethodSyntax, CreateProducesDefaultResponseTypeAttribute());
+            documentEditor.AddAttribute(
+                context.MethodSyntax,
+                CreateProducesDefaultResponseTypeAttribute()
+            );
         }
 
-        var apiConventionMethodAttribute = context.Method.GetAttributes(context.SymbolCache.ApiConventionMethodAttribute).FirstOrDefault();
+        var apiConventionMethodAttribute = context
+            .Method.GetAttributes(context.SymbolCache.ApiConventionMethodAttribute)
+            .FirstOrDefault();
 
         if (apiConventionMethodAttribute != null)
         {
             // Remove [ApiConventionMethodAttribute] declared on the method since it's no longer required
             var attributeSyntax = await apiConventionMethodAttribute
-                .ApplicationSyntaxReference
-                .GetSyntaxAsync(cancellationToken)
+                .ApplicationSyntaxReference.GetSyntaxAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             documentEditor.RemoveNode(attributeSyntax);
@@ -113,26 +147,36 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
         {
             const string @namespace = "Microsoft.AspNetCore.Http";
 
-            var declaredUsings = new HashSet<string>(compilationUnit.Usings.Select(x => x.Name.ToString()));
+            var declaredUsings = new HashSet<string>(
+                compilationUnit.Usings.Select(x => x.Name.ToString())
+            );
 
             if (!declaredUsings.Contains(@namespace))
             {
-                root = compilationUnit.AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(@namespace)));
+                root = compilationUnit.AddUsings(
+                    SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(@namespace))
+                );
             }
         }
 
         return document.WithSyntaxRoot(root);
     }
 
-    private async Task<CodeActionContext?> CreateCodeActionContext(CancellationToken cancellationToken)
+    private async Task<CodeActionContext?> CreateCodeActionContext(
+        CancellationToken cancellationToken
+    )
     {
         var root = await _document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-        var semanticModel = await _document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+        var semanticModel = await _document
+            .GetSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
         var diagnosticNode = root.FindNode(_diagnostic.Location.SourceSpan);
         var methodSyntax = diagnosticNode.FirstAncestorOrSelf<MethodDeclarationSyntax>();
         var method = semanticModel.GetDeclaredSymbol(methodSyntax, cancellationToken);
 
-        var statusCodesType = semanticModel.Compilation.GetTypeByMetadataName(ApiSymbolNames.HttpStatusCodes);
+        var statusCodesType = semanticModel.Compilation.GetTypeByMetadataName(
+            ApiSymbolNames.HttpStatusCodes
+        );
         var statusCodeConstants = GetStatusCodeConstants(statusCodesType);
 
         if (!ApiControllerSymbolCache.TryCreate(semanticModel.Compilation, out var symbolCache))
@@ -140,7 +184,14 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
             return null;
         }
 
-        var codeActionContext = new CodeActionContext(semanticModel, symbolCache, method, methodSyntax, statusCodeConstants, cancellationToken);
+        var codeActionContext = new CodeActionContext(
+            semanticModel,
+            symbolCache,
+            method,
+            methodSyntax,
+            statusCodeConstants,
+            cancellationToken
+        );
         return codeActionContext;
     }
 
@@ -152,11 +203,13 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
         {
             foreach (var member in statusCodesType.GetMembers())
             {
-                if (member is IFieldSymbol field &&
-                    field.Type.SpecialType == SpecialType.System_Int32 &&
-                    field.Name.StartsWith("Status", StringComparison.Ordinal) &&
-                    field.HasConstantValue &&
-                    field.ConstantValue is int statusCode)
+                if (
+                    member is IFieldSymbol field
+                    && field.Type.SpecialType == SpecialType.System_Int32
+                    && field.Name.StartsWith("Status", StringComparison.Ordinal)
+                    && field.HasConstantValue
+                    && field.ConstantValue is int statusCode
+                )
                 {
                     statusCodeConstants[statusCode] = field.Name;
                 }
@@ -166,11 +219,24 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
         return statusCodeConstants;
     }
 
-    private static ICollection<(int statusCode, ITypeSymbol? typeSymbol)> CalculateStatusCodesToApply(in CodeActionContext context, IList<DeclaredApiResponseMetadata> declaredResponseMetadata)
+    private static ICollection<(
+        int statusCode,
+        ITypeSymbol? typeSymbol
+    )> CalculateStatusCodesToApply(
+        in CodeActionContext context,
+        IList<DeclaredApiResponseMetadata> declaredResponseMetadata
+    )
     {
-        var operation = (IMethodBodyBaseOperation)context.SemanticModel.GetOperation(context.MethodSyntax, context.CancellationToken);
+        var operation = (IMethodBodyBaseOperation)
+            context.SemanticModel.GetOperation(context.MethodSyntax, context.CancellationToken);
 
-        if (!ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(context.SymbolCache, operation, out var actualResponseMetadata))
+        if (
+            !ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(
+                context.SymbolCache,
+                operation,
+                out var actualResponseMetadata
+            )
+        )
         {
             // If we cannot parse metadata correctly, don't offer fixes.
             return Array.Empty<(int, ITypeSymbol?)>();
@@ -179,8 +245,17 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
         var statusCodes = new Dictionary<int, (int, ITypeSymbol?)>();
         foreach (var metadata in actualResponseMetadata)
         {
-            if (DeclaredApiResponseMetadata.TryGetDeclaredMetadata(declaredResponseMetadata, metadata, result: out var declaredMetadata) &&
-                SymbolEqualityComparer.Default.Equals(declaredMetadata.AttributeSource, context.Method))
+            if (
+                DeclaredApiResponseMetadata.TryGetDeclaredMetadata(
+                    declaredResponseMetadata,
+                    metadata,
+                    result: out var declaredMetadata
+                )
+                && SymbolEqualityComparer.Default.Equals(
+                    declaredMetadata.AttributeSource,
+                    context.Method
+                )
+            )
             {
                 // A ProducesResponseType attribute is declared on the method for the current status code.
                 continue;
@@ -198,66 +273,97 @@ internal sealed class AddResponseTypeAttributeCodeFixAction : CodeAction
         return statusCodes.Values;
     }
 
-    private static AttributeSyntax CreateProducesResponseTypeAttribute(in CodeActionContext context, int statusCode, out bool addUsingDirective)
+    private static AttributeSyntax CreateProducesResponseTypeAttribute(
+        in CodeActionContext context,
+        int statusCode,
+        out bool addUsingDirective
+    )
     {
         // [ProducesResponseType(StatusCodes.Status400NotFound)]
         var statusCodeSyntax = CreateStatusCodeSyntax(context, statusCode, out addUsingDirective);
 
         return SyntaxFactory.Attribute(
-            SyntaxFactory.ParseName(ApiSymbolNames.ProducesResponseTypeAttribute)
+            SyntaxFactory
+                .ParseName(ApiSymbolNames.ProducesResponseTypeAttribute)
                 .WithAdditionalAnnotations(Simplifier.Annotation),
-            SyntaxFactory.AttributeArgumentList().AddArguments(
-
-                SyntaxFactory.AttributeArgument(statusCodeSyntax)));
+            SyntaxFactory
+                .AttributeArgumentList()
+                .AddArguments(SyntaxFactory.AttributeArgument(statusCodeSyntax))
+        );
     }
 
-    private static AttributeSyntax CreateProducesResponseTypeAttribute(in CodeActionContext context, int statusCode, ITypeSymbol typeSymbol, out bool addUsingDirective)
+    private static AttributeSyntax CreateProducesResponseTypeAttribute(
+        in CodeActionContext context,
+        int statusCode,
+        ITypeSymbol typeSymbol,
+        out bool addUsingDirective
+    )
     {
         // [ProducesResponseType(typeof(ReturnType), StatusCodes.Status400NotFound)]
         var statusCodeSyntax = CreateStatusCodeSyntax(context, statusCode, out addUsingDirective);
         var responseTypeAttribute = SyntaxFactory.TypeOfExpression(
-            SyntaxFactory.ParseTypeName(typeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat))
-                .WithAdditionalAnnotations(Simplifier.Annotation));
+            SyntaxFactory
+                .ParseTypeName(typeSymbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat))
+                .WithAdditionalAnnotations(Simplifier.Annotation)
+        );
 
         return SyntaxFactory.Attribute(
-            SyntaxFactory.ParseName(ApiSymbolNames.ProducesResponseTypeAttribute)
+            SyntaxFactory
+                .ParseName(ApiSymbolNames.ProducesResponseTypeAttribute)
                 .WithAdditionalAnnotations(Simplifier.Annotation),
-            SyntaxFactory.AttributeArgumentList().AddArguments(
-                SyntaxFactory.AttributeArgument(responseTypeAttribute),
-                SyntaxFactory.AttributeArgument(statusCodeSyntax)));
+            SyntaxFactory
+                .AttributeArgumentList()
+                .AddArguments(
+                    SyntaxFactory.AttributeArgument(responseTypeAttribute),
+                    SyntaxFactory.AttributeArgument(statusCodeSyntax)
+                )
+        );
     }
 
-    private static ExpressionSyntax CreateStatusCodeSyntax(CodeActionContext context, int statusCode, out bool addUsingDirective)
+    private static ExpressionSyntax CreateStatusCodeSyntax(
+        CodeActionContext context,
+        int statusCode,
+        out bool addUsingDirective
+    )
     {
         if (context.StatusCodeConstants.TryGetValue(statusCode, out var constantName))
         {
             addUsingDirective = true;
             return SyntaxFactory.MemberAccessExpression(
                 SyntaxKind.SimpleMemberAccessExpression,
-                SyntaxFactory.ParseTypeName(ApiSymbolNames.HttpStatusCodes)
+                SyntaxFactory
+                    .ParseTypeName(ApiSymbolNames.HttpStatusCodes)
                     .WithAdditionalAnnotations(Simplifier.Annotation),
-                SyntaxFactory.IdentifierName(constantName));
+                SyntaxFactory.IdentifierName(constantName)
+            );
         }
 
         addUsingDirective = false;
-        return SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal(statusCode));
+        return SyntaxFactory.LiteralExpression(
+            SyntaxKind.NumericLiteralExpression,
+            SyntaxFactory.Literal(statusCode)
+        );
     }
 
     private static AttributeSyntax CreateProducesDefaultResponseTypeAttribute()
     {
         return SyntaxFactory.Attribute(
-            SyntaxFactory.ParseName(ApiSymbolNames.ProducesDefaultResponseTypeAttribute)
-                .WithAdditionalAnnotations(Simplifier.Annotation));
+            SyntaxFactory
+                .ParseName(ApiSymbolNames.ProducesDefaultResponseTypeAttribute)
+                .WithAdditionalAnnotations(Simplifier.Annotation)
+        );
     }
 
     private readonly struct CodeActionContext
     {
-        public CodeActionContext(SemanticModel semanticModel,
+        public CodeActionContext(
+            SemanticModel semanticModel,
             ApiControllerSymbolCache symbolCache,
             IMethodSymbol method,
             MethodDeclarationSyntax methodSyntax,
             Dictionary<int, string> statusCodeConstants,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             SemanticModel = semanticModel;
             SymbolCache = symbolCache;

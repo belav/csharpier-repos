@@ -13,9 +13,7 @@ internal sealed class tagDBPROPSET
     public Int32 cProperties;
     public Guid guidPropertySet;
 
-    internal tagDBPROPSET()
-    {
-    }
+    internal tagDBPROPSET() { }
 
     internal tagDBPROPSET(int propertyCount, Guid propertySet)
     {
@@ -27,7 +25,7 @@ internal sealed class tagDBPROPSET
 public class a
 {
     [Fact]
-    static public int TestEntryPoint()
+    public static int TestEntryPoint()
     {
         try
         {

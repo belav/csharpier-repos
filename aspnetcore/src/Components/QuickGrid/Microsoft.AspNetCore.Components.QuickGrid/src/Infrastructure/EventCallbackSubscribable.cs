@@ -25,10 +25,9 @@ internal sealed class EventCallbackSubscribable<T>
     }
 
     // Don't call this directly - it gets called by EventCallbackSubscription
-    public void Subscribe(EventCallbackSubscriber<T> owner, EventCallback<T> callback)
-        => _callbacks.Add(owner, callback);
+    public void Subscribe(EventCallbackSubscriber<T> owner, EventCallback<T> callback) =>
+        _callbacks.Add(owner, callback);
 
     // Don't call this directly - it gets called by EventCallbackSubscription
-    public void Unsubscribe(EventCallbackSubscriber<T> owner)
-        => _callbacks.Remove(owner);
+    public void Unsubscribe(EventCallbackSubscriber<T> owner) => _callbacks.Remove(owner);
 }

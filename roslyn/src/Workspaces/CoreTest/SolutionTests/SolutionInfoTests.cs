@@ -18,10 +18,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var solutionId = SolutionId.CreateNewId();
             var version = VersionStamp.Default;
-            var projectInfo = ProjectInfo.Create(ProjectId.CreateNewId(), version, "proj", "assembly", "C#");
+            var projectInfo = ProjectInfo.Create(
+                ProjectId.CreateNewId(),
+                version,
+                "proj",
+                "assembly",
+                "C#"
+            );
 
             Assert.Throws<ArgumentNullException>(() => SolutionInfo.Create(null, version));
-            Assert.Throws<ArgumentNullException>(() => SolutionInfo.Create(solutionId, version, projects: new[] { projectInfo, null }));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    SolutionInfo.Create(solutionId, version, projects: new[] { projectInfo, null })
+            );
         }
 
         [Fact]
@@ -29,7 +38,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var solutionId = SolutionId.CreateNewId();
             var version = VersionStamp.Default;
-            var projectInfo = ProjectInfo.Create(ProjectId.CreateNewId(), version, "proj", "assembly", "C#");
+            var projectInfo = ProjectInfo.Create(
+                ProjectId.CreateNewId(),
+                version,
+                "proj",
+                "assembly",
+                "C#"
+            );
 
             var info1 = SolutionInfo.Create(solutionId, version, projects: new[] { projectInfo });
             Assert.Same(projectInfo, ((ImmutableArray<ProjectInfo>)info1.Projects).Single());
@@ -40,7 +55,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var info3 = SolutionInfo.Create(solutionId, version, projects: new ProjectInfo[0]);
             Assert.True(((ImmutableArray<ProjectInfo>)info3.Projects).IsEmpty);
 
-            var info4 = SolutionInfo.Create(solutionId, version, projects: ImmutableArray<ProjectInfo>.Empty);
+            var info4 = SolutionInfo.Create(
+                solutionId,
+                version,
+                projects: ImmutableArray<ProjectInfo>.Empty
+            );
             Assert.True(((ImmutableArray<ProjectInfo>)info4.Projects).IsEmpty);
         }
 
@@ -50,7 +69,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [InlineData("path")]
         public void Create_FilePath(string path)
         {
-            var info = SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Default, filePath: path);
+            var info = SolutionInfo.Create(
+                SolutionId.CreateNewId(),
+                VersionStamp.Default,
+                filePath: path
+            );
             Assert.Equal(path, info.FilePath);
         }
     }

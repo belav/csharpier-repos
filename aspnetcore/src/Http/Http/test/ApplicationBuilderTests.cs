@@ -61,7 +61,8 @@ public class ApplicationBuilderTests : LoggedTest
                 return Task.CompletedTask;
             },
             EndpointMetadataCollection.Empty,
-            "Test endpoint");
+            "Test endpoint"
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.SetEndpoint(endpoint);
@@ -69,9 +70,9 @@ public class ApplicationBuilderTests : LoggedTest
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => app.Invoke(httpContext));
 
         var expected =
-            "The request reached the end of the pipeline without executing the endpoint: 'Test endpoint'. " +
-            "Please register the EndpointMiddleware using 'IApplicationBuilder.UseEndpoints(...)' if " +
-            "using routing.";
+            "The request reached the end of the pipeline without executing the endpoint: 'Test endpoint'. "
+            + "Please register the EndpointMiddleware using 'IApplicationBuilder.UseEndpoints(...)' if "
+            + "using routing.";
         Assert.Equal(expected, ex.Message);
         Assert.False(endpointCalled);
     }
@@ -99,7 +100,10 @@ public class ApplicationBuilderTests : LoggedTest
 
         Assert.Equal(404, httpContext.Response.StatusCode);
 
-        Assert.True(httpContext.Items.ContainsKey("__RequestUnhandled"), "Request unhandled flag should be set.");
+        Assert.True(
+            httpContext.Items.ContainsKey("__RequestUnhandled"),
+            "Request unhandled flag should be set."
+        );
     }
 
     [Fact]
@@ -110,11 +114,13 @@ public class ApplicationBuilderTests : LoggedTest
         var serviceProvider = services.BuildServiceProvider();
 
         var builder = new ApplicationBuilder(serviceProvider);
-        builder.Use((HttpContext context, RequestDelegate next) =>
-        {
-            context.Response.StatusCode = StatusCodes.Status204NoContent;
-            return Task.CompletedTask;
-        });
+        builder.Use(
+            (HttpContext context, RequestDelegate next) =>
+            {
+                context.Response.StatusCode = StatusCodes.Status204NoContent;
+                return Task.CompletedTask;
+            }
+        );
         var app = builder.Build();
 
         var httpContext = new DefaultHttpContext();
@@ -143,7 +149,8 @@ public class ApplicationBuilderTests : LoggedTest
                 return Task.CompletedTask;
             },
             EndpointMetadataCollection.Empty,
-            "Test endpoint");
+            "Test endpoint"
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.SetEndpoint(endpoint);
@@ -173,7 +180,9 @@ public class ApplicationBuilderTests : LoggedTest
             get => _statusCode;
             set
             {
-                _statusCode = HasStarted ? throw new NotSupportedException("The response has already started") : value;
+                _statusCode = HasStarted
+                    ? throw new NotSupportedException("The response has already started")
+                    : value;
             }
         }
         public string ReasonPhrase { get; set; }
@@ -182,14 +191,8 @@ public class ApplicationBuilderTests : LoggedTest
 
         public bool HasStarted { get; set; }
 
-        public void OnCompleted(Func<object, Task> callback, object state)
-        {
+        public void OnCompleted(Func<object, Task> callback, object state) { }
 
-        }
-
-        public void OnStarting(Func<object, Task> callback, object state)
-        {
-
-        }
+        public void OnStarting(Func<object, Task> callback, object state) { }
     }
 }

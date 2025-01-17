@@ -18,12 +18,13 @@ namespace Microsoft.AspNetCore.Components.Forms;
 /// <item><see cref="TimeOnly"/></item>
 /// </list>
 /// </summary>
-public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputBase<TValue>
+public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
+    : InputBase<TValue>
 {
-    private const string DateFormat = "yyyy-MM-dd";                     // Compatible with HTML 'date' inputs
-    private const string DateTimeLocalFormat = "yyyy-MM-ddTHH:mm:ss";   // Compatible with HTML 'datetime-local' inputs
-    private const string MonthFormat = "yyyy-MM";                       // Compatible with HTML 'month' inputs
-    private const string TimeFormat = "HH:mm:ss";                       // Compatible with HTML 'time' inputs
+    private const string DateFormat = "yyyy-MM-dd"; // Compatible with HTML 'date' inputs
+    private const string DateTimeLocalFormat = "yyyy-MM-ddTHH:mm:ss"; // Compatible with HTML 'datetime-local' inputs
+    private const string MonthFormat = "yyyy-MM"; // Compatible with HTML 'month' inputs
+    private const string TimeFormat = "HH:mm:ss"; // Compatible with HTML 'time' inputs
 
     private string _typeAttributeValue = default!;
     private string _format = default!;
@@ -32,12 +33,14 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     /// <summary>
     /// Gets or sets the type of HTML input to be rendered.
     /// </summary>
-    [Parameter] public InputDateType Type { get; set; } = InputDateType.Date;
+    [Parameter]
+    public InputDateType Type { get; set; } = InputDateType.Date;
 
     /// <summary>
     /// Gets or sets the error message used when displaying an a parsing error.
     /// </summary>
-    [Parameter] public string ParsingErrorMessage { get; set; } = string.Empty;
+    [Parameter]
+    public string ParsingErrorMessage { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the associated <see cref="ElementReference"/>.
@@ -45,7 +48,8 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     /// May be <see langword="null"/> if accessed before the component is rendered.
     /// </para>
     /// </summary>
-    [DisallowNull] public ElementReference? Element { get; protected set; }
+    [DisallowNull]
+    public ElementReference? Element { get; protected set; }
 
     /// <summary>
     /// Constructs an instance of <see cref="InputDate{TValue}"/>
@@ -54,10 +58,12 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
     {
         var type = Nullable.GetUnderlyingType(typeof(TValue)) ?? typeof(TValue);
 
-        if (type != typeof(DateTime) &&
-            type != typeof(DateTimeOffset) &&
-            type != typeof(DateOnly) &&
-            type != typeof(TimeOnly))
+        if (
+            type != typeof(DateTime)
+            && type != typeof(DateTimeOffset)
+            && type != typeof(DateOnly)
+            && type != typeof(TimeOnly)
+        )
         {
             throw new InvalidOperationException($"Unsupported {GetType()} type param '{type}'.");
         }
@@ -72,7 +78,9 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
             InputDateType.DateTimeLocal => ("datetime-local", DateTimeLocalFormat, "date and time"),
             InputDateType.Month => ("month", MonthFormat, "year and month"),
             InputDateType.Time => ("time", TimeFormat, "time"),
-            _ => throw new InvalidOperationException($"Unsupported {nameof(InputDateType)} '{Type}'.")
+            _ => throw new InvalidOperationException(
+                $"Unsupported {nameof(InputDateType)} '{Type}'."
+            ),
         };
 
         _parsingErrorMessage = string.IsNullOrEmpty(ParsingErrorMessage)
@@ -89,25 +97,53 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         builder.AddAttributeIfNotNullOrEmpty(3, "name", NameAttributeValue);
         builder.AddAttribute(4, "class", CssClass);
         builder.AddAttribute(5, "value", CurrentValueAsString);
-        builder.AddAttribute(6, "onchange", EventCallback.Factory.CreateBinder<string?>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+        builder.AddAttribute(
+            6,
+            "onchange",
+            EventCallback.Factory.CreateBinder<string?>(
+                this,
+                __value => CurrentValueAsString = __value,
+                CurrentValueAsString
+            )
+        );
         builder.SetUpdatesAttributeName("value");
         builder.AddElementReferenceCapture(7, __inputReference => Element = __inputReference);
         builder.CloseElement();
     }
 
     /// <inheritdoc />
-    protected override string FormatValueAsString(TValue? value)
-        => value switch
+    protected override string FormatValueAsString(TValue? value) =>
+        value switch
         {
-            DateTime dateTimeValue => BindConverter.FormatValue(dateTimeValue, _format, CultureInfo.InvariantCulture),
-            DateTimeOffset dateTimeOffsetValue => BindConverter.FormatValue(dateTimeOffsetValue, _format, CultureInfo.InvariantCulture),
-            DateOnly dateOnlyValue => BindConverter.FormatValue(dateOnlyValue, _format, CultureInfo.InvariantCulture),
-            TimeOnly timeOnlyValue => BindConverter.FormatValue(timeOnlyValue, _format, CultureInfo.InvariantCulture),
+            DateTime dateTimeValue => BindConverter.FormatValue(
+                dateTimeValue,
+                _format,
+                CultureInfo.InvariantCulture
+            ),
+            DateTimeOffset dateTimeOffsetValue => BindConverter.FormatValue(
+                dateTimeOffsetValue,
+                _format,
+                CultureInfo.InvariantCulture
+            ),
+            DateOnly dateOnlyValue => BindConverter.FormatValue(
+                dateOnlyValue,
+                _format,
+                CultureInfo.InvariantCulture
+            ),
+            TimeOnly timeOnlyValue => BindConverter.FormatValue(
+                timeOnlyValue,
+                _format,
+                CultureInfo.InvariantCulture
+            ),
             _ => string.Empty, // Handles null for Nullable<DateTime>, etc.
         };
 
     /// <inheritdoc />
-    protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out TValue result, [NotNullWhen(false)] out string? validationErrorMessage)
+    protected override bool TryParseValueFromString(
+        string? value,
+        [MaybeNullWhen(false)] out TValue result,
+        [NotNullWhen(false)] out string? validationErrorMessage
+    )
     {
         if (BindConverter.TryConvertTo(value, CultureInfo.InvariantCulture, out result))
         {
@@ -117,7 +153,11 @@ public class InputDate<[DynamicallyAccessedMembers(DynamicallyAccessedMemberType
         }
         else
         {
-            validationErrorMessage = string.Format(CultureInfo.InvariantCulture, _parsingErrorMessage, DisplayName ?? FieldIdentifier.FieldName);
+            validationErrorMessage = string.Format(
+                CultureInfo.InvariantCulture,
+                _parsingErrorMessage,
+                DisplayName ?? FieldIdentifier.FieldName
+            );
             return false;
         }
     }

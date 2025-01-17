@@ -31,12 +31,18 @@ namespace Rotate_explicit2_cs
 
             public virtual void VerifyValid()
             {
-                if (_BASEPAD_0 != 63) throw new Exception("m_BASEPAD_0");
-                if (_BASEPAD_1 != 'f') throw new Exception("m_BASEPAD_1");
-                if (_BASEPAD_2 != 64) throw new Exception("m_BASEPAD_2");
-                if (_BASEPAD_3 != "20808") throw new Exception("m_BASEPAD_3");
-                if (_BASEPAD_4 != '*') throw new Exception("m_BASEPAD_4");
-                if (_BASEPAD_5 != "11051") throw new Exception("m_BASEPAD_5");
+                if (_BASEPAD_0 != 63)
+                    throw new Exception("m_BASEPAD_0");
+                if (_BASEPAD_1 != 'f')
+                    throw new Exception("m_BASEPAD_1");
+                if (_BASEPAD_2 != 64)
+                    throw new Exception("m_BASEPAD_2");
+                if (_BASEPAD_3 != "20808")
+                    throw new Exception("m_BASEPAD_3");
+                if (_BASEPAD_4 != '*')
+                    throw new Exception("m_BASEPAD_4");
+                if (_BASEPAD_5 != "11051")
+                    throw new Exception("m_BASEPAD_5");
             }
         }
 
@@ -162,60 +168,114 @@ namespace Rotate_explicit2_cs
             public override void VerifyValid()
             {
                 base.VerifyValid();
-                if (_PREPAD_0 != 33) throw new Exception("m_PREPAD_0");
-                if (_PREPAD_1 != "26819") throw new Exception("m_PREPAD_1");
-                if (_PREPAD_2 != 'l') throw new Exception("m_PREPAD_2");
-                if (_PREPAD_3 != 220) throw new Exception("m_PREPAD_3");
-                if (_PREPAD_4 != '^') throw new Exception("m_PREPAD_4");
-                if (_PREPAD_5 != '`') throw new Exception("m_PREPAD_5");
-                if (_PREPAD_6 != 'o') throw new Exception("m_PREPAD_6");
-                if (_PREPAD_7 != 162) throw new Exception("m_PREPAD_7");
-                if (_PREPAD_8 != 171) throw new Exception("m_PREPAD_8");
-                if (_MID1PAD_0 != 98) throw new Exception("m_MID1PAD_0");
-                if (_MID1PAD_1 != 90) throw new Exception("m_MID1PAD_1");
-                if (_MID1PAD_2 != 121) throw new Exception("m_MID1PAD_2");
-                if (_MID1PAD_3 != "9109") throw new Exception("m_MID1PAD_3");
-                if (_MID1PAD_4 != "6459") throw new Exception("m_MID1PAD_4");
-                if (_MID1PAD_5 != 124) throw new Exception("m_MID1PAD_5");
-                if (_MID1PAD_6 != 74) throw new Exception("m_MID1PAD_6");
-                if (_MID1PAD_7 != 113) throw new Exception("m_MID1PAD_7");
-                if (_MID1PAD_8 != "1720") throw new Exception("m_MID1PAD_8");
-                if (_MID1PAD_9 != "15021") throw new Exception("m_MID1PAD_9");
-                if (_MID1PAD_10 != 39) throw new Exception("m_MID1PAD_10");
-                if (_MID1PAD_11 != 133) throw new Exception("m_MID1PAD_11");
-                if (_MID1PAD_12 != 'N') throw new Exception("m_MID1PAD_12");
-                if (_MID1PAD_13 != 235) throw new Exception("m_MID1PAD_13");
-                if (_MID1PAD_14 != "22271") throw new Exception("m_MID1PAD_14");
-                if (_MID1PAD_15 != 55) throw new Exception("m_MID1PAD_15");
-                if (_MID1PAD_16 != 'G') throw new Exception("m_MID1PAD_16");
-                if (_MID2PAD_0 != 173) throw new Exception("m_MID2PAD_0");
-                if (_MID2PAD_1 != '') throw new Exception("m_MID2PAD_1");
-                if (_MID2PAD_2 != 94) throw new Exception("m_MID2PAD_2");
-                if (_MID2PAD_3 != 229) throw new Exception("m_MID2PAD_3");
-                if (_MID2PAD_4 != "13459") throw new Exception("m_MID2PAD_4");
-                if (_MID2PAD_5 != "8381") throw new Exception("m_MID2PAD_5");
-                if (_MID2PAD_6 != 54) throw new Exception("m_MID2PAD_6");
-                if (_MID2PAD_7 != 215) throw new Exception("m_MID2PAD_7");
-                if (_MID2PAD_8 != "14415") throw new Exception("m_MID2PAD_8");
-                if (_MID2PAD_9 != "30092") throw new Exception("m_MID2PAD_9");
-                if (_MID2PAD_10 != 'S') throw new Exception("m_MID2PAD_10");
-                if (_MID2PAD_11 != 250) throw new Exception("m_MID2PAD_11");
-                if (_MID2PAD_12 != 247) throw new Exception("m_MID2PAD_12");
-                if (_MID2PAD_13 != "3600") throw new Exception("m_MID2PAD_13");
-                if (_MID2PAD_14 != 'k') throw new Exception("m_MID2PAD_14");
-                if (_MID2PAD_15 != 229) throw new Exception("m_MID2PAD_15");
-                if (_MID2PAD_16 != "18373") throw new Exception("m_MID2PAD_16");
-                if (_AFTERPAD_0 != "18816") throw new Exception("m_AFTERPAD_0");
-                if (_AFTERPAD_1 != 98) throw new Exception("m_AFTERPAD_1");
-                if (_AFTERPAD_2 != 25) throw new Exception("m_AFTERPAD_2");
-                if (_AFTERPAD_3 != "3802") throw new Exception("m_AFTERPAD_3");
-                if (_AFTERPAD_4 != 217) throw new Exception("m_AFTERPAD_4");
-                if (_AFTERPAD_5 != '*') throw new Exception("m_AFTERPAD_5");
-                if (_AFTERPAD_6 != 140) throw new Exception("m_AFTERPAD_6");
-                if (_AFTERPAD_7 != 74) throw new Exception("m_AFTERPAD_7");
-                if (_AFTERPAD_8 != 91) throw new Exception("m_AFTERPAD_8");
-                if (_AFTERPAD_9 != "18469") throw new Exception("m_AFTERPAD_9");
-                if (_AFTERPAD_10 != 77) throw new Exception("m_AFTERPAD_10");
+                if (_PREPAD_0 != 33)
+                    throw new Exception("m_PREPAD_0");
+                if (_PREPAD_1 != "26819")
+                    throw new Exception("m_PREPAD_1");
+                if (_PREPAD_2 != 'l')
+                    throw new Exception("m_PREPAD_2");
+                if (_PREPAD_3 != 220)
+                    throw new Exception("m_PREPAD_3");
+                if (_PREPAD_4 != '^')
+                    throw new Exception("m_PREPAD_4");
+                if (_PREPAD_5 != '`')
+                    throw new Exception("m_PREPAD_5");
+                if (_PREPAD_6 != 'o')
+                    throw new Exception("m_PREPAD_6");
+                if (_PREPAD_7 != 162)
+                    throw new Exception("m_PREPAD_7");
+                if (_PREPAD_8 != 171)
+                    throw new Exception("m_PREPAD_8");
+                if (_MID1PAD_0 != 98)
+                    throw new Exception("m_MID1PAD_0");
+                if (_MID1PAD_1 != 90)
+                    throw new Exception("m_MID1PAD_1");
+                if (_MID1PAD_2 != 121)
+                    throw new Exception("m_MID1PAD_2");
+                if (_MID1PAD_3 != "9109")
+                    throw new Exception("m_MID1PAD_3");
+                if (_MID1PAD_4 != "6459")
+                    throw new Exception("m_MID1PAD_4");
+                if (_MID1PAD_5 != 124)
+                    throw new Exception("m_MID1PAD_5");
+                if (_MID1PAD_6 != 74)
+                    throw new Exception("m_MID1PAD_6");
+                if (_MID1PAD_7 != 113)
+                    throw new Exception("m_MID1PAD_7");
+                if (_MID1PAD_8 != "1720")
+                    throw new Exception("m_MID1PAD_8");
+                if (_MID1PAD_9 != "15021")
+                    throw new Exception("m_MID1PAD_9");
+                if (_MID1PAD_10 != 39)
+                    throw new Exception("m_MID1PAD_10");
+                if (_MID1PAD_11 != 133)
+                    throw new Exception("m_MID1PAD_11");
+                if (_MID1PAD_12 != 'N')
+                    throw new Exception("m_MID1PAD_12");
+                if (_MID1PAD_13 != 235)
+                    throw new Exception("m_MID1PAD_13");
+                if (_MID1PAD_14 != "22271")
+                    throw new Exception("m_MID1PAD_14");
+                if (_MID1PAD_15 != 55)
+                    throw new Exception("m_MID1PAD_15");
+                if (_MID1PAD_16 != 'G')
+                    throw new Exception("m_MID1PAD_16");
+                if (_MID2PAD_0 != 173)
+                    throw new Exception("m_MID2PAD_0");
+                if (_MID2PAD_1 != '')
+                    throw new Exception("m_MID2PAD_1");
+                if (_MID2PAD_2 != 94)
+                    throw new Exception("m_MID2PAD_2");
+                if (_MID2PAD_3 != 229)
+                    throw new Exception("m_MID2PAD_3");
+                if (_MID2PAD_4 != "13459")
+                    throw new Exception("m_MID2PAD_4");
+                if (_MID2PAD_5 != "8381")
+                    throw new Exception("m_MID2PAD_5");
+                if (_MID2PAD_6 != 54)
+                    throw new Exception("m_MID2PAD_6");
+                if (_MID2PAD_7 != 215)
+                    throw new Exception("m_MID2PAD_7");
+                if (_MID2PAD_8 != "14415")
+                    throw new Exception("m_MID2PAD_8");
+                if (_MID2PAD_9 != "30092")
+                    throw new Exception("m_MID2PAD_9");
+                if (_MID2PAD_10 != 'S')
+                    throw new Exception("m_MID2PAD_10");
+                if (_MID2PAD_11 != 250)
+                    throw new Exception("m_MID2PAD_11");
+                if (_MID2PAD_12 != 247)
+                    throw new Exception("m_MID2PAD_12");
+                if (_MID2PAD_13 != "3600")
+                    throw new Exception("m_MID2PAD_13");
+                if (_MID2PAD_14 != 'k')
+                    throw new Exception("m_MID2PAD_14");
+                if (_MID2PAD_15 != 229)
+                    throw new Exception("m_MID2PAD_15");
+                if (_MID2PAD_16 != "18373")
+                    throw new Exception("m_MID2PAD_16");
+                if (_AFTERPAD_0 != "18816")
+                    throw new Exception("m_AFTERPAD_0");
+                if (_AFTERPAD_1 != 98)
+                    throw new Exception("m_AFTERPAD_1");
+                if (_AFTERPAD_2 != 25)
+                    throw new Exception("m_AFTERPAD_2");
+                if (_AFTERPAD_3 != "3802")
+                    throw new Exception("m_AFTERPAD_3");
+                if (_AFTERPAD_4 != 217)
+                    throw new Exception("m_AFTERPAD_4");
+                if (_AFTERPAD_5 != '*')
+                    throw new Exception("m_AFTERPAD_5");
+                if (_AFTERPAD_6 != 140)
+                    throw new Exception("m_AFTERPAD_6");
+                if (_AFTERPAD_7 != 74)
+                    throw new Exception("m_AFTERPAD_7");
+                if (_AFTERPAD_8 != 91)
+                    throw new Exception("m_AFTERPAD_8");
+                if (_AFTERPAD_9 != "18469")
+                    throw new Exception("m_AFTERPAD_9");
+                if (_AFTERPAD_10 != 77)
+                    throw new Exception("m_AFTERPAD_10");
             }
 
             public virtual Node growTree(int maxHeight, String indent)
@@ -239,7 +299,8 @@ namespace Rotate_explicit2_cs
                 VerifyValid();
 
                 //	create node objects for children
-                Node newLeftChild = null, newRightChild = null;
+                Node newLeftChild = null,
+                    newRightChild = null;
                 if (m_leftChild != null)
                 {
                     newRightChild = new Node();
@@ -259,19 +320,22 @@ namespace Rotate_explicit2_cs
                 m_leftChild = newLeftChild;
                 m_rightChild = newRightChild;
 
-                for (int I = 0; I < 32; I++) { int[] u = new int[1024]; }
+                for (int I = 0; I < 32; I++)
+                {
+                    int[] u = new int[1024];
+                }
 
                 //	verify all valid
                 if (m_rightChild != null)
                 {
-                    if (m_rightChild.m_leftChild != null &&
-                        m_rightChild.m_rightChild != null)
+                    if (m_rightChild.m_leftChild != null && m_rightChild.m_rightChild != null)
                     {
                         m_rightChild.m_leftChild.VerifyValid();
                         m_rightChild.m_rightChild.VerifyValid();
                         m_rightChild.rotateTree(
                             ref m_rightChild.m_leftChild.m_weight,
-                            ref m_rightChild.m_rightChild.m_weight);
+                            ref m_rightChild.m_rightChild.m_weight
+                        );
                     }
                     else
                     {
@@ -286,14 +350,14 @@ namespace Rotate_explicit2_cs
                 }
                 if (m_leftChild != null)
                 {
-                    if (m_leftChild.m_leftChild != null &&
-                        m_leftChild.m_rightChild != null)
+                    if (m_leftChild.m_leftChild != null && m_leftChild.m_rightChild != null)
                     {
                         m_leftChild.m_leftChild.VerifyValid();
                         m_leftChild.m_rightChild.VerifyValid();
                         m_leftChild.rotateTree(
                             ref m_leftChild.m_leftChild.m_weight,
-                            ref m_leftChild.m_rightChild.m_weight);
+                            ref m_leftChild.m_rightChild.m_weight
+                        );
                     }
                     else
                     {
@@ -315,9 +379,8 @@ namespace Rotate_explicit2_cs
             try
             {
                 Node root = new Node();
-                root.growTree(6, "").rotateTree(
-                    ref root.m_leftChild.m_weight,
-                    ref root.m_rightChild.m_weight);
+                root.growTree(6, "")
+                    .rotateTree(ref root.m_leftChild.m_weight, ref root.m_rightChild.m_weight);
             }
             catch (Exception)
             {

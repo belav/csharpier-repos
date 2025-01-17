@@ -33,14 +33,21 @@ namespace System.IO.Tests
         [InlineData(false, false)]
         public void Ctor_NewUtf8Encoding_UsesFastUtf8(bool emitIdentifier, bool throwOnInvalidBytes)
         {
-            BinaryWriter writer = new BinaryWriter(new MemoryStream(), new UTF8Encoding(emitIdentifier, throwOnInvalidBytes));
+            BinaryWriter writer = new BinaryWriter(
+                new MemoryStream(),
+                new UTF8Encoding(emitIdentifier, throwOnInvalidBytes)
+            );
             Assert.True(IsUsingFastUtf8(writer));
         }
 
         [Fact]
         public void Ctor_Utf8EncodingWithSingleCharReplacementChar_UsesFastUtf8()
         {
-            Encoding encoding = Encoding.GetEncoding("utf-8", new EncoderReplacementFallback("x"), DecoderFallback.ExceptionFallback);
+            Encoding encoding = Encoding.GetEncoding(
+                "utf-8",
+                new EncoderReplacementFallback("x"),
+                DecoderFallback.ExceptionFallback
+            );
             BinaryWriter writer = new BinaryWriter(new MemoryStream(), encoding);
             Assert.True(IsUsingFastUtf8(writer));
         }
@@ -48,7 +55,11 @@ namespace System.IO.Tests
         [Fact]
         public void Ctor_Utf8EncodingWithMultiCharReplacementChar_DoesNotUseFastUtf8()
         {
-            Encoding encoding = Encoding.GetEncoding("utf-8", new EncoderReplacementFallback("xx"), DecoderFallback.ExceptionFallback);
+            Encoding encoding = Encoding.GetEncoding(
+                "utf-8",
+                new EncoderReplacementFallback("xx"),
+                DecoderFallback.ExceptionFallback
+            );
             BinaryWriter writer = new BinaryWriter(new MemoryStream(), encoding);
             Assert.False(IsUsingFastUtf8(writer));
         }
@@ -63,7 +74,10 @@ namespace System.IO.Tests
         [Fact]
         public void Ctor_Utf8EncodingDerivedTypeWithWrongCodePage_DoesNotUseFastUtf8()
         {
-            BinaryWriter writer = new BinaryWriter(new MemoryStream(), new NotActuallyUTF8Encoding());
+            BinaryWriter writer = new BinaryWriter(
+                new MemoryStream(),
+                new NotActuallyUTF8Encoding()
+            );
             Assert.False(IsUsingFastUtf8(writer));
         }
 
@@ -95,7 +109,10 @@ namespace System.IO.Tests
         public void WriteSingleChar_NotUtf8NoArrayPoolRentalNeeded(char ch)
         {
             MemoryStream stream = new MemoryStream();
-            BinaryWriter writer = new BinaryWriter(stream, Encoding.Unicode /* little endian */);
+            BinaryWriter writer = new BinaryWriter(
+                stream,
+                Encoding.Unicode /* little endian */
+            );
 
             writer.Write(ch);
 
@@ -106,7 +123,11 @@ namespace System.IO.Tests
         public void WriteSingleChar_ArrayPoolRentalNeeded()
         {
             string replacementString = new string('v', 10_000);
-            Encoding encoding = Encoding.GetEncoding("ascii", new EncoderReplacementFallback(replacementString), DecoderFallback.ExceptionFallback);
+            Encoding encoding = Encoding.GetEncoding(
+                "ascii",
+                new EncoderReplacementFallback(replacementString),
+                DecoderFallback.ExceptionFallback
+            );
             MemoryStream stream = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(stream, encoding);
 
@@ -127,7 +148,7 @@ namespace System.IO.Tests
             MemoryStream stream = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(stream);
 
-            writer.Write(stringToWrite.ToCharArray()); // writing a char buffer doesn't emit the length upfront 
+            writer.Write(stringToWrite.ToCharArray()); // writing a char buffer doesn't emit the length upfront
             Assert.Equal(expectedBytes, stream.GetBuffer()[..expectedBytes.Length]);
         }
 
@@ -147,8 +168,17 @@ namespace System.IO.Tests
             writer.Write(stringToWrite);
             stream.Position = 0;
 
-            Assert.Equal(expectedBytes.Length /* byte count */, new BinaryReader(stream).Read7BitEncodedInt());
-            Assert.Equal(expectedBytes, stream.GetBuffer()[Get7BitEncodedIntByteLength((uint)expectedBytes.Length)..(int)stream.Length]);
+            Assert.Equal(
+                expectedBytes.Length /* byte count */
+                ,
+                new BinaryReader(stream).Read7BitEncodedInt()
+            );
+            Assert.Equal(
+                expectedBytes,
+                stream.GetBuffer()[
+                    Get7BitEncodedIntByteLength((uint)expectedBytes.Length)..(int)stream.Length
+                ]
+            );
         }
 
         [Theory]
@@ -165,8 +195,17 @@ namespace System.IO.Tests
             writer.Write(stringToWrite);
             stream.Position = 0;
 
-            Assert.Equal(expectedBytes.Length /* byte count */, new BinaryReader(stream).Read7BitEncodedInt());
-            Assert.Equal(expectedBytes, stream.GetBuffer()[Get7BitEncodedIntByteLength((uint)expectedBytes.Length)..(int)stream.Length]);
+            Assert.Equal(
+                expectedBytes.Length /* byte count */
+                ,
+                new BinaryReader(stream).Read7BitEncodedInt()
+            );
+            Assert.Equal(
+                expectedBytes,
+                stream.GetBuffer()[
+                    Get7BitEncodedIntByteLength((uint)expectedBytes.Length)..(int)stream.Length
+                ]
+            );
         }
 
         [Theory]
@@ -179,32 +218,52 @@ namespace System.IO.Tests
             byte[] expectedBytes = Encoding.Unicode.GetBytes(stringToWrite);
 
             MemoryStream stream = new MemoryStream();
-            BinaryWriter writer = new BinaryWriter(stream, Encoding.Unicode /* little endian */);
+            BinaryWriter writer = new BinaryWriter(
+                stream,
+                Encoding.Unicode /* little endian */
+            );
 
             writer.Write(stringToWrite);
             stream.Position = 0;
 
-            Assert.Equal(expectedBytes.Length /* byte count */, new BinaryReader(stream).Read7BitEncodedInt());
-            Assert.Equal(expectedBytes, stream.GetBuffer()[Get7BitEncodedIntByteLength((uint)expectedBytes.Length)..(int)stream.Length]);
+            Assert.Equal(
+                expectedBytes.Length /* byte count */
+                ,
+                new BinaryReader(stream).Read7BitEncodedInt()
+            );
+            Assert.Equal(
+                expectedBytes,
+                stream.GetBuffer()[
+                    Get7BitEncodedIntByteLength((uint)expectedBytes.Length)..(int)stream.Length
+                ]
+            );
         }
 
         private static bool IsUsingFastUtf8(BinaryWriter writer)
         {
-            return (bool)typeof(BinaryWriter).GetField("_useFastUtf8", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(writer);
+            return (bool)
+                typeof(BinaryWriter)
+                    .GetField("_useFastUtf8", BindingFlags.NonPublic | BindingFlags.Instance)
+                    .GetValue(writer);
         }
 
         private static string GenerateLargeUnicodeString(int charCount)
         {
-            return string.Create(charCount, (object)null, static (buffer, _) =>
-            {
-                for (int i = 0; i < buffer.Length; i++)
+            return string.Create(
+                charCount,
+                (object)null,
+                static (buffer, _) =>
                 {
-                    buffer[i] = (char)((i % 0xF00) + 0x100); // U+0100..U+0FFF (mix of 2-byte and 3-byte chars)
+                    for (int i = 0; i < buffer.Length; i++)
+                    {
+                        buffer[i] = (char)((i % 0xF00) + 0x100); // U+0100..U+0FFF (mix of 2-byte and 3-byte chars)
+                    }
                 }
-            });
+            );
         }
 
-        private static int Get7BitEncodedIntByteLength(uint value) => (BitOperations.Log2(value) / 7) + 1;
+        private static int Get7BitEncodedIntByteLength(uint value) =>
+            (BitOperations.Log2(value) / 7) + 1;
 
         // subclasses UTF8Encoding, but returns a non-UTF8 code page
         private class NotActuallyUTF8Encoding : UTF8Encoding
@@ -213,8 +272,6 @@ namespace System.IO.Tests
         }
 
         // subclasses UTF8Encoding, returns UTF-8 code page
-        private class MyCustomUTF8Encoding : UTF8Encoding
-        {
-        }
+        private class MyCustomUTF8Encoding : UTF8Encoding { }
     }
 }

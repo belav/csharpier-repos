@@ -29,53 +29,71 @@ internal static class WebAssemblyNetDebugProxyAppBuilderExtensions
     /// </summary>
     public static void UseWebAssemblyDebugging(this IApplicationBuilder app)
     {
-        app.Map("/_framework/debug", app =>
-        {
-            app.Run(async (context) =>
+        app.Map(
+            "/_framework/debug",
+            app =>
             {
-                var queryParams = HttpUtility.ParseQueryString(context.Request.QueryString.Value!);
-                var browserParam = queryParams.Get("browser");
-                Uri? browserUrl = null;
-                var devToolsHost = "http://localhost:9222";
-                if (browserParam != null)
-                {
-                    browserUrl = new Uri(browserParam);
-                    devToolsHost = $"http://{browserUrl.Host}:{browserUrl.Port}";
-                }
-                var isFirefox = string.IsNullOrEmpty(queryParams.Get("isFirefox")) ? false : true;
-                if (isFirefox)
-                {
-                    devToolsHost = "localhost:6000";
-                }
-                var debugProxyBaseUrl = await DebugProxyLauncher.EnsureLaunchedAndGetUrl(context.RequestServices, devToolsHost, isFirefox);
-                var requestPath = context.Request.Path.ToString();
-                if (requestPath == string.Empty)
-                {
-                    requestPath = "/";
-                }
-
-                switch (requestPath)
-                {
-                    case "/":
-                        var targetPickerUi = new TargetPickerUi(debugProxyBaseUrl, devToolsHost);
+                app.Run(
+                    async (context) =>
+                    {
+                        var queryParams = HttpUtility.ParseQueryString(
+                            context.Request.QueryString.Value!
+                        );
+                        var browserParam = queryParams.Get("browser");
+                        Uri? browserUrl = null;
+                        var devToolsHost = "http://localhost:9222";
+                        if (browserParam != null)
+                        {
+                            browserUrl = new Uri(browserParam);
+                            devToolsHost = $"http://{browserUrl.Host}:{browserUrl.Port}";
+                        }
+                        var isFirefox = string.IsNullOrEmpty(queryParams.Get("isFirefox"))
+                            ? false
+                            : true;
                         if (isFirefox)
                         {
-                            await targetPickerUi.DisplayFirefox(context);
+                            devToolsHost = "localhost:6000";
                         }
-                        else
+                        var debugProxyBaseUrl = await DebugProxyLauncher.EnsureLaunchedAndGetUrl(
+                            context.RequestServices,
+                            devToolsHost,
+                            isFirefox
+                        );
+                        var requestPath = context.Request.Path.ToString();
+                        if (requestPath == string.Empty)
                         {
-                            await targetPickerUi.Display(context);
+                            requestPath = "/";
                         }
-                        break;
-                    case "/ws-proxy":
-                        context.Response.Redirect($"{debugProxyBaseUrl}{browserUrl!.PathAndQuery}");
-                        break;
-                    default:
-                        context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                        break;
-                }
-            });
-        });
+
+                        switch (requestPath)
+                        {
+                            case "/":
+                                var targetPickerUi = new TargetPickerUi(
+                                    debugProxyBaseUrl,
+                                    devToolsHost
+                                );
+                                if (isFirefox)
+                                {
+                                    await targetPickerUi.DisplayFirefox(context);
+                                }
+                                else
+                                {
+                                    await targetPickerUi.Display(context);
+                                }
+                                break;
+                            case "/ws-proxy":
+                                context.Response.Redirect(
+                                    $"{debugProxyBaseUrl}{browserUrl!.PathAndQuery}"
+                                );
+                                break;
+                            default:
+                                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                                break;
+                        }
+                    }
+                );
+            }
+        );
     }
 }
 
@@ -85,7 +103,7 @@ internal sealed class TargetPickerUi
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         PropertyNameCaseInsensitive = true,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
     };
 
     private readonly string _browserHost;
@@ -96,7 +114,10 @@ internal sealed class TargetPickerUi
     /// </summary>
     /// <param name="debugProxyUrl">The debug proxy url.</param>
     /// <param name="devToolsHost">The dev tools host.</param>
-    public TargetPickerUi([StringSyntax(StringSyntaxAttribute.Uri)] string debugProxyUrl, string devToolsHost)
+    public TargetPickerUi(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string debugProxyUrl,
+        string devToolsHost
+    )
     {
         _debugProxyUrl = debugProxyUrl;
         _browserHost = devToolsHost;
@@ -109,15 +130,25 @@ internal sealed class TargetPickerUi
     /// <returns>The <see cref="Task"/>.</returns>
     public async Task DisplayFirefox(HttpContext context)
     {
-        static async Task SendMessageToBrowser(NetworkStream toStream, ExpandoObject args, CancellationToken token)
+        static async Task SendMessageToBrowser(
+            NetworkStream toStream,
+            ExpandoObject args,
+            CancellationToken token
+        )
         {
             var msg = JsonSerializer.Serialize(args);
             var bytes = Encoding.UTF8.GetBytes(msg);
-            var bytesWithHeader = Encoding.UTF8.GetBytes($"{bytes.Length}:").Concat(bytes).ToArray();
+            var bytesWithHeader = Encoding
+                .UTF8.GetBytes($"{bytes.Length}:")
+                .Concat(bytes)
+                .ToArray();
             await toStream.WriteAsync(bytesWithHeader, token).AsTask();
         }
 #pragma warning disable CA1835
-        static async Task<string> ReceiveMessageLoop(TcpClient browserDebugClientConnect, CancellationToken token)
+        static async Task<string> ReceiveMessageLoop(
+            TcpClient browserDebugClientConnect,
+            CancellationToken token
+        )
         {
             var toStream = browserDebugClientConnect.GetStream();
             var bytesRead = 0;
@@ -131,8 +162,10 @@ internal sealed class TargetPickerUi
 
                 if (bytesRead + 1 > _lengthBuffer.Length)
                 {
-                    throw new IOException($"Protocol error: did not get the expected length preceding a message, " +
-                                          $"after reading {bytesRead} bytes. Instead got: {Encoding.UTF8.GetString(_lengthBuffer)}");
+                    throw new IOException(
+                        $"Protocol error: did not get the expected length preceding a message, "
+                            + $"after reading {bytesRead} bytes. Instead got: {Encoding.UTF8.GetString(_lengthBuffer)}"
+                    );
                 }
 
                 int readLen = await toStream.ReadAsync(_lengthBuffer, bytesRead, 1, token);
@@ -151,12 +184,22 @@ internal sealed class TargetPickerUi
                 {
                     return "";
                 }
-                bytesRead += await toStream.ReadAsync(buffer, bytesRead, messageLen - bytesRead, token);
+                bytesRead += await toStream.ReadAsync(
+                    buffer,
+                    bytesRead,
+                    messageLen - bytesRead,
+                    token
+                );
             }
             var messageReceived = Encoding.UTF8.GetString(buffer, 0, messageLen);
             return messageReceived;
         }
-        static async Task EvaluateOnBrowser(NetworkStream toStream, string? to, string text, CancellationToken token)
+        static async Task EvaluateOnBrowser(
+            NetworkStream toStream,
+            string? to,
+            string text,
+            CancellationToken token
+        )
         {
             dynamic message = new ExpandoObject();
             dynamic options = new ExpandoObject();
@@ -185,13 +228,15 @@ internal sealed class TargetPickerUi
             catch (Exception)
             {
                 context.Response.StatusCode = 404;
-                await context.Response.WriteAsync($@"WARNING:
+                await context.Response.WriteAsync(
+                    $@"WARNING:
 Open about:config:
 - enable devtools.debugger.remote-enabled
 - enable devtools.chrome.enabled
 - disable devtools.debugger.prompt-connection
 Open firefox with remote debugging enabled on port 6000:
-firefox --start-debugger-server 6000 -new-tab about:debugging");
+firefox --start-debugger-server 6000 -new-tab about:debugging"
+                );
                 return;
             }
             var source = new CancellationTokenSource();
@@ -207,10 +252,17 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
             string? toCmd = null;
             while (browserDebugClientConnect.Connected)
             {
-                var res = System.Text.Json.JsonDocument.Parse(await ReceiveMessageLoop(browserDebugClientConnect, token)).RootElement;
+                var res = System
+                    .Text.Json.JsonDocument.Parse(
+                        await ReceiveMessageLoop(browserDebugClientConnect, token)
+                    )
+                    .RootElement;
                 var hasTabs = res.TryGetProperty("tabs", out var tabs);
                 var hasType = res.TryGetProperty("type", out var type);
-                if (hasType && type.GetString()?.Equals("tabListChanged", StringComparison.Ordinal) == true)
+                if (
+                    hasType
+                    && type.GetString()?.Equals("tabListChanged", StringComparison.Ordinal) == true
+                )
                 {
                     await SendMessageToBrowser(toStream, messageListTabs, token);
                 }
@@ -227,10 +279,21 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
                         {
                             var hasUrl = tab.TryGetProperty("url", out var urlInTab);
                             var hasActor = tab.TryGetProperty("actor", out var actorInTab);
-                            var hasBrowserId = tab.TryGetProperty("browserId", out var browserIdInTab);
+                            var hasBrowserId = tab.TryGetProperty(
+                                "browserId",
+                                out var browserIdInTab
+                            );
                             if (string.IsNullOrEmpty(consoleActorId))
                             {
-                                if (hasUrl && urlInTab.GetString()?.StartsWith("about:debugging#", StringComparison.InvariantCultureIgnoreCase) == true)
+                                if (
+                                    hasUrl
+                                    && urlInTab
+                                        .GetString()
+                                        ?.StartsWith(
+                                            "about:debugging#",
+                                            StringComparison.InvariantCultureIgnoreCase
+                                        ) == true
+                                )
                                 {
                                     foundAboutDebugging = true;
 
@@ -240,7 +303,13 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
                                         break;
                                     }
                                 }
-                                if (hasUrl && urlInTab.GetString()?.Equals(targetApplicationUrl, StringComparison.Ordinal) == true)
+                                if (
+                                    hasUrl
+                                    && urlInTab
+                                        .GetString()
+                                        ?.Equals(targetApplicationUrl, StringComparison.Ordinal)
+                                        == true
+                                )
                                 {
                                     tabToRedirect = hasBrowserId ? browserIdInTab.GetInt32() : -1;
                                     if (foundAboutDebugging)
@@ -249,7 +318,15 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
                                     }
                                 }
                             }
-                            else if (hasUrl && urlInTab.GetString()?.StartsWith("about:devtools", StringComparison.InvariantCultureIgnoreCase) == true)
+                            else if (
+                                hasUrl
+                                && urlInTab
+                                    .GetString()
+                                    ?.StartsWith(
+                                        "about:devtools",
+                                        StringComparison.InvariantCultureIgnoreCase
+                                    ) == true
+                            )
                             {
                                 return;
                             }
@@ -257,37 +334,76 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
                         if (!foundAboutDebugging)
                         {
                             context.Response.StatusCode = 404;
-                            await context.Response.WriteAsync("WARNING: Open about:debugging tab before pressing Debugging Hotkey");
+                            await context.Response.WriteAsync(
+                                "WARNING: Open about:debugging tab before pressing Debugging Hotkey"
+                            );
                             return;
                         }
                         if (string.IsNullOrEmpty(consoleActorId))
                         {
-                            await EvaluateOnBrowser(toStream, consoleActorId, $"if (AboutDebugging.store.getState().runtimes.networkRuntimes.find(element => element.id == \"{_debugProxyUrl}\").runtimeDetails !== null) {{ AboutDebugging.actions.selectPage(\"runtime\", \"{_debugProxyUrl}\"); if (AboutDebugging.store.getState().runtimes.selectedRuntimeId == \"{_debugProxyUrl}\") AboutDebugging.actions.inspectDebugTarget(\"tab\", {tabToRedirect})}};", token);
+                            await EvaluateOnBrowser(
+                                toStream,
+                                consoleActorId,
+                                $"if (AboutDebugging.store.getState().runtimes.networkRuntimes.find(element => element.id == \"{_debugProxyUrl}\").runtimeDetails !== null) {{ AboutDebugging.actions.selectPage(\"runtime\", \"{_debugProxyUrl}\"); if (AboutDebugging.store.getState().runtimes.selectedRuntimeId == \"{_debugProxyUrl}\") AboutDebugging.actions.inspectDebugTarget(\"tab\", {tabToRedirect})}};",
+                                token
+                            );
                         }
                     }
                 }
                 if (!string.IsNullOrEmpty(consoleActorId))
                 {
                     var hasInput = res.TryGetProperty("input", out var input);
-                    if (hasInput && input.GetString()?.StartsWith("AboutDebugging.actions.addNetworkLocation(", StringComparison.InvariantCultureIgnoreCase) == true)
+                    if (
+                        hasInput
+                        && input
+                            .GetString()
+                            ?.StartsWith(
+                                "AboutDebugging.actions.addNetworkLocation(",
+                                StringComparison.InvariantCultureIgnoreCase
+                            ) == true
+                    )
                     {
-                        await EvaluateOnBrowser(toStream, consoleActorId, $"if (AboutDebugging.store.getState().runtimes.networkRuntimes.find(element => element.id == \"{_debugProxyUrl}\").runtimeDetails !== null) {{ AboutDebugging.actions.selectPage(\"runtime\", \"{_debugProxyUrl}\"); if (AboutDebugging.store.getState().runtimes.selectedRuntimeId == \"{_debugProxyUrl}\") AboutDebugging.actions.inspectDebugTarget(\"tab\", {tabToRedirect})}};", token);
+                        await EvaluateOnBrowser(
+                            toStream,
+                            consoleActorId,
+                            $"if (AboutDebugging.store.getState().runtimes.networkRuntimes.find(element => element.id == \"{_debugProxyUrl}\").runtimeDetails !== null) {{ AboutDebugging.actions.selectPage(\"runtime\", \"{_debugProxyUrl}\"); if (AboutDebugging.store.getState().runtimes.selectedRuntimeId == \"{_debugProxyUrl}\") AboutDebugging.actions.inspectDebugTarget(\"tab\", {tabToRedirect})}};",
+                            token
+                        );
                     }
-                    if (hasInput && input.GetString()?.StartsWith("if (AboutDebugging.store.getState()", StringComparison.InvariantCultureIgnoreCase) == true)
+                    if (
+                        hasInput
+                        && input
+                            .GetString()
+                            ?.StartsWith(
+                                "if (AboutDebugging.store.getState()",
+                                StringComparison.InvariantCultureIgnoreCase
+                            ) == true
+                    )
                     {
-                        await EvaluateOnBrowser(toStream, consoleActorId, $"if (AboutDebugging.store.getState().runtimes.networkRuntimes.find(element => element.id == \"{_debugProxyUrl}\").runtimeDetails !== null) {{ AboutDebugging.actions.selectPage(\"runtime\", \"{_debugProxyUrl}\"); if (AboutDebugging.store.getState().runtimes.selectedRuntimeId == \"{_debugProxyUrl}\") AboutDebugging.actions.inspectDebugTarget(\"tab\", {tabToRedirect})}};", token);
+                        await EvaluateOnBrowser(
+                            toStream,
+                            consoleActorId,
+                            $"if (AboutDebugging.store.getState().runtimes.networkRuntimes.find(element => element.id == \"{_debugProxyUrl}\").runtimeDetails !== null) {{ AboutDebugging.actions.selectPage(\"runtime\", \"{_debugProxyUrl}\"); if (AboutDebugging.store.getState().runtimes.selectedRuntimeId == \"{_debugProxyUrl}\") AboutDebugging.actions.inspectDebugTarget(\"tab\", {tabToRedirect})}};",
+                            token
+                        );
                     }
                 }
                 else
                 {
                     var hasTarget = res.TryGetProperty("target", out var target);
                     JsonElement consoleActor = default;
-                    var hasConsoleActor = hasTarget && target.TryGetProperty("consoleActor", out consoleActor);
+                    var hasConsoleActor =
+                        hasTarget && target.TryGetProperty("consoleActor", out consoleActor);
                     var hasActor = res.TryGetProperty("actor", out var actor);
                     if (hasConsoleActor && !string.IsNullOrEmpty(consoleActor.GetString()))
                     {
                         consoleActorId = consoleActor.GetString();
-                        await EvaluateOnBrowser(toStream, consoleActorId, $"AboutDebugging.actions.addNetworkLocation(\"{_debugProxyUrl}\"); AboutDebugging.actions.connectRuntime(\"{_debugProxyUrl}\");", token);
+                        await EvaluateOnBrowser(
+                            toStream,
+                            consoleActorId,
+                            $"AboutDebugging.actions.addNetworkLocation(\"{_debugProxyUrl}\"); AboutDebugging.actions.connectRuntime(\"{_debugProxyUrl}\");",
+                            token
+                        );
                     }
                     else if (hasActor && !string.IsNullOrEmpty(actor.GetString()))
                     {
@@ -312,7 +428,6 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
                     }
                 }
             }
-
         }
         return;
     }
@@ -338,7 +453,8 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
         }
         catch (Exception ex)
         {
-            await context.Response.WriteAsync($@"
+            await context.Response.WriteAsync(
+                $@"
 <h1>Unable to find debuggable browser tab</h1>
 <p>
     Could not get a list of browser tabs from <code>{debuggerTabsListUrl}</code>.
@@ -356,14 +472,17 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
 <strong>This should launch a new browser window with debugging enabled..</p>
 <h2>Underlying exception:</h2>
 <pre>{ex}</pre>
-                ");
+                "
+            );
 
             return;
         }
 
         var matchingTabs = string.IsNullOrEmpty(targetApplicationUrl)
             ? availableTabs.ToList()
-            : availableTabs.Where(t => t.Url.Equals(targetApplicationUrl, StringComparison.Ordinal)).ToList();
+            : availableTabs
+                .Where(t => t.Url.Equals(targetApplicationUrl, StringComparison.Ordinal))
+                .ToList();
 
         if (matchingTabs.Count == 1)
         {
@@ -378,13 +497,18 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
             var suffix = string.IsNullOrEmpty(targetApplicationUrl)
                 ? string.Empty
                 : $" matching the URL {WebUtility.HtmlEncode(targetApplicationUrl)}";
-            await context.Response.WriteAsync($"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>");
-            await context.Response.WriteAsync("<p>Make sure your browser is displaying the target application.</p>");
+            await context.Response.WriteAsync(
+                $"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>"
+            );
+            await context.Response.WriteAsync(
+                "<p>Make sure your browser is displaying the target application.</p>"
+            );
         }
         else
         {
             await context.Response.WriteAsync("<h1>Inspectable pages</h1>");
-            await context.Response.WriteAsync(@"
+            await context.Response.WriteAsync(
+                @"
                     <style type='text/css'>
                         body {
                             font-family: Helvetica, Arial, sans-serif;
@@ -411,15 +535,17 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
                             color: black;
                         }
                     </style>
-                ");
+                "
+            );
 
             foreach (var tab in matchingTabs)
             {
                 var devToolsUrlWithProxy = GetDevToolsUrlWithProxy(tab);
                 await context.Response.WriteAsync(
                     $"<a class='inspectable-page' href='{WebUtility.HtmlEncode(devToolsUrlWithProxy)}'>"
-                    + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"
-                    + $"</a>");
+                        + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"
+                        + $"</a>"
+                );
             }
         }
     }
@@ -429,7 +555,8 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
         var underlyingV8Endpoint = new Uri(tabToDebug.WebSocketDebuggerUrl);
         var proxyEndpoint = new Uri(_debugProxyUrl);
         var devToolsUrlAbsolute = new Uri(_browserHost + tabToDebug.DevtoolsFrontendUrl);
-        var devToolsUrlWithProxy = $"{devToolsUrlAbsolute.Scheme}://{devToolsUrlAbsolute.Authority}{devToolsUrlAbsolute.AbsolutePath}?{underlyingV8Endpoint.Scheme}={proxyEndpoint.Authority}{underlyingV8Endpoint.PathAndQuery}";
+        var devToolsUrlWithProxy =
+            $"{devToolsUrlAbsolute.Scheme}://{devToolsUrlAbsolute.Authority}{devToolsUrlAbsolute.AbsolutePath}?{underlyingV8Endpoint.Scheme}={proxyEndpoint.Authority}{underlyingV8Endpoint.PathAndQuery}";
         return devToolsUrlWithProxy;
     }
 
@@ -487,8 +614,7 @@ firefox --start-debugger-server 6000 -new-tab about:debugging");
         return JsonSerializer.Deserialize<BrowserTab[]>(jsonResponse, JsonOptions)!;
     }
 
-    private sealed record BrowserTab
-    (
+    private sealed record BrowserTab(
         string Id,
         string Type,
         string Url,

@@ -5,37 +5,72 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-
 using Xunit;
 
 namespace LibraryImportGenerator.IntegrationTests
 {
     partial class NativeExportsNE
     {
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "ushort_return_as_uint", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "ushort_return_as_uint",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         public static partial uint ReturnUnicodeAsUInt(char input);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_uint", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_uint",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         public static partial char ReturnUIntAsUnicode(uint input);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_refushort", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_refushort",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         public static partial void ReturnUIntAsUnicode_Ref(uint input, ref char res);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_refushort", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_refushort",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         public static partial void ReturnUIntAsUnicode_Out(uint input, out char res);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_refushort", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_refushort",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         public static partial void ReturnUIntAsUnicode_In(uint input, in char res);
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_uint", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_uint",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         [return: MarshalAs(UnmanagedType.U2)]
-        public static partial char ReturnU2AsU2IgnoreCharSet([MarshalAs(UnmanagedType.U2)] char input);
+        public static partial char ReturnU2AsU2IgnoreCharSet(
+            [MarshalAs(UnmanagedType.U2)] char input
+        );
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "char_return_as_uint", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_return_as_uint",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         [return: MarshalAs(UnmanagedType.I2)]
-        public static partial char ReturnI2AsI2IgnoreCharSet([MarshalAs(UnmanagedType.I2)] char input);
+        public static partial char ReturnI2AsI2IgnoreCharSet(
+            [MarshalAs(UnmanagedType.I2)] char input
+        );
 
-        [LibraryImport(NativeExportsNE_Binary, EntryPoint = "char_reverse_buffer_ref", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            NativeExportsNE_Binary,
+            EntryPoint = "char_reverse_buffer_ref",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         public static partial void ReverseBuffer(ref char buffer, int len);
     }
 
@@ -95,7 +130,10 @@ namespace LibraryImportGenerator.IntegrationTests
             Array.Copy(chars, expected, chars.Length);
             Array.Reverse(expected);
 
-            NativeExportsNE.ReverseBuffer(ref MemoryMarshal.GetArrayDataReference(chars), chars.Length);
+            NativeExportsNE.ReverseBuffer(
+                ref MemoryMarshal.GetArrayDataReference(chars),
+                chars.Length
+            );
             Assert.Equal(expected, chars);
         }
     }

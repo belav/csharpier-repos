@@ -5,15 +5,18 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
 
-    [XmlRoot(MetadataStrings.MetadataExchangeStrings.Metadata, Namespace = MetadataStrings.MetadataExchangeStrings.Namespace)]
+    [XmlRoot(
+        MetadataStrings.MetadataExchangeStrings.Metadata,
+        Namespace = MetadataStrings.MetadataExchangeStrings.Namespace
+    )]
     public class MetadataSet : IXmlSerializable
     {
         Collection<MetadataSection> sections = new Collection<MetadataSection>();
@@ -21,9 +24,7 @@ namespace System.ServiceModel.Description
 
         internal ServiceMetadataExtension.WriteFilter WriteFilter;
 
-        public MetadataSet()
-        {
-        }
+        public MetadataSet() { }
 
         public MetadataSet(IEnumerable<MetadataSection> sections)
             : this()
@@ -33,7 +34,10 @@ namespace System.ServiceModel.Description
                     this.sections.Add(section);
         }
 
-        [XmlElement(MetadataStrings.MetadataExchangeStrings.MetadataSection, Namespace = MetadataStrings.MetadataExchangeStrings.Namespace)]
+        [XmlElement(
+            MetadataStrings.MetadataExchangeStrings.MetadataSection,
+            Namespace = MetadataStrings.MetadataExchangeStrings.Namespace
+        )]
         public Collection<MetadataSection> MetadataSections
         {
             get { return this.sections; }
@@ -85,7 +89,7 @@ namespace System.ServiceModel.Description
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
             WriteMetadataSet(writer, false);
-        } 
+        }
 
         void WriteMetadataSet(XmlWriter writer, bool processOuterElement)
         {
@@ -103,20 +107,19 @@ namespace System.ServiceModel.Description
 
             xs.Serialize(writer, this);
         }
-
     }
 
 #pragma warning disable
 
     /* The Following code is a generated XmlSerializer.  It was created by:
      *      (*) Removing the IXmlSerializable from MetadataSet
-     *      (*) Changing typeof(WsdlNS.ServiceDescription) and typeof(XsdNS.XmlSchema) to typeof(string) and typeof(int) on the [XmlElement] attribute on 
+     *      (*) Changing typeof(WsdlNS.ServiceDescription) and typeof(XsdNS.XmlSchema) to typeof(string) and typeof(int) on the [XmlElement] attribute on
      *          MetadataSection.Metadata
-     *      (*) running "sgen /a:System.ServiceModel.dll /t:System.ServiceModel.Description.MetadataSet /k" to generate the code 
+     *      (*) running "sgen /a:System.ServiceModel.dll /t:System.ServiceModel.Description.MetadataSet /k" to generate the code
      *      (*) Revert the above changes.
-     * 
+     *
      * and then doing the following to fix it up:
-     * 
+     *
      *      (*) Change the classes from public to internal
      *      (*) Add ProcessOuterElement to MetadataSetSerializer, XmlSerializationReaderMetadataSet, and XmlSerializationWriterMetadataSet
                        private bool processOuterElement = true;
@@ -127,106 +130,107 @@ namespace System.ServiceModel.Description
                            set { processOuterElement = value; }
                        }
      *      (*) Set XmlSerializationWriterMetadataSet.ProcessOuterElement with MetadataSetSerializer.ProcessOuterElement
-     *          in MetadataSetSerializer.Serialize 
+     *          in MetadataSetSerializer.Serialize
      *          ((XmlSerializationWriterMetadataSet)writer).ProcessOuterElement = this.processOuterElement;
-     * 
+     *
      *      (*) Set XmlSerializationReaderMetadataSet.ProcessOuterElement with MetadataSetSerializer.ProcessOuterElement
-     *          in MetadataSetSerializer.Deserialize 
+     *          in MetadataSetSerializer.Deserialize
      *          ((XmlSerializationReaderMetadataSet)reader).ProcessOuterElement = this.processOuterElement;
-     *      (*) wrap anything in XmlSerializationWriterMetadataSet.Write*_Metadata or 
+     *      (*) wrap anything in XmlSerializationWriterMetadataSet.Write*_Metadata or
      *          XmlSerializationWriterMetadataSet.Write*_MetadataSet that outputs the outer
      *          element with "if(processOuterElement) { ... }"
      *      (*) Add "!processOuterElement ||" to checks for name and namespace of the outer element
      *          in XmlSerializationReaderMetadataSet.Read*_Metadata and XmlSerializationReaderMetadataSet.Read*_MetadataSet.
      *      (*) In XmlSerializationReaderMetadataSet.Read*_MetadataSection change the if clause writing the XmlSchema from
-     *          
+     *
      *          o.@Metadata = Reader.ReadElementString();
      *          to
                 o.@Metadata = System.Xml.Schema.XmlSchema.Read(this.Reader, null);
                 if (this.Reader.NodeType == XmlNodeType.EndElement)
                     ReadEndElement();
-     * 
-     * 
+     *
+     *
      *      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSection change
      *
      *          else if (o.@Metadata is global::System.Int32) {
      *              WriteElementString(@"schema", @"http://www.w3.org/2001/XMLSchema", ((global::System.Int32)o.@Metadata));
      *          }
      *          to
-     * 
+     *
                 else if (o.@Metadata is global::System.Xml.Schema.XmlSchema)
                 {
                     ((global::System.Xml.Schema.XmlSchema)o.@Metadata).Write(this.Writer);
-                }       
-     * 
-     *      (*) In XmlSerializationReaderMetadataSet.Read*_MetadataSection change 
-     *          
+                }
+     *
+     *      (*) In XmlSerializationReaderMetadataSet.Read*_MetadataSection change
+     *
      *          o.@Metadata = Reader.ReadElementString();
      *          to
      *          o.@Metadata = System.Web.Services.Description.ServiceDescription.Read(this.Reader);
-     * 
-     * 
+     *
+     *
      *      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSection change
      *
      *          if (o.@Metadata is global::System.String) {
      *              WriteElementString(@"definitions", @"http://schemas.xmlsoap.org/wsdl/", ((global::System.String)o.@Metadata));
      *          }
      *          to
-     * 
+     *
                 if (o.@Metadata is global::System.Web.Services.Description.ServiceDescription) {
                     ((global::System.Web.Services.Description.ServiceDescription)o.@Metadata).Write(this.Writer);
-                }         
-     * 
-     *      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSet add 
+                }
+     *
+     *      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSet add
      *
                 XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
                 xmlSerializerNamespaces.Add(MetadataStrings.MetadataExchangeStrings.Prefix, MetadataStrings.MetadataExchangeStrings.Namespace);
                 WriteNamespaceDeclarations(xmlSerializerNamespaces);
-     *          
+     *
      *          immediately before 'if (needType) WriteXsiType(@"MetadataSet", @"http://schemas.xmlsoap.org/ws/2004/09/mex");'
-     * 
-     *      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSection replace  
+     *
+     *      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSection replace
      *          WriteStartElement(n, ns, o, false, null);
      *          with
-     * 
+     *
                 XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
                 xmlSerializerNamespaces.Add(string.Empty, string.Empty);
 
                 WriteStartElement(n, ns, o, true, xmlSerializerNamespaces);
-     *          
-     *      (*) In XmlSerializationWriterMetadataSet Write*_XmlSchema replace              
+     *
+     *      (*) In XmlSerializationWriterMetadataSet Write*_XmlSchema replace
      *          WriteStartElement(n, ns, o, false, o.@Namespaces);
-     *          with 
+     *          with
      *          WriteStartElement(n, ns, o, true, o.@Namespaces);
-     * 
+     *
      *       (*) Make sure you keep the #pragmas surrounding this block.
-     * 
+     *
      *      (*) Make sure to replace all exception throw with standard throw using DiagnosticUtility.ExceptionUtility.ThrowHelperError;
      *          change:
      *
      *          throw CreateUnknownTypeException(*);
      *          to
      *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownTypeException(*));
-     *          
+     *
      *          throw CreateUnknownNodeException();
      *          to
      *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownNodeException());
-     * 
+     *
      *          throw CreateInvalidAnyTypeException(elem);
      *          to
      *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateInvalidAnyTypeException(elem));
-     * 
+     *
      *          throw CreateInvalidEnumValueException(*);
      *          to
      *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateInvalidEnumValueException(*));
-     * 
+     *
      *          throw CreateUnknownConstantException(*);
      *          to
      *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownConstantException(*));
      *
      */
 
-    internal class XmlSerializationWriterMetadataSet : System.Xml.Serialization.XmlSerializationWriter
+    internal class XmlSerializationWriterMetadataSet
+        : System.Xml.Serialization.XmlSerializationWriter
     {
         bool processOuterElement = true;
         public bool ProcessOuterElement
@@ -247,28 +251,41 @@ namespace System.ServiceModel.Description
                 }
                 TopLevelElement();
             }
-            Write67_MetadataSet(@"Metadata", @"http://schemas.xmlsoap.org/ws/2004/09/mex", ((global::System.ServiceModel.Description.MetadataSet)o), true, false);
+            Write67_MetadataSet(
+                @"Metadata",
+                @"http://schemas.xmlsoap.org/ws/2004/09/mex",
+                ((global::System.ServiceModel.Description.MetadataSet)o),
+                true,
+                false
+            );
         }
 
-        void Write67_MetadataSet(string n, string ns, global::System.ServiceModel.Description.MetadataSet o, bool isNullable, bool needType)
+        void Write67_MetadataSet(
+            string n,
+            string ns,
+            global::System.ServiceModel.Description.MetadataSet o,
+            bool isNullable,
+            bool needType
+        )
         {
             if (processOuterElement)
             {
                 if ((object)o == null)
                 {
-                    if (isNullable) WriteNullTagLiteral(n, ns);
+                    if (isNullable)
+                        WriteNullTagLiteral(n, ns);
                     return;
                 }
             }
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::System.ServiceModel.Description.MetadataSet))
-                {
-                }
+                if (t == typeof(global::System.ServiceModel.Description.MetadataSet)) { }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownTypeException(o));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateUnknownTypeException(o)
+                    );
                 }
             }
             if (processOuterElement)
@@ -277,12 +294,18 @@ namespace System.ServiceModel.Description
             }
 
             XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
-            xmlSerializerNamespaces.Add(MetadataStrings.MetadataExchangeStrings.Prefix, MetadataStrings.MetadataExchangeStrings.Namespace);
+            xmlSerializerNamespaces.Add(
+                MetadataStrings.MetadataExchangeStrings.Prefix,
+                MetadataStrings.MetadataExchangeStrings.Namespace
+            );
             WriteNamespaceDeclarations(xmlSerializerNamespaces);
 
-            if (needType) WriteXsiType(@"MetadataSet", @"http://schemas.xmlsoap.org/ws/2004/09/mex");
+            if (needType)
+                WriteXsiType(@"MetadataSet", @"http://schemas.xmlsoap.org/ws/2004/09/mex");
             {
-                global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute> a = (global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute>)o.@Attributes;
+                global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute> a =
+                    (global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute>)
+                        o.@Attributes;
                 if (a != null)
                 {
                     for (int i = 0; i < ((System.Collections.ICollection)a).Count; i++)
@@ -293,12 +316,20 @@ namespace System.ServiceModel.Description
                 }
             }
             {
-                global::System.Collections.ObjectModel.Collection<global::System.ServiceModel.Description.MetadataSection> a = (global::System.Collections.ObjectModel.Collection<global::System.ServiceModel.Description.MetadataSection>)o.@MetadataSections;
+                global::System.Collections.ObjectModel.Collection<global::System.ServiceModel.Description.MetadataSection> a =
+                    (global::System.Collections.ObjectModel.Collection<global::System.ServiceModel.Description.MetadataSection>)
+                        o.@MetadataSections;
                 if (a != null)
                 {
                     for (int ia = 0; ia < ((System.Collections.ICollection)a).Count; ia++)
                     {
-                        Write66_MetadataSection(@"MetadataSection", @"http://schemas.xmlsoap.org/ws/2004/09/mex", ((global::System.ServiceModel.Description.MetadataSection)a[ia]), false, false);
+                        Write66_MetadataSection(
+                            @"MetadataSection",
+                            @"http://schemas.xmlsoap.org/ws/2004/09/mex",
+                            ((global::System.ServiceModel.Description.MetadataSection)a[ia]),
+                            false,
+                            false
+                        );
                     }
                 }
             }
@@ -308,33 +339,42 @@ namespace System.ServiceModel.Description
             }
         }
 
-        void Write66_MetadataSection(string n, string ns, global::System.ServiceModel.Description.MetadataSection o, bool isNullable, bool needType)
+        void Write66_MetadataSection(
+            string n,
+            string ns,
+            global::System.ServiceModel.Description.MetadataSection o,
+            bool isNullable,
+            bool needType
+        )
         {
             if ((object)o == null)
             {
-                if (isNullable) WriteNullTagLiteral(n, ns);
+                if (isNullable)
+                    WriteNullTagLiteral(n, ns);
                 return;
             }
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::System.ServiceModel.Description.MetadataSection))
-                {
-                }
+                if (t == typeof(global::System.ServiceModel.Description.MetadataSection)) { }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownTypeException(o));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateUnknownTypeException(o)
+                    );
                 }
             }
-
 
             XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
             xmlSerializerNamespaces.Add(string.Empty, string.Empty);
 
             WriteStartElement(n, ns, o, true, xmlSerializerNamespaces);
-            if (needType) WriteXsiType(@"MetadataSection", @"http://schemas.xmlsoap.org/ws/2004/09/mex");
+            if (needType)
+                WriteXsiType(@"MetadataSection", @"http://schemas.xmlsoap.org/ws/2004/09/mex");
             {
-                global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute> a = (global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute>)o.@Attributes;
+                global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute> a =
+                    (global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute>)
+                        o.@Attributes;
                 if (a != null)
                 {
                     for (int i = 0; i < ((System.Collections.ICollection)a).Count; i++)
@@ -349,7 +389,9 @@ namespace System.ServiceModel.Description
             {
                 if (o.@Metadata is global::System.Web.Services.Description.ServiceDescription)
                 {
-                    ((global::System.Web.Services.Description.ServiceDescription)o.@Metadata).Write(this.Writer);
+                    ((global::System.Web.Services.Description.ServiceDescription)o.@Metadata).Write(
+                        this.Writer
+                    );
                 }
                 else if (o.@Metadata is global::System.Xml.Schema.XmlSchema)
                 {
@@ -357,15 +399,35 @@ namespace System.ServiceModel.Description
                 }
                 else if (o.@Metadata is global::System.ServiceModel.Description.MetadataSet)
                 {
-                    Write67_MetadataSet(@"Metadata", @"http://schemas.xmlsoap.org/ws/2004/09/mex", ((global::System.ServiceModel.Description.MetadataSet)o.@Metadata), false, false);
+                    Write67_MetadataSet(
+                        @"Metadata",
+                        @"http://schemas.xmlsoap.org/ws/2004/09/mex",
+                        ((global::System.ServiceModel.Description.MetadataSet)o.@Metadata),
+                        false,
+                        false
+                    );
                 }
                 else if (o.@Metadata is global::System.ServiceModel.Description.MetadataLocation)
                 {
-                    Write65_MetadataLocation(@"Location", @"http://schemas.xmlsoap.org/ws/2004/09/mex", ((global::System.ServiceModel.Description.MetadataLocation)o.@Metadata), false, false);
+                    Write65_MetadataLocation(
+                        @"Location",
+                        @"http://schemas.xmlsoap.org/ws/2004/09/mex",
+                        ((global::System.ServiceModel.Description.MetadataLocation)o.@Metadata),
+                        false,
+                        false
+                    );
                 }
                 else if (o.@Metadata is global::System.ServiceModel.Description.MetadataReference)
                 {
-                    WriteSerializable((System.Xml.Serialization.IXmlSerializable)((global::System.ServiceModel.Description.MetadataReference)o.@Metadata), @"MetadataReference", @"http://schemas.xmlsoap.org/ws/2004/09/mex", false, true);
+                    WriteSerializable(
+                        (System.Xml.Serialization.IXmlSerializable)(
+                            (global::System.ServiceModel.Description.MetadataReference)o.@Metadata
+                        ),
+                        @"MetadataReference",
+                        @"http://schemas.xmlsoap.org/ws/2004/09/mex",
+                        false,
+                        true
+                    );
                 }
                 else if (o.@Metadata is System.Xml.XmlElement)
                 {
@@ -376,52 +438,63 @@ namespace System.ServiceModel.Description
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateInvalidAnyTypeException(elem));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateInvalidAnyTypeException(elem)
+                        );
                     }
                 }
                 else
                 {
                     if (o.@Metadata != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownTypeException(o.@Metadata));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateUnknownTypeException(o.@Metadata)
+                        );
                     }
                 }
             }
             WriteEndElement(o);
         }
 
-        void Write65_MetadataLocation(string n, string ns, global::System.ServiceModel.Description.MetadataLocation o, bool isNullable, bool needType)
+        void Write65_MetadataLocation(
+            string n,
+            string ns,
+            global::System.ServiceModel.Description.MetadataLocation o,
+            bool isNullable,
+            bool needType
+        )
         {
             if ((object)o == null)
             {
-                if (isNullable) WriteNullTagLiteral(n, ns);
+                if (isNullable)
+                    WriteNullTagLiteral(n, ns);
                 return;
             }
             if (!needType)
             {
                 System.Type t = o.GetType();
-                if (t == typeof(global::System.ServiceModel.Description.MetadataLocation))
-                {
-                }
+                if (t == typeof(global::System.ServiceModel.Description.MetadataLocation)) { }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownTypeException(o));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateUnknownTypeException(o)
+                    );
                 }
             }
             WriteStartElement(n, ns, o, false, null);
-            if (needType) WriteXsiType(@"MetadataLocation", @"http://schemas.xmlsoap.org/ws/2004/09/mex");
+            if (needType)
+                WriteXsiType(@"MetadataLocation", @"http://schemas.xmlsoap.org/ws/2004/09/mex");
             {
                 WriteValue(((global::System.String)o.@Location));
             }
             WriteEndElement(o);
         }
 
-        protected override void InitCallbacks()
-        {
-        }
+        protected override void InitCallbacks() { }
     }
 
-    internal class XmlSerializationReaderMetadataSet : System.Xml.Serialization.XmlSerializationReader
+    internal class XmlSerializationReaderMetadataSet
+        : System.Xml.Serialization.XmlSerializationReader
     {
         bool processOuterElement = true;
         public bool ProcessOuterElement
@@ -436,13 +509,23 @@ namespace System.ServiceModel.Description
             Reader.MoveToContent();
             if (Reader.NodeType == System.Xml.XmlNodeType.Element)
             {
-                if (!processOuterElement || (((object)Reader.LocalName == (object)id1_Metadata && (object)Reader.NamespaceURI == (object)id2_Item)))
+                if (
+                    !processOuterElement
+                    || (
+                        (
+                            (object)Reader.LocalName == (object)id1_Metadata
+                            && (object)Reader.NamespaceURI == (object)id2_Item
+                        )
+                    )
+                )
                 {
                     o = Read67_MetadataSet(true, true);
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownNodeException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateUnknownNodeException()
+                    );
                 }
             }
             else
@@ -452,30 +535,51 @@ namespace System.ServiceModel.Description
             return (object)o;
         }
 
-        global::System.ServiceModel.Description.MetadataSet Read67_MetadataSet(bool isNullable, bool checkType)
+        global::System.ServiceModel.Description.MetadataSet Read67_MetadataSet(
+            bool isNullable,
+            bool checkType
+        )
         {
             System.Xml.XmlQualifiedName xsiType = checkType ? GetXsiType() : null;
             bool isNull = false;
-            if (isNullable) isNull = ReadNull();
+            if (isNullable)
+                isNull = ReadNull();
             if (checkType)
             {
-                if (!processOuterElement || (xsiType == null || ((object)((System.Xml.XmlQualifiedName)xsiType).Name == (object)id3_MetadataSet && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace == (object)id2_Item)))
-                {
-                }
+                if (
+                    !processOuterElement
+                    || (
+                        xsiType == null
+                        || (
+                            (object)((System.Xml.XmlQualifiedName)xsiType).Name
+                                == (object)id3_MetadataSet
+                            && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
+                                == (object)id2_Item
+                        )
+                    )
+                ) { }
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
+                    );
             }
-            if (isNull) return null;
+            if (isNull)
+                return null;
             global::System.ServiceModel.Description.MetadataSet o;
             o = new global::System.ServiceModel.Description.MetadataSet();
-            global::System.Collections.ObjectModel.Collection<global::System.ServiceModel.Description.MetadataSection> a_0 = (global::System.Collections.ObjectModel.Collection<global::System.ServiceModel.Description.MetadataSection>)o.@MetadataSections;
-            global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute> a_1 = (global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute>)o.@Attributes;
+            global::System.Collections.ObjectModel.Collection<global::System.ServiceModel.Description.MetadataSection> a_0 =
+                (global::System.Collections.ObjectModel.Collection<global::System.ServiceModel.Description.MetadataSection>)
+                    o.@MetadataSections;
+            global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute> a_1 =
+                (global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute>)
+                    o.@Attributes;
             bool[] paramsRead = new bool[2];
             while (Reader.MoveToNextAttribute())
             {
                 if (!IsXmlnsAttribute(Reader.Name))
                 {
-                    System.Xml.XmlAttribute attr = (System.Xml.XmlAttribute)Document.ReadNode(Reader);
+                    System.Xml.XmlAttribute attr = (System.Xml.XmlAttribute)
+                        Document.ReadNode(Reader);
                     ParseWsdlArrayType(attr);
                     a_1.Add(attr);
                 }
@@ -490,22 +594,39 @@ namespace System.ServiceModel.Description
             Reader.MoveToContent();
             int whileIterations0 = 0;
             int readerCount0 = ReaderCount;
-            while (Reader.NodeType != System.Xml.XmlNodeType.EndElement && Reader.NodeType != System.Xml.XmlNodeType.None)
+            while (
+                Reader.NodeType != System.Xml.XmlNodeType.EndElement
+                && Reader.NodeType != System.Xml.XmlNodeType.None
+            )
             {
                 if (Reader.NodeType == System.Xml.XmlNodeType.Element)
                 {
-                    if (((object)Reader.LocalName == (object)id4_MetadataSection && (object)Reader.NamespaceURI == (object)id2_Item))
+                    if (
+                        (
+                            (object)Reader.LocalName == (object)id4_MetadataSection
+                            && (object)Reader.NamespaceURI == (object)id2_Item
+                        )
+                    )
                     {
-                        if ((object)(a_0) == null) Reader.Skip(); else a_0.Add(Read66_MetadataSection(false, true));
+                        if ((object)(a_0) == null)
+                            Reader.Skip();
+                        else
+                            a_0.Add(Read66_MetadataSection(false, true));
                     }
                     else
                     {
-                        UnknownNode((object)o, @"http://schemas.xmlsoap.org/ws/2004/09/mex:MetadataSection");
+                        UnknownNode(
+                            (object)o,
+                            @"http://schemas.xmlsoap.org/ws/2004/09/mex:MetadataSection"
+                        );
                     }
                 }
                 else
                 {
-                    UnknownNode((object)o, @"http://schemas.xmlsoap.org/ws/2004/09/mex:MetadataSection");
+                    UnknownNode(
+                        (object)o,
+                        @"http://schemas.xmlsoap.org/ws/2004/09/mex:MetadataSection"
+                    );
                 }
                 Reader.MoveToContent();
                 CheckReaderCount(ref whileIterations0, ref readerCount0);
@@ -514,39 +635,67 @@ namespace System.ServiceModel.Description
             return o;
         }
 
-        global::System.ServiceModel.Description.MetadataSection Read66_MetadataSection(bool isNullable, bool checkType)
+        global::System.ServiceModel.Description.MetadataSection Read66_MetadataSection(
+            bool isNullable,
+            bool checkType
+        )
         {
             System.Xml.XmlQualifiedName xsiType = checkType ? GetXsiType() : null;
             bool isNull = false;
-            if (isNullable) isNull = ReadNull();
-            if (checkType) 
+            if (isNullable)
+                isNull = ReadNull();
+            if (checkType)
             {
-                if (xsiType == null || ((object)((System.Xml.XmlQualifiedName)xsiType).Name == (object)id4_MetadataSection && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace == (object)id2_Item))
-                {
-                }
+                if (
+                    xsiType == null
+                    || (
+                        (object)((System.Xml.XmlQualifiedName)xsiType).Name
+                            == (object)id4_MetadataSection
+                        && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
+                            == (object)id2_Item
+                    )
+                ) { }
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
+                    );
             }
-            if (isNull) return null;
+            if (isNull)
+                return null;
             global::System.ServiceModel.Description.MetadataSection o;
             o = new global::System.ServiceModel.Description.MetadataSection();
-            global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute> a_0 = (global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute>)o.@Attributes;
+            global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute> a_0 =
+                (global::System.Collections.ObjectModel.Collection<global::System.Xml.XmlAttribute>)
+                    o.@Attributes;
             bool[] paramsRead = new bool[4];
             while (Reader.MoveToNextAttribute())
             {
-                if (!paramsRead[1] && ((object)Reader.LocalName == (object)id5_Dialect && (object)Reader.NamespaceURI == (object)id6_Item))
+                if (
+                    !paramsRead[1]
+                    && (
+                        (object)Reader.LocalName == (object)id5_Dialect
+                        && (object)Reader.NamespaceURI == (object)id6_Item
+                    )
+                )
                 {
                     o.@Dialect = Reader.Value;
                     paramsRead[1] = true;
                 }
-                else if (!paramsRead[2] && ((object)Reader.LocalName == (object)id7_Identifier && (object)Reader.NamespaceURI == (object)id6_Item))
+                else if (
+                    !paramsRead[2]
+                    && (
+                        (object)Reader.LocalName == (object)id7_Identifier
+                        && (object)Reader.NamespaceURI == (object)id6_Item
+                    )
+                )
                 {
                     o.@Identifier = Reader.Value;
                     paramsRead[2] = true;
                 }
                 else if (!IsXmlnsAttribute(Reader.Name))
                 {
-                    System.Xml.XmlAttribute attr = (System.Xml.XmlAttribute)Document.ReadNode(Reader);
+                    System.Xml.XmlAttribute attr = (System.Xml.XmlAttribute)
+                        Document.ReadNode(Reader);
                     ParseWsdlArrayType(attr);
                     a_0.Add(attr);
                 }
@@ -561,35 +710,83 @@ namespace System.ServiceModel.Description
             Reader.MoveToContent();
             int whileIterations1 = 0;
             int readerCount1 = ReaderCount;
-            while (Reader.NodeType != System.Xml.XmlNodeType.EndElement && Reader.NodeType != System.Xml.XmlNodeType.None)
+            while (
+                Reader.NodeType != System.Xml.XmlNodeType.EndElement
+                && Reader.NodeType != System.Xml.XmlNodeType.None
+            )
             {
                 if (Reader.NodeType == System.Xml.XmlNodeType.Element)
                 {
-                    if (!paramsRead[3] && ((object)Reader.LocalName == (object)id1_Metadata && (object)Reader.NamespaceURI == (object)id2_Item))
+                    if (
+                        !paramsRead[3]
+                        && (
+                            (object)Reader.LocalName == (object)id1_Metadata
+                            && (object)Reader.NamespaceURI == (object)id2_Item
+                        )
+                    )
                     {
                         o.@Metadata = Read67_MetadataSet(false, true);
                         paramsRead[3] = true;
                     }
-                    else if (!paramsRead[3] && ((object)Reader.LocalName == (object)id8_schema && (object)Reader.NamespaceURI == (object)id9_Item))
+                    else if (
+                        !paramsRead[3]
+                        && (
+                            (object)Reader.LocalName == (object)id8_schema
+                            && (object)Reader.NamespaceURI == (object)id9_Item
+                        )
+                    )
                     {
                         o.@Metadata = System.Xml.Schema.XmlSchema.Read(this.Reader, null);
                         if (this.Reader.NodeType == XmlNodeType.EndElement)
                             ReadEndElement();
                         paramsRead[3] = true;
                     }
-                    else if (!paramsRead[3] && ((object)Reader.LocalName == (object)id10_definitions && (object)Reader.NamespaceURI == (object)id11_Item))
+                    else if (
+                        !paramsRead[3]
+                        && (
+                            (object)Reader.LocalName == (object)id10_definitions
+                            && (object)Reader.NamespaceURI == (object)id11_Item
+                        )
+                    )
                     {
                         {
-                            o.@Metadata = System.Web.Services.Description.ServiceDescription.Read(this.Reader);
+                            o.@Metadata = System.Web.Services.Description.ServiceDescription.Read(
+                                this.Reader
+                            );
                         }
                         paramsRead[3] = true;
                     }
-                    else if (!paramsRead[3] && ((object)Reader.LocalName == (object)id12_MetadataReference && (object)Reader.NamespaceURI == (object)id2_Item))
+                    else if (
+                        !paramsRead[3]
+                        && (
+                            (object)Reader.LocalName == (object)id12_MetadataReference
+                            && (object)Reader.NamespaceURI == (object)id2_Item
+                        )
+                    )
                     {
-                        o.@Metadata = (global::System.ServiceModel.Description.MetadataReference)ReadSerializable((System.Xml.Serialization.IXmlSerializable)System.Activator.CreateInstance(typeof(global::System.ServiceModel.Description.MetadataReference), System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.CreateInstance | System.Reflection.BindingFlags.NonPublic, null, new object[0], null));
+                        o.@Metadata =
+                            (global::System.ServiceModel.Description.MetadataReference)ReadSerializable(
+                                (System.Xml.Serialization.IXmlSerializable)
+                                    System.Activator.CreateInstance(
+                                        typeof(global::System.ServiceModel.Description.MetadataReference),
+                                        System.Reflection.BindingFlags.Instance
+                                            | System.Reflection.BindingFlags.Public
+                                            | System.Reflection.BindingFlags.CreateInstance
+                                            | System.Reflection.BindingFlags.NonPublic,
+                                        null,
+                                        new object[0],
+                                        null
+                                    )
+                            );
                         paramsRead[3] = true;
                     }
-                    else if (!paramsRead[3] && ((object)Reader.LocalName == (object)id13_Location && (object)Reader.NamespaceURI == (object)id2_Item))
+                    else if (
+                        !paramsRead[3]
+                        && (
+                            (object)Reader.LocalName == (object)id13_Location
+                            && (object)Reader.NamespaceURI == (object)id2_Item
+                        )
+                    )
                     {
                         o.@Metadata = Read65_MetadataLocation(false, true);
                         paramsRead[3] = true;
@@ -601,7 +798,10 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    UnknownNode((object)o, @"http://schemas.xmlsoap.org/ws/2004/09/mex:Metadata, http://www.w3.org/2001/XMLSchema:schema, http://schemas.xmlsoap.org/wsdl/:definitions, http://schemas.xmlsoap.org/ws/2004/09/mex:MetadataReference, http://schemas.xmlsoap.org/ws/2004/09/mex:Location");
+                    UnknownNode(
+                        (object)o,
+                        @"http://schemas.xmlsoap.org/ws/2004/09/mex:Metadata, http://www.w3.org/2001/XMLSchema:schema, http://schemas.xmlsoap.org/wsdl/:definitions, http://schemas.xmlsoap.org/ws/2004/09/mex:MetadataReference, http://schemas.xmlsoap.org/ws/2004/09/mex:Location"
+                    );
                 }
                 Reader.MoveToContent();
                 CheckReaderCount(ref whileIterations1, ref readerCount1);
@@ -610,20 +810,33 @@ namespace System.ServiceModel.Description
             return o;
         }
 
-        global::System.ServiceModel.Description.MetadataLocation Read65_MetadataLocation(bool isNullable, bool checkType)
+        global::System.ServiceModel.Description.MetadataLocation Read65_MetadataLocation(
+            bool isNullable,
+            bool checkType
+        )
         {
             System.Xml.XmlQualifiedName xsiType = checkType ? GetXsiType() : null;
             bool isNull = false;
-            if (isNullable) isNull = ReadNull();
+            if (isNullable)
+                isNull = ReadNull();
             if (checkType)
             {
-                if (xsiType == null || ((object)((System.Xml.XmlQualifiedName)xsiType).Name == (object)id14_MetadataLocation && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace == (object)id2_Item))
-                {
-                }
+                if (
+                    xsiType == null
+                    || (
+                        (object)((System.Xml.XmlQualifiedName)xsiType).Name
+                            == (object)id14_MetadataLocation
+                        && (object)((System.Xml.XmlQualifiedName)xsiType).Namespace
+                            == (object)id2_Item
+                    )
+                ) { }
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateUnknownTypeException((System.Xml.XmlQualifiedName)xsiType)
+                    );
             }
-            if (isNull) return null;
+            if (isNull)
+                return null;
             global::System.ServiceModel.Description.MetadataLocation o;
             o = new global::System.ServiceModel.Description.MetadataLocation();
             bool[] paramsRead = new bool[1];
@@ -644,17 +857,22 @@ namespace System.ServiceModel.Description
             Reader.MoveToContent();
             int whileIterations2 = 0;
             int readerCount2 = ReaderCount;
-            while (Reader.NodeType != System.Xml.XmlNodeType.EndElement && Reader.NodeType != System.Xml.XmlNodeType.None)
+            while (
+                Reader.NodeType != System.Xml.XmlNodeType.EndElement
+                && Reader.NodeType != System.Xml.XmlNodeType.None
+            )
             {
                 string tmp = null;
                 if (Reader.NodeType == System.Xml.XmlNodeType.Element)
                 {
                     UnknownNode((object)o, @"");
                 }
-                else if (Reader.NodeType == System.Xml.XmlNodeType.Text ||
-                Reader.NodeType == System.Xml.XmlNodeType.CDATA ||
-                Reader.NodeType == System.Xml.XmlNodeType.Whitespace ||
-                Reader.NodeType == System.Xml.XmlNodeType.SignificantWhitespace)
+                else if (
+                    Reader.NodeType == System.Xml.XmlNodeType.Text
+                    || Reader.NodeType == System.Xml.XmlNodeType.CDATA
+                    || Reader.NodeType == System.Xml.XmlNodeType.Whitespace
+                    || Reader.NodeType == System.Xml.XmlNodeType.SignificantWhitespace
+                )
                 {
                     tmp = ReadString(tmp, false);
                     o.@Location = tmp;
@@ -670,9 +888,7 @@ namespace System.ServiceModel.Description
             return o;
         }
 
-        protected override void InitCallbacks()
-        {
-        }
+        protected override void InitCallbacks() { }
 
         string id60_documentation;
         string id22_targetNamespace;
@@ -834,12 +1050,16 @@ namespace System.ServiceModel.Description
             id139_XmlSchemaInclude = Reader.NameTable.Add(@"XmlSchemaInclude");
             id78_namespace = Reader.NameTable.Add(@"namespace");
             id18_attributeFormDefault = Reader.NameTable.Add(@"attributeFormDefault");
-            id100_XmlSchemaFractionDigitsFacet = Reader.NameTable.Add(@"XmlSchemaFractionDigitsFacet");
+            id100_XmlSchemaFractionDigitsFacet = Reader.NameTable.Add(
+                @"XmlSchemaFractionDigitsFacet"
+            );
             id32_attributeGroup = Reader.NameTable.Add(@"attributeGroup");
             id64_XmlSchemaDocumentation = Reader.NameTable.Add(@"XmlSchemaDocumentation");
             id93_maxLength = Reader.NameTable.Add(@"maxLength");
             id49_type = Reader.NameTable.Add(@"type");
-            id86_XmlSchemaSimpleTypeRestriction = Reader.NameTable.Add(@"XmlSchemaSimpleTypeRestriction");
+            id86_XmlSchemaSimpleTypeRestriction = Reader.NameTable.Add(
+                @"XmlSchemaSimpleTypeRestriction"
+            );
             id96_length = Reader.NameTable.Add(@"length");
             id104_XmlSchemaLengthFacet = Reader.NameTable.Add(@"XmlSchemaLengthFacet");
             id17_XmlSchema = Reader.NameTable.Add(@"XmlSchema");
@@ -966,6 +1186,7 @@ namespace System.ServiceModel.Description
         {
             return new XmlSerializationReaderMetadataSet();
         }
+
         protected override System.Xml.Serialization.XmlSerializationWriter CreateWriter()
         {
             return new XmlSerializationWriterMetadataSet();
@@ -983,26 +1204,43 @@ namespace System.ServiceModel.Description
 
         public override System.Boolean CanDeserialize(System.Xml.XmlReader xmlReader)
         {
-            return xmlReader.IsStartElement(@"Metadata", @"http://schemas.xmlsoap.org/ws/2004/09/mex");
+            return xmlReader.IsStartElement(
+                @"Metadata",
+                @"http://schemas.xmlsoap.org/ws/2004/09/mex"
+            );
         }
 
-        protected override void Serialize(object objectToSerialize, System.Xml.Serialization.XmlSerializationWriter writer)
+        protected override void Serialize(
+            object objectToSerialize,
+            System.Xml.Serialization.XmlSerializationWriter writer
+        )
         {
-            ((XmlSerializationWriterMetadataSet)writer).ProcessOuterElement = this.processOuterElement;
+            ((XmlSerializationWriterMetadataSet)writer).ProcessOuterElement =
+                this.processOuterElement;
             ((XmlSerializationWriterMetadataSet)writer).Write68_Metadata(objectToSerialize);
         }
 
-        protected override object Deserialize(System.Xml.Serialization.XmlSerializationReader reader)
+        protected override object Deserialize(
+            System.Xml.Serialization.XmlSerializationReader reader
+        )
         {
-            ((XmlSerializationReaderMetadataSet)reader).ProcessOuterElement = this.processOuterElement;
+            ((XmlSerializationReaderMetadataSet)reader).ProcessOuterElement =
+                this.processOuterElement;
             return ((XmlSerializationReaderMetadataSet)reader).Read68_Metadata();
         }
     }
 
-    internal class XmlSerializerContract : global::System.Xml.Serialization.XmlSerializerImplementation
+    internal class XmlSerializerContract
+        : global::System.Xml.Serialization.XmlSerializerImplementation
     {
-        public override global::System.Xml.Serialization.XmlSerializationReader Reader { get { return new XmlSerializationReaderMetadataSet(); } }
-        public override global::System.Xml.Serialization.XmlSerializationWriter Writer { get { return new XmlSerializationWriterMetadataSet(); } }
+        public override global::System.Xml.Serialization.XmlSerializationReader Reader
+        {
+            get { return new XmlSerializationReaderMetadataSet(); }
+        }
+        public override global::System.Xml.Serialization.XmlSerializationWriter Writer
+        {
+            get { return new XmlSerializationWriterMetadataSet(); }
+        }
         System.Collections.Hashtable readMethods = null;
         public override System.Collections.Hashtable ReadMethods
         {
@@ -1011,8 +1249,11 @@ namespace System.ServiceModel.Description
                 if (readMethods == null)
                 {
                     System.Collections.Hashtable _tmp = new System.Collections.Hashtable();
-                    _tmp[@"System.ServiceModel.Description.MetadataSet:http://schemas.xmlsoap.org/ws/2004/09/mex:Metadata:True:"] = @"Read68_Metadata";
-                    if (readMethods == null) readMethods = _tmp;
+                    _tmp[
+                        @"System.ServiceModel.Description.MetadataSet:http://schemas.xmlsoap.org/ws/2004/09/mex:Metadata:True:"
+                    ] = @"Read68_Metadata";
+                    if (readMethods == null)
+                        readMethods = _tmp;
                 }
                 return readMethods;
             }
@@ -1025,8 +1266,11 @@ namespace System.ServiceModel.Description
                 if (writeMethods == null)
                 {
                     System.Collections.Hashtable _tmp = new System.Collections.Hashtable();
-                    _tmp[@"System.ServiceModel.Description.MetadataSet:http://schemas.xmlsoap.org/ws/2004/09/mex:Metadata:True:"] = @"Write68_Metadata";
-                    if (writeMethods == null) writeMethods = _tmp;
+                    _tmp[
+                        @"System.ServiceModel.Description.MetadataSet:http://schemas.xmlsoap.org/ws/2004/09/mex:Metadata:True:"
+                    ] = @"Write68_Metadata";
+                    if (writeMethods == null)
+                        writeMethods = _tmp;
                 }
                 return writeMethods;
             }
@@ -1039,20 +1283,28 @@ namespace System.ServiceModel.Description
                 if (typedSerializers == null)
                 {
                     System.Collections.Hashtable _tmp = new System.Collections.Hashtable();
-                    _tmp.Add(@"System.ServiceModel.Description.MetadataSet:http://schemas.xmlsoap.org/ws/2004/09/mex:Metadata:True:", new MetadataSetSerializer());
-                    if (typedSerializers == null) typedSerializers = _tmp;
+                    _tmp.Add(
+                        @"System.ServiceModel.Description.MetadataSet:http://schemas.xmlsoap.org/ws/2004/09/mex:Metadata:True:",
+                        new MetadataSetSerializer()
+                    );
+                    if (typedSerializers == null)
+                        typedSerializers = _tmp;
                 }
                 return typedSerializers;
             }
         }
+
         public override System.Boolean CanSerialize(System.Type type)
         {
-            if (type == typeof(global::System.ServiceModel.Description.MetadataSet)) return true;
+            if (type == typeof(global::System.ServiceModel.Description.MetadataSet))
+                return true;
             return false;
         }
+
         public override System.Xml.Serialization.XmlSerializer GetSerializer(System.Type type)
         {
-            if (type == typeof(global::System.ServiceModel.Description.MetadataSet)) return new MetadataSetSerializer();
+            if (type == typeof(global::System.ServiceModel.Description.MetadataSet))
+                return new MetadataSetSerializer();
             return null;
         }
     }

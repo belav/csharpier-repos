@@ -20,7 +20,10 @@ namespace System.DirectoryServices.Tests
 
         [Theory]
         [InlineData(DirectorySynchronizationOptions.None)]
-        [InlineData(DirectorySynchronizationOptions.IncrementalValues | DirectorySynchronizationOptions.ObjectSecurity)]
+        [InlineData(
+            DirectorySynchronizationOptions.IncrementalValues
+                | DirectorySynchronizationOptions.ObjectSecurity
+        )]
         public void Ctor_Option(DirectorySynchronizationOptions option)
         {
             var synchronization = new DirectorySynchronization(option);
@@ -32,7 +35,7 @@ namespace System.DirectoryServices.Tests
         [Theory]
         [InlineData(null)]
         [InlineData(new byte[0])]
-        [InlineData(new byte[] { 1, 2, 3, })]
+        [InlineData(new byte[] { 1, 2, 3 })]
         public void Ctor_Cookie(byte[] cookie)
         {
             var synchronization = new DirectorySynchronization(cookie);
@@ -46,7 +49,11 @@ namespace System.DirectoryServices.Tests
         [Theory]
         [InlineData(DirectorySynchronizationOptions.None, null)]
         [InlineData(DirectorySynchronizationOptions.IncrementalValues, new byte[0])]
-        [InlineData(DirectorySynchronizationOptions.IncrementalValues | DirectorySynchronizationOptions.ObjectSecurity, new byte[] { 1, 2, 3 })]
+        [InlineData(
+            DirectorySynchronizationOptions.IncrementalValues
+                | DirectorySynchronizationOptions.ObjectSecurity,
+            new byte[] { 1, 2, 3 }
+        )]
         public void Ctor_Option_Cookie(DirectorySynchronizationOptions option, byte[] cookie)
         {
             var synchronization = new DirectorySynchronization(option, cookie);
@@ -60,16 +67,30 @@ namespace System.DirectoryServices.Tests
         [Theory]
         [InlineData((DirectorySynchronizationOptions)(-1))]
         [InlineData((DirectorySynchronizationOptions)int.MaxValue)]
-        public void Ctor_InvalidOption_ThrowsInvalidEnumArgumentException(DirectorySynchronizationOptions options)
+        public void Ctor_InvalidOption_ThrowsInvalidEnumArgumentException(
+            DirectorySynchronizationOptions options
+        )
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => new DirectorySynchronization(options));
-            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => new DirectorySynchronization(options, new byte[0]));
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "value",
+                () => new DirectorySynchronization(options)
+            );
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "value",
+                () => new DirectorySynchronization(options, new byte[0])
+            );
         }
 
         public static IEnumerable<object[]> Ctor_Synchronization_TestData()
         {
             yield return new object[] { null };
-            yield return new object[] { new DirectorySynchronization(DirectorySynchronizationOptions.ObjectSecurity, new byte[] { 1, 2, 3 }) };
+            yield return new object[]
+            {
+                new DirectorySynchronization(
+                    DirectorySynchronizationOptions.ObjectSecurity,
+                    new byte[] { 1, 2, 3 }
+                ),
+            };
         }
 
         [Theory]
@@ -77,20 +98,32 @@ namespace System.DirectoryServices.Tests
         public void Ctor_Synchronization(DirectorySynchronization otherSynchronization)
         {
             var synchronization = new DirectorySynchronization(otherSynchronization);
-            Assert.Equal(otherSynchronization?.Option ?? DirectorySynchronizationOptions.None, synchronization.Option);
+            Assert.Equal(
+                otherSynchronization?.Option ?? DirectorySynchronizationOptions.None,
+                synchronization.Option
+            );
 
-            Assert.Equal(otherSynchronization?.GetDirectorySynchronizationCookie() ?? Array.Empty<byte>(), synchronization.GetDirectorySynchronizationCookie());
+            Assert.Equal(
+                otherSynchronization?.GetDirectorySynchronizationCookie() ?? Array.Empty<byte>(),
+                synchronization.GetDirectorySynchronizationCookie()
+            );
         }
 
         [Fact]
         public void Copy_Invoke_ReturnsExpected()
         {
-            var synchronization = new DirectorySynchronization(DirectorySynchronizationOptions.ObjectSecurity, new byte[] { 1, 2, 3 });
+            var synchronization = new DirectorySynchronization(
+                DirectorySynchronizationOptions.ObjectSecurity,
+                new byte[] { 1, 2, 3 }
+            );
             DirectorySynchronization copy = synchronization.Copy();
 
             Assert.NotSame(synchronization, copy);
             Assert.Equal(DirectorySynchronizationOptions.ObjectSecurity, synchronization.Option);
-            Assert.Equal(new byte[] { 1, 2, 3 }, synchronization.GetDirectorySynchronizationCookie());
+            Assert.Equal(
+                new byte[] { 1, 2, 3 },
+                synchronization.GetDirectorySynchronizationCookie()
+            );
         }
 
         [Fact]
@@ -111,7 +144,10 @@ namespace System.DirectoryServices.Tests
             var synchronization = new DirectorySynchronization(new byte[] { 255, 255, 255 });
             synchronization.ResetDirectorySynchronizationCookie(cookie);
 
-            Assert.Equal(cookie ?? Array.Empty<byte>(), synchronization.GetDirectorySynchronizationCookie());
+            Assert.Equal(
+                cookie ?? Array.Empty<byte>(),
+                synchronization.GetDirectorySynchronizationCookie()
+            );
         }
 
         [Fact]
@@ -123,7 +159,10 @@ namespace System.DirectoryServices.Tests
             synchronization.ResetDirectorySynchronizationCookie(cookie);
             cookie[0] = 20;
 
-            Assert.Equal(new byte[] { 1, 2, 3 }, synchronization.GetDirectorySynchronizationCookie());
+            Assert.Equal(
+                new byte[] { 1, 2, 3 },
+                synchronization.GetDirectorySynchronizationCookie()
+            );
         }
     }
 }

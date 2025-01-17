@@ -28,8 +28,10 @@ namespace System.ServiceModel.Administration
             get { return ManagementExtension.isEnabled; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls critical method DiagnosticSection.UnsafeGetSection.",
-            Safe = "Doesn't leak config section instance, just returns a bool.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls critical method DiagnosticSection.UnsafeGetSection.",
+            Safe = "Doesn't leak config section instance, just returns a bool."
+        )]
         [SecuritySafeCritical]
         static bool GetIsWmiProviderEnabled()
         {
@@ -53,10 +55,7 @@ namespace System.ServiceModel.Administration
 
         internal static ICollection<ServiceHostBase> Services
         {
-            get
-            {
-                return GetServices().Keys;
-            }
+            get { return GetServices().Keys; }
         }
 
         internal static DateTime GetTimeOpened(ServiceHostBase service)
@@ -116,13 +115,22 @@ namespace System.ServiceModel.Administration
 
         static void Activate()
         {
-            WbemProvider wmi = new WbemProvider(AdministrationStrings.IndigoNamespace, AdministrationStrings.IndigoAppName);
+            WbemProvider wmi = new WbemProvider(
+                AdministrationStrings.IndigoNamespace,
+                AdministrationStrings.IndigoAppName
+            );
             wmi.Register(AdministrationStrings.AppDomainInfo, new AppDomainInstanceProvider());
             wmi.Register(AdministrationStrings.Service, new ServiceInstanceProvider());
             wmi.Register(AdministrationStrings.Contract, new ContractInstanceProvider());
             wmi.Register(AdministrationStrings.Endpoint, new EndpointInstanceProvider());
-            wmi.Register(AdministrationStrings.ServiceAppDomain, new ServiceAppDomainAssociationProvider());
-            wmi.Register(AdministrationStrings.ServiceToEndpointAssociation, new ServiceEndpointAssociationProvider());
+            wmi.Register(
+                AdministrationStrings.ServiceAppDomain,
+                new ServiceAppDomainAssociationProvider()
+            );
+            wmi.Register(
+                AdministrationStrings.ServiceToEndpointAssociation,
+                new ServiceEndpointAssociationProvider()
+            );
         }
     }
 }

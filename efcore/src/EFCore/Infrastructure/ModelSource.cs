@@ -55,7 +55,8 @@ public class ModelSource : IModelSource
     public virtual IModel GetModel(
         DbContext context,
         ModelCreationDependencies modelCreationDependencies,
-        bool designTime)
+        bool designTime
+    )
     {
         var cache = Dependencies.MemoryCache;
         var cacheKey = Dependencies.ModelCacheKeyFactory.Create(context, designTime);
@@ -67,12 +68,26 @@ public class ModelSource : IModelSource
                 if (!cache.TryGetValue(cacheKey, out model))
                 {
                     model = CreateModel(
-                        context, modelCreationDependencies.ConventionSetBuilder, modelCreationDependencies.ModelDependencies);
+                        context,
+                        modelCreationDependencies.ConventionSetBuilder,
+                        modelCreationDependencies.ModelDependencies
+                    );
 
                     model = modelCreationDependencies.ModelRuntimeInitializer.Initialize(
-                        model, designTime, modelCreationDependencies.ValidationLogger);
+                        model,
+                        designTime,
+                        modelCreationDependencies.ValidationLogger
+                    );
 
-                    model = cache.Set(cacheKey, model, new MemoryCacheEntryOptions { Size = 100, Priority = CacheItemPriority.High });
+                    model = cache.Set(
+                        cacheKey,
+                        model,
+                        new MemoryCacheEntryOptions
+                        {
+                            Size = 100,
+                            Priority = CacheItemPriority.High,
+                        }
+                    );
                 }
             }
         }
@@ -90,13 +105,15 @@ public class ModelSource : IModelSource
     protected virtual IModel CreateModel(
         DbContext context,
         IConventionSetBuilder conventionSetBuilder,
-        ModelDependencies modelDependencies)
+        ModelDependencies modelDependencies
+    )
     {
         Check.DebugAssert(context != null, "context == null");
 
         var modelConfigurationBuilder = new ModelConfigurationBuilder(
             conventionSetBuilder.CreateConventionSet(),
-            context.GetInfrastructure());
+            context.GetInfrastructure()
+        );
 
         context.ConfigureConventions(modelConfigurationBuilder);
 

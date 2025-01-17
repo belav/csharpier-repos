@@ -1,13 +1,14 @@
 // ------------------------------------------------------------------------------
 // <copyright file="FtpStatusCode.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright> 
+// </copyright>
 // ------------------------------------------------------------------------------
-// 
+//
 
-namespace System.Net {
-
-    public enum FtpStatusCode {
+namespace System.Net
+{
+    public enum FtpStatusCode
+    {
         Undefined = 0,
 
         //
@@ -22,10 +23,10 @@ namespace System.Net {
         // Success 2xx
         //
 
-        CommandOK  = 200,
+        CommandOK = 200,
         CommandExtraneous = 202,
-        DirectoryStatus = 212, 
-        FileStatus = 213, 
+        DirectoryStatus = 212,
+        FileStatus = 213,
         SystemType = 215,
         SendUserCommand = 220,
         ClosingControl = 221,
@@ -40,7 +41,7 @@ namespace System.Net {
         // Intermeidate 3xx
         //
 
-        SendPasswordCommand  = 331,
+        SendPasswordCommand = 331,
         NeedLoginAccount = 332,
         FileCommandPending = 350,
 
@@ -55,8 +56,7 @@ namespace System.Net {
         ActionNotTakenFileUnavailableOrBusy = 450,
         ActionAbortedLocalProcessingError = 451,
         ActionNotTakenInsufficientSpace = 452,
-        
-        
+
         //
         // Fatal Errors 5xx
         //
@@ -70,6 +70,6 @@ namespace System.Net {
         ActionNotTakenFileUnavailable = 550,
         ActionAbortedUnknownPageType = 551,
         FileActionAborted = 552,
-        ActionNotTakenFilenameNotAllowed = 553
+        ActionNotTakenFilenameNotAllowed = 553,
     }
 }

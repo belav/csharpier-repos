@@ -33,12 +33,12 @@ public sealed class UriHelpersTests
         {
             return new[]
             {
-                    new object[] {new Uri("http://sub.domain"), new Uri("http://domain")},
-                    new object[] {new Uri("https://sub.domain"), new Uri("https://domain")},
-                    new object[] {new Uri("https://sub.domain:5678"), new Uri("https://domain:5678")},
-                    new object[] {new Uri("http://sub.sub.domain"), new Uri("http://domain")},
-                    new object[] {new Uri("http://sub.sub.domain"), new Uri("http://sub.domain")}
-                };
+                new object[] { new Uri("http://sub.domain"), new Uri("http://domain") },
+                new object[] { new Uri("https://sub.domain"), new Uri("https://domain") },
+                new object[] { new Uri("https://sub.domain:5678"), new Uri("https://domain:5678") },
+                new object[] { new Uri("http://sub.sub.domain"), new Uri("http://domain") },
+                new object[] { new Uri("http://sub.sub.domain"), new Uri("http://sub.domain") },
+            };
         }
     }
 
@@ -48,14 +48,22 @@ public sealed class UriHelpersTests
         {
             return new[]
             {
-                    new object[] {new Uri("http://subdomain"), new Uri("http://domain")},
-                    new object[] {new Uri("https://sub.domain"), new Uri("http://domain")},
-                    new object[] {new Uri("https://sub.domain:1234"), new Uri("https://domain:5678")},
-                    new object[] {new Uri("http://domain.tld"), new Uri("http://domain")},
-                    new object[] {new Uri("http://sub.domain.tld"), new Uri("http://domain")},
-                    new object[] {new Uri("/relativeUri", UriKind.Relative), new Uri("http://domain")},
-                    new object[] {new Uri("http://sub.domain"), new Uri("/relative", UriKind.Relative)}
-                };
+                new object[] { new Uri("http://subdomain"), new Uri("http://domain") },
+                new object[] { new Uri("https://sub.domain"), new Uri("http://domain") },
+                new object[] { new Uri("https://sub.domain:1234"), new Uri("https://domain:5678") },
+                new object[] { new Uri("http://domain.tld"), new Uri("http://domain") },
+                new object[] { new Uri("http://sub.domain.tld"), new Uri("http://domain") },
+                new object[]
+                {
+                    new Uri("/relativeUri", UriKind.Relative),
+                    new Uri("http://domain"),
+                },
+                new object[]
+                {
+                    new Uri("http://sub.domain"),
+                    new Uri("/relative", UriKind.Relative),
+                },
+            };
         }
     }
 }

@@ -20,7 +20,10 @@ namespace System.Reflection.Emit.Tests
             Type[] genericTypeParams = resultType.GetGenericArguments();
 
             Assert.Equal(1, genericTypeParams.Length);
-            Assert.Equal(new Type[] { typeof(EmptyNonGenericInterface1) }, genericTypeParams[0].GetTypeInfo().GetGenericParameterConstraints());
+            Assert.Equal(
+                new Type[] { typeof(EmptyNonGenericInterface1) },
+                genericTypeParams[0].GetTypeInfo().GetGenericParameterConstraints()
+            );
         }
 
         [Fact]
@@ -35,7 +38,10 @@ namespace System.Reflection.Emit.Tests
             Type[] genericTypeParams = resultType.GetGenericArguments();
 
             Assert.Equal(1, genericTypeParams.Length);
-            Assert.Equal(new Type[0], genericTypeParams[0].GetTypeInfo().GetGenericParameterConstraints());
+            Assert.Equal(
+                new Type[0],
+                genericTypeParams[0].GetTypeInfo().GetGenericParameterConstraints()
+            );
         }
 
         [Fact]
@@ -46,12 +52,22 @@ namespace System.Reflection.Emit.Tests
             string[] typeParamNames = new string[] { "TFirst" };
             GenericTypeParameterBuilder[] typeParams = type.DefineGenericParameters(typeParamNames);
 
-            typeParams[0].SetInterfaceConstraints(new Type[] { typeof(EmptyNonGenericInterface1), typeof(EmptyNonGenericInterface2) });
+            typeParams[0]
+                .SetInterfaceConstraints(
+                    new Type[]
+                    {
+                        typeof(EmptyNonGenericInterface1),
+                        typeof(EmptyNonGenericInterface2),
+                    }
+                );
             Type resultType = type.CreateType();
             Type[] genericTypeParams = resultType.GetGenericArguments();
 
             Assert.Equal(1, genericTypeParams.Length);
-            Assert.Equal(new Type[] { typeof(EmptyNonGenericInterface1), typeof(EmptyNonGenericInterface2) }, genericTypeParams[0].GetTypeInfo().GetGenericParameterConstraints());
+            Assert.Equal(
+                new Type[] { typeof(EmptyNonGenericInterface1), typeof(EmptyNonGenericInterface2) },
+                genericTypeParams[0].GetTypeInfo().GetGenericParameterConstraints()
+            );
         }
     }
 }

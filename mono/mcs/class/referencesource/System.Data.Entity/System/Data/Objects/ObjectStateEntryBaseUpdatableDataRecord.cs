@@ -17,9 +17,13 @@ using System.Reflection;
 namespace System.Data.Objects
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public abstract class DbUpdatableDataRecord : DbDataRecord, IExtendedDataRecord
     {
         internal readonly StateManagerTypeMetadata _metadata;
@@ -27,17 +31,19 @@ namespace System.Data.Objects
         internal readonly object _userObject;
         internal DataRecordInfo _recordInfo;
 
-        internal DbUpdatableDataRecord(ObjectStateEntry cacheEntry, StateManagerTypeMetadata metadata, object userObject)
+        internal DbUpdatableDataRecord(
+            ObjectStateEntry cacheEntry,
+            StateManagerTypeMetadata metadata,
+            object userObject
+        )
         {
             _cacheEntry = cacheEntry;
             _userObject = userObject;
             _metadata = metadata;
         }
 
-        internal DbUpdatableDataRecord(ObjectStateEntry cacheEntry) :
-            this(cacheEntry, null, null)
-        {
-        }
+        internal DbUpdatableDataRecord(ObjectStateEntry cacheEntry)
+            : this(cacheEntry, null, null) { }
 
         /// <summary>
         /// Returns the number of fields in the record.
@@ -58,10 +64,7 @@ namespace System.Data.Objects
         /// <returns>The field value</returns>
         override public object this[int ordinal]
         {
-            get
-            {
-                return GetValue(ordinal);
-            }
+            get { return GetValue(ordinal); }
         }
 
         /// <summary>
@@ -71,10 +74,7 @@ namespace System.Data.Objects
         /// <returns>The field value</returns>
         override public object this[string name]
         {
-            get
-            {
-                return GetValue(GetOrdinal(name));
-            }
+            get { return GetValue(GetOrdinal(name)); }
         }
 
         /// <summary>
@@ -106,7 +106,13 @@ namespace System.Data.Objects
         /// <param name="bufferIndex">The index in the destination buffer where copying will begin</param>
         /// <param name="length">The number of bytes to copy</param>
         /// <returns>The number of bytes copied</returns>
-        override public long GetBytes(int ordinal, long dataIndex, byte[] buffer, int bufferIndex, int length)
+        override public long GetBytes(
+            int ordinal,
+            long dataIndex,
+            byte[] buffer,
+            int bufferIndex,
+            int length
+        )
         {
             byte[] tempBuffer;
             tempBuffer = (byte[])GetValue(ordinal);
@@ -123,7 +129,11 @@ namespace System.Data.Objects
             }
             else if ((bufferIndex < 0) || (bufferIndex > 0 && bufferIndex >= buffer.Length))
             {
-                throw EntityUtil.InvalidDestinationBufferIndex(buffer.Length, bufferIndex, "bufferIndex");
+                throw EntityUtil.InvalidDestinationBufferIndex(
+                    buffer.Length,
+                    bufferIndex,
+                    "bufferIndex"
+                );
             }
 
             if (0 < byteCount)
@@ -160,7 +170,13 @@ namespace System.Data.Objects
         /// <param name="bufferIndex">The index in the destination buffer where copying will begin</param>
         /// <param name="length">The number of chars to copy</param>
         /// <returns>The number of chars copied</returns>
-        override public long GetChars(int ordinal, long dataIndex, char[] buffer, int bufferIndex, int length)
+        override public long GetChars(
+            int ordinal,
+            long dataIndex,
+            char[] buffer,
+            int bufferIndex,
+            int length
+        )
         {
             char[] tempBuffer;
             tempBuffer = (char[])GetValue(ordinal);
@@ -178,7 +194,11 @@ namespace System.Data.Objects
             }
             else if ((bufferIndex < 0) || (bufferIndex > 0 && bufferIndex >= buffer.Length))
             {
-                throw EntityUtil.InvalidDestinationBufferIndex(buffer.Length, bufferIndex, "bufferIndex");
+                throw EntityUtil.InvalidDestinationBufferIndex(
+                    buffer.Length,
+                    bufferIndex,
+                    "bufferIndex"
+                );
             }
 
             if (0 < charCount)
@@ -195,6 +215,7 @@ namespace System.Data.Objects
             }
             return charCount;
         }
+
         IDataReader IDataRecord.GetData(int ordinal)
         {
             return GetDbDataReader(ordinal);
@@ -209,6 +230,7 @@ namespace System.Data.Objects
         {
             throw EntityUtil.NotSupported();
         }
+
         /// <summary>
         /// Retrieves the name of the field data type
         /// </summary>
@@ -218,6 +240,7 @@ namespace System.Data.Objects
         {
             return ((Type)GetFieldType(ordinal)).Name;
         }
+
         /// <summary>
         /// Retrieves the field value as a DateTime
         /// </summary>
@@ -227,6 +250,7 @@ namespace System.Data.Objects
         {
             return (DateTime)GetValue(ordinal);
         }
+
         /// <summary>
         /// Retrieves the field value as a decimal
         /// </summary>
@@ -236,6 +260,7 @@ namespace System.Data.Objects
         {
             return (Decimal)GetValue(ordinal);
         }
+
         /// <summary>
         /// Retrieves the field value as a double
         /// </summary>
@@ -245,6 +270,7 @@ namespace System.Data.Objects
         {
             return (double)GetValue(ordinal);
         }
+
         /// <summary>
         /// Retrieves the type of a field
         /// </summary>
@@ -255,6 +281,7 @@ namespace System.Data.Objects
             Debug.Assert(_cacheEntry != null, "CacheEntry is required.");
             return _cacheEntry.GetFieldType(ordinal, _metadata);
         }
+
         /// <summary>
         /// Retrieves the field value as a float
         /// </summary>
@@ -264,6 +291,7 @@ namespace System.Data.Objects
         {
             return (float)GetValue(ordinal);
         }
+
         /// <summary>
         /// Retrieves the field value as a Guid
         /// </summary>
@@ -273,6 +301,7 @@ namespace System.Data.Objects
         {
             return (Guid)GetValue(ordinal);
         }
+
         /// <summary>
         /// Retrieves the field value as an Int16
         /// </summary>
@@ -282,6 +311,7 @@ namespace System.Data.Objects
         {
             return (Int16)GetValue(ordinal);
         }
+
         /// <summary>
         /// Retrieves the field value as an Int32
         /// </summary>
@@ -291,6 +321,7 @@ namespace System.Data.Objects
         {
             return (Int32)GetValue(ordinal);
         }
+
         /// <summary>
         /// Retrieves the field value as an Int64
         /// </summary>
@@ -300,6 +331,7 @@ namespace System.Data.Objects
         {
             return (Int64)GetValue(ordinal);
         }
+
         /// <summary>
         /// Retrieves the name of a field
         /// </summary>
@@ -310,6 +342,7 @@ namespace System.Data.Objects
             Debug.Assert(_cacheEntry != null, "CacheEntry is required.");
             return _cacheEntry.GetCLayerName(ordinal, _metadata);
         }
+
         /// <summary>
         /// Retrieves the ordinal of a field by name
         /// </summary>
@@ -323,8 +356,9 @@ namespace System.Data.Objects
             {
                 throw EntityUtil.ArgumentOutOfRange("name");
             }
-            return  ordinal;
+            return ordinal;
         }
+
         /// <summary>
         /// Retrieves the field value as a string
         /// </summary>
@@ -334,6 +368,7 @@ namespace System.Data.Objects
         {
             return (string)GetValue(ordinal);
         }
+
         /// <summary>
         /// Retrieves the value of a field
         /// </summary>
@@ -343,6 +378,7 @@ namespace System.Data.Objects
         {
             return GetRecordValue(ordinal);
         }
+
         /// <summary>
         /// In derived classes, retrieves the record value for a field
         /// </summary>
@@ -368,6 +404,7 @@ namespace System.Data.Objects
             }
             return minValue;
         }
+
         /// <summary>
         /// Determines if a field has a DBNull value
         /// </summary>
@@ -377,6 +414,7 @@ namespace System.Data.Objects
         {
             return (GetValue(ordinal) == DBNull.Value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -386,6 +424,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -395,6 +434,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -404,6 +444,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -413,6 +454,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -422,6 +464,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -431,6 +474,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -440,6 +484,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -449,6 +494,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -458,6 +504,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -467,6 +514,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -476,6 +524,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -485,6 +534,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -494,6 +544,7 @@ namespace System.Data.Objects
         {
             SetValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets the value of a field in a record
         /// </summary>
@@ -503,6 +554,7 @@ namespace System.Data.Objects
         {
             SetRecordValue(ordinal, value);
         }
+
         /// <summary>
         /// Sets field values in a record
         /// </summary>
@@ -517,6 +569,7 @@ namespace System.Data.Objects
             }
             return minValue;
         }
+
         /// <summary>
         /// Sets a field to the DBNull value
         /// </summary>
@@ -525,6 +578,7 @@ namespace System.Data.Objects
         {
             SetRecordValue(ordinal, DBNull.Value);
         }
+
         /// <summary>
         /// Retrieve data record information
         /// </summary>
@@ -540,6 +594,7 @@ namespace System.Data.Objects
                 return _recordInfo;
             }
         }
+
         /// <summary>
         /// Retrieves a field value as a DbDataRecord
         /// </summary>
@@ -570,22 +625,24 @@ namespace System.Data.Objects
 
     public abstract class CurrentValueRecord : DbUpdatableDataRecord
     {
-        internal CurrentValueRecord(ObjectStateEntry cacheEntry, StateManagerTypeMetadata metadata, object userObject) :
-            base(cacheEntry, metadata, userObject)
-        {
-        }
+        internal CurrentValueRecord(
+            ObjectStateEntry cacheEntry,
+            StateManagerTypeMetadata metadata,
+            object userObject
+        )
+            : base(cacheEntry, metadata, userObject) { }
 
-        internal CurrentValueRecord(ObjectStateEntry cacheEntry) :
-            base(cacheEntry)
-        {
-        }
+        internal CurrentValueRecord(ObjectStateEntry cacheEntry)
+            : base(cacheEntry) { }
     }
 
     public abstract class OriginalValueRecord : DbUpdatableDataRecord
     {
-        internal OriginalValueRecord(ObjectStateEntry cacheEntry, StateManagerTypeMetadata metadata, object userObject) :
-            base(cacheEntry, metadata, userObject)
-        {
-        }
+        internal OriginalValueRecord(
+            ObjectStateEntry cacheEntry,
+            StateManagerTypeMetadata metadata,
+            object userObject
+        )
+            : base(cacheEntry, metadata, userObject) { }
     }
 }

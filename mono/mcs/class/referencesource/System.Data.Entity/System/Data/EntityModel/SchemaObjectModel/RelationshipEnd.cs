@@ -29,23 +29,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         /// <param name="relationship"></param>
         public RelationshipEnd(Relationship relationship)
-            : base(relationship)
-        {
-        }
+            : base(relationship) { }
 
         /// <summary>
         /// Type of the End
         /// </summary>
         public SchemaEntityType Type
         {
-            get
-            {
-                return _type;
-            }
-            private set
-            {
-                _type = value;
-            }
+            get { return _type; }
+            private set { _type = value; }
         }
 
         /// <summary>
@@ -53,14 +45,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         public RelationshipMultiplicity? Multiplicity
         {
-            get
-            {
-                return _multiplicity;
-            }
-            set
-            {
-                _multiplicity = value;
-            }
+            get { return _multiplicity; }
+            set { _multiplicity = value; }
         }
 
         /// <summary>
@@ -94,8 +80,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 Type = element as SchemaEntityType;
                 if (Type == null)
                 {
-                    AddError(ErrorCode.InvalidRelationshipEndType, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidRelationshipEndType(ParentElement.Name, element.FQName));
+                    AddError(
+                        ErrorCode.InvalidRelationshipEndType,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.InvalidRelationshipEndType(
+                            ParentElement.Name,
+                            element.FQName
+                        )
+                    );
                 }
             }
         }
@@ -107,20 +99,27 @@ namespace System.Data.EntityModel.SchemaObjectModel
             // Check if the end has multiplicity as many, it cannot have any operation behaviour
             if (Multiplicity == RelationshipMultiplicity.Many && Operations.Count != 0)
             {
-                AddError(ErrorCode.EndWithManyMultiplicityCannotHaveOperationsSpecified,
-                         EdmSchemaErrorSeverity.Error,
-                         System.Data.Entity.Strings.EndWithManyMultiplicityCannotHaveOperationsSpecified(this.Name, ParentElement.FQName));
-
-                
-                
+                AddError(
+                    ErrorCode.EndWithManyMultiplicityCannotHaveOperationsSpecified,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.EndWithManyMultiplicityCannotHaveOperationsSpecified(
+                        this.Name,
+                        ParentElement.FQName
+                    )
+                );
             }
-            
+
             // if there is no RefConstraint in Association and multiplicity is null
             if (this.ParentElement.Constraints.Count == 0 && Multiplicity == null)
             {
-                AddError(ErrorCode.EndWithoutMultiplicity,
-                         EdmSchemaErrorSeverity.Error,
-                         System.Data.Entity.Strings.EndWithoutMultiplicity(this.Name, ParentElement.FQName));
+                AddError(
+                    ErrorCode.EndWithoutMultiplicity,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.EndWithoutMultiplicity(
+                        this.Name,
+                        ParentElement.FQName
+                    )
+                );
             }
         }
 
@@ -135,7 +134,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             base.HandleAttributesComplete();
         }
-        
+
         protected override bool ProhibitAttribute(string namespaceUri, string localName)
         {
             if (base.ProhibitAttribute(namespaceUri, localName))
@@ -149,6 +148,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             }
             return false;
         }
+
         protected override bool HandleAttribute(XmlReader reader)
         {
             if (base.HandleAttribute(reader))
@@ -213,7 +213,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
             RelationshipMultiplicity multiplicity;
             if (!TryParseMultiplicity(reader.Value, out multiplicity))
             {
-                AddError(ErrorCode.InvalidMultiplicity, EdmSchemaErrorSeverity.Error, reader, System.Data.Entity.Strings.InvalidRelationshipEndMultiplicity(ParentElement.Name, reader.Value));
+                AddError(
+                    ErrorCode.InvalidMultiplicity,
+                    EdmSchemaErrorSeverity.Error,
+                    reader,
+                    System.Data.Entity.Strings.InvalidRelationshipEndMultiplicity(
+                        ParentElement.Name,
+                        reader.Value
+                    )
+                );
             }
             _multiplicity = multiplicity;
         }
@@ -239,7 +247,12 @@ namespace System.Data.EntityModel.SchemaObjectModel
             foreach (OnOperation other in Operations)
             {
                 if (other.Operation == operation)
-                    AddError(ErrorCode.InvalidOperation, EdmSchemaErrorSeverity.Error, reader, System.Data.Entity.Strings.DuplicationOperation(reader.Name));
+                    AddError(
+                        ErrorCode.InvalidOperation,
+                        EdmSchemaErrorSeverity.Error,
+                        reader,
+                        System.Data.Entity.Strings.DuplicationOperation(reader.Name)
+                    );
             }
 
             OnOperation onOperation = new OnOperation(this, operation);
@@ -247,17 +260,12 @@ namespace System.Data.EntityModel.SchemaObjectModel
             _operations.Add(onOperation);
         }
 
-
-
         /// <summary>
         /// The parent element as an IRelationship
         /// </summary>
         internal new IRelationship ParentElement
         {
-            get
-            {
-                return (IRelationship)(base.ParentElement);
-            }
+            get { return (IRelationship)(base.ParentElement); }
         }
 
         /// <summary>
@@ -266,7 +274,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// <param name="value">string containing Multiplicity definition</param>
         /// <param name="multiplicity">new multiplicity object (null if there were errors)</param>
         /// <returns>try if the string was parsable, false otherwise</returns>
-        private static bool TryParseMultiplicity(string value, out RelationshipMultiplicity multiplicity)
+        private static bool TryParseMultiplicity(
+            string value,
+            out RelationshipMultiplicity multiplicity
+        )
         {
             switch (value)
             {
@@ -280,7 +291,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     multiplicity = RelationshipMultiplicity.Many;
                     return true;
                 default:
-                    multiplicity = (RelationshipMultiplicity)(- 1);
+                    multiplicity = (RelationshipMultiplicity)(-1);
                     return false;
             }
         }

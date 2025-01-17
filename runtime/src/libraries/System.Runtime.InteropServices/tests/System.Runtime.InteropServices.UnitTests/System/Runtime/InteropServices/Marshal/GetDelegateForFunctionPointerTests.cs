@@ -19,7 +19,10 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(typeof(OtherNonGenericDelegate))]
         public void GetDelegateForFunctionPointer_NonGeneric_ReturnsExpected(Type t)
         {
-            MethodInfo targetMethod = typeof(GetDelegateForFunctionPointerTests).GetMethod(nameof(Method), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo targetMethod = typeof(GetDelegateForFunctionPointerTests).GetMethod(
+                nameof(Method),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Delegate d = targetMethod.CreateDelegate(typeof(NonGenericDelegate));
             IntPtr ptr = Marshal.GetFunctionPointerForDelegate(d);
 
@@ -28,21 +31,56 @@ namespace System.Runtime.InteropServices.Tests
             VerifyDelegate(functionDelegate, targetMethod);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void GetDelegateForFunctionPointer_CollectibleType_ReturnsExpected()
         {
-            MethodInfo targetMethod = typeof(GetDelegateForFunctionPointerTests).GetMethod(nameof(Method), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo targetMethod = typeof(GetDelegateForFunctionPointerTests).GetMethod(
+                nameof(Method),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Delegate d = targetMethod.CreateDelegate(typeof(NonGenericDelegate));
             IntPtr ptr = Marshal.GetFunctionPointerForDelegate(d);
 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
-            TypeBuilder typeBuilder = moduleBuilder.DefineType("Type", TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.AnsiClass | TypeAttributes.AutoClass, typeof(MulticastDelegate));
-            ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(MethodAttributes.RTSpecialName | MethodAttributes.HideBySig | MethodAttributes.Public, CallingConventions.Standard, new Type[] { typeof(object), typeof(IntPtr) });
-            constructorBuilder.SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
+            TypeBuilder typeBuilder = moduleBuilder.DefineType(
+                "Type",
+                TypeAttributes.Class
+                    | TypeAttributes.Public
+                    | TypeAttributes.Sealed
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.AutoClass,
+                typeof(MulticastDelegate)
+            );
+            ConstructorBuilder constructorBuilder = typeBuilder.DefineConstructor(
+                MethodAttributes.RTSpecialName
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[] { typeof(object), typeof(IntPtr) }
+            );
+            constructorBuilder.SetImplementationFlags(
+                MethodImplAttributes.Runtime | MethodImplAttributes.Managed
+            );
 
-            MethodBuilder methodBuilder = typeBuilder.DefineMethod("Invoke", MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual, targetMethod.ReturnType, targetMethod.GetParameters().Select(p => p.ParameterType).ToArray());
-            methodBuilder.SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
+            MethodBuilder methodBuilder = typeBuilder.DefineMethod(
+                "Invoke",
+                MethodAttributes.Public
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Virtual,
+                targetMethod.ReturnType,
+                targetMethod.GetParameters().Select(p => p.ParameterType).ToArray()
+            );
+            methodBuilder.SetImplementationFlags(
+                MethodImplAttributes.Runtime | MethodImplAttributes.Managed
+            );
 
             Type type = typeBuilder.CreateType();
 
@@ -54,11 +92,16 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoAOT))]
         public void GetDelegateForFunctionPointer_Generic_ReturnsExpected()
         {
-            MethodInfo targetMethod = typeof(GetDelegateForFunctionPointerTests).GetMethod(nameof(Method), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo targetMethod = typeof(GetDelegateForFunctionPointerTests).GetMethod(
+                nameof(Method),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Delegate d = targetMethod.CreateDelegate(typeof(NonGenericDelegate));
             IntPtr ptr = Marshal.GetFunctionPointerForDelegate(d);
 
-            Delegate functionDelegate = Marshal.GetDelegateForFunctionPointer<NonGenericDelegate>(ptr);
+            Delegate functionDelegate = Marshal.GetDelegateForFunctionPointer<NonGenericDelegate>(
+                ptr
+            );
             GC.KeepAlive(d);
             VerifyDelegate(functionDelegate, targetMethod);
         }
@@ -66,11 +109,16 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoAOT))]
         public void GetDelegateForFunctionPointer_GenericInvalidType_ReturnsExpected()
         {
-            MethodInfo targetMethod = typeof(GetDelegateForFunctionPointerTests).GetMethod(nameof(Method), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo targetMethod = typeof(GetDelegateForFunctionPointerTests).GetMethod(
+                nameof(Method),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Delegate d = targetMethod.CreateDelegate(typeof(NonGenericDelegate));
             IntPtr ptr = Marshal.GetFunctionPointerForDelegate(d);
 
-            Delegate functionDelegate = Marshal.GetDelegateForFunctionPointer<MulticastDelegate>(ptr);
+            Delegate functionDelegate = Marshal.GetDelegateForFunctionPointer<MulticastDelegate>(
+                ptr
+            );
             GC.KeepAlive(d);
             VerifyDelegate(functionDelegate, targetMethod);
         }
@@ -80,8 +128,14 @@ namespace System.Runtime.InteropServices.Tests
         public void GetDelegateForFunctionPointer_MulticastDelegate_ThrowsMustBeDelegate()
         {
             IntPtr ptr = Marshal.AllocHGlobal(16);
-            AssertExtensions.Throws<ArgumentException>("t", () => Marshal.GetDelegateForFunctionPointer(ptr, typeof(MulticastDelegate)));
-            AssertExtensions.Throws<ArgumentException>("t", () => Marshal.GetDelegateForFunctionPointer<MulticastDelegate>(ptr));
+            AssertExtensions.Throws<ArgumentException>(
+                "t",
+                () => Marshal.GetDelegateForFunctionPointer(ptr, typeof(MulticastDelegate))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "t",
+                () => Marshal.GetDelegateForFunctionPointer<MulticastDelegate>(ptr)
+            );
             Marshal.FreeHGlobal(ptr);
         }
 
@@ -95,14 +149,23 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GetDelegateForFunctionPointer_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.GetDelegateForFunctionPointer(IntPtr.Zero, typeof(NonGenericDelegate)));
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.GetDelegateForFunctionPointer<string>(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () => Marshal.GetDelegateForFunctionPointer(IntPtr.Zero, typeof(NonGenericDelegate))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () => Marshal.GetDelegateForFunctionPointer<string>(IntPtr.Zero)
+            );
         }
 
         [Fact]
         public void GetDelegateForFunctionPointer_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("t", () => Marshal.GetDelegateForFunctionPointer((IntPtr)1, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "t",
+                () => Marshal.GetDelegateForFunctionPointer((IntPtr)1, null)
+            );
         }
 
         public static IEnumerable<object[]> GetDelegateForFunctionPointer_InvalidType_TestData()
@@ -120,11 +183,17 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(IGenericInterface<>) };
             yield return new object[] { typeof(IGenericInterface<string>) };
 
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
+            };
 
             if (PlatformDetection.IsReflectionEmitSupported)
             {
-                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("Assembly"),
+                    AssemblyBuilderAccess.Run
+                );
                 ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
                 TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
                 yield return new object[] { typeBuilder };
@@ -139,17 +208,25 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(GetDelegateForFunctionPointer_InvalidType_TestData))]
         public void GetDelegateForFunctionPointer_InvalidType_ThrowsArgumentException(Type t)
         {
-            AssertExtensions.Throws<ArgumentException>("t", () => Marshal.GetDelegateForFunctionPointer((IntPtr)1, t));
+            AssertExtensions.Throws<ArgumentException>(
+                "t",
+                () => Marshal.GetDelegateForFunctionPointer((IntPtr)1, t)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMonoAOT))]
         public void GetDelegateForFunctionPointer_CantCast_ThrowsInvalidCastException()
         {
-            MethodInfo targetMethod = typeof(GetDelegateForFunctionPointerTests).GetMethod(nameof(Method), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo targetMethod = typeof(GetDelegateForFunctionPointerTests).GetMethod(
+                nameof(Method),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Delegate d = targetMethod.CreateDelegate(typeof(NonGenericDelegate));
             IntPtr ptr = Marshal.GetFunctionPointerForDelegate(d);
 
-            Assert.Throws<InvalidCastException>(() => Marshal.GetDelegateForFunctionPointer<OtherNonGenericDelegate>(ptr));
+            Assert.Throws<InvalidCastException>(
+                () => Marshal.GetDelegateForFunctionPointer<OtherNonGenericDelegate>(ptr)
+            );
             GC.KeepAlive(d);
         }
 

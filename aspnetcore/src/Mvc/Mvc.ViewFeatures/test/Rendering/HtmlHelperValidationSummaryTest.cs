@@ -15,54 +15,70 @@ public class HtmlHelperValidationSummaryTest
     {
         get
         {
-            var attributes = new { @class = "wood smoke", attribute_name = "attribute-value", };
+            var attributes = new { @class = "wood smoke", attribute_name = "attribute-value" };
             var dictionary = new Dictionary<string, object>
-                {
-                    { "class", "wood smoke" },
-                    { "attribute-name", "attribute-value" },
-                };
+            {
+                { "class", "wood smoke" },
+                { "attribute-name", "attribute-value" },
+            };
 
-            var basicDiv = "<div class=\"HtmlEncode[[validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">" +
-                "<ul><li style=\"display:none\"></li>" + Environment.NewLine +
-                "</ul></div>";
-            var divWithAttributes = "<div attribute-name=\"HtmlEncode[[attribute-value]]\" " +
-                "class=\"HtmlEncode[[wood smoke validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>" +
-                "<li style=\"display:none\"></li>" + Environment.NewLine +
-                "</ul></div>";
-            var divWithMessage = "<div class=\"HtmlEncode[[validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">" +
-                "<span>HtmlEncode[[This is my message]]</span>" + Environment.NewLine +
-                "<ul><li style=\"display:none\"></li>" + Environment.NewLine +
-                "</ul></div>";
-            var divWithH3Message = "<div class=\"HtmlEncode[[validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">" +
-                "<h3>HtmlEncode[[This is my message]]</h3>" + Environment.NewLine +
-                "<ul><li style=\"display:none\"></li>" + Environment.NewLine +
-                "</ul></div>";
-            var divWithMessageAndAttributes = "<div attribute-name=\"HtmlEncode[[attribute-value]]\" " +
-                "class=\"HtmlEncode[[wood smoke validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">" +
-                "<span>HtmlEncode[[This is my message]]</span>" + Environment.NewLine +
-                "<ul><li style=\"display:none\"></li>" + Environment.NewLine +
-                "</ul></div>";
-            var divWithH3MessageAndAttributes = "<div attribute-name=\"HtmlEncode[[attribute-value]]\" " +
-                "class=\"HtmlEncode[[wood smoke validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">" +
-                "<h3>HtmlEncode[[This is my message]]</h3>" + Environment.NewLine +
-                "<ul><li style=\"display:none\"></li>" + Environment.NewLine +
-                "</ul></div>";
+            var basicDiv =
+                "<div class=\"HtmlEncode[[validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">"
+                + "<ul><li style=\"display:none\"></li>"
+                + Environment.NewLine
+                + "</ul></div>";
+            var divWithAttributes =
+                "<div attribute-name=\"HtmlEncode[[attribute-value]]\" "
+                + "class=\"HtmlEncode[[wood smoke validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>"
+                + "<li style=\"display:none\"></li>"
+                + Environment.NewLine
+                + "</ul></div>";
+            var divWithMessage =
+                "<div class=\"HtmlEncode[[validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">"
+                + "<span>HtmlEncode[[This is my message]]</span>"
+                + Environment.NewLine
+                + "<ul><li style=\"display:none\"></li>"
+                + Environment.NewLine
+                + "</ul></div>";
+            var divWithH3Message =
+                "<div class=\"HtmlEncode[[validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">"
+                + "<h3>HtmlEncode[[This is my message]]</h3>"
+                + Environment.NewLine
+                + "<ul><li style=\"display:none\"></li>"
+                + Environment.NewLine
+                + "</ul></div>";
+            var divWithMessageAndAttributes =
+                "<div attribute-name=\"HtmlEncode[[attribute-value]]\" "
+                + "class=\"HtmlEncode[[wood smoke validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">"
+                + "<span>HtmlEncode[[This is my message]]</span>"
+                + Environment.NewLine
+                + "<ul><li style=\"display:none\"></li>"
+                + Environment.NewLine
+                + "</ul></div>";
+            var divWithH3MessageAndAttributes =
+                "<div attribute-name=\"HtmlEncode[[attribute-value]]\" "
+                + "class=\"HtmlEncode[[wood smoke validation-summary-valid]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">"
+                + "<h3>HtmlEncode[[This is my message]]</h3>"
+                + Environment.NewLine
+                + "<ul><li style=\"display:none\"></li>"
+                + Environment.NewLine
+                + "</ul></div>";
 
             return new TheoryData<string, object, string, string>
-                {
-                    { null, null, null, basicDiv },
-                    { null, null, "h3", basicDiv },
-                    { null, attributes, null, divWithAttributes },
-                    { null, attributes, "h3", divWithAttributes },
-                    { null, dictionary, null, divWithAttributes },
-                    { null, dictionary, "h3", divWithAttributes },
-                    { "This is my message", null, null, divWithMessage },
-                    { "This is my message", null, "h3", divWithH3Message },
-                    { "This is my message", attributes, null, divWithMessageAndAttributes },
-                    { "This is my message", attributes, "h3", divWithH3MessageAndAttributes },
-                    { "This is my message", dictionary, null, divWithMessageAndAttributes },
-                    { "This is my message", dictionary, "h3", divWithH3MessageAndAttributes },
-                };
+            {
+                { null, null, null, basicDiv },
+                { null, null, "h3", basicDiv },
+                { null, attributes, null, divWithAttributes },
+                { null, attributes, "h3", divWithAttributes },
+                { null, dictionary, null, divWithAttributes },
+                { null, dictionary, "h3", divWithAttributes },
+                { "This is my message", null, null, divWithMessage },
+                { "This is my message", null, "h3", divWithH3Message },
+                { "This is my message", attributes, null, divWithMessageAndAttributes },
+                { "This is my message", attributes, "h3", divWithH3MessageAndAttributes },
+                { "This is my message", dictionary, null, divWithMessageAndAttributes },
+                { "This is my message", dictionary, "h3", divWithH3MessageAndAttributes },
+            };
         }
     }
 
@@ -71,20 +87,24 @@ public class HtmlHelperValidationSummaryTest
     {
         get
         {
-            var divWithError = "<div class=\"HtmlEncode[[validation-summary-errors]]\"><ul>" +
-                "<li>HtmlEncode[[This is my validation message]]</li>" + Environment.NewLine +
-                "</ul></div>";
-            var divWithErrorAndSummary = "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>" +
-                "<li>HtmlEncode[[This is my validation message]]</li>" + Environment.NewLine +
-                "</ul></div>";
+            var divWithError =
+                "<div class=\"HtmlEncode[[validation-summary-errors]]\"><ul>"
+                + "<li>HtmlEncode[[This is my validation message]]</li>"
+                + Environment.NewLine
+                + "</ul></div>";
+            var divWithErrorAndSummary =
+                "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>"
+                + "<li>HtmlEncode[[This is my validation message]]</li>"
+                + Environment.NewLine
+                + "</ul></div>";
 
             return new TheoryData<bool, bool, string, string>
-                {
-                    { false, false, divWithError, divWithError },
-                    { false, true, divWithErrorAndSummary, divWithErrorAndSummary },
-                    { true, false, divWithError, string.Empty },
-                    { true, true, divWithError, string.Empty },
-                };
+            {
+                { false, false, divWithError, divWithError },
+                { false, true, divWithErrorAndSummary, divWithErrorAndSummary },
+                { true, false, divWithError, string.Empty },
+                { true, true, divWithError, string.Empty },
+            };
         }
     }
 
@@ -93,34 +113,49 @@ public class HtmlHelperValidationSummaryTest
     {
         get
         {
-            var divWithRootError = "<div class=\"HtmlEncode[[validation-summary-errors]]\"><ul>" +
-                "<li>HtmlEncode[[This is an error for the model root.]]</li>" + Environment.NewLine +
-                "<li>HtmlEncode[[This is another error for the model root.]]</li>" + Environment.NewLine +
-                "</ul></div>";
-            var divWithProperty3Error = "<div class=\"HtmlEncode[[validation-summary-errors]]\"><ul>" +
-                "<li>HtmlEncode[[This is an error for Property3.]]</li>" + Environment.NewLine +
-                "</ul></div>";
-            var divWithAllErrors = "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>" +
-                "<li>HtmlEncode[[This is an error for Property2.]]</li>" + Environment.NewLine +
-                "<li>HtmlEncode[[This is another error for Property2.]]</li>" + Environment.NewLine +
-                "<li>HtmlEncode[[The value '' is not valid for Property2.]]</li>" + Environment.NewLine +
-                "<li>HtmlEncode[[This is an error for Property3.OrderedProperty3.]]</li>" + Environment.NewLine +
-                "<li>HtmlEncode[[This is an error for Property3.OrderedProperty2.]]</li>" + Environment.NewLine +
-                "<li>HtmlEncode[[This is an error for Property3.Property2.]]</li>" + Environment.NewLine +
-                "<li>HtmlEncode[[This is an error for Property3.]]</li>" + Environment.NewLine +
-                "<li>HtmlEncode[[This is an error for the model root.]]</li>" + Environment.NewLine +
-                "<li>HtmlEncode[[This is another error for the model root.]]</li>" + Environment.NewLine +
-                "</ul></div>";
+            var divWithRootError =
+                "<div class=\"HtmlEncode[[validation-summary-errors]]\"><ul>"
+                + "<li>HtmlEncode[[This is an error for the model root.]]</li>"
+                + Environment.NewLine
+                + "<li>HtmlEncode[[This is another error for the model root.]]</li>"
+                + Environment.NewLine
+                + "</ul></div>";
+            var divWithProperty3Error =
+                "<div class=\"HtmlEncode[[validation-summary-errors]]\"><ul>"
+                + "<li>HtmlEncode[[This is an error for Property3.]]</li>"
+                + Environment.NewLine
+                + "</ul></div>";
+            var divWithAllErrors =
+                "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>"
+                + "<li>HtmlEncode[[This is an error for Property2.]]</li>"
+                + Environment.NewLine
+                + "<li>HtmlEncode[[This is another error for Property2.]]</li>"
+                + Environment.NewLine
+                + "<li>HtmlEncode[[The value '' is not valid for Property2.]]</li>"
+                + Environment.NewLine
+                + "<li>HtmlEncode[[This is an error for Property3.OrderedProperty3.]]</li>"
+                + Environment.NewLine
+                + "<li>HtmlEncode[[This is an error for Property3.OrderedProperty2.]]</li>"
+                + Environment.NewLine
+                + "<li>HtmlEncode[[This is an error for Property3.Property2.]]</li>"
+                + Environment.NewLine
+                + "<li>HtmlEncode[[This is an error for Property3.]]</li>"
+                + Environment.NewLine
+                + "<li>HtmlEncode[[This is an error for the model root.]]</li>"
+                + Environment.NewLine
+                + "<li>HtmlEncode[[This is another error for the model root.]]</li>"
+                + Environment.NewLine
+                + "</ul></div>";
 
             return new TheoryData<bool, string, string>
-                {
-                    { false, string.Empty, divWithAllErrors },
-                    { false, "Property2", divWithAllErrors },
-                    { false, "some.unrelated.prefix", divWithAllErrors },
-                    { true, string.Empty, divWithRootError },
-                    { true, "Property3", divWithProperty3Error },
-                    { true, "some.unrelated.prefix", string.Empty },
-                };
+            {
+                { false, string.Empty, divWithAllErrors },
+                { false, "Property2", divWithAllErrors },
+                { false, "some.unrelated.prefix", divWithAllErrors },
+                { true, string.Empty, divWithRootError },
+                { true, "Property3", divWithProperty3Error },
+                { true, "some.unrelated.prefix", string.Empty },
+            };
         }
     }
 
@@ -130,7 +165,8 @@ public class HtmlHelperValidationSummaryTest
         string message,
         object htmlAttributes,
         string tag,
-        string expected)
+        string expected
+    )
     {
         // Arrange
         var model = new ValidationModel();
@@ -141,7 +177,8 @@ public class HtmlHelperValidationSummaryTest
             excludePropertyErrors: false,
             message: message,
             htmlAttributes: htmlAttributes,
-            tag: tag);
+            tag: tag
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -153,7 +190,8 @@ public class HtmlHelperValidationSummaryTest
         string message,
         object htmlAttributes,
         string tag,
-        string ignored)
+        string ignored
+    )
     {
         // Arrange
         var model = new ValidationModel();
@@ -164,7 +202,8 @@ public class HtmlHelperValidationSummaryTest
             excludePropertyErrors: true,
             message: message,
             htmlAttributes: htmlAttributes,
-            tag: tag);
+            tag: tag
+        );
 
         // Assert
         Assert.Equal(HtmlString.Empty, result);
@@ -176,7 +215,8 @@ public class HtmlHelperValidationSummaryTest
         string message,
         object htmlAttributes,
         string tag,
-        string ignored)
+        string ignored
+    )
     {
         // Arrange
         var model = new ValidationModel();
@@ -188,7 +228,8 @@ public class HtmlHelperValidationSummaryTest
             excludePropertyErrors: false,
             message: message,
             htmlAttributes: htmlAttributes,
-            tag: tag);
+            tag: tag
+        );
 
         // Assert
         Assert.Equal(HtmlString.Empty, result);
@@ -200,7 +241,8 @@ public class HtmlHelperValidationSummaryTest
         bool excludePropertyErrors,
         bool clientValidationEnabled,
         string expected,
-        string ignored)
+        string ignored
+    )
     {
         // Arrange
         var model = new ValidationModel();
@@ -213,7 +255,8 @@ public class HtmlHelperValidationSummaryTest
             excludePropertyErrors: excludePropertyErrors,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -225,21 +268,26 @@ public class HtmlHelperValidationSummaryTest
         bool excludePropertyErrors,
         bool clientValidationEnabled,
         string expected,
-        string ignored)
+        string ignored
+    )
     {
         // Arrange
         var model = new ValidationModel();
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
         html.ViewContext.ClientValidationEnabled = clientValidationEnabled;
         html.ViewData.TemplateInfo.HtmlFieldPrefix = "this.is.my.prefix";
-        html.ViewData.ModelState.AddModelError("this.is.my.prefix", "This is my validation message");
+        html.ViewData.ModelState.AddModelError(
+            "this.is.my.prefix",
+            "This is my validation message"
+        );
 
         // Act
         var result = html.ValidationSummary(
             excludePropertyErrors,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -251,7 +299,8 @@ public class HtmlHelperValidationSummaryTest
         bool excludePropertyErrors,
         bool clientValidationEnabled,
         string ignored,
-        string expected)
+        string expected
+    )
     {
         // Arrange
         var model = new ValidationModel();
@@ -264,7 +313,8 @@ public class HtmlHelperValidationSummaryTest
             excludePropertyErrors,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -275,7 +325,8 @@ public class HtmlHelperValidationSummaryTest
     public void ValidationSummary_MultipleErrors_ReturnsExpectedDiv(
         bool excludePropertyErrors,
         string prefix,
-        string expected)
+        string expected
+    )
     {
         // Arrange
         var model = new ValidationModel();
@@ -288,7 +339,8 @@ public class HtmlHelperValidationSummaryTest
             excludePropertyErrors,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -298,13 +350,19 @@ public class HtmlHelperValidationSummaryTest
     public void ValidationSummary_OrdersCorrectlyWhenElementsAreRemovedFromDictionary()
     {
         // Arrange
-        var expected = "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>" +
-            "<li>HtmlEncode[[New error for Property2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for Property3.OrderedProperty3.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for Property3.Property2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for the model root.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is another error for the model root.]]</li>" + Environment.NewLine +
-            "</ul></div>";
+        var expected =
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>"
+            + "<li>HtmlEncode[[New error for Property2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for Property3.OrderedProperty3.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for Property3.Property2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for the model root.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is another error for the model root.]]</li>"
+            + Environment.NewLine
+            + "</ul></div>";
         var model = new ValidationModel();
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
         AddMultipleErrors(html.ViewData.ModelState);
@@ -318,7 +376,8 @@ public class HtmlHelperValidationSummaryTest
             excludePropertyErrors: false,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -328,20 +387,33 @@ public class HtmlHelperValidationSummaryTest
     public void ValidationSummary_IncludesErrorsThatAreNotPartOfMetadata()
     {
         // Arrange
-        var expected = "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>" +
-            "<li>HtmlEncode[[This is an error for Property2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is another error for Property2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[The value '' is not valid for Property2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for Property3.OrderedProperty3.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for Property3.OrderedProperty2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for Property3.Property2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for Property3.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for the model root.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is another error for the model root.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[non-existent-error1]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[non-existent-error2]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[non-existent-error3]]</li>" + Environment.NewLine +
-            "</ul></div>";
+        var expected =
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>"
+            + "<li>HtmlEncode[[This is an error for Property2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is another error for Property2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[The value '' is not valid for Property2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for Property3.OrderedProperty3.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for Property3.OrderedProperty2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for Property3.Property2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for Property3.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for the model root.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is another error for the model root.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[non-existent-error1]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[non-existent-error2]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[non-existent-error3]]</li>"
+            + Environment.NewLine
+            + "</ul></div>";
         var model = new ValidationModel();
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
         AddMultipleErrors(html.ViewData.ModelState);
@@ -354,7 +426,8 @@ public class HtmlHelperValidationSummaryTest
             excludePropertyErrors: false,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -364,27 +437,46 @@ public class HtmlHelperValidationSummaryTest
     public void ValidationSummary_IncludesErrorsForCollectionProperties()
     {
         // Arrange
-        var expected = "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>" +
-           "<li>HtmlEncode[[Property1 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[Property2[0].OrderedProperty1 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[Property2[0].Property1 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[Property2[2].Property3 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[Property2[10].Property2 error]]</li>" + Environment.NewLine +
-           "</ul></div>";
+        var expected =
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>"
+            + "<li>HtmlEncode[[Property1 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[Property2[0].OrderedProperty1 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[Property2[0].Property1 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[Property2[2].Property3 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[Property2[10].Property2 error]]</li>"
+            + Environment.NewLine
+            + "</ul></div>";
         var model = new ModelWithCollection();
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
         html.ViewData.ModelState.AddModelError("Property1", "Property1 error");
-        html.ViewData.ModelState.AddModelError("Property2[0].OrderedProperty1", "Property2[0].OrderedProperty1 error");
-        html.ViewData.ModelState.AddModelError("Property2[10].Property2", "Property2[10].Property2 error");
-        html.ViewData.ModelState.AddModelError("Property2[2].Property3", "Property2[2].Property3 error");
-        html.ViewData.ModelState.AddModelError("Property2[0].Property1", "Property2[0].Property1 error");
+        html.ViewData.ModelState.AddModelError(
+            "Property2[0].OrderedProperty1",
+            "Property2[0].OrderedProperty1 error"
+        );
+        html.ViewData.ModelState.AddModelError(
+            "Property2[10].Property2",
+            "Property2[10].Property2 error"
+        );
+        html.ViewData.ModelState.AddModelError(
+            "Property2[2].Property3",
+            "Property2[2].Property3 error"
+        );
+        html.ViewData.ModelState.AddModelError(
+            "Property2[0].Property1",
+            "Property2[0].Property1 error"
+        );
 
         // Act
         var result = html.ValidationSummary(
             excludePropertyErrors: false,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -394,27 +486,43 @@ public class HtmlHelperValidationSummaryTest
     public void ValidationSummary_IncludesErrorsForTopLevelCollectionProperties()
     {
         // Arrange
-        var expected = "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>" +
-           "<li>HtmlEncode[[[0].OrderedProperty2 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[[0].OrderedProperty1 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[[0].Property1 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[[2].OrderedProperty3 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[[2].Property3 error]]</li>" + Environment.NewLine +
-           "</ul></div>";
+        var expected =
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>"
+            + "<li>HtmlEncode[[[0].OrderedProperty2 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[[0].OrderedProperty1 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[[0].Property1 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[[2].OrderedProperty3 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[[2].Property3 error]]</li>"
+            + Environment.NewLine
+            + "</ul></div>";
         var model = new OrderedModel[5];
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
-        html.ViewData.ModelState.AddModelError("[0].OrderedProperty2", "[0].OrderedProperty2 error");
+        html.ViewData.ModelState.AddModelError(
+            "[0].OrderedProperty2",
+            "[0].OrderedProperty2 error"
+        );
         html.ViewData.ModelState.AddModelError("[0].Property1", "[0].Property1 error");
-        html.ViewData.ModelState.AddModelError("[0].OrderedProperty1", "[0].OrderedProperty1 error");
+        html.ViewData.ModelState.AddModelError(
+            "[0].OrderedProperty1",
+            "[0].OrderedProperty1 error"
+        );
         html.ViewData.ModelState.AddModelError("[2].Property3", "[2].Property3 error");
-        html.ViewData.ModelState.AddModelError("[2].OrderedProperty3", "[2].OrderedProperty3 error");
+        html.ViewData.ModelState.AddModelError(
+            "[2].OrderedProperty3",
+            "[2].OrderedProperty3 error"
+        );
 
         // Act
         var result = html.ValidationSummary(
             excludePropertyErrors: false,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -424,22 +532,39 @@ public class HtmlHelperValidationSummaryTest
     public void ValidationSummary_IncludesErrorsForPropertiesOnCollectionTypes()
     {
         // Arrange
-        var expected = "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>" +
-           "<li>HtmlEncode[[[0].OrderedProperty2 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[[0].OrderedProperty1 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[[0].Property1 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[[2].OrderedProperty3 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[[2].Property3 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[OrderedProperty1 error]]</li>" + Environment.NewLine +
-           "<li>HtmlEncode[[OrderedProperty2 error]]</li>" + Environment.NewLine +
-           "</ul></div>";
+        var expected =
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>"
+            + "<li>HtmlEncode[[[0].OrderedProperty2 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[[0].OrderedProperty1 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[[0].Property1 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[[2].OrderedProperty3 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[[2].Property3 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[OrderedProperty1 error]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[OrderedProperty2 error]]</li>"
+            + Environment.NewLine
+            + "</ul></div>";
         var model = new OrderedModel[5];
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
-        html.ViewData.ModelState.AddModelError("[0].OrderedProperty2", "[0].OrderedProperty2 error");
+        html.ViewData.ModelState.AddModelError(
+            "[0].OrderedProperty2",
+            "[0].OrderedProperty2 error"
+        );
         html.ViewData.ModelState.AddModelError("[0].Property1", "[0].Property1 error");
-        html.ViewData.ModelState.AddModelError("[0].OrderedProperty1", "[0].OrderedProperty1 error");
+        html.ViewData.ModelState.AddModelError(
+            "[0].OrderedProperty1",
+            "[0].OrderedProperty1 error"
+        );
         html.ViewData.ModelState.AddModelError("[2].Property3", "[2].Property3 error");
-        html.ViewData.ModelState.AddModelError("[2].OrderedProperty3", "[2].OrderedProperty3 error");
+        html.ViewData.ModelState.AddModelError(
+            "[2].OrderedProperty3",
+            "[2].OrderedProperty3 error"
+        );
         html.ViewData.ModelState.AddModelError("OrderedProperty1", "OrderedProperty1 error");
         html.ViewData.ModelState.AddModelError("OrderedProperty2", "OrderedProperty2 error");
 
@@ -448,7 +573,8 @@ public class HtmlHelperValidationSummaryTest
             excludePropertyErrors: false,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -458,19 +584,31 @@ public class HtmlHelperValidationSummaryTest
     public void ValidationSummary_ErrorsInModelUsingOrder_SortsErrorsAsExpected()
     {
         // Arrange
-        var expected = "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>" +
-            "<li>HtmlEncode[[This is an error for OrderedProperty3.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for OrderedProperty2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is another error for OrderedProperty2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is yet-another error for OrderedProperty2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for OrderedProperty1.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for Property3.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for Property1.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is another error for Property1.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for Property2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is another error for Property2.]]</li>" + Environment.NewLine +
-            "<li>HtmlEncode[[This is an error for LastProperty.]]</li>" + Environment.NewLine +
-            "</ul></div>";
+        var expected =
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\"><ul>"
+            + "<li>HtmlEncode[[This is an error for OrderedProperty3.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for OrderedProperty2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is another error for OrderedProperty2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is yet-another error for OrderedProperty2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for OrderedProperty1.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for Property3.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for Property1.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is another error for Property1.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for Property2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is another error for Property2.]]</li>"
+            + Environment.NewLine
+            + "<li>HtmlEncode[[This is an error for LastProperty.]]</li>"
+            + Environment.NewLine
+            + "</ul></div>";
 
         var model = new OrderedModel();
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
@@ -481,7 +619,8 @@ public class HtmlHelperValidationSummaryTest
             excludePropertyErrors: false,
             message: null,
             htmlAttributes: null,
-            tag: null);
+            tag: null
+        );
 
         // Assert
         Assert.Equal(expected, HtmlContentUtilities.HtmlContentToString(result));
@@ -499,10 +638,12 @@ public class HtmlHelperValidationSummaryTest
 
         // Assert
         Assert.Equal(
-            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">" +
-            "<ul><li>HtmlEncode[[Error for Property1]]</li>" + Environment.NewLine +
-            "</ul></div>",
-            HtmlContentUtilities.HtmlContentToString(validationSummaryResult));
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">"
+                + "<ul><li>HtmlEncode[[Error for Property1]]</li>"
+                + Environment.NewLine
+                + "</ul></div>",
+            HtmlContentUtilities.HtmlContentToString(validationSummaryResult)
+        );
     }
 
     [Fact]
@@ -531,11 +672,14 @@ public class HtmlHelperValidationSummaryTest
 
         // Assert
         Assert.Equal(
-            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">" +
-            "<span>HtmlEncode[[Custom Message]]</span>" + Environment.NewLine +
-            "<ul><li>HtmlEncode[[Error for Property1]]</li>" + Environment.NewLine +
-            "</ul></div>",
-            HtmlContentUtilities.HtmlContentToString(validationSummaryResult));
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">"
+                + "<span>HtmlEncode[[Custom Message]]</span>"
+                + Environment.NewLine
+                + "<ul><li>HtmlEncode[[Error for Property1]]</li>"
+                + Environment.NewLine
+                + "</ul></div>",
+            HtmlContentUtilities.HtmlContentToString(validationSummaryResult)
+        );
     }
 
     [Fact]
@@ -546,15 +690,21 @@ public class HtmlHelperValidationSummaryTest
         helper.ViewData.ModelState.AddModelError("Property1", "Error for Property1");
 
         // Act
-        var validationSummaryResult = helper.ValidationSummary(message: "Custom Message", tag: "div");
+        var validationSummaryResult = helper.ValidationSummary(
+            message: "Custom Message",
+            tag: "div"
+        );
 
         // Assert
         Assert.Equal(
-            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">" +
-            "<div>HtmlEncode[[Custom Message]]</div>" + Environment.NewLine +
-            "<ul><li>HtmlEncode[[Error for Property1]]</li>" + Environment.NewLine +
-            "</ul></div>",
-            HtmlContentUtilities.HtmlContentToString(validationSummaryResult));
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">"
+                + "<div>HtmlEncode[[Custom Message]]</div>"
+                + Environment.NewLine
+                + "<ul><li>HtmlEncode[[Error for Property1]]</li>"
+                + Environment.NewLine
+                + "</ul></div>",
+            HtmlContentUtilities.HtmlContentToString(validationSummaryResult)
+        );
     }
 
     [Fact]
@@ -566,15 +716,20 @@ public class HtmlHelperValidationSummaryTest
         helper.ViewData.ModelState.AddModelError("Property1", "Error for Property1");
 
         // Act
-        var validationSummaryResult = helper.ValidationSummary(excludePropertyErrors: true, message: "Custom Message");
+        var validationSummaryResult = helper.ValidationSummary(
+            excludePropertyErrors: true,
+            message: "Custom Message"
+        );
 
         // Assert
         Assert.Equal(
-            "<div class=\"HtmlEncode[[validation-summary-errors]]\"><span>HtmlEncode[[Custom Message]]</span>" +
-            Environment.NewLine +
-            "<ul><li>HtmlEncode[[Error for root]]</li>" + Environment.NewLine +
-            "</ul></div>",
-            HtmlContentUtilities.HtmlContentToString(validationSummaryResult));
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\"><span>HtmlEncode[[Custom Message]]</span>"
+                + Environment.NewLine
+                + "<ul><li>HtmlEncode[[Error for root]]</li>"
+                + Environment.NewLine
+                + "</ul></div>",
+            HtmlContentUtilities.HtmlContentToString(validationSummaryResult)
+        );
     }
 
     [Fact]
@@ -585,15 +740,21 @@ public class HtmlHelperValidationSummaryTest
         helper.ViewData.ModelState.AddModelError("Property1", "Error for Property1");
 
         // Act
-        var validationSummaryResult = helper.ValidationSummary(message: "Custom Message", htmlAttributes: new { attr = "value" });
+        var validationSummaryResult = helper.ValidationSummary(
+            message: "Custom Message",
+            htmlAttributes: new { attr = "value" }
+        );
 
         // Assert
         Assert.Equal(
-            "<div attr=\"HtmlEncode[[value]]\" class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">" +
-            "<span>HtmlEncode[[Custom Message]]</span>" + Environment.NewLine +
-            "<ul><li>HtmlEncode[[Error for Property1]]</li>" + Environment.NewLine +
-            "</ul></div>",
-            HtmlContentUtilities.HtmlContentToString(validationSummaryResult));
+            "<div attr=\"HtmlEncode[[value]]\" class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">"
+                + "<span>HtmlEncode[[Custom Message]]</span>"
+                + Environment.NewLine
+                + "<ul><li>HtmlEncode[[Error for Property1]]</li>"
+                + Environment.NewLine
+                + "</ul></div>",
+            HtmlContentUtilities.HtmlContentToString(validationSummaryResult)
+        );
     }
 
     [Fact]
@@ -604,15 +765,22 @@ public class HtmlHelperValidationSummaryTest
         helper.ViewData.ModelState.AddModelError("Property1", "Error for Property1");
 
         // Act
-        var validationSummaryResult = helper.ValidationSummary(message: "Custom Message", htmlAttributes: new { attr = "value" }, tag: "div");
+        var validationSummaryResult = helper.ValidationSummary(
+            message: "Custom Message",
+            htmlAttributes: new { attr = "value" },
+            tag: "div"
+        );
 
         // Assert
         Assert.Equal(
-            "<div attr=\"HtmlEncode[[value]]\" class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">" +
-            "<div>HtmlEncode[[Custom Message]]</div>" + Environment.NewLine +
-            "<ul><li>HtmlEncode[[Error for Property1]]</li>" + Environment.NewLine +
-            "</ul></div>",
-            HtmlContentUtilities.HtmlContentToString(validationSummaryResult));
+            "<div attr=\"HtmlEncode[[value]]\" class=\"HtmlEncode[[validation-summary-errors]]\" data-valmsg-summary=\"HtmlEncode[[true]]\">"
+                + "<div>HtmlEncode[[Custom Message]]</div>"
+                + Environment.NewLine
+                + "<ul><li>HtmlEncode[[Error for Property1]]</li>"
+                + Environment.NewLine
+                + "</ul></div>",
+            HtmlContentUtilities.HtmlContentToString(validationSummaryResult)
+        );
     }
 
     [Fact]
@@ -624,15 +792,21 @@ public class HtmlHelperValidationSummaryTest
         helper.ViewData.ModelState.AddModelError("Property1", "Error for Property1");
 
         // Act
-        var validationSummaryResult = helper.ValidationSummary(excludePropertyErrors: true, message: "Custom Message", tag: "div");
+        var validationSummaryResult = helper.ValidationSummary(
+            excludePropertyErrors: true,
+            message: "Custom Message",
+            tag: "div"
+        );
 
         // Assert
         Assert.Equal(
-            "<div class=\"HtmlEncode[[validation-summary-errors]]\"><div>HtmlEncode[[Custom Message]]</div>" +
-            Environment.NewLine +
-            "<ul><li>HtmlEncode[[Error for root]]</li>" + Environment.NewLine +
-            "</ul></div>",
-            HtmlContentUtilities.HtmlContentToString(validationSummaryResult));
+            "<div class=\"HtmlEncode[[validation-summary-errors]]\"><div>HtmlEncode[[Custom Message]]</div>"
+                + Environment.NewLine
+                + "<ul><li>HtmlEncode[[Error for root]]</li>"
+                + Environment.NewLine
+                + "</ul></div>",
+            HtmlContentUtilities.HtmlContentToString(validationSummaryResult)
+        );
     }
 
     [Fact]
@@ -647,49 +821,86 @@ public class HtmlHelperValidationSummaryTest
         var validationSummaryResult = helper.ValidationSummary(
             excludePropertyErrors: true,
             message: "Custom Message",
-            htmlAttributes: new { attr = "value" });
+            htmlAttributes: new { attr = "value" }
+        );
 
         // Assert
         Assert.Equal(
-            "<div attr=\"HtmlEncode[[value]]\" class=\"HtmlEncode[[validation-summary-errors]]\"><span>HtmlEncode[[Custom Message]]</span>" +
-            Environment.NewLine +
-            "<ul><li>HtmlEncode[[Error for root]]</li>" + Environment.NewLine +
-            "</ul></div>",
-            HtmlContentUtilities.HtmlContentToString(validationSummaryResult));
+            "<div attr=\"HtmlEncode[[value]]\" class=\"HtmlEncode[[validation-summary-errors]]\"><span>HtmlEncode[[Custom Message]]</span>"
+                + Environment.NewLine
+                + "<ul><li>HtmlEncode[[Error for root]]</li>"
+                + Environment.NewLine
+                + "</ul></div>",
+            HtmlContentUtilities.HtmlContentToString(validationSummaryResult)
+        );
     }
 
     // Adds errors for various parts of the model, including the root.
     private void AddMultipleErrors(ModelStateDictionary modelState)
     {
-        modelState.AddModelError("Property3.Property2", "This is an error for Property3.Property2.");
-        modelState.AddModelError("Property3.OrderedProperty3", "This is an error for Property3.OrderedProperty3.");
-        modelState.AddModelError("Property3.OrderedProperty2", "This is an error for Property3.OrderedProperty2.");
+        modelState.AddModelError(
+            "Property3.Property2",
+            "This is an error for Property3.Property2."
+        );
+        modelState.AddModelError(
+            "Property3.OrderedProperty3",
+            "This is an error for Property3.OrderedProperty3."
+        );
+        modelState.AddModelError(
+            "Property3.OrderedProperty2",
+            "This is an error for Property3.OrderedProperty2."
+        );
         modelState.SetModelValue("Property3.Empty", rawValue: null, attemptedValue: null);
         modelState.MarkFieldValid("Property3.Empty");
 
         var provider = new EmptyModelMetadataProvider();
-        var metadata = provider.GetMetadataForProperty(typeof(ValidationModel), nameof(ValidationModel.Property3));
+        var metadata = provider.GetMetadataForProperty(
+            typeof(ValidationModel),
+            nameof(ValidationModel.Property3)
+        );
         modelState.AddModelError("Property3", "This is an error for Property3.");
-        modelState.AddModelError("Property3", new InvalidCastException("Exception will be ignored."), metadata);
+        modelState.AddModelError(
+            "Property3",
+            new InvalidCastException("Exception will be ignored."),
+            metadata
+        );
 
-        metadata = provider.GetMetadataForProperty(typeof(ValidationModel), nameof(ValidationModel.Property2));
+        metadata = provider.GetMetadataForProperty(
+            typeof(ValidationModel),
+            nameof(ValidationModel.Property2)
+        );
         modelState.AddModelError("Property2", "This is an error for Property2.");
         modelState.AddModelError("Property2", "This is another error for Property2.");
-        modelState.AddModelError("Property2", new OverflowException("Produces invalid value message"), metadata);
+        modelState.AddModelError(
+            "Property2",
+            new OverflowException("Produces invalid value message"),
+            metadata
+        );
 
         metadata = provider.GetMetadataForType(typeof(ValidationModel));
         modelState.AddModelError(string.Empty, "This is an error for the model root.");
         modelState.AddModelError(string.Empty, "This is another error for the model root.");
-        modelState.AddModelError(string.Empty, new InvalidOperationException("Another ignored Exception."), metadata);
+        modelState.AddModelError(
+            string.Empty,
+            new InvalidOperationException("Another ignored Exception."),
+            metadata
+        );
     }
 
     // Adds one or more errors for all properties in OrderedModel. But adds errors out of order.
     private void AddOrderedErrors(ModelStateDictionary modelState)
     {
         var provider = new EmptyModelMetadataProvider();
-        var metadata = provider.GetMetadataForProperty(typeof(OrderedModel), nameof(OrderedModel.Property3));
+        var metadata = provider.GetMetadataForProperty(
+            typeof(OrderedModel),
+            nameof(OrderedModel.Property3)
+        );
         modelState.AddModelError("Property3", "This is an error for Property3.");
-        modelState.AddModelError("Property3", new InvalidCastException("An ignored Exception."), metadata);
+        modelState.AddModelError(
+            "Property3",
+            new InvalidCastException("An ignored Exception."),
+            metadata
+        );
 
         modelState.AddModelError("Property2", "This is an error for Property2.");
         modelState.AddModelError("Property2", "This is another error for Property2.");
@@ -705,7 +916,10 @@ public class HtmlHelperValidationSummaryTest
         modelState.AddModelError("Property1", "This is another error for Property1.");
 
         modelState.AddModelError("OrderedProperty1", "This is an error for OrderedProperty1.");
-        modelState.AddModelError("OrderedProperty2", "This is yet-another error for OrderedProperty2.");
+        modelState.AddModelError(
+            "OrderedProperty2",
+            "This is yet-another error for OrderedProperty2."
+        );
 
         modelState.SetModelValue("Empty", rawValue: null, attemptedValue: null);
         modelState.MarkFieldValid("Empty");
@@ -731,8 +945,10 @@ public class HtmlHelperValidationSummaryTest
 
         [Display(Order = 23)]
         public string OrderedProperty3 { get; set; }
+
         [Display(Order = 23)]
         public string OrderedProperty2 { get; set; }
+
         [Display(Order = 23)]
         public string OrderedProperty1 { get; set; }
 

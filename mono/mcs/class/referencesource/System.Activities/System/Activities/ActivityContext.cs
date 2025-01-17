@@ -20,9 +20,7 @@ namespace System.Activities
         long instanceId;
 
         // Used by subclasses that are pooled.
-        internal ActivityContext()
-        {
-        }
+        internal ActivityContext() { }
 
         // these can only be created by the WF Runtime
         internal ActivityContext(ActivityInstance instance, ActivityExecutor executor)
@@ -44,32 +42,18 @@ namespace System.Activities
             }
         }
 
-        internal bool AllowChainedEnvironmentAccess
-        {
-            get;
-            set;
-        }
+        internal bool AllowChainedEnvironmentAccess { get; set; }
 
-        internal Activity Activity
-        {
-            get;
-            private set;
-        }
+        internal Activity Activity { get; private set; }
 
         internal ActivityInstance CurrentInstance
         {
-            get
-            {
-                return this.instance;
-            }
+            get { return this.instance; }
         }
 
         internal ActivityExecutor CurrentExecutor
         {
-            get
-            {
-                return this.executor;
-            }
+            get { return this.executor; }
         }
 
         public string ActivityInstanceId
@@ -101,11 +85,16 @@ namespace System.Activities
                 // creating their own, so we need to give them a DataContext without variables
                 bool includeLocalVariables = !this.instance.IsResolvingArguments;
 
-                if (this.instance.DataContext == null ||
-                    this.instance.DataContext.IncludesLocalVariables != includeLocalVariables)
+                if (
+                    this.instance.DataContext == null
+                    || this.instance.DataContext.IncludesLocalVariables != includeLocalVariables
+                )
                 {
-                    this.instance.DataContext
-                        = new WorkflowDataContext(this.executor, this.instance, includeLocalVariables);
+                    this.instance.DataContext = new WorkflowDataContext(
+                        this.executor,
+                        this.instance,
+                        includeLocalVariables
+                    );
                 }
 
                 return this.instance.DataContext;
@@ -114,10 +103,7 @@ namespace System.Activities
 
         internal bool IsDisposed
         {
-            get
-            {
-                return this.isDisposed;
-            }
+            get { return this.isDisposed; }
         }
 
         public T GetExtension<T>()
@@ -137,7 +123,12 @@ namespace System.Activities
             Reinitialize(instance, executor, instance.Activity, instance.InternalId);
         }
 
-        internal void Reinitialize(ActivityInstance instance, ActivityExecutor executor, Activity activity, long instanceId)
+        internal void Reinitialize(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            Activity activity,
+            long instanceId
+        )
         {
             this.isDisposed = false;
             this.instance = instance;
@@ -187,7 +178,10 @@ namespace System.Activities
             }
             else
             {
-                Fx.Assert(location != null, "The contract of LocationReference is that GetLocation never returns null.");
+                Fx.Assert(
+                    location != null,
+                    "The contract of LocationReference is that GetLocation never returns null."
+                );
 
                 if (locationReference.Type == typeof(T))
                 {
@@ -195,7 +189,15 @@ namespace System.Activities
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.LocationTypeMismatch(locationReference.Name, typeof(T), locationReference.Type)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.LocationTypeMismatch(
+                                locationReference.Name,
+                                typeof(T),
+                                locationReference.Type
+                            )
+                        )
+                    );
                 }
             }
         }
@@ -228,7 +230,10 @@ namespace System.Activities
             }
             else
             {
-                Fx.Assert(location != null, "The contract of LocationReference is that GetLocation never returns null.");
+                Fx.Assert(
+                    location != null,
+                    "The contract of LocationReference is that GetLocation never returns null."
+                );
 
                 return TypeHelper.Convert<T>(location.Value);
             }
@@ -259,10 +264,17 @@ namespace System.Activities
             }
             else
             {
-
                 if (!TypeHelper.AreTypesCompatible(value, locationReference.Type))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotSetValueToLocation(value != null ? value.GetType() : typeof(T), locationReference.Name, locationReference.Type)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.CannotSetValueToLocation(
+                                value != null ? value.GetType() : typeof(T),
+                                locationReference.Name,
+                                locationReference.Type
+                            )
+                        )
+                    );
                 }
 
                 location.Value = value;
@@ -272,8 +284,11 @@ namespace System.Activities
         // Soft-Link: This method is referenced through reflection by
         // ExpressionUtilities.TryRewriteLambdaExpression.  Update that
         // file if the signature changes.
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
         public T GetValue<T>(OutArgument<T> argument)
         {
             ThrowIfDisposed();
@@ -291,8 +306,11 @@ namespace System.Activities
         // Soft-Link: This method is referenced through reflection by
         // ExpressionUtilities.TryRewriteLambdaExpression.  Update that
         // file if the signature changes.
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
         public T GetValue<T>(InOutArgument<T> argument)
         {
             ThrowIfDisposed();
@@ -310,8 +328,11 @@ namespace System.Activities
         // Soft-Link: This method is referenced through reflection by
         // ExpressionUtilities.TryRewriteLambdaExpression.  Update that
         // file if the signature changes.
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
         public T GetValue<T>(InArgument<T> argument)
         {
             ThrowIfDisposed();
@@ -346,8 +367,11 @@ namespace System.Activities
         // Soft-Link: This method is referenced through reflection by
         // ExpressionUtilities.TryRewriteLambdaExpression.  Update that
         // file if the signature changes.
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "We explicitly provide a RuntimeArgument overload to avoid requiring the object type parameter.")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "We explicitly provide a RuntimeArgument overload to avoid requiring the object type parameter."
+        )]
         public object GetValue(RuntimeArgument runtimeArgument)
         {
             ThrowIfDisposed();
@@ -360,8 +384,11 @@ namespace System.Activities
             return GetValueCore<object>(runtimeArgument);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
         public void SetValue<T>(OutArgument<T> argument, T value)
         {
             ThrowIfDisposed();
@@ -377,8 +404,11 @@ namespace System.Activities
             SetValueCore(argument.RuntimeArgument, value);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
         public void SetValue<T>(InOutArgument<T> argument, T value)
         {
             ThrowIfDisposed();
@@ -394,8 +424,11 @@ namespace System.Activities
             SetValueCore(argument.RuntimeArgument, value);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
         public void SetValue<T>(InArgument<T> argument, T value)
         {
             ThrowIfDisposed();
@@ -443,7 +476,8 @@ namespace System.Activities
             if (this.isDisposed)
             {
                 throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException(this.GetType().FullName, SR.AECDisposed));
+                    new ObjectDisposedException(this.GetType().FullName, SR.AECDisposed)
+                );
             }
         }
     }

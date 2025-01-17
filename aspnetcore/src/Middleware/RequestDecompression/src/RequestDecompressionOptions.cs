@@ -11,10 +11,11 @@ public sealed class RequestDecompressionOptions
     /// <summary>
     /// The <see cref="IDecompressionProvider"/> types to use for request decompression.
     /// </summary>
-    public IDictionary<string, IDecompressionProvider> DecompressionProviders { get; } = new Dictionary<string, IDecompressionProvider>(StringComparer.OrdinalIgnoreCase)
-    {
-        ["br"] = new BrotliDecompressionProvider(),
-        ["deflate"] = new DeflateDecompressionProvider(),
-        ["gzip"] = new GZipDecompressionProvider()
-    };
+    public IDictionary<string, IDecompressionProvider> DecompressionProviders { get; } =
+        new Dictionary<string, IDecompressionProvider>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["br"] = new BrotliDecompressionProvider(),
+            ["deflate"] = new DeflateDecompressionProvider(),
+            ["gzip"] = new GZipDecompressionProvider(),
+        };
 }

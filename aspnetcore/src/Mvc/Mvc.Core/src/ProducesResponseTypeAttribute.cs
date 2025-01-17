@@ -11,7 +11,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// A filter that specifies the type of the value and status code returned by the action.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = true,
+    Inherited = true
+)]
 public class ProducesResponseTypeAttribute : Attribute, IApiResponseMetadataProvider
 {
     private readonly MediaTypeCollection? _contentTypes;
@@ -45,7 +49,12 @@ public class ProducesResponseTypeAttribute : Attribute, IApiResponseMetadataProv
     /// <param name="statusCode">The HTTP response status code.</param>
     /// <param name="contentType">The content type associated with the response.</param>
     /// <param name="additionalContentTypes">Additional content types supported by the response.</param>
-    public ProducesResponseTypeAttribute(Type type, int statusCode, string contentType, params string[] additionalContentTypes)
+    public ProducesResponseTypeAttribute(
+        Type type,
+        int statusCode,
+        string contentType,
+        params string[] additionalContentTypes
+    )
     {
         ArgumentNullException.ThrowIfNull(contentType);
 
@@ -100,7 +109,10 @@ public class ProducesResponseTypeAttribute : Attribute, IApiResponseMetadataProv
         }
     }
 
-    private static MediaTypeCollection GetContentTypes(string contentType, string[] additionalContentTypes)
+    private static MediaTypeCollection GetContentTypes(
+        string contentType,
+        string[] additionalContentTypes
+    )
     {
         var completeContentTypes = new List<string>(additionalContentTypes.Length + 1);
         completeContentTypes.Add(contentType);
@@ -111,7 +123,9 @@ public class ProducesResponseTypeAttribute : Attribute, IApiResponseMetadataProv
             var mediaType = new MediaType(type);
             if (mediaType.HasWildcard)
             {
-                throw new InvalidOperationException(Resources.FormatGetContentTypes_WildcardsNotSupported(type));
+                throw new InvalidOperationException(
+                    Resources.FormatGetContentTypes_WildcardsNotSupported(type)
+                );
             }
 
             contentTypes.Add(type);

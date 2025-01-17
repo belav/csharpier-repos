@@ -14,26 +14,20 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         {
             private static readonly ErrorVisitor s_instance = new();
 
-            public static bool ContainsError(ISymbol? symbol)
-                => s_instance.Visit(symbol);
+            public static bool ContainsError(ISymbol? symbol) => s_instance.Visit(symbol);
 
-            public override bool DefaultVisit(ISymbol symbol)
-                => true;
+            public override bool DefaultVisit(ISymbol symbol) => true;
 
-            public override bool VisitAlias(IAliasSymbol symbol)
-                => false;
+            public override bool VisitAlias(IAliasSymbol symbol) => false;
 
-            public override bool VisitArrayType(IArrayTypeSymbol symbol)
-                => Visit(symbol.ElementType);
+            public override bool VisitArrayType(IArrayTypeSymbol symbol) =>
+                Visit(symbol.ElementType);
 
-            public override bool VisitEvent(IEventSymbol symbol)
-                => Visit(symbol.Type);
+            public override bool VisitEvent(IEventSymbol symbol) => Visit(symbol.Type);
 
-            public override bool VisitField(IFieldSymbol symbol)
-                => Visit(symbol.Type);
+            public override bool VisitField(IFieldSymbol symbol) => Visit(symbol.Type);
 
-            public override bool VisitLocal(ILocalSymbol symbol)
-                => Visit(symbol.Type);
+            public override bool VisitLocal(ILocalSymbol symbol) => Visit(symbol.Type);
 
             public override bool VisitMethod(IMethodSymbol symbol)
             {
@@ -69,14 +63,12 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 return symbol.IsErrorType();
             }
 
-            public override bool VisitParameter(IParameterSymbol symbol)
-                => Visit(symbol.Type);
+            public override bool VisitParameter(IParameterSymbol symbol) => Visit(symbol.Type);
 
-            public override bool VisitProperty(IPropertySymbol symbol)
-                => Visit(symbol.Type);
+            public override bool VisitProperty(IPropertySymbol symbol) => Visit(symbol.Type);
 
-            public override bool VisitPointerType(IPointerTypeSymbol symbol)
-                => Visit(symbol.PointedAtType);
+            public override bool VisitPointerType(IPointerTypeSymbol symbol) =>
+                Visit(symbol.PointedAtType);
         }
     }
 }

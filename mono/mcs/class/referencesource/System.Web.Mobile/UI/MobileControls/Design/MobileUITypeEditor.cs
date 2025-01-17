@@ -1,29 +1,31 @@
 //------------------------------------------------------------------------------
 // <copyright file="MobileUITypeEditor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.Design.MobileControls 
+namespace System.Web.UI.Design.MobileControls
 {
     using System;
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
     using System.Diagnostics;
+    using System.Drawing.Design;
 
     /// <summary>
     ///    <para>
     ///       The editor for column collections.
     ///    </para>
     /// </summary>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class MobileUITypeEditor : UITypeEditor 
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class MobileUITypeEditor : UITypeEditor
     {
         protected ControlDesigner GetDesigner(ITypeDescriptorContext context)
         {
@@ -52,10 +54,9 @@ namespace System.Web.UI.Design.MobileControls
         ///       A <see cref='System.Drawing.Design.UITypeEditorEditStyle'/> that represents the edit style.
         ///    </para>
         /// </returns>
-        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) 
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
             return UITypeEditorEditStyle.Modal;
         }
     }
 }
-

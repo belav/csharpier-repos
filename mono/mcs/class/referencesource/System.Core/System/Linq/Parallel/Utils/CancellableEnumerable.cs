@@ -1,7 +1,7 @@
 ﻿// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -14,9 +14,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Parallel;
 using System.Text;
 using System.Threading;
-using System.Linq.Parallel;
 
 namespace System.Linq.Parallel
 {
@@ -27,7 +27,10 @@ namespace System.Linq.Parallel
         /// will be wrapped by an object that periodically checks whether a particular cancellation token has
         /// been cancelled. If so, the next call to MoveNext() will throw an OperationCancelledException.
         /// </summary>
-        internal static IEnumerable<TElement> Wrap<TElement>(IEnumerable<TElement> source, CancellationToken token)
+        internal static IEnumerable<TElement> Wrap<TElement>(
+            IEnumerable<TElement> source,
+            CancellationToken token
+        )
         {
             int count = 0;
             foreach (TElement element in source)

@@ -8,11 +8,8 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Specialized;
 using System.Collections.Generic;
-
-
-
+using System.Collections.Specialized;
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -22,7 +19,8 @@ namespace System.Data.EntityModel.Emitters
         IntializeMethod,
         PropertyInfoProperty,
         PropertyInfoField,
+
         // add additional members here
-        Count 
-    }  
+        Count,
+    }
 }

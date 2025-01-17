@@ -8,6 +8,6 @@ namespace System.ServiceModel.Dispatcher
     {
         AutoAcknowledgeOnReceive = 0,
         AutoAcknowledgeOnRPCComplete = 1,
-        ManualAcknowledgement = 2
+        ManualAcknowledgement = 2,
     }
 }

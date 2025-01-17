@@ -17,9 +17,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
 /// </remarks>
-public class ComplexPropertyBuilder :
-    IInfrastructure<IConventionComplexPropertyBuilder>,
-    IInfrastructure<IConventionComplexTypeBuilder>
+public class ComplexPropertyBuilder
+    : IInfrastructure<IConventionComplexPropertyBuilder>,
+        IInfrastructure<IConventionComplexTypeBuilder>
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,7 +41,11 @@ public class ComplexPropertyBuilder :
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalComplexPropertyBuilder PropertyBuilder { [DebuggerStepThrough] get; }
+    protected virtual InternalComplexPropertyBuilder PropertyBuilder
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -50,25 +54,28 @@ public class ComplexPropertyBuilder :
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalComplexTypeBuilder TypeBuilder { [DebuggerStepThrough] get; }
+    protected virtual InternalComplexTypeBuilder TypeBuilder
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     Gets the internal builder being used to configure the complex property.
     /// </summary>
-    IConventionComplexPropertyBuilder IInfrastructure<IConventionComplexPropertyBuilder>.Instance
-        => PropertyBuilder;
+    IConventionComplexPropertyBuilder IInfrastructure<IConventionComplexPropertyBuilder>.Instance =>
+        PropertyBuilder;
 
     /// <summary>
     ///     Gets the internal builder being used to configure the complex type.
     /// </summary>
-    IConventionComplexTypeBuilder IInfrastructure<IConventionComplexTypeBuilder>.Instance
-        => TypeBuilder;
+    IConventionComplexTypeBuilder IInfrastructure<IConventionComplexTypeBuilder>.Instance =>
+        TypeBuilder;
 
     /// <summary>
     ///     The complex property being configured.
     /// </summary>
-    public virtual IMutableComplexProperty Metadata
-        => PropertyBuilder.Metadata;
+    public virtual IMutableComplexProperty Metadata => PropertyBuilder.Metadata;
 
     /// <summary>
     ///     Adds or updates an annotation on the complex property. If an annotation with the key specified in
@@ -157,11 +164,15 @@ public class ComplexPropertyBuilder :
     /// </remarks>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexTypePropertyBuilder Property(string propertyName)
-        => new(
-            TypeBuilder.Property(
-                Check.NotEmpty(propertyName, nameof(propertyName)),
-                ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexTypePropertyBuilder Property(string propertyName) =>
+        new(
+            TypeBuilder
+                .Property(
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the complex type.
@@ -177,11 +188,16 @@ public class ComplexPropertyBuilder :
     /// <typeparam name="TProperty">The type of the property to be configured.</typeparam>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexTypePropertyBuilder<TProperty> Property<TProperty>(string propertyName)
-        => new(
-            TypeBuilder.Property(
-                typeof(TProperty),
-                Check.NotEmpty(propertyName, nameof(propertyName)), ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexTypePropertyBuilder<TProperty> Property<TProperty>(string propertyName) =>
+        new(
+            TypeBuilder
+                .Property(
+                    typeof(TProperty),
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the complex type.
@@ -197,11 +213,16 @@ public class ComplexPropertyBuilder :
     /// <param name="propertyType">The type of the property to be configured.</param>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexTypePropertyBuilder Property(Type propertyType, string propertyName)
-        => new(
-            TypeBuilder.Property(
-                Check.NotNull(propertyType, nameof(propertyType)),
-                Check.NotEmpty(propertyName, nameof(propertyName)), ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexTypePropertyBuilder Property(Type propertyType, string propertyName) =>
+        new(
+            TypeBuilder
+                .Property(
+                    Check.NotNull(propertyType, nameof(propertyType)),
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the complex type.
@@ -214,11 +235,15 @@ public class ComplexPropertyBuilder :
     /// </remarks>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexTypePrimitiveCollectionBuilder PrimitiveCollection(string propertyName)
-        => new(
-            TypeBuilder.PrimitiveCollection(
-                Check.NotEmpty(propertyName, nameof(propertyName)),
-                ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexTypePrimitiveCollectionBuilder PrimitiveCollection(string propertyName) =>
+        new(
+            TypeBuilder
+                .PrimitiveCollection(
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the complex type.
@@ -234,11 +259,18 @@ public class ComplexPropertyBuilder :
     /// <typeparam name="TProperty">The type of the property to be configured.</typeparam>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexTypePrimitiveCollectionBuilder<TProperty> PrimitiveCollection<TProperty>(string propertyName)
-        => new(
-            TypeBuilder.PrimitiveCollection(
-                typeof(TProperty),
-                Check.NotEmpty(propertyName, nameof(propertyName)), ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexTypePrimitiveCollectionBuilder<TProperty> PrimitiveCollection<TProperty>(
+        string propertyName
+    ) =>
+        new(
+            TypeBuilder
+                .PrimitiveCollection(
+                    typeof(TProperty),
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the complex type.
@@ -254,11 +286,19 @@ public class ComplexPropertyBuilder :
     /// <param name="propertyType">The type of the property to be configured.</param>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexTypePrimitiveCollectionBuilder PrimitiveCollection(Type propertyType, string propertyName)
-        => new(
-            TypeBuilder.PrimitiveCollection(
-                Check.NotNull(propertyType, nameof(propertyType)),
-                Check.NotEmpty(propertyName, nameof(propertyName)), ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexTypePrimitiveCollectionBuilder PrimitiveCollection(
+        Type propertyType,
+        string propertyName
+    ) =>
+        new(
+            TypeBuilder
+                .PrimitiveCollection(
+                    Check.NotNull(propertyType, nameof(propertyType)),
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the complex type.
@@ -272,12 +312,18 @@ public class ComplexPropertyBuilder :
     /// <typeparam name="TProperty">The type of the property to be configured.</typeparam>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexTypePropertyBuilder<TProperty> IndexerProperty
-        <[DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] TProperty>(string propertyName)
-        => new(
-            TypeBuilder.IndexerProperty(
-                typeof(TProperty),
-                Check.NotEmpty(propertyName, nameof(propertyName)), ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexTypePropertyBuilder<TProperty> IndexerProperty<
+        [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] TProperty
+    >(string propertyName) =>
+        new(
+            TypeBuilder
+                .IndexerProperty(
+                    typeof(TProperty),
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the complex type.
@@ -293,14 +339,20 @@ public class ComplexPropertyBuilder :
     /// <returns>An object that can be used to configure the property.</returns>
     public virtual ComplexTypePropertyBuilder IndexerProperty(
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
-        string propertyName)
+        string propertyName
+    )
     {
         Check.NotNull(propertyType, nameof(propertyType));
 
         return new ComplexTypePropertyBuilder(
-            TypeBuilder.IndexerProperty(
-                propertyType,
-                Check.NotEmpty(propertyName, nameof(propertyName)), ConfigurationSource.Explicit)!.Metadata);
+            TypeBuilder
+                .IndexerProperty(
+                    propertyType,
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
     }
 
     /// <summary>
@@ -314,14 +366,18 @@ public class ComplexPropertyBuilder :
     /// </remarks>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexPropertyBuilder ComplexProperty(string propertyName)
-        => new(
-            TypeBuilder.ComplexProperty(
-                propertyType: null,
-                Check.NotEmpty(propertyName, nameof(propertyName)),
-                complexTypeName: null,
-                collection: false,
-                ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexPropertyBuilder ComplexProperty(string propertyName) =>
+        new(
+            TypeBuilder
+                .ComplexProperty(
+                    propertyType: null,
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    complexTypeName: null,
+                    collection: false,
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a complex property of the complex type.
@@ -337,14 +393,20 @@ public class ComplexPropertyBuilder :
     /// <typeparam name="TProperty">The type of the property to be configured.</typeparam>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexPropertyBuilder<TProperty> ComplexProperty<TProperty>(string propertyName)
-        => new(
-            TypeBuilder.ComplexProperty(
-                typeof(TProperty),
-                Check.NotEmpty(propertyName, nameof(propertyName)),
-                complexTypeName: null,
-                collection: false,
-                ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexPropertyBuilder<TProperty> ComplexProperty<TProperty>(
+        string propertyName
+    ) =>
+        new(
+            TypeBuilder
+                .ComplexProperty(
+                    typeof(TProperty),
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    complexTypeName: null,
+                    collection: false,
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a complex property of the complex type.
@@ -361,14 +423,21 @@ public class ComplexPropertyBuilder :
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <param name="complexTypeName">The name of the complex type.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexPropertyBuilder<TProperty> ComplexProperty<TProperty>(string propertyName, string complexTypeName)
-        => new(
-            TypeBuilder.ComplexProperty(
-                typeof(TProperty),
-                Check.NotEmpty(propertyName, nameof(propertyName)),
-                Check.NotEmpty(complexTypeName, nameof(complexTypeName)),
-                collection: false,
-                ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexPropertyBuilder<TProperty> ComplexProperty<TProperty>(
+        string propertyName,
+        string complexTypeName
+    ) =>
+        new(
+            TypeBuilder
+                .ComplexProperty(
+                    typeof(TProperty),
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    Check.NotEmpty(complexTypeName, nameof(complexTypeName)),
+                    collection: false,
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a complex property of the complex type.
@@ -384,14 +453,18 @@ public class ComplexPropertyBuilder :
     /// <param name="propertyType">The type of the property to be configured.</param>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexPropertyBuilder ComplexProperty(Type propertyType, string propertyName)
-        => new(
-            TypeBuilder.ComplexProperty(
-                Check.NotNull(propertyType, nameof(propertyType)),
-                Check.NotEmpty(propertyName, nameof(propertyName)),
-                complexTypeName: null,
-                collection: false,
-                ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexPropertyBuilder ComplexProperty(Type propertyType, string propertyName) =>
+        new(
+            TypeBuilder
+                .ComplexProperty(
+                    Check.NotNull(propertyType, nameof(propertyType)),
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    complexTypeName: null,
+                    collection: false,
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Returns an object that can be used to configure a complex property of the complex type.
@@ -408,14 +481,22 @@ public class ComplexPropertyBuilder :
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <param name="complexTypeName">The name of the complex type.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ComplexPropertyBuilder ComplexProperty(Type propertyType, string propertyName, string complexTypeName)
-        => new(
-            TypeBuilder.ComplexProperty(
-                Check.NotNull(propertyType, nameof(propertyType)),
-                Check.NotEmpty(propertyName, nameof(propertyName)),
-                Check.NotEmpty(complexTypeName, nameof(complexTypeName)),
-                collection: false,
-                ConfigurationSource.Explicit)!.Metadata);
+    public virtual ComplexPropertyBuilder ComplexProperty(
+        Type propertyType,
+        string propertyName,
+        string complexTypeName
+    ) =>
+        new(
+            TypeBuilder
+                .ComplexProperty(
+                    Check.NotNull(propertyType, nameof(propertyType)),
+                    Check.NotEmpty(propertyName, nameof(propertyName)),
+                    Check.NotEmpty(complexTypeName, nameof(complexTypeName)),
+                    collection: false,
+                    ConfigurationSource.Explicit
+                )!
+                .Metadata
+        );
 
     /// <summary>
     ///     Configures a complex property of the complex type.
@@ -429,7 +510,10 @@ public class ComplexPropertyBuilder :
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <param name="buildAction">An action that performs configuration of the property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ComplexPropertyBuilder ComplexProperty(string propertyName, Action<ComplexPropertyBuilder> buildAction)
+    public virtual ComplexPropertyBuilder ComplexProperty(
+        string propertyName,
+        Action<ComplexPropertyBuilder> buildAction
+    )
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -455,7 +539,8 @@ public class ComplexPropertyBuilder :
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ComplexPropertyBuilder ComplexProperty<TProperty>(
         string propertyName,
-        Action<ComplexPropertyBuilder<TProperty>> buildAction)
+        Action<ComplexPropertyBuilder<TProperty>> buildAction
+    )
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -483,7 +568,8 @@ public class ComplexPropertyBuilder :
     public virtual ComplexPropertyBuilder ComplexProperty<TProperty>(
         string propertyName,
         string complexTypeName,
-        Action<ComplexPropertyBuilder<TProperty>> buildAction)
+        Action<ComplexPropertyBuilder<TProperty>> buildAction
+    )
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -510,7 +596,8 @@ public class ComplexPropertyBuilder :
     public virtual ComplexPropertyBuilder ComplexProperty(
         Type propertyType,
         string propertyName,
-        Action<ComplexPropertyBuilder> buildAction)
+        Action<ComplexPropertyBuilder> buildAction
+    )
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -539,7 +626,8 @@ public class ComplexPropertyBuilder :
         Type propertyType,
         string propertyName,
         string complexTypeName,
-        Action<ComplexPropertyBuilder> buildAction)
+        Action<ComplexPropertyBuilder> buildAction
+    )
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -568,7 +656,9 @@ public class ComplexPropertyBuilder :
     /// </summary>
     /// <param name="changeTrackingStrategy">The change tracking strategy to be used.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ComplexPropertyBuilder HasChangeTrackingStrategy(ChangeTrackingStrategy changeTrackingStrategy)
+    public virtual ComplexPropertyBuilder HasChangeTrackingStrategy(
+        ChangeTrackingStrategy changeTrackingStrategy
+    )
     {
         TypeBuilder.HasChangeTrackingStrategy(changeTrackingStrategy, ConfigurationSource.Explicit);
 
@@ -592,7 +682,9 @@ public class ComplexPropertyBuilder :
     /// </remarks>
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for this property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ComplexPropertyBuilder UsePropertyAccessMode(PropertyAccessMode propertyAccessMode)
+    public virtual ComplexPropertyBuilder UsePropertyAccessMode(
+        PropertyAccessMode propertyAccessMode
+    )
     {
         PropertyBuilder.UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
 
@@ -616,7 +708,9 @@ public class ComplexPropertyBuilder :
     /// </remarks>
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for properties of this complex type.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual ComplexPropertyBuilder UseDefaultPropertyAccessMode(PropertyAccessMode propertyAccessMode)
+    public virtual ComplexPropertyBuilder UseDefaultPropertyAccessMode(
+        PropertyAccessMode propertyAccessMode
+    )
     {
         TypeBuilder.UsePropertyAccessMode(propertyAccessMode, ConfigurationSource.Explicit);
 
@@ -630,8 +724,7 @@ public class ComplexPropertyBuilder :
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -640,8 +733,7 @@ public class ComplexPropertyBuilder :
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -649,8 +741,7 @@ public class ComplexPropertyBuilder :
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

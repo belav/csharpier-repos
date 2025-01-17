@@ -64,7 +64,9 @@ public class SqliteCommandTest
             {
                 reader.Read();
 
-                var ex = Assert.Throws<InvalidOperationException>(() => command.CommandText = "SELECT 2;");
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => command.CommandText = "SELECT 2;"
+                );
 
                 Assert.Equal(Resources.SetRequiresNoOpenReader("CommandText"), ex.Message);
             }
@@ -76,7 +78,8 @@ public class SqliteCommandTest
     {
         var command = new SqliteCommand
         {
-            Connection = new SqliteConnection("Command Timeout=1") { DefaultTimeout = 2 }, CommandTimeout = 3
+            Connection = new SqliteConnection("Command Timeout=1") { DefaultTimeout = 2 },
+            CommandTimeout = 3,
         };
 
         Assert.Equal(3, command.CommandTimeout);
@@ -85,7 +88,10 @@ public class SqliteCommandTest
     [Fact]
     public void CommandTimeout_defaults_to_connection()
     {
-        var command = new SqliteCommand { Connection = new SqliteConnection("Default Timeout=1") { DefaultTimeout = 2 } };
+        var command = new SqliteCommand
+        {
+            Connection = new SqliteConnection("Default Timeout=1") { DefaultTimeout = 2 },
+        };
 
         Assert.Equal(2, command.CommandTimeout);
     }
@@ -136,7 +142,9 @@ public class SqliteCommandTest
             {
                 reader.Read();
 
-                var ex = Assert.Throws<InvalidOperationException>(() => command.Connection = new SqliteConnection());
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => command.Connection = new SqliteConnection()
+                );
 
                 Assert.Equal(Resources.SetRequiresNoOpenReader("Connection"), ex.Message);
             }
@@ -144,15 +152,17 @@ public class SqliteCommandTest
     }
 
     [Fact]
-    public void CommandType_text_by_default()
-        => Assert.Equal(CommandType.Text, new SqliteCommand().CommandType);
+    public void CommandType_text_by_default() =>
+        Assert.Equal(CommandType.Text, new SqliteCommand().CommandType);
 
     [Theory]
     [InlineData(CommandType.StoredProcedure)]
     [InlineData(CommandType.TableDirect)]
     public void CommandType_validates_value(CommandType commandType)
     {
-        var ex = Assert.Throws<ArgumentException>(() => new SqliteCommand().CommandType = commandType);
+        var ex = Assert.Throws<ArgumentException>(
+            () => new SqliteCommand().CommandType = commandType
+        );
 
         Assert.Equal(Resources.InvalidCommandType(commandType), ex.Message);
     }
@@ -169,8 +179,7 @@ public class SqliteCommandTest
     }
 
     [Fact]
-    public void CreateParameter_works()
-        => Assert.NotNull(new SqliteCommand().CreateParameter());
+    public void CreateParameter_works() => Assert.NotNull(new SqliteCommand().CreateParameter());
 
     [Fact]
     public void Prepare_throws_when_no_connection()
@@ -185,7 +194,9 @@ public class SqliteCommandTest
     {
         using (var connection = new SqliteConnection("Data Source=:memory:"))
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => connection.CreateCommand().Prepare());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => connection.CreateCommand().Prepare()
+            );
 
             Assert.Equal(Resources.CallRequiresOpenConnection("Prepare"), ex.Message);
         }
@@ -212,7 +223,10 @@ public class SqliteCommandTest
             command.CommandText = "CREATE TABLE Data (Value); SELECT * FROM Data;";
             var ex = Assert.Throws<SqliteException>(() => command.Prepare());
 
-            Assert.Equal(Resources.SqliteNativeError(SQLITE_ERROR, "no such table: Data"), ex.Message);
+            Assert.Equal(
+                Resources.SqliteNativeError(SQLITE_ERROR, "no such table: Data"),
+                ex.Message
+            );
         }
     }
 
@@ -224,7 +238,9 @@ public class SqliteCommandTest
         using (var connection = new SqliteConnection("Data Source=:memory:"))
         {
             connection.Open();
-            connection.ExecuteNonQuery("CREATE TABLE Data (ID integer PRIMARY KEY, Value integer);");
+            connection.ExecuteNonQuery(
+                "CREATE TABLE Data (ID integer PRIMARY KEY, Value integer);"
+            );
 
             using (var command = connection.CreateCommand())
             {
@@ -263,7 +279,9 @@ public class SqliteCommandTest
     [Fact]
     public void ExecuteReader_throws_when_no_connection()
     {
-        var ex = Assert.Throws<InvalidOperationException>(() => new SqliteCommand().ExecuteReader());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => new SqliteCommand().ExecuteReader()
+        );
 
         Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteReader"), ex.Message);
     }
@@ -273,7 +291,9 @@ public class SqliteCommandTest
     {
         using (var connection = new SqliteConnection("Data Source=:memory:"))
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => connection.CreateCommand().ExecuteReader());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => connection.CreateCommand().ExecuteReader()
+            );
 
             Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteReader"), ex.Message);
         }
@@ -311,7 +331,9 @@ public class SqliteCommandTest
     [Fact]
     public void ExecuteScalar_throws_when_no_connection()
     {
-        var ex = Assert.Throws<InvalidOperationException>(() => new SqliteCommand().ExecuteScalar());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => new SqliteCommand().ExecuteScalar()
+        );
 
         Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteScalar"), ex.Message);
     }
@@ -321,7 +343,9 @@ public class SqliteCommandTest
     {
         using (var connection = new SqliteConnection("Data Source=:memory:"))
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => connection.CreateCommand().ExecuteScalar());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => connection.CreateCommand().ExecuteScalar()
+            );
 
             Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteScalar"), ex.Message);
         }
@@ -550,7 +574,9 @@ public class SqliteCommandTest
     [Fact]
     public void ExecuteNonQuery_throws_when_no_connection()
     {
-        var ex = Assert.Throws<InvalidOperationException>(() => new SqliteCommand().ExecuteNonQuery());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => new SqliteCommand().ExecuteNonQuery()
+        );
 
         Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteNonQuery"), ex.Message);
     }
@@ -560,7 +586,9 @@ public class SqliteCommandTest
     {
         using (var connection = new SqliteConnection("Data Source=:memory:"))
         {
-            var ex = Assert.Throws<InvalidOperationException>(() => connection.CreateCommand().ExecuteNonQuery());
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => connection.CreateCommand().ExecuteNonQuery()
+            );
 
             Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteNonQuery"), ex.Message);
         }
@@ -596,7 +624,9 @@ public class SqliteCommandTest
                 {
                     command.Transaction = transaction;
 
-                    var ex = Assert.Throws<InvalidOperationException>(() => command.ExecuteReader());
+                    var ex = Assert.Throws<InvalidOperationException>(
+                        () => command.ExecuteReader()
+                    );
 
                     Assert.Equal(Resources.TransactionConnectionMismatch, ex.Message);
                 }
@@ -615,7 +645,9 @@ public class SqliteCommandTest
             {
                 connection.ExecuteNonQuery("ROLLBACK;");
 
-                var ex = Assert.Throws<InvalidOperationException>(() => connection.ExecuteNonQuery("SELECT 1;"));
+                var ex = Assert.Throws<InvalidOperationException>(
+                    () => connection.ExecuteNonQuery("SELECT 1;")
+                );
 
                 Assert.Equal(Resources.TransactionCompleted, ex.Message);
             }
@@ -684,7 +716,8 @@ public class SqliteCommandTest
             connection.ExecuteNonQuery("CREATE TABLE Test(Value);");
 
             var command = connection.CreateCommand();
-            command.CommandText = @"
+            command.CommandText =
+                @"
                     INSERT INTO Test VALUES(1);
                     SELECT 1;";
 
@@ -733,8 +766,7 @@ public class SqliteCommandTest
     }
 
     [Fact]
-    public void Cancel_does_nothing()
-        => new SqliteCommand().Cancel();
+    public void Cancel_does_nothing() => new SqliteCommand().Cancel();
 
     [Fact]
     public void ExecuteReader_supports_SequentialAccess()
@@ -816,47 +848,47 @@ public class SqliteCommandTest
         var selectedSignal = new AutoResetEvent(initialState: false);
 
         return Task.WhenAll(
-            Task.Run(
-                async () =>
+            Task.Run(async () =>
+            {
+                using (var connection = new SqliteConnection(connectionString))
                 {
-                    using (var connection = new SqliteConnection(connectionString))
+                    connection.Open();
+                    if (extendedErrorCode)
                     {
-                        connection.Open();
-                        if (extendedErrorCode)
-                        {
-                            sqlite3_extended_result_codes(connection.Handle, 1);
-                        }
-
-                        connection.ExecuteNonQuery(
-                            "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);");
-
-                        using (connection.ExecuteReader("SELECT * FROM Data;"))
-                        {
-                            selectedSignal.Set();
-
-                            await Task.Delay(1000);
-                        }
+                        sqlite3_extended_result_codes(connection.Handle, 1);
                     }
-                }),
-            Task.Run(
-                () =>
+
+                    connection.ExecuteNonQuery(
+                        "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
+                    );
+
+                    using (connection.ExecuteReader("SELECT * FROM Data;"))
+                    {
+                        selectedSignal.Set();
+
+                        await Task.Delay(1000);
+                    }
+                }
+            }),
+            Task.Run(() =>
+            {
+                using (var connection = new SqliteConnection(connectionString))
                 {
-                    using (var connection = new SqliteConnection(connectionString))
+                    connection.Open();
+                    if (extendedErrorCode)
                     {
-                        connection.Open();
-                        if (extendedErrorCode)
-                        {
-                            sqlite3_extended_result_codes(connection.Handle, 1);
-                        }
-
-                        selectedSignal.WaitOne();
-
-                        var command = connection.CreateCommand();
-                        command.CommandText = "DROP TABLE Data;";
-
-                        command.ExecuteNonQuery();
+                        sqlite3_extended_result_codes(connection.Handle, 1);
                     }
-                }));
+
+                    selectedSignal.WaitOne();
+
+                    var command = connection.CreateCommand();
+                    command.CommandText = "DROP TABLE Data;";
+
+                    command.ExecuteNonQuery();
+                }
+            })
+        );
     }
 
     [Fact]
@@ -869,39 +901,39 @@ public class SqliteCommandTest
         try
         {
             await Task.WhenAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    using (var connection = new SqliteConnection(connectionString))
                     {
-                        using (var connection = new SqliteConnection(connectionString))
+                        connection.Open();
+
+                        connection.ExecuteNonQuery(
+                            "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
+                        );
+
+                        using (connection.ExecuteReader("SELECT * FROM Data;"))
                         {
-                            connection.Open();
+                            selectedSignal.Set();
 
-                            connection.ExecuteNonQuery(
-                                "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);");
-
-                            using (connection.ExecuteReader("SELECT * FROM Data;"))
-                            {
-                                selectedSignal.Set();
-
-                                await Task.Delay(1000);
-                            }
+                            await Task.Delay(1000);
                         }
-                    }),
-                Task.Run(
-                    () =>
+                    }
+                }),
+                Task.Run(() =>
+                {
+                    using (var connection = new SqliteConnection(connectionString))
                     {
-                        using (var connection = new SqliteConnection(connectionString))
-                        {
-                            connection.Open();
+                        connection.Open();
 
-                            selectedSignal.WaitOne();
+                        selectedSignal.WaitOne();
 
-                            var command = connection.CreateCommand();
-                            command.CommandText = "DROP TABLE Data;";
+                        var command = connection.CreateCommand();
+                        command.CommandText = "DROP TABLE Data;";
 
-                            command.ExecuteNonQuery();
-                        }
-                    }));
+                        command.ExecuteNonQuery();
+                    }
+                })
+            );
         }
         finally
         {
@@ -911,63 +943,55 @@ public class SqliteCommandTest
     }
 
     [Fact]
-    public Task ExecuteScalar_throws_when_busy_with_returning()
-        => Execute_throws_when_busy_with_returning(
-            command =>
-            {
-                var ex = Assert.Throws<SqliteException>(
-                    () => command.ExecuteScalar());
+    public Task ExecuteScalar_throws_when_busy_with_returning() =>
+        Execute_throws_when_busy_with_returning(command =>
+        {
+            var ex = Assert.Throws<SqliteException>(() => command.ExecuteScalar());
 
-                Assert.Equal(SQLITE_BUSY, ex.SqliteErrorCode);
-            });
+            Assert.Equal(SQLITE_BUSY, ex.SqliteErrorCode);
+        });
 
     [Fact]
-    public Task ExecuteNonQuery_throws_when_busy_with_returning()
-        => Execute_throws_when_busy_with_returning(
-            command =>
-            {
-                var ex = Assert.Throws<SqliteException>(
-                    () => command.ExecuteNonQuery());
+    public Task ExecuteNonQuery_throws_when_busy_with_returning() =>
+        Execute_throws_when_busy_with_returning(command =>
+        {
+            var ex = Assert.Throws<SqliteException>(() => command.ExecuteNonQuery());
 
-                Assert.Equal(SQLITE_BUSY, ex.SqliteErrorCode);
-            });
+            Assert.Equal(SQLITE_BUSY, ex.SqliteErrorCode);
+        });
 
     [Fact]
-    public Task ExecuteReader_throws_when_busy_with_returning()
-        => Execute_throws_when_busy_with_returning(
-            command =>
+    public Task ExecuteReader_throws_when_busy_with_returning() =>
+        Execute_throws_when_busy_with_returning(command =>
+        {
+            var reader = command.ExecuteReader();
+            try
             {
-                var reader = command.ExecuteReader();
-                try
-                {
-                    Assert.True(reader.Read());
-                    Assert.Equal(2L, reader.GetInt64(0));
-                }
-                finally
-                {
-                    var ex = Assert.Throws<SqliteException>(
-                        () => reader.Dispose());
-
-                    Assert.Equal(SQLITE_BUSY, ex.SqliteErrorCode);
-                }
-            });
-
-    [Fact]
-    public Task ExecuteReader_throws_when_busy_with_returning_while_draining()
-        => Execute_throws_when_busy_with_returning(
-            command =>
-            {
-                using var reader = command.ExecuteReader();
                 Assert.True(reader.Read());
                 Assert.Equal(2L, reader.GetInt64(0));
-                Assert.True(reader.Read());
-                Assert.Equal(3L, reader.GetInt64(0));
-
-                var ex = Assert.Throws<SqliteException>(
-                    () => reader.Read());
+            }
+            finally
+            {
+                var ex = Assert.Throws<SqliteException>(() => reader.Dispose());
 
                 Assert.Equal(SQLITE_BUSY, ex.SqliteErrorCode);
-            });
+            }
+        });
+
+    [Fact]
+    public Task ExecuteReader_throws_when_busy_with_returning_while_draining() =>
+        Execute_throws_when_busy_with_returning(command =>
+        {
+            using var reader = command.ExecuteReader();
+            Assert.True(reader.Read());
+            Assert.Equal(2L, reader.GetInt64(0));
+            Assert.True(reader.Read());
+            Assert.Equal(3L, reader.GetInt64(0));
+
+            var ex = Assert.Throws<SqliteException>(() => reader.Read());
+
+            Assert.Equal(SQLITE_BUSY, ex.SqliteErrorCode);
+        });
 
     private static async Task Execute_throws_when_busy_with_returning(Action<SqliteCommand> action)
     {
@@ -987,36 +1011,34 @@ public class SqliteCommandTest
 
             connection1.Open();
 
-            connection1.ExecuteNonQuery(
-                "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);");
+            connection1.ExecuteNonQuery("CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);");
 
             await Task.WhenAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    using var connection = new SqliteConnection(connectionString);
+                    connection.Open();
+
+                    using (connection.ExecuteReader("SELECT * FROM Data;"))
                     {
-                        using var connection = new SqliteConnection(connectionString);
-                        connection.Open();
+                        selectedSignal.Set();
 
-                        using (connection.ExecuteReader("SELECT * FROM Data;"))
-                        {
-                            selectedSignal.Set();
+                        await Task.Delay(1000);
+                    }
+                }),
+                Task.Run(() =>
+                {
+                    using var connection = new SqliteConnection(connectionString);
+                    connection.Open();
 
-                            await Task.Delay(1000);
-                        }
-                    }),
-                Task.Run(
-                    () =>
-                    {
-                        using var connection = new SqliteConnection(connectionString);
-                        connection.Open();
+                    selectedSignal.WaitOne();
 
-                        selectedSignal.WaitOne();
+                    var command = connection.CreateCommand();
+                    command.CommandText = "INSERT INTO Data VALUES (1),(2) RETURNING rowid;";
 
-                        var command = connection.CreateCommand();
-                        command.CommandText = "INSERT INTO Data VALUES (1),(2) RETURNING rowid;";
-
-                        action(command);
-                    }));
+                    action(command);
+                })
+            );
 
             var count = connection1.ExecuteScalar<long>("SELECT COUNT(*) FROM Data;");
             Assert.Equal(1L, count);
@@ -1074,10 +1096,12 @@ public class SqliteCommandTest
             connection.ExecuteNonQuery(
                 @"
                     CREATE TABLE Test(Value);
-                    INSERT INTO Test VALUES(1), (2);");
+                    INSERT INTO Test VALUES(1), (2);"
+            );
 
             var command = connection.CreateCommand();
-            command.CommandText = @"
+            command.CommandText =
+                @"
                     SELECT Value FROM Test;
                     DELETE FROM Test";
 
@@ -1109,7 +1133,9 @@ public class SqliteCommandTest
             var ex = Assert.Throws<SqliteException>(() => command.ExecuteScalar());
             Assert.Equal(SQLITE_ERROR, ex.SqliteErrorCode);
 
-            connection.ExecuteNonQuery("CREATE TABLE dual (dummy); INSERT INTO dual (dummy) VALUES ('X');");
+            connection.ExecuteNonQuery(
+                "CREATE TABLE dual (dummy); INSERT INTO dual (dummy) VALUES ('X');"
+            );
 
             var result = command.ExecuteScalar();
 

@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -119,9 +118,14 @@ namespace Moq.Tests
         public void ShouldPreserveStackTraceWhenRaisingEvent()
         {
             var mock = new Mock<IAdder<string>>();
-            mock.Object.Added += (s, e) => { throw new InvalidOperationException(); };
+            mock.Object.Added += (s, e) =>
+            {
+                throw new InvalidOperationException();
+            };
 
-            Assert.Throws<InvalidOperationException>(() => mock.Raise(m => m.Added += null, EventArgs.Empty));
+            Assert.Throws<InvalidOperationException>(
+                () => mock.Raise(m => m.Added += null, EventArgs.Empty)
+            );
         }
 
         [Fact]
@@ -167,7 +171,10 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<string>>();
 
             mock.Setup(add => add.Do(It.IsAny<string>(), It.IsAny<int>()))
-                .Raises(m => m.Added += null, (string s, int i) => new FooArgs { Args = new object[] { s, i } });
+                .Raises(
+                    m => m.Added += null,
+                    (string s, int i) => new FooArgs { Args = new object[] { s, i } }
+                );
 
             var raised = false;
 
@@ -191,7 +198,10 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<string>>();
 
             mock.Setup(add => add.Do(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>()))
-                .Raises(m => m.Added += null, (string s, int i, bool b) => new FooArgs { Args = new object[] { s, i, b } });
+                .Raises(
+                    m => m.Added += null,
+                    (string s, int i, bool b) => new FooArgs { Args = new object[] { s, i, b } }
+                );
 
             var raised = false;
 
@@ -215,8 +225,19 @@ namespace Moq.Tests
         {
             var mock = new Mock<IAdder<string>>();
 
-            mock.Setup(add => add.Do(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<string>()))
-                .Raises(m => m.Added += null, (string s, int i, bool b, string v) => new FooArgs { Args = new object[] { s, i, b, v } });
+            mock.Setup(add =>
+                    add.Do(
+                        It.IsAny<string>(),
+                        It.IsAny<int>(),
+                        It.IsAny<bool>(),
+                        It.IsAny<string>()
+                    )
+                )
+                .Raises(
+                    m => m.Added += null,
+                    (string s, int i, bool b, string v) =>
+                        new FooArgs { Args = new object[] { s, i, b, v } }
+                );
 
             var raised = false;
 
@@ -294,7 +315,10 @@ namespace Moq.Tests
 
             parent.Object.Event += delegate
             {
-                parent.Object.Event += delegate { raisedField = true; };
+                parent.Object.Event += delegate
+                {
+                    raisedField = true;
+                };
             };
 
             parent.Raise(p => p.Event += null, EventArgs.Empty);
@@ -330,7 +354,10 @@ namespace Moq.Tests
             var prop = "";
             mock.Object.PropertyChanged += (sender, args) => prop = args.PropertyName;
 
-            mock.Raise(x => x.PropertyChanged -= It.IsAny<PropertyChangedEventHandler>(), new PropertyChangedEventArgs("foo"));
+            mock.Raise(
+                x => x.PropertyChanged -= It.IsAny<PropertyChangedEventHandler>(),
+                new PropertyChangedEventArgs("foo")
+            );
 
             Assert.Equal("foo", prop);
         }
@@ -343,7 +370,9 @@ namespace Moq.Tests
             var prop = "";
             mock.Object.PropertyChanged += (sender, args) => prop = args.PropertyName;
 
-            Assert.Throws<ArgumentException>(() => mock.Raise(x => x.PropertyChanged -= null, EventArgs.Empty));
+            Assert.Throws<ArgumentException>(
+                () => mock.Raise(x => x.PropertyChanged -= null, EventArgs.Empty)
+            );
         }
 
         [Fact]
@@ -366,7 +395,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IWithEvent>();
 
-            mock.SetupSet(m => m.Value = It.IsAny<int>()).Raises(m => m.InterfaceEvent += null, EventArgs.Empty);
+            mock.SetupSet(m => m.Value = It.IsAny<int>())
+                .Raises(m => m.InterfaceEvent += null, EventArgs.Empty);
 
             var raised = false;
             mock.Object.InterfaceEvent += (sender, args) => raised = true;
@@ -381,7 +411,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<WithEvent>();
 
-            mock.SetupSet(m => m.Value = It.IsAny<int>()).Raises(m => m.VirtualEvent += null, EventArgs.Empty);
+            mock.SetupSet(m => m.Value = It.IsAny<int>())
+                .Raises(m => m.VirtualEvent += null, EventArgs.Empty);
 
             var raised = false;
             mock.Object.VirtualEvent += (sender, args) => raised = true;
@@ -397,7 +428,10 @@ namespace Moq.Tests
             var mock = new Mock<WithEvent>();
 
             Assert.Throws<ArgumentException>(
-                () => mock.SetupSet(m => m.Value = It.IsAny<int>()).Raises(m => m.ClassEvent += null, EventArgs.Empty));
+                () =>
+                    mock.SetupSet(m => m.Value = It.IsAny<int>())
+                        .Raises(m => m.ClassEvent += null, EventArgs.Empty)
+            );
         }
 
         //[Fact(Skip = "Events on non-virtual events not supported yet")]
@@ -433,7 +467,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IAdder<int>>();
 
-            mock.Setup(m => m.Do("foo")).Raises<string>(m => m.Done += null, s => new DoneArgs { Value = s });
+            mock.Setup(m => m.Do("foo"))
+                .Raises<string>(m => m.Done += null, s => new DoneArgs { Value = s });
 
             DoneArgs args = null;
             mock.Object.Done += (sender, e) => args = e;
@@ -467,7 +502,10 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<int>>();
 
             mock.Setup(m => m.Do("foo", 5, true))
-                .Raises(m => m.Done += null, (string s, int i, bool b) => new DoneArgs { Value = s + i + b });
+                .Raises(
+                    m => m.Done += null,
+                    (string s, int i, bool b) => new DoneArgs { Value = s + i + b }
+                );
 
             DoneArgs args = null;
             mock.Object.Done += (sender, e) => args = e;
@@ -484,7 +522,10 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<int>>();
 
             mock.Setup(m => m.Do("foo", 5, true, "bar"))
-                .Raises(m => m.Done += null, (string s, int i, bool b, string s1) => new DoneArgs { Value = s + i + b + s1 });
+                .Raises(
+                    m => m.Done += null,
+                    (string s, int i, bool b, string s1) => new DoneArgs { Value = s + i + b + s1 }
+                );
 
             DoneArgs args = null;
             mock.Object.Done += (sender, e) => args = e;
@@ -501,7 +542,11 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<int>>();
 
             mock.Setup(m => m.Do("foo", 5, true, "bar", 5))
-                .Raises(m => m.Done += null, (string s, int i, bool b, string s1, int arg5) => new DoneArgs { Value = s + i + b + s1 + arg5 });
+                .Raises(
+                    m => m.Done += null,
+                    (string s, int i, bool b, string s1, int arg5) =>
+                        new DoneArgs { Value = s + i + b + s1 + arg5 }
+                );
 
             DoneArgs args = null;
             mock.Object.Done += (sender, e) => args = e;
@@ -518,7 +563,11 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<int>>();
 
             mock.Setup(m => m.Do("foo", 5, true, "bar", 5, 6))
-                .Raises(m => m.Done += null, (string s, int i, bool b, string s1, int arg5, int arg6) => new DoneArgs { Value = s + i + b + s1 + arg5 + arg6 });
+                .Raises(
+                    m => m.Done += null,
+                    (string s, int i, bool b, string s1, int arg5, int arg6) =>
+                        new DoneArgs { Value = s + i + b + s1 + arg5 + arg6 }
+                );
 
             DoneArgs args = null;
             mock.Object.Done += (sender, e) => args = e;
@@ -535,7 +584,11 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<int>>();
 
             mock.Setup(m => m.Do("foo", 5, true, "bar", 5, 6, 7))
-                .Raises(m => m.Done += null, (string s, int i, bool b, string s1, int arg5, int arg6, int arg7) => new DoneArgs { Value = s + i + b + s1 + arg5 + arg6 + arg7 });
+                .Raises(
+                    m => m.Done += null,
+                    (string s, int i, bool b, string s1, int arg5, int arg6, int arg7) =>
+                        new DoneArgs { Value = s + i + b + s1 + arg5 + arg6 + arg7 }
+                );
 
             DoneArgs args = null;
             mock.Object.Done += (sender, e) => args = e;
@@ -552,7 +605,11 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<int>>();
 
             mock.Setup(m => m.Do("foo", 5, true, "bar", 5, 6, 7, 8))
-                .Raises(m => m.Done += null, (string s, int i, bool b, string s1, int arg5, int arg6, int arg7, int arg8) => new DoneArgs { Value = s + i + b + s1 + arg5 + arg6 + arg7 + arg8 });
+                .Raises(
+                    m => m.Done += null,
+                    (string s, int i, bool b, string s1, int arg5, int arg6, int arg7, int arg8) =>
+                        new DoneArgs { Value = s + i + b + s1 + arg5 + arg6 + arg7 + arg8 }
+                );
 
             DoneArgs args = null;
             mock.Object.Done += (sender, e) => args = e;
@@ -570,7 +627,11 @@ namespace Moq.Tests
             string message = null;
             int? value = null;
 
-            mock.Object.CustomEvent += (s, i) => { message = s; value = i; };
+            mock.Object.CustomEvent += (s, i) =>
+            {
+                message = s;
+                value = i;
+            };
 
             mock.Raise(x => x.CustomEvent += null, "foo", 5);
 
@@ -585,7 +646,11 @@ namespace Moq.Tests
             string message = null;
             int? value = null;
 
-            mock.Object.CustomEvent += (s, i) => { message = s; value = i; };
+            mock.Object.CustomEvent += (s, i) =>
+            {
+                message = s;
+                value = i;
+            };
             mock.SetupSet(w => w.Value = 5).Raises(x => x.CustomEvent += null, "foo", 5);
 
             mock.Object.Value = 5;
@@ -618,7 +683,8 @@ namespace Moq.Tests
         [Fact]
         public void When_raising_event_on_inner_mock_event_of_same_name_on_root_mock_will_not_be_raised()
         {
-            bool raisedOnRootMock = false, raisedOnInnerMock = false;
+            bool raisedOnRootMock = false,
+                raisedOnInnerMock = false;
             var parentMock = new Mock<IParent> { DefaultValue = DefaultValue.Mock };
             parentMock.Object.Done += (_, __) => raisedOnRootMock = true;
             parentMock.Object.Adder.Done += (_, __) => raisedOnInnerMock = true;
@@ -739,9 +805,18 @@ namespace Moq.Tests
             mock.SetupAdd(m => m.VirtualEvent += It.IsAny<EventHandler>()).CallBase();
 
             //Act
-            mock.Object.VirtualEvent += (s, a) => { invoked++; };
-            mock.Object.VirtualEvent += (s, a) => { invoked++; };
-            mock.Object.VirtualEvent += (s, a) => { invoked++; };
+            mock.Object.VirtualEvent += (s, a) =>
+            {
+                invoked++;
+            };
+            mock.Object.VirtualEvent += (s, a) =>
+            {
+                invoked++;
+            };
+            mock.Object.VirtualEvent += (s, a) =>
+            {
+                invoked++;
+            };
             mock.Object.OnVirtualEvent();
 
             //Assert
@@ -757,9 +832,18 @@ namespace Moq.Tests
             mock.SetupAdd(m => m.VirtualEvent += It.IsAny<EventHandler>());
 
             //Act
-            mock.Object.VirtualEvent += (s, a) => { invoked++; };
-            mock.Object.VirtualEvent += (s, a) => { invoked++; };
-            mock.Object.VirtualEvent += (s, a) => { invoked++; };
+            mock.Object.VirtualEvent += (s, a) =>
+            {
+                invoked++;
+            };
+            mock.Object.VirtualEvent += (s, a) =>
+            {
+                invoked++;
+            };
+            mock.Object.VirtualEvent += (s, a) =>
+            {
+                invoked++;
+            };
             mock.Object.OnVirtualEvent();
 
             //Assert
@@ -815,7 +899,9 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<EventArgs>>();
 
             //Act
-            var exception = Record.Exception(() => mock.VerifyRemove(m => m.Do(It.IsAny<string>())));
+            var exception = Record.Exception(
+                () => mock.VerifyRemove(m => m.Do(It.IsAny<string>()))
+            );
 
             //Assert
             Assert.IsType<ArgumentException>(exception);
@@ -842,7 +928,8 @@ namespace Moq.Tests
             //Arrange
             var invoked = false;
             var mock = new Mock<IAdder<EventArgs>>();
-            mock.SetupRemove(m => m.Added -= It.IsAny<EventHandler>()).Callback(() => invoked = true);
+            mock.SetupRemove(m => m.Added -= It.IsAny<EventHandler>())
+                .Callback(() => invoked = true);
 
             //Act
             mock.Object.Added -= (s, a) => { };
@@ -937,9 +1024,7 @@ namespace Moq.Tests
             event EventHandler<DoneArgs> Done;
         }
 
-        public interface IDerived : IParent
-        {
-        }
+        public interface IDerived : IParent { }
 
         public interface IInterfaceWithEvent
         {
@@ -947,7 +1032,6 @@ namespace Moq.Tests
         }
 
         public class FordawrdEventDoProtectedImplementation : INotifyPropertyChanged
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                     private PropertyChangedEventHandler eventHandler;
@@ -965,14 +1049,8 @@ namespace Moq.Tests
 
             protected virtual event PropertyChangedEventHandler PropertyChanged
             {
-                add
-                {
-                    this.eventHandler += value;
-                }
-                remove
-                {
-                    this.eventHandler -= value;
-                }
+                add { this.eventHandler += value; }
+                remove { this.eventHandler -= value; }
             }
         }
     }

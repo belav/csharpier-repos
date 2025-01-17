@@ -29,161 +29,170 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
 using System.Net.Http.Headers;
+using NUnit.Framework;
 
 namespace MonoTests.System.Net.Http.Headers
 {
-	[TestFixture]
-	public class NameValueHeaderValueTest
-	{
-		[Test]
-		public void Ctor_InvalidArguments ()
-		{
-			try {
-				new NameValueHeaderValue (null);
-				Assert.Fail ("#1");
-			} catch (ArgumentException) {
-			}
+    [TestFixture]
+    public class NameValueHeaderValueTest
+    {
+        [Test]
+        public void Ctor_InvalidArguments()
+        {
+            try
+            {
+                new NameValueHeaderValue(null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentException) { }
 
-			try {
-				new NameValueHeaderValue (" ", null);
-				Assert.Fail ("#2");
-			} catch (FormatException) {
-			}
+            try
+            {
+                new NameValueHeaderValue(" ", null);
+                Assert.Fail("#2");
+            }
+            catch (FormatException) { }
 
-			try {
-				new NameValueHeaderValue ("\x7f", null);
-				Assert.Fail ("#3");
-			} catch (FormatException) {
-			}
+            try
+            {
+                new NameValueHeaderValue("\x7f", null);
+                Assert.Fail("#3");
+            }
+            catch (FormatException) { }
 
-			try {
-				new NameValueHeaderValue ("arg", "\x7f");
-				Assert.Fail ("#4");
-			} catch (FormatException) {
-			}
-		}
+            try
+            {
+                new NameValueHeaderValue("arg", "\x7f");
+                Assert.Fail("#4");
+            }
+            catch (FormatException) { }
+        }
 
-		[Test]
-		public void Ctor_ValidArguments ()
-		{
-			NameValueHeaderValue nvh;
-			
-			nvh = new NameValueHeaderValue ("arg", "~");
-			Assert.AreEqual ("~", nvh.Value, "#1");
-			
-			nvh = new NameValueHeaderValue ("arg", "\"\x7f\x80\"");
-			Assert.AreEqual ("\"\x7f\x80\"", nvh.Value, "#2");
-		}
+        [Test]
+        public void Ctor_ValidArguments()
+        {
+            NameValueHeaderValue nvh;
 
-		[Test]
-		public void Equals ()
-		{
-			var value = new NameValueHeaderValue ("ab");
-			Assert.AreEqual (value, new NameValueHeaderValue ("ab"), "#1");
-			Assert.AreEqual (value, new NameValueHeaderValue ("AB"), "#2");
-			Assert.AreNotEqual (value, new NameValueHeaderValue ("AA"), "#3");
-			Assert.AreEqual (value, new NameValueHeaderValue ("AB", ""), "#3-1");
+            nvh = new NameValueHeaderValue("arg", "~");
+            Assert.AreEqual("~", nvh.Value, "#1");
 
-			value = new NameValueHeaderValue ("ab", "DD");
-			Assert.AreEqual (value, new NameValueHeaderValue ("Ab", "DD"), "#4");
-			Assert.AreNotEqual (value, new NameValueHeaderValue ("AB"), "#5");
-			Assert.AreEqual (value, new NameValueHeaderValue ("Ab", "dd"), "#6");
-		}
+            nvh = new NameValueHeaderValue("arg", "\"\x7f\x80\"");
+            Assert.AreEqual("\"\x7f\x80\"", nvh.Value, "#2");
+        }
 
-		[Test]
-		public void Parse ()
-		{
-			var res = NameValueHeaderValue.Parse ("c");
-			Assert.AreEqual ("c", res.Name, "#1");
-			Assert.IsNull (res.Value, "#1a");
+        [Test]
+        public void Equals()
+        {
+            var value = new NameValueHeaderValue("ab");
+            Assert.AreEqual(value, new NameValueHeaderValue("ab"), "#1");
+            Assert.AreEqual(value, new NameValueHeaderValue("AB"), "#2");
+            Assert.AreNotEqual(value, new NameValueHeaderValue("AA"), "#3");
+            Assert.AreEqual(value, new NameValueHeaderValue("AB", ""), "#3-1");
 
-			res = NameValueHeaderValue.Parse ("c = 1");
-			Assert.AreEqual ("c", res.Name, "#2");
-			Assert.AreEqual ("1", res.Value, "#2a");
-			Assert.AreEqual ("c=1", res.ToString (), "#2b");
+            value = new NameValueHeaderValue("ab", "DD");
+            Assert.AreEqual(value, new NameValueHeaderValue("Ab", "DD"), "#4");
+            Assert.AreNotEqual(value, new NameValueHeaderValue("AB"), "#5");
+            Assert.AreEqual(value, new NameValueHeaderValue("Ab", "dd"), "#6");
+        }
 
-			res = NameValueHeaderValue.Parse ("c = \"1\"");
-			Assert.AreEqual ("c", res.Name, "#3");
-			Assert.AreEqual ("\"1\"", res.Value, "#3a");
-			Assert.AreEqual ("c=\"1\"", res.ToString (), "#3b");
-		}
+        [Test]
+        public void Parse()
+        {
+            var res = NameValueHeaderValue.Parse("c");
+            Assert.AreEqual("c", res.Name, "#1");
+            Assert.IsNull(res.Value, "#1a");
 
-		[Test]
-		public void Parse_Invalid ()
-		{
-			try {
-				NameValueHeaderValue.Parse (null);
-				Assert.Fail ("#1");
-			} catch (FormatException) {
-			}
+            res = NameValueHeaderValue.Parse("c = 1");
+            Assert.AreEqual("c", res.Name, "#2");
+            Assert.AreEqual("1", res.Value, "#2a");
+            Assert.AreEqual("c=1", res.ToString(), "#2b");
 
-			try {
-				NameValueHeaderValue.Parse ("  ");
-				Assert.Fail ("#2");
-			} catch (FormatException) {
-			}
+            res = NameValueHeaderValue.Parse("c = \"1\"");
+            Assert.AreEqual("c", res.Name, "#3");
+            Assert.AreEqual("\"1\"", res.Value, "#3a");
+            Assert.AreEqual("c=\"1\"", res.ToString(), "#3b");
+        }
 
-			try {
-				NameValueHeaderValue.Parse ("a;b");
-				Assert.Fail ("#3");
-			} catch (FormatException) {
-			}
+        [Test]
+        public void Parse_Invalid()
+        {
+            try
+            {
+                NameValueHeaderValue.Parse(null);
+                Assert.Fail("#1");
+            }
+            catch (FormatException) { }
 
-			try {
-				NameValueHeaderValue.Parse ("c = 1;");
-				Assert.Fail ("#3");
-			} catch (FormatException) {
-			}
-		}
+            try
+            {
+                NameValueHeaderValue.Parse("  ");
+                Assert.Fail("#2");
+            }
+            catch (FormatException) { }
 
-		[Test]
-		public void Properties ()
-		{
-			var value = new NameValueHeaderValue ("s", "p");
-			Assert.AreEqual ("s", value.Name, "#1");
-			Assert.AreEqual ("p", value.Value, "#2");
+            try
+            {
+                NameValueHeaderValue.Parse("a;b");
+                Assert.Fail("#3");
+            }
+            catch (FormatException) { }
 
-			value = new NameValueHeaderValue ("s");
-			Assert.AreEqual ("s", value.Name, "#3");
-			Assert.IsNull (value.Value, "#4");
+            try
+            {
+                NameValueHeaderValue.Parse("c = 1;");
+                Assert.Fail("#3");
+            }
+            catch (FormatException) { }
+        }
 
-			value.Value = "bb";
-			Assert.AreEqual ("bb", value.Value, "#5");
+        [Test]
+        public void Properties()
+        {
+            var value = new NameValueHeaderValue("s", "p");
+            Assert.AreEqual("s", value.Name, "#1");
+            Assert.AreEqual("p", value.Value, "#2");
 
-			value.Value = null;
-		}
+            value = new NameValueHeaderValue("s");
+            Assert.AreEqual("s", value.Name, "#3");
+            Assert.IsNull(value.Value, "#4");
 
-		[Test]
-		public void Properties_Invalid ()
-		{
-			var value = new NameValueHeaderValue ("s");
-			try {
-				value.Value = "   ";
-				Assert.Fail ("#1");
-			} catch (FormatException) {
-			}
-		}
+            value.Value = "bb";
+            Assert.AreEqual("bb", value.Value, "#5");
 
-		[Test]
-		public void TryParse ()
-		{
-			NameValueHeaderValue res;
-			Assert.IsTrue (NameValueHeaderValue.TryParse ("a", out res), "#1");
-			Assert.AreEqual ("a", res.Name, "#2");
-			Assert.IsNull (res.Value, "#3");
-		}
+            value.Value = null;
+        }
 
-		[Test]
-		public void TryParse_Invalid ()
-		{
-			NameValueHeaderValue res;
-			Assert.IsFalse (NameValueHeaderValue.TryParse ("", out res), "#1");
-			Assert.IsNull (res, "#2");
+        [Test]
+        public void Properties_Invalid()
+        {
+            var value = new NameValueHeaderValue("s");
+            try
+            {
+                value.Value = "   ";
+                Assert.Fail("#1");
+            }
+            catch (FormatException) { }
+        }
 
-			Assert.IsFalse (NameValueHeaderValue.TryParse ("\"a\"=b", out res), "#3");
-			Assert.IsNull (res, "#4");
-		}
-	}
+        [Test]
+        public void TryParse()
+        {
+            NameValueHeaderValue res;
+            Assert.IsTrue(NameValueHeaderValue.TryParse("a", out res), "#1");
+            Assert.AreEqual("a", res.Name, "#2");
+            Assert.IsNull(res.Value, "#3");
+        }
+
+        [Test]
+        public void TryParse_Invalid()
+        {
+            NameValueHeaderValue res;
+            Assert.IsFalse(NameValueHeaderValue.TryParse("", out res), "#1");
+            Assert.IsNull(res, "#2");
+
+            Assert.IsFalse(NameValueHeaderValue.TryParse("\"a\"=b", out res), "#3");
+            Assert.IsNull(res, "#4");
+        }
+    }
 }

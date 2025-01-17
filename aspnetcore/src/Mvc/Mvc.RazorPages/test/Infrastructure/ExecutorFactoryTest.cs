@@ -53,7 +53,9 @@ public class ExecutorFactoryTest
     public async Task CreateExecutor_ForActionResultReturningMethod_WithParameters()
     {
         // Arrange
-        var methodInfo = typeof(TestPage).GetMethod(nameof(TestPage.ActionResultReturnHandlerWithParameters));
+        var methodInfo = typeof(TestPage).GetMethod(
+            nameof(TestPage.ActionResultReturnHandlerWithParameters)
+        );
         var handler = new HandlerMethodDescriptor()
         {
             MethodInfo = methodInfo,
@@ -175,8 +177,13 @@ public class ExecutorFactoryTest
         };
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => ExecutorFactory.CreateExecutor(handler));
-        Assert.Equal($"Unsupported handler method return type '{methodInfo.ReturnType}'.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => ExecutorFactory.CreateExecutor(handler)
+        );
+        Assert.Equal(
+            $"Unsupported handler method return type '{methodInfo.ReturnType}'.",
+            ex.Message
+        );
     }
 
     private static object[] CreateArguments(MethodInfo methodInfo)
@@ -205,31 +212,31 @@ public class ExecutorFactoryTest
     {
         var parameters = methodInfo.GetParameters();
 
-        return parameters.Select(p => new HandlerParameterDescriptor()
-        {
-            BindingInfo = BindingInfo.GetBindingInfo(p.GetCustomAttributes()),
-            Name = p.Name,
-            ParameterInfo = p,
-            ParameterType = p.ParameterType,
-        }).ToArray();
+        return parameters
+            .Select(p => new HandlerParameterDescriptor()
+            {
+                BindingInfo = BindingInfo.GetBindingInfo(p.GetCustomAttributes()),
+                Name = p.Name,
+                ParameterInfo = p,
+                ParameterType = p.ParameterType,
+            })
+            .ToArray();
     }
 
     private class TestPage : Page
     {
-        public TestPage()
-        {
-        }
+        public TestPage() { }
 
         public bool SideEffects { get; private set; }
 
         public IActionResult ActionResultReturningHandler() => new EmptyResult();
 
-        public IActionResult ActionResultReturnHandlerWithParameters(int arg1, string arg2 = "Hello")
+        public IActionResult ActionResultReturnHandlerWithParameters(
+            int arg1,
+            string arg2 = "Hello"
+        )
         {
-            return new ContentResult
-            {
-                Content = $"{arg2} {arg1}",
-            };
+            return new ContentResult { Content = $"{arg2} {arg1}" };
         }
 
         public ViewResult ConcreteActionResult() => new ViewResult();
@@ -247,14 +254,12 @@ public class ExecutorFactoryTest
             });
         }
 
-        public Task<IActionResult> GenericTaskHandler() => Task.FromResult<IActionResult>(new EmptyResult());
+        public Task<IActionResult> GenericTaskHandler() =>
+            Task.FromResult<IActionResult>(new EmptyResult());
 
         public Task<ContentResult> TaskReturningConcreteSubtype(string arg = "value")
         {
-            return Task.FromResult(new ContentResult
-            {
-                Content = arg,
-            });
+            return Task.FromResult(new ContentResult { Content = arg });
         }
 
         public override Task ExecuteAsync()
@@ -269,12 +274,12 @@ public class ExecutorFactoryTest
 
         public IActionResult ActionResultReturningHandler() => new EmptyResult();
 
-        public IActionResult ActionResultReturnHandlerWithParameters(int arg1, string arg2 = "Hello")
+        public IActionResult ActionResultReturnHandlerWithParameters(
+            int arg1,
+            string arg2 = "Hello"
+        )
         {
-            return new ContentResult
-            {
-                Content = $"{arg2} {arg1}",
-            };
+            return new ContentResult { Content = $"{arg2} {arg1}" };
         }
 
         public ViewResult ConcreteActionResult() => new ViewResult();
@@ -292,14 +297,12 @@ public class ExecutorFactoryTest
             });
         }
 
-        public Task<IActionResult> GenericTaskHandler() => Task.FromResult<IActionResult>(new EmptyResult());
+        public Task<IActionResult> GenericTaskHandler() =>
+            Task.FromResult<IActionResult>(new EmptyResult());
 
         public Task<ContentResult> TaskReturningConcreteSubtype(string arg = "value")
         {
-            return Task.FromResult(new ContentResult
-            {
-                Content = arg,
-            });
+            return Task.FromResult(new ContentResult { Content = arg });
         }
 
         public string StringResult() => "";
@@ -311,9 +314,7 @@ public class ExecutorFactoryTest
 
     private class EmptyPage : Page
     {
-        public EmptyPage()
-        {
-        }
+        public EmptyPage() { }
 
         public override Task ExecuteAsync()
         {

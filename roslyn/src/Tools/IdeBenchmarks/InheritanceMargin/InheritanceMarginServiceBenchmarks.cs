@@ -32,15 +32,20 @@ namespace IdeBenchmarks.InheritanceMargin
         {
             _useExportProviderAttribute.Before(null);
 
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
-            var solutionPath = Path.Combine(roslynRoot, @"src\Tools\IdeCoreBenchmarks\Assets\Microsoft.CodeAnalysis.sln");
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
+            var solutionPath = Path.Combine(
+                roslynRoot,
+                @"src\Tools\IdeCoreBenchmarks\Assets\Microsoft.CodeAnalysis.sln"
+            );
 
             if (!File.Exists(solutionPath))
                 throw new ArgumentException("Couldn't find solution.");
 
             Console.WriteLine("Found solution.");
-            var assemblies = MSBuildMefHostServices.DefaultAssemblies
-                .AddRange(EditorTestCompositions.EditorFeatures.Assemblies)
+            var assemblies = MSBuildMefHostServices
+                .DefaultAssemblies.AddRange(EditorTestCompositions.EditorFeatures.Assemblies)
                 .Distinct();
 
             var hostService = MefHostServices.Create(assemblies);
@@ -57,9 +62,9 @@ namespace IdeBenchmarks.InheritanceMargin
         [Benchmark]
         public async Task BenchmarkInheritanceMarginServiceAsync()
         {
-            var items = await BenchmarksHelpers.GenerateInheritanceMarginItemsAsync(
-                           _solution,
-                           CancellationToken.None).ConfigureAwait(false);
+            var items = await BenchmarksHelpers
+                .GenerateInheritanceMarginItemsAsync(_solution, CancellationToken.None)
+                .ConfigureAwait(false);
             Console.WriteLine($"Total {items.Length} items are generated.");
         }
     }

@@ -3,23 +3,23 @@ namespace System.Workflow.ComponentModel.Compiler
     #region Imports
 
     using System;
-    using System.Text;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Collections.Generic;
     using System.CodeDom;
-    using System.Reflection;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Runtime.Serialization;
     using System.Diagnostics;
-    using System.Text.RegularExpressions;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Runtime.Versioning;
     using System.Security;
+    using System.Text;
+    using System.Text.RegularExpressions;
     using Microsoft.Build.Utilities;
-    using System.IO;
-    using System.Runtime.InteropServices;
 
     #endregion
 
@@ -38,10 +38,18 @@ namespace System.Workflow.ComponentModel.Compiler
 
         const string SerializationItem_TargetFramework = "TargetFramework";
 
-        static IDictionary<Version, string> KnownSupportedTargetFrameworksAndRelatedCompilerVersions =
-            new Dictionary<Version, string>()
-            { { TargetFramework30, TargetFramework30CompilerVersion }, { TargetFramework35, TargetFramework35CompilerVersion }, 
-              { TargetFramework40, TargetFramework40CompilerVersion } };
+        static IDictionary<
+            Version,
+            string
+        > KnownSupportedTargetFrameworksAndRelatedCompilerVersions = new Dictionary<
+            Version,
+            string
+        >()
+        {
+            { TargetFramework30, TargetFramework30CompilerVersion },
+            { TargetFramework35, TargetFramework35CompilerVersion },
+            { TargetFramework40, TargetFramework40CompilerVersion },
+        };
 
         FrameworkName targetFramework;
         string compilerVersion;
@@ -58,15 +66,14 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new ArgumentNullException("info");
             }
 
-            this.targetFramework = new FrameworkName(info.GetString(MultiTargetingInfo.SerializationItem_TargetFramework));
+            this.targetFramework = new FrameworkName(
+                info.GetString(MultiTargetingInfo.SerializationItem_TargetFramework)
+            );
         }
 
         public FrameworkName TargetFramework
         {
-            get
-            {
-                return this.targetFramework;
-            }
+            get { return this.targetFramework; }
         }
         public string CompilerVersion
         {
@@ -74,7 +81,9 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 if (this.compilerVersion == null)
                 {
-                    this.compilerVersion = MultiTargetingInfo.GetCompilerVersion(this.targetFramework.Version);
+                    this.compilerVersion = MultiTargetingInfo.GetCompilerVersion(
+                        this.targetFramework.Version
+                    );
                 }
                 return this.compilerVersion;
             }
@@ -88,7 +97,11 @@ namespace System.Workflow.ComponentModel.Compiler
                 throw new ArgumentNullException("info");
             }
 
-            info.AddValue(MultiTargetingInfo.SerializationItem_TargetFramework, this.targetFramework.FullName, typeof(string));
+            info.AddValue(
+                MultiTargetingInfo.SerializationItem_TargetFramework,
+                this.targetFramework.FullName,
+                typeof(string)
+            );
         }
 
         static string GetCompilerVersion(Version targetFrameworkVersion)
@@ -101,11 +114,19 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             else
             {
-                versionKey = new Version(targetFrameworkVersion.Major, targetFrameworkVersion.Minor);
+                versionKey = new Version(
+                    targetFrameworkVersion.Major,
+                    targetFrameworkVersion.Minor
+                );
             }
 
             string compilerVersion;
-            if (!MultiTargetingInfo.KnownSupportedTargetFrameworksAndRelatedCompilerVersions.TryGetValue(versionKey, out compilerVersion))
+            if (
+                !MultiTargetingInfo.KnownSupportedTargetFrameworksAndRelatedCompilerVersions.TryGetValue(
+                    versionKey,
+                    out compilerVersion
+                )
+            )
             {
                 compilerVersion = string.Empty;
             }
@@ -126,7 +147,9 @@ namespace System.Workflow.ComponentModel.Compiler
                 return refManager.IsFrameworkReferenceAssembly(path);
             }
 
-            public static WorkflowCompilerParameters NormalizeReferencedAssemblies(WorkflowCompilerParameters parameters)
+            public static WorkflowCompilerParameters NormalizeReferencedAssemblies(
+                WorkflowCompilerParameters parameters
+            )
             {
                 EnsureRuntimeManager();
                 EnsureReferenceManager();
@@ -134,7 +157,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 bool wasNormelized = false;
                 for (int i = 0; i < parameters.ReferencedAssemblies.Count; i++)
                 {
-                    normalizedAssemblies[i] = NormalizePath(parameters.ReferencedAssemblies[i], ref wasNormelized);
+                    normalizedAssemblies[i] = NormalizePath(
+                        parameters.ReferencedAssemblies[i],
+                        ref wasNormelized
+                    );
                 }
                 if (wasNormelized)
                 {
@@ -145,7 +171,10 @@ namespace System.Workflow.ComponentModel.Compiler
                     return parameters;
                 }
             }
-            public static WorkflowCompilerParameters RenormalizeReferencedAssemblies(WorkflowCompilerParameters parameters)
+
+            public static WorkflowCompilerParameters RenormalizeReferencedAssemblies(
+                WorkflowCompilerParameters parameters
+            )
             {
                 EnsureRuntimeManager();
                 EnsureReferenceManager();
@@ -153,7 +182,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 bool wasRenormelized = false;
                 for (int i = 0; i < parameters.ReferencedAssemblies.Count; i++)
                 {
-                    renormalizedAssemblies[i] = RenormalizePath(parameters.ReferencedAssemblies[i], ref wasRenormelized);
+                    renormalizedAssemblies[i] = RenormalizePath(
+                        parameters.ReferencedAssemblies[i],
+                        ref wasRenormelized
+                    );
                 }
                 if (wasRenormelized)
                 {
@@ -172,6 +204,7 @@ namespace System.Workflow.ComponentModel.Compiler
                     runtimeManager = new RuntimeManager();
                 }
             }
+
             static void EnsureReferenceManager()
             {
                 if (refManager == null)
@@ -191,13 +224,17 @@ namespace System.Workflow.ComponentModel.Compiler
                 else if (IsPathUnderDirectory(path, refManager.FrameworkReferenceAssemblyRoot))
                 {
                     wasNormelized = true;
-                    return path.Replace(refManager.FrameworkReferenceAssemblyRoot, FrameworkReferencePrefix);
+                    return path.Replace(
+                        refManager.FrameworkReferenceAssemblyRoot,
+                        FrameworkReferencePrefix
+                    );
                 }
                 else
                 {
                     return path;
                 }
             }
+
             static string RenormalizePath(string path, ref bool wasRenormelized)
             {
                 if (path.StartsWith(RuntimeReferencePrefix, StringComparison.Ordinal))
@@ -208,13 +245,17 @@ namespace System.Workflow.ComponentModel.Compiler
                 else if (path.StartsWith(FrameworkReferencePrefix, StringComparison.Ordinal))
                 {
                     wasRenormelized = true;
-                    return path.Replace(FrameworkReferencePrefix, refManager.FrameworkReferenceAssemblyRoot);
+                    return path.Replace(
+                        FrameworkReferencePrefix,
+                        refManager.FrameworkReferenceAssemblyRoot
+                    );
                 }
                 else
                 {
                     return path;
                 }
             }
+
             static bool IsPathUnderDirectory(string path, string parentDirectory)
             {
                 if (!path.StartsWith(parentDirectory, StringComparison.CurrentCultureIgnoreCase))
@@ -226,7 +267,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     return false;
                 }
-                if ((path[parentLength] != Path.DirectorySeparatorChar) && (path[parentLength] != Path.AltDirectorySeparatorChar))
+                if (
+                    (path[parentLength] != Path.DirectorySeparatorChar)
+                    && (path[parentLength] != Path.AltDirectorySeparatorChar)
+                )
                 {
                     return false;
                 }
@@ -236,24 +280,27 @@ namespace System.Workflow.ComponentModel.Compiler
 
             class RuntimeManager
             {
-                const string NDPSetupRegistryBranch = "SOFTWARE\\Microsoft\\NET Framework Setup\\NDP";
+                const string NDPSetupRegistryBranch =
+                    "SOFTWARE\\Microsoft\\NET Framework Setup\\NDP";
 
                 string netFxRuntimeRoot;
 
                 public RuntimeManager()
                 {
-                    string runtimePath = XomlCompilerHelper.TrimDirectorySeparatorChar(RuntimeEnvironment.GetRuntimeDirectory());
-                    this.netFxRuntimeRoot = XomlCompilerHelper.TrimDirectorySeparatorChar(Path.GetDirectoryName(runtimePath));
+                    string runtimePath = XomlCompilerHelper.TrimDirectorySeparatorChar(
+                        RuntimeEnvironment.GetRuntimeDirectory()
+                    );
+                    this.netFxRuntimeRoot = XomlCompilerHelper.TrimDirectorySeparatorChar(
+                        Path.GetDirectoryName(runtimePath)
+                    );
                 }
 
                 public string NetFxRuntimeRoot
                 {
-                    get
-                    {
-                        return this.netFxRuntimeRoot;
-                    }
+                    get { return this.netFxRuntimeRoot; }
                 }
             }
+
             class ReferenceManager
             {
                 string frameworkReferenceAssemblyRoot;
@@ -261,17 +308,24 @@ namespace System.Workflow.ComponentModel.Compiler
 
                 public ReferenceManager()
                 {
-                    this.frameworkReferenceAssemblyRoot = ToolLocationHelper.GetProgramFilesReferenceAssemblyRoot();
-                    this.frameworkReferenceDirectories = new HashSet<string>(StringComparer.CurrentCultureIgnoreCase);
+                    this.frameworkReferenceAssemblyRoot =
+                        ToolLocationHelper.GetProgramFilesReferenceAssemblyRoot();
+                    this.frameworkReferenceDirectories = new HashSet<string>(
+                        StringComparer.CurrentCultureIgnoreCase
+                    );
 
-                    IList<string> supportedTargetFrameworks = ToolLocationHelper.GetSupportedTargetFrameworks();
+                    IList<string> supportedTargetFrameworks =
+                        ToolLocationHelper.GetSupportedTargetFrameworks();
                     for (int i = 0; i < supportedTargetFrameworks.Count; i++)
                     {
                         FrameworkName fxName = new FrameworkName(supportedTargetFrameworks[i]);
-                        IList<string> refDirectories = ToolLocationHelper.GetPathToReferenceAssemblies(fxName);
+                        IList<string> refDirectories =
+                            ToolLocationHelper.GetPathToReferenceAssemblies(fxName);
                         for (int j = 0; j < refDirectories.Count; j++)
                         {
-                            string refDir = XomlCompilerHelper.TrimDirectorySeparatorChar(refDirectories[j]);
+                            string refDir = XomlCompilerHelper.TrimDirectorySeparatorChar(
+                                refDirectories[j]
+                            );
                             if (!this.frameworkReferenceDirectories.Contains(refDir))
                             {
                                 this.frameworkReferenceDirectories.Add(refDir);
@@ -282,15 +336,14 @@ namespace System.Workflow.ComponentModel.Compiler
 
                 public string FrameworkReferenceAssemblyRoot
                 {
-                    get
-                    {
-                        return this.frameworkReferenceAssemblyRoot;
-                    }
+                    get { return this.frameworkReferenceAssemblyRoot; }
                 }
 
                 public bool IsFrameworkReferenceAssembly(string path)
                 {
-                    string dir = XomlCompilerHelper.TrimDirectorySeparatorChar(Path.GetDirectoryName(Path.GetFullPath(path)));
+                    string dir = XomlCompilerHelper.TrimDirectorySeparatorChar(
+                        Path.GetDirectoryName(Path.GetFullPath(path))
+                    );
                     return this.frameworkReferenceDirectories.Contains(dir);
                 }
             }
@@ -298,7 +351,9 @@ namespace System.Workflow.ComponentModel.Compiler
     }
 
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowCompilerParameters : CompilerParameters
     {
         #region Private members
@@ -314,6 +369,7 @@ namespace System.Workflow.ComponentModel.Compiler
         private bool compileWithNoCode = false;
         private bool checkTypes = false;
         private string compilerOptions = null;
+
         [OptionalField(VersionAdded = 2)]
         MultiTargetingInfo mtInfo = null;
 
@@ -321,31 +377,28 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #region Constructors
 
-        public WorkflowCompilerParameters()
-        {
-        }
+        public WorkflowCompilerParameters() { }
 
         public WorkflowCompilerParameters(string[] assemblyNames)
-            : base(assemblyNames)
-        {
-        }
+            : base(assemblyNames) { }
 
         public WorkflowCompilerParameters(string[] assemblyNames, string outputName)
-            : base(assemblyNames, outputName)
-        {
-        }
+            : base(assemblyNames, outputName) { }
 
-        public WorkflowCompilerParameters(string[] assemblyNames, string outputName, bool includeDebugInformation)
-            : base(assemblyNames, outputName, includeDebugInformation)
-        {
-        }
+        public WorkflowCompilerParameters(
+            string[] assemblyNames,
+            string outputName,
+            bool includeDebugInformation
+        )
+            : base(assemblyNames, outputName, includeDebugInformation) { }
 
         public WorkflowCompilerParameters(WorkflowCompilerParameters parameters)
-            : this(parameters, null)
-        {
-        }
+            : this(parameters, null) { }
 
-        internal WorkflowCompilerParameters(WorkflowCompilerParameters parameters, string[] newReferencedAssemblies)
+        internal WorkflowCompilerParameters(
+            WorkflowCompilerParameters parameters,
+            string[] newReferencedAssemblies
+        )
             : this()
         {
             if (parameters == null)
@@ -406,45 +459,47 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public new string CompilerOptions
         {
-            get
-            {
-                return this.compilerOptions;
-            }
-
+            get { return this.compilerOptions; }
             set
             {
                 this.compilerOptions = value;
-                base.CompilerOptions =
-                    XomlCompilerHelper.ProcessCompilerOptions(value, out this.compileWithNoCode, out this.checkTypes);
+                base.CompilerOptions = XomlCompilerHelper.ProcessCompilerOptions(
+                    value,
+                    out this.compileWithNoCode,
+                    out this.checkTypes
+                );
             }
         }
 
         public bool GenerateCodeCompileUnitOnly
         {
-            get
-            {
-                return this.generateCCU;
-            }
-            set
-            {
-                this.generateCCU = value;
-            }
+            get { return this.generateCCU; }
+            set { this.generateCCU = value; }
         }
 
         public string LanguageToUse
         {
-            get
-            {
-                return this.languageToUse;
-            }
+            get { return this.languageToUse; }
             set
             {
                 if (String.IsNullOrEmpty(value))
                     throw new ArgumentNullException("value");
 
-                if (String.Compare(value, SupportedLanguages.CSharp.ToString(), StringComparison.OrdinalIgnoreCase) != 0 &&
-                    String.Compare(value, SupportedLanguages.VB.ToString(), StringComparison.OrdinalIgnoreCase) != 0)
-                    throw new NotSupportedException(SR.GetString(SR.Error_LanguageNeedsToBeVBCSharp, value));
+                if (
+                    String.Compare(
+                        value,
+                        SupportedLanguages.CSharp.ToString(),
+                        StringComparison.OrdinalIgnoreCase
+                    ) != 0
+                    && String.Compare(
+                        value,
+                        SupportedLanguages.VB.ToString(),
+                        StringComparison.OrdinalIgnoreCase
+                    ) != 0
+                )
+                    throw new NotSupportedException(
+                        SR.GetString(SR.Error_LanguageNeedsToBeVBCSharp, value)
+                    );
 
                 this.languageToUse = value;
             }
@@ -473,30 +528,18 @@ namespace System.Workflow.ComponentModel.Compiler
 
         internal Assembly LocalAssembly
         {
-            get
-            {
-                return this.localAssembly;
-            }
-            set
-            {
-                this.localAssembly = value;
-            }
+            get { return this.localAssembly; }
+            set { this.localAssembly = value; }
         }
 
         internal bool CompileWithNoCode
         {
-            get
-            {
-                return this.compileWithNoCode;
-            }
+            get { return this.compileWithNoCode; }
         }
 
         internal bool CheckTypes
         {
-            get
-            {
-                return this.checkTypes;
-            }
+            get { return this.checkTypes; }
         }
 
         internal string CompilerVersion
@@ -516,14 +559,8 @@ namespace System.Workflow.ComponentModel.Compiler
 
         internal MultiTargetingInfo MultiTargetingInformation
         {
-            get
-            {
-                return this.mtInfo;
-            }
-            set
-            {
-                this.mtInfo = value;
-            }
+            get { return this.mtInfo; }
+            set { this.mtInfo = value; }
         }
 
         #endregion
@@ -533,7 +570,13 @@ namespace System.Workflow.ComponentModel.Compiler
             string rootNamespace = string.Empty;
 
             // extract the namespace from the compiler options
-            if (parameters.CompilerOptions != null && (CompilerHelpers.GetSupportedLanguage(parameters.LanguageToUse) == SupportedLanguages.VB))
+            if (
+                parameters.CompilerOptions != null
+                && (
+                    CompilerHelpers.GetSupportedLanguage(parameters.LanguageToUse)
+                    == SupportedLanguages.VB
+                )
+            )
             {
                 Regex options = new Regex(@"\s*[/-]rootnamespace[:=]\s*(?<RootNamespace>[^\s]*)");
                 Match match = options.Match(parameters.CompilerOptions);

@@ -13,9 +13,7 @@ internal sealed class CorsHttpMethodActionConstraint : HttpMethodActionConstrain
     private readonly string AccessControlRequestMethod = "Access-Control-Request-Method";
 
     public CorsHttpMethodActionConstraint(HttpMethodActionConstraint constraint)
-        : base(constraint.HttpMethods)
-    {
-    }
+        : base(constraint.HttpMethods) { }
 
     public override bool Accept(ActionConstraintContext context)
     {
@@ -29,17 +27,28 @@ internal sealed class CorsHttpMethodActionConstraint : HttpMethodActionConstrain
 
         var request = context.RouteContext.HttpContext.Request;
         // Perf: Check http method before accessing the Headers collection.
-        if (Http.HttpMethods.IsOptions(request.Method) &&
-            request.Headers.ContainsKey(OriginHeader) &&
-            request.Headers.TryGetValue(AccessControlRequestMethod, out var accessControlRequestMethod) &&
-            !StringValues.IsNullOrEmpty(accessControlRequestMethod))
+        if (
+            Http.HttpMethods.IsOptions(request.Method)
+            && request.Headers.ContainsKey(OriginHeader)
+            && request.Headers.TryGetValue(
+                AccessControlRequestMethod,
+                out var accessControlRequestMethod
+            )
+            && !StringValues.IsNullOrEmpty(accessControlRequestMethod)
+        )
         {
             // Read interface .Count once rather than per iteration
             var methodsCount = methods.Count;
             for (var i = 0; i < methodsCount; i++)
             {
                 var supportedMethod = methods[i];
-                if (string.Equals(supportedMethod, accessControlRequestMethod, StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        supportedMethod,
+                        accessControlRequestMethod,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }

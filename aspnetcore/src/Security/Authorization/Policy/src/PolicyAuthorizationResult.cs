@@ -8,7 +8,10 @@ namespace Microsoft.AspNetCore.Authorization.Policy;
 /// </summary>
 public class PolicyAuthorizationResult
 {
-    private static readonly PolicyAuthorizationResult _challengedResult = new() { Challenged = true };
+    private static readonly PolicyAuthorizationResult _challengedResult = new()
+    {
+        Challenged = true,
+    };
     private static readonly PolicyAuthorizationResult _forbiddenResult = new() { Forbidden = true };
     private static readonly PolicyAuthorizationResult _succeededResult = new() { Succeeded = true };
 
@@ -51,10 +54,14 @@ public class PolicyAuthorizationResult
     /// </summary>
     /// <param name="authorizationFailure">Specifies the reason the authorization failed.s</param>
     /// <returns>The <see cref="PolicyAuthorizationResult"/>.</returns>
-    public static PolicyAuthorizationResult Forbid(AuthorizationFailure? authorizationFailure)
-        => authorizationFailure is null
-        ? _forbiddenResult
-        : new PolicyAuthorizationResult { Forbidden = true, AuthorizationFailure = authorizationFailure };
+    public static PolicyAuthorizationResult Forbid(AuthorizationFailure? authorizationFailure) =>
+        authorizationFailure is null
+            ? _forbiddenResult
+            : new PolicyAuthorizationResult
+            {
+                Forbidden = true,
+                AuthorizationFailure = authorizationFailure,
+            };
 
     /// <summary>
     /// Indicates a successful authorization.

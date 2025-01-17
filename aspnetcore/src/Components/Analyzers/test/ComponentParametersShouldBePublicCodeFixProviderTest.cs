@@ -13,7 +13,8 @@ public class ComponentParametersShouldBePublicCodeFixProviderTest : CodeFixVerif
     [Fact]
     public void IgnoresPrivatePropertiesWithoutParameterAttribute()
     {
-        var test = @"
+        var test =
+            @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -28,48 +29,61 @@ public class ComponentParametersShouldBePublicCodeFixProviderTest : CodeFixVerif
     [Fact]
     public void AddsDiagnosticAndFixForPrivatePropertiesWithParameterAttribute()
     {
-        var test = @"
+        var test =
+            @"
     namespace ConsoleApplication1
     {
-        using " + typeof(ParameterAttribute).Namespace + @";
+        using "
+            + typeof(ParameterAttribute).Namespace
+            + @";
 
         class TypeName
         {
             [Parameter] private string BadProperty1 { get; set; }
         }
-    }" + ComponentsTestDeclarations.Source;
+    }"
+            + ComponentsTestDeclarations.Source;
 
-        VerifyCSharpDiagnostic(test,
+        VerifyCSharpDiagnostic(
+            test,
             new DiagnosticResult
             {
                 Id = DiagnosticDescriptors.ComponentParametersShouldBePublic.Id,
-                Message = "Component parameter 'ConsoleApplication1.TypeName.BadProperty1' should be public.",
+                Message =
+                    "Component parameter 'ConsoleApplication1.TypeName.BadProperty1' should be public.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 8, 40)
-                }
-            });
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 8, 40) },
+            }
+        );
 
-        VerifyCSharpFix(test, @"
+        VerifyCSharpFix(
+            test,
+            @"
     namespace ConsoleApplication1
     {
-        using " + typeof(ParameterAttribute).Namespace + @";
+        using "
+                + typeof(ParameterAttribute).Namespace
+                + @";
 
         class TypeName
         {
             [Parameter] public string BadProperty1 { get; set; }
         }
-    }" + ComponentsTestDeclarations.Source);
+    }"
+                + ComponentsTestDeclarations.Source
+        );
     }
 
     [Fact]
     public void IgnoresPublicPropertiesWithNonPublicSetterWithParameterAttribute()
     {
-        var test = @"
+        var test =
+            @"
     namespace ConsoleApplication1
     {
-        using " + typeof(ParameterAttribute).Namespace + @";
+        using "
+            + typeof(ParameterAttribute).Namespace
+            + @";
 
         class TypeName
         {
@@ -77,39 +91,36 @@ public class ComponentParametersShouldBePublicCodeFixProviderTest : CodeFixVerif
             [Parameter] public object MyProperty2 { get; protected set; }
             [Parameter] public object MyProperty3 { get; internal set; }
         }
-    }" + ComponentsTestDeclarations.Source;
+    }"
+            + ComponentsTestDeclarations.Source;
 
-        VerifyCSharpDiagnostic(test,
+        VerifyCSharpDiagnostic(
+            test,
             new DiagnosticResult
             {
                 Id = DiagnosticDescriptors.ComponentParameterSettersShouldBePublic.Id,
-                Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty1' should have a public setter.",
+                Message =
+                    "Component parameter 'ConsoleApplication1.TypeName.MyProperty1' should have a public setter.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 8, 39)
-                }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 8, 39) },
             },
             new DiagnosticResult
             {
                 Id = DiagnosticDescriptors.ComponentParameterSettersShouldBePublic.Id,
-                Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty2' should have a public setter.",
+                Message =
+                    "Component parameter 'ConsoleApplication1.TypeName.MyProperty2' should have a public setter.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 9, 39)
-                }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 39) },
             },
             new DiagnosticResult
             {
                 Id = DiagnosticDescriptors.ComponentParameterSettersShouldBePublic.Id,
-                Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty3' should have a public setter.",
+                Message =
+                    "Component parameter 'ConsoleApplication1.TypeName.MyProperty3' should have a public setter.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 10, 39)
-                }
-            });
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 10, 39) },
+            }
+        );
     }
 
     protected override CodeFixProvider GetCSharpCodeFixProvider()

@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 using static Expression;
 
-public class NonSharedPrimitiveCollectionsQuerySqlServerTest : NonSharedPrimitiveCollectionsQueryRelationalTestBase
+public class NonSharedPrimitiveCollectionsQuerySqlServerTest
+    : NonSharedPrimitiveCollectionsQueryRelationalTestBase
 {
     #region Support for specific element types
 
@@ -23,7 +24,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] nvarchar(max) '$') AS [s]
     WHERE [s].[value] = N'a') = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_int()
@@ -38,7 +40,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] int '$') AS [s]
     WHERE [s].[value] = 1) = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_long()
@@ -53,7 +56,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] bigint '$') AS [s]
     WHERE [s].[value] = CAST(1 AS bigint)) = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_short()
@@ -68,12 +72,12 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] smallint '$') AS [s]
     WHERE [s].[value] = CAST(1 AS smallint)) = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public override Task Array_of_byte()
-        => base.Array_of_byte();
+    public override Task Array_of_byte() => base.Array_of_byte();
 
     public override async Task Array_of_double()
     {
@@ -87,7 +91,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] float '$') AS [s]
     WHERE [s].[value] = 1.0E0) = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_float()
@@ -102,7 +107,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] real '$') AS [s]
     WHERE [s].[value] = CAST(1 AS real)) = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_decimal()
@@ -117,7 +123,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] decimal(18,2) '$') AS [s]
     WHERE [s].[value] = 1.0) = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_DateTime()
@@ -132,7 +139,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] datetime2 '$') AS [s]
     WHERE [s].[value] = '2023-01-01T12:30:00.0000000') = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_DateTime_with_milliseconds()
@@ -147,7 +155,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] datetime2 '$') AS [s]
     WHERE [s].[value] = '2023-01-01T12:30:00.1230000') = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_DateTime_with_microseconds()
@@ -162,7 +171,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] datetime2 '$') AS [s]
     WHERE [s].[value] = '2023-01-01T12:30:00.1234560') = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_DateOnly()
@@ -177,7 +187,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] date '$') AS [s]
     WHERE [s].[value] = '2023-01-01') = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_TimeOnly()
@@ -192,7 +203,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] time '$') AS [s]
     WHERE [s].[value] = '12:30:00') = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_TimeOnly_with_milliseconds()
@@ -207,7 +219,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] time '$') AS [s]
     WHERE [s].[value] = '12:30:00.123') = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_TimeOnly_with_microseconds()
@@ -222,7 +235,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] time '$') AS [s]
     WHERE [s].[value] = '12:30:00.123456') = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_DateTimeOffset()
@@ -237,7 +251,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] datetimeoffset '$') AS [s]
     WHERE [s].[value] = '2023-01-01T12:30:00.0000000+02:00') = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_bool()
@@ -252,7 +267,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] bit '$') AS [s]
     WHERE [s].[value] = CAST(1 AS bit)) = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_Guid()
@@ -267,7 +283,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] uniqueidentifier '$') AS [s]
     WHERE [s].[value] = 'dc8c903d-d655-4144-a0fd-358099d40ae1') = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_byte_array()
@@ -282,7 +299,8 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] varbinary(max) '$') AS [s]
     WHERE [s].[value] = 0x0102) = 2
-""");
+"""
+        );
     }
 
     public override async Task Array_of_enum()
@@ -297,16 +315,17 @@ WHERE (
     SELECT COUNT(*)
     FROM OPENJSON([t].[SomeArray]) WITH ([value] int '$') AS [s]
     WHERE [s].[value] = 0) = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public override Task Array_of_array_is_not_supported()
-        => base.Array_of_array_is_not_supported();
+    public override Task Array_of_array_is_not_supported() =>
+        base.Array_of_array_is_not_supported();
 
     [ConditionalFact]
-    public override Task Multidimensional_array_is_not_supported()
-        => base.Multidimensional_array_is_not_supported();
+    public override Task Multidimensional_array_is_not_supported() =>
+        base.Multidimensional_array_is_not_supported();
 
     #endregion Support for specific element types
 
@@ -337,7 +356,8 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = N'a') = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -358,7 +378,8 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = 1) = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -379,7 +400,8 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = CAST(1 AS bigint)) = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -400,13 +422,14 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = CAST(1 AS smallint)) = 2
-""");
+"""
+        );
     }
 
     // On relational databases, byte[] gets mapped to a special binary data type, which isn't queryable as a regular primitive collection.
     [ConditionalFact]
-    public virtual async Task Ordered_array_of_byte()
-        => await AssertTranslationFailed(() => TestOrderedArray((byte)1, (byte)2));
+    public virtual async Task Ordered_array_of_byte() =>
+        await AssertTranslationFailed(() => TestOrderedArray((byte)1, (byte)2));
 
     [ConditionalFact]
     public virtual async Task Ordered_array_of_double()
@@ -426,7 +449,8 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = 1.0E0) = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -447,7 +471,8 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = CAST(1 AS real)) = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -468,13 +493,17 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = 1.0) = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Ordered_array_of_DateTime()
     {
-        await TestOrderedArray(new DateTime(2023, 1, 1, 12, 30, 0), new DateTime(2023, 1, 2, 12, 30, 0));
+        await TestOrderedArray(
+            new DateTime(2023, 1, 1, 12, 30, 0),
+            new DateTime(2023, 1, 2, 12, 30, 0)
+        );
 
         AssertSql(
             """
@@ -489,7 +518,8 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = '2023-01-01T12:30:00.0000000') = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -510,7 +540,8 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = '2023-01-01') = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -531,7 +562,8 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = '12:30:00') = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -539,7 +571,8 @@ WHERE (
     {
         await TestOrderedArray(
             new DateTimeOffset(2023, 1, 1, 12, 30, 0, TimeSpan.FromHours(2)),
-            new DateTimeOffset(2023, 1, 2, 12, 30, 0, TimeSpan.FromHours(2)));
+            new DateTimeOffset(2023, 1, 2, 12, 30, 0, TimeSpan.FromHours(2))
+        );
 
         AssertSql(
             """
@@ -554,7 +587,8 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = '2023-01-01T12:30:00.0000000+02:00') = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -575,7 +609,8 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = CAST(1 AS bit)) = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -583,7 +618,8 @@ WHERE (
     {
         await TestOrderedArray(
             new Guid("dc8c903d-d655-4144-a0fd-358099d40ae1"),
-            new Guid("008719a5-1999-4798-9cf3-92a78ffa94a2"));
+            new Guid("008719a5-1999-4798-9cf3-92a78ffa94a2")
+        );
 
         AssertSql(
             """
@@ -598,16 +634,21 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = 'dc8c903d-d655-4144-a0fd-358099d40ae1') = 2
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Ordered_array_of_byte_array()
     {
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => TestOrderedArray(new byte[] { 1, 2 }, new byte[] { 3, 4 }));
+            () => TestOrderedArray(new byte[] { 1, 2 }, new byte[] { 3, 4 })
+        );
 
-        Assert.Equal(SqlServerStrings.QueryingOrderedBinaryJsonCollectionsNotSupported, exception.Message);
+        Assert.Equal(
+            SqlServerStrings.QueryingOrderedBinaryJsonCollectionsNotSupported,
+            exception.Message
+        );
     }
 
     [ConditionalFact]
@@ -628,20 +669,27 @@ WHERE (
         OFFSET 1 ROWS
     ) AS [t0]
     WHERE [t0].[value] = 0) = 2
-""");
+"""
+        );
     }
 
-    private enum MyEnum { Label1, Label2 }
+    private enum MyEnum
+    {
+        Label1,
+        Label2,
+    }
 
     private async Task TestOrderedArray<TElement>(
         TElement value1,
         TElement value2,
-        Action<ModelBuilder> onModelCreating = null)
+        Action<ModelBuilder> onModelCreating = null
+    )
     {
         var arrayClrType = typeof(TElement).MakeArrayType();
 
         var contextFactory = await InitializeAsync<TestContext>(
-            onModelCreating: onModelCreating ?? (mb => mb.Entity<TestEntity>().Property(arrayClrType, "SomeArray")),
+            onModelCreating: onModelCreating
+                ?? (mb => mb.Entity<TestEntity>().Property(arrayClrType, "SomeArray")),
             seed: context =>
             {
                 var instance1 = new TestEntity { Id = 1 };
@@ -661,15 +709,19 @@ WHERE (
                 context.Entry(instance2).Property("SomeArray").CurrentValue = array2;
 
                 context.SaveChanges();
-            });
+            }
+        );
 
         await using var context = contextFactory.CreateContext();
 
         var entityParam = Parameter(typeof(TestEntity), "m");
         var efPropertyCall = Call(
-            typeof(EF).GetMethod(nameof(EF.Property), BindingFlags.Public | BindingFlags.Static)!.MakeGenericMethod(arrayClrType),
+            typeof(EF)
+                .GetMethod(nameof(EF.Property), BindingFlags.Public | BindingFlags.Static)!
+                .MakeGenericMethod(arrayClrType),
             entityParam,
-            Constant("SomeArray"));
+            Constant("SomeArray")
+        );
 
         var elementParam = Parameter(typeof(TElement), "a");
         var predicate = Lambda<Func<TestEntity, bool>>(
@@ -679,27 +731,32 @@ WHERE (
                     Call(
                         SkipMethod.MakeGenericMethod(typeof(TElement)),
                         efPropertyCall,
-                        Constant(1)),
-                    Lambda(Equal(elementParam, Constant(value1)), elementParam)),
-                Constant(2)),
-            entityParam);
+                        Constant(1)
+                    ),
+                    Lambda(Equal(elementParam, Constant(value1)), elementParam)
+                ),
+                Constant(2)
+            ),
+            entityParam
+        );
 
         // context.Set<TestEntity>().SingleAsync(m => EF.Property<int[]>(m, "SomeArray").Skip(1).Count(a => a == <value1>) == 2)
         var result = await context.Set<TestEntity>().SingleAsync(predicate);
         Assert.Equal(1, result.Id);
     }
 
-    private static readonly MethodInfo CountWithPredicateMethod
-        = typeof(Enumerable).GetRuntimeMethods().Single(m => m.Name == nameof(Enumerable.Count) && m.GetParameters().Length == 2);
+    private static readonly MethodInfo CountWithPredicateMethod = typeof(Enumerable)
+        .GetRuntimeMethods()
+        .Single(m => m.Name == nameof(Enumerable.Count) && m.GetParameters().Length == 2);
 
-    private static readonly MethodInfo SkipMethod
-        = typeof(Enumerable).GetRuntimeMethods().Single(m => m.Name == nameof(Enumerable.Skip) && m.GetParameters().Length == 2);
+    private static readonly MethodInfo SkipMethod = typeof(Enumerable)
+        .GetRuntimeMethods()
+        .Single(m => m.Name == nameof(Enumerable.Skip) && m.GetParameters().Length == 2);
 
     #endregion
 
     [ConditionalFact]
-    public override Task Column_with_custom_converter()
-        => base.Column_with_custom_converter();
+    public override Task Column_with_custom_converter() => base.Column_with_custom_converter();
 
     public override async Task Parameter_with_inferred_value_converter()
     {
@@ -722,7 +779,8 @@ WHERE (
     SELECT COUNT(*)
     FROM (VALUES (CAST(1 AS int)), (8)) AS [v]([Value])
     WHERE [v].[Value] = [t].[PropertyWithValueConverter]) = 1
-""");
+"""
+        );
     }
 
     public override async Task Inline_collection_in_query_filter()
@@ -737,7 +795,8 @@ WHERE (
     SELECT COUNT(*)
     FROM (VALUES (CAST(1 AS int)), (2), (3)) AS [v]([Value])
     WHERE [v].[Value] > [t].[Id]) = 1
-""");
+"""
+        );
     }
 
     public override async Task Column_collection_inside_json_owned_entity()
@@ -757,29 +816,35 @@ WHERE (
 SELECT TOP(2) [t].[Id], [t].[Owned]
 FROM [TestOwner] AS [t]
 WHERE JSON_VALUE(JSON_VALUE([t].[Owned], '$.Strings'), '$[1]') = N'bar'
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Same_parameter_with_different_type_mappings()
     {
-        var contextFactory = await InitializeAsync<TestContext>(
-            onModelCreating: mb => mb.Entity<TestEntity>(
-                b =>
-                {
-                    b.Property(typeof(DateTime), "DateTime").HasColumnType("datetime");
-                    b.Property(typeof(DateTime), "DateTime2").HasColumnType("datetime2");
-                }));
+        var contextFactory = await InitializeAsync<TestContext>(onModelCreating: mb =>
+            mb.Entity<TestEntity>(b =>
+            {
+                b.Property(typeof(DateTime), "DateTime").HasColumnType("datetime");
+                b.Property(typeof(DateTime), "DateTime2").HasColumnType("datetime2");
+            })
+        );
 
         await using var context = contextFactory.CreateContext();
 
-        var dateTimes = new[] { new DateTime(2020, 1, 1, 12, 30, 00), new DateTime(2020, 1, 2, 12, 30, 00) };
+        var dateTimes = new[]
+        {
+            new DateTime(2020, 1, 1, 12, 30, 00),
+            new DateTime(2020, 1, 2, 12, 30, 00),
+        };
 
-        _ = await context.Set<TestEntity>()
-            .Where(
-                m =>
-                    dateTimes.Contains(EF.Property<DateTime>(m, "DateTime"))
-                    && dateTimes.Contains(EF.Property<DateTime>(m, "DateTime2")))
+        _ = await context
+            .Set<TestEntity>()
+            .Where(m =>
+                dateTimes.Contains(EF.Property<DateTime>(m, "DateTime"))
+                && dateTimes.Contains(EF.Property<DateTime>(m, "DateTime2"))
+            )
             .ToArrayAsync();
 
         AssertSql(
@@ -796,20 +861,28 @@ WHERE [t].[DateTime] IN (
     SELECT [d0].[value]
     FROM OPENJSON(@__dateTimes_0_1) WITH ([value] datetime2 '$') AS [d0]
 )
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Same_collection_with_default_type_mapping_and_uninferrable_context()
     {
-        var contextFactory = await InitializeAsync<TestContext>(
-            onModelCreating: mb => mb.Entity<TestEntity>(b => b.Property(typeof(DateTime), "DateTime")));
+        var contextFactory = await InitializeAsync<TestContext>(onModelCreating: mb =>
+            mb.Entity<TestEntity>(b => b.Property(typeof(DateTime), "DateTime"))
+        );
 
         await using var context = contextFactory.CreateContext();
 
-        var dateTimes = new DateTime?[] { new DateTime(2020, 1, 1, 12, 30, 00), new DateTime(2020, 1, 2, 12, 30, 00), null };
+        var dateTimes = new DateTime?[]
+        {
+            new DateTime(2020, 1, 1, 12, 30, 00),
+            new DateTime(2020, 1, 2, 12, 30, 00),
+            null,
+        };
 
-        _ = await context.Set<TestEntity>()
+        _ = await context
+            .Set<TestEntity>()
             .Where(m => dateTimes.Any(d => d == EF.Property<DateTime>(m, "DateTime") && d != null))
             .ToArrayAsync();
 
@@ -823,58 +896,85 @@ WHERE EXISTS (
     SELECT 1
     FROM OPENJSON(@__dateTimes_0) WITH ([value] datetime2 '$') AS [d]
     WHERE [d].[value] = [t].[DateTime] AND [d].[value] IS NOT NULL)
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Same_collection_with_non_default_type_mapping_and_uninferrable_context()
     {
-        var contextFactory = await InitializeAsync<TestContext>(
-            onModelCreating: mb => mb.Entity<TestEntity>(
-                b => b.Property(typeof(DateTime), "DateTime").HasColumnType("datetime")));
+        var contextFactory = await InitializeAsync<TestContext>(onModelCreating: mb =>
+            mb.Entity<TestEntity>(b =>
+                b.Property(typeof(DateTime), "DateTime").HasColumnType("datetime")
+            )
+        );
 
         await using var context = contextFactory.CreateContext();
 
-        var dateTimes = new DateTime?[] { new DateTime(2020, 1, 1, 12, 30, 00), new DateTime(2020, 1, 2, 12, 30, 00), null };
+        var dateTimes = new DateTime?[]
+        {
+            new DateTime(2020, 1, 1, 12, 30, 00),
+            new DateTime(2020, 1, 2, 12, 30, 00),
+            null,
+        };
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => context.Set<TestEntity>()
-                .Where(
-                    m => dateTimes.Any(d => d == EF.Property<DateTime>(m, "DateTime") && d != null))
-                .ToArrayAsync());
-        Assert.Equal(RelationalStrings.ConflictingTypeMappingsInferredForColumn("value"), exception.Message);
+            () =>
+                context
+                    .Set<TestEntity>()
+                    .Where(m =>
+                        dateTimes.Any(d => d == EF.Property<DateTime>(m, "DateTime") && d != null)
+                    )
+                    .ToArrayAsync()
+        );
+        Assert.Equal(
+            RelationalStrings.ConflictingTypeMappingsInferredForColumn("value"),
+            exception.Message
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Same_collection_with_conflicting_type_mappings_not_supported()
     {
-        var contextFactory = await InitializeAsync<TestContext>(
-            onModelCreating: mb => mb.Entity<TestEntity>(
-                b =>
-                {
-                    b.Property(typeof(DateTime), "DateTime").HasColumnType("datetime");
-                    b.Property(typeof(DateTime), "DateTime2").HasColumnType("datetime2");
-                }));
+        var contextFactory = await InitializeAsync<TestContext>(onModelCreating: mb =>
+            mb.Entity<TestEntity>(b =>
+            {
+                b.Property(typeof(DateTime), "DateTime").HasColumnType("datetime");
+                b.Property(typeof(DateTime), "DateTime2").HasColumnType("datetime2");
+            })
+        );
 
         await using var context = contextFactory.CreateContext();
 
-        var dateTimes = new[] { new DateTime(2020, 1, 1, 12, 30, 00), new DateTime(2020, 1, 2, 12, 30, 00) };
+        var dateTimes = new[]
+        {
+            new DateTime(2020, 1, 1, 12, 30, 00),
+            new DateTime(2020, 1, 2, 12, 30, 00),
+        };
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => context.Set<TestEntity>()
-                .Where(
-                    m => dateTimes
-                        .Any(d => d == EF.Property<DateTime>(m, "DateTime") && d == EF.Property<DateTime>(m, "DateTime2")))
-                .ToArrayAsync());
-        Assert.Equal(RelationalStrings.ConflictingTypeMappingsInferredForColumn("value"), exception.Message);
+            () =>
+                context
+                    .Set<TestEntity>()
+                    .Where(m =>
+                        dateTimes.Any(d =>
+                            d == EF.Property<DateTime>(m, "DateTime")
+                            && d == EF.Property<DateTime>(m, "DateTime2")
+                        )
+                    )
+                    .ToArrayAsync()
+        );
+        Assert.Equal(
+            RelationalStrings.ConflictingTypeMappingsInferredForColumn("value"),
+            exception.Message
+        );
     }
 
     #endregion Type mapping inference
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 }
