@@ -295,7 +295,6 @@ namespace Mono.Posix
         // TODO: time
         // TODO: mknod
 
-
         [DllImport("libc", EntryPoint = "chmod", SetLastError = true)]
         internal static extern int syscall_chmod(string path, int mode);
 

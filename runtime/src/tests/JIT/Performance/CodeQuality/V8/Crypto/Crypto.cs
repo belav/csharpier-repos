@@ -328,7 +328,6 @@ namespace V8.Crypto
         // IE7 does 9% better with am3/28 than with am4/26.
         // Firefox (SM) gets 10% faster with am3/28 than with am4/26.
 
-
         public static void setupEngine(AMSig fn, int bits)
         {
             BigInteger.s_am = fn;

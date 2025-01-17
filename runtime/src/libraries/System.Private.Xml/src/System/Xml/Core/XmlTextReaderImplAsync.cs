@@ -3407,7 +3407,6 @@ namespace System.Xml
         //                 (the text has a non-whitespace character if outOrChars > 0x20).
         // Returns true when the whole value has been parsed. Return false when it needs to be called again to get a next chunk of value.
 
-
         private readonly struct ParseTextState
         {
             public readonly int outOrChars;

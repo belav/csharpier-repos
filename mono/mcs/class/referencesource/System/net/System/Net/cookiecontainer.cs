@@ -1157,7 +1157,6 @@ namespace System.Net
 
         //<
 
-
         public void SetCookies(Uri uri, string cookieHeader)
         {
             if (uri == null)

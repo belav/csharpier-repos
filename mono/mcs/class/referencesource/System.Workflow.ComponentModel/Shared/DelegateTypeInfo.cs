@@ -6,7 +6,6 @@
 // THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE
 // AND INFORMATION REMAINS WITH THE USER.
 
-
 /*********************************************************************
  * NOTE: A copy of this file exists at: WF\Activities\Common
  * The two files must be kept in sync.  Any change made here must also

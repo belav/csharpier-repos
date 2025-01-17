@@ -23,7 +23,6 @@
 //	Jackson Harper (jackson@ximian.com)
 //
 
-
 using System;
 using System.Drawing;
 using System.IO;

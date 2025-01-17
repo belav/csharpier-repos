@@ -22,9 +22,7 @@
 // Authors:
 //	Ravindra (rkumar@novell.com)
 
-
 // COMPLETE
-
 
 using System;
 using System.Collections;

@@ -758,7 +758,6 @@ namespace System.Xml
     //         EE    if SE, EE are blocks                  b). true:  indexLevel same                                  </B>
     //
 
-
     //
     // This is an alternative way to make the output looks better
     //

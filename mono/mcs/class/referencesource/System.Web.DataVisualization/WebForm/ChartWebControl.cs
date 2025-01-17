@@ -1822,7 +1822,6 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Control properties
 
 
-
         /// <summary>
         /// Indicates that non-critical chart exceptions will be suppressed.
         /// </summary>

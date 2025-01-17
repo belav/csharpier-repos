@@ -7,7 +7,6 @@
 // (c) 2007 Novell, Inc.
 //
 
-
 // a reference like this is required:
 // -reference:MS_System=<gac>\System.dll
 extern alias MS_System;
@@ -1413,7 +1412,6 @@ namespace MonoTests.System.ComponentModel
             ////string Name = "mtp";
             //string TestName = MethodInfo.GetCurrentMethod ().Name.Replace ("Generate", "");
             ////int counter = 0;
-
 
             //WriteTestHeader (TestName);
             //WriteLine ("");
@@ -4435,7 +4433,6 @@ namespace MonoTests.System.ComponentModel
         //                WriteLine ("MaskedTextProvider mtp;");
         //                WriteLine ("object result = null;");
 
-
         //                for (int i = 0; i < ps.Length; i++)
         //                        inputs [i] = GetTestValues (ps [i].ParameterType);
 
@@ -4523,7 +4520,6 @@ namespace MonoTests.System.ComponentModel
         //{
         //        int assert_count = 1;
         //        string Name = "mtp";
-
 
         //        foreach (ConstructorInfo ctor in ctors) {
         //                string TestName = GetTestName ("Constructor", ctor.GetParameters ());
@@ -4728,7 +4724,6 @@ namespace MonoTests.System.ComponentModel
         //        WriteLine ("Assert.AreEqual ({0}, {1}.ResetOnSpace, \"{2}-#{3}\");", GetStringValue (mtp.ResetOnSpace), Name, TestName, (i++).ToString ());
         //        WriteLine ("Assert.AreEqual ({0}, {1}.SkipLiterals, \"{2}-#{3}\");", GetStringValue (mtp.SkipLiterals), Name, TestName, (i++).ToString ());
         //}
-
 
         static bool CompareMaskTextProviders(object mtp_MS, object mtp_Mono)
         {

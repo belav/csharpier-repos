@@ -38,8 +38,6 @@ using Mono.Data.Sqlite;
 #endif
 /*--For Bug 853 Test End--*/
 
-
-
 namespace MonoTests.System.Data.Common
 {
     [TestFixture]

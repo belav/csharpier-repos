@@ -278,7 +278,6 @@ namespace System.Web.UI.WebControls
 
         // private implementation of IStateManager
 
-
         /// <internalonly/>
         bool IStateManager.IsTrackingViewState
         {

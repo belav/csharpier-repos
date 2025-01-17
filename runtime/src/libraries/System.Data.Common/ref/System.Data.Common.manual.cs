@@ -4,7 +4,6 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-
 namespace System.Data
 {
     [System.ComponentModel.TypeConverter(typeof(ConstraintConverter))]

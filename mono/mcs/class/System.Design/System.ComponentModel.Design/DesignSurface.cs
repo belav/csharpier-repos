@@ -27,7 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -85,8 +84,6 @@ namespace System.ComponentModel.Design
             }
         } // DesignerLoader
         #endregion
-
-
 
 
         private DesignerHost _designerHost;

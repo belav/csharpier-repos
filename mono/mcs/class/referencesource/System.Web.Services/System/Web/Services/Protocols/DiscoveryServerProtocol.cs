@@ -91,7 +91,6 @@ namespace System.Web.Services.Protocols
 
                 //
 
-
                 string id = "wsdl" + i.ToString(CultureInfo.InvariantCulture);
 
                 import.Location = uri + "?wsdl=" + id;

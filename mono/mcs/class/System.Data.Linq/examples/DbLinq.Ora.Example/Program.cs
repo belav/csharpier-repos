@@ -66,10 +66,8 @@ namespace nwind
             //var q1 = from c in cc where c.CustomerID==0 select c.CustomerID.Select(0);
             //var q = from o in db.Orders where o.Customer.City == "London" select new { c = o.Customer, o };
 
-
             //string queryText = db.GetQueryText(q);
             //Console.WriteLine("User sees sql:"+queryText);
-
 
             //foreach (var v in q)
             //{

@@ -22,7 +22,6 @@ public class TestClass
             //Second, the default implementation of this class does not guarantee that
             //the same value will be returned by different instances.
 
-
             {
                 LocStr = "loc_001";
                 iTestCount++;

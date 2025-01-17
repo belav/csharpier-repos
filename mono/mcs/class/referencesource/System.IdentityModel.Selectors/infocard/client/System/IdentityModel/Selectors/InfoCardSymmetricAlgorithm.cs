@@ -9,7 +9,6 @@
 //
 #pragma warning disable 1634, 1691      // unknown message, unknown pragma
 
-
 namespace System.IdentityModel.Selectors
 {
     using System;

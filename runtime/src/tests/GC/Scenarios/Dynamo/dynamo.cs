@@ -27,7 +27,6 @@
  *   -passes in debug
  */
 
-
 namespace Dynamo
 {
     using System;

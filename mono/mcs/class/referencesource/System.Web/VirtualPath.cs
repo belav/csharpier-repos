@@ -379,7 +379,6 @@ namespace System.Web
 
         ///////////// end of VirtualPathProvider methods /////////////
 
-
         internal bool HasTrailingSlash
         {
             get

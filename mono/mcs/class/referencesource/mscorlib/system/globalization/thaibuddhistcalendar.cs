@@ -21,7 +21,6 @@ namespace System.Globalization
     **      Thai        0544/01/01  10542/12/31
     ============================================================================*/
 
-
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
     public class ThaiBuddhistCalendar : Calendar

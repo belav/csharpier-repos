@@ -265,10 +265,6 @@ namespace System.Configuration.Internal
                 {
                     //
 
-
-
-
-
                     if (assertPermissions)
                     {
                         new FileIOPermission(PermissionState.Unrestricted).Assert();

@@ -20,7 +20,6 @@ namespace System.Web.Security
 
             //
 
-
             if (Membership.ValidateUser(userName, password))
             {
                 FormsAuthentication.SetAuthCookie(userName, createPersistentCookie);

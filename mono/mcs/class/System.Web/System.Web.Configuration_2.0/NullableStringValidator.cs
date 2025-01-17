@@ -30,7 +30,6 @@
 // copied StringValidator.cs and changed class name and just one line
 // in Validate() (see there).
 
-
 namespace System.Configuration
 {
     internal class NullableStringValidator : ConfigurationValidatorBase

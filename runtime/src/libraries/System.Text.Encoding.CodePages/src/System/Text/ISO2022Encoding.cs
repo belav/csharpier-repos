@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 //
 //  Ported to managed code from c_is2022.c and related iso 2022 dll files from mlang
 //

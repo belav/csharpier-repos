@@ -1176,19 +1176,6 @@ namespace System.Net
             //
             //THE
 
-
-
-
-
-
-
-
-
-
-
-
-
-
             if (m_SslStatus != SslStatus.Insecure)
             {
                 // at this point we know that DefaultFlags has the 2 bit set (Negotiate Client certificate)
@@ -1304,19 +1291,6 @@ namespace System.Net
             //SEC_I_RENOGOTIATE through which the client cert demand is made
             //
             //THE
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             if (m_SslStatus != SslStatus.Insecure)
             {
@@ -1745,9 +1719,6 @@ namespace System.Net
         }
 
         // <
-
-
-
 
         static class Helpers
         {

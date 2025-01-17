@@ -14,7 +14,6 @@
 // (C) 2003 Aleksey Sanin (aleksey@aleksey.com)
 // (C) 2004 Novell (http://www.novell.com)
 
-
 using System.IO;
 using System.Text;
 using System.Xml;

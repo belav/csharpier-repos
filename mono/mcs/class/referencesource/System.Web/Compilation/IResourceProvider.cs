@@ -66,7 +66,6 @@ namespace System.Web.Compilation
 
         ///// End of IResourceProvider implementation
 
-
         protected abstract ResourceManager CreateResourceManager();
 
         private void EnsureResourceManager()

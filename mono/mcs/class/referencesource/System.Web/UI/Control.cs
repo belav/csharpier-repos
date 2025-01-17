@@ -3419,7 +3419,6 @@ namespace System.Web.UI
 
         // Members related to being a container
 
-
         /// <devdoc>
         ///    <para> Gets a ControlCollection object that represents the child controls for a specified control in the
         ///       UI hierarchy.</para>

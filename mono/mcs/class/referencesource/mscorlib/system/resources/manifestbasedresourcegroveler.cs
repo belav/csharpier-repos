@@ -662,9 +662,6 @@ namespace System.Resources
             // require Reflection TypeInformation permission to be able to read
             // this.  <
 
-
-
-
 #if !FEATURE_CORECLR && !MONO
             if (s != null)
             {

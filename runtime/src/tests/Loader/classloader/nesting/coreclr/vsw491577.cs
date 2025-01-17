@@ -6,7 +6,6 @@
 // Loading the 73rd type resulted in AV
 // this tests passes as long as we don't AV.
 
-
 using System;
 using Xunit;
 

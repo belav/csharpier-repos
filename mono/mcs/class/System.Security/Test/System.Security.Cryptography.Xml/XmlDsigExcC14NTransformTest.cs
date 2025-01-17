@@ -20,7 +20,6 @@
 //
 #if !MOBILE
 
-
 using System;
 using System.IO;
 using System.Security.Cryptography.Xml;

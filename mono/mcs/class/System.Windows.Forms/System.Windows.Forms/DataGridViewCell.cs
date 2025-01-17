@@ -24,8 +24,6 @@
 //	Ivan N. Zlatev  <contact@i-nz.net>
 //
 
-
-
 using System;
 using System.ComponentModel;
 using System.Drawing;

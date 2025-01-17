@@ -5,7 +5,6 @@
 //  A nullable type with a value returns the GetHashCode() from the underlying struct
 //</Description>
 
-
 using System;
 
 interface BaseInter

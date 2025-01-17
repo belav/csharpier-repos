@@ -15,7 +15,6 @@
 **
 =============================================================================*/
 
-
 #if !MOBILE
 #if !FEATURE_MACL
 namespace System.Security.AccessControl

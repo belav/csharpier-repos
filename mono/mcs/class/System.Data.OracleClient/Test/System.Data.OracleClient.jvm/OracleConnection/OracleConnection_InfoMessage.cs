@@ -141,7 +141,6 @@ namespace MonoTests.System.Data.OracleClient
             //				cmd.CommandText = "TestInfoMessage";
             //				cmd.CommandType = CommandType.StoredProcedure;
 
-
             if (errorCounter == 0)
             {
                 Thread.Sleep(5000);

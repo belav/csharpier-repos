@@ -911,7 +911,6 @@ namespace System.Web.Services.Protocols
 
             //
 
-
             HttpWebResponse httpResponse = response as HttpWebResponse;
             int statusCode = httpResponse != null ? (int)httpResponse.StatusCode : -1;
             if (statusCode >= 300 && statusCode != 500 && statusCode != 400)

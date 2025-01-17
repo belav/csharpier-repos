@@ -516,7 +516,6 @@ namespace System.Web.UI.MobileControls
         // persistence behavior, they're referenced from FontInfo.cs.
         //
 
-
         [
             Browsable(false),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
@@ -609,7 +608,6 @@ namespace System.Web.UI.MobileControls
         /////////////////////////////////////////////////////////////////////////
         //  TEMPLATES SUPPORT
         /////////////////////////////////////////////////////////////////////////
-
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.IParserAccessor.AddParsedSubObject"]/*' />
         /// <internalonly/>

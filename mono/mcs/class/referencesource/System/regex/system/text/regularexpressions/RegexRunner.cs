@@ -19,7 +19,6 @@
 // methods to push new subpattern match results into (or remove
 // backtracked results from) the Match instance.
 
-
 namespace System.Text.RegularExpressions
 {
     using System.Collections;
@@ -30,9 +29,6 @@ namespace System.Text.RegularExpressions
     /// <internalonly/>
 
     //
-
-
-
 
 #if !SILVERLIGHT
     [EditorBrowsable(EditorBrowsableState.Never)]

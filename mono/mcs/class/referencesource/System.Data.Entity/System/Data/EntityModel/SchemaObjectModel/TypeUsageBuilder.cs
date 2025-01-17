@@ -214,9 +214,6 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             // Forward compat
 
-
-
-
             if (
                 Helper.IsSpatialType(scalar.Type)
                 && !_facetValues.ContainsKey(EdmProviderManifest.IsStrictFacetName)

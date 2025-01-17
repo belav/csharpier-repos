@@ -585,7 +585,6 @@ namespace System.Security.AccessControl.Tests
             //call the same method to check the meaninglessness, only some sanitory cases are enough.
             //bug# 288116
 
-
             AssertExtensions.Throws<ArgumentException>(
                 "propagationFlags",
                 () =>

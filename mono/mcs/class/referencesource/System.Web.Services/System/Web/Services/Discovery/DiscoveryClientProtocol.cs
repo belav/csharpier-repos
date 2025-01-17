@@ -716,10 +716,6 @@ namespace System.Web.Services.Discovery
 
         //
 
-
-
-
-
         public sealed class DiscoveryClientResultsFile
         {
             private DiscoveryClientResultCollection results = new DiscoveryClientResultCollection();

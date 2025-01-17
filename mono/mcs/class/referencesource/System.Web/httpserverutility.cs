@@ -60,7 +60,6 @@ namespace System.Web
         // Misc ASP compatibility methods
         //
 
-
         /// <devdoc>
         ///    <para>
         ///       Instantiates a COM object identified via a progid.
@@ -284,7 +283,6 @@ namespace System.Web
         //
         // Server.Transfer/Server.Execute -- child requests
         //
-
 
         /// <devdoc>
         ///    <para>
@@ -1099,7 +1097,6 @@ namespace System.Web
         // Request Timeout
         //
 
-
         /// <devdoc>
         ///    <para>
         ///       Request timeout in seconds
@@ -1135,7 +1132,6 @@ namespace System.Web
         //
         // Encoding / Decoding -- wrappers for HttpUtility
         //
-
 
         /// <devdoc>
         ///    <para>
@@ -1284,7 +1280,6 @@ namespace System.Web
         //
         //  HTML Encoding / Decoding
         //
-
 
         /// <devdoc>
         ///    <para>
@@ -1493,7 +1488,6 @@ namespace System.Web
             return sb.ToString();
         }*/
 
-
         //
         //  Query string parsing support
         //
@@ -1532,7 +1526,6 @@ namespace System.Web
         //
         //  Public static methods
         //
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

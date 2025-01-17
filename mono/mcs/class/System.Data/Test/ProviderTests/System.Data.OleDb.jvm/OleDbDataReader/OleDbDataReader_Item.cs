@@ -58,8 +58,6 @@ namespace MonoTests.System.Data.OleDb
 
             //prepare data
 
-
-
             OleDbConnection con = new OleDbConnection(
                 MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
             );

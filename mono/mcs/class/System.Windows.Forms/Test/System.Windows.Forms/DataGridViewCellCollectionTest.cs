@@ -22,7 +22,6 @@
 //
 // Copyright (c) 2007 Gert Driesen
 
-
 using System;
 using System.Data;
 using System.Windows.Forms;

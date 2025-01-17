@@ -72,8 +72,6 @@ namespace System.Web.UI
 
                 //
 
-
-
                 try
                 {
                     propInfo = TargetFrameworkUtil.GetProperty(currentType, propName, flags);

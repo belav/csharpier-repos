@@ -1903,7 +1903,6 @@ namespace ICSharpCode.SharpZipLib.BZip2
             */
             //	szptr = zptr;
 
-
             szptr = new short[2 * n];
         }
 

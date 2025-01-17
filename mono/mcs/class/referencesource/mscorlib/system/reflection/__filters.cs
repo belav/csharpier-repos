@@ -22,8 +22,6 @@ namespace System.Reflection
 
     //<
 
-
-
     [Serializable]
     internal class __Filters
     {

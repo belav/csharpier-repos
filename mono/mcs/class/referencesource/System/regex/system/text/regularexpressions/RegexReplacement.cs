@@ -187,7 +187,6 @@ namespace System.Text.RegularExpressions
          * replace (evaluator), and split.
          */
 
-
         /*
          * Replaces all ocurrances of the regex in the string with the
          * replacement pattern.

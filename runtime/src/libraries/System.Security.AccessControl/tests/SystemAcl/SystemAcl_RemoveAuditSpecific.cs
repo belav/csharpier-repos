@@ -418,7 +418,6 @@ namespace System.Security.AccessControl.Tests
             );
             //Case 5, null sid
 
-
             Assert.Throws<ArgumentNullException>(() =>
             {
                 isContainer = true;

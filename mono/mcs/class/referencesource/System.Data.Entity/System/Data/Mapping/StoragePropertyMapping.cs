@@ -7,7 +7,6 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
 using System;
 using System.Collections.Generic;
 using System.Data.Metadata.Edm;

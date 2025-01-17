@@ -218,7 +218,6 @@ public class EMFloat : EmFloatStruct
         }
         */
 
-
         /*
         ** Set up the arrays
         */

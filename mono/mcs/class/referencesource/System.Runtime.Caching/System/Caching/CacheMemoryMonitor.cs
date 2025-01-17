@@ -215,7 +215,6 @@ namespace System.Runtime.Caching
 
             //
 
-
             int result = (int)(cacheSize * 100 / _memoryLimit);
             return result;
         }

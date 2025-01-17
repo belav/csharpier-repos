@@ -245,8 +245,6 @@ namespace System.Data.SqlClient
         // END EventContextPair private class.
         // ----------------------------------------
 
-
-
         // ----------------
         // Instance members
         // ----------------
@@ -1423,7 +1421,6 @@ namespace System.Data.SqlClient
 
                 // VSTS 59821: add Connection string to prevent redundant notifications when same command is running against different databases or SQL servers
                 //
-
 
                 string commandHash = ComputeCommandHash(
                     command.Connection.ConnectionString,

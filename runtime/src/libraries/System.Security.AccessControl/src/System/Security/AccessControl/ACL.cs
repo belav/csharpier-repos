@@ -1428,7 +1428,6 @@ namespace System.Security.AccessControl
                 //   OT = A        Remove   Remove      Nothing Common
                 //
 
-
                 if (ace is ObjectAce objectAce)
                 {
                     //
@@ -1490,7 +1489,6 @@ namespace System.Security.AccessControl
                 //
                 //   IOT = A        Remove   Remove      Nothing Common
                 //
-
 
                 if (ace is ObjectAce objectAce)
                 {

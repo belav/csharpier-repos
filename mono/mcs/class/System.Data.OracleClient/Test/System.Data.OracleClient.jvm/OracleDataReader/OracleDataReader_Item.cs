@@ -58,8 +58,6 @@ namespace MonoTests.System.Data.OracleClient
 
             //prepare data
 
-
-
             OracleConnection con = new OracleConnection(
                 MonoTests.System.Data.Utils.ConnectedDataProvider.ConnectionString
             );

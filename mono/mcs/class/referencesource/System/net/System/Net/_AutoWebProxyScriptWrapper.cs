@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 // Two implementations of AutoWebProxyScriptWrapper live in this file.  The first uses jscript.dll via COM, the second
 // uses Microsoft.JScript using an external AppDomain.
 

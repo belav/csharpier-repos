@@ -7,7 +7,6 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
 using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Structures;
 using System.Runtime.Serialization;

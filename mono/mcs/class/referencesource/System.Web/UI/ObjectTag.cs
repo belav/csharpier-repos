@@ -108,9 +108,6 @@ namespace System.Web.UI
 
                     //
 
-
-
-
                     if (_fLateBinding || Util.IsLateBoundComClassicType(_type))
                     {
                         _lateBound = true;
@@ -145,9 +142,6 @@ namespace System.Web.UI
                     Debug.Trace("Template", "<object> type: " + _type.FullName);
 
                     //
-
-
-
 
                     if (_fLateBinding || Util.IsLateBoundComClassicType(_type))
                     {

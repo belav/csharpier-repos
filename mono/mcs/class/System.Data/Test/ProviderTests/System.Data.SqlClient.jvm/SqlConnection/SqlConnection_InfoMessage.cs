@@ -88,7 +88,6 @@ namespace MonoTests.System.Data.SqlClient
             //				cmd.CommandText = "TestInfoMessage";
             //				cmd.CommandType = CommandType.StoredProcedure;
 
-
             if (errorCounter == 0)
             {
                 Thread.Sleep(5000);

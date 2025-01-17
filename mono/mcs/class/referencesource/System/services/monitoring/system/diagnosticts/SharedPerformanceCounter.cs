@@ -1624,9 +1624,6 @@ namespace System.Diagnostics
                 }
                 //
 
-
-
-
                 if (currentCategoryPointer->FirstInstanceOffset != 0)
                 {
                     Debug.Assert(

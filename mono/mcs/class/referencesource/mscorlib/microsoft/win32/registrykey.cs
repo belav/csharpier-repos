@@ -49,7 +49,6 @@
 
 */
 
-
 namespace Microsoft.Win32
 {
     using System;

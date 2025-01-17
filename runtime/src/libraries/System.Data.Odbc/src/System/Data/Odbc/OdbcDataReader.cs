@@ -2715,9 +2715,6 @@ namespace System.Data.Odbc
                             }
                             //
 
-
-
-
                             // if we got keyinfo from the column we dont even get to here!
                             //
                             // reset isUnique flag if the key(s) are not unique

@@ -872,10 +872,6 @@ namespace System.Web.Configuration
         {
             //
 
-
-
-
-
             TagNamespaceRegisterEntryTable tagNamespaceRegisterEntries =
                 new TagNamespaceRegisterEntryTable();
             foreach (TagNamespaceRegisterEntry entry in DefaultTagNamespaceRegisterEntries)

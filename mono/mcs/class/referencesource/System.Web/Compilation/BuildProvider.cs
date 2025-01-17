@@ -4,8 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
-
 /*********************************
 
 Class hierarchy
@@ -33,7 +31,6 @@ BuildProvider
                 GlobalPageThemeBuildProvider
 
 **********************************/
-
 
 namespace System.Web.Compilation
 {
@@ -71,7 +68,6 @@ namespace System.Web.Compilation
         //
         // Public interface
         //
-
 
         /// <devdoc>
         ///     Returns the CompilerType for the language that this build provider

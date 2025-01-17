@@ -46,7 +46,6 @@ namespace System.ComponentModel
 
         // attributes.
 
-
         // This is an index that we use to create a unique name for a property in the
         // event of a name collision.  The only time we should use this is when
         // a name collision happened on an extender property that has no site or

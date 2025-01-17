@@ -639,7 +639,6 @@ namespace System.Web.ClientServices.Providers
                 //                 ProfileService                   clientService  = channelFactory.CreateChannel();
                 //                 Dictionary<string, object>       propertyValues = null;
 
-
                 //                 using (new OperationContextScope((IContextChannel)clientService)) {
                 //                     ProxyHelper.AddCookiesToWCF(cookies, GetServiceUri(), id.Name, GetConnectionString(), _ConnectionStringProvider);
                 //                     propertyValues = clientService.GetPropertiesForCurrentUser(propertyNames, id.IsAuthenticated && (id is ClientFormsIdentity));

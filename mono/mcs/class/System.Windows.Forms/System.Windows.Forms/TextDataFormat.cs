@@ -26,7 +26,6 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-
 namespace System.Windows.Forms
 {
     public enum TextDataFormat

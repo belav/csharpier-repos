@@ -1236,7 +1236,6 @@ namespace System.Web
          * ASPNET_WP.EXE
          */
 
-
         [DllImport(ModName.WP_FULL_NAME, EntryPoint = "PMGetTraceContextId")]
         internal static extern int PMGetTraceContextId(IntPtr pMsg, out Guid traceContextId);
 

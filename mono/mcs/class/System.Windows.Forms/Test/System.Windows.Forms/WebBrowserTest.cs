@@ -23,7 +23,6 @@
 //	Andreia Gaita (avidigal@novell.com)
 //
 
-
 using System;
 using System.Drawing;
 using System.Windows.Forms;

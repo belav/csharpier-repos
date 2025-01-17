@@ -16,7 +16,6 @@ namespace System.Net
         // Date indicies used to figure out what each entry is.
         //
 
-
         private const int DATE_INDEX_DAY_OF_WEEK = 0;
 
         private const int DATE_1123_INDEX_DAY = 1;

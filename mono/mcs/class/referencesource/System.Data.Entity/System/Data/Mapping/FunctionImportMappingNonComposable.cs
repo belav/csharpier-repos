@@ -267,11 +267,6 @@ namespace System.Data.Mapping
                 {
                     //
 
-
-
-
-
-
                     TypeUsage type = TypeUsage.CreateStringTypeUsage(
                         workspace.GetModelPrimitiveType(PrimitiveTypeKind.String),
                         true,

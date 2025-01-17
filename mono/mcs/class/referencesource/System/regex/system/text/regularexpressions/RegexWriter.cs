@@ -14,7 +14,6 @@
 // sequences of codes.
 //
 
-
 namespace System.Text.RegularExpressions
 {
     using System.Collections;

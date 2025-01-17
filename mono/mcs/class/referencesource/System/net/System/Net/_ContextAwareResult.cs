@@ -543,7 +543,6 @@ namespace System.Net
             // complete regularly, as long as CaptureOrComplete() has finished.
             //
 
-
             if (userToken != IntPtr.Zero || context == null)
             {
                 base.Complete(userToken);

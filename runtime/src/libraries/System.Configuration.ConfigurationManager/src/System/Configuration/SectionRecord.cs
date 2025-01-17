@@ -63,7 +63,6 @@ namespace System.Configuration
 
         // the cached result of evaluating this section after GetRuntimeObject is called
 
-
         internal SectionRecord(string configKey)
         {
             ConfigKey = configKey;

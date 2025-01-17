@@ -8,7 +8,6 @@
 // (C) 2001 Nick D. Drochak II
 //
 
-
 using System;
 using System.Collections;
 using NUnit.Framework;

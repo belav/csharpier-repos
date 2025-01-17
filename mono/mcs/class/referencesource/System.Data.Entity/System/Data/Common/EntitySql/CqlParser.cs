@@ -2,10 +2,7 @@
 //### C# capabilities added 11 Sep 2000
 //### static char yysccsid[] = "@(#)yaccpar	1.9 (Berkeley) 02/21/93";
 
-
-
 // the current file was generated on 06/16/2010 at 16:57
-
 
 //#line 2 "CqlGrammar.y"
 
@@ -42,9 +39,6 @@ using System.Data.Entity;
 
 ///////////////////////////////////////////////////////////////////////////////*/
 #pragma warning disable 414
-
-
-
 
 //#####################################################################
 // namespace: System.Data.Common.EntitySql

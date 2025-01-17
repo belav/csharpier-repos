@@ -22,7 +22,6 @@ using Xunit;
 // A likely fix for this would be to delay backpatching getX() until after the .cctor has fully completed.
 // mwilk. 2/3/04.
 
-
 public class MyClass
 {
     private static int X;

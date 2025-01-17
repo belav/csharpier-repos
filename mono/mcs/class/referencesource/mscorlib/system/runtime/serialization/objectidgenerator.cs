@@ -78,7 +78,6 @@ namespace System.Runtime.Serialization
         {
             //<
 
-
             int hashcode = RuntimeHelpers.GetHashCode(obj);
             int hashIncrement = (1 + ((hashcode & 0x7FFFFFFF) % (m_currentSize - 2)));
             do

@@ -22,7 +22,6 @@
 // Authors:
 //	Peter Bartok	pbartok@novell.com
 
-
 // COMPLETE
 
 using System;

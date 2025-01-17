@@ -1154,7 +1154,6 @@ namespace System.ServiceModel
             //
             //
 
-
             SecurityTokenHandlerCollectionManager sthcm =
                 this.parent.SecurityTokenHandlerCollectionManager;
             WsSecurityTokenSerializerAdapter adapter = new WsSecurityTokenSerializerAdapter(

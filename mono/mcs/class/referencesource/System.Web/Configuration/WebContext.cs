@@ -27,7 +27,6 @@ namespace System.Web.Configuration
         //
         //
 
-
         public WebContext(
             WebApplicationLevel pathLevel,
             string site,

@@ -26,7 +26,6 @@
 //
 //
 
-
 using System;
 using System.Threading;
 using MonoTests.System.Threading.Tasks;

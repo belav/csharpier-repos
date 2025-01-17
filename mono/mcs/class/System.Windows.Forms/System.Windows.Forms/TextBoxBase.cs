@@ -2717,7 +2717,6 @@ namespace System.Windows.Forms
 
             //Console.WriteLine("Caret now at {0} (Thumb: {1}x{2}, Canvas: {3}x{4}, Document {5}x{6})", pos, hscroll.Value, vscroll.Value, canvas_width, canvas_height, document.Width, document.Height);
 
-
             // Horizontal scrolling:
             // If the caret moves to the left outside the visible area, we jump the document into view, not just one
             // character, but 1/3 of the width of the document

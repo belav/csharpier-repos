@@ -123,7 +123,6 @@ namespace System.Web.Hosting
 
                 //
 
-
                 IIS.MgdGetRequestTraceGuid(_context, out _traceId);
 
                 if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.Infrastructure))
@@ -1424,8 +1423,6 @@ namespace System.Web.Hosting
             );
 
             //
-
-
 
             // Check if PushPromise is supported on this platform
             if (result == HResults.E_NOTIMPL)

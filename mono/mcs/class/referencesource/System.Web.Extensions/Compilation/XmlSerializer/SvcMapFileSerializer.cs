@@ -7,7 +7,6 @@
 //  This file is generated. DO NOT MODIFY IT BY HAND.
 // Please read HowToUpdateSerializer.txt in the parent directory to see how to update it.
 
-
 namespace System.Web.Compilation.WCFModel.SvcMapFileXmlSerializer
 {
     internal class XmlSerializationWriterSvcMapFileImpl

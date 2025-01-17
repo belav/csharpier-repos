@@ -81,7 +81,6 @@ namespace System.ServiceModel.Security
             //
             //
 
-
             get { return _securityTokenHandlerCollection; }
         }
 

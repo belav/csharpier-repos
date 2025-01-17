@@ -1164,7 +1164,6 @@ namespace System.Data
                 }
                 */
 
-
                 if (ct.ContentModel is XmlSchemaComplexContent)
                 {
                     XmlSchemaAnnotated? cContent = (

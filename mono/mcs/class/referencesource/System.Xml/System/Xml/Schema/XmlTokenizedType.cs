@@ -5,7 +5,6 @@
 // <owner current="true" primary="true">helenak</owner>
 //------------------------------------------------------------------------------
 
-
 namespace System.Xml
 {
     // NOTE: Absolute numbering is utilized in DtdParser. -HelenaK

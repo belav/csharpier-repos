@@ -785,7 +785,6 @@ namespace System.Web.UI.MobileControls.Adapters
             //in practice, the number of items on the stack is small
             //so it may be comparable
 
-
             //reset wrapping
             while (state.TagsWritten.Count > 0)
             {

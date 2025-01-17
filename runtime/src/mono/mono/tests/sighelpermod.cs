@@ -9,7 +9,6 @@
 //             int32 modopt([mscorlib]System.Runtime.CompilerServices.IsConst),
 //             int64 modopt([mscorlib]System.Runtime.CompilerServices.IsConst))
 
-
 using System;
 using System.Reflection;
 using System.Reflection.Emit;

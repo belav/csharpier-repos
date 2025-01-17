@@ -369,7 +369,6 @@ namespace System.Data.SqlTypes
         }
         */
 
-
         // do we still want to define a property of DateTime? If the user uses it often, it is expensive
         // property: Value
         public DateTime Value
@@ -565,7 +564,6 @@ namespace System.Data.SqlTypes
         }
 
         // Builtin functions
-
 
         // utility functions
         /*

@@ -982,7 +982,6 @@ namespace System.Collections
         {
             // @
 
-
             if (key == null)
             {
                 throw new ArgumentNullException(

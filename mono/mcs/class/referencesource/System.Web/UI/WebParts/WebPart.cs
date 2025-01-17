@@ -21,10 +21,6 @@ namespace System.Web.UI.WebControls.WebParts
 
     //
 
-
-
-
-
     /// <devdoc>
     /// Adds several features to the Part class, including connections, personalization behavior,
     /// and additional UI properties.

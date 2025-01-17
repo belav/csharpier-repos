@@ -154,7 +154,6 @@ namespace IBM.Data.DB2
         #region Methods
 
 
-
         #region Close method
 
         public void Close()

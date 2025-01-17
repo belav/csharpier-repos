@@ -604,7 +604,6 @@ namespace System.Security.AccessControl.Tests
             //Case 7, Remove Ace of NOT(AccessControlType.Allow |AccessControlType.Denied) to the DiscretionaryAcl with no ACE,
             // should throw appropriate exception for wrong parameter, bug#287188
 
-
             isContainer = true;
             isDS = false;
 

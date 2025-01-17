@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Web.Script.Services
 {
     internal class RestClientProxyHandler : IHttpHandler

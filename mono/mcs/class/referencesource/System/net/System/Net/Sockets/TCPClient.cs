@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Net.Sockets
 {
     using System.Security.Permissions;
@@ -241,7 +240,6 @@ namespace System.Net.Sockets
             //       DNS when trying to connect. Use of AddressList[0] is
             //       bad form.
             //
-
 
             IPAddress[] addresses = Dns.GetHostAddresses(hostname);
             Exception lastex = null;

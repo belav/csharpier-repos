@@ -1095,8 +1095,6 @@ namespace System.ServiceModel.Dispatcher
 
         // ........................................................................................................
 
-
-
         abstract class VolatileBase : ISinglePhaseNotification
         {
             protected InstanceContext InstanceContext;

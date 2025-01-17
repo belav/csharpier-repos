@@ -7,7 +7,6 @@
 /*
  */
 
-
 #if Microsoft_NAMESPACE
 namespace System.Windows.Forms
 #elif DRAWING_NAMESPACE

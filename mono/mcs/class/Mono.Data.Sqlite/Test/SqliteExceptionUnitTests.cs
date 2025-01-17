@@ -2,7 +2,6 @@
 //
 // Author(s):	Thomas Zoechling <thomas.zoechling@gmx.at>
 
-
 using System;
 using System.Data;
 using System.IO;

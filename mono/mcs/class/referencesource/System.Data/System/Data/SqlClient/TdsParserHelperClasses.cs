@@ -1011,7 +1011,6 @@ namespace System.Data.SqlClient
             this.metaType = original.metaType;
             //
 
-
             this.structuredTypeDatabaseName = original.structuredTypeDatabaseName;
             this.structuredTypeSchemaName = original.structuredTypeSchemaName;
             this.structuredTypeName = original.structuredTypeName;

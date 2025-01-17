@@ -475,7 +475,6 @@ namespace System.Data.SqlTypes
         //         XML Serialization
         // --------------------------------------------------------------
 
-
         XmlSchema? IXmlSerializable.GetSchema()
         {
             return null;

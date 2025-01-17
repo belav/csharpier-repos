@@ -116,7 +116,6 @@ namespace Novell.Directory.Ldap.Utilclass
         
         */
 
-
         private System.Collections.ArrayList rdnList;
 
         public DN()

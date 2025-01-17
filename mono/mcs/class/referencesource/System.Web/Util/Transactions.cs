@@ -19,7 +19,6 @@ namespace System.Web.Util
     //  Delegate to the transacted managed code
     //
 
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -41,7 +40,6 @@ namespace System.Web.Util
     //
     //  Utility class with to be called to do transactions
     //
-
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

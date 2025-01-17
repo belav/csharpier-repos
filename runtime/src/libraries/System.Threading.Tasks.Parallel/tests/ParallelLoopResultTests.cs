@@ -470,7 +470,6 @@ namespace System.Threading.Tasks.Tests
             // Test 32-bit Parallel.For()
             //
 
-
             ForPLRTest(
                 delegate(int i, ParallelLoopState ps)
                 {
@@ -610,7 +609,6 @@ namespace System.Threading.Tasks.Tests
             //
             // Test "vanilla" Parallel.ForEach
             //
-
 
             ForEachPLRTest(
                 delegate(KeyValuePair<int, string> kvp, ParallelLoopState ps)
@@ -752,7 +750,6 @@ namespace System.Threading.Tasks.Tests
             // Test Parallel.ForEach w/ Partitioner
             //
 
-
             PartitionerForEachPLRTest(
                 delegate(int i, ParallelLoopState ps)
                 {
@@ -817,7 +814,6 @@ namespace System.Threading.Tasks.Tests
             // Test Parallel.ForEach w/ OrderablePartitioner
             //
 
-
             OrderablePartitionerForEachPLRTest(
                 delegate(int i, ParallelLoopState ps, long index)
                 {
@@ -881,7 +877,6 @@ namespace System.Threading.Tasks.Tests
             //
             // Test 64-bit Parallel.For
             //
-
 
             For64PLRTest(
                 delegate(long i, ParallelLoopState ps)

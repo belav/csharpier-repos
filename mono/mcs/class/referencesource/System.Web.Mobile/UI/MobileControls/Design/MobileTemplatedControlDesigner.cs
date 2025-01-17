@@ -189,7 +189,6 @@ namespace System.Web.UI.Design.MobileControls
 
         //
 
-
         // Return true only when GetErrorMessage returns non-null string and
         // it is not info mode (warning only).
         protected virtual bool ErrorMode

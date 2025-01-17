@@ -6,7 +6,6 @@
 /// <owner>gpaperin</owner>
 ///------------------------------------------------------------------------------
 
-
 namespace System.IO.Compression
 {
     /// <summary>

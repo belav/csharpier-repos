@@ -565,7 +565,6 @@ namespace System.Web.UI.Design.MobileControls
 
             //
 
-
             void SetOndragstart([In, MarshalAs(UnmanagedType.Struct)] Object p);
 
             [return: MarshalAs(UnmanagedType.Struct)]
@@ -931,7 +930,6 @@ namespace System.Web.UI.Design.MobileControls
 
             //
 
-
             void SetOnbeforeupdate([In, MarshalAs(UnmanagedType.Struct)] Object p);
 
             [return: MarshalAs(UnmanagedType.Struct)]
@@ -1110,7 +1108,6 @@ namespace System.Web.UI.Design.MobileControls
             object GetImports();
 
             //
-
 
             void SetHref([In, MarshalAs(UnmanagedType.BStr)] string p);
 

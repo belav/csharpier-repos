@@ -1857,7 +1857,6 @@ namespace System.Workflow.ComponentModel.Design
 
                 //Draw all the filters
 
-
                 using (
                     PaintEventArgs paintArgs = new PaintEventArgs(
                         viewPortGraphics,
@@ -2418,7 +2417,6 @@ namespace System.Workflow.ComponentModel.Design
                     ? this.activeLayout.MapOutRectangleFromLayout(rectangle)
                     : rectangle;
             //
-
 
             return new Rectangle(
                 LogicalPointToClient(clientViewPort.Location, false),

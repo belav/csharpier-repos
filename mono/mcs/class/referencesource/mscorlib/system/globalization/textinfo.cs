@@ -38,7 +38,6 @@ namespace System.Globalization
         //                        Internal Information                        //
         //--------------------------------------------------------------------//
 
-
         //
         //  Variables.
         //
@@ -502,7 +501,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
 #if !FEATURE_CORECLR
         public virtual int ANSICodePage
         {
@@ -637,7 +635,6 @@ namespace System.Globalization
         //  Returns the string used to separate items in a list.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public virtual String ListSeparator
         {
@@ -831,7 +828,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
         public override bool Equals(Object obj)
         {
             TextInfo that = obj as TextInfo;
@@ -854,7 +850,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
         public override int GetHashCode()
         {
             return (this.CultureName.GetHashCode());
@@ -868,7 +863,6 @@ namespace System.Globalization
         //  TextInfo.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public override String ToString()
         {
@@ -891,12 +885,6 @@ namespace System.Globalization
         //
         //
         // Differences between UNICODE 5.0 and the .NET Framework (
-
-
-
-
-
-
 
 #if !FEATURE_CORECLR
         public unsafe String ToTitleCase(String str)

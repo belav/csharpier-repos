@@ -4,7 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-
 using System;
 
 namespace System.IdentityModel.Tokens

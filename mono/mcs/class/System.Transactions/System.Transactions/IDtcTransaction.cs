@@ -7,7 +7,6 @@
 // (C)2005 Novell Inc,
 //
 
-
 // Well, am not interested in implementing DTC support...
 using System;
 using System.Runtime.InteropServices;

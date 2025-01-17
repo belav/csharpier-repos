@@ -14,7 +14,6 @@ namespace System.Data.Common
         // used by pooling classes so it is easier to verify correctness
         // without the risk of the objects of the class being modified during execution.
 
-
         // differences between OleDb and Odbc
         // ODBC:
         //     https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function

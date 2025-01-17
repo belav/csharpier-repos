@@ -1551,7 +1551,6 @@ namespace System.Xml.Schema
         //
         //  }
 
-
         private static void XDR_EndElement(XdrBuilder builder)
         {
             if (builder._ElementDef._HasType)
@@ -1733,7 +1732,6 @@ namespace System.Xml.Schema
         //    {
         //
         //    }
-
 
         private static void XDR_EndGroup(XdrBuilder builder)
         {

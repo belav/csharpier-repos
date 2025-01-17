@@ -14,7 +14,6 @@
 **
 ===========================================================*/
 
-
 namespace System.Collections.Generic
 {
     using System;
@@ -1109,7 +1108,6 @@ namespace System.Collections.Generic
         /// Testing counter that can track rotations
         /// </summary>
 
-
         private static TreeRotation RotationNeeded(Node parent, Node current, Node sibling)
         {
             Debug.Assert(
@@ -1338,7 +1336,6 @@ namespace System.Collections.Generic
             //    As we're adding to the leftmost of the right branch, nesting will not hurt the red-black properties
             //    Leaf nodes are red if they have no sibling (if there are 2 nodes or if a node trickles
             //    down to the bottom
-
 
             //the iterative way to do this ends up wasting more space than it saves in stack frames (at
             //least in what i tried)
@@ -2161,7 +2158,6 @@ namespace System.Collections.Generic
             bool lBoundActive,
                 uBoundActive;
             //used to see if the count is out of date
-
 
 #if DEBUG
             internal override bool versionUpToDate()

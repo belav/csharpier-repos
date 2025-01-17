@@ -265,7 +265,6 @@ namespace System.Data.Objects
         {
             //
 
-
             Debug.Assert(
                 Member(ordinal) != null,
                 "The only case where Member(ordinal) can be null is if the property is in shadow state.  "

@@ -93,7 +93,6 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         //              Expression  null --> ignore
         // SQL: wrap clause with PK information
 
-
         /// <summary>
         /// Creates a query for insertion
         /// </summary>

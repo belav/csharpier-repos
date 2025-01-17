@@ -271,7 +271,6 @@ namespace System.Web.UI.WebControls
             {
                 //
 
-
                 // Must be saved when
                 // 1. There is a registered event handler for SelectedIndexChanged
                 // 2. Control is not enabled or visible, because the browser's post data will not include this control

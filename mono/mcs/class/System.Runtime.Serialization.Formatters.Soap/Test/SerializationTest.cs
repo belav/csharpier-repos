@@ -87,7 +87,6 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap
             //			calls = new IMessage[originalMsgData.Length];
             //			resps = new IMessage[originalMsgData.Length];
 
-
             //			for (int n=0; n<originalMsgData.Length; n++)
             //			{
             //				calls[n] = (IMessage) f.Deserialize (ms);

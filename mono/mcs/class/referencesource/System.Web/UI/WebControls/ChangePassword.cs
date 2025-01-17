@@ -1680,7 +1680,6 @@ namespace System.Web.UI.WebControls
 
         ///////////////////// EVENTS //////////////////////////////
 
-
         /// <devdoc>
         ///     Raised on the click of the cancel button.
         /// </devdoc>

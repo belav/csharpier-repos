@@ -336,7 +336,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
         public CultureInfo(String name)
             : this(name, true) { }
 
@@ -788,7 +787,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
         public static CultureInfo CurrentCulture
         {
             get
@@ -1041,7 +1039,6 @@ namespace System.Globalization
         //  culture info.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public static CultureInfo InvariantCulture
         {
@@ -1382,7 +1379,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
         public virtual TextInfo TextInfo
         {
             get
@@ -1416,7 +1412,6 @@ namespace System.Globalization
         //  or not object refers to the same CultureInfo as the current instance.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public override bool Equals(Object value)
         {
@@ -1459,7 +1454,6 @@ namespace System.Globalization
         //  eg. "de-DE_phoneb", "en-US", or "fj-FJ".
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public override String ToString()
         {
@@ -1556,7 +1550,6 @@ namespace System.Globalization
         // the CultureID.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public virtual DateTimeFormatInfo DateTimeFormat
         {
@@ -1677,7 +1670,6 @@ namespace System.Globalization
         **  ArgumentNull_Obj if the set value is null.
         ============================================================================*/
 
-
         public virtual Calendar Calendar
         {
             get
@@ -1707,7 +1699,6 @@ namespace System.Globalization
         **Arguments:
         **Exceptions:
         ============================================================================*/
-
 
         public virtual Calendar[] OptionalCalendars
         {

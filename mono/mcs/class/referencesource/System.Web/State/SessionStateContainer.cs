@@ -203,7 +203,6 @@ namespace System.Web.SessionState
         {
             //
 
-
             get { return Thread.CurrentThread.CurrentCulture.LCID; }
             set
             {
@@ -219,7 +218,6 @@ namespace System.Web.SessionState
         public int CodePage
         {
             //
-
 
             get
             {

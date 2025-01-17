@@ -7,7 +7,6 @@
 // (C) 2003 Ximian, Inc (http://www.ximian.com)
 //
 
-
 using System;
 
 namespace Mono.ILASM

@@ -19,7 +19,6 @@
  SOFTWARE.
 */
 
-
 using System;
 using C5;
 using SCG = System.Collections.Generic;

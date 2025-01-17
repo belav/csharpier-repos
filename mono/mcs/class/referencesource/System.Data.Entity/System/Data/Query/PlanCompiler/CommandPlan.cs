@@ -30,7 +30,6 @@ using md = System.Data.Metadata.Edm;
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
 
-
 //
 // A CommandPlan represents the plan for a query.
 //

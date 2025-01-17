@@ -7,7 +7,6 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
 using System.Data.Common.Utils;
 
 namespace System.Data.Mapping.ViewGeneration.Structures

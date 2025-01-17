@@ -6,7 +6,6 @@
 // and committed from the LargeObjectHeap
 // The Finalizer makes sure that the GC is actually collecting the large objects
 
-
 using System;
 
 namespace LargeObjectTest

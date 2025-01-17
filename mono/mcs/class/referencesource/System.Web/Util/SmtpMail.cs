@@ -698,7 +698,6 @@ namespace System.Web.Mail
     // Enums for message elements
     //
 
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>

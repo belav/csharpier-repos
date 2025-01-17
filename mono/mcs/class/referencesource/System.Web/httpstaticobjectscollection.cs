@@ -98,7 +98,6 @@ namespace System.Web
         // Implementation of standard collection stuff
         //
 
-
         /// <devdoc>
         ///    <para>Gets the object in the collection with the given name (case
         ///       insensitive). </para>

@@ -844,7 +844,6 @@ namespace System.IO
         // space after 'position' to write a value of type XXX.  XXX can be a bool, byte, char, decimal,
         // double, short, int, long, sbyte, float, ushort, uint, or ulong.
 
-
         public void Write(Int64 position, bool value)
         {
             int sizeOfType = sizeof(bool);
@@ -1372,7 +1371,6 @@ namespace System.IO
         }
 
         // Writes 'count' structs of type T from 'array' (starting at 'offset') into unmanaged memory.
-
 
         [System.Security.SecurityCritical] // auto-generated_required
         public void WriteArray<T>(Int64 position, T[] array, Int32 offset, Int32 count)

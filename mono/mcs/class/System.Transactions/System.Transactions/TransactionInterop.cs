@@ -7,7 +7,6 @@
 // (C)2005 Novell Inc,
 //
 
-
 // OK, everyone knows that am not interested in DTC support ;-)
 
 namespace System.Transactions

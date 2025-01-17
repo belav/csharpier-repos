@@ -93,7 +93,6 @@ namespace System.Runtime.Remoting.Contexts
 
         // <
 
-
         /// <internalonly/>
         [System.Security.SecurityCritical] // auto-generated_required
         public Context()

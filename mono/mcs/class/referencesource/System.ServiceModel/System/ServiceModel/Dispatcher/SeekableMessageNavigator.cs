@@ -16,9 +16,6 @@ namespace System.ServiceModel.Dispatcher
 
     // Anything marked
 
-
-
-
     class SeekableMessageNavigator : SeekableXPathNavigator, INodeCounter
     {
         // Use a single template for constructing the common elements.

@@ -154,7 +154,6 @@ namespace System.Threading.Tasks
         // Internal overridable methods
         //
 
-
         /// <summary>
         /// Attempts to execute the target task synchronously.
         /// </summary>

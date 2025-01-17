@@ -89,7 +89,6 @@ namespace System.Web.UI
         private SimpleBitVector32 flags;
 #pragma warning restore 0649
 
-
         /// <devdoc>
         /// </devdoc>
         public virtual Type BindingContainerType

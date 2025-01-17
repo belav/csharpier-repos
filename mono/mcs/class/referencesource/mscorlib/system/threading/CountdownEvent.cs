@@ -600,7 +600,6 @@ namespace System.Threading
         // --------------------------------------
         // Private methods
 
-
         /// <summary>
         /// Throws an exception if the latch has been disposed.
         /// </summary>

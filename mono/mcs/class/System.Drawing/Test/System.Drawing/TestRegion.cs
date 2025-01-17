@@ -804,7 +804,6 @@ namespace MonoTests.System.Drawing
                 *
                 */
 
-
                 rect1 = new Rectangle(70, 60, 100, 70);
                 rect2 = new Rectangle(100, 10, 100, 150);
 
@@ -828,7 +827,6 @@ namespace MonoTests.System.Drawing
                 * 	  |  		     |
                 *  	  |------------------|
                 */
-
 
                 rect1 = new Rectangle(20, 20, 100, 100);
                 rect2 = new Rectangle(10, 80, 140, 150);

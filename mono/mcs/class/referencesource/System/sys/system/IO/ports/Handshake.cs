@@ -13,7 +13,6 @@
 **
 ===========================================================*/
 
-
 namespace System.IO.Ports
 {
     public enum Handshake

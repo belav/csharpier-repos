@@ -15,16 +15,6 @@
 // Because these two implementations of TextWriter are so similar, the C++ preprocessor
 // is used to generate each implementation from one template file, using macros and ifdefs.
 
-
-
-
-
-
-
-
-
-
-
 using System;
 using System.Diagnostics;
 using System.Globalization;

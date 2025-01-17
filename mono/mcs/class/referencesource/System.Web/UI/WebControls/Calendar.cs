@@ -872,7 +872,6 @@ namespace System.Web.UI.WebControls
 
         // Methods
 
-
         /// <devdoc>
         /// </devdoc>
         private void ApplyTitleStyle(

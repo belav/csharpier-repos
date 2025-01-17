@@ -4,7 +4,6 @@
 // This is needed due to NativeAOT which doesn't enable nullable globally yet
 #nullable enable
 
-
 using System.Collections.Generic;
 using ILLink.Shared.DataFlow;
 using ILLink.Shared.TypeSystemProxy;

@@ -1635,7 +1635,6 @@ namespace System.ComponentModel
             }
             */
 
-
             /// <devdoc>
             ///      Retrieves the type converter for this entry.
             ///      Type converters are found by either looking for a

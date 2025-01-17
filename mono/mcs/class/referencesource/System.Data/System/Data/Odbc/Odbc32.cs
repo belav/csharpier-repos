@@ -6,7 +6,6 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-
 namespace System.Data.Odbc
 {
     using System;

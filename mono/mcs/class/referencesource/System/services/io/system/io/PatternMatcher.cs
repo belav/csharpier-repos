@@ -160,7 +160,6 @@ namespace System.IO
             // the only component that calls this method is FileSystemWatcher and
             // it will never pass a name that contains a wildcard.
 
-
             //
             //  Also special case expressions of the form *X.  With this and the prior
             //  case we have covered virtually all normal queries.

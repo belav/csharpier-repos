@@ -23,7 +23,6 @@
 //	Peter Bartok	(pbartok@novell.com)
 //
 
-
 // COMPLETE
 
 namespace System.Windows.Forms

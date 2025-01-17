@@ -770,7 +770,6 @@ namespace HFATest
         // Average Methods
         // ---------------------------------------------------
 
-
         [DllImport(
             Config.DllName,
             EntryPoint = "average_HFA01",
@@ -1397,7 +1396,6 @@ namespace HFATest
         // ---------------------------------------------------
         // Add Methods
         // ---------------------------------------------------
-
 
         [DllImport(
             Config.DllName,
@@ -2564,7 +2562,6 @@ namespace HFATest
         // Average Methods
         // ---------------------------------------------------
 
-
         [DllImport(
             Config.DllName,
             EntryPoint = "average_HFA01",
@@ -3191,7 +3188,6 @@ namespace HFATest
         // ---------------------------------------------------
         // Add Methods
         // ---------------------------------------------------
-
 
         [DllImport(
             Config.DllName,

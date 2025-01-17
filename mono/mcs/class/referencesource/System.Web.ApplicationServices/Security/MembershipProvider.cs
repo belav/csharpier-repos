@@ -32,7 +32,6 @@ namespace System.Web.Security
         // Property Section
         //
 
-
         // Public properties
         public abstract bool EnablePasswordRetrieval { get; }
 
@@ -59,7 +58,6 @@ namespace System.Web.Security
         //
         // Method Section
         //
-
 
         [SuppressMessage(
             "Microsoft.Naming",

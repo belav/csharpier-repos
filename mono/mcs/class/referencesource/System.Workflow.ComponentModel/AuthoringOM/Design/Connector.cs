@@ -681,9 +681,6 @@ namespace System.Workflow.ComponentModel.Design
 
                 //
 
-
-
-
                 List<FreeformActivityDesigner> targetParents = new List<FreeformActivityDesigner>();
                 ActivityDesigner designer = this.target.AssociatedDesigner;
                 while (designer != null)
@@ -1944,8 +1941,6 @@ namespace System.Workflow.ComponentModel.Design
 
             //
 
-
-
             if (!AreAllSegmentsVerticalOrHorizontal(routedPoints))
                 routedPoints = ConnectorRouter.Route(
                     sourcePoint,
@@ -2509,11 +2504,6 @@ namespace System.Workflow.ComponentModel.Design
                     return null;
                 //{
                 //    //
-
-
-
-
-
 
                 //    return newPath.ToArray();
                 //}

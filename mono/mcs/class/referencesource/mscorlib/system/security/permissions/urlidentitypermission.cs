@@ -103,7 +103,6 @@ namespace System.Security.Permissions
         //
         //------------------------------------------------------
 
-
         public UrlIdentityPermission(PermissionState state)
         {
             if (state == PermissionState.Unrestricted)
@@ -198,7 +197,6 @@ namespace System.Security.Permissions
         // IPERMISSION IMPLEMENTATION
         //
         //------------------------------------------------------
-
 
         public override IPermission Copy()
         {

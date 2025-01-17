@@ -3573,7 +3573,6 @@ namespace System.Runtime.Remoting.Messaging
             }
             //ResolveMethod();
 
-
             //Contract.Assert(null != MI, "null != MI");
 
             // get method parameters and parameter maps
@@ -4266,7 +4265,6 @@ namespace System.Runtime.Remoting.Messaging
         private RemotingMethodCachedData _methodCache;
 
         // Constructor -- this constructor is called only in the SOAP Scenario
-
 
         /// <internalonly/>
         [System.Security.SecurityCritical] // auto-generated
@@ -6041,7 +6039,6 @@ namespace System.Runtime.Remoting.Messaging
 
         // end of IMethodMessage implementation
 
-
         // IMethodCallMessage implementation
         //   (We cannot simply delegate to the internal message
         //    since we override the definition of Args and create our own array
@@ -6089,7 +6086,6 @@ namespace System.Runtime.Remoting.Messaging
         } // InArgs
 
         // end of IMethodCallMessage implementation
-
 
         /// <internalonly/>
         public virtual IDictionary Properties
@@ -6285,7 +6281,6 @@ namespace System.Runtime.Remoting.Messaging
         }
 
         // end of IMethodMessage implementation
-
 
         // IMethodReturnMessage implementation
         //   (We cannot simply delegate to the internal message

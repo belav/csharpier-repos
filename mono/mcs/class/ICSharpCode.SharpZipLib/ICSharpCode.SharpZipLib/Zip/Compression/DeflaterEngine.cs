@@ -82,7 +82,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
     // to the previous index with the same hash.
     //
 
-
     /// <summary>
     /// Low level compression engine for deflate algorithm which uses a 32K sliding window
     /// with secondary compression from Huffman/Shannon-Fano codes.

@@ -206,7 +206,6 @@ namespace System.Net
                         {
                             //
 
-
                             string chunkHeader = size.ToString("x", CultureInfo.InvariantCulture);
                             dataToWrite = dataToWrite + (uint)(chunkHeader.Length + 4);
                             bufferAsIntPtr = SafeLocalFree.LocalAlloc((int)dataToWrite);
@@ -541,7 +540,6 @@ namespace System.Net
                 throw exception;
             }
             //
-
 
             GlobalLog.Print(
                 "HttpResponseStream#" + ValidationHelper.HashString(this) + "::EndWrite()"

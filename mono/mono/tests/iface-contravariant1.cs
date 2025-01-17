@@ -2,7 +2,6 @@ using System;
 
 /* Test of constrained.callvirt resolution for contravariant interfaces */
 
-
 public interface I<in T>
 {
     string F(T t);

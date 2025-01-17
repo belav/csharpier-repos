@@ -126,7 +126,6 @@ using System.Diagnostics.CodeAnalysis;
 )]
 // krisragh, END FxCop violations for code in Microsoft.Web.Script.Services.*
 
-
 [module: SuppressMessage(
     "Microsoft.Design",
     "CA1011:ConsiderPassingBaseTypesAsParameters",

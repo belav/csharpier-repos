@@ -640,7 +640,6 @@ namespace System.Runtime.Remoting
 
             // <
 
-
             String[] bashInfo = (String[])CallContext.GetData("__bashChannelUrl");
             if (bashInfo == null)
                 return oldChannelInfo;

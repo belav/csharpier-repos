@@ -275,8 +275,6 @@ namespace System.Windows.Forms.Design
         #endregion
 
 
-
-
         private DesignerViewFrame _designerViewFrame;
 
         public DocumentDesigner() { }

@@ -59,7 +59,6 @@ using System.Threading;
 // 6. when finished, return connection
 //
 
-
 namespace System.Net
 {
     public partial class ServicePointManager

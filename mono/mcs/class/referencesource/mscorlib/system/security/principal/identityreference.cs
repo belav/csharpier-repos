@@ -29,7 +29,6 @@ namespace System.Security.Principal
         //      {
         //          get { return new Url(""); } //
 
-
         public abstract bool IsValidTargetType(Type targetType);
 
         public abstract IdentityReference Translate(Type targetType);

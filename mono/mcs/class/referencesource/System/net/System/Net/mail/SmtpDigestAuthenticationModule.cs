@@ -49,9 +49,6 @@ namespace System.Net.Mail
                     }
                     //
 
-
-
-
                     this.sessions[sessionCookie] = clientContext = new NTAuthentication(
                         false,
                         "WDigest",

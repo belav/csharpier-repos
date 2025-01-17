@@ -7,7 +7,6 @@
  *      Each thread in turn adds and deletes thousands of nodes from the linked list.
  */
 
-
 namespace ThdList
 {
     using System;

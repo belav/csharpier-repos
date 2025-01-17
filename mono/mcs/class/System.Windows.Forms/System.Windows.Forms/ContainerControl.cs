@@ -24,7 +24,6 @@
 //
 //
 
-
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
@@ -104,7 +103,6 @@ namespace System.Windows.Forms
                 //	  ...  	...	      ...   ...		  ...  	...
                 //     	  /      \	      /	       			  \
                 //     current 	 new   	   current   			  new
-
 
                 // note (3) doesn't require any upward walking, and no leave events are generated.
                 //      (2) doesn't require any downward walking, and no enter events are generated.

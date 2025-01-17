@@ -871,7 +871,6 @@ namespace System.Windows.Forms.X11Internal
             //XSetFunction(DisplayHandle,   gc, GXxor);
             //XSetPlaneMask(DisplayHandle,  gc, mask);
 
-
             gc = Xlib.XCreateGC(
                 display.Handle,
                 ClientWindow,

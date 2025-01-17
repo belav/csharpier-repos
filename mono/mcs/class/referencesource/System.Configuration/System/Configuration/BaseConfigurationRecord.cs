@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Configuration
 {
     using System.Collections;
@@ -3694,7 +3693,6 @@ namespace System.Configuration
             //         that we fall back to the default since we couldnt find a section record with explicit lock mode nowhere above us)
             //
             // I sure hope that made some sense!
-
 
             OverrideMode mode = OverrideMode.Inherit;
             BaseConfigurationRecord parent = Parent;

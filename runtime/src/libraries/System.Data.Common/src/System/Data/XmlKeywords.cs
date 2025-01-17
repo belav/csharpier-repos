@@ -21,9 +21,6 @@ namespace System.Data
 
         //internal const string DESCENDENT            = "descendent";
 
-
-
-
         internal const string MSD = "msdata";
         internal const string MSDNS = "urn:schemas-microsoft-com:xml-msdata";
         internal const string MSD_ACCEPTREJECTRULE = "AcceptRejectRule";

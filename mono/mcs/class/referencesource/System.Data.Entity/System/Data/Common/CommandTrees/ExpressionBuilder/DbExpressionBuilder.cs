@@ -2557,7 +2557,6 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
 
         //
 
-
         /// <summary>
         /// Creates a new <see cref="DbApplyExpression"/> that evaluates the given <paramref name="apply"/> expression once for each element of a given input set,
         /// producing a collection of rows with corresponding input and apply columns. Rows for which <paramref name="apply"/> evaluates to an empty set have an apply column value of <code>null</code>.
@@ -2582,7 +2581,6 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         }
 
         //
-
 
         //
 

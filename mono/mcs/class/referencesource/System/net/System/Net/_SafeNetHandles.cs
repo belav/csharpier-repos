@@ -1032,17 +1032,6 @@ namespace System.Net
         {
             //
 
-
-
-
-
-
-
-
-
-
-
-
             UnsafeNclNativeMethods.SafeNetHandles.CertFreeCertificateChainList(handle);
             return true;
         }

@@ -693,8 +693,6 @@ namespace System.ServiceModel.Activities
             {
                 //
 
-
-
                 // The entire InternalSendMessage runs in a no persist zone
                 NoPersistHandle noPersistHandle = this.noPersistHandle.Get(context);
                 noPersistHandle.Enter(context);

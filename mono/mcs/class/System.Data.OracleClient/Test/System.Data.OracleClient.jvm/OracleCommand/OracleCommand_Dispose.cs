@@ -21,7 +21,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Data;
 using System.Data.OracleClient;
@@ -66,7 +65,6 @@ namespace MonoTests.System.Data.OracleClient
         //To: //Oved Yavine//
         //Subject: 2 problems from Synergy
 
-
         //Please check those 2 problems reported by Synergy and tell me what do you think.
 
         //1) The following code works in dotnet but doesn//t work in j2ee.
@@ -101,7 +99,6 @@ namespace MonoTests.System.Data.OracleClient
         //}
         //i have identified the problem as being "DbCommand.Dispose()". If you comment this line out or make it
         //"DbCommand = null", then its okay. So this instruction doesnt work the same in both in .net and j2ee.
-
 
         [Test]
         public void run()

@@ -537,7 +537,6 @@ namespace System.Security.Claims
 
             //
 
-
             int numberOfPropertiesWritten = 1;
             SerializationMask mask = SerializationMask.None;
             if (string.Equals(m_type, ClaimsIdentity.DefaultNameClaimType))

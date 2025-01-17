@@ -19,7 +19,6 @@ namespace System.Web.Mobile
      * Copyright (c) 2000 Microsoft Corporation
      */
 
-
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal

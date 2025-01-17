@@ -18,7 +18,6 @@ namespace System.Web.SessionState
      * access to session state.
      */
 
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>

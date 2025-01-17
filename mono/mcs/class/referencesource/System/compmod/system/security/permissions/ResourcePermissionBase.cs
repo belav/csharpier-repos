@@ -476,7 +476,6 @@ namespace System.Security.Permissions
             //
             //
 
-
             if (currentContent is int)
             {
                 int currentAccess = (int)currentContent;

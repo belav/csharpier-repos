@@ -7,7 +7,6 @@
 // (C) 2003 Jackson Harper, All rights reserved
 //
 
-
 using System;
 using System.Collections;
 using System.Security;

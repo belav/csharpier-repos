@@ -354,7 +354,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
             {
                 // <
 
-
                 int co = 0;
                 foreach (DictionaryEntry entry in properties)
                 {

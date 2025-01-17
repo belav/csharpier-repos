@@ -27,7 +27,6 @@ namespace System.Workflow.ComponentModel.Design
 
     //
 
-
     #region SequentialActivityDesigner Class
     /// <summary>
     /// Base class used for all the designers which have sequential vertical layout.

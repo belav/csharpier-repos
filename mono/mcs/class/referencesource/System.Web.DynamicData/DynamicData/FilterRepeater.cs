@@ -110,7 +110,6 @@
             {
                 //
 
-
                 return base.Visible && _filters.Count > 0;
             }
             set { base.Visible = value; }

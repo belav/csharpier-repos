@@ -23,7 +23,6 @@
 //	Andreia Gaita (avidigal@novell.com)
 //
 
-
 using System;
 using Mono.WebBrowser.DOM;
 

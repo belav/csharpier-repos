@@ -13,7 +13,6 @@
  * It seems like the 64bit runtime is doing something wrong here.
  */
 
-
 using System;
 using Xunit;
 

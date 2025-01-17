@@ -28,7 +28,6 @@
 // Copyright (C) 2005-2009 Novell, Inc (http://www.novell.com)
 //
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;

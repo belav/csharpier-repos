@@ -4,7 +4,6 @@
 // Author: Peter Dennis Bartok (pbartok@novell.com)
 //
 
-
 using System;
 using System.Drawing;
 using System.IO;

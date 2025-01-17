@@ -21,13 +21,11 @@ IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
 PARTICULAR PURPOSE.
 =====================================================================*/
 
-
 // Add the classes in the following namespaces to our namespace
 using System;
 using System.Threading;
 
 ///////////////////////////////////////////////////////////////////////////////
-
 
 // Note that deriving from Object is optional since it is always implied
 public class BaseObj : Object
@@ -80,7 +78,6 @@ public class BaseObj : Object
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
 // This class shows how to derive a class from another class and how base class
 // Finalize methods are NOT automatically called. By contrast, base class
 // destructors (in unmanaged code) are automatically called.
@@ -109,7 +106,6 @@ public class DerivedObj : BaseObj
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 
 // This class shows how an object can resurrect itself
 public class ResurrectObj : BaseObj
@@ -162,7 +158,6 @@ public class ResurrectObj : BaseObj
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
 // This class shows how the GC improves performance using generations
 public class GenObj : BaseObj
 {
@@ -179,7 +174,6 @@ public class GenObj : BaseObj
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 
 // This class shows the proper way to implement explicit cleanup.
 public class DisposeObj : BaseObj
@@ -216,7 +210,6 @@ public class DisposeObj : BaseObj
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-
 
 // This class represents the application itself
 class Application

@@ -6,7 +6,6 @@
 // @owner Microsoft
 //---------------------------------------------------------------------
 
-
 using System.Collections.Generic;
 using System.Data.Common.CommandTrees;
 using System.Data.Metadata.Edm;

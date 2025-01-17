@@ -474,7 +474,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 {
                     // obtain initial slot domain and restrict it if the slot has conditions
 
-
                     CellConstantSet restrictedDomain;
                     bool wasDomainRestricted = GetRestrictedOrUnrestrictedDomain(
                         sSlot,

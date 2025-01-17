@@ -170,7 +170,6 @@ namespace System.Threading.Tasks
         // the completion event which will be set when the Future class calls Finish().
         // But the event would now be signalled if Cancel() is called
 
-
         internal object m_stateObject; // A state object that can be optionally supplied, passed to action.
         internal TaskScheduler m_taskScheduler; // The task scheduler this task runs under.
 
@@ -1548,7 +1547,6 @@ namespace System.Threading.Tasks
         //// Helper methods for Factory StartNew methods.
         ////
 
-
         // Implicitly converts action to object and handles the meat of the StartNew() logic.
         internal static Task InternalStartNew(
             Task creatingTask,
@@ -2167,7 +2165,6 @@ namespace System.Threading.Tasks
         /////////////
         // methods
 
-
         /// <summary>
         /// Disposes the <see cref="Task"/>, releasing all of its unmanaged resources.
         /// </summary>
@@ -2257,7 +2254,6 @@ namespace System.Threading.Tasks
 
         /////////////
         // internal helpers
-
 
         /// <summary>
         /// Schedules the task for execution.
@@ -3028,7 +3024,6 @@ namespace System.Threading.Tasks
 
             // Important Note: The child replicas we launch from here will be attached the root replica (by virtue of the root.CreateReplicaTask call)
             // because we need the root task to receive all their exceptions, and to block until all of them return
-
 
             // This variable is captured in a closure and shared among all replicas.
             bool replicasAreQuitting = false;
@@ -4164,9 +4159,6 @@ namespace System.Threading.Tasks
         //
         // Continuation passing functionality (aka ContinueWith)
         //
-
-
-
 
         /// <summary>
         /// Runs all of the continuations, as appropriate.

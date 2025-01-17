@@ -106,7 +106,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // * From double to sbyte, byte, short, ushort, int, uint, long, ulong, char, float, or decimal.
         // * From decimal to sbyte, byte, short, ushort, int, uint, long, ulong, char, float, or double.
 
-
         private const byte ID = (byte)ConvKind.Identity; // 0x01
         private const byte IMP = (byte)ConvKind.Implicit; // 0x02
         private const byte EXP = (byte)ConvKind.Explicit; // 0x03

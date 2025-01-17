@@ -715,8 +715,6 @@ namespace Microsoft.Win32
 
         //////////////////// Serial Port methods ////////////////////
 
-
-
         [DllImport(
             ExternDll.Kernel32,
             SetLastError = true,

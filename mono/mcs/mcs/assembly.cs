@@ -10,7 +10,6 @@
 // Copyright 2011-2013 Xamarin Inc
 //
 
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;

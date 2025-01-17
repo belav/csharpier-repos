@@ -33,7 +33,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Data;
 using System.Data.SqlTypes;
@@ -737,7 +736,6 @@ namespace MonoTests.System.Data
             ds.WriteXmlSchema(writer);
             string TextString = GetNormalizedSchema(writer.ToString());
             //			string TextString = writer.ToString ();
-
 
             string substring = TextString.Substring(0, TextString.IndexOf(EOL));
             TextString = TextString.Substring(TextString.IndexOf(EOL) + EOL.Length);

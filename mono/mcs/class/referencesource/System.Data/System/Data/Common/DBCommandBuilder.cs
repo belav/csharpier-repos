@@ -210,8 +210,6 @@ namespace System.Data.Common
             {
                 //
 
-
-
                 for (int i = 0; i < _count - 1; i++)
                 {
                     string name = _baseParameterNames[i];
@@ -1855,8 +1853,6 @@ namespace System.Data.Common
         protected abstract void SetRowUpdatingHandler(DbDataAdapter adapter); // V1.2.3300
 
         //
-
-
 
         static internal string[] ParseProcedureName(
             string name,

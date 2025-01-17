@@ -180,7 +180,6 @@ namespace Novell.Directory.Ldap.Asn1
                     return new Asn1GeneralString(this, in, length);
                     */
 
-
                     default:
                         throw new System.IO.EndOfStreamException("Unknown tag"); // !!! need a better exception
                 }

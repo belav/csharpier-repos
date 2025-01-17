@@ -744,7 +744,6 @@ public class ReliabilityFramework
                 //			Memory Usage							(makes tests run)
                 //			Paging & Page Faults					(stops tests from running)
 
-
                 bool startTest = false; // do we need to start a test?
                 TimeSpan timeRunning = DateTime.Now.Subtract(_startTime);
 

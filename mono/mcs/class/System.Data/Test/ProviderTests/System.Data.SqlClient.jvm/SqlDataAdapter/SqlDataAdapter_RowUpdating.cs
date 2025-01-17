@@ -34,7 +34,6 @@ namespace MonoTests.System.Data.SqlClient
         //Activate this constructor to log Failures to a log file
         //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-
         //Activate this constructor to log All to a log file
         //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 

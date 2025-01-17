@@ -118,11 +118,6 @@ namespace System.Data.Metadata.Edm
         /// test for the existence of a directory or file resource after resolving the path.
         ///
 
-
-
-
-
-
         internal string MapWebPath(string path)
         {
             Debug.Assert(path != null, "path == null");

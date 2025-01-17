@@ -38,11 +38,6 @@ namespace System.Configuration
         {
             //
 
-
-
-
-
-
             Debug.Assert(!String.IsNullOrEmpty(oldStreamname));
 
             if (String.IsNullOrEmpty(oldStreamname))

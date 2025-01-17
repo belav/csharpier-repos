@@ -922,8 +922,6 @@ namespace System.Web
 
                     // FEATURE_PAL
 
-
-
                     if (file.IndexOf('~') != -1)
                     {
                         throw FileChangesMonitor.CreateFileMonitoringException(

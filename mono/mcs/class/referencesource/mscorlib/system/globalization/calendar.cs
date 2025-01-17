@@ -448,7 +448,6 @@ namespace System.Globalization
         **Exceptions: None.
         ============================================================================*/
 
-
         public abstract int[] Eras { get; }
 
         // Returns the hour part of the specified DateTime. The returned value is an
@@ -581,8 +580,6 @@ namespace System.Globalization
             //     Sat      Sun     Mon     Tue     Wed     Thu     Fri     Sat
             //     1/1      1/2     1/3     1/4     1/5     1/6     1/7     1/8
             //                      +--> First week starts here.
-
-
 
             // Day of week is 0-based.
             // Get the day of week for 1/1.  This can be derived from the day of week of the target day.

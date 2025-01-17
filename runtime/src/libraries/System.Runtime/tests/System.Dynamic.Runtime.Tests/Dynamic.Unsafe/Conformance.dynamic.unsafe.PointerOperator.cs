@@ -17,7 +17,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
     //<Expects Status=success></Expects>
     // <Code>
 
-
     [TestClass]
     public unsafe class Test
     {
@@ -62,7 +61,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.unsfe.PointegeregererOp
     // <RelatedBug></RelatedBug>
     //<Expects Status=success></Expects>
     // <Code>
-
 
     [TestClass]
     public unsafe class Test

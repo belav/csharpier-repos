@@ -784,7 +784,6 @@ namespace System
         // This method will return a event by name if it is found.
         //  null is returned if the event is not found
 
-
         public EventInfo GetEvent(String name)
         {
             return GetEvent(name, Type.DefaultLookup);

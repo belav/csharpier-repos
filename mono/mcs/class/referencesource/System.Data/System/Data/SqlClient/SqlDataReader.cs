@@ -3845,12 +3845,6 @@ namespace System.Data.SqlClient
 
                     //
 
-
-
-
-
-
-
                     // process any done, doneproc and doneinproc token streams and
                     // any order, error or info token preceeding the first done, doneproc or doneinproc token stream
                     byte b;
@@ -5194,7 +5188,6 @@ namespace System.Data.SqlClient
                         }
 
                         //
-
 
                         // simply rip the order token off the wire
                         if (b == TdsEnums.SQLORDER)

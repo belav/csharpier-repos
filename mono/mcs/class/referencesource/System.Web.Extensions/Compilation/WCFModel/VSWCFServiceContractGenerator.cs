@@ -34,7 +34,6 @@ using Microsoft.VSDesigner.WCF.Resources;
 /// that are configured according to the options set in the SvcMap file
 ///
 
-
 #if WEB_EXTENSIONS_CODE
 namespace System.Web.Compilation.WCFModel
 #else

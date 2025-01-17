@@ -5,7 +5,6 @@
 // If the nullable type has a null value, HasValue is false
 //</Description>
 
-
 using System;
 
 interface BaseInter { }

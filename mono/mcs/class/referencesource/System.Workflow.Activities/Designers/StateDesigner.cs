@@ -69,12 +69,6 @@ namespace System.Workflow.Activities
 
         //
 
-
-
-
-
-
-
         private bool _addingSetState = true;
         private bool _removingSetState = true;
 
@@ -869,8 +863,6 @@ namespace System.Workflow.Activities
             base.EnsureVisibleContainedDesigner(containedDesigner);
 
             //
-
-
 
             if (!_ensuringVisible)
             {
@@ -2183,10 +2175,6 @@ namespace System.Workflow.Activities
         }
 
         //
-
-
-
-
 
         private bool GetIsEditable()
         {

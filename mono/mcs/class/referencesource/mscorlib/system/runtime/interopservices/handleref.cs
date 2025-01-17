@@ -17,7 +17,6 @@ namespace System.Runtime.InteropServices
 
         //------------------------------------------------------------------
 
-
         public HandleRef(Object wrapper, IntPtr handle)
         {
             m_wrapper = wrapper;

@@ -446,7 +446,6 @@ namespace System.Web.UI.WebControls
             }
         }*/
 
-
         /// <devdoc>
         /// Collection of parameters used in Select().
         /// </devdoc>
@@ -1751,7 +1750,6 @@ namespace System.Web.UI.WebControls
 
 
 */
-
 
         protected internal override void RaiseUnsupportedCapabilityError(
             DataSourceCapabilities capability

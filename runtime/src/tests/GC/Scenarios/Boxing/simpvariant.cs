@@ -10,7 +10,6 @@
 // that is a valid test pass.
 //
 
-
 namespace DefaultNamespace
 {
     using System;

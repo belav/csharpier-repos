@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.Cookie))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
     typeof(System.Net.CookieCollection)

@@ -131,6 +131,5 @@ public class CLSClass
     }
 #pragma warning restore 169
 
-
     public static void Main() { }
 }

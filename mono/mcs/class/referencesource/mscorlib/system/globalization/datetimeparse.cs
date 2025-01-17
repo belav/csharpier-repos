@@ -1143,13 +1143,6 @@ namespace System
 #if _LOGGING
             // <
 
-
-
-
-
-
-
-
             if (_tracingEnabled)
             {
                 BCLDebug.Trace(
@@ -3375,10 +3368,6 @@ namespace System
             // First try the predefined format.
             //
             //<
-
-
-
-
 
             DS dps = DS.BEGIN; // Date Parsing State.
             bool reachTerminalState = false;
@@ -5887,13 +5876,6 @@ namespace System
 
         // <
 
-
-
-
-
-
-
-
         [Pure]
         [Conditional("_LOGGING")]
         [ResourceExposure(ResourceScope.None)]
@@ -6805,7 +6787,6 @@ namespace System
 
         //
         // <
-
 
         internal bool timeZone;
 

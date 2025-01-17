@@ -4,7 +4,6 @@
 // this test verifies that there is no deadlock when we do pumping inside a class constructor
 // from an STA thread.
 
-
 using System;
 using Xunit;
 

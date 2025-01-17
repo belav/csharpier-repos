@@ -36,8 +36,6 @@ namespace System.Web.Script.Services
             // If all else fails we use "", to indicate "any" client side type. "Object" is not the same as any type on the client since
             // string, for example, is not considered an object. "Object" is equiv to a .net dictionary.
 
-
-
             if (webServiceData.ClientTypeNameDictionary.ContainsKey(type))
             {
                 // if it exists in the client type dictionary, it will have a proxy generated for it

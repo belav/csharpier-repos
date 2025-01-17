@@ -561,7 +561,6 @@ namespace System.StubHelpers
     } // class WSTRBufferMarshaler
 #if FEATURE_COMINTEROP
 
-
     [StructLayout(LayoutKind.Sequential)]
     internal struct DateTimeNative
     {

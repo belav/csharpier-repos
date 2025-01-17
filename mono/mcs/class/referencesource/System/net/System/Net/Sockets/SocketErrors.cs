@@ -15,7 +15,6 @@ namespace System.Net.Sockets
     ///    </para>
     /// </devdoc>
 
-
     public enum SocketError : int
     {
         /// <devdoc>
@@ -42,7 +41,6 @@ namespace System.Net.Sockets
         ///       offset from this value.
         ///    </para>
         /// </devdoc>
-
 
         ///WSABASEERR = 10000;
 
@@ -384,8 +382,6 @@ namespace System.Net.Sockets
          * Note also that [WSA]NO_ADDRESS is defined only for
          * compatibility purposes.
          */
-
-
 
         /// <devdoc>
         ///    <para>

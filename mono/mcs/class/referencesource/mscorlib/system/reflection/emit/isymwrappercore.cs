@@ -32,7 +32,6 @@ namespace System.Reflection.Emit
     // (eg. diasymreader) in the no-trust scenarios (no debugger, partial-trust code).
     //-----------------------------------------------------------------------------------
 
-
     //------------------------------------------------------------------------------
     // SymWrapperCore is never instantiated and is used as an encapsulation class.
     // It is our "ISymWrapper.dll" assembly within an assembly.
@@ -201,7 +200,6 @@ namespace System.Reflection.Emit
             //=========================================================================================
             // Public interface methods start here.
             //=========================================================================================
-
 
             //------------------------------------------------------------------------------
             // Initialize() wrapper

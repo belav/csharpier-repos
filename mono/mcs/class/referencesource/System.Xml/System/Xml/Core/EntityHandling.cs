@@ -5,7 +5,6 @@
 // <owner current="true" primary="true">helenak</owner>
 //------------------------------------------------------------------------------
 
-
 namespace System.Xml
 {
     // Specifies how entities are handled in XmlTextReader and XmlValidatingReader.

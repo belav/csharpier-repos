@@ -9,7 +9,6 @@
 // (C)2006 Novell Inc,
 //
 
-
 using System.Threading;
 
 namespace System.Transactions

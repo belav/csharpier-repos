@@ -88,7 +88,6 @@ namespace System.Net.Cache
 
 */
 
-
         //  Some supported Entry fields references
         [Flags]
         internal enum Entry_FC
@@ -242,7 +241,6 @@ namespace System.Net.Cache
         //
         // Method Definitions
         //
-
 
         //
         // Looks up an entry based on url string key.

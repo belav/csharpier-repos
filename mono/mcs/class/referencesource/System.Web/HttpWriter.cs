@@ -1944,7 +1944,6 @@ namespace System.Web
         // Public TextWriter method implementations
         //
 
-
         /// <devdoc>
         ///    <para> Sends all buffered output to the client and closes the socket connection.</para>
         /// </devdoc>
@@ -2204,7 +2203,6 @@ namespace System.Web
         //
         // Support for binary data
         //
-
 
         /// <devdoc>
         ///    <para>Sends a buffered stream of bytes to the client.</para>

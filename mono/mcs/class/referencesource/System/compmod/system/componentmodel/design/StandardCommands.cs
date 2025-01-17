@@ -1586,7 +1586,6 @@ namespace System.ComponentModel.Design
             //
             ///////////////////////////////////////////
 
-
             internal const int cmdidFormsFirst = 0x00006000;
 
             internal const int cmdidFormsLast = 0x00006FFF;

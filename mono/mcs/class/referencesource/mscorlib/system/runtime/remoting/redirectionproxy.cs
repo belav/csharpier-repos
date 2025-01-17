@@ -73,8 +73,6 @@ namespace System.Runtime.Remoting
         {
             // <
 
-
-
             IMessage replyMsg = null;
 
             replyMsg = SyncProcessMessage(msg);
@@ -142,8 +140,6 @@ namespace System.Runtime.Remoting
         public virtual IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
         {
             // <
-
-
 
             IMessage replyMsg = null;
 

@@ -270,7 +270,6 @@ namespace System.Xml.Xsl.Xslt
 
             //
 
-
             compilParams.ReferencedAssemblies.Add(typeof(System.Xml.Res).Assembly.Location);
             compilParams.ReferencedAssemblies.Add("System.dll");
             if (isVB)

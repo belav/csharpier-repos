@@ -25,7 +25,6 @@
 //	Sebastien Pouliot  <sebastien@ximian.com>
 //
 
-
 namespace System.Drawing
 {
     public sealed class SystemFonts

@@ -63,7 +63,6 @@ namespace tests.system_data_dll.System_Data
         //Activate this constructor to log Failures to a log file
         //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-
         //Activate this constructor to log All to a log file
         //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
@@ -137,7 +136,6 @@ namespace tests.system_data_dll.System_Data
                 exp = null;
             }
             //-------------------------------------------------------------
-
 
             //-------------------------------------------------------------
             //Get excpected result

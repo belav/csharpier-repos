@@ -157,7 +157,6 @@ class ConcurrentRepro
         // set process affinity to 1 to repro bug easier
         //Process.GetCurrentProcess().ProcessorAffinity = (IntPtr)1;
 
-
         PriorityTest priorityTest = new PriorityTest(1000000, 5000, parameters[0], 17, 30, 3);
         ThreadStart startDelegate = new ThreadStart(priorityTest.RunTest);
 

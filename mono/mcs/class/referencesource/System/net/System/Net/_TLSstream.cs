@@ -53,7 +53,6 @@ namespace System.Net
 
             //
 
-
             GlobalLog.Enter(
                 "TlsStream::TlsStream",
                 "host="

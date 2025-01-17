@@ -26,7 +26,6 @@
 //      Daniel Nauck    (dna(at)mono-project(dot)de)
 //      Carlos Alberto Cortez <calberto.cortez@gmail.com>
 
-
 using System;
 using System.Collections;
 using System.Drawing;

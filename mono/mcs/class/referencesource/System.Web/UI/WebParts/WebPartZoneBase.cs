@@ -1731,9 +1731,6 @@ namespace System.Web.UI.WebControls.WebParts
         {
             //
 
-
-
-
             // Render title bar
             writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
             writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, "2");

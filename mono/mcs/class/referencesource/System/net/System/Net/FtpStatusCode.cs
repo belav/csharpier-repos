@@ -49,7 +49,6 @@ namespace System.Net
         // Temporary Errors 4xx
         //
 
-
         ServiceNotAvailable = 421,
         CantOpenData = 425,
         ConnectionClosed = 426,

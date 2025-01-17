@@ -8,7 +8,6 @@ namespace System.Web.UI.WebControls
 {
     // TODO, nikhilko: Change namespace to System.Web.UI
 
-
     /// <devdoc>
     /// Allows the designer of a composite control to recreate the composite control's child controls.
     ///

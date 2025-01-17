@@ -26,7 +26,6 @@
 //	Jackson Harper (jackson@ximian.com)
 //
 
-
 namespace System.Windows.Forms
 {
     public class TreeViewHitTestInfo

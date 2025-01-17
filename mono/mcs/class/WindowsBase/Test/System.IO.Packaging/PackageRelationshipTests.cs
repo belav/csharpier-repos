@@ -25,7 +25,6 @@
 //    Rolf Bjarne Kvinge (rolf@xamarin.com)
 //
 
-
 using System;
 using System.Collections.Generic;
 using System.IO;

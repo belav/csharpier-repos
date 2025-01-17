@@ -98,7 +98,6 @@ namespace System.Tests
         // IAdditiveIdentity
         //
 
-
         [Fact]
         public static void AllBitsSetTest()
         {

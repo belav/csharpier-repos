@@ -24,7 +24,6 @@
 //	Ivan N. Zlatev  	<contact@i-nz.net>
 //
 
-
 // COMPLETE
 
 //#define ExternalExceptionHandler

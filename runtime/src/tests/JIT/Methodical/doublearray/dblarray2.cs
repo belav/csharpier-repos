@@ -10,7 +10,6 @@
 // 5) new arrays NOT allocated in large object heap is of generation 0
 // 6) the threshold can be set by registry key DoubleArrayToLargeObjectHeap
 
-
 using System;
 using System.Runtime.InteropServices;
 using Xunit;

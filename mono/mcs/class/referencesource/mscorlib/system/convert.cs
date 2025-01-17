@@ -613,7 +613,6 @@ namespace System
 
         // Conversions to Char
 
-
         public static char ToChar(object value)
         {
             return value == null ? (char)0 : ((IConvertible)value).ToChar(null);

@@ -43,7 +43,6 @@ namespace Mono.Security.Cryptography
     // * AES 128 bits encryption (separate key for each data protected)
     // * SHA256 digest to ensure integrity
 
-
     internal static class ManagedProtection
     {
         // FIXME	[KeyContainerPermission (SecurityAction.Assert, KeyContainerName = "DAPI",

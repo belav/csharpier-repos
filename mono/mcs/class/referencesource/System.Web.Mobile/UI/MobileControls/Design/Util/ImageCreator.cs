@@ -70,7 +70,6 @@ namespace System.Web.UI.Design.MobileControls.Util
 
             //
 
-
             using (
                 Font normalFont = new Font(_fontFamily, 8, FontStyle.Regular),
                     boldFont = new Font(normalFont.FontFamily, 8, FontStyle.Bold)

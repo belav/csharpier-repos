@@ -26,7 +26,6 @@
 //
 //
 
-
 namespace System.Drawing
 {
     public sealed class BufferedGraphicsManager

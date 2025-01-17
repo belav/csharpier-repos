@@ -2,7 +2,6 @@
 // ClaimsIdentityTest.cs - NUnit Test Cases for System.Security.Claims.ClaimsIdentity
 //
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;

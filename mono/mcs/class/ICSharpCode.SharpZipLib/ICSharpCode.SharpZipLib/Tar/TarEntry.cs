@@ -504,7 +504,6 @@ namespace ICSharpCode.SharpZipLib.Tar
 }
 
 
-
 /* The original Java file had this header:
     *
     ** Authored by Timothy Gerard Endres

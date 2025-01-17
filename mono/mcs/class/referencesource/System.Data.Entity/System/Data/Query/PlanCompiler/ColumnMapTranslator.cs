@@ -30,7 +30,6 @@ using System.Linq;
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
 
-
 namespace System.Data.Query.PlanCompiler
 {
     /// <summary>

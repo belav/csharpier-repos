@@ -776,7 +776,6 @@ namespace System.Net
         // Methods
         //
 
-
         // This will return an client token when conducted authentication on server side'
         // This token can be used ofr impersanation
         // We use it to create a WindowsIdentity and hand it out to the server app.

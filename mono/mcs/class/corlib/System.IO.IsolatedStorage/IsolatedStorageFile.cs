@@ -44,7 +44,6 @@ namespace System.IO.IsolatedStorage
     // This is a terribly named class.  It doesn't actually represent a file as
     // much as a directory
 
-
     [ComVisible(true)]
     // FIXME: Further limit the assertion when imperative Assert is implemented
     [FileIOPermission(SecurityAction.Assert, Unrestricted = true)]

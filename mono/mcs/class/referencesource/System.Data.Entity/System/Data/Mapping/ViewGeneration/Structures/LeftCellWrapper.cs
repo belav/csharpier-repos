@@ -107,7 +107,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         #endregion
 
 
-
         #region Properties
 
         internal FragmentQuery FragmentQuery

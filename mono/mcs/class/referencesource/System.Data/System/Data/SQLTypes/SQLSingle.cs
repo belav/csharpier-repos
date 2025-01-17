@@ -288,7 +288,6 @@ namespace System.Data.SqlTypes
 
         // Explicit conversions
 
-
         // Explicit conversion from SqlDouble to SqlSingle
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

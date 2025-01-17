@@ -132,7 +132,6 @@ namespace System.Runtime.Remoting.Messaging
 
         // <
 
-
         [System.Security.SecurityCritical] // auto-generated
         public static Object GetData(String name)
         {
@@ -438,8 +437,6 @@ namespace System.Runtime.Remoting.Messaging
         // call starts.
 
         // <
-
-
 
         [System.Security.SecuritySafeCritical] // overrides public transparent member
         public Object Clone()

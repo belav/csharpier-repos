@@ -24,7 +24,6 @@
 //
 //
 
-
 namespace System.Windows.Forms.RTF
 {
     internal static class CharsetToCodepage

@@ -18,7 +18,6 @@
 //
 //===================================================================
 
-
 #region Used namespaces
 
 using System;
@@ -2747,7 +2746,6 @@ namespace System.Web.UI.DataVisualization.Charting
         {
 #if Microsoft_CONTROL
 
-
             if (Chart != null)
             {
                 if (!invalidateAreaOnly)
@@ -2779,7 +2777,6 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion
 
         #region Series Enumeration
-
 
 
         /// <summary>

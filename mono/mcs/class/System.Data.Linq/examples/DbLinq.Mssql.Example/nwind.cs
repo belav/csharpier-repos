@@ -266,7 +266,6 @@ namespace nwind
         #endregion
 
 
-
         private System.Data.Linq.EntityRef<CustomerDemographics> _CustomerDemographics;
 
         [Association(
@@ -1053,7 +1052,6 @@ namespace nwind
         #endregion
 
 
-
         private System.Data.Linq.EntityRef<Employees> _Employees;
 
         [Association(
@@ -1202,7 +1200,6 @@ namespace nwind
             return _OrderID.Equals(o2._OrderID);
         }
         #endregion
-
 
 
         private System.Data.Linq.EntityRef<Orders> _Orders;

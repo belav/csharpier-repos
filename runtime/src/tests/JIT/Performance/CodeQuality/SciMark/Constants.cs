@@ -11,7 +11,6 @@
 /// own risk.
 /// </license>
 
-
 namespace SciMark2
 {
     public class Constants

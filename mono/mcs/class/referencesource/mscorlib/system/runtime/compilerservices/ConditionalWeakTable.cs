@@ -705,8 +705,6 @@ namespace System.Runtime.CompilerServices
     #endregion
 
 
-
-
     #region DependentHandle
     //=========================================================================================
     // This struct collects all operations on native DependentHandles. The DependentHandle

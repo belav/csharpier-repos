@@ -923,10 +923,6 @@ namespace System.Workflow.ComponentModel.Compiler
                             }
                             //
 
-
-
-
-
                             else if (!invokeMethod.ReturnType.Equals(methodInfo.ReturnType))
                             {
                                 message = SR.GetString(

@@ -7,7 +7,6 @@
 // (C) 2003 Jackson Harper, All rights reserved
 //
 
-
 namespace Mono.ILASM
 {
     public interface ISehClause

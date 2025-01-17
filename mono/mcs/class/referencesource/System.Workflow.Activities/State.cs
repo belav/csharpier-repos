@@ -135,7 +135,6 @@ namespace System.Workflow.Activities
 
             //
 
-
             if (this.QualifiedName != initialStateName)
                 StateMachineSubscriptionManager.DisableStateWorkflowQueues(context, this);
         }

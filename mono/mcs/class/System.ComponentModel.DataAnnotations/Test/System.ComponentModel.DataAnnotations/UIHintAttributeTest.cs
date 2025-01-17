@@ -5,7 +5,6 @@
 
 // https://silverlight.svn.codeplex.com/svn/Release/Silverlight4/Source/RiaClient.Tests/System.ComponentModel.DataAnnotations/UIHintAttributeTest.cs
 
-
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

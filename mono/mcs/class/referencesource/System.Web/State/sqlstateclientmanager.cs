@@ -1041,8 +1041,6 @@ namespace System.Web.SessionState
             // In this case, the SQL server closes the connection.
             //
 
-
-
             if (
                 ex != null
                 && (

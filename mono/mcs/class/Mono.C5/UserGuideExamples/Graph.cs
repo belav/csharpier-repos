@@ -21,15 +21,12 @@
 
 // C5 example: Graph representation with basic algorithms using C5
 
-
 // Compile with
 //   csc /r:C5.dll Graph.cs
-
 
 // The code is structured as a rudimentary Graph library, with an interface
 // for (edge)weighted graphs and a single implementation based on an
 // adjacency list representation using hash dictionaries.
-
 
 // The algorithms implemented include:
 //
@@ -46,7 +43,6 @@
 //
 // An approximation algorithm for Travelling Salesman Problems,
 // where the weights satisfies the triangle inequality.
-
 
 // Pervasive generic parameters:
 //                      V: The type of a vertex in a graph. Vertices are identified

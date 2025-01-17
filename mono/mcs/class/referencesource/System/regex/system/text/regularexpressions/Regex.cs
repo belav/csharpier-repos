@@ -132,7 +132,6 @@ namespace System.Text.RegularExpressions
 #endif
         // *********** } match timeout fields ***********
 
-
 #if SILVERLIGHT
         internal Dictionary<Int32, Int32> caps; // if captures are sparse, this is the hashtable capnum->index
         internal Dictionary<String, Int32> capnames; // if named captures are used, this maps names->index
@@ -1779,7 +1778,6 @@ namespace System.Text.RegularExpressions
             if (0 == Interlocked.Exchange(ref _locked, 1))
             {
                 // grab reference
-
 
                 Object obj = _ref;
 

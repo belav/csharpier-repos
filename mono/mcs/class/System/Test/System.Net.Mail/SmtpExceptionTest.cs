@@ -7,7 +7,6 @@
 // (C) 2008 Gert Driesen
 //
 
-
 using System;
 using System.Collections;
 using System.Net.Mail;

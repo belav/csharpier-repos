@@ -168,7 +168,6 @@ namespace System.Numerics
             // sqrt(a^2 + b^2) == a/a * sqrt(a^2 + b^2) = a * sqrt(a^2/a^2 + b^2/a^2)
             // Using the above we can factor out the square of the larger component to dodge overflow.
 
-
             double c = Math.Abs(value.m_real);
             double d = Math.Abs(value.m_imaginary);
 

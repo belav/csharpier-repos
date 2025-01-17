@@ -8,7 +8,6 @@
  *      shrink and grow during their lifetime).
  */
 
-
 namespace DefaultNamespace
 {
     using System;

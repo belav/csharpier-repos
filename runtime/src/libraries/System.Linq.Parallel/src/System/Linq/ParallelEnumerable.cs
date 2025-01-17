@@ -610,7 +610,6 @@ namespace System.Linq
         // Select merely maps a selector delegate over each element in the data source.
         //
 
-
         /// <summary>
         /// Projects in parallel each element of a sequence into a new form.
         /// </summary>

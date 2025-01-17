@@ -199,8 +199,6 @@ namespace System.Web.Services.Protocols
                 {
                     //
 
-
-
                     writer.WriteStartElement(Soap.Element.FaultDetail, "");
                     writer.WriteEndElement();
                 }

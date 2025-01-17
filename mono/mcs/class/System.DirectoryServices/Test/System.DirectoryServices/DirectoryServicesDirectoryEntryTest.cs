@@ -1331,7 +1331,6 @@ namespace MonoTests.System.DirectoryServices
             DirectoryEntries children = de.Children;
             //Assert.AreEqual(children.SchemaFilter.Count,0);
 
-
             de = new DirectoryEntry(configuration.ConnectionString);
             children = de.Children;
 

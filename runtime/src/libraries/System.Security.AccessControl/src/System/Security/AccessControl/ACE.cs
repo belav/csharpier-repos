@@ -21,7 +21,6 @@ namespace System.Security.AccessControl
     // Anything else is considered user-defined
     //
 
-
     public enum AceType : byte
     {
         AccessAllowed = 0x00,
@@ -671,7 +670,6 @@ namespace System.Security.AccessControl
     // Every known ACE type contains an access mask and a SID
     //
 
-
     public abstract class KnownAce : GenericAce
     {
         #region Private Members
@@ -749,7 +747,6 @@ namespace System.Security.AccessControl
     // User-defined ACEs are ACE types we don't recognize.
     // They contain a standard ACE header followed by a binary blob.
     //
-
 
     public sealed class CustomAce : GenericAce
     {
@@ -915,7 +912,6 @@ namespace System.Security.AccessControl
     //     ULONG SidStart;
     // } COMPOUND_ACCESS_ALLOWED_ACE;
     //
-
 
     public enum CompoundAceType
     {
@@ -1110,7 +1106,6 @@ namespace System.Security.AccessControl
     //     - SystemAlarm
     // and may optionally support callback data
     //
-
 
     public enum AceQualifier
     {
@@ -1385,7 +1380,6 @@ namespace System.Security.AccessControl
     //     // Opaque resource manager specific data
     // } SYSTEM_ALARM_CALLBACK_ACE, *PSYSTEM_ALARM_CALLBACK_ACE;
     //
-
 
     public sealed class CommonAce : QualifiedAce
     {

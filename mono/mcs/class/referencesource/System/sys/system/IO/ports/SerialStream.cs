@@ -2226,8 +2226,6 @@ namespace System.IO.Ports
                     errors = errors & errorEvents;
                     //
 
-
-
                     if (errors != 0)
                     {
                         ThreadPool.QueueUserWorkItem(callErrorEvents, errors);

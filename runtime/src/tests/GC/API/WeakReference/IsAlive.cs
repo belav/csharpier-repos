@@ -3,7 +3,6 @@
 
 // Tests WeakReference.IsAlive : IsAlive=true if GC has not occurred on the object
 
-
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;

@@ -22,7 +22,6 @@
 // Authors:
 //	Andreia Gaita (avidigal@novell.com)
 
-
 using System;
 
 namespace System.Windows.Forms

@@ -39,7 +39,6 @@ namespace System.Xml.ReaderSettingsTests
         //[Variation("Wrapping Tests: CR with CR", Pri = 2, Params = new object[] { "Fragment", "Document", "<root/><root/>", "false" })]
         //[Variation("Wrapping Tests: CR with CR", Pri = 2, Params = new object[] { "Document", "Document", "<root/>", "true" })]
 
-
         public int wrappingTests()
         {
             string underlyingReaderLevel = this.CurVariation.Params[0].ToString();

@@ -5,7 +5,6 @@
 // <owner current="true" primary="true">priyal</owner>
 //------------------------------------------------------------------------------
 
-
 namespace System.Xml.Schema
 {
     /// <include file='doc\XmlSchemaContentType.uex' path='docs/doc[@for="XmlSchemaContentType"]/*' />

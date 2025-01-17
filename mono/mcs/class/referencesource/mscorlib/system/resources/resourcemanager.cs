@@ -1470,7 +1470,6 @@ namespace System.Resources
                                     // too much about the ResourceManager object they are using. However it could
                                     // mask potentially fatal errors that we are not aware of, such as a disk drive failing.
 
-
                                     // The alternative, which we chose, is to throw unknown exceptions. This may tear
                                     // down the process if the portable library and app don't expect this exception type.
                                     // On the other hand, this won't mask potentially fatal errors we don't know about.

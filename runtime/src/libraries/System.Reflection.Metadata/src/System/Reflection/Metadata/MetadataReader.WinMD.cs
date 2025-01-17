@@ -621,7 +621,6 @@ namespace System.Reflection.Metadata
                     // We only add the <WinRT> prefix here since the WinRT view is the only view that is marked WindowsRuntime
                     // De-mangling the CLR name is done below.
 
-
                     // tomat: The CLR adapter implements a back-compat quirk: Enums exported with an older WinMDExp have only one version
                     // not marked with tdSpecialName. These enums should *not* be mangled and flipped to private.
                     // We don't implement this flag since the WinMDs produced by the older WinMDExp are not used in the wild.

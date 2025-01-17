@@ -1486,13 +1486,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Boolean.
 
-
         //-----------------------------------------------
         // ToDateTime
         //-----------------------------------------------
 
         // This converter does not support conversions to DateTime.
-
 
         //-----------------------------------------------
         // ToDecimal
@@ -1549,7 +1547,6 @@ namespace System.Xml.Schema
         //-----------------------------------------------
 
         // This converter does not support conversions to Double.
-
 
         //-----------------------------------------------
         // ToInt32
@@ -1656,7 +1653,6 @@ namespace System.Xml.Schema
         //-----------------------------------------------
 
         // This converter does not support conversions to Single.
-
 
         //-----------------------------------------------
         // ToString
@@ -1957,20 +1953,17 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Boolean.
 
-
         //-----------------------------------------------
         // ToDateTime
         //-----------------------------------------------
 
         // This converter does not support conversions to DateTime.
 
-
         //-----------------------------------------------
         // ToDecimal
         //-----------------------------------------------
 
         // This converter does not support conversions to Decimal.
-
 
         //-----------------------------------------------
         // ToDouble
@@ -2021,13 +2014,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Int32.
 
-
         //-----------------------------------------------
         // ToInt64
         //-----------------------------------------------
 
         // This converter does not support conversions to Int64.
-
 
         //-----------------------------------------------
         // ToSingle
@@ -2257,7 +2248,6 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Boolean.
 
-
         //-----------------------------------------------
         // ToDateTime
         //-----------------------------------------------
@@ -2380,13 +2370,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Decimal.
 
-
         //-----------------------------------------------
         // ToDouble
         //-----------------------------------------------
 
         // This converter does not support conversions to Double.
-
 
         //-----------------------------------------------
         // ToInt32
@@ -2394,20 +2382,17 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Int32.
 
-
         //-----------------------------------------------
         // ToInt64
         //-----------------------------------------------
 
         // This converter does not support conversions to Int64.
 
-
         //-----------------------------------------------
         // ToSingle
         //-----------------------------------------------
 
         // This converter does not support conversions to Single.
-
 
         //-----------------------------------------------
         // ToString
@@ -2658,13 +2643,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to DateTime.
 
-
         //-----------------------------------------------
         // ToDecimal
         //-----------------------------------------------
 
         // This converter does not support conversions to Decimal.
-
 
         //-----------------------------------------------
         // ToDouble
@@ -2672,13 +2655,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Double.
 
-
         //-----------------------------------------------
         // ToInt32
         //-----------------------------------------------
 
         // This converter does not support conversions to Int32.
-
 
         //-----------------------------------------------
         // ToInt64
@@ -2686,13 +2667,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Int64.
 
-
         //-----------------------------------------------
         // ToSingle
         //-----------------------------------------------
 
         // This converter does not support conversions to Single.
-
 
         //-----------------------------------------------
         // ToString
@@ -2837,13 +2816,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Boolean.
 
-
         //-----------------------------------------------
         // ToDateTime
         //-----------------------------------------------
 
         // This converter does not support conversions to DateTime.
-
 
         //-----------------------------------------------
         // ToDecimal
@@ -2851,13 +2828,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Decimal.
 
-
         //-----------------------------------------------
         // ToDouble
         //-----------------------------------------------
 
         // This converter does not support conversions to Double.
-
 
         //-----------------------------------------------
         // ToInt32
@@ -2865,20 +2840,17 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Int32.
 
-
         //-----------------------------------------------
         // ToInt64
         //-----------------------------------------------
 
         // This converter does not support conversions to Int64.
 
-
         //-----------------------------------------------
         // ToSingle
         //-----------------------------------------------
 
         // This converter does not support conversions to Single.
-
 
         //-----------------------------------------------
         // ToString
@@ -3204,13 +3176,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Boolean.
 
-
         //-----------------------------------------------
         // ToDateTime
         //-----------------------------------------------
 
         // This converter does not support conversions to DateTime.
-
 
         //-----------------------------------------------
         // ToDecimal
@@ -3218,13 +3188,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Decimal.
 
-
         //-----------------------------------------------
         // ToDouble
         //-----------------------------------------------
 
         // This converter does not support conversions to Double.
-
 
         //-----------------------------------------------
         // ToInt32
@@ -3232,20 +3200,17 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Int32.
 
-
         //-----------------------------------------------
         // ToInt64
         //-----------------------------------------------
 
         // This converter does not support conversions to Int64.
 
-
         //-----------------------------------------------
         // ToSingle
         //-----------------------------------------------
 
         // This converter does not support conversions to Single.
-
 
         //-----------------------------------------------
         // ToString
@@ -4098,13 +4063,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Boolean.
 
-
         //-----------------------------------------------
         // ToDateTime
         //-----------------------------------------------
 
         // This converter does not support conversions to DateTime.
-
 
         //-----------------------------------------------
         // ToDecimal
@@ -4112,13 +4075,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Decimal.
 
-
         //-----------------------------------------------
         // ToDouble
         //-----------------------------------------------
 
         // This converter does not support conversions to Double.
-
 
         //-----------------------------------------------
         // ToInt32
@@ -4126,13 +4087,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Int32.
 
-
         //-----------------------------------------------
         // ToInt64
         //-----------------------------------------------
 
         // This converter does not support conversions to Int64.
-
 
         //-----------------------------------------------
         // ToSingle
@@ -4140,13 +4099,11 @@ namespace System.Xml.Schema
 
         // This converter does not support conversions to Single.
 
-
         //-----------------------------------------------
         // ToString
         //-----------------------------------------------
 
         // This converter does not support conversions to String.
-
 
         //-----------------------------------------------
         // ChangeType
@@ -4336,7 +4293,6 @@ namespace System.Xml.Schema
         //-----------------------------------------------
 
         // This converter does not support conversions to String.
-
 
         //-----------------------------------------------
         // ChangeType

@@ -216,7 +216,6 @@ namespace MonoTests.System.Drawing.Drawing2D
         // Methods
         //
 
-
         [Test]
         public void Clone()
         {

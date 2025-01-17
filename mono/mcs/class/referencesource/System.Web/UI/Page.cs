@@ -2244,8 +2244,6 @@ namespace System.Web.UI
             // it's an initial request
             //
 
-
-
             if (
                 ret[ViewStateFieldPrefixID] == null
                 && ret[ViewStateFieldCountID] == null
@@ -5034,8 +5032,6 @@ window.onload = WebForm_RestoreScrollPosition;
         /// For now this early initialization includes
         /// theme loading.
         ///
-
-
 
         private void PerformPreInit()
         {

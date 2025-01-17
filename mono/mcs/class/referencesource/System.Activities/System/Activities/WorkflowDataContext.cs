@@ -216,8 +216,6 @@ namespace System.Activities
 
             //
 
-
-
             public PropertyDescriptorImpl(LocationReference reference)
                 : base(reference.Name, new Attribute[0])
             {

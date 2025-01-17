@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Web.UI.Design.MobileControls
 {
     // This class exists solely to make the class SR available members of this

@@ -1318,8 +1318,6 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
     // END SqlConnectionContainer private class.
     // -----------------------------------------
 
-
-
     // -------------------------------------------------------------------
     // Private class encapsulating the notification payload parsing logic.
     // -------------------------------------------------------------------
@@ -1592,8 +1590,6 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
     // END SqlNotificationParser private class.
     // ----------------------------------------
 
-
-
     // ------------------------------------------------------------------
     // Private class encapsulating the SqlConnectionContainer hash logic.
     // ------------------------------------------------------------------
@@ -1733,8 +1729,6 @@ internal class SqlDependencyProcessDispatcher : MarshalByRefObject
     // ----------------------------------------
     // END SqlConnectionContainerHashHelper private class.
     // ----------------------------------------
-
-
 
     // ---------------------------------------------
     // SqlDependencyProcessDispatcher static members

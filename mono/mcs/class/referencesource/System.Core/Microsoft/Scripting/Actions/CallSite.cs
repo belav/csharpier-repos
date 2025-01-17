@@ -54,7 +54,6 @@ namespace System.Runtime.CompilerServices
     // CallSiteBinding to encode a caching policy.
     //
 
-
     /// <summary>
     /// A Dynamic Call Site base class. This type is used as a parameter type to the
     /// dynamic site targets. The first parameter of the delegate (T) below must be
@@ -355,20 +354,6 @@ namespace System.Runtime.CompilerServices
 
         // NEEDS SECURITY
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #if SILVERLIGHT
         [System.Security.SecuritySafeCritical]
 #endif
@@ -658,7 +643,6 @@ namespace System.Runtime.CompilerServices
             //        CallSiteOps.ClearMatch(site);
             //    }
             //
-
 
             // L2 invokeRule is different (no onMatch)
             if (@return.Type == typeof(void))

@@ -26,7 +26,6 @@
 //	Rolf Bjarne Kvinge (RKvinge@novell.com)
 //
 
-
 using System;
 using System.Collections;
 using System.ComponentModel;

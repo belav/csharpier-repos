@@ -26,7 +26,6 @@
 // TODO:
 //		- wire in all events from monthcalendar
 
-
 using System;
 using System.Collections;
 using System.ComponentModel;

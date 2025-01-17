@@ -75,7 +75,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         #region Fields
 
 
-
         // Total Y values from all series at specified index orgonized by stacked groups
         // Hashtable will contain arrays of doubles stored by group name key.
         Hashtable _stackedGroupsTotalPerPoint = null;

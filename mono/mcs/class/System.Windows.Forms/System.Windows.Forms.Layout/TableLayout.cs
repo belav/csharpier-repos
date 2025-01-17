@@ -26,7 +26,6 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-
 #undef TABLE_DEBUG
 
 using System;

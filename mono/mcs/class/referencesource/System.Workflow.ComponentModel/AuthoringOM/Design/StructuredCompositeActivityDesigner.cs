@@ -27,8 +27,6 @@ namespace System.Workflow.ComponentModel.Design
 
     //
 
-
-
     #region StructuredCompositeActivityDesigner Class
     /// <summary>
     /// Base class for CompositActivityDesigner which have a structured layouts where contained ContainedDesigners
@@ -720,7 +718,6 @@ namespace System.Workflow.ComponentModel.Design
                 this.views = null;
 
                 //
-
 
                 PerformLayout();
             }

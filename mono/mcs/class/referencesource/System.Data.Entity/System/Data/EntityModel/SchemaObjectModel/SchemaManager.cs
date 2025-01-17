@@ -79,7 +79,6 @@ namespace System.Data.EntityModel.SchemaObjectModel
         #region Public Methods
 
 
-
         public static IList<EdmSchemaError> LoadProviderManifest(
             XmlReader xmlReader,
             string location,

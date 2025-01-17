@@ -23,10 +23,7 @@
 //	Ravindra (rkumar@novell.com)
 //
 
-
-
 // COMPLETE
-
 
 namespace System.Windows.Forms
 {

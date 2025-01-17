@@ -12,7 +12,6 @@ namespace DefaultNamespace
     /*           take Mul_Dimention array as function argument.
     /*************************************************************/
 
-
     class MulDimJagAry
     {
         public static int Main()

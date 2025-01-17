@@ -127,7 +127,6 @@ namespace System.Workflow.ComponentModel.Compiler
 
                 // End Work around
 
-
                 line = lines[index];
                 column = columns[index];
 

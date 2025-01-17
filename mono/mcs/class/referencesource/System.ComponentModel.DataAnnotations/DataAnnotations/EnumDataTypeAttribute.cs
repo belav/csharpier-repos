@@ -120,8 +120,6 @@ namespace System.ComponentModel.DataAnnotations
             {
                 //
 
-
-
                 string underlying = GetUnderlyingTypeValueString(this.EnumType, convertedValue);
                 string converted = convertedValue.ToString();
                 return !underlying.Equals(converted);

@@ -789,7 +789,6 @@ namespace System.Xml
                             // check xml:space and xml:lang
                             //
 
-
                             if (
                                 attrDef != null
                                 && attrDef.Prefix.Length > 0
@@ -835,8 +834,6 @@ namespace System.Xml
                         if (v1Compat)
                         {
                             //
-
-
 
                             string val = attrDef.DefaultValueExpanded.Trim();
                             if (val.Equals("preserve") || val.Equals("default"))

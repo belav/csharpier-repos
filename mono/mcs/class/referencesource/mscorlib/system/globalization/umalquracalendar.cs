@@ -996,7 +996,6 @@ namespace System.Globalization
 
         //internal static Calendar m_defaultInstance;
 
-
         // This is the minimal Gregorian date that we support in the UmAlQuraCalendar.
         internal static DateTime minDate = new DateTime(1900, 4, 30);
         internal static DateTime maxDate = new DateTime(
@@ -1019,8 +1018,6 @@ namespace System.Globalization
         }
         */
 
-
-
         public override DateTime MinSupportedDateTime
         {
             get { return (minDate); }
@@ -1033,7 +1030,6 @@ namespace System.Globalization
 
         // Return the type of the UmAlQura calendar.
         //
-
 
         public override CalendarAlgorithmType AlgorithmType
         {
@@ -1305,7 +1301,6 @@ namespace System.Globalization
         // y1.
         //
 
-
         public override DateTime AddMonths(DateTime time, int months)
         {
             if (months < -120000 || months > 120000)
@@ -1363,7 +1358,6 @@ namespace System.Globalization
         // parts of the result are the same as those of the specified DateTime.
         //
 
-
         public override DateTime AddYears(DateTime time, int years)
         {
             return (AddMonths(time, years * 12));
@@ -1372,7 +1366,6 @@ namespace System.Globalization
         // Returns the day-of-month part of the specified DateTime. The returned
         // value is an integer between 1 and 31.
         //
-
 
         public override int GetDayOfMonth(DateTime time)
         {
@@ -1385,7 +1378,6 @@ namespace System.Globalization
         // Thursday, 5 indicates Friday, and 6 indicates Saturday.
         //
 
-
         public override DayOfWeek GetDayOfWeek(DateTime time)
         {
             return ((DayOfWeek)((int)(time.Ticks / TicksPerDay + 1) % 7));
@@ -1394,7 +1386,6 @@ namespace System.Globalization
         // Returns the day-of-year part of the specified DateTime. The returned value
         // is an integer between 1 and 354 or 355.
         //
-
 
         public override int GetDayOfYear(DateTime time)
         {
@@ -1411,7 +1402,6 @@ namespace System.Globalization
         // Returns the number of days in the month given by the year and
         // month arguments.
         //
-
 
         public override int GetDaysInMonth(int year, int month, int era)
         {
@@ -1453,7 +1443,6 @@ namespace System.Globalization
         // Returns the number of days in the year given by the year argument for the current era.
         //
 
-
         public override int GetDaysInYear(int year, int era)
         {
             CheckYearRange(year, era);
@@ -1461,7 +1450,6 @@ namespace System.Globalization
         }
 
         // Returns the era for the specified DateTime value.
-
 
         public override int GetEra(DateTime time)
         {
@@ -1478,14 +1466,12 @@ namespace System.Globalization
         // integer between 1 and 12.
         //
 
-
         public override int GetMonth(DateTime time)
         {
             return (GetDatePart(time, DatePartMonth));
         }
 
         // Returns the number of months in the specified year and era.
-
 
         public override int GetMonthsInYear(int year, int era)
         {
@@ -1497,7 +1483,6 @@ namespace System.Globalization
         // integer between MinCalendarYear and MaxCalendarYear.
         //
 
-
         public override int GetYear(DateTime time)
         {
             return (GetDatePart(time, DatePartYear));
@@ -1506,7 +1491,6 @@ namespace System.Globalization
         // Checks whether a given day in the specified era is a leap day. This method returns true if
         // the date is a leap day, or false if not.
         //
-
 
         public override bool IsLeapDay(int year, int month, int day, int era)
         {
@@ -1537,7 +1521,6 @@ namespace System.Globalization
         // if this calendar does not have leap month, or this year is not a leap year.
         //
 
-
         public override int GetLeapMonth(int year, int era)
         {
             CheckYearRange(year, era);
@@ -1548,7 +1531,6 @@ namespace System.Globalization
         // month is a leap month, or false if not.
         //
 
-
         public override bool IsLeapMonth(int year, int month, int era)
         {
             CheckYearMonthRange(year, month, era);
@@ -1558,7 +1540,6 @@ namespace System.Globalization
         // Checks whether a given year in the specified era is a leap year. This method returns true if
         // year is a leap year, or false if not.
         //
-
 
         public override bool IsLeapYear(int year, int era)
         {
@@ -1571,7 +1552,6 @@ namespace System.Globalization
 
         // Returns the date and time converted to a DateTime value.  Throws an exception if the n-tuple is invalid.
         //
-
 
         public override DateTime ToDateTime(
             int year,

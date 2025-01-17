@@ -19,7 +19,6 @@ namespace System.Web.UI.WebControls
     /// </devdoc>
     //
 
-
     public class TemplateField : DataControlField
     {
         private ITemplate headerTemplate;

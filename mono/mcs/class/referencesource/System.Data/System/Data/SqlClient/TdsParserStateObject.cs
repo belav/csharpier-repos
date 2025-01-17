@@ -781,10 +781,6 @@ namespace System.Data.SqlClient
 
                     //
 
-
-
-
-
                     // If write or read failed with reset, we need to clear event but not mark connection
                     // as reset.
                     _fResetConnectionSent = false;
@@ -1041,8 +1037,6 @@ namespace System.Data.SqlClient
             {
                 // Comment CloseMARSSession
                 //
-
-
 
                 //
                 RuntimeHelpers.PrepareConstrainedRegions();
@@ -2292,7 +2286,6 @@ namespace System.Data.SqlClient
         // Value Skip Logic                    //
         /////////////////////////////////////////
 
-
         // Reads bytes from the buffer but doesn't return them, in effect simply deleting them.
         // Does not handle plp fields, need to use SkipPlpBytesValue for those.
         // Does not handle null values or NBC bitmask, ensure the value is not null before calling this method
@@ -3399,7 +3392,6 @@ namespace System.Data.SqlClient
         /////////////////////////////////////////
         // Network/Packet Writing & Processing //
         /////////////////////////////////////////
-
 
         //
         // Takes a secure string and offsets and saves them for a write latter when the information is written out to SNI Packet

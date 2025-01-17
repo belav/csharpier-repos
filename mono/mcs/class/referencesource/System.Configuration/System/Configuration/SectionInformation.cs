@@ -661,9 +661,6 @@ namespace System.Configuration
                 //
                 //
 
-
-
-
                 if (force == true && BaseConfigurationRecord.IsImplicitSection(SectionName))
                 {
                     throw new ConfigurationErrorsException(

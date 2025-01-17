@@ -299,7 +299,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // END RUNTIME BINDER ONLY CHANGE
                 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
                 bool wasOutOrRef = false;
                 if (pDest is ParameterModifierType modDest)
                 {

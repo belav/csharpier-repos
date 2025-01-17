@@ -125,8 +125,6 @@ namespace System.Data.SqlClient
                             // What about a failure - throw?  YES!
                             //
 
-
-
                             SqlConnectionString sseopt = new SqlConnectionString(
                                 opt,
                                 opt.DataSource,

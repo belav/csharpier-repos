@@ -69,7 +69,6 @@ namespace System.ServiceModel.Channels
             this.useSourceJournal = elementToBeCloned.useSourceJournal;
             //
 
-
             this.ReceiveContextSettings = elementToBeCloned.ReceiveContextSettings;
         }
 

@@ -3,7 +3,6 @@
 //ThreadStatics are only initialized on the first thread to call the constructor
 //   All other threads get the value 0 set for value types
 
-
 using System;
 using System.Threading;
 using Xunit;

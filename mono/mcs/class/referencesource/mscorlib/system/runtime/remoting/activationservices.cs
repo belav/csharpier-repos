@@ -60,10 +60,6 @@ namespace System.Runtime.Remoting.Activation
 
         // <
 
-
-
-
-
         //1 private static LocalActivator  localActivator = null;
 
         // ActivationListener is the object that listens to incoming
@@ -665,9 +661,6 @@ namespace System.Runtime.Remoting.Activation
                 serverContext = new Context();
 
                 // <
-
-
-
 
                 ArrayList list = (ArrayList)reqMsg.ContextProperties;
                 RuntimeAssembly asm = null;
@@ -1410,12 +1403,7 @@ namespace System.Runtime.Remoting.Activation
 
             // <
 
-
-
-
             // <
-
-
 
             BCLDebug.Log("Attempting Connection to remote activation service");
             IActivator remActivator = null;

@@ -417,7 +417,6 @@ namespace System.Collections.Generic
             }
             // @
 
-
             Contract.EndContractBlock();
 
             List<TOutput> list = new List<TOutput>(_size);

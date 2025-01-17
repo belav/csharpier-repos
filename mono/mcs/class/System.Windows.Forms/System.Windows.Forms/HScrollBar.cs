@@ -26,7 +26,6 @@
 //	Jordi Mas i Hernandez	jordi@ximian.com
 //
 
-
 using System.Drawing;
 using System.Runtime.InteropServices;
 

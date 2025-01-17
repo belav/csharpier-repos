@@ -39,7 +39,6 @@ namespace nist_dom.fundamental
                 }
         */
 
-
         //------------------------ test case core-0001T ------------------------
         //
         // Testing feature - The doctype attribute contains the Document Type
@@ -895,7 +894,6 @@ namespace nist_dom.fundamental
         // Semantic Requirements: 17
         //
         //----------------------------------------------------------------------------
-
 
         [Test]
         public void core0018D()

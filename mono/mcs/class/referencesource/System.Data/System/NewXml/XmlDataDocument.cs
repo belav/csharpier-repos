@@ -2143,13 +2143,6 @@ namespace System.Xml
                     case DataRowAction.Add:
                         //
 
-
-
-
-
-
-
-
                         OnAddRow(row);
                         break;
 

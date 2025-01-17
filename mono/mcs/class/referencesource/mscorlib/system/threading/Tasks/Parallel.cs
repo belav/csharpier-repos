@@ -1330,7 +1330,6 @@ namespace System.Threading.Tasks
                         // We need to call FindNewWork32() on it to see whether there's a chunk available.
                         //
 
-
                         // Cache some information about the current task
                         Task currentWorkerTask = Task.InternalCurrent;
                         bool bIsRootTask = (currentWorkerTask == rootTask);
@@ -4110,7 +4109,6 @@ namespace System.Threading.Tasks
                     if (orderedSource != null)
                     {
                         // Use this path for OrderablePartitioner
-
 
                         // first check if there's saved state from a previous replica that we might be replacing.
                         // the only state to be passed down in such a transition is the enumerator

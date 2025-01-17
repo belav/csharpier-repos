@@ -13,7 +13,6 @@
  **
  ===========================================================*/
 
-
 // All classes and methods in here are only for the internal use by the XML and Binary Formatters.
 // They are public so that the XMLFormatter can address them. Eventually they will
 // be signed so that they can't be used by external applications.
@@ -108,7 +107,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal long PRtopId;
         internal long PRheaderId;
 #pragma warning restore 0414
-
 
         // MemberInfo accumulated during parsing of members
 

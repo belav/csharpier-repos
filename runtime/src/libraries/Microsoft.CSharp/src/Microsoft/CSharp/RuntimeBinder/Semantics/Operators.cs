@@ -2950,7 +2950,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // compile-time error occurs. An exception is the rule that permits the long value
             // -9223372036854775808 (-2^63) to be written as a decimal integer literal (9.4.4.2).
 
-
             Debug.Assert(
                 ptOp == PredefinedType.PT_INT
                     || ptOp == PredefinedType.PT_UINT

@@ -989,7 +989,6 @@ namespace TestStructFields
         #endregion // S8 tests
 
 
-
         #region S16 tests
         struct S16
         {

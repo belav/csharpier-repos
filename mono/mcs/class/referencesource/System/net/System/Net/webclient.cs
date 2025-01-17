@@ -1331,7 +1331,6 @@ namespace System.Net
         //
         //
 
-
         /// <devdoc>
         ///    <para>Holds the state and handles the basic async logic of downloading</para>
         /// </devdoc>

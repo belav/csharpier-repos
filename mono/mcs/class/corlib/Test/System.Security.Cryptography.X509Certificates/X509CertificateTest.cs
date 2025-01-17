@@ -63,7 +63,6 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
 
         //--8<-- NON GENERATED CODE STARTS HERE --8<----8<----8<----8<----8<----8<--
 
-
         [Test]
         public void Equality()
         {

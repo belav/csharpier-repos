@@ -9,7 +9,6 @@
 // (C)2006 Novell Inc,
 //
 
-
 namespace System.Transactions
 {
     public class Enlistment

@@ -3816,7 +3816,6 @@ namespace System
             // Will do that on demand.
             //
 
-
             //
             //We have already checked on the port in EnsureUriInfo() that calls CreateUriInfo
             //

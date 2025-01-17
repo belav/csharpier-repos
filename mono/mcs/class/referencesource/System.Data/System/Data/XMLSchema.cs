@@ -1176,7 +1176,6 @@ namespace System.Data
                 }
                 */
 
-
                 if (ct.ContentModel is XmlSchemaComplexContent)
                 {
                     XmlSchemaAnnotated cContent = (
@@ -1664,8 +1663,6 @@ namespace System.Data
             table = _ds.Tables.GetTable(typeName, _TableUri);
 
             //
-
-
 
             /*            if (table!=null) {
                             throw ExceptionBuilder.DuplicateDeclaration(typeName);

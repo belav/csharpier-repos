@@ -4875,7 +4875,6 @@ namespace System.Windows.Forms
             // CWL shows nothing.  So we fudge it and put
             // a CreateHandle here.
 
-
             if (accessibility_object != null && accessibility_object is ControlAccessibleObject)
                 ((ControlAccessibleObject)accessibility_object).NotifyClients(accEvent, childID);
         }

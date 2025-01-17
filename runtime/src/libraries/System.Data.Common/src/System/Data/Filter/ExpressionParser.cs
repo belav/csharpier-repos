@@ -278,7 +278,6 @@ namespace System.Data
                             case Tokens.Name:
                                 /* Qualify name now for nice error checking */
 
-
                                 /* Create tree element -                */
                                 // CONSIDER: Check for reserved proc names here
                                 node = new NameNode(_table, _text, _start, _pos);

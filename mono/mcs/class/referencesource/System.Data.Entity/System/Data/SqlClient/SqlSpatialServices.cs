@@ -402,8 +402,6 @@ namespace System.Data.SqlClient
 
         //
 
-
-
         #region Argument Conversion (conversion to SQL Server Types)
 
         private object ConvertToSqlValue(DbGeography geographyValue, string argumentName)

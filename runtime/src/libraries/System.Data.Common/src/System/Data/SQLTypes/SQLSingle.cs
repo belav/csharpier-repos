@@ -204,7 +204,6 @@ namespace System.Data.SqlTypes
 
         // Explicit conversions
 
-
         // Explicit conversion from SqlDouble to SqlSingle
         public static explicit operator SqlSingle(SqlDouble x)
         {

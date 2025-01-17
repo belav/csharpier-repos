@@ -9,7 +9,6 @@ using System.Threading;
 
 //Repro for bug Bug 656705: Heap corruption when using LOH compaction
 
-
 namespace LOHCompactScenarioRepro
 {
     public class Program

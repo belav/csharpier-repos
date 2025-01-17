@@ -169,13 +169,6 @@ namespace System.Linq.Expressions.Compiler
 
                 //
 
-
-
-
-
-
-
-
                 if (!field.IsLiteral && !field.IsInitOnly)
                 {
                     _ilg.EmitFieldAddress(field);

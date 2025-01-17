@@ -820,7 +820,6 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                                 //      If you intended overlap on the S-side ensure they have similar relationship on teh C-side.
                                 //TestCase (10)
 
-
                                 if (CSideHasDifferentEntitySets(fragment1, fragment2))
                                 {
                                     // If they are equal via a Referential integrity constraint try making one a subset of the other by

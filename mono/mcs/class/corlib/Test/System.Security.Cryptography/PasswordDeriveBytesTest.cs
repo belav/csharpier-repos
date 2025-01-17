@@ -321,7 +321,6 @@ namespace MonoTests.System.Security.Cryptography
 
         // 1.0/1.1 compatibility
 
-
         // Old tests
 
         static int ToInt32LE(byte[] bytes, int offset)

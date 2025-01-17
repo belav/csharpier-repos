@@ -11,7 +11,6 @@
 /// own risk.
 /// </license>
 
-
 using System;
 using System.Runtime.CompilerServices;
 

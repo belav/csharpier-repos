@@ -21,12 +21,6 @@ inc, assignment, adding, double inc.
 
 *********************************************/
 
-
-
-
-
-
-
 public class test
 {
     [Fact]

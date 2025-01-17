@@ -1330,9 +1330,6 @@ namespace System.Data.Entity.Design.PluralizationServices
 
             //
 
-
-
-
             if (
                 PluralizationServiceUtil.TryInflectOnSuffixInWord(
                     suffixWord,

@@ -434,7 +434,6 @@ namespace System.Net
 
         --*/
 
-
         /// <devdoc>
         ///    <para>Gets the stream used for reading the body of the response from the
         ///       server.</para>

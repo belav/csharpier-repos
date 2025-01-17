@@ -13,7 +13,6 @@
 // main TODO: additional tests for functions affected by
 //            fixedsize and read-only properties
 
-
 using System;
 using System.Collections;
 using System.IO;

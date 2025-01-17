@@ -23,7 +23,6 @@
 //	Jonathan Chambers	jonathan.chambers@ansys.com
 //
 
-
 // COMPLETE
 
 using System;

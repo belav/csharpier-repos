@@ -777,7 +777,6 @@ namespace System.Runtime.Remoting
     {
         // <
 
-
         [System.Security.SecurityCritical] // auto-generated
         internal static String GetXmlNamespaceForType(RuntimeType type, String dynamicUrl)
         {

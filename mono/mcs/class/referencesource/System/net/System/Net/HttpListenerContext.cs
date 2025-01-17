@@ -140,18 +140,6 @@ namespace System.Net
 
         // <
 
-
-
-
-
-
-
-
-
-
-
-
-
         internal bool PromoteCookiesToRfc2965
         {
             get { return m_PromoteCookiesToRfc2965; }

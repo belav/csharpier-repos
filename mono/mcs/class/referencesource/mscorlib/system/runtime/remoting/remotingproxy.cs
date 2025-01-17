@@ -187,8 +187,6 @@ namespace System.Runtime.Remoting.Proxies
                     // marked fully initialized.
                     // <
 
-
-
                     // Let the original constructor thread go through but
                     // throw for other threads.
                     if (CtorThread == Thread.CurrentThread.GetHashCode())
@@ -205,8 +203,6 @@ namespace System.Runtime.Remoting.Proxies
                         // earlier than usual so that envoy & channel sinks
                         // get set up!
                         // <
-
-
 
                         RemotingServices.Wrap((ContextBoundObject)this.UnwrappedServerObject);
                     }

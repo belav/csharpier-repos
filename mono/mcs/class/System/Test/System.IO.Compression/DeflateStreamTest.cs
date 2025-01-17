@@ -8,7 +8,6 @@
 // (C) 2004 Novell, Inc. <http://www.novell.com>
 //
 
-
 using System;
 using System.IO;
 using System.IO.Compression;

@@ -294,7 +294,6 @@ namespace System.Data.ProviderBase
             // With this logic, objects are pruned from the pool if unused for
             // at least one period but not more than two periods.
 
-
             // Destroy free objects that put us above MinPoolSize from old stack.
             while (Count > MinPoolSize)
             { // While above MinPoolSize...
@@ -1099,7 +1098,6 @@ namespace System.Data.ProviderBase
         {
             Debug.Assert(null != obj, "why are we adding a null object to the pool?");
             // Debug.Assert(obj.CanBePooled,    "non-poolable object in pool");
-
 
             _stackNew.Push(obj);
             _waitHandles.PoolSemaphore.Release(1);

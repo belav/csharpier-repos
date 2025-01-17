@@ -1630,7 +1630,6 @@ namespace System.Net.Security
 
         --*/
 
-
         internal SecurityStatus Encrypt(
             byte[] buffer,
             int offset,

@@ -7,7 +7,6 @@
 // (C) 2003 Jackson Harper (Jackson@LatitudeGeo.com)
 //
 
-
 using System;
 
 namespace Mono.ILASM

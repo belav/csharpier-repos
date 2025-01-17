@@ -56,18 +56,6 @@ namespace System.Web.UI.WebControls
 
         // SECURITY CODE
 
-
-
-
-
-
-
-
-
-
-
-
-
         // VSWhidbey 253188: Permission assert to support page running below full trust
         [ReflectionPermission(SecurityAction.Assert, Flags = ReflectionPermissionFlag.MemberAccess)]
         private HttpResponseSubstitutionCallback GetDelegate(Type targetType, string methodName)

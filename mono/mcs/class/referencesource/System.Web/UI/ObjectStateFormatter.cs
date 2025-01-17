@@ -29,8 +29,6 @@ namespace System.Web.UI
 
     //
 
-
-
     /// <devdoc>
     /// ObjectStateFormatter is designed to efficiently serialize arbitrary object graphs
     /// that represent the state of an object (decomposed into simpler types) into
@@ -103,7 +101,6 @@ namespace System.Web.UI
         // Known types for which we generate short type references
         // rather than assembly qualified names
         //
-
 
         private static readonly Type[] KnownTypes = new Type[]
         {

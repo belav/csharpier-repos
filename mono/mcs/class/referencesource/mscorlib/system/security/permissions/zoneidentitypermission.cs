@@ -219,7 +219,6 @@ namespace System.Security.Permissions
         //
         //------------------------------------------------------
 
-
         public override IPermission Copy()
         {
             return new ZoneIdentityPermission(this.m_zones);

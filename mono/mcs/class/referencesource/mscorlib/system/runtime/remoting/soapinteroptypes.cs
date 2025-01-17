@@ -236,7 +236,6 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
         // The form of the time duration is PxxYxxDTxxHxxMxx.xxxS or PxxYxxDTxxHxxMxxS
         // Keep in sync with Message.cs
 
-
         public static String XsdType
         {
             get { return "duration"; }

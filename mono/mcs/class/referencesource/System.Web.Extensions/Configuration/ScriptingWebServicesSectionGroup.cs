@@ -28,7 +28,6 @@ namespace System.Web.Configuration
         }
 #pragma warning restore 0436
 
-
         [ConfigurationProperty("authenticationService")]
         public ScriptingAuthenticationServiceSection AuthenticationService
         {

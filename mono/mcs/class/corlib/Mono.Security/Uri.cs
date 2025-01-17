@@ -840,7 +840,6 @@ namespace Mono.Security
                     info.AddValue ("AbsoluteUri", this.AbsoluteUri);
                 }*/
 
-
         // Internal Methods
 
         protected void Escape()

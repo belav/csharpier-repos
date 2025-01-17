@@ -29,7 +29,6 @@
  * DAMAGE.
  */
 
-
 using System;
 
 namespace Exocortex.DSP

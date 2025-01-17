@@ -26,9 +26,6 @@ namespace System.Net.PeerToPeer
     /// </remarks>
     /// <
 
-
-
-
     [Serializable]
     public class Cloud : ISerializable, IEquatable<Cloud>
     {

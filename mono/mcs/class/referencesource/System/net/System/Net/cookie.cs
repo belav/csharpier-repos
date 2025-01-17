@@ -895,7 +895,6 @@ namespace System.Net
 
         // methods
 
-
         internal static IComparer GetComparer()
         {
             //the class don't have any members, it's safe reuse the instance

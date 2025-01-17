@@ -38,7 +38,6 @@ namespace System.Runtime.Serialization.Formatters
     //
     // Turn on Logging in the jitmgr
 
-
     // remoting Wsdl logging
     /// <internalonly/>
     [System.Security.SecurityCritical] // auto-generated_required

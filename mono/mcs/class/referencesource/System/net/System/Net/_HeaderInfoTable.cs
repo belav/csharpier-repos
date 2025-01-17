@@ -31,8 +31,6 @@ namespace System.Net
         //
         // <
 
-
-
         private static string[] ParseMultiValue(string value)
         {
             StringCollection tempStringCollection = new StringCollection();

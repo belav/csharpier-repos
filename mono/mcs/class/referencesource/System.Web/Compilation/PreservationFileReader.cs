@@ -4,8 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
-
 namespace System.Web.Compilation
 {
     using System;

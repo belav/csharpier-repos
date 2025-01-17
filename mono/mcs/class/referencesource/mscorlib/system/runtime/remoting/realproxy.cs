@@ -1017,8 +1017,6 @@ namespace System.Runtime.Remoting.Proxies
         {
             // <
 
-
-
             ServerIdentity serverID = _identity as ServerIdentity;
             if ((null != serverID) && (this is RemotingProxy))
             {

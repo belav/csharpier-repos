@@ -24,7 +24,6 @@
 //
 //
 
-
 //
 // TODO:
 //  - dead chars are not translated properly

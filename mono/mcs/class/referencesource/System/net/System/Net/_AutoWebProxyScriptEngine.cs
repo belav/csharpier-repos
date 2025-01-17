@@ -168,7 +168,6 @@ namespace System.Net
 
         // End of locking helper methods.
 
-
         // The lock is always held while these three are modified.
         internal bool AutomaticallyDetectSettings
         {

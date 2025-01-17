@@ -172,7 +172,6 @@ namespace System.Web
         // Public methods and properties
         //
 
-
         /// <devdoc>
         ///    <para>Sets the "Vary: *" header and causes all other Vary:
         ///       header information to be dropped.</para>

@@ -8,9 +8,6 @@
 //     Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' tried to implicitly implement an interface method with
 //     weaker type parameter constraints."
 
-
-
-
 using System;
 using Xunit;
 

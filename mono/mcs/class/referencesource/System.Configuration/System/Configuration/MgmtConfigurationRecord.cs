@@ -54,7 +54,6 @@ namespace System.Configuration
 
         // new configSource stream added thru API
 
-
         static internal MgmtConfigurationRecord Create(
             IInternalConfigRoot configRoot,
             IInternalConfigRecord parent,

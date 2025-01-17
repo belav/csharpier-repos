@@ -8,7 +8,6 @@
 // It translates a block of RegexCode to MSIL, and creates a
 // subclass of the RegexRunner type.
 
-
 #if !SILVERLIGHT && !FULL_AOT_RUNTIME
 
 namespace System.Text.RegularExpressions
@@ -1372,7 +1371,6 @@ namespace System.Text.RegularExpressions
 
                 // <
 
-
                 Ldc(1);
                 Ret();
             }
@@ -1380,7 +1378,6 @@ namespace System.Text.RegularExpressions
             {
                 // Compiled Boyer-Moore string matching
                 // <
-
 
                 LocalBuilder chV = _tempV;
                 LocalBuilder testV = _tempV;
@@ -2377,10 +2374,6 @@ namespace System.Text.RegularExpressions
                 case RegexCode.Lazybranchcount | RegexCode.Back2:
                     // <
 
-
-
-
-
                     ReadyReplaceStack(1);
                     PopTrack();
                     DoReplace();
@@ -2646,11 +2639,6 @@ namespace System.Text.RegularExpressions
                 case RegexCode.Multi | RegexCode.Ci:
                 //
                 // <
-
-
-
-
-
 
                 //: String Str = _strings[Operand(0)];
                 //: int i, c;

@@ -19,7 +19,6 @@
 //
 // Licensed under the MIT/X11 License.
 
-
 using System;
 
 namespace System.Data.OracleClient

@@ -188,7 +188,6 @@ public class Test_Class_ImplicitOverrideVirtualNewslot
 
         // TEST5: test generic virtual method
 
-
         Eval((iIntc3.method2<int>().ToString()).Equals("6"));
         Eval((iIntc3.method2<object>().ToString()).Equals("6"));
         Eval((iIntc3.method2<string>().ToString()).Equals("6"));

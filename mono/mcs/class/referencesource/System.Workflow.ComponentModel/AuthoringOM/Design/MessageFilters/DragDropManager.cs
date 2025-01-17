@@ -455,7 +455,6 @@
 
             //
 
-
             if (this.dragImage != null)
             {
                 parentView.InvalidateClientRectangle(

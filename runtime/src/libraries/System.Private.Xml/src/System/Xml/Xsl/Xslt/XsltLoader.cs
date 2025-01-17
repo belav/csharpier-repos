@@ -2993,7 +2993,6 @@ namespace System.Xml.Xsl.Xslt
             href ??= string.Empty;
             // attHref is a BaseUri of new output tree. It should be resolved relative to "base output URI"
 
-
             if (input.MoveToXsltAttribute(5, "method"))
             {
                 compiler.EnterForwardsCompatible();
