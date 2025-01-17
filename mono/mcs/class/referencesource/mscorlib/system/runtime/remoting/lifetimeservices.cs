@@ -10,8 +10,6 @@
 //
 // Contents:    Used to obtain a lease <
 
-
-
 //
 //+----------------------------------------------------------------------------
 
@@ -284,7 +282,6 @@ namespace System.Runtime.Remoting.Lifetime
             // 1) the lease has a null state which specifies that no lease is to be created.
             // 2) the lease has an initial state which specifies that InitializeLifeTimeService has created a new lease.
             // 3) the lease has another state which indicates that the lease has already been created and registered.
-
 
             if (leaseObj == null)
             {

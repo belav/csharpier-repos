@@ -179,7 +179,6 @@ namespace System.Security.AccessControl.Tests
 
             // case 1, no ACE, get index at -1
 
-
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 rawAcl = new RawAcl(1, 1);
@@ -190,7 +189,6 @@ namespace System.Security.AccessControl.Tests
 
             //case 2, no ACE, get index at Count
 
-
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 rawAcl = new RawAcl(1, 1);
@@ -200,7 +198,6 @@ namespace System.Security.AccessControl.Tests
             });
 
             //case 3, no ACE, set index at -1
-
 
             Assert.Throws<NotSupportedException>(() =>
             {
@@ -222,7 +219,6 @@ namespace System.Security.AccessControl.Tests
             });
 
             //case 4, no ACE, set index at Count
-
 
             Assert.Throws<NotSupportedException>(() =>
             {
@@ -264,7 +260,6 @@ namespace System.Security.AccessControl.Tests
                 systemAcl[index] = gAce;
             });
             //case 6, set index at 0
-
 
             Assert.Throws<NotSupportedException>(() =>
             {

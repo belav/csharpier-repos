@@ -10,10 +10,6 @@ namespace System.Net.Mail
     /// Summary description for MailMessage.
     /// </summary>
 
-
-
-
-
     //rfc3461
     [Flags]
     public enum DeliveryNotificationOptions

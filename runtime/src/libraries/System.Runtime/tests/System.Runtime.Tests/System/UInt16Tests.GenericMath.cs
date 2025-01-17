@@ -3174,7 +3174,6 @@ namespace System.Tests
         // IBinaryNumber
         //
 
-
         [Fact]
         public static void AllBitsSetTest()
         {

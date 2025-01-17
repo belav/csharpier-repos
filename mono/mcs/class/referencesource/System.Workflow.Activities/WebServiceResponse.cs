@@ -270,7 +270,6 @@ namespace System.Workflow.Activities
         #endregion
 
 
-
         #region IDynamicPropertyTypeProvider
 
         Type IDynamicPropertyTypeProvider.GetPropertyType(

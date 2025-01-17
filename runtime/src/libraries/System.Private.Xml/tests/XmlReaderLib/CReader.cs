@@ -68,7 +68,6 @@ namespace System.Xml.Tests
 
         //  Node Properties
 
-
         public override XmlNodeType NodeType
         {
             get

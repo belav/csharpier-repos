@@ -7,7 +7,6 @@
 // (C) 2003 Jackson Harper, All rights reserved
 //
 
-
 using System;
 
 namespace Mono.ILASM

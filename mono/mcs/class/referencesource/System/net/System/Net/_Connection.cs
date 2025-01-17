@@ -1633,7 +1633,6 @@ namespace System.Net
                     // as soon as the write is done. Otherwise we have to wait
                     // until both read and write are done.
 
-
                     GlobalLog.Print(
                         "Connection#"
                             + ValidationHelper.HashString(this)
@@ -2934,8 +2933,6 @@ namespace System.Net
                     //
                     //For the purpose of this QFE, when we receive a header we test
                     //if this is a Proxy Service Point OR if this is a TUNNEL request
-
-
 
                     bool haveClose = false;
                     bool haveKeepAlive = false;

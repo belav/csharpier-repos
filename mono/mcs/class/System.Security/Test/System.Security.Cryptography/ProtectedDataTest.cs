@@ -8,7 +8,6 @@
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
 
-
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;

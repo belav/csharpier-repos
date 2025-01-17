@@ -794,7 +794,6 @@ namespace System.Diagnostics
 
                         //
 
-
                         string filename = null;
                         try
                         {

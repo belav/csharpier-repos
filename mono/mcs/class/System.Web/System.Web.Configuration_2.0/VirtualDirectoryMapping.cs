@@ -26,7 +26,6 @@
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
 
-
 using System.Collections.Specialized;
 
 namespace System.Web.Configuration

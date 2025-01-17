@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 // If the nullable type has a null value, Value throws a System.InvalidOperationException
 
 #pragma warning disable 0168, 0649

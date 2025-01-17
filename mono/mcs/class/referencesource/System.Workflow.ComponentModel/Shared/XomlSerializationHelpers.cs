@@ -184,7 +184,6 @@ namespace System.Workflow.ComponentModel.Serialization
                     {
                         //
 
-
                         int lineNumber =
                             (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LineNumber : 1;
                         int linePosition =

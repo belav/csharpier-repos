@@ -119,7 +119,6 @@ namespace System.Runtime.Remoting.Channels
 
             // <
 
-
             if ((null != url) && (data == null))
             {
                 if (url.StartsWith(_channelName, StringComparison.Ordinal))

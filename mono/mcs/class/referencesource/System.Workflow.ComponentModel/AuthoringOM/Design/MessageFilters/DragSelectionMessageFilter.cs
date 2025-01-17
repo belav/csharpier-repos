@@ -61,8 +61,6 @@
             //We do nothing if the logical coordinate is not in the active layout
             //
 
-
-
             float dragMultiply = 2.0f / (float)parentView.Zoom * 100.0f;
             if (
                 !this.dragStarted

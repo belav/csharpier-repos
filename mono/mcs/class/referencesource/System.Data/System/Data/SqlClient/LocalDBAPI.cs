@@ -5,7 +5,6 @@
 // <owner current="true" primary="true">antonam</owner>
 //------------------------------------------------------------------------------
 
-
 namespace System.Data
 {
     using System.Collections.Generic;

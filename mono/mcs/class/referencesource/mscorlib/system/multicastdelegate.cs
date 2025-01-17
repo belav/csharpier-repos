@@ -539,7 +539,6 @@ namespace System
             Contract.Ensures(Contract.Result<Delegate[]>() != null);
             // @
 
-
             Delegate[] del;
             Object[] invocationList = _invocationList as Object[];
             if (invocationList == null)

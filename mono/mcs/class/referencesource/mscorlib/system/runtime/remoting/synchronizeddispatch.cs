@@ -408,7 +408,6 @@ namespace System.Runtime.Remoting.Contexts
         {
             // <
 
-
             bool bQueued;
 
             // Check for nested call backs
@@ -969,7 +968,6 @@ namespace System.Runtime.Remoting.Contexts
                 // RemotingProxy invoke code does Clone() the callContext at
                 // the start of each Async call so we don't have to worry
                 // about stomping someone else's lcid here.
-
 
                 String lcid = Identity.GetNewLogicalCallID();
                 cctx.RemotingData.LogicalCallID = lcid;

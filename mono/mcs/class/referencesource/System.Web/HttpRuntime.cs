@@ -3193,7 +3193,6 @@ namespace System.Web
                 // Make sure we have already initialized the trust level
                 //
 
-
                 return _theRuntime._namedPermissionSet;
             }
         }
@@ -3454,8 +3453,6 @@ namespace System.Web
         {
             // Make sure we have already initialized the trust level
             //
-
-
 
             // If we don't have a NamedPermissionSet, we're in full trust
             if (NamedPermissionSet == null)
@@ -3741,7 +3738,6 @@ namespace System.Web
         //
         //  Static app domain related properties
         //
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

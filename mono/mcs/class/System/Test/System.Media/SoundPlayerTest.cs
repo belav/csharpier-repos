@@ -7,7 +7,6 @@
 // (C) 2007 Gert Driesen
 //
 
-
 using System;
 using System.IO;
 using System.Media;

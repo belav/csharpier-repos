@@ -39,7 +39,6 @@ namespace System.Web.UI.WebControls.WebParts
         {
             //
 
-
             // Note that we don't use the IsPostBack property of Page because that
             // is based on the presence of view state, which could be on the query string
             // in a non-POST request as well. Instead we use the actual verb associated

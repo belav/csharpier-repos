@@ -32,7 +32,6 @@ namespace System.Web
         // all the _haveX booleans with bitfields or something similar, because
         // the methods depend on the fact that "_haveX = true" is atomic.
 
-
         /// <devdoc>
         ///    <para>Returns the .NET Common Language Runtime version running
         ///         on the client.  If no CLR version is specified on the

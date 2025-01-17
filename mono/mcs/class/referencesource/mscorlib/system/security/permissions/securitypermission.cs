@@ -105,7 +105,6 @@ namespace System.Security.Permissions
         //
         //------------------------------------------------------
 
-
         private void SetUnrestricted(bool unrestricted)
         {
             if (unrestricted)

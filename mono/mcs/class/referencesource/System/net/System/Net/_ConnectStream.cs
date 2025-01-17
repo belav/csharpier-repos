@@ -702,9 +702,6 @@ namespace System.Net
             //
             //
 
-
-
-
             //
             // we're going to resubmit
             //
@@ -1043,7 +1040,6 @@ namespace System.Net
                 IAsyncResult    - the async result
 
         --*/
-
 
         [HostProtection(ExternalThreading = true)]
         public override IAsyncResult BeginWrite(
@@ -2139,7 +2135,6 @@ namespace System.Net
                 Nothing.
 
         --*/
-
 
         [HostProtection(ExternalThreading = true)]
         public override IAsyncResult BeginRead(

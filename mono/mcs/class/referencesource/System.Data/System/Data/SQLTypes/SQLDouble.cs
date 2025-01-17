@@ -288,8 +288,6 @@ namespace System.Data.SqlTypes
 
         // Explicit conversions
 
-
-
         // Explicit conversion from SqlString to SqlDouble
         // Throws FormatException or OverflowException if necessary.
         /// <devdoc>

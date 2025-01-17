@@ -26,7 +26,6 @@
 // Copyright (C) 2006 Novell, Inc (http://www.novell.com)
 //
 
-
 using System;
 using System.Configuration.Internal;
 using System.Reflection;

@@ -2813,15 +2813,6 @@ namespace System.Reflection
 
                 // <
 
-
-
-
-
-
-
-
-
-
                 return new UnmanagedMemoryStream(
                     pbInMemoryResource,
                     (long)length,

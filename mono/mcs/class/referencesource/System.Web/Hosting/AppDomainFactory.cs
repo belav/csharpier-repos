@@ -32,7 +32,6 @@ namespace System.Web.Hosting
     // The new code uses IAppManagerAppDomainFactory / AppAppManagerDomainFactory
     //
 
-
     /// <internalonly/>
     [
         ComImport,
@@ -106,7 +105,6 @@ namespace System.Web.Hosting
     // The new code -- IAppManagerAppDomainFactory / AppAppManagerDomainFactory
     //
 
-
     /// <internalonly/>
     [
         ComImport,
@@ -165,7 +163,6 @@ namespace System.Web.Hosting
                 //
 
                 //
-
 
                 if (appPath[0] == '.')
                 {

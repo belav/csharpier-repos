@@ -94,7 +94,6 @@ namespace System.Data.Common
             // parameter.Scale - from the TypeMapping;
             // parameter.Size - from the TypeMapping;
 
-
             // type.EdmType may not be a primitive type here - e.g. the user specified
             // a complex or entity type when creating an ObjectParameter instance. To keep
             // the same behavior we had in previous versions we let it through here. We will

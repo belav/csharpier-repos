@@ -456,7 +456,6 @@ namespace System.Data
                             }
                             //
 
-
                             MergeExtendedProperties(
                                 src.ExtendedProperties,
                                 dest.ExtendedProperties
@@ -692,7 +691,6 @@ namespace System.Data
                 if (MissingSchemaAction.Add == missingSchemaAction)
                 {
                     // create identical realtion in the current dataset
-
 
                     DataTable parent;
                     if (_IgnoreNSforTableLookup)

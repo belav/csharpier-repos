@@ -52,5 +52,4 @@ enum E
 }
 */
 
-
 interface II { }

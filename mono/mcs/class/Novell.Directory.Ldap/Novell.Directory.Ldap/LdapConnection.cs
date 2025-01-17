@@ -540,7 +540,6 @@ namespace Novell.Directory.Ldap
         * Constructors
         */
 
-
         /// <summary> Constructs a new LdapConnection object, which will use the supplied
         /// class factory to construct a socket connection during
         /// LdapConnection.connect method.

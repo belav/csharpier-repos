@@ -116,8 +116,6 @@ namespace System.Data.OleDb
             // 2) it is in the collection to schema rowset mapping above
             // 3) the provider does not support the necessary schema rowset
 
-
-
             DataColumn populationMechanism = metaDataCollectionsTable.Columns[_populationMechanism];
             if (
                 (null == populationMechanism)

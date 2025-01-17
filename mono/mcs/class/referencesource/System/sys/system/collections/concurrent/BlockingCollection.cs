@@ -534,7 +534,6 @@ namespace System.Collections.Concurrent
                     //existing item and thus TryAdd returns false indicating that the size of the underlying
                     //store did not increase.
 
-
                     bool addingSucceeded = false;
                     try
                     {

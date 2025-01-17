@@ -319,8 +319,6 @@ namespace System.Data.ProviderBase
 
                 //
 
-
-
                 lock (_transactedCxns)
                 {
                     if (_transactedCxns.TryGetValue(transaction, out connections))

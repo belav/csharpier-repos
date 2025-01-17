@@ -17,7 +17,6 @@ namespace System.Web.SessionState
      * Marker interface to indicate that class uses session state.
      */
 
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>

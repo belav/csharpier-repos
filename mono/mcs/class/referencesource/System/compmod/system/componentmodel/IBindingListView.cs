@@ -4,8 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
-
 namespace System.ComponentModel
 {
     using System.Collections;

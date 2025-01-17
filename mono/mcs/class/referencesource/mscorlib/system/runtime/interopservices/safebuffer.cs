@@ -66,7 +66,6 @@
 // static variable (perhaps using Interlocked.CompareExchange).  Of course,
 // assignments in a static class constructor are under a lock implicitly.
 
-
 namespace System.Runtime.InteropServices
 {
     using System;

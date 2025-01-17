@@ -10,7 +10,6 @@
 //            The height the ball will travel up: d2 = (1/2) g t^2 = v2^2 / (2 * g)
 //            This process is repeated until the ball is no more that 0.1m above the ground.
 
-
 using System;
 
 class Ball

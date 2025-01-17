@@ -3331,7 +3331,6 @@ namespace System.Windows.Forms
             //XSetFunction(DisplayHandle,   gc, GXxor);
             //XSetPlaneMask(DisplayHandle,  gc, mask);
 
-
             gc = XCreateGC(
                 DisplayHandle,
                 hwnd.client_window,

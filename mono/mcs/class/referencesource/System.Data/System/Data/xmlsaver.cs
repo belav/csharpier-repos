@@ -436,7 +436,6 @@ namespace System.Data
                             rootSchema.SetAttribute(Keywords.XSDID, XmlConvert.EncodeLocalName("NewDataSet"));
             */
 
-
             if (!Common.ADP.IsEmpty(targetNamespace))
             {
                 rootSchema.SetAttribute(Keywords.TARGETNAMESPACE, targetNamespace);
@@ -2407,7 +2406,6 @@ namespace System.Data
                     type.RemoveChild(compositor);
 
             // Output all constraints.
-
 
             ConstraintCollection constraints = table.Constraints;
             XmlElement selector,

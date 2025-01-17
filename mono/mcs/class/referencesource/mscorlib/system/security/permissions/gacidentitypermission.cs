@@ -70,7 +70,6 @@ namespace System.Security.Permissions
         //
         //------------------------------------------------------
 
-
         public override IPermission Copy()
         {
             return new GacIdentityPermission();

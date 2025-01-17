@@ -210,8 +210,6 @@ namespace System.IdentityModel
             //
             //
 
-
-
             FederatedAsyncState asyncState = new FederatedAsyncState(
                 request,
                 principal,

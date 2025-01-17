@@ -1886,8 +1886,6 @@ namespace System.Data.SqlClient
                 {
                     //
 
-
-
                     if (isParallel)
                     {
                         attemptOneLoginTimeout = intervalTimer;

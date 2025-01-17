@@ -27,7 +27,6 @@ namespace System.Security.Cryptography
                 throw new ArgumentNullException("name");
             // @
 
-
             m_name = name;
             m_propertyOptions = options;
             m_hashCode = null;

@@ -930,7 +930,6 @@ namespace System.Data.SqlClient
 
             //
 
-
             for (
                 int option = (int)PreLoginOptions.VERSION;
                 option < (int)PreLoginOptions.NUMOPT;
@@ -6107,7 +6106,6 @@ namespace System.Data.SqlClient
             {
                 //
 
-
                 if (!TryProcessOneTable(stateObj, ref length, out mpt))
                 {
                     multiPartTableNames = null;
@@ -10494,7 +10492,6 @@ namespace System.Data.SqlClient
             // incremented the delegated transaction requests will fail, so they
             // won't stomp on anything.
 
-
             Debug.Assert(
                 !_connHandler.ThreadHasParserLockForClose
                     || _connHandler._parserLock.ThreadMayHaveLock(),
@@ -10972,7 +10969,6 @@ namespace System.Data.SqlClient
                 // until we increment the open results count.  Once it's been
                 // incremented the delegated transaction requests will fail, so they
                 // won't stomp on anything.
-
 
                 if (firstCall)
                 {

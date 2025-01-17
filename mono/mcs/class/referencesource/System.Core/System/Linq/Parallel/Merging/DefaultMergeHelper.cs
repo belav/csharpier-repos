@@ -179,10 +179,6 @@ namespace System.Linq.Parallel
         //
         // @
 
-
-
-
-
         public TInputOutput[] GetResultsAsArray()
         {
             if (m_syncChannels != null)

@@ -60,8 +60,6 @@ namespace System.Web.UI
 
             //
 
-
-
             PropertyInfo propInfo = TargetFrameworkUtil.GetProperty(
                 parentBuilder.ControlType,
                 tagName,

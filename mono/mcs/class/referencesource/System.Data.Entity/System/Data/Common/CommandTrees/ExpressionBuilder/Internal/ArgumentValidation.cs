@@ -2149,10 +2149,6 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder.Internal
 
             //
 
-
-
-
-
             validElements = new DbExpressionList(new DbExpression[] { });
             return collectionType;
         }

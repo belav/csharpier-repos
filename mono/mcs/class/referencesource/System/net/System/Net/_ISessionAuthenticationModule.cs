@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Net
 {
     internal interface ISessionAuthenticationModule : IAuthenticationModule

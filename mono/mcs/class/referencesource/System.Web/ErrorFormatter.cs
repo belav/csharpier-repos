@@ -445,7 +445,6 @@ namespace System.Web
 
             //
 
-
             sb.Append("<!DOCTYPE html>\r\n");
             sb.Append("<html");
 

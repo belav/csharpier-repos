@@ -8,7 +8,6 @@
 /* the next object is created. Do this loop iRep times.
 /**************************************************************/
 
-
 namespace SingLink
 {
     using System;

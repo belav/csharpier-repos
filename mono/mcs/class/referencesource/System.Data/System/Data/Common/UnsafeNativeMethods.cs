@@ -130,7 +130,6 @@ namespace System.Data.Common
         //            SQLSMALLINT *StringLength, SQLPOINTER NumericAttribute);
         // #endif
 
-
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
@@ -973,8 +972,6 @@ namespace System.Data.Common
                 typedef ULONGLONG           DB_URESERVE;
         */
 
-
-
         [
             ComImport,
             Guid("0C733A8C-2A1C-11CE-ADE5-00AA0044773D"),
@@ -1713,7 +1710,6 @@ namespace System.Data.Common
         // we do not expect native to change its vtable entry at run-time (especially since these are free-threaded objects)
         // however to be extra safe double check the function pointer is the same as the cached delegate
         // whenever we encounter a new instance of the data
-
 
         // dangerous delegate around IUnknown::QueryInterface (0th vtable entry)
         [System.Security.SuppressUnmanagedCodeSecurityAttribute()]

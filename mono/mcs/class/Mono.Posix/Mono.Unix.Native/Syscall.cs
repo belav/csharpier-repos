@@ -2246,7 +2246,6 @@ namespace Mono.Unix.Native
         // - null (which will be passed as null)
         // without any heap memory allocations.
 
-
         // This is a fake Sockaddr which is passed to the fixed() statement if the address was null.
         // Sockaddr.GetNative() will return a null pointer for this Sockaddr.
         static Sockaddr nullSockaddr = new Sockaddr();
@@ -2877,7 +2876,6 @@ namespace Mono.Unix.Native
         // aio_return(3), aio_suspend(3), aio_write(3)
         //
         // Then update UnixStream.BeginRead to use the aio* functions.
-
 
         #region <attr/xattr.h> Declarations
         //

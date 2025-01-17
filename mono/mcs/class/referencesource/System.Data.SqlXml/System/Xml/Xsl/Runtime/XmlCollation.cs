@@ -483,7 +483,6 @@ namespace System.Xml.Xsl.Runtime
 
             //
 
-
             sortKey = Culture.CompareInfo.GetSortKey(s, this.compops);
 
             // Create an XmlStringSortKey using the SortKey if possible

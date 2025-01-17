@@ -20,7 +20,6 @@
 // Copyright (c) 2006 Novell, Inc. (http://www.novell.com)
 //
 
-
 namespace System.Windows.Forms
 {
     public interface ICurrencyManagerProvider

@@ -24,7 +24,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 // Net 2.0 SP1 class
 using System.Collections.ObjectModel;
 

@@ -22,7 +22,6 @@
 // Authors:
 //	Chris Toshok	toshok@ximian.com
 
-
 using System;
 using System.Collections;
 using System.Data;

@@ -869,8 +869,6 @@ namespace System.Workflow.Activities
 
                 //
 
-
-
                 ((ReplicatorActivity)context.Activity).HandleStatusChange(context, e, this);
             }
             #endregion

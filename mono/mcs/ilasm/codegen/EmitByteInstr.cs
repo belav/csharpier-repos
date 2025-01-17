@@ -7,7 +7,6 @@
 // (C) 2007 Novell, Inc (http://www.novell.com)
 //
 
-
 using System;
 using System.Collections;
 

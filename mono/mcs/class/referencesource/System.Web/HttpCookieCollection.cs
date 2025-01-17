@@ -201,7 +201,6 @@ namespace System.Web
         //  Public APIs to add / remove
         //
 
-
         /// <devdoc>
         ///    <para>
         ///       Adds a cookie to the collection.
@@ -280,7 +279,6 @@ namespace System.Web
         //  Access by name
         //
 
-
         /// <devdoc>
         /// <para>Returns an <see cref='System.Web.HttpCookie'/> item from the collection.</para>
         /// </devdoc>
@@ -315,7 +313,6 @@ namespace System.Web
         //
         // Indexed access
         //
-
 
         /// <devdoc>
         ///    <para>

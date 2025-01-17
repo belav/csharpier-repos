@@ -989,7 +989,6 @@ namespace System.Web.UI.WebControls.WebParts
                         }
                         // Otherwise, we're updating an existing connection and _pendingTransformer has been set by EnsurePendingData.
 
-
                         _pendingTransformerConfigurationControl = GetConfigurationControl(
                             _pendingTransformer
                         );

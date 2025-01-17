@@ -655,7 +655,6 @@ namespace Novell.Directory.Ldap
         //  The following methods retrieve an Enumeration of Names of a schema type
         // #######################################################################
 
-
         /// <summary> This helper function returns a number that represents the type of schema
         /// definition the element represents.  The top of this file enumerates
         /// these types.

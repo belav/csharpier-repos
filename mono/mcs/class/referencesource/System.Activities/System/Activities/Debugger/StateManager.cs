@@ -173,7 +173,6 @@ namespace System.Activities.Debugger
         //    this.EnterState(threadIndex, state, null);
         //}
 
-
         // Enter a state and push it onto the 'virtual callstack'.
         // If the user set a a breakpoint at the source location associated with
         // this state, this call will hit that breakpoint.

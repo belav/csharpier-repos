@@ -6795,7 +6795,6 @@ namespace System.Data
 
                             // if reader points to the schema load it...
 
-
                             if (
                                 !fSchemaFound
                                 && !fDataFound

@@ -128,8 +128,6 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         //
 
-
-
         internal void EnsureEnumTypeFacets(
             Converter.ConversionCache convertedItemCache,
             Dictionary<SchemaElement, GlobalItem> newGlobalItems

@@ -450,7 +450,6 @@ namespace System.Runtime.Remoting.Proxies
 
             // Check out parameters
 
-
             int no;
 
             if (call.NeedsOutProcessing(out no))

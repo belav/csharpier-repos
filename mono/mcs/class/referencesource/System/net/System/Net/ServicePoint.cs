@@ -1184,9 +1184,6 @@ namespace System.Net
 
                     //
 
-
-
-
                     m_ExpiringTimer.Cancel();
                     m_ExpiringTimer = null;
                 }

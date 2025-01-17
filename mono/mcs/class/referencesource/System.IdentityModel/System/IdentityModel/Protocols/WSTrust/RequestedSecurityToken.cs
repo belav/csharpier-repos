@@ -4,7 +4,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-
 namespace System.IdentityModel.Protocols.WSTrust
 {
     using System.IdentityModel.Tokens;

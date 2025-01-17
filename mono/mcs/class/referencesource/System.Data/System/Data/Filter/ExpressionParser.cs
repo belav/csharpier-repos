@@ -1297,7 +1297,6 @@ namespace System.Data
         // of these things is specified by the language, and does not agree with what COM+
         // implements.
 
-
         /// <devdoc>
         ///     is the character a white space character?
         ///     Consider using CharacterInfo().IsWhiteSpace(ch) (System.Globalization)

@@ -3723,7 +3723,6 @@ namespace System.Data.SqlClient.SqlGen
                 // this Join Symbol does not have its own select statement, so we
                 // do not set IsNestedJoin
 
-
                 // We do not call AddFromSymbol(), since we do not want to add
                 // "AS alias" to the FROM clause- it has been done when the extent was added earlier.
                 symbolTable.Add(input.VariableName, fromSymbol);
@@ -3791,7 +3790,6 @@ namespace System.Data.SqlClient.SqlGen
             {
                 //
                 //
-
 
                 throw EntityUtil.NotSupported();
             }

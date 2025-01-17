@@ -132,7 +132,6 @@ namespace System.Web.UI
 
         // Delegate most things to the Page
 
-
         /// <devdoc>
         /// <para>Gets the <see langword='Application'/> object provided by
         ///    the HTTP Runtime.</para>

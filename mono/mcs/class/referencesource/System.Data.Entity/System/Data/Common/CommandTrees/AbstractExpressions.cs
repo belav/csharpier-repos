@@ -699,14 +699,6 @@ namespace System.Data.Common.CommandTrees
 
         ////
 
-
-
-
-
-
-
-
-
         //public static implicit operator DbExpression(sbyte? value)
         //{
         //    return DbExpression.FromSByte(value);

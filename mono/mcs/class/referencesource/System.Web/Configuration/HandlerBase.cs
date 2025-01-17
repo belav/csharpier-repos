@@ -354,7 +354,6 @@ namespace System.Web.Configuration
         // XML Element Helpers
         //
 
-
         internal static void CheckForNonCommentChildNodes(XmlNode node)
         {
             foreach (XmlNode childNode in node.ChildNodes)

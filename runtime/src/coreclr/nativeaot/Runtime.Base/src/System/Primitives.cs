@@ -54,7 +54,6 @@ namespace System
     **
     ===========================================================*/
 
-
     // CONTRACT with Runtime
     // The Char type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type char
@@ -103,7 +102,6 @@ namespace System
     **
     ===========================================================*/
 
-
     // CONTRACT with Runtime
     // The Byte type is one of the primitives understood by the compilers and runtime
     // Data Contract: Single field of type bool
@@ -127,7 +125,6 @@ namespace System
     **
     **
     ===========================================================*/
-
 
     // CONTRACT with Runtime
     // The Int16 type is one of the primitives understood by the compilers and runtime
@@ -429,7 +426,6 @@ namespace System
         }
     }
 #pragma warning restore 0660, 0661
-
 
     /*============================================================
     **

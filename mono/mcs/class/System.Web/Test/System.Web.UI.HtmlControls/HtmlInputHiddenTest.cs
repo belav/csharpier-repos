@@ -26,7 +26,6 @@
 //
 // (C) 2005 Novell, Inc.
 
-
 using System;
 using System.Collections.Specialized;
 using System.IO;

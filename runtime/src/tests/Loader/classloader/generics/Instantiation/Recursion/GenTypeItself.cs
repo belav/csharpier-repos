@@ -7,7 +7,6 @@
 // This test is for JIT.
 // NGEN test will be located in the NGEN tree.
 
-
 using System;
 using Xunit;
 

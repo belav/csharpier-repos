@@ -106,7 +106,6 @@ namespace System.Data.Odbc
             // 2) it is in the collection to odbc function mapping above
             // 3) the provider does not support the necessary odbc function
 
-
             DataColumn populationMechanism = metaDataCollectionsTable.Columns[
                 _populationMechanism
             ]!;

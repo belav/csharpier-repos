@@ -57,12 +57,10 @@ namespace MonoTests.System.Data.OleDb
         //Activate this constructor to log Failures to a log file
         //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-
         //Activate this constructor to log All to a log file
         //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
         //BY DEFAULT LOGGING IS DONE TO THE STANDARD OUTPUT ONLY FOR FAILURES
-
 
         int EventCounter = 0;
         DataRow drInsert,

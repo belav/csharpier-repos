@@ -838,10 +838,6 @@ namespace System.Data.OleDb
                 {
                     //
 
-
-
-
-
                     e = OleDbException.CreateException(errorInfo, hresult, null);
                     //}
 

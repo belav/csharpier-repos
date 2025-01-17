@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 // Comment this out to get a version that doesn't need synchronized
 // access. This can be used for profiling, to compare whether the lock
 // or the late writing is more useful.

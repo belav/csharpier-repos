@@ -518,7 +518,6 @@ namespace System.Web.UI.MobileControls
             {
                 //
 
-
                 pageWeight = MobilePage.Adapter.OptimumPageWeight / 2;
             }
 

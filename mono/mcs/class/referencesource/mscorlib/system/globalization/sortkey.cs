@@ -64,7 +64,6 @@ namespace System.Globalization
         //
         //
 
-
         [OnSerializing]
         private void OnSerializing(StreamingContext context)
         {
@@ -77,7 +76,6 @@ namespace System.Globalization
 
         //
         //
-
 
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)

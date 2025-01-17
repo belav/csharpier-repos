@@ -251,7 +251,6 @@ namespace System.Data.Mapping.ViewGeneration
         #endregion
 
 
-
         #region Private Methods
 
         // effects: Given the extent cells and a map for the domains of all

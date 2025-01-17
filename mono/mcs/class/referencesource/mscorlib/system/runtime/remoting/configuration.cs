@@ -1255,7 +1255,6 @@ namespace System.Runtime.Remoting
             // helper functions to retrieve registered types
             //
 
-
             internal ActivatedServiceTypeEntry[] GetRegisteredActivatedServiceTypes()
             {
                 ActivatedServiceTypeEntry[] entries = new ActivatedServiceTypeEntry[

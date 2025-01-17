@@ -18,7 +18,6 @@
 //
 //===================================================================
 
-
 #region Used namespace
 
 using System;
@@ -27,7 +26,6 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 
 #endregion
-
 
 
 #if Microsoft_CONTROL

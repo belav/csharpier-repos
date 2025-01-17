@@ -36,7 +36,6 @@ namespace System.Web.UI.MobileControls
 
         //
 
-
         internal FontInfo(Style style)
         {
             _style = style;

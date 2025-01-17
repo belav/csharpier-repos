@@ -41,7 +41,6 @@
 // _operands, an an object (either a string or a set)
 // is stored in _data
 
-
 namespace System.Text.RegularExpressions
 {
     using System.Collections;

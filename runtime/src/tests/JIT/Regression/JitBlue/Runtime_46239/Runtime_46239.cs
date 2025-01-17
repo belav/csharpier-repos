@@ -218,7 +218,6 @@ namespace Runtime_46239
             // int size = Marshal.SizeOf(typeof(T));
             // Console.WriteLine("size of " + typeof(T).Name + " is: " + size);
 
-
             if (test1<T>(1, 2, 3, 4, 5, 6, 7, 8, 1, new T(), new T()) != 100)
             {
                 Console.WriteLine("test1() failed.");

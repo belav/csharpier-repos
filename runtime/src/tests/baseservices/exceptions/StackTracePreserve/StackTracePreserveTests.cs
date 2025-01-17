@@ -522,7 +522,6 @@ public class InactiveForeignException
         // This is the unhandled exception case
         //ProcessStatus(Scenario2(true));
 
-
         Console.WriteLine("\nPassed: {0}\nFailed: {1}", iPassed, iFailed);
 
         return ((iFailed == 0) && (iPassed > 0)) ? 100 : 99;

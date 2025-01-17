@@ -61,7 +61,6 @@ namespace MonoTests.System.Data.SqlClient
             //Closed  The connection is closed.
             //Open  The connection is open.
 
-
             //add event handler
             con.StateChange += new StateChangeEventHandler(con_StateChange);
 

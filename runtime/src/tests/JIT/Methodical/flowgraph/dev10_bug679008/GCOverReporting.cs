@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 /*
  * If using a value type/struct that contains only a single reference type field, under certain situations the x64 JIT reports the stack location as a live GC pointer before zero-initializing it.
  * The only workaround would be to disable optimizations via MethodImplOptions.NoOptimization.  This GC hole is sort of an existing one and sort of a regression.

@@ -1470,7 +1470,6 @@ namespace Novell.Directory.Ldap
                             * messages.
                             */
 
-
                             /* Note the location of this code.  We could have required
                             * that message ID 0 be just like other message ID's but
                             * since message ID 0 has to be treated specially we have

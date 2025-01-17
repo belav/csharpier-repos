@@ -1049,7 +1049,6 @@ namespace System.Web.UI.DataVisualization.Charting
         //private void InsertEmptyDataPoints( double [][] input, double [][] inputWithoutEmpty, out double [][] output )
         //{
 
-
         // *** NOTE ***
         //
         //
@@ -1059,8 +1058,6 @@ namespace System.Web.UI.DataVisualization.Charting
         // --Microsoft 4/21/08
         //
         // ************
-
-
 
         //output = inputWithoutEmpty;
         //return;
@@ -1145,7 +1142,6 @@ namespace System.Web.UI.DataVisualization.Charting
         }
         */
         //}
-
 
         /// <summary>
         /// This method splits a string with comma separated

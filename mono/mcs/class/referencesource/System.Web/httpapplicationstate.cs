@@ -24,7 +24,6 @@ namespace System.Web
     //  Application state collection
     //
 
-
     /// <devdoc>
     ///    <para>
     ///       The HttpApplicationState class enables developers to
@@ -77,7 +76,6 @@ namespace System.Web
         // Implementation of standard collection stuff
         //
 
-
         /// <devdoc>
         ///    <para>Gets
         ///       the number of item objects in the application state collection.</para>
@@ -102,7 +100,6 @@ namespace System.Web
         }
 
         // modifying methods
-
 
         /// <devdoc>
         ///    <para>
@@ -207,7 +204,6 @@ namespace System.Web
 
         // access by key
 
-
         /// <devdoc>
         ///    <para>
         ///       Enables user to retrieve application state object by name.
@@ -240,7 +236,6 @@ namespace System.Web
         }
 
         // access by index
-
 
         /// <devdoc>
         ///    <para>
@@ -299,7 +294,6 @@ namespace System.Web
 
         // access to keys and values as arrays
 
-
         /// <devdoc>
         ///    <para>
         ///       Enables user
@@ -330,7 +324,6 @@ namespace System.Web
         // Public properties
         //
 
-
         /// <devdoc>
         ///    <para>
         ///       Returns "this". Provided for legacy ASP compatibility.
@@ -355,7 +348,6 @@ namespace System.Web
         //
         //  Locking support
         //
-
 
         /// <devdoc>
         ///    <para>

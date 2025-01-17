@@ -5,7 +5,6 @@
 // If memory is low, after every loop, the large objects should be collected
 // and committed from the LargeObjectHeap
 
-
 using System;
 
 public class Test

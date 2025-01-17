@@ -28,7 +28,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using Orig = System.Web.Configuration.HttpCapabilitiesBase;
 
 namespace SystemWebTestShim

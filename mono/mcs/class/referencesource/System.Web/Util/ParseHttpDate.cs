@@ -157,7 +157,6 @@ namespace System.Web.Util
                     // if s[1] is 'u' then Jun, if 'a' then Jan
                     //
 
-
                     if (s_monthIndexTable[(s[1 + startIndex] - 0x40) & 0x3f] == (sbyte)'A')
                     {
                         monthIndex = 1;

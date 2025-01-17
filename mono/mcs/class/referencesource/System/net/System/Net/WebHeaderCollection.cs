@@ -849,7 +849,6 @@ namespace System.Net
         // Add more headers; if "name" already exists it will
         // add concatenated value
 
-
         // Add -
         //  Routine Description:
         //      Adds headers with validation to see if they are "proper" headers.

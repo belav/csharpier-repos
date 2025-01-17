@@ -488,7 +488,6 @@ namespace System.Net
         ///    </para>
         /// </devdoc>
 
-
         [Obsolete(
             "CertificatePolicy is obsoleted for this type, please use ServerCertificateValidationCallback instead. http://go.microsoft.com/fwlink/?linkid=14202"
         )]
@@ -769,8 +768,6 @@ namespace System.Net
                 if (address.Scheme != Uri.UriSchemeHttp)
                 {
                     // <
-
-
 
                     Exception exception = new NotSupportedException(
                         SR.GetString(SR.net_proxyschemenotsupported, address.Scheme)

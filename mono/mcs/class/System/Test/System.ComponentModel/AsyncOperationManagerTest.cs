@@ -7,7 +7,6 @@
 // Copyright (C) 2007 Novell, Inc.
 //
 
-
 using System;
 using System.ComponentModel;
 using System.Globalization;

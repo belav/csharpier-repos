@@ -7,7 +7,6 @@
 // @backupOwner cmeek
 //---------------------------------------------------------------------
 
-
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
     // This enum identifies for which side we are generating the view

@@ -2052,7 +2052,6 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Methods
 
 
-
         /// <summary>
         /// Determines whether the specified item is expired.
         /// </summary>

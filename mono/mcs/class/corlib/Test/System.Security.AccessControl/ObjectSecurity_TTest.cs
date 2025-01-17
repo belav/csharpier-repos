@@ -3,7 +3,6 @@
 // Authors:
 //	James Bellinger (jfb@zer7.com)
 
-
 using System;
 using System.Security.AccessControl;
 using System.Security.Principal;

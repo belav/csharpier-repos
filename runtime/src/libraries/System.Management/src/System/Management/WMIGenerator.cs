@@ -288,7 +288,6 @@ namespace System.Management
                         }
                 */
 
-
             // Add a private member variable to hold the namespace of the created class
             // Generate a private member variable for storing the generated class Name
             GeneratePrivateMember(

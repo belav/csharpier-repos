@@ -138,7 +138,6 @@ namespace System.ServiceModel.ComIntegration
             // SxS activation context properties
             //
 
-
             // Manifest for VARIANT UDT types
             //
 

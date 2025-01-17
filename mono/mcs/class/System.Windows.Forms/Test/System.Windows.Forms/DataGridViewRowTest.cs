@@ -23,8 +23,6 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
-
-
 using System;
 using System.Collections;
 using System.Drawing;

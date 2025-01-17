@@ -5,7 +5,6 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-
 namespace System.Xml
 {
     using System;

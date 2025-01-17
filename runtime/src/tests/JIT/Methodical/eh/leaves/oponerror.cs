@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 // catch ret inside try region
 // note: this is NOT the test case
 // after vswhidbey:5875 is fixed, intry will be outside the outer try block

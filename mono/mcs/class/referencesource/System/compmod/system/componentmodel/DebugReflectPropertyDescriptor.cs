@@ -956,7 +956,6 @@ namespace System.ComponentModel
             //     supercede existing values.
             //
 
-
             // We need to include attributes from the type of the property.
             //
             foreach (Attribute typeAttr in DebugTypeDescriptor.GetAttributes(PropertyType))

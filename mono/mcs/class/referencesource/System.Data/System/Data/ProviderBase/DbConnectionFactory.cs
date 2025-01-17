@@ -339,7 +339,6 @@ namespace System.Data.ProviderBase
                             // If it is a new slot or a compelted task, this continuation will start right away.
                             //
 
-
                             newTask = s_pendingOpenNonPooled[idx]
                                 .ContinueWith(
                                     (_) =>

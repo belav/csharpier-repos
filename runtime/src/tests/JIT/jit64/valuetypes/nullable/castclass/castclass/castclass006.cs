@@ -10,7 +10,6 @@
 //<Expects Status=success></Expects>
 // <Code>
 
-
 using System;
 using System.Runtime.InteropServices;
 using Xunit;

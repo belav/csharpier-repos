@@ -95,8 +95,6 @@ namespace System.Web.Mobile
                 }
         */
 
-
-
         private void Application_Error(Object source, EventArgs e)
         {
             HttpApplication application = (HttpApplication)source;

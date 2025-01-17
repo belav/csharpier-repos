@@ -1130,7 +1130,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
         [System.Security.SecuritySafeCritical] // auto-generated
         private static bool IsReplacementCultureName(String name)
         {
@@ -2866,7 +2865,6 @@ namespace System.Globalization
 
         // String array DEFAULTS
         // Note: GetDTFIOverrideValues does the user overrides for these, so we don't have to.
-
 
         // Time separator (derived from time format)
         internal String TimeSeparator

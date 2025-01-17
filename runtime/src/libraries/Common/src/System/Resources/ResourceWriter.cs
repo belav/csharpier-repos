@@ -303,7 +303,6 @@ namespace System.Resources
             resMgrHeaderBlob.CopyTo(bw.BaseStream, (int)resMgrHeaderBlob.Length);
             // End ResourceManager header
 
-
             // Write out the RuntimeResourceSet header
             // Version number
             bw.Write(ResSetVersion);

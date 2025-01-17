@@ -23,8 +23,6 @@ using System.Threading;
 //
 // We do not want to do the effort unless we have to squeze performance.
 
-
-
 namespace System.Data.Odbc
 {
     [

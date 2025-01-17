@@ -384,8 +384,6 @@ namespace System.Data.Common
             {
                 //
 
-
-
                 throw new ArgumentException("keyword", "not a string");
             }
         }

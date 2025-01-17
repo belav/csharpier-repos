@@ -122,7 +122,6 @@ namespace System.IdentityModel
         //        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.UnboundPrefixInQName, qname)));
         //}
 
-
         // Everything below is from WIF
         public static XmlQualifiedName GetXsiType(XmlReader reader)
         {

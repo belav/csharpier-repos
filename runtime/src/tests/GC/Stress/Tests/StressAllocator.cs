@@ -16,9 +16,6 @@ using System.Threading;
 //The objects'size is organized in buckets (size ranges), the user can specify the percentage for each bucket.
 //Collection type can be array or binary tree.
 
-
-
-
 namespace StressAllocator
 {
     public class StressAllocator
@@ -71,7 +68,6 @@ namespace StressAllocator
         public const int MAX_REFS = 4; //max number of references to another object
 
         ///////////// end default parameters
-
 
         public static long timeout = 0;
         public static SizeBucket[] sizeBuckets = new SizeBucket[SIZEBUCKET_COUNT];

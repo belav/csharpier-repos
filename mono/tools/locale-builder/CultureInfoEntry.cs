@@ -7,7 +7,6 @@
 // (C) 2004 Novell, Inc (http://www.novell.com)
 //
 
-
 using System;
 using System.Collections.Generic;
 using System.Globalization;

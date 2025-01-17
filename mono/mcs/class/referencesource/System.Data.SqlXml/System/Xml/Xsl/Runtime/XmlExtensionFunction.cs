@@ -297,11 +297,6 @@ namespace System.Xml.Xsl.Runtime
 
                 //
 
-
-
-
-
-
                 if (this.namespaceUri.Length == 0)
                 {
                     if ((object)this.argXmlTypes[i] == (object)XmlQueryTypeFactory.NodeNotRtf)

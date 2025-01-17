@@ -836,7 +836,6 @@ namespace System.Web.UI.Design.MobileControls
 
         //
 
-
         private void OnSpecialPropertyChanged(Object sender, bool navigateUrl)
         {
             IComponent component = (IComponent)sender;

@@ -42,7 +42,6 @@ namespace System.Web
     // Async EventHandler support
     //
 
-
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -199,7 +198,6 @@ namespace System.Web
         //
         // Public Application properties
         //
-
 
         /// <devdoc>
         ///    <para>
@@ -944,7 +942,6 @@ namespace System.Web
         //
         // Sync event hookup
         //
-
 
         /// <devdoc><para>[To be supplied.]</para></devdoc>
         public event EventHandler BeginRequest
@@ -1923,7 +1920,6 @@ namespace System.Web
         // Public Application virtual methods
         //
 
-
         /// <devdoc>
         ///    <para>
         ///       Used
@@ -2248,7 +2244,6 @@ namespace System.Web
         // IComponent implementation
         //
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2265,7 +2260,6 @@ namespace System.Web
         //
         // IHttpAsyncHandler implementation
         //
-
 
         /// <internalonly/>
         IAsyncResult IHttpAsyncHandler.BeginProcessRequest(
@@ -2313,7 +2307,6 @@ namespace System.Web
         //
         // IHttpHandler implementation
         //
-
 
         /// <internalonly/>
         void IHttpHandler.ProcessRequest(HttpContext context)
@@ -5376,7 +5369,6 @@ namespace System.Web
                     using (syncContext.AcquireThreadLock())
                     {
                         // avoid ---- between the app code and fast async completion from a module
-
 
                         try
                         {

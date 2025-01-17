@@ -739,7 +739,6 @@ namespace MonoTests.System.Data.Utils
             // --------- check for DBConcurrencyException /UniqueConstraint -----------------
             //	call AcceptChanges after each exception check in order to make sure that we check only the the current row
 
-
             try
             {
                 BeginCase("DBConcurrencyException - Delete");
@@ -972,7 +971,6 @@ namespace MonoTests.System.Data.Utils
 
             // --------- check for DBConcurrencyException /UniqueConstraint -----------------
             //	call AcceptChanges after each exception check in order to make sure that we check only the the current row
-
 
             try
             {
@@ -1450,7 +1448,6 @@ namespace MonoTests.System.Data.Utils
 
             // --------- check for DBConcurrencyException /UniqueConstraint -----------------
             //	call AcceptChanges after each exception check in order to make sure that we check only the the current row
-
 
             try
             {

@@ -837,7 +837,6 @@ namespace System.Runtime.Remoting.Metadata
 
         //  (if Sequence is specified on containing type's SoapTypeAttribute
 
-
         // Returns true if this attribute specifies interop xml element values.
         public bool IsInteropXmlElement()
         {

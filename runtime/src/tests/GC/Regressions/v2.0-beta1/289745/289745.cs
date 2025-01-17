@@ -6,7 +6,6 @@
  *  NOTE:           if unable to repro, tweak the array lengths depending on the amount of physical ram in your machine
  */
 
-
 using System;
 
 public class Test

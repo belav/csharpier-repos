@@ -1084,8 +1084,6 @@ public class BestFitMapping
     #endregion
 
 
-
-
     [Fact]
     public static int TestEntryPoint()
     {

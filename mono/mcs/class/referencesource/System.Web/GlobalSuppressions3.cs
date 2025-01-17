@@ -30,7 +30,6 @@ using System.Diagnostics.CodeAnalysis;
 #endregion
 
 
-
 #region Security Suppressions - To Be Reviewed
 
 [module: SuppressMessage(
@@ -98,7 +97,6 @@ using System.Diagnostics.CodeAnalysis;
 )]
 
 #endregion
-
 
 
 #region Low-priority items for review

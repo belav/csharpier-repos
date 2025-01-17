@@ -22,7 +22,6 @@ namespace System.Web.Services.Description
     /// </devdoc>
     //
 
-
     public sealed class WebServicesInteroperability
     {
         private WebServicesInteroperability() { }

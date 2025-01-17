@@ -201,7 +201,6 @@ namespace System.Runtime.Remoting
         // not a RuntimeXXX. This is to avoid clutter in code where these
         // methods are called. <BUGNUM>(48721)</BUGNUM> <
 
-
         [System.Security.SecurityCritical] // auto-generated
         internal static Object CreateTransparentProxy(
             RealProxy rp,
@@ -1066,8 +1065,6 @@ namespace System.Runtime.Remoting
 
                 // <
 
-
-
                 idObj = IdentityHolder.FindOrCreateIdentity(objectURI, url, null);
 
                 // Set the envoy and channel sinks in a thread safe manner
@@ -1507,10 +1504,6 @@ namespace System.Runtime.Remoting
             // a proxy which is different from the type given.
 
             // <
-
-
-
-
 
             ServerIdentity serverID = idObj as ServerIdentity;
             if (null != serverID)
@@ -2408,8 +2401,6 @@ namespace System.Runtime.Remoting
                             // Proxy does not have an associated ObjRef
                             // <
 
-
-
                             //Contract.Assert(false, "Found proxy without an objref");
                             contextId = IntPtr.Zero;
                         }
@@ -2633,8 +2624,6 @@ namespace System.Runtime.Remoting
         //   message TypeName. It consists either of the actual type name or
         //   "<typeId>:typename" where for now "soap:<soap type name>" is the only
         //   supported alternative.  <
-
-
 
         // This is used by the cached type data to figure out which type name
         //   to use (this should never be publicly exposed; GetDefaultQualifiedTypeName should,
@@ -2863,7 +2852,6 @@ namespace System.Runtime.Remoting
         //
         // end of Methods for mapping and resolving qualified type names
         //
-
 
         //
         // These are used by the profiling code to profile remoting.

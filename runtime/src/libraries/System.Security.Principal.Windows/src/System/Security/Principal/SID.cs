@@ -599,7 +599,6 @@ namespace System.Security.Principal
         //       there is no security risk involved, so no security demand is being made.
         //
 
-
         public SecurityIdentifier(string sddlForm)
         {
             ArgumentNullException.ThrowIfNull(sddlForm);
@@ -652,7 +651,6 @@ namespace System.Security.Principal
         // NOTE: although there is a P/Invoke call involved in the implementation of this constructor,
         //       there is no security risk involved, so no security demand is being made.
         //
-
 
         public SecurityIdentifier(WellKnownSidType sidType, SecurityIdentifier? domainSid)
         {
@@ -1050,7 +1048,6 @@ namespace System.Security.Principal
         //       there is no security risk involved, so no security demand is being made.
         //
 
-
         public bool IsWellKnown(WellKnownSidType type)
         {
             return Win32.IsWellKnownSid(this, type);
@@ -1065,7 +1062,6 @@ namespace System.Security.Principal
         // NOTE: although there is a P/Invoke call involved in the implementation of this method,
         //       there is no security risk involved, so no security demand is being made.
         //
-
 
         public bool IsEqualDomainSid(SecurityIdentifier sid)
         {

@@ -708,7 +708,6 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
 
             // do the sanity check against the input task
 
-
             bool found = false;
             for (int i = 0; i < _tasks.Length; i++)
             {

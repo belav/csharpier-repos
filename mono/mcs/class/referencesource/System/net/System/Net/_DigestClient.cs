@@ -102,7 +102,6 @@ namespace System.Net
 
             // If it's default credentials, we support them on XP and up through WDigest.
 
-
             NetworkCredential NC = credentials.GetCredential(
                 httpWebRequest.ChallengedUri,
                 DigestClient.Signature

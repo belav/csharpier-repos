@@ -82,8 +82,6 @@ namespace System.Web.Compilation
 
             //
 
-
-
             CodeMemberField fileDependencies = new CodeMemberField(
                 typeof(object),
                 fileDependenciesName
@@ -249,7 +247,6 @@ namespace System.Web.Compilation
                     );
 
                     // This is the "__outputCacheSettings = new OutputCacheParameters()" part
-
 
                     // e.g. declare local variable: OutputCacheParameters outputCacheSettings;
                     CodeVariableDeclarationStatement outputCacheSettingsDeclaration =

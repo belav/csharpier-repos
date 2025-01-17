@@ -3020,7 +3020,6 @@ namespace System.Deployment.Internal.Isolation
 
 #if ISOLATION_IN_MSCORLIB || ISOLATION_IN_CLICKONCE
 
-
 #if FEATURE_MAIN_CLR_MODULE_USES_CORE_NAME
         public const String IsolationDllName = "coreclr.dll";
 #else //FEATURE_MAIN_CLR_MODULE_USES_CORE_NAME

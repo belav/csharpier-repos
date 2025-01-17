@@ -253,11 +253,6 @@ namespace System.Web.Mobile
                     {
                         //
 
-
-
-
-
-
                         // Why three similar expressions? See ParseHttpException above.
 
                         _searchExpressions = new Regex[_expressionCount];

@@ -50,7 +50,6 @@ namespace MS.Internal.Xml.XPath
 
         // --------------- Expresion Parsing ----------------------
 
-
         //The recursive is like
         //ParseOrExpr->ParseAndExpr->ParseEqualityExpr->ParseRelationalExpr...->ParseFilterExpr->ParsePredicate->ParseExpresion
         //So put 200 limitation here will max cause about 2000~3000 depth stack.

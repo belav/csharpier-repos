@@ -23,7 +23,6 @@
 // Alan McGovern (amcgovern@novell.com)
 //
 
-
 using System;
 using System.Collections.Generic;
 using System.IO;

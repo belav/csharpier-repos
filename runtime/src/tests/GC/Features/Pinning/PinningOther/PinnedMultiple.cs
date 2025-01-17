@@ -3,7 +3,6 @@
 
 // Tests multiple handles for same object
 
-
 using System;
 using System.Runtime.InteropServices;
 

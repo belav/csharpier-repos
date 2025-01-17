@@ -4,7 +4,6 @@
 // This is regression test for VSW 123712.
 // Loading the type resulted in TypeLoadException.
 
-
 using System;
 using Xunit;
 

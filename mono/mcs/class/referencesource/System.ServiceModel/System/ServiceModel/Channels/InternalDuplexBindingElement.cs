@@ -17,7 +17,6 @@ namespace System.ServiceModel.Channels
 
         //
 
-
         internal InternalDuplexBindingElement(bool providesCorrelation)
             : base()
         {

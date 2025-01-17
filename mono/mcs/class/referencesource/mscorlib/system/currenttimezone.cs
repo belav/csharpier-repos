@@ -43,11 +43,6 @@ namespace System
     {
         // <
 
-
-
-
-
-
         private const long TicksPerMillisecond = 10000;
         private const long TicksPerSecond = TicksPerMillisecond * 1000;
         private const long TicksPerMinute = TicksPerSecond * 60;

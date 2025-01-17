@@ -559,10 +559,6 @@ namespace System.Web.Util
 #else
             // <
 
-
-
-
-
             if (len >= 16)
             {
                 do

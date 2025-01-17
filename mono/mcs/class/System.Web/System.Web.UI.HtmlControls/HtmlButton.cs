@@ -26,7 +26,6 @@
 //
 // (C) 2005-2010 Novell, Inc.
 
-
 using System.ComponentModel;
 using System.Security.Permissions;
 

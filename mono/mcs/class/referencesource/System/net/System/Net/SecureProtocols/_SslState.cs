@@ -102,7 +102,6 @@ namespace System.Net.Security
         // This is a perf trick ONLY for HTTPS TlsStream.
         //
 
-
         private bool _ForceBufferingLastHandshakePayload;
         private byte[] _LastPayload;
 

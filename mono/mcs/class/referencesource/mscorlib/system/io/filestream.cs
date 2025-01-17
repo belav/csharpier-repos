@@ -3180,12 +3180,6 @@ namespace System.IO
 
                 //
 
-
-
-
-
-
-
                 SeekCore(numBytes, SeekOrigin.Current);
             }
 

@@ -59,7 +59,6 @@ namespace System.Threading.Tasks
         // ctor parameters provide defaults for the factory, which can be overridden by options provided to
         // specific calls on the factory
 
-
         /// <summary>
         /// Initializes a <see cref="TaskFactory"/> instance with the default configuration.
         /// </summary>

@@ -149,7 +149,6 @@ namespace System.Data.Objects.DataClasses
         // Properties
         // ----------
 
-
         internal bool IsForeignKey
         {
             get

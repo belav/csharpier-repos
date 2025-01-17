@@ -170,7 +170,6 @@ namespace System.Net
             // we should use the Default Encoding) we need to attempt encoding and then decoding.
             // <
 
-
             GlobalLog.Print(
                 "BasicClient::EncodingRightGetBytes(): Default Encoding is:"
                     + Encoding.Default.EncodingName
@@ -188,13 +187,9 @@ namespace System.Net
 
             //<
 
-
-
-
             if (!canMapToCurrentCodePage)
             {
                 //<
-
 
                 GlobalLog.LeaveException(
                     "BasicClient::EncodingRightGetBytes",

@@ -427,7 +427,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
         public static double GetNumericValue(char ch)
         {
             return (InternalGetNumericValue(ch));
@@ -466,7 +465,6 @@ namespace System.Globalization
         //      ArgumentOutOfRangeException
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public static int GetDecimalDigitValue(char ch)
         {
@@ -509,7 +507,6 @@ namespace System.Globalization
         //      ArgumentOutOfRangeException
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public static int GetDigitValue(char ch)
         {

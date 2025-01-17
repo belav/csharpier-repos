@@ -43,7 +43,6 @@
 // the first character on a line; the reason is that 0 is the position
 // *before* the first character on a line
 
-
 #undef Debug
 
 using System;

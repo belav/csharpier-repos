@@ -63,7 +63,6 @@ namespace tests.system_data_dll.System_Data
         //Activate this constructor to log Failures to a log file
         //public TestClass(System.IO.TextWriter tw):base(tw, false){}
 
-
         //Activate this constructor to log All to a log file
         //public TestClass(System.IO.TextWriter tw):base(tw, true){}
 
@@ -149,7 +148,6 @@ namespace tests.system_data_dll.System_Data
             #endregion
 
 
-
             #region "ds,false,MissingSchemaAction.AddWithKey)"
             //MissingSchemaAction.Add,MissingSchemaAction.AddWithKey - behave the same, checked only Add
 
@@ -195,7 +193,6 @@ namespace tests.system_data_dll.System_Data
             //		catch(Exception ex)	{exp = ex;}
             //		finally	{EndCase(exp); exp = null;}
             #endregion
-
 
 
             #region "ds,false,MissingSchemaAction.Ignore )"

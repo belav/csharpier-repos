@@ -3433,15 +3433,6 @@ namespace System.Data.Objects
         // Use one of the following methods to retrieve an enumeration of all CLR types mapped to O-Space EntityType objects:
         //
 
-
-
-
-
-
-
-
-
-
         //
 
         public void CreateProxyTypes(IEnumerable<Type> types)

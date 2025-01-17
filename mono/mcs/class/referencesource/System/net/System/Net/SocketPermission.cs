@@ -15,7 +15,6 @@ namespace System.Net
     //NOTE: While SocketPermissionAttribute resides in System.DLL,
     //      no classes from that DLL are able to make declarative usage of SocketPermission.
 
-
     // THE syntax of this attribute is as followed
     // [SocketPermsion(SecurityAction.Assert, Access=Connect, Host=hostname, Transport=Tcp/Udp/All, port=portN/All)]
     // [SocketPermsion(SecurityAction.Assert, Access=Accept, Host=localname, Transport=Tcp/Udp/All, port=portN/All)]
@@ -829,7 +828,6 @@ namespace System.Net
             //
             // We also check on any duplicates in the result
 
-
             bool[] aDone = new bool[A.Count]; //used to avoid duplicates in result
             bool[] bDone = new bool[B.Count];
             int ia = 0;
@@ -906,10 +904,6 @@ namespace System.Net
         //
         // <
 
-
-
-
-
         internal String hostname;
         internal int port;
         internal TransportType transport;
@@ -952,10 +946,6 @@ namespace System.Net
 
         //
         // <
-
-
-
-
 
         internal EndpointPermission(String epname, int port, TransportType trtype)
         {
@@ -1010,7 +1000,6 @@ namespace System.Net
 
         //
         // <
-
 
         internal bool IsDns
         {
@@ -1101,8 +1090,6 @@ namespace System.Net
             {
                 //
                 // <
-
-
 
                 return (
                     String.Compare(hostname, e.hostname, StringComparison.OrdinalIgnoreCase) == 0

@@ -1443,7 +1443,6 @@ namespace Microsoft.Build.Tasks.Xaml
             //    return xsc;
             //}
 
-
             CodeMemberField schemaContextField = new CodeMemberField()
             {
                 Name = "schemaContextField",

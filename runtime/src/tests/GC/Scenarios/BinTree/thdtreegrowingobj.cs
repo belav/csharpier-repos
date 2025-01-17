@@ -7,8 +7,6 @@
  *      Differs from thdtree in a way that the nodes of the binary trees grow during the lifetime.
  */
 
-
-
 namespace DefaultNamespace
 {
     using System;

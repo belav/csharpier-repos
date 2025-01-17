@@ -9,7 +9,6 @@
 //
 // Slightly modified by Konrad M. Kruczynski (added baud rate value checking)
 
-
 using System;
 using System.IO;
 using System.Runtime.InteropServices;

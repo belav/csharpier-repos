@@ -3883,7 +3883,6 @@ namespace System.Web.UI.WebControls
             // If the tree is invisible (or one of its parents is) and we're in the GET request, we have to remember (VSWhidbey 349279)
             //
 
-
             if (!Visible && (Page != null) && !Page.IsPostBack)
             {
                 ViewState["NeverExpanded"] = true;

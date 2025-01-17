@@ -6,7 +6,6 @@
 
 // This code is used to optimize the instantiation of generated types.
 
-
 namespace System.Web.Compilation
 {
     using System;

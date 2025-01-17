@@ -135,7 +135,6 @@ namespace System
         // Public Instance Methods
         //
 
-
         /*=====================================Next=====================================
         **Returns: An int [0..Int32.MaxValue)
         **Arguments: None

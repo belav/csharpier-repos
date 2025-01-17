@@ -7,7 +7,6 @@
 // (C)2005 Novell Inc,
 //
 
-
 namespace System.Transactions
 {
     public enum IsolationLevel

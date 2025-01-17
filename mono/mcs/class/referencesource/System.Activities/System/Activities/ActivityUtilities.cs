@@ -1002,7 +1002,6 @@ namespace System.Activities
             {
                 // We're processing a reference
 
-
                 // Add all the children for processing even though they've already
                 // been seen.
                 SetupForProcessing(

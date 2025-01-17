@@ -25,7 +25,6 @@
 // Author:
 //      Jonathan Pobst (monkey@jpobst.com)
 
-
 using System;
 using System.Windows.Forms;
 

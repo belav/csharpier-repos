@@ -23,7 +23,6 @@
 //	Alan McGovern (alan.mcgovern@gmail.com)
 //
 
-
 using System.Drawing;
 
 namespace System.Windows.Forms

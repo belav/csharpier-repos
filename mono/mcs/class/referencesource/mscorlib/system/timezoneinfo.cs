@@ -1638,7 +1638,6 @@ namespace System
 
         // ----- SECTION: internal instance utility methods ----------------*
 
-
         // assumes dateTime is in the current time zone's time
         private AdjustmentRule GetAdjustmentRuleForTime(DateTime dateTime)
         {
@@ -3938,8 +3937,6 @@ namespace System
 
                     //
 
-
-
                     if (UtcOffsetOutOfRange(baseUtcOffset + current.DaylightDelta))
                     {
                         throw new InvalidTimeZoneException(
@@ -4446,9 +4443,7 @@ namespace System
                         }
             */
 
-
             // -------- SECTION: factory methods -----------------*
-
 
             static public TransitionTime CreateFixedDateRule(
                 DateTime timeOfDay,
@@ -4801,7 +4796,6 @@ namespace System
             }
 
             // ---- SECTION: public instance methods --------------*
-
 
             // -------- SECTION: constructors -----------------*
 
@@ -5344,7 +5338,6 @@ namespace System
                     //
                     //
 
-
                     SkipVersionNextDataFields(1);
                 }
                 else
@@ -5511,7 +5504,6 @@ namespace System
                     // skip ahead of any "v.Next" data at the end of the AdjustmentRule
                     //
                     //
-
 
                     SkipVersionNextDataFields(1);
                 }

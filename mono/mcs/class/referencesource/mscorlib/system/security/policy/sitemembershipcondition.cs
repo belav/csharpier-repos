@@ -64,7 +64,6 @@ namespace System.Security.Policy
         //
         //------------------------------------------------------
 
-
         public String Site
         {
             set

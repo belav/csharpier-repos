@@ -23,7 +23,6 @@ namespace System.Web.UI.WebControls
         //    we also use a 0 for type to imply its equal to Unit.Empty.
         // NotSet = 0,
 
-
         /// <devdoc>
         ///    A pixel.
         /// </devdoc>

@@ -4,8 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
-
 namespace System.Web.Compilation
 {
     using System;
@@ -233,7 +231,6 @@ namespace System.Web.Compilation
         }
 
         // Beginning of public contract
-
 
         /// <devdoc>
         ///     Adds an assembly that will be referenced during compilation.

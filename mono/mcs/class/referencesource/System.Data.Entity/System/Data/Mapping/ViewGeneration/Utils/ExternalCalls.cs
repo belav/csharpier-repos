@@ -7,7 +7,6 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Common.CommandTrees;

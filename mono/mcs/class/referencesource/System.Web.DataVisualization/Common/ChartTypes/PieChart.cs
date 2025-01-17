@@ -5737,7 +5737,6 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                 // happening because pie slice is bigger then 180 degree.
                 // *********************************************************
 
-
                 // **********************************
                 // Fill from Front Point to Back Point
                 // **********************************

@@ -824,7 +824,6 @@ namespace System.Data
 
                 //
 
-
                 throw EntityUtil.EntitySetDoesNotMatch(
                     "metadataWorkspace",
                     TypeHelpers.GetFullName(entitySet)

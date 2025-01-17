@@ -1406,7 +1406,6 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(customBinder, serializerProxy.Binder);
 #pragma warning restore CS0618 // Type or member is obsolete
 
-
             serializerProxy.CheckAdditionalContent = true;
             Assert.AreEqual(true, serializerProxy.CheckAdditionalContent);
 

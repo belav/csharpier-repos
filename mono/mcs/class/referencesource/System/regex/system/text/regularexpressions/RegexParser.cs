@@ -12,7 +12,6 @@
 // It would be nice to get rid of the comment modes, since the
 // ScanBlank() calls are just kind of duct-taped in.
 
-
 namespace System.Text.RegularExpressions
 {
     using System.Collections;

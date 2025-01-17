@@ -26,7 +26,6 @@ namespace System.Web.UI.Design.MobileControls.Util
     /// <internalonly/>
     //
 
-
     [System.Security.Permissions.SecurityPermission(
         System.Security.Permissions.SecurityAction.Demand,
         Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode

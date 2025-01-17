@@ -2350,8 +2350,6 @@ namespace System
             {
                 // <
 
-
-
                 if (comparer == null || comparer == Comparer<T>.Default)
                 {
                     if (TrySZSort(array, null, index, index + length - 1))

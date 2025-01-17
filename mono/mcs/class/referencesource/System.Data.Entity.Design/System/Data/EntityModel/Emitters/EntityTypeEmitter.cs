@@ -103,7 +103,6 @@ namespace System.Data.EntityModel.Emitters
         #endregion
 
 
-
         #region Public Properties
         #endregion
 

@@ -30,11 +30,9 @@ namespace System.IO
     // efficiency when operating under heavy concurrency. The synchronization
     // technique used in this implementation is specifically optimized for IO
 
-
     // The main differences between this implementation and the existing System.IO.BufferedStream
     //  - the design allows for inheritance as opposed to wrapping streams
     //  - it is thread safe, though currently only synchronous Write is optimized
-
 
     [HostProtection(Synchronization = true)]
     internal abstract class BufferedStream2 : Stream

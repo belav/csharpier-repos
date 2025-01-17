@@ -1319,7 +1319,6 @@ namespace Test.OracleClient
         {
             // test stored procedure with no parameters
 
-
             OracleCommand cmd2 = con.CreateCommand();
 
             Console.WriteLine("  Drop table MONO_TEST_TABLE1...");

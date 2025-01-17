@@ -272,7 +272,6 @@ namespace MS.Internal.Xml.XPath
         // To achive this in all places where we accept from or report to user XPathResultType.
         // On my best knowledge this happens only in XsltContext.ResolveFunction() / IXsltContextFunction.ReturnType
 
-
         protected XPathResultType GetXPathType(object value)
         {
             if (value is XPathNodeIterator)

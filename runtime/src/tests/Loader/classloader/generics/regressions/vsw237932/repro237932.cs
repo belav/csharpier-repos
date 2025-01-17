@@ -6,8 +6,6 @@
 // and so when we created C1<System.OverflowException> and C1<System.InvalidCastException> the ThreadStatic
 // field got incremented to 2, which is wrong.
 
-
-
 using System;
 using System.Threading;
 using Xunit;

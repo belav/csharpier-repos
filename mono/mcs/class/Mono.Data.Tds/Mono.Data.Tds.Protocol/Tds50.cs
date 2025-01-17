@@ -481,7 +481,6 @@ namespace Mono.Data.Tds.Protocol
 
             //StringBuilder declare = new StringBuilder ();
 
-
             sql = String.Format("create proc {0} as\n{1}", id, sql);
             short len = (short)((id.Length) + sql.Length + 5);
 

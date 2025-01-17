@@ -6,8 +6,6 @@
 
 /************************************************************************************************************/
 
-
-
 namespace System.Web.Compilation
 {
     using System;
@@ -1437,8 +1435,6 @@ namespace System.Web.Compilation
                 {
                     //
 
-
-
                     VirtualPath virtualSubDir = virtualDir.SimpleCombineWithDir(
                         entry.DirectoryName
                     );
@@ -2805,7 +2801,6 @@ namespace System.Web.Compilation
         // Caching related code
         //
 
-
         public static ICollection GetVirtualPathDependencies(string virtualPath)
         {
             CompilationSection compConfig = RuntimeConfig.GetRootWebConfig().Compilation;
@@ -2841,7 +2836,6 @@ namespace System.Web.Compilation
                 return;
 
             //
-
 
             // Get the list of virtual paths that it depends on (e.g. user controls)
             ICollection virtualPathDependencies = GetVirtualPathDependencies(virtualPath);
@@ -4023,7 +4017,6 @@ namespace System.Web.Compilation
         //
         // Public methods
         //
-
 
         /// <devdoc>
         ///     Compiles a file given its virtual path, using the appropriate BuildProvider (based

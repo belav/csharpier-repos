@@ -34,7 +34,6 @@ namespace Microsoft.SqlServer.Server
     //  that the values passed to it have been validated externally, however.
     //
 
-
     // SmiMetaData
     //
     //  Root of the heirarchy.
@@ -63,8 +62,6 @@ namespace Microsoft.SqlServer.Server
         // DevNote: For now, since the list of extended property types is small, we can handle them in a simple list.
         //  In the future, we may need to create a more performant storage & lookup mechanism, such as a hash table
         //  of lists indexed by type of property or an array of lists with a well-known index for each type.
-
-
 
         // Limits for attributes (SmiMetaData will assert that these limits as applicable in constructor)
         internal const long UnlimitedMaxLengthIndicator = -1; // unlimited (except by implementation) max-length.
@@ -621,7 +618,6 @@ namespace Microsoft.SqlServer.Server
             SetDefaultsForType(dbType);
 
             //
-
 
             switch (dbType)
             {

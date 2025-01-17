@@ -55,7 +55,6 @@ namespace System.IO.Compression
                 // ZLibNative.Deflate_DefaultWindowBits = -15;
                 // ZLibNative.Deflate_DefaultMemLevel = 8;
 
-
                 case CompressionLevel.Optimal:
                     zlibCompressionLevel = (ZLibNative.CompressionLevel)6;
                     windowBits = -15;

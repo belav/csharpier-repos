@@ -785,7 +785,6 @@ namespace System.Data
             //  </Table> ...
             //            \------------------------------ We are here on exit
 
-
             Debug.Assert(table != null, "Table to be loaded is null on LoadTopMostTable() entry");
             Debug.Assert(topMostNode != null, "topMostNode is null on LoadTopMostTable() entry");
             Debug.Assert(
@@ -890,7 +889,6 @@ namespace System.Data
                                 if (!(matchFound || topNodeIsTable))
                                 {
                                     // Could top node be a DataSet?
-
 
                                     return; // Assume top node is DataSet
                                     // and stop top node processing
@@ -1023,8 +1021,6 @@ namespace System.Data
                 } // Oops. No column for this element
 
                 //
-
-
 
                 // else if (table.XmlText != null &&
                 //          dataReader.NamespaceURI == Keywords.XSINS &&

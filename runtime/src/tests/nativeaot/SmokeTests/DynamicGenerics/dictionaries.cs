@@ -1355,8 +1355,6 @@ namespace CtorDict
     //      enums(long) and valuetype that has alignment requirement > 4, with finalizer            (to test usage of the NewFinalizableAlign8 helper)
     //      enums(long) and valuetype that has alignment requirement > 4, without finalizer         (to test usage of the NewFastMisalign helper)
 
-
-
     public class CtorTest<T, X>
         where T : new()
     {

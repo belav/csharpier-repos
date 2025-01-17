@@ -166,7 +166,6 @@ namespace System.Data.SqlClient
                 {
                     //
 
-
                     timeout = Timeout.Infinite; // -1 == native SNIOPEN_TIMEOUT_VALUE / INFINITE
                 }
 

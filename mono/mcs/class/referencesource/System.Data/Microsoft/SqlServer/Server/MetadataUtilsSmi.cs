@@ -428,16 +428,6 @@ namespace Microsoft.SqlServer.Server
         // Returns the ExtendedClrTypeCode that describes the given value
         //
 
-
-
-
-
-
-
-
-
-
-
         static internal ExtendedClrTypeCode DetermineExtendedTypeCode(object value)
         {
             ExtendedClrTypeCode resultCode;

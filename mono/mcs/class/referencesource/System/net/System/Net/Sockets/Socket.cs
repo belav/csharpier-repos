@@ -332,10 +332,6 @@ namespace System.Net.Sockets
             // ExceptionHelper.UnmanagedPermission.Demand();
             //<
 
-
-
-
-
             //
             // this should never happen, let's check anyway
             //
@@ -355,7 +351,6 @@ namespace System.Net.Sockets
 #endif
 
         //************* properties *************************
-
 
         /// <devdoc>
         /// <para>Indicates whether IPv4 support is available and enabled on this machine.</para>
@@ -1079,9 +1074,6 @@ namespace System.Net.Sockets
 
         //************* public methods *************************
 
-
-
-
 #if !MONO
         /// <devdoc>
         ///    <para>Associates a socket with an end point.</para>
@@ -1146,10 +1138,6 @@ namespace System.Net.Sockets
             else
             {
                 //<
-
-
-
-
 
                 ExceptionHelper.UnmanagedPermission.Demand();
             }
@@ -2002,7 +1990,6 @@ namespace System.Net.Sockets
         ///       a connected socket, starting at the indicated location in the
         ///       data.</para>
         /// </devdoc>
-
 
         public int Send(byte[] buffer, int offset, int size, SocketFlags socketFlags)
         {
@@ -3809,7 +3796,6 @@ namespace System.Net.Sockets
 
         --*/
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -4133,15 +4119,6 @@ namespace System.Net.Sockets
             }
 
             //<
-
-
-
-
-
-
-
-
-
 
             //
             // get async completion
@@ -5357,7 +5334,6 @@ namespace System.Net.Sockets
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
 
-
         public int EndSend(IAsyncResult asyncResult)
         {
             SocketError errorCode;
@@ -5859,7 +5835,6 @@ namespace System.Net.Sockets
            IAsyncResult - Async result used to retreive result
 
         --*/
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -7662,8 +7637,6 @@ namespace System.Net.Sockets
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
 
-
-
         public Socket EndAccept(IAsyncResult asyncResult)
         {
             if (s_LoggingEnabled)
@@ -8180,8 +8153,6 @@ namespace System.Net.Sockets
         }
 
         //************* internal and private methods *************************
-
-
 
         private void CheckSetOptionPermissions(
             SocketOptionLevel optionLevel,

@@ -2032,7 +2032,6 @@ namespace Newtonsoft.Json.Tests
         //    Assert.AreEqual("{\"Overload\":\"IList<string>\"}", json);
         //}
 
-
         [Test]
         public void CustomDoubleRounding()
         {

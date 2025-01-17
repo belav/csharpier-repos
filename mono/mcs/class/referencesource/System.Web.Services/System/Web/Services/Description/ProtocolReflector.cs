@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Web.Services.Description
 {
     using System;

@@ -14,7 +14,6 @@ namespace System.Web.Compilation
     {
         //
 
-
         private TemplateControl _templateControl;
         private VirtualPath _virtualPath;
 

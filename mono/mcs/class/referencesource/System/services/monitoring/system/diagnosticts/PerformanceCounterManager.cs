@@ -16,7 +16,6 @@ namespace System.Diagnostics
     // This code was no longer maintained, and it accessed the same shared memory that the new code accessed.  To be certain there
     // are no security holes and no serious bugs, we have removed all of the real code.
 
-
     /// <internalonly/>
     [
         ComVisible(true),

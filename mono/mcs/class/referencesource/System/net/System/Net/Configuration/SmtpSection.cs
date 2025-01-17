@@ -73,8 +73,6 @@ namespace System.Net.Configuration
 
         //
 
-
-
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
         readonly ConfigurationProperty from = new ConfigurationProperty(

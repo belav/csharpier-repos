@@ -22,7 +22,6 @@
 //
 //===================================================================
 
-
 #region Used namespaces
 
 using System;
@@ -6356,7 +6355,6 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion
 
         #region Serialization control
-
 
 
         private bool CheckIfSerializationRequired(CommonCustomProperties attribute)

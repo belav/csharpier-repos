@@ -27,7 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Collections;
 using System.Data;
@@ -189,7 +188,6 @@ namespace MonoTests.System.Web.UI.WebControls
         }
 
         //Default properties
-
 
         [Test]
         public void ObjectDataSource_DefaultProperties()

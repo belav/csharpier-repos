@@ -82,7 +82,6 @@ namespace DefaultNamespace
         public BNode obj;
 #pragma warning restore 0414
 
-
         public CreateObj()
         {
             mv_Obj = new BaseFinal();

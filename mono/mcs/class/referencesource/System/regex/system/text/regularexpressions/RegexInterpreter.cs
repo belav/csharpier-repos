@@ -8,7 +8,6 @@
 // It executes a block of regular expression codes while consuming
 // input.
 
-
 namespace System.Text.RegularExpressions
 {
     using System.Collections;

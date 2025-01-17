@@ -5,7 +5,6 @@
 // <owner current="true" primary="true">ElenaK</owner>
 //------------------------------------------------------------------------------
 
-
 namespace System.Xml.Serialization
 {
     using System.ComponentModel;

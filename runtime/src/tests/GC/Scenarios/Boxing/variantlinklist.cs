@@ -8,7 +8,6 @@
  *      the variant objects in the nodes
  */
 
-
 namespace DefaultNamespace
 {
     using System;

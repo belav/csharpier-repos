@@ -1580,7 +1580,6 @@ namespace System.Data
                         special case evaluating of the IN operator: the right have to be IN function node
                         */
 
-
                         if (!(right is FunctionNode))
                         {
                             // this is more like an Assert: should never happens, so we do not care about "nice" Exseptions

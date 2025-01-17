@@ -38,7 +38,6 @@ namespace System.Security.AccessControl.Tests
             Guid inheritedObjectAceType;
             //case 1, no Ace
 
-
             revision = 127;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);

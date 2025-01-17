@@ -6,7 +6,6 @@
 //
 // (C) 2006 Novell
 
-
 using System;
 using System.Diagnostics;
 using System.Linq;

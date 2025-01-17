@@ -465,7 +465,6 @@ namespace System.Runtime
 
         //
 
-
         ~IOThreadScheduler()
         {
             // If the AppDomain is shutting down, we may still have pending ops.  The AppDomain shutdown will clean

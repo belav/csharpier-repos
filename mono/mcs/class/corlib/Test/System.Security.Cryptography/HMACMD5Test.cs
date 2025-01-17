@@ -8,7 +8,6 @@
 // Copyright (C) 2006, 2007 Novell, Inc (http://www.novell.com)
 //
 
-
 using System;
 using System.IO;
 using System.Security.Cryptography;

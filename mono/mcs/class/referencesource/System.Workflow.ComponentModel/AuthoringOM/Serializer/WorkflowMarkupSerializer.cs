@@ -1121,7 +1121,6 @@ namespace System.Workflow.ComponentModel.Serialization
 
                 // Dependency events are treated as the same as dependency properties.
 
-
                 try
                 {
                     if (
@@ -1678,8 +1677,6 @@ namespace System.Workflow.ComponentModel.Serialization
                         else
                         {
                             //
-
-
 
                             //NOTE: THE FOLLOWING CONDITION ABOUT contentProperty.Property.PropertyType != typeof(object) is VALID AS WE SHOULD NOT SERIALIZE A PROPERTY OF TYPE OBJECT TO STRING
                             //IF WE DO THAT THEN WE DO NOT KNOWN WHAT WAS THE TYPE OF ORIGINAL OBJECT AND SERIALIZER WONT BE ABLE TO GET THE STRING BACK INTO THE CORRECT TYPE,

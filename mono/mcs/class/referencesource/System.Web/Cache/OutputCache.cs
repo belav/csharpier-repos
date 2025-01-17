@@ -564,7 +564,6 @@ namespace System.Web.Caching
         // internal properties and methods
         //
 
-
         //
         // If we're not using a provider, we can optimize this so the OutputCacheModule
         // only need run when there are entries--return true iff count is non-zero.

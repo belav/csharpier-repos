@@ -26,7 +26,6 @@
 //
 // (C) 2005-2010 Novell, Inc.
 
-
 //
 // TODO: getting the .x and .y in LoadData doesn't work with mozilla
 //

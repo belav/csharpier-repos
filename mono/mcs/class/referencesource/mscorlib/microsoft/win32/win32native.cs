@@ -114,17 +114,6 @@ namespace Microsoft.Win32
     // global declaration on the class.
     // <
 
-
-
-
-
-
-
-
-
-
-
-
     [System.Security.SecurityCritical]
     [SuppressUnmanagedCodeSecurityAttribute()]
     internal static class Win32Native
@@ -393,7 +382,6 @@ namespace Microsoft.Win32
         }
 
         // end of TimeZone
-
 
         // Win32 ACL-related constants:
         internal const int READ_CONTROL = 0x00020000;

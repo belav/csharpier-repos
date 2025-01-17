@@ -6275,7 +6275,6 @@ namespace System.Data.Common.EntitySql
             //    SET EXPRESSIONS
             ////////////////////////////
 
-
             //
             // e1 UNION e2
             //

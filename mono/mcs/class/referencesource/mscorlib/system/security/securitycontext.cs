@@ -257,7 +257,6 @@ namespace System.Security
 
 #if !FEATURE_PAL && FEATURE_IMPERSONATION
 
-
         internal WindowsIdentity WindowsIdentity
         {
             get { return _windowsIdentity; }

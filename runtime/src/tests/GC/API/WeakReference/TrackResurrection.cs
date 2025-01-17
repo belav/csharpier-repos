@@ -9,7 +9,6 @@
 // FALSE: The reference will refer to the target until the first time it is detected
 //        to be unreachable by Runtime (until Finalization).
 
-
 using System;
 
 public class Test_TrackResurrection

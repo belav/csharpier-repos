@@ -196,8 +196,6 @@ namespace System.Net
                         {
                             //
 
-
-
                             IPHostEntry result;
                             if (Dns.TryInternalResolve(host, out result))
                             {
@@ -223,8 +221,6 @@ namespace System.Net
                     // For this cases we already did a DNS lookup
 
                     //
-
-
 
                     host = httpWebRequest.ServicePoint.Hostname;
                     trustNewHost &= httpWebRequest.ServicePoint.IsTrustedHost; // Can only lose trust

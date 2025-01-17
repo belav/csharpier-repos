@@ -785,7 +785,6 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
 #pragma warning restore IDE0044
 
-
         /// <summary>
         /// In bootstrap builds this validates the response. When this returns false it
         /// indicates the bootstrap build is incorrect and the compilation should fail.

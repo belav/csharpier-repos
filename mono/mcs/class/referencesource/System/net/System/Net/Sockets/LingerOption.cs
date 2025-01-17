@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Net.Sockets
 {
     using System;

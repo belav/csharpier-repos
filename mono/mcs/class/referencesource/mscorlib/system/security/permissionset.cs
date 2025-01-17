@@ -104,7 +104,6 @@ namespace System.Security
         // This is a hack so that SQL can operate under default policy without actually
         // granting permissions in assemblies that they disallow.  @
 
-
         [OptionalField(VersionAdded = 2)]
         private bool m_ignoreTypeLoadFailures = false;
 
@@ -2990,7 +2989,6 @@ namespace System.Security
 
         // This is a hack so that SQL can operate under default policy without actually
         // granting permissions in assemblies that they disallow.  @
-
 
         internal bool IgnoreTypeLoadFailures
         {

@@ -4,7 +4,6 @@
 // This test tests that we throw TypeLoadException when trying to load explicit generic class/struct, since we do not allow
 // explicit generic types anymore.
 
-
 using System;
 using System.Runtime.InteropServices;
 using Xunit;

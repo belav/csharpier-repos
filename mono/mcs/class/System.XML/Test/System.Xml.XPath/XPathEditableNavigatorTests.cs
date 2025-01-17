@@ -7,7 +7,6 @@
 // Copyright (C) 2005 Novell, Inc.  http://www.novell.com
 //
 
-
 using System;
 using System.Xml;
 using System.Xml.XPath;

@@ -991,9 +991,6 @@ namespace MonoTests.System.Web.UI.WebControls
 
             /* XXXXXX  Image starts here XXXXXX */
 
-
-
-
             /* not sorted, image, no sort expression, no
              * header/footer text
              */

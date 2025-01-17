@@ -883,7 +883,6 @@ namespace System.Web.UI.MobileControls.Adapters
             // of required postback cards.
             //
 
-
             int numberOfCardsRequired =
                 (_usingPostBackType[0] ? 1 : 0) + (_usingPostBackType[1] ? 1 : 0);
             if (_numberOfPostBacks > numberOfCardsRequired)

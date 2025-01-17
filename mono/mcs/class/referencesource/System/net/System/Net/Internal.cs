@@ -2325,7 +2325,6 @@ namespace System.Net
         //  at some point we should consolidate
         //
 
-
         // parse String to DateTime format.
         internal static DateTime string2date(String S)
         {

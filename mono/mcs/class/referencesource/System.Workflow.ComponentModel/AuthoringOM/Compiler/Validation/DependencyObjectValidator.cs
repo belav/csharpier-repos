@@ -45,7 +45,6 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             //
 
-
             foreach (DependencyProperty prop in dependencyObject.MetaDependencyProperties)
             {
                 if (prop.IsAttached)

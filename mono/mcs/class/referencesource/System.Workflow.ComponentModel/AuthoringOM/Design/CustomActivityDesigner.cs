@@ -824,8 +824,6 @@
             {
                 //
 
-
-
                 foreach (CustomProperty property in propCollection)
                 {
                     bool createNew = (

@@ -4,7 +4,6 @@
 // A nonlocal exit and a catchret in a funclet where the destination label is also in the same funclet
 // cause confusion when we're building FG for the funclet (114611)
 
-
 using System;
 using Xunit;
 

@@ -131,7 +131,6 @@ namespace System.Web.DynamicData.ModelProviders
                 {
                     //
 
-
                     var edmType = EdmMember.TypeUsage.EdmType;
                     if (edmType is EntityType)
                     {

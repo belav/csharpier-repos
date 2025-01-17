@@ -421,8 +421,6 @@ namespace System.Web.Compilation
 
                 //
 
-
-
                 if (
                     (
                         !TargetFrameworkUtil.HasMethod(

@@ -208,10 +208,6 @@ namespace System.Workflow.ComponentModel
 
         //
 
-
-
-
-
         public ActivityBind GetBinding(DependencyProperty dependencyProperty)
         {
             if (dependencyProperty == null)

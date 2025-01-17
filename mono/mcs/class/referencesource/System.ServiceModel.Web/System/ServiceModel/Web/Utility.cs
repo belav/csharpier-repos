@@ -195,8 +195,6 @@ namespace System.ServiceModel.Web
                 {
                     //
 
-
-
                     // throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new FormatException(
                     // SR2.GetString(SR2.InvalidContentType, contentType)));
                     return null;

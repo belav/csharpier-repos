@@ -6,7 +6,6 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-
 namespace System.Data
 {
     using System;

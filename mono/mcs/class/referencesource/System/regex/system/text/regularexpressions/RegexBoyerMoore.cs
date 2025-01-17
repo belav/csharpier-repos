@@ -180,7 +180,6 @@ namespace System.Text.RegularExpressions
             //for (int i=0; i<_positive.Length; i++)
             //    System.Diagnostics.Debug.WriteLine("\t_positive[" + i + "] = " + _positive[i]);
 
-
             /*
              * PART II - the bad-character shift table
              *

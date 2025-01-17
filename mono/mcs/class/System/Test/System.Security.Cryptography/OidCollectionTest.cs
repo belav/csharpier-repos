@@ -7,7 +7,6 @@
 // (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 //
 
-
 using System;
 using System.Security.Cryptography;
 using NUnit.Framework;

@@ -1397,7 +1397,6 @@ namespace System.Web.Hosting
         // public static methods
         //
 
-
         // register protocol handler with hosting environment
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         public static void RegisterObject(IRegisteredObject obj)
@@ -1504,7 +1503,6 @@ namespace System.Web.Hosting
         //
         // public static methods for the user code to call
         //
-
 
         public static void IncrementBusyCount()
         {

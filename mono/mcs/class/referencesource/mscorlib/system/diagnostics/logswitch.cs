@@ -26,7 +26,6 @@ namespace System.Diagnostics
 
         // ! END WARNING !
 
-
         private LogSwitch() { }
 
         // Constructs a LogSwitch.  A LogSwitch is used to categorize log messages.

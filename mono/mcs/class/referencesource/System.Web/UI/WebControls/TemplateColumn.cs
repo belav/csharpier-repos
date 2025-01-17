@@ -19,7 +19,6 @@ namespace System.Web.UI.WebControls
     /// </devdoc>
     //
 
-
     public class TemplateColumn : DataGridColumn
     {
         private ITemplate headerTemplate;

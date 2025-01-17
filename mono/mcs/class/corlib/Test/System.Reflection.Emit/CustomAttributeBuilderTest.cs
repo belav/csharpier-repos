@@ -545,7 +545,6 @@ namespace MonoTests.System.Reflection.Emit
             //The types of the property values do
             //not match the types of the named properties.
 
-
             Type[] ctorParams = new Type[] { typeof(string), typeof(string) };
 
             ConstructorInfo classCtorInfo = typeof(CustomAttribute).GetConstructor(ctorParams);

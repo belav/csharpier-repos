@@ -7,7 +7,6 @@
 // (C) 2005 John Luke
 //
 
-
 using System;
 using System.Net.Mime;
 using NUnit.Framework;

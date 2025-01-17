@@ -1338,8 +1338,6 @@ namespace System.Data.Mapping.Update.Internal
             {
                 //
 
-
-
                 throw EntityUtil.Update(System.Data.Entity.Strings.Update_WorkspaceMismatch, null);
             }
         }

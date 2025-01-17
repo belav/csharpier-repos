@@ -191,7 +191,6 @@ namespace System.Web.Services.Protocols
                     paramWriter.InitializeRequest(request, parameters);
                     //
 
-
                     if (paramWriter.UsesWriteRequest)
                     {
                         if (parameters.Length == 0)
@@ -491,7 +490,6 @@ namespace System.Web.Services.Protocols
                 return null;
 
             //
-
 
             if (responseStream != null)
             {

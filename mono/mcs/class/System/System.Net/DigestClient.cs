@@ -54,7 +54,6 @@ namespace System.Net
     //	See RFC 2617 for details.
     //
 
-
     class DigestHeaderParser
     {
         string header;

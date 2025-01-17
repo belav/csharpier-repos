@@ -29,7 +29,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 namespace System.Security.Authentication
 {
     public enum ExchangeAlgorithmType

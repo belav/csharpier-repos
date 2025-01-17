@@ -7,7 +7,6 @@
 // Expected: System.InvalidCastException: Unable to cast object of type 'System.Object' to type 'IFoo'.
 // Actual: System.InvalidCastException: Unable to cast object of type 'IFoo' to type 'System.Object'.
 
-
 using System;
 using Xunit;
 

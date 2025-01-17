@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Net
 {
     using System.Collections;
@@ -16,7 +15,6 @@ namespace System.Net
 
     //NOTE: While WebPermissionAttribute resides in System.DLL,
     //      no classes from that DLL are able to make declarative usage of WebPermission.
-
 
     // THE syntax of this attribute is as followed
     // [WebPermission(SecurityAction.Assert, Connect="http://hostname/path/url", Accept="http://localhost/path/url")]

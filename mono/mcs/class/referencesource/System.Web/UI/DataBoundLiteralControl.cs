@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 /*
  * Control that holds databinding expressions and literals
  *

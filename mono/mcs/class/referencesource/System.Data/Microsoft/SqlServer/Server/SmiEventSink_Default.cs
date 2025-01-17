@@ -218,7 +218,6 @@ namespace Microsoft.SqlServer.Server
         //       was thrown, because they will be eaten by the server and replaced
         //       with a different exception.
 
-
         // Called at end of stream
         internal override void BatchCompleted()
         {

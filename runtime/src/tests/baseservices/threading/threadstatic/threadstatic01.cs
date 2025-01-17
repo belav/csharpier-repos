@@ -4,7 +4,6 @@
 //   If someone screws up the function we will end up
 //   setting values in the wrong slots and the totals will be wrong
 
-
 using System;
 using System.Threading;
 using Xunit;

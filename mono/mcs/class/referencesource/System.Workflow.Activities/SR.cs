@@ -715,7 +715,6 @@ internal sealed class SR
 
     // workflow load errors
 
-
     // serializer errrors
     internal const string In = "In";
     internal const string Out = "Out";

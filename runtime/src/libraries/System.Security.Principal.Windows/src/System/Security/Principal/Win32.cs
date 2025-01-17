@@ -16,7 +16,6 @@ namespace System.Security.Principal
         // Wrapper around advapi32.LsaOpenPolicy
         //
 
-
         internal static SafeLsaPolicyHandle LsaOpenPolicy(
             string? systemName,
             Interop.Advapi32.PolicyRights rights
@@ -110,7 +109,6 @@ namespace System.Security.Principal
         // Wrapper around advapi32.ConvertStringSidToSidW
         //
 
-
         internal static unsafe int CreateSidFromString(string stringSid, out byte[]? resultSid)
         {
             int ErrorCode;
@@ -154,7 +152,6 @@ namespace System.Security.Principal
         // Wrapper around advapi32.CreateWellKnownSid
         //
 
-
         internal static int CreateWellKnownSid(
             WellKnownSidType sidType,
             SecurityIdentifier? domainSid,
@@ -192,7 +189,6 @@ namespace System.Security.Principal
         //
         // Wrapper around advapi32.EqualDomainSid
         //
-
 
         internal static bool IsEqualDomainSid(SecurityIdentifier sid1, SecurityIdentifier sid2)
         {
@@ -259,7 +255,6 @@ namespace System.Security.Principal
         //
         // Wrapper around advapi32.IsWellKnownSid
         //
-
 
         internal static bool IsWellKnownSid(SecurityIdentifier sid, WellKnownSidType type)
         {

@@ -146,7 +146,6 @@ namespace MonoTests.System.Runtime.Serialization
 
 // Generated code
 
-
 [
     GeneratedCode("System.ServiceModel", "4.0.0.0"),
     DebuggerStepThrough,

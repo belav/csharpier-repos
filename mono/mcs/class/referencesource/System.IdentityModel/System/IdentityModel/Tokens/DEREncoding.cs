@@ -56,7 +56,6 @@ namespace System.IdentityModel.Tokens
         // (Note: In many implementations, elements 3-5 may be stored and
         // referenced as a contiguous string constant.)
 
-
         static byte[] mech = new byte[] { 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x12, 0x01, 0x02, 0x02 };
         static byte[] type = new byte[] { 0x01, 0x00 };
 

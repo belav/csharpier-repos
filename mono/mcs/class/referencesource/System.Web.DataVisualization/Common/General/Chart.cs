@@ -3791,7 +3791,6 @@ namespace System.Web.UI.DataVisualization.Charting
 
 #if !Microsoft_CONTROL
 
-
         /// <summary>
         /// Writes chart map tag into the stream.
         /// </summary>

@@ -5,7 +5,6 @@
 //      Thomas Neidhart (tome@sbox.tugraz.at)
 //
 
-
 using System;
 using System.Security.Cryptography;
 using NUnit.Framework;

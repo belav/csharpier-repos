@@ -2813,9 +2813,6 @@ namespace System.Web.Security
             //
             //
 
-
-
-
             return Membership.GeneratePassword(
                 MinRequiredPasswordLength < PASSWORD_SIZE
                     ? PASSWORD_SIZE
@@ -3877,8 +3874,6 @@ namespace System.Web.Security
 
         //
         //
-
-
 
         private string GenerateAccountName()
         {

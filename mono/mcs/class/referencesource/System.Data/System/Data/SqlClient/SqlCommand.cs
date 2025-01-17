@@ -3830,8 +3830,6 @@ namespace System.Data.SqlClient
 
             //
 
-
-
             paramsCmd.Parameters.Add(new SqlParameter("@procedure_name", SqlDbType.NVarChar, 255));
             paramsCmd.Parameters[0].Value = UnquoteProcedureName(parsedSProc[3], out groupNumber); // ProcedureName is 4rd element in parsed array
 
@@ -6582,8 +6580,6 @@ namespace System.Data.SqlClient
 
                 //
 
-
-
                 // bind this reader to this connection now
                 _activeConnection.AddWeakReference(ds, SqlReferenceCollection.DataReaderTag);
 
@@ -7044,7 +7040,6 @@ namespace System.Data.SqlClient
 
         //
         //
-
 
         internal void OnReturnStatus(int status)
         {
@@ -7828,9 +7823,6 @@ namespace System.Data.SqlClient
         /// This function constructs a string parameter containing the exec statement in the following format
         /// N'EXEC sp_name @param1=@param1, @param1=@param2, ..., @paramN=@paramN'
         ///
-
-
-
 
         private SqlParameter BuildStoredProcedureStatementForColumnEncryption(
             string storedProcedureName,

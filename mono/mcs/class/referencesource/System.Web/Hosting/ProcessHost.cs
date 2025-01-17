@@ -904,7 +904,6 @@ namespace System.Web.Hosting
 
                 //
 
-
                 if (appPath[0] == '.')
                 {
                     System.IO.FileInfo file = new System.IO.FileInfo(appPath);

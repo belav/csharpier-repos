@@ -454,7 +454,6 @@ namespace System.Xml.XPath.DataBinding
         //
         // Internal Implementation
 
-
         internal Shape RowShape
         {
             get { return this.rowShape; }

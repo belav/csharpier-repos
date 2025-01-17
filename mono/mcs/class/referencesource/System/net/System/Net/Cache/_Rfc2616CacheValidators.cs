@@ -263,7 +263,6 @@ namespace System.Net.Cache
             // At this point we assume that policy >= CacheOrNextCacheOnly && policy < Refresh
             //
 
-
             // If there was a retry already, it should go with cache disabled so by default we won't retry it again
             if (ctx.ResponseCount > 1)
             {
@@ -1052,7 +1051,6 @@ namespace System.Net.Cache
 
                 // NOTE: If no Expire and no Validator peresnt we choose to CACHE
                 //===============================================================
-
 
                 /*
                     Note: a new response that has an older Date header value than
@@ -2726,7 +2724,6 @@ namespace System.Net.Cache
                       - Transfer-Encoding
                       - Upgrade
                 */
-
 
                 // We add or Replace headers from the live response
                 for (int i = 0; i < ctx.Response.Headers.Count; ++i)

@@ -117,8 +117,6 @@ namespace Novell.Directory.Ldap.Asn1
         * throws IOException;
         */
 
-
-
         /// <summary> Decode an OCTET_STRING directly from a stream. Call this method when you
         /// know that the next ASN.1 encoded element is a OCTET_STRING.
         ///
@@ -136,8 +134,6 @@ namespace Novell.Directory.Ldap.Asn1
         * throws IOException;
         */
 
-
-
         /// <summary> Decode a CharacterString directly from a stream.
         ///
         /// Decodes any of the specialized character strings.
@@ -153,7 +149,6 @@ namespace Novell.Directory.Ldap.Asn1
         /* No Decoders for ASN.1 structured types. A structured type's value is a
         * collection of other types.
         */
-
 
         /* Decoders for ASN.1 useful types
         */
@@ -175,7 +170,6 @@ namespace Novell.Directory.Ldap.Asn1
         * public Object decodeExternal(InputStream in, int len)
         * throws IOException;
         */
-
 
         /* Asn1 TYPE NOT YET SUPPORTED
         * Decode an OBJECT_DESCRIPTOR directly from a stream.

@@ -393,7 +393,6 @@ namespace System.Activities.Statements
         {
             //
 
-
             WorkflowRuntimeService workflowRuntimeService =
                 context.GetExtension<WorkflowRuntimeService>();
             if (

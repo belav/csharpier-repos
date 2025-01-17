@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 //
 
-
 namespace System.ServiceModel.Security
 {
     using System.IdentityModel.Selectors;

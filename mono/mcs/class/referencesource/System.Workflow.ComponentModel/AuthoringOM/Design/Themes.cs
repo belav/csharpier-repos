@@ -28,8 +28,6 @@ namespace System.Workflow.ComponentModel.Design
 
     //
 
-
-
     #region WorkflowTheme Enums
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"

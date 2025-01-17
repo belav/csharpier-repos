@@ -7,7 +7,6 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
 namespace System.Data.EntityClient
 {
     using System;

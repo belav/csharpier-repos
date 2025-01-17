@@ -58,8 +58,6 @@ namespace System.Security
         private bool m_declSecComputed; // set from the VM to indicate that the declarative A/PO/D on this frame has been populated
 #pragma warning restore 169
 
-
-
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -285,7 +283,6 @@ namespace System.Security
         //-----------------------------------------------------------+
         // Demand Evaluation
         //-----------------------------------------------------------+
-
 
         // This will get called when we hit a FSD while evaluating a demand on the call stack or compressedstack
         [System.Security.SecurityCritical] // auto-generated

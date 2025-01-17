@@ -873,10 +873,6 @@ namespace System.Web.UI
 
                 //
 
-
-
-
-
                 // DevDiv 55447: Do not use Response.Flush and a NullStream to prevent Response.Writes
                 // from being written to the output stream, as calling Response.Flush causes headers to
                 // be written. This prevents cookies from being issued after this, for example.
@@ -1029,11 +1025,6 @@ namespace System.Web.UI
         internal void RenderPageRequestManagerScript(HtmlTextWriter writer)
         {
             //
-
-
-
-
-
 
             // Script format:
             // <script type=""text/javascript"">

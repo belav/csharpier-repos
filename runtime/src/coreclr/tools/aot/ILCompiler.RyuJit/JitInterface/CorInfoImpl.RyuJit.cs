@@ -1480,7 +1480,6 @@ namespace Internal.JitInterface
             // Initialize callee context used for inlining and instantiation arguments
             //
 
-
             if (targetMethod.HasInstantiation)
             {
                 pResult->contextHandle = contextFromMethod(targetMethod);

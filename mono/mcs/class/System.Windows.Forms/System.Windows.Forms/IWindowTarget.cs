@@ -23,7 +23,6 @@
 //	Peter Bartok	pbartok@novell.com
 //
 
-
 namespace System.Windows.Forms
 {
     public interface IWindowTarget

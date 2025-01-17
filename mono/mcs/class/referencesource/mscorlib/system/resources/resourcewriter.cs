@@ -345,7 +345,6 @@ namespace System.Resources
             bw.Write(resMgrHeaderBlob.GetBuffer(), 0, (int)resMgrHeaderBlob.Length);
             // End ResourceManager header
 
-
             // Write out the RuntimeResourceSet header
             // Version number
             bw.Write(RuntimeResourceSet.Version);

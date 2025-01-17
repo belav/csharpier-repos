@@ -24,7 +24,6 @@ namespace System.Web.UI.HtmlControls
     // designer (as they should not be in the first place, but it was not fixed
     // in V1 unfortunately)
 
-
     [DefaultEvent("")]
     [SupportsEventValidation]
     public class HtmlInputReset : HtmlInputButton

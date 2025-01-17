@@ -255,7 +255,6 @@ namespace System.Net.Security
 
         //
 
-
         [HostProtection(ExternalThreading = true)]
         public virtual IAsyncResult BeginAuthenticateAsClient(
             string targetHost,
@@ -327,7 +326,6 @@ namespace System.Net.Security
         }
 
         //
-
 
         //
         //server side auth

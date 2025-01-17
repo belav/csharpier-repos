@@ -3195,7 +3195,6 @@ namespace System.Xml.Xsl.Xslt
             }
             // attHref is a BaseUri of new output tree. It should be resolved relative to "base output URI"
 
-
             if (input.MoveToXsltAttribute(5, "method"))
             {
                 compiler.EnterForwardsCompatible();

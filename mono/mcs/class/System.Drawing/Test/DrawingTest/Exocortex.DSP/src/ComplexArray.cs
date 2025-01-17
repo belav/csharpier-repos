@@ -29,7 +29,6 @@
  * DAMAGE.
  */
 
-
 using System;
 using System.Diagnostics;
 using Exocortex.DSP;
@@ -667,7 +666,6 @@ namespace Exocortex.DSP
 
             ComplexArray.UnlockWorkspaceF( ref workspace );
         }  */
-
 
         /// <summary>
         /// Copy an array

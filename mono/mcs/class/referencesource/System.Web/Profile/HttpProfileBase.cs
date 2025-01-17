@@ -36,7 +36,6 @@ namespace System.Web.Profile
         //////////////////////////////////////////////////////////////////////////
         // Public (instance) functions and properties
 
-
         public override object this[string propertyName]
         {
             get
@@ -238,7 +237,6 @@ namespace System.Web.Profile
         //////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////
         // static public Properties and functions
-
 
         static public ProfileBase Create(string username)
         {

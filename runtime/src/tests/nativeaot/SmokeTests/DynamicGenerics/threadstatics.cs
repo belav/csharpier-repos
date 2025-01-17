@@ -414,7 +414,6 @@ namespace ThreadLocalStatics
 
 #pragma warning restore 0169
 
-
     public class TLSTesting
     {
         static void InvokerHelper(MethodInfo[] setters, MethodInfo[] getters, object arg)

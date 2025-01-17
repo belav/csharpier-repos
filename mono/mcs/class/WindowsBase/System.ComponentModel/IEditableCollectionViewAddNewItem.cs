@@ -24,7 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 namespace System.ComponentModel
 {
     public interface IEditableCollectionViewAddNewItem : IEditableCollectionView

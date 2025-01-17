@@ -4,7 +4,6 @@
 #pragma warning disable 0183
 #pragma warning disable 0184
 
-
 using System;
 using System.Runtime.InteropServices;
 using Xunit;

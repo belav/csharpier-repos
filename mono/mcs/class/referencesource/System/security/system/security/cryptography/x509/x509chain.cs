@@ -412,7 +412,6 @@ namespace System.Security.Cryptography.X509Certificates
         // Builds a certificate chain.
         //
 
-
         [SecurityCritical]
         internal static unsafe int BuildChain(
             IntPtr hChainEngine,

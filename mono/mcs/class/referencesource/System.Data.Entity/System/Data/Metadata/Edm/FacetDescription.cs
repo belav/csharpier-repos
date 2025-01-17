@@ -24,7 +24,6 @@ namespace System.Data.Metadata.Edm
         #region Constructors
 
 
-
         internal FacetDescription(
             string facetName,
             EdmType facetType,

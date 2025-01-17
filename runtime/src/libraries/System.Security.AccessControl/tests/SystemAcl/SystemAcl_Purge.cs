@@ -161,7 +161,6 @@ namespace System.Security.AccessControl.Tests
 
             //case 7, 1 explicit CustomAce
 
-
             Assert.Throws<InvalidOperationException>(() =>
             {
                 revision = 127;
@@ -210,7 +209,6 @@ namespace System.Security.AccessControl.Tests
             });
             //case 9, 1 explicit ObjectAce
 
-
             revision = 127;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
@@ -256,7 +254,6 @@ namespace System.Security.AccessControl.Tests
             byte revision = 0;
             int capacity = 0;
             //case 1, null Sid
-
 
             Assert.Throws<ArgumentNullException>(() =>
             {

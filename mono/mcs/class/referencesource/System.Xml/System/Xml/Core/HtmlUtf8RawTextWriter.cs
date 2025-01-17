@@ -15,30 +15,6 @@
 // Because these two implementations of XmlTextWriter are so similar, the C++ preprocessor
 // is used to generate each implementation from one template file, using macros and ifdefs.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 using System;
 //using System.Xml.Query;
 using System.Diagnostics;
@@ -80,13 +56,6 @@ namespace System.Xml
         //
         // Constructors
         //
-
-
-
-
-
-
-
 
         public HtmlUtf8RawTextWriter(Stream stream, XmlWriterSettings settings)
             : base(stream, settings)
@@ -849,7 +818,6 @@ namespace System.Xml
     //         EE    if SE, EE are blocks                  b). true:  indexLevel same                                  </B>
     //
 
-
     //
     // This is an alternative way to make the output looks better
     //
@@ -889,12 +857,6 @@ namespace System.Xml
         //
         // Constructors
         //
-
-
-
-
-
-
 
         public HtmlUtf8RawTextWriterIndent(Stream stream, XmlWriterSettings settings)
             : base(stream, settings)

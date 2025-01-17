@@ -63,7 +63,6 @@ namespace System.Globalization
     // Includes CHebrew implemetation;i.e All the code necessary for converting
     // Gregorian to Hebrew Lunar from 1583 to 2239.
 
-
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
     public class HebrewCalendar : Calendar
@@ -1500,7 +1499,6 @@ namespace System.Globalization
         // Return the type of the Hebrew calendar.
         //
 
-
         public override CalendarAlgorithmType AlgorithmType
         {
             get { return CalendarAlgorithmType.LunisolarCalendar; }
@@ -1522,7 +1520,6 @@ namespace System.Globalization
             return (m_defaultInstance);
         }
         */
-
 
         // Construct an instance of gregorian calendar.
 
@@ -2152,7 +2149,6 @@ namespace System.Globalization
         // if this calendar does not have leap month, or this year is not a leap year.
         //
 
-
         public override int GetLeapMonth(int year, int era)
         {
             // Year/era values are checked in IsLeapYear().
@@ -2257,7 +2253,6 @@ namespace System.Globalization
         **      the ticks value of the number of days.
         **
         ============================================================================*/
-
 
         static DateTime HebrewToGregorian(
             int hebrewYear,

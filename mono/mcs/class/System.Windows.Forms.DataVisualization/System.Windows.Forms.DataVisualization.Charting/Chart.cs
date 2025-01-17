@@ -110,7 +110,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         #endregion
 
 
-
         public event EventHandler AnnotationPlaced;
         public event EventHandler AnnotationPositionChanged;
         public event EventHandler<AnnotationPositionChangingEventArgs> AnnotationPositionChanging;

@@ -130,7 +130,6 @@ namespace System.Runtime.InteropServices
       3) If you use DangerousAddRef and forget to call DangerousRelease, you can leak a SafeHandle.  Use CER's & don't do that.
      */
 
-
     // This class should not be serializable - it's a handle.  We require unmanaged
     // code permission to subclass SafeHandle to prevent people from writing a
     // subclass and suddenly being able to run arbitrary native code with the

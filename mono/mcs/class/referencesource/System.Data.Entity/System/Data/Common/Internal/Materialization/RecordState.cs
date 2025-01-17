@@ -309,7 +309,6 @@ namespace System.Data.Common.Internal.Materialization
         {
             //
 
-
             for (int i = 0; i < PendingColumnValues.Length; i++)
             {
                 PendingColumnValues[i] = DBNull.Value;

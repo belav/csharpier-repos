@@ -1266,7 +1266,6 @@ namespace System.Data.Common.Internal.Materialization
 
                 //
 
-
                 // (_discriminator == 0 ? entitySets[0] : (_discriminator == 1 ? entitySets[1] ... : null)
                 entitySetReader = Expression.Constant(null, typeof(EntitySet));
                 for (int i = 0; i < entitySets.Length; i++)

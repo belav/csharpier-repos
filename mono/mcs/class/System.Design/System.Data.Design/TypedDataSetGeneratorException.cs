@@ -30,7 +30,6 @@
 
 // It is a copy from System.Data.TypedDataSetGeneratorException
 
-
 using System;
 using System.Collections;
 using System.Globalization;

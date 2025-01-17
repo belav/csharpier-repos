@@ -1499,7 +1499,6 @@ namespace System.ComponentModel
                         // pick it up here.  Rather, we just merge it in from
                         // the base class list.
 
-
                         // If a property had at least a get method, we consider it.  We don't
                         // consider write-only properties.
                         //

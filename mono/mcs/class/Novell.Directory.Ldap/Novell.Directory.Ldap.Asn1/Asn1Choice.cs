@@ -89,7 +89,6 @@ namespace Novell.Directory.Ldap.Asn1
         /* Asn1Object implementation
         */
 
-
         /// <summary> Call this method to encode the contents of this Asn1Choice
         /// instance into the specified output stream using the
         /// specified encoder object.

@@ -267,7 +267,6 @@ namespace System.Runtime.Remoting.Messaging
 
         //   note: first <n> entries in _deserializedArgs will be the property entries
 
-
         // always use this helper method to create
         [System.Security.SecurityCritical] // auto-generated
         internal static SmuggledMethodCallMessage SmuggleIfPossible(IMessage msg)
@@ -454,7 +453,6 @@ namespace System.Runtime.Remoting.Messaging
         private int _propertyCount; // <n> = # of user properties in dictionary
 
         //   note: first <n> entries in _deserializedArgs will be the property entries
-
 
         // always use this helper method to create
         [System.Security.SecurityCritical] // auto-generated

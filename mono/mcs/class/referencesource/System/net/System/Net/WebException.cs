@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Net
 {
     using System;
@@ -22,8 +21,6 @@ namespace System.Net
 
 
     --*/
-
-
 
     /// <devdoc>
     ///    <para>

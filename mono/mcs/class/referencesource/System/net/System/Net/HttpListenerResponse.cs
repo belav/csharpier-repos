@@ -506,7 +506,6 @@ namespace System.Net
                 {
                     // <
 
-
                     m_ResponseStream.BeginWrite(
                         responseEntity,
                         0,

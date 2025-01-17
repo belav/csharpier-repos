@@ -831,7 +831,6 @@ namespace System.Globalization
         **Exceptions: None.
         ============================================================================*/
 
-
         public int GetEra(String eraName)
         {
             if (eraName == null)
@@ -3449,7 +3448,6 @@ namespace System.Globalization
                                 // Same token.  If they have different types (regular token vs separator token).  Add them.
                                 // If we have the same regular token or separator token in the hash already, do NOT update the hash.
                                 // Therefore, the order of inserting token is significant here regarding what tokenType will be kept in the hash.
-
 
                                 //
                                 // Check the current value of RegularToken (stored in the lower 8-bit of tokenType) , and insert the tokenType into the hash ONLY when we don't have a RegularToken yet.

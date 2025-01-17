@@ -92,7 +92,6 @@ namespace System.Globalization
         #endregion Serialization
 
 
-
         public bool MoveNext()
         {
             if (index >= strLen)

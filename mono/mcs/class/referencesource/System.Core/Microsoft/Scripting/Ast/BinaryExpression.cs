@@ -2001,7 +2001,6 @@ namespace System.Linq.Expressions
             // The return type must match exactly.
             //
 
-
             if (!TypeUtils.AreEquivalent(method.ReturnType, right.Type))
             {
                 throw Error.OperandTypesDoNotMatchParameters(

@@ -25,7 +25,6 @@
 //		Andreia Gaita	(avidigal@novell.com)
 //  		Gary Barnett	(gary.barnett.mono@gmail.com)
 
-
 using System;
 using System.Collections;
 using System.ComponentModel.Design;

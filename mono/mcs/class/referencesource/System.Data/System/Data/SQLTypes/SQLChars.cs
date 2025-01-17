@@ -39,7 +39,6 @@
 // @EndHeader@
 //**************************************************************************
 
-
 namespace System.Data.SqlTypes
 {
     using System;
@@ -568,7 +567,6 @@ namespace System.Data.SqlTypes
         // --------------------------------------------------------------
         // 		XML Serialization
         // --------------------------------------------------------------
-
 
         XmlSchema IXmlSerializable.GetSchema()
         {

@@ -29,7 +29,6 @@
 // Disable unreachable code warnings in this entire file.
 #pragma warning disable 162
 
-
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;

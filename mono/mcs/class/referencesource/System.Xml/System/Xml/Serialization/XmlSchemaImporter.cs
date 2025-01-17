@@ -656,7 +656,6 @@ namespace System.Xml.Serialization
                 }
                 //
 
-
                 foreach (CodeNamespace ns in compileUnit.Namespaces)
                 {
                     CodeGenerator.ValidateIdentifiers(ns);

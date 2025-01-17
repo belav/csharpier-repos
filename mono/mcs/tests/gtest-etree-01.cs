@@ -44,7 +44,6 @@ public struct MyType<T>
 }
 */
 
-
 // TODO: Create a clone which uses +(MyType, int) pattern and an implicit conversion
 // is required to do the user-conversion
 

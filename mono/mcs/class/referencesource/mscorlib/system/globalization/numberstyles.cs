@@ -52,7 +52,6 @@ namespace System.Globalization
 
         //Common uses.  These represent some of the most common combinations of these flags.
 
-
         Integer = AllowLeadingWhite | AllowTrailingWhite | AllowLeadingSign,
 
         HexNumber = AllowLeadingWhite | AllowTrailingWhite | AllowHexSpecifier,

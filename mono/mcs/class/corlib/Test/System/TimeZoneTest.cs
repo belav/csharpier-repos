@@ -1051,7 +1051,6 @@ namespace MonoTests.System
              * This test should work in all the above timezones
              */
 
-
             TimeZone tz = TimeZone.CurrentTimeZone;
             int year = DateTime.Now.Year;
             DaylightTime daylightChanges = tz.GetDaylightChanges(year);

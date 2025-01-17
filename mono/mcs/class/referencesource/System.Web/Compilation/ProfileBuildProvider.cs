@@ -233,7 +233,6 @@ namespace System.Web.Compilation
             //                       get { return (string) GetProperty("Color"); }
             //                       set { SetProperty("Color", value); } }
 
-
             // public  property.Type property.name {
             CodeMemberProperty prop = new CodeMemberProperty();
             prop.Name = name;

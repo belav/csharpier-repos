@@ -272,7 +272,6 @@ namespace System.Text
             // Let's not bother complicating this logic with array pool rentals or allocation-
             // avoiding loops.
 
-
             char[] chars = Array.Empty<char>();
             int charCount = _thisDecoder.GetCharCount(Array.Empty<byte>(), 0, 0, flush: true);
             if (charCount > 0)

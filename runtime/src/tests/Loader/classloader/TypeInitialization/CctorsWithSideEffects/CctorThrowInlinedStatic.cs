@@ -12,7 +12,6 @@ Expected: Should return the same exception.
 
 */
 
-
 using System;
 using System.IO;
 using System.Runtime.CompilerServices;

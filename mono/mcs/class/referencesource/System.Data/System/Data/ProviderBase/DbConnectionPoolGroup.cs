@@ -150,12 +150,6 @@ namespace System.Data.ProviderBase
                     {
                         //
 
-
-
-
-
-
-
                         DbConnectionFactory connectionFactory = pool.ConnectionFactory;
 #if !MOBILE
                         connectionFactory.PerformanceCounters.NumberOfActiveConnectionPools.Decrement();
@@ -316,12 +310,6 @@ namespace System.Data.ProviderBase
                         if (pool != null)
                         {
                             //
-
-
-
-
-
-
 
                             // Actually prune the pool if there are no connections in the pool and no errors occurred.
                             // Empty pool during pruning indicates zero or low activity, but

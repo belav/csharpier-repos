@@ -253,7 +253,6 @@ namespace System.Runtime.Remoting.Channels
             // we allow null to be passed in, so we can use this api to trigger the
             //   refresh of the channel data <
 
-
             bool fLocked = false;
             RuntimeHelpers.PrepareConstrainedRegions();
             try
@@ -704,7 +703,6 @@ namespace System.Runtime.Remoting.Channels
 
                 // <
 
-
                 // Make sure that incoming calls are counted as a remote call. This way it
                 // makes more sense on a server.
                 IncrementRemoteCalls();
@@ -864,7 +862,6 @@ namespace System.Runtime.Remoting.Channels
                 // For ContextBoundObject's,
                 // we must switch to the target context of the object and call the context chains etc...
                 // Currenly XContextChannel does exactly so. So this method is just a wrapper..
-
 
                 // Make sure that incoming calls are counted as a remote call. This way it
                 // makes more sense on a server.
@@ -1240,7 +1237,6 @@ namespace System.Runtime.Remoting.Channels
 
     // This list should be considered immutable once created.
     //   <
-
 
     internal class RegisteredChannelList
     {

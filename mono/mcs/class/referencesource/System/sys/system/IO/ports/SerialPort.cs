@@ -16,7 +16,6 @@
 **
 ===========================================================*/
 
-
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -1138,7 +1137,6 @@ namespace System.IO.Ports
             // Solution II: Use a binary reduction and backtracking to reduce the number of calls.
             // Read calls: size * log n; GetCharCount calls: size * log n; each byte "counted": size * (log n) / n times.
             // We use the second, more complicated solution here.  Note log is actually log_(size/size - 1)...
-
 
             // we need to read some from the stream
             // read *up to* the maximum number of bytes from the stream

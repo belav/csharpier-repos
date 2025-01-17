@@ -124,7 +124,6 @@ namespace System.Text
         #endregion Serialization
 
 
-
         [System.Runtime.InteropServices.ComVisible(false)]
         public override bool Equals(Object value)
         {

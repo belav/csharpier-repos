@@ -43,7 +43,6 @@ namespace System.Globalization
     **      Japanese    Meiji 01/01 Reiwa 7981/12/31
     ============================================================================*/
 
-
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
     public class JapaneseCalendar : Calendar
@@ -476,7 +475,6 @@ namespace System.Globalization
         **  ArgumentException  If month is less than 1 or greater * than 12.
         ============================================================================*/
 
-
         public override int GetDaysInMonth(int year, int month, int era)
         {
             return (helper.GetDaysInMonth(year, month, era));
@@ -525,7 +523,6 @@ namespace System.Globalization
         **      time the specified date time.
         **Exceptions: ArgumentOutOfRangeException if time is out of the valid era ranges.
         ============================================================================*/
-
 
         public override int GetEra(DateTime time)
         {

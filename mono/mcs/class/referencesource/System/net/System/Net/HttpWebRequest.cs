@@ -35,7 +35,6 @@ namespace System.Net
     ///  </para>
     /// </devdoc>
 
-
     [Flags]
     public enum DecompressionMethods
     {
@@ -7955,8 +7954,6 @@ namespace System.Net
                     int bytesTransferred = 0;
 
                     //
-
-
 
                     int maxBytesToBuffer =
                         (HttpWebRequest.DefaultMaximumErrorResponseLength == -1)

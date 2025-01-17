@@ -392,7 +392,6 @@ namespace System.Web.UI.WebControls.WebParts
         {
             //
 
-
             writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
             int padding = Padding;
             if (padding >= 0)

@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Net
 {
     using System.Collections;
@@ -198,7 +197,6 @@ namespace System.Net
         /// parameter.</para>
         /// </devdoc>
 
-
         [Obsolete(
             "GetHostByName is obsoleted for this type, please use GetHostEntry instead. http://go.microsoft.com/fwlink/?linkid=14202"
         )]
@@ -223,7 +221,6 @@ namespace System.Net
         }
 
         //
-
 
         internal static IPHostEntry InternalGetHostByName(string hostName)
         {
@@ -550,7 +547,6 @@ namespace System.Net
         /// instance from a DNS hostname.</para>
         /// </devdoc>
         // UEUE
-
 
         [Obsolete(
             "Resolve is obsoleted for this type, please use GetHostEntry instead. http://go.microsoft.com/fwlink/?linkid=14202"
@@ -1003,7 +999,6 @@ namespace System.Net
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
 
-
         [Obsolete(
             "EndGetHostByName is obsoleted for this type, please use EndGetHostEntry instead. http://go.microsoft.com/fwlink/?linkid=14202"
         )]
@@ -1022,8 +1017,6 @@ namespace System.Net
         //***********************************************************************
         //*************   New Whidbey Apis  *************************************
         //***********************************************************************
-
-
 
         public static IPHostEntry GetHostEntry(string hostNameOrAddress)
         {

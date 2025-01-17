@@ -585,7 +585,6 @@ namespace MonoTests.System.Linq
         {
             //string [] data = { "2", "1", "5", "3", "4" };
 
-
             // ElementAt<TSource> (int)
             AssertException<ArgumentNullException>(
                 delegate()
@@ -627,7 +626,6 @@ namespace MonoTests.System.Linq
         public void ElementAtOrDefaultArgumentNullTest()
         {
             //string [] data = { "2", "1", "5", "3", "4" };
-
 
             // ElementAtOrDefault<TSource> (int)
             AssertException<ArgumentNullException>(
@@ -838,7 +836,6 @@ namespace MonoTests.System.Linq
         public void ContainsArgumentNullTest()
         {
             //string [] data = { "2", "1", "5", "3", "4" };
-
 
             // Contains<TSource> (TSource)
             AssertException<ArgumentNullException>(
@@ -2746,7 +2743,6 @@ namespace MonoTests.System.Linq
         {
             //string [] data = { "2", "1", "5", "3", "4" };
 
-
             // Take<TSource> (int)
             AssertException<ArgumentNullException>(
                 delegate()
@@ -2819,7 +2815,6 @@ namespace MonoTests.System.Linq
         public void SkipArgumentNullTest()
         {
             //string [] data = { "2", "1", "5", "3", "4" };
-
 
             // Skip<TSource> (int)
             AssertException<ArgumentNullException>(
@@ -3870,7 +3865,6 @@ namespace MonoTests.System.Linq
         {
             //string [] data = { "2", "1", "5", "3", "4" };
 
-
             // Distinct<TSource> ()
             AssertException<ArgumentNullException>(
                 delegate()
@@ -4050,7 +4044,6 @@ namespace MonoTests.System.Linq
         {
             //string [] data = { "2", "1", "5", "3", "4" };
 
-
             // Reverse<TSource> ()
             AssertException<ArgumentNullException>(
                 delegate()
@@ -4149,7 +4142,6 @@ namespace MonoTests.System.Linq
         {
             //string [] data = { "2", "1", "5", "3", "4" };
 
-
             // ToArray<TSource> ()
             AssertException<ArgumentNullException>(
                 delegate()
@@ -4173,7 +4165,6 @@ namespace MonoTests.System.Linq
         public void ToListArgumentNullTest()
         {
             //string [] data = { "2", "1", "5", "3", "4" };
-
 
             // ToList<string> ()
             AssertException<ArgumentNullException>(
@@ -4519,7 +4510,6 @@ namespace MonoTests.System.Linq
         {
             //string [] data = { "2", "1", "5", "3", "4" };
 
-
             // DefaultIfEmpty<string> ()
             AssertException<ArgumentNullException>(
                 delegate()
@@ -4559,7 +4549,6 @@ namespace MonoTests.System.Linq
         {
             //string [] data = { "2", "1", "5", "3", "4" };
 
-
             // OfType<string> ()
             AssertException<ArgumentNullException>(
                 delegate()
@@ -4583,7 +4572,6 @@ namespace MonoTests.System.Linq
         public void CastArgumentNullTest()
         {
             //string [] data = { "2", "1", "5", "3", "4" };
-
 
             // Cast<string> ()
             AssertException<ArgumentNullException>(

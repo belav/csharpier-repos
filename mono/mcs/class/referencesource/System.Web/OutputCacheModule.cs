@@ -766,7 +766,6 @@ namespace System.Web.Caching
                  * Skip this step if it's a VaryByNone vary policy.
                  */
 
-
                 key = CreateOutputCachedItemKey(context, cachedVary);
                 if (key == null)
                 {

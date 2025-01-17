@@ -494,7 +494,6 @@ namespace System.Net
             }
             //
 
-
             uint dataRead = (uint)returnValue;
             UpdateAfterRead((uint)castedAsyncResult.ErrorCode, dataRead);
             GlobalLog.Print(

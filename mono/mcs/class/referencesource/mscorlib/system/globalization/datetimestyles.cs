@@ -24,7 +24,6 @@ namespace System.Globalization
         // 0x0009, 0x000A, 0x000B, 0x000C, 0x000D, and 0x0020 are considered to be
         // whitespace.
 
-
         None = 0x00000000,
 
         AllowLeadingWhite = 0x00000001,

@@ -29,9 +29,6 @@ namespace System.Web.UI
 
     //
 
-
-
-
     /// <devdoc>
     ///    <para>Maps a sequence of text characters to a .NET Framework
     ///       type when an .aspx file is processed on the server.</para>
@@ -338,8 +335,6 @@ namespace System.Web.UI
                 }
 
                 //
-
-
 
                 if (parser.FInDesigner && (_tagNamespaceRegisterEntries == null))
                 {

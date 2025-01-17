@@ -80,12 +80,6 @@ namespace System.Collections.Specialized
             {
                 // <
 
-
-
-
-
-
-
                 ListDictionary cachedList = list;
                 if (hashtable != null)
                 {
@@ -98,12 +92,6 @@ namespace System.Collections.Specialized
                 else
                 {
                     // <
-
-
-
-
-
-
 
                     if (key == null)
                     {
@@ -171,9 +159,6 @@ namespace System.Collections.Specialized
                 newTable.Add(en.Key, en.Value);
             }
             // <
-
-
-
 
             hashtable = newTable;
             list = null;

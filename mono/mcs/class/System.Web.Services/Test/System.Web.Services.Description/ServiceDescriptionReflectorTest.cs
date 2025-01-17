@@ -9,7 +9,6 @@
 // Copyright (C) 2006 Novell, Inc.
 //
 
-
 #if !MOBILE && !XAMMAC_4_5
 using NUnit.Framework;
 using System;

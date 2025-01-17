@@ -57,7 +57,6 @@ namespace Microsoft.SqlServer.Server
         #endregion
 
 
-
         #region Value getters
 
         //  SmiRecordBuffer subclasses that expose CanGet == true must implement all Getters from SmiTypedGetterSetter

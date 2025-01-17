@@ -45,7 +45,6 @@ namespace System.Globalization
     //  If you change the values below, be sure to change the values in native part as well.
     //
 
-
     [Serializable]
     [Flags]
     [System.Runtime.InteropServices.ComVisible(true)]
@@ -475,7 +474,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
         public virtual int Compare(String string1, String string2)
         {
             return (Compare(string1, string2, CompareOptions.None));
@@ -562,7 +560,6 @@ namespace System.Globalization
         //  string1 is greater than string2.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public unsafe virtual int Compare(
             String string1,
@@ -752,7 +749,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
         [System.Security.SecuritySafeCritical] // auto-generated
         public virtual unsafe bool IsPrefix(String source, String prefix, CompareOptions options)
         {
@@ -831,7 +827,6 @@ namespace System.Globalization
         //  String.Empty, true is returned.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         [System.Security.SecuritySafeCritical] // auto-generated
         public virtual unsafe bool IsSuffix(String source, String suffix, CompareOptions options)
@@ -922,7 +917,6 @@ namespace System.Globalization
         //  Throws ArgumentException if value is null.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public unsafe virtual int IndexOf(String source, char value)
         {
@@ -1191,7 +1185,6 @@ namespace System.Globalization
         //  Throws ArgumentException if value is null.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public unsafe virtual int LastIndexOf(String source, char value)
         {
@@ -1588,7 +1581,6 @@ namespace System.Globalization
         //
         ////////////////////////////////////////////////////////////////////////
 
-
         public override bool Equals(Object value)
         {
             CompareInfo that = value as CompareInfo;
@@ -1610,7 +1602,6 @@ namespace System.Globalization
         //  CompareInfo A and B where A.Equals(B) is true.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public override int GetHashCode()
         {
@@ -1733,7 +1724,6 @@ namespace System.Globalization
         //  CompareInfo.
         //
         ////////////////////////////////////////////////////////////////////////
-
 
         public override String ToString()
         {

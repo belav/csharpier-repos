@@ -7,7 +7,6 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-
 namespace System.ServiceModel.Security.Tokens
 {
     using System.IdentityModel.Selectors;

@@ -17,8 +17,6 @@ namespace System.Web.UI.WebControls
 
         /*private bool _executingSelectCount;*/
 
-
-
         public SqlDataSourceSelectingEventArgs(
             DbCommand command,
             DataSourceSelectArguments arguments /*, bool executingSelectCount*/

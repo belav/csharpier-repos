@@ -2,7 +2,6 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //----------------------------------------------------------------
 
-
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
     System.Runtime.FxCop.Category.Performance,
     System.Runtime.FxCop.Rule.AvoidUncalledPrivateCode,

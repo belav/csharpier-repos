@@ -236,16 +236,6 @@ namespace System.Runtime.Remoting
 
                 // <
 
-
-
-
-
-
-
-
-
-
-
                 BCLDebug.Assert(Thread.CurrentContext == _srvCtx, "Bad context mismatch");
 
                 MarshalByRefObject srvObj = null;

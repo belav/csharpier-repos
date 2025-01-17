@@ -22,7 +22,6 @@
 // Authors:
 //	Andreia Gaita	<avidigal@novell.com>
 
-
 using System;
 using System.ComponentModel;
 using System.Drawing;

@@ -195,7 +195,6 @@ namespace MS.Internal.Xml.XPath
         // To achieve this in all places where we accept from or report to user XPathResultType.
         // On my best knowledge this happens only in XsltContext.ResolveFunction() / IXsltContextFunction.ReturnType
 
-
         protected static XPathResultType GetXPathType(object value)
         {
             if (value is XPathNodeIterator)

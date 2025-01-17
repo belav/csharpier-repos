@@ -125,7 +125,6 @@ namespace System.Security.Permissions
         //
         //------------------------------------------------------
 
-
         public StrongNameIdentityPermission(PermissionState state)
         {
             if (state == PermissionState.Unrestricted)
@@ -268,7 +267,6 @@ namespace System.Security.Permissions
         // IPERMISSION IMPLEMENTATION
         //
         //------------------------------------------------------
-
 
         public override IPermission Copy()
         {

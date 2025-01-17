@@ -2561,7 +2561,6 @@ namespace Newtonsoft.Json.Tests.Serialization
         //  </cas:authenticationSuccess>
         //</cas:serviceResponse>
 
-
         //WAYF
         //<cas:serviceResponse xmlns:cas="http://www.yale.edu/tp/cas">
         //  <cas:authenticationSuccess>
@@ -2592,7 +2591,6 @@ namespace Newtonsoft.Json.Tests.Serialization
         //  </norEduPerson>
         // </cas:authenticationSuccess>
         //</cas:serviceResponse>
-
 
         public enum ssoLanguage
         {

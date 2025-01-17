@@ -32,7 +32,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 // This is a wrapper around StreamWriter used by System.Console that
 // catches IOException so that graphical applications don't suddenly
 // get IO errors when their terminal vanishes (ie when they spew debug

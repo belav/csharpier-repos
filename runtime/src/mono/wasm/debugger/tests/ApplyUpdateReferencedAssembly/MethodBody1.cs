@@ -124,18 +124,6 @@ namespace ApplyUpdateReferencedAssembly
     //     }
     // }
 
-
-
-
-
-
-
-
-
-
-
-
-
     public class MethodBody11
     {
         public static void StaticMethod1()

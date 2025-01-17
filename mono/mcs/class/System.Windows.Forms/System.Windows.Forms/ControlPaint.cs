@@ -23,7 +23,6 @@
 //	Peter Bartok	pbartok@novell.com
 //
 
-
 // NOT COMPLETE
 
 using System.Drawing;

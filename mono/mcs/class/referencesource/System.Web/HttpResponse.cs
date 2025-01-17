@@ -3522,7 +3522,6 @@ namespace System.Web
         {
             //
 
-
             PushPromise(path, method: "GET", headers: null);
         }
 
@@ -3600,7 +3599,6 @@ namespace System.Web
         //
         // Deprecated ASP compatibility methods and properties
         //
-
 
         /// <devdoc>
         ///    <para>
@@ -3713,7 +3711,6 @@ namespace System.Web
         /*
          * ASP compatible caching properties
          */
-
 
         /// <devdoc>
         ///    <para>

@@ -5,7 +5,6 @@
 //	Kenneth Bell
 //
 
-
 namespace System.Security.Principal
 {
     internal class WellKnownAccount

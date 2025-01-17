@@ -117,7 +117,6 @@ namespace System.Web.UI
                 // Even though this only makes sense for compiled pages, Sharepoint needs us to
                 // ignore instead of throw when the page in non-compiled.
 
-
                 // For historical reasons, the virtual path can be specified by 3 different attributes:
                 // virtualpath, page and control.  They all do the same, and virtualpath is the recommended
                 // one (the other two are deprecated).

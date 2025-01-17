@@ -48,7 +48,6 @@ namespace System.Web.UI.WebControls
         {
             //
 
-
             Debug.Assert(_adRotatorHelper != null && _adRotatorHelper.Page != null);
 
             // In PostCache Substitution, we use a string writer to return the markup.

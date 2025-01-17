@@ -169,7 +169,6 @@ namespace System.Data.SqlTypes
     {
         //
 
-
         // Creates a new SqlNotFilledException with its message string set to the common string.
         public SqlNotFilledException()
             : this(SQLResource.NotFilledMessage, null) { }
@@ -194,7 +193,6 @@ namespace System.Data.SqlTypes
     public sealed class SqlAlreadyFilledException : SqlTypeException
     {
         //
-
 
         // Creates a new SqlNotFilledException with its message string set to the common string.
         public SqlAlreadyFilledException()

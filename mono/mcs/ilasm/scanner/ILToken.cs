@@ -1,7 +1,6 @@
 // ILToken.cs
 // Author: Sergey Chaban (serge@wildwestsoftware.com)
 
-
 using System;
 
 namespace Mono.ILASM

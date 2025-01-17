@@ -2445,8 +2445,6 @@ namespace System.Data.SqlClient
 
             //
 
-
-
             // If we get here, the debugger must be hooked up.
             if (!sdc.active)
             {
@@ -3008,10 +3006,6 @@ namespace System.Data.SqlClient
     } // SqlConnection
 
     //
-
-
-
-
 
     [
         ComVisible(true),

@@ -23,9 +23,7 @@
 //	Jordi Mas i Hernandez, jordi@ximian.com
 //
 
-
 // COMPLETE
-
 
 namespace System.Windows.Forms
 {

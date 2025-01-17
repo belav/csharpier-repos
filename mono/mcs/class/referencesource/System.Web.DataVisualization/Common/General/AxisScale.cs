@@ -778,7 +778,6 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Axis Segments and Scale Breaks Properties
 
 
-
         // Field that stores Axis automatic scale breaks style.
         internal AxisScaleBreakStyle axisScaleBreakStyle = null;
 

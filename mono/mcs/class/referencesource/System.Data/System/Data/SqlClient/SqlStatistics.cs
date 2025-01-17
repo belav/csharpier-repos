@@ -6,7 +6,6 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-
 using System;
 using System.Collections;
 using System.Data.Common;

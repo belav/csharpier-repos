@@ -4,8 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
-
 /*********************************
 
 BuildResultCache
@@ -784,7 +782,6 @@ namespace System.Web.Compilation
             // Thus, since ShutdownAppDomain acquires a lock on ApplicationManager, we always release the CompilationMutex
             // before calling ShutdownAppDomain, in case another thread has acquired the lock on ApplicationManager and
             // is waiting on the CompilationMutex.
-
 
             if (
                 s_shutdownStatus == SHUTDOWN_NEEDED

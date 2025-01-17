@@ -165,7 +165,6 @@ namespace MonoTests.System.Windows.Forms
         //        Assert.AreEqual (Color.Green, tsi.VisitedLinkColor, "B1");
         //}
 
-
         //[Test]
         //public void PropertyAnchorAndDocking ()
         //{

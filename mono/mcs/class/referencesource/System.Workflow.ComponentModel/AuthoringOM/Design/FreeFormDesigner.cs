@@ -34,9 +34,6 @@ namespace System.Workflow.ComponentModel.Design
     #region Class FreeformActivityDesigner
     //
 
-
-
-
     //By default this designer will use the CompositeActivityDesigner theme
     [DesignerSerializer(
         typeof(FreeformActivityDesignerLayoutSerializer),
@@ -738,7 +735,6 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         //
-
 
         protected override void OnContainedActivitiesChanging(
             ActivityCollectionChangeEventArgs listChangeArgs

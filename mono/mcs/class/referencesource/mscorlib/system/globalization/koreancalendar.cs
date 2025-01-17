@@ -24,7 +24,6 @@ namespace System.Globalization
     **      Korean      2334/01/01  12332/12/31
     ============================================================================*/
 
-
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
     public class KoreanCalendar : Calendar
@@ -89,7 +88,6 @@ namespace System.Globalization
         }
         */
 
-
         public KoreanCalendar()
         {
             try
@@ -128,7 +126,6 @@ namespace System.Globalization
         **Exceptions
         **  ArgumentException  If month is less than 1 or greater * than 12.
         ============================================================================*/
-
 
         public override int GetDaysInMonth(int year, int month, int era)
         {

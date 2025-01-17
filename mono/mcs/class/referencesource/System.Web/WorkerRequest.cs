@@ -37,7 +37,6 @@ namespace System.Web
     // ****************************************************************************
     //
 
-
     /// <devdoc>
     ///    <para>This abstract class defines the base worker methods and enumerations used by ASP.NET managed code for request processing.</para>
     /// </devdoc>
@@ -51,7 +50,6 @@ namespace System.Web
 #pragma warning disable 0649
         private Guid _traceId;
 #pragma warning restore 0649
-
 
         protected HttpWorkerRequest()
         {
@@ -71,7 +69,6 @@ namespace System.Web
         //
         // general-headers [section 4.5]
         //
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -127,7 +124,6 @@ namespace System.Web
         // entity-headers  [section 7.1]
         //
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -181,7 +177,6 @@ namespace System.Web
         //
         // request-headers [section 5.3]
         //
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -287,7 +282,6 @@ namespace System.Web
         // Request headers end here
         //
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -296,7 +290,6 @@ namespace System.Web
         //
         // response-headers [section 6.2]
         //
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -352,7 +345,6 @@ namespace System.Web
         // Response headers end here
         //
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -363,7 +355,6 @@ namespace System.Web
         //
         // Request reasons
         //
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -408,7 +399,6 @@ namespace System.Web
         //
 
         // required members
-
 
         /// <devdoc>
         ///    <para> Returns the virtual path to the requested Uri, including PathInfo.</para>
@@ -518,7 +508,6 @@ namespace System.Web
         }
 
         // optional members with defaults supplied
-
 
         /// <devdoc>
         ///    <para>When overriden in a derived class, returns the response query string as an array of bytes.</para>
@@ -958,7 +947,6 @@ namespace System.Web
         // Abstract methods to write the response
         //
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1129,7 +1117,6 @@ namespace System.Web
         // Virtual helper methods
         //
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1252,7 +1239,6 @@ namespace System.Web
         // criteria to find out if there is posted data
         //
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1295,7 +1281,6 @@ namespace System.Web
         //
         // Default values for Http status description strings
         //
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -1394,7 +1379,6 @@ namespace System.Web
         // Header index to string conversions
         //
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1409,7 +1393,6 @@ namespace System.Web
         }
 
         // ************************************************************************
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -1426,7 +1409,6 @@ namespace System.Web
 
         // ************************************************************************
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1442,7 +1424,6 @@ namespace System.Web
 
         // ************************************************************************
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1452,7 +1433,6 @@ namespace System.Web
         }
 
         // ************************************************************************
-
 
         //
         // Implemenation -- lookup tables for header names

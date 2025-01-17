@@ -25,7 +25,6 @@
 // Author:
 //      Daniel Nauck    (dna(at)mono-project(dot)de)
 
-
 using System;
 using System.Collections;
 using System.Drawing;

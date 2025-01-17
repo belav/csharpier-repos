@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 // This file defines an internal static class used to throw exceptions in BCL code.
 // The main purpose is to reduce code size.
 //

@@ -6,8 +6,6 @@
 // <owner current="true" primary="false">billin</owner>
 //------------------------------------------------------------------------------
 
-
-
 namespace System.Data.SqlClient
 {
     using System;

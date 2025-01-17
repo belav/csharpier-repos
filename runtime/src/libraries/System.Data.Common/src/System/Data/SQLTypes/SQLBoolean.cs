@@ -221,7 +221,6 @@ namespace System.Data.SqlTypes
 
         // Implicit conversions
 
-
         // Explicit conversions
 
         // Explicit conversion from SqlByte to SqlBoolean

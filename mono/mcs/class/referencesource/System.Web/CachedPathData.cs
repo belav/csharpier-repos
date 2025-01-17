@@ -273,7 +273,6 @@ namespace System.Web
 
             // WOS
 
-
             bool cacheEntryIsNotRemovable = false;
 
             // if not found, try to add it
@@ -421,9 +420,6 @@ namespace System.Web
                 if (isDataCreator)
                 {
                     //
-
-
-
 
                     if (!dataAdd._flags[FInited])
                     {

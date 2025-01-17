@@ -316,8 +316,6 @@ namespace System.Workflow.ComponentModel.Serialization
             {
                 //
 
-
-
                 throw new InvalidOperationException();
             }
 

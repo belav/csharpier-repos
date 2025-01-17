@@ -5,7 +5,6 @@
 // We were appending every time the callstack and using the same exception object.
 // Now we still use the same object, but callstack is cleared every time.
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;

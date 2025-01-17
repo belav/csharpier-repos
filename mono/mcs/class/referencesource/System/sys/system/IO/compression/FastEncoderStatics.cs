@@ -237,7 +237,6 @@ namespace System.IO.Compression
         // cache locality, fewer memory operations.
         //
 
-
         // Encoding information for literal and Length.
         // The least 5 significant bits are the length
         // and the rest is the code bits.

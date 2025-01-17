@@ -208,7 +208,6 @@ namespace System.Data
             //  If we have BOTH, we set them through the constructor - 1 index creation
             //
 
-
             // Filter AND Sort
             if ((null != finalPredicate) && (0 < _sortExpression.Count))
             {

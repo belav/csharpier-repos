@@ -4,7 +4,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
 namespace System.Diagnostics
 {
     public enum PerformanceCounterInstanceLifetime

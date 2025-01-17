@@ -61,7 +61,6 @@ namespace System.Xml
 
         //define the array positions
 
-
         /// <include file='doc\ReadOnlyTernaryTree.uex' path='docs/doc[@for="TernaryTreeReadOnly.TernaryTreeReadOnly"]/*' />
         public TernaryTreeReadOnly(byte[] nodeBuffer)
         {

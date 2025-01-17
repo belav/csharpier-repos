@@ -5,7 +5,6 @@
 // <owner current="true" primary="true">helenak</owner>
 //------------------------------------------------------------------------------
 
-
 namespace System.Xml
 {
     /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType"]/*' />

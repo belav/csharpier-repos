@@ -572,7 +572,6 @@ namespace System.Globalization
             // Total Items: 146
             // code page, family code page, web name, header name, body name, flags
 
-
             MapCodePageDataItem(37, 1252, "IBM037", 0), // "IBM EBCDIC (US-Canada)"
             MapCodePageDataItem(437, 1252, "IBM437", 0), // "OEM United States"
             MapCodePageDataItem(500, 1252, "IBM500", 0), // "IBM EBCDIC (International)"

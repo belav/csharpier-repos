@@ -6,9 +6,6 @@ using System.Collections.Generic;
 
 //Repro from http://www.simple-talk.com/dotnet/.net-framework/the-dangers-of-the-large-object-heap/
 
-
-
-
 namespace LOH_test
 {
     class Program

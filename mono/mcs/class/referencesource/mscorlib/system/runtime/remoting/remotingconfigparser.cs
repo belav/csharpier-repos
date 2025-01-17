@@ -307,7 +307,6 @@ namespace System.Runtime.Remoting.Activation
         // end of configuration entry storage classes
         //
 
-
         //
         // configuration data access
         //
@@ -328,7 +327,6 @@ namespace System.Runtime.Remoting.Activation
         //
         // end of configuration data access
         //
-
 
         //
         // modify configuration data (for multiple entry entities)
@@ -807,7 +805,6 @@ namespace System.Runtime.Remoting.Activation
         private static void ReportError(String errorStr, RemotingXmlConfigFileData configData)
         {
             // <
-
 
             throw new RemotingException(errorStr);
         } // ReportError

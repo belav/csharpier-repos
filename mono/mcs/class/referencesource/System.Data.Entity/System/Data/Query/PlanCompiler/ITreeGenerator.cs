@@ -2151,13 +2151,6 @@ namespace System.Data.Query.PlanCompiler
             // Project - only for identity project
             //           SC_
 
-
-
-
-
-
-
-
             DbExpression result;
             switch (current.ExpressionKind)
             {

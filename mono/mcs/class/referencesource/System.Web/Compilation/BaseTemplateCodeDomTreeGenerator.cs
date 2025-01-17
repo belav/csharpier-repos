@@ -1351,7 +1351,6 @@ namespace System.Web.Compilation
                     // but only if there is codebehind
                     //
 
-
                     // e.g. __ctrl.ServerClick -= new System.EventHandler(this.buttonClicked);
                     // e.g. __ctrl.ServerClick += new System.EventHandler(this.buttonClicked);
                     CodeDelegateCreateExpression newDelegate = new CodeDelegateCreateExpression();
@@ -2124,8 +2123,6 @@ namespace System.Web.Compilation
                 // Index that the control will have in its parent's Controls
                 // collection.
                 //
-
-
 
                 int controlIndex = 0;
 
