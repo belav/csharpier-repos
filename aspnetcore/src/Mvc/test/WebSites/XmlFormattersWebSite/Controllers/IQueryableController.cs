@@ -20,10 +20,11 @@ public class IQueryableController : Controller
 
     public IQueryable<Person> WrappedTypes()
     {
-        return new[] {
-                new Person() { Id = 10, Name = "Mike" },
-                new Person() { Id = 11, Name = "Jimmy" }
-            }.AsQueryable();
+        return new[]
+        {
+            new Person() { Id = 10, Name = "Mike" },
+            new Person() { Id = 11, Name = "Jimmy" },
+        }.AsQueryable();
     }
 
     public IQueryable<Person> WrappedTypes_Empty()

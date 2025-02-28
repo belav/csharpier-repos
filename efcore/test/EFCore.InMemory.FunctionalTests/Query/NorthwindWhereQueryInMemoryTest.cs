@@ -5,12 +5,14 @@ using Microsoft.EntityFrameworkCore.InMemory.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindWhereQueryInMemoryTest : NorthwindWhereQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
+public class NorthwindWhereQueryInMemoryTest
+    : NorthwindWhereQueryTestBase<NorthwindQueryInMemoryFixture<NoopModelCustomizer>>
 {
     public NorthwindWhereQueryInMemoryTest(
         NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
 #pragma warning disable IDE0060 // Remove unused parameter
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
 #pragma warning restore IDE0060 // Remove unused parameter
         : base(fixture)
     {
@@ -28,37 +30,36 @@ public class NorthwindWhereQueryInMemoryTest : NorthwindWhereQueryTestBase<North
 
     public override Task Like_with_non_string_column_using_double_cast(bool async)
         // Casting int to object to string is invalid for InMemory
-        => Assert.ThrowsAsync<InvalidCastException>(() => base.Like_with_non_string_column_using_double_cast(async));
+        =>
+        Assert.ThrowsAsync<InvalidCastException>(
+            () => base.Like_with_non_string_column_using_double_cast(async)
+        );
 
-    public override Task ElementAt_over_custom_projection_compared_to_not_null(bool async)
-        => Task.CompletedTask;
+    public override Task ElementAt_over_custom_projection_compared_to_not_null(bool async) =>
+        Task.CompletedTask;
 
-    public override Task ElementAtOrDefault_over_custom_projection_compared_to_null(bool async)
-        => Task.CompletedTask;
+    public override Task ElementAtOrDefault_over_custom_projection_compared_to_null(bool async) =>
+        Task.CompletedTask;
 
-    public override Task Where_compare_constructed_equal(bool async)
-        => Task.CompletedTask;
+    public override Task Where_compare_constructed_equal(bool async) => Task.CompletedTask;
 
-    public override Task Where_compare_constructed_multi_value_equal(bool async)
-        => Task.CompletedTask;
+    public override Task Where_compare_constructed_multi_value_equal(bool async) =>
+        Task.CompletedTask;
 
-    public override Task Where_compare_tuple_constructed_equal(bool async)
-        => Task.CompletedTask;
+    public override Task Where_compare_tuple_constructed_equal(bool async) => Task.CompletedTask;
 
-    public override Task Where_compare_tuple_constructed_multi_value_equal(bool async)
-        => Task.CompletedTask;
+    public override Task Where_compare_tuple_constructed_multi_value_equal(bool async) =>
+        Task.CompletedTask;
 
-    public override Task Where_compare_tuple_create_constructed_equal(bool async)
-        => Task.CompletedTask;
+    public override Task Where_compare_tuple_create_constructed_equal(bool async) =>
+        Task.CompletedTask;
 
-    public override Task Where_compare_tuple_create_constructed_multi_value_equal(bool async)
-        => Task.CompletedTask;
+    public override Task Where_compare_tuple_create_constructed_multi_value_equal(bool async) =>
+        Task.CompletedTask;
 
-    public override Task Where_compare_tuple_constructed_multi_value_not_equal(bool async)
-        => Task.CompletedTask;
+    public override Task Where_compare_tuple_constructed_multi_value_not_equal(bool async) =>
+        Task.CompletedTask;
 
-    public override Task Where_compare_tuple_create_constructed_multi_value_not_equal(bool async)
-        => Task.CompletedTask;
-
-    
+    public override Task Where_compare_tuple_create_constructed_multi_value_not_equal(bool async) =>
+        Task.CompletedTask;
 }

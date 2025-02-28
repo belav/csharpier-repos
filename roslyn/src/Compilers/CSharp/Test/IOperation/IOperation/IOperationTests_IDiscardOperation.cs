@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DiscardFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M()
@@ -34,7 +35,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -57,14 +59,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DiscardFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(int i)
@@ -80,7 +87,8 @@ class C
 }";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -107,14 +115,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DiscardFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(int i, bool b)
@@ -134,7 +147,8 @@ class C
 }";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -191,14 +205,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DiscardFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(int i1, int i2, bool b)
@@ -206,12 +225,15 @@ class C
         (_, (b ? i1 : i2)) = (1, 2);
     }/*</bind>*/
 }";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,14): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (_, (b ? i1 : i2)) = (1, 2);
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "b ? i1 : i2").WithLocation(6, 14) };
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "b ? i1 : i2").WithLocation(6, 14),
+            };
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -272,14 +294,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DiscardFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(int i, bool b)
@@ -289,7 +316,8 @@ class C
 }";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -356,7 +384,11 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(27086, "https://github.com/dotnet/roslyn/issues/27086")]
@@ -364,7 +396,8 @@ Block[B5] - Exit
         [Fact]
         public void DiscardFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(object o)
@@ -379,7 +412,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -397,14 +431,19 @@ Block[B2] - Exit
     Predecessors: [B1*2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DiscardFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(int i, int j, int k, bool b)
@@ -422,7 +461,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -488,7 +528,11 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [WorkItem(27086, "https://github.com/dotnet/roslyn/issues/27086")]
@@ -496,7 +540,8 @@ Block[B5] - Exit
         [Fact]
         public void DiscardFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void M(object o)
@@ -509,12 +554,15 @@ class C
     }/*</bind>*/
 }";
 
-            var expectedDiagnostics = new DiagnosticDescription[] { 
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,18): error CS0825: The contextual keyword 'var' may only appear within a local variable declaration or in script code
                 //         if (o is var)
-                Diagnostic(ErrorCode.ERR_TypeVarNotFound, "var").WithLocation(7, 18) };
+                Diagnostic(ErrorCode.ERR_TypeVarNotFound, "var").WithLocation(7, 18),
+            };
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -536,7 +584,11 @@ Block[B2] - Exit
     Predecessors: [B1*2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

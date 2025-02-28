@@ -15,13 +15,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BracePairs
 {
     public sealed class CSharpBracePairsTests : AbstractBracePairsTests
     {
-        protected override TestWorkspace CreateWorkspace(string input)
-            => TestWorkspace.CreateCSharp(input);
+        protected override TestWorkspace CreateWorkspace(string input) =>
+            TestWorkspace.CreateCSharp(input);
 
         [Fact]
         public async Task Test1()
         {
-            await Test("""
+            await Test(
+                """
                 public class C
                 {|a:{|}
                     void M{|b:(|}int i{|b:)|}
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BracePairs
                     {|g:{|}
                     {|g:}|}
                 {|a:}|}
-                """);
+                """
+            );
         }
     }
 }

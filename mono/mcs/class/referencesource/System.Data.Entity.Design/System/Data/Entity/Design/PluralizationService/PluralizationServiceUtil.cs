@@ -8,20 +8,30 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Entity.Design.PluralizationServices
 {
     internal static class PluralizationServiceUtil
     {
-        internal static bool DoesWordContainSuffix(string word, IEnumerable<string> suffixes, CultureInfo culture)
+        internal static bool DoesWordContainSuffix(
+            string word,
+            IEnumerable<string> suffixes,
+            CultureInfo culture
+        )
         {
             return suffixes.Any(s => word.EndsWith(s, true, culture));
         }
 
-        internal static bool TryInflectOnSuffixInWord(string word, IEnumerable<string> suffixes, Func<string, string> operationOnWord, CultureInfo culture, out string newWord)
+        internal static bool TryInflectOnSuffixInWord(
+            string word,
+            IEnumerable<string> suffixes,
+            Func<string, string> operationOnWord,
+            CultureInfo culture,
+            out string newWord
+        )
         {
             newWord = null;
 

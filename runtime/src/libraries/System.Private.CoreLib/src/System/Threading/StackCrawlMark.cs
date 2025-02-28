@@ -13,6 +13,6 @@ namespace System.Threading
         LookForMe = 0,
         LookForMyCaller = 1,
         LookForMyCallersCaller = 2,
-        LookForThread = 3
+        LookForThread = 3,
     }
 }

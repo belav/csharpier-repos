@@ -30,7 +30,8 @@ public class ValidationAttributeAdapterOfTAttributeTest
             modelMetadata,
             metadataProvider,
             container: null,
-            model: null);
+            model: null
+        );
 
         // Act
         adapter.GetErrorMessage(validationContext);
@@ -50,11 +51,14 @@ public class ValidationAttributeAdapterOfTAttributeTest
         }
     }
 
-    public class TestValidationAttributeAdapter : ValidationAttributeAdapter<TestValidationAttribute>
+    public class TestValidationAttributeAdapter
+        : ValidationAttributeAdapter<TestValidationAttribute>
     {
-        public TestValidationAttributeAdapter(TestValidationAttribute attribute, IStringLocalizer stringLocalizer)
-            : base(attribute, stringLocalizer)
-        { }
+        public TestValidationAttributeAdapter(
+            TestValidationAttribute attribute,
+            IStringLocalizer stringLocalizer
+        )
+            : base(attribute, stringLocalizer) { }
 
         public override void AddValidation(ClientModelValidationContext context)
         {

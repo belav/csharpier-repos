@@ -17,19 +17,23 @@ public abstract class Editor<T> : ComponentBase, ICascadingValueSupplier
     /// <summary>
     /// The value for the component.
     /// </summary>
-    [Parameter] public T Value { get; set; } = default!;
+    [Parameter]
+    public T Value { get; set; } = default!;
 
     /// <summary>
     /// An expression that represents the value for the component.
     /// </summary>
-    [Parameter] public Expression<Func<T>> ValueExpression { get; set; } = default!;
+    [Parameter]
+    public Expression<Func<T>> ValueExpression { get; set; } = default!;
 
     /// <summary>
     /// A callback that gets invoked when the value changes.
     /// </summary>
-    [Parameter] public EventCallback<T> ValueChanged { get; set; } = default!;
+    [Parameter]
+    public EventCallback<T> ValueChanged { get; set; } = default!;
 
-    [CascadingParameter] private HtmlFieldPrefix FieldPrefix { get; set; } = default!;
+    [CascadingParameter]
+    private HtmlFieldPrefix FieldPrefix { get; set; } = default!;
 
     bool ICascadingValueSupplier.IsFixed => true;
 
@@ -46,11 +50,16 @@ public abstract class Editor<T> : ComponentBase, ICascadingValueSupplier
     {
         if (ValueExpression == null)
         {
-            throw new InvalidOperationException($"{GetType()} requires a value for the 'ValueExpression' " +
-                "parameter. Normally this is provided automatically when using 'bind-Value'.");
+            throw new InvalidOperationException(
+                $"{GetType()} requires a value for the 'ValueExpression' "
+                    + "parameter. Normally this is provided automatically when using 'bind-Value'."
+            );
         }
 
-        _value = FieldPrefix != null ? FieldPrefix.Combine(ValueExpression) : new HtmlFieldPrefix(ValueExpression);
+        _value =
+            FieldPrefix != null
+                ? FieldPrefix.Combine(ValueExpression)
+                : new HtmlFieldPrefix(ValueExpression);
     }
 
     bool ICascadingValueSupplier.CanSupplyValue(in CascadingParameterInfo parameterInfo) =>
@@ -61,13 +70,23 @@ public abstract class Editor<T> : ComponentBase, ICascadingValueSupplier
         return ((ICascadingValueSupplier)this).CanSupplyValue(parameterInfo) ? _value : null;
     }
 
-    void ICascadingValueSupplier.Subscribe(ComponentState subscriber, in CascadingParameterInfo parameterInfo)
+    void ICascadingValueSupplier.Subscribe(
+        ComponentState subscriber,
+        in CascadingParameterInfo parameterInfo
+    )
     {
-        throw new InvalidOperationException($"Cannot subscribe to a {typeof(HtmlFieldPrefix).Name}.");
+        throw new InvalidOperationException(
+            $"Cannot subscribe to a {typeof(HtmlFieldPrefix).Name}."
+        );
     }
 
-    void ICascadingValueSupplier.Unsubscribe(ComponentState subscriber, in CascadingParameterInfo parameterInfo)
+    void ICascadingValueSupplier.Unsubscribe(
+        ComponentState subscriber,
+        in CascadingParameterInfo parameterInfo
+    )
     {
-        throw new InvalidOperationException($"Cannot subscribe to a {typeof(HtmlFieldPrefix).Name}.");
+        throw new InvalidOperationException(
+            $"Cannot subscribe to a {typeof(HtmlFieldPrefix).Name}."
+        );
     }
 }

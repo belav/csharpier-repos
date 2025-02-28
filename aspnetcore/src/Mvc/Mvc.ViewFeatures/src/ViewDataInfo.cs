@@ -36,9 +36,7 @@ public class ViewDataInfo
     /// <param name="container">The <see cref="object"/> that <see cref="Value"/> will be evaluated from.</param>
     /// <param name="propertyInfo">The <see cref="PropertyInfo"/> that will be used to evaluate <see cref="Value"/>.</param>
     public ViewDataInfo(object container, PropertyInfo propertyInfo)
-        : this(container, propertyInfo, _propertyInfoResolver)
-    {
-    }
+        : this(container, propertyInfo, _propertyInfoResolver) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataInfo"/> class with info about a

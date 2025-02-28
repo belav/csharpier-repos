@@ -103,7 +103,9 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void Context_Null()
         {
-            XmlDocument doc = GetDocumentFromResource("System.Security.Cryptography.Xml.Tests.XmlLicenseSample.xml");
+            XmlDocument doc = GetDocumentFromResource(
+                "System.Security.Cryptography.Xml.Tests.XmlLicenseSample.xml"
+            );
 
             Assert.Throws<CryptographicException>(() => transform.LoadInput(doc));
         }
@@ -121,32 +123,45 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void Decryptor_Null()
         {
-            XmlDocument doc = GetDocumentFromResource("System.Security.Cryptography.Xml.Tests.XmlLicenseSample.xml");
+            XmlDocument doc = GetDocumentFromResource(
+                "System.Security.Cryptography.Xml.Tests.XmlLicenseSample.xml"
+            );
 
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(doc.NameTable);
             namespaceManager.AddNamespace("r", "urn:mpeg:mpeg21:2003:01-REL-R-NS");
-            transform.Context = doc.DocumentElement.SelectSingleNode("//r:issuer[1]", namespaceManager) as XmlElement;
+            transform.Context =
+                doc.DocumentElement.SelectSingleNode("//r:issuer[1]", namespaceManager)
+                as XmlElement;
 
             Assert.Throws<CryptographicException>(() => transform.LoadInput(doc));
         }
 
         [Fact]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "https://github.com/dotnet/runtime/issues/21536")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            "https://github.com/dotnet/runtime/issues/21536"
+        )]
         public void ValidLicense()
         {
-            XmlDocument doc = GetDocumentFromResource("System.Security.Cryptography.Xml.Tests.XmlLicenseSample.xml");
+            XmlDocument doc = GetDocumentFromResource(
+                "System.Security.Cryptography.Xml.Tests.XmlLicenseSample.xml"
+            );
 
             XmlNamespaceManager namespaceManager = new XmlNamespaceManager(doc.NameTable);
             namespaceManager.AddNamespace("r", "urn:mpeg:mpeg21:2003:01-REL-R-NS");
-            transform.Context = doc.DocumentElement.SelectSingleNode("//r:issuer[1]", namespaceManager) as XmlElement;
+            transform.Context =
+                doc.DocumentElement.SelectSingleNode("//r:issuer[1]", namespaceManager)
+                as XmlElement;
             DummyDecryptor decryptor = new DummyDecryptor { ContentToReturn = "Encrypted Content" };
             transform.Decryptor = decryptor;
             transform.LoadInput(doc);
             XmlDocument output = transform.GetOutput(typeof(XmlDocument)) as XmlDocument;
 
-            string decodedXml = @"<r:license xmlns:r=""urn:mpeg:mpeg21:2003:01-REL-R-NS"" licenseId=""{00000000-0000-0000-0000-123456789012}"">";
+            string decodedXml =
+                @"<r:license xmlns:r=""urn:mpeg:mpeg21:2003:01-REL-R-NS"" licenseId=""{00000000-0000-0000-0000-123456789012}"">";
             decodedXml += "<r:title>Test License</r:title><r:grant>Encrypted Content</r:grant>";
-            decodedXml += "<r:issuer><r:details><r:timeOfIssue>2017-01-71T00:00:00Z</r:timeOfIssue></r:details></r:issuer></r:license>";
+            decodedXml +=
+                "<r:issuer><r:details><r:timeOfIssue>2017-01-71T00:00:00Z</r:timeOfIssue></r:details></r:issuer></r:license>";
             Assert.NotNull(output);
             Assert.Equal(decodedXml, output.OuterXml);
         }
@@ -154,7 +169,10 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void GetOutput_InvalidType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => transform.GetOutput(typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => transform.GetOutput(typeof(string))
+            );
         }
 
         [Fact]
@@ -163,19 +181,25 @@ namespace System.Security.Cryptography.Xml.Tests
             using (var key = RSA.Create())
             {
                 string expected;
-                string encryptedLicenseWithGrants = GenerateLicenseXmlWithEncryptedGrants(key, out expected);
+                string encryptedLicenseWithGrants = GenerateLicenseXmlWithEncryptedGrants(
+                    key,
+                    out expected
+                );
 
                 Assert.Contains("hello!", expected);
                 Assert.DoesNotContain("hello!", encryptedLicenseWithGrants);
 
                 XmlNamespaceManager nsManager;
-                XmlDocument toDecrypt = LoadXmlWithLicenseNs(encryptedLicenseWithGrants, out nsManager);
+                XmlDocument toDecrypt = LoadXmlWithLicenseNs(
+                    encryptedLicenseWithGrants,
+                    out nsManager
+                );
 
                 var decryptor = new XmlLicenseEncryptedRef();
                 var transform = new XmlLicenseTransform()
                 {
                     Decryptor = decryptor,
-                    Context = FindLicenseTransformContext(toDecrypt, nsManager)
+                    Context = FindLicenseTransformContext(toDecrypt, nsManager),
                 };
 
                 decryptor.AddAsymmetricKey(key);
@@ -203,7 +227,10 @@ namespace System.Security.Cryptography.Xml.Tests
             return doc;
         }
 
-        private static string GenerateLicenseXmlWithEncryptedGrants(RSA key, out string plainTextLicense)
+        private static string GenerateLicenseXmlWithEncryptedGrants(
+            RSA key,
+            out string plainTextLicense
+        )
         {
             plainTextLicense = @"<r:license xmlns:r=""urn:mpeg:mpeg21:2003:01-REL-R-NS"">
     <r:title>Test License</r:title>
@@ -255,13 +282,19 @@ namespace System.Security.Cryptography.Xml.Tests
             return doc.OuterXml;
         }
 
-        private static XmlElement FindLicenseTransformContext(XmlDocument doc, XmlNamespaceManager nsManager)
+        private static XmlElement FindLicenseTransformContext(
+            XmlDocument doc,
+            XmlNamespaceManager nsManager
+        )
         {
             XmlNodeList issuerList = doc.SelectNodes("//r:issuer", nsManager);
             return issuerList[0] as XmlElement;
         }
 
-        private static XmlDocument LoadXmlWithLicenseNs(string xml, out XmlNamespaceManager nsManager)
+        private static XmlDocument LoadXmlWithLicenseNs(
+            string xml,
+            out XmlNamespaceManager nsManager
+        )
         {
             XmlDocument doc = new XmlDocument();
             doc.PreserveWhitespace = true;
@@ -283,10 +316,19 @@ namespace System.Security.Cryptography.Xml.Tests
                 KeyInfo keyInfo;
                 EncryptionMethod encryptionMethod;
                 CipherData cipherData;
-                XmlLicenseEncryptedRef.Encrypt(ms, key, out keyInfo, out encryptionMethod, out cipherData);
+                XmlLicenseEncryptedRef.Encrypt(
+                    ms,
+                    key,
+                    out keyInfo,
+                    out encryptionMethod,
+                    out cipherData
+                );
                 grant.RemoveAll();
                 XmlDocument doc = grant.OwnerDocument;
-                XmlElement encryptedGrant = doc.CreateElement("encryptedGrant", LicenseTransformNsUrl);
+                XmlElement encryptedGrant = doc.CreateElement(
+                    "encryptedGrant",
+                    LicenseTransformNsUrl
+                );
                 grant.AppendChild(encryptedGrant);
 
                 encryptedGrant.AppendChild(doc.ImportNode(keyInfo.GetXml(), true));
@@ -304,19 +346,29 @@ namespace System.Security.Cryptography.Xml.Tests
             nsMgr.AddNamespace("enc", EncryptedXml.XmlEncNamespaceUrl);
             nsMgr.AddNamespace("r", LicenseTransformNsUrl);
 
-            XmlElement currentIssuerContext = context.SelectSingleNode("ancestor-or-self::r:issuer[1]", nsMgr) as XmlElement;
+            XmlElement currentIssuerContext =
+                context.SelectSingleNode("ancestor-or-self::r:issuer[1]", nsMgr) as XmlElement;
             Assert.NotNull(currentIssuerContext);
 
-            XmlElement signatureNode = currentIssuerContext.SelectSingleNode("descendant-or-self::dsig:Signature[1]", nsMgr) as XmlElement;
+            XmlElement signatureNode =
+                currentIssuerContext.SelectSingleNode(
+                    "descendant-or-self::dsig:Signature[1]",
+                    nsMgr
+                ) as XmlElement;
             if (signatureNode != null)
             {
                 signatureNode.ParentNode.RemoveChild(signatureNode);
             }
 
-            XmlElement currentLicenseContext = currentIssuerContext.SelectSingleNode("ancestor-or-self::r:license[1]", nsMgr) as XmlElement;
+            XmlElement currentLicenseContext =
+                currentIssuerContext.SelectSingleNode("ancestor-or-self::r:license[1]", nsMgr)
+                as XmlElement;
             Assert.NotNull(currentLicenseContext);
 
-            XmlNodeList issuerList = currentLicenseContext.SelectNodes("descendant-or-self::r:license[1]/r:issuer", nsMgr);
+            XmlNodeList issuerList = currentLicenseContext.SelectNodes(
+                "descendant-or-self::r:license[1]/r:issuer",
+                nsMgr
+            );
             for (int i = 0; i < issuerList.Count; i++)
             {
                 XmlNode issuer = issuerList[i];
@@ -325,14 +377,16 @@ namespace System.Security.Cryptography.Xml.Tests
                     continue;
                 }
 
-                if (issuer.LocalName == "issuer"
-                    && issuer.NamespaceURI == LicenseTransformNsUrl)
+                if (issuer.LocalName == "issuer" && issuer.NamespaceURI == LicenseTransformNsUrl)
                 {
                     issuer.ParentNode.RemoveChild(issuer);
                 }
             }
 
-            XmlNodeList encryptedGrantList = currentLicenseContext.SelectNodes("/r:license/r:grant", nsMgr);
+            XmlNodeList encryptedGrantList = currentLicenseContext.SelectNodes(
+                "/r:license/r:grant",
+                nsMgr
+            );
 
             for (int i = 0; i < encryptedGrantList.Count; i++)
             {

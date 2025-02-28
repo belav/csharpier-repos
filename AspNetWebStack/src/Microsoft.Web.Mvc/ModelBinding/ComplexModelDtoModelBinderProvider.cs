@@ -9,18 +9,25 @@ namespace Microsoft.Web.Mvc.ModelBinding
     public sealed class ComplexModelDtoModelBinderProvider : ModelBinderProvider
     {
         // This is really just a simple binder.
-        private static readonly SimpleModelBinderProvider _underlyingProvider = GetUnderlyingProvider();
+        private static readonly SimpleModelBinderProvider _underlyingProvider =
+            GetUnderlyingProvider();
 
-        public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+        public override IExtensibleModelBinder GetBinder(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        )
         {
             return _underlyingProvider.GetBinder(controllerContext, bindingContext);
         }
 
         private static SimpleModelBinderProvider GetUnderlyingProvider()
         {
-            return new SimpleModelBinderProvider(typeof(ComplexModelDto), new ComplexModelDtoModelBinder())
+            return new SimpleModelBinderProvider(
+                typeof(ComplexModelDto),
+                new ComplexModelDtoModelBinder()
+            )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
         }
     }

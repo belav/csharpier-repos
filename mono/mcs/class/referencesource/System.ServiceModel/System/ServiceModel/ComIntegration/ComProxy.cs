@@ -12,6 +12,7 @@ namespace System.ServiceModel.ComIntegration
     {
         IntPtr inner;
         IDisposable ccw;
+
         internal static ComProxy Create(IntPtr outer, object obj, IDisposable disp)
         {
             if (outer == IntPtr.Zero)
@@ -21,7 +22,7 @@ namespace System.ServiceModel.ComIntegration
             IntPtr inner = IntPtr.Zero;
             inner = Marshal.CreateAggregatedObject(outer, obj);
             int refCount = Marshal.AddRef(inner);
-            // Workaround for the CLR ref count issue. 
+            // Workaround for the CLR ref count issue.
             if (3 == refCount)
                 Marshal.Release(inner);
             Marshal.Release(inner);

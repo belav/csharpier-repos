@@ -23,15 +23,25 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             yield return new object[] { null, null };
             yield return new object[] { string.Empty, new DirectoryAttribute[0] };
-            yield return new object[] { "DistinguishedName", new DirectoryAttribute[] { new DirectoryAttribute("name", "value") } };
+            yield return new object[]
+            {
+                "DistinguishedName",
+                new DirectoryAttribute[] { new DirectoryAttribute("name", "value") },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_DistinguishedName_Attributes_TestData))]
-        public void Ctor_DistinguishedString_Attributes(string distinguishedName, DirectoryAttribute[] attributes)
+        public void Ctor_DistinguishedString_Attributes(
+            string distinguishedName,
+            DirectoryAttribute[] attributes
+        )
         {
             var request = new AddRequest(distinguishedName, attributes);
-            Assert.Equal(attributes ?? Enumerable.Empty<DirectoryAttribute>(), request.Attributes.Cast<DirectoryAttribute>());
+            Assert.Equal(
+                attributes ?? Enumerable.Empty<DirectoryAttribute>(),
+                request.Attributes.Cast<DirectoryAttribute>()
+            );
             Assert.Empty(request.Controls);
             Assert.Equal(distinguishedName, request.DistinguishedName);
             Assert.Null(request.RequestId);
@@ -40,7 +50,10 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NullObjectInAttributes_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new AddRequest("DistinguishedName", new DirectoryAttribute[] { null }));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new AddRequest("DistinguishedName", new DirectoryAttribute[] { null })
+            );
         }
 
         [Theory]
@@ -61,7 +74,10 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NullObjectClass_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("objectClass", () => new AddRequest("DistinguishedName", (string)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "objectClass",
+                () => new AddRequest("DistinguishedName", (string)null)
+            );
         }
 
         [Fact]

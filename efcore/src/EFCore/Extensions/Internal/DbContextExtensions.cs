@@ -21,6 +21,6 @@ public static class DbContextExtensions
     /// </summary>
     public static void ConfigureConventions(
         this DbContext context,
-        ModelConfigurationBuilder configurationBuilder)
-        => context.ConfigureConventions(configurationBuilder);
+        ModelConfigurationBuilder configurationBuilder
+    ) => context.ConfigureConventions(configurationBuilder);
 }

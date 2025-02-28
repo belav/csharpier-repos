@@ -25,13 +25,13 @@ namespace System.ServiceModel.ComIntegration
 
     internal class WsdlServiceChannelBuilder : IProxyCreator, IProvideChannelBuilderSettings
     {
-
         ContractDescription contractDescription = null;
         ServiceChannelFactory serviceChannelFactory = null;
         Dictionary<MonikerHelper.MonikerAttribute, string> propertyTable;
         ServiceChannel serviceChannel = null;
         ServiceEndpoint serviceEndpoint = null;
-        KeyedByTypeCollection<IEndpointBehavior> behaviors = new KeyedByTypeCollection<IEndpointBehavior>();
+        KeyedByTypeCollection<IEndpointBehavior> behaviors =
+            new KeyedByTypeCollection<IEndpointBehavior>();
         bool useXmlSerializer = false;
 
         //Suppressing PreSharp warning that property get methods should not throw
@@ -41,7 +41,9 @@ namespace System.ServiceModel.ComIntegration
             get
             {
                 if (serviceChannel != null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE)
+                    );
                 return serviceChannelFactory;
             }
         }
@@ -49,17 +51,11 @@ namespace System.ServiceModel.ComIntegration
 
         ServiceChannel IProvideChannelBuilderSettings.ServiceChannel
         {
-            get
-            {
-                return CreateChannel();
-            }
+            get { return CreateChannel(); }
         }
         ServiceChannelFactory IProvideChannelBuilderSettings.ServiceChannelFactoryReadOnly
         {
-            get
-            {
-                return serviceChannelFactory;
-            }
+            get { return serviceChannelFactory; }
         }
 
         //Suppressing PreSharp warning that property get methods should not throw
@@ -69,7 +65,9 @@ namespace System.ServiceModel.ComIntegration
             get
             {
                 if (serviceChannel != null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(SR.GetString(SR.TooLate), HR.RPC_E_TOO_LATE)
+                    );
                 return behaviors;
             }
         }
@@ -79,14 +77,14 @@ namespace System.ServiceModel.ComIntegration
         {
             if (serviceChannel != null)
                 serviceChannel.Close();
-
         }
 
-        internal WsdlServiceChannelBuilder(Dictionary<MonikerHelper.MonikerAttribute, string> propertyTable)
+        internal WsdlServiceChannelBuilder(
+            Dictionary<MonikerHelper.MonikerAttribute, string> propertyTable
+        )
         {
             this.propertyTable = propertyTable;
             ProcessWsdl();
-
         }
 
         private ServiceChannel CreateChannel()
@@ -107,16 +105,30 @@ namespace System.ServiceModel.ComIntegration
                             }
                             if (serviceChannelFactory == null)
                             {
-                                throw Fx.AssertAndThrow("ServiceChannelFactory cannot be null at this point");
+                                throw Fx.AssertAndThrow(
+                                    "ServiceChannelFactory cannot be null at this point"
+                                );
                             }
                             serviceChannelFactory.Open();
                             if (serviceEndpoint == null)
                             {
                                 throw Fx.AssertAndThrow("ServiceEndpoint cannot be null");
                             }
-                            serviceChannel = serviceChannelFactory.CreateServiceChannel(new EndpointAddress(serviceEndpoint.Address.Uri, serviceEndpoint.Address.Identity, serviceEndpoint.Address.Headers), serviceEndpoint.Address.Uri);
-                            ComPlusChannelCreatedTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationChannelCreated,
-                                SR.TraceCodeComIntegrationChannelCreated, serviceEndpoint.Address.Uri, contractDescription.ContractType);
+                            serviceChannel = serviceChannelFactory.CreateServiceChannel(
+                                new EndpointAddress(
+                                    serviceEndpoint.Address.Uri,
+                                    serviceEndpoint.Address.Identity,
+                                    serviceEndpoint.Address.Headers
+                                ),
+                                serviceEndpoint.Address.Uri
+                            );
+                            ComPlusChannelCreatedTrace.Trace(
+                                TraceEventType.Verbose,
+                                TraceCode.ComIntegrationChannelCreated,
+                                SR.TraceCodeComIntegrationChannelCreated,
+                                serviceEndpoint.Address.Uri,
+                                contractDescription.ContractType
+                            );
                             if (serviceChannel == null)
                             {
                                 throw Fx.AssertAndThrow("serviceProxy MUST derive from RealProxy");
@@ -133,11 +145,12 @@ namespace System.ServiceModel.ComIntegration
                 }
             }
             return serviceChannel;
-
         }
+
         private ServiceChannelFactory CreateServiceChannelFactory()
         {
-            serviceChannelFactory = ServiceChannelFactory.BuildChannelFactory(serviceEndpoint) as ServiceChannelFactory;
+            serviceChannelFactory =
+                ServiceChannelFactory.BuildChannelFactory(serviceEndpoint) as ServiceChannelFactory;
             if (serviceChannelFactory == null)
             {
                 throw Fx.AssertAndThrow("We should get a ServiceChannelFactory back");
@@ -171,9 +184,15 @@ namespace System.ServiceModel.ComIntegration
                 operation.DeserializeReply = true;
 
                 if (useXmlSerializer)
-                    operation.Formatter = XmlSerializerOperationBehavior.CreateOperationFormatter(opDesc);
+                    operation.Formatter = XmlSerializerOperationBehavior.CreateOperationFormatter(
+                        opDesc
+                    );
                 else
-                    operation.Formatter = new DataContractSerializerOperationFormatter(opDesc, TypeLoader.DefaultDataContractFormatAttribute, null);
+                    operation.Formatter = new DataContractSerializerOperationFormatter(
+                        opDesc,
+                        TypeLoader.DefaultDataContractFormatAttribute,
+                        null
+                    );
             }
         }
 
@@ -199,32 +218,50 @@ namespace System.ServiceModel.ComIntegration
             propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.UpnIdentity, out upnIdentity);
             propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.DnsIdentity, out dnsIdentity);
             propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.Serializer, out serializer);
-            propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.BindingNamespace, out bindingNamespace);
-            propertyTable.TryGetValue(MonikerHelper.MonikerAttribute.ContractNamespace, out contractNamespace);
+            propertyTable.TryGetValue(
+                MonikerHelper.MonikerAttribute.BindingNamespace,
+                out bindingNamespace
+            );
+            propertyTable.TryGetValue(
+                MonikerHelper.MonikerAttribute.ContractNamespace,
+                out contractNamespace
+            );
 
             if (string.IsNullOrEmpty(wsdlText))
             {
                 throw Fx.AssertAndThrow("Wsdl should not be null at this point");
             }
-            if (string.IsNullOrEmpty(portType) || string.IsNullOrEmpty(bindingName) || string.IsNullOrEmpty(address))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.ContractBindingAddressCannotBeNull)));
+            if (
+                string.IsNullOrEmpty(portType)
+                || string.IsNullOrEmpty(bindingName)
+                || string.IsNullOrEmpty(address)
+            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MonikerSyntaxException(SR.GetString(SR.ContractBindingAddressCannotBeNull))
+                );
 
             if (!string.IsNullOrEmpty(spnIdentity))
             {
                 if ((!string.IsNullOrEmpty(upnIdentity)) || (!string.IsNullOrEmpty(dnsIdentity)))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity))
+                    );
                 identity = EndpointIdentity.CreateSpnIdentity(spnIdentity);
             }
             else if (!string.IsNullOrEmpty(upnIdentity))
             {
                 if ((!string.IsNullOrEmpty(spnIdentity)) || (!string.IsNullOrEmpty(dnsIdentity)))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity))
+                    );
                 identity = EndpointIdentity.CreateUpnIdentity(upnIdentity);
             }
             else if (!string.IsNullOrEmpty(dnsIdentity))
             {
                 if ((!string.IsNullOrEmpty(spnIdentity)) || (!string.IsNullOrEmpty(upnIdentity)))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorrectServerIdentity))
+                    );
                 identity = EndpointIdentity.CreateDnsIdentity(dnsIdentity);
             }
             else
@@ -235,7 +272,9 @@ namespace System.ServiceModel.ComIntegration
             if (!String.IsNullOrEmpty(serializer))
             {
                 if ("xml" != serializer && "datacontract" != serializer)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.MonikerIncorectSerializer)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.MonikerIncorectSerializer))
+                    );
 
                 if ("xml" == serializer)
                     useXmlSerializer = true;
@@ -257,13 +296,16 @@ namespace System.ServiceModel.ComIntegration
                     if (String.IsNullOrEmpty(bindingNamespace))
                         bindingNamespace = wsdl.TargetNamespace;
 
-                    WsdlNS.ServiceDescriptionCollection wsdlDocs = new WsdlNS.ServiceDescriptionCollection();
+                    WsdlNS.ServiceDescriptionCollection wsdlDocs =
+                        new WsdlNS.ServiceDescriptionCollection();
                     wsdlDocs.Add(wsdl);
                     XmlSchemaSet schemas = new XmlSchemaSet();
                     foreach (XmlSchema schema in wsdl.Types.Schemas)
                         schemas.Add(schema);
 
-                    MetadataSet mds = new MetadataSet(WsdlImporter.CreateMetadataDocuments(wsdlDocs, schemas, null));
+                    MetadataSet mds = new MetadataSet(
+                        WsdlImporter.CreateMetadataDocuments(wsdlDocs, schemas, null)
+                    );
                     WsdlImporter importer;
 
                     if (useXmlSerializer)
@@ -276,8 +318,14 @@ namespace System.ServiceModel.ComIntegration
                             importer = new WsdlImporter(mds);
                     }
 
-                    XmlQualifiedName contractQname = new XmlQualifiedName(portType, contractNamespace);
-                    XmlQualifiedName bindingQname = new XmlQualifiedName(bindingName, bindingNamespace);
+                    XmlQualifiedName contractQname = new XmlQualifiedName(
+                        portType,
+                        contractNamespace
+                    );
+                    XmlQualifiedName bindingQname = new XmlQualifiedName(
+                        bindingName,
+                        bindingNamespace
+                    );
 
                     WsdlNS.PortType wsdlPortType = wsdlDocs.GetPortType(contractQname);
                     contractDescription = importer.ImportContract(wsdlPortType);
@@ -285,19 +333,38 @@ namespace System.ServiceModel.ComIntegration
                     WsdlNS.Binding wsdlBinding = wsdlDocs.GetBinding(bindingQname);
                     Binding binding = importer.ImportBinding(wsdlBinding);
 
-                    EndpointAddress endpointAddress = new EndpointAddress(new Uri(address), identity, (AddressHeaderCollection)null);
+                    EndpointAddress endpointAddress = new EndpointAddress(
+                        new Uri(address),
+                        identity,
+                        (AddressHeaderCollection)null
+                    );
 
-                    serviceEndpoint = new ServiceEndpoint(contractDescription, binding, endpointAddress);
+                    serviceEndpoint = new ServiceEndpoint(
+                        contractDescription,
+                        binding,
+                        endpointAddress
+                    );
 
-                    ComPlusWsdlChannelBuilderTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationWsdlChannelBuilderLoaded,
-                        SR.TraceCodeComIntegrationWsdlChannelBuilderLoaded, bindingQname, contractQname, wsdl, contractDescription, binding, wsdl.Types.Schemas);
+                    ComPlusWsdlChannelBuilderTrace.Trace(
+                        TraceEventType.Verbose,
+                        TraceCode.ComIntegrationWsdlChannelBuilderLoaded,
+                        SR.TraceCodeComIntegrationWsdlChannelBuilderLoaded,
+                        bindingQname,
+                        contractQname,
+                        wsdl,
+                        contractDescription,
+                        binding,
+                        wsdl.Types.Schemas
+                    );
                 }
                 catch (Exception e)
                 {
                     if (Fx.IsFatal(e))
                         throw;
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MonikerSyntaxException(SR.GetString(SR.FailedImportOfWsdl, e.Message)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MonikerSyntaxException(SR.GetString(SR.FailedImportOfWsdl, e.Message))
+                    );
                 }
             }
             finally
@@ -309,11 +376,16 @@ namespace System.ServiceModel.ComIntegration
 
         public WsdlImporter CreateDataContractSerializerImporter(MetadataSet metaData)
         {
-            Collection<IWsdlImportExtension> wsdlImportExtensions = ConfigNS.ClientSection.GetSection().Metadata.LoadWsdlImportExtensions();
+            Collection<IWsdlImportExtension> wsdlImportExtensions = ConfigNS
+                .ClientSection.GetSection()
+                .Metadata.LoadWsdlImportExtensions();
 
             for (int i = 0; i < wsdlImportExtensions.Count; i++)
             {
-                if (wsdlImportExtensions[i].GetType() == typeof(XmlSerializerMessageContractImporter))
+                if (
+                    wsdlImportExtensions[i].GetType()
+                    == typeof(XmlSerializerMessageContractImporter)
+                )
                     wsdlImportExtensions.RemoveAt(i);
             }
 
@@ -324,11 +396,16 @@ namespace System.ServiceModel.ComIntegration
 
         public WsdlImporter CreateXmlSerializerImporter(MetadataSet metaData)
         {
-            Collection<IWsdlImportExtension> wsdlImportExtensions = ConfigNS.ClientSection.GetSection().Metadata.LoadWsdlImportExtensions();
+            Collection<IWsdlImportExtension> wsdlImportExtensions = ConfigNS
+                .ClientSection.GetSection()
+                .Metadata.LoadWsdlImportExtensions();
 
             for (int i = 0; i < wsdlImportExtensions.Count; i++)
             {
-                if (wsdlImportExtensions[i].GetType() == typeof(DataContractSerializerMessageContractImporter))
+                if (
+                    wsdlImportExtensions[i].GetType()
+                    == typeof(DataContractSerializerMessageContractImporter)
+                )
                     wsdlImportExtensions.RemoveAt(i);
             }
 
@@ -337,18 +414,18 @@ namespace System.ServiceModel.ComIntegration
             return importer;
         }
 
-
         ComProxy IProxyCreator.CreateProxy(IntPtr outer, ref Guid riid)
         {
             IntPtr inner = IntPtr.Zero;
             if (riid != InterfaceID.idIDispatch)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidCastException(SR.GetString(SR.NoInterface, riid)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidCastException(SR.GetString(SR.NoInterface, riid))
+                );
             if (contractDescription == null)
             {
                 throw Fx.AssertAndThrow("ContractDescription should not be null at this point");
             }
             return DispatchProxy.Create(outer, contractDescription, this);
-
         }
 
         bool IProxyCreator.SupportsErrorInfo(ref Guid riid)
@@ -357,7 +434,6 @@ namespace System.ServiceModel.ComIntegration
                 return false;
             else
                 return true;
-
         }
 
         bool IProxyCreator.SupportsDispatch()
@@ -369,9 +445,5 @@ namespace System.ServiceModel.ComIntegration
         {
             return true;
         }
-
     }
 }
-          
-               
-          

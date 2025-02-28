@@ -5,18 +5,19 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
+using System.IO;
 using System.IO.Pipes;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CommandLine;
+using Microsoft.CodeAnalysis.Test.Utilities;
 using Moq;
 using Roslyn.Test.Utilities;
 using Xunit;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System.IO;
-using Microsoft.CodeAnalysis.Test.Utilities;
 using static Microsoft.CodeAnalysis.CommandLine.BuildResponse;
+
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 {
     public class ClientConnectionHandlerTests
@@ -24,38 +25,54 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         [Fact]
         public async Task ThrowDuringBuild()
         {
-            var compilerServerHost = new TestableCompilerServerHost(delegate { throw new Exception(); });
+            var compilerServerHost = new TestableCompilerServerHost(
+                delegate
+                {
+                    throw new Exception();
+                }
+            );
             var clientConnectionHandler = new ClientConnectionHandler(compilerServerHost);
             var clientConnection = new TestableClientConnection()
             {
                 ReadBuildRequestFunc = _ => Task.FromResult(ProtocolUtil.EmptyCSharpBuildRequest),
             };
-            var completionData = await clientConnectionHandler.ProcessAsync(Task.FromResult<IClientConnection>(clientConnection));
+            var completionData = await clientConnectionHandler.ProcessAsync(
+                Task.FromResult<IClientConnection>(clientConnection)
+            );
             Assert.Equal(CompletionData.RequestError, completionData);
         }
 
         [Fact]
         public async Task ThrowReadingRequest()
         {
-            var compilerServerHost = new TestableCompilerServerHost(delegate
-            {
-                Assert.True(false, "Should not reach compilation");
-                throw new Exception("");
-            });
+            var compilerServerHost = new TestableCompilerServerHost(
+                delegate
+                {
+                    Assert.True(false, "Should not reach compilation");
+                    throw new Exception("");
+                }
+            );
             var clientConnectionHandler = new ClientConnectionHandler(compilerServerHost);
             var clientConnection = new TestableClientConnection()
             {
                 ReadBuildRequestFunc = _ => throw new Exception(),
             };
 
-            var completionData = await clientConnectionHandler.ProcessAsync(Task.FromResult<IClientConnection>(clientConnection));
+            var completionData = await clientConnectionHandler.ProcessAsync(
+                Task.FromResult<IClientConnection>(clientConnection)
+            );
             Assert.Equal(CompletionData.RequestError, completionData);
         }
 
         [Fact]
         public async Task ThrowWritingResponse()
         {
-            var compilerServerHost = new TestableCompilerServerHost(delegate { return ProtocolUtil.EmptyBuildResponse; });
+            var compilerServerHost = new TestableCompilerServerHost(
+                delegate
+                {
+                    return ProtocolUtil.EmptyBuildResponse;
+                }
+            );
             var clientConnectionHandler = new ClientConnectionHandler(compilerServerHost);
             var threwException = false;
             var clientConnection = new TestableClientConnection()
@@ -65,10 +82,12 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 {
                     threwException = true;
                     throw new Exception("");
-                }
+                },
             };
 
-            var completionData = await clientConnectionHandler.ProcessAsync(Task.FromResult<IClientConnection>(clientConnection));
+            var completionData = await clientConnectionHandler.ProcessAsync(
+                Task.FromResult<IClientConnection>(clientConnection)
+            );
             Assert.Equal(CompletionData.RequestError, completionData);
             Assert.True(threwException);
         }
@@ -80,12 +99,17 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public async Task CompilationsDisallowed()
         {
             var hitCompilation = false;
-            var compilerServerHost = new TestableCompilerServerHost(delegate
-            {
-                hitCompilation = true;
-                Assert.True(false, "Should not reach compilation when compilations are disallowed");
-                throw new Exception("");
-            });
+            var compilerServerHost = new TestableCompilerServerHost(
+                delegate
+                {
+                    hitCompilation = true;
+                    Assert.True(
+                        false,
+                        "Should not reach compilation when compilations are disallowed"
+                    );
+                    throw new Exception("");
+                }
+            );
 
             var clientConnectionHandler = new ClientConnectionHandler(compilerServerHost);
 
@@ -97,12 +121,13 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 {
                     response = r;
                     return Task.CompletedTask;
-                }
+                },
             };
 
             var completionData = await clientConnectionHandler.ProcessAsync(
                 Task.FromResult<IClientConnection>(clientConnection),
-                allowCompilationRequests: false);
+                allowCompilationRequests: false
+            );
 
             Assert.Equal(CompletionData.RequestCompleted, completionData);
             Assert.True(response is RejectedBuildResponse);
@@ -117,11 +142,13 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public async Task ShutdownRequest(bool allowCompilationRequests)
         {
             var hitCompilation = false;
-            var compilerServerHost = new TestableCompilerServerHost(delegate
-            {
-                hitCompilation = true;
-                throw new Exception("");
-            });
+            var compilerServerHost = new TestableCompilerServerHost(
+                delegate
+                {
+                    hitCompilation = true;
+                    throw new Exception("");
+                }
+            );
 
             BuildResponse? response = null;
             var clientConnectionHandler = new ClientConnectionHandler(compilerServerHost);
@@ -132,15 +159,19 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 {
                     response = r;
                     return Task.CompletedTask;
-                }
+                },
             };
 
             var completionData = await clientConnectionHandler.ProcessAsync(
                 Task.FromResult<IClientConnection>(clientConnection),
-                allowCompilationRequests: allowCompilationRequests);
+                allowCompilationRequests: allowCompilationRequests
+            );
 
             Assert.False(hitCompilation);
-            Assert.Equal(new CompletionData(CompletionReason.RequestCompleted, shutdownRequested: true), completionData);
+            Assert.Equal(
+                new CompletionData(CompletionReason.RequestCompleted, shutdownRequested: true),
+                completionData
+            );
             Assert.True(response is ShutdownBuildResponse);
         }
 
@@ -149,13 +180,15 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         {
             using var buildStartedMre = new ManualResetEvent(initialState: false);
             using var clientClosedMre = new ManualResetEvent(initialState: false);
-            var compilerServerHost = new TestableCompilerServerHost((request, cancellationToken) =>
-            {
-                buildStartedMre.Set();
-                clientClosedMre.WaitOne();
-                Assert.True(cancellationToken.IsCancellationRequested);
-                return ProtocolUtil.EmptyBuildResponse;
-            });
+            var compilerServerHost = new TestableCompilerServerHost(
+                (request, cancellationToken) =>
+                {
+                    buildStartedMre.Set();
+                    clientClosedMre.WaitOne();
+                    Assert.True(cancellationToken.IsCancellationRequested);
+                    return ProtocolUtil.EmptyBuildResponse;
+                }
+            );
 
             var disconnectTaskCompletionSource = new TaskCompletionSource<object?>();
             var isDisposed = false;
@@ -163,13 +196,18 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             {
                 ReadBuildRequestFunc = _ => Task.FromResult(ProtocolUtil.EmptyBasicBuildRequest),
                 DisconnectTask = disconnectTaskCompletionSource.Task,
-                DisposeFunc = () => { isDisposed = true; },
+                DisposeFunc = () =>
+                {
+                    isDisposed = true;
+                },
             };
 
             var clientConnectionHandler = new ClientConnectionHandler(compilerServerHost);
-            var task = clientConnectionHandler.ProcessAsync(Task.FromResult<IClientConnection>(clientConnection));
+            var task = clientConnectionHandler.ProcessAsync(
+                Task.FromResult<IClientConnection>(clientConnection)
+            );
 
-            // Don't trigger the disconnect until we confirm that the client has issued a 
+            // Don't trigger the disconnect until we confirm that the client has issued a
             // build request.
             buildStartedMre.WaitOne();
             disconnectTaskCompletionSource.TrySetResult(null);

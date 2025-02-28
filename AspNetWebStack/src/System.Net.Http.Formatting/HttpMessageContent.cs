@@ -31,11 +31,15 @@ namespace System.Net.Http
         private const string DefaultRequestMsgType = "request";
         private const string DefaultResponseMsgType = "response";
 
-        private const string DefaultRequestMediaType = DefaultMediaType + "; " + MsgTypeParameter + "=" + DefaultRequestMsgType;
-        private const string DefaultResponseMediaType = DefaultMediaType + "; " + MsgTypeParameter + "=" + DefaultResponseMsgType;
+        private const string DefaultRequestMediaType =
+            DefaultMediaType + "; " + MsgTypeParameter + "=" + DefaultRequestMsgType;
+        private const string DefaultResponseMediaType =
+            DefaultMediaType + "; " + MsgTypeParameter + "=" + DefaultResponseMsgType;
 
         // Set of header fields that only support single values such as Set-Cookie.
-        private static readonly HashSet<string> _singleValueHeaderFields = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        private static readonly HashSet<string> _singleValueHeaderFields = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        )
         {
             "Cookie",
             "Set-Cookie",
@@ -43,10 +47,8 @@ namespace System.Net.Http
         };
 
         // Set of header fields that should get serialized as space-separated values such as User-Agent.
-        private static readonly HashSet<string> _spaceSeparatedValueHeaderFields = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "User-Agent",
-        };
+        private static readonly HashSet<string> _spaceSeparatedValueHeaderFields =
+            new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "User-Agent" };
 
         private bool _contentConsumed;
         private Lazy<Task<Stream>> _streamTask;
@@ -65,7 +67,9 @@ namespace System.Net.Http
 
             HttpRequestMessage = httpRequest;
             Headers.ContentType = new MediaTypeHeaderValue(DefaultMediaType);
-            Headers.ContentType.Parameters.Add(new NameValueHeaderValue(MsgTypeParameter, DefaultRequestMsgType));
+            Headers.ContentType.Parameters.Add(
+                new NameValueHeaderValue(MsgTypeParameter, DefaultRequestMsgType)
+            );
 
             InitializeStreamTask();
         }
@@ -84,14 +88,21 @@ namespace System.Net.Http
 
             HttpResponseMessage = httpResponse;
             Headers.ContentType = new MediaTypeHeaderValue(DefaultMediaType);
-            Headers.ContentType.Parameters.Add(new NameValueHeaderValue(MsgTypeParameter, DefaultResponseMsgType));
+            Headers.ContentType.Parameters.Add(
+                new NameValueHeaderValue(MsgTypeParameter, DefaultResponseMsgType)
+            );
 
             InitializeStreamTask();
         }
 
         private HttpContent Content
         {
-            get { return HttpRequestMessage != null ? HttpRequestMessage.Content : HttpResponseMessage.Content; }
+            get
+            {
+                return HttpRequestMessage != null
+                    ? HttpRequestMessage.Content
+                    : HttpResponseMessage.Content;
+            }
         }
 
         /// <summary>
@@ -106,7 +117,9 @@ namespace System.Net.Http
 
         private void InitializeStreamTask()
         {
-            _streamTask = new Lazy<Task<Stream>>(() => Content == null ? null : Content.ReadAsStreamAsync());
+            _streamTask = new Lazy<Task<Stream>>(
+                () => Content == null ? null : Content.ReadAsStreamAsync()
+            );
         }
 
         /// <summary>
@@ -116,7 +129,11 @@ namespace System.Net.Http
         /// <param name="isRequest">if set to <c>true</c> if the content is either an HTTP Request or an HTTP Response.</param>
         /// <param name="throwOnError">Indicates whether validation failure should result in an <see cref="Exception"/> or not.</param>
         /// <returns><c>true</c> if content is either an HTTP Request or an HTTP Response</returns>
-        internal static bool ValidateHttpMessageContent(HttpContent content, bool isRequest, bool throwOnError)
+        internal static bool ValidateHttpMessageContent(
+            HttpContent content,
+            bool isRequest,
+            bool throwOnError
+        )
         {
             if (content == null)
             {
@@ -126,12 +143,21 @@ namespace System.Net.Http
             MediaTypeHeaderValue contentType = content.Headers.ContentType;
             if (contentType != null)
             {
-                if (!contentType.MediaType.Equals(DefaultMediaType, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !contentType.MediaType.Equals(
+                        DefaultMediaType,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     if (throwOnError)
                     {
-                        throw Error.Argument("content", Properties.Resources.HttpMessageInvalidMediaType, FormattingUtilities.HttpContentType.Name,
-                                      isRequest ? DefaultRequestMediaType : DefaultResponseMediaType);
+                        throw Error.Argument(
+                            "content",
+                            Properties.Resources.HttpMessageInvalidMediaType,
+                            FormattingUtilities.HttpContentType.Name,
+                            isRequest ? DefaultRequestMediaType : DefaultResponseMediaType
+                        );
                     }
                     else
                     {
@@ -144,11 +170,21 @@ namespace System.Net.Http
                     if (parameter.Name.Equals(MsgTypeParameter, StringComparison.OrdinalIgnoreCase))
                     {
                         string msgType = FormattingUtilities.UnquoteToken(parameter.Value);
-                        if (!msgType.Equals(isRequest ? DefaultRequestMsgType : DefaultResponseMsgType, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            !msgType.Equals(
+                                isRequest ? DefaultRequestMsgType : DefaultResponseMsgType,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             if (throwOnError)
                             {
-                                throw Error.Argument("content", Properties.Resources.HttpMessageInvalidMediaType, FormattingUtilities.HttpContentType.Name, isRequest ? DefaultRequestMediaType : DefaultResponseMediaType);
+                                throw Error.Argument(
+                                    "content",
+                                    Properties.Resources.HttpMessageInvalidMediaType,
+                                    FormattingUtilities.HttpContentType.Name,
+                                    isRequest ? DefaultRequestMediaType : DefaultResponseMediaType
+                                );
                             }
                             else
                             {
@@ -163,7 +199,12 @@ namespace System.Net.Http
 
             if (throwOnError)
             {
-                throw Error.Argument("content", Properties.Resources.HttpMessageInvalidMediaType, FormattingUtilities.HttpContentType.Name, isRequest ? DefaultRequestMediaType : DefaultResponseMediaType);
+                throw Error.Argument(
+                    "content",
+                    Properties.Resources.HttpMessageInvalidMediaType,
+                    FormattingUtilities.HttpContentType.Name,
+                    isRequest ? DefaultRequestMediaType : DefaultResponseMediaType
+                );
             }
             else
             {
@@ -177,7 +218,10 @@ namespace System.Net.Http
         /// <param name="stream">The <see cref="Stream"/> to which to write.</param>
         /// <param name="context">The associated <see cref="TransportContext"/>.</param>
         /// <returns>A <see cref="Task"/> instance that is asynchronously serializing the object's content.</returns>
-        protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
+        protected override async Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext context
+        )
         {
             if (stream == null)
             {
@@ -200,8 +244,11 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="length">The computed length of the stream.</param>
         /// <returns><c>true</c> if the length has been computed; otherwise <c>false</c>.</returns>
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1108:BlockStatementsMustNotContainEmbeddedComments",
-            Justification = "The code is more readable with such comments")]
+        [SuppressMessage(
+            "StyleCop.CSharp.ReadabilityRules",
+            "SA1108:BlockStatementsMustNotContainEmbeddedComments",
+            Justification = "The code is more readable with such comments"
+        )]
         protected override bool TryComputeLength(out long length)
         {
             // We have four states we could be in:
@@ -224,8 +271,11 @@ namespace System.Net.Http
             else if (_streamTask.Value is not null)
             {
                 Stream readStream;
-                if (!_streamTask.Value.TryGetResult(out readStream) // Case #1
-                    || readStream == null || !readStream.CanSeek) // Case #2
+                if (
+                    !_streamTask.Value.TryGetResult(out readStream) // Case #1
+                    || readStream == null
+                    || !readStream.CanSeek
+                ) // Case #2
                 {
                     length = -1;
                     return false;
@@ -271,17 +321,30 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="message">Where to write the request line.</param>
         /// <param name="httpRequest">The HTTP request.</param>
-        private static void SerializeRequestLine(StringBuilder message, HttpRequestMessage httpRequest)
+        private static void SerializeRequestLine(
+            StringBuilder message,
+            HttpRequestMessage httpRequest
+        )
         {
             Contract.Assert(message != null, "message cannot be null");
             message.Append(httpRequest.Method + SP);
             message.Append(httpRequest.RequestUri.PathAndQuery + SP);
-            message.Append(FormattingUtilities.HttpVersionToken + "/" + (httpRequest.Version != null ? httpRequest.Version.ToString(2) : "1.1") + CRLF);
+            message.Append(
+                FormattingUtilities.HttpVersionToken
+                    + "/"
+                    + (httpRequest.Version != null ? httpRequest.Version.ToString(2) : "1.1")
+                    + CRLF
+            );
 
             // Only insert host header if not already present.
             if (httpRequest.Headers.Host == null)
             {
-                message.Append(FormattingUtilities.HttpHostHeader + ColonSP + httpRequest.RequestUri.Authority + CRLF);
+                message.Append(
+                    FormattingUtilities.HttpHostHeader
+                        + ColonSP
+                        + httpRequest.RequestUri.Authority
+                        + CRLF
+                );
             }
         }
 
@@ -290,10 +353,18 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="message">Where to write the status line.</param>
         /// <param name="httpResponse">The HTTP response.</param>
-        private static void SerializeStatusLine(StringBuilder message, HttpResponseMessage httpResponse)
+        private static void SerializeStatusLine(
+            StringBuilder message,
+            HttpResponseMessage httpResponse
+        )
         {
             Contract.Assert(message != null, "message cannot be null");
-            message.Append(FormattingUtilities.HttpVersionToken + "/" + (httpResponse.Version != null ? httpResponse.Version.ToString(2) : "1.1") + SP);
+            message.Append(
+                FormattingUtilities.HttpVersionToken
+                    + "/"
+                    + (httpResponse.Version != null ? httpResponse.Version.ToString(2) : "1.1")
+                    + SP
+            );
             message.Append((int)httpResponse.StatusCode + SP);
             message.Append(httpResponse.ReasonPhrase + CRLF);
         }
@@ -323,7 +394,9 @@ namespace System.Net.Http
                     }
                     else
                     {
-                        message.Append(header.Key + ColonSP + String.Join(CommaSeparator, header.Value) + CRLF);
+                        message.Append(
+                            header.Key + ColonSP + String.Join(CommaSeparator, header.Value) + CRLF
+                        );
                     }
                 }
             }
@@ -379,11 +452,13 @@ namespace System.Net.Http
                 }
                 else
                 {
-                    throw Error.InvalidOperation(Properties.Resources.HttpMessageContentAlreadyRead,
-                                  FormattingUtilities.HttpContentType.Name,
-                                  HttpRequestMessage != null
-                                      ? FormattingUtilities.HttpRequestMessageType.Name
-                                      : FormattingUtilities.HttpResponseMessageType.Name);
+                    throw Error.InvalidOperation(
+                        Properties.Resources.HttpMessageContentAlreadyRead,
+                        FormattingUtilities.HttpContentType.Name,
+                        HttpRequestMessage != null
+                            ? FormattingUtilities.HttpRequestMessageType.Name
+                            : FormattingUtilities.HttpResponseMessageType.Name
+                    );
                 }
             }
 

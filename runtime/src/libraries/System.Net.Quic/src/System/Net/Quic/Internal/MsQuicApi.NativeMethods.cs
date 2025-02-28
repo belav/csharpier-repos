@@ -92,7 +92,11 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public void RegistrationShutdown(MsQuicSafeHandle registration, QUIC_CONNECTION_SHUTDOWN_FLAGS flags, ulong code)
+    public void RegistrationShutdown(
+        MsQuicSafeHandle registration,
+        QUIC_CONNECTION_SHUTDOWN_FLAGS flags,
+        ulong code
+    )
     {
         bool success = false;
         try
@@ -109,13 +113,29 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public int ConfigurationOpen(MsQuicSafeHandle registration, QUIC_BUFFER* alpnBuffers, uint alpnBuffersCount, QUIC_SETTINGS* settings, uint settingsSize, void* context, QUIC_HANDLE** configuration)
+    public int ConfigurationOpen(
+        MsQuicSafeHandle registration,
+        QUIC_BUFFER* alpnBuffers,
+        uint alpnBuffersCount,
+        QUIC_SETTINGS* settings,
+        uint settingsSize,
+        void* context,
+        QUIC_HANDLE** configuration
+    )
     {
         bool success = false;
         try
         {
             registration.DangerousAddRef(ref success);
-            return ApiTable->ConfigurationOpen(registration.QuicHandle, alpnBuffers, alpnBuffersCount, settings, settingsSize, context, configuration);
+            return ApiTable->ConfigurationOpen(
+                registration.QuicHandle,
+                alpnBuffers,
+                alpnBuffersCount,
+                settings,
+                settingsSize,
+                context,
+                configuration
+            );
         }
         finally
         {
@@ -126,7 +146,10 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public int ConfigurationLoadCredential(MsQuicSafeHandle configuration, QUIC_CREDENTIAL_CONFIG* config)
+    public int ConfigurationLoadCredential(
+        MsQuicSafeHandle configuration,
+        QUIC_CREDENTIAL_CONFIG* config
+    )
     {
         bool success = false;
         try
@@ -143,7 +166,12 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public int ListenerOpen(MsQuicSafeHandle registration, delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_LISTENER_EVENT*, int> callback, void* context, QUIC_HANDLE** listener)
+    public int ListenerOpen(
+        MsQuicSafeHandle registration,
+        delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_LISTENER_EVENT*, int> callback,
+        void* context,
+        QUIC_HANDLE** listener
+    )
     {
         bool success = false;
         try
@@ -160,13 +188,23 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public int ListenerStart(MsQuicSafeHandle listener, QUIC_BUFFER* alpnBuffers, uint alpnBuffersCount, QuicAddr* localAddress)
+    public int ListenerStart(
+        MsQuicSafeHandle listener,
+        QUIC_BUFFER* alpnBuffers,
+        uint alpnBuffersCount,
+        QuicAddr* localAddress
+    )
     {
         bool success = false;
         try
         {
             listener.DangerousAddRef(ref success);
-            return ApiTable->ListenerStart(listener.QuicHandle, alpnBuffers, alpnBuffersCount, localAddress);
+            return ApiTable->ListenerStart(
+                listener.QuicHandle,
+                alpnBuffers,
+                alpnBuffersCount,
+                localAddress
+            );
         }
         finally
         {
@@ -194,7 +232,12 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public int ConnectionOpen(MsQuicSafeHandle registration, delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_CONNECTION_EVENT*, int> callback, void* context, QUIC_HANDLE** connection)
+    public int ConnectionOpen(
+        MsQuicSafeHandle registration,
+        delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_CONNECTION_EVENT*, int> callback,
+        void* context,
+        QUIC_HANDLE** connection
+    )
     {
         bool success = false;
         try
@@ -211,7 +254,11 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public void ConnectionShutdown(MsQuicSafeHandle connection, QUIC_CONNECTION_SHUTDOWN_FLAGS flags, ulong code)
+    public void ConnectionShutdown(
+        MsQuicSafeHandle connection,
+        QUIC_CONNECTION_SHUTDOWN_FLAGS flags,
+        ulong code
+    )
     {
         bool success = false;
         try
@@ -228,7 +275,13 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public int ConnectionStart(MsQuicSafeHandle connection, MsQuicSafeHandle configuration, ushort family, sbyte* serverName, ushort serverPort)
+    public int ConnectionStart(
+        MsQuicSafeHandle connection,
+        MsQuicSafeHandle configuration,
+        ushort family,
+        sbyte* serverName,
+        ushort serverPort
+    )
     {
         bool connectionSuccess = false;
         bool configurationSuccess = false;
@@ -236,7 +289,13 @@ internal sealed unsafe partial class MsQuicApi
         {
             connection.DangerousAddRef(ref connectionSuccess);
             configuration.DangerousAddRef(ref configurationSuccess);
-            return ApiTable->ConnectionStart(connection.QuicHandle, configuration.QuicHandle, family, serverName, serverPort);
+            return ApiTable->ConnectionStart(
+                connection.QuicHandle,
+                configuration.QuicHandle,
+                family,
+                serverName,
+                serverPort
+            );
         }
         finally
         {
@@ -251,7 +310,10 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public int ConnectionSetConfiguration(MsQuicSafeHandle connection, MsQuicSafeHandle configuration)
+    public int ConnectionSetConfiguration(
+        MsQuicSafeHandle connection,
+        MsQuicSafeHandle configuration
+    )
     {
         bool connectionSuccess = false;
         bool configurationSuccess = false;
@@ -259,7 +321,10 @@ internal sealed unsafe partial class MsQuicApi
         {
             connection.DangerousAddRef(ref connectionSuccess);
             configuration.DangerousAddRef(ref configurationSuccess);
-            return ApiTable->ConnectionSetConfiguration(connection.QuicHandle, configuration.QuicHandle);
+            return ApiTable->ConnectionSetConfiguration(
+                connection.QuicHandle,
+                configuration.QuicHandle
+            );
         }
         finally
         {
@@ -274,7 +339,13 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public int StreamOpen(MsQuicSafeHandle connection, QUIC_STREAM_OPEN_FLAGS flags, delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int> callback, void* context, QUIC_HANDLE** stream)
+    public int StreamOpen(
+        MsQuicSafeHandle connection,
+        QUIC_STREAM_OPEN_FLAGS flags,
+        delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int> callback,
+        void* context,
+        QUIC_HANDLE** stream
+    )
     {
         bool success = false;
         try
@@ -325,7 +396,13 @@ internal sealed unsafe partial class MsQuicApi
         }
     }
 
-    public int StreamSend(MsQuicSafeHandle stream, QUIC_BUFFER* buffers, uint buffersCount, QUIC_SEND_FLAGS flags, void* context)
+    public int StreamSend(
+        MsQuicSafeHandle stream,
+        QUIC_BUFFER* buffers,
+        uint buffersCount,
+        QUIC_SEND_FLAGS flags,
+        void* context
+    )
     {
         bool success = false;
         try

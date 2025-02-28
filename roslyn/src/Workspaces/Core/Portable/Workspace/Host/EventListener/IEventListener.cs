@@ -8,10 +8,8 @@ namespace Microsoft.CodeAnalysis.Host
 {
     /// <summary>
     /// provide a way for features to lazily subscribe to a service event for particular workspace
-    /// 
+    ///
     /// see <see cref="WellKnownEventListeners"/> for supported services
     /// </summary>
-    internal interface IEventListener
-    {
-    }
+    internal interface IEventListener { }
 }

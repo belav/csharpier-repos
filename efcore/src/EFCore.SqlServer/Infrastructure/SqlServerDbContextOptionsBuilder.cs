@@ -20,9 +20,7 @@ public class SqlServerDbContextOptionsBuilder
     /// </summary>
     /// <param name="optionsBuilder">The options builder.</param>
     public SqlServerDbContextOptionsBuilder(DbContextOptionsBuilder optionsBuilder)
-        : base(optionsBuilder)
-    {
-    }
+        : base(optionsBuilder) { }
 
     /// <summary>
     ///     Configures the context to use the default retrying <see cref="IExecutionStrategy" />.
@@ -40,8 +38,8 @@ public class SqlServerDbContextOptionsBuilder
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
-    public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure()
-        => ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c));
+    public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure() =>
+        ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c));
 
     /// <summary>
     ///     Configures the context to use the default retrying <see cref="IExecutionStrategy" />.
@@ -59,8 +57,8 @@ public class SqlServerDbContextOptionsBuilder
     ///         for more information and examples.
     ///     </para>
     /// </remarks>
-    public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure(int maxRetryCount)
-        => ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c, maxRetryCount));
+    public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure(int maxRetryCount) =>
+        ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c, maxRetryCount));
 
     /// <summary>
     ///     Configures the context to use the default retrying <see cref="IExecutionStrategy" />.
@@ -79,8 +77,9 @@ public class SqlServerDbContextOptionsBuilder
     ///     </para>
     /// </remarks>
     /// <param name="errorNumbersToAdd">Additional SQL error numbers that should be considered transient.</param>
-    public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure(ICollection<int> errorNumbersToAdd)
-        => ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c, errorNumbersToAdd));
+    public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure(
+        ICollection<int> errorNumbersToAdd
+    ) => ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c, errorNumbersToAdd));
 
     /// <summary>
     ///     Configures the context to use the default retrying <see cref="IExecutionStrategy" />.
@@ -101,8 +100,14 @@ public class SqlServerDbContextOptionsBuilder
     public virtual SqlServerDbContextOptionsBuilder EnableRetryOnFailure(
         int maxRetryCount,
         TimeSpan maxRetryDelay,
-        IEnumerable<int>? errorNumbersToAdd)
-        => ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(c, maxRetryCount, maxRetryDelay, errorNumbersToAdd));
+        IEnumerable<int>? errorNumbersToAdd
+    ) =>
+        ExecutionStrategy(c => new SqlServerRetryingExecutionStrategy(
+            c,
+            maxRetryCount,
+            maxRetryDelay,
+            errorNumbersToAdd
+        ));
 
     /// <summary>
     ///     Sets the SQL Server compatibility level that EF Core will use when interacting with the database. This allows configuring EF
@@ -117,13 +122,13 @@ public class SqlServerDbContextOptionsBuilder
     ///     for more information and examples.
     /// </remarks>
     /// <param name="compatibilityLevel"><see langword="false" /> to have null resource</param>
-    public virtual SqlServerDbContextOptionsBuilder UseCompatibilityLevel(int compatibilityLevel)
-        => WithOption(e => e.WithCompatibilityLevel(compatibilityLevel));
+    public virtual SqlServerDbContextOptionsBuilder UseCompatibilityLevel(int compatibilityLevel) =>
+        WithOption(e => e.WithCompatibilityLevel(compatibilityLevel));
 
     /// <summary>
     ///     Configures the context to use defaults optimized for Azure SQL, including retries on errors.
     /// </summary>
     /// <param name="enable">Whether the defaults should be enabled.</param>
-    public virtual SqlServerDbContextOptionsBuilder UseAzureSqlDefaults(bool enable = true)
-        => WithOption(e => e.WithAzureSql(enable));
+    public virtual SqlServerDbContextOptionsBuilder UseAzureSqlDefaults(bool enable = true) =>
+        WithOption(e => e.WithAzureSql(enable));
 }

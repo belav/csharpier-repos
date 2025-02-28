@@ -23,6 +23,10 @@ namespace System
         /// <param name="provider">An object that provides culture-specific formatting information about <paramref name="utf8Text" />.</param>
         /// <param name="result">On return, contains the result of successfully parsing <paramref name="utf8Text" /> or an undefined value on failure.</param>
         /// <returns><c>true</c> if <paramref name="utf8Text" /> was successfully parsed; otherwise, <c>false</c>.</returns>
-        static abstract bool TryParse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out TSelf result);
+        static abstract bool TryParse(
+            ReadOnlySpan<byte> utf8Text,
+            IFormatProvider? provider,
+            [MaybeNullWhen(returnValue: false)] out TSelf result
+        );
     }
 }

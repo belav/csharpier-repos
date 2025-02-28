@@ -10,14 +10,22 @@ namespace System.Web.Mvc
 {
     public class ClientDataTypeModelValidatorProvider : ModelValidatorProvider
     {
-        private static readonly HashSet<Type> _numericTypes = new HashSet<Type>(new Type[]
-        {
-            typeof(byte), typeof(sbyte),
-            typeof(short), typeof(ushort),
-            typeof(int), typeof(uint),
-            typeof(long), typeof(ulong),
-            typeof(float), typeof(double), typeof(decimal)
-        });
+        private static readonly HashSet<Type> _numericTypes = new HashSet<Type>(
+            new Type[]
+            {
+                typeof(byte),
+                typeof(sbyte),
+                typeof(short),
+                typeof(ushort),
+                typeof(int),
+                typeof(uint),
+                typeof(long),
+                typeof(ulong),
+                typeof(float),
+                typeof(double),
+                typeof(decimal),
+            }
+        );
 
         private static string _resourceClassKey;
 
@@ -27,7 +35,10 @@ namespace System.Web.Mvc
             set { _resourceClassKey = value; }
         }
 
-        public override IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, ControllerContext context)
+        public override IEnumerable<ModelValidator> GetValidators(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             if (metadata == null)
             {
@@ -41,7 +52,10 @@ namespace System.Web.Mvc
             return GetValidatorsImpl(metadata, context);
         }
 
-        private static IEnumerable<ModelValidator> GetValidatorsImpl(ModelMetadata metadata, ControllerContext context)
+        private static IEnumerable<ModelValidator> GetValidatorsImpl(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             Type type = metadata.ModelType;
 
@@ -64,7 +78,11 @@ namespace System.Web.Mvc
         private static bool IsDateTimeType(Type type, ModelMetadata metadata)
         {
             return typeof(DateTime) == GetTypeToValidate(type)
-                && !String.Equals(metadata.DataTypeName, "Time", StringComparison.OrdinalIgnoreCase);
+                && !String.Equals(
+                    metadata.DataTypeName,
+                    "Time",
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
         private static Type GetTypeToValidate(Type type)
@@ -76,13 +94,25 @@ namespace System.Web.Mvc
         // If the class key is invalid, an exception will be thrown.
         // If the class key is valid but the resource is not found, it returns null, in which
         // case it will fall back to the MVC default error message.
-        private static string GetUserResourceString(ControllerContext controllerContext, string resourceName)
+        private static string GetUserResourceString(
+            ControllerContext controllerContext,
+            string resourceName
+        )
         {
             string result = null;
 
-            if (!String.IsNullOrEmpty(ResourceClassKey) && (controllerContext != null) && (controllerContext.HttpContext != null))
+            if (
+                !String.IsNullOrEmpty(ResourceClassKey)
+                && (controllerContext != null)
+                && (controllerContext.HttpContext != null)
+            )
             {
-                result = controllerContext.HttpContext.GetGlobalResourceObject(ResourceClassKey, resourceName, CultureInfo.CurrentUICulture) as string;
+                result =
+                    controllerContext.HttpContext.GetGlobalResourceObject(
+                        ResourceClassKey,
+                        resourceName,
+                        CultureInfo.CurrentUICulture
+                    ) as string;
             }
 
             return result;
@@ -90,12 +120,14 @@ namespace System.Web.Mvc
 
         private static string GetFieldMustBeNumericResource(ControllerContext controllerContext)
         {
-            return GetUserResourceString(controllerContext, "FieldMustBeNumeric") ?? MvcResources.ClientDataTypeModelValidatorProvider_FieldMustBeNumeric;
+            return GetUserResourceString(controllerContext, "FieldMustBeNumeric")
+                ?? MvcResources.ClientDataTypeModelValidatorProvider_FieldMustBeNumeric;
         }
 
         private static string GetFieldMustBeDateResource(ControllerContext controllerContext)
         {
-            return GetUserResourceString(controllerContext, "FieldMustBeDate") ?? MvcResources.ClientDataTypeModelValidatorProvider_FieldMustBeDate;
+            return GetUserResourceString(controllerContext, "FieldMustBeDate")
+                ?? MvcResources.ClientDataTypeModelValidatorProvider_FieldMustBeDate;
         }
 
         internal class ClientModelValidator : ModelValidator
@@ -103,7 +135,12 @@ namespace System.Web.Mvc
             private string _errorMessage;
             private string _validationType;
 
-            public ClientModelValidator(ModelMetadata metadata, ControllerContext controllerContext, string validationType, string errorMessage)
+            public ClientModelValidator(
+                ModelMetadata metadata,
+                ControllerContext controllerContext,
+                string validationType,
+                string errorMessage
+            )
                 : base(metadata, controllerContext)
             {
                 if (String.IsNullOrEmpty(validationType))
@@ -125,7 +162,7 @@ namespace System.Web.Mvc
                 ModelClientValidationRule rule = new ModelClientValidationRule()
                 {
                     ValidationType = _validationType,
-                    ErrorMessage = FormatErrorMessage(Metadata.GetDisplayName())
+                    ErrorMessage = FormatErrorMessage(Metadata.GetDisplayName()),
                 };
 
                 return new ModelClientValidationRule[] { rule };
@@ -147,17 +184,26 @@ namespace System.Web.Mvc
         internal sealed class DateModelValidator : ClientModelValidator
         {
             public DateModelValidator(ModelMetadata metadata, ControllerContext controllerContext)
-                : base(metadata, controllerContext, "date", GetFieldMustBeDateResource(controllerContext))
-            {
-            }
+                : base(
+                    metadata,
+                    controllerContext,
+                    "date",
+                    GetFieldMustBeDateResource(controllerContext)
+                ) { }
         }
 
         internal sealed class NumericModelValidator : ClientModelValidator
         {
-            public NumericModelValidator(ModelMetadata metadata, ControllerContext controllerContext)
-                : base(metadata, controllerContext, "number", GetFieldMustBeNumericResource(controllerContext))
-            {
-            }
+            public NumericModelValidator(
+                ModelMetadata metadata,
+                ControllerContext controllerContext
+            )
+                : base(
+                    metadata,
+                    controllerContext,
+                    "number",
+                    GetFieldMustBeNumericResource(controllerContext)
+                ) { }
         }
     }
 }

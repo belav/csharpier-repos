@@ -17,7 +17,6 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         //-----------------------------------------------------------------------------------
         //[Variation(Desc = "v1 - Get nametable", Priority = 0)]
         [Fact]

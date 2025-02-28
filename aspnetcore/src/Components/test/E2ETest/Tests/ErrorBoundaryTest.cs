@@ -13,10 +13,12 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
 public class ErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
-    public ErrorBoundaryTest(BrowserFixture browserFixture, ToggleExecutionModeServerFixture<Program> serverFixture, ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+    public ErrorBoundaryTest(
+        BrowserFixture browserFixture,
+        ToggleExecutionModeServerFixture<Program> serverFixture,
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -43,12 +45,14 @@ public class ErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture
         container.FindElement(By.Id(triggerId)).Click();
 
         // The whole UI within the container is replaced by the default error UI
-        Browser.Collection(() => container.FindElements(By.CssSelector("*")),
+        Browser.Collection(
+            () => container.FindElements(By.CssSelector("*")),
             elem =>
             {
                 Assert.Equal("blazor-error-boundary", elem.GetAttribute("class"));
                 Assert.Empty(elem.FindElements(By.CssSelector("*")));
-            });
+            }
+        );
 
         AssertGlobalErrorState(false);
     }
@@ -57,8 +61,10 @@ public class ErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture
     public void CanCreateCustomErrorBoundary()
     {
         var container = Browser.Exists(By.Id("custom-error-boundary-test"));
-        Func<IWebElement> incrementButtonAccessor = () => container.FindElement(By.ClassName("increment-count"));
-        Func<string> currentCountAccessor = () => container.FindElement(By.ClassName("current-count")).Text;
+        Func<IWebElement> incrementButtonAccessor = () =>
+            container.FindElement(By.ClassName("increment-count"));
+        Func<string> currentCountAccessor = () =>
+            container.FindElement(By.ClassName("current-count")).Text;
 
         incrementButtonAccessor().Click();
         incrementButtonAccessor().Click();
@@ -66,8 +72,10 @@ public class ErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture
 
         // If it throws, we see the custom error boundary
         container.FindElement(By.ClassName("throw-counter-exception")).Click();
-        Browser.Collection(() => container.FindElements(By.ClassName("received-exception")),
-            elem => Assert.Equal($"Exception from {nameof(ErrorCausingCounter)}", elem.Text));
+        Browser.Collection(
+            () => container.FindElements(By.ClassName("received-exception")),
+            elem => Assert.Equal($"Exception from {nameof(ErrorCausingCounter)}", elem.Text)
+        );
         AssertGlobalErrorState(false);
 
         // On recovery, the count is reset, because it's a new instance
@@ -82,8 +90,10 @@ public class ErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture
     public void HandleCustomErrorBoundaryThatIgnoresErrors()
     {
         var container = Browser.Exists(By.Id("error-ignorer-test"));
-        Func<IWebElement> incrementButtonAccessor = () => container.FindElement(By.ClassName("increment-count"));
-        Func<string> currentCountAccessor = () => container.FindElement(By.ClassName("current-count")).Text;
+        Func<IWebElement> incrementButtonAccessor = () =>
+            container.FindElement(By.ClassName("increment-count"));
+        Func<string> currentCountAccessor = () =>
+            container.FindElement(By.ClassName("current-count")).Text;
 
         incrementButtonAccessor().Click();
         incrementButtonAccessor().Click();
@@ -106,7 +116,10 @@ public class ErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture
 
         // If ChildContent throws during rendering, the error boundary handles it
         container.FindElement(By.ClassName("throw-in-childcontent")).Click();
-        Browser.Contains("There was an error: System.InvalidTimeZoneException: Inline exception", () => container.FindElement(By.ClassName("error-message")).Text);
+        Browser.Contains(
+            "There was an error: System.InvalidTimeZoneException: Inline exception",
+            () => container.FindElement(By.ClassName("error-message")).Text
+        );
         AssertGlobalErrorState(false);
 
         // If the ErrorContent throws during rendering, it gets caught by the "infinite error loop" detection logic and is fatal
@@ -120,8 +133,11 @@ public class ErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture
         var container = Browser.Exists(By.Id("error-after-disposal-test"));
 
         container.FindElement(By.ClassName("throw-after-disposing-component")).Click();
-        Browser.Collection(() => container.FindElements(By.ClassName("received-exception")),
-            elem => Assert.Equal("Delayed asynchronous exception in OnParametersSetAsync", elem.Text));
+        Browser.Collection(
+            () => container.FindElements(By.ClassName("received-exception")),
+            elem =>
+                Assert.Equal("Delayed asynchronous exception in OnParametersSetAsync", elem.Text)
+        );
 
         AssertGlobalErrorState(false);
     }
@@ -150,10 +166,12 @@ public class ErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture
         var message = "Delayed asynchronous exception in OnParametersSetAsync";
 
         container.FindElement(By.ClassName("throw-in-children")).Click();
-        Browser.Collection(() => container.FindElements(By.ClassName("received-exception")),
+        Browser.Collection(
+            () => container.FindElements(By.ClassName("received-exception")),
             elem => Assert.Equal(message, elem.Text),
             elem => Assert.Equal(message, elem.Text),
-            elem => Assert.Equal(message, elem.Text));
+            elem => Assert.Equal(message, elem.Text)
+        );
 
         AssertGlobalErrorState(false);
     }
@@ -161,6 +179,9 @@ public class ErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture
     void AssertGlobalErrorState(bool hasGlobalError)
     {
         var globalErrorUi = Browser.Exists(By.Id("blazor-error-ui"));
-        Browser.Equal(hasGlobalError ? "block" : "none", () => globalErrorUi.GetCssValue("display"));
+        Browser.Equal(
+            hasGlobalError ? "block" : "none",
+            () => globalErrorUi.GetCssValue("display")
+        );
     }
 }

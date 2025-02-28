@@ -27,56 +27,55 @@ public class TestDiagnosticListener
     [DiagnosticName("Microsoft.AspNetCore.Hosting.BeginRequest")]
     public virtual void OnBeginRequest(IProxyHttpContext httpContext)
     {
-        BeginRequest = new OnRequestEventData()
-        {
-            HttpContext = httpContext
-        };
+        BeginRequest = new OnRequestEventData() { HttpContext = httpContext };
     }
 
     [DiagnosticName("Microsoft.AspNetCore.Hosting.EndRequest")]
     public virtual void OnEndRequest(IProxyHttpContext httpContext)
     {
-        EndRequest = new OnRequestEventData()
-        {
-            HttpContext = httpContext
-        };
+        EndRequest = new OnRequestEventData() { HttpContext = httpContext };
     }
 
     [DiagnosticName("Microsoft.AspNetCore.Hosting.UnhandledException")]
-    public virtual void OnHostingUnhandledException(IProxyHttpContext httpContext, IProxyException exception)
+    public virtual void OnHostingUnhandledException(
+        IProxyHttpContext httpContext,
+        IProxyException exception
+    )
     {
         HostingUnhandledException = new OnExceptionEventData()
         {
             HttpContext = httpContext,
-            Exception = exception
+            Exception = exception,
         };
     }
 
     [DiagnosticName("Microsoft.AspNetCore.Diagnostics.UnhandledException")]
-    public virtual void OnDiagnosticUnhandledException(IProxyHttpContext httpContext, IProxyException exception)
+    public virtual void OnDiagnosticUnhandledException(
+        IProxyHttpContext httpContext,
+        IProxyException exception
+    )
     {
         DiagnosticUnhandledException = new OnExceptionEventData()
         {
             HttpContext = httpContext,
-            Exception = exception
+            Exception = exception,
         };
     }
 
     [DiagnosticName("Microsoft.AspNetCore.Diagnostics.HandledException")]
-    public virtual void OnDiagnosticHandledException(IProxyHttpContext httpContext, IProxyException exception)
+    public virtual void OnDiagnosticHandledException(
+        IProxyHttpContext httpContext,
+        IProxyException exception
+    )
     {
         DiagnosticHandledException = new OnExceptionEventData()
         {
             HttpContext = httpContext,
-            Exception = exception
+            Exception = exception,
         };
     }
 
-    public interface IProxyHttpContext
-    {
-    }
+    public interface IProxyHttpContext { }
 
-    public interface IProxyException
-    {
-    }
+    public interface IProxyException { }
 }

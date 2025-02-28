@@ -12,5 +12,6 @@ internal sealed class AccessTokenProviderAccessor : IAccessTokenProviderAccessor
 
     public AccessTokenProviderAccessor(IServiceProvider provider) => _provider = provider;
 
-    public IAccessTokenProvider TokenProvider => _tokenProvider ??= _provider.GetRequiredService<IAccessTokenProvider>();
+    public IAccessTokenProvider TokenProvider =>
+        _tokenProvider ??= _provider.GetRequiredService<IAccessTokenProvider>();
 }

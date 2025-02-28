@@ -14,6 +14,7 @@ using Xunit;
 public class Program
 {
     public static ushort s_41 = 1646;
+
     [Fact]
     public static int TestEntryPoint()
     {

@@ -17,14 +17,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEditorClassificationService()
-        {
-        }
+        public CSharpEditorClassificationService() { }
 
-        public override void AddLexicalClassifications(SourceText text, TextSpan textSpan, SegmentedList<ClassifiedSpan> result, CancellationToken cancellationToken)
-            => ClassificationHelpers.AddLexicalClassifications(text, textSpan, result, cancellationToken);
+        public override void AddLexicalClassifications(
+            SourceText text,
+            TextSpan textSpan,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        ) =>
+            ClassificationHelpers.AddLexicalClassifications(
+                text,
+                textSpan,
+                result,
+                cancellationToken
+            );
 
-        public override ClassifiedSpan AdjustStaleClassification(SourceText text, ClassifiedSpan classifiedSpan)
-            => ClassificationHelpers.AdjustStaleClassification(text, classifiedSpan);
+        public override ClassifiedSpan AdjustStaleClassification(
+            SourceText text,
+            ClassifiedSpan classifiedSpan
+        ) => ClassificationHelpers.AdjustStaleClassification(text, classifiedSpan);
     }
 }

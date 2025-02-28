@@ -15,8 +15,8 @@ namespace DebuggerTests
 {
     public class BadHarnessInitTests : DebuggerTests
     {
-        public BadHarnessInitTests(ITestOutputHelper testOutput) : base(testOutput)
-        {}
+        public BadHarnessInitTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         public override async Task InitializeAsync() => await Task.CompletedTask;
 
@@ -25,16 +25,21 @@ namespace DebuggerTests
         {
             var bad_cmd_name = "non-existent.command";
 
-            Func<InspectorClient, CancellationToken, List<(string, Task<Result>)>> fn = (client, token) =>
+            Func<InspectorClient, CancellationToken, List<(string, Task<Result>)>> fn = (
+                client,
+                token
+            ) =>
                 new List<(string, Task<Result>)>
                 {
                     ("Profiler.enable", client.SendCommand("Profiler.enable", null, token)),
-                    (bad_cmd_name, client.SendCommand(bad_cmd_name, null, token))
+                    (bad_cmd_name, client.SendCommand(bad_cmd_name, null, token)),
                 };
 
             await Ready();
 
-            var ae = await Assert.ThrowsAsync<ArgumentException>(async () => await insp.OpenSessionAsync(fn, "", TestTimeout));
+            var ae = await Assert.ThrowsAsync<ArgumentException>(
+                async () => await insp.OpenSessionAsync(fn, "", TestTimeout)
+            );
             Assert.Contains(bad_cmd_name, ae.Message);
         }
     }

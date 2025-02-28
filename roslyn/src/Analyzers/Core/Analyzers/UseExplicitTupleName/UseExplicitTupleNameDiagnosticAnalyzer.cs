@@ -12,23 +12,33 @@ using Microsoft.CodeAnalysis.Operations;
 namespace Microsoft.CodeAnalysis.UseExplicitTupleName
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-    internal class UseExplicitTupleNameDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal class UseExplicitTupleNameDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public const string ElementName = nameof(ElementName);
 
         public UseExplicitTupleNameDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseExplicitTupleNameDiagnosticId,
-                   EnforceOnBuildValues.UseExplicitTupleName,
-                   CodeStyleOptions2.PreferExplicitTupleNames,
-                   title: new LocalizableResourceString(nameof(AnalyzersResources.Use_explicitly_provided_tuple_name), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   messageFormat: new LocalizableResourceString(nameof(AnalyzersResources.Prefer_explicitly_provided_tuple_element_name), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseExplicitTupleNameDiagnosticId,
+                EnforceOnBuildValues.UseExplicitTupleName,
+                CodeStyleOptions2.PreferExplicitTupleNames,
+                title: new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_explicitly_provided_tuple_name),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                messageFormat: new LocalizableResourceString(
+                    nameof(AnalyzersResources.Prefer_explicitly_provided_tuple_element_name),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterOperationAction(AnalyzeOperation, OperationKind.FieldReference);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterOperationAction(AnalyzeOperation, OperationKind.FieldReference);
 
         private void AnalyzeOperation(OperationAnalysisContext context)
         {
@@ -51,21 +61,34 @@ namespace Microsoft.CodeAnalysis.UseExplicitTupleName
             {
                 if (field.CorrespondingTupleField?.Equals(field) == true)
                 {
-                    var namedField = GetNamedField(field.ContainingType, field, context.CancellationToken);
+                    var namedField = GetNamedField(
+                        field.ContainingType,
+                        field,
+                        context.CancellationToken
+                    );
                     if (namedField != null)
                     {
                         var memberAccessSyntax = fieldReferenceOperation.Syntax;
-                        var nameNode = memberAccessSyntax.ChildNodesAndTokens().Reverse().FirstOrDefault().AsNode();
+                        var nameNode = memberAccessSyntax
+                            .ChildNodesAndTokens()
+                            .Reverse()
+                            .FirstOrDefault()
+                            .AsNode();
                         if (nameNode != null)
                         {
                             var properties = ImmutableDictionary<string, string?>.Empty.Add(
-                                nameof(ElementName), namedField.Name);
-                            context.ReportDiagnostic(DiagnosticHelper.Create(
-                                Descriptor,
-                                nameNode.GetLocation(),
-                                option.Notification,
-                                additionalLocations: null,
-                                properties));
+                                nameof(ElementName),
+                                namedField.Name
+                            );
+                            context.ReportDiagnostic(
+                                DiagnosticHelper.Create(
+                                    Descriptor,
+                                    nameNode.GetLocation(),
+                                    option.Notification,
+                                    additionalLocations: null,
+                                    properties
+                                )
+                            );
                         }
                     }
                 }
@@ -73,7 +96,10 @@ namespace Microsoft.CodeAnalysis.UseExplicitTupleName
         }
 
         private static IFieldSymbol? GetNamedField(
-            INamedTypeSymbol containingType, IFieldSymbol unnamedField, CancellationToken cancellationToken)
+            INamedTypeSymbol containingType,
+            IFieldSymbol unnamedField,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var member in containingType.GetMembers())
             {
@@ -82,8 +108,10 @@ namespace Microsoft.CodeAnalysis.UseExplicitTupleName
                 if (member.Kind == SymbolKind.Field)
                 {
                     var fieldSymbol = (IFieldSymbol)member;
-                    if (unnamedField.Equals(fieldSymbol.CorrespondingTupleField) &&
-                        !fieldSymbol.Name.Equals(unnamedField.Name))
+                    if (
+                        unnamedField.Equals(fieldSymbol.CorrespondingTupleField)
+                        && !fieldSymbol.Name.Equals(unnamedField.Name)
+                    )
                     {
                         return fieldSymbol;
                     }

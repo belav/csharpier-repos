@@ -32,29 +32,32 @@ using XamMac.CoreFoundation;
 
 namespace Mono.AppleTls
 {
-	class X509PalImplApple : X509PalImpl
-	{
-		public override X509CertificateImpl Import (byte[] data)
-		{
-			data = ConvertData (data);
+    class X509PalImplApple : X509PalImpl
+    {
+        public override X509CertificateImpl Import(byte[] data)
+        {
+            data = ConvertData(data);
 
-			var handle = CFHelpers.CreateCertificateFromData (data);
-			if (handle != IntPtr.Zero)
-				return new X509CertificateImplApple (handle, true);
+            var handle = CFHelpers.CreateCertificateFromData(data);
+            if (handle != IntPtr.Zero)
+                return new X509CertificateImplApple(handle, true);
 
-			return null;
-		}
+            return null;
+        }
 
-		public override X509Certificate2Impl Import (
-			byte[] data, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
-		{
-			return null;
-		}
+        public override X509Certificate2Impl Import(
+            byte[] data,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
+        {
+            return null;
+        }
 
-		public override X509Certificate2Impl Import (X509Certificate cert)
-		{
-			return null;
-		}
-	}
+        public override X509Certificate2Impl Import(X509Certificate cert)
+        {
+            return null;
+        }
+    }
 }
 #endif

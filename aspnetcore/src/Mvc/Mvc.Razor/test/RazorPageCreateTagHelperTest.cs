@@ -68,42 +68,58 @@ public class RazorPageCreateTagHelperTest
             Mock.Of<IJsonHelper>(),
             new DiagnosticListener("Microsoft.AspNetCore"),
             new HtmlTestEncoder(),
-            modelExpressionProvider);
+            modelExpressionProvider
+        );
 
         var serviceProvider = new Mock<IServiceProvider>();
         var tagHelperActivator = new DefaultTagHelperActivator();
         var myService = new MyService();
-        serviceProvider.Setup(mock => mock.GetService(typeof(MyService)))
-                       .Returns(myService);
-        serviceProvider.Setup(mock => mock.GetService(typeof(ITagHelperFactory)))
+        serviceProvider.Setup(mock => mock.GetService(typeof(MyService))).Returns(myService);
+        serviceProvider
+            .Setup(mock => mock.GetService(typeof(ITagHelperFactory)))
             .Returns(new DefaultTagHelperFactory(tagHelperActivator));
-        serviceProvider.Setup(mock => mock.GetService(typeof(ITagHelperActivator)))
-                       .Returns(tagHelperActivator);
-        serviceProvider.Setup(mock => mock.GetService(It.Is<Type>(serviceType =>
-            serviceType.IsGenericType && serviceType.GetGenericTypeDefinition() == typeof(IEnumerable<>))))
+        serviceProvider
+            .Setup(mock => mock.GetService(typeof(ITagHelperActivator)))
+            .Returns(tagHelperActivator);
+        serviceProvider
+            .Setup(mock =>
+                mock.GetService(
+                    It.Is<Type>(serviceType =>
+                        serviceType.IsGenericType
+                        && serviceType.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                    )
+                )
+            )
             .Returns<Type>(serviceType =>
             {
                 var enumerableType = serviceType.GetGenericArguments().First();
-                return typeof(Enumerable).GetMethod("Empty").MakeGenericMethod(enumerableType).Invoke(null, null);
+                return typeof(Enumerable)
+                    .GetMethod("Empty")
+                    .MakeGenericMethod(enumerableType)
+                    .Invoke(null, null);
             });
         var httpContext = new Mock<HttpContext>();
-        httpContext.SetupGet(c => c.RequestServices)
-                   .Returns(serviceProvider.Object);
+        httpContext.SetupGet(c => c.RequestServices).Returns(serviceProvider.Object);
 
-        var actionContext = new ActionContext(httpContext.Object, new RouteData(), new ActionDescriptor());
-        var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
+        var actionContext = new ActionContext(
+            httpContext.Object,
+            new RouteData(),
+            new ActionDescriptor()
+        );
+        var viewData = new ViewDataDictionary(
+            new EmptyModelMetadataProvider(),
+            new ModelStateDictionary()
+        );
         var viewContext = new ViewContext(
             actionContext,
             Mock.Of<IView>(),
             viewData,
             Mock.Of<ITempDataDictionary>(),
             TextWriter.Null,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
 
-        return new TestRazorPage
-        {
-            ViewContext = viewContext
-        };
+        return new TestRazorPage { ViewContext = viewContext };
     }
 
     private class TestRazorPage : RazorPage<dynamic>
@@ -114,9 +130,7 @@ public class RazorPageCreateTagHelperTest
         }
     }
 
-    private class NoServiceTagHelper : TagHelper
-    {
-    }
+    private class NoServiceTagHelper : TagHelper { }
 
     private class ServiceTagHelper : TagHelper
     {
@@ -135,7 +149,5 @@ public class RazorPageCreateTagHelperTest
         public ViewContext ViewContext { get; set; }
     }
 
-    private class MyService
-    {
-    }
+    private class MyService { }
 }

@@ -26,24 +26,38 @@ internal sealed class LanguageServerHost
     private readonly AbstractLanguageServer<RequestContext> _roslynLanguageServer;
     private readonly JsonRpc _jsonRpc;
 
-    public LanguageServerHost(Stream inputStream, Stream outputStream, ExportProvider exportProvider, ILogger logger)
+    public LanguageServerHost(
+        Stream inputStream,
+        Stream outputStream,
+        ExportProvider exportProvider,
+        ILogger logger
+    )
     {
-        var handler = new HeaderDelimitedMessageHandler(outputStream, inputStream, new JsonMessageFormatter());
+        var handler = new HeaderDelimitedMessageHandler(
+            outputStream,
+            inputStream,
+            new JsonMessageFormatter()
+        );
 
         // If there is a jsonrpc disconnect or server shutdown, that is handled by the AbstractLanguageServer.  No need to do anything here.
-        _jsonRpc = new JsonRpc(handler)
-        {
-            ExceptionStrategy = ExceptionProcessing.CommonErrorData,
-        };
+        _jsonRpc = new JsonRpc(handler) { ExceptionStrategy = ExceptionProcessing.CommonErrorData };
 
         var roslynLspFactory = exportProvider.GetExportedValue<ILanguageServerFactory>();
-        var capabilitiesProvider = new ServerCapabilitiesProvider(exportProvider.GetExportedValue<ExperimentalCapabilitiesProvider>());
+        var capabilitiesProvider = new ServerCapabilitiesProvider(
+            exportProvider.GetExportedValue<ExperimentalCapabilitiesProvider>()
+        );
 
         _logger = logger;
         var lspLogger = new LspServiceLogger(_logger);
 
         var hostServices = exportProvider.GetExportedValue<HostServicesProvider>().HostServices;
-        _roslynLanguageServer = roslynLspFactory.Create(_jsonRpc, capabilitiesProvider, WellKnownLspServerKinds.CSharpVisualBasicLspServer, lspLogger, hostServices);
+        _roslynLanguageServer = roslynLspFactory.Create(
+            _jsonRpc,
+            capabilitiesProvider,
+            WellKnownLspServerKinds.CSharpVisualBasicLspServer,
+            lspLogger,
+            hostServices
+        );
     }
 
     public void Start()
@@ -60,7 +74,8 @@ internal sealed class LanguageServerHost
         await _roslynLanguageServer.WaitForExitAsync();
     }
 
-    public T GetRequiredLspService<T>() where T : ILspService
+    public T GetRequiredLspService<T>()
+        where T : ILspService
     {
         return _roslynLanguageServer.GetLspServices().GetRequiredService<T>();
     }

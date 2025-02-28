@@ -1,9 +1,8 @@
 //------------------------------------------------------------------------------
 // <copyright file="DesignerDeviceConfig.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
-
 
 using System;
 using System.ComponentModel;
@@ -15,28 +14,30 @@ namespace System.Web.UI.MobileControls
     // Data structure for a specialized version of IndividualDeviceConfig,
     // used in design mode.
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     class DesignerDeviceConfig : IndividualDeviceConfig
     {
-        internal DesignerDeviceConfig(String pageAdapterType) : base(Type.GetType (pageAdapterType))
-        {
-        }
+        internal DesignerDeviceConfig(String pageAdapterType)
+            : base(Type.GetType(pageAdapterType)) { }
 
         internal override IControlAdapter NewControlAdapter(Type originalControlType)
         {
             IControlAdapter adapter;
             IWebObjectFactory adapterFactory = LookupControl(originalControlType);
-            
+
             if (adapterFactory != null)
             {
-                adapter = (IControlAdapter) adapterFactory.CreateInstance();
+                adapter = (IControlAdapter)adapterFactory.CreateInstance();
             }
             else
             {
                 DesignerAdapterAttribute da;
                 da = (DesignerAdapterAttribute)
-                    TypeDescriptor.GetAttributes(originalControlType)
-                        [typeof(DesignerAdapterAttribute)];
+                    TypeDescriptor.GetAttributes(originalControlType)[
+                        typeof(DesignerAdapterAttribute)
+                    ];
                 if (da == null)
                 {
                     return new EmptyControlAdapter();
@@ -57,6 +58,5 @@ namespace System.Web.UI.MobileControls
             }
             return adapter;
         }
-
     }
 }

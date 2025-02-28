@@ -27,7 +27,10 @@ internal sealed class NewtonsoftJsonHelper : IJsonHelper
     /// The <see cref="ArrayPool{Char}"/> for use with custom <see cref="JsonSerializerSettings"/> (see
     /// <see cref="Serialize(object, JsonSerializerSettings)"/>).
     /// </param>
-    public NewtonsoftJsonHelper(IOptions<MvcNewtonsoftJsonOptions> options, ArrayPool<char> charPool)
+    public NewtonsoftJsonHelper(
+        IOptions<MvcNewtonsoftJsonOptions> options,
+        ArrayPool<char> charPool
+    )
     {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(charPool);
@@ -53,10 +56,7 @@ internal sealed class NewtonsoftJsonHelper : IJsonHelper
     {
         using (var stringWriter = new StringWriter(CultureInfo.InvariantCulture))
         {
-            var jsonWriter = new JsonTextWriter(stringWriter)
-            {
-                ArrayPool = _charPool,
-            };
+            var jsonWriter = new JsonTextWriter(stringWriter) { ArrayPool = _charPool };
 
             using (jsonWriter)
             {
@@ -67,7 +67,9 @@ internal sealed class NewtonsoftJsonHelper : IJsonHelper
         }
     }
 
-    private static JsonSerializer CreateHtmlSafeSerializer(JsonSerializerSettings serializerSettings)
+    private static JsonSerializer CreateHtmlSafeSerializer(
+        JsonSerializerSettings serializerSettings
+    )
     {
         var jsonSerializer = JsonSerializer.Create(serializerSettings);
         // Ignore the user configured StringEscapeHandling and always escape it.

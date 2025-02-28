@@ -103,7 +103,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"string{1}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -127,7 +128,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"string{1}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -151,7 +153,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{1}string";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -175,7 +178,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{1 + 2}string";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -203,7 +207,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                         $"{1 + 2}string" /* trailing trivia */;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -227,7 +232,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{1 + 2}string{3}{4}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -251,7 +257,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"\r{2}string{3}\n";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -275,7 +282,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"\\r{2}string{3}\\n";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -299,7 +307,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $@"{1}string";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -385,7 +394,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{1}string" + d;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -432,7 +442,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"A{1}BC";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16820")]
@@ -456,7 +467,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"ABC{1}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16820")]
@@ -480,7 +492,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"A{1}BC{2}DEF{3}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16820")]
@@ -555,7 +568,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                         var v = $"{1}{{string}}";
                     }
                 }
-                """);
+                """
+            );
         }
     }
 
@@ -581,7 +595,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                         var v = $"{1}{{string}}{{string}}";
                     }
                 }
-                """);
+                """
+            );
         }
     }
 
@@ -607,7 +622,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                         var v = $"{1}{{{{string}}}}";
                     }
                 }
-                """);
+                """
+            );
         }
     }
 
@@ -633,7 +649,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                         var v = $"{{{1}}}";
                     }
                 }
-                """);
+                """
+            );
         }
     }
 
@@ -658,7 +675,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $@"{1}{{string}}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23536")]
@@ -682,7 +700,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $@"{{{1}}}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
@@ -707,7 +726,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"string{1}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16981")]
@@ -784,7 +804,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"string{1}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16981")]
@@ -808,7 +829,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{3}string{1}string";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16981")]
@@ -832,7 +854,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{3}string{1}string";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16981")]
@@ -856,7 +879,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{3}string{1}string";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16981")]
@@ -880,7 +904,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{3}string{1}string";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16981")]
@@ -904,7 +929,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{3}string{1}string";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/16981")]
@@ -928,7 +954,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{3}string{1}string";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32864")]
@@ -952,7 +979,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var v = $"{1}{"string"}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37324")]
@@ -980,7 +1008,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var str = $"{hello} {world}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37324")]
@@ -1006,7 +1035,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var str = $"hello {world}";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37324")]
@@ -1032,7 +1062,8 @@ public class ConvertConcatenationToInterpolatedStringTests
                     var str = $"{hello} world";
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40413")]
@@ -1112,7 +1143,8 @@ public class ConvertConcatenationToInterpolatedStringTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40413")]
     public async Task TestConcatenationWithInlineString()
     {
-        await VerifyCS.VerifyRefactoringAsync("""
+        await VerifyCS.VerifyRefactoringAsync(
+            """
             using System;
             class C
             {
@@ -1133,56 +1165,77 @@ public class ConvertConcatenationToInterpolatedStringTests
                     Console.WriteLine($"{Hello} {World}");
                 }
             }
-            """);
+            """
+        );
     }
 
     [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/49229")]
-    [InlineData(@"[|""a"" + $""{1:000}""|]",
-                 """
-                 $"a{1:000}"
-                 """)]
-    [InlineData(@"[|""a"" + $""b{1:000}""|]",
-                 """
-                 $"ab{1:000}"
-                 """)]
-    [InlineData(@"[|$""a{1:000}"" + ""b""|]",
-                 """
-                 $"a{1:000}b"
-                 """)]
-    [InlineData(@"[|""a"" + $""b{1:000}c"" + ""d""|]",
-                 """
-                 $"ab{1:000}cd"
-                 """)]
-    [InlineData(@"[|""a"" + $""{1:000}b"" + ""c""|]",
-                 """
-                 $"a{1:000}bc"
-                 """)]
-    [InlineData(@"[|""a"" + $""{1:000}"" + $""{2:000}"" + ""b""|]",
-                 """
-                 $"a{1:000}{2:000}b"
-                 """)]
-    [InlineData(@"[|@""a"" + @$""{1:000}""|]",
-                 """
-                 $@"a{1:000}"
-                 """)]
-    [InlineData(@"[|@""a"" + $""{1:000}""|]",
-                 """
-                 $@"a{$"{1:000}"}"
-                 """)]
-    [InlineData(@"[|""a"" + @$""{1:000}""|]",
-                 """
-                 $"a{@$"{1:000}"}"
-                 """)]
+    [InlineData(
+        @"[|""a"" + $""{1:000}""|]",
+        """
+            $"a{1:000}"
+            """
+    )]
+    [InlineData(
+        @"[|""a"" + $""b{1:000}""|]",
+        """
+            $"ab{1:000}"
+            """
+    )]
+    [InlineData(
+        @"[|$""a{1:000}"" + ""b""|]",
+        """
+            $"a{1:000}b"
+            """
+    )]
+    [InlineData(
+        @"[|""a"" + $""b{1:000}c"" + ""d""|]",
+        """
+            $"ab{1:000}cd"
+            """
+    )]
+    [InlineData(
+        @"[|""a"" + $""{1:000}b"" + ""c""|]",
+        """
+            $"a{1:000}bc"
+            """
+    )]
+    [InlineData(
+        @"[|""a"" + $""{1:000}"" + $""{2:000}"" + ""b""|]",
+        """
+            $"a{1:000}{2:000}b"
+            """
+    )]
+    [InlineData(
+        @"[|@""a"" + @$""{1:000}""|]",
+        """
+            $@"a{1:000}"
+            """
+    )]
+    [InlineData(
+        @"[|@""a"" + $""{1:000}""|]",
+        """
+            $@"a{$"{1:000}"}"
+            """
+    )]
+    [InlineData(
+        @"[|""a"" + @$""{1:000}""|]",
+        """
+            $"a{@$"{1:000}"}"
+            """
+    )]
     public async Task TestInliningOfInterpolatedString(string before, string after)
     {
-        var initialMarkup = $@"
+        var initialMarkup =
+            $@"
 class C
 {{
     void M() {{
         _ = {before};
     }}
 }}";
-        var expected = $@"
+        var expected =
+            $@"
 class C
 {{
     void M() {{
@@ -1193,36 +1246,46 @@ class C
     }
 
     [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/49229")]
-    [InlineData("""
-        "\t" [|+|] 1
-        """,
+    [InlineData(
         """
-        $"\t{1}"
-        """)]
-    [InlineData("""
-        "😀" [|+|] 1
-        """,
+            "\t" [|+|] 1
+            """,
         """
-        $"😀{1}"
-        """)]
-    [InlineData("""
-        "\u2764" [|+|] 1
-        """,
+            $"\t{1}"
+            """
+    )]
+    [InlineData(
         """
-        $"\u2764{1}"
-        """)]
-    [InlineData("""
-        "\"" [|+|] 1
-        """,
+            "😀" [|+|] 1
+            """,
         """
-        $"\"{1}"
-        """)]
-    [InlineData("""
-        "{}" [|+|] 1
-        """,
+            $"😀{1}"
+            """
+    )]
+    [InlineData(
         """
-        $"{{}}{1}"
-        """)]
+            "\u2764" [|+|] 1
+            """,
+        """
+            $"\u2764{1}"
+            """
+    )]
+    [InlineData(
+        """
+            "\"" [|+|] 1
+            """,
+        """
+            $"\"{1}"
+            """
+    )]
+    [InlineData(
+        """
+            "{}" [|+|] 1
+            """,
+        """
+            $"{{}}{1}"
+            """
+    )]
     public async Task TestUnicodeAndEscapeHandling(string before, string after)
     {
         var initialMarkup = $$"""
@@ -1245,30 +1308,38 @@ class C
     }
 
     [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/49229")]
-    [InlineData("""
-        "a" [|+|] (1 + 1)
-        """,
+    [InlineData(
         """
-        $"a{1 + 1}"
-        """)]
-    [InlineData("""
-        "a" [||]+ (1 + 1) + "b" + (2 + 2)
-        """,
+            "a" [|+|] (1 + 1)
+            """,
         """
-        $"a{1 + 1}b{2 + 2}"
-        """)]
-    [InlineData("""
-        "a" [|+|] (true ? "t" : "f")
-        """,
+            $"a{1 + 1}"
+            """
+    )]
+    [InlineData(
         """
-        $"a{(true ? "t" : "f")}"
-        """)]
-    [InlineData("""
-        "a" [|+|] $"{(1 + 1)}"
-        """,
+            "a" [||]+ (1 + 1) + "b" + (2 + 2)
+            """,
         """
-        $"a{(1 + 1)}"
-        """)]
+            $"a{1 + 1}b{2 + 2}"
+            """
+    )]
+    [InlineData(
+        """
+            "a" [|+|] (true ? "t" : "f")
+            """,
+        """
+            $"a{(true ? "t" : "f")}"
+            """
+    )]
+    [InlineData(
+        """
+            "a" [|+|] $"{(1 + 1)}"
+            """,
+        """
+            $"a{(1 + 1)}"
+            """
+    )]
     public async Task TestRemovalOfSuperflousParenthesis(string before, string after)
     {
         var initialMarkup = $$"""
@@ -1312,7 +1383,7 @@ class C
                 {
                     public T Item1;
                     public T Item2;
-                
+
                     public override string ToString()
                     {
                         return $"({Item1.ToString()}, {Item2.ToString()})";
@@ -1344,7 +1415,7 @@ class C
                 {
                     public T Item1;
                     public T Item2;
-                
+
                     public override string ToString()
                     {
                         return $"({Item1}, {Item2})";

@@ -8,15 +8,15 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
-using System.Reflection;
-using System.Data.Metadata.Edm;
 using System.Data.Entity.Design.Common;
-using System.IO;
-using System.Data.Mapping;
 using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Mapping;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Xml;
 
 namespace System.Data.Entity.Design
@@ -27,7 +27,10 @@ namespace System.Data.Entity.Design
         public static readonly Version Version2 = EntityFrameworkVersionsUtil.Version2;
         public static readonly Version Version3 = EntityFrameworkVersionsUtil.Version3;
 
-        internal static Version EdmVersion1_1 { get { return EntityFrameworkVersionsUtil.EdmVersion1_1; } }
+        internal static Version EdmVersion1_1
+        {
+            get { return EntityFrameworkVersionsUtil.EdmVersion1_1; }
+        }
 
         /// <summary>
         /// Returns the stream of the XSD corresponding to the frameworkVersion, and dataSpace passed in.
@@ -37,25 +40,31 @@ namespace System.Data.Entity.Design
         /// <returns>Stream version of the XSD</returns>
         public static Stream GetSchemaXsd(Version entityFrameworkVersion, DataSpace dataSpace)
         {
-            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(entityFrameworkVersion, "entityFrameworkVersion");
+            EDesignUtil.CheckTargetEntityFrameworkVersionArgument(
+                entityFrameworkVersion,
+                "entityFrameworkVersion"
+            );
 
             string resourceName = null;
-            switch(dataSpace)
+            switch (dataSpace)
             {
                 case DataSpace.CSpace:
-                    resourceName =  GetEdmSchemaXsdResourceName(entityFrameworkVersion);
+                    resourceName = GetEdmSchemaXsdResourceName(entityFrameworkVersion);
                     break;
                 case DataSpace.CSSpace:
-                    resourceName =  GetMappingSchemaXsdResourceName(entityFrameworkVersion);
+                    resourceName = GetMappingSchemaXsdResourceName(entityFrameworkVersion);
                     break;
                 case DataSpace.SSpace:
-                    resourceName =  GetStoreSchemaXsdResourceName(entityFrameworkVersion);
+                    resourceName = GetStoreSchemaXsdResourceName(entityFrameworkVersion);
                     break;
                 default:
                     throw EDesignUtil.Argument("dataSpace");
             }
 
-            Debug.Assert(!string.IsNullOrEmpty(resourceName), "Did you forget to map something new?");
+            Debug.Assert(
+                !string.IsNullOrEmpty(resourceName),
+                "Did you forget to map something new?"
+            );
 
             Assembly dataEntity = typeof(EdmItemCollection).Assembly;
             return dataEntity.GetManifestResourceStream(resourceName);
@@ -63,24 +72,38 @@ namespace System.Data.Entity.Design
 
         private static string GetStoreSchemaXsdResourceName(Version entityFrameworkVersion)
         {
-            Debug.Assert(IsValidVersion(entityFrameworkVersion), "Did you forget to check for valid versions before calling this private method?");
+            Debug.Assert(
+                IsValidVersion(entityFrameworkVersion),
+                "Did you forget to check for valid versions before calling this private method?"
+            );
             Dictionary<string, XmlSchemaResource> map = new Dictionary<string, XmlSchemaResource>();
-            XmlSchemaResource.AddStoreSchemaResourceMapEntries(map, GetEdmVersion(entityFrameworkVersion));
+            XmlSchemaResource.AddStoreSchemaResourceMapEntries(
+                map,
+                GetEdmVersion(entityFrameworkVersion)
+            );
             return map[GetStoreSchemaNamespace(entityFrameworkVersion)].ResourceName;
-            
         }
 
         private static string GetMappingSchemaXsdResourceName(Version entityFrameworkVersion)
         {
-            Debug.Assert(IsValidVersion(entityFrameworkVersion), "Did you forget to check for valid versions before calling this private method?");
+            Debug.Assert(
+                IsValidVersion(entityFrameworkVersion),
+                "Did you forget to check for valid versions before calling this private method?"
+            );
             Dictionary<string, XmlSchemaResource> map = new Dictionary<string, XmlSchemaResource>();
-            XmlSchemaResource.AddMappingSchemaResourceMapEntries(map, GetEdmVersion(entityFrameworkVersion));
+            XmlSchemaResource.AddMappingSchemaResourceMapEntries(
+                map,
+                GetEdmVersion(entityFrameworkVersion)
+            );
             return map[GetMappingSchemaNamespace(entityFrameworkVersion)].ResourceName;
         }
 
         private static double GetEdmVersion(Version entityFrameworkVersion)
         {
-            Debug.Assert(IsValidVersion(entityFrameworkVersion), "Did you add a new version or forget to check the version");
+            Debug.Assert(
+                IsValidVersion(entityFrameworkVersion),
+                "Did you add a new version or forget to check the version"
+            );
             if (entityFrameworkVersion.Major == 1)
             {
                 if (entityFrameworkVersion.Minor == 1)
@@ -98,25 +121,43 @@ namespace System.Data.Entity.Design
             }
             else
             {
-                Debug.Assert(entityFrameworkVersion == EntityFrameworkVersions.Version3, "did you add a new version?");
+                Debug.Assert(
+                    entityFrameworkVersion == EntityFrameworkVersions.Version3,
+                    "did you add a new version?"
+                );
                 return XmlConstants.EdmVersionForV3;
             }
         }
 
         private static string GetEdmSchemaXsdResourceName(Version entityFrameworkVersion)
         {
-            Debug.Assert(ValidVersions.Contains(entityFrameworkVersion), "Did you forget to check for valid versions before calling this private method?");
+            Debug.Assert(
+                ValidVersions.Contains(entityFrameworkVersion),
+                "Did you forget to check for valid versions before calling this private method?"
+            );
             Dictionary<string, XmlSchemaResource> map = new Dictionary<string, XmlSchemaResource>();
-            XmlSchemaResource.AddEdmSchemaResourceMapEntries(map, GetEdmVersion(entityFrameworkVersion));
+            XmlSchemaResource.AddEdmSchemaResourceMapEntries(
+                map,
+                GetEdmVersion(entityFrameworkVersion)
+            );
             return map[GetEdmSchemaNamespace(entityFrameworkVersion)].ResourceName;
         }
 
-        internal static string GetSchemaNamespace(Version entityFrameworkVersion, DataSpace dataSpace)
+        internal static string GetSchemaNamespace(
+            Version entityFrameworkVersion,
+            DataSpace dataSpace
+        )
         {
-            Debug.Assert(IsValidVersion(entityFrameworkVersion), "Did you add a new version or forget to check the version");
-            Debug.Assert(dataSpace == DataSpace.CSpace ||
-                         dataSpace == DataSpace.CSSpace ||
-                         dataSpace == DataSpace.SSpace, "only support the three spaces with an xml file format");
+            Debug.Assert(
+                IsValidVersion(entityFrameworkVersion),
+                "Did you add a new version or forget to check the version"
+            );
+            Debug.Assert(
+                dataSpace == DataSpace.CSpace
+                    || dataSpace == DataSpace.CSSpace
+                    || dataSpace == DataSpace.SSpace,
+                "only support the three spaces with an xml file format"
+            );
             switch (dataSpace)
             {
                 case DataSpace.CSpace:
@@ -130,7 +171,10 @@ namespace System.Data.Entity.Design
 
         private static string GetStoreSchemaNamespace(Version entityFrameworkVersion)
         {
-            Debug.Assert(ValidVersions.Contains(entityFrameworkVersion), "Did you forget to check for valid versions before calling this private method?");
+            Debug.Assert(
+                ValidVersions.Contains(entityFrameworkVersion),
+                "Did you forget to check for valid versions before calling this private method?"
+            );
             if (entityFrameworkVersion == EntityFrameworkVersions.Version1)
             {
                 return XmlConstants.TargetNamespace_1;
@@ -141,14 +185,20 @@ namespace System.Data.Entity.Design
             }
             else
             {
-                Debug.Assert(entityFrameworkVersion == EntityFrameworkVersions.Version3, "did you add a new version?");
+                Debug.Assert(
+                    entityFrameworkVersion == EntityFrameworkVersions.Version3,
+                    "did you add a new version?"
+                );
                 return XmlConstants.TargetNamespace_3;
             }
         }
 
         private static string GetMappingSchemaNamespace(Version entityFrameworkVersion)
         {
-            Debug.Assert(ValidVersions.Contains(entityFrameworkVersion), "Did you forget to check for valid versions before calling this private method?");
+            Debug.Assert(
+                ValidVersions.Contains(entityFrameworkVersion),
+                "Did you forget to check for valid versions before calling this private method?"
+            );
             if (entityFrameworkVersion == EntityFrameworkVersions.Version1)
             {
                 return StorageMslConstructs.NamespaceUriV1;
@@ -159,14 +209,20 @@ namespace System.Data.Entity.Design
             }
             else
             {
-                Debug.Assert(entityFrameworkVersion == EntityFrameworkVersions.Version3, "did you add a new version?");
+                Debug.Assert(
+                    entityFrameworkVersion == EntityFrameworkVersions.Version3,
+                    "did you add a new version?"
+                );
                 return StorageMslConstructs.NamespaceUriV3;
             }
         }
 
         private static string GetEdmSchemaNamespace(Version entityFrameworkVersion)
         {
-            Debug.Assert(ValidVersions.Contains(entityFrameworkVersion), "Did you forget to check for valid versions before calling this private method?");
+            Debug.Assert(
+                ValidVersions.Contains(entityFrameworkVersion),
+                "Did you forget to check for valid versions before calling this private method?"
+            );
             if (entityFrameworkVersion == EntityFrameworkVersions.Version1)
             {
                 return XmlConstants.ModelNamespace_1;
@@ -177,7 +233,10 @@ namespace System.Data.Entity.Design
             }
             else
             {
-                Debug.Assert(entityFrameworkVersion == EntityFrameworkVersions.Version3, "did you add a new version?");
+                Debug.Assert(
+                    entityFrameworkVersion == EntityFrameworkVersions.Version3,
+                    "did you add a new version?"
+                );
                 return XmlConstants.ModelNamespace_3;
             }
         }
@@ -185,6 +244,7 @@ namespace System.Data.Entity.Design
         internal static Version Default = Version2;
         internal static Version Latest = Version3;
         internal static Version[] ValidVersions = new Version[] { Version1, Version2, Version3 };
+
         internal static bool IsValidVersion(Version entityFrameworkVersion)
         {
             return ValidVersions.Contains(entityFrameworkVersion);
@@ -197,13 +257,10 @@ namespace System.Data.Entity.Design
             // already there
             if (!reader.EOF && reader.NodeType != XmlNodeType.Element)
             {
-                while (reader.Read() && reader.NodeType != XmlNodeType.Element)
-                {
-                }
+                while (reader.Read() && reader.NodeType != XmlNodeType.Element) { }
             }
 
-            if (!reader.EOF &&
-                (reader.LocalName == EntityDesignerUtils.EdmxRootElementName))
+            if (!reader.EOF && (reader.LocalName == EntityDesignerUtils.EdmxRootElementName))
             {
                 return TryGetEdmxVersion(reader.NamespaceURI, out entityFrameworkVersion);
             }
@@ -212,7 +269,10 @@ namespace System.Data.Entity.Design
             return false;
         }
 
-        internal static bool TryGetEdmxVersion(string xmlNamespaceName, out Version entityFrameworkVersion)
+        internal static bool TryGetEdmxVersion(
+            string xmlNamespaceName,
+            out Version entityFrameworkVersion
+        )
         {
             switch (xmlNamespaceName)
             {
@@ -230,6 +290,5 @@ namespace System.Data.Entity.Design
                     return false;
             }
         }
-
     }
 }

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,16 +25,16 @@ using System.Collections.Generic;
 
 namespace System.Xaml
 {
-	public class NamespaceDeclaration
-	{
-		public NamespaceDeclaration (string ns, string prefix)
-		{
-			// null arguments are allowed.
-			Namespace = ns;
-			Prefix = prefix;
-		}
-		
-		public string Namespace { get; private set; }
-		public string Prefix { get; private set; }
-	}
+    public class NamespaceDeclaration
+    {
+        public NamespaceDeclaration(string ns, string prefix)
+        {
+            // null arguments are allowed.
+            Namespace = ns;
+            Prefix = prefix;
+        }
+
+        public string Namespace { get; private set; }
+        public string Prefix { get; private set; }
+    }
 }

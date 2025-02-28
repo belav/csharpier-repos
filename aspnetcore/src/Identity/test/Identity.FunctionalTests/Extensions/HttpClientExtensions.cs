@@ -11,7 +11,8 @@ public static class HttpClientExtensions
     public static Task<HttpResponseMessage> SendAsync(
         this HttpClient client,
         IHtmlFormElement form,
-        IHtmlElement submitButton)
+        IHtmlElement submitButton
+    )
     {
         return client.SendAsync(form, submitButton, new Dictionary<string, string>());
     }
@@ -19,7 +20,8 @@ public static class HttpClientExtensions
     public static Task<HttpResponseMessage> SendAsync(
         this HttpClient client,
         IHtmlFormElement form,
-        IEnumerable<KeyValuePair<string, string>> formValues)
+        IEnumerable<KeyValuePair<string, string>> formValues
+    )
     {
         var submitElement = Assert.Single(form.QuerySelectorAll("[type=submit]"));
         var submitButton = Assert.IsAssignableFrom<IHtmlElement>(submitElement);
@@ -31,7 +33,8 @@ public static class HttpClientExtensions
         this HttpClient client,
         IHtmlFormElement form,
         IHtmlElement submitButton,
-        IEnumerable<KeyValuePair<string, string>> formValues)
+        IEnumerable<KeyValuePair<string, string>> formValues
+    )
     {
         foreach (var kvp in formValues)
         {
@@ -48,7 +51,7 @@ public static class HttpClientExtensions
         }
         var submision = new HttpRequestMessage(new HttpMethod(submit.Method.ToString()), target)
         {
-            Content = new StreamContent(submit.Body)
+            Content = new StreamContent(submit.Body),
         };
 
         foreach (var header in submit.Headers)

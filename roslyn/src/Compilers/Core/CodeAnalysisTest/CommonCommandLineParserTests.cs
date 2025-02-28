@@ -17,9 +17,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
 {
     public class CommonCommandLineParserTests : TestBase
     {
-        private void VerifyCommandLineSplitter(string commandLine, string[] expected, bool removeHashComments = false)
+        private void VerifyCommandLineSplitter(
+            string commandLine,
+            string[] expected,
+            bool removeHashComments = false
+        )
         {
-            var actual = CommandLineParser.SplitCommandLineIntoArguments(commandLine, removeHashComments).ToArray();
+            var actual = CommandLineParser
+                .SplitCommandLineIntoArguments(commandLine, removeHashComments)
+                .ToArray();
 
             Assert.Equal(expected.Length, actual.Length);
             for (int i = 0; i < actual.Length; ++i)
@@ -48,7 +54,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             return RuleSetProcessor.LoadFromFile(file.Path);
         }
 
-        private void VerifyRuleSetError(string source, Func<string> messageFormatter, bool locSpecific = true, params string[] otherSources)
+        private void VerifyRuleSetError(
+            string source,
+            Func<string> messageFormatter,
+            bool locSpecific = true,
+            params string[] otherSources
+        )
         {
             CultureInfo saveUICulture = Thread.CurrentThread.CurrentUICulture;
 
@@ -90,31 +101,64 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             VerifyCommandLineSplitter("", new string[0]);
             VerifyCommandLineSplitter("   \t   ", new string[0]);
-            VerifyCommandLineSplitter("   abc\tdef baz    quuz   ", new[] { "abc", "def", "baz", "quuz" });
-            VerifyCommandLineSplitter(@"  ""abc def""  fi""ddle dee de""e  ""hi there ""dude  he""llo there""  ",
-                                        new string[] { @"abc def", @"fi""ddle dee de""e", @"""hi there ""dude", @"he""llo there""" });
-            VerifyCommandLineSplitter(@"  ""abc def \"" baz quuz"" ""\""straw berry"" fi\""zz \""buzz fizzbuzz",
-                                        new string[] { @"abc def \"" baz quuz", @"\""straw berry", @"fi\""zz", @"\""buzz", @"fizzbuzz" });
-            VerifyCommandLineSplitter(@"  \\""abc def""  \\\""abc def"" ",
-                                        new string[] { @"\\""abc def""", @"\\\""abc", @"def"" " });
-            VerifyCommandLineSplitter(@"  \\\\""abc def""  \\\\\""abc def"" ",
-                                        new string[] { @"\\\\""abc def""", @"\\\\\""abc", @"def"" " });
-            VerifyCommandLineSplitter(@"  \\\\""abc def""  \\\\\""abc def"" q a r ",
-                                        new string[] { @"\\\\""abc def""", @"\\\\\""abc", @"def"" q a r " });
-            VerifyCommandLineSplitter(@"abc #Comment ignored",
-                                        new string[] { @"abc" }, removeHashComments: true);
-            VerifyCommandLineSplitter(@"""goo bar"";""baz"" ""tree""",
-                                        new string[] { @"""goo bar"";""baz""", "tree" });
-            VerifyCommandLineSplitter(@"/reference:""a, b"" ""test""",
-                                        new string[] { @"/reference:""a, b""", "test" });
-            VerifyCommandLineSplitter(@"fo""o ba""r",
-                                        new string[] { @"fo""o ba""r" });
+            VerifyCommandLineSplitter(
+                "   abc\tdef baz    quuz   ",
+                new[] { "abc", "def", "baz", "quuz" }
+            );
+            VerifyCommandLineSplitter(
+                @"  ""abc def""  fi""ddle dee de""e  ""hi there ""dude  he""llo there""  ",
+                new string[]
+                {
+                    @"abc def",
+                    @"fi""ddle dee de""e",
+                    @"""hi there ""dude",
+                    @"he""llo there""",
+                }
+            );
+            VerifyCommandLineSplitter(
+                @"  ""abc def \"" baz quuz"" ""\""straw berry"" fi\""zz \""buzz fizzbuzz",
+                new string[]
+                {
+                    @"abc def \"" baz quuz",
+                    @"\""straw berry",
+                    @"fi\""zz",
+                    @"\""buzz",
+                    @"fizzbuzz",
+                }
+            );
+            VerifyCommandLineSplitter(
+                @"  \\""abc def""  \\\""abc def"" ",
+                new string[] { @"\\""abc def""", @"\\\""abc", @"def"" " }
+            );
+            VerifyCommandLineSplitter(
+                @"  \\\\""abc def""  \\\\\""abc def"" ",
+                new string[] { @"\\\\""abc def""", @"\\\\\""abc", @"def"" " }
+            );
+            VerifyCommandLineSplitter(
+                @"  \\\\""abc def""  \\\\\""abc def"" q a r ",
+                new string[] { @"\\\\""abc def""", @"\\\\\""abc", @"def"" q a r " }
+            );
+            VerifyCommandLineSplitter(
+                @"abc #Comment ignored",
+                new string[] { @"abc" },
+                removeHashComments: true
+            );
+            VerifyCommandLineSplitter(
+                @"""goo bar"";""baz"" ""tree""",
+                new string[] { @"""goo bar"";""baz""", "tree" }
+            );
+            VerifyCommandLineSplitter(
+                @"/reference:""a, b"" ""test""",
+                new string[] { @"/reference:""a, b""", "test" }
+            );
+            VerifyCommandLineSplitter(@"fo""o ba""r", new string[] { @"fo""o ba""r" });
         }
 
         [Fact]
         public void TestRuleSetParsingDuplicateRule()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -125,13 +169,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>";
 
-            VerifyRuleSetError(source, () => string.Format(CodeAnalysisResources.RuleSetHasDuplicateRules, "CA1012", "Error", "Warn"));
+            VerifyRuleSetError(
+                source,
+                () =>
+                    string.Format(
+                        CodeAnalysisResources.RuleSetHasDuplicateRules,
+                        "CA1012",
+                        "Error",
+                        "Warn"
+                    )
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingDuplicateRule2()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -144,13 +198,24 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>";
 
-            VerifyRuleSetError(source, () => string.Format(CodeAnalysisResources.RuleSetHasDuplicateRules, "CA1012", "Error", "Warn"), locSpecific: false);
+            VerifyRuleSetError(
+                source,
+                () =>
+                    string.Format(
+                        CodeAnalysisResources.RuleSetHasDuplicateRules,
+                        "CA1012",
+                        "Error",
+                        "Warn"
+                    ),
+                locSpecific: false
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingDuplicateRule3()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -164,13 +229,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>";
 
             var ruleSet = ParseRuleSet(source);
-            Assert.Equal(expected: ReportDiagnostic.Error, actual: ruleSet.SpecificDiagnosticOptions["CA1012"]);
+            Assert.Equal(
+                expected: ReportDiagnostic.Error,
+                actual: ruleSet.SpecificDiagnosticOptions["CA1012"]
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingDuplicateRuleSet()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -184,13 +253,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(source, () => "There are multiple root elements. Line 8, position 2.");
+            VerifyRuleSetError(
+                source,
+                () => "There are multiple root elements. Line 8, position 2."
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingIncludeAll1()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -205,7 +278,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetParsingIncludeAll2()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA1012"" Action=""Error"" />
@@ -219,7 +293,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetParsingWithIncludeOfSameFile()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <Include Path=""a.ruleset"" Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -235,7 +310,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetParsingWithMutualIncludes()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <Include Path=""file1.ruleset"" Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -244,7 +320,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <Include Path=""a.ruleset"" Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -260,7 +337,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetParsingWithSiblingIncludes()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <Include Path=""file1.ruleset"" Action=""Warning"" />
   <Include Path=""file2.ruleset"" Action=""Warning"" />
@@ -270,7 +348,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <Include Path=""file2.ruleset"" Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -279,7 +358,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source2 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source2 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <Include Path=""file1.ruleset"" Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -295,7 +375,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetParsingIncludeAll3()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Default"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -303,13 +384,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(source, () => string.Format(CodeAnalysisResources.RuleSetBadAttributeValue, "Action", "Default"));
+            VerifyRuleSetError(
+                source,
+                () =>
+                    string.Format(
+                        CodeAnalysisResources.RuleSetBadAttributeValue,
+                        "Action",
+                        "Default"
+                    )
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingRulesMissingAttribute1()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -317,13 +407,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(source, () => string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rule", "Id"));
+            VerifyRuleSetError(
+                source,
+                () => string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rule", "Id")
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingRulesMissingAttribute2()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -331,13 +425,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(source, () => string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rule", "Action"));
+            VerifyRuleSetError(
+                source,
+                () => string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rule", "Action")
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingRulesMissingAttribute3()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules RuleNamespace=""Microsoft.Rules.Managed"">
@@ -345,13 +443,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(source, () => string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rules", "AnalyzerId"));
+            VerifyRuleSetError(
+                source,
+                () =>
+                    string.Format(
+                        CodeAnalysisResources.RuleSetMissingAttribute,
+                        "Rules",
+                        "AnalyzerId"
+                    )
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingRulesMissingAttribute4()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test""  ToolsVersion=""12.0"">
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"">
@@ -359,13 +466,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(source, () => string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rules", "RuleNamespace"));
+            VerifyRuleSetError(
+                source,
+                () =>
+                    string.Format(
+                        CodeAnalysisResources.RuleSetMissingAttribute,
+                        "Rules",
+                        "RuleNamespace"
+                    )
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingRulesMissingAttribute5()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" >
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -374,13 +490,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            VerifyRuleSetError(source, () => string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "RuleSet", "ToolsVersion"));
+            VerifyRuleSetError(
+                source,
+                () =>
+                    string.Format(
+                        CodeAnalysisResources.RuleSetMissingAttribute,
+                        "RuleSet",
+                        "ToolsVersion"
+                    )
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingRulesMissingAttribute6()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -388,13 +513,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(source, () => string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "RuleSet", "Name"));
+            VerifyRuleSetError(
+                source,
+                () =>
+                    string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "RuleSet", "Name")
+            );
         }
 
         [Fact]
         public void TestRuleSetParsingRules()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -422,7 +552,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetParsingRules2()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -433,13 +564,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            VerifyRuleSetError(source, () => string.Format(CodeAnalysisResources.RuleSetBadAttributeValue, "Action", "Default"));
+            VerifyRuleSetError(
+                source,
+                () =>
+                    string.Format(
+                        CodeAnalysisResources.RuleSetBadAttributeValue,
+                        "Action",
+                        "Default"
+                    )
+            );
         }
 
         [Fact]
         public void TestRuleSetInclude()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""goo.ruleset"" Action=""Default"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -459,7 +599,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetInclude1()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""goo.ruleset"" Action=""Default"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -481,7 +622,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetInclude2()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Default"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -490,7 +632,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA1013"" Action=""Warning"" />
@@ -508,7 +651,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeGlobalStrict()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Default"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -517,7 +661,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Hidden"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -536,7 +681,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeGlobalStrict1()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Info"" />
   <Include Path=""file1.ruleset"" Action=""Default"" />
@@ -546,7 +692,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA1013"" Action=""Warning"" />
@@ -564,7 +711,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeGlobalStrict2()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Warning"" />
   <Include Path=""file1.ruleset"" Action=""Default"" />
@@ -574,7 +722,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -593,7 +742,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeGlobalStrict3()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Warning"" />
   <Include Path=""file1.ruleset"" Action=""Error"" />
@@ -604,7 +754,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -612,7 +763,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source2 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source2 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -631,7 +783,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeRecursiveIncludes()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Warning"" />
   <Include Path=""file1.ruleset"" Action=""Default"" />
@@ -641,7 +794,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Error"" />
   <Include Path=""file2.ruleset"" Action=""Default"" />
@@ -650,7 +804,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source2 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source2 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -671,7 +826,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeSpecificStrict1()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Default"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -680,7 +836,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -697,7 +854,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeSpecificStrict2()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Default"" />
   <Include Path=""file2.ruleset"" Action=""Default"" />
@@ -707,7 +865,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Error"" />
   <Include Path=""file2.ruleset"" Action=""Default"" />
@@ -716,7 +875,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source2 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source2 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -733,7 +893,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeSpecificStrict3()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Default"" />
   <Include Path=""file2.ruleset"" Action=""Default"" />
@@ -743,7 +904,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -751,7 +913,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source2 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source2 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -770,7 +933,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeEffectiveAction()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""None"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -778,7 +942,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -795,7 +960,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeEffectiveAction1()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -803,7 +969,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA1013"" Action=""Warning"" />
@@ -821,7 +988,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeEffectiveActionGlobal1()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -829,7 +997,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -844,7 +1013,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeEffectiveActionGlobal2()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -852,7 +1022,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <IncludeAll Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -867,7 +1038,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeEffectiveActionSpecific1()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -875,7 +1047,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA1013"" Action=""None"" />
@@ -892,7 +1065,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeEffectiveActionSpecific2()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -900,7 +1074,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA1013"" Action=""Warning"" />
@@ -917,7 +1092,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestAllCombinations()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""New Rule Set1"" Description=""Test"" ToolsVersion=""12.0"">
   <Include Path=""file1.ruleset"" Action=""Error"" />
   <Include Path=""file2.ruleset"" Action=""Warning"" />
@@ -929,7 +1105,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""New Rule Set2"" Description=""Test"" ToolsVersion=""12.0"">
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA2100"" Action=""Warning"" />
@@ -937,7 +1114,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source2 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source2 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""New Rule Set3"" Description=""Test"" ToolsVersion=""12.0"">
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA2100"" Action=""Warning"" />
@@ -961,7 +1139,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TestRuleSetIncludeError()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Include Path=""file1.ruleset"" Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -969,7 +1148,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string source1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset2"" Description=""Test"" ToolsVersion=""12.0"" >
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA1013"" Action=""Default"" />
@@ -991,7 +1171,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 }
                 catch (InvalidRuleSetException e)
                 {
-                    Assert.Contains(string.Format(CodeAnalysisResources.InvalidRuleSetInclude, newFile.Path, string.Format(CodeAnalysisResources.RuleSetBadAttributeValue, "Action", "Default")), e.Message, StringComparison.Ordinal);
+                    Assert.Contains(
+                        string.Format(
+                            CodeAnalysisResources.InvalidRuleSetInclude,
+                            newFile.Path,
+                            string.Format(
+                                CodeAnalysisResources.RuleSetBadAttributeValue,
+                                "Action",
+                                "Default"
+                            )
+                        ),
+                        e.Message,
+                        StringComparison.Ordinal
+                    );
                 }
             }
         }
@@ -999,7 +1191,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void GetEffectiveIncludes_NoIncludes()
         {
-            string source = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string source =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""Ruleset1"" Description=""Test"" ToolsVersion=""12.0"" >
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA1012"" Action=""Warning"" />
@@ -1020,7 +1213,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void GetEffectiveIncludes_OneLevel()
         {
-            string ruleSetSource = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string ruleSetSource =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""New Rule Set1"" Description=""Test"" ToolsVersion=""12.0"">
   <Include Path=""file1.ruleset"" Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -1031,7 +1225,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string includeSource = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string includeSource =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""New Rule Set2"" Description=""Test"" ToolsVersion=""12.0"">
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA2100"" Action=""Warning"" />
@@ -1058,7 +1253,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void GetEffectiveIncludes_TwoLevels()
         {
-            string ruleSetSource = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string ruleSetSource =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""New Rule Set1"" Description=""Test"" ToolsVersion=""12.0"">
   <Include Path=""file1.ruleset"" Action=""Error"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -1069,7 +1265,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            string includeSource1 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string includeSource1 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""New Rule Set2"" Description=""Test"" ToolsVersion=""12.0"">
   <Include Path=""file2.ruleset"" Action=""Warning"" />
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
@@ -1078,7 +1275,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            string includeSource2 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+            string includeSource2 =
+                @"<?xml version=""1.0"" encoding=""utf-8""?>
 <RuleSet Name=""New Rule Set3"" Description=""Test"" ToolsVersion=""12.0"">
   <Rules AnalyzerId=""Microsoft.Analyzers.ManagedCodeAnalysis"" RuleNamespace=""Microsoft.Rules.Managed"">
     <Rule Id=""CA2100"" Action=""Warning"" />
@@ -1108,23 +1306,28 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(expected: include2.Path, actual: includePaths[2]);
         }
 
-        private string[] ParseSeparatedStrings(string arg, char[] separators, bool removeEmptyEntries = true)
+        private string[] ParseSeparatedStrings(
+            string arg,
+            char[] separators,
+            bool removeEmptyEntries = true
+        )
         {
             var builder = ArrayBuilder<ReadOnlyMemory<char>>.GetInstance();
-            CommandLineParser.ParseSeparatedStrings(arg.AsMemory(), separators, removeEmptyEntries, builder);
+            CommandLineParser.ParseSeparatedStrings(
+                arg.AsMemory(),
+                separators,
+                removeEmptyEntries,
+                builder
+            );
             return builder.Select(x => x.ToString()).ToArray();
         }
 
         [Fact]
         public void ParseSeparatedStrings_ExcludeSeparatorChar()
         {
-            Assert.Equal(
-                ParseSeparatedStrings(@"a,b", new[] { ',' }),
-                new[] { "a", "b" });
+            Assert.Equal(ParseSeparatedStrings(@"a,b", new[] { ',' }), new[] { "a", "b" });
 
-            Assert.Equal(
-                ParseSeparatedStrings(@"a,,b", new[] { ',' }),
-                new[] { "a", "b" });
+            Assert.Equal(ParseSeparatedStrings(@"a,,b", new[] { ',' }), new[] { "a", "b" });
         }
 
         /// <summary>
@@ -1134,48 +1337,65 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void ParseSeparatedStrings_IncludeQuotes()
         {
-            Assert.Equal(
-                ParseSeparatedStrings(@"""a"",b", new[] { ',' }),
-                new[] { @"""a""", "b" });
+            Assert.Equal(ParseSeparatedStrings(@"""a"",b", new[] { ',' }), new[] { @"""a""", "b" });
 
-            Assert.Equal(
-                ParseSeparatedStrings(@"""a,b""", new[] { ',' }),
-                new[] { @"""a,b""" });
+            Assert.Equal(ParseSeparatedStrings(@"""a,b""", new[] { ',' }), new[] { @"""a,b""" });
 
             Assert.Equal(
                 ParseSeparatedStrings(@"""a"",""b", new[] { ',' }),
-                new[] { @"""a""", @"""b" });
+                new[] { @"""a""", @"""b" }
+            );
         }
 
         /// <summary>
         /// This function should always preserve the slashes as they exist in the original command
         /// line.  The only serve to decide whether quotes should count as grouping constructors
-        /// or not. 
+        /// or not.
         /// </summary>
         [Fact]
         public void SplitCommandLineIntoArguments_Slashes()
         {
             Assert.Equal(
                 new[] { @"\\test" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"\\test", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"\\test",
+                    removeHashComments: false
+                )
+            );
 
-            // Even though there are an even number of slashes here that doesn't factor into the 
+            // Even though there are an even number of slashes here that doesn't factor into the
             // output.  It just means the quote is a grouping construct.
             Assert.Equal(
                 new[] { @"\\""test" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"\\""test", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"\\""test",
+                    removeHashComments: false
+                )
+            );
 
             Assert.Equal(
                 new[] { @"\\\""test" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"\\\""test", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"\\\""test",
+                    removeHashComments: false
+                )
+            );
 
             Assert.Equal(
                 new[] { @"\\\test" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"\\\test", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"\\\test",
+                    removeHashComments: false
+                )
+            );
 
             Assert.Equal(
                 new[] { @"\\\\\test" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"\\\\\test", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"\\\\\test",
+                    removeHashComments: false
+                )
+            );
         }
 
         /// <summary>
@@ -1186,50 +1406,76 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             Assert.Equal(
                 new[] { @"a", @"b" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"a b", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(@"a b", removeHashComments: false)
+            );
 
             Assert.Equal(
                 new[] { @"a b" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"""a b""", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"""a b""",
+                    removeHashComments: false
+                )
+            );
 
             Assert.Equal(
                 new[] { @"a ", @"b""" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"""a "" b""", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"""a "" b""",
+                    removeHashComments: false
+                )
+            );
 
             // In this case the inner quote is escaped so it doesn't count as a real quote.  Strings which have
-            // outer quotes with no real inner quotes have the outer quotes removed. 
+            // outer quotes with no real inner quotes have the outer quotes removed.
             Assert.Equal(
                 new[] { @"a \"" b" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"""a \"" b""", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"""a \"" b""",
+                    removeHashComments: false
+                )
+            );
 
             Assert.Equal(
                 new[] { @"\a", @"b" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"\a b", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(@"\a b", removeHashComments: false)
+            );
 
             // Escaped quote is not a grouping construct
             Assert.Equal(
                 new[] { @"\""a", @"b\""" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"\""a b\""", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"\""a b\""",
+                    removeHashComments: false
+                )
+            );
 
-            // Unescaped quote is a grouping construct. 
+            // Unescaped quote is a grouping construct.
             Assert.Equal(
                 new[] { @"\\""a b\\""" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"\\""a b\\""", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"\\""a b\\""",
+                    removeHashComments: false
+                )
+            );
 
             Assert.Equal(
                 new[] { @"""a""m""b""" },
-                CommandLineParser.SplitCommandLineIntoArguments(@"""a""m""b""", removeHashComments: false));
+                CommandLineParser.SplitCommandLineIntoArguments(
+                    @"""a""m""b""",
+                    removeHashComments: false
+                )
+            );
         }
 
         /// <summary>
-        /// Test all of the cases around slashes in the RemoveQuotes function.  
+        /// Test all of the cases around slashes in the RemoveQuotes function.
         /// </summary>
         /// <remarks>
-        /// It's important to remember this is testing slash behavior on the strings as they 
-        /// are passed to RemoveQuotes, not as they are passed to the command line.  Command 
+        /// It's important to remember this is testing slash behavior on the strings as they
+        /// are passed to RemoveQuotes, not as they are passed to the command line.  Command
         /// line arguments have already gone through an initial round of processing.  So a
         /// string that appears here as "\\test.cs" actually came through the command line
-        /// as \"\\test.cs\". 
+        /// as \"\\test.cs\".
         /// </remarks>
         [Fact]
         public void RemoveQuotesAndSlashes()
@@ -1238,17 +1484,32 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(@"\\test.cs", CommandLineParser.RemoveQuotesAndSlashes(@"""\\test.cs"""));
             Assert.Equal(@"\\\test.cs", CommandLineParser.RemoveQuotesAndSlashes(@"\\\test.cs"));
             Assert.Equal(@"\\\\test.cs", CommandLineParser.RemoveQuotesAndSlashes(@"\\\\test.cs"));
-            Assert.Equal(@"\\test\a\b.cs", CommandLineParser.RemoveQuotesAndSlashes(@"\\test\a\b.cs"));
-            Assert.Equal(@"\\\\test\\a\\b.cs", CommandLineParser.RemoveQuotesAndSlashes(@"\\\\test\\a\\b.cs"));
+            Assert.Equal(
+                @"\\test\a\b.cs",
+                CommandLineParser.RemoveQuotesAndSlashes(@"\\test\a\b.cs")
+            );
+            Assert.Equal(
+                @"\\\\test\\a\\b.cs",
+                CommandLineParser.RemoveQuotesAndSlashes(@"\\\\test\\a\\b.cs")
+            );
             Assert.Equal(@"a""b.cs", CommandLineParser.RemoveQuotesAndSlashes(@"a\""b.cs"));
-            Assert.Equal(@"a"" mid ""b.cs", CommandLineParser.RemoveQuotesAndSlashes(@"a\"" mid \""b.cs"));
-            Assert.Equal(@"a mid b.cs", CommandLineParser.RemoveQuotesAndSlashes(@"a"" mid ""b.cs"));
+            Assert.Equal(
+                @"a"" mid ""b.cs",
+                CommandLineParser.RemoveQuotesAndSlashes(@"a\"" mid \""b.cs")
+            );
+            Assert.Equal(
+                @"a mid b.cs",
+                CommandLineParser.RemoveQuotesAndSlashes(@"a"" mid ""b.cs")
+            );
             Assert.Equal(@"a.cs", CommandLineParser.RemoveQuotesAndSlashes(@"""a.cs"""));
-            Assert.Equal(@"C:""My Folder\MyBinary.xml", CommandLineParser.RemoveQuotesAndSlashes(@"C:\""My Folder""\MyBinary.xml"));
+            Assert.Equal(
+                @"C:""My Folder\MyBinary.xml",
+                CommandLineParser.RemoveQuotesAndSlashes(@"C:\""My Folder""\MyBinary.xml")
+            );
         }
 
         /// <summary>
-        /// Verify that for the standard cases we do not allocate new memory but instead 
+        /// Verify that for the standard cases we do not allocate new memory but instead
         /// return a <see cref="ReadOnlyMemory{T}"/> to the existing string
         /// </summary>
         [Fact]

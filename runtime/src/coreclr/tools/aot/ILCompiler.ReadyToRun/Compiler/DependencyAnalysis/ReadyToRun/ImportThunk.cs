@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Internal.Text;
-using Internal.ReadyToRunConstants;
 using System.Diagnostics;
+using Internal.ReadyToRunConstants;
+using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -32,7 +32,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         /// Import thunks are used to call a runtime-provided helper which fixes up an indirection cell in a particular
         /// import section. Optionally they may also contain a relocation for a specific indirection cell to fix up.
         /// </summary>
-        public ImportThunk(NodeFactory factory, ReadyToRunHelper helperId, ImportSectionNode containingImportSection, bool useVirtualCall, bool useJumpableStub)
+        public ImportThunk(
+            NodeFactory factory,
+            ReadyToRunHelper helperId,
+            ImportSectionNode containingImportSection,
+            bool useVirtualCall,
+            bool useJumpableStub
+        )
         {
             _helperCell = factory.GetReadyToRunHelperCell(helperId);
             _containingImportSection = containingImportSection;
@@ -49,10 +55,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 _thunkKind = Kind.Lazy;
             }
-            else if (helperId == ReadyToRunHelper.DelayLoad_MethodCall ||
-                helperId == ReadyToRunHelper.DelayLoad_Helper ||
-                helperId == ReadyToRunHelper.DelayLoad_Helper_Obj ||
-                helperId == ReadyToRunHelper.DelayLoad_Helper_ObjObj)
+            else if (
+                helperId == ReadyToRunHelper.DelayLoad_MethodCall
+                || helperId == ReadyToRunHelper.DelayLoad_Helper
+                || helperId == ReadyToRunHelper.DelayLoad_Helper_Obj
+                || helperId == ReadyToRunHelper.DelayLoad_Helper_ObjObj
+            )
             {
                 _thunkKind = Kind.DelayLoadHelper;
             }
@@ -85,7 +93,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (result != 0)
                 return result;
 
-            result = ((ImportSectionNode)_containingImportSection).CompareToImpl((ImportSectionNode)otherNode._containingImportSection, comparer);
+            result = ((ImportSectionNode)_containingImportSection).CompareToImpl(
+                (ImportSectionNode)otherNode._containingImportSection,
+                comparer
+            );
             if (result != 0)
                 return result;
 

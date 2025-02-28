@@ -33,14 +33,14 @@ internal static partial class Interop
             byte[] derEncoded = OpenSslEncode(
                 GetAsn1IntegerDerSize,
                 EncodeAsn1Integer,
-                asn1Integer);
+                asn1Integer
+            );
 
             try
             {
-                return AsnDecoder.ReadIntegerBytes(
-                    derEncoded,
-                    AsnEncodingRules.DER,
-                    out _).ToArray();
+                return AsnDecoder
+                    .ReadIntegerBytes(derEncoded, AsnEncodingRules.DER, out _)
+                    .ToArray();
             }
             catch (AsnContentException e)
             {

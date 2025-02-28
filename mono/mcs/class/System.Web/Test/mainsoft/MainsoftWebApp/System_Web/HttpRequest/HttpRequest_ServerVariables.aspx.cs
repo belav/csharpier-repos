@@ -35,69 +35,63 @@ using System.Drawing;
 using System.Web;
 using System.Web.SessionState;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-    public class HttpRequest_ServerVariables
-        : GHTBaseWeb {
+    public class HttpRequest_ServerVariables : GHTBaseWeb
+    {
+        private string[] sortKeys = null;
 
-        private string [] sortKeys = null;
+        private void Page_Load(object sender, EventArgs e)
+        {
+            HtmlForm form1 = (HtmlForm)this.FindControl("form1");
+            this.GHTTestBegin(form1);
+            this.CreateSortKeys();
+            this.GHTSubTestBegin("All keys:");
+            try
+            {
+                string[] textArray1 = this.sortKeys;
+                for (int num1 = 0; num1 < textArray1.Length; num1++)
+                {
+                    string text1 = textArray1[num1];
+                }
+            }
+            catch (Exception exception2)
+            {
+                Exception exception1 = exception2;
+                this.GHTSubTestUnexpectedExceptionCaught(exception1);
+            }
+            this.GHTSubTestEnd();
+            this.GHTTestEnd();
+        }
 
-		private void Page_Load(object sender, EventArgs e)
-		{
-			HtmlForm form1 = (HtmlForm) this.FindControl("form1");
-			this.GHTTestBegin(form1);
-			this.CreateSortKeys();
-			this.GHTSubTestBegin("All keys:");
-			try
-			{
-				string[] textArray1 = this.sortKeys;
-				for (int num1 = 0; num1 < textArray1.Length; num1++)
-				{
-					string text1 = textArray1[num1];
-				}
-			}
-			catch (Exception exception2)
-			{
-				Exception exception1 = exception2;
-				this.GHTSubTestUnexpectedExceptionCaught(exception1);
-			}
-			this.GHTSubTestEnd();
-			this.GHTTestEnd();
-		}
+        private void CreateSortKeys()
+        {
+            this.sortKeys = new string[this.Request.ServerVariables.Keys.Count + 1];
+            ((ICollection)this.Request.ServerVariables.Keys).CopyTo(this.sortKeys, 0);
+            Array.Sort(this.sortKeys);
+        }
 
-		private void CreateSortKeys()
-		{
-			this.sortKeys = new string[this.Request.ServerVariables.Keys.Count + 1];
-			((ICollection) this.Request.ServerVariables.Keys).CopyTo(this.sortKeys, 0);
-			Array.Sort(this.sortKeys);
-		}
- 
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
- 
-
-
-
-#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e)
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
     }
 }

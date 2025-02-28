@@ -58,35 +58,36 @@ struct S
         Pad p;
 
         p.d1 =
-        p.d2 =
-        p.d3 =
-        p.d4 =
-        p.d5 =
-        p.d6 =
-        p.d7 =
-        p.d8 =
-        p.d9 =
-        p.d10 =
-        p.d11 =
-        p.d12 =
-        p.d13 =
-        p.d14 =
-        p.d15 =
-        p.d16 =
-        p.d17 =
-        p.d18 =
-        p.d19 =
-        p.d20 =
-        p.d21 =
-        p.d22 =
-        p.d23 =
-        p.d24 =
-        p.d25 =
-        p.d26 =
-        p.d27 =
-        p.d28 =
-        p.d29 =
-        p.d30 = 3.3;
+            p.d2 =
+            p.d3 =
+            p.d4 =
+            p.d5 =
+            p.d6 =
+            p.d7 =
+            p.d8 =
+            p.d9 =
+            p.d10 =
+            p.d11 =
+            p.d12 =
+            p.d13 =
+            p.d14 =
+            p.d15 =
+            p.d16 =
+            p.d17 =
+            p.d18 =
+            p.d19 =
+            p.d20 =
+            p.d21 =
+            p.d22 =
+            p.d23 =
+            p.d24 =
+            p.d25 =
+            p.d26 =
+            p.d27 =
+            p.d28 =
+            p.d29 =
+            p.d30 =
+                3.3;
 
         return p;
     }
@@ -98,35 +99,36 @@ struct S
 
         //pad = initPad();
         pad.d1 =
-        pad.d2 =
-        pad.d3 =
-        pad.d4 =
-        pad.d5 =
-        pad.d6 =
-        pad.d7 =
-        pad.d8 =
-        pad.d9 =
-        pad.d10 =
-        pad.d11 =
-        pad.d12 =
-        pad.d13 =
-        pad.d14 =
-        pad.d15 =
-        pad.d16 =
-        pad.d17 =
-        pad.d18 =
-        pad.d19 =
-        pad.d20 =
-        pad.d21 =
-        pad.d22 =
-        pad.d23 =
-        pad.d24 =
-        pad.d25 =
-        pad.d26 =
-        pad.d27 =
-        pad.d28 =
-        pad.d29 =
-        pad.d30 = 3.3;
+            pad.d2 =
+            pad.d3 =
+            pad.d4 =
+            pad.d5 =
+            pad.d6 =
+            pad.d7 =
+            pad.d8 =
+            pad.d9 =
+            pad.d10 =
+            pad.d11 =
+            pad.d12 =
+            pad.d13 =
+            pad.d14 =
+            pad.d15 =
+            pad.d16 =
+            pad.d17 =
+            pad.d18 =
+            pad.d19 =
+            pad.d20 =
+            pad.d21 =
+            pad.d22 =
+            pad.d23 =
+            pad.d24 =
+            pad.d25 =
+            pad.d26 =
+            pad.d27 =
+            pad.d28 =
+            pad.d29 =
+            pad.d30 =
+                3.3;
 
         pad5 = pad4 = pad3 = pad2 = pad;
     }

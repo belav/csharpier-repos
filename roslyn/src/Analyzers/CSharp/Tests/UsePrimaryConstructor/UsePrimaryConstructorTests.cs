@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.UsePrimaryConstructo
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpUsePrimaryConstructorDiagnosticAnalyzer,
-    CSharpUsePrimaryConstructorCodeFixProvider>;
+    CSharpUsePrimaryConstructorCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsUsePrimaryConstructor)]
 public partial class UsePrimaryConstructorTests
@@ -779,7 +780,7 @@ public partial class UsePrimaryConstructorTests
                     public struct Enumerator
                     {
                         private int _i;
-                
+
                         public Enumerator(OuterType c)
                         {
                             _i = c._i;
@@ -957,38 +958,38 @@ public partial class UsePrimaryConstructorTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            class C
-            {
-                private int _i;
-                [CLSCompliant(true)]
-                private int _j;
-
-                public [|C|](int i, int j)
+                using System;
+                class C
                 {
-                    _i = i;
-                    _j = j;
-                }
+                    private int _i;
+                    [CLSCompliant(true)]
+                    private int _j;
 
-                void M()
-                {
-                    Console.WriteLine(_i + _j);
+                    public [|C|](int i, int j)
+                    {
+                        _i = i;
+                        _j = j;
+                    }
+
+                    void M()
+                    {
+                        Console.WriteLine(_i + _j);
+                    }
                 }
-            }
-            """,
+                """,
             FixedCode = """
-            using System;
-            class C(int i, int j)
-            {
-                [CLSCompliant(true)]
-                private int _j = j;
-
-                void M()
+                using System;
+                class C(int i, int j)
                 {
-                    Console.WriteLine(i + _j);
+                    [CLSCompliant(true)]
+                    private int _j = j;
+
+                    void M()
+                    {
+                        Console.WriteLine(i + _j);
+                    }
                 }
-            }
-            """,
+                """,
             CodeActionIndex = 1,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
@@ -1765,7 +1766,7 @@ public partial class UsePrimaryConstructorTests
                     public [|C|](int i)
                     {
                     }
-                
+
                     class D
                     {
                         public [|D|](int j)
@@ -1800,7 +1801,7 @@ public partial class UsePrimaryConstructorTests
                     {
                         this.i = i;
                     }
-                
+
                     class D
                     {
                         private int J { get; }
@@ -1847,7 +1848,7 @@ public partial class UsePrimaryConstructorTests
                     {
                         Console.WriteLine(i);
                     }
-                
+
                     class D
                     {
                         private int J { get; }
@@ -1856,7 +1857,7 @@ public partial class UsePrimaryConstructorTests
                         {
                             this.J = j;
                         }
-                
+
                         void N()
                         {
                             Console.WriteLine(J);
@@ -1894,22 +1895,22 @@ public partial class UsePrimaryConstructorTests
         await new VerifyCS.Test
         {
             TestCode = """
-               using System;
-               class C
-               {
-                   [Obsolete("", error: true)]
-                   public [|C|](int i)
-                   {
-                   }
-               }
-               """,
+                using System;
+                class C
+                {
+                    [Obsolete("", error: true)]
+                    public [|C|](int i)
+                    {
+                    }
+                }
+                """,
             FixedCode = """
-               using System;
-               [method: Obsolete("", error: true)]
-               class C(int i)
-               {
-               }
-               """,
+                using System;
+                [method: Obsolete("", error: true)]
+                class C(int i)
+                {
+                }
+                """,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -1920,24 +1921,24 @@ public partial class UsePrimaryConstructorTests
         await new VerifyCS.Test
         {
             TestCode = """
-               using System;
-               [Obsolete("", error: true)]
-               class C
-               {
-                   [Obsolete("", error: true)]
-                   public [|C|](int i)
-                   {
-                   }
-               }
-               """,
+                using System;
+                [Obsolete("", error: true)]
+                class C
+                {
+                    [Obsolete("", error: true)]
+                    public [|C|](int i)
+                    {
+                    }
+                }
+                """,
             FixedCode = """
-               using System;
-               [Obsolete("", error: true)]
-               [method: Obsolete("", error: true)]
-               class C(int i)
-               {
-               }
-               """,
+                using System;
+                [Obsolete("", error: true)]
+                [method: Obsolete("", error: true)]
+                class C(int i)
+                {
+                }
+                """,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -1949,7 +1950,7 @@ public partial class UsePrimaryConstructorTests
         {
             TestCode = """
                 using System;
-     
+
                 namespace N
                 {
                     class C
@@ -1983,7 +1984,7 @@ public partial class UsePrimaryConstructorTests
         {
             TestCode = """
                 using System;
-     
+
                 namespace N
                 {
                     [Obsolete("", error: true)]
@@ -2019,7 +2020,7 @@ public partial class UsePrimaryConstructorTests
         {
             TestCode = """
                 using System;
-     
+
                 namespace N
                 {
                     class C
@@ -2056,7 +2057,7 @@ public partial class UsePrimaryConstructorTests
         {
             TestCode = """
                 using System;
-     
+
                 namespace N
                 {
                     [Obsolete("", error: true)]
@@ -2132,7 +2133,7 @@ public partial class UsePrimaryConstructorTests
                 class C
                 {
                     int x;
-                
+
                     [CLSCompliant(false)]
                     [Obsolete("", error: true)]
                     public [|C|](int i)
@@ -2556,7 +2557,7 @@ public partial class UsePrimaryConstructorTests
                 {
                     public class A { }
                 }
-                
+
                 public class C(B.A a) : B(a)
                 {
                 }
@@ -2852,7 +2853,7 @@ public partial class UsePrimaryConstructorTests
             FixedCode = """
                 class C(int i)
                 {
-                
+
                     #region constructors
 
                     #endregion
@@ -3073,7 +3074,7 @@ public partial class UsePrimaryConstructorTests
                         /// Method which the instruction is scoped to.
                         /// </summary>
                         public string Method { get; }
-                
+
                         /// <summary>
                         /// The IL offset for the instruction.
                         /// </summary>
@@ -3154,11 +3155,11 @@ public partial class UsePrimaryConstructorTests
                 class Base(int i)
                 {
                 }
-                
+
                 partial class C(int i) : Base(i)
                 {
                 }
-                
+
                 partial class C : Base
                 {
                 }
@@ -3194,16 +3195,16 @@ public partial class UsePrimaryConstructorTests
                 """,
             FixedCode = """
                 using System;
-                
+
                 class Base(int i)
                 {
                 }
-                
+
                 partial class C(int i) : Base(i), IDisposable
                 {
                     public void Dispose() { }
                 }
-                
+
                 partial class C : Base
                 {
                 }
@@ -3237,11 +3238,11 @@ public partial class UsePrimaryConstructorTests
                 class Base(int i)
                 {
                 }
-                
+
                 partial class C<T>(int i) : Base(i)
                 {
                 }
-                
+
                 partial class C<T> : Base
                 {
                 }
@@ -3279,11 +3280,11 @@ public partial class UsePrimaryConstructorTests
                 class Base(int i)
                 {
                 }
-                
+
                 partial class C<T>(int i) : Base(i) where T : IDisposable
                 {
                 }
-                
+
                 partial class C<T> : Base
                 {
                 }

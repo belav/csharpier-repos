@@ -34,16 +34,10 @@ public class JsonPatchController : Controller
         {
             Name = "Book1",
             Reviews = new List<Review>()
-                {
-                    new Review
-                    {
-                         Rating = 4
-                    },
-                    new Review
-                    {
-                        Rating = 3
-                    }
-                }
+            {
+                new Review { Rating = 4 },
+                new Review { Rating = 3 },
+            },
         };
     }
 }

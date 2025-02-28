@@ -19,12 +19,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LanguageServerSnippetExpanderAdapter(LanguageServerSnippetExpander languageServerSnippetExpander)
+        public LanguageServerSnippetExpanderAdapter(
+            LanguageServerSnippetExpander languageServerSnippetExpander
+        )
         {
             _languageServerSnippetExpander = languageServerSnippetExpander;
         }
 
-        public bool TryExpand(string lspSnippetText, SnapshotSpan snapshotSpan, ITextView textView)
-            => _languageServerSnippetExpander.TryExpand(lspSnippetText, snapshotSpan, textView);
+        public bool TryExpand(
+            string lspSnippetText,
+            SnapshotSpan snapshotSpan,
+            ITextView textView
+        ) => _languageServerSnippetExpander.TryExpand(lspSnippetText, snapshotSpan, textView);
     }
 }

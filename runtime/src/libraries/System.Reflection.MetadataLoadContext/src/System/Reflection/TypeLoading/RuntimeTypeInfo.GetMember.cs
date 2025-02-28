@@ -8,7 +8,9 @@ namespace System.Reflection.TypeLoading
 {
     internal partial class RoType
     {
-        public sealed override MemberInfo[] GetMembers(BindingFlags bindingAttr) => GetMemberImpl(null, MemberTypes.All, bindingAttr);
+        public sealed override MemberInfo[] GetMembers(BindingFlags bindingAttr) =>
+            GetMemberImpl(null, MemberTypes.All, bindingAttr);
+
         public sealed override MemberInfo[] GetMember(string name, BindingFlags bindingAttr)
         {
             if (name is null)
@@ -19,7 +21,11 @@ namespace System.Reflection.TypeLoading
             return GetMemberImpl(name, MemberTypes.All, bindingAttr);
         }
 
-        public sealed override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+        public sealed override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
             if (name is null)
             {
@@ -29,16 +35,24 @@ namespace System.Reflection.TypeLoading
             return GetMemberImpl(name, type, bindingAttr);
         }
 
-        private MemberInfo[] GetMemberImpl(string? optionalNameOrPrefix, MemberTypes type, BindingFlags bindingAttr)
+        private MemberInfo[] GetMemberImpl(
+            string? optionalNameOrPrefix,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
-            bool prefixSearch = optionalNameOrPrefix != null && optionalNameOrPrefix.EndsWith("*", StringComparison.Ordinal);
+            bool prefixSearch =
+                optionalNameOrPrefix != null
+                && optionalNameOrPrefix.EndsWith("*", StringComparison.Ordinal);
             string? optionalName = prefixSearch ? null : optionalNameOrPrefix;
 
             Func<MemberInfo, bool>? predicate = null;
             if (prefixSearch)
             {
                 bool ignoreCase = (bindingAttr & BindingFlags.IgnoreCase) != 0;
-                StringComparison comparisonType = ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+                StringComparison comparisonType = ignoreCase
+                    ? StringComparison.OrdinalIgnoreCase
+                    : StringComparison.Ordinal;
                 string prefix = optionalNameOrPrefix!.Substring(0, optionalNameOrPrefix.Length - 1);
 
                 predicate = (member => member.Name.StartsWith(prefix, comparisonType));
@@ -46,26 +60,112 @@ namespace System.Reflection.TypeLoading
 
             MemberInfo[]? results;
 
-            if ((results = QuerySpecificMemberTypeIfRequested(type, optionalName, bindingAttr, predicate, MemberTypes.Method, out QueryResult<MethodInfo> methods)) != null)
+            if (
+                (
+                    results = QuerySpecificMemberTypeIfRequested(
+                        type,
+                        optionalName,
+                        bindingAttr,
+                        predicate,
+                        MemberTypes.Method,
+                        out QueryResult<MethodInfo> methods
+                    )
+                ) != null
+            )
                 return results;
-            if ((results = QuerySpecificMemberTypeIfRequested(type, optionalName, bindingAttr, predicate, MemberTypes.Constructor, out QueryResult<ConstructorInfo> constructors)) != null)
+            if (
+                (
+                    results = QuerySpecificMemberTypeIfRequested(
+                        type,
+                        optionalName,
+                        bindingAttr,
+                        predicate,
+                        MemberTypes.Constructor,
+                        out QueryResult<ConstructorInfo> constructors
+                    )
+                ) != null
+            )
                 return results;
-            if ((results = QuerySpecificMemberTypeIfRequested(type, optionalName, bindingAttr, predicate, MemberTypes.Property, out QueryResult<PropertyInfo> properties)) != null)
+            if (
+                (
+                    results = QuerySpecificMemberTypeIfRequested(
+                        type,
+                        optionalName,
+                        bindingAttr,
+                        predicate,
+                        MemberTypes.Property,
+                        out QueryResult<PropertyInfo> properties
+                    )
+                ) != null
+            )
                 return results;
-            if ((results = QuerySpecificMemberTypeIfRequested(type, optionalName, bindingAttr, predicate, MemberTypes.Event, out QueryResult<EventInfo> events)) != null)
+            if (
+                (
+                    results = QuerySpecificMemberTypeIfRequested(
+                        type,
+                        optionalName,
+                        bindingAttr,
+                        predicate,
+                        MemberTypes.Event,
+                        out QueryResult<EventInfo> events
+                    )
+                ) != null
+            )
                 return results;
-            if ((results = QuerySpecificMemberTypeIfRequested(type, optionalName, bindingAttr, predicate, MemberTypes.Field, out QueryResult<FieldInfo> fields)) != null)
+            if (
+                (
+                    results = QuerySpecificMemberTypeIfRequested(
+                        type,
+                        optionalName,
+                        bindingAttr,
+                        predicate,
+                        MemberTypes.Field,
+                        out QueryResult<FieldInfo> fields
+                    )
+                ) != null
+            )
                 return results;
-            if ((results = QuerySpecificMemberTypeIfRequested(type, optionalName, bindingAttr, predicate, MemberTypes.NestedType, out QueryResult<Type> nestedTypes)) != null)
+            if (
+                (
+                    results = QuerySpecificMemberTypeIfRequested(
+                        type,
+                        optionalName,
+                        bindingAttr,
+                        predicate,
+                        MemberTypes.NestedType,
+                        out QueryResult<Type> nestedTypes
+                    )
+                ) != null
+            )
                 return results;
             if ((type & (MemberTypes.NestedType | MemberTypes.TypeInfo)) == MemberTypes.TypeInfo)
             {
-                if ((results = QuerySpecificMemberTypeIfRequested(type, optionalName, bindingAttr, predicate, MemberTypes.TypeInfo, out nestedTypes)) != null)
+                if (
+                    (
+                        results = QuerySpecificMemberTypeIfRequested(
+                            type,
+                            optionalName,
+                            bindingAttr,
+                            predicate,
+                            MemberTypes.TypeInfo,
+                            out nestedTypes
+                        )
+                    ) != null
+                )
                     return results;
             }
 
-            int numMatches = methods.Count + constructors.Count + properties.Count + events.Count + fields.Count + nestedTypes.Count;
-            results = (type == (MemberTypes.Method | MemberTypes.Constructor)) ? new MethodBase[numMatches] : new MemberInfo[numMatches];
+            int numMatches =
+                methods.Count
+                + constructors.Count
+                + properties.Count
+                + events.Count
+                + fields.Count
+                + nestedTypes.Count;
+            results =
+                (type == (MemberTypes.Method | MemberTypes.Constructor))
+                    ? new MethodBase[numMatches]
+                    : new MemberInfo[numMatches];
             int numCopied = 0;
 
             methods.CopyTo(results, numCopied);
@@ -91,7 +191,15 @@ namespace System.Reflection.TypeLoading
             return results;
         }
 
-        private M[]? QuerySpecificMemberTypeIfRequested<M>(MemberTypes memberType, string? optionalName, BindingFlags bindingAttr, Func<MemberInfo, bool>? optionalPredicate, MemberTypes targetMemberType, out QueryResult<M> queryResult) where M : MemberInfo
+        private M[]? QuerySpecificMemberTypeIfRequested<M>(
+            MemberTypes memberType,
+            string? optionalName,
+            BindingFlags bindingAttr,
+            Func<MemberInfo, bool>? optionalPredicate,
+            MemberTypes targetMemberType,
+            out QueryResult<M> queryResult
+        )
+            where M : MemberInfo
         {
             if ((memberType & targetMemberType) == 0)
             {

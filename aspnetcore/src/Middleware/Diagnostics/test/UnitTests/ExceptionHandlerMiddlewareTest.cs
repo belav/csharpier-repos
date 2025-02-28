@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.Metrics;
 using Microsoft.Extensions.Diagnostics.Metrics.Testing;
@@ -39,7 +39,10 @@ public class ExceptionHandlerMiddlewareTest
                     {
                         if (context.Exception is not null)
                         {
-                            context.ProblemDetails.Extensions.Add("OriginalExceptionMessage", context.Exception.Message);
+                            context.ProblemDetails.Extensions.Add(
+                                "OriginalExceptionMessage",
+                                context.Exception.Message
+                            );
                         }
                     };
                 });
@@ -47,17 +50,17 @@ public class ExceptionHandlerMiddlewareTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseExceptionHandler();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        throw new Exception("Test exception");
+                        app.UseExceptionHandler();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
                     });
-
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -70,7 +73,9 @@ public class ExceptionHandlerMiddlewareTest
 
         // Assert
         var body = await response.Content.ReadFromJsonAsync<ProblemDetails>();
-        var originalExceptionMessage = ((JsonElement)body.Extensions["OriginalExceptionMessage"]).GetString();
+        var originalExceptionMessage = (
+            (JsonElement)body.Extensions["OriginalExceptionMessage"]
+        ).GetString();
         Assert.Equal("Test exception", originalExceptionMessage);
     }
 
@@ -79,17 +84,21 @@ public class ExceptionHandlerMiddlewareTest
     {
         // Arrange
         var httpContext = CreateHttpContext();
-        httpContext.SetEndpoint(new Endpoint((_) => Task.CompletedTask, new EndpointMetadataCollection(), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint((_) => Task.CompletedTask, new EndpointMetadataCollection(), "Test")
+        );
         httpContext.Request.RouteValues["John"] = "Doe";
 
-        var optionsAccessor = CreateOptionsAccessor(
-            exceptionHandler: context =>
-            {
-                Assert.Empty(context.Request.RouteValues);
-                Assert.Null(context.GetEndpoint());
-                return Task.CompletedTask;
-            });
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor);
+        var optionsAccessor = CreateOptionsAccessor(exceptionHandler: context =>
+        {
+            Assert.Empty(context.Request.RouteValues);
+            Assert.Null(context.GetEndpoint());
+            return Task.CompletedTask;
+        });
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor
+        );
 
         // Act & Assert
         await middleware.Invoke(httpContext);
@@ -100,20 +109,26 @@ public class ExceptionHandlerMiddlewareTest
     {
         // Arrange
         var httpContext = CreateHttpContext();
-        var endpoint = new Endpoint((_) => Task.CompletedTask, new EndpointMetadataCollection(), "Test");
+        var endpoint = new Endpoint(
+            (_) => Task.CompletedTask,
+            new EndpointMetadataCollection(),
+            "Test"
+        );
         httpContext.SetEndpoint(endpoint);
         httpContext.Request.RouteValues["John"] = "Doe";
 
-        var optionsAccessor = CreateOptionsAccessor(
-            exceptionHandler: context =>
-            {
-                var feature = context.Features.Get<IExceptionHandlerPathFeature>();
-                Assert.Equal(endpoint, feature.Endpoint);
-                Assert.Equal("Doe", feature.RouteValues["John"]);
+        var optionsAccessor = CreateOptionsAccessor(exceptionHandler: context =>
+        {
+            var feature = context.Features.Get<IExceptionHandlerPathFeature>();
+            Assert.Equal(endpoint, feature.Endpoint);
+            Assert.Equal("Doe", feature.RouteValues["John"]);
 
-                return Task.CompletedTask;
-            });
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor);
+            return Task.CompletedTask;
+        });
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor
+        );
 
         // Act & Assert
         await middleware.Invoke(httpContext);
@@ -134,7 +149,11 @@ public class ExceptionHandlerMiddlewareTest
             new TestExceptionHandler(true, "3"),
         };
 
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor, exceptionHandlers);
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor,
+            exceptionHandlers
+        );
 
         // Act & Assert
         await middleware.Invoke(httpContext);
@@ -159,7 +178,11 @@ public class ExceptionHandlerMiddlewareTest
             new TestExceptionHandler(true, "3"),
         };
 
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor, exceptionHandlers);
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor,
+            exceptionHandlers
+        );
 
         // Act & Assert
         await middleware.Invoke(httpContext);
@@ -180,7 +203,8 @@ public class ExceptionHandlerMiddlewareTest
             {
                 context.Items["ExceptionHandler"] = true;
                 return Task.CompletedTask;
-            });
+            }
+        );
 
         var exceptionHandlers = new List<IExceptionHandler>
         {
@@ -189,7 +213,11 @@ public class ExceptionHandlerMiddlewareTest
             new TestExceptionHandler(false, "3"),
         };
 
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor, exceptionHandlers);
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor,
+            exceptionHandlers
+        );
 
         // Act & Assert
         await middleware.Invoke(httpContext);
@@ -208,10 +236,19 @@ public class ExceptionHandlerMiddlewareTest
         var optionsAccessor = CreateOptionsAccessor();
         var meterFactory = new TestMeterFactory();
         var exceptionHandlers = new List<IExceptionHandler> { new TestExceptionHandler(true, "1") };
-        var middleware = CreateMiddleware(_ => Task.CompletedTask, optionsAccessor, exceptionHandlers, meterFactory);
+        var middleware = CreateMiddleware(
+            _ => Task.CompletedTask,
+            optionsAccessor,
+            exceptionHandlers,
+            meterFactory
+        );
         var meter = meterFactory.Meters.Single();
 
-        using var diagnosticsRequestExceptionCollector = new MetricCollector<long>(meterFactory, DiagnosticsMetrics.MeterName, "aspnetcore.diagnostics.exceptions");
+        using var diagnosticsRequestExceptionCollector = new MetricCollector<long>(
+            meterFactory,
+            DiagnosticsMetrics.MeterName,
+            "aspnetcore.diagnostics.exceptions"
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -231,17 +268,34 @@ public class ExceptionHandlerMiddlewareTest
         var optionsAccessor = CreateOptionsAccessor();
         var meterFactory = new TestMeterFactory();
         var exceptionHandlers = new List<IExceptionHandler> { new TestExceptionHandler(true, "1") };
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor, exceptionHandlers, meterFactory);
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor,
+            exceptionHandlers,
+            meterFactory
+        );
         var meter = meterFactory.Meters.Single();
 
-        using var diagnosticsRequestExceptionCollector = new MetricCollector<long>(meterFactory, DiagnosticsMetrics.MeterName, "aspnetcore.diagnostics.exceptions");
+        using var diagnosticsRequestExceptionCollector = new MetricCollector<long>(
+            meterFactory,
+            DiagnosticsMetrics.MeterName,
+            "aspnetcore.diagnostics.exceptions"
+        );
 
         // Act
         await middleware.Invoke(httpContext);
 
         // Assert
-        Assert.Collection(diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
-            m => AssertRequestException(m, "System.InvalidOperationException", "handled", typeof(TestExceptionHandler).FullName));
+        Assert.Collection(
+            diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
+            m =>
+                AssertRequestException(
+                    m,
+                    "System.InvalidOperationException",
+                    "handled",
+                    typeof(TestExceptionHandler).FullName
+                )
+        );
     }
 
     [Fact]
@@ -253,17 +307,28 @@ public class ExceptionHandlerMiddlewareTest
         var optionsAccessor = CreateOptionsAccessor();
         var meterFactory = new TestMeterFactory();
         var exceptionHandlers = new List<IExceptionHandler> { new TestExceptionHandler(true, "1") };
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor, exceptionHandlers, meterFactory);
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor,
+            exceptionHandlers,
+            meterFactory
+        );
         var meter = meterFactory.Meters.Single();
 
-        using var diagnosticsRequestExceptionCollector = new MetricCollector<long>(meterFactory, DiagnosticsMetrics.MeterName, "aspnetcore.diagnostics.exceptions");
+        using var diagnosticsRequestExceptionCollector = new MetricCollector<long>(
+            meterFactory,
+            DiagnosticsMetrics.MeterName,
+            "aspnetcore.diagnostics.exceptions"
+        );
 
         // Act
         await Assert.ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(httpContext));
 
         // Assert
-        Assert.Collection(diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
-            m => AssertRequestException(m, "System.InvalidOperationException", "skipped"));
+        Assert.Collection(
+            diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
+            m => AssertRequestException(m, "System.InvalidOperationException", "skipped")
+        );
     }
 
     private sealed class TestResponseFeature : HttpResponseFeature
@@ -278,17 +343,27 @@ public class ExceptionHandlerMiddlewareTest
         var httpContext = CreateHttpContext();
         var optionsAccessor = CreateOptionsAccessor();
         var meterFactory = new TestMeterFactory();
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor, meterFactory: meterFactory);
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor,
+            meterFactory: meterFactory
+        );
         var meter = meterFactory.Meters.Single();
 
-        using var diagnosticsRequestExceptionCollector = new MetricCollector<long>(meterFactory, DiagnosticsMetrics.MeterName, "aspnetcore.diagnostics.exceptions");
+        using var diagnosticsRequestExceptionCollector = new MetricCollector<long>(
+            meterFactory,
+            DiagnosticsMetrics.MeterName,
+            "aspnetcore.diagnostics.exceptions"
+        );
 
         // Act
         await middleware.Invoke(httpContext);
 
         // Assert
-        Assert.Collection(diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
-            m => AssertRequestException(m, "System.InvalidOperationException", "handled", null));
+        Assert.Collection(
+            diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
+            m => AssertRequestException(m, "System.InvalidOperationException", "handled", null)
+        );
     }
 
     [Fact]
@@ -302,24 +377,42 @@ public class ExceptionHandlerMiddlewareTest
             return Task.CompletedTask;
         });
         var meterFactory = new TestMeterFactory();
-        var middleware = CreateMiddleware(_ => throw new InvalidOperationException(), optionsAccessor, meterFactory: meterFactory);
+        var middleware = CreateMiddleware(
+            _ => throw new InvalidOperationException(),
+            optionsAccessor,
+            meterFactory: meterFactory
+        );
         var meter = meterFactory.Meters.Single();
 
-        using var diagnosticsRequestExceptionCollector = new MetricCollector<long>(meterFactory, DiagnosticsMetrics.MeterName, "aspnetcore.diagnostics.exceptions");
+        using var diagnosticsRequestExceptionCollector = new MetricCollector<long>(
+            meterFactory,
+            DiagnosticsMetrics.MeterName,
+            "aspnetcore.diagnostics.exceptions"
+        );
 
         // Act
         await Assert.ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(httpContext));
 
         // Assert
-        Assert.Collection(diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
-            m => AssertRequestException(m, "System.InvalidOperationException", "unhandled"));
+        Assert.Collection(
+            diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
+            m => AssertRequestException(m, "System.InvalidOperationException", "unhandled")
+        );
     }
 
-    private static void AssertRequestException(CollectedMeasurement<long> measurement, string exceptionName, string result, string handler = null)
+    private static void AssertRequestException(
+        CollectedMeasurement<long> measurement,
+        string exceptionName,
+        string result,
+        string handler = null
+    )
     {
         Assert.Equal(1, measurement.Value);
         Assert.Equal(exceptionName, (string)measurement.Tags["error.type"]);
-        Assert.Equal(result, measurement.Tags["aspnetcore.diagnostics.exception.result"].ToString());
+        Assert.Equal(
+            result,
+            measurement.Tags["aspnetcore.diagnostics.exception.result"].ToString()
+        );
         if (handler == null)
         {
             Assert.False(measurement.Tags.ContainsKey("aspnetcore.diagnostics.handler.type"));
@@ -341,7 +434,11 @@ public class ExceptionHandlerMiddlewareTest
             _name = name;
         }
 
-        public ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
+        public ValueTask<bool> TryHandleAsync(
+            HttpContext httpContext,
+            Exception exception,
+            CancellationToken cancellationToken
+        )
         {
             httpContext.Items[_name] = true;
             return ValueTask.FromResult(_handle);
@@ -350,17 +447,15 @@ public class ExceptionHandlerMiddlewareTest
 
     private HttpContext CreateHttpContext()
     {
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new TestServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new TestServiceProvider() };
 
         return httpContext;
     }
 
     private IOptions<ExceptionHandlerOptions> CreateOptionsAccessor(
         RequestDelegate exceptionHandler = null,
-        string exceptionHandlingPath = null)
+        string exceptionHandlingPath = null
+    )
     {
         exceptionHandler ??= c => Task.CompletedTask;
         var options = new ExceptionHandlerOptions()
@@ -376,7 +471,8 @@ public class ExceptionHandlerMiddlewareTest
         RequestDelegate next,
         IOptions<ExceptionHandlerOptions> options,
         IEnumerable<IExceptionHandler> exceptionHandlers = null,
-        IMeterFactory meterFactory = null)
+        IMeterFactory meterFactory = null
+    )
     {
         next ??= c => Task.CompletedTask;
         var listener = new DiagnosticListener("Microsoft.AspNetCore");
@@ -387,7 +483,8 @@ public class ExceptionHandlerMiddlewareTest
             options,
             listener,
             exceptionHandlers ?? Enumerable.Empty<IExceptionHandler>(),
-            meterFactory ?? new TestMeterFactory());
+            meterFactory ?? new TestMeterFactory()
+        );
 
         return middleware;
     }

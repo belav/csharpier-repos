@@ -24,7 +24,8 @@ public interface IReverseEngineerScaffolder
         string connectionString,
         DatabaseModelFactoryOptions databaseOptions,
         ModelReverseEngineerOptions modelOptions,
-        ModelCodeGenerationOptions codeOptions);
+        ModelCodeGenerationOptions codeOptions
+    );
 
     /// <summary>
     ///     Saves a scaffolded model to disk.
@@ -33,8 +34,5 @@ public interface IReverseEngineerScaffolder
     /// <param name="outputDir">The output directory.</param>
     /// <param name="overwriteFiles">True to overwrite any existing files.</param>
     /// <returns>The model files.</returns>
-    SavedModelFiles Save(
-        ScaffoldedModel scaffoldedModel,
-        string outputDir,
-        bool overwriteFiles);
+    SavedModelFiles Save(ScaffoldedModel scaffoldedModel, string outputDir, bool overwriteFiles);
 }

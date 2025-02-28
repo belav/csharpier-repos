@@ -12,14 +12,14 @@ namespace System.ServiceModel.Description
         UseWindowsGroups,
         UseAspNetRoles,
         Custom,
-        Always
+        Always,
     }
 
     static class PrincipalPermissionModeHelper
     {
         public static bool IsDefined(PrincipalPermissionMode principalPermissionMode)
         {
-            return Enum.IsDefined( typeof( PrincipalPermissionMode ), principalPermissionMode );
+            return Enum.IsDefined(typeof(PrincipalPermissionMode), principalPermissionMode);
         }
     }
 }

@@ -24,7 +24,10 @@ namespace System.Threading.Tasks
         /// Async enumeration does not happen in the background; each MoveNext call will invoke the underlying <see cref="IAsyncEnumerator{T}.MoveNextAsync"/> exactly once.
         /// </remarks>
         [UnsupportedOSPlatform("browser")]
-        public static IEnumerable<T> ToBlockingEnumerable<T>(this IAsyncEnumerable<T> source, CancellationToken cancellationToken = default)
+        public static IEnumerable<T> ToBlockingEnumerable<T>(
+            this IAsyncEnumerable<T> source,
+            CancellationToken cancellationToken = default
+        )
         {
             IAsyncEnumerator<T> enumerator = source.GetAsyncEnumerator(cancellationToken);
             // A ManualResetEventSlim variant that lets us reuse the same
@@ -41,7 +44,9 @@ namespace System.Threading.Tasks
 
                     if (!moveNextTask.IsCompleted)
                     {
-                        (mres ??= new ManualResetEventWithAwaiterSupport()).Wait(moveNextTask.ConfigureAwait(false).GetAwaiter());
+                        (mres ??= new ManualResetEventWithAwaiterSupport()).Wait(
+                            moveNextTask.ConfigureAwait(false).GetAwaiter()
+                        );
                         Debug.Assert(moveNextTask.IsCompleted);
                     }
 
@@ -59,7 +64,9 @@ namespace System.Threading.Tasks
 
                 if (!disposeTask.IsCompleted)
                 {
-                    (mres ?? new ManualResetEventWithAwaiterSupport()).Wait(disposeTask.ConfigureAwait(false).GetAwaiter());
+                    (mres ?? new ManualResetEventWithAwaiterSupport()).Wait(
+                        disposeTask.ConfigureAwait(false).GetAwaiter()
+                    );
                     Debug.Assert(disposeTask.IsCompleted);
                 }
 
@@ -77,7 +84,8 @@ namespace System.Threading.Tasks
             }
 
             [UnsupportedOSPlatform("browser")]
-            public void Wait<TAwaiter>(TAwaiter awaiter) where TAwaiter : ICriticalNotifyCompletion
+            public void Wait<TAwaiter>(TAwaiter awaiter)
+                where TAwaiter : ICriticalNotifyCompletion
             {
                 awaiter.UnsafeOnCompleted(_onCompleted);
                 Wait();

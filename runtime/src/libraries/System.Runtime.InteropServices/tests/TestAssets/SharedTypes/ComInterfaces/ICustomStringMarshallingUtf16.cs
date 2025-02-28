@@ -8,7 +8,10 @@ using System.Runtime.InteropServices.Marshalling;
 namespace SharedTypes.ComInterfaces
 {
     [Guid(IID)]
-    [GeneratedComInterface(StringMarshalling = StringMarshalling.Custom, StringMarshallingCustomType = typeof(Utf16StringMarshaller))]
+    [GeneratedComInterface(
+        StringMarshalling = StringMarshalling.Custom,
+        StringMarshallingCustomType = typeof(Utf16StringMarshaller)
+    )]
     internal partial interface ICustomStringMarshallingUtf16
     {
         public string GetString();

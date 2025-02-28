@@ -3,24 +3,25 @@
 //----------------------------------------------------------------
 namespace System.ServiceModel.Activities.Presentation
 {
+    using System.Activities.Presentation;
+    using System.Activities.Presentation.Model;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Linq;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Configuration;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Activities.Presentation.Model;
-    using System.Configuration;
-    using System.ServiceModel.Configuration;
-    using System.Activities.Presentation;
-    
+
     partial class BindingEditor
     {
-        public static readonly DependencyProperty BindingProperty =
-            DependencyProperty.Register("Binding",
+        public static readonly DependencyProperty BindingProperty = DependencyProperty.Register(
+            "Binding",
             typeof(object),
             typeof(BindingEditor),
-            new PropertyMetadata(OnBindingChanged));
+            new PropertyMetadata(OnBindingChanged)
+        );
 
         List<BindingDescriptor> bindingElements = new List<BindingDescriptor>();
 
@@ -41,14 +42,32 @@ namespace System.ServiceModel.Activities.Presentation
         {
             try
             {
-                this.bindingElements.Add(new BindingDescriptor { BindingName = (string)(this.TryFindResource("bindingEditorEmptyBindingLabel") ?? "none"), Value = null });
-                Configuration machineConfig = ConfigurationManager.OpenMachineConfiguration();              
-                ServiceModelSectionGroup section = ServiceModelSectionGroup.GetSectionGroup(machineConfig);
+                this.bindingElements.Add(
+                    new BindingDescriptor
+                    {
+                        BindingName = (string)(
+                            this.TryFindResource("bindingEditorEmptyBindingLabel") ?? "none"
+                        ),
+                        Value = null,
+                    }
+                );
+                Configuration machineConfig = ConfigurationManager.OpenMachineConfiguration();
+                ServiceModelSectionGroup section = ServiceModelSectionGroup.GetSectionGroup(
+                    machineConfig
+                );
                 if (null != section && null != section.Bindings)
                 {
-                    this.bindingElements.AddRange(section.Bindings.BindingCollections
-                        .OrderBy(p => p.BindingName)
-                        .Select<BindingCollectionElement, BindingDescriptor>(p => new BindingDescriptor() { BindingName = p.BindingName, Value = p }));
+                    this.bindingElements.AddRange(
+                        section
+                            .Bindings.BindingCollections.OrderBy(p => p.BindingName)
+                            .Select<BindingCollectionElement, BindingDescriptor>(
+                                p => new BindingDescriptor()
+                                {
+                                    BindingName = p.BindingName,
+                                    Value = p,
+                                }
+                            )
+                    );
                 }
             }
             catch (ConfigurationErrorsException err)
@@ -72,14 +91,17 @@ namespace System.ServiceModel.Activities.Presentation
             base.OnSelectionChanged(e);
             if (!this.isInitializing)
             {
-
                 BindingDescriptor entry = (BindingDescriptor)e.AddedItems[0];
                 if (null == entry.Value)
                 {
                     Binding = null;
                 }
                 // try to avoid blowing away any binding that has been custom-tweaked in XAML.
-                else if (Binding == null || !(Binding is ModelItem) || !((ModelItem)Binding).ItemType.Equals(entry.Value.BindingType))
+                else if (
+                    Binding == null
+                    || !(Binding is ModelItem)
+                    || !((ModelItem)Binding).ItemType.Equals(entry.Value.BindingType)
+                )
                 {
                     Binding instance = (Binding)Activator.CreateInstance(entry.Value.BindingType);
                     instance.Name = entry.BindingName;
@@ -88,7 +110,10 @@ namespace System.ServiceModel.Activities.Presentation
             }
         }
 
-        static void OnBindingChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+        static void OnBindingChanged(
+            DependencyObject sender,
+            DependencyPropertyChangedEventArgs args
+        )
         {
             BindingEditor editor = (BindingEditor)sender;
             object newValue = args.NewValue;
@@ -112,10 +137,14 @@ namespace System.ServiceModel.Activities.Presentation
 
             // Make combo appear empty if the binding is not one of the ones known to us, e.g., has been custom-tweaked in XAML.
             BindingDescriptor toSelect = null;
-            Func<BindingDescriptor, bool> where = p => null != p.Value && p.Value.BindingType == bindingType;
+            Func<BindingDescriptor, bool> where = p =>
+                null != p.Value && p.Value.BindingType == bindingType;
             if (editor.bindingElements.Count(where) > 1)
             {
-                toSelect = editor.bindingElements.Where(where).Where(p => string.Equals(p.BindingName, bindingName)).FirstOrDefault();
+                toSelect = editor
+                    .bindingElements.Where(where)
+                    .Where(p => string.Equals(p.BindingName, bindingName))
+                    .FirstOrDefault();
             }
             else
             {
@@ -135,19 +164,11 @@ namespace System.ServiceModel.Activities.Presentation
             editor.isInitializing = false;
         }
 
-        sealed class BindingDescriptor 
+        sealed class BindingDescriptor
         {
-            public string BindingName
-            {
-                get;
-                internal set;
-            }
+            public string BindingName { get; internal set; }
 
-            public BindingCollectionElement Value
-            {
-                get;
-                internal set;
-            }
+            public BindingCollectionElement Value { get; internal set; }
 
             public override string ToString()
             {

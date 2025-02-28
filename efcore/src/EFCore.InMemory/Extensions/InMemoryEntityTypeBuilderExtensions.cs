@@ -27,7 +27,8 @@ public static class InMemoryEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder ToInMemoryQuery(
         this EntityTypeBuilder entityTypeBuilder,
-        LambdaExpression? query)
+        LambdaExpression? query
+    )
     {
         Check.NotNull(query, nameof(query));
 
@@ -48,7 +49,8 @@ public static class InMemoryEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> ToInMemoryQuery<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        Expression<Func<IQueryable<TEntity>>> query)
+        Expression<Func<IQueryable<TEntity>>> query
+    )
         where TEntity : class
     {
         Check.NotNull(query, nameof(query));
@@ -74,7 +76,8 @@ public static class InMemoryEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ToInMemoryQuery(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         LambdaExpression? query,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (CanSetInMemoryQuery(entityTypeBuilder, query, fromDataAnnotation))
         {
@@ -100,10 +103,16 @@ public static class InMemoryEntityTypeBuilderExtensions
     public static bool CanSetInMemoryQuery(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         LambdaExpression? query,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
 #pragma warning disable EF1001 // Internal EF Core API usage.
 #pragma warning disable CS0612 // Type or member is obsolete
-        => entityTypeBuilder.CanSetAnnotation(CoreAnnotationNames.DefiningQuery, query, fromDataAnnotation);
+        =>
+        entityTypeBuilder.CanSetAnnotation(
+            CoreAnnotationNames.DefiningQuery,
+            query,
+            fromDataAnnotation
+        );
 #pragma warning restore CS0612 // Type or member is obsolete
 #pragma warning restore EF1001 // Internal EF Core API usage.
 }

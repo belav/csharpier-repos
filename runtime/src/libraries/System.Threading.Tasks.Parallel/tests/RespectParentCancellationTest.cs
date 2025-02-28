@@ -15,14 +15,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Threading.Tasks.Tests
 {
     public sealed class RespectParentCancellationTest
     {
-        private API _api;                                     // the API to be tested
+        private API _api; // the API to be tested
 
         public RespectParentCancellationTest(API api)
         {
@@ -46,30 +45,51 @@ namespace System.Threading.Tasks.Tests
                 wakeLoop.Wait();
             };
 
-            Task wrappedTask = Task.Factory.StartNew(delegate
-            {
-                CancellationToken ct = cts.Token;
-                switch (_api)
+            Task wrappedTask = Task.Factory.StartNew(
+                delegate
                 {
-                    case API.For:
-                        result = Parallel.For(0, int.MaxValue, new ParallelOptions() { CancellationToken = ct }, (i) => body());
-                        break;
+                    CancellationToken ct = cts.Token;
+                    switch (_api)
+                    {
+                        case API.For:
+                            result = Parallel.For(
+                                0,
+                                int.MaxValue,
+                                new ParallelOptions() { CancellationToken = ct },
+                                (i) => body()
+                            );
+                            break;
 
-                    case API.For64:
-                        result = Parallel.For(0, long.MaxValue, new ParallelOptions() { CancellationToken = ct }, (i) => body());
-                        break;
+                        case API.For64:
+                            result = Parallel.For(
+                                0,
+                                long.MaxValue,
+                                new ParallelOptions() { CancellationToken = ct },
+                                (i) => body()
+                            );
+                            break;
 
-                    case API.Foreach:
-                        result = Parallel.ForEach<int>(GetIEnumerable(), new ParallelOptions() { CancellationToken = ct }, (i) => body());
-                        break;
-                }
-            }, cts.Token, TaskCreationOptions.None, TaskScheduler.Default);
+                        case API.Foreach:
+                            result = Parallel.ForEach<int>(
+                                GetIEnumerable(),
+                                new ParallelOptions() { CancellationToken = ct },
+                                (i) => body()
+                            );
+                            break;
+                    }
+                },
+                cts.Token,
+                TaskCreationOptions.None,
+                TaskScheduler.Default
+            );
 
             allowCancel.Wait();
             cts.Cancel();
             wakeLoop.Set();
 
-            Assert.ThrowsAny<OperationCanceledException>(() => wrappedTask.GetAwaiter().GetResult());
+            Assert.ThrowsAny<OperationCanceledException>(
+                () => wrappedTask.GetAwaiter().GetResult()
+            );
 
             // verify result : Stopped <==> if Completed is false and LowestBreakIteration == null
             Assert.False(result.IsCompleted, "Should not be completed.");
@@ -86,28 +106,37 @@ namespace System.Threading.Tasks.Tests
 
         public enum API
         {
-            For,      // Parallel.For
-            For64,    // Parallel.For64
-            Foreach,  // Parallel.Foreach
+            For, // Parallel.For
+            For64, // Parallel.For64
+            Foreach, // Parallel.Foreach
         }
 
         public static class TestMethods
         {
-            [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+            [ConditionalFact(
+                typeof(PlatformDetection),
+                nameof(PlatformDetection.IsThreadingSupported)
+            )]
             public static void RespectParentCancellation1()
             {
                 RespectParentCancellationTest test = new RespectParentCancellationTest(API.For);
                 test.RealRun();
             }
 
-            [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+            [ConditionalFact(
+                typeof(PlatformDetection),
+                nameof(PlatformDetection.IsThreadingSupported)
+            )]
             public static void RespectParentCancellation2()
             {
                 RespectParentCancellationTest test = new RespectParentCancellationTest(API.For64);
                 test.RealRun();
             }
 
-            [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+            [ConditionalFact(
+                typeof(PlatformDetection),
+                nameof(PlatformDetection.IsThreadingSupported)
+            )]
             public static void RespectParentCancellation3()
             {
                 RespectParentCancellationTest test = new RespectParentCancellationTest(API.Foreach);

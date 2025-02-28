@@ -37,9 +37,7 @@ internal class PhotinoSynchronizationContext : SynchronizationContext
     private readonly int _uiThreadId;
 
     public PhotinoSynchronizationContext(PhotinoWindow window)
-        : this(window, new State())
-    {
-    }
+        : this(window, new State()) { }
 
     private PhotinoSynchronizationContext(PhotinoWindow window, State state)
     {
@@ -47,9 +45,11 @@ internal class PhotinoSynchronizationContext : SynchronizationContext
 
         _window = window ?? throw new ArgumentNullException(nameof(window));
 
-        _uiThreadId = (int)_window.GetType()
-            .GetField("_managedThreadId", BindingFlags.NonPublic | BindingFlags.Instance)!
-            .GetValue(_window)!;
+        _uiThreadId = (int)
+            _window
+                .GetType()
+                .GetField("_managedThreadId", BindingFlags.NonPublic | BindingFlags.Instance)!
+                .GetValue(_window)!;
     }
 
     private readonly State _state;
@@ -59,95 +59,117 @@ internal class PhotinoSynchronizationContext : SynchronizationContext
     public Task InvokeAsync(Action action)
     {
         var completion = new PhotinoSynchronizationTaskCompletionSource<Action, object>(action);
-        ExecuteSynchronouslyIfPossible((state) =>
-        {
-            var completion = (PhotinoSynchronizationTaskCompletionSource<Action, object>)state;
-            try
+        ExecuteSynchronouslyIfPossible(
+            (state) =>
             {
-                completion.Callback();
-                completion.SetResult(null);
-            }
-            catch (OperationCanceledException)
-            {
-                completion.SetCanceled();
-            }
-            catch (Exception exception)
-            {
-                completion.SetException(exception);
-            }
-        }, completion);
+                var completion = (PhotinoSynchronizationTaskCompletionSource<Action, object>)state;
+                try
+                {
+                    completion.Callback();
+                    completion.SetResult(null);
+                }
+                catch (OperationCanceledException)
+                {
+                    completion.SetCanceled();
+                }
+                catch (Exception exception)
+                {
+                    completion.SetException(exception);
+                }
+            },
+            completion
+        );
 
         return completion.Task;
     }
 
     public Task InvokeAsync(Func<Task> asyncAction)
     {
-        var completion = new PhotinoSynchronizationTaskCompletionSource<Func<Task>, object>(asyncAction);
-        ExecuteSynchronouslyIfPossible(async (state) =>
-        {
-            var completion = (PhotinoSynchronizationTaskCompletionSource<Func<Task>, object>)state;
-            try
+        var completion = new PhotinoSynchronizationTaskCompletionSource<Func<Task>, object>(
+            asyncAction
+        );
+        ExecuteSynchronouslyIfPossible(
+            async (state) =>
             {
-                await completion.Callback();
-                completion.SetResult(null);
-            }
-            catch (OperationCanceledException)
-            {
-                completion.SetCanceled();
-            }
-            catch (Exception exception)
-            {
-                completion.SetException(exception);
-            }
-        }, completion);
+                var completion =
+                    (PhotinoSynchronizationTaskCompletionSource<Func<Task>, object>)state;
+                try
+                {
+                    await completion.Callback();
+                    completion.SetResult(null);
+                }
+                catch (OperationCanceledException)
+                {
+                    completion.SetCanceled();
+                }
+                catch (Exception exception)
+                {
+                    completion.SetException(exception);
+                }
+            },
+            completion
+        );
 
         return completion.Task;
     }
 
     public Task<TResult> InvokeAsync<TResult>(Func<TResult> function)
     {
-        var completion = new PhotinoSynchronizationTaskCompletionSource<Func<TResult>, TResult>(function);
-        ExecuteSynchronouslyIfPossible((state) =>
-        {
-            var completion = (PhotinoSynchronizationTaskCompletionSource<Func<TResult>, TResult>)state;
-            try
+        var completion = new PhotinoSynchronizationTaskCompletionSource<Func<TResult>, TResult>(
+            function
+        );
+        ExecuteSynchronouslyIfPossible(
+            (state) =>
             {
-                var result = completion.Callback();
-                completion.SetResult(result);
-            }
-            catch (OperationCanceledException)
-            {
-                completion.SetCanceled();
-            }
-            catch (Exception exception)
-            {
-                completion.SetException(exception);
-            }
-        }, completion);
+                var completion =
+                    (PhotinoSynchronizationTaskCompletionSource<Func<TResult>, TResult>)state;
+                try
+                {
+                    var result = completion.Callback();
+                    completion.SetResult(result);
+                }
+                catch (OperationCanceledException)
+                {
+                    completion.SetCanceled();
+                }
+                catch (Exception exception)
+                {
+                    completion.SetException(exception);
+                }
+            },
+            completion
+        );
 
         return completion.Task;
     }
 
     public Task<TResult> InvokeAsync<TResult>(Func<Task<TResult>> asyncFunction)
     {
-        var completion = new PhotinoSynchronizationTaskCompletionSource<Func<Task<TResult>>, TResult>(asyncFunction);
-        ExecuteSynchronouslyIfPossible(async (state) =>
-        {
-            var completion = (PhotinoSynchronizationTaskCompletionSource<Func<Task<TResult>>, TResult>)state;
-            try
+        var completion = new PhotinoSynchronizationTaskCompletionSource<
+            Func<Task<TResult>>,
+            TResult
+        >(asyncFunction);
+        ExecuteSynchronouslyIfPossible(
+            async (state) =>
             {
-                var result = await completion.Callback();
-                completion.SetResult(result);
-            }
-            catch (OperationCanceledException)
-            {
-                completion.SetCanceled();
-            }
-            catch (Exception exception)
-            {
-                completion.SetException(exception);
-            }
-        }, completion);
+                var completion =
+                    (PhotinoSynchronizationTaskCompletionSource<Func<Task<TResult>>, TResult>)state;
+                try
+                {
+                    var result = await completion.Callback();
+                    completion.SetResult(result);
+                }
+                catch (OperationCanceledException)
+                {
+                    completion.SetCanceled();
+                }
+                catch (Exception exception)
+                {
+                    completion.SetException(exception);
+                }
+            },
+            completion
+        );
 
         return completion.Task;
     }
@@ -214,7 +236,12 @@ internal class PhotinoSynchronizationContext : SynchronizationContext
         ExecuteSynchronously(completion, d, state);
     }
 
-    private Task Enqueue(Task antecedent, SendOrPostCallback d, object state, bool forceAsync = false)
+    private Task Enqueue(
+        Task antecedent,
+        SendOrPostCallback d,
+        object state,
+        bool forceAsync = false
+    )
     {
         // If we get here is means that a callback is being explicitly queued. Let's instead add it to the queue and yield.
         //
@@ -230,20 +257,29 @@ internal class PhotinoSynchronizationContext : SynchronizationContext
             executionContext = ExecutionContext.Capture();
         }
 
-        var flags = forceAsync ? TaskContinuationOptions.RunContinuationsAsynchronously : TaskContinuationOptions.None;
-        return antecedent.ContinueWith(BackgroundWorkThunk, new WorkItem()
-        {
-            SynchronizationContext = this,
-            ExecutionContext = executionContext,
-            Callback = d,
-            State = state,
-        }, CancellationToken.None, flags, TaskScheduler.Current);
+        var flags = forceAsync
+            ? TaskContinuationOptions.RunContinuationsAsynchronously
+            : TaskContinuationOptions.None;
+        return antecedent.ContinueWith(
+            BackgroundWorkThunk,
+            new WorkItem()
+            {
+                SynchronizationContext = this,
+                ExecutionContext = executionContext,
+                Callback = d,
+                State = state,
+            },
+            CancellationToken.None,
+            flags,
+            TaskScheduler.Current
+        );
     }
 
     private void ExecuteSynchronously(
         TaskCompletionSource completion,
         SendOrPostCallback d,
-        object state)
+        object state
+    )
     {
         // Anything run on the sync context should actually be dispatched as far as Photino
         // is concerned, so that it's safe to interact with the native window/WebView.
@@ -322,7 +358,8 @@ internal class PhotinoSynchronizationContext : SynchronizationContext
         public object State;
     }
 
-    private class PhotinoSynchronizationTaskCompletionSource<TCallback, TResult> : TaskCompletionSource<TResult>
+    private class PhotinoSynchronizationTaskCompletionSource<TCallback, TResult>
+        : TaskCompletionSource<TResult>
     {
         public PhotinoSynchronizationTaskCompletionSource(TCallback callback)
         {

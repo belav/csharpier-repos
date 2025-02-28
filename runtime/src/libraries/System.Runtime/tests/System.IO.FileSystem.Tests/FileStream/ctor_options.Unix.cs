@@ -9,17 +9,29 @@ namespace System.IO.Tests
 {
     public partial class FileStream_ctor_options
     {
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsStartingProcessesSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsStartingProcessesSupported)
+        )]
         [MemberData(nameof(TestUnixFileModes))]
         public void CreateWithUnixFileMode(UnixFileMode mode)
         {
             string filename = GetTestFilePath();
-            FileStream fs = CreateFileStream(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize: 1, FileOptions.None, preallocationSize: 0, mode);
+            FileStream fs = CreateFileStream(
+                filename,
+                FileMode.CreateNew,
+                FileAccess.Write,
+                FileShare.None,
+                bufferSize: 1,
+                FileOptions.None,
+                preallocationSize: 0,
+                mode
+            );
             fs.Dispose();
 
             UnixFileMode platformFilter = PlatformDetection.IsBsdLike
-                                            ? (UnixFileMode.SetGroup | UnixFileMode.SetUser | UnixFileMode.StickyBit)
-                                            : UnixFileMode.None;
+                ? (UnixFileMode.SetGroup | UnixFileMode.SetUser | UnixFileMode.StickyBit)
+                : UnixFileMode.None;
             UnixFileMode expectedMode = mode & ~GetUmask() & ~platformFilter;
             UnixFileMode actualMode = File.GetUnixFileMode(filename);
             Assert.Equal(expectedMode, actualMode);
@@ -34,10 +46,29 @@ namespace System.IO.Tests
             // Create file as writable for user only.
             const UnixFileMode mode = UnixFileMode.UserWrite;
             string filename = GetTestFilePath();
-            CreateFileStream(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize: 1, FileOptions.None, preallocationSize: 0, mode).Dispose();
+            CreateFileStream(
+                    filename,
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    preallocationSize: 0,
+                    mode
+                )
+                .Dispose();
 
             // Now open with AllAccess.
-            using FileStream fs = CreateFileStream(filename, fileMode, FileAccess.Write, FileShare.None, bufferSize: 1, FileOptions.None, preallocationSize: 0, AllAccess);
+            using FileStream fs = CreateFileStream(
+                filename,
+                fileMode,
+                FileAccess.Write,
+                FileShare.None,
+                bufferSize: 1,
+                FileOptions.None,
+                preallocationSize: 0,
+                AllAccess
+            );
             UnixFileMode actualMode = File.GetUnixFileMode(filename);
             Assert.Equal(mode, actualMode);
         }
@@ -49,21 +80,46 @@ namespace System.IO.Tests
         [InlineData(FileMode.OpenOrCreate, true)]
         [InlineData(FileMode.Truncate, false)]
         [InlineData(FileMode.Open, false)]
-        public void UnixCreateModeThrowsForNonCreatingFileModes(FileMode fileMode, bool canSetUnixCreateMode)
+        public void UnixCreateModeThrowsForNonCreatingFileModes(
+            FileMode fileMode,
+            bool canSetUnixCreateMode
+        )
         {
             const UnixFileMode unixMode = UnixFileMode.UserWrite;
             string filename = GetTestFilePath();
 
             if (canSetUnixCreateMode)
             {
-                CreateFileStream(filename, fileMode, FileAccess.Write, FileShare.None, bufferSize: 1, FileOptions.None, preallocationSize: 0, unixMode).Dispose();
+                CreateFileStream(
+                        filename,
+                        fileMode,
+                        FileAccess.Write,
+                        FileShare.None,
+                        bufferSize: 1,
+                        FileOptions.None,
+                        preallocationSize: 0,
+                        unixMode
+                    )
+                    .Dispose();
 
                 UnixFileMode actualMode = File.GetUnixFileMode(filename);
                 Assert.Equal(unixMode, actualMode);
             }
             else
             {
-                Assert.Throws<ArgumentException>(() => CreateFileStream(filename, fileMode, FileAccess.Write, FileShare.None, bufferSize: 1, FileOptions.None, preallocationSize: 0, unixMode));
+                Assert.Throws<ArgumentException>(
+                    () =>
+                        CreateFileStream(
+                            filename,
+                            fileMode,
+                            FileAccess.Write,
+                            FileShare.None,
+                            bufferSize: 1,
+                            FileOptions.None,
+                            preallocationSize: 0,
+                            unixMode
+                        )
+                );
             }
         }
 
@@ -71,14 +127,19 @@ namespace System.IO.Tests
         {
             bool isOSX = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
             // Call 'stat' to get the number of blocks, and size of blocks.
-            using var px = Process.Start(new ProcessStartInfo
-            {
-                FileName = "stat",
-                ArgumentList = { PlatformDetection.IsBsdLike ? "-f"    : "-c",
-                                 PlatformDetection.IsBsdLike ? "%b %k" : "%b %B",
-                                 fileStream.Name },
-                RedirectStandardOutput = true
-            });
+            using var px = Process.Start(
+                new ProcessStartInfo
+                {
+                    FileName = "stat",
+                    ArgumentList =
+                    {
+                        PlatformDetection.IsBsdLike ? "-f" : "-c",
+                        PlatformDetection.IsBsdLike ? "%b %k" : "%b %B",
+                        fileStream.Name,
+                    },
+                    RedirectStandardOutput = true,
+                }
+            );
             string stdout = px.StandardOutput.ReadToEnd();
 
             string[] parts = stdout.Split(' ');
@@ -86,8 +147,8 @@ namespace System.IO.Tests
         }
 
         private static bool SupportsPreallocation =>
-            RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ||
-            RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+            RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+            || RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
 
         // Mobile platforms don't support Process.Start.
         private static bool IsGetAllocatedSizeImplemented => !PlatformDetection.IsMobile;

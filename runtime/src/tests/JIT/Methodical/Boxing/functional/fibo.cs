@@ -1,10 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using Xunit;
-
 
 namespace BoxTest_fibo_cs
 {
@@ -12,8 +10,7 @@ namespace BoxTest_fibo_cs
     {
         protected object Fibonacci(object num, object flag)
         {
-            if (num.GetType() != typeof(int) ||
-                flag.GetType() != typeof(bool))
+            if (num.GetType() != typeof(int) || flag.GetType() != typeof(bool))
                 throw new Exception();
 
             return Fibonacci2(num, flag);

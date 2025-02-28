@@ -13,13 +13,24 @@ namespace System.ComponentModel.Design.Tests
         public static IEnumerable<object[]> Ctor_String_EventHandler_TestData()
         {
             yield return new object[] { "Text", new EventHandler(EventHandler), "Text", "Text" };
-            yield return new object[] { "(&.)Text", new EventHandler(EventHandler), "Text", "Text" };
+            yield return new object[]
+            {
+                "(&.)Text",
+                new EventHandler(EventHandler),
+                "Text",
+                "Text",
+            };
             yield return new object[] { null, null, string.Empty, null };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_String_EventHandler_TestData))]
-        public void Ctor_String_EventHandler(string text, EventHandler handler, string expectedText, string expectedPropertiesText)
+        public void Ctor_String_EventHandler(
+            string text,
+            EventHandler handler,
+            string expectedText,
+            string expectedPropertiesText
+        )
         {
             var verb = new DesignerVerb(text, handler);
             Assert.Equal(new Guid("{74D21313-2AEE-11d1-8BFB-00A0C90F26F7}"), verb.CommandID.Guid);
@@ -40,14 +51,34 @@ namespace System.ComponentModel.Design.Tests
 
         public static IEnumerable<object[]> Ctor_String_EventHandler_CommandID_TestData()
         {
-            yield return new object[] { "Text", new EventHandler(EventHandler), new CommandID(Guid.NewGuid(), 10), "Text", "Text" };
-            yield return new object[] { "(&.)Text", new EventHandler(EventHandler), new CommandID(Guid.NewGuid(), 10), "Text", "Text" };
+            yield return new object[]
+            {
+                "Text",
+                new EventHandler(EventHandler),
+                new CommandID(Guid.NewGuid(), 10),
+                "Text",
+                "Text",
+            };
+            yield return new object[]
+            {
+                "(&.)Text",
+                new EventHandler(EventHandler),
+                new CommandID(Guid.NewGuid(), 10),
+                "Text",
+                "Text",
+            };
             yield return new object[] { null, null, null, string.Empty, null };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_String_EventHandler_CommandID_TestData))]
-        public void Ctor_String_EventHandler_CommandID(string text, EventHandler handler, CommandID commandID, string expectedText, string expectedPropertiesText)
+        public void Ctor_String_EventHandler_CommandID(
+            string text,
+            EventHandler handler,
+            CommandID commandID,
+            string expectedText,
+            string expectedPropertiesText
+        )
         {
             var verb = new DesignerVerb(text, handler, commandID);
             Assert.Equal(commandID, verb.CommandID);
@@ -68,8 +99,17 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Ctor_NullProperties_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() => new NullPropertiesDesignerVerb("Text", new EventHandler(EventHandler)));
-            Assert.Throws<NullReferenceException>(() => new NullPropertiesDesignerVerb("Text", new EventHandler(EventHandler), new CommandID(Guid.NewGuid(), 10)));
+            Assert.Throws<NullReferenceException>(
+                () => new NullPropertiesDesignerVerb("Text", new EventHandler(EventHandler))
+            );
+            Assert.Throws<NullReferenceException>(
+                () =>
+                    new NullPropertiesDesignerVerb(
+                        "Text",
+                        new EventHandler(EventHandler),
+                        new CommandID(Guid.NewGuid(), 10)
+                    )
+            );
         }
 
         [Theory]
@@ -94,7 +134,10 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Description_GetWithNullProperties_ThrowsNullReferenceException()
         {
-            var verb = new NullPropertiesAfterConstructionDesignerVerb("Text", new EventHandler(EventHandler));
+            var verb = new NullPropertiesAfterConstructionDesignerVerb(
+                "Text",
+                new EventHandler(EventHandler)
+            );
             Assert.Throws<NullReferenceException>(() => verb.Description = "value");
         }
 
@@ -106,7 +149,7 @@ namespace System.ComponentModel.Design.Tests
         {
             var verb = new DesignerVerb("Text", new EventHandler(EventHandler))
             {
-                Description = value
+                Description = value,
             };
             Assert.Equal(expected, verb.Description);
             Assert.Equal(value, verb.Properties["Description"]);
@@ -120,7 +163,10 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Description_SetWithNullProperties_ThrowsNullReferenceException()
         {
-            var verb = new NullPropertiesAfterConstructionDesignerVerb("Text", new EventHandler(EventHandler));
+            var verb = new NullPropertiesAfterConstructionDesignerVerb(
+                "Text",
+                new EventHandler(EventHandler)
+            );
             Assert.Throws<NullReferenceException>(() => verb.Description);
         }
 
@@ -146,7 +192,10 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void Text_GetWithNullProperties_ThrowsNullReferenceException()
         {
-            var verb = new NullPropertiesAfterConstructionDesignerVerb("Text", new EventHandler(EventHandler));
+            var verb = new NullPropertiesAfterConstructionDesignerVerb(
+                "Text",
+                new EventHandler(EventHandler)
+            );
             Assert.Throws<NullReferenceException>(() => verb.Text);
         }
 
@@ -154,33 +203,40 @@ namespace System.ComponentModel.Design.Tests
         public void ToString_Invoke_ReturnsExpected()
         {
             var verb = new DesignerVerb("Text", new EventHandler(EventHandler));
-            Assert.Equal("Text : 74d21313-2aee-11d1-8bfb-00a0c90f26f7 : 8192 : Supported|Enabled|Visible", verb.ToString());
+            Assert.Equal(
+                "Text : 74d21313-2aee-11d1-8bfb-00a0c90f26f7 : 8192 : Supported|Enabled|Visible",
+                verb.ToString()
+            );
         }
 
         private static void EventHandler(object sender, EventArgs e) { }
 
         private class NullPropertiesDesignerVerb : DesignerVerb
         {
-            public NullPropertiesDesignerVerb(string text, EventHandler handler) : base(text, handler)
-            {
-            }
+            public NullPropertiesDesignerVerb(string text, EventHandler handler)
+                : base(text, handler) { }
 
-            public NullPropertiesDesignerVerb(string text, EventHandler handler, CommandID startCommandID) : base(text, handler, startCommandID)
-            {
-            }
+            public NullPropertiesDesignerVerb(
+                string text,
+                EventHandler handler,
+                CommandID startCommandID
+            )
+                : base(text, handler, startCommandID) { }
 
             public override IDictionary Properties => null;
         }
 
         private class NullPropertiesAfterConstructionDesignerVerb : DesignerVerb
         {
-            public NullPropertiesAfterConstructionDesignerVerb(string text, EventHandler handler) : base(text, handler)
-            {
-            }
+            public NullPropertiesAfterConstructionDesignerVerb(string text, EventHandler handler)
+                : base(text, handler) { }
 
-            public NullPropertiesAfterConstructionDesignerVerb(string text, EventHandler handler, CommandID startCommandID) : base(text, handler, startCommandID)
-            {
-            }
+            public NullPropertiesAfterConstructionDesignerVerb(
+                string text,
+                EventHandler handler,
+                CommandID startCommandID
+            )
+                : base(text, handler, startCommandID) { }
 
             private bool Constructed { get; set; }
 

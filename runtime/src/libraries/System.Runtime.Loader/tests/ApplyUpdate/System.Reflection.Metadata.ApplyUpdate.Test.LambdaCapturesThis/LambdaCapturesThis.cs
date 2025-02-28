@@ -4,13 +4,14 @@ using System;
 
 namespace System.Reflection.Metadata.ApplyUpdate.Test
 {
-    public class LambdaCapturesThis {
-
+    public class LambdaCapturesThis
+    {
         string s;
 
-        public LambdaCapturesThis () {}
+        public LambdaCapturesThis() { }
 
-        public string MethodWithLambda () {
+        public string MethodWithLambda()
+        {
             s = "STRING";
             Func<string> fn = () => "OLD " + s;
             return fn();

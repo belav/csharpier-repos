@@ -21,7 +21,11 @@ namespace System.CodeDom.Tests
             yield return new object[] { null, null };
             yield return new object[] { new CodePrimitiveExpression("Value1"), null };
             yield return new object[] { null, new CodePrimitiveExpression("Value2") };
-            yield return new object[] { new CodePrimitiveExpression("Value1"), new CodePrimitiveExpression("Value2") };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                new CodePrimitiveExpression("Value2"),
+            };
         }
 
         [Theory]

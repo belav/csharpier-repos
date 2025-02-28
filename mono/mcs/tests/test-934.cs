@@ -1,23 +1,23 @@
 class X
 {
-	public static int Main ()
-	{
-		var a = new byte[] { };
-		var b = new byte[] { };
-		if (a.Equals (b))
-			return 1;
+    public static int Main()
+    {
+        var a = new byte[] { };
+        var b = new byte[] { };
+        if (a.Equals(b))
+            return 1;
 
-		if (ReferenceEquals (a, b))
-			return 2;
+        if (ReferenceEquals(a, b))
+            return 2;
 
-		a = new byte[0];
-		b = new byte[0];
-		if (a.Equals (b))
-			return 3;
+        a = new byte[0];
+        b = new byte[0];
+        if (a.Equals(b))
+            return 3;
 
-		if (ReferenceEquals (a, b))
-			return 4;
+        if (ReferenceEquals(a, b))
+            return 4;
 
-		return 0;
-	}
+        return 0;
+    }
 }

@@ -53,8 +53,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
         /// </summary>
         public IList<TaggedText> SelectedDisplayParts { get; }
 
-        private static readonly Func<CancellationToken, IEnumerable<TaggedText>> s_emptyDocumentationFactory =
-            _ => SpecializedCollections.EmptyEnumerable<TaggedText>();
+        private static readonly Func<
+            CancellationToken,
+            IEnumerable<TaggedText>
+        > s_emptyDocumentationFactory = _ => SpecializedCollections.EmptyEnumerable<TaggedText>();
 
         public FSharpSignatureHelpParameter(
             string name,
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
             IEnumerable<TaggedText> displayParts,
             IEnumerable<TaggedText> prefixDisplayParts = null,
             IEnumerable<TaggedText> suffixDisplayParts = null,
-            IEnumerable<TaggedText> selectedDisplayParts = null)
+            IEnumerable<TaggedText> selectedDisplayParts = null
+        )
         {
             this.Name = name ?? string.Empty;
             this.IsOptional = isOptional;
@@ -76,9 +79,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
 
         internal IEnumerable<TaggedText> GetAllParts()
         {
-            return this.PrefixDisplayParts.Concat(this.DisplayParts)
-                                          .Concat(this.SuffixDisplayParts)
-                                          .Concat(this.SelectedDisplayParts);
+            return this
+                .PrefixDisplayParts.Concat(this.DisplayParts)
+                .Concat(this.SuffixDisplayParts)
+                .Concat(this.SelectedDisplayParts);
         }
 
         public override string ToString()

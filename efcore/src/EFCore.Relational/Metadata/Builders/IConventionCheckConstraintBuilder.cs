@@ -28,7 +28,11 @@ public interface IConventionCheckConstraintBuilder : IConventionAnnotatableBuild
     ///     An <see cref="IConventionCheckConstraintBuilder" /> to continue configuration if the annotation was set, <see langword="null" />
     ///     otherwise.
     /// </returns>
-    new IConventionCheckConstraintBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionCheckConstraintBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -45,7 +49,8 @@ public interface IConventionCheckConstraintBuilder : IConventionAnnotatableBuild
     new IConventionCheckConstraintBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.
@@ -56,7 +61,10 @@ public interface IConventionCheckConstraintBuilder : IConventionAnnotatableBuild
     ///     An <see cref="IConventionCheckConstraintBuilder" /> to continue configuration if the annotation was set, <see langword="null" />
     ///     otherwise.
     /// </returns>
-    new IConventionCheckConstraintBuilder? HasNoAnnotation(string name, bool fromDataAnnotation = false);
+    new IConventionCheckConstraintBuilder? HasNoAnnotation(
+        string name,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the database name of the check constraint.

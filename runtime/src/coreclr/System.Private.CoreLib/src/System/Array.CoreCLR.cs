@@ -12,36 +12,78 @@ namespace System
 {
     // Note that we make a T[] (single-dimensional w/ zero as the lower bound) implement both
     // IList<U> and IReadOnlyList<U>, where T : U dynamically.  See the SZArrayHelper class for details.
-    public abstract partial class Array : ICloneable, IList, IStructuralComparable, IStructuralEquatable
+    public abstract partial class Array
+        : ICloneable,
+            IList,
+            IStructuralComparable,
+            IStructuralEquatable
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Array_CreateInstance")]
-        private static unsafe partial void InternalCreate(QCallTypeHandle type, int rank, int* pLengths, int* pLowerBounds,
-            [MarshalAs(UnmanagedType.Bool)] bool fromArrayType, ObjectHandleOnStack retArray);
+        private static unsafe partial void InternalCreate(
+            QCallTypeHandle type,
+            int rank,
+            int* pLengths,
+            int* pLowerBounds,
+            [MarshalAs(UnmanagedType.Bool)] bool fromArrayType,
+            ObjectHandleOnStack retArray
+        );
 
-        private static unsafe Array InternalCreate(RuntimeType elementType, int rank, int* pLengths, int* pLowerBounds)
+        private static unsafe Array InternalCreate(
+            RuntimeType elementType,
+            int rank,
+            int* pLengths,
+            int* pLowerBounds
+        )
         {
             Array? retArray = null;
-            InternalCreate(new QCallTypeHandle(ref elementType), rank, pLengths, pLowerBounds,
-                fromArrayType: false, ObjectHandleOnStack.Create(ref retArray));
+            InternalCreate(
+                new QCallTypeHandle(ref elementType),
+                rank,
+                pLengths,
+                pLowerBounds,
+                fromArrayType: false,
+                ObjectHandleOnStack.Create(ref retArray)
+            );
             return retArray!;
         }
 
-        private static unsafe Array InternalCreateFromArrayType(RuntimeType arrayType, int rank, int* pLengths, int* pLowerBounds)
+        private static unsafe Array InternalCreateFromArrayType(
+            RuntimeType arrayType,
+            int rank,
+            int* pLengths,
+            int* pLowerBounds
+        )
         {
             Array? retArray = null;
-            InternalCreate(new QCallTypeHandle(ref arrayType), rank, pLengths, pLowerBounds,
-                fromArrayType: true, ObjectHandleOnStack.Create(ref retArray));
+            InternalCreate(
+                new QCallTypeHandle(ref arrayType),
+                rank,
+                pLengths,
+                pLowerBounds,
+                fromArrayType: true,
+                ObjectHandleOnStack.Create(ref retArray)
+            );
             return retArray!;
         }
 
-        private static unsafe void CopyImpl(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length, bool reliable)
+        private static unsafe void CopyImpl(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length,
+            bool reliable
+        )
         {
             if (sourceArray == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.sourceArray);
             if (destinationArray == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.destinationArray);
 
-            if (sourceArray.GetType() != destinationArray.GetType() && sourceArray.Rank != destinationArray.Rank)
+            if (
+                sourceArray.GetType() != destinationArray.GetType()
+                && sourceArray.Rank != destinationArray.Rank
+            )
                 throw new RankException(SR.Rank_MustMatch);
 
             ArgumentOutOfRangeException.ThrowIfNegative(length);
@@ -53,7 +95,10 @@ namespace System
 
             int dstLB = destinationArray.GetLowerBound(0);
             ArgumentOutOfRangeException.ThrowIfLessThan(destinationIndex, dstLB);
-            ArgumentOutOfRangeException.ThrowIfNegative(destinationIndex - dstLB, nameof(destinationIndex));
+            ArgumentOutOfRangeException.ThrowIfNegative(
+                destinationIndex - dstLB,
+                nameof(destinationIndex)
+            );
             destinationIndex -= dstLB;
 
             if ((uint)(sourceIndex + length) > sourceArray.NativeLength)
@@ -61,14 +106,23 @@ namespace System
             if ((uint)(destinationIndex + length) > destinationArray.NativeLength)
                 throw new ArgumentException(SR.Arg_LongerThanDestArray, nameof(destinationArray));
 
-            if (sourceArray.GetType() == destinationArray.GetType() || IsSimpleCopy(sourceArray, destinationArray))
+            if (
+                sourceArray.GetType() == destinationArray.GetType()
+                || IsSimpleCopy(sourceArray, destinationArray)
+            )
             {
                 MethodTable* pMT = RuntimeHelpers.GetMethodTable(sourceArray);
 
                 nuint elementSize = (nuint)pMT->ComponentSize;
                 nuint byteCount = (uint)length * elementSize;
-                ref byte src = ref Unsafe.AddByteOffset(ref MemoryMarshal.GetArrayDataReference(sourceArray), (uint)sourceIndex * elementSize);
-                ref byte dst = ref Unsafe.AddByteOffset(ref MemoryMarshal.GetArrayDataReference(destinationArray), (uint)destinationIndex * elementSize);
+                ref byte src = ref Unsafe.AddByteOffset(
+                    ref MemoryMarshal.GetArrayDataReference(sourceArray),
+                    (uint)sourceIndex * elementSize
+                );
+                ref byte dst = ref Unsafe.AddByteOffset(
+                    ref MemoryMarshal.GetArrayDataReference(destinationArray),
+                    (uint)destinationIndex * elementSize
+                );
 
                 if (pMT->ContainsGCPointers)
                     Buffer.BulkMoveWithWriteBarrier(ref dst, ref src, byteCount);
@@ -96,16 +150,35 @@ namespace System
         // reliable flag is true, it will either always succeed or always
         // throw an exception with no side effects.
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void CopySlow(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length);
+        private static extern void CopySlow(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length
+        );
 
         // Provides a strong exception guarantee - either it succeeds, or
         // it throws an exception with no side effects.  The arrays must be
         // compatible array types based on the array element type - this
         // method does not support casting, boxing, or primitive widening.
         // It will up-cast, assuming the array types are correct.
-        public static void ConstrainedCopy(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length)
+        public static void ConstrainedCopy(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length
+        )
         {
-            CopyImpl(sourceArray, sourceIndex, destinationArray, destinationIndex, length, reliable: true);
+            CopyImpl(
+                sourceArray,
+                sourceIndex,
+                destinationArray,
+                destinationIndex,
+                length,
+                reliable: true
+            );
         }
 
         /// <summary>
@@ -129,7 +202,10 @@ namespace System
             else
             {
                 Debug.Assert(totalByteLength % (nuint)sizeof(IntPtr) == 0);
-                SpanHelpers.ClearWithReferences(ref Unsafe.As<byte, IntPtr>(ref pStart), totalByteLength / (nuint)sizeof(IntPtr));
+                SpanHelpers.ClearWithReferences(
+                    ref Unsafe.As<byte, IntPtr>(ref pStart),
+                    totalByteLength / (nuint)sizeof(IntPtr)
+                );
             }
 
             // GC.KeepAlive(array) not required. pMT kept alive via `pStart`
@@ -156,7 +232,12 @@ namespace System
 
             int offset = index - lowerBound;
 
-            if (index < lowerBound || offset < 0 || length < 0 || (uint)(offset + length) > array.NativeLength)
+            if (
+                index < lowerBound
+                || offset < 0
+                || length < 0
+                || (uint)(offset + length) > array.NativeLength
+            )
                 ThrowHelper.ThrowIndexOutOfRangeException();
 
             nuint elementSize = pMT->ComponentSize;
@@ -165,7 +246,10 @@ namespace System
             nuint byteLength = (uint)length * elementSize;
 
             if (pMT->ContainsGCPointers)
-                SpanHelpers.ClearWithReferences(ref Unsafe.As<byte, IntPtr>(ref ptr), byteLength / (uint)sizeof(IntPtr));
+                SpanHelpers.ClearWithReferences(
+                    ref Unsafe.As<byte, IntPtr>(ref ptr),
+                    byteLength / (uint)sizeof(IntPtr)
+                );
             else
                 SpanHelpers.ClearWithoutReferences(ref ptr, byteLength);
 
@@ -199,7 +283,7 @@ namespace System
                 nint flattenedIndex = 0;
                 for (int i = 0; i < indices.Length; i++)
                 {
-                    int index = indices[i] - Unsafe.Add(ref bounds, indices.Length  + i);
+                    int index = indices[i] - Unsafe.Add(ref bounds, indices.Length + i);
                     int length = Unsafe.Add(ref bounds, i);
                     if ((uint)index >= (uint)length)
                         ThrowHelper.ThrowIndexOutOfRangeException();
@@ -240,7 +324,10 @@ namespace System
             if (pElementMethodTable->IsValueType)
             {
                 // If the element is a value type, shift to the right offset using the component size, then box
-                ref byte offsetDataRef = ref Unsafe.Add(ref arrayDataRef, flattenedIndex * pMethodTable->ComponentSize);
+                ref byte offsetDataRef = ref Unsafe.Add(
+                    ref arrayDataRef,
+                    flattenedIndex * pMethodTable->ComponentSize
+                );
 
                 result = RuntimeHelpers.Box(pElementMethodTable, ref offsetDataRef);
             }
@@ -315,7 +402,10 @@ namespace System
             if ((uint)dimension >= (uint)rank)
                 throw new IndexOutOfRangeException(SR.IndexOutOfRange_ArrayRankIndex);
 
-            return Unsafe.Add(ref RuntimeHelpers.GetMultiDimensionalArrayBounds(this), rank + dimension);
+            return Unsafe.Add(
+                ref RuntimeHelpers.GetMultiDimensionalArrayBounds(this),
+                rank + dimension
+            );
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
@@ -353,7 +443,7 @@ namespace System
                 arrayType.GenericCache = cache;
             }
 
-            delegate*<ref byte, void> constructorFtn = cache.ConstructorEntrypoint;
+            delegate* <ref byte, void> constructorFtn = cache.ConstructorEntrypoint;
             ref byte arrayRef = ref MemoryMarshal.GetArrayDataReference(this);
             nuint elementSize = pArrayMT->ComponentSize;
 
@@ -366,14 +456,21 @@ namespace System
 
         private sealed unsafe partial class ArrayInitializeCache
         {
-            internal readonly delegate*<ref byte, void> ConstructorEntrypoint;
+            internal readonly delegate* <ref byte, void> ConstructorEntrypoint;
 
-            [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Array_GetElementConstructorEntrypoint")]
-            private static partial delegate*<ref byte, void> GetElementConstructorEntrypoint(QCallTypeHandle arrayType);
+            [LibraryImport(
+                RuntimeHelpers.QCall,
+                EntryPoint = "Array_GetElementConstructorEntrypoint"
+            )]
+            private static partial delegate* <ref byte, void> GetElementConstructorEntrypoint(
+                QCallTypeHandle arrayType
+            );
 
             public ArrayInitializeCache(RuntimeType arrayType)
             {
-                ConstructorEntrypoint = GetElementConstructorEntrypoint(new QCallTypeHandle(ref arrayType));
+                ConstructorEntrypoint = GetElementConstructorEntrypoint(
+                    new QCallTypeHandle(ref arrayType)
+                );
             }
         }
     }
@@ -416,7 +513,9 @@ namespace System
             // ! or you may introduce a security hole!
             T[] @this = Unsafe.As<T[]>(this);
             int length = @this.Length;
-            return length == 0 ? SZGenericArrayEnumerator<T>.Empty : new SZGenericArrayEnumerator<T>(@this, length);
+            return length == 0
+                ? SZGenericArrayEnumerator<T>.Empty
+                : new SZGenericArrayEnumerator<T>(@this, length);
         }
 
         private void CopyTo<T>(T[] array, int index)
@@ -465,7 +564,9 @@ namespace System
         private void Add<T>(T _)
         {
             // Not meaningful for arrays.
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_FixedSizeCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_FixedSizeCollection
+            );
         }
 
         private bool Contains<T>(T value)
@@ -486,7 +587,9 @@ namespace System
             // ! Warning: "this" is an array, not an SZArrayHelper. See comments above
             // ! or you may introduce a security hole!
 
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
         }
 
         private int IndexOf<T>(T value)
@@ -500,20 +603,26 @@ namespace System
         private void Insert<T>(int _, T _1)
         {
             // Not meaningful for arrays
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_FixedSizeCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_FixedSizeCollection
+            );
         }
 
         private bool Remove<T>(T _)
         {
             // Not meaningful for arrays
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_FixedSizeCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_FixedSizeCollection
+            );
             return default;
         }
 
         private void RemoveAt<T>(int _)
         {
             // Not meaningful for arrays
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_FixedSizeCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_FixedSizeCollection
+            );
         }
     }
 #pragma warning restore CA1822

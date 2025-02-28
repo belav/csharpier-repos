@@ -7,33 +7,39 @@ namespace System.Workflow.ComponentModel
     using System;
     using System.CodeDom;
     using System.CodeDom.Compiler;
-    using System.Xml;
-    using System.Text;
-    using System.IO;
-    using System.Reflection;
     using System.Collections;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Drawing.Design;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Resources;
-    using System.Globalization;
     using System.Diagnostics;
-    using System.Collections.Specialized;
-    using System.Collections.ObjectModel;
+    using System.Drawing.Design;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Text;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
 
     #endregion
 
     #region Classes ActivityResolveEventArgs and WorkflowChangeActionsResolveEventArgs
 
-    internal delegate Activity ActivityResolveEventHandler(object sender, ActivityResolveEventArgs e);
-    internal delegate ArrayList WorkflowChangeActionsResolveEventHandler(object sender, WorkflowChangeActionsResolveEventArgs e);
+    internal delegate Activity ActivityResolveEventHandler(
+        object sender,
+        ActivityResolveEventArgs e
+    );
+    internal delegate ArrayList WorkflowChangeActionsResolveEventHandler(
+        object sender,
+        WorkflowChangeActionsResolveEventArgs e
+    );
 
     internal sealed class ActivityResolveEventArgs : EventArgs
     {
@@ -44,10 +50,19 @@ namespace System.Workflow.ComponentModel
         private bool initForRuntime = true;
         private IServiceProvider serviceProvider = null;
 
-        internal ActivityResolveEventArgs(Type activityType, string workflowMarkup, string rulesMarkup, bool createNew, bool initForRuntime, IServiceProvider serviceProvider)
+        internal ActivityResolveEventArgs(
+            Type activityType,
+            string workflowMarkup,
+            string rulesMarkup,
+            bool createNew,
+            bool initForRuntime,
+            IServiceProvider serviceProvider
+        )
         {
             if (!(string.IsNullOrEmpty(workflowMarkup) ^ activityType == null))
-                throw new ArgumentException(SR.GetString(SR.Error_WrongParamForActivityResolveEventArgs));
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_WrongParamForActivityResolveEventArgs)
+                );
 
             this.activityType = activityType;
             this.activityDefinition = workflowMarkup;
@@ -59,45 +74,27 @@ namespace System.Workflow.ComponentModel
 
         public Type Type
         {
-            get
-            {
-                return this.activityType;
-            }
+            get { return this.activityType; }
         }
         public string WorkflowMarkup
         {
-            get
-            {
-                return this.activityDefinition;
-            }
+            get { return this.activityDefinition; }
         }
         public string RulesMarkup
         {
-            get
-            {
-                return this.rulesDefinition;
-            }
+            get { return this.rulesDefinition; }
         }
         public bool CreateNewDefinition
         {
-            get
-            {
-                return this.createNew;
-            }
+            get { return this.createNew; }
         }
         public bool InitializeForRuntime
         {
-            get
-            {
-                return this.initForRuntime;
-            }
+            get { return this.initForRuntime; }
         }
         public IServiceProvider ServiceProvider
         {
-            get
-            {
-                return this.serviceProvider;
-            }
+            get { return this.serviceProvider; }
         }
     }
 
@@ -112,10 +109,7 @@ namespace System.Workflow.ComponentModel
 
         public string WorkflowChangesMarkup
         {
-            get
-            {
-                return this.workflowChangesMarkup;
-            }
+            get { return this.workflowChangesMarkup; }
         }
     }
 
@@ -128,7 +122,10 @@ namespace System.Workflow.ComponentModel
     [ActivityValidator(typeof(ActivityValidator))]
     [System.Drawing.ToolboxBitmap(typeof(Activity), "Design.Resources.Activity.png")]
     [ToolboxItemFilter("Microsoft.Workflow.VSDesigner", ToolboxItemFilterType.Require)]
-    [ToolboxItemFilter("System.Workflow.ComponentModel.Design.ActivitySet", ToolboxItemFilterType.Allow)]
+    [ToolboxItemFilter(
+        "System.Workflow.ComponentModel.Design.ActivitySet",
+        ToolboxItemFilterType.Allow
+    )]
     [DesignerSerializer(typeof(ActivityMarkupSerializer), typeof(WorkflowMarkupSerializer))]
     [DesignerSerializer(typeof(ActivityCodeDomSerializer), typeof(CodeDomSerializer))]
     [DesignerSerializer(typeof(ActivityTypeCodeDomSerializer), typeof(TypeCodeDomSerializer))]
@@ -138,48 +135,200 @@ namespace System.Workflow.ComponentModel
     [Designer(typeof(ActivityDesigner), typeof(IRootDesigner))]
     [ToolboxItem(typeof(ActivityToolboxItem))]
     [RuntimeNameProperty("Name")]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class Activity : DependencyObject
     {
-        private static DependencyProperty NameProperty = DependencyProperty.Register("Name", typeof(string), typeof(Activity), new PropertyMetadata("", DependencyPropertyOptions.Metadata, new ValidationOptionAttribute(ValidationOption.Required)));
-        private static DependencyProperty DescriptionProperty = DependencyProperty.Register("Description", typeof(string), typeof(Activity), new PropertyMetadata("", DependencyPropertyOptions.Metadata));
-        private static DependencyProperty EnabledProperty = DependencyProperty.Register("Enabled", typeof(bool), typeof(Activity), new PropertyMetadata(true, DependencyPropertyOptions.Metadata));
-        private static DependencyProperty QualifiedNameProperty = DependencyProperty.Register("QualifiedName", typeof(string), typeof(Activity), new PropertyMetadata(DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly));
-        private static DependencyProperty DottedPathProperty = DependencyProperty.Register("DottedPath", typeof(string), typeof(Activity), new PropertyMetadata(DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly));
-        internal static readonly DependencyProperty WorkflowXamlMarkupProperty = DependencyProperty.Register("WorkflowXamlMarkup", typeof(string), typeof(Activity));
-        internal static readonly DependencyProperty WorkflowRulesMarkupProperty = DependencyProperty.Register("WorkflowRulesMarkup", typeof(string), typeof(Activity));
+        private static DependencyProperty NameProperty = DependencyProperty.Register(
+            "Name",
+            typeof(string),
+            typeof(Activity),
+            new PropertyMetadata(
+                "",
+                DependencyPropertyOptions.Metadata,
+                new ValidationOptionAttribute(ValidationOption.Required)
+            )
+        );
+        private static DependencyProperty DescriptionProperty = DependencyProperty.Register(
+            "Description",
+            typeof(string),
+            typeof(Activity),
+            new PropertyMetadata("", DependencyPropertyOptions.Metadata)
+        );
+        private static DependencyProperty EnabledProperty = DependencyProperty.Register(
+            "Enabled",
+            typeof(bool),
+            typeof(Activity),
+            new PropertyMetadata(true, DependencyPropertyOptions.Metadata)
+        );
+        private static DependencyProperty QualifiedNameProperty = DependencyProperty.Register(
+            "QualifiedName",
+            typeof(string),
+            typeof(Activity),
+            new PropertyMetadata(
+                DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly
+            )
+        );
+        private static DependencyProperty DottedPathProperty = DependencyProperty.Register(
+            "DottedPath",
+            typeof(string),
+            typeof(Activity),
+            new PropertyMetadata(
+                DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly
+            )
+        );
+        internal static readonly DependencyProperty WorkflowXamlMarkupProperty =
+            DependencyProperty.Register("WorkflowXamlMarkup", typeof(string), typeof(Activity));
+        internal static readonly DependencyProperty WorkflowRulesMarkupProperty =
+            DependencyProperty.Register("WorkflowRulesMarkup", typeof(string), typeof(Activity));
 
-        internal static readonly DependencyProperty SynchronizationHandlesProperty = DependencyProperty.Register("SynchronizationHandles", typeof(ICollection<String>), typeof(Activity), new PropertyMetadata(DependencyPropertyOptions.Metadata));
+        internal static readonly DependencyProperty SynchronizationHandlesProperty =
+            DependencyProperty.Register(
+                "SynchronizationHandles",
+                typeof(ICollection<String>),
+                typeof(Activity),
+                new PropertyMetadata(DependencyPropertyOptions.Metadata)
+            );
 
-        internal static readonly DependencyProperty ActivityExecutionContextInfoProperty = DependencyProperty.RegisterAttached("ActivityExecutionContextInfo", typeof(ActivityExecutionContextInfo), typeof(Activity));
-        public static readonly DependencyProperty ActivityContextGuidProperty = DependencyProperty.RegisterAttached("ActivityContextGuid", typeof(Guid), typeof(Activity), new PropertyMetadata(Guid.Empty));
-        internal static readonly DependencyProperty CompletedExecutionContextsProperty = DependencyProperty.RegisterAttached("CompletedExecutionContexts", typeof(IList), typeof(Activity));
-        internal static readonly DependencyProperty ActiveExecutionContextsProperty = DependencyProperty.RegisterAttached("ActiveExecutionContexts", typeof(IList), typeof(Activity));
-        internal static readonly DependencyProperty CompletedOrderIdProperty = DependencyProperty.Register("CompletedOrderId", typeof(int), typeof(Activity), new PropertyMetadata(new Int32()));
-        private static readonly DependencyProperty SerializedStreamLengthProperty = DependencyProperty.RegisterAttached("SerializedStreamLength", typeof(long), typeof(Activity), new PropertyMetadata(DependencyPropertyOptions.NonSerialized));
+        internal static readonly DependencyProperty ActivityExecutionContextInfoProperty =
+            DependencyProperty.RegisterAttached(
+                "ActivityExecutionContextInfo",
+                typeof(ActivityExecutionContextInfo),
+                typeof(Activity)
+            );
+        public static readonly DependencyProperty ActivityContextGuidProperty =
+            DependencyProperty.RegisterAttached(
+                "ActivityContextGuid",
+                typeof(Guid),
+                typeof(Activity),
+                new PropertyMetadata(Guid.Empty)
+            );
+        internal static readonly DependencyProperty CompletedExecutionContextsProperty =
+            DependencyProperty.RegisterAttached(
+                "CompletedExecutionContexts",
+                typeof(IList),
+                typeof(Activity)
+            );
+        internal static readonly DependencyProperty ActiveExecutionContextsProperty =
+            DependencyProperty.RegisterAttached(
+                "ActiveExecutionContexts",
+                typeof(IList),
+                typeof(Activity)
+            );
+        internal static readonly DependencyProperty CompletedOrderIdProperty =
+            DependencyProperty.Register(
+                "CompletedOrderId",
+                typeof(int),
+                typeof(Activity),
+                new PropertyMetadata(new Int32())
+            );
+        private static readonly DependencyProperty SerializedStreamLengthProperty =
+            DependencyProperty.RegisterAttached(
+                "SerializedStreamLength",
+                typeof(long),
+                typeof(Activity),
+                new PropertyMetadata(DependencyPropertyOptions.NonSerialized)
+            );
 
         // activity runtime state
-        internal static readonly DependencyProperty ExecutionStatusProperty = DependencyProperty.RegisterAttached("ExecutionStatus", typeof(ActivityExecutionStatus), typeof(Activity), new PropertyMetadata(ActivityExecutionStatus.Initialized, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
-        internal static readonly DependencyProperty ExecutionResultProperty = DependencyProperty.RegisterAttached("ExecutionResult", typeof(ActivityExecutionResult), typeof(Activity), new PropertyMetadata(ActivityExecutionResult.None, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
-        internal static readonly DependencyProperty WasExecutingProperty = DependencyProperty.RegisterAttached("WasExecuting", typeof(bool), typeof(Activity), new PropertyMetadata(false, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
+        internal static readonly DependencyProperty ExecutionStatusProperty =
+            DependencyProperty.RegisterAttached(
+                "ExecutionStatus",
+                typeof(ActivityExecutionStatus),
+                typeof(Activity),
+                new PropertyMetadata(
+                    ActivityExecutionStatus.Initialized,
+                    new Attribute[]
+                    {
+                        new BrowsableAttribute(false),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Hidden
+                        ),
+                    }
+                )
+            );
+        internal static readonly DependencyProperty ExecutionResultProperty =
+            DependencyProperty.RegisterAttached(
+                "ExecutionResult",
+                typeof(ActivityExecutionResult),
+                typeof(Activity),
+                new PropertyMetadata(
+                    ActivityExecutionResult.None,
+                    new Attribute[]
+                    {
+                        new BrowsableAttribute(false),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Hidden
+                        ),
+                    }
+                )
+            );
+        internal static readonly DependencyProperty WasExecutingProperty =
+            DependencyProperty.RegisterAttached(
+                "WasExecuting",
+                typeof(bool),
+                typeof(Activity),
+                new PropertyMetadata(
+                    false,
+                    new Attribute[]
+                    {
+                        new BrowsableAttribute(false),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Hidden
+                        ),
+                    }
+                )
+            );
 
         // lock count on status change property
-        private static readonly DependencyProperty LockCountOnStatusChangeProperty = DependencyProperty.RegisterAttached("LockCountOnStatusChange", typeof(int), typeof(Activity), new PropertyMetadata(new Int32()));
-        internal static readonly DependencyProperty HasPrimaryClosedProperty = DependencyProperty.RegisterAttached("HasPrimaryClosed", typeof(bool), typeof(Activity), new PropertyMetadata(false));
+        private static readonly DependencyProperty LockCountOnStatusChangeProperty =
+            DependencyProperty.RegisterAttached(
+                "LockCountOnStatusChange",
+                typeof(int),
+                typeof(Activity),
+                new PropertyMetadata(new Int32())
+            );
+        internal static readonly DependencyProperty HasPrimaryClosedProperty =
+            DependencyProperty.RegisterAttached(
+                "HasPrimaryClosed",
+                typeof(bool),
+                typeof(Activity),
+                new PropertyMetadata(false)
+            );
 
         // nested activity collection used at serialization time
-        private static readonly DependencyProperty NestedActivitiesProperty = DependencyProperty.RegisterAttached("NestedActivities", typeof(IList<Activity>), typeof(Activity));
+        private static readonly DependencyProperty NestedActivitiesProperty =
+            DependencyProperty.RegisterAttached(
+                "NestedActivities",
+                typeof(IList<Activity>),
+                typeof(Activity)
+            );
 
         // Workflow Definition property, should only be visible to runtime
-        internal static readonly DependencyProperty WorkflowDefinitionProperty = DependencyProperty.RegisterAttached("WorkflowDefinition", typeof(Activity), typeof(Activity), new PropertyMetadata(DependencyPropertyOptions.NonSerialized));
+        internal static readonly DependencyProperty WorkflowDefinitionProperty =
+            DependencyProperty.RegisterAttached(
+                "WorkflowDefinition",
+                typeof(Activity),
+                typeof(Activity),
+                new PropertyMetadata(DependencyPropertyOptions.NonSerialized)
+            );
 
         // Workflow Runtime property, should only be visible to runtime
-        internal static readonly DependencyProperty WorkflowRuntimeProperty = DependencyProperty.RegisterAttached("WorkflowRuntime", typeof(IServiceProvider), typeof(Activity), new PropertyMetadata(DependencyPropertyOptions.NonSerialized));
+        internal static readonly DependencyProperty WorkflowRuntimeProperty =
+            DependencyProperty.RegisterAttached(
+                "WorkflowRuntime",
+                typeof(IServiceProvider),
+                typeof(Activity),
+                new PropertyMetadata(DependencyPropertyOptions.NonSerialized)
+            );
 
         [ThreadStatic]
         internal static Hashtable ContextIdToActivityMap = null;
+
         [ThreadStatic]
         internal static Activity DefinitionActivity = null;
+
         [ThreadStatic]
         internal static ArrayList ActivityRoots = null;
 
@@ -198,7 +347,13 @@ namespace System.Workflow.ComponentModel
 
         private static object staticSyncRoot = new object();
 
-        internal static readonly DependencyProperty CustomActivityProperty = DependencyProperty.Register("CustomActivity", typeof(bool), typeof(Activity), new PropertyMetadata(DependencyPropertyOptions.Metadata));
+        internal static readonly DependencyProperty CustomActivityProperty =
+            DependencyProperty.Register(
+                "CustomActivity",
+                typeof(bool),
+                typeof(Activity),
+                new PropertyMetadata(DependencyPropertyOptions.Metadata)
+            );
         internal static Type ActivityType = null;
 
         static Activity()
@@ -207,40 +362,147 @@ namespace System.Workflow.ComponentModel
             binaryFormatter.SurrogateSelector = ActivitySurrogateSelector.Default;
 
             // register known properties
-            DependencyProperty.RegisterAsKnown(ActivityExecutionContextInfoProperty, (byte)1, DependencyProperty.PropertyValidity.Reexecute);
-            DependencyProperty.RegisterAsKnown(CompletedExecutionContextsProperty, (byte)2, DependencyProperty.PropertyValidity.Reexecute);
-            DependencyProperty.RegisterAsKnown(ActiveExecutionContextsProperty, (byte)3, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(CompletedOrderIdProperty, (byte)4, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(ExecutionStatusProperty, (byte)5, DependencyProperty.PropertyValidity.Reexecute);
-            DependencyProperty.RegisterAsKnown(ExecutionResultProperty, (byte)6, DependencyProperty.PropertyValidity.Reexecute);
-            DependencyProperty.RegisterAsKnown(WasExecutingProperty, (byte)7, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(LockCountOnStatusChangeProperty, (byte)8, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(HasPrimaryClosedProperty, (byte)9, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(NestedActivitiesProperty, (byte)10, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(ActivityContextGuidProperty, (byte)11, DependencyProperty.PropertyValidity.Reexecute);
-            DependencyProperty.RegisterAsKnown(WorkflowXamlMarkupProperty, (byte)12, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(WorkflowRulesMarkupProperty, (byte)13, DependencyProperty.PropertyValidity.Uninitialize);
+            DependencyProperty.RegisterAsKnown(
+                ActivityExecutionContextInfoProperty,
+                (byte)1,
+                DependencyProperty.PropertyValidity.Reexecute
+            );
+            DependencyProperty.RegisterAsKnown(
+                CompletedExecutionContextsProperty,
+                (byte)2,
+                DependencyProperty.PropertyValidity.Reexecute
+            );
+            DependencyProperty.RegisterAsKnown(
+                ActiveExecutionContextsProperty,
+                (byte)3,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                CompletedOrderIdProperty,
+                (byte)4,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                ExecutionStatusProperty,
+                (byte)5,
+                DependencyProperty.PropertyValidity.Reexecute
+            );
+            DependencyProperty.RegisterAsKnown(
+                ExecutionResultProperty,
+                (byte)6,
+                DependencyProperty.PropertyValidity.Reexecute
+            );
+            DependencyProperty.RegisterAsKnown(
+                WasExecutingProperty,
+                (byte)7,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                LockCountOnStatusChangeProperty,
+                (byte)8,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                HasPrimaryClosedProperty,
+                (byte)9,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                NestedActivitiesProperty,
+                (byte)10,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                ActivityContextGuidProperty,
+                (byte)11,
+                DependencyProperty.PropertyValidity.Reexecute
+            );
+            DependencyProperty.RegisterAsKnown(
+                WorkflowXamlMarkupProperty,
+                (byte)12,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                WorkflowRulesMarkupProperty,
+                (byte)13,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
 
             // other classes
-            DependencyProperty.RegisterAsKnown(ActivityExecutionContext.CurrentExceptionProperty, (byte)23, DependencyProperty.PropertyValidity.Reexecute);
-            DependencyProperty.RegisterAsKnown(ActivityExecutionContext.GrantedLocksProperty, (byte)24, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(ActivityExecutionContext.LockAcquiredCallbackProperty, (byte)25, DependencyProperty.PropertyValidity.Uninitialize);
-
+            DependencyProperty.RegisterAsKnown(
+                ActivityExecutionContext.CurrentExceptionProperty,
+                (byte)23,
+                DependencyProperty.PropertyValidity.Reexecute
+            );
+            DependencyProperty.RegisterAsKnown(
+                ActivityExecutionContext.GrantedLocksProperty,
+                (byte)24,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                ActivityExecutionContext.LockAcquiredCallbackProperty,
+                (byte)25,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
 
             // events
-            DependencyProperty.RegisterAsKnown(ExecutingEvent, (byte)31, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(CancelingEvent, (byte)32, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(ClosedEvent, (byte)33, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(CompensatingEvent, (byte)34, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(StatusChangedEvent, (byte)35, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(StatusChangedLockedEvent, (byte)36, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(LockCountOnStatusChangeChangedEvent, (byte)37, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(FaultingEvent, (byte)38, DependencyProperty.PropertyValidity.Uninitialize);
+            DependencyProperty.RegisterAsKnown(
+                ExecutingEvent,
+                (byte)31,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                CancelingEvent,
+                (byte)32,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                ClosedEvent,
+                (byte)33,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                CompensatingEvent,
+                (byte)34,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                StatusChangedEvent,
+                (byte)35,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                StatusChangedLockedEvent,
+                (byte)36,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                LockCountOnStatusChangeChangedEvent,
+                (byte)37,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                FaultingEvent,
+                (byte)38,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
 
             // misc. others
-            DependencyProperty.RegisterAsKnown(FaultAndCancellationHandlingFilter.FaultProcessedProperty, (byte)41, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(CompensationHandlingFilter.CompensateProcessedProperty, (byte)43, DependencyProperty.PropertyValidity.Uninitialize);
-            DependencyProperty.RegisterAsKnown(CompensationHandlingFilter.LastCompensatedOrderIdProperty, (byte)44, DependencyProperty.PropertyValidity.Uninitialize);
+            DependencyProperty.RegisterAsKnown(
+                FaultAndCancellationHandlingFilter.FaultProcessedProperty,
+                (byte)41,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                CompensationHandlingFilter.CompensateProcessedProperty,
+                (byte)43,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
+            DependencyProperty.RegisterAsKnown(
+                CompensationHandlingFilter.LastCompensatedOrderIdProperty,
+                (byte)44,
+                DependencyProperty.PropertyValidity.Uninitialize
+            );
         }
 
         public Activity()
@@ -264,23 +526,32 @@ namespace System.Workflow.ComponentModel
         {
             if (provider == null)
                 throw new ArgumentNullException("provider");
-
         }
-        protected internal virtual ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+
+        protected internal virtual ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
 
             return ActivityExecutionStatus.Closed;
         }
-        protected internal virtual ActivityExecutionStatus Cancel(ActivityExecutionContext executionContext)
+
+        protected internal virtual ActivityExecutionStatus Cancel(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
 
             return ActivityExecutionStatus.Closed;
         }
-        protected internal virtual ActivityExecutionStatus HandleFault(ActivityExecutionContext executionContext, Exception exception)
+
+        protected internal virtual ActivityExecutionStatus HandleFault(
+            ActivityExecutionContext executionContext,
+            Exception exception
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -289,12 +560,10 @@ namespace System.Workflow.ComponentModel
         }
 
         /// <summary>
-        /// Derived implementation may do necessary cleanup here such as removing serializable instance 
+        /// Derived implementation may do necessary cleanup here such as removing serializable instance
         /// dependency properties before the activity status is set to closed.
         /// </summary>
-        protected virtual void OnClosed(IServiceProvider provider)
-        {
-        }
+        protected virtual void OnClosed(IServiceProvider provider) { }
 
         /// <summary>
         /// Called Immediatly once activity is done with it life time
@@ -326,7 +595,12 @@ namespace System.Workflow.ComponentModel
 
         #region Activity Execution Helper Methods
 
-        protected internal void RaiseGenericEvent<T>(DependencyProperty dependencyEvent, object sender, T e) where T : EventArgs
+        protected internal void RaiseGenericEvent<T>(
+            DependencyProperty dependencyEvent,
+            object sender,
+            T e
+        )
+            where T : EventArgs
         {
             if (dependencyEvent == null)
                 throw new ArgumentNullException("dependencyEvent");
@@ -337,7 +611,9 @@ namespace System.Workflow.ComponentModel
             if (this.WorkflowCoreRuntime == null)
                 throw new InvalidOperationException(SR.GetString(SR.Error_NoRuntimeAvailable));
 
-            EventHandler<T>[] eventHandlers = ((IDependencyObjectAccessor)this).GetInvocationList<EventHandler<T>>(dependencyEvent);
+            EventHandler<T>[] eventHandlers = ((IDependencyObjectAccessor)this).GetInvocationList<
+                EventHandler<T>
+            >(dependencyEvent);
             if (eventHandlers != null)
             {
                 foreach (EventHandler<T> eventHandler in eventHandlers)
@@ -355,7 +631,11 @@ namespace System.Workflow.ComponentModel
             }
         }
 
-        protected internal void RaiseEvent(DependencyProperty dependencyEvent, object sender, EventArgs e)
+        protected internal void RaiseEvent(
+            DependencyProperty dependencyEvent,
+            object sender,
+            EventArgs e
+        )
         {
             if (sender == null)
                 throw new ArgumentNullException("sender");
@@ -369,7 +649,9 @@ namespace System.Workflow.ComponentModel
             if (this.WorkflowCoreRuntime == null)
                 throw new InvalidOperationException(SR.GetString(SR.Error_NoRuntimeAvailable));
 
-            EventHandler[] eventHandlers = ((IDependencyObjectAccessor)this).GetInvocationList<EventHandler>(dependencyEvent);
+            EventHandler[] eventHandlers = (
+                (IDependencyObjectAccessor)this
+            ).GetInvocationList<EventHandler>(dependencyEvent);
             if (eventHandlers != null)
             {
                 foreach (EventHandler eventHandler in eventHandlers)
@@ -396,6 +678,7 @@ namespace System.Workflow.ComponentModel
 
             this.WorkflowCoreRuntime.Track(null, userData);
         }
+
         protected void TrackData(string userDataKey, object userData)
         {
             if (userData == null)
@@ -405,6 +688,7 @@ namespace System.Workflow.ComponentModel
 
             this.WorkflowCoreRuntime.Track(userDataKey, userData);
         }
+
         protected Guid WorkflowInstanceId
         {
             get
@@ -415,9 +699,10 @@ namespace System.Workflow.ComponentModel
                 return this.WorkflowCoreRuntime.InstanceID;
             }
         }
-        protected internal void Invoke<T>(EventHandler<T> handler, T e) where T : EventArgs
-        {
 
+        protected internal void Invoke<T>(EventHandler<T> handler, T e)
+            where T : EventArgs
+        {
             if (handler == null)
                 throw new ArgumentNullException("handler");
 
@@ -425,20 +710,41 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentNullException("e");
 
             if (this.WorkflowCoreRuntime == null)
-                throw new InvalidOperationException(SR.GetString(System.Globalization.CultureInfo.CurrentCulture, SR.Error_NoRuntimeAvailable));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        SR.Error_NoRuntimeAvailable
+                    )
+                );
 
-            if (this.ExecutionStatus == ActivityExecutionStatus.Initialized || this.ExecutionStatus == ActivityExecutionStatus.Closed)
-                throw new InvalidOperationException(SR.GetString(System.Globalization.CultureInfo.CurrentCulture, SR.Error_InvalidInvokingState));
+            if (
+                this.ExecutionStatus == ActivityExecutionStatus.Initialized
+                || this.ExecutionStatus == ActivityExecutionStatus.Closed
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        SR.Error_InvalidInvokingState
+                    )
+                );
 
             // create subscriber
             ActivityExecutorDelegateInfo<T> activityExecutorDelegate = null;
             using (this.WorkflowCoreRuntime.SetCurrentActivity(this))
-                activityExecutorDelegate = new ActivityExecutorDelegateInfo<T>(handler, this.ContextActivity);
+                activityExecutorDelegate = new ActivityExecutorDelegateInfo<T>(
+                    handler,
+                    this.ContextActivity
+                );
 
-            activityExecutorDelegate.InvokeDelegate(this.WorkflowCoreRuntime.CurrentActivity.ContextActivity, e, false);
+            activityExecutorDelegate.InvokeDelegate(
+                this.WorkflowCoreRuntime.CurrentActivity.ContextActivity,
+                e,
+                false
+            );
         }
 
-        protected internal void Invoke<T>(IActivityEventListener<T> eventListener, T e) where T : EventArgs
+        protected internal void Invoke<T>(IActivityEventListener<T> eventListener, T e)
+            where T : EventArgs
         {
             if (eventListener == null)
                 throw new ArgumentNullException("eventListener");
@@ -447,17 +753,37 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentNullException("e");
 
             if (this.WorkflowCoreRuntime == null)
-                throw new InvalidOperationException(SR.GetString(System.Globalization.CultureInfo.CurrentCulture, SR.Error_NoRuntimeAvailable));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        SR.Error_NoRuntimeAvailable
+                    )
+                );
 
-            if (this.ExecutionStatus == ActivityExecutionStatus.Initialized || this.ExecutionStatus == ActivityExecutionStatus.Closed)
-                throw new InvalidOperationException(SR.GetString(System.Globalization.CultureInfo.CurrentCulture, SR.Error_InvalidInvokingState));
+            if (
+                this.ExecutionStatus == ActivityExecutionStatus.Initialized
+                || this.ExecutionStatus == ActivityExecutionStatus.Closed
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        SR.Error_InvalidInvokingState
+                    )
+                );
 
             // create subscriber
             ActivityExecutorDelegateInfo<T> activityExecutorDelegate = null;
             using (this.WorkflowCoreRuntime.SetCurrentActivity(this))
-                activityExecutorDelegate = new ActivityExecutorDelegateInfo<T>(eventListener, this.ContextActivity);
+                activityExecutorDelegate = new ActivityExecutorDelegateInfo<T>(
+                    eventListener,
+                    this.ContextActivity
+                );
 
-            activityExecutorDelegate.InvokeDelegate(this.WorkflowCoreRuntime.CurrentActivity.ContextActivity, e, false);
+            activityExecutorDelegate.InvokeDelegate(
+                this.WorkflowCoreRuntime.CurrentActivity.ContextActivity,
+                e,
+                false
+            );
         }
         #endregion
 
@@ -467,10 +793,7 @@ namespace System.Workflow.ComponentModel
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public CompositeActivity Parent
         {
-            get
-            {
-                return this.parent;
-            }
+            get { return this.parent; }
         }
 
         internal void SetParent(CompositeActivity compositeActivity)
@@ -486,14 +809,8 @@ namespace System.Workflow.ComponentModel
         [DefaultValue("")]
         public string Name
         {
-            get
-            {
-                return (string)GetValue(NameProperty);
-            }
-            set
-            {
-                SetValue(NameProperty, value);
-            }
+            get { return (string)GetValue(NameProperty); }
+            set { SetValue(NameProperty, value); }
         }
 
         [Browsable(true)]
@@ -502,14 +819,8 @@ namespace System.Workflow.ComponentModel
         [DefaultValue(true)]
         public bool Enabled
         {
-            get
-            {
-                return (bool)GetValue(EnabledProperty);
-            }
-            set
-            {
-                SetValue(EnabledProperty, value);
-            }
+            get { return (bool)GetValue(EnabledProperty); }
+            set { SetValue(EnabledProperty, value); }
         }
 
         [Browsable(false)]
@@ -541,46 +852,55 @@ namespace System.Workflow.ComponentModel
         [DefaultValue("")]
         public string Description
         {
-            get
-            {
-                return (string)GetValue(DescriptionProperty);
-            }
-            set
-            {
-                SetValue(DescriptionProperty, value);
-            }
+            get { return (string)GetValue(DescriptionProperty); }
+            set { SetValue(DescriptionProperty, value); }
         }
         #endregion
 
         #region Activity Instance Properties
 
-        public static readonly DependencyProperty StatusChangedEvent = DependencyProperty.Register("StatusChanged", typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>), typeof(Activity));
+        public static readonly DependencyProperty StatusChangedEvent = DependencyProperty.Register(
+            "StatusChanged",
+            typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>),
+            typeof(Activity)
+        );
+
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public event EventHandler<ActivityExecutionStatusChangedEventArgs> StatusChanged
         {
-            add
-            {
-                this.AddStatusChangeHandler(StatusChangedEvent, value);
-            }
-            remove
-            {
-                this.RemoveStatusChangeHandler(StatusChangedEvent, value);
-            }
+            add { this.AddStatusChangeHandler(StatusChangedEvent, value); }
+            remove { this.RemoveStatusChangeHandler(StatusChangedEvent, value); }
         }
 
-        internal static readonly DependencyProperty LockCountOnStatusChangeChangedEvent = DependencyProperty.Register("LockCountOnStatusChangeChanged", typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>), typeof(Activity));
-        internal static readonly DependencyProperty StatusChangedLockedEvent = DependencyProperty.Register("StatusChangedLocked", typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>), typeof(Activity));
-        internal void HoldLockOnStatusChange(IActivityEventListener<ActivityExecutionStatusChangedEventArgs> eventListener)
+        internal static readonly DependencyProperty LockCountOnStatusChangeChangedEvent =
+            DependencyProperty.Register(
+                "LockCountOnStatusChangeChanged",
+                typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>),
+                typeof(Activity)
+            );
+        internal static readonly DependencyProperty StatusChangedLockedEvent =
+            DependencyProperty.Register(
+                "StatusChangedLocked",
+                typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>),
+                typeof(Activity)
+            );
+
+        internal void HoldLockOnStatusChange(
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs> eventListener
+        )
         {
             this.RegisterForStatusChange(StatusChangedLockedEvent, eventListener);
 
             // increment count
             this.SetValue(LockCountOnStatusChangeProperty, this.LockCountOnStatusChange + 1);
         }
-        internal void ReleaseLockOnStatusChange(IActivityEventListener<ActivityExecutionStatusChangedEventArgs> eventListener)
+
+        internal void ReleaseLockOnStatusChange(
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs> eventListener
+        )
         {
-            // remove it 
+            // remove it
             this.UnregisterForStatusChange(StatusChangedLockedEvent, eventListener);
 
             // decrement count and fire event
@@ -615,103 +935,90 @@ namespace System.Workflow.ComponentModel
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal int LockCountOnStatusChange
         {
-            get
-            {
-                return (int)this.GetValue(LockCountOnStatusChangeProperty);
-            }
+            get { return (int)this.GetValue(LockCountOnStatusChangeProperty); }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal bool HasPrimaryClosed
         {
-            get
-            {
-                return (bool)this.GetValue(HasPrimaryClosedProperty);
-            }
+            get { return (bool)this.GetValue(HasPrimaryClosedProperty); }
         }
 
-        public static readonly DependencyProperty CancelingEvent = DependencyProperty.Register("Canceling", typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>), typeof(Activity));
+        public static readonly DependencyProperty CancelingEvent = DependencyProperty.Register(
+            "Canceling",
+            typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>),
+            typeof(Activity)
+        );
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public event EventHandler<ActivityExecutionStatusChangedEventArgs> Canceling
         {
-            add
-            {
-                this.AddStatusChangeHandler(CancelingEvent, value);
-            }
-            remove
-            {
-                this.RemoveStatusChangeHandler(CancelingEvent, value);
-            }
+            add { this.AddStatusChangeHandler(CancelingEvent, value); }
+            remove { this.RemoveStatusChangeHandler(CancelingEvent, value); }
         }
 
-        public static readonly DependencyProperty FaultingEvent = DependencyProperty.Register("Faulting", typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>), typeof(Activity));
+        public static readonly DependencyProperty FaultingEvent = DependencyProperty.Register(
+            "Faulting",
+            typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>),
+            typeof(Activity)
+        );
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public event EventHandler<ActivityExecutionStatusChangedEventArgs> Faulting
         {
-            add
-            {
-                this.AddStatusChangeHandler(FaultingEvent, value);
-            }
-            remove
-            {
-                this.RemoveStatusChangeHandler(FaultingEvent, value);
-            }
+            add { this.AddStatusChangeHandler(FaultingEvent, value); }
+            remove { this.RemoveStatusChangeHandler(FaultingEvent, value); }
         }
 
-
-        public static readonly DependencyProperty ClosedEvent = DependencyProperty.Register("Closed", typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>), typeof(Activity));
+        public static readonly DependencyProperty ClosedEvent = DependencyProperty.Register(
+            "Closed",
+            typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>),
+            typeof(Activity)
+        );
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public event EventHandler<ActivityExecutionStatusChangedEventArgs> Closed
         {
-            add
-            {
-                this.AddStatusChangeHandler(ClosedEvent, value);
-            }
-            remove
-            {
-                this.RemoveStatusChangeHandler(ClosedEvent, value);
-            }
+            add { this.AddStatusChangeHandler(ClosedEvent, value); }
+            remove { this.RemoveStatusChangeHandler(ClosedEvent, value); }
         }
 
-        public static readonly DependencyProperty ExecutingEvent = DependencyProperty.Register("Executing", typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>), typeof(Activity));
+        public static readonly DependencyProperty ExecutingEvent = DependencyProperty.Register(
+            "Executing",
+            typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>),
+            typeof(Activity)
+        );
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public event EventHandler<ActivityExecutionStatusChangedEventArgs> Executing
         {
-            add
-            {
-                this.AddStatusChangeHandler(ExecutingEvent, value);
-            }
-            remove
-            {
-                this.RemoveStatusChangeHandler(ExecutingEvent, value);
-            }
+            add { this.AddStatusChangeHandler(ExecutingEvent, value); }
+            remove { this.RemoveStatusChangeHandler(ExecutingEvent, value); }
         }
 
-        public static readonly DependencyProperty CompensatingEvent = DependencyProperty.Register("Compensating", typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>), typeof(Activity));
+        public static readonly DependencyProperty CompensatingEvent = DependencyProperty.Register(
+            "Compensating",
+            typeof(EventHandler<ActivityExecutionStatusChangedEventArgs>),
+            typeof(Activity)
+        );
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public event EventHandler<ActivityExecutionStatusChangedEventArgs> Compensating
         {
-            add
-            {
-                this.AddStatusChangeHandler(CompensatingEvent, value);
-            }
-            remove
-            {
-                this.RemoveStatusChangeHandler(CompensatingEvent, value);
-            }
+            add { this.AddStatusChangeHandler(CompensatingEvent, value); }
+            remove { this.RemoveStatusChangeHandler(CompensatingEvent, value); }
         }
-        private void AddStatusChangeHandler(DependencyProperty dependencyProp, EventHandler<ActivityExecutionStatusChangedEventArgs> delegateValue)
+
+        private void AddStatusChangeHandler(
+            DependencyProperty dependencyProp,
+            EventHandler<ActivityExecutionStatusChangedEventArgs> delegateValue
+        )
         {
             IList handlers = null;
             if (this.DependencyPropertyValues.ContainsKey(dependencyProp))
@@ -723,21 +1030,38 @@ namespace System.Workflow.ComponentModel
                 handlers = new ArrayList();
                 this.DependencyPropertyValues[dependencyProp] = handlers;
             }
-            handlers.Add(new ActivityExecutorDelegateInfo<ActivityExecutionStatusChangedEventArgs>(true, delegateValue, this.ContextActivity ?? this.RootActivity));
+            handlers.Add(
+                new ActivityExecutorDelegateInfo<ActivityExecutionStatusChangedEventArgs>(
+                    true,
+                    delegateValue,
+                    this.ContextActivity ?? this.RootActivity
+                )
+            );
         }
-        private void RemoveStatusChangeHandler(DependencyProperty dependencyProp, EventHandler<ActivityExecutionStatusChangedEventArgs> delegateValue)
+
+        private void RemoveStatusChangeHandler(
+            DependencyProperty dependencyProp,
+            EventHandler<ActivityExecutionStatusChangedEventArgs> delegateValue
+        )
         {
             if (this.DependencyPropertyValues.ContainsKey(dependencyProp))
             {
                 IList handlers = this.DependencyPropertyValues[dependencyProp] as IList;
                 if (handlers != null)
                 {
-                    handlers.Remove(new ActivityExecutorDelegateInfo<ActivityExecutionStatusChangedEventArgs>(true, delegateValue, this.ContextActivity));
+                    handlers.Remove(
+                        new ActivityExecutorDelegateInfo<ActivityExecutionStatusChangedEventArgs>(
+                            true,
+                            delegateValue,
+                            this.ContextActivity
+                        )
+                    );
                     if (handlers.Count == 0)
                         this.DependencyPropertyValues.Remove(dependencyProp);
                 }
             }
         }
+
         private IList GetStatusChangeHandlers(DependencyProperty dependencyProp)
         {
             IList handlers = null;
@@ -746,21 +1070,26 @@ namespace System.Workflow.ComponentModel
             return handlers;
         }
 
-        public void RegisterForStatusChange(DependencyProperty dependencyProp, IActivityEventListener<ActivityExecutionStatusChangedEventArgs> activityStatusChangeListener)
+        public void RegisterForStatusChange(
+            DependencyProperty dependencyProp,
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs> activityStatusChangeListener
+        )
         {
             if (dependencyProp == null)
                 throw new ArgumentNullException("dependencyProp");
             if (activityStatusChangeListener == null)
                 throw new ArgumentNullException("activityStatusChangeListener");
 
-            if (dependencyProp != Activity.ExecutingEvent &&
-                dependencyProp != Activity.CancelingEvent &&
-                dependencyProp != Activity.ClosedEvent &&
-                dependencyProp != Activity.CompensatingEvent &&
-                dependencyProp != Activity.FaultingEvent &&
-                dependencyProp != Activity.StatusChangedEvent &&
-                dependencyProp != Activity.StatusChangedLockedEvent &&
-                dependencyProp != Activity.LockCountOnStatusChangeChangedEvent)
+            if (
+                dependencyProp != Activity.ExecutingEvent
+                && dependencyProp != Activity.CancelingEvent
+                && dependencyProp != Activity.ClosedEvent
+                && dependencyProp != Activity.CompensatingEvent
+                && dependencyProp != Activity.FaultingEvent
+                && dependencyProp != Activity.StatusChangedEvent
+                && dependencyProp != Activity.StatusChangedLockedEvent
+                && dependencyProp != Activity.LockCountOnStatusChangeChangedEvent
+            )
                 throw new ArgumentException();
 
             IList handlers = null;
@@ -773,23 +1102,35 @@ namespace System.Workflow.ComponentModel
                 handlers = new ArrayList();
                 this.DependencyPropertyValues[dependencyProp] = handlers;
             }
-            handlers.Add(new ActivityExecutorDelegateInfo<ActivityExecutionStatusChangedEventArgs>(true, activityStatusChangeListener, this.ContextActivity));
+            handlers.Add(
+                new ActivityExecutorDelegateInfo<ActivityExecutionStatusChangedEventArgs>(
+                    true,
+                    activityStatusChangeListener,
+                    this.ContextActivity
+                )
+            );
         }
-        public void UnregisterForStatusChange(DependencyProperty dependencyProp, IActivityEventListener<ActivityExecutionStatusChangedEventArgs> activityStatusChangeListener)
+
+        public void UnregisterForStatusChange(
+            DependencyProperty dependencyProp,
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs> activityStatusChangeListener
+        )
         {
             if (dependencyProp == null)
                 throw new ArgumentNullException("dependencyProp");
             if (activityStatusChangeListener == null)
                 throw new ArgumentNullException("activityStatusChangeListener");
 
-            if (dependencyProp != Activity.ExecutingEvent &&
-                dependencyProp != Activity.CancelingEvent &&
-                dependencyProp != Activity.ClosedEvent &&
-                dependencyProp != Activity.CompensatingEvent &&
-                dependencyProp != Activity.FaultingEvent &&
-                dependencyProp != Activity.StatusChangedEvent &&
-                dependencyProp != Activity.StatusChangedLockedEvent &&
-                dependencyProp != Activity.LockCountOnStatusChangeChangedEvent)
+            if (
+                dependencyProp != Activity.ExecutingEvent
+                && dependencyProp != Activity.CancelingEvent
+                && dependencyProp != Activity.ClosedEvent
+                && dependencyProp != Activity.CompensatingEvent
+                && dependencyProp != Activity.FaultingEvent
+                && dependencyProp != Activity.StatusChangedEvent
+                && dependencyProp != Activity.StatusChangedLockedEvent
+                && dependencyProp != Activity.LockCountOnStatusChangeChangedEvent
+            )
                 throw new ArgumentException();
 
             if (this.DependencyPropertyValues.ContainsKey(dependencyProp))
@@ -797,7 +1138,13 @@ namespace System.Workflow.ComponentModel
                 IList handlers = this.DependencyPropertyValues[dependencyProp] as IList;
                 if (handlers != null)
                 {
-                    handlers.Remove(new ActivityExecutorDelegateInfo<ActivityExecutionStatusChangedEventArgs>(true, activityStatusChangeListener, this.ContextActivity));
+                    handlers.Remove(
+                        new ActivityExecutorDelegateInfo<ActivityExecutionStatusChangedEventArgs>(
+                            true,
+                            activityStatusChangeListener,
+                            this.ContextActivity
+                        )
+                    );
                     if (handlers.Count == 0)
                         this.DependencyPropertyValues.Remove(dependencyProp);
                 }
@@ -808,20 +1155,14 @@ namespace System.Workflow.ComponentModel
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ActivityExecutionStatus ExecutionStatus
         {
-            get
-            {
-                return (ActivityExecutionStatus)this.GetValue(ExecutionStatusProperty);
-            }
+            get { return (ActivityExecutionStatus)this.GetValue(ExecutionStatusProperty); }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ActivityExecutionResult ExecutionResult
         {
-            get
-            {
-                return (ActivityExecutionResult)this.GetValue(ExecutionResultProperty);
-            }
+            get { return (ActivityExecutionResult)this.GetValue(ExecutionResultProperty); }
         }
 
         [Browsable(false)]
@@ -837,20 +1178,18 @@ namespace System.Workflow.ComponentModel
             }
         }
 
-
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal bool WasExecuting
         {
-            get
-            {
-                return (bool)this.GetValue(WasExecutingProperty);
-            }
+            get { return (bool)this.GetValue(WasExecutingProperty); }
         }
+
         public Activity GetActivityByName(string activityQualifiedName)
         {
             return GetActivityByName(activityQualifiedName, false);
         }
+
         public Activity GetActivityByName(string activityQualifiedName, bool withinThisActivityOnly)
         {
             if (activityQualifiedName == null)
@@ -867,14 +1206,23 @@ namespace System.Workflow.ComponentModel
             if (resolvedActivity == null)
             {
                 // if custom then append its qualified id and then try it
-                if (this is CompositeActivity && Helpers.IsCustomActivity(this as CompositeActivity))
-                    resolvedActivity = ResolveActivityByName(this.QualifiedName + "." + activityQualifiedName, withinThisActivityOnly);
+                if (
+                    this is CompositeActivity
+                    && Helpers.IsCustomActivity(this as CompositeActivity)
+                )
+                    resolvedActivity = ResolveActivityByName(
+                        this.QualifiedName + "." + activityQualifiedName,
+                        withinThisActivityOnly
+                    );
             }
 
             return resolvedActivity;
         }
 
-        private Activity ResolveActivityByName(string activityQualifiedName, bool withinThisActivityOnly)
+        private Activity ResolveActivityByName(
+            string activityQualifiedName,
+            bool withinThisActivityOnly
+        )
         {
             Activity resolvedActivity = null;
             if (!this.DesignMode && !this.DynamicUpdateMode)
@@ -895,7 +1243,11 @@ namespace System.Workflow.ComponentModel
                                 if (path.Length == thisPath.Length)
                                     resolvedActivity = this;
                                 else if (thisPath.Length == 0 || path[thisPath.Length] == '.')
-                                    resolvedActivity = this.TraverseDottedPath(path.Substring(thisPath.Length > 0 ? thisPath.Length + 1 : 0));
+                                    resolvedActivity = this.TraverseDottedPath(
+                                        path.Substring(
+                                            thisPath.Length > 0 ? thisPath.Length + 1 : 0
+                                        )
+                                    );
                             }
                             else if (!withinThisActivityOnly)
                             {
@@ -912,7 +1264,8 @@ namespace System.Workflow.ComponentModel
             else if (!this.DesignMode)
             {
                 // WinOE Bug 20584: Fix this for dynamic updates only.  See bug description for details.
-                CompositeActivity parent = (withinThisActivityOnly ? this : this.RootActivity) as CompositeActivity;
+                CompositeActivity parent =
+                    (withinThisActivityOnly ? this : this.RootActivity) as CompositeActivity;
                 if (parent != null)
                 {
                     foreach (Activity childActivity in Helpers.GetNestedActivities(parent))
@@ -927,11 +1280,14 @@ namespace System.Workflow.ComponentModel
             }
             else
             {
-                // 
+                //
                 resolvedActivity = Helpers.ParseActivity(this, activityQualifiedName);
 
                 if (resolvedActivity == null && !withinThisActivityOnly)
-                    resolvedActivity = Helpers.ParseActivity(this.RootActivity, activityQualifiedName);
+                    resolvedActivity = Helpers.ParseActivity(
+                        this.RootActivity,
+                        activityQualifiedName
+                    );
             }
 
             return resolvedActivity;
@@ -944,12 +1300,23 @@ namespace System.Workflow.ComponentModel
 
         private void ResetKnownDependencyProperties(bool forReexecute)
         {
-            DependencyProperty[] propertyClone = new DependencyProperty[this.DependencyPropertyValues.Keys.Count];
+            DependencyProperty[] propertyClone = new DependencyProperty[
+                this.DependencyPropertyValues.Keys.Count
+            ];
             this.DependencyPropertyValues.Keys.CopyTo(propertyClone, 0);
 
             foreach (DependencyProperty property in propertyClone)
             {
-                if (property.IsKnown && (property.Validity == DependencyProperty.PropertyValidity.Uninitialize || (forReexecute && property.Validity == DependencyProperty.PropertyValidity.Reexecute)))
+                if (
+                    property.IsKnown
+                    && (
+                        property.Validity == DependencyProperty.PropertyValidity.Uninitialize
+                        || (
+                            forReexecute
+                            && property.Validity == DependencyProperty.PropertyValidity.Reexecute
+                        )
+                    )
+                )
                     this.RemoveProperty(property);
             }
         }
@@ -958,6 +1325,7 @@ namespace System.Workflow.ComponentModel
         {
             return null;
         }
+
         internal Activity TraverseDottedPathFromRoot(string dottedPathFromRoot)
         {
             string thisActivityDottedPath = this.DottedPath;
@@ -971,10 +1339,13 @@ namespace System.Workflow.ComponentModel
             // calculate relative path
             string relativeDottedPath = dottedPathFromRoot;
             if (thisActivityDottedPath.Length > 0)
-                relativeDottedPath = dottedPathFromRoot.Substring(thisActivityDottedPath.Length + 1);
+                relativeDottedPath = dottedPathFromRoot.Substring(
+                    thisActivityDottedPath.Length + 1
+                );
 
             return this.TraverseDottedPath(relativeDottedPath);
         }
+
         internal string DottedPath
         {
             get
@@ -991,7 +1362,10 @@ namespace System.Workflow.ComponentModel
                 while (thisActivity.parent != null)
                 {
                     int thisActivityIndex = thisActivity.parent.Activities.IndexOf(thisActivity);
-                    dottedPathBuilder.Insert(0, thisActivityIndex.ToString(CultureInfo.InvariantCulture)); //15
+                    dottedPathBuilder.Insert(
+                        0,
+                        thisActivityIndex.ToString(CultureInfo.InvariantCulture)
+                    ); //15
                     dottedPathBuilder.Insert(0, '.'); //.15
                     thisActivity = thisActivity.parent;
                 }
@@ -1005,17 +1379,11 @@ namespace System.Workflow.ComponentModel
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal IWorkflowCoreRuntime WorkflowCoreRuntime
         {
-            get
-            {
-                return this.workflowCoreRuntime;
-            }
+            get { return this.workflowCoreRuntime; }
         }
         internal bool DynamicUpdateMode
         {
-            get
-            {
-                return (this.cachedDottedPath != null);
-            }
+            get { return (this.cachedDottedPath != null); }
             set
             {
                 if (value)
@@ -1026,10 +1394,7 @@ namespace System.Workflow.ComponentModel
         }
         internal string CachedDottedPath
         {
-            get
-            {
-                return this.cachedDottedPath;
-            }
+            get { return this.cachedDottedPath; }
         }
 
         #endregion
@@ -1047,7 +1412,10 @@ namespace System.Workflow.ComponentModel
             MemoryStream memoryStream = new MemoryStream((int)max);
             Save(memoryStream);
             memoryStream.Position = 0;
-            this.SetValue(SerializedStreamLengthProperty, memoryStream.Length > max ? memoryStream.Length : max);
+            this.SetValue(
+                SerializedStreamLengthProperty,
+                memoryStream.Length > max ? memoryStream.Length : max
+            );
             return Activity.Load(memoryStream, this);
         }
 
@@ -1055,6 +1423,7 @@ namespace System.Workflow.ComponentModel
         {
             this.Save(stream, binaryFormatter);
         }
+
         public void Save(Stream stream, IFormatter formatter)
         {
             if (stream == null)
@@ -1093,10 +1462,12 @@ namespace System.Workflow.ComponentModel
                 ActivityRoots = null;
             }
         }
+
         public static Activity Load(Stream stream, Activity outerActivity)
         {
             return Load(stream, outerActivity, binaryFormatter);
         }
+
         public static Activity Load(Stream stream, Activity outerActivity, IFormatter formatter)
         {
             if (stream == null)
@@ -1140,29 +1511,48 @@ namespace System.Workflow.ComponentModel
                     if (deserializedActivityRoot.IsContextActivity)
                     {
                         // get the corresponding definition activity
-                        ActivityExecutionContextInfo contextInfo = (ActivityExecutionContextInfo)deserializedActivityRoot.GetValue(Activity.ActivityExecutionContextInfoProperty);
-                        definitionActivity = definitionActivity.GetActivityByName(contextInfo.ActivityQualifiedName);
+                        ActivityExecutionContextInfo contextInfo = (ActivityExecutionContextInfo)
+                            deserializedActivityRoot.GetValue(
+                                Activity.ActivityExecutionContextInfoProperty
+                            );
+                        definitionActivity = definitionActivity.GetActivityByName(
+                            contextInfo.ActivityQualifiedName
+                        );
 
                         // get the corresponding parent activity
-                        Activity parentContextActivity = (Activity)ContextIdToActivityMap[contextInfo.ParentContextId];
+                        Activity parentContextActivity = (Activity)
+                            ContextIdToActivityMap[contextInfo.ParentContextId];
                         if (parentContextActivity != null)
-                            parentActivity = parentContextActivity.GetActivityByName(contextInfo.ActivityQualifiedName).parent;
+                            parentActivity = parentContextActivity
+                                .GetActivityByName(contextInfo.ActivityQualifiedName)
+                                .parent;
 
                         // fill up the cached context activities
-                        ContextIdToActivityMap[deserializedActivityRoot.ContextId] = deserializedActivityRoot;
+                        ContextIdToActivityMap[deserializedActivityRoot.ContextId] =
+                            deserializedActivityRoot;
 
                         // get nested context activities and queue them for processing
-                        IList<Activity> deserializedNestedActivityRoots = (IList<Activity>)deserializedActivityRoot.GetValue(Activity.ActiveExecutionContextsProperty);
+                        IList<Activity> deserializedNestedActivityRoots =
+                            (IList<Activity>)
+                                deserializedActivityRoot.GetValue(
+                                    Activity.ActiveExecutionContextsProperty
+                                );
                         if (deserializedNestedActivityRoots != null)
                         {
-                            foreach (Activity deserializedNestedActivityRoot in deserializedNestedActivityRoots)
-                                deserializedActivityRootsQueue.Enqueue(deserializedNestedActivityRoot);
+                            foreach (
+                                Activity deserializedNestedActivityRoot in deserializedNestedActivityRoots
+                            )
+                                deserializedActivityRootsQueue.Enqueue(
+                                    deserializedNestedActivityRoot
+                                );
                         }
                     }
 
                     // prepare hash of id to activity
                     Hashtable idToActivityMap = new Hashtable();
-                    IList<Activity> nestedActivities = (IList<Activity>)deserializedActivityRoot.GetValue(Activity.NestedActivitiesProperty);
+                    IList<Activity> nestedActivities =
+                        (IList<Activity>)
+                            deserializedActivityRoot.GetValue(Activity.NestedActivitiesProperty);
                     if (nestedActivities != null)
                     {
                         foreach (Activity nestedActivity in nestedActivities)
@@ -1170,14 +1560,21 @@ namespace System.Workflow.ComponentModel
                     }
 
                     // fix up parent child relation ship for this activity
-                    deserializedActivityRoot.FixUpParentChildRelationship(definitionActivity, parentActivity, idToActivityMap);
+                    deserializedActivityRoot.FixUpParentChildRelationship(
+                        definitionActivity,
+                        parentActivity,
+                        idToActivityMap
+                    );
                     deserializedActivityRoot.FixUpMetaProperties(definitionActivity);
                     deserializedActivityRoot.RemoveProperty(Activity.NestedActivitiesProperty);
                 }
 
                 // set the Workflow Definition in case of root activity
                 if (returnActivity.Parent == null)
-                    returnActivity.SetValue(Activity.WorkflowDefinitionProperty, DefinitionActivity);
+                    returnActivity.SetValue(
+                        Activity.WorkflowDefinitionProperty,
+                        DefinitionActivity
+                    );
             }
             finally
             {
@@ -1187,6 +1584,7 @@ namespace System.Workflow.ComponentModel
             }
             return returnActivity;
         }
+
         private static void FillContextIdToActivityMap(Activity seedActivity)
         {
             Queue<Activity> activityRootsQueue = new Queue<Activity>();
@@ -1197,7 +1595,9 @@ namespace System.Workflow.ComponentModel
                 if (activityRoot.IsContextActivity)
                 {
                     ContextIdToActivityMap[activityRoot.ContextId] = activityRoot;
-                    IList<Activity> activeActivityRoots = (IList<Activity>)activityRoot.GetValue(Activity.ActiveExecutionContextsProperty);
+                    IList<Activity> activeActivityRoots =
+                        (IList<Activity>)
+                            activityRoot.GetValue(Activity.ActiveExecutionContextsProperty);
                     if (activeActivityRoots != null)
                     {
                         foreach (Activity activeActivityRoot in activeActivityRoots)
@@ -1239,7 +1639,6 @@ namespace System.Workflow.ComponentModel
                     workflowChangeActionsResolve += value;
                 }
             }
-
             remove
             {
                 lock (staticSyncRoot)
@@ -1249,7 +1648,14 @@ namespace System.Workflow.ComponentModel
             }
         }
 
-        internal static Activity OnResolveActivityDefinition(Type type, string workflowMarkup, string rulesMarkup, bool createNew, bool initForRuntime, IServiceProvider serviceProvider)
+        internal static Activity OnResolveActivityDefinition(
+            Type type,
+            string workflowMarkup,
+            string rulesMarkup,
+            bool createNew,
+            bool initForRuntime,
+            IServiceProvider serviceProvider
+        )
         {
             // get invocation list
             Delegate[] invocationList = null;
@@ -1265,7 +1671,17 @@ namespace System.Workflow.ComponentModel
             {
                 foreach (ActivityResolveEventHandler activityDefinitionResolver in invocationList)
                 {
-                    activityDefinition = activityDefinitionResolver(null, new ActivityResolveEventArgs(type, workflowMarkup, rulesMarkup, createNew, initForRuntime, serviceProvider));
+                    activityDefinition = activityDefinitionResolver(
+                        null,
+                        new ActivityResolveEventArgs(
+                            type,
+                            workflowMarkup,
+                            rulesMarkup,
+                            createNew,
+                            initForRuntime,
+                            serviceProvider
+                        )
+                    );
                     if (activityDefinition != null)
                         return activityDefinition;
                 }
@@ -1273,7 +1689,10 @@ namespace System.Workflow.ComponentModel
             return null;
         }
 
-        internal static ArrayList OnResolveWorkflowChangeActions(string workflowChangesMarkup, Activity root)
+        internal static ArrayList OnResolveWorkflowChangeActions(
+            string workflowChangesMarkup,
+            Activity root
+        )
         {
             // get invocation list
             Delegate[] invocationList = null;
@@ -1287,9 +1706,14 @@ namespace System.Workflow.ComponentModel
             ArrayList changeActions = null;
             if (invocationList != null)
             {
-                foreach (WorkflowChangeActionsResolveEventHandler workflowChangeActionsResolver in invocationList)
+                foreach (
+                    WorkflowChangeActionsResolveEventHandler workflowChangeActionsResolver in invocationList
+                )
                 {
-                    changeActions = workflowChangeActionsResolver(root, new WorkflowChangeActionsResolveEventArgs(workflowChangesMarkup));
+                    changeActions = workflowChangeActionsResolver(
+                        root,
+                        new WorkflowChangeActionsResolveEventArgs(workflowChangesMarkup)
+                    );
                     if (changeActions != null)
                         return changeActions;
                 }
@@ -1303,23 +1727,26 @@ namespace System.Workflow.ComponentModel
 
         internal bool IsContextActivity
         {
-            get
-            {
-                return this.GetValue(Activity.ActivityExecutionContextInfoProperty) != null;
-            }
+            get { return this.GetValue(Activity.ActivityExecutionContextInfoProperty) != null; }
         }
         internal int ContextId
         {
             get
             {
-                return ((ActivityExecutionContextInfo)this.ContextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty)).ContextId;
+                return (
+                    (ActivityExecutionContextInfo)
+                        this.ContextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty)
+                ).ContextId;
             }
         }
         internal Guid ContextGuid
         {
             get
             {
-                return ((ActivityExecutionContextInfo)this.ContextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty)).ContextGuid;
+                return (
+                    (ActivityExecutionContextInfo)
+                        this.ContextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty)
+                ).ContextGuid;
             }
         }
         internal Activity ContextActivity
@@ -1327,7 +1754,11 @@ namespace System.Workflow.ComponentModel
             get
             {
                 Activity contextActivity = this;
-                while (contextActivity != null && contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty) == null)
+                while (
+                    contextActivity != null
+                    && contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty)
+                        == null
+                )
                     contextActivity = contextActivity.parent;
                 return contextActivity;
             }
@@ -1337,18 +1768,18 @@ namespace System.Workflow.ComponentModel
             get
             {
                 Activity contextActivity = this.ContextActivity;
-                ActivityExecutionContextInfo executionContextInfo = (ActivityExecutionContextInfo)contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty);
+                ActivityExecutionContextInfo executionContextInfo = (ActivityExecutionContextInfo)
+                    contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty);
                 if (executionContextInfo.ParentContextId == -1)
                     return null;
-                return this.WorkflowCoreRuntime.GetContextActivityForId(executionContextInfo.ParentContextId);
+                return this.WorkflowCoreRuntime.GetContextActivityForId(
+                    executionContextInfo.ParentContextId
+                );
             }
         }
         internal Activity RootContextActivity
         {
-            get
-            {
-                return this.WorkflowCoreRuntime.RootActivity;
-            }
+            get { return this.WorkflowCoreRuntime.RootActivity; }
         }
         internal Activity RootActivity
         {
@@ -1376,7 +1807,8 @@ namespace System.Workflow.ComponentModel
                 this.UserData[UserDataKeys.CustomActivity] = this.GetValue(CustomActivityProperty);
 
                 // Work around !! Supports Synchronization and atomic transaction isolation
-                ICollection<String> handles = (ICollection<String>)GetValue(SynchronizationHandlesProperty);
+                ICollection<String> handles =
+                    (ICollection<String>)GetValue(SynchronizationHandlesProperty);
                 if (this.SupportsTransaction)
                 {
                     if (handles == null)
@@ -1384,7 +1816,10 @@ namespace System.Workflow.ComponentModel
                     handles.Add(TransactionScopeActivity.TransactionScopeActivityIsolationHandle);
                 }
                 if (handles != null)
-                    this.SetValue(SynchronizationHandlesProperty, new ReadOnlyCollection<string>(new List<string>(handles)));
+                    this.SetValue(
+                        SynchronizationHandlesProperty,
+                        new ReadOnlyCollection<string>(new List<string>(handles))
+                    );
 
                 // lookup paths for root activity
                 if (this.Parent == null)
@@ -1399,17 +1834,24 @@ namespace System.Workflow.ComponentModel
                 SetReadOnlyPropertyValue(DottedPathProperty, this.DottedPath);
 
                 // cache attributes
-                this.UserData[typeof(PersistOnCloseAttribute)] = (this.GetType().GetCustomAttributes(typeof(PersistOnCloseAttribute), true).Length > 0);
+                this.UserData[typeof(PersistOnCloseAttribute)] = (
+                    this.GetType().GetCustomAttributes(typeof(PersistOnCloseAttribute), true).Length
+                    > 0
+                );
             }
         }
-        internal override void OnInitializeInstanceForRuntime(IWorkflowCoreRuntime workflowCoreRuntime)
+
+        internal override void OnInitializeInstanceForRuntime(
+            IWorkflowCoreRuntime workflowCoreRuntime
+        )
         {
             base.OnInitializeInstanceForRuntime(workflowCoreRuntime);
             this.workflowCoreRuntime = workflowCoreRuntime;
-
         }
 
-        internal override void OnInitializeActivatingInstanceForRuntime(IWorkflowCoreRuntime workflowCoreRuntime)
+        internal override void OnInitializeActivatingInstanceForRuntime(
+            IWorkflowCoreRuntime workflowCoreRuntime
+        )
         {
             //doing this will call OnRuntimeInitialized() which is a hook for the activity writers
             //to initialize/wire up their DPs correctly for the activating instance
@@ -1425,12 +1867,18 @@ namespace System.Workflow.ComponentModel
             // call base class
             base.FixUpMetaProperties(originalObject);
         }
-        internal virtual void FixUpParentChildRelationship(Activity definitionActivity, Activity parentActivity, Hashtable deserializedActivities)
+
+        internal virtual void FixUpParentChildRelationship(
+            Activity definitionActivity,
+            Activity parentActivity,
+            Hashtable deserializedActivities
+        )
         {
             // set parent for myself, root activity will have null parent
             if (parentActivity != null)
                 this.SetParent((CompositeActivity)parentActivity);
         }
+
         internal virtual IList<Activity> CollectNestedActivities()
         {
             return null;
@@ -1441,11 +1889,20 @@ namespace System.Workflow.ComponentModel
 
         internal void SetStatus(ActivityExecutionStatus newStatus, bool transacted)
         {
-            System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0, "Activity Status Change - Activity: {0} Old:{1}; New:{2}", this.QualifiedName, ActivityExecutionStatusEnumToString(this.ExecutionStatus), ActivityExecutionStatusEnumToString(newStatus));
+            System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Activity Status Change - Activity: {0} Old:{1}; New:{2}",
+                this.QualifiedName,
+                ActivityExecutionStatusEnumToString(this.ExecutionStatus),
+                ActivityExecutionStatusEnumToString(newStatus)
+            );
 
             // Set Was Executing
-            if (newStatus == ActivityExecutionStatus.Faulting &&
-                    this.ExecutionStatus == ActivityExecutionStatus.Executing)
+            if (
+                newStatus == ActivityExecutionStatus.Faulting
+                && this.ExecutionStatus == ActivityExecutionStatus.Executing
+            )
             {
                 this.SetValue(WasExecutingProperty, true);
             }
@@ -1484,44 +1941,66 @@ namespace System.Workflow.ComponentModel
                 this.RemoveProperty(Activity.WasExecutingProperty);
             }
         }
+
         private void FireStatusChangedEvents(DependencyProperty dependencyProperty, bool transacted)
         {
             IList eventListeners = this.GetStatusChangeHandlers(dependencyProperty);
             if (eventListeners != null)
             {
-                ActivityExecutionStatusChangedEventArgs statusChangeEventArgs = new ActivityExecutionStatusChangedEventArgs(this.ExecutionStatus, this.ExecutionResult, this);
-                foreach (ActivityExecutorDelegateInfo<ActivityExecutionStatusChangedEventArgs> delegateInfo in eventListeners)
-                    delegateInfo.InvokeDelegate(this.ContextActivity, statusChangeEventArgs, delegateInfo.ActivityQualifiedName == null, transacted);
+                ActivityExecutionStatusChangedEventArgs statusChangeEventArgs =
+                    new ActivityExecutionStatusChangedEventArgs(
+                        this.ExecutionStatus,
+                        this.ExecutionResult,
+                        this
+                    );
+                foreach (
+                    ActivityExecutorDelegateInfo<ActivityExecutionStatusChangedEventArgs> delegateInfo in eventListeners
+                )
+                    delegateInfo.InvokeDelegate(
+                        this.ContextActivity,
+                        statusChangeEventArgs,
+                        delegateInfo.ActivityQualifiedName == null,
+                        transacted
+                    );
             }
         }
+
         internal void MarkCanceled()
         {
             if (this.ExecutionStatus != ActivityExecutionStatus.Closed)
             {
                 if (this.ExecutionStatus != ActivityExecutionStatus.Canceling)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_InvalidCancelActivityState)); //DCR01
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_InvalidCancelActivityState)
+                    ); //DCR01
                 this.SetValue(ExecutionResultProperty, ActivityExecutionResult.Canceled);
                 this.MarkClosed();
             }
         }
+
         internal void MarkCompleted()
         {
             this.SetValue(ExecutionResultProperty, ActivityExecutionResult.Succeeded);
             this.MarkClosed();
         }
+
         internal void MarkCompensated()
         {
             if (this.ExecutionStatus != ActivityExecutionStatus.Compensating)
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidCompensateActivityState)); //DCR01
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_InvalidCompensateActivityState)
+                ); //DCR01
 
             this.SetValue(ExecutionResultProperty, ActivityExecutionResult.Compensated);
             this.MarkClosed();
         }
+
         internal void MarkFaulted()
         {
             this.SetValue(ExecutionResultProperty, ActivityExecutionResult.Faulted);
             this.MarkClosed();
         }
+
         private void MarkClosed()
         {
             switch (this.ExecutionStatus)
@@ -1532,21 +2011,43 @@ namespace System.Workflow.ComponentModel
                 case ActivityExecutionStatus.Canceling:
                     break;
                 default:
-                    throw new InvalidOperationException(SR.GetString(SR.Error_InvalidCloseActivityState)); //DCR01
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_InvalidCloseActivityState)
+                    ); //DCR01
             }
 
             if (this is CompositeActivity)
             {
                 foreach (Activity childActivity in ((CompositeActivity)this).Activities)
-                    if (childActivity.Enabled && !(childActivity.ExecutionStatus == ActivityExecutionStatus.Initialized || childActivity.ExecutionStatus == ActivityExecutionStatus.Closed))
-                        throw new InvalidOperationException(SR.GetString(System.Globalization.CultureInfo.CurrentCulture, SR.Error_ActiveChildExist));
+                    if (
+                        childActivity.Enabled
+                        && !(
+                            childActivity.ExecutionStatus == ActivityExecutionStatus.Initialized
+                            || childActivity.ExecutionStatus == ActivityExecutionStatus.Closed
+                        )
+                    )
+                        throw new InvalidOperationException(
+                            SR.GetString(
+                                System.Globalization.CultureInfo.CurrentCulture,
+                                SR.Error_ActiveChildExist
+                            )
+                        );
 
                 ActivityExecutionContext currentContext = new ActivityExecutionContext(this);
 
-                foreach (ActivityExecutionContext childContext in currentContext.ExecutionContextManager.ExecutionContexts)
+                foreach (
+                    ActivityExecutionContext childContext in currentContext
+                        .ExecutionContextManager
+                        .ExecutionContexts
+                )
                 {
                     if (this.GetActivityByName(childContext.Activity.QualifiedName, true) != null)
-                        throw new InvalidOperationException(SR.GetString(System.Globalization.CultureInfo.CurrentCulture, SR.Error_ActiveChildContextExist));
+                        throw new InvalidOperationException(
+                            SR.GetString(
+                                System.Globalization.CultureInfo.CurrentCulture,
+                                SR.Error_ActiveChildContextExist
+                            )
+                        );
                 }
             }
 
@@ -1555,9 +2056,13 @@ namespace System.Workflow.ComponentModel
                 this.SetValue(HasPrimaryClosedProperty, true);
                 this.FireStatusChangedEvents(Activity.StatusChangedLockedEvent, false);
             }
-            else if (this.parent == null ||
-                        (this.ExecutionResult == ActivityExecutionResult.Succeeded && (this is ICompensatableActivity || this.PersistOnClose))
-                    )
+            else if (
+                this.parent == null
+                || (
+                    this.ExecutionResult == ActivityExecutionResult.Succeeded
+                    && (this is ICompensatableActivity || this.PersistOnClose)
+                )
+            )
             {
                 ActivityExecutionStatus oldStatus = this.ExecutionStatus;
                 ActivityExecutionResult oldOutcome = this.ExecutionResult;
@@ -1571,9 +2076,13 @@ namespace System.Workflow.ComponentModel
                 catch (Exception e)
                 {
                     this.SetValue(ExecutionResultProperty, ActivityExecutionResult.Faulted);
-                    this.SetValueCommon(ActivityExecutionContext.CurrentExceptionProperty, e, ActivityExecutionContext.CurrentExceptionProperty.DefaultMetadata, false);
+                    this.SetValueCommon(
+                        ActivityExecutionContext.CurrentExceptionProperty,
+                        e,
+                        ActivityExecutionContext.CurrentExceptionProperty.DefaultMetadata,
+                        false
+                    );
                 }
-
 
                 if (this.parent != null && (this is ICompensatableActivity))
                 {
@@ -1593,20 +2102,38 @@ namespace System.Workflow.ComponentModel
 
                 try
                 {
-                    Exception exception = (Exception)this.GetValue(ActivityExecutionContext.CurrentExceptionProperty);
+                    Exception exception = (Exception)
+                        this.GetValue(ActivityExecutionContext.CurrentExceptionProperty);
                     if (exception != null && this.parent == null)
                     {
                         this.WorkflowCoreRuntime.ActivityStatusChanged(this, false, true);
                         // terminate the workflow instance
-                        string errorString = "Uncaught exception escaped to the root of the workflow.\n"
-                            + string.Format(CultureInfo.CurrentCulture, "    In instance {0} in activity {1}\n", new object[] { this.WorkflowInstanceId, string.Empty })
-                            + string.Format(CultureInfo.CurrentCulture, "Inner exception: {0}", new object[] { exception });
-                        System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(TraceEventType.Critical, 0, errorString);
+                        string errorString =
+                            "Uncaught exception escaped to the root of the workflow.\n"
+                            + string.Format(
+                                CultureInfo.CurrentCulture,
+                                "    In instance {0} in activity {1}\n",
+                                new object[] { this.WorkflowInstanceId, string.Empty }
+                            )
+                            + string.Format(
+                                CultureInfo.CurrentCulture,
+                                "Inner exception: {0}",
+                                new object[] { exception }
+                            );
+                        System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
+                            TraceEventType.Critical,
+                            0,
+                            errorString
+                        );
                         this.WorkflowCoreRuntime.TerminateInstance(exception);
                     }
                     else if (exception != null && this.parent != null)
                     {
-                        this.WorkflowCoreRuntime.RaiseException(exception, this.Parent, string.Empty);
+                        this.WorkflowCoreRuntime.RaiseException(
+                            exception,
+                            this.Parent,
+                            string.Empty
+                        );
                         this.RemoveProperty(ActivityExecutionContext.CurrentExceptionProperty);
                     }
                     else if (this.parent == null || this.PersistOnClose)
@@ -1617,7 +2144,11 @@ namespace System.Workflow.ComponentModel
                         // throw exception to outer
                         if (exception != null)
                         {
-                            this.WorkflowCoreRuntime.RaiseException(exception, this.Parent, string.Empty);
+                            this.WorkflowCoreRuntime.RaiseException(
+                                exception,
+                                this.Parent,
+                                string.Empty
+                            );
                             this.RemoveProperty(ActivityExecutionContext.CurrentExceptionProperty);
                         }
                     }
@@ -1627,11 +2158,12 @@ namespace System.Workflow.ComponentModel
                     while (parent != null)
                     {
                         if (parent.SupportsSynchronization || parent.Parent == null)
-                            parent.RemoveProperty(ActivityExecutionContext.CachedGrantedLocksProperty);
+                            parent.RemoveProperty(
+                                ActivityExecutionContext.CachedGrantedLocksProperty
+                            );
 
                         parent = parent.parent;
                     }
-
                 }
                 catch
                 {
@@ -1649,10 +2181,17 @@ namespace System.Workflow.ComponentModel
                     {
                         if (parent.SupportsSynchronization || parent.Parent == null)
                         {
-                            object cachedGrantedLocks = parent.GetValue(ActivityExecutionContext.CachedGrantedLocksProperty);
+                            object cachedGrantedLocks = parent.GetValue(
+                                ActivityExecutionContext.CachedGrantedLocksProperty
+                            );
                             if (cachedGrantedLocks != null)
-                                parent.SetValue(ActivityExecutionContext.GrantedLocksProperty, cachedGrantedLocks);
-                            parent.RemoveProperty(ActivityExecutionContext.CachedGrantedLocksProperty);
+                                parent.SetValue(
+                                    ActivityExecutionContext.GrantedLocksProperty,
+                                    cachedGrantedLocks
+                                );
+                            parent.RemoveProperty(
+                                ActivityExecutionContext.CachedGrantedLocksProperty
+                            );
                         }
                         parent = parent.parent;
                     }
@@ -1670,7 +2209,12 @@ namespace System.Workflow.ComponentModel
                 catch (Exception e)
                 {
                     this.SetValue(ExecutionResultProperty, ActivityExecutionResult.Faulted);
-                    this.SetValueCommon(ActivityExecutionContext.CurrentExceptionProperty, e, ActivityExecutionContext.CurrentExceptionProperty.DefaultMetadata, false);
+                    this.SetValueCommon(
+                        ActivityExecutionContext.CurrentExceptionProperty,
+                        e,
+                        ActivityExecutionContext.CurrentExceptionProperty.DefaultMetadata,
+                        false
+                    );
                 }
                 if (CanUninitializeNow)
                 {
@@ -1680,7 +2224,8 @@ namespace System.Workflow.ComponentModel
                     this.SetValue(ExecutionResultProperty, ActivityExecutionResult.Uninitialized);
                 }
 
-                Exception exception = (Exception)this.GetValue(ActivityExecutionContext.CurrentExceptionProperty);
+                Exception exception = (Exception)
+                    this.GetValue(ActivityExecutionContext.CurrentExceptionProperty);
                 if (exception != null)
                 {
                     this.WorkflowCoreRuntime.RaiseException(exception, this.Parent, string.Empty);
@@ -1695,8 +2240,8 @@ namespace System.Workflow.ComponentModel
             {
                 //This check finds
                 //1) Existence of Succeeded ISC in same context.
-                //2) If activity is ContextActivity? Checks existence of completed child 
-                //context which needs compensation            
+                //2) If activity is ContextActivity? Checks existence of completed child
+                //context which needs compensation
                 if (this.NeedsCompensation)
                     return false;
 
@@ -1706,13 +2251,21 @@ namespace System.Workflow.ComponentModel
 
                 if (contextActivity != this)
                 {
-                    IList<ActivityExecutionContextInfo> childsCompletedContexts = contextActivity.GetValue(Activity.CompletedExecutionContextsProperty) as IList<ActivityExecutionContextInfo>;
+                    IList<ActivityExecutionContextInfo> childsCompletedContexts =
+                        contextActivity.GetValue(Activity.CompletedExecutionContextsProperty)
+                        as IList<ActivityExecutionContextInfo>;
 
                     if (childsCompletedContexts != null && childsCompletedContexts.Count > 0)
                     {
-                        foreach (ActivityExecutionContextInfo contextInfo in childsCompletedContexts)
+                        foreach (
+                            ActivityExecutionContextInfo contextInfo in childsCompletedContexts
+                        )
                         {
-                            if ((contextInfo.Flags & PersistFlags.NeedsCompensation) != 0 && this.GetActivityByName(contextInfo.ActivityQualifiedName, true) != null)
+                            if (
+                                (contextInfo.Flags & PersistFlags.NeedsCompensation) != 0
+                                && this.GetActivityByName(contextInfo.ActivityQualifiedName, true)
+                                    != null
+                            )
                             {
                                 return false;
                             }
@@ -1725,21 +2278,39 @@ namespace System.Workflow.ComponentModel
             }
         }
 
-        static void UninitializeCompletedContext(Activity activity, ActivityExecutionContext executionContext)
+        static void UninitializeCompletedContext(
+            Activity activity,
+            ActivityExecutionContext executionContext
+        )
         {
             //Uninitialize Compensatable Children which ran in Sub Contextee.
-            IList<ActivityExecutionContextInfo> childsCompletedContexts = activity.GetValue(Activity.CompletedExecutionContextsProperty) as IList<ActivityExecutionContextInfo>;
+            IList<ActivityExecutionContextInfo> childsCompletedContexts =
+                activity.GetValue(Activity.CompletedExecutionContextsProperty)
+                as IList<ActivityExecutionContextInfo>;
 
             if (childsCompletedContexts != null && childsCompletedContexts.Count > 0)
             {
-                IList<ActivityExecutionContextInfo> childsCompletedContextsClone = new List<ActivityExecutionContextInfo>(childsCompletedContexts);
+                IList<ActivityExecutionContextInfo> childsCompletedContextsClone =
+                    new List<ActivityExecutionContextInfo>(childsCompletedContexts);
                 foreach (ActivityExecutionContextInfo contextInfo in childsCompletedContextsClone)
                 {
-                    if ((contextInfo.Flags & PersistFlags.NeedsCompensation) != 0 && activity.GetActivityByName(contextInfo.ActivityQualifiedName, true) != null)
+                    if (
+                        (contextInfo.Flags & PersistFlags.NeedsCompensation) != 0
+                        && activity.GetActivityByName(contextInfo.ActivityQualifiedName, true)
+                            != null
+                    )
                     {
-                        ActivityExecutionContext resurrectedContext = executionContext.ExecutionContextManager.DiscardPersistedExecutionContext(contextInfo);
-                        UninitializeCompletedContext(resurrectedContext.Activity, resurrectedContext);
-                        executionContext.ExecutionContextManager.CompleteExecutionContext(resurrectedContext);
+                        ActivityExecutionContext resurrectedContext =
+                            executionContext.ExecutionContextManager.DiscardPersistedExecutionContext(
+                                contextInfo
+                            );
+                        UninitializeCompletedContext(
+                            resurrectedContext.Activity,
+                            resurrectedContext
+                        );
+                        executionContext.ExecutionContextManager.CompleteExecutionContext(
+                            resurrectedContext
+                        );
                     }
                 }
             }
@@ -1748,13 +2319,18 @@ namespace System.Workflow.ComponentModel
             CompositeActivity compositeActivity = activity as CompositeActivity;
             if (compositeActivity != null)
             {
-                Activity[] compensatableChildren = CompensationUtils.GetCompensatableChildren(compositeActivity);
+                Activity[] compensatableChildren = CompensationUtils.GetCompensatableChildren(
+                    compositeActivity
+                );
 
                 for (int i = compensatableChildren.Length - 1; i >= 0; --i)
                 {
                     Activity compensatableChild = (Activity)compensatableChildren.GetValue(i);
                     compensatableChild.Uninitialize(activity.RootActivity.WorkflowCoreRuntime);
-                    compensatableChild.SetValue(ExecutionResultProperty, ActivityExecutionResult.Uninitialized);
+                    compensatableChild.SetValue(
+                        ExecutionResultProperty,
+                        ActivityExecutionResult.Uninitialized
+                    );
                 }
             }
 
@@ -1767,12 +2343,22 @@ namespace System.Workflow.ComponentModel
         {
             get
             {
-                IList<ActivityExecutionContextInfo> childsCompletedContexts = this.GetValue(Activity.CompletedExecutionContextsProperty) as IList<ActivityExecutionContextInfo>;
+                IList<ActivityExecutionContextInfo> childsCompletedContexts =
+                    this.GetValue(Activity.CompletedExecutionContextsProperty)
+                    as IList<ActivityExecutionContextInfo>;
                 if (childsCompletedContexts != null && childsCompletedContexts.Count > 0)
                 {
-                    foreach (ActivityExecutionContextInfo completedActivityInfo in childsCompletedContexts)
+                    foreach (
+                        ActivityExecutionContextInfo completedActivityInfo in childsCompletedContexts
+                    )
                     {
-                        if ((completedActivityInfo.Flags & PersistFlags.NeedsCompensation) != 0 && this.GetActivityByName(completedActivityInfo.ActivityQualifiedName, true) != null)
+                        if (
+                            (completedActivityInfo.Flags & PersistFlags.NeedsCompensation) != 0
+                            && this.GetActivityByName(
+                                completedActivityInfo.ActivityQualifiedName,
+                                true
+                            ) != null
+                        )
                             return true;
                     }
                 }
@@ -1783,14 +2369,20 @@ namespace System.Workflow.ComponentModel
                 while (completedActivities.Count > 0)
                 {
                     Activity completedChild = completedActivities.Dequeue();
-                    if (completedChild is ICompensatableActivity &&
-                         completedChild.ExecutionStatus == ActivityExecutionStatus.Closed &&
-                         completedChild.ExecutionResult == ActivityExecutionResult.Succeeded)
+                    if (
+                        completedChild is ICompensatableActivity
+                        && completedChild.ExecutionStatus == ActivityExecutionStatus.Closed
+                        && completedChild.ExecutionResult == ActivityExecutionResult.Succeeded
+                    )
                         return true;
 
                     if (completedChild is CompositeActivity)
                     {
-                        foreach (Activity completedChild2 in ((CompositeActivity)completedChild).Activities)
+                        foreach (
+                            Activity completedChild2 in (
+                                (CompositeActivity)completedChild
+                            ).Activities
+                        )
                         {
                             if (completedChild2.Enabled)
                                 completedActivities.Enqueue(completedChild2);
@@ -1809,15 +2401,13 @@ namespace System.Workflow.ComponentModel
         {
             get
             {
-                return this is CompensatableTransactionScopeActivity || this is TransactionScopeActivity;
+                return this is CompensatableTransactionScopeActivity
+                    || this is TransactionScopeActivity;
             }
         }
         internal bool SupportsSynchronization
         {
-            get
-            {
-                return this is SynchronizationScopeActivity;
-            }
+            get { return this is SynchronizationScopeActivity; }
         }
         internal bool PersistOnClose
         {
@@ -1826,20 +2416,24 @@ namespace System.Workflow.ComponentModel
                 if (this.UserData.Contains(typeof(PersistOnCloseAttribute)))
                     return (bool)this.UserData[typeof(PersistOnCloseAttribute)];
 
-                object[] attributes = this.GetType().GetCustomAttributes(typeof(PersistOnCloseAttribute), true);
+                object[] attributes = this.GetType()
+                    .GetCustomAttributes(typeof(PersistOnCloseAttribute), true);
                 return (attributes != null && attributes.Length > 0);
             }
         }
 
         internal int IncrementCompletedOrderId()
         {
-            int completedOrderId = (int)this.RootActivity.GetValue(Activity.CompletedOrderIdProperty);
+            int completedOrderId = (int)
+                this.RootActivity.GetValue(Activity.CompletedOrderIdProperty);
             this.RootActivity.SetValue(Activity.CompletedOrderIdProperty, completedOrderId + 1);
             return (completedOrderId + 1);
         }
+
         internal void DecrementCompletedOrderId()
         {
-            int completedOrderId = (int)this.RootActivity.GetValue(Activity.CompletedOrderIdProperty);
+            int completedOrderId = (int)
+                this.RootActivity.GetValue(Activity.CompletedOrderIdProperty);
             this.RootActivity.SetValue(Activity.CompletedOrderIdProperty, completedOrderId - 1);
         }
 
@@ -1873,7 +2467,10 @@ namespace System.Workflow.ComponentModel
             }
             return retVal;
         }
-        internal static string ActivityExecutionResultEnumToString(ActivityExecutionResult activityExecutionResult)
+
+        internal static string ActivityExecutionResultEnumToString(
+            ActivityExecutionResult activityExecutionResult
+        )
         {
             string retVal = string.Empty;
             switch (activityExecutionResult)
@@ -1909,15 +2506,33 @@ namespace System.Workflow.ComponentModel
     #region Class CompositeActivity
 
     [ContentProperty("Activities")]
-    [DesignerSerializer(typeof(CompositeActivityMarkupSerializer), typeof(WorkflowMarkupSerializer))]
+    [DesignerSerializer(
+        typeof(CompositeActivityMarkupSerializer),
+        typeof(WorkflowMarkupSerializer)
+    )]
     [ActivityCodeGenerator(typeof(CompositeActivityCodeGenerator))]
     [ActivityValidator(typeof(CompositeActivityValidator))]
     [ActivityExecutor(typeof(CompositeActivityExecutor<CompositeActivity>))]
     [TypeDescriptionProvider(typeof(CompositeActivityTypeDescriptorProvider))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class CompositeActivity : Activity, ISupportAlternateFlow
     {
-        private static DependencyProperty CanModifyActivitiesProperty = DependencyProperty.Register("CanModifyActivities", typeof(bool), typeof(CompositeActivity), new PropertyMetadata(DependencyPropertyOptions.Metadata, new Attribute[] { new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
+        private static DependencyProperty CanModifyActivitiesProperty = DependencyProperty.Register(
+            "CanModifyActivities",
+            typeof(bool),
+            typeof(CompositeActivity),
+            new PropertyMetadata(
+                DependencyPropertyOptions.Metadata,
+                new Attribute[]
+                {
+                    new DesignerSerializationVisibilityAttribute(
+                        DesignerSerializationVisibility.Hidden
+                    ),
+                }
+            )
+        );
 
         [NonSerialized]
         private ActivityCollection activities = null;
@@ -1925,8 +2540,12 @@ namespace System.Workflow.ComponentModel
         public CompositeActivity()
         {
             this.activities = new ActivityCollection(this);
-            this.activities.ListChanging += new EventHandler<ActivityCollectionChangeEventArgs>(OnListChangingEventHandler);
-            this.activities.ListChanged += new EventHandler<ActivityCollectionChangeEventArgs>(OnListChangedEventHandler);
+            this.activities.ListChanging += new EventHandler<ActivityCollectionChangeEventArgs>(
+                OnListChangingEventHandler
+            );
+            this.activities.ListChanged += new EventHandler<ActivityCollectionChangeEventArgs>(
+                OnListChangedEventHandler
+            );
 
             SetValue(CanModifyActivitiesProperty, false);
         }
@@ -1945,8 +2564,12 @@ namespace System.Workflow.ComponentModel
             : base(name)
         {
             this.activities = new ActivityCollection(this);
-            this.activities.ListChanging += new EventHandler<ActivityCollectionChangeEventArgs>(OnListChangingEventHandler);
-            this.activities.ListChanged += new EventHandler<ActivityCollectionChangeEventArgs>(OnListChangedEventHandler);
+            this.activities.ListChanging += new EventHandler<ActivityCollectionChangeEventArgs>(
+                OnListChangingEventHandler
+            );
+            this.activities.ListChanged += new EventHandler<ActivityCollectionChangeEventArgs>(
+                OnListChangedEventHandler
+            );
 
             SetValue(CanModifyActivitiesProperty, false);
         }
@@ -1959,14 +2582,19 @@ namespace System.Workflow.ComponentModel
             // Work around - make sure that we return the parent property value
             // otherwise .Parent property would have set the workflowCoreRuntime for parent
             if (activity.parent != this)
-                throw new ArgumentException(SR.GetString(SR.GetDynamicActivities_InvalidActivity), "activity");
+                throw new ArgumentException(
+                    SR.GetString(SR.GetDynamicActivities_InvalidActivity),
+                    "activity"
+                );
 
             // get context activity
             Activity contextActivity = this.ContextActivity;
             List<Activity> dynamicActivities = new List<Activity>();
             if (contextActivity != null)
             {
-                IList<Activity> activeContextActivities = (IList<Activity>)contextActivity.GetValue(Activity.ActiveExecutionContextsProperty);
+                IList<Activity> activeContextActivities =
+                    (IList<Activity>)
+                        contextActivity.GetValue(Activity.ActiveExecutionContextsProperty);
                 if (activeContextActivities != null)
                 {
                     foreach (Activity activeContextActivity in activeContextActivities)
@@ -1985,7 +2613,9 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentNullException("provider");
 
             if (!(provider is ActivityExecutionContext))
-                throw new ArgumentException(SR.GetString(SR.Error_InvalidServiceProvider, "provider"));
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_InvalidServiceProvider, "provider")
+                );
 
             foreach (Activity childActivity in Helpers.GetAllEnabledActivities(this))
             {
@@ -2006,11 +2636,15 @@ namespace System.Workflow.ComponentModel
                 if (childActivity.ExecutionResult != ActivityExecutionResult.Uninitialized)
                 {
                     childActivity.Uninitialize(provider);
-                    childActivity.SetValue(ExecutionResultProperty, ActivityExecutionResult.Uninitialized);
+                    childActivity.SetValue(
+                        ExecutionResultProperty,
+                        ActivityExecutionResult.Uninitialized
+                    );
                 }
             }
             base.Uninitialize(provider);
         }
+
         protected internal override void OnActivityExecutionContextLoad(IServiceProvider provider)
         {
             if (provider == null)
@@ -2023,6 +2657,7 @@ namespace System.Workflow.ComponentModel
                 childActivity.OnActivityExecutionContextLoad(provider);
             }
         }
+
         protected internal override void OnActivityExecutionContextUnload(IServiceProvider provider)
         {
             if (provider == null)
@@ -2036,7 +2671,10 @@ namespace System.Workflow.ComponentModel
             }
         }
 
-        protected internal override ActivityExecutionStatus HandleFault(ActivityExecutionContext executionContext, Exception exception)
+        protected internal override ActivityExecutionStatus HandleFault(
+            ActivityExecutionContext executionContext,
+            Exception exception
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -2057,7 +2695,9 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentNullException("workflowChanges");
 
             if (this.Parent != null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidActivityForWorkflowChanges));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_InvalidActivityForWorkflowChanges)
+                );
 
             if (this.RootActivity == null)
                 throw new InvalidOperationException(SR.GetString(SR.Error_MissingRootActivity));
@@ -2068,28 +2708,27 @@ namespace System.Workflow.ComponentModel
             workflowChanges.ApplyTo(this);
         }
 
-
         #region Workflow Change Notification Methods
-        protected internal virtual void OnActivityChangeAdd(ActivityExecutionContext executionContext, Activity addedActivity)
+        protected internal virtual void OnActivityChangeAdd(
+            ActivityExecutionContext executionContext,
+            Activity addedActivity
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
 
             if (addedActivity == null)
                 throw new ArgumentNullException("addedActivity");
-
-
         }
 
-        protected internal virtual void OnActivityChangeRemove(ActivityExecutionContext executionContext, Activity removedActivity)
-        {
+        protected internal virtual void OnActivityChangeRemove(
+            ActivityExecutionContext executionContext,
+            Activity removedActivity
+        ) { }
 
-        }
-
-        protected internal virtual void OnWorkflowChangesCompleted(ActivityExecutionContext rootContext)
-        {
-
-        }
+        protected internal virtual void OnWorkflowChangesCompleted(
+            ActivityExecutionContext rootContext
+        ) { }
         #endregion
 
         #region CompositeActivity Meta Properties
@@ -2098,18 +2737,12 @@ namespace System.Workflow.ComponentModel
         [Browsable(false)]
         public ActivityCollection Activities
         {
-            get
-            {
-                return this.activities;
-            }
+            get { return this.activities; }
         }
 
         protected internal bool CanModifyActivities
         {
-            get
-            {
-                return (bool)GetValue(CanModifyActivitiesProperty);
-            }
+            get { return (bool)GetValue(CanModifyActivitiesProperty); }
             set
             {
                 SetValue(CanModifyActivitiesProperty, value);
@@ -2131,7 +2764,7 @@ namespace System.Workflow.ComponentModel
                 List<Activity> executableActivities = new List<Activity>();
                 foreach (Activity activity in this.activities)
                 {
-                    // This check makes sure that only Enabled activities are returned 
+                    // This check makes sure that only Enabled activities are returned
                     // and the framwork provided activities are skipped.
                     if (activity.Enabled && !Helpers.IsFrameworkActivity(activity))
                         executableActivities.Add(activity);
@@ -2203,11 +2836,15 @@ namespace System.Workflow.ComponentModel
                         string lookupPath = thisLookupPath;
                         if (!string.IsNullOrEmpty(thisLookupPath))
                             lookupPath += ".";
-                        lookupPath += this.activities.IndexOf(childActivity).ToString(CultureInfo.InvariantCulture);
+                        lookupPath += this
+                            .activities.IndexOf(childActivity)
+                            .ToString(CultureInfo.InvariantCulture);
                         lookupPaths.Add(childActivity.QualifiedName, lookupPath);
 
                         // initialize for runtime
-                        ((IDependencyObjectAccessor)childActivity).InitializeDefinitionForRuntime(null);
+                        ((IDependencyObjectAccessor)childActivity).InitializeDefinitionForRuntime(
+                            null
+                        );
                     }
                     else
                     {
@@ -2223,7 +2860,9 @@ namespace System.Workflow.ComponentModel
             }
         }
 
-        internal override void OnInitializeInstanceForRuntime(IWorkflowCoreRuntime workflowCoreRuntime)
+        internal override void OnInitializeInstanceForRuntime(
+            IWorkflowCoreRuntime workflowCoreRuntime
+        )
         {
             base.OnInitializeInstanceForRuntime(workflowCoreRuntime);
 
@@ -2231,11 +2870,15 @@ namespace System.Workflow.ComponentModel
             foreach (Activity childActivity in this.activities)
             {
                 if (childActivity.Enabled)
-                    ((IDependencyObjectAccessor)childActivity).InitializeInstanceForRuntime(workflowCoreRuntime);
+                    ((IDependencyObjectAccessor)childActivity).InitializeInstanceForRuntime(
+                        workflowCoreRuntime
+                    );
             }
         }
 
-        internal override void OnInitializeActivatingInstanceForRuntime(IWorkflowCoreRuntime workflowCoreRuntime)
+        internal override void OnInitializeActivatingInstanceForRuntime(
+            IWorkflowCoreRuntime workflowCoreRuntime
+        )
         {
             // call base: this will call activity
             base.OnInitializeActivatingInstanceForRuntime(workflowCoreRuntime);
@@ -2244,7 +2887,9 @@ namespace System.Workflow.ComponentModel
             foreach (Activity childActivity in this.activities)
             {
                 if (childActivity.Enabled)
-                    ((IDependencyObjectAccessor)childActivity).InitializeActivatingInstanceForRuntime(null, workflowCoreRuntime);
+                    (
+                        (IDependencyObjectAccessor)childActivity
+                    ).InitializeActivatingInstanceForRuntime(null, workflowCoreRuntime);
                 else
                     this.Readonly = true;
             }
@@ -2260,7 +2905,7 @@ namespace System.Workflow.ComponentModel
             // call base
             base.FixUpMetaProperties(originalObject);
 
-            // ask each child to fixup 
+            // ask each child to fixup
             if (this.activities != null)
             {
                 CompositeActivity originalCompositeActivity = originalObject as CompositeActivity;
@@ -2268,23 +2913,38 @@ namespace System.Workflow.ComponentModel
                 {
                     int index = 0;
                     foreach (Activity childActivity in this.activities)
-                        childActivity.FixUpMetaProperties(originalCompositeActivity.activities[index++]);
+                        childActivity.FixUpMetaProperties(
+                            originalCompositeActivity.activities[index++]
+                        );
                 }
             }
         }
-        internal override void FixUpParentChildRelationship(Activity definitionActivity, Activity parentActivity, Hashtable deserializedActivities)
+
+        internal override void FixUpParentChildRelationship(
+            Activity definitionActivity,
+            Activity parentActivity,
+            Hashtable deserializedActivities
+        )
         {
             CompositeActivity definitionCompositeActivity = definitionActivity as CompositeActivity;
             if (definitionCompositeActivity == null)
                 throw new ArgumentException("definitionActivity");
 
             // call base
-            base.FixUpParentChildRelationship(definitionActivity, parentActivity, deserializedActivities);
+            base.FixUpParentChildRelationship(
+                definitionActivity,
+                parentActivity,
+                deserializedActivities
+            );
 
             // fix up the children collection
             this.activities = new ActivityCollection(this);
-            this.activities.ListChanging += new EventHandler<ActivityCollectionChangeEventArgs>(OnListChangingEventHandler);
-            this.activities.ListChanged += new EventHandler<ActivityCollectionChangeEventArgs>(OnListChangedEventHandler);
+            this.activities.ListChanging += new EventHandler<ActivityCollectionChangeEventArgs>(
+                OnListChangingEventHandler
+            );
+            this.activities.ListChanged += new EventHandler<ActivityCollectionChangeEventArgs>(
+                OnListChangedEventHandler
+            );
 
             // detect if there was a context
             string prefix = this.DottedPath;
@@ -2293,14 +2953,24 @@ namespace System.Workflow.ComponentModel
             int index = 0;
             foreach (Activity definitionChildActivity in definitionCompositeActivity.activities)
             {
-                Activity childActivity = (Activity)deserializedActivities[prefix.Length == 0 ? index.ToString(CultureInfo.InvariantCulture) : prefix + "." + index.ToString(CultureInfo.InvariantCulture)];
+                Activity childActivity = (Activity)
+                    deserializedActivities[
+                        prefix.Length == 0
+                            ? index.ToString(CultureInfo.InvariantCulture)
+                            : prefix + "." + index.ToString(CultureInfo.InvariantCulture)
+                    ];
                 this.activities.InnerAdd(childActivity);
 
                 // ask child to fix up its parent child relation ship
-                childActivity.FixUpParentChildRelationship(definitionChildActivity, this, deserializedActivities);
+                childActivity.FixUpParentChildRelationship(
+                    definitionChildActivity,
+                    this,
+                    deserializedActivities
+                );
                 index++;
             }
         }
+
         internal override IList<Activity> CollectNestedActivities()
         {
             List<Activity> nestedActivities = new List<Activity>();
@@ -2311,7 +2981,11 @@ namespace System.Workflow.ComponentModel
                 nestedActivities.Add(nestedActivity);
                 if (nestedActivity is CompositeActivity)
                 {
-                    foreach (Activity nestedChildActivity in ((CompositeActivity)nestedActivity).activities)
+                    foreach (
+                        Activity nestedChildActivity in (
+                            (CompositeActivity)nestedActivity
+                        ).activities
+                    )
                         activityQueue.Enqueue(nestedChildActivity);
                 }
             }
@@ -2329,14 +3003,27 @@ namespace System.Workflow.ComponentModel
             if (!this.CanModifyActivities)
             {
                 // Check the ActivityType only during design mode
-                if (this.DesignMode && Activity.ActivityType != null && this.GetType() == Activity.ActivityType)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_Missing_CanModifyProperties_True, this.GetType().FullName));
+                if (
+                    this.DesignMode
+                    && Activity.ActivityType != null
+                    && this.GetType() == Activity.ActivityType
+                )
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.Error_Missing_CanModifyProperties_True,
+                            this.GetType().FullName
+                        )
+                    );
 
                 if (!IsDynamicMode(this) && CannotModifyChildren(this, false))
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CannotAddRemoveChildActivities));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CannotAddRemoveChildActivities)
+                    );
 
                 if (IsDynamicMode(this) && CannotModifyChildren(this, true))
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CannotAddRemoveChildActivities));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CannotAddRemoveChildActivities)
+                    );
             }
 
             if (e.Action == ActivityCollectionChangeAction.Add && e.AddedItems != null)
@@ -2345,7 +3032,9 @@ namespace System.Workflow.ComponentModel
                 while (parent != null)
                 {
                     if (e.AddedItems.Contains(parent))
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ActivityCircularReference));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ActivityCircularReference)
+                        );
 
                     parent = parent.Parent;
                 }
@@ -2363,14 +3052,24 @@ namespace System.Workflow.ComponentModel
                 foreach (Activity activity in e.AddedItems)
                 {
                     if (activity.Parent != null)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ActivityHasParent, activity.QualifiedName, activity.Parent.QualifiedName));
+                        throw new InvalidOperationException(
+                            SR.GetString(
+                                SR.Error_ActivityHasParent,
+                                activity.QualifiedName,
+                                activity.Parent.QualifiedName
+                            )
+                        );
                     if (activity == this)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_Recursion, activity.QualifiedName));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_Recursion, activity.QualifiedName)
+                        );
                 }
             }
             if (((IComponent)this).Site != null)
             {
-                IComponentChangeService changeService = ((IComponent)this).Site.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+                IComponentChangeService changeService =
+                    ((IComponent)this).Site.GetService(typeof(IComponentChangeService))
+                    as IComponentChangeService;
                 if (changeService != null)
                     changeService.OnComponentChanging(this, null);
             }
@@ -2386,16 +3085,26 @@ namespace System.Workflow.ComponentModel
             if (e == null)
                 throw new ArgumentNullException("e");
             // remove the parent
-            if ((e.Action == ActivityCollectionChangeAction.Replace || e.Action == ActivityCollectionChangeAction.Remove) &&
-                    e.RemovedItems != null)
+            if (
+                (
+                    e.Action == ActivityCollectionChangeAction.Replace
+                    || e.Action == ActivityCollectionChangeAction.Remove
+                )
+                && e.RemovedItems != null
+            )
             {
                 foreach (Activity activity in e.RemovedItems)
                     activity.SetParent(null);
             }
 
             // set the parent on the activity
-            if ((e.Action == ActivityCollectionChangeAction.Replace || e.Action == ActivityCollectionChangeAction.Add) &&
-                    e.AddedItems != null)
+            if (
+                (
+                    e.Action == ActivityCollectionChangeAction.Replace
+                    || e.Action == ActivityCollectionChangeAction.Add
+                )
+                && e.AddedItems != null
+            )
             {
                 foreach (Activity activity in e.AddedItems)
                     activity.SetParent(this);
@@ -2404,15 +3113,32 @@ namespace System.Workflow.ComponentModel
                 while (queue.Count > 0)
                 {
                     Activity activity = queue.Dequeue() as Activity;
-                    if (activity != null && (activity.Name == null || activity.Name.Length == 0 || activity.Name == activity.GetType().Name))
+                    if (
+                        activity != null
+                        && (
+                            activity.Name == null
+                            || activity.Name.Length == 0
+                            || activity.Name == activity.GetType().Name
+                        )
+                    )
                     {
                         Activity rootActivity = Helpers.GetRootActivity(activity);
-                        string className = rootActivity.GetValue(WorkflowMarkupSerializer.XClassProperty) as string;
+                        string className =
+                            rootActivity.GetValue(WorkflowMarkupSerializer.XClassProperty)
+                            as string;
                         if (rootActivity.Parent == null || !string.IsNullOrEmpty(className))
                         {
                             ArrayList identifiers = new ArrayList();
-                            identifiers.AddRange(Helpers.GetIdentifiersInCompositeActivity(rootActivity as CompositeActivity));
-                            activity.Name = DesignerHelpers.GenerateUniqueIdentifier(((IComponent)this).Site, Helpers.GetBaseIdentifier(activity), (string[])identifiers.ToArray(typeof(string)));
+                            identifiers.AddRange(
+                                Helpers.GetIdentifiersInCompositeActivity(
+                                    rootActivity as CompositeActivity
+                                )
+                            );
+                            activity.Name = DesignerHelpers.GenerateUniqueIdentifier(
+                                ((IComponent)this).Site,
+                                Helpers.GetBaseIdentifier(activity),
+                                (string[])identifiers.ToArray(typeof(string))
+                            );
                         }
                     }
                     if (activity is CompositeActivity)
@@ -2423,10 +3149,12 @@ namespace System.Workflow.ComponentModel
                 }
             }
 
-            // 
+            //
             if (((IComponent)this).Site != null)
             {
-                IComponentChangeService changeService = ((IComponent)this).Site.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+                IComponentChangeService changeService =
+                    ((IComponent)this).Site.GetService(typeof(IComponentChangeService))
+                    as IComponentChangeService;
                 if (changeService != null)
                     changeService.OnComponentChanged(this, null, e, null);
             }

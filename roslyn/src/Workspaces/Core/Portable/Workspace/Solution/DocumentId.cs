@@ -21,14 +21,22 @@ namespace Microsoft.CodeAnalysis
     {
         [DataMember(Order = 0)]
         public ProjectId ProjectId { get; }
+
         [DataMember(Order = 1)]
         public Guid Id { get; }
+
         [DataMember(Order = 2)]
         internal bool IsSourceGenerated { get; }
+
         [DataMember(Order = 3)]
         private readonly string? _debugName;
 
-        private DocumentId(ProjectId projectId, Guid guid, bool isSourceGenerated, string? debugName)
+        private DocumentId(
+            ProjectId projectId,
+            Guid guid,
+            bool isSourceGenerated,
+            string? debugName
+        )
         {
             this.ProjectId = projectId;
             this.Id = guid;
@@ -41,13 +49,21 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="projectId">The project id this document id is relative to.</param>
         /// <param name="debugName">An optional name to make this id easier to recognize while debugging.</param>
-        public static DocumentId CreateNewId(ProjectId projectId, string? debugName = null)
-            => CreateFromSerialized(projectId, Guid.NewGuid(), isSourceGenerated: false, debugName);
+        public static DocumentId CreateNewId(ProjectId projectId, string? debugName = null) =>
+            CreateFromSerialized(projectId, Guid.NewGuid(), isSourceGenerated: false, debugName);
 
-        public static DocumentId CreateFromSerialized(ProjectId projectId, Guid id, string? debugName = null)
-            => CreateFromSerialized(projectId, id, isSourceGenerated: false, debugName);
+        public static DocumentId CreateFromSerialized(
+            ProjectId projectId,
+            Guid id,
+            string? debugName = null
+        ) => CreateFromSerialized(projectId, id, isSourceGenerated: false, debugName);
 
-        internal static DocumentId CreateFromSerialized(ProjectId projectId, Guid id, bool isSourceGenerated, string? debugName)
+        internal static DocumentId CreateFromSerialized(
+            ProjectId projectId,
+            Guid id,
+            bool isSourceGenerated,
+            string? debugName
+        )
         {
             if (projectId == null)
                 throw new ArgumentNullException(nameof(projectId));
@@ -60,32 +76,25 @@ namespace Microsoft.CodeAnalysis
 
         internal string? DebugName => _debugName;
 
-        internal string GetDebuggerDisplay()
-            => string.Format("({0}, #{1} - {2})", this.GetType().Name, this.Id, _debugName);
+        internal string GetDebuggerDisplay() =>
+            string.Format("({0}, #{1} - {2})", this.GetType().Name, this.Id, _debugName);
 
-        public override string ToString()
-            => GetDebuggerDisplay();
+        public override string ToString() => GetDebuggerDisplay();
 
-        public override bool Equals(object? obj)
-            => this.Equals(obj as DocumentId);
+        public override bool Equals(object? obj) => this.Equals(obj as DocumentId);
 
         public bool Equals(DocumentId? other)
         {
             // Technically, we don't need to check project id.
-            return
-                other is not null &&
-                this.Id == other.Id &&
-                this.ProjectId == other.ProjectId;
+            return other is not null && this.Id == other.Id && this.ProjectId == other.ProjectId;
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(this.ProjectId, this.Id.GetHashCode());
+        public override int GetHashCode() => Hash.Combine(this.ProjectId, this.Id.GetHashCode());
 
-        public static bool operator ==(DocumentId? left, DocumentId? right)
-            => EqualityComparer<DocumentId?>.Default.Equals(left, right);
+        public static bool operator ==(DocumentId? left, DocumentId? right) =>
+            EqualityComparer<DocumentId?>.Default.Equals(left, right);
 
-        public static bool operator !=(DocumentId? left, DocumentId? right)
-            => !(left == right);
+        public static bool operator !=(DocumentId? left, DocumentId? right) => !(left == right);
 
         internal void WriteTo(ObjectWriter writer)
         {

@@ -14,11 +14,13 @@ namespace Microsoft.CodeAnalysis.LanguageService
         public readonly IMethodSymbol DisposeMethod;
         public readonly ITypeSymbol ElementType;
 
-        internal ForEachSymbols(IMethodSymbol getEnumeratorMethod,
-                                IMethodSymbol moveNextMethod,
-                                IPropertySymbol currentProperty,
-                                IMethodSymbol disposeMethod,
-                                ITypeSymbol elementType)
+        internal ForEachSymbols(
+            IMethodSymbol getEnumeratorMethod,
+            IMethodSymbol moveNextMethod,
+            IPropertySymbol currentProperty,
+            IMethodSymbol disposeMethod,
+            ITypeSymbol elementType
+        )
             : this()
         {
             this.GetEnumeratorMethod = getEnumeratorMethod;

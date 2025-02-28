@@ -24,7 +24,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             bool expectDataRemaining,
-            int expectedSequenceTagNumber)
+            int expectedSequenceTagNumber
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
 
@@ -76,8 +77,16 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("Missing Content - Indefinite", AsnEncodingRules.CER, "3180")]
         [InlineData("Missing EoC", AsnEncodingRules.BER, "3180" + "010100")]
         [InlineData("Missing EoC", AsnEncodingRules.CER, "3180" + "010100")]
-        [InlineData("Missing Outer EoC", AsnEncodingRules.BER, "3180" + "010100" + ("3180" + "0000"))]
-        [InlineData("Missing Outer EoC", AsnEncodingRules.CER, "3180" + "010100" + ("3180" + "0000"))]
+        [InlineData(
+            "Missing Outer EoC",
+            AsnEncodingRules.BER,
+            "3180" + "010100" + ("3180" + "0000")
+        )]
+        [InlineData(
+            "Missing Outer EoC",
+            AsnEncodingRules.CER,
+            "3180" + "010100" + ("3180" + "0000")
+        )]
         [InlineData("Wrong Tag - Definite", AsnEncodingRules.BER, "3000")]
         [InlineData("Wrong Tag - Definite", AsnEncodingRules.DER, "3000")]
         [InlineData("Wrong Tag - Indefinite", AsnEncodingRules.BER, "3080" + "0000")]
@@ -85,7 +94,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void ReadSetOf_Throws(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
@@ -117,7 +127,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             bool expectSuccess,
-            int lastTagValue)
+            int lastTagValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
 
@@ -127,7 +138,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnReader laxReader = new AsnReader(
                 inputData,
                 ruleSet,
-                new AsnReaderOptions { SkipSetSortOrderVerification = true });
+                new AsnReaderOptions { SkipSetSortOrderVerification = true }
+            );
 
             if (expectSuccess)
             {
@@ -180,12 +192,14 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null));
+                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
             Assert.Throws<AsnContentException>(
-                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 0)));
+                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 0))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -205,12 +219,14 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null));
+                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
             Assert.Throws<AsnContentException>(
-                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 0)));
+                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 0))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -230,7 +246,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null));
+                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
@@ -239,12 +256,14 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.True(reader.HasData, "HasData after default tag");
 
             Assert.Throws<AsnContentException>(
-                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.Application, 5)));
+                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.Application, 5))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
             Assert.Throws<AsnContentException>(
-                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 7)));
+                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 7))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
@@ -264,7 +283,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null));
+                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
@@ -273,12 +293,14 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.True(reader.HasData, "HasData after default tag");
 
             Assert.Throws<AsnContentException>(
-                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.Application, 5)));
+                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.Application, 5))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
             Assert.Throws<AsnContentException>(
-                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 7)));
+                () => reader.ReadSetOf(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 7))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
@@ -301,7 +323,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             TagClass tagClass,
-            int tagValue)
+            int tagValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -314,7 +337,10 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnReader val2 = reader.ReadSetOf(expectedTag: new Asn1Tag(tagClass, tagValue, false));
             Assert.False(reader.HasData);
 
-            Assert.Equal(val1.ReadEncodedValue().ByteArrayToHex(), val2.ReadEncodedValue().ByteArrayToHex());
+            Assert.Equal(
+                val1.ReadEncodedValue().ByteArrayToHex(),
+                val2.ReadEncodedValue().ByteArrayToHex()
+            );
         }
 
         [Theory]
@@ -328,8 +354,7 @@ namespace System.Formats.Asn1.Tests.Reader
             //
             // They're sorted backwards, though.
             const string PayloadHex =
-                "850D3530303130323132333435365A" +
-                "170D3132303130323233353935395A";
+                "850D3530303130323132333435365A" + "170D3132303130323233353935395A";
 
             byte[] inputData;
 
@@ -341,7 +366,9 @@ namespace System.Formats.Asn1.Tests.Reader
             }
             else
             {
-                inputData = ("3180" + "A280" + PayloadHex + "0000" + "0500" + "0000").HexToByteArray();
+                inputData = (
+                    "3180" + "A280" + PayloadHex + "0000" + "0500" + "0000"
+                ).HexToByteArray();
             }
 
             AsnReaderOptions options = new AsnReaderOptions
@@ -373,13 +400,15 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.Equal(
                 new DateTimeOffset(1950, 1, 2, 12, 34, 56, TimeSpan.Zero),
-                inner.ReadUtcTime(new Asn1Tag(TagClass.ContextSpecific, 5)));
+                inner.ReadUtcTime(new Asn1Tag(TagClass.ContextSpecific, 5))
+            );
 
             // This confirms that we've passed UtcTimeTwoDigitYearMax,
             // the default would call this 2012.
             Assert.Equal(
                 new DateTimeOffset(1912, 1, 2, 23, 59, 59, TimeSpan.Zero),
-                inner.ReadUtcTime());
+                inner.ReadUtcTime()
+            );
 
             Assert.False(inner.HasData);
 

@@ -19,32 +19,52 @@ namespace System.Web.Http.ModelBinding.Binders
             Mock<IModelBinder> mockKvpBinder = new Mock<IModelBinder>();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(IDictionary<int, string>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(IDictionary<int, string>)
+                ),
                 ModelName = "someName",
                 ValueProvider = new SimpleHttpValueProvider
                 {
                     { "someName[0]", new KeyValuePair<int, string>(42, "forty-two") },
-                    { "someName[1]", new KeyValuePair<int, string>(84, "eighty-four") }
-                }
+                    { "someName[1]", new KeyValuePair<int, string>(84, "eighty-four") },
+                },
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
-            context.ControllerContext.Configuration.Services.Replace(typeof(ModelBinderProvider), (new SimpleModelBinderProvider(typeof(KeyValuePair<int, string>), mockKvpBinder.Object)));
+            context.ControllerContext.Configuration.Services.Replace(
+                typeof(ModelBinderProvider),
+                (
+                    new SimpleModelBinderProvider(
+                        typeof(KeyValuePair<int, string>),
+                        mockKvpBinder.Object
+                    )
+                )
+            );
 
             mockKvpBinder
                 .Setup(o => o.BindModel(context, It.IsAny<ModelBindingContext>()))
-                .Returns((HttpActionContext cc, ModelBindingContext mbc) =>
-                {
-                    mbc.Model = mbc.ValueProvider.GetValue(mbc.ModelName).ConvertTo(mbc.ModelType);
-                    return true;
-                });
+                .Returns(
+                    (HttpActionContext cc, ModelBindingContext mbc) =>
+                    {
+                        mbc.Model = mbc
+                            .ValueProvider.GetValue(mbc.ModelName)
+                            .ConvertTo(mbc.ModelType);
+                        return true;
+                    }
+                );
 
             // Act
-            bool retVal = new DictionaryModelBinder<int, string>().BindModel(context, bindingContext);
+            bool retVal = new DictionaryModelBinder<int, string>().BindModel(
+                context,
+                bindingContext
+            );
 
             // Assert
             Assert.True(retVal);
 
-            var dictionary = Assert.IsAssignableFrom<IDictionary<int, string>>(bindingContext.Model);
+            var dictionary = Assert.IsAssignableFrom<IDictionary<int, string>>(
+                bindingContext.Model
+            );
             Assert.NotNull(dictionary);
             Assert.Equal(2, dictionary.Count);
             Assert.Equal("forty-two", dictionary[42]);

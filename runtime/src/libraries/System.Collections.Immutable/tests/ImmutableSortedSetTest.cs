@@ -49,7 +49,10 @@ namespace System.Collections.Immutable.Tests
                         break;
                     case Operation.Union:
                         int inputLength = random.Next(100);
-                        IEnumerable<int> values = Enumerable.Range(0, inputLength).Select(i => random.Next()).ToArray();
+                        IEnumerable<int> values = Enumerable
+                            .Range(0, inputLength)
+                            .Select(i => random.Next())
+                            .ToArray();
                         Debug.WriteLine("Adding {0} elements to the set.", inputLength);
                         expected.UnionWith(values);
                         actual = actual.Union(values);
@@ -84,25 +87,29 @@ namespace System.Collections.Immutable.Tests
                 ImmutableSortedSet<string>.Empty.WithComparer(StringComparer.Ordinal),
                 true,
                 new[] { "apple", "APPLE" },
-                new[] { "APPLE", "apple" });
+                new[] { "APPLE", "apple" }
+            );
             this.CustomSortTestHelper(
                 ImmutableSortedSet<string>.Empty.WithComparer(StringComparer.OrdinalIgnoreCase),
                 true,
                 new[] { "apple", "APPLE" },
-                new[] { "apple" });
+                new[] { "apple" }
+            );
         }
 
         [Fact]
         public void ChangeSortComparer()
         {
-            ImmutableSortedSet<string> ordinalSet = ImmutableSortedSet<string>.Empty
-                .WithComparer(StringComparer.Ordinal)
+            ImmutableSortedSet<string> ordinalSet = ImmutableSortedSet<string>
+                .Empty.WithComparer(StringComparer.Ordinal)
                 .Add("apple")
                 .Add("APPLE");
             Assert.Equal(2, ordinalSet.Count); // claimed count
             Assert.False(ordinalSet.Contains("aPpLe"));
 
-            ImmutableSortedSet<string> ignoreCaseSet = ordinalSet.WithComparer(StringComparer.OrdinalIgnoreCase);
+            ImmutableSortedSet<string> ignoreCaseSet = ordinalSet.WithComparer(
+                StringComparer.OrdinalIgnoreCase
+            );
             Assert.Equal(1, ignoreCaseSet.Count);
             Assert.True(ignoreCaseSet.Contains("aPpLe"));
         }
@@ -110,7 +117,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ToUnorderedTest()
         {
-            ImmutableHashSet<int> result = ImmutableSortedSet<int>.Empty.Add(3).ToImmutableHashSet();
+            ImmutableHashSet<int> result = ImmutableSortedSet<int>
+                .Empty.Add(3)
+                .ToImmutableHashSet();
             Assert.True(result.Contains(3));
         }
 
@@ -189,8 +198,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void IndexGetTest()
         {
-            ImmutableSortedSet<int> set = ImmutableSortedSet<int>.Empty
-                .Union(Enumerable.Range(1, 10).Select(n => n * 10)); // 10, 20, 30, ... 100
+            ImmutableSortedSet<int> set = ImmutableSortedSet<int>.Empty.Union(
+                Enumerable.Range(1, 10).Select(n => n * 10)
+            ); // 10, 20, 30, ... 100
 
             int i = 0;
             foreach (int item in set)
@@ -369,33 +379,53 @@ namespace System.Collections.Immutable.Tests
             enumerator.Dispose();
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public void DebuggerAttributesValid()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSortedSet.Create<int>());
             ImmutableSortedSet<string> set = ImmutableSortedSet.Create("1", "2", "3");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(set);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                set
+            );
 
-            object rootNode = DebuggerAttributes.GetFieldValue(ImmutableSortedSet.Create<object>(), "_root");
+            object rootNode = DebuggerAttributes.GetFieldValue(
+                ImmutableSortedSet.Create<object>(),
+                "_root"
+            );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                == DebuggerBrowsableState.RootHidden
+            );
             string[] items = itemProperty.GetValue(info.Instance) as string[];
             Assert.Equal(set, items);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void TestDebuggerAttributes_Null()
         {
-            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableSortedSet.Create("1", "2", "3"));
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            Type proxyType = DebuggerAttributes.GetProxyType(
+                ImmutableSortedSet.Create("1", "2", "3")
+            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
         [Fact]
         public void SymmetricExceptWithComparerTests()
         {
-            ImmutableSortedSet<string> set = ImmutableSortedSet.Create<string>("a").WithComparer(StringComparer.OrdinalIgnoreCase);
-            var otherCollection = new[] {"A"};
+            ImmutableSortedSet<string> set = ImmutableSortedSet
+                .Create<string>("a")
+                .WithComparer(StringComparer.OrdinalIgnoreCase);
+            var otherCollection = new[] { "A" };
 
             var expectedSet = new SortedSet<string>(set, set.KeyComparer);
             expectedSet.SymmetricExceptWith(otherCollection);

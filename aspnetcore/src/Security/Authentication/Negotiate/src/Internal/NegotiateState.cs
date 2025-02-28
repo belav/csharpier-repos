@@ -17,12 +17,18 @@ internal sealed class NegotiateState : INegotiateState
         _instance = new NegotiateAuthentication(_serverOptions);
     }
 
-    public string? GetOutgoingBlob(string incomingBlob, out BlobErrorType status, out Exception? error)
+    public string? GetOutgoingBlob(
+        string incomingBlob,
+        out BlobErrorType status,
+        out Exception? error
+    )
     {
         var outgoingBlob = _instance.GetOutgoingBlob(incomingBlob, out var authStatus);
 
-        if (authStatus == NegotiateAuthenticationStatusCode.Completed ||
-            authStatus == NegotiateAuthenticationStatusCode.ContinueNeeded)
+        if (
+            authStatus == NegotiateAuthenticationStatusCode.Completed
+            || authStatus == NegotiateAuthenticationStatusCode.ContinueNeeded
+        )
         {
             status = BlobErrorType.None;
             error = null;
@@ -60,7 +66,9 @@ internal sealed class NegotiateState : INegotiateState
     public IIdentity GetIdentity()
     {
         var remoteIdentity = _instance.RemoteIdentity;
-        return remoteIdentity is ClaimsIdentity claimsIdentity ? claimsIdentity.Clone() : remoteIdentity;
+        return remoteIdentity is ClaimsIdentity claimsIdentity
+            ? claimsIdentity.Clone()
+            : remoteIdentity;
     }
 
     public void Dispose()
@@ -70,18 +78,18 @@ internal sealed class NegotiateState : INegotiateState
 
     private static bool IsCredentialError(NegotiateAuthenticationStatusCode error)
     {
-        return error == NegotiateAuthenticationStatusCode.UnknownCredentials ||
-            error == NegotiateAuthenticationStatusCode.CredentialsExpired ||
-            error == NegotiateAuthenticationStatusCode.BadBinding;
+        return error == NegotiateAuthenticationStatusCode.UnknownCredentials
+            || error == NegotiateAuthenticationStatusCode.CredentialsExpired
+            || error == NegotiateAuthenticationStatusCode.BadBinding;
     }
 
     private static bool IsClientError(NegotiateAuthenticationStatusCode error)
     {
-        return error == NegotiateAuthenticationStatusCode.InvalidToken ||
-            error == NegotiateAuthenticationStatusCode.QopNotSupported ||
-            error == NegotiateAuthenticationStatusCode.UnknownCredentials ||
-            error == NegotiateAuthenticationStatusCode.MessageAltered ||
-            error == NegotiateAuthenticationStatusCode.OutOfSequence ||
-            error == NegotiateAuthenticationStatusCode.InvalidCredentials;
+        return error == NegotiateAuthenticationStatusCode.InvalidToken
+            || error == NegotiateAuthenticationStatusCode.QopNotSupported
+            || error == NegotiateAuthenticationStatusCode.UnknownCredentials
+            || error == NegotiateAuthenticationStatusCode.MessageAltered
+            || error == NegotiateAuthenticationStatusCode.OutOfSequence
+            || error == NegotiateAuthenticationStatusCode.InvalidCredentials;
     }
 }

@@ -13,7 +13,7 @@ namespace System.Net.NetworkInformation
         TimeExceeded = 3,
         ParameterProblem = 4,
         EchoRequest = 128,
-        EchoReply = 129
+        EchoReply = 129,
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ namespace System.Net.NetworkInformation
         PortUnreachable = 4,
         SourceAddressFailedPolicy = 5,
         RejectRouteToDestination = 6,
-        SourceRoutingHeaderError = 7
+        SourceRoutingHeaderError = 7,
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ namespace System.Net.NetworkInformation
     internal enum IcmpV6TimeExceededCode : byte
     {
         HopLimitExceeded = 0,
-        FragmentReassemblyTimeExceeded = 1
+        FragmentReassemblyTimeExceeded = 1,
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ namespace System.Net.NetworkInformation
     {
         ErroneousHeaderField = 0,
         UnrecognizedNextHeader = 1,
-        UnrecognizedIpv6Option = 2
+        UnrecognizedIpv6Option = 2,
     }
 
     internal static class IcmpV6MessageConstants
@@ -57,22 +57,26 @@ namespace System.Net.NetworkInformation
             return (IcmpV6MessageType)type switch
             {
                 IcmpV6MessageType.EchoReply => IPStatus.Success,
-                IcmpV6MessageType.DestinationUnreachable => (IcmpV6DestinationUnreachableCode)code switch
-                {
-                    IcmpV6DestinationUnreachableCode.NoRouteToDestination => IPStatus.BadRoute,
-                    IcmpV6DestinationUnreachableCode.SourceRoutingHeaderError => IPStatus.BadHeader,
-                    _ => IPStatus.DestinationUnreachable,
-                },
+                IcmpV6MessageType.DestinationUnreachable =>
+                    (IcmpV6DestinationUnreachableCode)code switch
+                    {
+                        IcmpV6DestinationUnreachableCode.NoRouteToDestination => IPStatus.BadRoute,
+                        IcmpV6DestinationUnreachableCode.SourceRoutingHeaderError =>
+                            IPStatus.BadHeader,
+                        _ => IPStatus.DestinationUnreachable,
+                    },
                 IcmpV6MessageType.PacketTooBig => IPStatus.PacketTooBig,
                 IcmpV6MessageType.TimeExceeded => (IcmpV6TimeExceededCode)code switch
                 {
-                    IcmpV6TimeExceededCode.FragmentReassemblyTimeExceeded => IPStatus.TtlReassemblyTimeExceeded,
+                    IcmpV6TimeExceededCode.FragmentReassemblyTimeExceeded =>
+                        IPStatus.TtlReassemblyTimeExceeded,
                     _ => IPStatus.TtlExpired,
                 },
                 IcmpV6MessageType.ParameterProblem => (IcmpV6ParameterProblemCode)code switch
                 {
                     IcmpV6ParameterProblemCode.ErroneousHeaderField => IPStatus.BadHeader,
-                    IcmpV6ParameterProblemCode.UnrecognizedNextHeader => IPStatus.UnrecognizedNextHeader,
+                    IcmpV6ParameterProblemCode.UnrecognizedNextHeader =>
+                        IPStatus.UnrecognizedNextHeader,
                     IcmpV6ParameterProblemCode.UnrecognizedIpv6Option => IPStatus.BadOption,
                     _ => IPStatus.ParameterProblem,
                 },

@@ -23,5 +23,6 @@ public interface IObjectModelValidator
         ActionContext actionContext,
         ValidationStateDictionary? validationState,
         string prefix,
-        object? model);
+        object? model
+    );
 }

@@ -36,10 +36,13 @@ public class CompositeViewEngine : ICompositeViewEngine
 
         if (ViewEngines.Count == 0)
         {
-            throw new InvalidOperationException(Resources.FormatViewEnginesAreRequired(
-                typeof(MvcViewOptions).FullName,
-                nameof(MvcViewOptions.ViewEngines),
-                typeof(IViewEngine).FullName));
+            throw new InvalidOperationException(
+                Resources.FormatViewEnginesAreRequired(
+                    typeof(MvcViewOptions).FullName,
+                    nameof(MvcViewOptions.ViewEngines),
+                    typeof(IViewEngine).FullName
+                )
+            );
         }
 
         // Do not allocate in the common cases: ViewEngines contains one entry or initial attempt is successful.
@@ -52,7 +55,11 @@ public class CompositeViewEngine : ICompositeViewEngine
             {
                 if (result.View is IAsyncDisposable)
                 {
-                    throw new InvalidOperationException(Resources.FormatAsyncDisposableViewsNotSupported(typeof(IAsyncDisposable).FullName));
+                    throw new InvalidOperationException(
+                        Resources.FormatAsyncDisposableViewsNotSupported(
+                            typeof(IAsyncDisposable).FullName
+                        )
+                    );
                 }
                 return result;
             }
@@ -88,10 +95,13 @@ public class CompositeViewEngine : ICompositeViewEngine
 
         if (ViewEngines.Count == 0)
         {
-            throw new InvalidOperationException(Resources.FormatViewEnginesAreRequired(
-                typeof(MvcViewOptions).FullName,
-                nameof(MvcViewOptions.ViewEngines),
-                typeof(IViewEngine).FullName));
+            throw new InvalidOperationException(
+                Resources.FormatViewEnginesAreRequired(
+                    typeof(MvcViewOptions).FullName,
+                    nameof(MvcViewOptions.ViewEngines),
+                    typeof(IViewEngine).FullName
+                )
+            );
         }
 
         // Do not allocate in the common cases: ViewEngines contains one entry or initial attempt is successful.

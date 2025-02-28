@@ -4,7 +4,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -26,30 +26,22 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 
 namespace Microsoft.Build.Framework
 {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface ILogger
-	{
-		// Subscribes loggers to specifices events.
-		void Initialize (IEventSource eventSource);
-		
-		// Releases the resources allocated to the logger at the time
-		// of initialization or during the build.
-		void Shutdown ();
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public interface ILogger
+    {
+        // Subscribes loggers to specifices events.
+        void Initialize(IEventSource eventSource);
 
-		string Parameters {
-			get;
-			set;
-		}
+        // Releases the resources allocated to the logger at the time
+        // of initialization or during the build.
+        void Shutdown();
 
-		LoggerVerbosity Verbosity {
-			get;
-			set;
-		}
-	}
+        string Parameters { get; set; }
+
+        LoggerVerbosity Verbosity { get; set; }
+    }
 }
-

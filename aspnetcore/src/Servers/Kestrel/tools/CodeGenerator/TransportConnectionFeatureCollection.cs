@@ -24,7 +24,7 @@ public class TransportConnectionFeatureCollection
             "IStreamIdFeature",
             "IStreamAbortFeature",
             "IStreamClosedFeature",
-            "IConnectionMetricsTagsFeature"
+            "IConnectionMetricsTagsFeature",
         };
 
         var implementedFeatures = new[]
@@ -33,10 +33,11 @@ public class TransportConnectionFeatureCollection
             "IConnectionTransportFeature",
             "IConnectionItemsFeature",
             "IMemoryPoolFeature",
-            "IConnectionLifetimeFeature"
+            "IConnectionLifetimeFeature",
         };
 
-        var usings = $@"
+        var usings =
+            $@"
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;";
 
@@ -46,6 +47,7 @@ using Microsoft.AspNetCore.Http.Features;";
             allFeatures: allFeatures,
             implementedFeatures: implementedFeatures,
             extraUsings: usings,
-            fallbackFeatures: "MultiplexedConnectionFeatures");
+            fallbackFeatures: "MultiplexedConnectionFeatures"
+        );
     }
 }

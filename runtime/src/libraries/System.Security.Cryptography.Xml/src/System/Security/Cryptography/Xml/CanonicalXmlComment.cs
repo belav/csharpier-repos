@@ -12,7 +12,12 @@ namespace System.Security.Cryptography.Xml
         private bool _isInNodeSet;
         private readonly bool _includeComments;
 
-        public CanonicalXmlComment(string? comment, XmlDocument doc, bool defaultNodeSetInclusionState, bool includeComments)
+        public CanonicalXmlComment(
+            string? comment,
+            XmlDocument doc,
+            bool defaultNodeSetInclusionState,
+            bool includeComments
+        )
             : base(comment, doc)
         {
             _isInNodeSet = defaultNodeSetInclusionState;
@@ -30,7 +35,11 @@ namespace System.Security.Cryptography.Xml
             get { return _includeComments; }
         }
 
-        public void Write(StringBuilder strBuilder, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void Write(
+            StringBuilder strBuilder,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             if (!IsInNodeSet || !IncludeComments)
                 return;
@@ -44,7 +53,11 @@ namespace System.Security.Cryptography.Xml
                 strBuilder.Append((char)10);
         }
 
-        public void WriteHash(HashAlgorithm hash, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void WriteHash(
+            HashAlgorithm hash,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             if (!IsInNodeSet || !IncludeComments)
                 return;

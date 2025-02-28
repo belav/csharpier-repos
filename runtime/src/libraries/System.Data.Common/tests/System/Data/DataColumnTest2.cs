@@ -168,10 +168,25 @@ namespace System.Data.Tests
         {
             DataColumn dc;
             dc = new DataColumn();
-            Type[] typeArr = { typeof(bool), typeof(byte), typeof(char), typeof(DateTime),
-                typeof(decimal), typeof(double), typeof(short), typeof(int),
-                typeof(long), typeof(sbyte), typeof(float), typeof(string),
-                typeof(TimeSpan), typeof(ushort), typeof(uint), typeof(ulong) };
+            Type[] typeArr =
+            {
+                typeof(bool),
+                typeof(byte),
+                typeof(char),
+                typeof(DateTime),
+                typeof(decimal),
+                typeof(double),
+                typeof(short),
+                typeof(int),
+                typeof(long),
+                typeof(sbyte),
+                typeof(float),
+                typeof(string),
+                typeof(TimeSpan),
+                typeof(ushort),
+                typeof(uint),
+                typeof(ulong),
+            };
 
             //Checking default value (string)
             // GetType - Default
@@ -210,7 +225,7 @@ namespace System.Data.Tests
 
             iHashCode1 = dc1.GetHashCode();
             for (int i = 0; i < 10; i++)
-            {   // must return the same value each time
+            { // must return the same value each time
                 // GetHashCode #" + i.ToString());
                 Assert.Equal(dc1.GetHashCode(), iHashCode1);
             }
@@ -321,7 +336,8 @@ namespace System.Data.Tests
         public void TestToString()
         {
             DataColumn dc;
-            string sColName, sExp;
+            string sColName,
+                sExp;
             dc = new DataColumn();
 
             //ToString = ColumnName
@@ -385,10 +401,25 @@ namespace System.Data.Tests
         {
             Type typTest;
             DataColumn dc = null;
-            Type[] typeArr = { typeof(bool), typeof(byte), typeof(char), typeof(DateTime),
-                typeof(decimal), typeof(double), typeof(short), typeof(int),
-                typeof(long), typeof(sbyte), typeof(float), typeof(string),
-                typeof(TimeSpan), typeof(ushort), typeof(uint), typeof(ulong) };
+            Type[] typeArr =
+            {
+                typeof(bool),
+                typeof(byte),
+                typeof(char),
+                typeof(DateTime),
+                typeof(decimal),
+                typeof(double),
+                typeof(short),
+                typeof(int),
+                typeof(long),
+                typeof(sbyte),
+                typeof(float),
+                typeof(string),
+                typeof(TimeSpan),
+                typeof(ushort),
+                typeof(uint),
+                typeof(ulong),
+            };
 
             foreach (Type type in typeArr)
             {
@@ -434,9 +465,9 @@ namespace System.Data.Tests
             DataColumnCollection dcColl;
             DataTable tb = new DataTable();
             dcColl = tb.Columns;
-            dcColl.Add();   //0
-            dcColl.Add();   //1
-            dcColl.Add();   //2
+            dcColl.Add(); //0
+            dcColl.Add(); //1
+            dcColl.Add(); //2
             dcColl.Add(dc); //3
 
             //Checking Get
@@ -479,48 +510,64 @@ namespace System.Data.Tests
         public void Expression_Exceptions()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                dt.Columns[0].Unique = true;
-                dt.Columns[0].Expression = "sum(" + dt.Columns[0].ColumnName + ")";
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    dt.Columns[0].Unique = true;
+                    dt.Columns[0].Expression = "sum(" + dt.Columns[0].ColumnName + ")";
+                }
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataTable dt1 = DataProvider.CreateParentDataTable();
-                dt1.Columns[0].AutoIncrement = true;
-                dt1.Columns[0].Expression = "sum(" + dt1.Columns[0].ColumnName + ")";
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataTable dt1 = DataProvider.CreateParentDataTable();
+                    dt1.Columns[0].AutoIncrement = true;
+                    dt1.Columns[0].Expression = "sum(" + dt1.Columns[0].ColumnName + ")";
+                }
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataTable dt1 = DataProvider.CreateParentDataTable();
-                dt1.Constraints.Add(new UniqueConstraint(dt1.Columns[0], false));
-                dt1.Columns[0].Expression = "count(" + dt1.Columns[0].ColumnName + ")";
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataTable dt1 = DataProvider.CreateParentDataTable();
+                    dt1.Constraints.Add(new UniqueConstraint(dt1.Columns[0], false));
+                    dt1.Columns[0].Expression = "count(" + dt1.Columns[0].ColumnName + ")";
+                }
+            );
 
             Assert.Throws<FormatException>(() =>
             {
                 DataTable dt1 = DataProvider.CreateParentDataTable();
-                dt1.Columns[0].Expression = "CONVERT(" + dt1.Columns[1].ColumnName + ",'System.Int32')";
+                dt1.Columns[0].Expression =
+                    "CONVERT(" + dt1.Columns[1].ColumnName + ",'System.Int32')";
             });
 
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataTable dt1 = DataProvider.CreateParentDataTable();
-                dt1.Columns[0].Expression = "CONVERT(" + dt1.Columns[0].ColumnName + ",'System.DateTime')";
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataTable dt1 = DataProvider.CreateParentDataTable();
+                    dt1.Columns[0].Expression =
+                        "CONVERT(" + dt1.Columns[0].ColumnName + ",'System.DateTime')";
+                }
+            );
 
             Assert.Throws<InvalidCastException>(() =>
             {
                 DataTable dt1 = DataProvider.CreateParentDataTable();
-                dt1.Columns[1].Expression = "CONVERT(" + dt1.Columns[0].ColumnName + ",'System.DateTime')";
+                dt1.Columns[1].Expression =
+                    "CONVERT(" + dt1.Columns[0].ColumnName + ",'System.DateTime')";
             });
 
             Assert.Throws<OverflowException>(() =>
             {
                 DataTable dt1 = DataProvider.CreateParentDataTable();
-                dt1.Columns[1].Expression = "SUBSTRING(" + dt1.Columns[2].ColumnName + ",60000000000,2)";
+                dt1.Columns[1].Expression =
+                    "SUBSTRING(" + dt1.Columns[2].ColumnName + ",60000000000,2)";
             });
         }
 
@@ -531,7 +578,8 @@ namespace System.Data.Tests
             //Simple expression --> not aggregate
             DataColumn dc = new DataColumn("expr", typeof(decimal));
             dt.Columns.Add(dc);
-            dt.Columns["expr"].Expression = dt.Columns[0].ColumnName + "*0.52 +" + dt.Columns[0].ColumnName;
+            dt.Columns["expr"].Expression =
+                dt.Columns[0].ColumnName + "*0.52 +" + dt.Columns[0].ColumnName;
 
             //Check the values
             //double temp;
@@ -565,18 +613,27 @@ namespace System.Data.Tests
             //Simple expression -->  aggregate
             DataColumn dc = new DataColumn("expr", typeof(decimal));
             dt.Columns.Add(dc);
-            dt.Columns["expr"].Expression = "sum(" + dt.Columns[0].ColumnName + ") + count(" + dt.Columns[0].ColumnName + ")";
-            dt.Columns["expr"].Expression += " + avg(" + dt.Columns[0].ColumnName + ") + Min(" + dt.Columns[0].ColumnName + ")";
-
+            dt.Columns["expr"].Expression =
+                "sum(" + dt.Columns[0].ColumnName + ") + count(" + dt.Columns[0].ColumnName + ")";
+            dt.Columns["expr"].Expression +=
+                " + avg(" + dt.Columns[0].ColumnName + ") + Min(" + dt.Columns[0].ColumnName + ")";
 
             //Check the values
             double temp;
             string str;
 
-            double sum = Convert.ToDouble(dt.Compute("sum(" + dt.Columns[0].ColumnName + ")", string.Empty));
-            double count = Convert.ToDouble(dt.Compute("count(" + dt.Columns[0].ColumnName + ")", string.Empty));
-            double avg = Convert.ToDouble(dt.Compute("avg(" + dt.Columns[0].ColumnName + ")", string.Empty));
-            double min = Convert.ToDouble(dt.Compute("min(" + dt.Columns[0].ColumnName + ")", string.Empty));
+            double sum = Convert.ToDouble(
+                dt.Compute("sum(" + dt.Columns[0].ColumnName + ")", string.Empty)
+            );
+            double count = Convert.ToDouble(
+                dt.Compute("count(" + dt.Columns[0].ColumnName + ")", string.Empty)
+            );
+            double avg = Convert.ToDouble(
+                dt.Compute("avg(" + dt.Columns[0].ColumnName + ")", string.Empty)
+            );
+            double min = Convert.ToDouble(
+                dt.Compute("min(" + dt.Columns[0].ColumnName + ")", string.Empty)
+            );
 
             str = (sum + count + avg + min).ToString();
             foreach (DataRow dr in dt.Rows)
@@ -609,14 +666,17 @@ namespace System.Data.Tests
 
             DataColumn dcComputedParent = new DataColumn("computedParent", typeof(double));
             parent.Columns.Add(dcComputedParent);
-            dcComputedParent.Expression = "sum(child(Relation1)." + child.Columns[1].ColumnName + ")";
+            dcComputedParent.Expression =
+                "sum(child(Relation1)." + child.Columns[1].ColumnName + ")";
 
             double preCalculatedExpression;
 
             foreach (DataRow dr in parent.Rows)
             {
-                object o = child.Compute("sum(" + child.Columns[1].ColumnName + ")",
-                    parent.Columns[0].ColumnName + "=" + dr[0]);
+                object o = child.Compute(
+                    "sum(" + child.Columns[1].ColumnName + ")",
+                    parent.Columns[0].ColumnName + "=" + dr[0]
+                );
                 if (o == DBNull.Value)
                 {
                     Assert.Equal(dr["computedParent"], o);
@@ -698,7 +758,9 @@ namespace System.Data.Tests
         {
             DataColumn col = new DataColumn("col", typeof(int));
             Assert.Equal(DataSetDateTime.UnspecifiedLocal, col.DateTimeMode);
-            Assert.Throws<InvalidOperationException>(() => col.DateTimeMode = DataSetDateTime.Local);
+            Assert.Throws<InvalidOperationException>(
+                () => col.DateTimeMode = DataSetDateTime.Local
+            );
 
             col = new DataColumn("col", typeof(DateTime));
             col.DateTimeMode = DataSetDateTime.Utc;
@@ -711,9 +773,13 @@ namespace System.Data.Tests
         public void DateTimeMode_InvalidValues()
         {
             DataColumn col = new DataColumn("col", typeof(DateTime));
-            Assert.Throws<InvalidEnumArgumentException>(() => col.DateTimeMode = (DataSetDateTime)(-1));
+            Assert.Throws<InvalidEnumArgumentException>(
+                () => col.DateTimeMode = (DataSetDateTime)(-1)
+            );
 
-            Assert.Throws<InvalidEnumArgumentException>(() => col.DateTimeMode = (DataSetDateTime)5);
+            Assert.Throws<InvalidEnumArgumentException>(
+                () => col.DateTimeMode = (DataSetDateTime)5
+            );
         }
 
         [Fact]
@@ -728,9 +794,13 @@ namespace System.Data.Tests
             table.Columns[0].DateTimeMode = DataSetDateTime.Unspecified;
             table.Columns[0].DateTimeMode = DataSetDateTime.UnspecifiedLocal;
 
-            Assert.Throws<InvalidOperationException>(() => table.Columns[0].DateTimeMode = DataSetDateTime.Local);
+            Assert.Throws<InvalidOperationException>(
+                () => table.Columns[0].DateTimeMode = DataSetDateTime.Local
+            );
 
-            Assert.Throws<InvalidOperationException>(() => table.Columns[0].DateTimeMode = DataSetDateTime.Utc);
+            Assert.Throws<InvalidOperationException>(
+                () => table.Columns[0].DateTimeMode = DataSetDateTime.Utc
+            );
         }
 
         [Fact]
@@ -759,6 +829,7 @@ namespace System.Data.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => table.Columns[0].SetOrdinal(4));
         }
+
         [Fact]
         public void Bug672113_MulpleColConstraint()
         {

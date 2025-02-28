@@ -16,11 +16,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
         [Fact]
         public void MultipleMscorlibReferencesInMetadata()
         {
-            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(new[]
-            {
-                TestReferences.SymbolsTests.CorLibrary.GuidTest2.exe,
-                TestMetadata.Net40.mscorlib
-            });
+            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                new[]
+                {
+                    TestReferences.SymbolsTests.CorLibrary.GuidTest2.exe,
+                    TestMetadata.Net40.mscorlib,
+                }
+            );
 
             Assert.Same(assemblies[1], assemblies[0].Modules[0].CorLibrary());
         }
@@ -28,25 +30,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.CorLibrary
         [Fact, WorkItem(760148, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/760148")]
         public void Bug760148_1()
         {
-            var corLib = CreateEmptyCompilation(@"
+            var corLib = CreateEmptyCompilation(
+                @"
 namespace System
 {
     public class Object
     {
     }
 }
-", options: TestOptions.ReleaseDll);
+",
+                options: TestOptions.ReleaseDll
+            );
 
             var obj = corLib.GetSpecialType(SpecialType.System_Object);
 
             Assert.False(obj.IsErrorType());
             Assert.Same(corLib.Assembly, obj.ContainingAssembly);
 
-            var consumer = CreateEmptyCompilation(@"
+            var consumer = CreateEmptyCompilation(
+                @"
 public class Test
 {
 }
-", new[] { new CSharpCompilationReference(corLib) }, options: TestOptions.ReleaseDll);
+",
+                new[] { new CSharpCompilationReference(corLib) },
+                options: TestOptions.ReleaseDll
+            );
 
             Assert.Same(obj, consumer.GetSpecialType(SpecialType.System_Object));
         }
@@ -54,20 +63,27 @@ public class Test
         [Fact, WorkItem(760148, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/760148")]
         public void Bug760148_2()
         {
-            var corLib = CreateEmptyCompilation(@"
+            var corLib = CreateEmptyCompilation(
+                @"
 namespace System
 {
     class Object
     {
     }
 }
-", options: TestOptions.ReleaseDll);
+",
+                options: TestOptions.ReleaseDll
+            );
 
-            var consumer = CreateEmptyCompilation(@"
+            var consumer = CreateEmptyCompilation(
+                @"
 public class Test
 {
 }
-", new[] { new CSharpCompilationReference(corLib) }, options: TestOptions.ReleaseDll);
+",
+                new[] { new CSharpCompilationReference(corLib) },
+                options: TestOptions.ReleaseDll
+            );
 
             Assert.True(consumer.GetSpecialType(SpecialType.System_Object).IsErrorType());
         }

@@ -33,22 +33,30 @@ namespace Microsoft.CodeAnalysis.Telemetry
         }
 
         /// <summary>
-        /// Posts a telemetry event representing the <paramref name="functionId"/> operation 
+        /// Posts a telemetry event representing the <paramref name="functionId"/> operation
         /// only if the block duration meets or exceeds <paramref name="minThresholdMs"/> milliseconds.
         /// This event will contain properties from <paramref name="logMessage"/> and the actual execution time.
         /// </summary>
         /// <param name="logMessage">Properties to be set on the telemetry event</param>
         /// <param name="minThresholdMs">Optional parameter used to determine whether to send the telemetry event</param>
-        public static IDisposable? LogBlockTime(FunctionId functionId, KeyValueLogMessage logMessage, int minThresholdMs = -1)
+        public static IDisposable? LogBlockTime(
+            FunctionId functionId,
+            KeyValueLogMessage logMessage,
+            int minThresholdMs = -1
+        )
         {
             return GetLog(functionId)?.LogBlockTime(logMessage, minThresholdMs);
         }
 
         /// <summary>
-        /// Adds information to an aggregated telemetry event representing the <paramref name="functionId"/> operation 
+        /// Adds information to an aggregated telemetry event representing the <paramref name="functionId"/> operation
         /// with the specified name and value.
         /// </summary>
-        public static void LogAggregated(FunctionId functionId, TelemetryLoggingInterpolatedStringHandler name, int value)
+        public static void LogAggregated(
+            FunctionId functionId,
+            TelemetryLoggingInterpolatedStringHandler name,
+            int value
+        )
         {
             if (GetAggregatingLog(functionId) is not { } aggregatingLog)
                 return;
@@ -63,11 +71,15 @@ namespace Microsoft.CodeAnalysis.Telemetry
         }
 
         /// <summary>
-        /// Adds block execution time to an aggregated telemetry event representing the <paramref name="functionId"/> operation 
+        /// Adds block execution time to an aggregated telemetry event representing the <paramref name="functionId"/> operation
         /// with metric <paramref name="metricName"/> only if the block duration meets or exceeds <paramref name="minThresholdMs"/> milliseconds.
         /// </summary>
         /// <param name="minThresholdMs">Optional parameter used to determine whether to send the telemetry event</param>
-        public static IDisposable? LogBlockTimeAggregated(FunctionId functionId, TelemetryLoggingInterpolatedStringHandler metricName, int minThresholdMs = -1)
+        public static IDisposable? LogBlockTimeAggregated(
+            FunctionId functionId,
+            TelemetryLoggingInterpolatedStringHandler metricName,
+            int minThresholdMs = -1
+        )
         {
             if (GetAggregatingLog(functionId) is not { } aggregatingLog)
                 return null;
@@ -91,7 +103,10 @@ namespace Microsoft.CodeAnalysis.Telemetry
         /// <summary>
         /// Returns aggregating telemetry log.
         /// </summary>
-        public static ITelemetryLog? GetAggregatingLog(FunctionId functionId, double[]? bucketBoundaries = null)
+        public static ITelemetryLog? GetAggregatingLog(
+            FunctionId functionId,
+            double[]? bucketBoundaries = null
+        )
         {
             return s_logProvider?.GetAggregatingLog(functionId, bucketBoundaries);
         }

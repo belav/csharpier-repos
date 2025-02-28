@@ -31,9 +31,7 @@ namespace System.Net.Http.Headers
         }
 
         public AuthenticationHeaderValue(string scheme)
-            : this(scheme, null)
-        {
-        }
+            : this(scheme, null) { }
 
         public AuthenticationHeaderValue(string scheme, string? parameter)
         {
@@ -76,8 +74,8 @@ namespace System.Net.Http.Headers
             else
             {
                 // Since we can't parse the parameter, we use case-sensitive comparison.
-                return string.Equals(_scheme, other._scheme, StringComparison.OrdinalIgnoreCase) &&
-                    string.Equals(_parameter, other._parameter, StringComparison.Ordinal);
+                return string.Equals(_scheme, other._scheme, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(_parameter, other._parameter, StringComparison.Ordinal);
             }
         }
 
@@ -96,16 +94,30 @@ namespace System.Net.Http.Headers
         public static AuthenticationHeaderValue Parse(string input)
         {
             int index = 0;
-            return (AuthenticationHeaderValue)GenericHeaderParser.SingleValueAuthenticationParser.ParseValue(
-                input, null, ref index);
+            return (AuthenticationHeaderValue)
+                GenericHeaderParser.SingleValueAuthenticationParser.ParseValue(
+                    input,
+                    null,
+                    ref index
+                );
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out AuthenticationHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out AuthenticationHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.SingleValueAuthenticationParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.SingleValueAuthenticationParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (AuthenticationHeaderValue)output!;
                 return true;
@@ -113,13 +125,21 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetAuthenticationLength(string? input, int startIndex, out object? parsedValue)
+        internal static int GetAuthenticationLength(
+            string? input,
+            int startIndex,
+            out object? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 
             parsedValue = null;
 
-            if (string.IsNullOrEmpty(input) || (startIndex >= input.Length) || HttpRuleParser.ContainsNewLine(input, startIndex))
+            if (
+                string.IsNullOrEmpty(input)
+                || (startIndex >= input.Length)
+                || HttpRuleParser.ContainsNewLine(input, startIndex)
+            )
             {
                 return 0;
             }
@@ -136,15 +156,25 @@ namespace System.Net.Http.Headers
             switch (schemeLength)
             {
                 // Avoid allocating a scheme string for the most common cases.
-                case 5: targetScheme = "Basic"; break;
-                case 6: targetScheme = "Digest"; break;
-                case 4: targetScheme = "NTLM"; break;
-                case 9: targetScheme = "Negotiate"; break;
+                case 5:
+                    targetScheme = "Basic";
+                    break;
+                case 6:
+                    targetScheme = "Digest";
+                    break;
+                case 4:
+                    targetScheme = "NTLM";
+                    break;
+                case 9:
+                    targetScheme = "Negotiate";
+                    break;
             }
 
-            string scheme = targetScheme != null && string.CompareOrdinal(input, startIndex, targetScheme, 0, schemeLength) == 0 ?
-                targetScheme :
-                input.Substring(startIndex, schemeLength);
+            string scheme =
+                targetScheme != null
+                && string.CompareOrdinal(input, startIndex, targetScheme, 0, schemeLength) == 0
+                    ? targetScheme
+                    : input.Substring(startIndex, schemeLength);
 
             int current = startIndex + schemeLength;
             int whitespaceLength = HttpRuleParser.GetWhitespaceLength(input, current);
@@ -185,12 +215,19 @@ namespace System.Net.Http.Headers
                 }
             }
 
-            string parameter = input.Substring(parameterStartIndex, parameterEndIndex - parameterStartIndex + 1);
+            string parameter = input.Substring(
+                parameterStartIndex,
+                parameterEndIndex - parameterStartIndex + 1
+            );
             parsedValue = new AuthenticationHeaderValue(scheme, parameter);
             return current - startIndex;
         }
 
-        private static bool TrySkipFirstBlob(string input, ref int current, ref int parameterEndIndex)
+        private static bool TrySkipFirstBlob(
+            string input,
+            ref int current,
+            ref int parameterEndIndex
+        )
         {
             // Find the delimiter: Note that <blob> in "<scheme> <blob>" may be a token, quoted string, name/value
             // pair or a Base64 encoded string. So make sure that we don't consider ',' characters within a quoted
@@ -200,8 +237,10 @@ namespace System.Net.Http.Headers
                 if (input[current] == '"')
                 {
                     int quotedStringLength;
-                    if (HttpRuleParser.GetQuotedStringLength(input, current, out quotedStringLength) !=
-                        HttpParseResult.Parsed)
+                    if (
+                        HttpRuleParser.GetQuotedStringLength(input, current, out quotedStringLength)
+                        != HttpParseResult.Parsed
+                    )
                     {
                         // We have a quote but an invalid quoted-string.
                         return false;
@@ -231,7 +270,11 @@ namespace System.Net.Http.Headers
             return true;
         }
 
-        private static bool TryGetParametersEndIndex(string input, ref int parseEndIndex, ref int parameterEndIndex)
+        private static bool TryGetParametersEndIndex(
+            string input,
+            ref int parseEndIndex,
+            ref int parameterEndIndex
+        )
         {
             Debug.Assert(parseEndIndex < input.Length, "Expected string to have at least 1 char");
             Debug.Assert(input[parseEndIndex] == ',');
@@ -241,7 +284,12 @@ namespace System.Net.Http.Headers
             {
                 current++; // skip ',' delimiter
 
-                current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(input, current, true, out _);
+                current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+                    input,
+                    current,
+                    true,
+                    out _
+                );
                 if (current == input.Length)
                 {
                     return true;

@@ -25,7 +25,8 @@ namespace System.Net.Security
         //
         internal Interop.SspiCli.CredHandle _handle;
 
-        protected SafeDeleteContext() : base(IntPtr.Zero, true)
+        protected SafeDeleteContext()
+            : base(IntPtr.Zero, true)
         {
             _handle = default;
         }
@@ -33,10 +34,7 @@ namespace System.Net.Security
         public override bool IsInvalid
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return IsClosed || _handle.IsZero;
-            }
+            get { return IsClosed || _handle.IsZero; }
         }
 
         public override string ToString()

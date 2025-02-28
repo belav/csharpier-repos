@@ -27,10 +27,11 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Caching {
-
-	public delegate void CacheItemRemovedCallback (string key,
-			object value, CacheItemRemovedReason reason);
-
+namespace System.Web.Caching
+{
+    public delegate void CacheItemRemovedCallback(
+        string key,
+        object value,
+        CacheItemRemovedReason reason
+    );
 }
-

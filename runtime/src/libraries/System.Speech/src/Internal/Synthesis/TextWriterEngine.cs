@@ -25,11 +25,19 @@ namespace System.Speech.Internal.Synthesis
 
         #region Internal Methods
 
-        public object ProcessSpeak(string sVersion, string baseUri, CultureInfo culture, List<SsmlXmlAttribute> extraNamespace)
+        public object ProcessSpeak(
+            string sVersion,
+            string baseUri,
+            CultureInfo culture,
+            List<SsmlXmlAttribute> extraNamespace
+        )
         {
             if (!string.IsNullOrEmpty(baseUri))
             {
-                throw new ArgumentException(SR.Get(SRID.InvalidSpeakAttribute, "baseUri", "speak"), nameof(baseUri));
+                throw new ArgumentException(
+                    SR.Get(SRID.InvalidSpeakAttribute, "baseUri", "speak"),
+                    nameof(baseUri)
+                );
             }
 
             bool fNewCulture = culture != null && !culture.Equals(_culture);
@@ -38,7 +46,12 @@ namespace System.Speech.Internal.Synthesis
                 _writer.WriteStartElement("voice");
 
                 // Always add the culture info as the voice element cannot not be empty (namespaces declaration don't count)
-                _writer.WriteAttributeString("xml", "lang", null, culture != null ? culture.Name : _culture.Name);
+                _writer.WriteAttributeString(
+                    "xml",
+                    "lang",
+                    null,
+                    culture != null ? culture.Name : _culture.Name
+                );
 
                 // write all the additional namespace
                 foreach (SsmlXmlAttribute ns in extraNamespace)
@@ -58,7 +71,13 @@ namespace System.Speech.Internal.Synthesis
             return null;
         }
 
-        public void ProcessText(string text, object voice, ref FragmentState fragmentState, int position, bool fIgnore)
+        public void ProcessText(
+            string text,
+            object voice,
+            ref FragmentState fragmentState,
+            int position,
+            bool fIgnore
+        )
         {
             _writer.WriteString(text);
         }
@@ -69,12 +88,21 @@ namespace System.Speech.Internal.Synthesis
             _writer.WriteAttributeString("src", uri);
         }
 
-        public void ProcessBreak(object voice, ref FragmentState fragmentState, EmphasisBreak eBreak, int time, bool fIgnore)
+        public void ProcessBreak(
+            object voice,
+            ref FragmentState fragmentState,
+            EmphasisBreak eBreak,
+            int time,
+            bool fIgnore
+        )
         {
             _writer.WriteStartElement("break");
             if (time > 0 && eBreak == EmphasisBreak.None)
             {
-                _writer.WriteAttributeString("time", time.ToString(CultureInfo.InvariantCulture) + "ms");
+                _writer.WriteAttributeString(
+                    "time",
+                    time.ToString(CultureInfo.InvariantCulture) + "ms"
+                );
             }
             else
             {
@@ -130,13 +158,26 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        public void ProcessMark(object voice, ref FragmentState fragmentState, string name, bool fIgnore)
+        public void ProcessMark(
+            object voice,
+            ref FragmentState fragmentState,
+            string name,
+            bool fIgnore
+        )
         {
             _writer.WriteStartElement("mark");
             _writer.WriteAttributeString("name", name);
         }
 
-        public object ProcessTextBlock(bool isParagraph, object voice, ref FragmentState fragmentState, CultureInfo culture, bool newCulture, VoiceGender gender, VoiceAge age)
+        public object ProcessTextBlock(
+            bool isParagraph,
+            object voice,
+            ref FragmentState fragmentState,
+            CultureInfo culture,
+            bool newCulture,
+            VoiceGender gender,
+            VoiceAge age
+        )
         {
             _writer.WriteStartElement(isParagraph ? "p" : "s");
             if (culture != null)
@@ -146,22 +187,37 @@ namespace System.Speech.Internal.Synthesis
             return null;
         }
 
-        public void EndProcessTextBlock(bool isParagraph)
-        {
-        }
+        public void EndProcessTextBlock(bool isParagraph) { }
 
-        public void ProcessPhoneme(ref FragmentState fragmentState, AlphabetType alphabet, string ph, char[] phoneIds)
+        public void ProcessPhoneme(
+            ref FragmentState fragmentState,
+            AlphabetType alphabet,
+            string ph,
+            char[] phoneIds
+        )
         {
             _writer.WriteStartElement("phoneme");
             if (alphabet != AlphabetType.Ipa)
             {
-                _writer.WriteAttributeString("alphabet", alphabet == AlphabetType.Sapi ? "x-microsoft-sapi" : "x-microsoft-ups");
-                System.Diagnostics.Debug.Assert(alphabet == AlphabetType.Ups || alphabet == AlphabetType.Sapi);
+                _writer.WriteAttributeString(
+                    "alphabet",
+                    alphabet == AlphabetType.Sapi ? "x-microsoft-sapi" : "x-microsoft-ups"
+                );
+                System.Diagnostics.Debug.Assert(
+                    alphabet == AlphabetType.Ups || alphabet == AlphabetType.Sapi
+                );
             }
             _writer.WriteAttributeString("ph", ph);
         }
 
-        public void ProcessProsody(string pitch, string range, string rate, string volume, string duration, string points)
+        public void ProcessProsody(
+            string pitch,
+            string range,
+            string rate,
+            string volume,
+            string duration,
+            string points
+        )
         {
             _writer.WriteStartElement("prosody");
             if (!string.IsNullOrEmpty(range))
@@ -200,12 +256,27 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        public void ProcessSub(string alias, object voice, ref FragmentState fragmentState, int position, bool fIgnore)
+        public void ProcessSub(
+            string alias,
+            object voice,
+            ref FragmentState fragmentState,
+            int position,
+            bool fIgnore
+        )
         {
             _writer.WriteStartElement("sub");
             _writer.WriteAttributeString("alias", alias);
         }
-        public object ProcessVoice(string name, CultureInfo culture, VoiceGender gender, VoiceAge age, int variant, bool fNewCulture, List<SsmlXmlAttribute> extraNamespace)
+
+        public object ProcessVoice(
+            string name,
+            CultureInfo culture,
+            VoiceGender gender,
+            VoiceAge age,
+            int variant,
+            bool fNewCulture,
+            List<SsmlXmlAttribute> extraNamespace
+        )
         {
             _writer.WriteStartElement("voice");
             if (!string.IsNullOrEmpty(name))
@@ -222,11 +293,17 @@ namespace System.Speech.Internal.Synthesis
             }
             if (age != VoiceAge.NotSet)
             {
-                _writer.WriteAttributeString("age", ((int)age).ToString(CultureInfo.InvariantCulture));
+                _writer.WriteAttributeString(
+                    "age",
+                    ((int)age).ToString(CultureInfo.InvariantCulture)
+                );
             }
             if (variant > 0)
             {
-                _writer.WriteAttributeString("variant", (variant).ToString(CultureInfo.InvariantCulture));
+                _writer.WriteAttributeString(
+                    "variant",
+                    (variant).ToString(CultureInfo.InvariantCulture)
+                );
             }
 
             // write all the additional namespace
@@ -263,23 +340,40 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        public void ProcessUnknownElement(object voice, ref FragmentState fragmentState, XmlReader reader)
+        public void ProcessUnknownElement(
+            object voice,
+            ref FragmentState fragmentState,
+            XmlReader reader
+        )
         {
             _writer.WriteNode(reader, false);
         }
 
-        public void StartProcessUnknownAttributes(object voice, ref FragmentState fragmentState, string sElement, List<SsmlXmlAttribute> extraAttributes)
+        public void StartProcessUnknownAttributes(
+            object voice,
+            ref FragmentState fragmentState,
+            string sElement,
+            List<SsmlXmlAttribute> extraAttributes
+        )
         {
             // write all the additional namespace
             foreach (SsmlXmlAttribute attribute in extraAttributes)
             {
-                _writer.WriteAttributeString(attribute._prefix, attribute._name, attribute._ns, attribute._value);
+                _writer.WriteAttributeString(
+                    attribute._prefix,
+                    attribute._name,
+                    attribute._ns,
+                    attribute._value
+                );
             }
         }
 
-        public void EndProcessUnknownAttributes(object voice, ref FragmentState fragmentState, string sElement, List<SsmlXmlAttribute> extraAttributes)
-        {
-        }
+        public void EndProcessUnknownAttributes(
+            object voice,
+            ref FragmentState fragmentState,
+            string sElement,
+            List<SsmlXmlAttribute> extraAttributes
+        ) { }
 
         #region Prompt Engine
 
@@ -288,7 +382,10 @@ namespace System.Speech.Internal.Synthesis
             _pexmlPrefix = pexmlPrefix;
         }
 
-        private bool ProcessPromptEngine(string element, params KeyValuePair<string, string>[] attributes)
+        private bool ProcessPromptEngine(
+            string element,
+            params KeyValuePair<string, string>[] attributes
+        )
         {
             _writer.WriteStartElement(_pexmlPrefix, element, xmlNamespacePrompt);
 
@@ -310,9 +407,22 @@ namespace System.Speech.Internal.Synthesis
             return ProcessPromptEngine("prompt_output");
         }
 
-        public bool ProcessPromptEngineDatabase(object voice, string fname, string delta, string idset)
+        public bool ProcessPromptEngineDatabase(
+            object voice,
+            string fname,
+            string delta,
+            string idset
+        )
         {
-            return ProcessPromptEngine("database", new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("fname", fname), new KeyValuePair<string, string>("delta", delta), new KeyValuePair<string, string>("idset", idset) });
+            return ProcessPromptEngine(
+                "database",
+                new KeyValuePair<string, string>[]
+                {
+                    new KeyValuePair<string, string>("fname", fname),
+                    new KeyValuePair<string, string>("delta", delta),
+                    new KeyValuePair<string, string>("idset", idset),
+                }
+            );
         }
 
         public bool ProcessPromptEngineDiv(object voice)
@@ -322,7 +432,10 @@ namespace System.Speech.Internal.Synthesis
 
         public bool ProcessPromptEngineId(object voice, string id)
         {
-            return ProcessPromptEngine("id", new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("id", id) });
+            return ProcessPromptEngine(
+                "id",
+                new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("id", id) }
+            );
         }
 
         public bool BeginPromptEngineTts(object voice)
@@ -330,31 +443,32 @@ namespace System.Speech.Internal.Synthesis
             return ProcessPromptEngine("tts");
         }
 
-        public void EndPromptEngineTts(object voice)
-        {
-        }
+        public void EndPromptEngineTts(object voice) { }
 
         public bool BeginPromptEngineWithTag(object voice, string tag)
         {
-            return ProcessPromptEngine("withtag", new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("tag", tag) });
+            return ProcessPromptEngine(
+                "withtag",
+                new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("tag", tag) }
+            );
         }
 
-        public void EndPromptEngineWithTag(object voice, string tag)
-        {
-        }
+        public void EndPromptEngineWithTag(object voice, string tag) { }
 
         public bool BeginPromptEngineRule(object voice, string name)
         {
-            return ProcessPromptEngine("rule", new KeyValuePair<string, string>[] { new KeyValuePair<string, string>("name", name) });
+            return ProcessPromptEngine(
+                "rule",
+                new KeyValuePair<string, string>[]
+                {
+                    new KeyValuePair<string, string>("name", name),
+                }
+            );
         }
 
-        public void EndPromptEngineRule(object voice, string name)
-        {
-        }
+        public void EndPromptEngineRule(object voice, string name) { }
 
-        public void EndPromptEngineOutput(object voice)
-        {
-        }
+        public void EndPromptEngineOutput(object voice) { }
 
         #endregion
 
@@ -364,10 +478,7 @@ namespace System.Speech.Internal.Synthesis
 
         public string Ssml
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         #endregion
@@ -378,7 +489,8 @@ namespace System.Speech.Internal.Synthesis
         private CultureInfo _culture;
         private bool _closeSpeak;
         private string _pexmlPrefix;
-        private const string xmlNamespacePrompt = "http://schemas.microsoft.com/Speech/2003/03/PromptEngine";
+        private const string xmlNamespacePrompt =
+            "http://schemas.microsoft.com/Speech/2003/03/PromptEngine";
 
         #endregion
     }

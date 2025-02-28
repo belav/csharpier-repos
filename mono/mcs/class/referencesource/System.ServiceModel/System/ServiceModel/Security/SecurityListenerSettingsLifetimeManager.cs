@@ -19,7 +19,12 @@ namespace System.ServiceModel.Security
         IChannelListener innerListener;
         int referenceCount;
 
-        public SecurityListenerSettingsLifetimeManager(SecurityProtocolFactory securityProtocolFactory, SecuritySessionServerSettings sessionSettings, bool sessionMode, IChannelListener innerListener)
+        public SecurityListenerSettingsLifetimeManager(
+            SecurityProtocolFactory securityProtocolFactory,
+            SecuritySessionServerSettings sessionSettings,
+            bool sessionMode,
+            IChannelListener innerListener
+        )
         {
             this.securityProtocolFactory = securityProtocolFactory;
             this.sessionSettings = sessionSettings;
@@ -52,16 +57,17 @@ namespace System.ServiceModel.Security
             if (this.sessionMode && this.sessionSettings != null)
             {
                 this.sessionSettings.Open(timeoutHelper.RemainingTime());
-            } 
+            }
 
             this.innerListener.Open(timeoutHelper.RemainingTime());
 
-            this.SetBufferManager();        
+            this.SetBufferManager();
         }
 
         void SetBufferManager()
         {
-            ITransportFactorySettings transportSettings = this.innerListener.GetProperty<ITransportFactorySettings>();
+            ITransportFactorySettings transportSettings =
+                this.innerListener.GetProperty<ITransportFactorySettings>();
             if (transportSettings == null)
                 return;
 
@@ -74,7 +80,11 @@ namespace System.ServiceModel.Security
                 this.securityProtocolFactory.StreamBufferManager = bufferManager;
             }
 
-            if (this.sessionMode && this.sessionSettings != null && this.sessionSettings.SessionProtocolFactory != null)
+            if (
+                this.sessionMode
+                && this.sessionSettings != null
+                && this.sessionSettings.SessionProtocolFactory != null
+            )
             {
                 this.sessionSettings.SessionProtocolFactory.StreamBufferManager = bufferManager;
             }
@@ -82,22 +92,35 @@ namespace System.ServiceModel.Security
 
         public IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            List<OperationWithTimeoutBeginCallback> beginOperations = new List<OperationWithTimeoutBeginCallback>(3);
+            List<OperationWithTimeoutBeginCallback> beginOperations =
+                new List<OperationWithTimeoutBeginCallback>(3);
             List<OperationEndCallback> endOperations = new List<OperationEndCallback>(3);
             if (this.securityProtocolFactory != null)
             {
-                beginOperations.Add(new OperationWithTimeoutBeginCallback(this.BeginOpenSecurityProtocolFactory));
+                beginOperations.Add(
+                    new OperationWithTimeoutBeginCallback(this.BeginOpenSecurityProtocolFactory)
+                );
                 endOperations.Add(new OperationEndCallback(this.EndOpenSecurityProtocolFactory));
             }
             if (this.sessionMode && this.sessionSettings != null)
             {
-                beginOperations.Add(new OperationWithTimeoutBeginCallback(this.sessionSettings.BeginOpen));
+                beginOperations.Add(
+                    new OperationWithTimeoutBeginCallback(this.sessionSettings.BeginOpen)
+                );
                 endOperations.Add(new OperationEndCallback(this.sessionSettings.EndOpen));
             }
-            beginOperations.Add(new OperationWithTimeoutBeginCallback(this.innerListener.BeginOpen));
+            beginOperations.Add(
+                new OperationWithTimeoutBeginCallback(this.innerListener.BeginOpen)
+            );
             endOperations.Add(new OperationEndCallback(this.innerListener.EndOpen));
 
-            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(timeout, beginOperations.ToArray(), endOperations.ToArray(), callback, state);
+            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
+                timeout,
+                beginOperations.ToArray(),
+                endOperations.ToArray(),
+                callback,
+                state
+            );
         }
 
         public void EndOpen(IAsyncResult result)
@@ -106,7 +129,11 @@ namespace System.ServiceModel.Security
             this.SetBufferManager();
         }
 
-        IAsyncResult BeginOpenSecurityProtocolFactory(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult BeginOpenSecurityProtocolFactory(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.securityProtocolFactory.BeginOpen(false, timeout, callback, state);
         }
@@ -152,21 +179,38 @@ namespace System.ServiceModel.Security
                 bool throwing = true;
                 try
                 {
-                    List<OperationWithTimeoutBeginCallback> beginOperations = new List<OperationWithTimeoutBeginCallback>(3);
+                    List<OperationWithTimeoutBeginCallback> beginOperations =
+                        new List<OperationWithTimeoutBeginCallback>(3);
                     List<OperationEndCallback> endOperations = new List<OperationEndCallback>(3);
                     if (this.securityProtocolFactory != null)
                     {
-                        beginOperations.Add(new OperationWithTimeoutBeginCallback(this.securityProtocolFactory.BeginClose));
-                        endOperations.Add(new OperationEndCallback(this.securityProtocolFactory.EndClose));
+                        beginOperations.Add(
+                            new OperationWithTimeoutBeginCallback(
+                                this.securityProtocolFactory.BeginClose
+                            )
+                        );
+                        endOperations.Add(
+                            new OperationEndCallback(this.securityProtocolFactory.EndClose)
+                        );
                     }
                     if (this.sessionMode && this.sessionSettings != null)
                     {
-                        beginOperations.Add(new OperationWithTimeoutBeginCallback(this.sessionSettings.BeginClose));
+                        beginOperations.Add(
+                            new OperationWithTimeoutBeginCallback(this.sessionSettings.BeginClose)
+                        );
                         endOperations.Add(new OperationEndCallback(this.sessionSettings.EndClose));
                     }
-                    beginOperations.Add(new OperationWithTimeoutBeginCallback(this.innerListener.BeginClose));
+                    beginOperations.Add(
+                        new OperationWithTimeoutBeginCallback(this.innerListener.BeginClose)
+                    );
                     endOperations.Add(new OperationEndCallback(this.innerListener.EndClose));
-                    IAsyncResult result = OperationWithTimeoutComposer.BeginComposeAsyncOperations(timeout, beginOperations.ToArray(), endOperations.ToArray(), callback, state);
+                    IAsyncResult result = OperationWithTimeoutComposer.BeginComposeAsyncOperations(
+                        timeout,
+                        beginOperations.ToArray(),
+                        endOperations.ToArray(),
+                        callback,
+                        state
+                    );
                     throwing = false;
                     return result;
                 }
@@ -224,11 +268,9 @@ namespace System.ServiceModel.Security
         class DummyCloseAsyncResult : CompletedAsyncResult
         {
             public DummyCloseAsyncResult(AsyncCallback callback, object state)
-                : base(callback, state)
-            {
-            }
+                : base(callback, state) { }
 
-            new public static void End(IAsyncResult result)
+            public static new void End(IAsyncResult result)
             {
                 AsyncResult.End<DummyCloseAsyncResult>(result);
             }

@@ -8,7 +8,12 @@ namespace Microsoft.Extensions.StackTrace.Sources;
 
 internal sealed class StackFrameInfo
 {
-    public StackFrameInfo(int lineNumber, string? filePath, StackFrame? stackFrame, MethodDisplayInfo? methodDisplayInfo)
+    public StackFrameInfo(
+        int lineNumber,
+        string? filePath,
+        StackFrame? stackFrame,
+        MethodDisplayInfo? methodDisplayInfo
+    )
     {
         LineNumber = lineNumber;
         FilePath = filePath;

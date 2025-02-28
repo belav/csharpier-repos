@@ -6,16 +6,18 @@ namespace System.ServiceModel.Discovery.VersionApril2005
 {
     using System.Runtime;
 
-    sealed class ResolveDuplexApril2005AsyncResult : ResolveDuplexAsyncResult<ResolveMessageApril2005, IDiscoveryResponseContractApril2005>
+    sealed class ResolveDuplexApril2005AsyncResult
+        : ResolveDuplexAsyncResult<ResolveMessageApril2005, IDiscoveryResponseContractApril2005>
     {
-        internal ResolveDuplexApril2005AsyncResult(ResolveMessageApril2005 resolveMessage,
+        internal ResolveDuplexApril2005AsyncResult(
+            ResolveMessageApril2005 resolveMessage,
             IDiscoveryServiceImplementation discoveryServiceImpl,
             IMulticastSuppressionImplementation multicastSuppressionImpl,
             AsyncCallback callback,
-            object state)
+            object state
+        )
             : base(resolveMessage, discoveryServiceImpl, multicastSuppressionImpl, callback, state)
-        {
-        }
+        { }
 
         public static void End(IAsyncResult result)
         {
@@ -28,7 +30,10 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             {
                 if (TD.DiscoveryMessageWithNoContentIsEnabled())
                 {
-                    TD.DiscoveryMessageWithNoContent(this.Context.EventTraceActivity, ProtocolStrings.TracingStrings.Resolve);
+                    TD.DiscoveryMessageWithNoContent(
+                        this.Context.EventTraceActivity,
+                        ProtocolStrings.TracingStrings.Resolve
+                    );
                 }
 
                 return false;
@@ -36,7 +41,9 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             return true;
         }
 
-        protected override ResolveCriteria GetResolveCriteria(ResolveMessageApril2005 resolveMessage)
+        protected override ResolveCriteria GetResolveCriteria(
+            ResolveMessageApril2005 resolveMessage
+        )
         {
             return resolveMessage.Resolve.ToResolveCriteria();
         }
@@ -46,17 +53,20 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             DiscoveryMessageSequence discoveryMessageSequence,
             EndpointDiscoveryMetadata matchingEndpoint,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
             return responseChannel.BeginResolveMatchOperation(
-                ResolveMatchesMessageApril2005.Create(
-                discoveryMessageSequence,
-                matchingEndpoint),
+                ResolveMatchesMessageApril2005.Create(discoveryMessageSequence, matchingEndpoint),
                 callback,
-                state);
+                state
+            );
         }
 
-        protected override void EndSendResolveResponse(IDiscoveryResponseContractApril2005 responseChannel, IAsyncResult result)
+        protected override void EndSendResolveResponse(
+            IDiscoveryResponseContractApril2005 responseChannel,
+            IAsyncResult result
+        )
         {
             responseChannel.EndResolveMatchOperation(result);
         }
@@ -66,17 +76,23 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             DiscoveryMessageSequence discoveryMessageSequence,
             EndpointDiscoveryMetadata proxyEndpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
             return responseChannel.BeginHelloOperation(
                 HelloMessageApril2005.Create(
-                discoveryMessageSequence,
-                proxyEndpointDiscoveryMetadata),
+                    discoveryMessageSequence,
+                    proxyEndpointDiscoveryMetadata
+                ),
                 callback,
-                state);
+                state
+            );
         }
 
-        protected override void EndSendProxyAnnouncement(IDiscoveryResponseContractApril2005 responseChannel, IAsyncResult result)
+        protected override void EndSendProxyAnnouncement(
+            IDiscoveryResponseContractApril2005 responseChannel,
+            IAsyncResult result
+        )
         {
             responseChannel.EndHelloOperation(result);
         }

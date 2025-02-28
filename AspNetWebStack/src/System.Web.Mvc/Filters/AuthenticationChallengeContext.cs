@@ -14,16 +14,17 @@ namespace System.Web.Mvc.Filters
 
         /// <summary>Initializes a new instance of the <see cref="AuthenticationChallengeContext"/> class.</summary>
         /// <remarks>This constructor should only be used for unit testing purposes.</remarks>
-        public AuthenticationChallengeContext()
-        {
-        }
+        public AuthenticationChallengeContext() { }
 
         /// <summary>Initializes a new instance of the <see cref="AuthenticationChallengeContext"/> class.</summary>
         /// <param name="controllerContext">The controller context.</param>
         /// <param name="actionDescriptor">The action descriptor.</param>
         /// <param name="result">The current action result.</param>
-        public AuthenticationChallengeContext(ControllerContext controllerContext, ActionDescriptor actionDescriptor,
-            ActionResult result)
+        public AuthenticationChallengeContext(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor,
+            ActionResult result
+        )
             : base(controllerContext)
         {
             if (actionDescriptor == null)
@@ -43,14 +44,8 @@ namespace System.Web.Mvc.Filters
         /// <summary>Gets or sets the action descriptor.</summary>
         public ActionDescriptor ActionDescriptor
         {
-            get
-            {
-                return _actionDescriptor;
-            }
-            set
-            {
-                _actionDescriptor = value;
-            }
+            get { return _actionDescriptor; }
+            set { _actionDescriptor = value; }
         }
 
         /// <summary>Gets or sets the action result to execute.</summary>
@@ -61,14 +56,8 @@ namespace System.Web.Mvc.Filters
         /// </remarks>
         public ActionResult Result
         {
-            get
-            {
-                return _result;
-            }
-            set
-            {
-                _result = value;
-            }
+            get { return _result; }
+            set { _result = value; }
         }
     }
 }

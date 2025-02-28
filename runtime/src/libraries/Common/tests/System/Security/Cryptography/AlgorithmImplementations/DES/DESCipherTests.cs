@@ -13,13 +13,19 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
     public static partial class DesCipherTests
     {
         // These are the expected output of many decryptions. Changing these values requires re-generating test input.
-        private static readonly string s_multiBlockString = new ASCIIEncoding().GetBytes(
-            "This is a sentence that is longer than a block, it ensures that multi-block functions work.").ByteArrayToHex();
+        private static readonly string s_multiBlockString = new ASCIIEncoding()
+            .GetBytes(
+                "This is a sentence that is longer than a block, it ensures that multi-block functions work."
+            )
+            .ByteArrayToHex();
         private static readonly string s_multiBlockStringPaddedZeros =
-             "5468697320697320612073656E74656E63652074686174206973206C6F6E676572207468616E206120626C6F636B2C20" +
-             "697420656E73757265732074686174206D756C74692D626C6F636B2066756E6374696F6E7320776F726B2E0000000000";
-        private static readonly string s_multiBlockString_8 = new ASCIIEncoding().GetBytes(
-            "This is a sentence that is longer than a block,but exactly an even block multiplier of 8").ByteArrayToHex();
+            "5468697320697320612073656E74656E63652074686174206973206C6F6E676572207468616E206120626C6F636B2C20"
+            + "697420656E73757265732074686174206D756C74692D626C6F636B2066756E6374696F6E7320776F726B2E0000000000";
+        private static readonly string s_multiBlockString_8 = new ASCIIEncoding()
+            .GetBytes(
+                "This is a sentence that is longer than a block,but exactly an even block multiplier of 8"
+            )
+            .ByteArrayToHex();
         private static readonly string s_randomKey_64 = "87FF0737F868378F";
         private static readonly string s_randomIv_64 = "E531E789E3E1BB6F";
 
@@ -36,7 +42,7 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     null,
                     "4e6f77206973207468652074696d6520666f7220616c6c20",
                     null,
-                    "3fa40e8a984d48156a271787ab8883f9893d51ec4b563b53"
+                    "3fa40e8a984d48156a271787ab8883f9893d51ec4b563b53",
                 };
 
                 yield return new object[]
@@ -47,8 +53,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     null,
                     s_multiBlockString_8,
                     null,
-                    "4E42A439ED50C7998CD626B8BE1ECC0A82B985EA772030E87C96BFAE1B97A7666505B8AE96745DE2921F6868897C20F2" +
-                    "BC8C7B284FD1E9A0A2E49DDAB7A3978233423377C88177CB2D92475EE4DC1FF9E6DFA135DE648E1B"
+                    "4E42A439ED50C7998CD626B8BE1ECC0A82B985EA772030E87C96BFAE1B97A7666505B8AE96745DE2921F6868897C20F2"
+                        + "BC8C7B284FD1E9A0A2E49DDAB7A3978233423377C88177CB2D92475EE4DC1FF9E6DFA135DE648E1B",
                 };
 
                 yield return new object[]
@@ -59,8 +65,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     null,
                     s_multiBlockString,
                     null,
-                    "4E42A439ED50C7998CD626B8BE1ECC0A82B985EA772030E87C96BFAE1B97A7666505B8AE96745DE249C1EC3338BBAD41" +
-                    "93A9B792205F345E22D45A9A996F21CE24697E5A45F600E8C6E71FC7114A3E96EC4EACC9F652DEBC679D22DE7141F67F"
+                    "4E42A439ED50C7998CD626B8BE1ECC0A82B985EA772030E87C96BFAE1B97A7666505B8AE96745DE249C1EC3338BBAD41"
+                        + "93A9B792205F345E22D45A9A996F21CE24697E5A45F600E8C6E71FC7114A3E96EC4EACC9F652DEBC679D22DE7141F67F",
                 };
 
                 yield return new object[]
@@ -71,8 +77,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     null,
                     s_multiBlockString,
                     s_multiBlockStringPaddedZeros,
-                    "4E42A439ED50C7998CD626B8BE1ECC0A82B985EA772030E87C96BFAE1B97A7666505B8AE96745DE249C1EC3338BBAD41" +
-                    "93A9B792205F345E22D45A9A996F21CE24697E5A45F600E8C6E71FC7114A3E96EC4EACC9F652DEBC471DF9564F29C738"
+                    "4E42A439ED50C7998CD626B8BE1ECC0A82B985EA772030E87C96BFAE1B97A7666505B8AE96745DE249C1EC3338BBAD41"
+                        + "93A9B792205F345E22D45A9A996F21CE24697E5A45F600E8C6E71FC7114A3E96EC4EACC9F652DEBC471DF9564F29C738",
                 };
 
                 // FIPS81 CBC with plaintext "Now is the time for all "
@@ -84,7 +90,7 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     "1234567890abcdef",
                     "4e6f77206973207468652074696d6520666f7220616c6c20",
                     null,
-                    "e5c7cdde872bf27c43e934008c389c0f683788499a7c05f6"
+                    "e5c7cdde872bf27c43e934008c389c0f683788499a7c05f6",
                 };
 
                 yield return new object[]
@@ -95,8 +101,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     s_randomIv_64,
                     s_multiBlockString_8,
                     null,
-                    "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03EEB61CF5219D769C1" +
-                    "ABF1A1FDE0EF87D3B3C4D567D9C8960DDA55DBE13341928FEF38B938E1F62FAD1D05E355E440E012"
+                    "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03EEB61CF5219D769C1"
+                        + "ABF1A1FDE0EF87D3B3C4D567D9C8960DDA55DBE13341928FEF38B938E1F62FAD1D05E355E440E012",
                 };
 
                 yield return new object[]
@@ -107,8 +113,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     s_randomIv_64,
                     s_multiBlockString,
                     s_multiBlockStringPaddedZeros,
-                    "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03E00F5B57801EFF745" +
-                    "F7A577842461CF39AC143505EC326233E66343A46FEADE9E8456D8AC6A84A1C32E6792857F062400740CB21A333D334D"
+                    "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03E00F5B57801EFF745"
+                        + "F7A577842461CF39AC143505EC326233E66343A46FEADE9E8456D8AC6A84A1C32E6792857F062400740CB21A333D334D",
                 };
 
                 yield return new object[]
@@ -119,16 +125,27 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     s_randomIv_64,
                     s_multiBlockString,
                     null,
-                    "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03E00F5B57801EFF745" +
-                    "F7A577842461CF39AC143505EC326233E66343A46FEADE9E8456D8AC6A84A1C32E6792857F062400EA9053D17AD3C35D"
+                    "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03E00F5B57801EFF745"
+                        + "F7A577842461CF39AC143505EC326233E66343A46FEADE9E8456D8AC6A84A1C32E6792857F062400EA9053D17AD3C35D",
                 };
             }
         }
 
         [Theory, MemberData(nameof(DesTestData))]
-        public static void DesRoundTrip(CipherMode cipherMode, PaddingMode paddingMode, string key, string iv, string textHex, string expectedDecrypted, string expectedEncrypted)
+        public static void DesRoundTrip(
+            CipherMode cipherMode,
+            PaddingMode paddingMode,
+            string key,
+            string iv,
+            string textHex,
+            string expectedDecrypted,
+            string expectedEncrypted
+        )
         {
-            byte[] expectedDecryptedBytes = expectedDecrypted == null ? textHex.HexToByteArray() : expectedDecrypted.HexToByteArray();
+            byte[] expectedDecryptedBytes =
+                expectedDecrypted == null
+                    ? textHex.HexToByteArray()
+                    : expectedDecrypted.HexToByteArray();
             byte[] expectedEncryptedBytes = expectedEncrypted.HexToByteArray();
             byte[] keyBytes = key.HexToByteArray();
 
@@ -166,8 +183,9 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                         byte[] plainText1 = s_multiBlockString.HexToByteArray();
                         byte[] cipher1 = encryptor.Transform(plainText1);
                         byte[] expectedCipher1 = (
-                            "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03E00F5B57801EFF745" +
-                            "F7A577842461CF39AC143505EC326233E66343A46FEADE9E8456D8AC6A84A1C32E6792857F062400EA9053D17AD3C35D").HexToByteArray();
+                            "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03E00F5B57801EFF745"
+                            + "F7A577842461CF39AC143505EC326233E66343A46FEADE9E8456D8AC6A84A1C32E6792857F062400EA9053D17AD3C35D"
+                        ).HexToByteArray();
                         Assert.Equal<byte>(expectedCipher1, cipher1);
 
                         byte[] decrypted1 = decryptor.Transform(cipher1);
@@ -177,8 +195,9 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                         byte[] plainText2 = s_multiBlockString_8.HexToByteArray();
                         byte[] cipher2 = encryptor.Transform(plainText2);
                         byte[] expectedCipher2 = (
-                            "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03EEB61CF5219D769C1" +
-                            "ABF1A1FDE0EF87D3B3C4D567D9C8960DDA55DBE13341928FEF38B938E1F62FAD1D05E355E440E012A0FFAB00B7AEE64D").HexToByteArray();
+                            "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03EEB61CF5219D769C1"
+                            + "ABF1A1FDE0EF87D3B3C4D567D9C8960DDA55DBE13341928FEF38B938E1F62FAD1D05E355E440E012A0FFAB00B7AEE64D"
+                        ).HexToByteArray();
                         Assert.Equal<byte>(expectedCipher2, cipher2);
 
                         byte[] decrypted2 = decryptor.Transform(cipher2);
@@ -196,13 +215,19 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
             {
                 alg.Padding = PaddingMode.PKCS7;
                 alg.Mode = CipherMode.CBC;
-                using (ICryptoTransform encryptor = alg.CreateEncryptor(s_randomKey_64.HexToByteArray(), s_randomIv_64.HexToByteArray()))
+                using (
+                    ICryptoTransform encryptor = alg.CreateEncryptor(
+                        s_randomKey_64.HexToByteArray(),
+                        s_randomIv_64.HexToByteArray()
+                    )
+                )
                 {
                     byte[] plainText1 = s_multiBlockString.HexToByteArray();
                     byte[] cipher1 = encryptor.Transform(plainText1);
                     byte[] expectedCipher1 = (
-                        "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03E00F5B57801EFF745" +
-                        "F7A577842461CF39AC143505EC326233E66343A46FEADE9E8456D8AC6A84A1C32E6792857F062400EA9053D17AD3C35D").HexToByteArray();
+                        "7264319AE3C504148CD4A19B4FDC7D2ACCCB0A08D60CBE2B885DCB2C1A86ED9CA51006E33859B03E00F5B57801EFF745"
+                        + "F7A577842461CF39AC143505EC326233E66343A46FEADE9E8456D8AC6A84A1C32E6792857F062400EA9053D17AD3C35D"
+                    ).HexToByteArray();
                     Assert.Equal<byte>(expectedCipher1, cipher1);
                 }
             }
@@ -215,13 +240,19 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
             {
                 alg.Padding = PaddingMode.PKCS7;
                 alg.Mode = CipherMode.ECB;
-                using (ICryptoTransform encryptor = alg.CreateEncryptor(s_randomKey_64.HexToByteArray(), null))
+                using (
+                    ICryptoTransform encryptor = alg.CreateEncryptor(
+                        s_randomKey_64.HexToByteArray(),
+                        null
+                    )
+                )
                 {
                     byte[] plainText1 = s_multiBlockString.HexToByteArray();
                     byte[] cipher1 = encryptor.Transform(plainText1);
                     byte[] expectedCipher1 = (
-                        "4E42A439ED50C7998CD626B8BE1ECC0A82B985EA772030E87C96BFAE1B97A7666505B8AE96745DE249C1EC3338BBAD41" +
-                        "93A9B792205F345E22D45A9A996F21CE24697E5A45F600E8C6E71FC7114A3E96EC4EACC9F652DEBC679D22DE7141F67F").HexToByteArray();
+                        "4E42A439ED50C7998CD626B8BE1ECC0A82B985EA772030E87C96BFAE1B97A7666505B8AE96745DE249C1EC3338BBAD41"
+                        + "93A9B792205F345E22D45A9A996F21CE24697E5A45F600E8C6E71FC7114A3E96EC4EACC9F652DEBC679D22DE7141F67F"
+                    ).HexToByteArray();
                     Assert.Equal<byte>(expectedCipher1, cipher1);
                 }
             }
@@ -249,8 +280,14 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
 
                 Assert.Equal(3 * (alg.BlockSize / 8), outputOffset);
                 string outputAsHex = output.ByteArrayToHex();
-                Assert.NotEqual(new string('0', outputOffset * 2), outputAsHex.Substring(0, outputOffset * 2));
-                Assert.Equal(new string('0', (output.Length - outputOffset) * 2), outputAsHex.Substring(outputOffset * 2));
+                Assert.NotEqual(
+                    new string('0', outputOffset * 2),
+                    outputAsHex.Substring(0, outputOffset * 2)
+                );
+                Assert.Equal(
+                    new string('0', (output.Length - outputOffset) * 2),
+                    outputAsHex.Substring(outputOffset * 2)
+                );
             }
         }
 
@@ -312,7 +349,10 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
         [InlineData(CipherMode.CBC, 0)]
         [InlineData(CipherMode.CFB, 8)]
         [InlineData(CipherMode.ECB, 0)]
-        public static void EncryptorReuse_LeadsToSameResults(CipherMode cipherMode, int feedbackSize)
+        public static void EncryptorReuse_LeadsToSameResults(
+            CipherMode cipherMode,
+            int feedbackSize
+        )
         {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
@@ -341,7 +381,10 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
         [InlineData(CipherMode.CBC, 0)]
         [InlineData(CipherMode.CFB, 8)]
         [InlineData(CipherMode.ECB, 0)]
-        public static void DecryptorReuse_LeadsToSameResults(CipherMode cipherMode, int feedbackSize)
+        public static void DecryptorReuse_LeadsToSameResults(
+            CipherMode cipherMode,
+            int feedbackSize
+        )
         {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
@@ -520,7 +563,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
             byte[] iv,
             byte[] plainBytes,
             byte[] cipherBytes,
-            int? feedbackSize = default)
+            int? feedbackSize = default
+        )
         {
             byte[] liveEncryptBytes;
             byte[] liveDecryptBytes;
@@ -555,8 +599,18 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     }
                     else if (cipherMode == CipherMode.CFB)
                     {
-                        liveOneShotDecryptBytes = des.DecryptCfb(cipherBytes, iv, paddingMode, feedbackSizeInBits: feedbackSize.Value);
-                        liveOneShotEncryptBytes = des.EncryptCfb(plainBytes, iv, paddingMode, feedbackSizeInBits: feedbackSize.Value);
+                        liveOneShotDecryptBytes = des.DecryptCfb(
+                            cipherBytes,
+                            iv,
+                            paddingMode,
+                            feedbackSizeInBits: feedbackSize.Value
+                        );
+                        liveOneShotEncryptBytes = des.EncryptCfb(
+                            plainBytes,
+                            iv,
+                            paddingMode,
+                            feedbackSizeInBits: feedbackSize.Value
+                        );
                     }
                 }
             }
@@ -579,7 +633,13 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
         {
             using (MemoryStream output = new MemoryStream())
             using (ICryptoTransform encryptor = des.CreateEncryptor(key, iv))
-            using (CryptoStream cryptoStream = new CryptoStream(output, encryptor, CryptoStreamMode.Write))
+            using (
+                CryptoStream cryptoStream = new CryptoStream(
+                    output,
+                    encryptor,
+                    CryptoStreamMode.Write
+                )
+            )
             {
                 cryptoStream.Write(plainBytes, 0, plainBytes.Length);
                 cryptoStream.FlushFinalBlock();
@@ -588,11 +648,22 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
             }
         }
 
-        private static byte[] DESDecryptDirectKey(DES des, byte[] key, byte[] iv, byte[] cipherBytes)
+        private static byte[] DESDecryptDirectKey(
+            DES des,
+            byte[] key,
+            byte[] iv,
+            byte[] cipherBytes
+        )
         {
             using (MemoryStream output = new MemoryStream())
             using (ICryptoTransform decryptor = des.CreateDecryptor(key, iv))
-            using (CryptoStream cryptoStream = new CryptoStream(output, decryptor, CryptoStreamMode.Write))
+            using (
+                CryptoStream cryptoStream = new CryptoStream(
+                    output,
+                    decryptor,
+                    CryptoStreamMode.Write
+                )
+            )
             {
                 cryptoStream.Write(cipherBytes, 0, cipherBytes.Length);
                 cryptoStream.FlushFinalBlock();
@@ -618,7 +689,8 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                 byte[] input = new byte[3 * (alg.BlockSize / 8)];
 
                 Assert.Throws<ArgumentOutOfRangeException>(
-                    () => xform.TransformBlock(input, 0, input.Length, output, 0));
+                    () => xform.TransformBlock(input, 0, input.Length, output, 0)
+                );
 
                 Assert.Equal(new byte[output.Length], output);
             }
@@ -642,7 +714,13 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
             using (ICryptoTransform xform = alg.CreateDecryptor(key, iv))
             {
                 Assert.Equal(2 * alg.BlockSize, (outputBytes.Length - outputPadding) * 8);
-                outputOffset += xform.TransformBlock(input, 0, input.Length, outputBytes, outputOffset);
+                outputOffset += xform.TransformBlock(
+                    input,
+                    0,
+                    input.Length,
+                    outputBytes,
+                    outputOffset
+                );
                 byte[] overflow = xform.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
                 Buffer.BlockCopy(overflow, 0, outputBytes, outputOffset, overflow.Length);
                 outputOffset += overflow.Length;

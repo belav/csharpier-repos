@@ -32,7 +32,11 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     /// <returns>
     ///     An <see cref="IConventionTypeBaseBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionTypeBaseBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionTypeBaseBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -49,7 +53,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     new IConventionTypeBaseBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.
@@ -77,7 +82,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
         Type propertyType,
         string propertyName,
         bool setTypeConfigurationSource = true,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns an object that can be used to configure the property with the given member info.
@@ -98,10 +104,7 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the property can be added.</returns>
-    bool CanHaveProperty(
-        Type? propertyType,
-        string propertyName,
-        bool fromDataAnnotation = false);
+    bool CanHaveProperty(Type? propertyType, string propertyName, bool fromDataAnnotation = false);
 
     /// <summary>
     ///     Returns a value indicating whether the given property can be added to this type.
@@ -125,7 +128,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     IConventionPropertyBuilder? IndexerProperty(
         Type propertyType,
         string propertyName,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given indexer property can be added to this type.
@@ -137,7 +141,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     bool CanHaveIndexerProperty(
         Type propertyType,
         string propertyName,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Creates a property with a name that's different from any existing properties.
@@ -149,7 +154,11 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     ///     An object that can be used to configure the property if it exists on the type,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? CreateUniqueProperty(Type propertyType, string basePropertyName, bool required);
+    IConventionPropertyBuilder? CreateUniqueProperty(
+        Type propertyType,
+        string basePropertyName,
+        bool required
+    );
 
     /// <summary>
     ///     Returns the existing properties with the given names or creates them if matching CLR members are found.
@@ -159,7 +168,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     /// <returns>A list of properties if they exist on the type, <see langword="null" /> otherwise.</returns>
     IReadOnlyList<IConventionProperty>? GetOrCreateProperties(
         IReadOnlyList<string>? propertyNames,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the existing properties matching the given members or creates them.
@@ -169,13 +179,16 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     /// <returns>A list of properties if they exist on the type, <see langword="null" /> otherwise.</returns>
     IReadOnlyList<IConventionProperty>? GetOrCreateProperties(
         IEnumerable<MemberInfo>? memberInfos,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes properties in the given list if they are not part of any metadata object.
     /// </summary>
     /// <param name="properties">The properties to remove.</param>
-    IConventionTypeBaseBuilder RemoveUnusedImplicitProperties(IReadOnlyList<IConventionProperty> properties);
+    IConventionTypeBaseBuilder RemoveUnusedImplicitProperties(
+        IReadOnlyList<IConventionProperty> properties
+    );
 
     /// <summary>
     ///     Removes a property from this type.
@@ -186,7 +199,10 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the property was removed,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionTypeBaseBuilder? HasNoProperty(IConventionProperty property, bool fromDataAnnotation = false);
+    IConventionTypeBaseBuilder? HasNoProperty(
+        IConventionProperty property,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the property can be removed from this type.
@@ -212,7 +228,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
         Type propertyType,
         string propertyName,
         Type? complexType = null,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns an object that can be used to configure the complex property with the given member info.
@@ -228,7 +245,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     IConventionComplexPropertyBuilder? ComplexProperty(
         MemberInfo memberInfo,
         Type? complexType = null,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given complex property can be added to this type.
@@ -242,7 +260,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
         Type? propertyType,
         string propertyName,
         Type? complexType = null,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given complex property can be added to this type.
@@ -254,7 +273,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     bool CanHaveComplexProperty(
         MemberInfo memberInfo,
         Type? complexType = null,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns an object that can be used to configure the complex indexer property with the given name.
@@ -272,7 +292,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
         Type propertyType,
         string propertyName,
         Type? complexType,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given complex indexer property can be added to this type.
@@ -286,7 +307,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
         Type propertyType,
         string propertyName,
         Type? complexType,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes a complex property from this type.
@@ -297,7 +319,10 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the complex property was removed,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionTypeBaseBuilder? HasNoComplexProperty(IConventionComplexProperty complexProperty, bool fromDataAnnotation = false);
+    IConventionTypeBaseBuilder? HasNoComplexProperty(
+        IConventionComplexProperty complexProperty,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the complex property can be removed from this type.
@@ -305,7 +330,10 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     /// <param name="complexProperty">The complex property to be removed.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the complex property can be removed from this type.</returns>
-    bool CanRemoveComplexProperty(IConventionComplexProperty complexProperty, bool fromDataAnnotation = false);
+    bool CanRemoveComplexProperty(
+        IConventionComplexProperty complexProperty,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Indicates whether the given member name is ignored for the given configuration source.
@@ -359,7 +387,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionTypeBaseBuilder? HasChangeTrackingStrategy(
         ChangeTrackingStrategy? changeTrackingStrategy,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given change tracking strategy can be set from the current configuration source.
@@ -370,7 +399,10 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the given change tracking strategy can be set.</returns>
-    bool CanSetChangeTrackingStrategy(ChangeTrackingStrategy? changeTrackingStrategy, bool fromDataAnnotation = false);
+    bool CanSetChangeTrackingStrategy(
+        ChangeTrackingStrategy? changeTrackingStrategy,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the <see cref="PropertyAccessMode" /> to use for all properties of this type.
@@ -387,7 +419,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionTypeBaseBuilder? UsePropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="PropertyAccessMode" /> can be set from the current configuration source.
@@ -398,5 +431,8 @@ public interface IConventionTypeBaseBuilder : IConventionAnnotatableBuilder
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the given <see cref="PropertyAccessMode" /> can be set.</returns>
-    bool CanSetPropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false);
+    bool CanSetPropertyAccessMode(
+        PropertyAccessMode? propertyAccessMode,
+        bool fromDataAnnotation = false
+    );
 }

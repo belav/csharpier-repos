@@ -6,21 +6,21 @@ namespace System.Runtime.Serialization.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Xml;
     using System.Security;
+    using System.Xml;
 
     public sealed partial class ParameterElement : ConfigurationElement
     {
-        public ParameterElement()
-        {
-        }
+        public ParameterElement() { }
 
         public ParameterElement(string typeName)
             : this()
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("typeName");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "typeName"
+                );
             }
             this.Type = typeName;
         }
@@ -39,10 +39,17 @@ namespace System.Runtime.Serialization.Configuration
             set { base[ConfigurationStrings.Index] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DefaultCollectionName, DefaultValue = null, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultCollectionName,
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public ParameterElementCollection Parameters
         {
-            get { return (ParameterElementCollection)base[ConfigurationStrings.DefaultCollectionName]; }
+            get
+            {
+                return (ParameterElementCollection)base[ConfigurationStrings.DefaultCollectionName];
+            }
         }
 
         protected override void PostDeserialize()
@@ -73,37 +80,64 @@ namespace System.Runtime.Serialization.Configuration
         void Validate()
         {
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
-            if ((propertyInfo[ConfigurationStrings.Index].ValueOrigin == PropertyValueOrigin.Default) &&
-                (propertyInfo[ConfigurationStrings.Type].ValueOrigin == PropertyValueOrigin.Default))
+            if (
+                (
+                    propertyInfo[ConfigurationStrings.Index].ValueOrigin
+                    == PropertyValueOrigin.Default
+                )
+                && (
+                    propertyInfo[ConfigurationStrings.Type].ValueOrigin
+                    == PropertyValueOrigin.Default
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigMustSetTypeOrIndex)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigMustSetTypeOrIndex))
+                );
             }
 
-            if ((propertyInfo[ConfigurationStrings.Index].ValueOrigin != PropertyValueOrigin.Default) &&
-                (propertyInfo[ConfigurationStrings.Type].ValueOrigin != PropertyValueOrigin.Default))
+            if (
+                (
+                    propertyInfo[ConfigurationStrings.Index].ValueOrigin
+                    != PropertyValueOrigin.Default
+                )
+                && (
+                    propertyInfo[ConfigurationStrings.Type].ValueOrigin
+                    != PropertyValueOrigin.Default
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigMustOnlySetTypeOrIndex)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigMustOnlySetTypeOrIndex))
+                );
             }
 
-            if ((propertyInfo[ConfigurationStrings.Index].ValueOrigin != PropertyValueOrigin.Default) && this.Parameters.Count > 0)
+            if (
+                (
+                    propertyInfo[ConfigurationStrings.Index].ValueOrigin
+                    != PropertyValueOrigin.Default
+                )
+                && this.Parameters.Count > 0
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                    SR.GetString(SR.ConfigMustOnlyAddParamsWithType)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigMustOnlyAddParamsWithType)
+                    )
+                );
             }
         }
 
         internal readonly Guid identity = Guid.NewGuid();
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Loads type given name in configuration."
-            + " Since this information is used to determine whether a particular type is included as a known type,"
-            + " changes to the logic should be reviewed.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Loads type given name in configuration."
+                + " Since this information is used to determine whether a particular type is included as a known type,"
+                + " changes to the logic should be reviewed."
+        )]
         internal Type GetType(string rootType, Type[] typeArgs)
         {
             return TypeElement.GetType(rootType, typeArgs, this.Type, this.Index, this.Parameters);
         }
     }
 }
-
-

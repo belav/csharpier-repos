@@ -33,21 +33,21 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Data.Odbc
 {
-        [TestFixture]
-        public class OdbcMetaDataCollectioNamesTest
+    [TestFixture]
+    public class OdbcMetaDataCollectioNamesTest
+    {
+        [Test]
+        public void ValuesTest()
         {
-                [Test]
-                public void ValuesTest ()
-                {
-                        Assert.AreEqual (OdbcMetaDataCollectionNames.Columns, "Columns");
-                        Assert.AreEqual (OdbcMetaDataCollectionNames.Indexes, "Indexes");
-                        Assert.AreEqual (OdbcMetaDataCollectionNames.ProcedureColumns, "ProcedureColumns");
-                        Assert.AreEqual (OdbcMetaDataCollectionNames.ProcedureParameters, "ProcedureParameters");
-                        Assert.AreEqual (OdbcMetaDataCollectionNames.Procedures, "Procedures");
-                        Assert.AreEqual (OdbcMetaDataCollectionNames.Tables, "Tables");
-                        Assert.AreEqual (OdbcMetaDataCollectionNames.Views, "Views");
-                }
+            Assert.AreEqual(OdbcMetaDataCollectionNames.Columns, "Columns");
+            Assert.AreEqual(OdbcMetaDataCollectionNames.Indexes, "Indexes");
+            Assert.AreEqual(OdbcMetaDataCollectionNames.ProcedureColumns, "ProcedureColumns");
+            Assert.AreEqual(OdbcMetaDataCollectionNames.ProcedureParameters, "ProcedureParameters");
+            Assert.AreEqual(OdbcMetaDataCollectionNames.Procedures, "Procedures");
+            Assert.AreEqual(OdbcMetaDataCollectionNames.Tables, "Tables");
+            Assert.AreEqual(OdbcMetaDataCollectionNames.Views, "Views");
         }
+    }
 }
 
 #endif

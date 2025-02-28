@@ -18,38 +18,68 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AssignOutParametersAboveReturn), Shared]
-    internal class AssignOutParametersAboveReturnCodeFixProvider : AbstractAssignOutParametersCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.AssignOutParametersAboveReturn
+        ),
+        Shared
+    ]
+    internal class AssignOutParametersAboveReturnCodeFixProvider
+        : AbstractAssignOutParametersCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AssignOutParametersAboveReturnCodeFixProvider()
-        {
-        }
+        public AssignOutParametersAboveReturnCodeFixProvider() { }
 
-        protected override void TryRegisterFix(CodeFixContext context, Document document, SyntaxNode container, SyntaxNode location)
+        protected override void TryRegisterFix(
+            CodeFixContext context,
+            Document document,
+            SyntaxNode container,
+            SyntaxNode location
+        )
         {
-            RegisterCodeFix(context, CSharpCodeFixesResources.Assign_out_parameters, nameof(CSharpCodeFixesResources.Assign_out_parameters));
+            RegisterCodeFix(
+                context,
+                CSharpCodeFixesResources.Assign_out_parameters,
+                nameof(CSharpCodeFixesResources.Assign_out_parameters)
+            );
         }
 
         protected override void AssignOutParameters(
-            SyntaxEditor editor, SyntaxNode container,
-            MultiDictionary<SyntaxNode, (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol> unassignedParameters)>.ValueSet values,
-            CancellationToken cancellationToken)
+            SyntaxEditor editor,
+            SyntaxNode container,
+            MultiDictionary<
+                SyntaxNode,
+                (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol> unassignedParameters)
+            >.ValueSet values,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var (exprOrStatement, unassignedParameters) in values)
             {
-                var statements = GenerateAssignmentStatements(editor.Generator, unassignedParameters);
+                var statements = GenerateAssignmentStatements(
+                    editor.Generator,
+                    unassignedParameters
+                );
                 AddAssignmentStatements(editor, exprOrStatement, statements);
             }
         }
 
         private static void AddAssignmentStatements(
-            SyntaxEditor editor, SyntaxNode exprOrStatement, ImmutableArray<SyntaxNode> statements)
+            SyntaxEditor editor,
+            SyntaxNode exprOrStatement,
+            ImmutableArray<SyntaxNode> statements
+        )
         {
             var generator = editor.Generator;
 
-            if (exprOrStatement is LocalFunctionStatementSyntax { ExpressionBody: { } localFunctionExpressionBody })
+            if (
+                exprOrStatement is LocalFunctionStatementSyntax
+                {
+                    ExpressionBody: { } localFunctionExpressionBody
+                }
+            )
             {
                 // Expression-bodied local functions report CS0177 on the method name instead of the expression.
                 // Reassign exprOrStatement so the code fix implementation works as it does for other expression-bodied
@@ -60,11 +90,14 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             var parent = exprOrStatement.GetRequiredParent();
             if (parent.IsEmbeddedStatementOwner())
             {
-                var newBody = SyntaxFactory.Block(statements.Add(exprOrStatement).Cast<StatementSyntax>());
+                var newBody = SyntaxFactory.Block(
+                    statements.Add(exprOrStatement).Cast<StatementSyntax>()
+                );
                 editor.ReplaceNode(exprOrStatement, newBody);
                 editor.ReplaceNode(
                     exprOrStatement.GetRequiredParent(),
-                    (c, _) => c.WithAdditionalAnnotations(Formatter.Annotation));
+                    (c, _) => c.WithAdditionalAnnotations(Formatter.Annotation)
+                );
             }
             else if (parent is BlockSyntax or SwitchSectionSyntax)
             {
@@ -75,16 +108,21 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 statements = statements.Add(generator.ReturnStatement(exprOrStatement));
                 editor.ReplaceNode(
                     parent.GetRequiredParent(),
-                    generator.WithStatements(parent.GetRequiredParent(), statements));
+                    generator.WithStatements(parent.GetRequiredParent(), statements)
+                );
             }
             else
             {
                 var lambda = (LambdaExpressionSyntax)parent;
-                var newBody = SyntaxFactory.Block(statements.Add(generator.ReturnStatement(exprOrStatement)).Cast<StatementSyntax>());
+                var newBody = SyntaxFactory.Block(
+                    statements
+                        .Add(generator.ReturnStatement(exprOrStatement))
+                        .Cast<StatementSyntax>()
+                );
                 editor.ReplaceNode(
                     lambda,
-                    lambda.WithBody(newBody)
-                          .WithAdditionalAnnotations(Formatter.Annotation));
+                    lambda.WithBody(newBody).WithAdditionalAnnotations(Formatter.Annotation)
+                );
             }
         }
     }

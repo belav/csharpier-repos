@@ -39,9 +39,22 @@ namespace System.Web.Mvc.Test
             // Arrange
             FormContext context = new FormContext() { FormId = "theFormId" };
 
-            ModelClientValidationRule rule = new ModelClientValidationRule() { ValidationType = "ValidationType1", ErrorMessage = "Error Message" };
-            rule.ValidationParameters["theParam"] = new { FirstName = "John", LastName = "Doe", Age = 32 };
-            FieldValidationMetadata metadata = new FieldValidationMetadata() { FieldName = "theFieldName", ValidationMessageId = "theFieldName_ValidationMessage" };
+            ModelClientValidationRule rule = new ModelClientValidationRule()
+            {
+                ValidationType = "ValidationType1",
+                ErrorMessage = "Error Message",
+            };
+            rule.ValidationParameters["theParam"] = new
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Age = 32,
+            };
+            FieldValidationMetadata metadata = new FieldValidationMetadata()
+            {
+                FieldName = "theFieldName",
+                ValidationMessageId = "theFieldName_ValidationMessage",
+            };
             metadata.ValidationRules.Add(rule);
             context.FieldValidators["theFieldName"] = metadata;
 
@@ -49,7 +62,8 @@ namespace System.Web.Mvc.Test
             string jsonMetadata = context.GetJsonValidationMetadata();
 
             // Assert
-            string expected = @"{""Fields"":[{""FieldName"":""theFieldName"",""ReplaceValidationMessageContents"":false,""ValidationMessageId"":""theFieldName_ValidationMessage"",""ValidationRules"":[{""ErrorMessage"":""Error Message"",""ValidationParameters"":{""theParam"":{""FirstName"":""John"",""LastName"":""Doe"",""Age"":32}},""ValidationType"":""ValidationType1""}]}],""FormId"":""theFormId"",""ReplaceValidationSummary"":false}";
+            string expected =
+                @"{""Fields"":[{""FieldName"":""theFieldName"",""ReplaceValidationMessageContents"":false,""ValidationMessageId"":""theFieldName_ValidationMessage"",""ValidationRules"":[{""ErrorMessage"":""Error Message"",""ValidationParameters"":{""theParam"":{""FirstName"":""John"",""LastName"":""Doe"",""Age"":32}},""ValidationType"":""ValidationType1""}]}],""FormId"":""theFormId"",""ReplaceValidationSummary"":false}";
             Assert.Equal(expected, jsonMetadata);
         }
 
@@ -57,11 +71,28 @@ namespace System.Web.Mvc.Test
         public void GetJsonValidationMetadata_ValidationSummary()
         {
             // Arrange
-            FormContext context = new FormContext() { FormId = "theFormId", ValidationSummaryId = "validationSummary" };
+            FormContext context = new FormContext()
+            {
+                FormId = "theFormId",
+                ValidationSummaryId = "validationSummary",
+            };
 
-            ModelClientValidationRule rule = new ModelClientValidationRule() { ValidationType = "ValidationType1", ErrorMessage = "Error Message" };
-            rule.ValidationParameters["theParam"] = new { FirstName = "John", LastName = "Doe", Age = 32 };
-            FieldValidationMetadata metadata = new FieldValidationMetadata() { FieldName = "theFieldName", ValidationMessageId = "theFieldName_ValidationMessage" };
+            ModelClientValidationRule rule = new ModelClientValidationRule()
+            {
+                ValidationType = "ValidationType1",
+                ErrorMessage = "Error Message",
+            };
+            rule.ValidationParameters["theParam"] = new
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                Age = 32,
+            };
+            FieldValidationMetadata metadata = new FieldValidationMetadata()
+            {
+                FieldName = "theFieldName",
+                ValidationMessageId = "theFieldName_ValidationMessage",
+            };
             metadata.ValidationRules.Add(rule);
             context.FieldValidators["theFieldName"] = metadata;
 
@@ -69,7 +100,8 @@ namespace System.Web.Mvc.Test
             string jsonMetadata = context.GetJsonValidationMetadata();
 
             // Assert
-            string expected = @"{""Fields"":[{""FieldName"":""theFieldName"",""ReplaceValidationMessageContents"":false,""ValidationMessageId"":""theFieldName_ValidationMessage"",""ValidationRules"":[{""ErrorMessage"":""Error Message"",""ValidationParameters"":{""theParam"":{""FirstName"":""John"",""LastName"":""Doe"",""Age"":32}},""ValidationType"":""ValidationType1""}]}],""FormId"":""theFormId"",""ReplaceValidationSummary"":false,""ValidationSummaryId"":""validationSummary""}";
+            string expected =
+                @"{""Fields"":[{""FieldName"":""theFieldName"",""ReplaceValidationMessageContents"":false,""ValidationMessageId"":""theFieldName_ValidationMessage"",""ValidationRules"":[{""ErrorMessage"":""Error Message"",""ValidationParameters"":{""theParam"":{""FirstName"":""John"",""LastName"":""Doe"",""Age"":32}},""ValidationType"":""ValidationType1""}]}],""FormId"":""theFormId"",""ReplaceValidationSummary"":false,""ValidationSummaryId"":""validationSummary""}";
             Assert.Equal(expected, jsonMetadata);
         }
 
@@ -80,7 +112,10 @@ namespace System.Web.Mvc.Test
             FormContext context = new FormContext();
 
             // Act
-            FieldValidationMetadata result = context.GetValidationMetadataForField("fieldName", true /* createIfNotFound */);
+            FieldValidationMetadata result = context.GetValidationMetadataForField(
+                "fieldName",
+                true /* createIfNotFound */
+            );
 
             // Assert
             Assert.NotNull(result);
@@ -127,7 +162,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { context.GetValidationMetadataForField(String.Empty); }, "fieldName");
+                delegate
+                {
+                    context.GetValidationMetadataForField(String.Empty);
+                },
+                "fieldName"
+            );
         }
 
         [Fact]
@@ -138,7 +178,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { context.GetValidationMetadataForField(null); }, "fieldName");
+                delegate
+                {
+                    context.GetValidationMetadataForField(null);
+                },
+                "fieldName"
+            );
         }
 
         // RenderedField

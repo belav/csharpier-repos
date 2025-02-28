@@ -23,7 +23,7 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
 
     /// <summary>
     /// It's reasonable to capture 'text' here and keep it alive.  We're already holding onto the generated text
-    /// strongly in the ConstantTextAndVersionSource we're passing to our base type. 
+    /// strongly in the ConstantTextAndVersionSource we're passing to our base type.
     /// </summary>
     public SourceText SourceText { get; }
 
@@ -35,23 +35,31 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
     /// actual text and hash algorithm that were used to create the SourceText on the host side.  To ensure both the
     /// host and OOP are in agreement about the true content checksum, we store this separately.
     /// </summary>
-    public Checksum GetOriginalSourceTextContentHash()
-        => _lazyContentHash.Value;
+    public Checksum GetOriginalSourceTextContentHash() => _lazyContentHash.Value;
 
     public static SourceGeneratedDocumentState Create(
         SourceGeneratedDocumentIdentity documentIdentity,
         SourceText generatedSourceText,
         ParseOptions parseOptions,
         LanguageServices languageServices,
-        Checksum? originalSourceTextChecksum)
+        Checksum? originalSourceTextChecksum
+    )
     {
         // If the caller explicitly provided us with the checksum for the source text, then we always defer to that.
         // This happens on the host side, when we are given the data computed by the OOP side.
         //
         // If the caller didn't provide us with the checksum, then we'll compute it on demand.  This happens on the OOP
         // side when we're actually producing the SG doc in the first place.
-        var lazyTextChecksum = new Lazy<Checksum>(() => originalSourceTextChecksum ?? ComputeContentHash(generatedSourceText));
-        return Create(documentIdentity, generatedSourceText, parseOptions, languageServices, lazyTextChecksum);
+        var lazyTextChecksum = new Lazy<Checksum>(
+            () => originalSourceTextChecksum ?? ComputeContentHash(generatedSourceText)
+        );
+        return Create(
+            documentIdentity,
+            generatedSourceText,
+            parseOptions,
+            languageServices,
+            lazyTextChecksum
+        );
     }
 
     private static SourceGeneratedDocumentState Create(
@@ -59,7 +67,8 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
         SourceText generatedSourceText,
         ParseOptions parseOptions,
         LanguageServices languageServices,
-        Lazy<Checksum> lazyTextChecksum)
+        Lazy<Checksum> lazyTextChecksum
+    )
     {
         var loadTextOptions = new LoadTextOptions(generatedSourceText.ChecksumAlgorithm);
         var textAndVersion = TextAndVersion.Create(generatedSourceText, VersionStamp.Create());
@@ -69,7 +78,8 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
             loadTextOptions,
             documentIdentity.FilePath,
             parseOptions,
-            languageServices);
+            languageServices
+        );
 
         return new SourceGeneratedDocumentState(
             documentIdentity,
@@ -82,13 +92,15 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
                 parseOptions.Kind,
                 filePath: documentIdentity.FilePath,
                 isGenerated: true,
-                designTimeOnly: false),
+                designTimeOnly: false
+            ),
             parseOptions,
             textSource,
             generatedSourceText,
             loadTextOptions,
             treeSource,
-            lazyTextChecksum);
+            lazyTextChecksum
+        );
     }
 
     private SourceGeneratedDocumentState(
@@ -101,8 +113,17 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
         SourceText text,
         LoadTextOptions loadTextOptions,
         AsyncLazy<TreeAndVersion> treeSource,
-        Lazy<Checksum> lazyContentHash)
-        : base(languageServices, documentServiceProvider, attributes, options, textSource, loadTextOptions, treeSource)
+        Lazy<Checksum> lazyContentHash
+    )
+        : base(
+            languageServices,
+            documentServiceProvider,
+            attributes,
+            options,
+            textSource,
+            loadTextOptions,
+            treeSource
+        )
     {
         Identity = documentIdentity;
 
@@ -110,17 +131,27 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
         _lazyContentHash = lazyContentHash;
     }
 
-    private static Checksum ComputeContentHash(SourceText text)
-        => Checksum.From(text.GetContentHash());
+    private static Checksum ComputeContentHash(SourceText text) =>
+        Checksum.From(text.GetContentHash());
 
     // The base allows for parse options to be null for non-C#/VB languages, but we'll always have parse options
     public new ParseOptions ParseOptions => base.ParseOptions!;
 
-    public SourceGeneratedDocumentContentIdentity GetContentIdentity()
-        => new(this.GetOriginalSourceTextContentHash(), this.SourceText.Encoding?.WebName, this.SourceText.ChecksumAlgorithm);
+    public SourceGeneratedDocumentContentIdentity GetContentIdentity() =>
+        new(
+            this.GetOriginalSourceTextContentHash(),
+            this.SourceText.Encoding?.WebName,
+            this.SourceText.ChecksumAlgorithm
+        );
 
-    protected override TextDocumentState UpdateText(ITextAndVersionSource newTextSource, PreservationMode mode, bool incremental)
-        => throw new NotSupportedException(WorkspacesResources.The_contents_of_a_SourceGeneratedDocument_may_not_be_changed);
+    protected override TextDocumentState UpdateText(
+        ITextAndVersionSource newTextSource,
+        PreservationMode mode,
+        bool incremental
+    ) =>
+        throw new NotSupportedException(
+            WorkspacesResources.The_contents_of_a_SourceGeneratedDocument_may_not_be_changed
+        );
 
     public SourceGeneratedDocumentState WithText(SourceText sourceText)
     {
@@ -135,7 +166,8 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
             ParseOptions,
             LanguageServices,
             // Just pass along the checksum for the new source text since we've already computed it.
-            newSourceTextChecksum);
+            newSourceTextChecksum
+        );
     }
 
     public SourceGeneratedDocumentState WithParseOptions(ParseOptions parseOptions)
@@ -150,7 +182,8 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
             parseOptions,
             LanguageServices,
             // We're just changing the parse options.  So the checksum will remain as is.
-            _lazyContentHash);
+            _lazyContentHash
+        );
     }
 
     /// <summary>
@@ -162,14 +195,15 @@ internal sealed class SourceGeneratedDocumentState : DocumentState
     {
         public static readonly SourceGeneratedTextDocumentServiceProvider Instance = new();
 
-        private SourceGeneratedTextDocumentServiceProvider()
-        {
-        }
+        private SourceGeneratedTextDocumentServiceProvider() { }
 
         public TService? GetService<TService>()
             where TService : class, IDocumentService
         {
-            if (SourceGeneratedDocumentOperationService.Instance is TService documentOperationService)
+            if (
+                SourceGeneratedDocumentOperationService.Instance
+                is TService documentOperationService
+            )
             {
                 return documentOperationService;
             }

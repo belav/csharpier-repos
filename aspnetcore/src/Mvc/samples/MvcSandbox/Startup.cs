@@ -27,7 +27,8 @@ public class Startup
             endpoints.MapControllers();
             endpoints.MapControllerRoute(
                 Guid.NewGuid().ToString(),
-                "{controller=Home}/{action=Index}/{id?}");
+                "{controller=Home}/{action=Index}/{id?}"
+            );
 
             endpoints.MapRazorPages();
         }
@@ -42,8 +43,7 @@ public class Startup
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }
@@ -53,11 +53,8 @@ public class Startup
             .UseContentRoot(Directory.GetCurrentDirectory())
             .ConfigureLogging(factory =>
             {
-                factory
-                    .AddConsole()
-                    .AddDebug();
+                factory.AddConsole().AddDebug();
             })
             .UseKestrel()
             .UseStartup<Startup>();
 }
-

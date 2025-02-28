@@ -13,12 +13,18 @@ namespace System.Activities.Core.Presentation
     partial class ParallelSeparator
     {
         public static readonly DependencyProperty AllowedItemTypeProperty =
-            DependencyProperty.Register("AllowedItemType", typeof(Type), typeof(ParallelSeparator), new UIPropertyMetadata(typeof(object)));
+            DependencyProperty.Register(
+                "AllowedItemType",
+                typeof(Type),
+                typeof(ParallelSeparator),
+                new UIPropertyMetadata(typeof(object))
+            );
 
         public static readonly DependencyProperty ContextProperty = DependencyProperty.Register(
             "Context",
             typeof(EditingContext),
-            typeof(ParallelSeparator));
+            typeof(ParallelSeparator)
+        );
 
         public ParallelSeparator()
         {
@@ -63,8 +69,10 @@ namespace System.Activities.Core.Presentation
         {
             if (!e.Handled)
             {
-                if (!this.Context.Items.GetValue<ReadOnlyState>().IsReadOnly &&
-                    DragDropHelper.AllowDrop(e.Data, this.Context, this.AllowedItemType))
+                if (
+                    !this.Context.Items.GetValue<ReadOnlyState>().IsReadOnly
+                    && DragDropHelper.AllowDrop(e.Data, this.Context, this.AllowedItemType)
+                )
                 {
                     BeginStoryboard((Storyboard)this.Resources[storyboardResourceName]);
                     return;

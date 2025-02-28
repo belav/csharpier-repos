@@ -7,6 +7,7 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Diagnostics;
+
 namespace System.Data.Entity.Design
 {
     public sealed partial class EntityStoreSchemaGenerator
@@ -22,7 +23,6 @@ namespace System.Data.Entity.Design
         [DebuggerDisplay("Catalog={Catalog}, Schema={Schema}, Name={TableName}")]
         internal struct DbObjectKey
         {
-            
             private readonly string _catalog;
             private readonly string _schema;
             private readonly string _name;
@@ -58,17 +58,22 @@ namespace System.Data.Entity.Design
                 }
 
                 _objectType = objectType;
-                Debug.Assert(_catalog != null || _schema != null || _name != null, "This is going to look like an empty one, just ue the default constructor");
+                Debug.Assert(
+                    _catalog != null || _schema != null || _name != null,
+                    "This is going to look like an empty one, just ue the default constructor"
+                );
             }
 
             public static bool operator ==(DbObjectKey lhs, DbObjectKey rhs)
             {
                 return lhs.Equals(rhs);
             }
+
             public static bool operator !=(DbObjectKey lhs, DbObjectKey rhs)
             {
                 return !(lhs == rhs);
             }
+
             public string Catalog
             {
                 get { return _catalog; }
@@ -170,10 +175,7 @@ namespace System.Data.Entity.Design
 
             internal bool IsEmpty
             {
-                get
-                {
-                    return _catalog == null && _schema == null && _name == null;
-                }
+                get { return _catalog == null && _schema == null && _name == null; }
             }
         }
     }

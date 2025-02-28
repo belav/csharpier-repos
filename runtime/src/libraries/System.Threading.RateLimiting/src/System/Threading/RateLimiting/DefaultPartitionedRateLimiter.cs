@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace System.Threading.RateLimiting
 {
-    internal sealed class DefaultPartitionedRateLimiter<TResource, TKey> : PartitionedRateLimiter<TResource> where TKey : notnull
+    internal sealed class DefaultPartitionedRateLimiter<TResource, TKey>
+        : PartitionedRateLimiter<TResource>
+        where TKey : notnull
     {
         private readonly Func<TResource, RateLimitPartition<TKey>> _partitioner;
         private static readonly TimeSpan s_idleTimeLimit = TimeSpan.FromSeconds(10);
@@ -18,7 +20,9 @@ namespace System.Threading.RateLimiting
         // TODO: Look at ConcurrentDictionary to try and avoid a global lock
         private readonly Dictionary<TKey, Lazy<RateLimiter>> _limiters;
         private bool _disposed;
-        private readonly TaskCompletionSource<object?> _disposeComplete = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource<object?> _disposeComplete = new(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         // Used by the Timer to call TryRelenish on ReplenishingRateLimiters
         // We use a separate list to avoid running TryReplenish (which might be user code) inside our lock
@@ -32,15 +36,18 @@ namespace System.Threading.RateLimiting
         // Use the Dictionary as the lock field so we don't need to allocate another object for a lock and have another field in the object
         private object Lock => _limiters;
 
-        public DefaultPartitionedRateLimiter(Func<TResource, RateLimitPartition<TKey>> partitioner,
-            IEqualityComparer<TKey>? equalityComparer = null)
-            : this(partitioner, equalityComparer, TimeSpan.FromMilliseconds(100))
-        {
-        }
+        public DefaultPartitionedRateLimiter(
+            Func<TResource, RateLimitPartition<TKey>> partitioner,
+            IEqualityComparer<TKey>? equalityComparer = null
+        )
+            : this(partitioner, equalityComparer, TimeSpan.FromMilliseconds(100)) { }
 
         // Extra ctor for testing purposes, primarily used when wanting to test the timer manually
-        private DefaultPartitionedRateLimiter(Func<TResource, RateLimitPartition<TKey>> partitioner,
-            IEqualityComparer<TKey>? equalityComparer, TimeSpan timerInterval)
+        private DefaultPartitionedRateLimiter(
+            Func<TResource, RateLimitPartition<TKey>> partitioner,
+            IEqualityComparer<TKey>? equalityComparer,
+            TimeSpan timerInterval
+        )
         {
             _limiters = new Dictionary<TKey, Lazy<RateLimiter>>(equalityComparer);
             _partitioner = partitioner;
@@ -62,7 +69,7 @@ namespace System.Threading.RateLimiting
 #else
                         false
 #endif
-                        );
+                    );
                 }
                 catch { }
             }
@@ -79,7 +86,11 @@ namespace System.Threading.RateLimiting
             return GetRateLimiter(resource).AttemptAcquire(permitCount);
         }
 
-        protected override ValueTask<RateLimitLease> AcquireAsyncCore(TResource resource, int permitCount, CancellationToken cancellationToken)
+        protected override ValueTask<RateLimitLease> AcquireAsyncCore(
+            TResource resource,
+            int permitCount,
+            CancellationToken cancellationToken
+        )
         {
             return GetRateLimiter(resource).AcquireAsync(permitCount, cancellationToken);
         }
@@ -94,7 +105,9 @@ namespace System.Threading.RateLimiting
                 if (!_limiters.TryGetValue(partition.PartitionKey, out limiter))
                 {
                     // Using Lazy avoids calling user code (partition.Factory) inside the lock
-                    limiter = new Lazy<RateLimiter>(() => partition.Factory(partition.PartitionKey));
+                    limiter = new Lazy<RateLimiter>(
+                        () => partition.Factory(partition.PartitionKey)
+                    );
                     _limiters.Add(partition.PartitionKey, limiter);
                     // Cache is invalid now
                     _cacheInvalid = true;
@@ -230,7 +243,10 @@ namespace System.Threading.RateLimiting
                 {
                     continue;
                 }
-                if (rateLimiter.Value.Value.IdleDuration is TimeSpan idleDuration && idleDuration > s_idleTimeLimit)
+                if (
+                    rateLimiter.Value.Value.IdleDuration is TimeSpan idleDuration
+                    && idleDuration > s_idleTimeLimit
+                )
                 {
                     lock (Lock)
                     {

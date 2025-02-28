@@ -11,7 +11,9 @@ internal static class OptionBuilder
 
     static OptionBuilder()
     {
-        _ctor = typeof(CliOption<string>).GetConstructor(new[] { typeof(string), typeof(string[]) });
+        _ctor = typeof(CliOption<string>).GetConstructor(
+            new[] { typeof(string), typeof(string[]) }
+        );
     }
 
     internal static CliOption CreateOption(string name, Type valueType, string description = null)
@@ -31,7 +33,12 @@ internal static class OptionBuilder
         return option;
     }
 
-    internal static CliOption CreateOption(string name, Type valueType, string description, Func<object> defaultValueFactory)
+    internal static CliOption CreateOption(
+        string name,
+        Type valueType,
+        string description,
+        Func<object> defaultValueFactory
+    )
     {
         if (defaultValueFactory == null)
         {
@@ -40,9 +47,12 @@ internal static class OptionBuilder
 
         var optionType = typeof(Bridge<>).MakeGenericType(valueType);
 
-        var ctor = optionType.GetConstructor(new[] { typeof(string), typeof(Func<object>), typeof(string) });
+        var ctor = optionType.GetConstructor(
+            new[] { typeof(string), typeof(Func<object>), typeof(string) }
+        );
 
-        var option = (CliOption)ctor.Invoke(new object[] { name, defaultValueFactory, description });
+        var option = (CliOption)
+            ctor.Invoke(new object[] { name, defaultValueFactory, description });
 
         return option;
     }

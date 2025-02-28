@@ -9,7 +9,8 @@ using Roslyn.Test.Utilities;
 using Xunit;
 using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeFixVerifier<
     Microsoft.CodeAnalysis.CSharp.FileHeaders.CSharpFileHeaderDiagnosticAnalyzer,
-    Microsoft.CodeAnalysis.CSharp.FileHeaders.CSharpFileHeaderCodeFixProvider>;
+    Microsoft.CodeAnalysis.CSharp.FileHeaders.CSharpFileHeaderCodeFixProvider
+>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FileHeaders
 {
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FileHeaders
             {
                 TestCode = testCode,
                 FixedCode = testCode,
-                EditorConfig = $@"
+                EditorConfig =
+                    $@"
 [*]
 {fileHeaderTemplate}
 ",
@@ -81,10 +83,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FileHeaders
                 TestCode = testCode.ReplaceLineEndings(lineEnding),
                 FixedCode = fixedCode.ReplaceLineEndings(lineEnding),
                 EditorConfig = TestSettings,
-                Options =
-                {
-                    { FormattingOptions2.NewLine, lineEnding },
-                },
+                Options = { { FormattingOptions2.NewLine, lineEnding } },
             }.RunAsync();
         }
 
@@ -162,14 +161,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FileHeaders
         [Fact]
         public async Task TestNoFileHeaderWithWhitespaceLineAsync()
         {
-            var testCode = "[||]    " + """
+            var testCode =
+                "[||]    "
+                + """
 
-                using System;
+                    using System;
 
-                namespace N
-                {
-                }
-                """;
+                    namespace N
+                    {
+                    }
+                    """;
             var fixedCode = """
                 // Copyright (c) SomeCorp. All rights reserved.
                 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
@@ -332,7 +333,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FileHeaders
         [InlineData("[|//|]    ")]
         public async Task TestInvalidFileHeaderWithoutTextAsync(string comment)
         {
-            var testCode = $@"{comment}
+            var testCode =
+                $@"{comment}
 
 namespace Bar
 {{
@@ -429,7 +431,8 @@ namespace Bar
         [InlineData(" Header", " Header")]
         public async Task TestValidFileHeaderInRegionAsync(string startLabel, string endLabel)
         {
-            var testCode = $@"#region{startLabel}
+            var testCode =
+                $@"#region{startLabel}
 // Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 #endregion{endLabel}
@@ -451,9 +454,13 @@ namespace Bar
         [InlineData("", "")]
         [InlineData(" Header", "")]
         [InlineData(" Header", " Header")]
-        public async Task TestInvalidFileHeaderWithWrongTextInRegionAsync(string startLabel, string endLabel)
+        public async Task TestInvalidFileHeaderWithWrongTextInRegionAsync(
+            string startLabel,
+            string endLabel
+        )
         {
-            var testCode = $@"#region{startLabel}
+            var testCode =
+                $@"#region{startLabel}
 [|//|] Copyright (c) OtherCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 #endregion{endLabel}
@@ -462,7 +469,8 @@ namespace Bar
 {{
 }}
 ";
-            var fixedCode = $@"// Copyright (c) SomeCorp. All rights reserved.
+            var fixedCode =
+                $@"// Copyright (c) SomeCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 
 #region{startLabel}
@@ -544,7 +552,8 @@ namespace Bar
         [InlineData("    ")]
         public async Task TestInvalidFileHeaderWithWrongTextAfterBlankLineAsync(string firstLine)
         {
-            var testCode = $@"{firstLine}
+            var testCode =
+                $@"{firstLine}
 [|//|] Copyright (c) OtherCorp. All rights reserved.
 // Licensed under the ??? license. See LICENSE file in the project root for full license information.
 

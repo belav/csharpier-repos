@@ -36,6 +36,7 @@ internal sealed class NonDisposableStream : Stream
 
     /// <inheritdoc />
     public override long Length => _innerStream.Length;
+
     /// <inheritdoc />
     public override long Position
     {
@@ -73,13 +74,21 @@ internal sealed class NonDisposableStream : Stream
     }
 
     /// <inheritdoc />
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
     }
 
     /// <inheritdoc />
-    public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+    public override ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         return _innerStream.ReadAsync(buffer, cancellationToken);
     }
@@ -90,7 +99,8 @@ internal sealed class NonDisposableStream : Stream
         int offset,
         int count,
         AsyncCallback? callback,
-        object? state)
+        object? state
+    )
     {
         return _innerStream.BeginRead(buffer, offset, count, callback, state);
     }
@@ -107,7 +117,8 @@ internal sealed class NonDisposableStream : Stream
         int offset,
         int count,
         AsyncCallback? callback,
-        object? state)
+        object? state
+    )
     {
         return _innerStream.BeginWrite(buffer, offset, count, callback, state);
     }
@@ -119,9 +130,7 @@ internal sealed class NonDisposableStream : Stream
     }
 
     /// <inheritdoc />
-    public override void Close()
-    {
-    }
+    public override void Close() { }
 
     /// <inheritdoc />
     public override int ReadByte()
@@ -136,7 +145,11 @@ internal sealed class NonDisposableStream : Stream
     }
 
     /// <inheritdoc />
-    public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+    public override Task CopyToAsync(
+        Stream destination,
+        int bufferSize,
+        CancellationToken cancellationToken
+    )
     {
         return _innerStream.CopyToAsync(destination, bufferSize, cancellationToken);
     }
@@ -160,13 +173,21 @@ internal sealed class NonDisposableStream : Stream
     }
 
     /// <inheritdoc />
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
     }
 
     /// <inheritdoc />
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         return _innerStream.WriteAsync(buffer, cancellationToken);
     }

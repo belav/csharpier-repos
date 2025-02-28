@@ -13,7 +13,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void MultipleConvertersInObjectArray()
         {
-            const string expectedJson = @"[""?"",{""TypeDiscriminator"":1,""CreditLimit"":100,""Name"":""C""},null]";
+            const string expectedJson =
+                @"[""?"",{""TypeDiscriminator"":1,""CreditLimit"":100,""Name"":""C""},null]";
 
             var options = new JsonSerializerOptions();
             options.Converters.Add(new MyBoolEnumConverter());
@@ -26,7 +27,10 @@ namespace System.Text.Json.Serialization.Tests
             MyBoolEnum myBoolEnum = MyBoolEnum.Unknown;
             MyBoolEnum? myNullBoolEnum = null;
 
-            string json = JsonSerializer.Serialize(new object[] { myBoolEnum, customer, myNullBoolEnum }, options);
+            string json = JsonSerializer.Serialize(
+                new object[] { myBoolEnum, customer, myNullBoolEnum },
+                options
+            );
             Assert.Equal(expectedJson, json);
 
             JsonElement jsonElement = JsonSerializer.Deserialize<JsonElement>(json, options);
@@ -50,7 +54,10 @@ namespace System.Text.Json.Serialization.Tests
 
             public override bool CanConvert(Type typeToConvert) => true;
 
-            public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+            public override JsonConverter CreateConverter(
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 Options = options;
                 return new SimpleConverter();
@@ -58,19 +65,30 @@ namespace System.Text.Json.Serialization.Tests
 
             public class SimpleConverter : JsonConverter<string>
             {
-                public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                public override string Read(
+                    ref Utf8JsonReader reader,
+                    Type typeToConvert,
+                    JsonSerializerOptions options
+                )
                 {
                     throw new NotImplementedException();
                 }
 
-                public override void Write(Utf8JsonWriter writer, string value, JsonSerializerOptions options)
-                    => writer.WriteStringValue(value);
+                public override void Write(
+                    Utf8JsonWriter writer,
+                    string value,
+                    JsonSerializerOptions options
+                ) => writer.WriteStringValue(value);
             }
         }
 
         private class ConverterReturningNull : JsonConverter<Customer>
         {
-            public override Customer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Customer Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 Assert.Equal(JsonTokenType.StartObject, reader.TokenType);
 
@@ -82,7 +100,11 @@ namespace System.Text.Json.Serialization.Tests
                 return null;
             }
 
-            public override void Write(Utf8JsonWriter writer, Customer value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Customer value,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotSupportedException();
             }
@@ -125,7 +147,11 @@ namespace System.Text.Json.Serialization.Tests
 
         public class ObjectBoolConverter : JsonConverter<object>
         {
-            public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override object Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.True)
                 {
@@ -140,7 +166,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
@@ -179,47 +209,63 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/66232", TargetFrameworkMonikers.NetFramework)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/66371", typeof(PlatformDetection), nameof(PlatformDetection.IsMonoInterpreter))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/66232",
+            TargetFrameworkMonikers.NetFramework
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/66371",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsMonoInterpreter)
+        )]
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void GetConverter_Poco_WriteThrowsNotSupportedException()
         {
-            RemoteExecutor.Invoke(static () =>
-            {
-                JsonSerializerOptions options = new();
-                JsonConverter<Point_2D> converter = (JsonConverter<Point_2D>)options.GetConverter(typeof(Point_2D));
+            RemoteExecutor
+                .Invoke(static () =>
+                {
+                    JsonSerializerOptions options = new();
+                    JsonConverter<Point_2D> converter =
+                        (JsonConverter<Point_2D>)options.GetConverter(typeof(Point_2D));
 
-                using var writer = new Utf8JsonWriter(new MemoryStream());
-                var value = new Point_2D(0, 0);
+                    using var writer = new Utf8JsonWriter(new MemoryStream());
+                    var value = new Point_2D(0, 0);
 
-                // Running the converter without priming the options instance
-                // for reflection-based serialization should throw NotSupportedException
-                // since it can't resolve reflection-based metadata.
-                Assert.Throws<NotSupportedException>(() => converter.Write(writer, value, options));
-                Assert.Equal(0, writer.BytesCommitted + writer.BytesPending);
-                options.IncludeFields = false; // options should still be mutable
+                    // Running the converter without priming the options instance
+                    // for reflection-based serialization should throw NotSupportedException
+                    // since it can't resolve reflection-based metadata.
+                    Assert.Throws<NotSupportedException>(
+                        () => converter.Write(writer, value, options)
+                    );
+                    Assert.Equal(0, writer.BytesCommitted + writer.BytesPending);
+                    options.IncludeFields = false; // options should still be mutable
 
-                JsonSerializer.Serialize(42, options);
+                    JsonSerializer.Serialize(42, options);
 
-                // Same operation should succeed when instance has been primed.
-                converter.Write(writer, value, options);
-                Assert.NotEqual(0, writer.BytesCommitted + writer.BytesPending);
-                writer.Reset();
+                    // Same operation should succeed when instance has been primed.
+                    converter.Write(writer, value, options);
+                    Assert.NotEqual(0, writer.BytesCommitted + writer.BytesPending);
+                    writer.Reset();
 
-                Assert.Throws<InvalidOperationException>(() => options.IncludeFields = false);
+                    Assert.Throws<InvalidOperationException>(() => options.IncludeFields = false);
 
-                // State change should not leak into unrelated options instances.
-                var options2 = new JsonSerializerOptions();
-                options2.AddContext<JsonContext>();
-                Assert.Throws<NotSupportedException>(() => converter.Write(writer, value, options2));
-                Assert.Equal(0, writer.BytesCommitted + writer.BytesPending);
-            }).Dispose();
+                    // State change should not leak into unrelated options instances.
+                    var options2 = new JsonSerializerOptions();
+                    options2.AddContext<JsonContext>();
+                    Assert.Throws<NotSupportedException>(
+                        () => converter.Write(writer, value, options2)
+                    );
+                    Assert.Equal(0, writer.BytesCommitted + writer.BytesPending);
+                })
+                .Dispose();
         }
 
         [Fact]
         public static void GetConverterTypeToConvertNull()
         {
-            Assert.Throws<ArgumentNullException>(() => (new JsonSerializerOptions()).GetConverter(typeToConvert: null!));
+            Assert.Throws<ArgumentNullException>(
+                () => (new JsonSerializerOptions()).GetConverter(typeToConvert: null!)
+            );
         }
 
         [Fact]
@@ -227,8 +273,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonSerializerOptions options = new();
             options.Converters.Add(new InvalidJsonConverterFactory());
-            var ex = Assert.Throws<InvalidOperationException>(() => 
-                JsonSerializer.Serialize(new InvalidTestInfo("Hello"), options));
+            var ex = Assert.Throws<InvalidOperationException>(
+                () => JsonSerializer.Serialize(new InvalidTestInfo("Hello"), options)
+            );
             Assert.Contains(typeof(InvalidTestInfo).Name, ex.Message);
         }
 
@@ -238,8 +285,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             public override bool CanConvert(Type typeToConvert) => true;
 
-            public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-                => new MyBoolEnumConverter();
+            public override JsonConverter? CreateConverter(
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => new MyBoolEnumConverter();
         }
 
         [Theory]
@@ -251,7 +300,10 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(JsonStringEnumConverter<MyBoolEnum>), null)]
         [InlineData(typeof(InvalidJsonConverterFactory), null)]
         [InlineData(typeof(TestFactory), null)]
-        public static void JsonConverter_TypeProperty_ReturnsExpectedResult(Type converterType, Type expectedType)
+        public static void JsonConverter_TypeProperty_ReturnsExpectedResult(
+            Type converterType,
+            Type expectedType
+        )
         {
             var converter = (JsonConverter)Activator.CreateInstance(converterType)!;
             Assert.Equal(expectedType, converter.Type);
@@ -266,7 +318,9 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(Customer))]
         [InlineData(typeof(int[]))]
         [InlineData(typeof(Dictionary<string, int>))]
-        public static void JsonSerializerOptions_GetConverter_TypeProperty_ReturnsExpectedResult(Type type)
+        public static void JsonSerializerOptions_GetConverter_TypeProperty_ReturnsExpectedResult(
+            Type type
+        )
         {
             JsonConverter converter = JsonSerializerOptions.Default.GetConverter(type);
             Assert.Equal(type, converter.Type);

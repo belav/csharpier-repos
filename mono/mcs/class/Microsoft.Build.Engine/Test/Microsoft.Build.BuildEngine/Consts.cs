@@ -29,68 +29,81 @@ using System;
 using System.IO;
 using Microsoft.Build.Utilities;
 
-public static class Consts {
+public static class Consts
+{
+    public static bool RunningOnMono()
+    {
+        return Type.GetType("Mono.Runtime") != null;
+    }
 
-	public static bool RunningOnMono ()
-	{
-		return Type.GetType ("Mono.Runtime") != null;
-	}
-	
-	public static string BinPath {
-		get {
-			if (RunningOnMono ()) {
+    public static string BinPath
+    {
+        get
+        {
+            if (RunningOnMono())
+            {
 #if XBUILD_14
-				string profile = "xbuild_14";
+                string profile = "xbuild_14";
 #elif XBUILD_12
-				string profile = "xbuild_12";
+                string profile = "xbuild_12";
 #elif NET_4_5
-				string profile = "net_4_x";
+                string profile = "net_4_x";
 #else
-				#error "Unknown profile"
+#error "Unknown profile"
 #endif
-				var corlib = typeof (object).Assembly.Location;
-				var lib = Path.GetDirectoryName (Path.GetDirectoryName (corlib));
-				return Path.Combine (lib, profile);
-			} else {
+                var corlib = typeof(object).Assembly.Location;
+                var lib = Path.GetDirectoryName(Path.GetDirectoryName(corlib));
+                return Path.Combine(lib, profile);
+            }
+            else
+            {
 #if XBUILD_14
-				return ToolLocationHelper.GetPathToBuildTools ("14.0");
+                return ToolLocationHelper.GetPathToBuildTools("14.0");
 #elif XBUILD_12
-				return ToolLocationHelper.GetPathToBuildTools ("12.0");
+                return ToolLocationHelper.GetPathToBuildTools("12.0");
 #elif NET_4_5
-				return ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version45);
+                return ToolLocationHelper.GetPathToDotNetFramework(
+                    TargetDotNetFrameworkVersion.Version45
+                );
 #elif NET_4_0
-				return ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version40);
+                return ToolLocationHelper.GetPathToDotNetFramework(
+                    TargetDotNetFrameworkVersion.Version40
+                );
 #else
-				return ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version20);
+                return ToolLocationHelper.GetPathToDotNetFramework(
+                    TargetDotNetFrameworkVersion.Version20
+                );
 #endif
-			}
-		}
-	}
+            }
+        }
+    }
 
-	public static string ToolsVersionString {
-		get {
+    public static string ToolsVersionString
+    {
+        get
+        {
 #if XBUILD_14
-			return " ToolsVersion='14.0'";
+            return " ToolsVersion='14.0'";
 #elif XBUILD_12
-			return " ToolsVersion='12.0'";
+            return " ToolsVersion='12.0'";
 #elif NET_4_0
-			return " ToolsVersion='4.0'";
+            return " ToolsVersion='4.0'";
 #else
-			return String.Empty;
+            return String.Empty;
 #endif
-		}
-	}
+        }
+    }
 
-	public static string GetTasksAsmPath ()
-	{
+    public static string GetTasksAsmPath()
+    {
 #if XBUILD_14
-		return Path.Combine (BinPath, "Microsoft.Build.Tasks.Core.dll");
+        return Path.Combine(BinPath, "Microsoft.Build.Tasks.Core.dll");
 #elif XBUILD_12
-		return Path.Combine (BinPath, "Microsoft.Build.Tasks.v12.0.dll");
+        return Path.Combine(BinPath, "Microsoft.Build.Tasks.v12.0.dll");
 #elif NET_4_0
-		return Path.Combine (BinPath, "Microsoft.Build.Tasks.v4.0.dll");
+        return Path.Combine(BinPath, "Microsoft.Build.Tasks.v4.0.dll");
 #else
-		return Path.Combine (BinPath, "Microsoft.Build.Tasks.dll");
+        return Path.Combine(BinPath, "Microsoft.Build.Tasks.dll");
 #endif
-	}
+    }
 }

@@ -20,10 +20,13 @@ namespace System.ServiceModel.Channels
         public abstract string WebSocketVersion { get; }
 
         // Provides the client WebSocket for step #2. WCF creates the HttpWebRequest in step #1, and passes the HttpWebResponse stream
-        // to this method. The 'settings' argument can optionally be used. On Win8 (and above), the WebSocket.CreateClientWebSocket method 
-        // requires other arguments (in addition to the Stream) that can be obtained from 'settings'. Since the WebSocket.CreateClientWebSocket 
-        // finds this argument to be enough to create a client WebSocket (on Win8, and post Win8 due to backward compatibility requirements), 
+        // to this method. The 'settings' argument can optionally be used. On Win8 (and above), the WebSocket.CreateClientWebSocket method
+        // requires other arguments (in addition to the Stream) that can be obtained from 'settings'. Since the WebSocket.CreateClientWebSocket
+        // finds this argument to be enough to create a client WebSocket (on Win8, and post Win8 due to backward compatibility requirements),
         // we estimate that implementors of a custom web socket factory will find it enough too.
-        public abstract WebSocket CreateWebSocket(Stream connection, WebSocketTransportSettings settings);
+        public abstract WebSocket CreateWebSocket(
+            Stream connection,
+            WebSocketTransportSettings settings
+        );
     }
 }

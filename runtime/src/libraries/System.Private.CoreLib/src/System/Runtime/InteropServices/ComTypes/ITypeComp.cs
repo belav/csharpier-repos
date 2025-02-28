@@ -13,7 +13,7 @@ namespace System.Runtime.InteropServices.ComTypes
         DESCKIND_VARDESC = DESCKIND_FUNCDESC + 1,
         DESCKIND_TYPECOMP = DESCKIND_VARDESC + 1,
         DESCKIND_IMPLICITAPPOBJ = DESCKIND_TYPECOMP + 1,
-        DESCKIND_MAX = DESCKIND_IMPLICITAPPOBJ + 1
+        DESCKIND_MAX = DESCKIND_IMPLICITAPPOBJ + 1,
     }
 
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -22,8 +22,10 @@ namespace System.Runtime.InteropServices.ComTypes
     {
         [FieldOffset(0)]
         public IntPtr lpfuncdesc;
+
         [FieldOffset(0)]
         public IntPtr lpvardesc;
+
         [FieldOffset(0)]
         public IntPtr lptcomp;
     }
@@ -34,7 +36,19 @@ namespace System.Runtime.InteropServices.ComTypes
     [ComImport]
     public interface ITypeComp
     {
-        void Bind([MarshalAs(UnmanagedType.LPWStr)] string szName, int lHashVal, short wFlags, out ITypeInfo ppTInfo, out DESCKIND pDescKind, out BINDPTR pBindPtr);
-        void BindType([MarshalAs(UnmanagedType.LPWStr)] string szName, int lHashVal, out ITypeInfo ppTInfo, out ITypeComp ppTComp);
+        void Bind(
+            [MarshalAs(UnmanagedType.LPWStr)] string szName,
+            int lHashVal,
+            short wFlags,
+            out ITypeInfo ppTInfo,
+            out DESCKIND pDescKind,
+            out BINDPTR pBindPtr
+        );
+        void BindType(
+            [MarshalAs(UnmanagedType.LPWStr)] string szName,
+            int lHashVal,
+            out ITypeInfo ppTInfo,
+            out ITypeComp ppTComp
+        );
     }
 }

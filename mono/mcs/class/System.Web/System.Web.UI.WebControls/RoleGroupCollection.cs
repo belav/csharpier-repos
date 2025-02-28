@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,7 +26,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Collections;
 using System.ComponentModel;
 using System.Security.Permissions;
@@ -34,85 +33,94 @@ using System.Security.Principal;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS (no InheritanceDemand for sealed class)
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[Editor ("System.Web.UI.Design.WebControls.RoleGroupCollectionEditor, " + Consts.AssemblySystem_Design, "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing)]
-	public sealed class RoleGroupCollection : CollectionBase
-	{
-		public RoleGroupCollection ()
-		{
-		}
+    // CAS (no InheritanceDemand for sealed class)
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [Editor(
+        "System.Web.UI.Design.WebControls.RoleGroupCollectionEditor, "
+            + Consts.AssemblySystem_Design,
+        "System.Drawing.Design.UITypeEditor, " + Consts.AssemblySystem_Drawing
+    )]
+    public sealed class RoleGroupCollection : CollectionBase
+    {
+        public RoleGroupCollection() { }
 
+        public RoleGroup this[int index]
+        {
+            get { return (RoleGroup)List[index]; }
+        }
 
-		public RoleGroup this [int index] {
-			get { return (RoleGroup) List [index]; }
-		}
+        public void Add(RoleGroup group)
+        {
+            List.Add(group);
+        }
 
+        public bool Contains(RoleGroup group)
+        {
+            return List.Contains(group);
+        }
 
-		public void Add (RoleGroup group)
-		{
-			List.Add (group);
-		}
+        public void CopyTo(RoleGroup[] array, int index)
+        {
+            if (array == null)
+                throw new ArgumentNullException("array");
+            if (index < 0)
+                throw new ArgumentException(Locale.GetText("Negative index."), "index");
+            if (this.Count <= array.Length - index)
+                throw new ArgumentException(
+                    Locale.GetText("Destination isn't large enough to copy collection."),
+                    "array"
+                );
 
-		public bool Contains (RoleGroup group)
-		{
-			return List.Contains (group);
-		}
+            for (int i = 0; i < Count; i++)
+                array[i + index] = this[i];
+        }
 
-		public void CopyTo (RoleGroup[] array, int index)
-		{
-			if (array == null)
-				throw new ArgumentNullException ("array");
-			if (index < 0)
-				throw new ArgumentException (Locale.GetText ("Negative index."), "index");
-			if (this.Count <= array.Length - index)
-				throw new ArgumentException (Locale.GetText ("Destination isn't large enough to copy collection."), "array");
+        public RoleGroup GetMatchingRoleGroup(IPrincipal user)
+        {
+            if (user == null)
+                throw new ArgumentNullException("user");
 
-			for (int i=0; i < Count; i++)
-				array [i + index] = this [i];
-		}
+            if (Count > 0)
+            {
+                foreach (RoleGroup rg in this)
+                {
+                    if (rg.ContainsUser(user))
+                        return rg;
+                }
+            }
+            return null;
+        }
 
-		public RoleGroup GetMatchingRoleGroup (IPrincipal user)
-		{
-			if (user == null)
-				throw new ArgumentNullException ("user");
+        public int IndexOf(RoleGroup group)
+        {
+            return List.IndexOf(group);
+        }
 
-			if (Count > 0) {
-				foreach (RoleGroup rg in this) {
-					if (rg.ContainsUser (user))
-						return rg;
-				}
-			}
-			return null;
-		}
+        public void Insert(int index, RoleGroup group)
+        {
+            List.Insert(index, group);
+        }
 
-		public int IndexOf (RoleGroup group)
-		{
-			return List.IndexOf (group);
-		}
+        protected override void OnValidate(object value)
+        {
+            // LAMESPEC: undocumented
+            //
+            // What do we validate here?
+            base.OnValidate(value);
+        }
 
-		public void Insert (int index, RoleGroup group)
-		{
-			List.Insert (index, group);
-		}
-
-		protected override void OnValidate (object value)
-		{
-			// LAMESPEC: undocumented
-			//
-			// What do we validate here?
-			base.OnValidate (value);
-		}
-		
-		public void Remove (RoleGroup group)
-		{
-			// note: checks required or we'll throw more exceptions :(
-			if (group != null) {
-				if (Contains (group))
-					List.Remove (group);
-			}
-		}
-	}
+        public void Remove(RoleGroup group)
+        {
+            // note: checks required or we'll throw more exceptions :(
+            if (group != null)
+            {
+                if (Contains(group))
+                    List.Remove(group);
+            }
+        }
+    }
 }
-

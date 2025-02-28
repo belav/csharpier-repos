@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Net;
-using System.Security.Permissions;
-using System.IO;
-using System.Xml;
-using System.Security;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Net;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using System.Xml;
 
 namespace System.Configuration
 {
@@ -34,7 +34,12 @@ namespace System.Configuration
                 sectionData.IriParsing = parentData.IriParsing;
                 sectionData.IdnScope = parentData.IdnScope;
 
-                foreach (KeyValuePair<string, SchemeSettingInternal> schemeSetting in parentData.SchemeSettings)
+                foreach (
+                    KeyValuePair<
+                        string,
+                        SchemeSettingInternal
+                    > schemeSetting in parentData.SchemeSettings
+                )
                 {
                     sectionData.SchemeSettings.Add(schemeSetting.Key, schemeSetting.Value);
                 }
@@ -52,8 +57,16 @@ namespace System.Configuration
             return reader.GetSectionData();
         }
 
-        [SuppressMessage("Microsoft.Security","CA2106:SecureAsserts", Justification="Must Assert read permission for only this file")]
-        [SuppressMessage("Microsoft.Security","CA2103:ReviewImperativeSecurity", Justification="Must Assert read permission for only this file")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2106:SecureAsserts",
+            Justification = "Must Assert read permission for only this file"
+        )]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2103:ReviewImperativeSecurity",
+            Justification = "Must Assert read permission for only this file"
+        )]
         private UriSectionData GetSectionData()
         {
             // Assert read permission for only this file.
@@ -62,7 +75,13 @@ namespace System.Configuration
             {
                 if (File.Exists(configFilePath))
                 {
-                    using (FileStream configFile = new FileStream(configFilePath, FileMode.Open, FileAccess.Read))
+                    using (
+                        FileStream configFile = new FileStream(
+                            configFilePath,
+                            FileMode.Open,
+                            FileAccess.Read
+                        )
+                    )
                     {
                         XmlReaderSettings settings = new XmlReaderSettings();
                         settings.IgnoreComments = true;
@@ -164,7 +183,8 @@ namespace System.Configuration
 
             try
             {
-                sectionData.IdnScope = (UriIdnScope)Enum.Parse(typeof(UriIdnScope), attributeValue, true);
+                sectionData.IdnScope = (UriIdnScope)
+                    Enum.Parse(typeof(UriIdnScope), attributeValue, true);
                 return true;
             }
             catch (ArgumentException)
@@ -196,14 +216,18 @@ namespace System.Configuration
                         continue;
                     }
                 }
-                else if (AreEqual(currentElementName, SchemeSettingElementCollection.RemoveItemName))
+                else if (
+                    AreEqual(currentElementName, SchemeSettingElementCollection.RemoveItemName)
+                )
                 {
                     if (ReadRemoveSchemeSetting())
                     {
                         continue;
                     }
                 }
-                else if (AreEqual(currentElementName, SchemeSettingElementCollection.ClearItemsName))
+                else if (
+                    AreEqual(currentElementName, SchemeSettingElementCollection.ClearItemsName)
+                )
                 {
                     ClearSchemeSetting();
                     continue;
@@ -226,20 +250,26 @@ namespace System.Configuration
         {
             string schemeValue = reader.GetAttribute(CommonConfigurationStrings.SchemeName);
             string genericUriParserOptionsValue = reader.GetAttribute(
-                CommonConfigurationStrings.GenericUriParserOptions);
+                CommonConfigurationStrings.GenericUriParserOptions
+            );
 
-            if (string.IsNullOrEmpty(schemeValue) || string.IsNullOrEmpty(genericUriParserOptionsValue))
+            if (
+                string.IsNullOrEmpty(schemeValue)
+                || string.IsNullOrEmpty(genericUriParserOptionsValue)
+            )
             {
                 return false;
             }
 
             try
             {
-                GenericUriParserOptions genericUriParserOptions = (GenericUriParserOptions)Enum.Parse(
-                    typeof(GenericUriParserOptions), genericUriParserOptionsValue);
+                GenericUriParserOptions genericUriParserOptions = (GenericUriParserOptions)
+                    Enum.Parse(typeof(GenericUriParserOptions), genericUriParserOptionsValue);
 
-                SchemeSettingInternal schemeSetting = new SchemeSettingInternal(schemeValue,
-                    genericUriParserOptions);
+                SchemeSettingInternal schemeSetting = new SchemeSettingInternal(
+                    schemeValue,
+                    genericUriParserOptions
+                );
 
                 sectionData.SchemeSettings[schemeSetting.Name] = schemeSetting;
                 return true;
@@ -272,8 +302,9 @@ namespace System.Configuration
 
         private bool IsEndElement(string elementName)
         {
-            return (reader.NodeType == XmlNodeType.EndElement) &&
-                string.Compare(reader.Name, elementName, StringComparison.OrdinalIgnoreCase) == 0;
+            return (reader.NodeType == XmlNodeType.EndElement)
+                && string.Compare(reader.Name, elementName, StringComparison.OrdinalIgnoreCase)
+                    == 0;
         }
 
         private bool ReadToUriSection()
@@ -301,7 +332,6 @@ namespace System.Configuration
                 {
                     return false;
                 }
-
             } while (reader.Depth != 1);
 
             return true;

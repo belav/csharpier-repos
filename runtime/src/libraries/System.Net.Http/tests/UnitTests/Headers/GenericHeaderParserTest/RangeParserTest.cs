@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
-
+using System.Text;
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -45,13 +44,19 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex, RangeHeaderValue expectedResult,
-            int expectedIndex)
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            RangeHeaderValue expectedResult,
+            int expectedIndex
+        )
         {
             HttpHeaderParser parser = GenericHeaderParser.RangeParser;
             object result = null;
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format("TryParse returned false. Input: '{0}'", input));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out result),
+                string.Format("TryParse returned false. Input: '{0}'", input)
+            );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(expectedResult, result);
         }
@@ -61,8 +66,10 @@ namespace System.Net.Http.Tests
             HttpHeaderParser parser = GenericHeaderParser.RangeParser;
             object result = null;
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format("TryParse returned true. Input: '{0}'", input));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out result),
+                string.Format("TryParse returned true. Input: '{0}'", input)
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

@@ -27,7 +27,46 @@ namespace System.Collections.Specialized.Tests
             yield return new object[] { 6, 6, new int[] { 2, 3 } };
             yield return new object[] { 31, 15, new int[] { 4 } };
             yield return new object[] { 22, 16, new int[] { 2, 3 } };
-            yield return new object[] { -1, 0, new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 } };
+            yield return new object[]
+            {
+                -1,
+                0,
+                new int[]
+                {
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                },
+            };
         }
 
         /// <summary>
@@ -61,18 +100,62 @@ namespace System.Collections.Specialized.Tests
             yield return new object[] { 1, BitVector32.CreateSection(1) };
             yield return new object[] { 0, BitVector32.CreateSection(short.MaxValue) };
             yield return new object[] { short.MaxValue, BitVector32.CreateSection(short.MaxValue) };
-            yield return new object[] { 0, BitVector32.CreateSection(1, BitVector32.CreateSection(byte.MaxValue)) };
-            yield return new object[] { 1, BitVector32.CreateSection(1, BitVector32.CreateSection(byte.MaxValue)) };
-            yield return new object[] { 0, BitVector32.CreateSection(short.MaxValue, BitVector32.CreateSection(byte.MaxValue)) };
-            yield return new object[] { short.MaxValue, BitVector32.CreateSection(short.MaxValue, BitVector32.CreateSection(byte.MaxValue)) };
+            yield return new object[]
+            {
+                0,
+                BitVector32.CreateSection(1, BitVector32.CreateSection(byte.MaxValue)),
+            };
+            yield return new object[]
+            {
+                1,
+                BitVector32.CreateSection(1, BitVector32.CreateSection(byte.MaxValue)),
+            };
+            yield return new object[]
+            {
+                0,
+                BitVector32.CreateSection(short.MaxValue, BitVector32.CreateSection(byte.MaxValue)),
+            };
+            yield return new object[]
+            {
+                short.MaxValue,
+                BitVector32.CreateSection(short.MaxValue, BitVector32.CreateSection(byte.MaxValue)),
+            };
             yield return new object[] { 16, BitVector32.CreateSection(short.MaxValue) };
-            yield return new object[] { 16, BitVector32.CreateSection(short.MaxValue, BitVector32.CreateSection(byte.MaxValue)) };
+            yield return new object[]
+            {
+                16,
+                BitVector32.CreateSection(short.MaxValue, BitVector32.CreateSection(byte.MaxValue)),
+            };
             yield return new object[] { 31, BitVector32.CreateSection(short.MaxValue) };
-            yield return new object[] { 31, BitVector32.CreateSection(short.MaxValue, BitVector32.CreateSection(byte.MaxValue)) };
+            yield return new object[]
+            {
+                31,
+                BitVector32.CreateSection(short.MaxValue, BitVector32.CreateSection(byte.MaxValue)),
+            };
             yield return new object[] { 16, BitVector32.CreateSection(byte.MaxValue) };
-            yield return new object[] { 16, BitVector32.CreateSection(byte.MaxValue, BitVector32.CreateSection(byte.MaxValue, BitVector32.CreateSection(short.MaxValue))) };
+            yield return new object[]
+            {
+                16,
+                BitVector32.CreateSection(
+                    byte.MaxValue,
+                    BitVector32.CreateSection(
+                        byte.MaxValue,
+                        BitVector32.CreateSection(short.MaxValue)
+                    )
+                ),
+            };
             yield return new object[] { 31, BitVector32.CreateSection(byte.MaxValue) };
-            yield return new object[] { 31, BitVector32.CreateSection(byte.MaxValue, BitVector32.CreateSection(byte.MaxValue, BitVector32.CreateSection(short.MaxValue))) };
+            yield return new object[]
+            {
+                31,
+                BitVector32.CreateSection(
+                    byte.MaxValue,
+                    BitVector32.CreateSection(
+                        byte.MaxValue,
+                        BitVector32.CreateSection(short.MaxValue)
+                    )
+                ),
+            };
         }
 
         /// <summary>
@@ -96,12 +179,38 @@ namespace System.Collections.Specialized.Tests
             yield return new object[] { nested, BitVector32.CreateSection(16, original) };
             yield return new object[] { BitVector32.CreateSection(16, original), nested };
             yield return new object[] { nested, BitVector32.CreateSection(31, original) };
-            yield return new object[] { nested, BitVector32.CreateSection(16, BitVector32.CreateSection(16)) };
-            yield return new object[] { BitVector32.CreateSection(16, BitVector32.CreateSection(16)), nested };
-            yield return new object[] { nested, BitVector32.CreateSection(31, BitVector32.CreateSection(16)) };
+            yield return new object[]
+            {
+                nested,
+                BitVector32.CreateSection(16, BitVector32.CreateSection(16)),
+            };
+            yield return new object[]
+            {
+                BitVector32.CreateSection(16, BitVector32.CreateSection(16)),
+                nested,
+            };
+            yield return new object[]
+            {
+                nested,
+                BitVector32.CreateSection(31, BitVector32.CreateSection(16)),
+            };
             // Because it only stores the offset, and not the previous section, later sections may be equal
-            yield return new object[] { nested, BitVector32.CreateSection(16, BitVector32.CreateSection(8, BitVector32.CreateSection(1))) };
-            yield return new object[] { BitVector32.CreateSection(16, BitVector32.CreateSection(8, BitVector32.CreateSection(1))), nested };
+            yield return new object[]
+            {
+                nested,
+                BitVector32.CreateSection(
+                    16,
+                    BitVector32.CreateSection(8, BitVector32.CreateSection(1))
+                ),
+            };
+            yield return new object[]
+            {
+                BitVector32.CreateSection(
+                    16,
+                    BitVector32.CreateSection(8, BitVector32.CreateSection(1))
+                ),
+                nested,
+            };
         }
 
         /// <summary>
@@ -120,10 +229,26 @@ namespace System.Collections.Specialized.Tests
             yield return new object[] { BitVector32.CreateSection(1), original };
             yield return new object[] { original, nested };
             yield return new object[] { nested, original };
-            yield return new object[] { nested, BitVector32.CreateSection(1, BitVector32.CreateSection(short.MaxValue)) };
-            yield return new object[] { BitVector32.CreateSection(1, BitVector32.CreateSection(short.MaxValue)), nested };
-            yield return new object[] { nested, BitVector32.CreateSection(16, BitVector32.CreateSection(short.MaxValue)) };
-            yield return new object[] { BitVector32.CreateSection(16, BitVector32.CreateSection(short.MaxValue)), nested };
+            yield return new object[]
+            {
+                nested,
+                BitVector32.CreateSection(1, BitVector32.CreateSection(short.MaxValue)),
+            };
+            yield return new object[]
+            {
+                BitVector32.CreateSection(1, BitVector32.CreateSection(short.MaxValue)),
+                nested,
+            };
+            yield return new object[]
+            {
+                nested,
+                BitVector32.CreateSection(16, BitVector32.CreateSection(short.MaxValue)),
+            };
+            yield return new object[]
+            {
+                BitVector32.CreateSection(16, BitVector32.CreateSection(short.MaxValue)),
+                nested,
+            };
             yield return new object[] { nested, BitVector32.CreateSection(1, original) };
             yield return new object[] { BitVector32.CreateSection(1, original), nested };
         }
@@ -375,7 +500,10 @@ namespace System.Collections.Specialized.Tests
             }
             {
                 BitVector32 data = new BitVector32();
-                BitVector32.Section nested = BitVector32.CreateSection(maximum, BitVector32.CreateSection(short.MaxValue));
+                BitVector32.Section nested = BitVector32.CreateSection(
+                    maximum,
+                    BitVector32.CreateSection(short.MaxValue)
+                );
 
                 data[nested] = value;
                 Assert.Equal((maximum & value) << 15, data.Data);
@@ -394,7 +522,10 @@ namespace System.Collections.Specialized.Tests
         public static void Set_Section_OverflowTest(int value)
         {
             BitVector32 data = new BitVector32();
-            BitVector32.Section offset = BitVector32.CreateSection(short.MaxValue, BitVector32.CreateSection(short.MaxValue));
+            BitVector32.Section offset = BitVector32.CreateSection(
+                short.MaxValue,
+                BitVector32.CreateSection(short.MaxValue)
+            );
             BitVector32.Section final = BitVector32.CreateSection(short.MaxValue, offset);
 
             data[final] = value;
@@ -429,9 +560,15 @@ namespace System.Collections.Specialized.Tests
         [InlineData(0)]
         public static void CreateSection_InvalidMaximumTest(short maxvalue)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxValue", () => BitVector32.CreateSection(maxvalue));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maxValue",
+                () => BitVector32.CreateSection(maxvalue)
+            );
             BitVector32.Section valid = BitVector32.CreateSection(1);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxValue", () => BitVector32.CreateSection(maxvalue, valid));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maxValue",
+                () => BitVector32.CreateSection(maxvalue, valid)
+            );
         }
 
         [Theory]
@@ -442,7 +579,10 @@ namespace System.Collections.Specialized.Tests
         public static void CreateSection_FullTest(short prior, short invalid)
         {
             // BV32 can hold just over 2 shorts, so fill most of the way first....
-            BitVector32.Section initial = BitVector32.CreateSection(short.MaxValue, BitVector32.CreateSection(short.MaxValue));
+            BitVector32.Section initial = BitVector32.CreateSection(
+                short.MaxValue,
+                BitVector32.CreateSection(short.MaxValue)
+            );
             BitVector32.Section overflow = BitVector32.CreateSection(prior, initial);
             // Final masked value can hang off the end
             Assert.Equal(prior, overflow.Mask);
@@ -451,7 +591,9 @@ namespace System.Collections.Specialized.Tests
             //     - the current offset is 30, and the current mask requires more than the remaining 1 bit.
             Assert.InRange(CountBitsRequired(overflow.Mask), 2, 15);
 
-            Assert.Throws<InvalidOperationException>(() => BitVector32.CreateSection(invalid, overflow));
+            Assert.Throws<InvalidOperationException>(
+                () => BitVector32.CreateSection(invalid, overflow)
+            );
         }
 
         [Theory]
@@ -473,7 +615,10 @@ namespace System.Collections.Specialized.Tests
 
         [Theory]
         [MemberData(nameof(Section_Unequal_Data))]
-        public static void Section_Unequal_EqualsTest(BitVector32.Section left, BitVector32.Section right)
+        public static void Section_Unequal_EqualsTest(
+            BitVector32.Section left,
+            BitVector32.Section right
+        )
         {
             Assert.False(left.Equals(right));
             Assert.False(right.Equals(left));
@@ -489,7 +634,10 @@ namespace System.Collections.Specialized.Tests
 
         [Theory]
         [MemberData(nameof(Section_Equal_Data))]
-        public static void Section_GetHashCodeTest(BitVector32.Section left, BitVector32.Section right)
+        public static void Section_GetHashCodeTest(
+            BitVector32.Section left,
+            BitVector32.Section right
+        )
         {
             Assert.Equal(left.GetHashCode(), left.GetHashCode());
             Assert.Equal(left.GetHashCode(), right.GetHashCode());

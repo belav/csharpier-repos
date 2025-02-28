@@ -10,18 +10,14 @@ namespace System.Activities.Tracking
     {
         Collection<string> arguments;
         Collection<string> states;
-        Collection<string> variables;        
-        
+        Collection<string> variables;
+
         public ActivityStateQuery()
         {
             this.ActivityName = "*";
         }
 
-        public string ActivityName
-        {
-            get;
-            set;
-        }
+        public string ActivityName { get; set; }
 
         public Collection<string> Arguments
         {
@@ -47,7 +43,7 @@ namespace System.Activities.Tracking
 
                 return this.variables;
             }
-        }        
+        }
 
         public Collection<string> States
         {
@@ -63,26 +59,17 @@ namespace System.Activities.Tracking
 
         internal bool HasStates
         {
-            get
-            {
-                return this.states != null && this.states.Count > 0;
-            }
+            get { return this.states != null && this.states.Count > 0; }
         }
 
         internal bool HasArguments
         {
-            get
-            {
-                return this.arguments != null && this.arguments.Count > 0;
-            }
+            get { return this.arguments != null && this.arguments.Count > 0; }
         }
 
         internal bool HasVariables
         {
-            get
-            {
-                return this.variables != null && this.variables.Count > 0;
-            }
-        }        
+            get { return this.variables != null && this.variables.Count > 0; }
+        }
     }
 }

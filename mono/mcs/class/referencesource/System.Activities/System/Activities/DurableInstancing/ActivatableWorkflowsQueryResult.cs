@@ -5,18 +5,19 @@
 namespace System.Activities.DurableInstancing
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Runtime;
     using System.Runtime.Collections;
     using System.Runtime.DurableInstancing;
     using System.Xml.Linq;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
 
     [Fx.Tag.XamlVisible(false)]
     public sealed class ActivatableWorkflowsQueryResult : InstanceStoreQueryResult
     {
-        static readonly ReadOnlyDictionaryInternal<XName, object> emptyDictionary = new ReadOnlyDictionaryInternal<XName, object>(new Dictionary<XName, object>(0));
+        static readonly ReadOnlyDictionaryInternal<XName, object> emptyDictionary =
+            new ReadOnlyDictionaryInternal<XName, object>(new Dictionary<XName, object>(0));
 
         public ActivatableWorkflowsQueryResult()
         {
@@ -26,7 +27,13 @@ namespace System.Activities.DurableInstancing
         public ActivatableWorkflowsQueryResult(IDictionary<XName, object> parameters)
         {
             ActivationParameters = new List<IDictionary<XName, object>>
-                { parameters == null ? ActivatableWorkflowsQueryResult.emptyDictionary : new ReadOnlyDictionaryInternal<XName, object>(new Dictionary<XName, object>(parameters)) };
+            {
+                parameters == null
+                    ? ActivatableWorkflowsQueryResult.emptyDictionary
+                    : new ReadOnlyDictionaryInternal<XName, object>(
+                        new Dictionary<XName, object>(parameters)
+                    ),
+            };
         }
 
         public ActivatableWorkflowsQueryResult(IEnumerable<IDictionary<XName, object>> parameters)
@@ -37,15 +44,18 @@ namespace System.Activities.DurableInstancing
             }
             else
             {
-                ActivationParameters = new List<IDictionary<XName, object>>(parameters.Select(dictionary =>
-                    dictionary == null ? ActivatableWorkflowsQueryResult.emptyDictionary : new ReadOnlyDictionaryInternal<XName, object>(new Dictionary<XName, object>(dictionary))));
+                ActivationParameters = new List<IDictionary<XName, object>>(
+                    parameters.Select(dictionary =>
+                        dictionary == null
+                            ? ActivatableWorkflowsQueryResult.emptyDictionary
+                            : new ReadOnlyDictionaryInternal<XName, object>(
+                                new Dictionary<XName, object>(dictionary)
+                            )
+                    )
+                );
             }
         }
 
-        public List<IDictionary<XName, object>> ActivationParameters
-        {
-            get;
-            private set;
-        }
+        public List<IDictionary<XName, object>> ActivationParameters { get; private set; }
     }
 }

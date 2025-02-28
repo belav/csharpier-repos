@@ -18,7 +18,8 @@ public class OperationLoggerTests
             RelationalEventId.CommandExecuted,
             null,
             null,
-            (_, __) => "-- Can't stop the SQL");
+            (_, __) => "-- Can't stop the SQL"
+        );
 
         Assert.Collection(
             reporter.Messages,
@@ -26,6 +27,7 @@ public class OperationLoggerTests
             {
                 Assert.Equal("-- Can't stop the SQL", x.Message);
                 Assert.Equal(LogLevel.Debug, x.Level);
-            });
+            }
+        );
     }
 }

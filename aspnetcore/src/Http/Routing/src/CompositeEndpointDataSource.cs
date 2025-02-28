@@ -46,7 +46,8 @@ public sealed class CompositeEndpointDataSource : EndpointDataSource, IDisposabl
         }
     }
 
-    private void OnDataSourcesChanged(object? sender, NotifyCollectionChangedEventArgs e) => HandleChange(collectionChanged: true);
+    private void OnDataSourcesChanged(object? sender, NotifyCollectionChangedEventArgs e) =>
+        HandleChange(collectionChanged: true);
 
     /// <summary>
     /// Returns the collection of <see cref="EndpointDataSource"/> instances associated with the object.
@@ -249,9 +250,12 @@ public sealed class CompositeEndpointDataSource : EndpointDataSource, IDisposabl
             _changeTokenRegistrations = new();
             foreach (var dataSource in _dataSources)
             {
-                _changeTokenRegistrations.Add(ChangeToken.OnChange(
-                    dataSource.GetChangeToken,
-                    () => HandleChange(collectionChanged: false)));
+                _changeTokenRegistrations.Add(
+                    ChangeToken.OnChange(
+                        dataSource.GetChangeToken,
+                        () => HandleChange(collectionChanged: false)
+                    )
+                );
             }
         }
 

@@ -48,11 +48,16 @@ namespace System.Net.Http.Headers
         public override string ToString() =>
             _quality == NotSetSentinel
                 ? _value
-                : string.Create(CultureInfo.InvariantCulture, stackalloc char[128], $"{_value}; q={_quality:0.0##}");
+                : string.Create(
+                    CultureInfo.InvariantCulture,
+                    stackalloc char[128],
+                    $"{_value}; q={_quality:0.0##}"
+                );
 
         public override bool Equals([NotNullWhen(true)] object? obj) =>
-            obj is StringWithQualityHeaderValue other &&
-            string.Equals(_value, other._value, StringComparison.OrdinalIgnoreCase) &&
+            obj is StringWithQualityHeaderValue other
+            && string.Equals(_value, other._value, StringComparison.OrdinalIgnoreCase)
+            &&
             // Note that we don't consider double.Epsilon here. We really consider two values equal if they're
             // actually equal. This makes sure that we also get the same hashcode for two values considered equal
             // by Equals().
@@ -64,17 +69,30 @@ namespace System.Net.Http.Headers
         public static StringWithQualityHeaderValue Parse(string input)
         {
             int index = 0;
-            return (StringWithQualityHeaderValue)GenericHeaderParser.SingleValueStringWithQualityParser.ParseValue(
-                input, null, ref index);
+            return (StringWithQualityHeaderValue)
+                GenericHeaderParser.SingleValueStringWithQualityParser.ParseValue(
+                    input,
+                    null,
+                    ref index
+                );
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out StringWithQualityHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out StringWithQualityHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.SingleValueStringWithQualityParser.TryParseValue(
-                input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.SingleValueStringWithQualityParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (StringWithQualityHeaderValue)output!;
                 return true;
@@ -82,7 +100,11 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetStringWithQualityLength(string? input, int startIndex, out object? parsedValue)
+        internal static int GetStringWithQualityLength(
+            string? input,
+            int startIndex,
+            out object? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 
@@ -159,8 +181,14 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            if (!double.TryParse(input.AsSpan(current, qualityLength), NumberStyles.AllowDecimalPoint,
-                NumberFormatInfo.InvariantInfo, out quality))
+            if (
+                !double.TryParse(
+                    input.AsSpan(current, qualityLength),
+                    NumberStyles.AllowDecimalPoint,
+                    NumberFormatInfo.InvariantInfo,
+                    out quality
+                )
+            )
             {
                 return false;
             }

@@ -7,8 +7,10 @@ namespace System.ComponentModel.DataAnnotations
     ///     Specifies a list of values that should not be allowed in a property.
     /// </summary>
     [CLSCompliant(false)]
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public class DeniedValuesAttribute : ValidationAttribute
     {
         /// <summary>

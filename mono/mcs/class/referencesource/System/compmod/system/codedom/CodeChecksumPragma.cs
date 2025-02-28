@@ -1,63 +1,51 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeChecksumPragma.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeChecksumPragma: CodeDirective {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeChecksumPragma : CodeDirective
+    {
         private string fileName;
         private byte[] checksumData;
         private Guid checksumAlgorithmId;
 
-        public CodeChecksumPragma() {
-        }
-        
-        public CodeChecksumPragma(string fileName, Guid checksumAlgorithmId, byte[] checksumData) {
+        public CodeChecksumPragma() { }
+
+        public CodeChecksumPragma(string fileName, Guid checksumAlgorithmId, byte[] checksumData)
+        {
             this.fileName = fileName;
             this.checksumAlgorithmId = checksumAlgorithmId;
             this.checksumData = checksumData;
         }
 
-        public string FileName {
-            get {
-                return (fileName == null) ? string.Empty : fileName;
-            }
-            set {
-                fileName = value;
-            }
+        public string FileName
+        {
+            get { return (fileName == null) ? string.Empty : fileName; }
+            set { fileName = value; }
         }
-        
-        public Guid ChecksumAlgorithmId {
-            get {
-                return checksumAlgorithmId;
-            }
-            set {
-                checksumAlgorithmId = value;
-            }
+
+        public Guid ChecksumAlgorithmId
+        {
+            get { return checksumAlgorithmId; }
+            set { checksumAlgorithmId = value; }
         }
-        
-        public byte[] ChecksumData {
-            get {
-                return checksumData;
-            }
-            set {
-                checksumData = value;
-            }
+
+        public byte[] ChecksumData
+        {
+            get { return checksumData; }
+            set { checksumData = value; }
         }
     }
 }

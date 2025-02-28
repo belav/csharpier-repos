@@ -19,8 +19,8 @@ public static class IdentityServiceCollectionExtensions
     /// <typeparam name="TUser">The type representing a User in the system.</typeparam>
     /// <param name="services">The services available in the application.</param>
     /// <returns>An <see cref="IdentityBuilder"/> for creating and configuring the identity system.</returns>
-    public static IdentityBuilder AddIdentityCore<TUser>(this IServiceCollection services) where TUser : class
-        => services.AddIdentityCore<TUser>(o => { });
+    public static IdentityBuilder AddIdentityCore<TUser>(this IServiceCollection services)
+        where TUser : class => services.AddIdentityCore<TUser>(o => { });
 
     /// <summary>
     /// Adds and configures the identity system for the specified User type. Role services are not added by default
@@ -30,7 +30,10 @@ public static class IdentityServiceCollectionExtensions
     /// <param name="services">The services available in the application.</param>
     /// <param name="setupAction">An action to configure the <see cref="IdentityOptions"/>.</param>
     /// <returns>An <see cref="IdentityBuilder"/> for creating and configuring the identity system.</returns>
-    public static IdentityBuilder AddIdentityCore<TUser>(this IServiceCollection services, Action<IdentityOptions> setupAction)
+    public static IdentityBuilder AddIdentityCore<TUser>(
+        this IServiceCollection services,
+        Action<IdentityOptions> setupAction
+    )
         where TUser : class
     {
         // Services identity depends on
@@ -44,7 +47,10 @@ public static class IdentityServiceCollectionExtensions
         services.TryAddScoped<IUserConfirmation<TUser>, DefaultUserConfirmation<TUser>>();
         // No interface for the error describer so we can add errors without rev'ing the interface
         services.TryAddScoped<IdentityErrorDescriber>();
-        services.TryAddScoped<IUserClaimsPrincipalFactory<TUser>, UserClaimsPrincipalFactory<TUser>>();
+        services.TryAddScoped<
+            IUserClaimsPrincipalFactory<TUser>,
+            UserClaimsPrincipalFactory<TUser>
+        >();
         services.TryAddScoped<UserManager<TUser>>();
 
         if (setupAction != null)

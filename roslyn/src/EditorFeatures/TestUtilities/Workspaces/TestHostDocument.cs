@@ -22,12 +22,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 {
     public class TestHostDocument
     {
-        private static readonly ImmutableArray<string> s_defaultRoles = ImmutableArray.Create<string>
-            (PredefinedTextViewRoles.Analyzable,
-            PredefinedTextViewRoles.Document,
-            PredefinedTextViewRoles.Editable,
-            PredefinedTextViewRoles.Interactive,
-            PredefinedTextViewRoles.Zoomable);
+        private static readonly ImmutableArray<string> s_defaultRoles =
+            ImmutableArray.Create<string>(
+                PredefinedTextViewRoles.Analyzable,
+                PredefinedTextViewRoles.Document,
+                PredefinedTextViewRoles.Editable,
+                PredefinedTextViewRoles.Interactive,
+                PredefinedTextViewRoles.Zoomable
+            );
 
         private readonly ExportProvider? _exportProvider;
         private HostLanguageServices? _languageServiceProvider;
@@ -63,7 +65,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 {
                     var workspace = _languageServiceProvider!.WorkspaceServices.Workspace;
                     var project = workspace.CurrentSolution.GetRequiredProject(_project!.Id);
-                    var sourceGeneratedDocuments = project.GetSourceGeneratedDocumentsAsync(CancellationToken.None).AsTask().Result;
+                    var sourceGeneratedDocuments = project
+                        .GetSourceGeneratedDocumentsAsync(CancellationToken.None)
+                        .AsTask()
+                        .Result;
                     _id = sourceGeneratedDocuments.Single(d => d.FilePath == this.FilePath).Id;
                 }
 
@@ -88,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         public int? CursorPosition { get; }
         public IList<TextSpan> SelectedSpans { get; } = new List<TextSpan>();
-        public IDictionary<string, ImmutableArray<TextSpan>> AnnotatedSpans { get; } = new Dictionary<string, ImmutableArray<TextSpan>>();
+        public IDictionary<string, ImmutableArray<TextSpan>> AnnotatedSpans { get; } =
+            new Dictionary<string, ImmutableArray<TextSpan>>();
 
         /// <summary>
         /// If a file exists in ProjectA and is added to ProjectB as a link, then this returns
@@ -121,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             IDocumentServiceProvider? documentServiceProvider = null,
             ImmutableArray<string> roles = default,
             ITextBuffer2? textBuffer = null,
-            ISourceGenerator? generator = null)
+            ISourceGenerator? generator = null
+        )
         {
             Contract.ThrowIfNull(filePath);
 
@@ -165,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             string? filePath = null,
             IReadOnlyList<string>? folders = null,
             ExportProvider? exportProvider = null,
-            IDocumentServiceProvider? documentServiceProvider = null)
+            IDocumentServiceProvider? documentServiceProvider = null
+        )
         {
             _exportProvider = exportProvider;
             _id = id;
@@ -210,11 +218,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 _text = text;
             }
 
-            internal override string? FilePath
-                => _hostDocument.FilePath;
+            internal override string? FilePath => _hostDocument.FilePath;
 
-            public override Task<TextAndVersion> LoadTextAndVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
-                => Task.FromResult(TextAndVersion.Create(SourceText.From(_text, encoding: null, options.ChecksumAlgorithm), VersionStamp.Create(), _hostDocument.FilePath));
+            public override Task<TextAndVersion> LoadTextAndVersionAsync(
+                LoadTextOptions options,
+                CancellationToken cancellationToken
+            ) =>
+                Task.FromResult(
+                    TextAndVersion.Create(
+                        SourceText.From(_text, encoding: null, options.ChecksumAlgorithm),
+                        VersionStamp.Create(),
+                        _hostDocument.FilePath
+                    )
+                );
         }
 
         public TextLoader Loader => _loader;
@@ -223,25 +239,35 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         {
             if (_textView == null)
             {
-                Contract.ThrowIfNull(_exportProvider, $"Can only create text view for {nameof(TestHostDocument)} created with {nameof(ExportProvider)}");
-                WpfTestRunner.RequireWpfFact($"Creates an {nameof(IWpfTextView)} through {nameof(TestHostDocument)}.{nameof(GetTextView)}");
+                Contract.ThrowIfNull(
+                    _exportProvider,
+                    $"Can only create text view for {nameof(TestHostDocument)} created with {nameof(ExportProvider)}"
+                );
+                WpfTestRunner.RequireWpfFact(
+                    $"Creates an {nameof(IWpfTextView)} through {nameof(TestHostDocument)}.{nameof(GetTextView)}"
+                );
 
                 var factory = _exportProvider.GetExportedValue<ITextEditorFactoryService>();
 
                 // Every default role but outlining. Starting in 15.2, the editor
-                // OutliningManager imports JoinableTaskContext in a way that's 
+                // OutliningManager imports JoinableTaskContext in a way that's
                 // difficult to satisfy in our unit tests. Since we don't directly
                 // depend on it, just disable it
                 var roles = factory.CreateTextViewRoleSet(_roles);
                 _textView = factory.CreateTextView(this.GetTextBuffer(), roles);
                 if (this.CursorPosition.HasValue)
                 {
-                    _textView.Caret.MoveTo(new SnapshotPoint(_textView.TextSnapshot, CursorPosition.Value));
+                    _textView.Caret.MoveTo(
+                        new SnapshotPoint(_textView.TextSnapshot, CursorPosition.Value)
+                    );
                 }
                 else if (this.SelectedSpans.IsSingle())
                 {
                     var span = this.SelectedSpans.Single();
-                    _textView.Selection.Select(new SnapshotSpan(_textView.TextSnapshot, new Span(span.Start, span.Length)), false);
+                    _textView.Selection.Select(
+                        new SnapshotSpan(_textView.TextSnapshot, new Span(span.Start, span.Length)),
+                        false
+                    );
                 }
             }
 
@@ -254,17 +280,31 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             if (_textBuffer == null)
             {
-                Contract.ThrowIfNull(_languageServiceProvider, $"To get a text buffer for a {nameof(TestHostDocument)}, it must have been parented in a project.");
-                var contentType = _languageServiceProvider.GetRequiredService<IContentTypeLanguageService>().GetDefaultContentType();
+                Contract.ThrowIfNull(
+                    _languageServiceProvider,
+                    $"To get a text buffer for a {nameof(TestHostDocument)}, it must have been parented in a project."
+                );
+                var contentType = _languageServiceProvider
+                    .GetRequiredService<IContentTypeLanguageService>()
+                    .GetDefaultContentType();
 
-                _textBuffer = workspace!.GetOrCreateBufferForPath(FilePath, contentType, _languageServiceProvider.Language, _initialText);
+                _textBuffer = workspace!.GetOrCreateBufferForPath(
+                    FilePath,
+                    contentType,
+                    _languageServiceProvider.Language,
+                    _initialText
+                );
                 _initialTextSnapshot = _textBuffer.CurrentSnapshot;
             }
 
             if (workspace != null)
             {
                 // Open (or reopen) any files that were closed in this call. We do this for all linked copies at once.
-                foreach (var linkedId in workspace.CurrentSolution.GetDocumentIdsWithFilePath(FilePath).Concat(this.Id))
+                foreach (
+                    var linkedId in workspace
+                        .CurrentSolution.GetDocumentIdsWithFilePath(FilePath)
+                        .Concat(this.Id)
+                )
                 {
                     if (workspace.IsDocumentOpen(linkedId))
                         continue;
@@ -274,24 +314,50 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         if (testDocument.IsSourceGenerated)
                         {
                             var threadingContext = workspace.GetService<IThreadingContext>();
-                            var document = threadingContext.JoinableTaskFactory.Run(() => workspace.CurrentSolution.GetSourceGeneratedDocumentAsync(testDocument.Id, CancellationToken.None).AsTask());
+                            var document = threadingContext.JoinableTaskFactory.Run(
+                                () =>
+                                    workspace
+                                        .CurrentSolution.GetSourceGeneratedDocumentAsync(
+                                            testDocument.Id,
+                                            CancellationToken.None
+                                        )
+                                        .AsTask()
+                            );
                             Contract.ThrowIfNull(document);
 
-                            workspace.OnSourceGeneratedDocumentOpened(_textBuffer.AsTextContainer(), document);
+                            workspace.OnSourceGeneratedDocumentOpened(
+                                _textBuffer.AsTextContainer(),
+                                document
+                            );
                         }
                         else
                         {
                             // If there is a linked file, we'll start the non-linked one as being the primary context, which some tests depend on.
-                            workspace.OnDocumentOpened(linkedId, _textBuffer.AsTextContainer(), isCurrentContext: !testDocument.IsLinkFile);
+                            workspace.OnDocumentOpened(
+                                linkedId,
+                                _textBuffer.AsTextContainer(),
+                                isCurrentContext: !testDocument.IsLinkFile
+                            );
                         }
                     }
-                    else if (workspace.GetTestAdditionalDocument(linkedId) is { } testAdditionalDocument)
+                    else if (
+                        workspace.GetTestAdditionalDocument(linkedId) is { } testAdditionalDocument
+                    )
                     {
-                        workspace.OnAdditionalDocumentOpened(linkedId, _textBuffer.AsTextContainer());
+                        workspace.OnAdditionalDocumentOpened(
+                            linkedId,
+                            _textBuffer.AsTextContainer()
+                        );
                     }
-                    else if (workspace.GetTestAnalyzerConfigDocument(linkedId) is { } testAnalyzerConfigDocument)
+                    else if (
+                        workspace.GetTestAnalyzerConfigDocument(linkedId) is
+                        { } testAnalyzerConfigDocument
+                    )
                     {
-                        workspace.OnAnalyzerConfigDocumentOpened(linkedId, _textBuffer.AsTextContainer());
+                        workspace.OnAnalyzerConfigDocumentOpened(
+                            linkedId,
+                            _textBuffer.AsTextContainer()
+                        );
                     }
                 }
             }
@@ -299,15 +365,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             return _textBuffer;
         }
 
-        public SourceTextContainer GetOpenTextContainer()
-            => this.GetTextBuffer().AsTextContainer();
+        public SourceTextContainer GetOpenTextContainer() => this.GetTextBuffer().AsTextContainer();
 
         public IReadOnlyList<string> Folders
         {
-            get
-            {
-                return _folders ?? ImmutableArray.Create<string>();
-            }
+            get { return _folders ?? ImmutableArray.Create<string>(); }
         }
 
         // TODO: delete this
@@ -323,7 +385,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         internal void Update(SourceText newText)
         {
             var buffer = GetTextBuffer();
-            using (var edit = buffer.CreateEdit(EditOptions.DefaultMinimalChange, reiteratedVersionNumber: null, editTag: null))
+            using (
+                var edit = buffer.CreateEdit(
+                    EditOptions.DefaultMinimalChange,
+                    reiteratedVersionNumber: null,
+                    editTag: null
+                )
+            )
             {
                 var oldText = buffer.CurrentSnapshot.AsText();
                 var changes = newText.GetTextChanges(oldText);
@@ -339,7 +407,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         private void Update(string newText)
         {
-            using (var edit = this.GetTextBuffer().CreateEdit(EditOptions.DefaultMinimalChange, reiteratedVersionNumber: null, editTag: null))
+            using (
+                var edit = this.GetTextBuffer()
+                    .CreateEdit(
+                        EditOptions.DefaultMinimalChange,
+                        reiteratedVersionNumber: null,
+                        editTag: null
+                    )
+            )
             {
                 edit.Replace(new Span(0, this.GetTextBuffer().CurrentSnapshot.Length), newText);
                 edit.Apply();
@@ -357,8 +432,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         public DocumentInfo ToDocumentInfo()
         {
-            Contract.ThrowIfTrue(IsSourceGenerated, "We shouldn't be producing a DocumentInfo for a source generated document.");
-            return DocumentInfo.Create(Id, Name, Folders, SourceCodeKind, Loader, FilePath, isGenerated: false)
+            Contract.ThrowIfTrue(
+                IsSourceGenerated,
+                "We shouldn't be producing a DocumentInfo for a source generated document."
+            );
+            return DocumentInfo
+                .Create(Id, Name, Folders, SourceCodeKind, Loader, FilePath, isGenerated: false)
                 .WithDocumentServiceProvider(_documentServiceProvider);
         }
     }

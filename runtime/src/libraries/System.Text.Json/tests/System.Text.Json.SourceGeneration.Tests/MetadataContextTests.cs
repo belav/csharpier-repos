@@ -1,115 +1,323 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Text.Json.Serialization;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Xunit;
 
 namespace System.Text.Json.SourceGeneration.Tests
 {
     [JsonSerializable(typeof(Location), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(RepeatedTypes.Location), TypeInfoPropertyName = "RepeatedLocation", GenerationMode = JsonSourceGenerationMode.Metadata)]
+    [JsonSerializable(
+        typeof(RepeatedTypes.Location),
+        TypeInfoPropertyName = "RepeatedLocation",
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
     [JsonSerializable(typeof(NumberTypes), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(ActiveOrUpcomingEvent), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(CampaignSummaryViewModel), GenerationMode = JsonSourceGenerationMode.Metadata)]
+    [JsonSerializable(
+        typeof(ActiveOrUpcomingEvent),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(CampaignSummaryViewModel),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
     [JsonSerializable(typeof(IndexViewModel), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(WeatherForecastWithPOCOs), GenerationMode = JsonSourceGenerationMode.Metadata)]
+    [JsonSerializable(
+        typeof(WeatherForecastWithPOCOs),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
     [JsonSerializable(typeof(EmptyPoco), GenerationMode = JsonSourceGenerationMode.Metadata)]
     [JsonSerializable(typeof(HighLowTemps), GenerationMode = JsonSourceGenerationMode.Metadata)]
     [JsonSerializable(typeof(MyType), GenerationMode = JsonSourceGenerationMode.Metadata)]
     [JsonSerializable(typeof(MyType2), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(MyTypeWithCallbacks), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(MyTypeWithPropertyOrdering), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(MyIntermediateType), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(HighLowTempsImmutable), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(HighLowTempsRecord), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(RealWorldContextTests.MyNestedClass), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(RealWorldContextTests.MyNestedClass.MyNestedNestedClass), GenerationMode = JsonSourceGenerationMode.Metadata)]
+    [JsonSerializable(
+        typeof(MyTypeWithCallbacks),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(MyTypeWithPropertyOrdering),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(MyIntermediateType),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(HighLowTempsImmutable),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(HighLowTempsRecord),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(RealWorldContextTests.MyNestedClass),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(RealWorldContextTests.MyNestedClass.MyNestedNestedClass),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
     [JsonSerializable(typeof(object[]), GenerationMode = JsonSourceGenerationMode.Metadata)]
     [JsonSerializable(typeof(byte[]), GenerationMode = JsonSourceGenerationMode.Metadata)]
     [JsonSerializable(typeof(string), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof((string Label1, int Label2, bool)), GenerationMode = JsonSourceGenerationMode.Metadata)]
+    [JsonSerializable(
+        typeof((string Label1, int Label2, bool)),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
     [JsonSerializable(typeof(JsonDocument), GenerationMode = JsonSourceGenerationMode.Metadata)]
     [JsonSerializable(typeof(JsonElement), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(RealWorldContextTests.ClassWithEnumAndNullable), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(RealWorldContextTests.ClassWithNullableProperties), GenerationMode = JsonSourceGenerationMode.Metadata)]
+    [JsonSerializable(
+        typeof(RealWorldContextTests.ClassWithEnumAndNullable),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(RealWorldContextTests.ClassWithNullableProperties),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
 #if NETCOREAPP
-    [JsonSerializable(typeof(RealWorldContextTests.ClassWithDateOnlyAndTimeOnlyValues), GenerationMode = JsonSourceGenerationMode.Metadata)]
+    [JsonSerializable(
+        typeof(RealWorldContextTests.ClassWithDateOnlyAndTimeOnlyValues),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
 #endif
-    [JsonSerializable(typeof(ClassWithCustomConverter), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(StructWithCustomConverter), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(ClassWithCustomConverterFactory), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(StructWithCustomConverterFactory), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(ClassWithCustomConverterProperty), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(StructWithCustomConverterProperty), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(ClassWithCustomConverterFactoryProperty), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(StructWithCustomConverterFactoryProperty), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(ClassWithCustomConverterNullableProperty), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(ClassWithCustomConverterFactoryNullableProperty), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(ClassWithBadCustomConverter), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(StructWithBadCustomConverter), GenerationMode = JsonSourceGenerationMode.Metadata)]
+    [JsonSerializable(
+        typeof(ClassWithCustomConverter),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(StructWithCustomConverter),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(ClassWithCustomConverterFactory),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(StructWithCustomConverterFactory),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(ClassWithCustomConverterProperty),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(StructWithCustomConverterProperty),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(ClassWithCustomConverterFactoryProperty),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(StructWithCustomConverterFactoryProperty),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(ClassWithCustomConverterNullableProperty),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(ClassWithCustomConverterFactoryNullableProperty),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(ClassWithBadCustomConverter),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(StructWithBadCustomConverter),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
     [JsonSerializable(typeof(PersonStruct?), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(TypeWithValidationAttributes), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(TypeWithDerivedAttribute), GenerationMode = JsonSourceGenerationMode.Metadata)]
+    [JsonSerializable(
+        typeof(TypeWithValidationAttributes),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
+    [JsonSerializable(
+        typeof(TypeWithDerivedAttribute),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
     [JsonSerializable(typeof(PolymorphicClass), GenerationMode = JsonSourceGenerationMode.Metadata)]
-    [JsonSerializable(typeof(PocoWithNumberHandlingAttr), GenerationMode = JsonSourceGenerationMode.Metadata)]
+    [JsonSerializable(
+        typeof(PocoWithNumberHandlingAttr),
+        GenerationMode = JsonSourceGenerationMode.Metadata
+    )]
     internal partial class MetadataWithPerTypeAttributeContext : JsonSerializerContext, ITestContext
     {
-        public JsonSourceGenerationMode JsonSourceGenerationMode => JsonSourceGenerationMode.Metadata;
-        public bool IsIncludeFieldsEnabled => GetType().GetCustomAttribute<JsonSourceGenerationOptionsAttribute>()?.IncludeFields ?? false;
+        public JsonSourceGenerationMode JsonSourceGenerationMode =>
+            JsonSourceGenerationMode.Metadata;
+        public bool IsIncludeFieldsEnabled =>
+            GetType().GetCustomAttribute<JsonSourceGenerationOptionsAttribute>()?.IncludeFields
+            ?? false;
     }
 
     public sealed class MetadataWithPerTypeAttributeContextTests : RealWorldContextTests
     {
-        public MetadataWithPerTypeAttributeContextTests() : base(MetadataWithPerTypeAttributeContext.Default, (options) => new MetadataWithPerTypeAttributeContext(options)) { }
+        public MetadataWithPerTypeAttributeContextTests()
+            : base(
+                MetadataWithPerTypeAttributeContext.Default,
+                (options) => new MetadataWithPerTypeAttributeContext(options)
+            ) { }
 
         [Fact]
         public override void EnsureFastPathGeneratedAsExpected()
         {
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.Location.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.RepeatedLocation.SerializeHandler);
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext.Default.RepeatedLocation.SerializeHandler
+            );
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.NumberTypes.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.ActiveOrUpcomingEvent.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.CampaignSummaryViewModel.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.IndexViewModel.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.WeatherForecastWithPOCOs.SerializeHandler);
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext.Default.ActiveOrUpcomingEvent.SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .CampaignSummaryViewModel
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext.Default.IndexViewModel.SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .WeatherForecastWithPOCOs
+                    .SerializeHandler
+            );
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.EmptyPoco.SerializeHandler);
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.HighLowTemps.SerializeHandler);
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.MyType.SerializeHandler);
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.MyType2.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.MyIntermediateType.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.HighLowTempsImmutable.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.HighLowTempsRecord.SerializeHandler);
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext.Default.MyIntermediateType.SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext.Default.HighLowTempsImmutable.SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext.Default.HighLowTempsRecord.SerializeHandler
+            );
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.MyNestedClass.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.MyNestedNestedClass.SerializeHandler);
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext.Default.MyNestedNestedClass.SerializeHandler
+            );
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.ObjectArray.SerializeHandler);
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.ByteArray.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.SourceGenSampleEnum.SerializeHandler);
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext.Default.SourceGenSampleEnum.SerializeHandler
+            );
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.String.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.ValueTupleStringInt32Boolean.SerializeHandler);
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .ValueTupleStringInt32Boolean
+                    .SerializeHandler
+            );
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.JsonDocument.SerializeHandler);
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.JsonElement.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.ClassWithEnumAndNullable.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.ClassWithNullableProperties.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.ClassWithCustomConverter.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.StructWithCustomConverter.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.ClassWithCustomConverterFactory.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.StructWithCustomConverterFactory.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.ClassWithCustomConverterProperty.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.StructWithCustomConverterProperty.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.ClassWithCustomConverterFactoryProperty.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.StructWithCustomConverterFactoryProperty.SerializeHandler);
-            Assert.Throws<InvalidOperationException>(() => MetadataWithPerTypeAttributeContext.Default.ClassWithBadCustomConverter.SerializeHandler);
-            Assert.Throws<InvalidOperationException>(() => MetadataWithPerTypeAttributeContext.Default.StructWithBadCustomConverter.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.NullablePersonStruct.SerializeHandler);
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithEnumAndNullable
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithNullableProperties
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithCustomConverter
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .StructWithCustomConverter
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithCustomConverterFactory
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .StructWithCustomConverterFactory
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithCustomConverterProperty
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .StructWithCustomConverterProperty
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithCustomConverterFactoryProperty
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .StructWithCustomConverterFactoryProperty
+                    .SerializeHandler
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    MetadataWithPerTypeAttributeContext
+                        .Default
+                        .ClassWithBadCustomConverter
+                        .SerializeHandler
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    MetadataWithPerTypeAttributeContext
+                        .Default
+                        .StructWithBadCustomConverter
+                        .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext.Default.NullablePersonStruct.SerializeHandler
+            );
             Assert.Null(MetadataWithPerTypeAttributeContext.Default.PersonStruct.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.TypeWithValidationAttributes.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.TypeWithDerivedAttribute.SerializeHandler);
-            Assert.Null(MetadataWithPerTypeAttributeContext.Default.PolymorphicClass.SerializeHandler);
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .TypeWithValidationAttributes
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext
+                    .Default
+                    .TypeWithDerivedAttribute
+                    .SerializeHandler
+            );
+            Assert.Null(
+                MetadataWithPerTypeAttributeContext.Default.PolymorphicClass.SerializeHandler
+            );
         }
     }
 
-    [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata, IncludeFields = true)]
+    [JsonSourceGenerationOptions(
+        GenerationMode = JsonSourceGenerationMode.Metadata,
+        IncludeFields = true
+    )]
     [JsonSerializable(typeof(Location))]
     [JsonSerializable(typeof(RepeatedTypes.Location), TypeInfoPropertyName = "RepeatedLocation")]
     [JsonSerializable(typeof(NumberTypes))]
@@ -158,20 +366,21 @@ namespace System.Text.Json.SourceGeneration.Tests
     [JsonSerializable(typeof(PocoWithNumberHandlingAttr))]
     internal partial class MetadataContext : JsonSerializerContext, ITestContext
     {
-        public JsonSourceGenerationMode JsonSourceGenerationMode => JsonSourceGenerationMode.Metadata;
-        public bool IsIncludeFieldsEnabled => GetType().GetCustomAttribute<JsonSourceGenerationOptionsAttribute>()?.IncludeFields ?? false;
+        public JsonSourceGenerationMode JsonSourceGenerationMode =>
+            JsonSourceGenerationMode.Metadata;
+        public bool IsIncludeFieldsEnabled =>
+            GetType().GetCustomAttribute<JsonSourceGenerationOptionsAttribute>()?.IncludeFields
+            ?? false;
     }
 
     [JsonConverter(typeof(JsonStringEnumConverter<EnumWrittenAsString>))]
     public enum EnumWrittenAsString
     {
-        A = 1
+        A = 1,
     }
 
     [JsonSerializable(typeof(EnumWrittenAsString))]
-    public partial class ContextWithExplicitStringEnum : JsonSerializerContext
-    {
-    }
+    public partial class ContextWithExplicitStringEnum : JsonSerializerContext { }
 
     public class PocoWithEnum
     {
@@ -179,13 +388,12 @@ namespace System.Text.Json.SourceGeneration.Tests
     }
 
     [JsonSerializable(typeof(PocoWithEnum))]
-    public partial class ContextWithImplicitStringEnum : JsonSerializerContext
-    {
-    }
+    public partial class ContextWithImplicitStringEnum : JsonSerializerContext { }
 
     public sealed class MetadataContextTests : RealWorldContextTests
     {
-        public MetadataContextTests() : base(MetadataContext.Default, (options) => new MetadataContext(options)) { }
+        public MetadataContextTests()
+            : base(MetadataContext.Default, (options) => new MetadataContext(options)) { }
 
         [Fact]
         public override void EnsureFastPathGeneratedAsExpected()
@@ -223,10 +431,18 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Null(MetadataContext.Default.StructWithCustomConverterFactory.SerializeHandler);
             Assert.Null(MetadataContext.Default.ClassWithCustomConverterProperty.SerializeHandler);
             Assert.Null(MetadataContext.Default.StructWithCustomConverterProperty.SerializeHandler);
-            Assert.Null(MetadataContext.Default.ClassWithCustomConverterFactoryProperty.SerializeHandler);
-            Assert.Null(MetadataContext.Default.StructWithCustomConverterFactoryProperty.SerializeHandler);
-            Assert.Throws<InvalidOperationException>(() => MetadataContext.Default.ClassWithBadCustomConverter.SerializeHandler);
-            Assert.Throws<InvalidOperationException>(() => MetadataContext.Default.StructWithBadCustomConverter.SerializeHandler);
+            Assert.Null(
+                MetadataContext.Default.ClassWithCustomConverterFactoryProperty.SerializeHandler
+            );
+            Assert.Null(
+                MetadataContext.Default.StructWithCustomConverterFactoryProperty.SerializeHandler
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => MetadataContext.Default.ClassWithBadCustomConverter.SerializeHandler
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => MetadataContext.Default.StructWithBadCustomConverter.SerializeHandler
+            );
             Assert.Null(MetadataContext.Default.NullablePersonStruct.SerializeHandler);
             Assert.Null(MetadataContext.Default.PersonStruct.SerializeHandler);
             Assert.Null(MetadataContext.Default.TypeWithValidationAttributes.SerializeHandler);
@@ -247,10 +463,16 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             EnumWrittenAsString obj = EnumWrittenAsString.A;
 
-            string json = JsonSerializer.Serialize(obj, ContextWithExplicitStringEnum.Default.EnumWrittenAsString);
+            string json = JsonSerializer.Serialize(
+                obj,
+                ContextWithExplicitStringEnum.Default.EnumWrittenAsString
+            );
             Assert.Equal(Json, json);
 
-            obj = JsonSerializer.Deserialize(Json, ContextWithExplicitStringEnum.Default.EnumWrittenAsString);
+            obj = JsonSerializer.Deserialize(
+                Json,
+                ContextWithExplicitStringEnum.Default.EnumWrittenAsString
+            );
             Assert.Equal(EnumWrittenAsString.A, obj);
         }
 
@@ -264,10 +486,16 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             PocoWithEnum obj = new() { MyEnum = EnumWrittenAsString.A };
 
-            string json = JsonSerializer.Serialize(obj, ContextWithImplicitStringEnum.Default.PocoWithEnum);
+            string json = JsonSerializer.Serialize(
+                obj,
+                ContextWithImplicitStringEnum.Default.PocoWithEnum
+            );
             Assert.Equal(Json, json);
 
-            obj = JsonSerializer.Deserialize(Json, ContextWithImplicitStringEnum.Default.PocoWithEnum);
+            obj = JsonSerializer.Deserialize(
+                Json,
+                ContextWithImplicitStringEnum.Default.PocoWithEnum
+            );
             Assert.Equal(EnumWrittenAsString.A, obj.MyEnum);
         }
     }

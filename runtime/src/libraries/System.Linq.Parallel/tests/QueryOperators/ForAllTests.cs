@@ -47,15 +47,42 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void ForAll_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).ForAll(x => { throw new DeliberateTestException(); }));
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Select((Func<int, int>)(x => { throw new DeliberateTestException(); })).ForAll(x => { }));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .ForAll(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Select(
+                            (Func<int, int>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+                        .ForAll(x => { })
+            );
         }
 
         [Fact]
         public static void ForAll_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<int>)null).ForAll(x => { }));
-            AssertExtensions.Throws<ArgumentNullException>("action", () => ParallelEnumerable.Range(0, 1).ForAll(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<int>)null).ForAll(x => { })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "action",
+                () => ParallelEnumerable.Range(0, 1).ForAll(null)
+            );
         }
 
         [Fact]
@@ -64,7 +91,10 @@ namespace System.Linq.Parallel.Tests
             const int Count = 10;
             try
             {
-                new int[Count].AsParallel().Select<int, int>(i => throw new AggregateException()).ForAll(_ => { });
+                new int[Count]
+                    .AsParallel()
+                    .Select<int, int>(i => throw new AggregateException())
+                    .ForAll(_ => { });
             }
             catch (AggregateException e)
             {

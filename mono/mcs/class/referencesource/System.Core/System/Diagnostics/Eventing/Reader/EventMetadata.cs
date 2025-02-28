@@ -1,31 +1,33 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: EventMetadata
 **
-** Purpose: 
-** This public class describes the metadata for a specific event 
-** raised by Provider. An instance of this class is obtained from 
+** Purpose:
+** This public class describes the metadata for a specific event
+** raised by Provider. An instance of this class is obtained from
 ** ProviderMetadata class.
-** 
+**
 ============================================================*/
 
-using System.Globalization;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Diagnostics.CodeAnalysis;
 
-namespace System.Diagnostics.Eventing.Reader {
+namespace System.Diagnostics.Eventing.Reader
+{
     /// <summary>
     /// Event Metadata
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public sealed class EventMetadata {
+    public sealed class EventMetadata
+    {
         private long id;
         private byte version;
         private byte channelId;
@@ -38,9 +40,19 @@ namespace System.Diagnostics.Eventing.Reader {
 
         ProviderMetadata pmReference;
 
-        internal EventMetadata(uint id, byte version, byte channelId,
-                 byte level, byte opcode, short task, long keywords,
-                 string template, string description, ProviderMetadata pmReference) {
+        internal EventMetadata(
+            uint id,
+            byte version,
+            byte channelId,
+            byte level,
+            byte opcode,
+            short task,
+            long keywords,
+            string template,
+            string description,
+            ProviderMetadata pmReference
+        )
+        {
             this.id = id;
             this.version = version;
             this.channelId = channelId;
@@ -55,53 +67,53 @@ namespace System.Diagnostics.Eventing.Reader {
 
         //
         // Max value will be UINT32.MaxValue - it is a long because this property
-        // is really a UINT32.  The legacy API allows event message ids to be declared 
-        // as UINT32 and these event/messages may be migrated into a Provider's 
-        // manifest as UINT32.  Note that EventRecord ids are 
+        // is really a UINT32.  The legacy API allows event message ids to be declared
+        // as UINT32 and these event/messages may be migrated into a Provider's
+        // manifest as UINT32.  Note that EventRecord ids are
         // still declared as int, because those ids max value is UINT16.MaxValue
-        // and rest of the bits of the legacy event id would be stored in 
+        // and rest of the bits of the legacy event id would be stored in
         // Qualifiers property.
-        // 
-        public long Id {
-            get {
-                return this.id;
-            }
+        //
+        public long Id
+        {
+            get { return this.id; }
         }
 
-        public byte Version {
-            get {
-                return this.version;
-            }
+        public byte Version
+        {
+            get { return this.version; }
         }
 
-        public EventLogLink LogLink {
-            get {
-                return new EventLogLink((uint)this.channelId, this.pmReference);
-            }
+        public EventLogLink LogLink
+        {
+            get { return new EventLogLink((uint)this.channelId, this.pmReference); }
         }
 
-        public EventLevel Level {
-            get {
-                return new EventLevel(this.level, this.pmReference);
-            }
+        public EventLevel Level
+        {
+            get { return new EventLevel(this.level, this.pmReference); }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "Opcode", Justification = "Microsoft: Shipped public in 3.5, breaking change to fix now.")]
-        public EventOpcode Opcode {
-            get {
-                return new EventOpcode(this.opcode, this.pmReference);
-            }
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "Opcode",
+            Justification = "Microsoft: Shipped public in 3.5, breaking change to fix now."
+        )]
+        public EventOpcode Opcode
+        {
+            get { return new EventOpcode(this.opcode, this.pmReference); }
         }
 
-        public EventTask Task {
-            get {
-                return new EventTask(this.task, this.pmReference);
-            }
+        public EventTask Task
+        {
+            get { return new EventTask(this.task, this.pmReference); }
         }
 
-
-        public IEnumerable<EventKeyword> Keywords {
-            get {
+        public IEnumerable<EventKeyword> Keywords
+        {
+            get
+            {
                 List<EventKeyword> list = new List<EventKeyword>();
 
                 ulong theKeywords = (ulong)this.keywords;
@@ -109,9 +121,11 @@ namespace System.Diagnostics.Eventing.Reader {
 
                 //for every bit
                 //for (int i = 0; i < 64 && theKeywords != 0; i++)
-                for (int i = 0; i < 64; i++) {
+                for (int i = 0; i < 64; i++)
+                {
                     //if this bit is set
-                    if ((theKeywords & mask) > 0) {
+                    if ((theKeywords & mask) > 0)
+                    {
                         //the mask is the keyword we will be searching for.
                         list.Add(new EventKeyword((long)mask, this.pmReference));
                         //theKeywords = theKeywords - mask;
@@ -124,16 +138,14 @@ namespace System.Diagnostics.Eventing.Reader {
             }
         }
 
-        public string Template {
-            get {
-                return this.template;
-            }
+        public string Template
+        {
+            get { return this.template; }
         }
 
-        public string Description {
-            get {
-                return this.description;
-            }
+        public string Description
+        {
+            get { return this.description; }
         }
     }
 }

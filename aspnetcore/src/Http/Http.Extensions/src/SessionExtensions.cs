@@ -20,10 +20,10 @@ public static class SessionExtensions
     {
         var bytes = new byte[]
         {
-                (byte)(value >> 24),
-                (byte)(0xFF & (value >> 16)),
-                (byte)(0xFF & (value >> 8)),
-                (byte)(0xFF & value)
+            (byte)(value >> 24),
+            (byte)(0xFF & (value >> 16)),
+            (byte)(0xFF & (value >> 8)),
+            (byte)(0xFF & value),
         };
         session.Set(key, bytes);
     }

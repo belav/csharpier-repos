@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Composition;
+using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.LanguageServer.LanguageServer;
 using Microsoft.CodeAnalysis.ProjectSystem;
-using Microsoft.Extensions.Logging;
-using Microsoft.CodeAnalysis.Host.Mef;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.Shared.TestHooks;
+using Microsoft.Extensions.Logging;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace.FileWatching;
 
@@ -28,7 +28,10 @@ internal sealed class DelegatingFileChangeWatcher : IFileChangeWatcher
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public DelegatingFileChangeWatcher(ILoggerFactory loggerFactory, IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider)
+    public DelegatingFileChangeWatcher(
+        ILoggerFactory loggerFactory,
+        IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider
+    )
     {
         _loggerFactory = loggerFactory;
         _asynchronousOperationListenerProvider = asynchronousOperationListenerProvider;
@@ -46,7 +49,11 @@ internal sealed class DelegatingFileChangeWatcher : IFileChangeWatcher
         }
         else
         {
-            _loggerFactory.CreateLogger<DelegatingFileChangeWatcher>().LogWarning("We are unable to use LSP file watching; falling back to our in-process watcher.");
+            _loggerFactory
+                .CreateLogger<DelegatingFileChangeWatcher>()
+                .LogWarning(
+                    "We are unable to use LSP file watching; falling back to our in-process watcher."
+                );
             return new SimpleFileChangeWatcher();
         }
     }

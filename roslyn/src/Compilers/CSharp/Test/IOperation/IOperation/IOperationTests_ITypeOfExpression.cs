@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestTypeOfExpression()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -27,20 +28,26 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITypeOfOperation (OperationKind.TypeOf, Type: System.Type) (Syntax: 'typeof(int)')
   TypeOperand: System.Int32
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TypeOfExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TypeOfExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestTypeOfExpression_NonPrimitiveTypeArgument()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -51,20 +58,26 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITypeOfOperation (OperationKind.TypeOf, Type: System.Type) (Syntax: 'typeof(C)')
   TypeOperand: C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TypeOfExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TypeOfExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestTypeOfExpression_ErrorTypeArgument()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -75,24 +88,33 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITypeOfOperation (OperationKind.TypeOf, Type: System.Type, IsInvalid) (Syntax: 'typeof(UndefinedType)')
   TypeOperand: UndefinedType
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0246: The type or namespace name 'UndefinedType' could not be found (are you missing a using directive or an assembly reference?)
                 //         t = /*<bind>*/typeof(UndefinedType)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UndefinedType").WithArguments("UndefinedType").WithLocation(8, 30)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UndefinedType")
+                    .WithArguments("UndefinedType")
+                    .WithLocation(8, 30),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TypeOfExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TypeOfExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestTypeOfExpression_IdentifierArgument()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -103,24 +125,33 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITypeOfOperation (OperationKind.TypeOf, Type: System.Type, IsInvalid) (Syntax: 'typeof(t)')
   TypeOperand: t
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0118: 't' is a variable but is used like a type
                 //         t = /*<bind>*/typeof(t)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadSKknown, "t").WithArguments("t", "variable", "type").WithLocation(8, 30)
+                Diagnostic(ErrorCode.ERR_BadSKknown, "t")
+                    .WithArguments("t", "variable", "type")
+                    .WithLocation(8, 30),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TypeOfExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TypeOfExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestTypeOfExpression_ExpressionArgument()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -133,13 +164,15 @@ class C
     Type M2() => null;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'typeof(M2()')
   Children(1):
       ITypeOfOperation (OperationKind.TypeOf, Type: System.Type, IsInvalid) (Syntax: 'typeof(M2')
         TypeOperand: M2
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1026: ) expected
                 //         t = /*<bind>*/typeof(M2()/*</bind>*/);
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "(").WithLocation(8, 32),
@@ -151,17 +184,24 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'typeof(M
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(8, 45),
                 // CS0246: The type or namespace name 'M2' could not be found (are you missing a using directive or an assembly reference?)
                 //         t = /*<bind>*/typeof(M2()/*</bind>*/);
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "M2").WithArguments("M2").WithLocation(8, 30)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "M2")
+                    .WithArguments("M2")
+                    .WithLocation(8, 30),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestTypeOfExpression_MissingArgument()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -172,24 +212,31 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITypeOfOperation (OperationKind.TypeOf, Type: System.Type, IsInvalid) (Syntax: 'typeof()')
   TypeOperand: ?
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1031: Type expected
                 //         t = /*<bind>*/typeof()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_TypeExpected, ")").WithLocation(8, 30)
+                Diagnostic(ErrorCode.ERR_TypeExpected, ")").WithLocation(8, 30),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TypeOfExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TypeOfExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TypeOfFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(System.Type t)
@@ -200,7 +247,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -221,7 +269,11 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

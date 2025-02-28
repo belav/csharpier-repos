@@ -4,7 +4,6 @@
 // this test is regression test for VSW 448208
 // A program AVed if there was a readonly static in a generic type
 
-
 using System;
 using Xunit;
 
@@ -16,7 +15,6 @@ public class GenType1<T>
     {
         return s_i == 0;
     }
-    
 }
 
 public class Test_b448208

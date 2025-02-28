@@ -8,10 +8,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeAsn1ObjectHandle : SafeHandle
     {
-        public SafeAsn1ObjectHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeAsn1ObjectHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -28,10 +26,8 @@ namespace Microsoft.Win32.SafeHandles
 
     internal sealed class SafeAsn1BitStringHandle : SafeHandle
     {
-        public SafeAsn1BitStringHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeAsn1BitStringHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -48,10 +44,8 @@ namespace Microsoft.Win32.SafeHandles
 
     internal sealed class SafeAsn1OctetStringHandle : SafeHandle
     {
-        public SafeAsn1OctetStringHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeAsn1OctetStringHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -68,17 +62,13 @@ namespace Microsoft.Win32.SafeHandles
 
     internal sealed class SafeSharedAsn1IntegerHandle : SafeInteriorHandle
     {
-        public SafeSharedAsn1IntegerHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeSharedAsn1IntegerHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
     }
 
     internal sealed class SafeSharedAsn1OctetStringHandle : SafeInteriorHandle
     {
-        public SafeSharedAsn1OctetStringHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeSharedAsn1OctetStringHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
     }
 }

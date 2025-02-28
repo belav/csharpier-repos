@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,99 +26,113 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web {
+namespace MonoCasTests.System.Web
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class TraceContextCas : AspNetHostingMinimal
+    {
+        private HttpContext context;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TraceContextCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            context = new HttpContext(null);
+        }
 
-		private HttpContext context;
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Properties_Events()
+        {
+            TraceContext tc = new TraceContext(context);
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			context = new HttpContext (null);
-		}
+            tc.IsEnabled = false;
+            Assert.IsFalse(tc.IsEnabled, "IsEnabled");
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Properties_Events ()
-		{
-			TraceContext tc = new TraceContext (context);
+            Assert.AreEqual(TraceMode.SortByTime, tc.TraceMode, "TraceMode");
+            tc.TraceMode = TraceMode.Default;
+            tc.TraceFinished += new TraceContextEventHandler(Handler);
+            tc.TraceFinished -= new TraceContextEventHandler(Handler);
+        }
 
-			tc.IsEnabled = false;
-			Assert.IsFalse (tc.IsEnabled, "IsEnabled");
+        private void Handler(object sender, TraceContextEventArgs e) { }
 
-			Assert.AreEqual (TraceMode.SortByTime, tc.TraceMode, "TraceMode");
-			tc.TraceMode = TraceMode.Default;
-			tc.TraceFinished += new TraceContextEventHandler (Handler);
-			tc.TraceFinished -= new TraceContextEventHandler (Handler);
-		}
-		private void Handler (object sender, TraceContextEventArgs e)
-		{
-		}
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetCurrentProcessInfo_Deny_High ()
-		{
-			ProcessModelInfo.GetCurrentProcessInfo ();
-		}
+        [Test]
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetCurrentProcessInfo_Deny_High()
+        {
+            ProcessModelInfo.GetCurrentProcessInfo();
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
-		public void GetCurrentProcessInfo_PermitOnly_High ()
-		{
-			try {
-				ProcessModelInfo.GetCurrentProcessInfo ();
-			}
-			catch (HttpException) {
-				// expected (as we're not running ASP.NET)
-			}
-		}
+        [Test]
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.High
+        )]
+        public void GetCurrentProcessInfo_PermitOnly_High()
+        {
+            try
+            {
+                ProcessModelInfo.GetCurrentProcessInfo();
+            }
+            catch (HttpException)
+            {
+                // expected (as we're not running ASP.NET)
+            }
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
-		[ExpectedException (typeof (SecurityException))]
-		public void GetHistory_Deny_High ()
-		{
-			ProcessModelInfo.GetHistory (0);
-		}
+        [Test]
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.High)]
+        [ExpectedException(typeof(SecurityException))]
+        public void GetHistory_Deny_High()
+        {
+            ProcessModelInfo.GetHistory(0);
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.High)]
-		public void GetHistory_PermitOnly_High ()
-		{
-			try {
-				ProcessModelInfo.GetHistory (0);
-			}
-			catch (HttpException) {
-				// expected (as we're not running ASP.NET)
-			}
-			catch (NotImplementedException) {
-				// mono
-			}
-		}
+        [Test]
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.High
+        )]
+        public void GetHistory_PermitOnly_High()
+        {
+            try
+            {
+                ProcessModelInfo.GetHistory(0);
+            }
+            catch (HttpException)
+            {
+                // expected (as we're not running ASP.NET)
+            }
+            catch (NotImplementedException)
+            {
+                // mono
+            }
+        }
 
-		// LinkDemand
+        // LinkDemand
 
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (HttpContext) });
-			Assert.IsNotNull (ci, ".ctor(HttpContext)");
-			return ci.Invoke (new object[1] { context });
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(HttpContext) });
+            Assert.IsNotNull(ci, ".ctor(HttpContext)");
+            return ci.Invoke(new object[1] { context });
+        }
 
-		public override Type Type {
-			get { return typeof (TraceContext); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(TraceContext); }
+        }
+    }
 }

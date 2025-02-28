@@ -31,12 +31,14 @@ public class WasmLoadAssembliesAndReferences : Task
 
     private SortedDictionary<string, Assembly> _assemblies = new();
 
-    public override bool Execute ()
+    public override bool Execute()
     {
         string? badPath = AssemblySearchPaths.FirstOrDefault(path => !Directory.Exists(path));
         if (badPath != null)
         {
-            Log.LogError($"Directory '{badPath}' in AssemblySearchPaths does not exist or is not a directory.");
+            Log.LogError(
+                $"Directory '{badPath}' in AssemblySearchPaths does not exist or is not a directory."
+            );
             return false;
         }
 
@@ -74,15 +76,31 @@ public class WasmLoadAssembliesAndReferences : Task
                 if (!AddAssemblyAndReferences(mlc, refAssembly))
                     return false;
             }
-            catch (Exception ex) when (ex is FileLoadException || ex is BadImageFormatException || ex is FileNotFoundException)
+            catch (Exception ex)
+                when (ex is FileLoadException
+                    || ex is BadImageFormatException
+                    || ex is FileNotFoundException
+                )
             {
                 if (SkipMissingAssemblies)
                 {
-                    Log.LogWarning(null, "WASM0004", "", "", 0, 0, 0, 0, $"Loading assembly reference '{aname}' for '{assembly.GetName()}' failed: {ex.Message} Skipping.");
+                    Log.LogWarning(
+                        null,
+                        "WASM0004",
+                        "",
+                        "",
+                        0,
+                        0,
+                        0,
+                        0,
+                        $"Loading assembly reference '{aname}' for '{assembly.GetName()}' failed: {ex.Message} Skipping."
+                    );
                 }
                 else
                 {
-                    Log.LogError($"Failed to load assembly reference '{aname}' for '{assembly.GetName()}': {ex.Message}");
+                    Log.LogError(
+                        $"Failed to load assembly reference '{aname}' for '{assembly.GetName()}': {ex.Message}"
+                    );
                     return false;
                 }
             }

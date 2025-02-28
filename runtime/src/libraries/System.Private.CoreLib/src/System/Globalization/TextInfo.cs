@@ -23,7 +23,7 @@ namespace System.Globalization
         {
             NotInitialized = 0,
             False = 1,
-            True = 2
+            True = 2,
         }
 
         private string? _listSeparator;
@@ -32,7 +32,10 @@ namespace System.Globalization
         private readonly string _cultureName;
         private readonly CultureData _cultureData;
 
-        private bool HasEmptyCultureName { get { return _cultureName.Length == 0; } }
+        private bool HasEmptyCultureName
+        {
+            get { return _cultureName.Length == 0; }
+        }
 
         // // Name of the text info we're using (ie: _cultureData.TextInfoName)
         private readonly string _textInfoName;
@@ -40,7 +43,13 @@ namespace System.Globalization
         private Tristate _isAsciiCasingSameAsInvariant = Tristate.NotInitialized;
 
         // Invariant text info
-        internal static readonly TextInfo Invariant = new TextInfo(CultureData.Invariant, readOnly: true) { _isAsciiCasingSameAsInvariant = Tristate.True };
+        internal static readonly TextInfo Invariant = new TextInfo(
+            CultureData.Invariant,
+            readOnly: true
+        )
+        {
+            _isAsciiCasingSameAsInvariant = Tristate.True,
+        };
 
         internal TextInfo(CultureData cultureData)
         {
@@ -223,10 +232,17 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private unsafe void ChangeCaseCommon<TConversion>(ReadOnlySpan<char> source, Span<char> destination) where TConversion : struct
+        private unsafe void ChangeCaseCommon<TConversion>(
+            ReadOnlySpan<char> source,
+            Span<char> destination
+        )
+            where TConversion : struct
         {
             Debug.Assert(!GlobalizationMode.Invariant);
-            Debug.Assert(typeof(TConversion) == typeof(ToUpperConversion) || typeof(TConversion) == typeof(ToLowerConversion));
+            Debug.Assert(
+                typeof(TConversion) == typeof(ToUpperConversion)
+                    || typeof(TConversion) == typeof(ToLowerConversion)
+            );
 
             if (source.IsEmpty)
             {
@@ -252,13 +268,23 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (char* pDestination = &MemoryMarshal.GetReference(destination))
             {
-                ChangeCaseCore(pSource + charsConsumed, source.Length - charsConsumed, pDestination + charsConsumed, destination.Length - charsConsumed, toUpper);
+                ChangeCaseCore(
+                    pSource + charsConsumed,
+                    source.Length - charsConsumed,
+                    pDestination + charsConsumed,
+                    destination.Length - charsConsumed,
+                    toUpper
+                );
             }
         }
 
-        private unsafe string ChangeCaseCommon<TConversion>(string source) where TConversion : struct
+        private unsafe string ChangeCaseCommon<TConversion>(string source)
+            where TConversion : struct
         {
-            Debug.Assert(typeof(TConversion) == typeof(ToUpperConversion) || typeof(TConversion) == typeof(ToLowerConversion));
+            Debug.Assert(
+                typeof(TConversion) == typeof(ToUpperConversion)
+                    || typeof(TConversion) == typeof(ToLowerConversion)
+            );
             bool toUpper = typeof(TConversion) == typeof(ToUpperConversion); // JIT will treat this as a constant in release builds
 
             Debug.Assert(!GlobalizationMode.Invariant);
@@ -293,7 +319,11 @@ namespace System.Globalization
                             {
                                 goto NotAscii;
                             }
-                            if ((toUpper) ? Utf16Utility.UInt32ContainsAnyLowercaseAsciiChar(tempValue) : Utf16Utility.UInt32ContainsAnyUppercaseAsciiChar(tempValue))
+                            if (
+                                (toUpper)
+                                    ? Utf16Utility.UInt32ContainsAnyLowercaseAsciiChar(tempValue)
+                                    : Utf16Utility.UInt32ContainsAnyUppercaseAsciiChar(tempValue)
+                            )
                             {
                                 goto AsciiMustChangeCase;
                             }
@@ -310,7 +340,11 @@ namespace System.Globalization
                         {
                             goto NotAscii;
                         }
-                        if ((toUpper) ? ((tempValue - 'a') <= (uint)('z' - 'a')) : ((tempValue - 'A') <= (uint)('Z' - 'A')))
+                        if (
+                            (toUpper)
+                                ? ((tempValue - 'a') <= (uint)('z' - 'a'))
+                                : ((tempValue - 'A') <= (uint)('Z' - 'A'))
+                        )
                         {
                             goto AsciiMustChangeCase;
                         }
@@ -319,7 +353,7 @@ namespace System.Globalization
                     // We got through all characters without finding anything that needed to change - done!
                     return source;
 
-                AsciiMustChangeCase:
+                    AsciiMustChangeCase:
                     {
                         // We reached ASCII data that requires a case change.
                         // This will necessarily allocate a new string, but let's try to stay within the managed (non-localization tables)
@@ -328,16 +362,22 @@ namespace System.Globalization
                         string result = string.FastAllocateString(source.Length); // changing case uses simple folding: doesn't change UTF-16 code unit count
 
                         // copy existing known-good data into the result
-                        Span<char> resultSpan = new Span<char>(ref result.GetRawStringData(), result.Length);
+                        Span<char> resultSpan = new Span<char>(
+                            ref result.GetRawStringData(),
+                            result.Length
+                        );
                         source.AsSpan(0, (int)currIdx).CopyTo(resultSpan);
 
                         // and re-run the fast span-based logic over the remainder of the data
-                        ChangeCaseCommon<TConversion>(source.AsSpan((int)currIdx), resultSpan.Slice((int)currIdx));
+                        ChangeCaseCommon<TConversion>(
+                            source.AsSpan((int)currIdx),
+                            resultSpan.Slice((int)currIdx)
+                        );
                         return result;
                     }
                 }
 
-            NotAscii:
+                NotAscii:
                 {
                     // We reached non-ASCII data *or* the requested culture doesn't map ASCII data the same way as the invariant culture.
                     // In either case we need to fall back to the localization tables.
@@ -347,14 +387,23 @@ namespace System.Globalization
                     if (currIdx > 0)
                     {
                         // copy existing known-good data into the result
-                        Span<char> resultSpan = new Span<char>(ref result.GetRawStringData(), result.Length);
+                        Span<char> resultSpan = new Span<char>(
+                            ref result.GetRawStringData(),
+                            result.Length
+                        );
                         source.AsSpan(0, (int)currIdx).CopyTo(resultSpan);
                     }
 
                     // and run the culture-aware logic over the remainder of the data
                     fixed (char* pResult = result)
                     {
-                        ChangeCaseCore(pSource + currIdx, source.Length - (int)currIdx, pResult + currIdx, result.Length - (int)currIdx, toUpper);
+                        ChangeCaseCore(
+                            pSource + currIdx,
+                            source.Length - (int)currIdx,
+                            pResult + currIdx,
+                            result.Length - (int)currIdx,
+                            toUpper
+                        );
                     }
                     return result;
                 }
@@ -473,7 +522,10 @@ namespace System.Globalization
                     PopulateIsAsciiCasingSameAsInvariant();
                 }
 
-                Debug.Assert(_isAsciiCasingSameAsInvariant == Tristate.True || _isAsciiCasingSameAsInvariant == Tristate.False);
+                Debug.Assert(
+                    _isAsciiCasingSameAsInvariant == Tristate.True
+                        || _isAsciiCasingSameAsInvariant == Tristate.False
+                );
                 return _isAsciiCasingSameAsInvariant == Tristate.True;
             }
         }
@@ -481,7 +533,14 @@ namespace System.Globalization
         [MethodImpl(MethodImplOptions.NoInlining)]
         private void PopulateIsAsciiCasingSameAsInvariant()
         {
-            bool compareResult = CultureInfo.GetCultureInfo(_textInfoName).CompareInfo.Compare("abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", CompareOptions.IgnoreCase) == 0;
+            bool compareResult =
+                CultureInfo
+                    .GetCultureInfo(_textInfoName)
+                    .CompareInfo.Compare(
+                        "abcdefghijklmnopqrstuvwxyz",
+                        "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                        CompareOptions.IgnoreCase
+                    ) == 0;
             _isAsciiCasingSameAsInvariant = (compareResult) ? Tristate.True : Tristate.False;
         }
 
@@ -493,8 +552,7 @@ namespace System.Globalization
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
-            return obj is TextInfo otherTextInfo
-                && CultureName.Equals(otherTextInfo.CultureName);
+            return obj is TextInfo otherTextInfo && CultureName.Equals(otherTextInfo.CultureName);
         }
 
         public override int GetHashCode() => CultureName.GetHashCode();
@@ -532,12 +590,21 @@ namespace System.Globalization
 
             for (int i = 0; i < str.Length; i++)
             {
-                UnicodeCategory charType = CharUnicodeInfo.GetUnicodeCategoryInternal(str, i, out int charLen);
+                UnicodeCategory charType = CharUnicodeInfo.GetUnicodeCategoryInternal(
+                    str,
+                    i,
+                    out int charLen
+                );
                 if (char.CheckLetter(charType))
                 {
                     // Special case to check for Dutch specific titlecasing with "IJ" characters
                     // at the beginning of a word
-                    if (isDutchCulture && i < str.Length - 1 && (str[i] == 'i' || str[i] == 'I') && (str[i + 1] == 'j' || str[i + 1] == 'J'))
+                    if (
+                        isDutchCulture
+                        && i < str.Length - 1
+                        && (str[i] == 'i' || str[i] == 'I')
+                        && (str[i + 1] == 'j' || str[i + 1] == 'J')
+                    )
                     {
                         result.Append("IJ");
                         i += 2;
@@ -626,9 +693,17 @@ namespace System.Globalization
             return result.ToString();
         }
 
-        private static int AddNonLetter(ref StringBuilder result, ref string input, int inputIndex, int charLen)
+        private static int AddNonLetter(
+            ref StringBuilder result,
+            ref string input,
+            int inputIndex,
+            int charLen
+        )
         {
-            Debug.Assert(charLen == 1 || charLen == 2, "[TextInfo.AddNonLetter] CharUnicodeInfo.InternalGetUnicodeCategory returned an unexpected charLen!");
+            Debug.Assert(
+                charLen == 1 || charLen == 2,
+                "[TextInfo.AddNonLetter] CharUnicodeInfo.InternalGetUnicodeCategory returned an unexpected charLen!"
+            );
             if (charLen == 2)
             {
                 // Surrogate pair
@@ -642,9 +717,17 @@ namespace System.Globalization
             return inputIndex;
         }
 
-        private int AddTitlecaseLetter(ref StringBuilder result, ref string input, int inputIndex, int charLen)
+        private int AddTitlecaseLetter(
+            ref StringBuilder result,
+            ref string input,
+            int inputIndex,
+            int charLen
+        )
         {
-            Debug.Assert(charLen == 1 || charLen == 2, "[TextInfo.AddTitlecaseLetter] CharUnicodeInfo.InternalGetUnicodeCategory returned an unexpected charLen!");
+            Debug.Assert(
+                charLen == 1 || charLen == 2,
+                "[TextInfo.AddTitlecaseLetter] CharUnicodeInfo.InternalGetUnicodeCategory returned an unexpected charLen!"
+            );
 
             if (charLen == 2)
             {
@@ -669,35 +752,45 @@ namespace System.Globalization
                 switch (input[inputIndex])
                 {
                     // For AppCompat, the Titlecase Case Mapping data from NDP 2.0 is used below.
-                    case (char)0x01C4:  // DZ with Caron -> Dz with Caron
-                    case (char)0x01C5:  // Dz with Caron -> Dz with Caron
-                    case (char)0x01C6:  // dz with Caron -> Dz with Caron
+                    case (char)0x01C4: // DZ with Caron -> Dz with Caron
+                    case (char)0x01C5: // Dz with Caron -> Dz with Caron
+                    case (char)0x01C6: // dz with Caron -> Dz with Caron
                         result.Append((char)0x01C5);
                         break;
-                    case (char)0x01C7:  // LJ -> Lj
-                    case (char)0x01C8:  // Lj -> Lj
-                    case (char)0x01C9:  // lj -> Lj
+                    case (char)0x01C7: // LJ -> Lj
+                    case (char)0x01C8: // Lj -> Lj
+                    case (char)0x01C9: // lj -> Lj
                         result.Append((char)0x01C8);
                         break;
-                    case (char)0x01CA:  // NJ -> Nj
-                    case (char)0x01CB:  // Nj -> Nj
-                    case (char)0x01CC:  // nj -> Nj
+                    case (char)0x01CA: // NJ -> Nj
+                    case (char)0x01CB: // Nj -> Nj
+                    case (char)0x01CC: // nj -> Nj
                         result.Append((char)0x01CB);
                         break;
-                    case (char)0x01F1:  // DZ -> Dz
-                    case (char)0x01F2:  // Dz -> Dz
-                    case (char)0x01F3:  // dz -> Dz
+                    case (char)0x01F1: // DZ -> Dz
+                    case (char)0x01F2: // Dz -> Dz
+                    case (char)0x01F3: // dz -> Dz
                         result.Append((char)0x01F2);
                         break;
                     default:
-                        result.Append(GlobalizationMode.Invariant ? InvariantModeCasing.ToUpper(input[inputIndex]) : ToUpper(input[inputIndex]));
+                        result.Append(
+                            GlobalizationMode.Invariant
+                                ? InvariantModeCasing.ToUpper(input[inputIndex])
+                                : ToUpper(input[inputIndex])
+                        );
                         break;
                 }
             }
             return inputIndex;
         }
 
-        private unsafe void ChangeCaseCore(char* src, int srcLen, char* dstBuffer, int dstBufferCapacity, bool bToUpper)
+        private unsafe void ChangeCaseCore(
+            char* src,
+            int srcLen,
+            char* dstBuffer,
+            int dstBufferCapacity,
+            bool bToUpper
+        )
         {
             if (GlobalizationMode.UseNls)
             {
@@ -724,36 +817,65 @@ namespace System.Globalization
         // When we find a starting letter, the following array decides if a category should be
         // considered as word separator or not.
         private const int c_wordSeparatorMask =
-            /* false */ (0 <<  0) | // UppercaseLetter = 0,
-            /* false */ (0 <<  1) | // LowercaseLetter = 1,
-            /* false */ (0 <<  2) | // TitlecaseLetter = 2,
-            /* false */ (0 <<  3) | // ModifierLetter = 3,
-            /* false */ (0 <<  4) | // OtherLetter = 4,
-            /* false */ (0 <<  5) | // NonSpacingMark = 5,
-            /* false */ (0 <<  6) | // SpacingCombiningMark = 6,
-            /* false */ (0 <<  7) | // EnclosingMark = 7,
-            /* false */ (0 <<  8) | // DecimalDigitNumber = 8,
-            /* false */ (0 <<  9) | // LetterNumber = 9,
-            /* false */ (0 << 10) | // OtherNumber = 10,
-            /* true  */ (1 << 11) | // SpaceSeparator = 11,
-            /* true  */ (1 << 12) | // LineSeparator = 12,
-            /* true  */ (1 << 13) | // ParagraphSeparator = 13,
-            /* true  */ (1 << 14) | // Control = 14,
-            /* true  */ (1 << 15) | // Format = 15,
-            /* false */ (0 << 16) | // Surrogate = 16,
-            /* false */ (0 << 17) | // PrivateUse = 17,
-            /* true  */ (1 << 18) | // ConnectorPunctuation = 18,
-            /* true  */ (1 << 19) | // DashPunctuation = 19,
-            /* true  */ (1 << 20) | // OpenPunctuation = 20,
-            /* true  */ (1 << 21) | // ClosePunctuation = 21,
-            /* true  */ (1 << 22) | // InitialQuotePunctuation = 22,
-            /* true  */ (1 << 23) | // FinalQuotePunctuation = 23,
-            /* true  */ (1 << 24) | // OtherPunctuation = 24,
-            /* true  */ (1 << 25) | // MathSymbol = 25,
-            /* true  */ (1 << 26) | // CurrencySymbol = 26,
-            /* true  */ (1 << 27) | // ModifierSymbol = 27,
-            /* true  */ (1 << 28) | // OtherSymbol = 28,
-            /* false */ (0 << 29);  // OtherNotAssigned = 29;
+            /* false */(0 << 0)
+            | // UppercaseLetter = 0,
+            /* false */(0 << 1)
+            | // LowercaseLetter = 1,
+            /* false */(0 << 2)
+            | // TitlecaseLetter = 2,
+            /* false */(0 << 3)
+            | // ModifierLetter = 3,
+            /* false */(0 << 4)
+            | // OtherLetter = 4,
+            /* false */(0 << 5)
+            | // NonSpacingMark = 5,
+            /* false */(0 << 6)
+            | // SpacingCombiningMark = 6,
+            /* false */(0 << 7)
+            | // EnclosingMark = 7,
+            /* false */(0 << 8)
+            | // DecimalDigitNumber = 8,
+            /* false */(0 << 9)
+            | // LetterNumber = 9,
+            /* false */(0 << 10)
+            | // OtherNumber = 10,
+            /* true  */(1 << 11)
+            | // SpaceSeparator = 11,
+            /* true  */(1 << 12)
+            | // LineSeparator = 12,
+            /* true  */(1 << 13)
+            | // ParagraphSeparator = 13,
+            /* true  */(1 << 14)
+            | // Control = 14,
+            /* true  */(1 << 15)
+            | // Format = 15,
+            /* false */(0 << 16)
+            | // Surrogate = 16,
+            /* false */(0 << 17)
+            | // PrivateUse = 17,
+            /* true  */(1 << 18)
+            | // ConnectorPunctuation = 18,
+            /* true  */(1 << 19)
+            | // DashPunctuation = 19,
+            /* true  */(1 << 20)
+            | // OpenPunctuation = 20,
+            /* true  */(1 << 21)
+            | // ClosePunctuation = 21,
+            /* true  */(1 << 22)
+            | // InitialQuotePunctuation = 22,
+            /* true  */(1 << 23)
+            | // FinalQuotePunctuation = 23,
+            /* true  */(1 << 24)
+            | // OtherPunctuation = 24,
+            /* true  */(1 << 25)
+            | // MathSymbol = 25,
+            /* true  */(1 << 26)
+            | // CurrencySymbol = 26,
+            /* true  */(1 << 27)
+            | // ModifierSymbol = 27,
+            /* true  */(1 << 28)
+            | // OtherSymbol = 28,
+            /* false */(0 << 29); // OtherNotAssigned = 29;
 
         private static bool IsWordSeparator(UnicodeCategory category)
         {
@@ -763,10 +885,10 @@ namespace System.Globalization
         private static bool IsLetterCategory(UnicodeCategory uc)
         {
             return uc == UnicodeCategory.UppercaseLetter
-                 || uc == UnicodeCategory.LowercaseLetter
-                 || uc == UnicodeCategory.TitlecaseLetter
-                 || uc == UnicodeCategory.ModifierLetter
-                 || uc == UnicodeCategory.OtherLetter;
+                || uc == UnicodeCategory.LowercaseLetter
+                || uc == UnicodeCategory.TitlecaseLetter
+                || uc == UnicodeCategory.ModifierLetter
+                || uc == UnicodeCategory.OtherLetter;
         }
 
         // A dummy struct that is used for 'ToUpper' in generic parameters

@@ -17,8 +17,12 @@ namespace System.Data.Objects.DataClasses
     /// <summary>
     /// Base attribute for schematized types
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
-    public abstract class EdmTypeAttribute: System.Attribute
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Edm"
+    )]
+    public abstract class EdmTypeAttribute : System.Attribute
     {
         private string _typeName;
         private string _namespaceName;
@@ -26,23 +30,15 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         /// Only allow derived attributes from this assembly
         /// </summary>
-        internal EdmTypeAttribute()
-        {
-        }
+        internal EdmTypeAttribute() { }
 
         /// <summary>
         /// Returns the name of the type that this type maps to in the CSpace
         /// </summary>
         public string Name
         {
-            get
-            {
-                return _typeName;
-            }
-            set
-            {
-                _typeName = value;
-            }
+            get { return _typeName; }
+            set { _typeName = value; }
         }
 
         /// <summary>
@@ -50,14 +46,8 @@ namespace System.Data.Objects.DataClasses
         /// </summary>
         public string NamespaceName
         {
-            get
-            {
-                return _namespaceName;
-            }
-            set
-            {
-                _namespaceName = value;
-            }
+            get { return _namespaceName; }
+            set { _namespaceName = value; }
         }
     }
 }

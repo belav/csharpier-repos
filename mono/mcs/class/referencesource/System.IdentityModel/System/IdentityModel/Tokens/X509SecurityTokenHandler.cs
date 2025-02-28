@@ -29,7 +29,8 @@ namespace System.IdentityModel.Tokens
         // The below defaults will only be used if some verification properties are set in config and others are not
         //
         private static X509RevocationMode defaultRevocationMode = X509RevocationMode.Online;
-        private static X509CertificateValidationMode defaultValidationMode = X509CertificateValidationMode.PeerOrChainTrust;
+        private static X509CertificateValidationMode defaultValidationMode =
+            X509CertificateValidationMode.PeerOrChainTrust;
         private static StoreLocation defaultStoreLocation = StoreLocation.LocalMachine;
         private X509NTAuthChainTrustValidator x509NTAuthChainTrustValidator;
         object lockObject = new object();
@@ -38,16 +39,15 @@ namespace System.IdentityModel.Tokens
         private X509CertificateValidator certificateValidator;
         private bool writeXmlDSigDefinedClauseTypes;
 
-        private X509DataSecurityKeyIdentifierClauseSerializer x509DataKeyIdentifierClauseSerializer = new X509DataSecurityKeyIdentifierClauseSerializer();
+        private X509DataSecurityKeyIdentifierClauseSerializer x509DataKeyIdentifierClauseSerializer =
+            new X509DataSecurityKeyIdentifierClauseSerializer();
 
         /// <summary>
         /// Creates an instance of <see cref="X509SecurityTokenHandler"/>. MapToWindows is defaulted to false.
         /// Uses <see cref="X509CertificateValidator.PeerOrChainTrust"/> as the default certificate validator.
         /// </summary>
         public X509SecurityTokenHandler()
-            : this(false, null)
-        {
-        }
+            : this(false, null) { }
 
         /// <summary>
         /// Creates an instance of <see cref="X509SecurityTokenHandler"/> with an X509 certificate validator.
@@ -55,27 +55,26 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="certificateValidator">The certificate validator.</param>
         public X509SecurityTokenHandler(X509CertificateValidator certificateValidator)
-            : this(false, certificateValidator)
-        {
-        }
+            : this(false, certificateValidator) { }
 
         /// <summary>
-        /// Creates an instance of <see cref="X509SecurityTokenHandler"/>. Uses <see cref="X509CertificateValidator.PeerOrChainTrust"/> 
+        /// Creates an instance of <see cref="X509SecurityTokenHandler"/>. Uses <see cref="X509CertificateValidator.PeerOrChainTrust"/>
         /// as the default certificate validator.
         /// </summary>
-        /// <param name="mapToWindows">Boolean to indicate if the certificate should be mapped to a 
+        /// <param name="mapToWindows">Boolean to indicate if the certificate should be mapped to a
         /// windows account. Default is false.</param>
         public X509SecurityTokenHandler(bool mapToWindows)
-            : this(mapToWindows, null)
-        {
-        }
+            : this(mapToWindows, null) { }
 
         /// <summary>
         /// Creates an instance of <see cref="X509SecurityTokenHandler"/>.
         /// </summary>
         /// <param name="mapToWindows">Boolean to indicate if the certificate should be mapped to a windows account.</param>
         /// <param name="certificateValidator">The certificate validator.</param>
-        public X509SecurityTokenHandler(bool mapToWindows, X509CertificateValidator certificateValidator)
+        public X509SecurityTokenHandler(
+            bool mapToWindows,
+            X509CertificateValidator certificateValidator
+        )
         {
             this.mapToWindows = mapToWindows;
             this.certificateValidator = certificateValidator;
@@ -91,7 +90,9 @@ namespace System.IdentityModel.Tokens
         {
             if (customConfigElements == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("customConfigElements");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "customConfigElements"
+                );
             }
 
             List<XmlElement> configNodes = XmlUtil.GetXmlElements(customConfigElements);
@@ -106,102 +107,220 @@ namespace System.IdentityModel.Tokens
 
             foreach (XmlElement customConfigElement in configNodes)
             {
-                if (!StringComparer.Ordinal.Equals(customConfigElement.LocalName, ConfigurationStrings.X509SecurityTokenHandlerRequirement))
+                if (
+                    !StringComparer.Ordinal.Equals(
+                        customConfigElement.LocalName,
+                        ConfigurationStrings.X509SecurityTokenHandlerRequirement
+                    )
+                )
                 {
                     continue;
                 }
 
                 if (foundValidConfig)
                 {
-                    throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID7026, ConfigurationStrings.X509SecurityTokenHandlerRequirement));
+                    throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                        SR.GetString(
+                            SR.ID7026,
+                            ConfigurationStrings.X509SecurityTokenHandlerRequirement
+                        )
+                    );
                 }
 
                 foreach (XmlAttribute attribute in customConfigElement.Attributes)
                 {
-                    if (StringComparer.OrdinalIgnoreCase.Equals(attribute.LocalName, ConfigurationStrings.MapToWindows))
+                    if (
+                        StringComparer.OrdinalIgnoreCase.Equals(
+                            attribute.LocalName,
+                            ConfigurationStrings.MapToWindows
+                        )
+                    )
                     {
                         mapToWindows = XmlConvert.ToBoolean(attribute.Value.ToLowerInvariant());
                     }
-                    else if (StringComparer.OrdinalIgnoreCase.Equals(attribute.LocalName, ConfigurationStrings.X509CertificateValidator))
+                    else if (
+                        StringComparer.OrdinalIgnoreCase.Equals(
+                            attribute.LocalName,
+                            ConfigurationStrings.X509CertificateValidator
+                        )
+                    )
                     {
                         customValidator = attribute.Value.ToString();
                     }
-                    else if (StringComparer.OrdinalIgnoreCase.Equals(attribute.LocalName, ConfigurationStrings.X509CertificateRevocationMode))
+                    else if (
+                        StringComparer.OrdinalIgnoreCase.Equals(
+                            attribute.LocalName,
+                            ConfigurationStrings.X509CertificateRevocationMode
+                        )
+                    )
                     {
                         foundCustomX509Validator = true;
 
                         string revocationModeString = attribute.Value.ToString();
 
-                        if (StringComparer.OrdinalIgnoreCase.Equals(revocationModeString, ConfigurationStrings.X509RevocationModeNoCheck))
+                        if (
+                            StringComparer.OrdinalIgnoreCase.Equals(
+                                revocationModeString,
+                                ConfigurationStrings.X509RevocationModeNoCheck
+                            )
+                        )
                         {
                             revocationMode = X509RevocationMode.NoCheck;
                         }
-                        else if (StringComparer.OrdinalIgnoreCase.Equals(revocationModeString, ConfigurationStrings.X509RevocationModeOffline))
+                        else if (
+                            StringComparer.OrdinalIgnoreCase.Equals(
+                                revocationModeString,
+                                ConfigurationStrings.X509RevocationModeOffline
+                            )
+                        )
                         {
                             revocationMode = X509RevocationMode.Offline;
                         }
-                        else if (StringComparer.OrdinalIgnoreCase.Equals(revocationModeString, ConfigurationStrings.X509RevocationModeOnline))
+                        else if (
+                            StringComparer.OrdinalIgnoreCase.Equals(
+                                revocationModeString,
+                                ConfigurationStrings.X509RevocationModeOnline
+                            )
+                        )
                         {
                             revocationMode = X509RevocationMode.Online;
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID7011, attribute.LocalName, customConfigElement.LocalName)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ID7011,
+                                        attribute.LocalName,
+                                        customConfigElement.LocalName
+                                    )
+                                )
+                            );
                         }
                     }
-                    else if (StringComparer.OrdinalIgnoreCase.Equals(attribute.LocalName, ConfigurationStrings.X509CertificateValidationMode))
+                    else if (
+                        StringComparer.OrdinalIgnoreCase.Equals(
+                            attribute.LocalName,
+                            ConfigurationStrings.X509CertificateValidationMode
+                        )
+                    )
                     {
                         foundCustomX509Validator = true;
 
                         string validationModeString = attribute.Value.ToString();
 
-                        if (StringComparer.OrdinalIgnoreCase.Equals(validationModeString, ConfigurationStrings.X509CertificateValidationModeChainTrust))
+                        if (
+                            StringComparer.OrdinalIgnoreCase.Equals(
+                                validationModeString,
+                                ConfigurationStrings.X509CertificateValidationModeChainTrust
+                            )
+                        )
                         {
                             certificateValidationMode = X509CertificateValidationMode.ChainTrust;
                         }
-                        else if (StringComparer.OrdinalIgnoreCase.Equals(validationModeString, ConfigurationStrings.X509CertificateValidationModePeerOrChainTrust))
+                        else if (
+                            StringComparer.OrdinalIgnoreCase.Equals(
+                                validationModeString,
+                                ConfigurationStrings.X509CertificateValidationModePeerOrChainTrust
+                            )
+                        )
                         {
-                            certificateValidationMode = X509CertificateValidationMode.PeerOrChainTrust;
+                            certificateValidationMode =
+                                X509CertificateValidationMode.PeerOrChainTrust;
                         }
-                        else if (StringComparer.OrdinalIgnoreCase.Equals(validationModeString, ConfigurationStrings.X509CertificateValidationModePeerTrust))
+                        else if (
+                            StringComparer.OrdinalIgnoreCase.Equals(
+                                validationModeString,
+                                ConfigurationStrings.X509CertificateValidationModePeerTrust
+                            )
+                        )
                         {
                             certificateValidationMode = X509CertificateValidationMode.PeerTrust;
                         }
-                        else if (StringComparer.OrdinalIgnoreCase.Equals(validationModeString, ConfigurationStrings.X509CertificateValidationModeNone))
+                        else if (
+                            StringComparer.OrdinalIgnoreCase.Equals(
+                                validationModeString,
+                                ConfigurationStrings.X509CertificateValidationModeNone
+                            )
+                        )
                         {
                             certificateValidationMode = X509CertificateValidationMode.None;
                         }
-                        else if (StringComparer.OrdinalIgnoreCase.Equals(validationModeString, ConfigurationStrings.X509CertificateValidationModeCustom))
+                        else if (
+                            StringComparer.OrdinalIgnoreCase.Equals(
+                                validationModeString,
+                                ConfigurationStrings.X509CertificateValidationModeCustom
+                            )
+                        )
                         {
                             certificateValidationMode = X509CertificateValidationMode.Custom;
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID7011, attribute.LocalName, customConfigElement.LocalName)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ID7011,
+                                        attribute.LocalName,
+                                        customConfigElement.LocalName
+                                    )
+                                )
+                            );
                         }
                     }
-                    else if (StringComparer.OrdinalIgnoreCase.Equals(attribute.LocalName, ConfigurationStrings.X509TrustedStoreLocation))
+                    else if (
+                        StringComparer.OrdinalIgnoreCase.Equals(
+                            attribute.LocalName,
+                            ConfigurationStrings.X509TrustedStoreLocation
+                        )
+                    )
                     {
                         foundCustomX509Validator = true;
 
                         string trustedStoreLocationString = attribute.Value.ToString();
 
-                        if (StringComparer.OrdinalIgnoreCase.Equals(trustedStoreLocationString, ConfigurationStrings.X509TrustedStoreLocationCurrentUser))
+                        if (
+                            StringComparer.OrdinalIgnoreCase.Equals(
+                                trustedStoreLocationString,
+                                ConfigurationStrings.X509TrustedStoreLocationCurrentUser
+                            )
+                        )
                         {
                             trustedStoreLocation = StoreLocation.CurrentUser;
                         }
-                        else if (StringComparer.OrdinalIgnoreCase.Equals(trustedStoreLocationString, ConfigurationStrings.X509TrustedStoreLocationLocalMachine))
+                        else if (
+                            StringComparer.OrdinalIgnoreCase.Equals(
+                                trustedStoreLocationString,
+                                ConfigurationStrings.X509TrustedStoreLocationLocalMachine
+                            )
+                        )
                         {
                             trustedStoreLocation = StoreLocation.LocalMachine;
                         }
                         else
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID7011, attribute.LocalName, customConfigElement.LocalName)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ID7011,
+                                        attribute.LocalName,
+                                        customConfigElement.LocalName
+                                    )
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID7004, attribute.LocalName, customConfigElement.LocalName)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ID7004,
+                                    attribute.LocalName,
+                                    customConfigElement.LocalName
+                                )
+                            )
+                        );
                     }
                 }
 
@@ -219,19 +338,28 @@ namespace System.IdentityModel.Tokens
 
                 if (customValidatorType == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID7007, customValidatorType));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID7007, customValidatorType)
+                    );
                 }
 
-                certificateValidator = CustomTypeElement.Resolve<X509CertificateValidator>(new CustomTypeElement(customValidatorType));
+                certificateValidator = CustomTypeElement.Resolve<X509CertificateValidator>(
+                    new CustomTypeElement(customValidatorType)
+                );
             }
             else if (foundCustomX509Validator)
             {
-                certificateValidator = X509Util.CreateCertificateValidator(certificateValidationMode, revocationMode, trustedStoreLocation);
+                certificateValidator = X509Util.CreateCertificateValidator(
+                    certificateValidationMode,
+                    revocationMode,
+                    trustedStoreLocation
+                );
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether if the validating token should be mapped to a 
+        /// Gets or sets a value indicating whether if the validating token should be mapped to a
         /// Windows account.
         /// </summary>
         public bool MapToWindows
@@ -263,11 +391,7 @@ namespace System.IdentityModel.Tokens
                     return certificateValidator;
                 }
             }
-
-            set
-            {
-                certificateValidator = value;
-            }
+            set { certificateValidator = value; }
         }
 
         /// <summary>
@@ -275,19 +399,12 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public X509NTAuthChainTrustValidator X509NTAuthChainTrustValidator
         {
-            get
-            {
-                return this.x509NTAuthChainTrustValidator;
-            }
-
-            set
-            {
-                this.x509NTAuthChainTrustValidator = value;
-            }
+            get { return this.x509NTAuthChainTrustValidator; }
+            set { this.x509NTAuthChainTrustValidator = value; }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether XmlDsig defined clause types are 
+        /// Gets or sets a value indicating whether XmlDsig defined clause types are
         /// preferred. Supported XmlDSig defined SecurityKeyIdentifierClause types
         /// are,
         /// 1. X509IssuerSerial
@@ -301,15 +418,12 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets a boolean indicating if the handler can validate tokens. 
+        /// Gets a boolean indicating if the handler can validate tokens.
         /// Returns true by default.
         /// </summary>
         public override bool CanValidateToken
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -318,10 +432,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public override bool CanWriteToken
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -353,10 +464,21 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            if (reader.IsStartElement(WSSecurity10Constants.Elements.BinarySecurityToken, WSSecurity10Constants.Namespace))
+            if (
+                reader.IsStartElement(
+                    WSSecurity10Constants.Elements.BinarySecurityToken,
+                    WSSecurity10Constants.Namespace
+                )
+            )
             {
-                string valueTypeUri = reader.GetAttribute(WSSecurity10Constants.Attributes.ValueType, null);
-                return StringComparer.Ordinal.Equals(valueTypeUri, WSSecurity10Constants.X509TokenType);
+                string valueTypeUri = reader.GetAttribute(
+                    WSSecurity10Constants.Attributes.ValueType,
+                    null
+                );
+                return StringComparer.Ordinal.Equals(
+                    valueTypeUri,
+                    WSSecurity10Constants.X509TokenType
+                );
             }
 
             return false;
@@ -373,14 +495,21 @@ namespace System.IdentityModel.Tokens
         /// <returns>True if the 'securityKeyIdentifierClause' is supported and if WriteXmlDSigDefinedClausTypes
         /// is set to true.</returns>
         /// <exception cref="ArgumentNullException">The parameter 'securityKeyIdentifierClause' is null.</exception>
-        public override bool CanWriteKeyIdentifierClause(SecurityKeyIdentifierClause securityKeyIdentifierClause)
+        public override bool CanWriteKeyIdentifierClause(
+            SecurityKeyIdentifierClause securityKeyIdentifierClause
+        )
         {
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityKeyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityKeyIdentifierClause"
+                );
             }
 
-            return writeXmlDSigDefinedClauseTypes && x509DataKeyIdentifierClauseSerializer.CanWriteKeyIdentifierClause(securityKeyIdentifierClause);
+            return writeXmlDSigDefinedClauseTypes
+                && x509DataKeyIdentifierClauseSerializer.CanWriteKeyIdentifierClause(
+                    securityKeyIdentifierClause
+                );
         }
 
         /// <summary>
@@ -411,10 +540,10 @@ namespace System.IdentityModel.Tokens
         /// Reads the X.509 Security token referenced by the XmlReader.
         /// </summary>
         /// <param name="reader">XmlReader pointing to a X.509 Security token.</param>
-        /// <returns>An instance of <see cref="X509SecurityToken"/>.</returns> 
+        /// <returns>An instance of <see cref="X509SecurityToken"/>.</returns>
         /// <exception cref="ArgumentNullException">The parameter 'reader' is null.</exception>
         /// <exception cref="XmlException">XmlReader is not pointing to an valid X509SecurityToken as
-        /// defined in WS-Security X.509 Token Profile. Or the encodingType specified is other than Base64 
+        /// defined in WS-Security X.509 Token Profile. Or the encodingType specified is other than Base64
         /// or HexBinary.</exception>
         public override SecurityToken ReadToken(XmlReader reader)
         {
@@ -424,53 +553,80 @@ namespace System.IdentityModel.Tokens
             }
 
             XmlDictionaryReader dicReader = XmlDictionaryReader.CreateDictionaryReader(reader);
-            if (!dicReader.IsStartElement(WSSecurity10Constants.Elements.BinarySecurityToken, WSSecurity10Constants.Namespace))
+            if (
+                !dicReader.IsStartElement(
+                    WSSecurity10Constants.Elements.BinarySecurityToken,
+                    WSSecurity10Constants.Namespace
+                )
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new XmlException(
                         SR.GetString(
-                        SR.ID4065,
-                        WSSecurity10Constants.Elements.BinarySecurityToken,
-                        WSSecurity10Constants.Namespace,
-                        dicReader.LocalName,
-                        dicReader.NamespaceURI)));
+                            SR.ID4065,
+                            WSSecurity10Constants.Elements.BinarySecurityToken,
+                            WSSecurity10Constants.Namespace,
+                            dicReader.LocalName,
+                            dicReader.NamespaceURI
+                        )
+                    )
+                );
             }
 
-            string valueTypeUri = dicReader.GetAttribute(WSSecurity10Constants.Attributes.ValueType, null);
+            string valueTypeUri = dicReader.GetAttribute(
+                WSSecurity10Constants.Attributes.ValueType,
+                null
+            );
 
             if (!StringComparer.Ordinal.Equals(valueTypeUri, WSSecurity10Constants.X509TokenType))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new XmlException(
                         SR.GetString(
-                        SR.ID4066,
-                        WSSecurity10Constants.Elements.BinarySecurityToken,
-                        WSSecurity10Constants.Namespace,
-                        WSSecurity10Constants.Attributes.ValueType,
-                        WSSecurity10Constants.X509TokenType,
-                        valueTypeUri)));
+                            SR.ID4066,
+                            WSSecurity10Constants.Elements.BinarySecurityToken,
+                            WSSecurity10Constants.Namespace,
+                            WSSecurity10Constants.Attributes.ValueType,
+                            WSSecurity10Constants.X509TokenType,
+                            valueTypeUri
+                        )
+                    )
+                );
             }
 
-            string wsuId = dicReader.GetAttribute(WSSecurityUtilityConstants.Attributes.Id, WSSecurityUtilityConstants.Namespace);
-            string encoding = dicReader.GetAttribute(WSSecurity10Constants.Attributes.EncodingType, null);
+            string wsuId = dicReader.GetAttribute(
+                WSSecurityUtilityConstants.Attributes.Id,
+                WSSecurityUtilityConstants.Namespace
+            );
+            string encoding = dicReader.GetAttribute(
+                WSSecurity10Constants.Attributes.EncodingType,
+                null
+            );
 
             byte[] binaryData;
-            if (encoding == null || StringComparer.Ordinal.Equals(encoding, WSSecurity10Constants.Base64EncodingType))
+            if (
+                encoding == null
+                || StringComparer.Ordinal.Equals(encoding, WSSecurity10Constants.Base64EncodingType)
+            )
             {
                 binaryData = dicReader.ReadElementContentAsBase64();
             }
-            else if (StringComparer.Ordinal.Equals(encoding, WSSecurity10Constants.HexBinaryEncodingType))
+            else if (
+                StringComparer.Ordinal.Equals(encoding, WSSecurity10Constants.HexBinaryEncodingType)
+            )
             {
                 binaryData = SoapHexBinary.Parse(dicReader.ReadElementContentAsString()).Value;
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.ID4068)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.ID4068))
+                );
             }
 
-            return String.IsNullOrEmpty(wsuId) ?
-                new X509SecurityToken(new X509Certificate2(binaryData)) :
-                new X509SecurityToken(new X509Certificate2(binaryData), wsuId);
+            return String.IsNullOrEmpty(wsuId)
+                ? new X509SecurityToken(new X509Certificate2(binaryData))
+                : new X509SecurityToken(new X509Certificate2(binaryData), wsuId);
         }
 
         /// <summary>
@@ -503,7 +659,10 @@ namespace System.IdentityModel.Tokens
             X509SecurityToken x509Token = token as X509SecurityToken;
             if (x509Token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID0018, typeof(X509SecurityToken)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID0018, typeof(X509SecurityToken))
+                );
             }
 
             if (this.Configuration == null)
@@ -520,8 +679,15 @@ namespace System.IdentityModel.Tokens
                 }
                 catch (SecurityTokenValidationException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.ID4257,
-                        X509Util.GetCertificateId(x509Token.Certificate)), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(
+                            SR.GetString(
+                                SR.ID4257,
+                                X509Util.GetCertificateId(x509Token.Certificate)
+                            ),
+                            e
+                        )
+                    );
                 }
 
                 if (this.Configuration.IssuerNameRegistry == null)
@@ -529,10 +695,15 @@ namespace System.IdentityModel.Tokens
                     throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4277));
                 }
 
-                string issuer = X509Util.GetCertificateIssuerName(x509Token.Certificate, this.Configuration.IssuerNameRegistry);
+                string issuer = X509Util.GetCertificateIssuerName(
+                    x509Token.Certificate,
+                    this.Configuration.IssuerNameRegistry
+                );
                 if (String.IsNullOrEmpty(issuer))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID4175)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.ID4175))
+                    );
                 }
 
                 ClaimsIdentity identity = null;
@@ -542,18 +713,27 @@ namespace System.IdentityModel.Tokens
                     identity = new ClaimsIdentity(AuthenticationTypes.X509);
 
                     // PARTIAL TRUST: will fail when adding claims, AddClaim is SecurityCritical.
-                    identity.AddClaim(new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.X509));
+                    identity.AddClaim(
+                        new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.X509)
+                    );
                 }
                 else
                 {
                     WindowsIdentity windowsIdentity;
-                    X509WindowsSecurityToken x509WindowsSecurityToken = token as X509WindowsSecurityToken;
+                    X509WindowsSecurityToken x509WindowsSecurityToken =
+                        token as X509WindowsSecurityToken;
 
                     // if this is the case, then the user has already been mapped to a windows account, just return the identity after adding a couple of claims.
-                    if (x509WindowsSecurityToken != null && x509WindowsSecurityToken.WindowsIdentity != null)
+                    if (
+                        x509WindowsSecurityToken != null
+                        && x509WindowsSecurityToken.WindowsIdentity != null
+                    )
                     {
                         // X509WindowsSecurityToken is disposable, make a copy.
-                        windowsIdentity = new WindowsIdentity(x509WindowsSecurityToken.WindowsIdentity.Token, x509WindowsSecurityToken.AuthenticationType);
+                        windowsIdentity = new WindowsIdentity(
+                            x509WindowsSecurityToken.WindowsIdentity.Token,
+                            x509WindowsSecurityToken.AuthenticationType
+                        );
                     }
                     else
                     {
@@ -564,7 +744,8 @@ namespace System.IdentityModel.Tokens
                             {
                                 if (this.x509NTAuthChainTrustValidator == null)
                                 {
-                                    this.x509NTAuthChainTrustValidator = new X509NTAuthChainTrustValidator();
+                                    this.x509NTAuthChainTrustValidator =
+                                        new X509NTAuthChainTrustValidator();
                                 }
                             }
                         }
@@ -574,7 +755,9 @@ namespace System.IdentityModel.Tokens
                     }
 
                     // PARTIAL TRUST: will fail when adding claims, AddClaim is SecurityCritical.
-                    windowsIdentity.AddClaim(new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.X509));
+                    windowsIdentity.AddClaim(
+                        new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.X509)
+                    );
                     identity = windowsIdentity;
                 }
 
@@ -583,8 +766,16 @@ namespace System.IdentityModel.Tokens
                     identity.BootstrapContext = new BootstrapContext(token, this);
                 }
 
-                identity.AddClaim(new Claim(ClaimTypes.AuthenticationInstant, XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated), ClaimValueTypes.DateTime));
-                identity.AddClaims(X509Util.GetClaimsFromCertificate(x509Token.Certificate, issuer));
+                identity.AddClaim(
+                    new Claim(
+                        ClaimTypes.AuthenticationInstant,
+                        XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated),
+                        ClaimValueTypes.DateTime
+                    )
+                );
+                identity.AddClaims(
+                    X509Util.GetClaimsFromCertificate(x509Token.Certificate, issuer)
+                );
 
                 this.TraceTokenValidationSuccess(token);
 
@@ -611,7 +802,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="securityKeyIdentifierClause">SecurityKeyIdentifierClause to serialize.</param>
         /// <exception cref="ArgumentNullException">Input parameter 'wrtier' or 'securityKeyIdentifierClause' is null.</exception>
         /// <exception cref="InvalidOperationException">The property WriteXmlDSigDefinedClauseTypes is false.</exception>
-        public override void WriteKeyIdentifierClause(XmlWriter writer, SecurityKeyIdentifierClause securityKeyIdentifierClause)
+        public override void WriteKeyIdentifierClause(
+            XmlWriter writer,
+            SecurityKeyIdentifierClause securityKeyIdentifierClause
+        )
         {
             if (writer == null)
             {
@@ -620,7 +814,9 @@ namespace System.IdentityModel.Tokens
 
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityKeyIdentifierClause");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityKeyIdentifierClause"
+                );
             }
 
             if (!writeXmlDSigDefinedClauseTypes)
@@ -628,7 +824,10 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4261));
             }
 
-            x509DataKeyIdentifierClauseSerializer.WriteKeyIdentifierClause(writer, securityKeyIdentifierClause);
+            x509DataKeyIdentifierClauseSerializer.WriteKeyIdentifierClause(
+                writer,
+                securityKeyIdentifierClause
+            );
         }
 
         /// <summary>
@@ -653,17 +852,34 @@ namespace System.IdentityModel.Tokens
             X509SecurityToken x509Token = token as X509SecurityToken;
             if (x509Token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID0018, typeof(X509SecurityToken)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID0018, typeof(X509SecurityToken))
+                );
             }
 
-            writer.WriteStartElement(WSSecurity10Constants.Elements.BinarySecurityToken, WSSecurity10Constants.Namespace);
+            writer.WriteStartElement(
+                WSSecurity10Constants.Elements.BinarySecurityToken,
+                WSSecurity10Constants.Namespace
+            );
             if (!String.IsNullOrEmpty(x509Token.Id))
             {
-                writer.WriteAttributeString(WSSecurityUtilityConstants.Attributes.Id, WSSecurityUtilityConstants.Namespace, x509Token.Id);
+                writer.WriteAttributeString(
+                    WSSecurityUtilityConstants.Attributes.Id,
+                    WSSecurityUtilityConstants.Namespace,
+                    x509Token.Id
+                );
             }
 
-            writer.WriteAttributeString(WSSecurity10Constants.Attributes.ValueType, null, WSSecurity10Constants.X509TokenType);
-            writer.WriteAttributeString(WSSecurity10Constants.Attributes.EncodingType, WSSecurity10Constants.Base64EncodingType);
+            writer.WriteAttributeString(
+                WSSecurity10Constants.Attributes.ValueType,
+                null,
+                WSSecurity10Constants.X509TokenType
+            );
+            writer.WriteAttributeString(
+                WSSecurity10Constants.Attributes.EncodingType,
+                WSSecurity10Constants.Base64EncodingType
+            );
 
             byte[] rawData = x509Token.Certificate.GetRawCertData();
             writer.WriteBase64(rawData, 0, rawData.Length);

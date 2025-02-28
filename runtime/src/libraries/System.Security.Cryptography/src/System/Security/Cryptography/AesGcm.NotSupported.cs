@@ -22,7 +22,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             Debug.Fail("Instance ctor should fail before we reach this point.");
             throw new NotImplementedException();
@@ -33,7 +34,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             Debug.Fail("Instance ctor should fail before we reach this point.");
             throw new NotImplementedException();

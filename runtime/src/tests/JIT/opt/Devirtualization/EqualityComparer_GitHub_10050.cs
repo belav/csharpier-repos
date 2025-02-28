@@ -87,7 +87,6 @@ public class EqualityComparer_GitHub_10050
         }
 
         return result;
-
     }
 
     // Optimization pattern should vary here.
@@ -109,7 +108,6 @@ public class EqualityComparer_GitHub_10050
         }
 
         return result;
-
     }
 
     [Fact]

@@ -33,9 +33,8 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-        WriteIndented = true
+        WriteIndented = true,
     };
-
 
     // <summary>
     // Extra json elements to add to _framework/blazor.boot.json
@@ -57,7 +56,9 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             return false;
 
         if (!InvariantGlobalization && (IcuDataFileNames == null || IcuDataFileNames.Length == 0))
-            throw new LogAsErrorException($"{nameof(IcuDataFileNames)} property shouldn't be empty when {nameof(InvariantGlobalization)}=false");
+            throw new LogAsErrorException(
+                $"{nameof(IcuDataFileNames)} property shouldn't be empty when {nameof(InvariantGlobalization)}=false"
+            );
 
         if (Assemblies.Length == 0)
         {
@@ -108,7 +109,7 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
         var bootConfig = new BootJsonData()
         {
             mainAssemblyName = MainAssemblyName,
-            globalizationMode = GetGlobalizationMode().ToString().ToLowerInvariant()
+            globalizationMode = GetGlobalizationMode().ToString().ToLowerInvariant(),
         };
 
         if (CacheBootResources)
@@ -132,25 +133,44 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             if (UseWebcil)
             {
                 var tmpWebcil = Path.GetTempFileName();
-                var webcilWriter = Microsoft.WebAssembly.Build.Tasks.WebcilConverter.FromPortableExecutable(inputPath: assembly, outputPath: tmpWebcil, logger: Log);
+                var webcilWriter =
+                    Microsoft.WebAssembly.Build.Tasks.WebcilConverter.FromPortableExecutable(
+                        inputPath: assembly,
+                        outputPath: tmpWebcil,
+                        logger: Log
+                    );
                 webcilWriter.ConvertToWebcil();
-                var finalWebcil = Path.Combine(runtimeAssetsPath, Path.ChangeExtension(Path.GetFileName(assembly), Utils.WebcilInWasmExtension));
+                var finalWebcil = Path.Combine(
+                    runtimeAssetsPath,
+                    Path.ChangeExtension(Path.GetFileName(assembly), Utils.WebcilInWasmExtension)
+                );
                 if (Utils.CopyIfDifferent(tmpWebcil, finalWebcil, useHash: true))
                     Log.LogMessage(MessageImportance.Low, $"Generated {finalWebcil} .");
                 else
-                    Log.LogMessage(MessageImportance.Low, $"Skipped generating {finalWebcil} as the contents are unchanged.");
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        $"Skipped generating {finalWebcil} as the contents are unchanged."
+                    );
                 _fileWrites.Add(finalWebcil);
             }
             else
             {
-                FileCopyChecked(assembly, Path.Combine(runtimeAssetsPath, Path.GetFileName(assembly)), "Assemblies");
+                FileCopyChecked(
+                    assembly,
+                    Path.Combine(runtimeAssetsPath, Path.GetFileName(assembly)),
+                    "Assemblies"
+                );
             }
             if (DebugLevel != 0)
             {
                 var pdb = assembly;
                 pdb = Path.ChangeExtension(pdb, ".pdb");
                 if (File.Exists(pdb))
-                    FileCopyChecked(pdb, Path.Combine(runtimeAssetsPath, Path.GetFileName(pdb)), "Assemblies");
+                    FileCopyChecked(
+                        pdb,
+                        Path.Combine(runtimeAssetsPath, Path.GetFileName(pdb)),
+                        "Assemblies"
+                    );
             }
         }
 
@@ -172,7 +192,10 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
 
             var itemHash = Utils.ComputeIntegrity(item.ItemSpec);
 
-            Dictionary<string, string>? resourceList = helper.GetNativeResourceTargetInBootConfig(bootConfig, name);
+            Dictionary<string, string>? resourceList = helper.GetNativeResourceTargetInBootConfig(
+                bootConfig,
+                name
+            );
             if (resourceList != null)
                 resourceList[name] = itemHash;
         }
@@ -191,18 +214,28 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             // for the is IL IsAssembly check we need to read the bytes from the original DLL
             if (!Utils.IsManagedAssembly(bytes))
             {
-                Log.LogMessage(MessageImportance.Low, "Skipping non-assembly file: " + assemblyPath);
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    "Skipping non-assembly file: " + assemblyPath
+                );
             }
             else
             {
                 if (UseWebcil)
                 {
-                    assemblyPath = Path.Combine(runtimeAssetsPath, Path.ChangeExtension(Path.GetFileName(assembly), Utils.WebcilInWasmExtension));
+                    assemblyPath = Path.Combine(
+                        runtimeAssetsPath,
+                        Path.ChangeExtension(
+                            Path.GetFileName(assembly),
+                            Utils.WebcilInWasmExtension
+                        )
+                    );
                     // For the hash, read the bytes from the webcil file, not the dll file.
                     bytes = File.ReadAllBytes(assemblyPath);
                 }
 
-                bootConfig.resources.assembly[Path.GetFileName(assemblyPath)] = Utils.ComputeIntegrity(bytes);
+                bootConfig.resources.assembly[Path.GetFileName(assemblyPath)] =
+                    Utils.ComputeIntegrity(bytes);
                 if (DebugLevel != 0)
                 {
                     var pdb = Path.ChangeExtension(assembly, ".pdb");
@@ -211,7 +244,9 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
                         if (bootConfig.resources.pdb == null)
                             bootConfig.resources.pdb = new();
 
-                        bootConfig.resources.pdb[Path.GetFileName(pdb)] = Utils.ComputeIntegrity(pdb);
+                        bootConfig.resources.pdb[Path.GetFileName(pdb)] = Utils.ComputeIntegrity(
+                            pdb
+                        );
                     }
                 }
             }
@@ -230,27 +265,52 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             if (UseWebcil)
             {
                 var tmpWebcil = Path.GetTempFileName();
-                var webcilWriter = Microsoft.WebAssembly.Build.Tasks.WebcilConverter.FromPortableExecutable(inputPath: args.fullPath, outputPath: tmpWebcil, logger: Log);
+                var webcilWriter =
+                    Microsoft.WebAssembly.Build.Tasks.WebcilConverter.FromPortableExecutable(
+                        inputPath: args.fullPath,
+                        outputPath: tmpWebcil,
+                        logger: Log
+                    );
                 webcilWriter.ConvertToWebcil();
-                var finalWebcil = Path.Combine(cultureDirectory, Path.ChangeExtension(name, Utils.WebcilInWasmExtension));
+                var finalWebcil = Path.Combine(
+                    cultureDirectory,
+                    Path.ChangeExtension(name, Utils.WebcilInWasmExtension)
+                );
                 if (Utils.CopyIfDifferent(tmpWebcil, finalWebcil, useHash: true))
                     Log.LogMessage(MessageImportance.Low, $"Generated {finalWebcil} .");
                 else
-                    Log.LogMessage(MessageImportance.Low, $"Skipped generating {finalWebcil} as the contents are unchanged.");
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        $"Skipped generating {finalWebcil} as the contents are unchanged."
+                    );
                 _fileWrites.Add(finalWebcil);
 
-                if (!bootConfig.resources.satelliteResources.TryGetValue(args.culture, out var cultureSatelliteResources))
-                    bootConfig.resources.satelliteResources[args.culture] = cultureSatelliteResources = new();
+                if (
+                    !bootConfig.resources.satelliteResources.TryGetValue(
+                        args.culture,
+                        out var cultureSatelliteResources
+                    )
+                )
+                    bootConfig.resources.satelliteResources[args.culture] =
+                        cultureSatelliteResources = new();
 
-                cultureSatelliteResources[Path.GetFileName(finalWebcil)] = Utils.ComputeIntegrity(finalWebcil);
+                cultureSatelliteResources[Path.GetFileName(finalWebcil)] = Utils.ComputeIntegrity(
+                    finalWebcil
+                );
             }
             else
             {
                 var satellitePath = Path.Combine(cultureDirectory, name);
                 FileCopyChecked(args.fullPath, satellitePath, "SatelliteAssemblies");
 
-                if (!bootConfig.resources.satelliteResources.TryGetValue(args.culture, out var cultureSatelliteResources))
-                    bootConfig.resources.satelliteResources[args.culture] = cultureSatelliteResources = new();
+                if (
+                    !bootConfig.resources.satelliteResources.TryGetValue(
+                        args.culture,
+                        out var cultureSatelliteResources
+                    )
+                )
+                    bootConfig.resources.satelliteResources[args.culture] =
+                        cultureSatelliteResources = new();
 
                 cultureSatelliteResources[name] = Utils.ComputeIntegrity(satellitePath);
             }
@@ -281,11 +341,23 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
 
                     if (firstPath == secondPath)
                     {
-                        Log.LogWarning(null, "WASM0003", "", "", 0, 0, 0, 0, $"Found identical vfs mappings for target path: {targetPath}, source file: {firstPath}. Ignoring.");
+                        Log.LogWarning(
+                            null,
+                            "WASM0003",
+                            "",
+                            "",
+                            0,
+                            0,
+                            0,
+                            0,
+                            $"Found identical vfs mappings for target path: {targetPath}, source file: {firstPath}. Ignoring."
+                        );
                         continue;
                     }
 
-                    throw new LogAsErrorException($"Found more than one file mapping to the target VFS path: {targetPath}. Source files: {firstPath}, and {secondPath}");
+                    throw new LogAsErrorException(
+                        $"Found more than one file mapping to the target VFS path: {targetPath}. Source files: {firstPath}, and {secondPath}"
+                    );
                 }
 
                 targetPathTable[targetPath] = item.ItemSpec;
@@ -296,7 +368,7 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
 
                 vfs[targetPath] = new()
                 {
-                    [$"supportFiles/{generatedFileName}"] = Utils.ComputeIntegrity(vfsPath)
+                    [$"supportFiles/{generatedFileName}"] = Utils.ComputeIntegrity(vfsPath),
                 };
             }
 
@@ -311,7 +383,9 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             {
                 if (!File.Exists(idfn))
                 {
-                    Log.LogError($"Expected the file defined as ICU resource: {idfn} to exist but it does not.");
+                    Log.LogError(
+                        $"Expected the file defined as ICU resource: {idfn} to exist but it does not."
+                    );
                     return false;
                 }
 
@@ -319,7 +393,6 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
                 bootConfig.resources.icu[Path.GetFileName(idfn)] = Utils.ComputeIntegrity(idfn);
             }
         }
-
 
         if (RemoteSources?.Length > 0)
         {
@@ -333,7 +406,9 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
 
         if (PThreadPoolSize < -1)
         {
-            throw new LogAsErrorException($"PThreadPoolSize must be -1, 0 or positive, but got {PThreadPoolSize}");
+            throw new LogAsErrorException(
+                $"PThreadPoolSize must be -1, 0 or positive, but got {PThreadPoolSize}"
+            );
         }
         else if (PThreadPoolSize > -1)
         {
@@ -346,16 +421,36 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             if (!TryParseExtraConfigValue(extra, out object? valueObject))
                 return false;
 
-            if (string.Equals(name, nameof(BootJsonData.environmentVariables), StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    name,
+                    nameof(BootJsonData.environmentVariables),
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 bootConfig.environmentVariables = valueObject;
             }
-            else if (string.Equals(name, nameof(BootJsonData.diagnosticTracing), StringComparison.OrdinalIgnoreCase))
+            else if (
+                string.Equals(
+                    name,
+                    nameof(BootJsonData.diagnosticTracing),
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                if (valueObject is bool boolValue || (valueObject is string stringValue && bool.TryParse(stringValue, out boolValue)))
+                if (
+                    valueObject is bool boolValue
+                    || (
+                        valueObject is string stringValue
+                        && bool.TryParse(stringValue, out boolValue)
+                    )
+                )
                     bootConfig.diagnosticTracing = boolValue;
                 else
-                    throw new LogAsErrorException($"Unsupported value '{valueObject}' of type '{valueObject?.GetType()?.FullName}' for extra config 'diagnosticTracing'.");
+                    throw new LogAsErrorException(
+                        $"Unsupported value '{valueObject}' of type '{valueObject?.GetType()?.FullName}' for extra config 'diagnosticTracing'."
+                    );
             }
             else
             {
@@ -365,10 +460,7 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
 
         if (extraConfiguration.Count > 0)
         {
-            bootConfig.extensions = new()
-            {
-                ["extra"] = extraConfiguration
-            };
+            bootConfig.extensions = new() { ["extra"] = extraConfiguration };
         }
 
         string tmpMonoConfigPath = Path.GetTempFileName();
@@ -417,7 +509,10 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
         if (string.IsNullOrEmpty(rawValue))
             return true;
 
-        if (TryConvert(rawValue, typeof(double), out valueObject) || TryConvert(rawValue, typeof(bool), out valueObject))
+        if (
+            TryConvert(rawValue, typeof(double), out valueObject)
+            || TryConvert(rawValue, typeof(bool), out valueObject)
+        )
             return true;
 
         // Try parsing as a quoted string
@@ -436,7 +531,9 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
         }
         catch (JsonException je)
         {
-            Log.LogError($"ExtraConfig: {extraItem.ItemSpec} with Value={rawValue} cannot be parsed as a number, boolean, string, or json object/array: {je.Message}");
+            Log.LogError(
+                $"ExtraConfig: {extraItem.ItemSpec} with Value={rawValue} cannot be parsed as a number, boolean, string, or json object/array: {je.Message}"
+            );
             return false;
         }
     }
@@ -449,7 +546,8 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
             value = Convert.ChangeType(str, type);
             return true;
         }
-        catch (Exception ex) when (ex is FormatException or InvalidCastException or OverflowException)
+        catch (Exception ex)
+            when (ex is FormatException or InvalidCastException or OverflowException)
         {
             return false;
         }

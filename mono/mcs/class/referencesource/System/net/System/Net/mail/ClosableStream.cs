@@ -19,7 +19,8 @@ namespace System.Net
         EventHandler onClose;
         int closed;
 
-        internal ClosableStream(Stream stream, EventHandler onClose) : base(stream)
+        internal ClosableStream(Stream stream, EventHandler onClose)
+            : base(stream)
         {
             this.onClose = onClose;
         }

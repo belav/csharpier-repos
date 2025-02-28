@@ -7,6 +7,6 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         MutualAuthentication = 2,
         Negotiate = 1,
-        NegotiatePassThrough = 0
+        NegotiatePassThrough = 0,
     }
 }

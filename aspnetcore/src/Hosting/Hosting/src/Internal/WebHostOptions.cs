@@ -11,31 +11,59 @@ namespace Microsoft.AspNetCore.Hosting;
 
 internal sealed class WebHostOptions
 {
-    public WebHostOptions(IConfiguration primaryConfiguration, IConfiguration? fallbackConfiguration = null, IHostEnvironment? environment = null)
+    public WebHostOptions(
+        IConfiguration primaryConfiguration,
+        IConfiguration? fallbackConfiguration = null,
+        IHostEnvironment? environment = null
+    )
     {
         ArgumentNullException.ThrowIfNull(primaryConfiguration);
 
         string? GetConfig(string key) => primaryConfiguration[key] ?? fallbackConfiguration?[key];
 
-        ApplicationName = environment?.ApplicationName ?? GetConfig(WebHostDefaults.ApplicationKey) ?? Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty;
+        ApplicationName =
+            environment?.ApplicationName
+            ?? GetConfig(WebHostDefaults.ApplicationKey)
+            ?? Assembly.GetEntryAssembly()?.GetName().Name
+            ?? string.Empty;
         StartupAssembly = GetConfig(WebHostDefaults.StartupAssemblyKey);
         DetailedErrors = WebHostUtilities.ParseBool(GetConfig(WebHostDefaults.DetailedErrorsKey));
-        CaptureStartupErrors = WebHostUtilities.ParseBool(GetConfig(WebHostDefaults.CaptureStartupErrorsKey));
+        CaptureStartupErrors = WebHostUtilities.ParseBool(
+            GetConfig(WebHostDefaults.CaptureStartupErrorsKey)
+        );
         Environment = environment?.EnvironmentName ?? GetConfig(WebHostDefaults.EnvironmentKey);
         WebRoot = GetConfig(WebHostDefaults.WebRootKey);
         ContentRootPath = environment?.ContentRootPath ?? GetConfig(WebHostDefaults.ContentRootKey);
-        PreventHostingStartup = WebHostUtilities.ParseBool(GetConfig(WebHostDefaults.PreventHostingStartupKey));
-        SuppressStatusMessages = WebHostUtilities.ParseBool(GetConfig(WebHostDefaults.SuppressStatusMessagesKey));
+        PreventHostingStartup = WebHostUtilities.ParseBool(
+            GetConfig(WebHostDefaults.PreventHostingStartupKey)
+        );
+        SuppressStatusMessages = WebHostUtilities.ParseBool(
+            GetConfig(WebHostDefaults.SuppressStatusMessagesKey)
+        );
         ServerUrls = GetConfig(WebHostDefaults.ServerUrlsKey);
-        PreferHostingUrls = WebHostUtilities.ParseBool(GetConfig(WebHostDefaults.PreferHostingUrlsKey));
+        PreferHostingUrls = WebHostUtilities.ParseBool(
+            GetConfig(WebHostDefaults.PreferHostingUrlsKey)
+        );
 
         // Search the primary assembly and configured assemblies.
-        HostingStartupAssemblies = Split(ApplicationName, GetConfig(WebHostDefaults.HostingStartupAssembliesKey));
-        HostingStartupExcludeAssemblies = Split(GetConfig(WebHostDefaults.HostingStartupExcludeAssembliesKey));
+        HostingStartupAssemblies = Split(
+            ApplicationName,
+            GetConfig(WebHostDefaults.HostingStartupAssembliesKey)
+        );
+        HostingStartupExcludeAssemblies = Split(
+            GetConfig(WebHostDefaults.HostingStartupExcludeAssembliesKey)
+        );
 
         var timeout = GetConfig(WebHostDefaults.ShutdownTimeoutKey);
-        if (!string.IsNullOrEmpty(timeout)
-            && int.TryParse(timeout, NumberStyles.None, CultureInfo.InvariantCulture, out var seconds))
+        if (
+            !string.IsNullOrEmpty(timeout)
+            && int.TryParse(
+                timeout,
+                NumberStyles.None,
+                CultureInfo.InvariantCulture,
+                out var seconds
+            )
+        )
         {
             ShutdownTimeout = TimeSpan.FromSeconds(seconds);
         }
@@ -71,13 +99,18 @@ internal sealed class WebHostOptions
 
     public IEnumerable<string> GetFinalHostingStartupAssemblies()
     {
-        return HostingStartupAssemblies.Except(HostingStartupExcludeAssemblies, StringComparer.OrdinalIgnoreCase);
+        return HostingStartupAssemblies.Except(
+            HostingStartupExcludeAssemblies,
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 
     private static IReadOnlyList<string> Split(string? value)
     {
-        return value?.Split(';', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)
-            ?? Array.Empty<string>();
+        return value?.Split(
+                ';',
+                StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries
+            ) ?? Array.Empty<string>();
     }
 
     private static IReadOnlyList<string> Split(string applicationName, string? environment)

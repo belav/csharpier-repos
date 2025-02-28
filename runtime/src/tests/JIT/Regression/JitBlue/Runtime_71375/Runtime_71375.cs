@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.Intrinsics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using Xunit;
 
 public class Runtime_71375
@@ -17,7 +17,16 @@ public class Runtime_71375
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static int VarArgs(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, Vector128<int> splitArg, __arglist) => splitArg.GetElement(0);
+    static int VarArgs(
+        int arg1,
+        int arg2,
+        int arg3,
+        int arg4,
+        int arg5,
+        int arg6,
+        Vector128<int> splitArg,
+        __arglist
+    ) => splitArg.GetElement(0);
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Problem()
@@ -34,7 +43,15 @@ public class Runtime_71375
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static int VarArgs2(int arg1, int arg2, int arg3, int arg4, int arg5, Vector128<int> vecArg, __arglist) => vecArg.GetElement(0);
+    static int VarArgs2(
+        int arg1,
+        int arg2,
+        int arg3,
+        int arg4,
+        int arg5,
+        Vector128<int> vecArg,
+        __arglist
+    ) => vecArg.GetElement(0);
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Case2()
@@ -52,7 +69,17 @@ public class Runtime_71375
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static int VarArgs3(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, Vector128<int> vecArg, __arglist) => vecArg.GetElement(0);
+    static int VarArgs3(
+        int arg1,
+        int arg2,
+        int arg3,
+        int arg4,
+        int arg5,
+        int arg6,
+        int arg7,
+        Vector128<int> vecArg,
+        __arglist
+    ) => vecArg.GetElement(0);
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Case3()
@@ -70,12 +97,30 @@ public class Runtime_71375
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static int VarArgs4(int arg1, object arg2, int arg3, object arg4, int arg5, object arg6, Vector128<int> splitArg, __arglist) => splitArg.GetElement(0);
+    static int VarArgs4(
+        int arg1,
+        object arg2,
+        int arg3,
+        object arg4,
+        int arg5,
+        object arg6,
+        Vector128<int> splitArg,
+        __arglist
+    ) => splitArg.GetElement(0);
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Case4()
     {
         // Spit the vector but also pass some object types so the GC needs to know about them.
-        return VarArgs4(0, new object(), 0, new object(), 0, new object(), Vector128<int>.AllBitsSet, __arglist(new object(), 1, new object())) != -1;
+        return VarArgs4(
+                0,
+                new object(),
+                0,
+                new object(),
+                0,
+                new object(),
+                Vector128<int>.AllBitsSet,
+                __arglist(new object(), 1, new object())
+            ) != -1;
     }
 }

@@ -13,7 +13,6 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Security.Tests
@@ -25,46 +24,68 @@ namespace System.Net.Security.Tests
         public static bool IsServerAndDomainAvailable =>
             Capability.IsDomainAvailable() && Capability.IsNegotiateServerAvailable();
 
-        public static bool IsClientAvailable =>
-            Capability.IsNegotiateClientAvailable();
+        public static bool IsClientAvailable => Capability.IsNegotiateClientAvailable();
 
         public static IEnumerable<object[]> GoodCredentialsData
         {
             get
             {
                 yield return new object[] { CredentialCache.DefaultNetworkCredentials };
-                yield return new object[] { new NetworkCredential(
-                    Configuration.Security.ActiveDirectoryUserName,
-                    Configuration.Security.ActiveDirectoryUserPassword,
-                    Configuration.Security.ActiveDirectoryName) };
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        Configuration.Security.ActiveDirectoryUserName,
+                        Configuration.Security.ActiveDirectoryUserPassword,
+                        Configuration.Security.ActiveDirectoryName
+                    ),
+                };
 
-                yield return new object[] { new NetworkCredential(
-                    Configuration.Security.ActiveDirectoryUserName,
-                    AsSecureString(Configuration.Security.ActiveDirectoryUserPassword),
-                    Configuration.Security.ActiveDirectoryName) };
-
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        Configuration.Security.ActiveDirectoryUserName,
+                        AsSecureString(Configuration.Security.ActiveDirectoryUserPassword),
+                        Configuration.Security.ActiveDirectoryName
+                    ),
+                };
 
                 // Anonymous (with domain name).
-                yield return new object[] { new NetworkCredential(
-                    Configuration.Security.ActiveDirectoryUserName,
-                    (string)null,
-                    Configuration.Security.ActiveDirectoryName) };
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        Configuration.Security.ActiveDirectoryUserName,
+                        (string)null,
+                        Configuration.Security.ActiveDirectoryName
+                    ),
+                };
 
-                yield return new object[] { new NetworkCredential(
-                    Configuration.Security.ActiveDirectoryUserName,
-                    (SecureString)null,
-                    Configuration.Security.ActiveDirectoryName) };
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        Configuration.Security.ActiveDirectoryUserName,
+                        (SecureString)null,
+                        Configuration.Security.ActiveDirectoryName
+                    ),
+                };
 
                 // Anonymous (without domain).
-                yield return new object[] { new NetworkCredential(
-                    Configuration.Security.ActiveDirectoryUserName,
-                    (string)null,
-                    null) };
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        Configuration.Security.ActiveDirectoryUserName,
+                        (string)null,
+                        null
+                    ),
+                };
 
-                yield return new object[] { new NetworkCredential(
-                    Configuration.Security.ActiveDirectoryUserName,
-                    (SecureString)null,
-                    null) };
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        Configuration.Security.ActiveDirectoryUserName,
+                        (SecureString)null,
+                        null
+                    ),
+                };
             }
         }
 
@@ -72,33 +93,61 @@ namespace System.Net.Security.Tests
         {
             get
             {
-                yield return new object[] { new NetworkCredential(null, (string)null, Configuration.Security.ActiveDirectoryName) };
-                yield return new object[] { new NetworkCredential(null, (SecureString)null, Configuration.Security.ActiveDirectoryName) };
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        null,
+                        (string)null,
+                        Configuration.Security.ActiveDirectoryName
+                    ),
+                };
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        null,
+                        (SecureString)null,
+                        Configuration.Security.ActiveDirectoryName
+                    ),
+                };
 
                 yield return new object[] { new NetworkCredential(null, (string)null, null) };
                 yield return new object[] { new NetworkCredential(null, (SecureString)null, null) };
 
-                yield return new object[] { new NetworkCredential(
-                    "baduser",
-                    (string)null,
-                    Configuration.Security.ActiveDirectoryName) };
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        "baduser",
+                        (string)null,
+                        Configuration.Security.ActiveDirectoryName
+                    ),
+                };
 
-                yield return new object[] { new NetworkCredential(
-                    "baduser",
-                    (SecureString)null,
-                    Configuration.Security.ActiveDirectoryName) };
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        "baduser",
+                        (SecureString)null,
+                        Configuration.Security.ActiveDirectoryName
+                    ),
+                };
 
-                yield return new object[] { new NetworkCredential(
-                    "baduser",
-                    AsSecureString("badpassword"),
-                    Configuration.Security.ActiveDirectoryName) };
+                yield return new object[]
+                {
+                    new NetworkCredential(
+                        "baduser",
+                        AsSecureString("badpassword"),
+                        Configuration.Security.ActiveDirectoryName
+                    ),
+                };
             }
         }
 
         [OuterLoop]
         [ConditionalTheory(nameof(IsServerAndDomainAvailable))]
         [MemberData(nameof(GoodCredentialsData))]
-        public async Task NegotiateStream_ClientAuthenticationRemote_Success(object credentialObject)
+        public async Task NegotiateStream_ClientAuthenticationRemote_Success(
+            object credentialObject
+        )
         {
             var credential = (NetworkCredential)credentialObject;
             await VerifyClientAuthentication(credential);
@@ -110,7 +159,9 @@ namespace System.Net.Security.Tests
         public async Task NegotiateStream_ClientAuthenticationRemote_Fails(object credentialObject)
         {
             var credential = (NetworkCredential)credentialObject;
-            await Assert.ThrowsAsync<AuthenticationException>(() => VerifyClientAuthentication(credential));
+            await Assert.ThrowsAsync<AuthenticationException>(
+                () => VerifyClientAuthentication(credential)
+            );
         }
 
         private async Task VerifyClientAuthentication(NetworkCredential credential)
@@ -127,8 +178,13 @@ namespace System.Net.Security.Tests
             {
                 expectedAuthenticationType = "NTLM";
             }
-            else if (credential != CredentialCache.DefaultNetworkCredentials &&
-                (string.IsNullOrEmpty(credential.UserName) || string.IsNullOrEmpty(credential.Password)))
+            else if (
+                credential != CredentialCache.DefaultNetworkCredentials
+                && (
+                    string.IsNullOrEmpty(credential.UserName)
+                    || string.IsNullOrEmpty(credential.Password)
+                )
+            )
             {
                 // Anonymous authentication.
                 expectedAuthenticationType = "NTLM";
@@ -140,15 +196,19 @@ namespace System.Net.Security.Tests
                 await client.ConnectAsync(serverName, port);
 
                 NetworkStream clientStream = client.GetStream();
-                using (var auth = new NegotiateStream(clientStream, leaveInnerStreamOpen:false))
+                using (var auth = new NegotiateStream(clientStream, leaveInnerStreamOpen: false))
                 {
                     await auth.AuthenticateAsClientAsync(
                         credential,
                         serverSPN,
                         ProtectionLevel.EncryptAndSign,
-                        System.Security.Principal.TokenImpersonationLevel.Identification);
+                        System.Security.Principal.TokenImpersonationLevel.Identification
+                    );
 
-                    Assert.Equal(expectedAuthenticationType, auth.RemoteIdentity.AuthenticationType);
+                    Assert.Equal(
+                        expectedAuthenticationType,
+                        auth.RemoteIdentity.AuthenticationType
+                    );
                     Assert.Equal(serverSPN, auth.RemoteIdentity.Name);
                     (auth.RemoteIdentity as IDisposable)?.Dispose();
 
@@ -177,16 +237,21 @@ namespace System.Net.Security.Tests
             {
                 string clientName = Configuration.Security.NegotiateClient.Host;
                 int clientPort = Configuration.Security.NegotiateClient.Port;
-                await controlClient.ConnectAsync(clientName, clientPort)
+                await controlClient
+                    .ConnectAsync(clientName, clientPort)
                     .WaitAsync(TimeSpan.FromSeconds(15));
                 var serverStream = controlClient.GetStream();
 
-                using (var serverAuth = new NegotiateStream(serverStream, leaveInnerStreamOpen: false))
+                using (
+                    var serverAuth = new NegotiateStream(serverStream, leaveInnerStreamOpen: false)
+                )
                 {
-                    await serverAuth.AuthenticateAsServerAsync(
-                        CredentialCache.DefaultNetworkCredentials,
-                        ProtectionLevel.EncryptAndSign,
-                        TokenImpersonationLevel.Identification)
+                    await serverAuth
+                        .AuthenticateAsServerAsync(
+                            CredentialCache.DefaultNetworkCredentials,
+                            ProtectionLevel.EncryptAndSign,
+                            TokenImpersonationLevel.Identification
+                        )
                         .WaitAsync(TimeSpan.FromSeconds(15));
 
                     Assert.True(serverAuth.IsAuthenticated, "IsAuthenticated");
@@ -194,7 +259,10 @@ namespace System.Net.Security.Tests
                     Assert.True(serverAuth.IsSigned, "IsSigned");
                     Assert.Equal(mutuallyAuthenticated, serverAuth.IsMutuallyAuthenticated);
 
-                    Assert.Equal(expectedAuthenticationType, serverAuth.RemoteIdentity.AuthenticationType);
+                    Assert.Equal(
+                        expectedAuthenticationType,
+                        serverAuth.RemoteIdentity.AuthenticationType
+                    );
                     Assert.Equal(expectedUser, serverAuth.RemoteIdentity.Name);
                     (serverAuth.RemoteIdentity as IDisposable)?.Dispose();
 
@@ -202,7 +270,9 @@ namespace System.Net.Security.Tests
                     var message = "Hello from the client.";
                     using (var reader = new StreamReader(serverAuth))
                     {
-                        var response = await reader.ReadToEndAsync().WaitAsync(TimeSpan.FromSeconds(15));
+                        var response = await reader
+                            .ReadToEndAsync()
+                            .WaitAsync(TimeSpan.FromSeconds(15));
                         Assert.Equal(message, response);
                     }
                 }

@@ -1,6 +1,7 @@
 ﻿namespace AutoMapper.IntegrationTests.Inheritance;
 
-public class QueryableInterfaceInheritanceIssue : IntegrationTest<QueryableInterfaceInheritanceIssue.DatabaseInitializer>
+public class QueryableInterfaceInheritanceIssue
+    : IntegrationTest<QueryableInterfaceInheritanceIssue.DatabaseInitializer>
 {
     QueryableDto[] _result;
 
@@ -9,9 +10,7 @@ public class QueryableInterfaceInheritanceIssue : IntegrationTest<QueryableInter
         string Id { get; set; }
     }
 
-    public interface IQueryableInterface : IBaseQueryableInterface
-    {
-    }
+    public interface IQueryableInterface : IBaseQueryableInterface { }
 
     public class QueryableInterfaceImpl : IQueryableInterface
     {
@@ -27,7 +26,13 @@ public class QueryableInterfaceInheritanceIssue : IntegrationTest<QueryableInter
     {
         protected override void Seed(ClientContext context)
         {
-            context.Entities.AddRange(new[] { new QueryableInterfaceImpl { Id = "One" }, new QueryableInterfaceImpl { Id = "Two" }});
+            context.Entities.AddRange(
+                new[]
+                {
+                    new QueryableInterfaceImpl { Id = "One" },
+                    new QueryableInterfaceImpl { Id = "Two" },
+                }
+            );
         }
     }
 
@@ -47,5 +52,6 @@ public class QueryableInterfaceInheritanceIssue : IntegrationTest<QueryableInter
         _result.FirstOrDefault(dto => dto.Id == "Two").ShouldNotBeNull();
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateProjection<IQueryableInterface, QueryableDto>());
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg => cfg.CreateProjection<IQueryableInterface, QueryableDto>());
 }

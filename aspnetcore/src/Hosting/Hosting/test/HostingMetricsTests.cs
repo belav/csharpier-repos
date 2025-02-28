@@ -25,8 +25,16 @@ public class HostingMetricsTests
         var httpContext = new DefaultHttpContext();
         var meter = meterFactory.Meters.Single();
 
-        using var requestDurationCollector = new MetricCollector<double>(meterFactory, HostingMetrics.MeterName, "http.server.request.duration");
-        using var activeRequestsCollector = new MetricCollector<long>(meterFactory, HostingMetrics.MeterName, "http.server.active_requests");
+        using var requestDurationCollector = new MetricCollector<double>(
+            meterFactory,
+            HostingMetrics.MeterName,
+            "http.server.request.duration"
+        );
+        using var activeRequestsCollector = new MetricCollector<long>(
+            meterFactory,
+            HostingMetrics.MeterName,
+            "http.server.active_requests"
+        );
 
         // Act/Assert
         Assert.Equal(HostingMetrics.MeterName, meter.Name);
@@ -38,11 +46,15 @@ public class HostingMetricsTests
         context1.HttpContext.Response.StatusCode = StatusCodes.Status200OK;
         hostingApplication.DisposeContext(context1, null);
 
-        Assert.Collection(activeRequestsCollector.GetMeasurementSnapshot(),
+        Assert.Collection(
+            activeRequestsCollector.GetMeasurementSnapshot(),
             m => Assert.Equal(1, m.Value),
-            m => Assert.Equal(-1, m.Value));
-        Assert.Collection(requestDurationCollector.GetMeasurementSnapshot(),
-            m => AssertRequestDuration(m, "1.1", StatusCodes.Status200OK));
+            m => Assert.Equal(-1, m.Value)
+        );
+        Assert.Collection(
+            requestDurationCollector.GetMeasurementSnapshot(),
+            m => AssertRequestDuration(m, "1.1", StatusCodes.Status200OK)
+        );
 
         // Request 2 (after failure)
         httpContext.Request.Protocol = HttpProtocol.Http2;
@@ -50,14 +62,24 @@ public class HostingMetricsTests
         context2.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         hostingApplication.DisposeContext(context2, new InvalidOperationException("Test error"));
 
-        Assert.Collection(activeRequestsCollector.GetMeasurementSnapshot(),
+        Assert.Collection(
+            activeRequestsCollector.GetMeasurementSnapshot(),
             m => Assert.Equal(1, m.Value),
             m => Assert.Equal(-1, m.Value),
             m => Assert.Equal(1, m.Value),
-            m => Assert.Equal(-1, m.Value));
-        Assert.Collection(requestDurationCollector.GetMeasurementSnapshot(),
+            m => Assert.Equal(-1, m.Value)
+        );
+        Assert.Collection(
+            requestDurationCollector.GetMeasurementSnapshot(),
             m => AssertRequestDuration(m, "1.1", StatusCodes.Status200OK),
-            m => AssertRequestDuration(m, "2", StatusCodes.Status500InternalServerError, exceptionName: "System.InvalidOperationException"));
+            m =>
+                AssertRequestDuration(
+                    m,
+                    "2",
+                    StatusCodes.Status500InternalServerError,
+                    exceptionName: "System.InvalidOperationException"
+                )
+        );
 
         // Request 3
         httpContext.Request.Protocol = HttpProtocol.Http3;
@@ -65,31 +87,58 @@ public class HostingMetricsTests
         context3.HttpContext.Items["__RequestUnhandled"] = true;
         context3.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
 
-        Assert.Collection(activeRequestsCollector.GetMeasurementSnapshot(),
+        Assert.Collection(
+            activeRequestsCollector.GetMeasurementSnapshot(),
             m => Assert.Equal(1, m.Value),
             m => Assert.Equal(-1, m.Value),
             m => Assert.Equal(1, m.Value),
             m => Assert.Equal(-1, m.Value),
-            m => Assert.Equal(1, m.Value));
-        Assert.Collection(requestDurationCollector.GetMeasurementSnapshot(),
+            m => Assert.Equal(1, m.Value)
+        );
+        Assert.Collection(
+            requestDurationCollector.GetMeasurementSnapshot(),
             m => AssertRequestDuration(m, "1.1", StatusCodes.Status200OK),
-            m => AssertRequestDuration(m, "2", StatusCodes.Status500InternalServerError, exceptionName: "System.InvalidOperationException"));
+            m =>
+                AssertRequestDuration(
+                    m,
+                    "2",
+                    StatusCodes.Status500InternalServerError,
+                    exceptionName: "System.InvalidOperationException"
+                )
+        );
 
         hostingApplication.DisposeContext(context3, null);
 
-        Assert.Collection(activeRequestsCollector.GetMeasurementSnapshot(),
+        Assert.Collection(
+            activeRequestsCollector.GetMeasurementSnapshot(),
             m => Assert.Equal(1, m.Value),
             m => Assert.Equal(-1, m.Value),
             m => Assert.Equal(1, m.Value),
             m => Assert.Equal(-1, m.Value),
             m => Assert.Equal(1, m.Value),
-            m => Assert.Equal(-1, m.Value));
-        Assert.Collection(requestDurationCollector.GetMeasurementSnapshot(),
+            m => Assert.Equal(-1, m.Value)
+        );
+        Assert.Collection(
+            requestDurationCollector.GetMeasurementSnapshot(),
             m => AssertRequestDuration(m, "1.1", StatusCodes.Status200OK),
-            m => AssertRequestDuration(m, "2", StatusCodes.Status500InternalServerError, exceptionName: "System.InvalidOperationException"),
-            m => AssertRequestDuration(m, "3", StatusCodes.Status404NotFound, unhandledRequest: true));
+            m =>
+                AssertRequestDuration(
+                    m,
+                    "2",
+                    StatusCodes.Status500InternalServerError,
+                    exceptionName: "System.InvalidOperationException"
+                ),
+            m =>
+                AssertRequestDuration(m, "3", StatusCodes.Status404NotFound, unhandledRequest: true)
+        );
 
-        static void AssertRequestDuration(CollectedMeasurement<double> measurement, string httpVersion, int statusCode, string exceptionName = null, bool? unhandledRequest = null)
+        static void AssertRequestDuration(
+            CollectedMeasurement<double> measurement,
+            string httpVersion,
+            int statusCode,
+            string exceptionName = null,
+            bool? unhandledRequest = null
+        )
         {
             Assert.True(measurement.Value > 0);
             Assert.Equal(httpVersion, (string)measurement.Tags["network.protocol.version"]);
@@ -119,10 +168,13 @@ public class HostingMetricsTests
         // Arrange
         var syncPoint = new SyncPoint();
         var meterFactory = new TestMeterFactory();
-        var hostingApplication = CreateApplication(meterFactory: meterFactory, requestDelegate: async ctx =>
-        {
-            await syncPoint.WaitToContinue();
-        });
+        var hostingApplication = CreateApplication(
+            meterFactory: meterFactory,
+            requestDelegate: async ctx =>
+            {
+                await syncPoint.WaitToContinue();
+            }
+        );
         var httpContext = new DefaultHttpContext();
         var meter = meterFactory.Meters.Single();
 
@@ -137,8 +189,16 @@ public class HostingMetricsTests
 
         await syncPoint.WaitForSyncPoint().DefaultTimeout();
 
-        using var requestDurationCollector = new MetricCollector<double>(meterFactory, HostingMetrics.MeterName, "http.server.request.duration");
-        using var currentRequestsCollector = new MetricCollector<long>(meterFactory, HostingMetrics.MeterName, "http.server.active_requests");
+        using var requestDurationCollector = new MetricCollector<double>(
+            meterFactory,
+            HostingMetrics.MeterName,
+            "http.server.request.duration"
+        );
+        using var currentRequestsCollector = new MetricCollector<long>(
+            meterFactory,
+            HostingMetrics.MeterName,
+            "http.server.active_requests"
+        );
         context1.HttpContext.Response.StatusCode = StatusCodes.Status200OK;
 
         syncPoint.Continue();
@@ -159,8 +219,16 @@ public class HostingMetricsTests
         var httpContext = new DefaultHttpContext();
         var meter = meterFactory.Meters.Single();
 
-        using var requestDurationCollector = new MetricCollector<double>(meterFactory, HostingMetrics.MeterName, "http.server.request.duration");
-        using var currentRequestsCollector = new MetricCollector<long>(meterFactory, HostingMetrics.MeterName, "http.server.active_requests");
+        using var requestDurationCollector = new MetricCollector<double>(
+            meterFactory,
+            HostingMetrics.MeterName,
+            "http.server.request.duration"
+        );
+        using var currentRequestsCollector = new MetricCollector<long>(
+            meterFactory,
+            HostingMetrics.MeterName,
+            "http.server.active_requests"
+        );
 
         // Act/Assert
         Assert.Equal(HostingMetrics.MeterName, meter.Name);
@@ -179,11 +247,17 @@ public class HostingMetricsTests
 
     private sealed class TestHttpMetricsTagsFeature : IHttpMetricsTagsFeature
     {
-        public ICollection<KeyValuePair<string, object>> Tags { get; } = new Collection<KeyValuePair<string, object>>();
+        public ICollection<KeyValuePair<string, object>> Tags { get; } =
+            new Collection<KeyValuePair<string, object>>();
     }
 
-    private static HostingApplication CreateApplication(IHttpContextFactory httpContextFactory = null, bool useHttpContextAccessor = false,
-        ActivitySource activitySource = null, IMeterFactory meterFactory = null, RequestDelegate requestDelegate = null)
+    private static HostingApplication CreateApplication(
+        IHttpContextFactory httpContextFactory = null,
+        bool useHttpContextAccessor = false,
+        ActivitySource activitySource = null,
+        IMeterFactory meterFactory = null,
+        RequestDelegate requestDelegate = null
+    )
     {
         var services = new ServiceCollection();
         services.AddOptions();
@@ -203,7 +277,8 @@ public class HostingMetricsTests
             DistributedContextPropagator.CreateDefaultPropagator(),
             httpContextFactory,
             HostingEventSource.Log,
-            new HostingMetrics(meterFactory ?? new TestMeterFactory()));
+            new HostingMetrics(meterFactory ?? new TestMeterFactory())
+        );
 
         return hostingApplication;
     }

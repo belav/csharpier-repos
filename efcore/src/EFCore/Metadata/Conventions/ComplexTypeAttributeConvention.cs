@@ -12,17 +12,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class ComplexTypeAttributeConvention : TypeAttributeConventionBase<ComplexTypeAttribute>,
-    IComplexPropertyAddedConvention
+public class ComplexTypeAttributeConvention
+    : TypeAttributeConventionBase<ComplexTypeAttribute>,
+        IComplexPropertyAddedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="ComplexTypeAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public ComplexTypeAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after a complex property is added to a type-like object.
@@ -31,10 +30,13 @@ public class ComplexTypeAttributeConvention : TypeAttributeConventionBase<Comple
     /// <param name="context">Additional information associated with convention execution.</param>
     public override void ProcessComplexPropertyAdded(
         IConventionComplexPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionComplexPropertyBuilder> context)
+        IConventionContext<IConventionComplexPropertyBuilder> context
+    )
     {
         var complexType = propertyBuilder.Metadata.ComplexType;
-        var memberTypes = complexType.GetRuntimeProperties().Values.Select(e => e.PropertyType)
+        var memberTypes = complexType
+            .GetRuntimeProperties()
+            .Values.Select(e => e.PropertyType)
             .Concat(complexType.GetRuntimeFields().Values.Select(e => e.FieldType));
 
         foreach (var memberType in memberTypes)
@@ -55,7 +57,8 @@ public class ComplexTypeAttributeConvention : TypeAttributeConventionBase<Comple
     protected override void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
         ComplexTypeAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         entityTypeBuilder.Metadata.Model.Builder.ComplexType(entityTypeBuilder.Metadata.ClrType);
 

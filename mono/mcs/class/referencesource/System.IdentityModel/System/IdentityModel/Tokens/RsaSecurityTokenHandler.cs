@@ -12,7 +12,7 @@ namespace System.IdentityModel.Tokens
     using System.Xml;
 
     /// <summary>
-    /// SecurityTokenHandler for RsaSecurityTokens. 
+    /// SecurityTokenHandler for RsaSecurityTokens.
     /// </summary>
     public class RsaSecurityTokenHandler : SecurityTokenHandler
     {
@@ -21,9 +21,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Creates an instance of <see cref="RsaSecurityTokenHandler"/>
         /// </summary>
-        public RsaSecurityTokenHandler()
-        {
-        }
+        public RsaSecurityTokenHandler() { }
 
         /// <summary>
         /// Checks the reader if this is a representation of an RsaSecurityToken.
@@ -38,7 +36,10 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            return reader.IsStartElement(XmlSignatureConstants.Elements.KeyInfo, XmlSignatureConstants.Namespace);
+            return reader.IsStartElement(
+                XmlSignatureConstants.Elements.KeyInfo,
+                XmlSignatureConstants.Namespace
+            );
         }
 
         /// <summary>
@@ -47,10 +48,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public override bool CanValidateToken
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -59,10 +57,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public override bool CanWriteToken
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -79,7 +74,7 @@ namespace System.IdentityModel.Tokens
         /// <param name="reader">An XML reader positioned at the start of the token</param>
         /// <returns>An instance of <see cref="RsaSecurityToken"/>.</returns>
         /// <exception cref="ArgumentNullException">The input argument 'reader' is null.</exception>
-        /// <exception cref="XmlException">The 'reader' is not positioned at a RSA token. 
+        /// <exception cref="XmlException">The 'reader' is not positioned at a RSA token.
         /// or the SecurityContextToken cannot be read.</exception>
         public override SecurityToken ReadToken(XmlReader reader)
         {
@@ -90,30 +85,46 @@ namespace System.IdentityModel.Tokens
 
             XmlDictionaryReader dicReader = XmlDictionaryReader.CreateDictionaryReader(reader);
 
-            if (!dicReader.IsStartElement(XmlSignatureConstants.Elements.KeyInfo, XmlSignatureConstants.Namespace))
+            if (
+                !dicReader.IsStartElement(
+                    XmlSignatureConstants.Elements.KeyInfo,
+                    XmlSignatureConstants.Namespace
+                )
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new XmlException(
                         SR.GetString(
-                        SR.ID4065,
-                        XmlSignatureConstants.Elements.KeyInfo,
-                        XmlSignatureConstants.Namespace,
-                        dicReader.LocalName,
-                        dicReader.NamespaceURI)));
+                            SR.ID4065,
+                            XmlSignatureConstants.Elements.KeyInfo,
+                            XmlSignatureConstants.Namespace,
+                            dicReader.LocalName,
+                            dicReader.NamespaceURI
+                        )
+                    )
+                );
             }
 
             dicReader.ReadStartElement();
 
-            if (!dicReader.IsStartElement(XmlSignatureConstants.Elements.KeyValue, XmlSignatureConstants.Namespace))
+            if (
+                !dicReader.IsStartElement(
+                    XmlSignatureConstants.Elements.KeyValue,
+                    XmlSignatureConstants.Namespace
+                )
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new XmlException(
                         SR.GetString(
-                        SR.ID4065,
-                        XmlSignatureConstants.Elements.KeyValue,
-                        XmlSignatureConstants.Namespace,
-                        dicReader.LocalName,
-                        dicReader.NamespaceURI)));
+                            SR.ID4065,
+                            XmlSignatureConstants.Elements.KeyValue,
+                            XmlSignatureConstants.Namespace,
+                            dicReader.LocalName,
+                            dicReader.NamespaceURI
+                        )
+                    )
+                );
             }
 
             dicReader.ReadStartElement();
@@ -143,7 +154,7 @@ namespace System.IdentityModel.Tokens
         /// <returns>A <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the identities contained in the token.</returns>
         /// <exception cref="ArgumentNullException">The parameter 'token' is null.</exception>
         /// <exception cref="ArgumentException">The token is not assignable from <see cref="RsaSecurityToken"/>.</exception>
-        /// <exception cref="InvalidOperationException">Configuration <see cref="SecurityTokenHandlerConfiguration"/>is null.</exception>        
+        /// <exception cref="InvalidOperationException">Configuration <see cref="SecurityTokenHandlerConfiguration"/>is null.</exception>
         public override ReadOnlyCollection<ClaimsIdentity> ValidateToken(SecurityToken token)
         {
             if (token == null)
@@ -154,7 +165,10 @@ namespace System.IdentityModel.Tokens
             RsaSecurityToken rsaToken = (RsaSecurityToken)token;
             if (rsaToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID0018, typeof(RsaSecurityToken)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID0018, typeof(RsaSecurityToken))
+                );
             }
 
             if (this.Configuration == null)
@@ -164,12 +178,30 @@ namespace System.IdentityModel.Tokens
 
             try
             {
+                // Export the Public Key of the RSA as a Claim.
+                ClaimsIdentity identity = new ClaimsIdentity(
+                    new Claim[]
+                    {
+                        new Claim(
+                            ClaimTypes.Rsa,
+                            rsaToken.Rsa.ToXmlString(false),
+                            ClaimValueTypes.RsaKeyValue,
+                            ClaimsIdentity.DefaultIssuer
+                        ),
+                    },
+                    AuthenticationTypes.Signature
+                );
 
-                // Export the Public Key of the RSA as a Claim. 
-                ClaimsIdentity identity = new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Rsa, rsaToken.Rsa.ToXmlString(false), ClaimValueTypes.RsaKeyValue, ClaimsIdentity.DefaultIssuer) }, AuthenticationTypes.Signature);
-
-                identity.AddClaim(new Claim(ClaimTypes.AuthenticationInstant, XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated), ClaimValueTypes.DateTime));
-                identity.AddClaim(new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.Signature));
+                identity.AddClaim(
+                    new Claim(
+                        ClaimTypes.AuthenticationInstant,
+                        XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated),
+                        ClaimValueTypes.DateTime
+                    )
+                );
+                identity.AddClaim(
+                    new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.Signature)
+                );
 
                 if (this.Configuration.SaveBootstrapContext)
                 {
@@ -218,26 +250,44 @@ namespace System.IdentityModel.Tokens
 
             if (rsaToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID0018, typeof(RsaSecurityToken)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID0018, typeof(RsaSecurityToken))
+                );
             }
 
             RSAParameters rsaParams = rsaToken.Rsa.ExportParameters(false);
 
-            writer.WriteStartElement(XmlSignatureConstants.Elements.KeyInfo, XmlSignatureConstants.Namespace);
-            writer.WriteStartElement(XmlSignatureConstants.Elements.KeyValue, XmlSignatureConstants.Namespace);
+            writer.WriteStartElement(
+                XmlSignatureConstants.Elements.KeyInfo,
+                XmlSignatureConstants.Namespace
+            );
+            writer.WriteStartElement(
+                XmlSignatureConstants.Elements.KeyValue,
+                XmlSignatureConstants.Namespace
+            );
 
             //
             // RSA.ToXmlString shouldn't be used here because it doesn't write namespaces.  The modulus and exponent are written manually.
             //
-            writer.WriteStartElement(XmlSignatureConstants.Elements.RsaKeyValue, XmlSignatureConstants.Namespace);
+            writer.WriteStartElement(
+                XmlSignatureConstants.Elements.RsaKeyValue,
+                XmlSignatureConstants.Namespace
+            );
 
-            writer.WriteStartElement(XmlSignatureConstants.Elements.Modulus, XmlSignatureConstants.Namespace);
+            writer.WriteStartElement(
+                XmlSignatureConstants.Elements.Modulus,
+                XmlSignatureConstants.Namespace
+            );
 
             byte[] modulus = rsaParams.Modulus;
             writer.WriteBase64(modulus, 0, modulus.Length);
             writer.WriteEndElement(); // </modulus>
 
-            writer.WriteStartElement(XmlSignatureConstants.Elements.Exponent, XmlSignatureConstants.Namespace);
+            writer.WriteStartElement(
+                XmlSignatureConstants.Elements.Exponent,
+                XmlSignatureConstants.Namespace
+            );
 
             byte[] exponent = rsaParams.Exponent;
             writer.WriteBase64(exponent, 0, exponent.Length);
@@ -246,7 +296,6 @@ namespace System.IdentityModel.Tokens
             writer.WriteEndElement(); // </RsaKeyValue>
             writer.WriteEndElement(); // </KeyValue>
             writer.WriteEndElement(); // </KeyInfo>
-
         }
     }
 }

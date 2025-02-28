@@ -15,14 +15,17 @@ namespace System.Linq.Expressions
         /// A <see cref="GotoExpression"/> that represents a jump to some location.
         /// </summary>
         Goto,
+
         /// <summary>
         /// A <see cref="GotoExpression"/> that represents a return statement.
         /// </summary>
         Return,
+
         /// <summary>
         /// A <see cref="GotoExpression"/> that represents a break statement.
         /// </summary>
         Break,
+
         /// <summary>
         /// A <see cref="GotoExpression"/> that represents a continue statement.
         /// </summary>
@@ -35,7 +38,12 @@ namespace System.Linq.Expressions
     [DebuggerTypeProxy(typeof(GotoExpressionProxy))]
     public sealed class GotoExpression : Expression
     {
-        internal GotoExpression(GotoExpressionKind kind, LabelTarget target, Expression? value, Type type)
+        internal GotoExpression(
+            GotoExpressionKind kind,
+            LabelTarget target,
+            Expression? value,
+            Type type
+        )
         {
             Kind = kind;
             Value = value;
@@ -330,18 +338,30 @@ namespace System.Linq.Expressions
         /// the <see cref="Type"/> property set to <paramref name="type"/>,
         /// and <paramref name="value"/> to be passed to the target label upon jumping.
         /// </returns>
-        public static GotoExpression MakeGoto(GotoExpressionKind kind, LabelTarget target, Expression? value, Type type)
+        public static GotoExpression MakeGoto(
+            GotoExpressionKind kind,
+            LabelTarget target,
+            Expression? value,
+            Type type
+        )
         {
             ValidateGoto(target, ref value, nameof(target), nameof(value), type);
             return new GotoExpression(kind, target, value, type);
         }
 
-        private static void ValidateGoto(LabelTarget target, ref Expression? value, string targetParameter, string valueParameter, Type? type)
+        private static void ValidateGoto(
+            LabelTarget target,
+            ref Expression? value,
+            string targetParameter,
+            string valueParameter,
+            Type? type
+        )
         {
             ArgumentNullException.ThrowIfNull(target, targetParameter);
             if (value == null)
             {
-                if (target.Type != typeof(void)) throw Error.LabelMustBeVoidOrHaveExpression(nameof(target));
+                if (target.Type != typeof(void))
+                    throw Error.LabelMustBeVoidOrHaveExpression(nameof(target));
 
                 if (type != null)
                 {
@@ -355,7 +375,11 @@ namespace System.Linq.Expressions
         }
 
         // Standard argument validation, taken from ValidateArgumentTypes
-        private static void ValidateGotoType(Type expectedType, ref Expression value, string paramName)
+        private static void ValidateGotoType(
+            Type expectedType,
+            ref Expression value,
+            string paramName
+        )
         {
             ExpressionUtils.RequiresCanRead(value, paramName);
             if (expectedType != typeof(void))

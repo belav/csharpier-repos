@@ -29,7 +29,8 @@ internal sealed class CodeStyleSetting<T> : CodeStyleSetting
         SettingLocation location,
         CodeStyleOption2<T> initialValue,
         T[] possibleValues,
-        string[] valueDescriptions)
+        string[] valueDescriptions
+    )
         : base(optionKey, description, updater, location)
     {
         Contract.ThrowIfFalse(possibleValues.Length == valueDescriptions.Length);
@@ -39,21 +40,17 @@ internal sealed class CodeStyleSetting<T> : CodeStyleSetting
         _valueDescriptions = valueDescriptions;
     }
 
-    public override Type Type
-        => typeof(T);
+    public override Type Type => typeof(T);
 
-    public override string[] GetValueDescriptions()
-        => _valueDescriptions;
+    public override string[] GetValueDescriptions() => _valueDescriptions;
 
-    public override string GetCurrentValueDescription()
-        => _valueDescriptions[_possibleValues.IndexOf(_value.Value)];
+    public override string GetCurrentValueDescription() =>
+        _valueDescriptions[_possibleValues.IndexOf(_value.Value)];
 
-    public override ICodeStyleOption GetCodeStyle()
-        => _value;
+    public override ICodeStyleOption GetCodeStyle() => _value;
 
-    protected override object GetPossibleValue(int valueIndex)
-        => _possibleValues[valueIndex];
+    protected override object GetPossibleValue(int valueIndex) => _possibleValues[valueIndex];
 
-    protected override object UpdateValue(object settingValue)
-        => _value = (CodeStyleOption2<T>)settingValue;
+    protected override object UpdateValue(object settingValue) =>
+        _value = (CodeStyleOption2<T>)settingValue;
 }

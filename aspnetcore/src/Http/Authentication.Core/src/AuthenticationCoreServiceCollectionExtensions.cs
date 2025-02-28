@@ -33,7 +33,10 @@ public static class AuthenticationCoreServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/>.</param>
     /// <param name="configureOptions">Used to configure the <see cref="AuthenticationOptions"/>.</param>
     /// <returns>The service collection.</returns>
-    public static IServiceCollection AddAuthenticationCore(this IServiceCollection services, Action<AuthenticationOptions> configureOptions)
+    public static IServiceCollection AddAuthenticationCore(
+        this IServiceCollection services,
+        Action<AuthenticationOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configureOptions);

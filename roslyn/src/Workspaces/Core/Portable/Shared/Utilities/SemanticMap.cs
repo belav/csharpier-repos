@@ -12,17 +12,17 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     internal partial class SemanticMap
     {
-        private readonly Dictionary<SyntaxNode, SymbolInfo> _expressionToInfoMap =
-            new();
+        private readonly Dictionary<SyntaxNode, SymbolInfo> _expressionToInfoMap = new();
 
-        private readonly Dictionary<SyntaxToken, SymbolInfo> _tokenToInfoMap =
-            new();
+        private readonly Dictionary<SyntaxToken, SymbolInfo> _tokenToInfoMap = new();
 
-        private SemanticMap()
-        {
-        }
+        private SemanticMap() { }
 
-        internal static SemanticMap From(SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken)
+        internal static SemanticMap From(
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             var map = new SemanticMap();
             var walker = new Walker(semanticModel, map, cancellationToken);
@@ -34,7 +34,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         {
             get
             {
-                return _expressionToInfoMap.Values.Concat(_tokenToInfoMap.Values).Select(info => info.Symbol).Distinct();
+                return _expressionToInfoMap
+                    .Values.Concat(_tokenToInfoMap.Values)
+                    .Select(info => info.Symbol)
+                    .Distinct();
             }
         }
     }

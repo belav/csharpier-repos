@@ -13,13 +13,25 @@ public class Test_Alloc_neg2
     public static int Main()
     {
         // The third element needs to be updated if Pinned is no longer the last value in the GCHandleType enum
-        long[] invalidValues = { Int32.MinValue, -1, (long)(GCHandleType.Pinned + 1), Int32.MaxValue, UInt32.MaxValue, Int64.MaxValue };
+        long[] invalidValues =
+        {
+            Int32.MinValue,
+            -1,
+            (long)(GCHandleType.Pinned + 1),
+            Int32.MaxValue,
+            UInt32.MaxValue,
+            Int64.MaxValue,
+        };
         bool passed = true;
 
         for (int i = 0; i < invalidValues.Length; i++)
         {
             // GCHandle.Alloc internally casts the GCHandleType to a uint
-            Console.WriteLine("Input: {0}, Converted to: {1}", invalidValues[i], (uint)invalidValues[i]);
+            Console.WriteLine(
+                "Input: {0}, Converted to: {1}",
+                invalidValues[i],
+                (uint)invalidValues[i]
+            );
 
             GCHandle gch = new GCHandle();
             try

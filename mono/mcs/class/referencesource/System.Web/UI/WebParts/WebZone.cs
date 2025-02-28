@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -21,11 +21,13 @@ namespace System.Web.UI.WebControls.WebParts {
     /// which is common to all zone classes.
     /// </devdoc>
     [
-    Designer("System.Web.UI.Design.WebControls.WebParts.WebZoneDesigner, " + AssemblyRef.SystemDesign),
-    Bindable(false),
+        Designer(
+            "System.Web.UI.Design.WebControls.WebParts.WebZoneDesigner, " + AssemblyRef.SystemDesign
+        ),
+        Bindable(false),
     ]
-    public abstract class WebZone : CompositeControl {
-
+    public abstract class WebZone : CompositeControl
+    {
         private WebPartManager _webPartManager;
 
         private const int baseIndex = 0;
@@ -49,59 +51,65 @@ namespace System.Web.UI.WebControls.WebParts {
         private Style _errorStyle;
 
         // Prevent class from being subclassed outside of our assembly
-        internal WebZone() {
-        }
+        internal WebZone() { }
 
         /// <devdoc>
         /// The URL of the background image for the control.
         /// </devdoc>
         [
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        UrlProperty(),
-        WebCategory("Appearance"),
-        WebSysDescription(SR.WebControl_BackImageUrl)
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            UrlProperty(),
+            WebCategory("Appearance"),
+            WebSysDescription(SR.WebControl_BackImageUrl)
         ]
-        public virtual string BackImageUrl {
-            get {
+        public virtual string BackImageUrl
+        {
+            get
+            {
                 string s = (string)ViewState["BackImageUrl"];
-                return((s == null) ? String.Empty : s);
+                return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["BackImageUrl"] = value;
-            }
+            set { ViewState["BackImageUrl"] = value; }
         }
 
         [
-        // Must use WebSysDefaultValue instead of DefaultValue, since it is overridden in extending classes
-        Localizable(true),
-        WebSysDefaultValue(""),
-        WebCategory("Behavior"),
-        WebSysDescription(SR.Zone_EmptyZoneText),
+            // Must use WebSysDefaultValue instead of DefaultValue, since it is overridden in extending classes
+            Localizable(true),
+            WebSysDefaultValue(""),
+            WebCategory("Behavior"),
+            WebSysDescription(SR.Zone_EmptyZoneText),
         ]
-        public virtual string EmptyZoneText {
-            get {
+        public virtual string EmptyZoneText
+        {
+            get
+            {
                 string s = (string)ViewState["EmptyZoneText"];
-                return((s == null) ? String.Empty : s);
+                return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["EmptyZoneText"] = value;
-            }
+            set { ViewState["EmptyZoneText"] = value; }
         }
 
         [
-        DefaultValue(null),
-        NotifyParentProperty(true),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.Zone_EmptyZoneTextStyle),
+            DefaultValue(null),
+            NotifyParentProperty(true),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.Zone_EmptyZoneTextStyle),
         ]
-        public Style EmptyZoneTextStyle {
-            get {
-                if (_emptyZoneTextStyle == null) {
+        public Style EmptyZoneTextStyle
+        {
+            get
+            {
+                if (_emptyZoneTextStyle == null)
+                {
                     _emptyZoneTextStyle = new Style();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_emptyZoneTextStyle).TrackViewState();
                     }
                 }
@@ -111,18 +119,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        NotifyParentProperty(true),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.Zone_ErrorStyle),
+            DefaultValue(null),
+            NotifyParentProperty(true),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.Zone_ErrorStyle),
         ]
-        public Style ErrorStyle {
-            get {
-                if (_errorStyle == null) {
+        public Style ErrorStyle
+        {
+            get
+            {
+                if (_errorStyle == null)
+                {
                     _errorStyle = new ErrorStyle();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_errorStyle).TrackViewState();
                     }
                 }
@@ -135,18 +147,22 @@ namespace System.Web.UI.WebControls.WebParts {
         /// Style for the footer of the zone.
         /// </devdoc>
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.Zone_FooterStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.Zone_FooterStyle)
         ]
-        public TitleStyle FooterStyle {
-            get {
-                if (_footerStyle == null) {
+        public TitleStyle FooterStyle
+        {
+            get
+            {
+                if (_footerStyle == null)
+                {
                     _footerStyle = new TitleStyle();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_footerStyle).TrackViewState();
                     }
                 }
@@ -155,54 +171,56 @@ namespace System.Web.UI.WebControls.WebParts {
             }
         }
 
-        protected virtual bool HasFooter {
-            get {
-                return true;
-            }
+        protected virtual bool HasFooter
+        {
+            get { return true; }
         }
 
-        protected virtual bool HasHeader {
-            get {
-                return true;
-            }
+        protected virtual bool HasHeader
+        {
+            get { return true; }
         }
 
         /// <devdoc>
         /// The header text of the zone.
         /// </devdoc>
         [
-        // Must use WebSysDefaultValue instead of DefaultValue, since it is overridden in extending classes
-        Localizable(true),
-        WebSysDefaultValue(""),
-        WebCategory("Appearance"),
-        WebSysDescription(SR.Zone_HeaderText)
+            // Must use WebSysDefaultValue instead of DefaultValue, since it is overridden in extending classes
+            Localizable(true),
+            WebSysDefaultValue(""),
+            WebCategory("Appearance"),
+            WebSysDescription(SR.Zone_HeaderText)
         ]
-        public virtual string HeaderText {
-            get {
+        public virtual string HeaderText
+        {
+            get
+            {
                 string s = (string)ViewState["HeaderText"];
-                return((s == null) ? String.Empty : s);
+                return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["HeaderText"] = value;
-            }
+            set { ViewState["HeaderText"] = value; }
         }
 
         /// <devdoc>
         /// Style for the title bar of the zone.
         /// </devdoc>
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.Zone_HeaderStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.Zone_HeaderStyle)
         ]
-        public TitleStyle HeaderStyle {
-            get {
-                if (_headerStyle == null) {
+        public TitleStyle HeaderStyle
+        {
+            get
+            {
+                if (_headerStyle == null)
+                {
                     _headerStyle = new TitleStyle();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_headerStyle).TrackViewState();
                     }
                 }
@@ -215,17 +233,21 @@ namespace System.Web.UI.WebControls.WebParts {
         /// Padding for the contained parts.
         /// </devdoc>
         [
-        DefaultValue(typeof(Unit), "5px"),
-        WebCategory("WebPart"),
-        WebSysDescription(SR.Zone_PartChromePadding)
+            DefaultValue(typeof(Unit), "5px"),
+            WebCategory("WebPart"),
+            WebSysDescription(SR.Zone_PartChromePadding)
         ]
-        public Unit PartChromePadding {
-            get {
+        public Unit PartChromePadding
+        {
+            get
+            {
                 object obj = ViewState["PartChromePadding"];
                 return (obj == null) ? Unit.Pixel(5) : (Unit)obj;
             }
-            set {
-                if (value.Value < 0) {
+            set
+            {
+                if (value.Value < 0)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["PartChromePadding"] = value;
@@ -236,18 +258,22 @@ namespace System.Web.UI.WebControls.WebParts {
         /// Style for the contained parts.
         /// </devdoc>
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("WebPart"),
-        WebSysDescription(SR.Zone_PartChromeStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("WebPart"),
+            WebSysDescription(SR.Zone_PartChromeStyle)
         ]
-        public Style PartChromeStyle {
-            get {
-                if (_partChromeStyle == null) {
+        public Style PartChromeStyle
+        {
+            get
+            {
+                if (_partChromeStyle == null)
+                {
                     _partChromeStyle = new Style();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_partChromeStyle).TrackViewState();
                     }
                 }
@@ -260,17 +286,21 @@ namespace System.Web.UI.WebControls.WebParts {
         /// The type of frame/border for the contained parts.
         /// </devdoc>
         [
-        DefaultValue(PartChromeType.Default),
-        WebCategory("WebPart"),
-        WebSysDescription(SR.Zone_PartChromeType)
+            DefaultValue(PartChromeType.Default),
+            WebCategory("WebPart"),
+            WebSysDescription(SR.Zone_PartChromeType)
         ]
-        public virtual PartChromeType PartChromeType {
-            get {
+        public virtual PartChromeType PartChromeType
+        {
+            get
+            {
                 object o = ViewState["PartChromeType"];
                 return (o != null) ? (PartChromeType)(int)o : PartChromeType.Default;
             }
-            set {
-                if ((value < PartChromeType.Default) || (value > PartChromeType.BorderOnly)) {
+            set
+            {
+                if ((value < PartChromeType.Default) || (value > PartChromeType.BorderOnly))
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["PartChromeType"] = (int)value;
@@ -281,18 +311,22 @@ namespace System.Web.UI.WebControls.WebParts {
         /// Style for the contents of the contained parts.
         /// </devdoc>
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("WebPart"),
-        WebSysDescription(SR.Zone_PartStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("WebPart"),
+            WebSysDescription(SR.Zone_PartStyle)
         ]
-        public TableStyle PartStyle {
-            get {
-                if (_partStyle == null) {
+        public TableStyle PartStyle
+        {
+            get
+            {
+                if (_partStyle == null)
+                {
                     _partStyle = new TableStyle();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_partStyle).TrackViewState();
                     }
                 }
@@ -305,18 +339,22 @@ namespace System.Web.UI.WebControls.WebParts {
         /// Style for the title bars of the contained parts.
         /// </devdoc>
         [
-        DefaultValue(null),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        NotifyParentProperty(true),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("WebPart"),
-        WebSysDescription(SR.Zone_PartTitleStyle)
+            DefaultValue(null),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            NotifyParentProperty(true),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("WebPart"),
+            WebSysDescription(SR.Zone_PartTitleStyle)
         ]
-        public TitleStyle PartTitleStyle {
-            get {
-                if (_partTitleStyle == null) {
+        public TitleStyle PartTitleStyle
+        {
+            get
+            {
+                if (_partTitleStyle == null)
+                {
                     _partTitleStyle = new TitleStyle();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_partTitleStyle).TrackViewState();
                     }
                 }
@@ -325,25 +363,24 @@ namespace System.Web.UI.WebControls.WebParts {
             }
         }
 
-        protected override HtmlTextWriterTag TagKey {
-            get {
-                return HtmlTextWriterTag.Table;
-            }
+        protected override HtmlTextWriterTag TagKey
+        {
+            get { return HtmlTextWriterTag.Table; }
         }
 
         // Padding = -1 means we will not render anything for the cellpadding attribute
-        [
-        DefaultValue(2),
-        WebCategory("Layout"),
-        WebSysDescription(SR.Zone_Padding),
-        ]
-        public virtual int Padding {
-            get {
+        [DefaultValue(2), WebCategory("Layout"), WebSysDescription(SR.Zone_Padding)]
+        public virtual int Padding
+        {
+            get
+            {
                 object obj = ViewState["Padding"];
-                return (obj == null) ? 2 : (int) obj;
+                return (obj == null) ? 2 : (int)obj;
             }
-            set {
-                if (value < -1) {
+            set
+            {
+                if (value < -1)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["Padding"] = value;
@@ -351,23 +388,30 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         // Called by WebPartZoneBase, EditorZoneBase, CatalogZoneBase, and ConnectionsZone.
-        internal void RenderBodyTableBeginTag(HtmlTextWriter writer) {
-            // 
-
+        internal void RenderBodyTableBeginTag(HtmlTextWriter writer)
+        {
+            //
 
             writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
             int padding = Padding;
-            if (padding >= 0) {
-                writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, padding.ToString(CultureInfo.InvariantCulture));
+            if (padding >= 0)
+            {
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Cellpadding,
+                    padding.ToString(CultureInfo.InvariantCulture)
+                );
             }
             writer.AddAttribute(HtmlTextWriterAttribute.Border, "0");
 
             // Copied from Panel.cs
-            // 
+            //
             string backImageUrl = BackImageUrl;
             // Whidbey 12856
             if (backImageUrl.Trim().Length > 0)
-                writer.AddStyleAttribute(HtmlTextWriterStyle.BackgroundImage,"url(" + ResolveClientUrl(backImageUrl) + ")");
+                writer.AddStyleAttribute(
+                    HtmlTextWriterStyle.BackgroundImage,
+                    "url(" + ResolveClientUrl(backImageUrl) + ")"
+                );
 
             // Needed if Zone HeaderText is wider than contained Parts
             writer.AddStyleAttribute(HtmlTextWriterStyle.Width, "100%");
@@ -379,45 +423,58 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         // Called by WebPartZoneBase, EditorZoneBase, CatalogZoneBase, and ConnectionsZone.
-        internal static void RenderBodyTableEndTag(HtmlTextWriter writer) {
-            writer.RenderEndTag();  // Table
+        internal static void RenderBodyTableEndTag(HtmlTextWriter writer)
+        {
+            writer.RenderEndTag(); // Table
         }
 
         // Called by WebPartZoneBase, EditorZoneBase, and CatalogZoneBase.
-        internal void RenderDesignerRegionBeginTag(HtmlTextWriter writer, Orientation orientation) {
+        internal void RenderDesignerRegionBeginTag(HtmlTextWriter writer, Orientation orientation)
+        {
             writer.AddAttribute(HtmlTextWriterAttribute.Valign, "top");
             writer.RenderBeginTag(HtmlTextWriterTag.Tr);
-            if (orientation == Orientation.Horizontal) {
+            if (orientation == Orientation.Horizontal)
+            {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.WhiteSpace, "nowrap");
             }
             writer.AddAttribute(HtmlTextWriterAttribute.DesignerRegion, "0");
             writer.RenderBeginTag(HtmlTextWriterTag.Td);
             writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
-            writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, Padding.ToString(CultureInfo.InvariantCulture));
+            writer.AddAttribute(
+                HtmlTextWriterAttribute.Cellpadding,
+                Padding.ToString(CultureInfo.InvariantCulture)
+            );
             writer.AddAttribute(HtmlTextWriterAttribute.Border, "0");
-            if (orientation == Orientation.Vertical) {
+            if (orientation == Orientation.Vertical)
+            {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Width, "100%");
             }
-            else {
+            else
+            {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Height, "100%");
             }
             writer.RenderBeginTag(HtmlTextWriterTag.Table);
         }
 
         // Called by WebPartZoneBase, EditorZoneBase, and CatalogZoneBase.
-        internal static void RenderDesignerRegionEndTag(HtmlTextWriter writer) {
+        internal static void RenderDesignerRegionEndTag(HtmlTextWriter writer)
+        {
             writer.RenderEndTag(); // Table
             writer.RenderEndTag(); // Td
             writer.RenderEndTag(); // Tr
         }
 
-        protected internal bool RenderClientScript {
-            get {
+        protected internal bool RenderClientScript
+        {
+            get
+            {
                 bool renderClientScript = false;
-                if (DesignMode) {
+                if (DesignMode)
+                {
                     renderClientScript = true;
                 }
-                else if (WebPartManager != null) {
+                else if (WebPartManager != null)
+                {
                     renderClientScript = WebPartManager.RenderClientScript;
                 }
                 return renderClientScript;
@@ -428,17 +485,21 @@ namespace System.Web.UI.WebControls.WebParts {
         /// The type of the button rendered for each verb.
         /// </devdoc>
         [
-        DefaultValue(ButtonType.Button),
-        WebCategory("Appearance"),
-        WebSysDescription(SR.Zone_VerbButtonType),
+            DefaultValue(ButtonType.Button),
+            WebCategory("Appearance"),
+            WebSysDescription(SR.Zone_VerbButtonType),
         ]
-        public virtual ButtonType VerbButtonType {
-            get {
+        public virtual ButtonType VerbButtonType
+        {
+            get
+            {
                 object obj = ViewState["VerbButtonType"];
                 return (obj == null) ? ButtonType.Button : (ButtonType)obj;
             }
-            set {
-                if (value < ButtonType.Button || value > ButtonType.Link) {
+            set
+            {
+                if (value < ButtonType.Button || value > ButtonType.Link)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["VerbButtonType"] = value;
@@ -446,18 +507,22 @@ namespace System.Web.UI.WebControls.WebParts {
         }
 
         [
-        DefaultValue(null),
-        NotifyParentProperty(true),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        PersistenceMode(PersistenceMode.InnerProperty),
-        WebCategory("Styles"),
-        WebSysDescription(SR.Zone_VerbStyle),
+            DefaultValue(null),
+            NotifyParentProperty(true),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            PersistenceMode(PersistenceMode.InnerProperty),
+            WebCategory("Styles"),
+            WebSysDescription(SR.Zone_VerbStyle),
         ]
-        public Style VerbStyle {
-            get {
-                if (_verbStyle == null) {
+        public Style VerbStyle
+        {
+            get
+            {
+                if (_verbStyle == null)
+                {
                     _verbStyle = new Style();
-                    if (IsTrackingViewState) {
+                    if (IsTrackingViewState)
+                    {
                         ((IStateManager)_verbStyle).TrackViewState();
                     }
                 }
@@ -470,18 +535,23 @@ namespace System.Web.UI.WebControls.WebParts {
         /// The effective chrome type of a part, taking into consideration the PartChromeType
         /// of the zone and the DisplayMode of the page.
         /// </devdoc>
-        public virtual PartChromeType GetEffectiveChromeType(Part part) {
-            if (part == null) {
+        public virtual PartChromeType GetEffectiveChromeType(Part part)
+        {
+            if (part == null)
+            {
                 throw new ArgumentNullException("part");
             }
 
             PartChromeType chromeType = part.ChromeType;
-            if (chromeType == PartChromeType.Default) {
+            if (chromeType == PartChromeType.Default)
+            {
                 PartChromeType partChromeType = PartChromeType;
-                if (partChromeType == PartChromeType.Default) {
+                if (partChromeType == PartChromeType.Default)
+                {
                     chromeType = PartChromeType.TitleAndBorder;
                 }
-                else {
+                else
+                {
                     chromeType = partChromeType;
                 }
             }
@@ -490,58 +560,79 @@ namespace System.Web.UI.WebControls.WebParts {
             return chromeType;
         }
 
-        protected override void LoadViewState(object savedState) {
-            if (savedState == null) {
+        protected override void LoadViewState(object savedState)
+        {
+            if (savedState == null)
+            {
                 base.LoadViewState(null);
             }
-            else {
-                object[] myState = (object[]) savedState;
-                if (myState.Length != viewStateArrayLength) {
+            else
+            {
+                object[] myState = (object[])savedState;
+                if (myState.Length != viewStateArrayLength)
+                {
                     throw new ArgumentException(SR.GetString(SR.ViewState_InvalidViewState));
                 }
 
                 base.LoadViewState(myState[baseIndex]);
-                if (myState[emptyZoneTextStyleIndex] != null) {
-                    ((IStateManager) EmptyZoneTextStyle).LoadViewState(myState[emptyZoneTextStyleIndex]);
+                if (myState[emptyZoneTextStyleIndex] != null)
+                {
+                    ((IStateManager)EmptyZoneTextStyle).LoadViewState(
+                        myState[emptyZoneTextStyleIndex]
+                    );
                 }
-                if (myState[footerStyleIndex] != null) {
-                    ((IStateManager) FooterStyle).LoadViewState(myState[footerStyleIndex]);
+                if (myState[footerStyleIndex] != null)
+                {
+                    ((IStateManager)FooterStyle).LoadViewState(myState[footerStyleIndex]);
                 }
-                if (myState[partStyleIndex] != null) {
-                    ((IStateManager) PartStyle).LoadViewState(myState[partStyleIndex]);
+                if (myState[partStyleIndex] != null)
+                {
+                    ((IStateManager)PartStyle).LoadViewState(myState[partStyleIndex]);
                 }
-                if (myState[partChromeStyleIndex] != null) {
-                    ((IStateManager) PartChromeStyle).LoadViewState(myState[partChromeStyleIndex]);
+                if (myState[partChromeStyleIndex] != null)
+                {
+                    ((IStateManager)PartChromeStyle).LoadViewState(myState[partChromeStyleIndex]);
                 }
-                if (myState[partTitleStyleIndex] != null) {
-                    ((IStateManager) PartTitleStyle).LoadViewState(myState[partTitleStyleIndex]);
+                if (myState[partTitleStyleIndex] != null)
+                {
+                    ((IStateManager)PartTitleStyle).LoadViewState(myState[partTitleStyleIndex]);
                 }
-                if (myState[headerStyleIndex] != null) {
-                    ((IStateManager) HeaderStyle).LoadViewState(myState[headerStyleIndex]);
+                if (myState[headerStyleIndex] != null)
+                {
+                    ((IStateManager)HeaderStyle).LoadViewState(myState[headerStyleIndex]);
                 }
-                if (myState[verbStyleIndex] != null) {
-                    ((IStateManager) VerbStyle).LoadViewState(myState[verbStyleIndex]);
+                if (myState[verbStyleIndex] != null)
+                {
+                    ((IStateManager)VerbStyle).LoadViewState(myState[verbStyleIndex]);
                 }
-                if (myState[errorStyleIndex] != null) {
-                    ((IStateManager) ErrorStyle).LoadViewState(myState[errorStyleIndex]);
+                if (myState[errorStyleIndex] != null)
+                {
+                    ((IStateManager)ErrorStyle).LoadViewState(myState[errorStyleIndex]);
                 }
             }
         }
 
-        protected internal override void OnInit(EventArgs e) {
+        protected internal override void OnInit(EventArgs e)
+        {
             base.OnInit(e);
 
             Page page = Page;
             Debug.Assert(page != null);
-            if (page != null) {
-                if (page.ControlState >= ControlState.Initialized && !DesignMode) {
+            if (page != null)
+            {
+                if (page.ControlState >= ControlState.Initialized && !DesignMode)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.Zone_AddedTooLate));
                 }
 
-                if (!DesignMode) {
+                if (!DesignMode)
+                {
                     _webPartManager = WebPartManager.GetCurrentWebPartManager(page);
-                    if (_webPartManager == null) {
-                        throw new InvalidOperationException(SR.GetString(SR.WebPartManagerRequired));
+                    if (_webPartManager == null)
+                    {
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.WebPartManagerRequired)
+                        );
                     }
 
                     _webPartManager.RegisterZone(this);
@@ -549,28 +640,34 @@ namespace System.Web.UI.WebControls.WebParts {
             }
         }
 
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
             Control parent = Parent;
             Debug.Assert(parent != null);
-            if (parent != null && (parent is WebZone || parent is Part)) {
+            if (parent != null && (parent is WebZone || parent is Part))
+            {
                 throw new InvalidOperationException(SR.GetString(SR.Zone_InvalidParent));
             }
         }
 
-        public override void RenderBeginTag(HtmlTextWriter writer) {
+        public override void RenderBeginTag(HtmlTextWriter writer)
+        {
             writer.AddAttribute(HtmlTextWriterAttribute.Cellspacing, "0");
             writer.AddAttribute(HtmlTextWriterAttribute.Cellpadding, "0");
             writer.AddAttribute(HtmlTextWriterAttribute.Border, "0");
 
             // On Mac IE, if height is not set, render height:1px, so the table sizes to contents.
             // Otherwise, Mac IE may give the table an arbitrary height (equal to the width of its contents).
-            if (!DesignMode &&
-                Page != null &&
-                Page.Request.Browser.Type == "IE5" &&
-                Page.Request.Browser.Platform == "MacPPC" &&
-                (!ControlStyleCreated || ControlStyle.Height == Unit.Empty)) {
+            if (
+                !DesignMode
+                && Page != null
+                && Page.Request.Browser.Type == "IE5"
+                && Page.Request.Browser.Platform == "MacPPC"
+                && (!ControlStyleCreated || ControlStyle.Height == Unit.Empty)
+            )
+            {
                 writer.AddStyleAttribute(HtmlTextWriterStyle.Height, "1px");
             }
 
@@ -578,17 +675,20 @@ namespace System.Web.UI.WebControls.WebParts {
             base.RenderBeginTag(writer);
         }
 
-        protected internal override void RenderContents(HtmlTextWriter writer) {
-            if (HasHeader) {
+        protected internal override void RenderContents(HtmlTextWriter writer)
+        {
+            if (HasHeader)
+            {
                 writer.RenderBeginTag(HtmlTextWriterTag.Tr);
                 TitleStyle headerStyle = HeaderStyle;
-                if (!headerStyle.IsEmpty) {
+                if (!headerStyle.IsEmpty)
+                {
                     headerStyle.AddAttributesToRender(writer, this);
                 }
                 writer.RenderBeginTag(HtmlTextWriterTag.Td);
                 RenderHeader(writer);
-                writer.RenderEndTag();  // Td
-                writer.RenderEndTag();  // Tr
+                writer.RenderEndTag(); // Td
+                writer.RenderEndTag(); // Tr
             }
 
             writer.RenderBeginTag(HtmlTextWriterTag.Tr);
@@ -600,46 +700,60 @@ namespace System.Web.UI.WebControls.WebParts {
 
             writer.RenderBeginTag(HtmlTextWriterTag.Td);
             RenderBody(writer);
-            writer.RenderEndTag();  // Td
-            writer.RenderEndTag();  // Tr
+            writer.RenderEndTag(); // Td
+            writer.RenderEndTag(); // Tr
 
-            if (HasFooter) {
+            if (HasFooter)
+            {
                 writer.RenderBeginTag(HtmlTextWriterTag.Tr);
                 TitleStyle footerStyle = FooterStyle;
-                if (!footerStyle.IsEmpty) {
+                if (!footerStyle.IsEmpty)
+                {
                     footerStyle.AddAttributesToRender(writer, this);
                 }
                 writer.RenderBeginTag(HtmlTextWriterTag.Td);
                 RenderFooter(writer);
-                writer.RenderEndTag();  // Td
-                writer.RenderEndTag();  // Tr
+                writer.RenderEndTag(); // Td
+                writer.RenderEndTag(); // Tr
             }
         }
 
-        protected virtual void RenderHeader(HtmlTextWriter writer) {
-        }
+        protected virtual void RenderHeader(HtmlTextWriter writer) { }
 
-        protected virtual void RenderBody(HtmlTextWriter writer) {
-        }
+        protected virtual void RenderBody(HtmlTextWriter writer) { }
 
-        protected virtual void RenderFooter(HtmlTextWriter writer) {
-        }
+        protected virtual void RenderFooter(HtmlTextWriter writer) { }
 
-        protected override object SaveViewState() {
+        protected override object SaveViewState()
+        {
             object[] myState = new object[viewStateArrayLength];
 
             myState[baseIndex] = base.SaveViewState();
-            myState[emptyZoneTextStyleIndex] = (_emptyZoneTextStyle != null) ? ((IStateManager)_emptyZoneTextStyle).SaveViewState() : null;
-            myState[footerStyleIndex] = (_footerStyle != null) ? ((IStateManager)_footerStyle).SaveViewState() : null;
-            myState[partStyleIndex] = (_partStyle != null) ? ((IStateManager)_partStyle).SaveViewState() : null;
-            myState[partChromeStyleIndex] = (_partChromeStyle != null) ? ((IStateManager)_partChromeStyle).SaveViewState() : null;
-            myState[partTitleStyleIndex] = (_partTitleStyle != null) ? ((IStateManager)_partTitleStyle).SaveViewState() : null;
-            myState[headerStyleIndex] = (_headerStyle != null) ? ((IStateManager)_headerStyle).SaveViewState() : null;
-            myState[verbStyleIndex] = (_verbStyle != null) ? ((IStateManager)_verbStyle).SaveViewState() : null;
-            myState[errorStyleIndex] = (_errorStyle != null) ? ((IStateManager)_errorStyle).SaveViewState() : null;
+            myState[emptyZoneTextStyleIndex] =
+                (_emptyZoneTextStyle != null)
+                    ? ((IStateManager)_emptyZoneTextStyle).SaveViewState()
+                    : null;
+            myState[footerStyleIndex] =
+                (_footerStyle != null) ? ((IStateManager)_footerStyle).SaveViewState() : null;
+            myState[partStyleIndex] =
+                (_partStyle != null) ? ((IStateManager)_partStyle).SaveViewState() : null;
+            myState[partChromeStyleIndex] =
+                (_partChromeStyle != null)
+                    ? ((IStateManager)_partChromeStyle).SaveViewState()
+                    : null;
+            myState[partTitleStyleIndex] =
+                (_partTitleStyle != null) ? ((IStateManager)_partTitleStyle).SaveViewState() : null;
+            myState[headerStyleIndex] =
+                (_headerStyle != null) ? ((IStateManager)_headerStyle).SaveViewState() : null;
+            myState[verbStyleIndex] =
+                (_verbStyle != null) ? ((IStateManager)_verbStyle).SaveViewState() : null;
+            myState[errorStyleIndex] =
+                (_errorStyle != null) ? ((IStateManager)_errorStyle).SaveViewState() : null;
 
-            for (int i=0; i < viewStateArrayLength; i++) {
-                if (myState[i] != null) {
+            for (int i = 0; i < viewStateArrayLength; i++)
+            {
+                if (myState[i] != null)
+                {
                     return myState;
                 }
             }
@@ -648,39 +762,47 @@ namespace System.Web.UI.WebControls.WebParts {
             return null;
         }
 
-        protected override void TrackViewState() {
+        protected override void TrackViewState()
+        {
             base.TrackViewState();
 
-            if (_emptyZoneTextStyle != null) {
-                ((IStateManager) _emptyZoneTextStyle).TrackViewState();
+            if (_emptyZoneTextStyle != null)
+            {
+                ((IStateManager)_emptyZoneTextStyle).TrackViewState();
             }
-            if (_footerStyle != null) {
-                ((IStateManager) _footerStyle).TrackViewState();
+            if (_footerStyle != null)
+            {
+                ((IStateManager)_footerStyle).TrackViewState();
             }
-            if (_partStyle != null) {
-                ((IStateManager) _partStyle).TrackViewState();
+            if (_partStyle != null)
+            {
+                ((IStateManager)_partStyle).TrackViewState();
             }
-            if (_partChromeStyle != null) {
-                ((IStateManager) _partChromeStyle).TrackViewState();
+            if (_partChromeStyle != null)
+            {
+                ((IStateManager)_partChromeStyle).TrackViewState();
             }
-            if (_partTitleStyle != null) {
-                ((IStateManager) _partTitleStyle).TrackViewState();
+            if (_partTitleStyle != null)
+            {
+                ((IStateManager)_partTitleStyle).TrackViewState();
             }
-            if (_headerStyle != null) {
-                ((IStateManager) _headerStyle).TrackViewState();
+            if (_headerStyle != null)
+            {
+                ((IStateManager)_headerStyle).TrackViewState();
             }
-            if (_verbStyle != null) {
-                ((IStateManager) _verbStyle).TrackViewState();
+            if (_verbStyle != null)
+            {
+                ((IStateManager)_verbStyle).TrackViewState();
             }
-            if (_errorStyle != null) {
-                ((IStateManager) _errorStyle).TrackViewState();
+            if (_errorStyle != null)
+            {
+                ((IStateManager)_errorStyle).TrackViewState();
             }
         }
 
-        protected WebPartManager WebPartManager {
-            get {
-                return _webPartManager;
-            }
+        protected WebPartManager WebPartManager
+        {
+            get { return _webPartManager; }
         }
     }
 }

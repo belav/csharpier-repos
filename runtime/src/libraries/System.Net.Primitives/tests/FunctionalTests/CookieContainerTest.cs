@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests
@@ -21,7 +20,10 @@ namespace System.Net.Primitives.Functional.Tests
 
         private static readonly Cookie c1 = new Cookie("name1", "value", "", u1);
         private static readonly Cookie c2 = new Cookie("name2", "value", "", u1) { Secure = true };
-        private static readonly Cookie c3 = new Cookie("name3", "value", "", u1) { Port = "\"80, 90, 100, 443\"" };
+        private static readonly Cookie c3 = new Cookie("name3", "value", "", u1)
+        {
+            Port = "\"80, 90, 100, 443\"",
+        };
         private static readonly Cookie c4 = new Cookie("name4", "value", "", u2);
         private static readonly Cookie c5 = new Cookie("name5", "value", "/path", u2);
         private static readonly Cookie c6 = new Cookie("name6", "value", "", "." + u3);
@@ -29,7 +31,10 @@ namespace System.Net.Primitives.Functional.Tests
         private static readonly Cookie c8 = new Cookie("name8", "value");
         private static readonly Cookie c9 = new Cookie("name9", "value");
         private static readonly Cookie c10 = new Cookie("name10", "value");
-        private static readonly Cookie c11 = new Cookie("name11", "value") { Port = "\"80, 90, 100\"" };
+        private static readonly Cookie c11 = new Cookie("name11", "value")
+        {
+            Port = "\"80, 90, 100\"",
+        };
 
         [Fact]
         public static void Ctor_Empty_Success()
@@ -57,7 +62,9 @@ namespace System.Net.Primitives.Functional.Tests
             CookieContainer cc = new CookieContainer();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => cc.Capacity = 0); // <= 0
-            Assert.Throws<ArgumentOutOfRangeException>(() => cc.Capacity = cc.PerDomainCapacity - 1); // < per domain capacity
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => cc.Capacity = cc.PerDomainCapacity - 1
+            ); // < per domain capacity
         }
 
         [Fact]
@@ -101,7 +108,9 @@ namespace System.Net.Primitives.Functional.Tests
             CookieContainer cc = new CookieContainer();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => cc.PerDomainCapacity = 0); // Per domain capacity <= 0
-            Assert.Throws<ArgumentOutOfRangeException>(() => cc.PerDomainCapacity = cc.Capacity + 1); // Per domain capacity >= Capacity
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => cc.PerDomainCapacity = cc.Capacity + 1
+            ); // Per domain capacity >= Capacity
         }
 
         [Fact]
@@ -109,7 +118,9 @@ namespace System.Net.Primitives.Functional.Tests
         {
             CookieContainer cc = new CookieContainer();
             Assert.Throws<ArgumentNullException>(() => cc.Add(null, new Cookie("name", "value"))); // Null uri
-            Assert.Throws<ArgumentNullException>(() => cc.Add(new Uri("http://contoso.com"), (Cookie)null)); // Null cookie
+            Assert.Throws<ArgumentNullException>(
+                () => cc.Add(new Uri("http://contoso.com"), (Cookie)null)
+            ); // Null cookie
         }
 
         [Fact]
@@ -117,7 +128,9 @@ namespace System.Net.Primitives.Functional.Tests
         {
             CookieContainer cc = new CookieContainer();
             Assert.Throws<ArgumentNullException>(() => cc.Add(null, new CookieCollection())); //Null uri
-            Assert.Throws<ArgumentNullException>(() => cc.Add(new Uri("http://contoso.com"), (CookieCollection)null)); //Null collection
+            Assert.Throws<ArgumentNullException>(
+                () => cc.Add(new Uri("http://contoso.com"), (CookieCollection)null)
+            ); //Null collection
         }
 
         [Fact]
@@ -138,8 +151,16 @@ namespace System.Net.Primitives.Functional.Tests
         {
             yield return new object[] { u5, "=value" }; // No name
             yield return new object[] { u5, "$=value" }; // Invalid name
-            yield return new object[] { new Uri("http://url.com"), "na\tme=value; domain=.domain.com" }; // Invalid name
-            yield return new object[] { new Uri("http://url.com"), "name=value; domain=.domain.com" }; // Domain not the same
+            yield return new object[]
+            {
+                new Uri("http://url.com"),
+                "na\tme=value; domain=.domain.com",
+            }; // Invalid name
+            yield return new object[]
+            {
+                new Uri("http://url.com"),
+                "name=value; domain=.domain.com",
+            }; // Domain not the same
             yield return new object[] { new Uri("http://url.com:90"), "name=value; port=\"80\"" }; // Port not the same
             yield return new object[] { new Uri("http://url.com"), "name=value; domain=" }; // Empty domain
             yield return new object[] { u6, "name11=value11; version=invalidversion" }; // Invalid version
@@ -193,7 +214,10 @@ namespace System.Net.Primitives.Functional.Tests
 
             if (!isFromSameDomain)
             {
-                FieldInfo domainTableField = typeof(CookieContainer).GetField("m_domainTable", BindingFlags.Instance | BindingFlags.NonPublic);
+                FieldInfo domainTableField = typeof(CookieContainer).GetField(
+                    "m_domainTable",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                );
                 Assert.NotNull(domainTableField);
                 Hashtable domainTable = domainTableField.GetValue(cookieContainer) as Hashtable;
                 Assert.NotNull(domainTable);

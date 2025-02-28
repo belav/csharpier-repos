@@ -4,9 +4,9 @@
 namespace Microsoft.InfoCards.Diagnostics
 {
     using System;
-    using System.Xml;
     using System.Diagnostics;
-    
+    using System.Xml;
+
     //
     // Summary
     // An InfoCardTraceRecord represents an ETW tracerecord plus some infocard specific
@@ -25,7 +25,7 @@ namespace Microsoft.InfoCards.Diagnostics
     //      <message>rabbit%s</message>
     //  </ExtendedData>
     //</TraceRecord>
-    // 
+    //
     class InfoCardTraceRecord : System.Runtime.Diagnostics.TraceRecord
     {
         //
@@ -33,27 +33,25 @@ namespace Microsoft.InfoCards.Diagnostics
         // 'StoreSignatureCollision' - used to derive the trace uri.
         //
         private string m_eventID;
-        
+
         //
         // A descriptive message about the error schematized as xmlAny
         //
         private string m_message;
-        
-        
+
         const string InfoCardEventIdBase = "http://schemas.microsoft.com/2004/11/InfoCard/";
-        
-        public InfoCardTraceRecord( string eventID, string message )
+
+        public InfoCardTraceRecord(string eventID, string message)
         {
-            InfoCardTrace.Assert( !String.IsNullOrEmpty( eventID ), "null eventid" );
-            InfoCardTrace.Assert( !String.IsNullOrEmpty( message ), "null message" );
+            InfoCardTrace.Assert(!String.IsNullOrEmpty(eventID), "null eventid");
+            InfoCardTrace.Assert(!String.IsNullOrEmpty(message), "null message");
             m_eventID = eventID;
             m_message = message;
         }
 
-        
         //
         // Summary:
-        // Returns the unique identifier for this event. Represented as a uri under the stanard e2e logging 
+        // Returns the unique identifier for this event. Represented as a uri under the stanard e2e logging
         // schema - configured as <uriPath> + <infocard event code> + <standard suffix>
         // for example
         // "http://schemas.microsoft.com/2004/11/InfoCard/" + "StoreSignatureCollision" + TraceRecord
@@ -62,28 +60,30 @@ namespace Microsoft.InfoCards.Diagnostics
         {
             get
             {
-                return InfoCardEventIdBase + m_eventID + System.Runtime.Diagnostics.TraceRecord.NamespaceSuffix;
+                return InfoCardEventIdBase
+                    + m_eventID
+                    + System.Runtime.Diagnostics.TraceRecord.NamespaceSuffix;
             }
         }
-    
+
         //
         // Summary:
-        // Called back by the indigo diagnostic trace infrastructure during etw trace logging. 
+        // Called back by the indigo diagnostic trace infrastructure during etw trace logging.
         // Writes the extendedData section out to the TraceRecord.
         //
         //
-        internal override void WriteTo( XmlWriter writer )
+        internal override void WriteTo(XmlWriter writer)
         {
-            InfoCardTrace.Assert( null != writer, "null writer" );
-            writer.WriteElementString( "message", m_message );
+            InfoCardTrace.Assert(null != writer, "null writer");
+            writer.WriteElementString("message", m_message);
         }
-        
+
         //
         // Override tostring to give a better event logging experience.
         //
         public override string ToString()
         {
-            return SR.GetString( SR.EventLogMessage, m_eventID, m_message );
+            return SR.GetString(SR.EventLogMessage, m_eventID, m_message);
         }
     }
 }

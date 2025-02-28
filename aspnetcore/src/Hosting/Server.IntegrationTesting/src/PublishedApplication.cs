@@ -23,6 +23,7 @@ public class PublishedApplication : IDisposable
             () => Directory.Delete(Path, true),
             e => _logger.LogWarning($"Failed to delete directory : {e.Message}"),
             retryCount: 3,
-            retryDelayMilliseconds: 100);
+            retryDelayMilliseconds: 100
+        );
     }
 }

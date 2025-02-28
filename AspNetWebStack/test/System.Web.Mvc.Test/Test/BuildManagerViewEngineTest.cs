@@ -16,7 +16,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             var engine = new TestableBuildManagerViewEngine();
-            var buildManagerMock = new MockBuildManager(expectedVirtualPath: null, compiledType: null);
+            var buildManagerMock = new MockBuildManager(
+                expectedVirtualPath: null,
+                compiledType: null
+            );
 
             // Act
             engine.BuildManager = buildManagerMock;
@@ -30,7 +33,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             string testPath = "/Path.txt";
-            var engine = new TestableBuildManagerViewEngine(pathProvider: CreatePathProvider(testPath));
+            var engine = new TestableBuildManagerViewEngine(
+                pathProvider: CreatePathProvider(testPath)
+            );
 
             // Act
             bool result = engine.FileExists(testPath);
@@ -44,7 +49,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             string testPath = "/Path.txt";
-            var engine = new TestableBuildManagerViewEngine(pathProvider: CreatePathProvider("some random path"));
+            var engine = new TestableBuildManagerViewEngine(
+                pathProvider: CreatePathProvider("some random path")
+            );
             var buildManagerMock = new Mock<MockBuildManager>();
             engine.BuildManager = buildManagerMock.Object;
 
@@ -61,7 +68,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             string testPath = "/Path.txt";
-            var engine = new TestableBuildManagerViewEngine(pathProvider: CreatePathProvider("some random path"));
+            var engine = new TestableBuildManagerViewEngine(
+                pathProvider: CreatePathProvider("some random path")
+            );
             engine.SetIsPrecompiledNonUpdateableSite(true);
             var buildManagerMock = new MockBuildManager(testPath, typeof(object));
             engine.BuildManager = buildManagerMock;
@@ -128,9 +137,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             string matchingPath = "/Path.txt";
             string nonMatchingPath = "/PathOther.txt";
-            var engine = new TestableBuildManagerViewEngine(pathProvider: CreatePathProvider(matchingPath))
+            var engine = new TestableBuildManagerViewEngine(
+                pathProvider: CreatePathProvider(matchingPath)
+            )
             {
-                BuildManager = new MockBuildManager(nonMatchingPath, fileExists: false)
+                BuildManager = new MockBuildManager(nonMatchingPath, fileExists: false),
             };
 
             // Act
@@ -147,7 +158,9 @@ namespace System.Web.Mvc.Test
             Mock<IViewPageActivator> activator = new Mock<IViewPageActivator>();
 
             // Act
-            TestableBuildManagerViewEngine engine = new TestableBuildManagerViewEngine(activator.Object);
+            TestableBuildManagerViewEngine engine = new TestableBuildManagerViewEngine(
+                activator.Object
+            );
 
             //Assert
             Assert.Equal(activator.Object, engine.ViewPageActivator);
@@ -161,7 +174,9 @@ namespace System.Web.Mvc.Test
             var activatorResolver = new Resolver<IViewPageActivator> { Current = activator.Object };
 
             // Act
-            TestableBuildManagerViewEngine engine = new TestableBuildManagerViewEngine(activatorResolver: activatorResolver);
+            TestableBuildManagerViewEngine engine = new TestableBuildManagerViewEngine(
+                activatorResolver: activatorResolver
+            );
 
             // Assert
             Assert.Equal(activator.Object, engine.ViewPageActivator);
@@ -175,10 +190,15 @@ namespace System.Web.Mvc.Test
             var controllerContext = new ControllerContext();
             var buildManager = new MockBuildManager("view path", typeof(object));
             var dependencyResolver = new Mock<IDependencyResolver>(MockBehavior.Strict);
-            dependencyResolver.Setup(dr => dr.GetService(typeof(object))).Returns(viewInstance).Verifiable();
+            dependencyResolver
+                .Setup(dr => dr.GetService(typeof(object)))
+                .Returns(viewInstance)
+                .Verifiable();
 
             // Act
-            TestableBuildManagerViewEngine engine = new TestableBuildManagerViewEngine(dependencyResolver: dependencyResolver.Object);
+            TestableBuildManagerViewEngine engine = new TestableBuildManagerViewEngine(
+                dependencyResolver: dependencyResolver.Object
+            );
             engine.ViewPageActivator.Create(controllerContext, typeof(object));
 
             // Assert
@@ -193,13 +213,17 @@ namespace System.Web.Mvc.Test
             var buildManager = new MockBuildManager("view path", typeof(NoParameterlessCtor));
             var dependencyResolver = new Mock<IDependencyResolver>();
 
-            var engine = new TestableBuildManagerViewEngine(dependencyResolver: dependencyResolver.Object);
+            var engine = new TestableBuildManagerViewEngine(
+                dependencyResolver: dependencyResolver.Object
+            );
 
             // Act & Assert, confirming type name and full stack are available in Exception
             // Depend on the fact that Activator.CreateInstance cannot create an object without a parameterless ctor
             MissingMethodException ex = Assert.Throws<MissingMethodException>(
-                () => engine.ViewPageActivator.Create(controllerContext, typeof(NoParameterlessCtor)),
-                "No parameterless constructor defined for this object. Object type 'System.Web.Mvc.Test.BuildManagerViewEngineTest+NoParameterlessCtor'.");
+                () =>
+                    engine.ViewPageActivator.Create(controllerContext, typeof(NoParameterlessCtor)),
+                "No parameterless constructor defined for this object. Object type 'System.Web.Mvc.Test.BuildManagerViewEngineTest+NoParameterlessCtor'."
+            );
             Assert.Contains("System.Activator.CreateInstance(", ex.InnerException.StackTrace);
         }
 
@@ -213,12 +237,19 @@ namespace System.Web.Mvc.Test
             Mock<IViewPageActivator> activator = new Mock<IViewPageActivator>();
 
             var resolverActivator = new Mock<IViewPageActivator>(MockBehavior.Strict);
-            var activatorResolver = new Resolver<IViewPageActivator> { Current = resolverActivator.Object };
+            var activatorResolver = new Resolver<IViewPageActivator>
+            {
+                Current = resolverActivator.Object,
+            };
 
             var dependencyResolver = new Mock<IDependencyResolver>(MockBehavior.Strict);
 
             //Act
-            var engine = new TestableBuildManagerViewEngine(activator.Object, activatorResolver, dependencyResolver.Object);
+            var engine = new TestableBuildManagerViewEngine(
+                activator.Object,
+                activatorResolver,
+                dependencyResolver.Object
+            );
 
             //Assert
             Assert.Same(activator.Object, engine.ViewPageActivator);
@@ -227,15 +258,14 @@ namespace System.Web.Mvc.Test
         private static VirtualPathProvider CreatePathProvider(params string[] files)
         {
             var vpp = new Mock<VirtualPathProvider>();
-            vpp.Setup(c => c.FileExists(It.IsAny<string>())).Returns<string>(p => files.Contains(p, StringComparer.OrdinalIgnoreCase));
+            vpp.Setup(c => c.FileExists(It.IsAny<string>()))
+                .Returns<string>(p => files.Contains(p, StringComparer.OrdinalIgnoreCase));
             return vpp.Object;
         }
 
         private class NoParameterlessCtor
         {
-            public NoParameterlessCtor(int x)
-            {
-            }
+            public NoParameterlessCtor(int x) { }
         }
 
         private class TestableBuildManagerViewEngine : BuildManagerViewEngine
@@ -243,19 +273,18 @@ namespace System.Web.Mvc.Test
             private bool _isPrecompiledNonUpdateableSite;
 
             public TestableBuildManagerViewEngine()
-                : base()
-            {
-            }
+                : base() { }
 
             public TestableBuildManagerViewEngine(IViewPageActivator viewPageActivator)
-                : base(viewPageActivator)
-            {
-            }
+                : base(viewPageActivator) { }
 
-            public TestableBuildManagerViewEngine(IViewPageActivator viewPageActivator = null, IResolver<IViewPageActivator> activatorResolver = null, IDependencyResolver dependencyResolver = null, VirtualPathProvider pathProvider = null)
-                : base(viewPageActivator, activatorResolver, dependencyResolver, pathProvider)
-            {
-            }
+            public TestableBuildManagerViewEngine(
+                IViewPageActivator viewPageActivator = null,
+                IResolver<IViewPageActivator> activatorResolver = null,
+                IDependencyResolver dependencyResolver = null,
+                VirtualPathProvider pathProvider = null
+            )
+                : base(viewPageActivator, activatorResolver, dependencyResolver, pathProvider) { }
 
             public new IViewPageActivator ViewPageActivator
             {
@@ -272,12 +301,19 @@ namespace System.Web.Mvc.Test
                 get { return _isPrecompiledNonUpdateableSite; }
             }
 
-            protected override IView CreatePartialView(ControllerContext controllerContext, string partialPath)
+            protected override IView CreatePartialView(
+                ControllerContext controllerContext,
+                string partialPath
+            )
             {
                 throw new NotImplementedException();
             }
 
-            protected override IView CreateView(ControllerContext controllerContext, string viewPath, string masterPath)
+            protected override IView CreateView(
+                ControllerContext controllerContext,
+                string viewPath,
+                string masterPath
+            )
             {
                 throw new NotImplementedException();
             }

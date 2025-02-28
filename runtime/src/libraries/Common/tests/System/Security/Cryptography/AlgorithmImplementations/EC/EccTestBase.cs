@@ -78,8 +78,8 @@ namespace System.Security.Cryptography.Tests
                 var curveDefs =
                     from curveDef in TestCurvesRaw
                     where
-                        curveDef.IsCurveValidOnPlatform == true &&
-                        curveDef.RequiredOnPlatform == false
+                        curveDef.IsCurveValidOnPlatform == true
+                        && curveDef.RequiredOnPlatform == false
                     select curveDef;
 
                 foreach (CurveDef curveDef in curveDefs)
@@ -117,7 +117,7 @@ namespace System.Security.Cryptography.Tests
                 {
                     Curve = ECCurve.NamedCurves.brainpoolP160r1,
                     KeySize = 160,
-                    CurveType = ECCurve.ECCurveType.PrimeShortWeierstrass
+                    CurveType = ECCurve.ECCurveType.PrimeShortWeierstrass,
                 };
                 yield return new CurveDef()
                 {
@@ -172,7 +172,11 @@ namespace System.Security.Cryptography.Tests
             CompareCurve(p1.Curve, p2.Curve);
         }
 
-        internal static void ComparePrivateKey(in ECParameters p1, in ECParameters p2, bool isEqual = true)
+        internal static void ComparePrivateKey(
+            in ECParameters p1,
+            in ECParameters p2,
+            bool isEqual = true
+        )
         {
             if (isEqual)
             {
@@ -204,8 +208,7 @@ namespace System.Security.Cryptography.Tests
             {
                 Assert.True(c2.IsNamed);
 
-                if (OperatingSystem.IsWindows() ||
-                    string.IsNullOrEmpty(c1.Oid.Value))
+                if (OperatingSystem.IsWindows() || string.IsNullOrEmpty(c1.Oid.Value))
                 {
                     Assert.Equal(c1.Oid.FriendlyName, c2.Oid.FriendlyName);
                 }
@@ -252,14 +255,18 @@ namespace System.Security.Cryptography.Tests
 
         internal static string InvertStringCase(string str)
         {
-            return string.Create(str.Length, str, static (destination, str) =>
-            {
-                for (int i = 0; i < str.Length; i++)
+            return string.Create(
+                str.Length,
+                str,
+                static (destination, str) =>
                 {
-                    char c = str[i];
-                    destination[i] = char.IsAsciiLetter(c) ? (char)(c ^ 0b0100000) : c;
+                    for (int i = 0; i < str.Length; i++)
+                    {
+                        char c = str[i];
+                        destination[i] = char.IsAsciiLetter(c) ? (char)(c ^ 0b0100000) : c;
+                    }
                 }
-            });
+            );
         }
 #endif
     }

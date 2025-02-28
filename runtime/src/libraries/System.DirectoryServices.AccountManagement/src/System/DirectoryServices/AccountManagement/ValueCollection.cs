@@ -16,18 +16,12 @@ namespace System.DirectoryServices.AccountManagement
         //
         bool IList.IsFixedSize
         {
-            get
-            {
-                return IsFixedSize;
-            }
+            get { return IsFixedSize; }
         }
 
         bool IList.IsReadOnly
         {
-            get
-            {
-                return IsReadOnly;
-            }
+            get { return IsReadOnly; }
         }
 
         int IList.Add(object value)
@@ -83,11 +77,7 @@ namespace System.DirectoryServices.AccountManagement
 
         object IList.this[int index]
         {
-            get
-            {
-                return this[index];
-            }
-
+            get { return this[index]; }
             set
             {
                 if (value == null)
@@ -107,42 +97,27 @@ namespace System.DirectoryServices.AccountManagement
 
         int ICollection.Count
         {
-            get
-            {
-                return _inner.Count;
-            }
+            get { return _inner.Count; }
         }
 
         bool ICollection.IsSynchronized
         {
-            get
-            {
-                return IsSynchronized;
-            }
+            get { return IsSynchronized; }
         }
 
         object ICollection.SyncRoot
         {
-            get
-            {
-                return SyncRoot;
-            }
+            get { return SyncRoot; }
         }
 
         public bool IsSynchronized
         {
-            get
-            {
-                return ((ICollection)_inner).IsSynchronized;
-            }
+            get { return ((ICollection)_inner).IsSynchronized; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         //
@@ -158,18 +133,12 @@ namespace System.DirectoryServices.AccountManagement
         //
         public bool IsFixedSize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         // Adds obj to the end of the list by inserting it into insertedValues.
@@ -205,13 +174,25 @@ namespace System.DirectoryServices.AccountManagement
             {
                 if (el.isInserted && el.insertedValue.Equals(value))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalValueCollection", "IndexOf: found {0} on inserted at {1}", value, index);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalValueCollection",
+                        "IndexOf: found {0} on inserted at {1}",
+                        value,
+                        index
+                    );
                     return index;
                 }
 
                 if (!el.isInserted && el.originalValue.Right.Equals(value))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalValueCollection", "IndexOf: found {0} on original at {1}", value, index);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalValueCollection",
+                        "IndexOf: found {0} on original at {1}",
+                        value,
+                        index
+                    );
                     return index;
                 }
 
@@ -230,7 +211,13 @@ namespace System.DirectoryServices.AccountManagement
 
             if ((index < 0) || (index > _inner.combinedValues.Count))
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "PrincipalValueCollection", "Insert({0}): out of range (count={1})", index, _inner.combinedValues.Count);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "PrincipalValueCollection",
+                    "Insert({0}): out of range (count={1})",
+                    index,
+                    _inner.combinedValues.Count
+                );
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
 
@@ -255,7 +242,13 @@ namespace System.DirectoryServices.AccountManagement
 
             if ((index < 0) || (index >= _inner.combinedValues.Count))
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "PrincipalValueCollection", "RemoveAt({0}): out of range (count={1})", index, _inner.combinedValues.Count);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "PrincipalValueCollection",
+                    "RemoveAt({0}): out of range (count={1})",
+                    index,
+                    _inner.combinedValues.Count
+                );
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
 
@@ -264,13 +257,23 @@ namespace System.DirectoryServices.AccountManagement
             if (el.isInserted)
             {
                 // We're removing an inserted value.
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalValueCollection", "RemoveAt({0}): removing inserted", index);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalValueCollection",
+                    "RemoveAt({0}): removing inserted",
+                    index
+                );
                 _inner.combinedValues.RemoveAt(index);
             }
             else
             {
                 // We're removing an original value.
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalValueCollection", "RemoveAt({0}): removing original", index);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "PrincipalValueCollection",
+                    "RemoveAt({0}): removing original",
+                    index
+                );
                 Pair<T, T> pair = _inner.combinedValues[index].originalValue;
                 _inner.combinedValues.RemoveAt(index);
                 _inner.removedValues.Add(pair.Left);
@@ -283,7 +286,13 @@ namespace System.DirectoryServices.AccountManagement
             {
                 if ((index < 0) || (index >= _inner.combinedValues.Count))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "PrincipalValueCollection", "this[{0}].get: out of range (count={1})", index, _inner.combinedValues.Count);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "PrincipalValueCollection",
+                        "this[{0}].get: out of range (count={1})",
+                        index,
+                        _inner.combinedValues.Count
+                    );
                     throw new ArgumentOutOfRangeException(nameof(index));
                 }
 
@@ -291,23 +300,40 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (el.isInserted)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalValueCollection", "this[{0}].get: is inserted {1}", index, el.insertedValue);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalValueCollection",
+                        "this[{0}].get: is inserted {1}",
+                        index,
+                        el.insertedValue
+                    );
                     return el.insertedValue;
                 }
                 else
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalValueCollection", "this[{0}].get: is original {1}", index, el.originalValue.Right);
-                    return el.originalValue.Right;  // Right == current value
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalValueCollection",
+                        "this[{0}].get: is original {1}",
+                        index,
+                        el.originalValue.Right
+                    );
+                    return el.originalValue.Right; // Right == current value
                 }
             }
-
             set
             {
                 _inner.MarkChange();
 
                 if ((index < 0) || (index >= _inner.combinedValues.Count))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "PrincipalValueCollection", "this[{0}].set: out of range (count={1})", index, _inner.combinedValues.Count);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "PrincipalValueCollection",
+                        "this[{0}].set: out of range (count={1})",
+                        index,
+                        _inner.combinedValues.Count
+                    );
                     throw new ArgumentOutOfRangeException(nameof(index));
                 }
 
@@ -318,12 +344,24 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (el.isInserted)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalValueCollection", "this[{0}].set: is inserted {1}", index, value);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalValueCollection",
+                        "this[{0}].set: is inserted {1}",
+                        index,
+                        value
+                    );
                     el.insertedValue = value;
                 }
                 else
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalValueCollection", "this[{0}].set: is original {1}", index, value);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "PrincipalValueCollection",
+                        "this[{0}].set: is original {1}",
+                        index,
+                        value
+                    );
                     el.originalValue.Right = value;
                 }
             }
@@ -339,10 +377,7 @@ namespace System.DirectoryServices.AccountManagement
 
         public int Count
         {
-            get
-            {
-                return _inner.Count;
-            }
+            get { return _inner.Count; }
         }
 
         //
@@ -374,7 +409,12 @@ namespace System.DirectoryServices.AccountManagement
 
         internal void Load(List<T> values)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalValueCollection", "Load, count={0}", values.Count);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalValueCollection",
+                "Load, count={0}",
+                values.Count
+            );
 
             // To support reload
             _inner.combinedValues.Clear();
@@ -397,34 +437,22 @@ namespace System.DirectoryServices.AccountManagement
 
         internal List<T> Inserted
         {
-            get
-            {
-                return _inner.Inserted;
-            }
+            get { return _inner.Inserted; }
         }
 
         internal List<T> Removed
         {
-            get
-            {
-                return _inner.Removed;
-            }
+            get { return _inner.Removed; }
         }
 
         internal List<Pair<T, T>> ChangedValues
         {
-            get
-            {
-                return _inner.ChangedValues;
-            }
+            get { return _inner.ChangedValues; }
         }
 
         internal bool Changed
         {
-            get
-            {
-                return _inner.Changed;
-            }
+            get { return _inner.Changed; }
         }
 
         // Resets the change-tracking of the collection to 'unchanged', by clearing out the removedValues,
@@ -432,7 +460,11 @@ namespace System.DirectoryServices.AccountManagement
         // the left-side does not equal the right-side, copying the right-side over the left-side
         internal void ResetTracking()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "PrincipalValueCollection", "Entering ResetTracking");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "PrincipalValueCollection",
+                "Entering ResetTracking"
+            );
 
             _inner.removedValues.Clear();
 
@@ -441,11 +473,12 @@ namespace System.DirectoryServices.AccountManagement
                 if (el.isInserted)
                 {
                     GlobalDebug.WriteLineIf(
-                                    GlobalDebug.Info,
-                                    "PrincipalValueCollection",
-                                    "ResetTracking: moving {0} (type {1}) from inserted to original",
-                                    el.insertedValue,
-                                    el.insertedValue.GetType());
+                        GlobalDebug.Info,
+                        "PrincipalValueCollection",
+                        "ResetTracking: moving {0} (type {1}) from inserted to original",
+                        el.insertedValue,
+                        el.insertedValue.GetType()
+                    );
 
                     el.isInserted = false;
                     el.originalValue = new Pair<T, T>(el.insertedValue, el.insertedValue);
@@ -458,12 +491,13 @@ namespace System.DirectoryServices.AccountManagement
                     if (!pair.Left.Equals(pair.Right))
                     {
                         GlobalDebug.WriteLineIf(
-                                        GlobalDebug.Info,
-                                        "PrincipalValueCollection",
-                                        "ResetTracking: found changed original, left={0}, right={1}, type={2}",
-                                        pair.Left,
-                                        pair.Right,
-                                        pair.Left.GetType());
+                            GlobalDebug.Info,
+                            "PrincipalValueCollection",
+                            "ResetTracking: found changed original, left={0}, right={1}, type={2}",
+                            pair.Left,
+                            pair.Right,
+                            pair.Left.GetType()
+                        );
 
                         pair.Left = pair.Right;
                     }

@@ -36,6 +36,14 @@ public class SqlServerTransactionFactory : IRelationalTransactionFactory
         DbTransaction transaction,
         Guid transactionId,
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
-        bool transactionOwned)
-        => new SqlServerTransaction(connection, transaction, transactionId, logger, transactionOwned, Dependencies.SqlGenerationHelper);
+        bool transactionOwned
+    ) =>
+        new SqlServerTransaction(
+            connection,
+            transaction,
+            transactionId,
+            logger,
+            transactionOwned,
+            Dependencies.SqlGenerationHelper
+        );
 }

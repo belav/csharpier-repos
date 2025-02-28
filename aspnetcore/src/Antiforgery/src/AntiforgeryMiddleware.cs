@@ -10,7 +10,8 @@ internal sealed class AntiforgeryMiddleware(IAntiforgery antiforgery, RequestDel
     private readonly RequestDelegate _next = next;
     private readonly IAntiforgery _antiforgery = antiforgery;
 
-    private const string AntiforgeryMiddlewareWithEndpointInvokedKey = "__AntiforgeryMiddlewareWithEndpointInvoked";
+    private const string AntiforgeryMiddlewareWithEndpointInvokedKey =
+        "__AntiforgeryMiddlewareWithEndpointInvoked";
     private static readonly object AntiforgeryMiddlewareWithEndpointInvokedValue = new object();
 
     public Task Invoke(HttpContext context)
@@ -19,7 +20,8 @@ internal sealed class AntiforgeryMiddleware(IAntiforgery antiforgery, RequestDel
 
         if (endpoint is not null)
         {
-            context.Items[AntiforgeryMiddlewareWithEndpointInvokedKey] = AntiforgeryMiddlewareWithEndpointInvokedValue;
+            context.Items[AntiforgeryMiddlewareWithEndpointInvokedKey] =
+                AntiforgeryMiddlewareWithEndpointInvokedValue;
         }
 
         var method = context.Request.Method;
@@ -45,7 +47,9 @@ internal sealed class AntiforgeryMiddleware(IAntiforgery antiforgery, RequestDel
         }
         catch (AntiforgeryValidationException e)
         {
-            context.Features.Set<IAntiforgeryValidationFeature>(new AntiforgeryValidationFeature(false, e));
+            context.Features.Set<IAntiforgeryValidationFeature>(
+                new AntiforgeryValidationFeature(false, e)
+            );
         }
         await _next(context);
     }

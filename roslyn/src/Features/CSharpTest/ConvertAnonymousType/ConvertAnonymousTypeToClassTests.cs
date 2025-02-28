@@ -4,23 +4,26 @@
 
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.CodeRefactorings;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.ConvertAnonymousType;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertAnonymousTypeToClass)]
     public class ConvertAnonymousTypeToClassTests : AbstractCSharpCodeActionTest
     {
-        private static readonly ParseOptions CSharp8 = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
+        private static readonly ParseOptions CSharp8 =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8);
 
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpConvertAnonymousTypeToClassCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertAnonymousTypeToClassCodeRefactoringProvider();
 
         [Fact]
         public async Task ConvertSingleAnonymousType()
@@ -70,7 +73,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -125,7 +133,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -152,7 +165,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                 internal record NewRecord(int A, int B);
 
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo());
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39916")]
@@ -209,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
         [Fact]
         public async Task OnEmptyAnonymousType()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class Test
                 {
                     void Method()
@@ -243,13 +261,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                         return 0;
                     }
                 }
-                """, parseOptions: CSharp8);
+                """,
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
         public async Task OnEmptyAnonymousType_CSharp9()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class Test
                 {
                     void Method()
@@ -269,13 +290,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
 
                 internal record NewRecord();
 
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task OnSingleFieldAnonymousType()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class Test
                 {
                     void Method()
@@ -313,13 +336,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                         return -862436692 + A.GetHashCode();
                     }
                 }
-                """, parseOptions: CSharp8);
+                """,
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
         public async Task OnSingleFieldAnonymousType_CSharp9()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 class Test
                 {
                     void Method()
@@ -339,7 +365,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
 
                 internal record NewRecord(int A);
 
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -390,7 +417,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -417,7 +449,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                 internal record NewRecord(int A, int B);
 
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo());
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo()
+            );
         }
 
         [Fact]
@@ -470,7 +506,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -499,7 +540,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                 internal record NewRecord(int A, int B);
 
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo());
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo()
+            );
         }
 
         [Fact]
@@ -564,7 +609,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -621,7 +671,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -678,7 +733,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -743,7 +803,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -794,7 +859,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -847,7 +917,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -916,7 +991,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -969,7 +1049,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -1022,7 +1107,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -1075,7 +1165,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -1104,7 +1199,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     where Y : class, new();
 
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo());
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo()
+            );
         }
 
         [Fact]
@@ -1163,7 +1262,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -1214,7 +1318,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -1241,7 +1350,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                 internal record NewRecord(int A, int Item);
 
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo());
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo()
+            );
         }
 
         [Fact]
@@ -1292,7 +1405,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -1355,7 +1473,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -1418,7 +1541,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -1481,7 +1609,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact]
@@ -1544,7 +1677,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
@@ -1595,7 +1733,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
@@ -1646,7 +1789,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
@@ -1697,7 +1845,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45747")]
@@ -1755,7 +1908,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45747")]
@@ -1817,7 +1975,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertAnonymousType
                     }
                 }
                 """;
-            await TestInRegularAndScriptAsync(text, expected, options: this.PreferImplicitTypeWithInfo(), parseOptions: CSharp8);
+            await TestInRegularAndScriptAsync(
+                text,
+                expected,
+                options: this.PreferImplicitTypeWithInfo(),
+                parseOptions: CSharp8
+            );
         }
     }
 }
