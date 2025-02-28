@@ -2061,7 +2061,6 @@ namespace System
                                 info.DecimalTailSharpDigits++;
                             else if (exponentArea)
                                 info.ExponentTailSharpDigits++;
-
                             goto case '0';
                         case '0':
                             if (c != '#')

@@ -2683,7 +2683,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 return 31;
                         }
                     }
-
                     // fall through
                     goto default;
 

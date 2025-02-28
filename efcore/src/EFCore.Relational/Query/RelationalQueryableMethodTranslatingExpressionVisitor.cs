@@ -2686,7 +2686,6 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                         {
                             return true;
                         }
-
                         goto default;
                     }
 

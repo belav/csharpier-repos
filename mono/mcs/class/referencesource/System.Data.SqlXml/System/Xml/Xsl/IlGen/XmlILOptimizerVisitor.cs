@@ -200,7 +200,6 @@ namespace System.Xml.Xsl.IlGen
                         // Invoke is assumed to have side-effects if it invokes a function with its SideEffects flag set
                         if (((QilInvoke)node).Function.MaybeSideEffects)
                             goto case QilNodeType.XsltInvokeLateBound;
-
                         // Otherwise, check children
                         goto default;
 

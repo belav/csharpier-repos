@@ -320,7 +320,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
             case State.PageBegin:
             {
                 _instance = CreateInstance();
-
                 goto case State.PageSelectHandlerBegin;
             }
 
@@ -329,7 +328,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                 _cursor.Reset();
 
                 _handler = SelectHandler();
-
                 goto case State.PageSelectHandlerNext;
             }
 
@@ -398,7 +396,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                     next = State.PageSelectHandlerAsyncEnd;
                     return task;
                 }
-
                 goto case State.PageSelectHandlerAsyncEnd;
             }
 
@@ -415,7 +412,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                     nameof(IAsyncPageFilter.OnPageHandlerSelectionAsync),
                     filter
                 );
-
                 goto case State.PageSelectHandlerNext;
             }
 
@@ -437,7 +433,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                 filter.OnPageHandlerSelected(handlerSelectedContext);
 
                 _diagnosticListener.AfterOnPageHandlerSelected(handlerSelectedContext, filter);
-
                 goto case State.PageSelectHandlerNext;
             }
 
@@ -458,7 +453,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                     next = State.PageNext;
                     return task;
                 }
-
                 goto case State.PageNext;
             }
 
@@ -530,7 +524,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                     next = State.PageAsyncEnd;
                     return task;
                 }
-
                 goto case State.PageAsyncEnd;
             }
 
@@ -566,7 +559,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                     nameof(IAsyncPageFilter.OnPageHandlerExecutionAsync),
                     filter
                 );
-
                 goto case State.PageEnd;
             }
 
@@ -610,7 +602,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                         Canceled = true,
                         Result = _handlerExecutingContext.Result,
                     };
-
                     goto case State.PageEnd;
                 }
 
@@ -620,7 +611,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                     next = State.PageSyncEnd;
                     return task;
                 }
-
                 goto case State.PageSyncEnd;
             }
 
@@ -648,7 +638,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                     nameof(IPageFilter.OnPageHandlerExecuted),
                     filter
                 );
-
                 goto case State.PageEnd;
             }
 
@@ -660,7 +649,6 @@ internal sealed class PageActionInvoker : ResourceInvoker, IActionInvoker
                     next = State.PageEnd;
                     return task;
                 }
-
                 goto case State.PageEnd;
             }
 

@@ -603,7 +603,6 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                                 methodCallExpression.Arguments[4].UnwrapLambdaFromQuote()
                             );
                         }
-
                         goto default;
                     }
 
@@ -622,7 +621,6 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                                 methodCallExpression.Arguments[4].UnwrapLambdaFromQuote()
                             );
                         }
-
                         goto default;
                     }
 
@@ -654,7 +652,6 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
                         {
                             return ProcessSetOperation(source, genericMethod, innerSource);
                         }
-
                         goto default;
                     }
 

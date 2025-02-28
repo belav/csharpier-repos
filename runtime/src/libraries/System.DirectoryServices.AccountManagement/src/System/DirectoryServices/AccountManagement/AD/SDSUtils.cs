@@ -949,7 +949,6 @@ namespace System.DirectoryServices.AccountManagement
                             "SDSUtils.AccountControlToDirectoryEntry: At PwdInfoCannotChangePassword but isSAM==false, path="
                                 + de.Path
                         );
-
                         goto default;
                     }
 

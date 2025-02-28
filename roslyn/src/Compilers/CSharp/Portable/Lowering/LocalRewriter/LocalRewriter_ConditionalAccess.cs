@@ -195,7 +195,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         _factory.AssignmentExpression(_factory.Local(temp), loweredReceiver),
                         _factory.Local(temp)
                     );
-
                     goto case ConditionalAccessLoweringKind.Conditional;
 
                 case ConditionalAccessLoweringKind.Conditional:

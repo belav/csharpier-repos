@@ -704,7 +704,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                     break;
                                 }
                             }
-
                             goto default;
 
                         default:
@@ -1394,7 +1393,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         case SyntaxKind.FileKeyword:
                             return DeclarationModifiers.File;
                     }
-
                     goto default;
                 default:
                     return DeclarationModifiers.None;

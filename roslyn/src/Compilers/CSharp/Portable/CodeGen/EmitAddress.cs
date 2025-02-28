@@ -127,7 +127,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         EmitCallExpression(call, UseKind.UsedAsAddress);
                         break;
                     }
-
                     goto default;
 
                 case BoundKind.FunctionPointerInvocation:
@@ -141,7 +140,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         EmitCalli(funcPtrInvocation, UseKind.UsedAsAddress);
                         break;
                     }
-
                     goto default;
 
                 case BoundKind.DefaultExpression:

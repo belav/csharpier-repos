@@ -143,7 +143,6 @@ namespace System.Net.Mail
                                 }
 
                                 statusCode = (SmtpStatusCode)(100 * (b - '0'));
-
                                 goto case ReadState.Status1;
                             }
                             readState = ReadState.Status0;
@@ -160,7 +159,6 @@ namespace System.Net.Mail
                                 }
 
                                 statusCode += 10 * (b - '0');
-
                                 goto case ReadState.Status2;
                             }
                             readState = ReadState.Status1;
@@ -177,7 +175,6 @@ namespace System.Net.Mail
                                 }
 
                                 statusCode += b - '0';
-
                                 goto case ReadState.ContinueFlag;
                             }
                             readState = ReadState.Status2;

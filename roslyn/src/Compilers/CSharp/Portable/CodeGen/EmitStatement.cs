@@ -576,7 +576,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                             _builder.EmitBranch(ilcode, dest, revOpCode);
                             return;
                     }
-
                     // none of above.
                     // then it is regular binary expression - Or, And, Xor ...
                     goto default;

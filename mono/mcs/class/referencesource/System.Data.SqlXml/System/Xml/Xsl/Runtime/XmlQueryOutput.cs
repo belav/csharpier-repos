@@ -1774,7 +1774,6 @@ namespace System.Xml.Xsl.Runtime
 
                     if (this.xstate == XmlState.WithinContent)
                         throw new XslTransformException(Res.XmlIl_BadXmlStateAttr, string.Empty);
-
                     goto case XPathNodeType.Element;
 
                 default:

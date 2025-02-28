@@ -436,7 +436,6 @@ namespace System.Xml
                             Debug.Assert(_xmlSchemaInfo.SchemaType!.Datatype != null);
                             return _xmlSchemaInfo.SchemaType.Datatype.ValueType;
                         }
-
                         goto default;
 
                     case XmlNodeType.Attribute:
@@ -448,7 +447,6 @@ namespace System.Xml
                             Debug.Assert(AttributeSchemaInfo.SchemaType!.Datatype != null);
                             return AttributeSchemaInfo.SchemaType.Datatype.ValueType;
                         }
-
                         goto default;
 
                     default:

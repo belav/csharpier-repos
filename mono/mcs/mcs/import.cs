@@ -2947,7 +2947,6 @@ namespace Mono.CSharp
                         case MemberTypes.Constructor:
                             if (declaringType.IsInterface)
                                 continue;
-
                             goto case MemberTypes.Method;
                         case MemberTypes.Method:
                             MethodBase mb = (MethodBase)member;

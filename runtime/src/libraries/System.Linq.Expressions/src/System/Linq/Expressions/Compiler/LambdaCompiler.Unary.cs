@@ -198,7 +198,6 @@ namespace System.Linq.Expressions.Compiler
                             _ilg.Emit(OpCodes.Ceq);
                             return;
                         }
-
                         goto case ExpressionType.OnesComplement;
                     case ExpressionType.OnesComplement:
                         _ilg.Emit(OpCodes.Not);

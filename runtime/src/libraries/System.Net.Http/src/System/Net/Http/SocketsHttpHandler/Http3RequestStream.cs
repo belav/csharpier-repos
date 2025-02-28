@@ -632,7 +632,6 @@ namespace System.Net.Http
                         _trailingHeaders = new List<(HeaderDescriptor name, string value)>();
                         await ReadHeadersAsync(payloadLength, cancellationToken)
                             .ConfigureAwait(false);
-
                         // Stop looping after a trailing header.
                         // There may be extra frames after this one, but they would all be unknown extension
                         // frames that can be safely ignored. Just stop reading here.
@@ -1714,7 +1713,6 @@ namespace System.Net.Http
                         _trailingHeaders = new List<(HeaderDescriptor name, string value)>();
                         await ReadHeadersAsync(payloadLength, cancellationToken)
                             .ConfigureAwait(false);
-
                         // There may be more frames after this one, but they would all be unknown extension
                         // frames that we are allowed to skip. Just close the stream early.
 

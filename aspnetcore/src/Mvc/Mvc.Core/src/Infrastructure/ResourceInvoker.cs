@@ -380,7 +380,6 @@ internal abstract partial class ResourceInvoker
                     next = State.AuthorizationAsyncEnd;
                     return task;
                 }
-
                 goto case State.AuthorizationAsyncEnd;
             }
 
@@ -403,7 +402,6 @@ internal abstract partial class ResourceInvoker
                 {
                     goto case State.AuthorizationShortCircuit;
                 }
-
                 goto case State.AuthorizationNext;
             }
 
@@ -435,7 +433,6 @@ internal abstract partial class ResourceInvoker
                 {
                     goto case State.AuthorizationShortCircuit;
                 }
-
                 goto case State.AuthorizationNext;
             }
 
@@ -525,7 +522,6 @@ internal abstract partial class ResourceInvoker
                     next = State.ResourceAsyncEnd;
                     return task;
                 }
-
                 goto case State.ResourceAsyncEnd;
             }
 
@@ -602,7 +598,6 @@ internal abstract partial class ResourceInvoker
                         Canceled = true,
                         Result = _resourceExecutingContext.Result,
                     };
-
                     goto case State.ResourceShortCircuit;
                 }
 
@@ -612,7 +607,6 @@ internal abstract partial class ResourceInvoker
                     next = State.ResourceSyncEnd;
                     return task;
                 }
-
                 goto case State.ResourceSyncEnd;
             }
 
@@ -640,7 +634,6 @@ internal abstract partial class ResourceInvoker
                     nameof(IResourceFilter.OnResourceExecuted),
                     filter
                 );
-
                 goto case State.ResourceEnd;
             }
 
@@ -658,7 +651,6 @@ internal abstract partial class ResourceInvoker
                     next = State.ResourceEnd;
                     return task;
                 }
-
                 goto case State.ResourceEnd;
             }
 
@@ -707,7 +699,6 @@ internal abstract partial class ResourceInvoker
                     next = State.ExceptionAsyncResume;
                     return task;
                 }
-
                 goto case State.ExceptionAsyncResume;
             }
 
@@ -735,10 +726,8 @@ internal abstract partial class ResourceInvoker
                         next = State.ExceptionAsyncEnd;
                         return task;
                     }
-
                     goto case State.ExceptionAsyncEnd;
                 }
-
                 goto case State.ExceptionEnd;
             }
 
@@ -764,7 +753,6 @@ internal abstract partial class ResourceInvoker
                     // and then just skip itself.
                     _logger.ExceptionFilterShortCircuited(filter);
                 }
-
                 goto case State.ExceptionEnd;
             }
 
@@ -776,7 +764,6 @@ internal abstract partial class ResourceInvoker
                     next = State.ExceptionSyncEnd;
                     return task;
                 }
-
                 goto case State.ExceptionSyncEnd;
             }
 
@@ -815,7 +802,6 @@ internal abstract partial class ResourceInvoker
                         _logger.ExceptionFilterShortCircuited(filter);
                     }
                 }
-
                 goto case State.ExceptionEnd;
             }
 
@@ -849,7 +835,6 @@ internal abstract partial class ResourceInvoker
                     next = State.ResourceInsideEnd;
                     return task;
                 }
-
                 goto case State.ResourceInsideEnd;
             }
 
@@ -895,7 +880,6 @@ internal abstract partial class ResourceInvoker
                     next = State.ActionEnd;
                     return task;
                 }
-
                 goto case State.ActionEnd;
             }
 
@@ -930,10 +914,8 @@ internal abstract partial class ResourceInvoker
                     {
                         Result = _result,
                     };
-
                     goto case State.ResourceEnd;
                 }
-
                 goto case State.InvokeEnd;
             }
 
@@ -947,7 +929,6 @@ internal abstract partial class ResourceInvoker
 
                 Debug.Assert(scope == Scope.Invoker);
                 Rethrow(_resourceExecutedContext!);
-
                 goto case State.InvokeEnd;
             }
 
@@ -1320,7 +1301,6 @@ internal abstract partial class ResourceInvoker
                     next = State.ResultAsyncEnd;
                     return task;
                 }
-
                 goto case State.ResultAsyncEnd;
             }
 
@@ -1355,7 +1335,6 @@ internal abstract partial class ResourceInvoker
                     nameof(IAsyncResultFilter.OnResultExecutionAsync),
                     filter
                 );
-
                 goto case State.ResultEnd;
             }
 
@@ -1397,7 +1376,6 @@ internal abstract partial class ResourceInvoker
                     {
                         Canceled = true,
                     };
-
                     goto case State.ResultEnd;
                 }
 
@@ -1407,7 +1385,6 @@ internal abstract partial class ResourceInvoker
                     next = State.ResultSyncEnd;
                     return task;
                 }
-
                 goto case State.ResultSyncEnd;
             }
 
@@ -1435,7 +1412,6 @@ internal abstract partial class ResourceInvoker
                     nameof(IResultFilter.OnResultExecuted),
                     filter
                 );
-
                 goto case State.ResultEnd;
             }
 
@@ -1459,7 +1435,6 @@ internal abstract partial class ResourceInvoker
                     next = State.ResultEnd;
                     return task;
                 }
-
                 goto case State.ResultEnd;
             }
 

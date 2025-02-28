@@ -1134,7 +1134,6 @@ namespace System.Security.Principal
                             safeLocalAllocHandle.Dispose();
                             return null;
                         }
-
                         // Throw the exception.
                         goto default;
                     default:

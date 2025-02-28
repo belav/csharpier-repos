@@ -643,7 +643,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                             rewrittenType
                         );
                     }
-
                     goto case ConversionKind.ExplicitEnumeration;
 
                 case ConversionKind.ExplicitEnumeration:

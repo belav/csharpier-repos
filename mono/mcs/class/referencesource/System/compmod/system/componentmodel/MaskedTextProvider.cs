@@ -2961,7 +2961,6 @@ namespace System.ComponentModel
                                 break;
                             }
                         }
-
                         goto default;
 
                     case CharType.Separator:

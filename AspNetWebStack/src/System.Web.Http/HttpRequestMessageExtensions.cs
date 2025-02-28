@@ -1123,7 +1123,6 @@ namespace System.Net.Http
                         // look up into the Request's property bag else default to LocalOnly.
                         return includeErrorDetail.Value;
                     }
-
                     goto case IncludeErrorDetailPolicy.LocalOnly;
 
                 case IncludeErrorDetailPolicy.LocalOnly:

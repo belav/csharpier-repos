@@ -160,7 +160,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         builder.Add(GetDeclarationInfo(node, associatedSymbol, codeBlocks));
                         return;
                     }
-
                     goto case SyntaxKind.InterfaceDeclaration;
                 }
                 case SyntaxKind.InterfaceDeclaration:

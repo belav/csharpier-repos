@@ -1073,7 +1073,6 @@ namespace System.Globalization
                                 {
                                     return src;
                                 }
-
                                 goto case '\0';
                             case '\0':
                                 return 0;

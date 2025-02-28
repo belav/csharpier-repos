@@ -1351,7 +1351,6 @@ public class DefaultHtmlGenerator : IHtmlGenerator
                     isChecked = modelStateWasChecked.Value;
                     usedModelState = true;
                 }
-
                 goto case InputType.Radio;
 
             case InputType.Radio:

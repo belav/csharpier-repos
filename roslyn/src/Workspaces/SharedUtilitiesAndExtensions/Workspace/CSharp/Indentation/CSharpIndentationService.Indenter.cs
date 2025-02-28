@@ -382,7 +382,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                             indenter.Options.FormattingOptions.IndentationSize
                         );
                     }
-
                     goto default;
                 }
 
@@ -400,7 +399,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                             )
                         );
                     }
-
                     goto default;
                 }
 
@@ -425,7 +423,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                             token.Parent.GetFirstToken(includeZeroWidth: true)
                         );
                     }
-
                     goto default;
                 }
 

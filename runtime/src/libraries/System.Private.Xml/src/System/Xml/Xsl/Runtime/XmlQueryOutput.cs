@@ -1763,7 +1763,6 @@ namespace System.Xml.Xsl.Runtime
 
                     if (_xstate == XmlState.WithinContent)
                         throw new XslTransformException(SR.XmlIl_BadXmlStateAttr, string.Empty);
-
                     goto case XPathNodeType.Element;
 
                 default:

@@ -456,7 +456,6 @@ namespace System.Net.Http.Headers
                             ttype = Token.Type.SeparatorDash;
                             break;
                         }
-
                         goto default;
                     case ',':
                         ttype = Token.Type.SeparatorComma;

@@ -2178,7 +2178,6 @@ namespace Mono.Linker.Steps
                     case Code.Ldarg_0:
                         if (!context.IsStatic)
                             return true;
-
                         goto default;
                     default:
                         // We are not inlining hence can evaluate anything and decide later

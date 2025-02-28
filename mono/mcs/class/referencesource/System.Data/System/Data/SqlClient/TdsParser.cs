@@ -7769,7 +7769,6 @@ namespace System.Data.SqlClient
                             return false;
                         }
                     }
-
                     goto case TdsEnums.SQLBIT;
 
                 case TdsEnums.SQLBIGCHAR:

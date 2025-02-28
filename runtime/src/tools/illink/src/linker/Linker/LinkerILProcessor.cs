@@ -131,7 +131,6 @@ namespace Mono.Linker
 
                             break;
                         }
-
                         goto case FlowControl.Branch;
 
                     case FlowControl.Branch:

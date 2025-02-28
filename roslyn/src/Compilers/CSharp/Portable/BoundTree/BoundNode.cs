@@ -473,7 +473,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                             return boundConversion.Conversion;
                         }
                     }
-
                     goto default;
 
                 case BoundValuePlaceholder valuePlaceholder

@@ -215,7 +215,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     {
                         goto default;
                     }
-
                     goto case FUNDTYPE.FT_VAR;
 
                 case FUNDTYPE.FT_VAR:

@@ -750,7 +750,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                                 GetName(node)
                             );
                     }
-
                     goto case SyntaxKind.EnumMemberDeclaration;
 
                 case SyntaxKind.EnumMemberDeclaration:

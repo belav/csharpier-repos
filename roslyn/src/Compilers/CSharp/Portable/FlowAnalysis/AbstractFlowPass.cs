@@ -610,7 +610,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                             }
                         }
                     }
-
                     goto default;
 
                 case BoundKind.FieldAccess:

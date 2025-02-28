@@ -2537,7 +2537,6 @@ namespace System.Net
                         // Move past the space.
                         if (++bytesParsed == effectiveMax)
                             goto quit;
-
                         goto case StatusCodeNumber;
 
                     case StatusCodeNumber:
@@ -2586,7 +2585,6 @@ namespace System.Net
                         // Move past the space.
                         if (++bytesParsed == effectiveMax)
                             goto quit;
-
                         goto case AfterStatusCode;
 
                     case AfterStatusCode:
@@ -2662,7 +2660,6 @@ namespace System.Net
                         // Move past the CR.
                         if (++bytesParsed == effectiveMax)
                             goto quit;
-
                         goto case AfterCarriageReturn;
                     }
 
@@ -3546,7 +3543,6 @@ namespace System.Net
                                         + "::ParseResponseData() calling SetRequestContinue()"
                                 );
                                 continueResponseData = m_ResponseData;
-
                                 //if we got a 100continue we ---- it and start looking for a final response
                                 goto case ReadState.Start;
                             }

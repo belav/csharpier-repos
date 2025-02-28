@@ -87,7 +87,6 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
                     next = State.ActionNext;
                     return task;
                 }
-
                 goto case State.ActionNext;
             }
 
@@ -154,7 +153,6 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
                     next = State.ActionAsyncEnd;
                     return task;
                 }
-
                 goto case State.ActionAsyncEnd;
             }
 
@@ -187,7 +185,6 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
                     nameof(IAsyncActionFilter.OnActionExecutionAsync),
                     filter
                 );
-
                 goto case State.ActionEnd;
             }
 
@@ -229,7 +226,6 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
                         Canceled = true,
                         Result = _actionExecutingContext.Result,
                     };
-
                     goto case State.ActionEnd;
                 }
 
@@ -239,7 +235,6 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
                     next = State.ActionSyncEnd;
                     return task;
                 }
-
                 goto case State.ActionSyncEnd;
             }
 
@@ -267,7 +262,6 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
                     nameof(IActionFilter.OnActionExecuted),
                     filter
                 );
-
                 goto case State.ActionEnd;
             }
 
@@ -279,7 +273,6 @@ internal partial class ControllerActionInvoker : ResourceInvoker, IActionInvoker
                     next = State.ActionEnd;
                     return task;
                 }
-
                 goto case State.ActionEnd;
             }
 

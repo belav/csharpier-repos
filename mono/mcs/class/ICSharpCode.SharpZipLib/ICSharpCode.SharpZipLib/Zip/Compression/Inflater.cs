@@ -495,7 +495,6 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                         {
                             throw new SharpZipBaseException("Illegal rep dist code");
                         }
-
                         goto case DECODE_HUFFMAN_DISTBITS; /* fall through */
 
                     case DECODE_HUFFMAN_DISTBITS:

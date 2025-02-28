@@ -119,7 +119,6 @@ namespace System.Linq
                             _current = _item;
                             return true;
                         }
-
                         goto case 2;
                     case 2:
                         GetSourceEnumerator();

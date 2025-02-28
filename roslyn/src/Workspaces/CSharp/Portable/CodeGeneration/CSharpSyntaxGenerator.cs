@@ -3129,7 +3129,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     {
                         return pd.ExpressionBody.Expression;
                     }
-
                     goto default;
 
                 case SyntaxKind.IndexerDeclaration:
@@ -3138,7 +3137,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     {
                         return id.ExpressionBody.Expression;
                     }
-
                     goto default;
 
                 case SyntaxKind.MethodDeclaration:
@@ -3147,7 +3145,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     {
                         return method.ExpressionBody.Expression;
                     }
-
                     goto default;
 
                 case SyntaxKind.LocalFunctionStatement:
@@ -3156,7 +3153,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     {
                         return local.ExpressionBody.Expression;
                     }
-
                     goto default;
 
                 default:
@@ -3192,7 +3188,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     {
                         return ReplaceWithTrivia(pd, pd.ExpressionBody.Expression, expr);
                     }
-
                     goto default;
 
                 case SyntaxKind.IndexerDeclaration:
@@ -3201,7 +3196,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     {
                         return ReplaceWithTrivia(id, id.ExpressionBody.Expression, expr);
                     }
-
                     goto default;
 
                 case SyntaxKind.MethodDeclaration:
@@ -3210,7 +3204,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     {
                         return ReplaceWithTrivia(method, method.ExpressionBody.Expression, expr);
                     }
-
                     goto default;
 
                 case SyntaxKind.LocalFunctionStatement:
@@ -3219,7 +3212,6 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                     {
                         return ReplaceWithTrivia(local, local.ExpressionBody.Expression, expr);
                     }
-
                     goto default;
 
                 default:

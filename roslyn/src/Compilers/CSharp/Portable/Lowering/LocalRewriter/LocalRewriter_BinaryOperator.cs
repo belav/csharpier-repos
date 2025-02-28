@@ -488,7 +488,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             operatorKind &= ~BinaryOperatorKind.Logical;
                         }
-
                         goto default;
 
                     case BinaryOperatorKind.LogicalBoolOr:
@@ -506,7 +505,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             operatorKind &= ~BinaryOperatorKind.Logical;
                         }
-
                         goto default;
 
                     case BinaryOperatorKind.BoolAnd:
@@ -529,7 +527,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             return _factory.MakeSequence(loweredLeft, loweredRight);
                         }
-
                         goto default;
 
                     case BinaryOperatorKind.BoolOr:
@@ -566,7 +563,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 loweredLeft,
                                 loweredLeft.Type
                             );
-
                         goto default;
 
                     case BinaryOperatorKind.BoolNotEqual:
@@ -596,7 +592,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 loweredLeft,
                                 loweredLeft.Type
                             );
-
                         goto default;
 
                     case BinaryOperatorKind.BoolXor:
@@ -626,7 +621,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 loweredLeft,
                                 loweredLeft.Type
                             );
-
                         goto default;
 
                     case BinaryOperatorKind.IntLeftShift:
@@ -842,7 +836,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             loweredRight = UnconvertArrayLength((BoundArrayLength)loweredRight);
                         }
-
                         goto default;
 
                     case BinaryOperatorKind.Utf8Addition:

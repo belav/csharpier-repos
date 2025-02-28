@@ -55,7 +55,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         {
                             goto default;
                         }
-
                         goto case TypeKind.TK_ArrayType;
 
                     case TypeKind.TK_ArrayType:

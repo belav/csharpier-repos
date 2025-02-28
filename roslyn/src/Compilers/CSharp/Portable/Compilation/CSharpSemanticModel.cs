@@ -103,7 +103,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         return false;
                     }
-
                     goto default;
 
                 case SyntaxKind.OmittedTypeArgument:

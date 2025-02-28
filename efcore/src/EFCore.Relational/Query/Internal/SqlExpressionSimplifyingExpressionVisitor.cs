@@ -386,7 +386,6 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                     candidateInfo = (column, constant, sqlBinaryExpression.OperatorType);
                     return true;
                 }
-
                 goto default;
             }
 

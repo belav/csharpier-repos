@@ -6335,7 +6335,6 @@ namespace System.Windows.Forms
                         max_blocks = 5;
                         start_pixel = client_area.X + (int)(client_area.Width * percent_done);
                     }
-
                     goto case 0;
                 case 0:
                 default: // Blocks

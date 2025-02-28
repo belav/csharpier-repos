@@ -423,7 +423,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                             expression = sequence.Value;
                             continue;
                         }
-
                         goto default;
 
                     case BoundKind.AssignmentOperator:
@@ -473,7 +472,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 );
                             }
                         }
-
                         goto default;
 
                     case BoundKind.ThisReference:
@@ -482,7 +480,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             return expression;
                         }
-
                         goto default;
 
                     case BoundKind.Parameter:
@@ -490,7 +487,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             return expression;
                         }
-
                         goto default;
 
                     case BoundKind.Local:
@@ -502,7 +498,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             return local;
                         }
-
                         goto default;
 
                     case BoundKind.FieldAccess:
@@ -634,7 +629,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 )
                             );
                         }
-
                         goto default;
 
                     default:

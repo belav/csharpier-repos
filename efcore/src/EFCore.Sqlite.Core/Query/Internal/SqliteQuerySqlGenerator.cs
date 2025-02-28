@@ -354,7 +354,6 @@ public class SqliteQuerySqlGenerator : QuerySqlGenerator
 
                     return sqlUnaryExpression;
                 }
-
                 goto default;
 
             case ExpressionType.Not when sqlUnaryExpression.Type == typeof(bool):
@@ -368,7 +367,6 @@ public class SqliteQuerySqlGenerator : QuerySqlGenerator
                         GenerateRegexp(regexpExpression, negated: true);
                         return sqlUnaryExpression;
                 }
-
                 goto default;
 
             default:

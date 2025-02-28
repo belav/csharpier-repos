@@ -398,7 +398,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         {
                             throw Exceptions.ThrowEFail();
                         }
-
                         goto case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes;
 
                     case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes:
@@ -451,7 +450,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         {
                             throw Exceptions.ThrowEFail();
                         }
-
                         goto case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes;
 
                     case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes:
@@ -567,7 +565,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         {
                             throw Exceptions.ThrowEFail();
                         }
-
                         goto case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes;
 
                     case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes:
@@ -784,7 +781,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         {
                             throw Exceptions.ThrowEFail();
                         }
-
                         goto case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes;
 
                     case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes:
@@ -866,7 +862,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         {
                             throw Exceptions.ThrowEFail();
                         }
-
                         goto case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes;
 
                     case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes:
@@ -910,7 +905,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         {
                             throw Exceptions.ThrowEFail();
                         }
-
                         goto case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes;
 
                     case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes:
@@ -954,7 +948,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         {
                             throw Exceptions.ThrowEFail();
                         }
-
                         goto case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes;
 
                     case EnvDTE.vsCMPart.vsCMPartWholeWithAttributes:

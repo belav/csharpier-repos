@@ -79,7 +79,6 @@ public class FormattedClassification
                     case "..":
                         return "Punctuation.DotDot";
                 }
-
                 goto default;
 
             case "operator":
@@ -92,7 +91,6 @@ public class FormattedClassification
                     case "=>":
                         return "Operators.EqualsGreaterThan";
                 }
-
                 goto default;
 
             case "keyword - control":

@@ -1162,7 +1162,6 @@ namespace System.Text.RegularExpressions
                             node = child;
                             continue;
                         }
-
                         goto default;
                     }
 

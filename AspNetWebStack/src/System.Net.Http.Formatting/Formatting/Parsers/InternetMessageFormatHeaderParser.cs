@@ -199,7 +199,6 @@ namespace System.Net.Http.Formatting.Parsers
                                 {
                                     goto quit;
                                 }
-
                                 goto case HeaderFieldState.AfterCarriageReturn;
                             }
                         }
@@ -232,7 +231,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HeaderFieldState.Value;
 
                 case HeaderFieldState.Value:
@@ -267,7 +265,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HeaderFieldState.AfterCarriageReturn;
 
                 case HeaderFieldState.AfterCarriageReturn:
@@ -289,7 +286,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HeaderFieldState.FoldingLine;
 
                 case HeaderFieldState.FoldingLine:
@@ -301,7 +297,6 @@ namespace System.Net.Http.Formatting.Parsers
                         {
                             goto quit;
                         }
-
                         goto case HeaderFieldState.Name;
                     }
 
@@ -314,7 +309,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HeaderFieldState.Value;
             }
 

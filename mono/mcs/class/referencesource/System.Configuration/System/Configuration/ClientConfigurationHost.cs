@@ -731,7 +731,6 @@ namespace System.Configuration
                                     "fileMap.RoamingUserConfigFilename"
                                 );
                             }
-
                             goto case ConfigurationUserLevel.None;
 
                         case ConfigurationUserLevel.PerUserRoamingAndLocal:
@@ -741,7 +740,6 @@ namespace System.Configuration
                                     "fileMap.LocalUserConfigFilename"
                                 );
                             }
-
                             goto case ConfigurationUserLevel.PerUserRoaming;
                     }
                 }

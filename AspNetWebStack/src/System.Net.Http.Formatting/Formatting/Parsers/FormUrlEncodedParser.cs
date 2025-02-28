@@ -208,7 +208,6 @@ namespace System.Net.Http.Formatting.Parsers
                         {
                             goto quit;
                         }
-
                         goto case NameValueState.Value;
                     }
                     else
@@ -221,7 +220,6 @@ namespace System.Net.Http.Formatting.Parsers
                         {
                             goto quit;
                         }
-
                         goto case NameValueState.Name;
                     }
 
@@ -260,7 +258,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case NameValueState.Name;
             }
 

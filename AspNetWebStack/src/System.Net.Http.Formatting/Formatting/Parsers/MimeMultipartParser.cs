@@ -311,7 +311,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case BodyPartState.AfterFirstCarriageReturn;
 
                 case BodyPartState.AfterFirstCarriageReturn:
@@ -331,7 +330,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case BodyPartState.AfterFirstLineFeed;
 
                 case BodyPartState.AfterFirstLineFeed:
@@ -347,7 +345,6 @@ namespace System.Net.Http.Formatting.Parsers
                         {
                             goto quit;
                         }
-
                         goto case BodyPartState.AfterFirstCarriageReturn;
                     }
 
@@ -367,7 +364,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case BodyPartState.AfterFirstDash;
 
                 case BodyPartState.AfterFirstDash:
@@ -387,7 +383,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case BodyPartState.Boundary;
 
                 case BodyPartState.Boundary:
@@ -436,7 +431,6 @@ namespace System.Net.Http.Formatting.Parsers
                             goto case BodyPartState.BodyPart;
                         }
                     }
-
                     goto case BodyPartState.AfterBoundary;
 
                 case BodyPartState.AfterBoundary:
@@ -455,7 +449,6 @@ namespace System.Net.Http.Formatting.Parsers
                             bodyPartState = BodyPartState.AfterSecondDash;
                             goto quit;
                         }
-
                         goto case BodyPartState.AfterSecondDash;
                     }
 
@@ -506,7 +499,6 @@ namespace System.Net.Http.Formatting.Parsers
                             bodyPartState = BodyPartState.AfterSecondCarriageReturn;
                             goto quit;
                         }
-
                         goto case BodyPartState.AfterSecondCarriageReturn;
                     }
                     else
@@ -541,7 +533,6 @@ namespace System.Net.Http.Formatting.Parsers
                             {
                                 goto quit;
                             }
-
                             goto case BodyPartState.BodyPart;
                         }
                     }
@@ -576,7 +567,6 @@ namespace System.Net.Http.Formatting.Parsers
                         {
                             goto quit;
                         }
-
                         goto case BodyPartState.BodyPart;
                     }
             }

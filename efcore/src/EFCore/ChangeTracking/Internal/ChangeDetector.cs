@@ -142,7 +142,6 @@ public class ChangeDetector : IChangeDetector
                         {
                             continue;
                         }
-
                         goto default;
                     default:
                         if (LocalDetectChanges(entry))

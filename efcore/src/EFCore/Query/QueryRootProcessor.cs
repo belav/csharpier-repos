@@ -112,7 +112,6 @@ public class QueryRootProcessor : ExpressionVisitor
                 {
                     return new InlineQueryRootExpression(valueExpressions, elementClrType);
                 }
-
                 goto default;
 
             case NewArrayExpression newArrayExpression

@@ -90,7 +90,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
                         case ">":
                             return "Punctuation.CloseAngle";
                     }
-
                     goto default;
 
                 case "operator":
@@ -191,7 +190,6 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
                         case "~":
                             return $"{operatorTypeName}.Tilde";
                     }
-
                     goto default;
 
                 case "keyword - control":

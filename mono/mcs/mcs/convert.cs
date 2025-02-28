@@ -1969,7 +1969,6 @@ namespace Mono.CSharp
                     case MemberKind.Class:
                         if (target_type.BuiltinType == BuiltinTypeSpec.Type.Object)
                             return EmptyCast.Create(expr, target_type);
-
                         goto case MemberKind.Struct;
                     case MemberKind.Struct:
                     case MemberKind.Delegate:

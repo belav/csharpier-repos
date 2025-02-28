@@ -703,7 +703,6 @@ namespace Mono.Linker.Steps
                         result = bvalue ? 1 : 0;
                         return true;
                     }
-
                     goto case MetadataType.Int32;
 
                 case MetadataType.Byte:

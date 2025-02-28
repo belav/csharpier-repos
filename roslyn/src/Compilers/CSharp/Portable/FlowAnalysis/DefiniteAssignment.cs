@@ -1750,7 +1750,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                             break;
                         }
                     }
-
                     goto default;
                 }
 

@@ -1265,7 +1265,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             {
                                 continue;
                             }
-
                             goto default;
                         }
                         case ':':
@@ -1280,7 +1279,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 ScanFormatSpecifier(kind);
                                 return;
                             }
-
                             goto default;
                         case '}':
                         case ')':
@@ -1322,7 +1320,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             var discarded = default(TokenInfo);
                             if (_lexer.TryScanAtStringToken(ref discarded))
                                 continue;
-
                             // Wasn't an @"" or @$"" string.  Just consume this as normal code.
                             goto default;
                         }

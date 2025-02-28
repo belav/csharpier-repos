@@ -3612,7 +3612,6 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             stack.Free();
                             return;
                         }
-
                         // none of above.
                         // then it is regular binary expression - Or, And, Xor ...
                         goto default;

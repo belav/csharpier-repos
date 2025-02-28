@@ -1798,7 +1798,6 @@ namespace Mono.CSharp
                                     "The `l' suffix is easily confused with the digit `1' (use `L' for clarity)"
                                 );
                             }
-
                             goto case 'L';
 
                         case 'L':

@@ -402,7 +402,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SyntaxKind.LocalDeclarationStatement:
                     // Local declarations are not legal in contexts where we need embedded statements.
                     diagnostics.Add(ErrorCode.ERR_BadEmbeddedStmt, node.GetLocation());
-
                     // fall through
                     goto case SyntaxKind.ExpressionStatement;
 
@@ -460,7 +459,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 {
                                     break;
                                 }
-
                                 goto default;
 
                             default:
@@ -473,7 +471,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 break;
                         }
                     }
-
                     // fall through
                     goto default;
 
@@ -1764,7 +1761,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                         elementType = ((PointerTypeSymbol)fa.Type).PointedAtType;
                         break;
                     }
-
                     goto default;
 
                 default:

@@ -766,7 +766,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     {
                         goto case '_';
                     }
-
                     goto default;
 
                 // All the 'common' identifier characters are represented directly in these switch cases for optimal
@@ -790,7 +789,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     {
                         goto case '_';
                     }
-
                     goto default;
 
                 case SlidingTextWindow.InvalidCharacter:
@@ -1551,7 +1549,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             // Fall back on the slow path.
                             return false;
                         }
-
                         // Otherwise, end the identifier.
                         goto case '\0';
                     case '\0':
@@ -1656,7 +1653,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             ch = PeekUnicodeEscape(out surrogateCharacter);
                             goto top;
                         }
-
                         goto default;
                     case '$':
                         if (!this.ModeIs(LexerMode.DebuggerSyntax) || _identLen > 0)
@@ -1943,7 +1939,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             AddCrefError(error);
                             goto top;
                         }
-
                         goto default;
 
                     case '_':
@@ -2881,7 +2876,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         info.Kind = SyntaxKind.AmpersandAmpersandToken;
                         break;
                     }
-
                     goto default;
 
                 case '|':
@@ -2891,7 +2885,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         info.Kind = SyntaxKind.BarBarToken;
                         break;
                     }
-
                     goto default;
 
                 case '0':
@@ -2925,7 +2918,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         this.ScanIdentifierOrKeyword(ref info);
                         break;
                     }
-
                     goto default;
                 }
 
@@ -3428,7 +3420,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     case ']':
@@ -3437,7 +3428,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     default:
@@ -3518,7 +3508,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         info.Kind = SyntaxKind.SlashGreaterThanToken;
                         break;
                     }
-
                     goto default;
 
                 case '"':
@@ -3565,7 +3554,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         );
                         break;
                     }
-
                     goto default;
 
                 default:
@@ -3689,7 +3677,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         info.Kind = SyntaxKind.DoubleQuoteToken;
                         break;
                     }
-
                     goto default;
 
                 case '\'':
@@ -3699,7 +3686,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         info.Kind = SyntaxKind.SingleQuoteToken;
                         break;
                     }
-
                     goto default;
 
                 case '&':
@@ -3754,7 +3740,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     case '\'':
@@ -3763,7 +3748,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     case '&':
@@ -3792,7 +3776,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     default:
@@ -4342,7 +4325,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         info.Kind = SyntaxKind.XmlCDataEndToken;
                         break;
                     }
-
                     goto default;
 
                 case '\r':
@@ -4386,7 +4368,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     case '\r':
@@ -4413,7 +4394,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     default:
@@ -4476,7 +4456,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             break;
                         }
                     }
-
                     goto default;
 
                 case '\r':
@@ -4519,7 +4498,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     case '\r':
@@ -4546,7 +4524,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     default:
@@ -4601,7 +4578,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         info.Kind = SyntaxKind.XmlProcessingInstructionEndToken;
                         break;
                     }
-
                     goto default;
 
                 case '\r':
@@ -4646,7 +4622,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     case '\r':
@@ -4673,7 +4648,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.StringValue = info.Text = TextWindow.GetText(false);
                             return;
                         }
-
                         goto default;
 
                     default:
@@ -4762,7 +4736,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                                 this.MutateLocation(XmlDocCommentLocation.Interior);
                                 return;
                             }
-
                             goto default;
 
                         case '*':
@@ -4804,7 +4777,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                                 return;
                             }
-
                             goto default;
 
                         default:
@@ -4915,7 +4887,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             // we're at the end of the comment, but don't add as trivia here.
                             return;
                         }
-
                         goto default;
 
                     default:

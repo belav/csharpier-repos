@@ -70,7 +70,6 @@ public class RelationalValueGenerationConvention
                 {
                     propertyBuilder.HasSentinel(annotation != null ? true : null);
                 }
-
                 goto case RelationalAnnotationNames.DefaultValueSql;
             case RelationalAnnotationNames.DefaultValueSql:
             case RelationalAnnotationNames.ComputedColumnSql:

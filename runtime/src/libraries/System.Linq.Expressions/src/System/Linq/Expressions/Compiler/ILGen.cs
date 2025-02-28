@@ -1150,7 +1150,6 @@ namespace System.Linq.Expressions.Compiler
                         locals.FreeLocal(lb);
                         break;
                     }
-
                     goto case TypeCode.Empty;
 
                 case TypeCode.Empty:

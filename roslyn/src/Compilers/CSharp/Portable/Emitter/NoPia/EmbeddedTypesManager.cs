@@ -419,7 +419,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
                     {
                         break;
                     }
-
                     goto case TypeKind.Struct;
                 case TypeKind.Struct:
                 case TypeKind.Delegate:

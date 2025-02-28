@@ -3654,7 +3654,6 @@ namespace Microsoft.CodeAnalysis.CSharp
                             expr = elementAccess.Expression;
                             continue;
                         }
-
                         goto default;
                     }
                     case BoundKind.RangeVariable:

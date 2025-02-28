@@ -199,7 +199,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HttpRequestLineState.RequestUri;
 
                 case HttpRequestLineState.RequestUri:
@@ -250,7 +249,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HttpRequestLineState.BeforeVersionNumbers;
 
                 case HttpRequestLineState.BeforeVersionNumbers:
@@ -306,7 +304,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HttpRequestLineState.MajorVersionNumber;
 
                 case HttpRequestLineState.MajorVersionNumber:
@@ -348,7 +345,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HttpRequestLineState.MinorVersionNumber;
 
                 case HttpRequestLineState.MinorVersionNumber:
@@ -393,7 +389,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HttpRequestLineState.AfterCarriageReturn;
 
                 case HttpRequestLineState.AfterCarriageReturn:

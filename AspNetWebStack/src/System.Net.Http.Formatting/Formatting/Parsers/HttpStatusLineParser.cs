@@ -212,7 +212,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HttpStatusLineState.MajorVersionNumber;
 
                 case HttpStatusLineState.MajorVersionNumber:
@@ -254,7 +253,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HttpStatusLineState.MinorVersionNumber;
 
                 case HttpStatusLineState.MinorVersionNumber:
@@ -299,7 +297,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HttpStatusLineState.StatusCode;
 
                 case HttpStatusLineState.StatusCode:
@@ -360,7 +357,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HttpStatusLineState.ReasonPhrase;
 
                 case HttpStatusLineState.ReasonPhrase:
@@ -405,7 +401,6 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         goto quit;
                     }
-
                     goto case HttpStatusLineState.AfterCarriageReturn;
 
                 case HttpStatusLineState.AfterCarriageReturn:

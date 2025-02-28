@@ -2572,7 +2572,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 );
                                 break;
                             }
-
                             goto default;
                         case SymbolKind.Property:
                         case SymbolKind.Event:
@@ -2581,7 +2580,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                             // CONSIDER: Dev10 actually reports an error for each accessor of a hidden property/event, but that seems unnecessary.
                             suppressAccessors = true;
-
                             goto default;
                         default:
                             diagnostics.Add(
