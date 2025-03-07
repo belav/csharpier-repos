@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Security.Cryptography;
-
 #if !NETCOREAPP3_1_OR_GREATER
 using System.Diagnostics;
 using System.Runtime.Serialization;
@@ -26,10 +25,7 @@ namespace Internal.Cryptography
             }
 
 #if NETCOREAPP3_1_OR_GREATER
-            return new CryptographicException(message)
-            {
-                HResult = hr
-            };
+            return new CryptographicException(message) { HResult = hr };
 #else
             // Prior to .NET Core 3.1, the Exception.HResult property was not publicly
             // settable, and CryptographicException did not have a ctor which allowed
@@ -53,7 +49,11 @@ namespace Internal.Cryptography
             }
 
 #if NET8_0_OR_GREATER
-            [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+            [Obsolete(
+                Obsoletions.LegacyFormatterImplMessage,
+                DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+                UrlFormat = Obsoletions.SharedUrlFormat
+            )]
             [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
             public override void GetObjectData(SerializationInfo info, StreamingContext context)

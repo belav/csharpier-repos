@@ -18,8 +18,16 @@ namespace System.Data.EntityClient
     /// <summary>
     /// Class representing a connection string builder for the entity client provider
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "EntityConnectionStringBuilder follows the naming convention of DbConnectionStringBuilder.")]
-    [SuppressMessage("Microsoft.Design", "CA1035:ICollectionImplementationsHaveStronglyTypedMembers", Justification = "There is no applicable strongly-typed implementation of CopyTo.")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "EntityConnectionStringBuilder follows the naming convention of DbConnectionStringBuilder."
+    )]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1035:ICollectionImplementationsHaveStronglyTypedMembers",
+        Justification = "There is no applicable strongly-typed implementation of CopyTo."
+    )]
     public sealed class EntityConnectionStringBuilder : DbConnectionStringBuilder
     {
         // Names of parameters to look for in the connection string
@@ -34,7 +42,7 @@ namespace System.Data.EntityClient
             NameParameterName,
             MetadataParameterName,
             ProviderParameterName,
-            ProviderConnectionStringParameterName
+            ProviderConnectionStringParameterName,
         };
 
         private static Hashtable s_synonyms;
@@ -71,10 +79,7 @@ namespace System.Data.EntityClient
         [RefreshProperties(RefreshProperties.All)]
         public string Name
         {
-            get
-            {
-                return this._namedConnectionName ?? "";
-            }
+            get { return this._namedConnectionName ?? ""; }
             set
             {
                 this._namedConnectionName = value;
@@ -91,10 +96,7 @@ namespace System.Data.EntityClient
         [RefreshProperties(RefreshProperties.All)]
         public string Provider
         {
-            get
-            {
-                return this._providerName ?? "";
-            }
+            get { return this._providerName ?? ""; }
             set
             {
                 this._providerName = value;
@@ -112,14 +114,11 @@ namespace System.Data.EntityClient
         [RefreshProperties(RefreshProperties.All)]
         public string Metadata
         {
-            get
-            {
-                return this._metadataLocations ?? "";
-            }
+            get { return this._metadataLocations ?? ""; }
             set
             {
                 this._metadataLocations = value;
-                base[MetadataParameterName] = value;                
+                base[MetadataParameterName] = value;
             }
         }
 
@@ -132,10 +131,7 @@ namespace System.Data.EntityClient
         [RefreshProperties(RefreshProperties.All)]
         public string ProviderConnectionString
         {
-            get
-            {
-                return this._storeProviderConnectionString ?? "";
-            }
+            get { return this._storeProviderConnectionString ?? ""; }
             set
             {
                 this._storeProviderConnectionString = value;
@@ -148,10 +144,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override bool IsFixedSize
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -161,7 +154,9 @@ namespace System.Data.EntityClient
         {
             get
             {
-                return new System.Collections.ObjectModel.ReadOnlyCollection<string>(s_validKeywords);
+                return new System.Collections.ObjectModel.ReadOnlyCollection<string>(
+                    s_validKeywords
+                );
             }
         }
 
@@ -198,19 +193,40 @@ namespace System.Data.EntityClient
 
                 // Just access the properties to get the value since the fields, which the properties will be accessing, will
                 // have already been set when the connection string is set
-                if (string.Compare(keyword, MetadataParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        keyword,
+                        MetadataParameterName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return this.Metadata;
                 }
-                else if (string.Compare(keyword, ProviderConnectionStringParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(
+                        keyword,
+                        ProviderConnectionStringParameterName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return this.ProviderConnectionString;
                 }
-                else if (string.Compare(keyword, NameParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(keyword, NameParameterName, StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     return this.Name;
                 }
-                else if (string.Compare(keyword, ProviderParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(
+                        keyword,
+                        ProviderParameterName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     return this.Provider;
                 }
@@ -232,24 +248,48 @@ namespace System.Data.EntityClient
                 string stringValue = value as string;
                 if (stringValue == null)
                 {
-                    throw EntityUtil.Argument(System.Data.Entity.Strings.EntityClient_ValueNotString, "value");
+                    throw EntityUtil.Argument(
+                        System.Data.Entity.Strings.EntityClient_ValueNotString,
+                        "value"
+                    );
                 }
 
                 // Just access the properties to get the value since the fields, which the properties will be accessing, will
                 // have already been set when the connection string is set
-                if (string.Compare(keyword, MetadataParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        keyword,
+                        MetadataParameterName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     this.Metadata = stringValue;
                 }
-                else if (string.Compare(keyword, ProviderConnectionStringParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(
+                        keyword,
+                        ProviderConnectionStringParameterName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     this.ProviderConnectionString = stringValue;
                 }
-                else if (string.Compare(keyword, NameParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(keyword, NameParameterName, StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
                 {
                     this.Name = stringValue;
                 }
-                else if (string.Compare(keyword, ProviderParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(
+                        keyword,
+                        ProviderParameterName,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     this.Provider = stringValue;
                 }
@@ -322,19 +362,33 @@ namespace System.Data.EntityClient
             EntityUtil.CheckArgumentNull(keyword, "keyword");
 
             // Convert the given object into a string
-            if (string.Compare(keyword, MetadataParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                string.Compare(keyword, MetadataParameterName, StringComparison.OrdinalIgnoreCase)
+                == 0
+            )
             {
                 this._metadataLocations = null;
             }
-            else if (string.Compare(keyword, ProviderConnectionStringParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+            else if (
+                string.Compare(
+                    keyword,
+                    ProviderConnectionStringParameterName,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
             {
                 this._storeProviderConnectionString = null;
             }
-            else if (string.Compare(keyword, NameParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+            else if (
+                string.Compare(keyword, NameParameterName, StringComparison.OrdinalIgnoreCase) == 0
+            )
             {
                 this._namedConnectionName = null;
             }
-            else if (string.Compare(keyword, ProviderParameterName, StringComparison.OrdinalIgnoreCase) == 0)
+            else if (
+                string.Compare(keyword, ProviderParameterName, StringComparison.OrdinalIgnoreCase)
+                == 0
+            )
             {
                 this._providerName = null;
             }

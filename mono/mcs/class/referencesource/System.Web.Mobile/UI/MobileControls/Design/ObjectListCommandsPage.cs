@@ -1,38 +1,39 @@
 //------------------------------------------------------------------------------
 // <copyright file="ObjectListCommandsPage.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
 {
     using System;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.CodeDom.Compiler;
     using System.Diagnostics;
     using System.Drawing;
+    //    using System.Web.UI.Design.Util;
+
+    using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-//    using System.Web.UI.Design.Util;
-
-    using System.Web.UI.Design.MobileControls.Util;
-
+    using Label = System.Windows.Forms.Label;
     using ObjectList = System.Web.UI.MobileControls.ObjectList;
-    using Label      = System.Windows.Forms.Label;
-    using TextBox    = System.Windows.Forms.TextBox;
+    using TextBox = System.Windows.Forms.TextBox;
 
     /// <summary>
     ///   The Commands page for the ObjectList control.
     /// </summary>
     /// <internalonly/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal sealed class ObjectListCommandsPage : ListComponentEditorPage
     {
         private ComboBox _cmbDefaultCommand;
@@ -43,21 +44,18 @@ namespace System.Web.UI.Design.MobileControls
         {
             Y = 24;
             CaseSensitive = false;
-            TreeViewTitle           = SR.GetString(SR.ObjectListCommandsPage_CommandNameCaption);
-            AddButtonTitle          = SR.GetString(SR.ObjectListCommandsPage_NewCommandBtnCaption);
-            DefaultName             = SR.GetString(SR.ObjectListCommandsPage_DefaultCommandName);
-            MessageTitle            = SR.GetString(SR.ObjectListCommandsPage_ErrorMessageTitle);
-            EmptyNameMessage        = SR.GetString(SR.ObjectListCommandsPage_EmptyNameError);
+            TreeViewTitle = SR.GetString(SR.ObjectListCommandsPage_CommandNameCaption);
+            AddButtonTitle = SR.GetString(SR.ObjectListCommandsPage_NewCommandBtnCaption);
+            DefaultName = SR.GetString(SR.ObjectListCommandsPage_DefaultCommandName);
+            MessageTitle = SR.GetString(SR.ObjectListCommandsPage_ErrorMessageTitle);
+            EmptyNameMessage = SR.GetString(SR.ObjectListCommandsPage_EmptyNameError);
             // DuplicateNameMessage = SR.GetString(SR.ObjectListCommandsPage_DuplicateNameError);
             // InvalidNameMessage   = SR.GetString(SR.ObjectListCommandsPage_InvalidName);  // DCR 4240
         }
 
-        protected override String HelpKeyword 
+        protected override String HelpKeyword
         {
-            get 
-            {
-                return "net.Mobile.ObjectListProperties.Commands";
-            }
+            get { return "net.Mobile.ObjectListProperties.Commands"; }
         }
 
         protected override void InitForm()
@@ -113,18 +111,20 @@ namespace System.Web.UI.Design.MobileControls
             _cmbDefaultCommand.SelectedIndexChanged += new EventHandler(this.OnSetPageDirty);
             _cmbDefaultCommand.TextChanged += new EventHandler(this.OnSetPageDirty);
 
-            this.Controls.AddRange(new Control[] 
-                                    {
-                                        grplblCommandList,
-                                        lblText,
-                                        _txtText,
-                                        grplblData,
-                                        lblDefaultCommand,
-                                        _cmbDefaultCommand
-                                    });
+            this.Controls.AddRange(
+                new Control[]
+                {
+                    grplblCommandList,
+                    lblText,
+                    _txtText,
+                    grplblData,
+                    lblDefaultCommand,
+                    _cmbDefaultCommand,
+                }
+            );
         }
 
-        protected override void InitPage() 
+        protected override void InitPage()
         {
             base.InitPage();
 
@@ -145,7 +145,7 @@ namespace System.Web.UI.Design.MobileControls
             LoadDefaultCommands();
         }
 
-        protected override void LoadItemProperties() 
+        protected override void LoadItemProperties()
         {
             using (new LoadingModeResource(this))
             {
@@ -170,7 +170,7 @@ namespace System.Web.UI.Design.MobileControls
             }
         }
 
-        private void OnSetPageDirty(Object source, EventArgs e) 
+        private void OnSetPageDirty(Object source, EventArgs e)
         {
             if (IsLoading())
             {
@@ -255,31 +255,30 @@ namespace System.Web.UI.Design.MobileControls
 
         protected override void UpdateControlsEnabling()
         {
-            TreeList.TvList.Enabled = 
-                _txtText.Enabled = (TreeList.TvList.SelectedNode != null);
+            TreeList.TvList.Enabled = _txtText.Enabled = (TreeList.TvList.SelectedNode != null);
         }
 
         /// <summary>
         ///    Internal object used to store all command properties
         /// </summary>
-        [
-            System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-            Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-        ]
+        [System.Security.Permissions.SecurityPermission(
+            System.Security.Permissions.SecurityAction.Demand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+        )]
         private class CommandTreeNode : ListTreeNode
         {
-            private ObjectListCommand   _runtimeCommand;
-            private String              _text;
+            private ObjectListCommand _runtimeCommand;
+            private String _text;
 
             /// <summary>
             /// </summary>
-            internal CommandTreeNode(String name) : this(name, new ObjectListCommand())
-            {
-            }
+            internal CommandTreeNode(String name)
+                : this(name, new ObjectListCommand()) { }
 
             /// <summary>
             /// </summary>
-            internal CommandTreeNode(String name, ObjectListCommand runtimeCommand) : base(name)
+            internal CommandTreeNode(String name, ObjectListCommand runtimeCommand)
+                : base(name)
             {
                 Debug.Assert(name != null, "invalid name for ObjectListCommand");
                 Debug.Assert(runtimeCommand != null, "null ObjectListCommand");
@@ -295,23 +294,13 @@ namespace System.Web.UI.Design.MobileControls
 
             internal ObjectListCommand RuntimeCommand
             {
-                get
-                {
-                    return _runtimeCommand;
-                }
+                get { return _runtimeCommand; }
             }
 
             internal new String Text
             {
-                get
-                {
-                    return _text;
-                }
-
-                set
-                {
-                    _text = value;
-                }
+                get { return _text; }
+                set { _text = value; }
             }
         }
     }

@@ -17,12 +17,14 @@ namespace System.Net.Http.Headers
         public static AltSvcHeaderParser Parser { get; } = new AltSvcHeaderParser();
 
         private AltSvcHeaderParser()
-            : base(supportsMultipleValues: true)
-        {
-        }
+            : base(supportsMultipleValues: true) { }
 
-        protected override int GetParsedValueLength(string value, int startIndex, object? storeValue,
-            out object? parsedValue)
+        protected override int GetParsedValueLength(
+            string value,
+            int startIndex,
+            object? storeValue,
+            out object? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
             Debug.Assert(startIndex < value.Length);
@@ -35,7 +37,14 @@ namespace System.Net.Http.Headers
 
             int idx = startIndex;
 
-            if (!TryReadPercentEncodedAlpnProtocolName(value, idx, out string? alpnProtocolName, out int alpnProtocolNameLength))
+            if (
+                !TryReadPercentEncodedAlpnProtocolName(
+                    value,
+                    idx,
+                    out string? alpnProtocolName,
+                    out int alpnProtocolNameLength
+                )
+            )
             {
                 parsedValue = null;
                 return 0;
@@ -63,7 +72,15 @@ namespace System.Net.Http.Headers
                 return 0;
             }
 
-            if (!TryReadQuotedAltAuthority(value, idx, out string? altAuthorityHost, out int altAuthorityPort, out int altAuthorityLength))
+            if (
+                !TryReadQuotedAltAuthority(
+                    value,
+                    idx,
+                    out string? altAuthorityHost,
+                    out int altAuthorityPort,
+                    out int altAuthorityLength
+                )
+            )
             {
                 parsedValue = null;
                 return 0;
@@ -77,7 +94,8 @@ namespace System.Net.Http.Headers
             while (idx < value.Length)
             {
                 // Skip OWS before semicolon.
-                while (idx < value.Length && IsOptionalWhiteSpace(value[idx])) ++idx;
+                while (idx < value.Length && IsOptionalWhiteSpace(value[idx]))
+                    ++idx;
 
                 if (idx == value.Length)
                 {
@@ -103,7 +121,8 @@ namespace System.Net.Http.Headers
                 ++idx;
 
                 // Skip OWS after semicolon / before value.
-                while (idx < value.Length && IsOptionalWhiteSpace(value[idx])) ++idx;
+                while (idx < value.Length && IsOptionalWhiteSpace(value[idx]))
+                    ++idx;
 
                 // Get the parameter key length.
                 int tokenLength = HttpRuleParser.GetTokenLength(value, idx);
@@ -124,7 +143,14 @@ namespace System.Net.Http.Headers
                     // Parse "ma" (Max Age).
 
                     idx += 3; // Skip "ma="
-                    if (!TryReadTokenOrQuotedInt32(value, idx, out int maxAgeTmp, out int parameterLength))
+                    if (
+                        !TryReadTokenOrQuotedInt32(
+                            value,
+                            idx,
+                            out int maxAgeTmp,
+                            out int parameterLength
+                        )
+                    )
                     {
                         parsedValue = null;
                         return 0;
@@ -145,7 +171,14 @@ namespace System.Net.Http.Headers
                 else if (value.AsSpan(idx).StartsWith("persist="))
                 {
                     idx += 8; // Skip "persist="
-                    if (TryReadTokenOrQuotedInt32(value, idx, out int persistInt, out int parameterLength))
+                    if (
+                        TryReadTokenOrQuotedInt32(
+                            value,
+                            idx,
+                            out int persistInt,
+                            out int parameterLength
+                        )
+                    )
                     {
                         persist = persistInt == 1;
                     }
@@ -173,9 +206,17 @@ namespace System.Net.Http.Headers
             }
 
             // If no "ma" parameter present, use the default.
-            TimeSpan maxAgeTimeSpan = TimeSpan.FromTicks(maxAge * TimeSpan.TicksPerSecond ?? DefaultMaxAgeTicks);
+            TimeSpan maxAgeTimeSpan = TimeSpan.FromTicks(
+                maxAge * TimeSpan.TicksPerSecond ?? DefaultMaxAgeTicks
+            );
 
-            parsedValue = new AltSvcHeaderValue(alpnProtocolName, altAuthorityHost, altAuthorityPort, maxAgeTimeSpan, persist);
+            parsedValue = new AltSvcHeaderValue(
+                alpnProtocolName,
+                altAuthorityHost,
+                altAuthorityPort,
+                maxAgeTimeSpan,
+                persist
+            );
             return idx - startIndex;
         }
 
@@ -184,7 +225,12 @@ namespace System.Net.Http.Headers
             return ch == ' ' || ch == '\t';
         }
 
-        private static bool TryReadPercentEncodedAlpnProtocolName(string value, int startIndex, [NotNullWhen(true)] out string? result, out int readLength)
+        private static bool TryReadPercentEncodedAlpnProtocolName(
+            string value,
+            int startIndex,
+            [NotNullWhen(true)] out string? result,
+            out int readLength
+        )
         {
             int tokenLength = HttpRuleParser.GetTokenLength(value, startIndex);
 
@@ -255,7 +301,10 @@ namespace System.Net.Http.Headers
             return TryReadUnknownPercentEncodedAlpnProtocolName(span, out result);
         }
 
-        private static bool TryReadUnknownPercentEncodedAlpnProtocolName(ReadOnlySpan<char> value, [NotNullWhen(true)] out string? result)
+        private static bool TryReadUnknownPercentEncodedAlpnProtocolName(
+            ReadOnlySpan<char> value,
+            [NotNullWhen(true)] out string? result
+        )
         {
             int idx = value.IndexOf('%');
 
@@ -265,7 +314,9 @@ namespace System.Net.Http.Headers
                 return true;
             }
 
-            var builder = new ValueStringBuilder(value.Length <= 128 ? stackalloc char[128] : new char[value.Length]);
+            var builder = new ValueStringBuilder(
+                value.Length <= 128 ? stackalloc char[128] : new char[value.Length]
+            );
 
             do
             {
@@ -274,7 +325,11 @@ namespace System.Net.Http.Headers
                     builder.Append(value.Slice(0, idx));
                 }
 
-                if ((value.Length - idx) < 3 || !TryReadAlpnHexDigit(value[1], out int hi) || !TryReadAlpnHexDigit(value[2], out int lo))
+                if (
+                    (value.Length - idx) < 3
+                    || !TryReadAlpnHexDigit(value[1], out int hi)
+                    || !TryReadAlpnHexDigit(value[2], out int lo)
+                )
                 {
                     result = null;
                     return false;
@@ -284,8 +339,7 @@ namespace System.Net.Http.Headers
 
                 value = value.Slice(idx + 3);
                 idx = value.IndexOf('%');
-            }
-            while (idx != -1);
+            } while (idx != -1);
 
             if (value.Length != 0)
             {
@@ -312,14 +366,26 @@ namespace System.Net.Http.Headers
             return true;
         }
 
-        private static bool TryReadQuotedAltAuthority(string value, int startIndex, out string? host, out int port, out int readLength)
+        private static bool TryReadQuotedAltAuthority(
+            string value,
+            int startIndex,
+            out string? host,
+            out int port,
+            out int readLength
+        )
         {
-            if (HttpRuleParser.GetQuotedStringLength(value, startIndex, out int quotedLength) != HttpParseResult.Parsed)
+            if (
+                HttpRuleParser.GetQuotedStringLength(value, startIndex, out int quotedLength)
+                != HttpParseResult.Parsed
+            )
             {
                 goto parseError;
             }
 
-            Debug.Assert(value[startIndex] == '"' && value[startIndex + quotedLength - 1] == '"', $"{nameof(HttpRuleParser.GetQuotedStringLength)} should return {nameof(HttpParseResult.NotParsed)} if the opening/closing quotes are missing.");
+            Debug.Assert(
+                value[startIndex] == '"' && value[startIndex + quotedLength - 1] == '"',
+                $"{nameof(HttpRuleParser.GetQuotedStringLength)} should return {nameof(HttpParseResult.NotParsed)} if the opening/closing quotes are missing."
+            );
             ReadOnlySpan<char> quoted = value.AsSpan(startIndex + 1, quotedLength - 2);
 
             int idx = quoted.IndexOf(':');
@@ -347,7 +413,7 @@ namespace System.Net.Http.Headers
             readLength = quotedLength;
             return true;
 
-        parseError:
+            parseError:
             host = null;
             port = 0;
             readLength = 0;
@@ -386,8 +452,7 @@ namespace System.Net.Http.Headers
 
                 value = value.Slice(idx + 2);
                 idx = value.IndexOf('\\');
-            }
-            while (idx != -1);
+            } while (idx != -1);
 
             if (value.Length != 0)
             {
@@ -398,7 +463,12 @@ namespace System.Net.Http.Headers
             return true;
         }
 
-        private static bool TryReadTokenOrQuotedInt32(string value, int startIndex, out int result, out int readLength)
+        private static bool TryReadTokenOrQuotedInt32(
+            string value,
+            int startIndex,
+            out int result,
+            out int readLength
+        )
         {
             if (startIndex >= value.Length)
             {
@@ -415,7 +485,10 @@ namespace System.Net.Http.Headers
                 return HeaderUtilities.TryParseInt32(value, startIndex, tokenLength, out result);
             }
 
-            if (HttpRuleParser.GetQuotedStringLength(value, startIndex, out int quotedLength) == HttpParseResult.Parsed)
+            if (
+                HttpRuleParser.GetQuotedStringLength(value, startIndex, out int quotedLength)
+                == HttpParseResult.Parsed
+            )
             {
                 readLength = quotedLength;
                 return TryReadQuotedInt32Value(value.AsSpan(1, quotedLength - 2), out result);
@@ -439,7 +512,8 @@ namespace System.Net.Http.Headers
             foreach (char ch in value)
             {
                 // The port shouldn't ever need a quoted-pair, but they're still valid... skip if found.
-                if (ch == '\\') continue;
+                if (ch == '\\')
+                    continue;
 
                 if (!char.IsAsciiDigit(ch))
                 {
@@ -477,7 +551,10 @@ namespace System.Net.Http.Headers
                 return true;
             }
 
-            if (HttpRuleParser.GetQuotedStringLength(value, startIndex, out int quotedLength) == HttpParseResult.Parsed)
+            if (
+                HttpRuleParser.GetQuotedStringLength(value, startIndex, out int quotedLength)
+                == HttpParseResult.Parsed
+            )
             {
                 readLength = quotedLength;
                 return true;

@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a validating a role.
 /// </summary>
 /// <typeparam name="TRole">The type encapsulating a role.</typeparam>
-public interface IRoleValidator<TRole> where TRole : class
+public interface IRoleValidator<TRole>
+    where TRole : class
 {
     /// <summary>
     /// Validates a role as an asynchronous operation.

@@ -12,10 +12,38 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void InvalidPaths_Throw()
         {
-            Assert.Throws<ArgumentNullException>(() => TarFile.ExtractToDirectory(sourceFileName: null, destinationDirectoryName: "path", overwriteFiles: false));
-            Assert.Throws<ArgumentException>(() => TarFile.ExtractToDirectory(sourceFileName: string.Empty, destinationDirectoryName: "path", overwriteFiles: false));
-            Assert.Throws<ArgumentNullException>(() => TarFile.ExtractToDirectory(sourceFileName: "path", destinationDirectoryName: null, overwriteFiles: false));
-            Assert.Throws<ArgumentException>(() => TarFile.ExtractToDirectory(sourceFileName: "path", destinationDirectoryName: string.Empty, overwriteFiles: false));
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: null,
+                        destinationDirectoryName: "path",
+                        overwriteFiles: false
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: string.Empty,
+                        destinationDirectoryName: "path",
+                        overwriteFiles: false
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: "path",
+                        destinationDirectoryName: null,
+                        overwriteFiles: false
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: "path",
+                        destinationDirectoryName: string.Empty,
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
@@ -28,7 +56,14 @@ namespace System.Formats.Tar.Tests
 
             Directory.CreateDirectory(dirPath);
 
-            Assert.Throws<FileNotFoundException>(() => TarFile.ExtractToDirectory(sourceFileName: filePath, destinationDirectoryName: dirPath, overwriteFiles: false));
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: filePath,
+                        destinationDirectoryName: dirPath,
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
@@ -41,7 +76,14 @@ namespace System.Formats.Tar.Tests
 
             File.Create(filePath).Dispose();
 
-            Assert.Throws<DirectoryNotFoundException>(() => TarFile.ExtractToDirectory(sourceFileName: filePath, destinationDirectoryName: dirPath, overwriteFiles: false));
+            Assert.Throws<DirectoryNotFoundException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceFileName: filePath,
+                        destinationDirectoryName: dirPath,
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
@@ -62,13 +104,25 @@ namespace System.Formats.Tar.Tests
             var dt = new DateTime(2001, 1, 2, 3, 4, 5, DateTimeKind.Local);
             File.SetLastWriteTime(inFile, dt);
 
-            TarFile.CreateFromDirectory(sourceDirectoryName: inDir, destinationFileName: tarFile, includeBaseDirectory: false);
+            TarFile.CreateFromDirectory(
+                sourceDirectoryName: inDir,
+                destinationFileName: tarFile,
+                includeBaseDirectory: false
+            );
 
             Directory.CreateDirectory(outDir);
-            TarFile.ExtractToDirectory(sourceFileName: tarFile, destinationDirectoryName: outDir, overwriteFiles: false);
+            TarFile.ExtractToDirectory(
+                sourceFileName: tarFile,
+                destinationDirectoryName: outDir,
+                overwriteFiles: false
+            );
 
             Assert.True(File.Exists(outFile));
-            Assert.InRange(File.GetLastWriteTime(outFile).Ticks, dt.AddSeconds(-3).Ticks, dt.AddSeconds(3).Ticks); // include some slop for filesystem granularity
+            Assert.InRange(
+                File.GetLastWriteTime(outFile).Ticks,
+                dt.AddSeconds(-3).Ticks,
+                dt.AddSeconds(3).Ticks
+            ); // include some slop for filesystem granularity
         }
 
         [Fact]
@@ -80,11 +134,13 @@ namespace System.Formats.Tar.Tests
             // Create a hierarcy of directories.
             var directories = new DirectoryInfo[]
             {
-                Directory.CreateDirectory(Path.Combine(fromDir.FullName, "dir")),                      // 'fromdir/dir'
-                Directory.CreateDirectory(Path.Combine(fromDir.FullName, "dir", "child")),             // 'fromdir/dir/child'
-                Directory.CreateDirectory(Path.Combine(fromDir.FullName, "dir", "child", "subchild")), // 'fromdir/dir/child/subchild'
-                Directory.CreateDirectory(Path.Combine(fromDir.FullName, "dir2")),                     // 'fromdir/dir2'
-                Directory.CreateDirectory(Path.Combine(fromDir.FullName, "dir2", "child2")),           // 'fromdir/dir2/child2'
+                Directory.CreateDirectory(Path.Combine(fromDir.FullName, "dir")), // 'fromdir/dir'
+                Directory.CreateDirectory(Path.Combine(fromDir.FullName, "dir", "child")), // 'fromdir/dir/child'
+                Directory.CreateDirectory(
+                    Path.Combine(fromDir.FullName, "dir", "child", "subchild")
+                ), // 'fromdir/dir/child/subchild'
+                Directory.CreateDirectory(Path.Combine(fromDir.FullName, "dir2")), // 'fromdir/dir2'
+                Directory.CreateDirectory(Path.Combine(fromDir.FullName, "dir2", "child2")), // 'fromdir/dir2/child2'
             };
             var dt = new DateTime[directories.Length];
             for (int i = directories.Length - 1; i >= 0; i--) // Reverse order to preserve parent timestamps.
@@ -93,24 +149,51 @@ namespace System.Formats.Tar.Tests
                 File.Create(Path.Combine(directories[i].FullName, "file")).Dispose();
 
                 // Set the directory timestamp.
-                dt[i] = new DateTime(2000 + i, 1 + i, 2 + i, 3 + i, 4 + i, 5 + i, DateTimeKind.Local);
+                dt[i] = new DateTime(
+                    2000 + i,
+                    1 + i,
+                    2 + i,
+                    3 + i,
+                    4 + i,
+                    5 + i,
+                    DateTimeKind.Local
+                );
                 directories[i].LastWriteTime = dt[i];
             }
 
             string tarFile = Path.Join(root.Path, "file.tar");
-            TarFile.CreateFromDirectory(sourceDirectoryName: fromDir.FullName, destinationFileName: tarFile, includeBaseDirectory: false);
+            TarFile.CreateFromDirectory(
+                sourceDirectoryName: fromDir.FullName,
+                destinationFileName: tarFile,
+                includeBaseDirectory: false
+            );
 
             string toDir = Path.Join(root.Path, "todir");
             Directory.CreateDirectory(toDir);
-            TarFile.ExtractToDirectory(sourceFileName: tarFile, destinationDirectoryName: toDir, overwriteFiles: false);
+            TarFile.ExtractToDirectory(
+                sourceFileName: tarFile,
+                destinationDirectoryName: toDir,
+                overwriteFiles: false
+            );
 
-            string[] extractedDirectories = Directory.GetDirectories(toDir, "*", new EnumerationOptions() { RecurseSubdirectories = true });
+            string[] extractedDirectories = Directory.GetDirectories(
+                toDir,
+                "*",
+                new EnumerationOptions() { RecurseSubdirectories = true }
+            );
             Array.Sort(extractedDirectories);
             Assert.Equal(directories.Length, extractedDirectories.Length);
             for (int i = 0; i < extractedDirectories.Length; i++)
             {
-                Assert.Equal(Path.GetFileName(directories[i].FullName), Path.GetFileName(extractedDirectories[i]));
-                Assert.InRange(Directory.GetLastWriteTime(extractedDirectories[i]).Ticks, dt[i].AddSeconds(-3).Ticks, dt[i].AddSeconds(3).Ticks); // include some slop for filesystem granularity
+                Assert.Equal(
+                    Path.GetFileName(directories[i].FullName),
+                    Path.GetFileName(extractedDirectories[i])
+                );
+                Assert.InRange(
+                    Directory.GetLastWriteTime(extractedDirectories[i]).Ticks,
+                    dt[i].AddSeconds(-3).Ticks,
+                    dt[i].AddSeconds(3).Ticks
+                ); // include some slop for filesystem granularity
             }
         }
 
@@ -123,13 +206,21 @@ namespace System.Formats.Tar.Tests
         [InlineData(TestTarFormat.oldgnu)]
         public void Extract_Archive_File(TestTarFormat testFormat)
         {
-            string sourceArchiveFileName = GetTarFilePath(CompressionMethod.Uncompressed, testFormat, "file");
+            string sourceArchiveFileName = GetTarFilePath(
+                CompressionMethod.Uncompressed,
+                testFormat,
+                "file"
+            );
 
             using TempDirectory destination = new TempDirectory();
 
             string filePath = Path.Join(destination.Path, "file.txt");
 
-            TarFile.ExtractToDirectory(sourceArchiveFileName, destination.Path, overwriteFiles: false);
+            TarFile.ExtractToDirectory(
+                sourceArchiveFileName,
+                destination.Path,
+                overwriteFiles: false
+            );
 
             Assert.True(File.Exists(filePath));
         }
@@ -138,7 +229,11 @@ namespace System.Formats.Tar.Tests
         public void Extract_Archive_File_OverwriteTrue()
         {
             string testCaseName = "file";
-            string archivePath = GetTarFilePath(CompressionMethod.Uncompressed, TestTarFormat.pax, testCaseName);
+            string archivePath = GetTarFilePath(
+                CompressionMethod.Uncompressed,
+                TestTarFormat.pax,
+                testCaseName
+            );
 
             using TempDirectory destination = new TempDirectory();
 
@@ -164,7 +259,11 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void Extract_Archive_File_OverwriteFalse()
         {
-            string sourceArchiveFileName = GetTarFilePath(CompressionMethod.Uncompressed, TestTarFormat.pax, "file");
+            string sourceArchiveFileName = GetTarFilePath(
+                CompressionMethod.Uncompressed,
+                TestTarFormat.pax,
+                "file"
+            );
 
             using TempDirectory destination = new TempDirectory();
 
@@ -172,7 +271,14 @@ namespace System.Formats.Tar.Tests
 
             File.Create(filePath).Dispose();
 
-            Assert.Throws<IOException>(() => TarFile.ExtractToDirectory(sourceArchiveFileName, destination.Path, overwriteFiles: false));
+            Assert.Throws<IOException>(
+                () =>
+                    TarFile.ExtractToDirectory(
+                        sourceArchiveFileName,
+                        destination.Path,
+                        overwriteFiles: false
+                    )
+            );
         }
 
         [Fact]
@@ -191,7 +297,10 @@ namespace System.Formats.Tar.Tests
                 PaxTarEntry segment2 = new PaxTarEntry(TarEntryType.Directory, "segment1/segment2");
                 writer.WriteEntry(segment2);
 
-                PaxTarEntry file = new PaxTarEntry(TarEntryType.RegularFile, "segment1/segment2/file.txt");
+                PaxTarEntry file = new PaxTarEntry(
+                    TarEntryType.RegularFile,
+                    "segment1/segment2/file.txt"
+                );
                 writer.WriteEntry(file);
             }
 
@@ -212,7 +321,9 @@ namespace System.Formats.Tar.Tests
         {
             using TempDirectory root = new TempDirectory();
 
-            using MemoryStream archiveStream = GetStrangeTarMemoryStream("prefixDotSlashAndCurrentFolderEntry");
+            using MemoryStream archiveStream = GetStrangeTarMemoryStream(
+                "prefixDotSlashAndCurrentFolderEntry"
+            );
 
             TarFile.ExtractToDirectory(archiveStream, root.Path, overwriteFiles: true);
 
@@ -225,7 +336,9 @@ namespace System.Formats.Tar.Tests
             {
                 // Normalize the path (remove redundant segments), remove trailing separators
                 // this is so the first entry can be skipped if it's the same as the root directory
-                string entryPath = Path.TrimEndingDirectorySeparator(Path.GetFullPath(Path.Join(root.Path, entry.Name)));
+                string entryPath = Path.TrimEndingDirectorySeparator(
+                    Path.GetFullPath(Path.Join(root.Path, entry.Name))
+                );
                 Assert.True(Path.Exists(entryPath), $"Entry was not extracted: {entryPath}");
             }
         }
@@ -251,15 +364,24 @@ namespace System.Formats.Tar.Tests
                 writer.WriteEntry(file);
 
                 // Archive has no entry for missing_parent.
-                PaxTarEntry missingParentDir = new PaxTarEntry(TarEntryType.Directory, "missing_parent/dir");
+                PaxTarEntry missingParentDir = new PaxTarEntry(
+                    TarEntryType.Directory,
+                    "missing_parent/dir"
+                );
                 missingParentDir.Mode = TestPermission3;
                 writer.WriteEntry(missingParentDir);
 
                 // out_of_order_parent/file entry comes before out_of_order_parent entry.
-                PaxTarEntry outOfOrderFile = new PaxTarEntry(TarEntryType.RegularFile, "out_of_order_parent/file");
+                PaxTarEntry outOfOrderFile = new PaxTarEntry(
+                    TarEntryType.RegularFile,
+                    "out_of_order_parent/file"
+                );
                 writer.WriteEntry(outOfOrderFile);
 
-                PaxTarEntry outOfOrderDir = new PaxTarEntry(TarEntryType.Directory, "out_of_order_parent");
+                PaxTarEntry outOfOrderDir = new PaxTarEntry(
+                    TarEntryType.Directory,
+                    "out_of_order_parent"
+                );
                 outOfOrderDir.Mode = TestPermission4;
                 writer.WriteEntry(outOfOrderDir);
             }
@@ -287,14 +409,23 @@ namespace System.Formats.Tar.Tests
             AssertFileModeEquals(filePath, TestPermission2);
 
             // Missing parents are created with CreateDirectoryDefaultMode.
-            Assert.True(Directory.Exists(missingParentPath), $"{missingParentPath}' does not exist.");
+            Assert.True(
+                Directory.Exists(missingParentPath),
+                $"{missingParentPath}' does not exist."
+            );
             AssertFileModeEquals(missingParentPath, CreateDirectoryDefaultMode);
 
-            Assert.True(Directory.Exists(missingParentDirPath), $"{missingParentDirPath}' does not exist.");
+            Assert.True(
+                Directory.Exists(missingParentDirPath),
+                $"{missingParentDirPath}' does not exist."
+            );
             AssertFileModeEquals(missingParentDirPath, TestPermission3);
 
             // Directory modes that are out-of-order are still applied.
-            Assert.True(Directory.Exists(outOfOrderDirPath), $"{outOfOrderDirPath}' does not exist.");
+            Assert.True(
+                Directory.Exists(outOfOrderDirPath),
+                $"{outOfOrderDirPath}' does not exist."
+            );
             AssertFileModeEquals(outOfOrderDirPath, TestPermission4);
         }
 

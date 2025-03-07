@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
  **
@@ -15,10 +15,11 @@
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
-    using System.Runtime.Serialization.Formatters;
+    using System;
     using System.Runtime.Remoting;
     using System.Runtime.Serialization;
-    using System;
+    using System.Runtime.Serialization.Formatters;
+
     // BinaryHeaderEnum is the first byte on binary records
     // (except for primitive types which do not have a header)
     [Serializable]
@@ -56,7 +57,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
     {
         Primitive = 0,
         String = 1,
-        Object = 2,    
+        Object = 2,
         ObjectUrt = 3,
         ObjectUser = 4,
         ObjectArray = 5,
@@ -72,7 +73,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         Rectangular = 2,
         SingleOffset = 3,
         JaggedOffset = 4,
-        RectangularOffset = 5,        
+        RectangularOffset = 5,
     }
 
     // Enums are for internal use by the XML and Binary Serializers
@@ -114,7 +115,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
         BodyEnd = 12,
     }
 
-
     [Serializable]
     internal enum InternalObjectTypeE
     {
@@ -122,7 +122,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
         Object = 1,
         Array = 2,
     }
-
 
     [Serializable]
     internal enum InternalObjectPositionE
@@ -199,8 +198,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         String = 18,
     }
 
-[Serializable]
-[Flags]
+    [Serializable]
+    [Flags]
     internal enum MessageEnum
     {
         NoArgs = 0x1,
@@ -217,9 +216,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         ReturnValueInline = 0x800,
         ReturnValueInArray = 0x1000,
         ExceptionInArray = 0x2000,
-        GenericMethod = 0x8000
+        GenericMethod = 0x8000,
     }
-
 
     // ValueType Fixup Enum
     [Serializable]
@@ -244,7 +242,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         UserNameSpace = 6,
         MemberName = 7,
         Interop = 8,
-        CallElement = 9
+        CallElement = 9,
     }
 
     [Serializable]
@@ -254,7 +252,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
         SchemaType = 0x1,
         Embedded = 0x2,
         XmlElement = 0x4,
-        XmlAttribute = 0x8
+        XmlAttribute = 0x8,
     }
-
 }

@@ -2,35 +2,40 @@
 // <copyright file="XmlMemberMapping.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
-
-    using System.Reflection;
+namespace System.Xml.Serialization
+{
     using System;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Reflection;
 
     /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping"]/*' />
     /// <internalonly/>
-    public class XmlMemberMapping {
+    public class XmlMemberMapping
+    {
         MemberMapping mapping;
 
-        internal XmlMemberMapping(MemberMapping mapping) {
+        internal XmlMemberMapping(MemberMapping mapping)
+        {
             this.mapping = mapping;
         }
 
-        internal MemberMapping Mapping {
+        internal MemberMapping Mapping
+        {
             get { return mapping; }
         }
 
-        internal Accessor Accessor {
+        internal Accessor Accessor
+        {
             get { return mapping.Accessor; }
         }
 
         /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.Any"]/*' />
-        public bool Any {
+        public bool Any
+        {
             get { return Accessor.Any; }
         }
 
@@ -38,7 +43,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string ElementName { 
+        public string ElementName
+        {
             get { return Accessor.UnescapeName(Accessor.Name); }
         }
 
@@ -46,7 +52,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string XsdElementName { 
+        public string XsdElementName
+        {
             get { return Accessor.Name; }
         }
 
@@ -54,7 +61,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Namespace {
+        public string Namespace
+        {
             get { return Accessor.Namespace; }
         }
 
@@ -62,7 +70,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string MemberName {
+        public string MemberName
+        {
             get { return mapping.Name; }
         }
 
@@ -70,7 +79,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string TypeName {
+        public string TypeName
+        {
             get { return Accessor.Mapping != null ? Accessor.Mapping.TypeName : String.Empty; }
         }
 
@@ -78,7 +88,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string TypeNamespace {
+        public string TypeNamespace
+        {
             get { return Accessor.Mapping != null ? Accessor.Mapping.Namespace : null; }
         }
 
@@ -86,7 +97,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string TypeFullName {
+        public string TypeFullName
+        {
             get { return mapping.TypeDesc.FullName; }
         }
 
@@ -94,11 +106,13 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool CheckSpecified {
+        public bool CheckSpecified
+        {
             get { return mapping.CheckSpecified != SpecifiedAccessor.None; }
         }
 
-        internal bool IsNullable {
+        internal bool IsNullable
+        {
             get { return mapping.IsNeedNullable; }
         }
 
@@ -106,7 +120,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string GenerateTypeName(CodeDomProvider codeProvider) {
+        public string GenerateTypeName(CodeDomProvider codeProvider)
+        {
             return mapping.GetTypeName(codeProvider);
         }
     }

@@ -15,6 +15,7 @@ public sealed class W3CLoggerOptions
     private string _fileName = "w3clog-";
     private string _logDirectory = "";
     private TimeSpan _flushInterval = TimeSpan.FromSeconds(1);
+
     // Update the MaxFilesReached log message in FileLoggerProcessor if this value changes.
     internal const int MaxFileCount = 10000;
 
@@ -30,7 +31,10 @@ public sealed class W3CLoggerOptions
         {
             if (value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(FileSizeLimit)} must be positive.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    $"{nameof(FileSizeLimit)} must be positive."
+                );
             }
             _fileSizeLimit = value;
         }
@@ -48,7 +52,10 @@ public sealed class W3CLoggerOptions
         {
             if (value <= 0 || value > MaxFileCount)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(RetainedFileCountLimit)} must be between 1 and 10,000 (inclusive)");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    $"{nameof(RetainedFileCountLimit)} must be between 1 and 10,000 (inclusive)"
+                );
             }
             _retainedFileCountLimit = value;
         }
@@ -96,7 +103,10 @@ public sealed class W3CLoggerOptions
         {
             if (value <= TimeSpan.Zero)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(FlushInterval)} must be positive.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    $"{nameof(FlushInterval)} must be positive."
+                );
             }
             _flushInterval = value;
         }
@@ -112,20 +122,34 @@ public sealed class W3CLoggerOptions
     /// access controlled and the privacy impact assessed.
     /// </para>
     /// </summary>
-    public ISet<string> AdditionalRequestHeaders { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+    public ISet<string> AdditionalRequestHeaders { get; } =
+        new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Fields to log. Defaults to logging request and response properties and headers,
     /// plus date/time info and server name.
     /// </summary>
-    public W3CLoggingFields LoggingFields { get; set; } = W3CLoggingFields.Date | W3CLoggingFields.Time |
-        W3CLoggingFields.ServerName | W3CLoggingFields.Method | W3CLoggingFields.UriStem | W3CLoggingFields.UriQuery |
-        W3CLoggingFields.ProtocolStatus | W3CLoggingFields.TimeTaken | W3CLoggingFields.ProtocolVersion |
-        W3CLoggingFields.Host | W3CLoggingFields.UserAgent | W3CLoggingFields.Referer | W3CLoggingFields.ConnectionInfoFields;
+    public W3CLoggingFields LoggingFields { get; set; } =
+        W3CLoggingFields.Date
+        | W3CLoggingFields.Time
+        | W3CLoggingFields.ServerName
+        | W3CLoggingFields.Method
+        | W3CLoggingFields.UriStem
+        | W3CLoggingFields.UriQuery
+        | W3CLoggingFields.ProtocolStatus
+        | W3CLoggingFields.TimeTaken
+        | W3CLoggingFields.ProtocolVersion
+        | W3CLoggingFields.Host
+        | W3CLoggingFields.UserAgent
+        | W3CLoggingFields.Referer
+        | W3CLoggingFields.ConnectionInfoFields;
 
     internal static ISet<string> FilterRequestHeaders(W3CLoggerOptions options)
     {
-        var clonedSet = new SortedSet<string>(options.AdditionalRequestHeaders, StringComparer.InvariantCultureIgnoreCase);
+        var clonedSet = new SortedSet<string>(
+            options.AdditionalRequestHeaders,
+            StringComparer.InvariantCultureIgnoreCase
+        );
 
         if (options.LoggingFields.HasFlag(W3CLoggingFields.Host))
         {

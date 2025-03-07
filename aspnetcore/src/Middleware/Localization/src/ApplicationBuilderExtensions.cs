@@ -33,7 +33,8 @@ public static class ApplicationBuilderExtensions
     /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
     public static IApplicationBuilder UseRequestLocalization(
         this IApplicationBuilder app,
-        RequestLocalizationOptions options)
+        RequestLocalizationOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);
@@ -53,7 +54,8 @@ public static class ApplicationBuilderExtensions
     /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
     public static IApplicationBuilder UseRequestLocalization(
         this IApplicationBuilder app,
-        Action<RequestLocalizationOptions> optionsAction)
+        Action<RequestLocalizationOptions> optionsAction
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(optionsAction);
@@ -76,7 +78,8 @@ public static class ApplicationBuilderExtensions
     /// </remarks>
     public static IApplicationBuilder UseRequestLocalization(
         this IApplicationBuilder app,
-        params string[] cultures)
+        params string[] cultures
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(cultures);

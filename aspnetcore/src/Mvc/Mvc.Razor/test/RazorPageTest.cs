@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,7 +16,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 using Microsoft.AspNetCore.Razor.Runtime.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.WebEncoders.Testing;
 using Moq;
@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor;
 public class RazorPageTest
 {
     private readonly RenderAsyncDelegate _nullRenderAsyncDelegate = () => Task.FromResult(0);
-    private readonly Func<TextWriter, Task> NullAsyncWrite = writer => writer.WriteAsync(string.Empty);
+    private readonly Func<TextWriter, Task> NullAsyncWrite = writer =>
+        writer.WriteAsync(string.Empty);
 
     [Fact]
     public async Task WritingScopesRedirectContentWrittenToViewContextWriter()
@@ -50,9 +51,10 @@ public class RazorPageTest
 
         // Assert
         Assert.Equal(
-            "HtmlEncode[[Hello Prefix]]HtmlEncode[[From Scope: ]]HtmlEncode[[Hello from Output]]" +
-            "Hello from view context writer",
-            pageOutput);
+            "HtmlEncode[[Hello Prefix]]HtmlEncode[[From Scope: ]]HtmlEncode[[Hello from Output]]"
+                + "Hello from view context writer",
+            pageOutput
+        );
     }
 
     [Fact]
@@ -76,7 +78,10 @@ public class RazorPageTest
         var pageOutput = page.RenderedContent;
 
         // Assert
-        Assert.Equal("HtmlEncode[[Hello Prefix]]HtmlEncode[[From Scope: ]]HtmlEncode[[Hello In Scope]]", pageOutput);
+        Assert.Equal(
+            "HtmlEncode[[Hello Prefix]]HtmlEncode[[From Scope: ]]HtmlEncode[[Hello In Scope]]",
+            pageOutput
+        );
     }
 
     [Fact]
@@ -109,9 +114,10 @@ public class RazorPageTest
         // Assert
         var pageOutput = page.RenderedContent;
         Assert.Equal(
-            "HtmlEncode[[Hello Prefix]]HtmlEncode[[From Scopes: ]]HtmlEncode[[Hello In Scope Pre Nest]]" +
-            "HtmlEncode[[Hello In Scope Post Nest]]HtmlEncode[[Hello In Nested Scope]]",
-            pageOutput);
+            "HtmlEncode[[Hello Prefix]]HtmlEncode[[From Scopes: ]]HtmlEncode[[Hello In Scope Pre Nest]]"
+                + "HtmlEncode[[Hello In Scope Post Nest]]HtmlEncode[[Hello In Nested Scope]]",
+            pageOutput
+        );
     }
 
     [Fact]
@@ -129,9 +135,10 @@ public class RazorPageTest
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => page.ExecuteAsync());
         Assert.Equal(
-            "The FlushAsync operation cannot be performed while " +
-            "inside a writing scope in '/Views/TestPath/Test.cshtml'.",
-            ex.Message);
+            "The FlushAsync operation cannot be performed while "
+                + "inside a writing scope in '/Views/TestPath/Test.cshtml'.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -272,127 +279,142 @@ public class RazorPageTest
         var bufferScope = new TestViewBufferScope();
         var viewContext = CreateViewContext(bufferScope: bufferScope);
 
-        var page = CreatePage(async v =>
-        {
-            Assert.Equal(0, bufferScope.CreatedBuffers.Count);
-            v.Write("Level:0"); // Creates a 'top-level' buffer.
-            Assert.Equal(1, bufferScope.CreatedBuffers.Count);
-
-            // Run a TagHelper
+        var page = CreatePage(
+            async v =>
             {
-                v.StartTagHelperWritingScope(encoder: null);
-
+                Assert.Equal(0, bufferScope.CreatedBuffers.Count);
+                v.Write("Level:0"); // Creates a 'top-level' buffer.
                 Assert.Equal(1, bufferScope.CreatedBuffers.Count);
-                Assert.Equal(0, bufferScope.ReturnedBuffers.Count);
-                v.Write("Level:1-A"); // Creates a new buffer for the TagHelper.
-                Assert.Equal(2, bufferScope.CreatedBuffers.Count);
-                Assert.Equal(0, bufferScope.ReturnedBuffers.Count);
 
-                TagHelperContent innerContentLevel1 = null;
-                var outputLevel1 = new TagHelperOutput("t1", new TagHelperAttributeList(), (_, encoder) =>
-                {
-                    return Task.FromResult(innerContentLevel1);
-                });
-
-                innerContentLevel1 = v.EndTagHelperWritingScope();
-                outputLevel1.Content = await outputLevel1.GetChildContentAsync();
-
-                Assert.Equal(2, bufferScope.CreatedBuffers.Count);
-                Assert.Equal(0, bufferScope.ReturnedBuffers.Count);
-                v.Write(outputLevel1); // Writing the TagHelper to output returns a buffer.
-                Assert.Equal(2, bufferScope.CreatedBuffers.Count);
-                Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
-            }
-
-            Assert.Equal(2, bufferScope.CreatedBuffers.Count);
-            Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
-            v.Write("Level:0"); // Already have a buffer for this scope.
-            Assert.Equal(2, bufferScope.CreatedBuffers.Count);
-            Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
-
-            // Run another TagHelper
-            {
-                v.StartTagHelperWritingScope(encoder: null);
-
-                Assert.Equal(2, bufferScope.CreatedBuffers.Count);
-                Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
-                v.Write("Level:1-B"); // Creates a new buffer for the TagHelper.
-                Assert.Equal(3, bufferScope.CreatedBuffers.Count);
-                Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
-
-                TagHelperContent innerContentLevel1 = null;
-                var outputLevel1 = new TagHelperOutput("t2", new TagHelperAttributeList(), (_, encoder) =>
-                {
-                    return Task.FromResult(innerContentLevel1);
-                });
-
-                // Run a nested TagHelper
+                // Run a TagHelper
                 {
                     v.StartTagHelperWritingScope(encoder: null);
 
+                    Assert.Equal(1, bufferScope.CreatedBuffers.Count);
+                    Assert.Equal(0, bufferScope.ReturnedBuffers.Count);
+                    v.Write("Level:1-A"); // Creates a new buffer for the TagHelper.
+                    Assert.Equal(2, bufferScope.CreatedBuffers.Count);
+                    Assert.Equal(0, bufferScope.ReturnedBuffers.Count);
+
+                    TagHelperContent innerContentLevel1 = null;
+                    var outputLevel1 = new TagHelperOutput(
+                        "t1",
+                        new TagHelperAttributeList(),
+                        (_, encoder) =>
+                        {
+                            return Task.FromResult(innerContentLevel1);
+                        }
+                    );
+
+                    innerContentLevel1 = v.EndTagHelperWritingScope();
+                    outputLevel1.Content = await outputLevel1.GetChildContentAsync();
+
+                    Assert.Equal(2, bufferScope.CreatedBuffers.Count);
+                    Assert.Equal(0, bufferScope.ReturnedBuffers.Count);
+                    v.Write(outputLevel1); // Writing the TagHelper to output returns a buffer.
+                    Assert.Equal(2, bufferScope.CreatedBuffers.Count);
+                    Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
+                }
+
+                Assert.Equal(2, bufferScope.CreatedBuffers.Count);
+                Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
+                v.Write("Level:0"); // Already have a buffer for this scope.
+                Assert.Equal(2, bufferScope.CreatedBuffers.Count);
+                Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
+
+                // Run another TagHelper
+                {
+                    v.StartTagHelperWritingScope(encoder: null);
+
+                    Assert.Equal(2, bufferScope.CreatedBuffers.Count);
+                    Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
+                    v.Write("Level:1-B"); // Creates a new buffer for the TagHelper.
                     Assert.Equal(3, bufferScope.CreatedBuffers.Count);
                     Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
-                    v.Write("Level:2"); // Creates a new buffer for the TagHelper.
-                    Assert.Equal(4, bufferScope.CreatedBuffers.Count);
-                    Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
 
-                    TagHelperContent innerContentLevel2 = null;
-                    var outputLevel2 = new TagHelperOutput("t3", new TagHelperAttributeList(), (_, encoder) =>
+                    TagHelperContent innerContentLevel1 = null;
+                    var outputLevel1 = new TagHelperOutput(
+                        "t2",
+                        new TagHelperAttributeList(),
+                        (_, encoder) =>
+                        {
+                            return Task.FromResult(innerContentLevel1);
+                        }
+                    );
+
+                    // Run a nested TagHelper
                     {
-                        return Task.FromResult(innerContentLevel2);
-                    });
+                        v.StartTagHelperWritingScope(encoder: null);
 
-                    innerContentLevel2 = v.EndTagHelperWritingScope();
-                    outputLevel2.Content = await outputLevel2.GetChildContentAsync();
+                        Assert.Equal(3, bufferScope.CreatedBuffers.Count);
+                        Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
+                        v.Write("Level:2"); // Creates a new buffer for the TagHelper.
+                        Assert.Equal(4, bufferScope.CreatedBuffers.Count);
+                        Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
 
-                    Assert.Equal(4, bufferScope.CreatedBuffers.Count);
-                    Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
-                    v.Write(outputLevel2); // Writing the TagHelper to output returns a buffer.
+                        TagHelperContent innerContentLevel2 = null;
+                        var outputLevel2 = new TagHelperOutput(
+                            "t3",
+                            new TagHelperAttributeList(),
+                            (_, encoder) =>
+                            {
+                                return Task.FromResult(innerContentLevel2);
+                            }
+                        );
+
+                        innerContentLevel2 = v.EndTagHelperWritingScope();
+                        outputLevel2.Content = await outputLevel2.GetChildContentAsync();
+
+                        Assert.Equal(4, bufferScope.CreatedBuffers.Count);
+                        Assert.Equal(1, bufferScope.ReturnedBuffers.Count);
+                        v.Write(outputLevel2); // Writing the TagHelper to output returns a buffer.
+                        Assert.Equal(4, bufferScope.CreatedBuffers.Count);
+                        Assert.Equal(2, bufferScope.ReturnedBuffers.Count);
+                    }
+
                     Assert.Equal(4, bufferScope.CreatedBuffers.Count);
                     Assert.Equal(2, bufferScope.ReturnedBuffers.Count);
+                    v.Write("Level:1-B"); // Already have a buffer for this scope.
+                    Assert.Equal(4, bufferScope.CreatedBuffers.Count);
+                    Assert.Equal(2, bufferScope.ReturnedBuffers.Count);
+
+                    innerContentLevel1 = v.EndTagHelperWritingScope();
+                    outputLevel1.Content = await outputLevel1.GetChildContentAsync();
+
+                    Assert.Equal(4, bufferScope.CreatedBuffers.Count);
+                    Assert.Equal(2, bufferScope.ReturnedBuffers.Count);
+                    v.Write(outputLevel1); // Writing the TagHelper to output returns a buffer.
+                    Assert.Equal(4, bufferScope.CreatedBuffers.Count);
+                    Assert.Equal(3, bufferScope.ReturnedBuffers.Count);
                 }
 
                 Assert.Equal(4, bufferScope.CreatedBuffers.Count);
-                Assert.Equal(2, bufferScope.ReturnedBuffers.Count);
-                v.Write("Level:1-B"); // Already have a buffer for this scope.
-                Assert.Equal(4, bufferScope.CreatedBuffers.Count);
-                Assert.Equal(2, bufferScope.ReturnedBuffers.Count);
-
-                innerContentLevel1 = v.EndTagHelperWritingScope();
-                outputLevel1.Content = await outputLevel1.GetChildContentAsync();
-
-                Assert.Equal(4, bufferScope.CreatedBuffers.Count);
-                Assert.Equal(2, bufferScope.ReturnedBuffers.Count);
-                v.Write(outputLevel1); // Writing the TagHelper to output returns a buffer.
+                Assert.Equal(3, bufferScope.ReturnedBuffers.Count);
+                v.Write("Level:0"); // Already have a buffer for this scope.
                 Assert.Equal(4, bufferScope.CreatedBuffers.Count);
                 Assert.Equal(3, bufferScope.ReturnedBuffers.Count);
-            }
-
-            Assert.Equal(4, bufferScope.CreatedBuffers.Count);
-            Assert.Equal(3, bufferScope.ReturnedBuffers.Count);
-            v.Write("Level:0"); // Already have a buffer for this scope.
-            Assert.Equal(4, bufferScope.CreatedBuffers.Count);
-            Assert.Equal(3, bufferScope.ReturnedBuffers.Count);
-
-        }, viewContext);
+            },
+            viewContext
+        );
 
         // Act & Assert
         await page.ExecuteAsync();
         Assert.Equal(
-            "HtmlEncode[[Level:0]]" +
-            "<t1>" +
-                "HtmlEncode[[Level:1-A]]" +
-            "</t1>" +
-            "HtmlEncode[[Level:0]]" +
-            "<t2>" +
-                "HtmlEncode[[Level:1-B]]" +
-                "<t3>" +
-                    "HtmlEncode[[Level:2]]" +
-                "</t3>" +
-                "HtmlEncode[[Level:1-B]]" +
-            "</t2>" +
-            "HtmlEncode[[Level:0]]",
-            page.RenderedContent);
+            "HtmlEncode[[Level:0]]"
+                + "<t1>"
+                + "HtmlEncode[[Level:1-A]]"
+                + "</t1>"
+                + "HtmlEncode[[Level:0]]"
+                + "<t2>"
+                + "HtmlEncode[[Level:1-B]]"
+                + "<t3>"
+                + "HtmlEncode[[Level:2]]"
+                + "</t3>"
+                + "HtmlEncode[[Level:1-B]]"
+                + "</t2>"
+                + "HtmlEncode[[Level:0]]",
+            page.RenderedContent
+        );
     }
 
     [Fact]
@@ -422,9 +444,9 @@ public class RazorPageTest
             v.Write(v.RenderSection("bar"));
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                { "bar", () => page.Output.WriteAsync(expected) }
-            };
+        {
+            { "bar", () => page.Output.WriteAsync(expected) },
+        };
 
         // Act
         await page.ExecuteAsync();
@@ -446,9 +468,11 @@ public class RazorPageTest
 
         // Act & Assert
         await page.ExecuteAsync();
-        Assert.Equal("RenderSection invocation in '/Views/TestPath/Test.cshtml' is invalid. " +
-            "RenderSection can only be called from a layout page.",
-            ex.Message);
+        Assert.Equal(
+            "RenderSection invocation in '/Views/TestPath/Test.cshtml' is invalid. "
+                + "RenderSection can only be called from a layout page.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -457,19 +481,23 @@ public class RazorPageTest
         // Arrange
         var context = CreateViewContext(viewPath: "/Views/TestPath/Test.cshtml");
         context.ExecutingFilePath = "/Views/Shared/_Layout.cshtml";
-        var page = CreatePage(v =>
-        {
-            v.RenderSection("bar");
-        }, context: context);
-        page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
+        var page = CreatePage(
+            v =>
             {
-                { "baz", _nullRenderAsyncDelegate }
-            };
+                v.RenderSection("bar");
+            },
+            context: context
+        );
+        page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
+        {
+            { "baz", _nullRenderAsyncDelegate },
+        };
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => page.ExecuteAsync());
-        var message = $"The layout page '/Views/Shared/_Layout.cshtml' cannot find the section 'bar'" +
-            " in the content page '/Views/TestPath/Test.cshtml'.";
+        var message =
+            $"The layout page '/Views/Shared/_Layout.cshtml' cannot find the section 'bar'"
+            + " in the content page '/Views/TestPath/Test.cshtml'.";
         Assert.Equal(message, ex.Message);
     }
 
@@ -479,15 +507,18 @@ public class RazorPageTest
         // Arrange
         var context = CreateViewContext(viewPath: "/Views/TestPath/Test.cshtml");
         context.ExecutingFilePath = "/Views/Shared/_Layout.cshtml";
-        var page = CreatePage(v =>
-        {
-            v.Path = "/Views/TestPath/Test.cshtml";
-            v.IgnoreSection("bar");
-        }, context);
-        page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
+        var page = CreatePage(
+            v =>
             {
-                { "baz", _nullRenderAsyncDelegate }
-            };
+                v.Path = "/Views/TestPath/Test.cshtml";
+                v.IgnoreSection("bar");
+            },
+            context
+        );
+        page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
+        {
+            { "baz", _nullRenderAsyncDelegate },
+        };
 
         // Act & Assert
         await page.ExecuteAsync();
@@ -505,9 +536,11 @@ public class RazorPageTest
         page.ExecuteAsync();
 
         // Act & Assert
-        ExceptionAssert.Throws<InvalidOperationException>(() => page.IsSectionDefined("foo"),
-            "IsSectionDefined invocation in '/Views/TestPath/Test.cshtml' is invalid." +
-            " IsSectionDefined can only be called from a layout page.");
+        ExceptionAssert.Throws<InvalidOperationException>(
+            () => page.IsSectionDefined("foo"),
+            "IsSectionDefined invocation in '/Views/TestPath/Test.cshtml' is invalid."
+                + " IsSectionDefined can only be called from a layout page."
+        );
     }
 
     [Fact]
@@ -522,9 +555,9 @@ public class RazorPageTest
             v.RenderBodyPublic();
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                { "baz", _nullRenderAsyncDelegate }
-            };
+        {
+            { "baz", _nullRenderAsyncDelegate },
+        };
         page.BodyContent = new HtmlString("body-content");
 
         // Act
@@ -546,9 +579,9 @@ public class RazorPageTest
             v.RenderBodyPublic();
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                { "baz", _nullRenderAsyncDelegate }
-            };
+        {
+            { "baz", _nullRenderAsyncDelegate },
+        };
         page.BodyContent = new HtmlString("body-content");
 
         // Act
@@ -570,16 +603,17 @@ public class RazorPageTest
             v.RenderSection("header");
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                { "header", _nullRenderAsyncDelegate }
-            };
+        {
+            { "header", _nullRenderAsyncDelegate },
+        };
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(page.ExecuteAsync);
         Assert.Equal(
-            "RenderSectionAsync invocation in '/Views/TestPath/Test.cshtml' is invalid." +
-            " The section 'header' has already been rendered.",
-            ex.Message);
+            "RenderSectionAsync invocation in '/Views/TestPath/Test.cshtml' is invalid."
+                + " The section 'header' has already been rendered.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -594,16 +628,17 @@ public class RazorPageTest
             await v.RenderSectionAsync("header");
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                { "header", _nullRenderAsyncDelegate }
-            };
+        {
+            { "header", _nullRenderAsyncDelegate },
+        };
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(page.ExecuteAsync);
         Assert.Equal(
-            "RenderSectionAsync invocation in '/Views/TestPath/Test.cshtml' is invalid." +
-            " The section 'header' has already been rendered.",
-            ex.Message);
+            "RenderSectionAsync invocation in '/Views/TestPath/Test.cshtml' is invalid."
+                + " The section 'header' has already been rendered.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -618,16 +653,17 @@ public class RazorPageTest
             await v.RenderSectionAsync("header");
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                { "header", _nullRenderAsyncDelegate }
-            };
+        {
+            { "header", _nullRenderAsyncDelegate },
+        };
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(page.ExecuteAsync);
         Assert.Equal(
-            "RenderSectionAsync invocation in '/Views/TestPath/Test.cshtml' is invalid." +
-            " The section 'header' has already been rendered.",
-            ex.Message);
+            "RenderSectionAsync invocation in '/Views/TestPath/Test.cshtml' is invalid."
+                + " The section 'header' has already been rendered.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -644,9 +680,10 @@ public class RazorPageTest
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(page.ExecuteAsync);
         Assert.Equal(
-            "RenderSectionAsync invocation in '/Views/TestPath/Test.cshtml' is invalid. " +
-            "RenderSectionAsync can only be called from a layout page.",
-            ex.Message);
+            "RenderSectionAsync invocation in '/Views/TestPath/Test.cshtml' is invalid. "
+                + "RenderSectionAsync can only be called from a layout page.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -654,16 +691,19 @@ public class RazorPageTest
     {
         // Arrange
         var path = "page-path";
-        var page = CreatePage(v =>
-        {
-        });
+        var page = CreatePage(v => { });
         page.Path = path;
         page.BodyContent = new HtmlString("some content");
         await page.ExecuteAsync();
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => page.EnsureRenderedBodyOrSections());
-        Assert.Equal($"RenderBody has not been called for the page at '{path}'. To ignore call IgnoreBody().", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => page.EnsureRenderedBodyOrSections()
+        );
+        Assert.Equal(
+            $"RenderBody has not been called for the page at '{path}'. To ignore call IgnoreBody().",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -671,9 +711,7 @@ public class RazorPageTest
     {
         // Arrange
         var path = "page-path";
-        var page = CreatePage(v =>
-        {
-        });
+        var page = CreatePage(v => { });
         page.Path = path;
         page.BodyContent = new HtmlString("some content");
         page.IgnoreBody();
@@ -689,23 +727,24 @@ public class RazorPageTest
         // Arrange
         var path = "page-path";
         var sectionName = "sectionA";
-        var page = CreatePage(v =>
-        {
-        });
+        var page = CreatePage(v => { });
         page.Path = path;
         page.BodyContent = new HtmlString("some content");
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                { sectionName, _nullRenderAsyncDelegate }
-            };
+        {
+            { sectionName, _nullRenderAsyncDelegate },
+        };
         await page.ExecuteAsync();
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => page.EnsureRenderedBodyOrSections());
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => page.EnsureRenderedBodyOrSections()
+        );
         Assert.Equal(
-            "The following sections have been defined but have not been rendered by the page at " +
-            $"'{path}': '{sectionName}'. To ignore an unrendered section call IgnoreSection(\"sectionName\").",
-            ex.Message);
+            "The following sections have been defined but have not been rendered by the page at "
+                + $"'{path}': '{sectionName}'. To ignore an unrendered section call IgnoreSection(\"sectionName\").",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -714,15 +753,13 @@ public class RazorPageTest
         // Arrange
         var path = "page-path";
         var sectionName = "sectionA";
-        var page = CreatePage(v =>
-        {
-        });
+        var page = CreatePage(v => { });
         page.Path = path;
         page.BodyContent = new HtmlString("some content");
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                { sectionName, _nullRenderAsyncDelegate }
-            };
+        {
+            { sectionName, _nullRenderAsyncDelegate },
+        };
         page.IgnoreSection(sectionName);
 
         // Act & Assert (does not throw)
@@ -743,10 +780,10 @@ public class RazorPageTest
         page.Path = path;
         page.BodyContent = new HtmlString("some content");
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                { "ignored", _nullRenderAsyncDelegate },
-                { "not-ignored-section", () => page.Output.WriteAsync("not-ignored-section-content") }
-            };
+        {
+            { "ignored", _nullRenderAsyncDelegate },
+            { "not-ignored-section", () => page.Output.WriteAsync("not-ignored-section-content") },
+        };
 
         // Act
         await page.ExecuteAsync();
@@ -768,10 +805,10 @@ public class RazorPageTest
         });
         page.BodyContent = new HtmlString("some content");
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                { sectionA, _nullRenderAsyncDelegate },
-                { sectionB, _nullRenderAsyncDelegate },
-            };
+        {
+            { sectionA, _nullRenderAsyncDelegate },
+            { sectionB, _nullRenderAsyncDelegate },
+        };
 
         // Act & Assert (does not throw)
         await page.ExecuteAsync();
@@ -782,14 +819,16 @@ public class RazorPageTest
     public async Task ExecuteAsync_RendersSectionsAndBody()
     {
         // Arrange
-        var expected = string.Join(Environment.NewLine,
-                                   "Layout start",
-                                   "Header section",
-                                   "Async Header section",
-                                   "body content",
-                                   "Async Footer section",
-                                   "Footer section",
-                                   "Layout end");
+        var expected = string.Join(
+            Environment.NewLine,
+            "Layout start",
+            "Header section",
+            "Async Header section",
+            "body content",
+            "Async Footer section",
+            "Footer section",
+            "Layout end"
+        );
         var page = CreatePage(async v =>
         {
             v.WriteLiteral("Layout start" + Environment.NewLine);
@@ -802,20 +841,12 @@ public class RazorPageTest
         });
         page.BodyContent = new HtmlString("body content" + Environment.NewLine);
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
-            {
-                {
-                    "footer", () => page.Output.WriteLineAsync("Footer section")
-                },
-                {
-                    "header", () => page.Output.WriteLineAsync("Header section")
-                },
-                {
-                    "async-header", () => page.Output.WriteLineAsync("Async Header section")
-                },
-                {
-                    "async-footer", () => page.Output.WriteLineAsync("Async Footer section")
-                },
-            };
+        {
+            { "footer", () => page.Output.WriteLineAsync("Footer section") },
+            { "header", () => page.Output.WriteLineAsync("Header section") },
+            { "async-header", () => page.Output.WriteLineAsync("Async Header section") },
+            { "async-footer", () => page.Output.WriteLineAsync("Async Footer section") },
+        };
 
         // Act
         await page.ExecuteAsync();
@@ -831,14 +862,9 @@ public class RazorPageTest
         // Arrange
         var expected = "urlhelper-url";
         var helper = new Mock<IUrlHelper>();
-        helper
-            .Setup(h => h.Content("url"))
-            .Returns(expected)
-            .Verifiable();
+        helper.Setup(h => h.Content("url")).Returns(expected).Verifiable();
         var factory = new Mock<IUrlHelperFactory>();
-        factory
-            .Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>()))
-            .Returns(helper.Object);
+        factory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>())).Returns(helper.Object);
 
         var page = CreatePage(v =>
         {
@@ -846,8 +872,7 @@ public class RazorPageTest
             v.Write(v.Href("url"));
         });
         var services = new Mock<IServiceProvider>();
-        services.Setup(s => s.GetService(typeof(IUrlHelperFactory)))
-                 .Returns(factory.Object);
+        services.Setup(s => s.GetService(typeof(IUrlHelperFactory))).Returns(factory.Object);
         page.Context.RequestServices = services.Object;
 
         // Act
@@ -865,10 +890,13 @@ public class RazorPageTest
         // Arrange
         var writer = new Mock<TextWriter>();
         var context = CreateViewContext(writer.Object);
-        var page = CreatePage(async p =>
-        {
-            await p.FlushAsync();
-        }, context);
+        var page = CreatePage(
+            async p =>
+            {
+                await p.FlushAsync();
+            },
+            context
+        );
 
         // Act
         await page.ExecuteAsync();
@@ -881,16 +909,20 @@ public class RazorPageTest
     public async Task FlushAsync_ThrowsIfTheLayoutHasBeenSet()
     {
         // Arrange
-        var expected = "Layout page '/Views/TestPath/Test.cshtml' cannot be rendered" +
-            " after 'FlushAsync' has been invoked.";
+        var expected =
+            "Layout page '/Views/TestPath/Test.cshtml' cannot be rendered"
+            + " after 'FlushAsync' has been invoked.";
         var writer = new Mock<TextWriter>();
         var context = CreateViewContext(writer.Object);
-        var page = CreatePage(async p =>
-        {
-            p.Path = "/Views/TestPath/Test.cshtml";
-            p.Layout = "foo";
-            await p.FlushAsync();
-        }, context);
+        var page = CreatePage(
+            async p =>
+            {
+                p.Path = "/Views/TestPath/Test.cshtml";
+                p.Layout = "foo";
+                await p.FlushAsync();
+            },
+            context
+        );
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => page.ExecuteAsync());
@@ -903,14 +935,20 @@ public class RazorPageTest
         // Arrange
         var writer = new Mock<TextWriter>();
         var context = CreateViewContext(writer.Object);
-        var page = CreatePage(p =>
-        {
-            p.Layout = "bar";
-            p.DefineSection("test-section", async () =>
+        var page = CreatePage(
+            p =>
             {
-                await p.FlushAsync();
-            });
-        }, context);
+                p.Layout = "bar";
+                p.DefineSection(
+                    "test-section",
+                    async () =>
+                    {
+                        await p.FlushAsync();
+                    }
+                );
+            },
+            context
+        );
 
         // Act
         await page.ExecuteAsync();
@@ -928,10 +966,13 @@ public class RazorPageTest
         HtmlString actual = null;
         var writer = new Mock<TextWriter>();
         var context = CreateViewContext(writer.Object);
-        var page = CreatePage(async p =>
-        {
-            actual = await p.FlushAsync();
-        }, context);
+        var page = CreatePage(
+            async p =>
+            {
+                actual = await p.FlushAsync();
+            },
+            context
+        );
 
         // Act
         await page.ExecuteAsync();
@@ -946,21 +987,12 @@ public class RazorPageTest
         {
             // attributeValues, expectedValue
             return new TheoryData<string, int, object, int, bool, string>
-                {
-                    {
-                        string.Empty, 9, (object)"Hello", 9, true, "Hello"
-                    },
-                    {
-                        " ", 9, (object)"Hello", 10, true, " Hello"
-                    },
-                    {
-
-                        " ", 9, (object)null, 10, false, string.Empty
-                    },
-                    {
-                        " ", 9, (object)false, 10, false, " HtmlEncode[[False]]"
-                    },
-                };
+            {
+                { string.Empty, 9, (object)"Hello", 9, true, "Hello" },
+                { " ", 9, (object)"Hello", 10, true, " Hello" },
+                { " ", 9, (object)null, 10, false, string.Empty },
+                { " ", 9, (object)false, 10, false, " HtmlEncode[[False]]" },
+            };
         }
     }
 
@@ -972,7 +1004,8 @@ public class RazorPageTest
         object value,
         int valueOffset,
         bool isLiteral,
-        string expectedValue)
+        string expectedValue
+    )
     {
         // Arrange
         var page = CreatePage(p => { });
@@ -984,10 +1017,16 @@ public class RazorPageTest
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
             startTagHelperWritingScope: _ => { },
-            endTagHelperWritingScope: () => new DefaultTagHelperContent());
+            endTagHelperWritingScope: () => new DefaultTagHelperContent()
+        );
 
         // Act
-        page.BeginAddHtmlAttributeValues(executionContext, "someattr", 1, HtmlAttributeValueStyle.SingleQuotes);
+        page.BeginAddHtmlAttributeValues(
+            executionContext,
+            "someattr",
+            1,
+            HtmlAttributeValueStyle.SingleQuotes
+        );
         page.AddHtmlAttributeValue(prefix, prefixOffset, value, valueOffset, 0, isLiteral);
         page.EndAddHtmlAttributeValues(executionContext);
 
@@ -996,14 +1035,22 @@ public class RazorPageTest
         var htmlAttribute = Assert.Single(output.Attributes);
         Assert.Equal("someattr", htmlAttribute.Name, StringComparer.Ordinal);
         var htmlContent = Assert.IsAssignableFrom<IHtmlContent>(htmlAttribute.Value);
-        Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(htmlContent), StringComparer.Ordinal);
+        Assert.Equal(
+            expectedValue,
+            HtmlContentUtilities.HtmlContentToString(htmlContent),
+            StringComparer.Ordinal
+        );
         Assert.Equal(HtmlAttributeValueStyle.SingleQuotes, htmlAttribute.ValueStyle);
 
         var context = executionContext.Context;
         var allAttribute = Assert.Single(context.AllAttributes);
         Assert.Equal("someattr", allAttribute.Name, StringComparer.Ordinal);
         htmlContent = Assert.IsAssignableFrom<IHtmlContent>(allAttribute.Value);
-        Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(htmlContent), StringComparer.Ordinal);
+        Assert.Equal(
+            expectedValue,
+            HtmlContentUtilities.HtmlContentToString(htmlContent),
+            StringComparer.Ordinal
+        );
         Assert.Equal(HtmlAttributeValueStyle.SingleQuotes, allAttribute.ValueStyle);
     }
 
@@ -1014,9 +1061,9 @@ public class RazorPageTest
         var expectedValue = "  HtmlEncode[[True]]  abcd";
         var attributeValues = new[]
         {
-                Tuple.Create("  ", 9, (object)true, 11, false),
-                Tuple.Create("  ", 9, (object)"abcd", 17, true)
-            };
+            Tuple.Create("  ", 9, (object)true, 11, false),
+            Tuple.Create("  ", 9, (object)"abcd", 17, true),
+        };
         var page = CreatePage(p => { });
         page.HtmlEncoder = new HtmlTestEncoder();
         var executionContext = new TagHelperExecutionContext(
@@ -1026,13 +1073,26 @@ public class RazorPageTest
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
             startTagHelperWritingScope: _ => { },
-            endTagHelperWritingScope: () => new DefaultTagHelperContent());
+            endTagHelperWritingScope: () => new DefaultTagHelperContent()
+        );
 
         // Act
-        page.BeginAddHtmlAttributeValues(executionContext, "someattr", attributeValues.Length, HtmlAttributeValueStyle.SingleQuotes);
+        page.BeginAddHtmlAttributeValues(
+            executionContext,
+            "someattr",
+            attributeValues.Length,
+            HtmlAttributeValueStyle.SingleQuotes
+        );
         foreach (var value in attributeValues)
         {
-            page.AddHtmlAttributeValue(value.Item1, value.Item2, value.Item3, value.Item4, 0, value.Item5);
+            page.AddHtmlAttributeValue(
+                value.Item1,
+                value.Item2,
+                value.Item3,
+                value.Item4,
+                0,
+                value.Item5
+            );
         }
         page.EndAddHtmlAttributeValues(executionContext);
 
@@ -1041,14 +1101,22 @@ public class RazorPageTest
         var htmlAttribute = Assert.Single(output.Attributes);
         Assert.Equal("someattr", htmlAttribute.Name, StringComparer.Ordinal);
         var htmlContent = Assert.IsAssignableFrom<IHtmlContent>(htmlAttribute.Value);
-        Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(htmlContent), StringComparer.Ordinal);
+        Assert.Equal(
+            expectedValue,
+            HtmlContentUtilities.HtmlContentToString(htmlContent),
+            StringComparer.Ordinal
+        );
         Assert.Equal(HtmlAttributeValueStyle.SingleQuotes, htmlAttribute.ValueStyle);
 
         var context = executionContext.Context;
         var allAttribute = Assert.Single(context.AllAttributes);
         Assert.Equal("someattr", allAttribute.Name, StringComparer.Ordinal);
         htmlContent = Assert.IsAssignableFrom<IHtmlContent>(allAttribute.Value);
-        Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(htmlContent), StringComparer.Ordinal);
+        Assert.Equal(
+            expectedValue,
+            HtmlContentUtilities.HtmlContentToString(htmlContent),
+            StringComparer.Ordinal
+        );
         Assert.Equal(HtmlAttributeValueStyle.SingleQuotes, allAttribute.ValueStyle);
     }
 
@@ -1059,10 +1127,10 @@ public class RazorPageTest
         var expectedValue = "prefix HtmlEncode[[suffix]]";
         var attributeValues = new[]
         {
-                Tuple.Create(string.Empty, 9, (object)"prefix", 9, true),
-                Tuple.Create("  ", 15, (object)null, 17, false),
-                Tuple.Create(" ", 21, (object)"suffix", 22, false),
-            };
+            Tuple.Create(string.Empty, 9, (object)"prefix", 9, true),
+            Tuple.Create("  ", 15, (object)null, 17, false),
+            Tuple.Create(" ", 21, (object)"suffix", 22, false),
+        };
         var page = CreatePage(p => { });
         page.HtmlEncoder = new HtmlTestEncoder();
         var executionContext = new TagHelperExecutionContext(
@@ -1072,13 +1140,26 @@ public class RazorPageTest
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
             startTagHelperWritingScope: _ => { },
-            endTagHelperWritingScope: () => new DefaultTagHelperContent());
+            endTagHelperWritingScope: () => new DefaultTagHelperContent()
+        );
 
         // Act
-        page.BeginAddHtmlAttributeValues(executionContext, "someattr", attributeValues.Length, HtmlAttributeValueStyle.SingleQuotes);
+        page.BeginAddHtmlAttributeValues(
+            executionContext,
+            "someattr",
+            attributeValues.Length,
+            HtmlAttributeValueStyle.SingleQuotes
+        );
         foreach (var value in attributeValues)
         {
-            page.AddHtmlAttributeValue(value.Item1, value.Item2, value.Item3, value.Item4, 0, value.Item5);
+            page.AddHtmlAttributeValue(
+                value.Item1,
+                value.Item2,
+                value.Item3,
+                value.Item4,
+                0,
+                value.Item5
+            );
         }
         page.EndAddHtmlAttributeValues(executionContext);
 
@@ -1087,14 +1168,22 @@ public class RazorPageTest
         var htmlAttribute = Assert.Single(output.Attributes);
         Assert.Equal("someattr", htmlAttribute.Name, StringComparer.Ordinal);
         var htmlContent = Assert.IsAssignableFrom<IHtmlContent>(htmlAttribute.Value);
-        Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(htmlContent), StringComparer.Ordinal);
+        Assert.Equal(
+            expectedValue,
+            HtmlContentUtilities.HtmlContentToString(htmlContent),
+            StringComparer.Ordinal
+        );
         Assert.Equal(HtmlAttributeValueStyle.SingleQuotes, htmlAttribute.ValueStyle);
 
         var context = executionContext.Context;
         var allAttribute = Assert.Single(context.AllAttributes);
         Assert.Equal("someattr", allAttribute.Name, StringComparer.Ordinal);
         htmlContent = Assert.IsAssignableFrom<IHtmlContent>(allAttribute.Value);
-        Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(htmlContent), StringComparer.Ordinal);
+        Assert.Equal(
+            expectedValue,
+            HtmlContentUtilities.HtmlContentToString(htmlContent),
+            StringComparer.Ordinal
+        );
         Assert.Equal(HtmlAttributeValueStyle.SingleQuotes, allAttribute.ValueStyle);
     }
 
@@ -1103,7 +1192,8 @@ public class RazorPageTest
     [InlineData(false, "False")]
     public void AddHtmlAttributeValues_OnlyAddsToAllAttributesWhenAttributeRemoved(
         object attributeValue,
-        string expectedValue)
+        string expectedValue
+    )
     {
         // Arrange
         var page = CreatePage(p => { });
@@ -1115,11 +1205,24 @@ public class RazorPageTest
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
             startTagHelperWritingScope: _ => { },
-            endTagHelperWritingScope: () => new DefaultTagHelperContent());
+            endTagHelperWritingScope: () => new DefaultTagHelperContent()
+        );
 
         // Act
-        page.BeginAddHtmlAttributeValues(executionContext, "someattr", 1, HtmlAttributeValueStyle.DoubleQuotes);
-        page.AddHtmlAttributeValue(string.Empty, 9, attributeValue, 9, valueLength: 0, isLiteral: false);
+        page.BeginAddHtmlAttributeValues(
+            executionContext,
+            "someattr",
+            1,
+            HtmlAttributeValueStyle.DoubleQuotes
+        );
+        page.AddHtmlAttributeValue(
+            string.Empty,
+            9,
+            attributeValue,
+            9,
+            valueLength: 0,
+            isLiteral: false
+        );
         page.EndAddHtmlAttributeValues(executionContext);
 
         // Assert
@@ -1145,10 +1248,16 @@ public class RazorPageTest
             uniqueId: string.Empty,
             executeChildContentAsync: () => Task.FromResult(result: true),
             startTagHelperWritingScope: _ => { },
-            endTagHelperWritingScope: () => new DefaultTagHelperContent());
+            endTagHelperWritingScope: () => new DefaultTagHelperContent()
+        );
 
         // Act
-        page.BeginAddHtmlAttributeValues(executionContext, "someattr", 1, HtmlAttributeValueStyle.NoQuotes);
+        page.BeginAddHtmlAttributeValues(
+            executionContext,
+            "someattr",
+            1,
+            HtmlAttributeValueStyle.NoQuotes
+        );
         page.AddHtmlAttributeValue(string.Empty, 9, true, 9, valueLength: 0, isLiteral: false);
         page.EndAddHtmlAttributeValues(executionContext);
 
@@ -1171,23 +1280,13 @@ public class RazorPageTest
         {
             // AttributeValues, ExpectedOutput
             return new TheoryData<string, int, object, int, bool, string>
-                {
-                    {
-                        string.Empty, 9, (object)true, 9, false, "someattr=HtmlEncode[[someattr]]"
-                    },
-                    {
-                        string.Empty, 9, (object)false, 9, false, string.Empty
-                    },
-                    {
-                        string.Empty, 9, (object)null, 9, false, string.Empty
-                    },
-                    {
-                        "  ", 9, (object)false, 11, false, "someattr=  HtmlEncode[[False]]"
-                    },
-                    {
-                        "  ", 9, (object)null, 11, false, "someattr="
-                    },
-                };
+            {
+                { string.Empty, 9, (object)true, 9, false, "someattr=HtmlEncode[[someattr]]" },
+                { string.Empty, 9, (object)false, 9, false, string.Empty },
+                { string.Empty, 9, (object)null, 9, false, string.Empty },
+                { "  ", 9, (object)false, 11, false, "someattr=  HtmlEncode[[False]]" },
+                { "  ", 9, (object)null, 11, false, "someattr=" },
+            };
         }
     }
 
@@ -1199,7 +1298,8 @@ public class RazorPageTest
         object value,
         int valueOffset,
         bool isLiteral,
-        string expectedOutput)
+        string expectedOutput
+    )
     {
         // Arrange
         var page = CreatePage(p => { });
@@ -1216,7 +1316,8 @@ public class RazorPageTest
             value,
             valueOffset,
             value?.ToString().Length ?? 0,
-            isLiteral);
+            isLiteral
+        );
         page.EndWriteAttribute();
         page.PopWriter();
 
@@ -1230,9 +1331,9 @@ public class RazorPageTest
         // Arrange
         var attributeValues = new[]
         {
-                Tuple.Create("  ", 9, (object)true, 11, false),
-                Tuple.Create("  ", 15, (object)"abcd", 17, true),
-            };
+            Tuple.Create("  ", 9, (object)true, 11, false),
+            Tuple.Create("  ", 15, (object)"abcd", 17, true),
+        };
         var expectedOutput = "someattr=  HtmlEncode[[True]]  abcd";
 
         var page = CreatePage(p => { });
@@ -1252,7 +1353,8 @@ public class RazorPageTest
                 value.Item3,
                 value.Item4,
                 value.Item3?.ToString().Length ?? 0,
-                value.Item5);
+                value.Item5
+            );
         }
         page.EndWriteAttribute();
         page.PopWriter();
@@ -1374,18 +1476,23 @@ public class RazorPageTest
 
     private static TestableRazorPage CreatePage(
         Action<TestableRazorPage> executeAction,
-        ViewContext context = null)
+        ViewContext context = null
+    )
     {
-        return CreatePage(page =>
-        {
-            executeAction(page);
-            return Task.FromResult(0);
-        }, context);
+        return CreatePage(
+            page =>
+            {
+                executeAction(page);
+                return Task.FromResult(0);
+            },
+            context
+        );
     }
 
     private static TestableRazorPage CreatePage(
         Func<TestableRazorPage, Task> executeAction,
-        ViewContext context = null)
+        ViewContext context = null
+    )
     {
         context = context ?? CreateViewContext();
         var view = new Mock<TestableRazorPage> { CallBase = true };
@@ -1405,7 +1512,8 @@ public class RazorPageTest
     private static ViewContext CreateViewContext(
         TextWriter writer = null,
         IViewBufferScope bufferScope = null,
-        string viewPath = null)
+        string viewPath = null
+    )
     {
         bufferScope = bufferScope ?? new TestViewBufferScope();
         var buffer = new ViewBuffer(bufferScope, viewPath ?? "TEST", 32);
@@ -1416,10 +1524,7 @@ public class RazorPageTest
             .AddSingleton<IViewBufferScope>(bufferScope)
             .BuildServiceProvider();
         httpContext.RequestServices = serviceProvider;
-        var actionContext = new ActionContext(
-            httpContext,
-            new RouteData(),
-            new ActionDescriptor());
+        var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var viewMock = new Mock<IView>();
         if (!string.IsNullOrEmpty(viewPath))
         {
@@ -1431,7 +1536,8 @@ public class RazorPageTest
             new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary()),
             Mock.Of<ITempDataDictionary>(),
             writer,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
     }
 
     public abstract class TestableRazorPage : RazorPage

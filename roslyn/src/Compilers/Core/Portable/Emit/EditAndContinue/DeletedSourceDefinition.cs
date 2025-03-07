@@ -16,7 +16,10 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
     {
         public readonly T OldDefinition;
 
-        private readonly Dictionary<ITypeDefinition, DeletedSourceTypeDefinition> _typesUsedByDeletedMembers;
+        private readonly Dictionary<
+            ITypeDefinition,
+            DeletedSourceTypeDefinition
+        > _typesUsedByDeletedMembers;
 
         /// <summary>
         /// Constructs a deleted definition
@@ -26,31 +29,37 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
         /// Cache of type definitions used in signatures of deleted members. Used so that if a method 'C M(C c)' is deleted
         /// we use the same <see cref="DeletedSourceTypeDefinition"/> instance for the method return type, and the parameter type.
         /// </param>
-        protected DeletedSourceDefinition(T oldDefinition, Dictionary<ITypeDefinition, DeletedSourceTypeDefinition> typesUsedByDeletedMembers)
+        protected DeletedSourceDefinition(
+            T oldDefinition,
+            Dictionary<ITypeDefinition, DeletedSourceTypeDefinition> typesUsedByDeletedMembers
+        )
         {
             OldDefinition = oldDefinition;
 
             _typesUsedByDeletedMembers = typesUsedByDeletedMembers;
         }
 
-        public bool IsEncDeleted
-            => true;
+        public bool IsEncDeleted => true;
 
         public IEnumerable<ICustomAttribute> GetAttributes(EmitContext context)
             // attributes shouldn't be emitted for deleted definitions
-            => throw ExceptionUtilities.Unreachable();
+            =>
+            throw ExceptionUtilities.Unreachable();
 
-        public ISymbolInternal? GetInternalSymbol()
-            => OldDefinition.GetInternalSymbol();
+        public ISymbolInternal? GetInternalSymbol() => OldDefinition.GetInternalSymbol();
 
         public abstract void Dispatch(MetadataVisitor visitor);
 
-        public IDefinition? AsDefinition(EmitContext context)
-            => this;
+        public IDefinition? AsDefinition(EmitContext context) => this;
 
-        protected ImmutableArray<DeletedSourceParameterDefinition> WrapParameters(ImmutableArray<IParameterDefinition> parameters)
+        protected ImmutableArray<DeletedSourceParameterDefinition> WrapParameters(
+            ImmutableArray<IParameterDefinition> parameters
+        )
         {
-            return parameters.SelectAsArray(p => new DeletedSourceParameterDefinition(p, _typesUsedByDeletedMembers));
+            return parameters.SelectAsArray(p => new DeletedSourceParameterDefinition(
+                p,
+                _typesUsedByDeletedMembers
+            ));
         }
 
         [return: NotNullIfNotNull(nameof(typeReference))]
@@ -60,7 +69,10 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             {
                 if (!_typesUsedByDeletedMembers.TryGetValue(typeDef, out var deletedType))
                 {
-                    deletedType = new DeletedSourceTypeDefinition(typeDef, _typesUsedByDeletedMembers);
+                    deletedType = new DeletedSourceTypeDefinition(
+                        typeDef,
+                        _typesUsedByDeletedMembers
+                    );
                     _typesUsedByDeletedMembers.Add(typeDef, deletedType);
                 }
 

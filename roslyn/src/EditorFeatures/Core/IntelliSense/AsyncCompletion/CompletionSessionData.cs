@@ -34,12 +34,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // Editor has to separate options control the behavior of block waiting computation of completion items.
             // When set to true, `NonBlockingCompletionOptionId` takes precedence over `ResponsiveCompletionOptionId`
             // and is equivalent to `ResponsiveCompletionOptionId` to true and `ResponsiveCompletionThresholdOptionId` to 0.
-            var nonBlockingCompletionEnabled = session.TextView.Options.GetOptionValue(DefaultOptions.NonBlockingCompletionOptionId);
-            var responsiveCompletionEnabled = session.TextView.Options.GetOptionValue(DefaultOptions.ResponsiveCompletionOptionId);
-            NonBlockingCompletionEnabled = nonBlockingCompletionEnabled || responsiveCompletionEnabled;
+            var nonBlockingCompletionEnabled = session.TextView.Options.GetOptionValue(
+                DefaultOptions.NonBlockingCompletionOptionId
+            );
+            var responsiveCompletionEnabled = session.TextView.Options.GetOptionValue(
+                DefaultOptions.ResponsiveCompletionOptionId
+            );
+            NonBlockingCompletionEnabled =
+                nonBlockingCompletionEnabled || responsiveCompletionEnabled;
         }
 
-        public static CompletionSessionData GetOrCreateSessionData(IAsyncCompletionSession session)
-            => session.Properties.GetOrCreateSingletonProperty(RoslynCompletionSessionData, () => new CompletionSessionData(session));
+        public static CompletionSessionData GetOrCreateSessionData(
+            IAsyncCompletionSession session
+        ) =>
+            session.Properties.GetOrCreateSingletonProperty(
+                RoslynCompletionSessionData,
+                () => new CompletionSessionData(session)
+            );
     }
 }

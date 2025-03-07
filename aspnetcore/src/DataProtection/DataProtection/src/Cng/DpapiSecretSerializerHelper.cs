@@ -52,7 +52,13 @@ internal static unsafe class DpapiSecretSerializerHelper
                 secret.WriteSecretIntoBuffer(new ArraySegment<byte>(plaintextSecret));
                 fixed (byte* pbPurpose = _purpose)
                 {
-                    return ProtectWithDpapiCore(pbPlaintextSecret, (uint)plaintextSecret.Length, pbPurpose, (uint)_purpose.Length, fLocalMachine: protectToLocalMachine);
+                    return ProtectWithDpapiCore(
+                        pbPlaintextSecret,
+                        (uint)plaintextSecret.Length,
+                        pbPurpose,
+                        (uint)_purpose.Length,
+                        fLocalMachine: protectToLocalMachine
+                    );
                 }
             }
             finally
@@ -63,19 +69,25 @@ internal static unsafe class DpapiSecretSerializerHelper
         }
     }
 
-    internal static byte[] ProtectWithDpapiCore(byte* pbSecret, uint cbSecret, byte* pbOptionalEntropy, uint cbOptionalEntropy, bool fLocalMachine = false)
+    internal static byte[] ProtectWithDpapiCore(
+        byte* pbSecret,
+        uint cbSecret,
+        byte* pbOptionalEntropy,
+        uint cbOptionalEntropy,
+        bool fLocalMachine = false
+    )
     {
         byte dummy; // provides a valid memory address if the secret or entropy has zero length
 
         var dataIn = new DATA_BLOB()
         {
             cbData = cbSecret,
-            pbData = (pbSecret != null) ? pbSecret : &dummy
+            pbData = (pbSecret != null) ? pbSecret : &dummy,
         };
         var entropy = new DATA_BLOB()
         {
             cbData = cbOptionalEntropy,
-            pbData = (pbOptionalEntropy != null) ? pbOptionalEntropy : &dummy
+            pbData = (pbOptionalEntropy != null) ? pbOptionalEntropy : &dummy,
         };
         var dataOut = default(DATA_BLOB);
 
@@ -91,8 +103,10 @@ internal static unsafe class DpapiSecretSerializerHelper
                 pOptionalEntropy: &entropy,
                 pvReserved: IntPtr.Zero,
                 pPromptStruct: IntPtr.Zero,
-                dwFlags: CRYPTPROTECT_UI_FORBIDDEN | ((fLocalMachine) ? CRYPTPROTECT_LOCAL_MACHINE : 0),
-                pDataOut: &dataOut);
+                dwFlags: CRYPTPROTECT_UI_FORBIDDEN
+                    | ((fLocalMachine) ? CRYPTPROTECT_LOCAL_MACHINE : 0),
+                pDataOut: &dataOut
+            );
             if (!success)
             {
                 var errorCode = Marshal.GetLastWin32Error();
@@ -115,7 +129,10 @@ internal static unsafe class DpapiSecretSerializerHelper
         }
     }
 
-    public static byte[] ProtectWithDpapiNG(ISecret secret, NCryptDescriptorHandle protectionDescriptorHandle)
+    public static byte[] ProtectWithDpapiNG(
+        ISecret secret,
+        NCryptDescriptorHandle protectionDescriptorHandle
+    )
     {
         Debug.Assert(secret != null);
         Debug.Assert(protectionDescriptorHandle != null);
@@ -131,7 +148,8 @@ internal static unsafe class DpapiSecretSerializerHelper
                 return ProtectWithDpapiNGCore(
                     protectionDescriptorHandle: protectionDescriptorHandle,
                     pbData: (pbPlaintextSecret != null) ? pbPlaintextSecret : &dummy,
-                    cbData: (uint)plaintextSecret.Length);
+                    cbData: (uint)plaintextSecret.Length
+                );
             }
             finally
             {
@@ -141,7 +159,11 @@ internal static unsafe class DpapiSecretSerializerHelper
         }
     }
 
-    private static byte[] ProtectWithDpapiNGCore(NCryptDescriptorHandle protectionDescriptorHandle, byte* pbData, uint cbData)
+    private static byte[] ProtectWithDpapiNGCore(
+        NCryptDescriptorHandle protectionDescriptorHandle,
+        byte* pbData,
+        uint cbData
+    )
     {
         Debug.Assert(protectionDescriptorHandle != null);
         Debug.Assert(pbData != null);
@@ -157,7 +179,8 @@ internal static unsafe class DpapiSecretSerializerHelper
             pMemPara: IntPtr.Zero,
             hWnd: IntPtr.Zero,
             ppbProtectedBlob: out protectedData,
-            pcbProtectedBlob: out cbProtectedData);
+            pcbProtectedBlob: out cbProtectedData
+        );
         UnsafeNativeMethods.ThrowExceptionForNCryptStatus(ntstatus);
         CryptoUtil.AssertSafeHandleIsValid(protectedData);
 
@@ -178,7 +201,11 @@ internal static unsafe class DpapiSecretSerializerHelper
                     try
                     {
                         protectedData.DangerousAddRef(ref handleAcquired);
-                        UnsafeBufferUtil.BlockCopy(from: (void*)protectedData.DangerousGetHandle(), to: pbRetVal, byteCount: cbProtectedData);
+                        UnsafeBufferUtil.BlockCopy(
+                            from: (void*)protectedData.DangerousGetHandle(),
+                            to: pbRetVal,
+                            byteCount: cbProtectedData
+                        );
                     }
                     finally
                     {
@@ -201,24 +228,34 @@ internal static unsafe class DpapiSecretSerializerHelper
         {
             fixed (byte* pbPurpose = _purpose)
             {
-                return UnprotectWithDpapiCore(pbProtectedSecret, (uint)protectedSecret.Length, pbPurpose, (uint)_purpose.Length);
+                return UnprotectWithDpapiCore(
+                    pbProtectedSecret,
+                    (uint)protectedSecret.Length,
+                    pbPurpose,
+                    (uint)_purpose.Length
+                );
             }
         }
     }
 
-    internal static Secret UnprotectWithDpapiCore(byte* pbProtectedData, uint cbProtectedData, byte* pbOptionalEntropy, uint cbOptionalEntropy)
+    internal static Secret UnprotectWithDpapiCore(
+        byte* pbProtectedData,
+        uint cbProtectedData,
+        byte* pbOptionalEntropy,
+        uint cbOptionalEntropy
+    )
     {
         byte dummy; // provides a valid memory address if the secret or entropy has zero length
 
         var dataIn = new DATA_BLOB()
         {
             cbData = cbProtectedData,
-            pbData = (pbProtectedData != null) ? pbProtectedData : &dummy
+            pbData = (pbProtectedData != null) ? pbProtectedData : &dummy,
         };
         var entropy = new DATA_BLOB()
         {
             cbData = cbOptionalEntropy,
-            pbData = (pbOptionalEntropy != null) ? pbOptionalEntropy : &dummy
+            pbData = (pbOptionalEntropy != null) ? pbOptionalEntropy : &dummy,
         };
         var dataOut = default(DATA_BLOB);
 
@@ -235,7 +272,8 @@ internal static unsafe class DpapiSecretSerializerHelper
                 pvReserved: IntPtr.Zero,
                 pPromptStruct: IntPtr.Zero,
                 dwFlags: CRYPTPROTECT_UI_FORBIDDEN,
-                pDataOut: &dataOut);
+                pDataOut: &dataOut
+            );
             if (!success)
             {
                 var errorCode = Marshal.GetLastWin32Error();
@@ -265,7 +303,8 @@ internal static unsafe class DpapiSecretSerializerHelper
             byte dummy; // used to provide a valid memory address if protected data is zero-length
             return UnprotectWithDpapiNGCore(
                 pbData: (pbProtectedData != null) ? pbProtectedData : &dummy,
-                cbData: (uint)protectedData.Length);
+                cbData: (uint)protectedData.Length
+            );
         }
     }
 
@@ -284,7 +323,8 @@ internal static unsafe class DpapiSecretSerializerHelper
             pMemPara: IntPtr.Zero,
             hWnd: IntPtr.Zero,
             ppbData: out unencryptedPayloadHandle,
-            pcbData: out cbUnencryptedPayload);
+            pcbData: out cbUnencryptedPayload
+        );
         UnsafeNativeMethods.ThrowExceptionForNCryptStatus(ntstatus);
         CryptoUtil.AssertSafeHandleIsValid(unencryptedPayloadHandle);
 
@@ -304,13 +344,19 @@ internal static unsafe class DpapiSecretSerializerHelper
             try
             {
                 unencryptedPayloadHandle.DangerousAddRef(ref handleAcquired);
-                return new Secret((byte*)unencryptedPayloadHandle.DangerousGetHandle(), checked((int)cbUnencryptedPayload));
+                return new Secret(
+                    (byte*)unencryptedPayloadHandle.DangerousGetHandle(),
+                    checked((int)cbUnencryptedPayload)
+                );
             }
             finally
             {
                 if (handleAcquired)
                 {
-                    UnsafeBufferUtil.SecureZeroMemory((byte*)unencryptedPayloadHandle.DangerousGetHandle(), cbUnencryptedPayload);
+                    UnsafeBufferUtil.SecureZeroMemory(
+                        (byte*)unencryptedPayloadHandle.DangerousGetHandle(),
+                        cbUnencryptedPayload
+                    );
                     unencryptedPayloadHandle.DangerousRelease();
                 }
             }
@@ -326,7 +372,8 @@ internal static unsafe class DpapiSecretSerializerHelper
             byte dummy; // used to provide a valid memory address if protected data is zero-length
             return GetRuleFromDpapiNGProtectedPayloadCore(
                 pbData: (pbProtectedData != null) ? pbProtectedData : &dummy,
-                cbData: (uint)protectedData.Length);
+                cbData: (uint)protectedData.Length
+            );
         }
     }
 
@@ -345,7 +392,8 @@ internal static unsafe class DpapiSecretSerializerHelper
             pMemPara: IntPtr.Zero,
             hWnd: IntPtr.Zero,
             ppbData: out unprotectedDataHandle,
-            pcbData: out _);
+            pcbData: out _
+        );
         UnsafeNativeMethods.ThrowExceptionForNCryptStatus(ntstatus);
         CryptoUtil.AssertSafeHandleIsValid(descriptorHandle);
 

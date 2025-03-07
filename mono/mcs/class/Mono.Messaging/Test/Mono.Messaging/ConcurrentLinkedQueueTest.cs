@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,39 +29,38 @@
 //
 
 using System;
-
 using Mono.Messaging;
 using NUnit.Framework;
 
-namespace MonoTests.Mono.Messaging {
-	
-	[TestFixture]
-	public class ConcurrentLinkedQueueTest
-	{
-		
-		[Test]
-		public void ShouldEnqueueAndDequeue ()
-		{
-			ConcurrentLinkedQueue<int> pool = new ConcurrentLinkedQueue<int>();
-			
-			pool.Enqueue (1);
-			
-			Assert.AreEqual (1, pool.Dequeue ());			
-		}
+namespace MonoTests.Mono.Messaging
+{
+    [TestFixture]
+    public class ConcurrentLinkedQueueTest
+    {
+        [Test]
+        public void ShouldEnqueueAndDequeue()
+        {
+            ConcurrentLinkedQueue<int> pool = new ConcurrentLinkedQueue<int>();
 
-		
-		[Test]
-		public void ShouldEnqueueAndDequeueMultiple ()
-		{
-			ConcurrentLinkedQueue<int> pool = new ConcurrentLinkedQueue<int>();
-			
-			for (int i = 1; i <= 10; i++) {
-				pool.Enqueue (i);
-			}
-			
-			for (int i = 1; i <= 10; i++) {
-				Assert.AreEqual (i, pool.Dequeue ());
-			}
-		}
-	}
+            pool.Enqueue(1);
+
+            Assert.AreEqual(1, pool.Dequeue());
+        }
+
+        [Test]
+        public void ShouldEnqueueAndDequeueMultiple()
+        {
+            ConcurrentLinkedQueue<int> pool = new ConcurrentLinkedQueue<int>();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                pool.Enqueue(i);
+            }
+
+            for (int i = 1; i <= 10; i++)
+            {
+                Assert.AreEqual(i, pool.Dequeue());
+            }
+        }
+    }
 }

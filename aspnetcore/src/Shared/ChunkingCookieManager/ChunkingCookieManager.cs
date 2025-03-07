@@ -72,7 +72,14 @@ internal sealed class ChunkingCookieManager
     {
         if (value != null && value.StartsWith(ChunkCountPrefix, StringComparison.Ordinal))
         {
-            if (int.TryParse(value.AsSpan(ChunkCountPrefix.Length), NumberStyles.None, CultureInfo.InvariantCulture, out var chunksCount))
+            if (
+                int.TryParse(
+                    value.AsSpan(ChunkCountPrefix.Length),
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out var chunksCount
+                )
+            )
             {
                 return chunksCount;
             }
@@ -100,7 +107,9 @@ internal sealed class ChunkingCookieManager
             var chunks = new List<string>(10); // The client may not have sent all of the chunks, don't allocate based on chunksCount.
             for (var chunkId = 1; chunkId <= chunksCount; chunkId++)
             {
-                var chunk = requestCookies[key + ChunkKeySuffix + chunkId.ToString(CultureInfo.InvariantCulture)];
+                var chunk = requestCookies[
+                    key + ChunkKeySuffix + chunkId.ToString(CultureInfo.InvariantCulture)
+                ];
                 if (string.IsNullOrEmpty(chunk))
                 {
                     if (ThrowForPartialCookies)
@@ -116,7 +125,9 @@ internal sealed class ChunkingCookieManager
                                 "The chunked cookie is incomplete. Only {0} of the expected {1} chunks were found, totaling {2} characters. A client size limit may have been exceeded.",
                                 chunkId - 1,
                                 chunksCount,
-                                totalSize));
+                                totalSize
+                            )
+                        );
                     }
                     // Missing chunk, abort by returning the original cookie value. It may have been a false positive?
                     return value;
@@ -142,7 +153,12 @@ internal sealed class ChunkingCookieManager
     /// <param name="key"></param>
     /// <param name="value"></param>
     /// <param name="options"></param>
-    public void AppendResponseCookie(HttpContext context, string key, string? value, CookieOptions options)
+    public void AppendResponseCookie(
+        HttpContext context,
+        string key,
+        string? value,
+        CookieOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(key);
@@ -168,7 +184,14 @@ internal sealed class ChunkingCookieManager
             if (requestChunks > 0)
             {
                 // If the cookie was previously chunked but no longer is, delete the chunks.
-                DeleteChunks(context, requestCookies, options, key, startChunk: 1, endChunk: requestChunks);
+                DeleteChunks(
+                    context,
+                    requestCookies,
+                    options,
+                    key,
+                    startChunk: 1,
+                    endChunk: requestChunks
+                );
             }
 
             responseCookies.Append(key, value, options);
@@ -177,7 +200,9 @@ internal sealed class ChunkingCookieManager
         {
             // 10 is the minimum data we want to put in an individual cookie, including the cookie chunk identifier "CXX".
             // No room for data, we can't chunk the options and name
-            throw new InvalidOperationException("The cookie key and options are larger than ChunksSize, leaving no room for data.");
+            throw new InvalidOperationException(
+                "The cookie key and options are larger than ChunksSize, leaving no room for data."
+            );
         }
         else
         {
@@ -193,11 +218,21 @@ internal sealed class ChunkingCookieManager
             if (requestChunks > cookieChunkCount)
             {
                 // If the cookie was previously chunked but is now smaller, delete the chunks.
-                DeleteChunks(context, requestCookies, options, key, startChunk: cookieChunkCount + 1, endChunk: requestChunks);
+                DeleteChunks(
+                    context,
+                    requestCookies,
+                    options,
+                    key,
+                    startChunk: cookieChunkCount + 1,
+                    endChunk: requestChunks
+                );
             }
 
             var keyValuePairs = new KeyValuePair<string, string>[cookieChunkCount + 1];
-            keyValuePairs[0] = KeyValuePair.Create(key, ChunkCountPrefix + cookieChunkCount.ToString(CultureInfo.InvariantCulture));
+            keyValuePairs[0] = KeyValuePair.Create(
+                key,
+                ChunkCountPrefix + cookieChunkCount.ToString(CultureInfo.InvariantCulture)
+            );
 
             var offset = 0;
             for (var chunkId = 1; chunkId <= cookieChunkCount; chunkId++)
@@ -206,7 +241,14 @@ internal sealed class ChunkingCookieManager
                 var length = Math.Min(dataSizePerCookie, remainingLength);
                 var segment = value.Substring(offset, length);
                 offset += length;
-                keyValuePairs[chunkId] = KeyValuePair.Create(string.Concat(key, ChunkKeySuffix, chunkId.ToString(CultureInfo.InvariantCulture)), segment);
+                keyValuePairs[chunkId] = KeyValuePair.Create(
+                    string.Concat(
+                        key,
+                        ChunkKeySuffix,
+                        chunkId.ToString(CultureInfo.InvariantCulture)
+                    ),
+                    segment
+                );
             }
 
             responseCookies.Append(keyValuePairs, options);
@@ -228,10 +270,7 @@ internal sealed class ChunkingCookieManager
         ArgumentNullException.ThrowIfNull(key);
         ArgumentNullException.ThrowIfNull(options);
 
-        var keys = new List<string>
-        {
-            key + "="
-        };
+        var keys = new List<string> { key + "=" };
 
         var requestCookies = context.Request.Cookies;
         var requestCookie = requestCookies[key];
@@ -257,14 +296,19 @@ internal sealed class ChunkingCookieManager
         var pathHasValue = !string.IsNullOrEmpty(options.Path);
 
         Func<string, bool> rejectPredicate;
-        Func<string, bool> predicate = value => keys.Any(k => value.StartsWith(k, StringComparison.OrdinalIgnoreCase));
+        Func<string, bool> predicate = value =>
+            keys.Any(k => value.StartsWith(k, StringComparison.OrdinalIgnoreCase));
         if (domainHasValue)
         {
-            rejectPredicate = value => predicate(value) && value.Contains("domain=" + options.Domain, StringComparison.OrdinalIgnoreCase);
+            rejectPredicate = value =>
+                predicate(value)
+                && value.Contains("domain=" + options.Domain, StringComparison.OrdinalIgnoreCase);
         }
         else if (pathHasValue)
         {
-            rejectPredicate = value => predicate(value) && value.Contains("path=" + options.Path, StringComparison.OrdinalIgnoreCase);
+            rejectPredicate = value =>
+                predicate(value)
+                && value.Contains("path=" + options.Path, StringComparison.OrdinalIgnoreCase);
         }
         else
         {
@@ -298,17 +342,27 @@ internal sealed class ChunkingCookieManager
 
         for (var i = 1; i <= chunks; i++)
         {
-            keyValuePairs[i] = KeyValuePair.Create(string.Concat(key, "C", i.ToString(CultureInfo.InvariantCulture)), string.Empty);
+            keyValuePairs[i] = KeyValuePair.Create(
+                string.Concat(key, "C", i.ToString(CultureInfo.InvariantCulture)),
+                string.Empty
+            );
         }
 
-        responseCookies.Append(keyValuePairs, new CookieOptions(options)
-        {
-            Expires = DateTimeOffset.UnixEpoch,
-        });
+        responseCookies.Append(
+            keyValuePairs,
+            new CookieOptions(options) { Expires = DateTimeOffset.UnixEpoch }
+        );
     }
 
     // Deletes unneeded cookie chunks, but not the primary cookie.
-    private static void DeleteChunks(HttpContext context, IRequestCookieCollection requestCookies, CookieOptions options, string key, int startChunk, int endChunk)
+    private static void DeleteChunks(
+        HttpContext context,
+        IRequestCookieCollection requestCookies,
+        CookieOptions options,
+        string key,
+        int startChunk,
+        int endChunk
+    )
     {
         // Don't pre-allocate, we don't trust the input.
         var keyValuePairs = new List<KeyValuePair<string, string>>();
@@ -328,11 +382,10 @@ internal sealed class ChunkingCookieManager
 
         if (keyValuePairs.Count > 0)
         {
-            context.Response.Cookies.Append(keyValuePairs.ToArray(), new CookieOptions(options)
-            {
-                Expires = DateTimeOffset.UnixEpoch,
-            });
+            context.Response.Cookies.Append(
+                keyValuePairs.ToArray(),
+                new CookieOptions(options) { Expires = DateTimeOffset.UnixEpoch }
+            );
         }
     }
 }
-

@@ -39,7 +39,10 @@ public static class WebSocketMiddlewareExtensions
     /// <returns>
     /// The <see cref="IApplicationBuilder" />.
     /// </returns>
-    public static IApplicationBuilder UseWebSockets(this IApplicationBuilder app, WebSocketOptions options)
+    public static IApplicationBuilder UseWebSockets(
+        this IApplicationBuilder app,
+        WebSocketOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);

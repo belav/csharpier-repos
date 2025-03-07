@@ -16,7 +16,9 @@ public class TestAuthHandler : IAuthorizationHandler
             context.Succeed(req);
         }
 
-        var hasClaim = context.User.HasClaim(o => o.Type == ClaimTypes.NameIdentifier && !string.IsNullOrEmpty(o.Value));
+        var hasClaim = context.User.HasClaim(o =>
+            o.Type == ClaimTypes.NameIdentifier && !string.IsNullOrEmpty(o.Value)
+        );
 
         if (!hasClaim)
         {

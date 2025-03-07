@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,182 +31,185 @@ using System;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.HtmlControls {
+namespace MonoTests.System.Web.UI.HtmlControls
+{
+    public class TestHtmlTableRow : HtmlTableRow
+    {
+        public string Render()
+        {
+            HtmlTextWriter writer = new HtmlTextWriter(new StringWriter());
+            base.Render(writer);
+            return writer.InnerWriter.ToString();
+        }
 
-	public class TestHtmlTableRow : HtmlTableRow {
+        public ControlCollection GetCollection()
+        {
+            return base.CreateControlCollection();
+        }
+    }
 
-		public string Render ()
-		{
-			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
+    public class InheritedHtmlTableCell : HtmlTableCell { }
 
-		public ControlCollection GetCollection ()
-		{
-			return base.CreateControlCollection ();
-		}
-	}
+    [TestFixture]
+    public class HtmlTableRowTest
+    {
+        [Test]
+        public void DefaultProperties()
+        {
+            HtmlTableRow r = new HtmlTableRow();
+            Assert.AreEqual(0, r.Attributes.Count, "Attributes.Count");
 
-	public class InheritedHtmlTableCell : HtmlTableCell {
-	}
+            Assert.AreEqual(String.Empty, r.Align, "Align");
+            Assert.AreEqual(String.Empty, r.BgColor, "BgColor");
+            Assert.AreEqual(String.Empty, r.BorderColor, "BorderColor");
+            Assert.AreEqual(0, r.Cells.Count, "Cells");
+            Assert.AreEqual(String.Empty, r.Height, "Height");
+            Assert.AreEqual(String.Empty, r.VAlign, "VAlign");
 
-	[TestFixture]
-	public class HtmlTableRowTest {
+            Assert.AreEqual("tr", r.TagName, "TagName");
+        }
 
-		[Test]
-		public void DefaultProperties ()
-		{
-			HtmlTableRow r = new HtmlTableRow ();
-			Assert.AreEqual (0, r.Attributes.Count, "Attributes.Count");
+        [Test]
+        public void NullProperties()
+        {
+            HtmlTableRow r = new HtmlTableRow();
+            r.Align = null;
+            Assert.AreEqual(String.Empty, r.Align, "Align");
+            r.BgColor = null;
+            Assert.AreEqual(String.Empty, r.BgColor, "BgColor");
+            r.BorderColor = null;
+            Assert.AreEqual(String.Empty, r.BorderColor, "BorderColor");
+            r.Height = null;
+            Assert.AreEqual(String.Empty, r.Height, "Height");
+            r.VAlign = null;
+            Assert.AreEqual(String.Empty, r.VAlign, "VAlign");
 
-			Assert.AreEqual (String.Empty, r.Align, "Align");
-			Assert.AreEqual (String.Empty, r.BgColor, "BgColor");
-			Assert.AreEqual (String.Empty, r.BorderColor, "BorderColor");
-			Assert.AreEqual (0, r.Cells.Count, "Cells");
-			Assert.AreEqual (String.Empty, r.Height, "Height");
-			Assert.AreEqual (String.Empty, r.VAlign, "VAlign");
+            Assert.AreEqual(0, r.Attributes.Count, "Attributes.Count");
+        }
 
-			Assert.AreEqual ("tr", r.TagName, "TagName");
-		}
+        [Test]
+        public void CleanProperties()
+        {
+            HtmlTableRow r = new HtmlTableRow();
+            r.Align = "center";
+            Assert.AreEqual("center", r.Align, "Align");
+            Assert.AreEqual(1, r.Attributes.Count, "1");
 
-		[Test]
-		public void NullProperties ()
-		{
-			HtmlTableRow r = new HtmlTableRow ();
-			r.Align = null;
-			Assert.AreEqual (String.Empty, r.Align, "Align");
-			r.BgColor = null;
-			Assert.AreEqual (String.Empty, r.BgColor, "BgColor");
-			r.BorderColor = null;
-			Assert.AreEqual (String.Empty, r.BorderColor, "BorderColor");
-			r.Height = null;
-			Assert.AreEqual (String.Empty, r.Height, "Height");
-			r.VAlign = null;
-			Assert.AreEqual (String.Empty, r.VAlign, "VAlign");
+            r.Align = null;
+            Assert.AreEqual(String.Empty, r.Align, "-Align");
+            Assert.AreEqual(0, r.Attributes.Count, "0");
+        }
 
-			Assert.AreEqual (0, r.Attributes.Count, "Attributes.Count");
-		}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void InnerHtml_Get()
+        {
+            HtmlTableRow r = new HtmlTableRow();
+            Assert.IsNotNull(r.InnerHtml);
+        }
 
-		[Test]
-		public void CleanProperties ()
-		{
-			HtmlTableRow r = new HtmlTableRow ();
-			r.Align = "center";
-			Assert.AreEqual ("center", r.Align, "Align");
-			Assert.AreEqual (1, r.Attributes.Count, "1");
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void InnerHtml_Set()
+        {
+            HtmlTableRow r = new HtmlTableRow();
+            r.InnerHtml = String.Empty;
+        }
 
-			r.Align = null;
-			Assert.AreEqual (String.Empty, r.Align, "-Align");
-			Assert.AreEqual (0, r.Attributes.Count, "0");
-		}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void InnerText_Get()
+        {
+            HtmlTableRow r = new HtmlTableRow();
+            Assert.IsNotNull(r.InnerText);
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void InnerHtml_Get ()
-		{
-			HtmlTableRow r = new HtmlTableRow ();
-			Assert.IsNotNull (r.InnerHtml);
-		}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void InnerText_Set()
+        {
+            HtmlTableRow r = new HtmlTableRow();
+            r.InnerText = String.Empty;
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void InnerHtml_Set ()
-		{
-			HtmlTableRow r = new HtmlTableRow ();
-			r.InnerHtml = String.Empty;
-		}
+        private string AdjustLineEndings(string s)
+        {
+            return s.Replace("\r\n", Environment.NewLine);
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void InnerText_Get ()
-		{
-			HtmlTableRow r = new HtmlTableRow ();
-			Assert.IsNotNull (r.InnerText);
-		}
+        [Test]
+        public void Render()
+        {
+            TestHtmlTableRow r = new TestHtmlTableRow();
+            r.Align = "*1*";
+            r.BgColor = "*2*";
+            r.BorderColor = "*3*";
+            r.Height = "*4*";
+            r.VAlign = "*5*";
+            Assert.AreEqual(
+                AdjustLineEndings(
+                    "<tr align=\"*1*\" bgcolor=\"*2*\" bordercolor=\"*3*\" height=\"*4*\" valign=\"*5*\">\r\n</tr>\r\n"
+                ),
+                r.Render()
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void InnerText_Set ()
-		{
-			HtmlTableRow r = new HtmlTableRow ();
-			r.InnerText = String.Empty;
-		}
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void HtmlTableCellControlCollectionAdd_Null()
+        {
+            TestHtmlTableRow t = new TestHtmlTableRow();
+            ControlCollection c = t.GetCollection();
+            c.Add(null);
+        }
 
-		private string AdjustLineEndings (string s)
-		{
-			return s.Replace ("\r\n", Environment.NewLine);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void HtmlTableCellControlCollectionAdd_WrongType()
+        {
+            TestHtmlTableRow t = new TestHtmlTableRow();
+            ControlCollection c = t.GetCollection();
+            c.Add(new HtmlTable());
+        }
 
-		[Test]
-		public void Render ()
-		{
-			TestHtmlTableRow r = new TestHtmlTableRow ();
-			r.Align = "*1*";
-			r.BgColor = "*2*";
-			r.BorderColor = "*3*";
-			r.Height = "*4*";
-			r.VAlign = "*5*";
-			Assert.AreEqual (AdjustLineEndings ("<tr align=\"*1*\" bgcolor=\"*2*\" bordercolor=\"*3*\" height=\"*4*\" valign=\"*5*\">\r\n</tr>\r\n"), r.Render ());
-		}
+        [Test]
+        public void HtmlTableCellControlCollectionAdd()
+        {
+            TestHtmlTableRow t = new TestHtmlTableRow();
+            ControlCollection c = t.GetCollection();
+            c.Add(new HtmlTableCell());
+            c.Add(new InheritedHtmlTableCell());
+            Assert.AreEqual(2, c.Count, "Cells");
+        }
 
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void HtmlTableCellControlCollectionAdd_Null ()
-		{
-			TestHtmlTableRow t = new TestHtmlTableRow ();
-			ControlCollection c = t.GetCollection ();
-			c.Add (null);
-		}
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void HtmlTableCellControlCollectionAddAt_Null()
+        {
+            TestHtmlTableRow t = new TestHtmlTableRow();
+            ControlCollection c = t.GetCollection();
+            c.AddAt(0, null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void HtmlTableCellControlCollectionAdd_WrongType ()
-		{
-			TestHtmlTableRow t = new TestHtmlTableRow ();
-			ControlCollection c = t.GetCollection ();
-			c.Add (new HtmlTable ());
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void HtmlTableCellControlCollectionAddAt_WrongType()
+        {
+            TestHtmlTableRow t = new TestHtmlTableRow();
+            ControlCollection c = t.GetCollection();
+            c.AddAt(0, new HtmlTable());
+        }
 
-		[Test]
-		public void HtmlTableCellControlCollectionAdd ()
-		{
-			TestHtmlTableRow t = new TestHtmlTableRow ();
-			ControlCollection c = t.GetCollection ();
-			c.Add (new HtmlTableCell ());
-			c.Add (new InheritedHtmlTableCell ());
-			Assert.AreEqual (2, c.Count, "Cells");
-		}
-
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void HtmlTableCellControlCollectionAddAt_Null ()
-		{
-			TestHtmlTableRow t = new TestHtmlTableRow ();
-			ControlCollection c = t.GetCollection ();
-			c.AddAt (0, null);
-		}
-
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void HtmlTableCellControlCollectionAddAt_WrongType ()
-		{
-			TestHtmlTableRow t = new TestHtmlTableRow ();
-			ControlCollection c = t.GetCollection ();
-			c.AddAt (0, new HtmlTable ());
-		}
-
-		[Test]
-		public void HtmlTableCellControlCollectionAddAt ()
-		{
-			TestHtmlTableRow t = new TestHtmlTableRow ();
-			ControlCollection c = t.GetCollection ();
-			c.AddAt (0, new HtmlTableCell ());
-			c.AddAt (0, new InheritedHtmlTableCell ());
-			Assert.AreEqual (2, c.Count, "Cells");
-		}
-	}
+        [Test]
+        public void HtmlTableCellControlCollectionAddAt()
+        {
+            TestHtmlTableRow t = new TestHtmlTableRow();
+            ControlCollection c = t.GetCollection();
+            c.AddAt(0, new HtmlTableCell());
+            c.AddAt(0, new InheritedHtmlTableCell());
+            Assert.AreEqual(2, c.Count, "Cells");
+        }
+    }
 }

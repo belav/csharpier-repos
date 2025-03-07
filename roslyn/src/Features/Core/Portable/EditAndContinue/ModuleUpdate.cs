@@ -11,4 +11,5 @@ namespace Microsoft.CodeAnalysis.EditAndContinue;
 [DataContract]
 internal readonly record struct ModuleUpdates(
     [property: DataMember(Order = 0)] ModuleUpdateStatus Status,
-    [property: DataMember(Order = 1)] ImmutableArray<ManagedHotReloadUpdate> Updates);
+    [property: DataMember(Order = 1)] ImmutableArray<ManagedHotReloadUpdate> Updates
+);

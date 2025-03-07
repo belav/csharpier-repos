@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,46 +14,49 @@
 
 namespace Castle.DynamicProxy.Tests.Interceptors
 {
-	using System;
-	using System.Collections;
-	using System.Reflection;
-	using System.Text;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Text;
 
-	public class LogInvocationInterceptor : StandardInterceptor
-	{
-		private StringBuilder sb = new StringBuilder();
-		private List<string> invocations = new List<string>();
+    public class LogInvocationInterceptor : StandardInterceptor
+    {
+        private StringBuilder sb = new StringBuilder();
+        private List<string> invocations = new List<string>();
 
-		public bool Proceed = true;
+        public bool Proceed = true;
 
-		protected override void PreProceed(IInvocation invocation)
-		{
-			invocations.Add(invocation.Method.Name);
+        protected override void PreProceed(IInvocation invocation)
+        {
+            invocations.Add(invocation.Method.Name);
 
-			sb.Append(string.Format("{0} ", invocation.Method.Name));
-		}
+            sb.Append(string.Format("{0} ", invocation.Method.Name));
+        }
 
-		protected override void PerformProceed (IInvocation invocation)
-		{
-			if (Proceed)
-			{
-				base.PerformProceed (invocation);
-			}
-			else if (invocation.Method.ReturnType.IsValueType && invocation.Method.ReturnType != typeof (void))
-			{
-				invocation.ReturnValue = Activator.CreateInstance (invocation.Method.ReturnType); // set default return value
-			}
-		}
+        protected override void PerformProceed(IInvocation invocation)
+        {
+            if (Proceed)
+            {
+                base.PerformProceed(invocation);
+            }
+            else if (
+                invocation.Method.ReturnType.IsValueType
+                && invocation.Method.ReturnType != typeof(void)
+            )
+            {
+                invocation.ReturnValue = Activator.CreateInstance(invocation.Method.ReturnType); // set default return value
+            }
+        }
 
-		public string LogContents
-		{
-			get { return sb.ToString(); }
-		}
+        public string LogContents
+        {
+            get { return sb.ToString(); }
+        }
 
-		public IList Invocations
-		{
-			get { return invocations; }
-		}
-	}
+        public IList Invocations
+        {
+            get { return invocations; }
+        }
+    }
 }

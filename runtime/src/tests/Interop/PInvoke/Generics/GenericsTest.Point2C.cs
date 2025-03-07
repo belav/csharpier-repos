@@ -20,7 +20,10 @@ unsafe partial class GenericsNative
     public static extern Point2<char> AddPoint2C(Point2<char> lhs, Point2<char> rhs);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Point2<char> AddPoint2Cs([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point2<char>[] pValues, int count);
+    public static extern Point2<char> AddPoint2Cs(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Point2<char>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Point2<char> AddPoint2Cs(in Point2<char> pValues, int count);
@@ -32,22 +35,29 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint2C('1', '2'));
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint2COut('1', '2', out GenericsNative.Point2<char> value3));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.GetPoint2COut('1', '2', out GenericsNative.Point2<char> value3)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint2CRef('1', '2'));
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint2C(default, default));
 
-        GenericsNative.Point2<char>[] values = new GenericsNative.Point2<char>[] {
+        GenericsNative.Point2<char>[] values = new GenericsNative.Point2<char>[]
+        {
             default,
             default,
             default,
             default,
-            default
+            default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint2Cs(values, values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint2Cs(values, values.Length)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddPoint2Cs(in values[0], values.Length));
+        Assert.Throws<MarshalDirectiveException>(
+            () => GenericsNative.AddPoint2Cs(in values[0], values.Length)
+        );
     }
 }

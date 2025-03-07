@@ -4,10 +4,10 @@
 
 namespace System.ServiceModel.Activities.Presentation
 {
-    using System.Runtime;
     using System.Activities.Core.Presentation;
     using System.Activities.Presentation.Model;
     using System.Globalization;
+    using System.Runtime;
     using System.Windows.Data;
 
     sealed class ContentButtonTitleConverter : IValueConverter
@@ -36,13 +36,21 @@ namespace System.ServiceModel.Activities.Presentation
                 }
                 else
                 {
-                    Fx.Assert(false, "Content must be of either ReceiveMessageContent, ReceiveParametersContent, SendMessageContent or SendParametersContent.");
+                    Fx.Assert(
+                        false,
+                        "Content must be of either ReceiveMessageContent, ReceiveParametersContent, SendMessageContent or SendParametersContent."
+                    );
                     return null;
                 }
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotSupportedException());
         }

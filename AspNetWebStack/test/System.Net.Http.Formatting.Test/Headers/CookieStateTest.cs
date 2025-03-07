@@ -63,7 +63,10 @@ namespace System.Net.Http.Headers
         [Fact]
         public void CookieState_CtorThrowsOnNullNameValueCollection()
         {
-            Assert.ThrowsArgumentNull(() => new CookieState("name", (NameValueCollection)null), "values");
+            Assert.ThrowsArgumentNull(
+                () => new CookieState("name", (NameValueCollection)null),
+                "values"
+            );
         }
 
         [Theory]
@@ -187,7 +190,10 @@ namespace System.Net.Http.Headers
 
         [Theory]
         [PropertyData("EncodedCookieStateStrings")]
-        public void CookieState_ToStringWithNameValueCollection(string subValue, string encodedSubvalue)
+        public void CookieState_ToStringWithNameValueCollection(
+            string subValue,
+            string encodedSubvalue
+        )
         {
             // Arrange
             NameValueCollection nvc = new NameValueCollection();

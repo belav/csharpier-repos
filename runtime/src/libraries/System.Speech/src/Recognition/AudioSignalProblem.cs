@@ -24,6 +24,6 @@ namespace System.Speech.Recognition
         TooFast,
 
         // The audio input is too slow for optimal recognition.
-        TooSlow
+        TooSlow,
     }
 }

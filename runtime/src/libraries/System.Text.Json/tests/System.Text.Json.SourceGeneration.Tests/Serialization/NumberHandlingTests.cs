@@ -14,9 +14,7 @@ namespace System.Text.Json.SourceGeneration.Tests
     public sealed partial class NumberHandlingTests_Metadata : NumberHandlingTests
     {
         public NumberHandlingTests_Metadata()
-            : base(new StringSerializerWrapper(NumberHandlingTestsContext_Metadata.Default))
-        {
-        }
+            : base(new StringSerializerWrapper(NumberHandlingTestsContext_Metadata.Default)) { }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         [JsonSerializable(typeof(Class_With_BoxedNumbers))]
@@ -28,7 +26,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ClassWith_ReadAsStringAttribute))]
         [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<int[]>))]
         [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<ConcurrentQueue<int>>))]
-        [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<GenericICollectionWrapper<int>>))]
+        [JsonSerializable(
+            typeof(ClassWithSimpleCollectionProperty<GenericICollectionWrapper<int>>)
+        )]
         [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<IEnumerable<int>>))]
         [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<Collection<int>>))]
         [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<ImmutableList<int>>))]
@@ -452,17 +452,14 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(Dictionary<float, float>))]
         [JsonSerializable(typeof(Dictionary<double, double>))]
         [JsonSerializable(typeof(SortedList))]
-        internal sealed partial class NumberHandlingTestsContext_Metadata : JsonSerializerContext
-        {
-        }
+        internal sealed partial class NumberHandlingTestsContext_Metadata
+            : JsonSerializerContext { }
     }
 
     public sealed partial class NumberHandlingTests_Default : NumberHandlingTests
     {
         public NumberHandlingTests_Default()
-            : base(new StringSerializerWrapper(NumberHandlingTestsContext_Default.Default))
-        {
-        }
+            : base(new StringSerializerWrapper(NumberHandlingTestsContext_Default.Default)) { }
 
         [JsonSerializable(typeof(Class_With_BoxedNumbers))]
         [JsonSerializable(typeof(Class_With_ListsOfBoxedNumbers))]
@@ -473,7 +470,9 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(ClassWith_ReadAsStringAttribute))]
         [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<int[]>))]
         [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<ConcurrentQueue<int>>))]
-        [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<GenericICollectionWrapper<int>>))]
+        [JsonSerializable(
+            typeof(ClassWithSimpleCollectionProperty<GenericICollectionWrapper<int>>)
+        )]
         [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<IEnumerable<int>>))]
         [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<Collection<int>>))]
         [JsonSerializable(typeof(ClassWithSimpleCollectionProperty<ImmutableList<int>>))]
@@ -897,8 +896,6 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(Dictionary<float, float>))]
         [JsonSerializable(typeof(Dictionary<double, double>))]
         [JsonSerializable(typeof(SortedList))]
-        internal sealed partial class NumberHandlingTestsContext_Default : JsonSerializerContext
-        {
-        }
+        internal sealed partial class NumberHandlingTestsContext_Default : JsonSerializerContext { }
     }
 }

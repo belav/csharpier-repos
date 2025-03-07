@@ -13,7 +13,12 @@ namespace System.Globalization
 {
     internal static partial class Ordinal
     {
-        internal static bool EqualsStringIgnoreCaseUtf8(ref byte strA, int lengthA, ref byte strB, int lengthB)
+        internal static bool EqualsStringIgnoreCaseUtf8(
+            ref byte strA,
+            int lengthA,
+            ref byte strB,
+            int lengthB
+        )
         {
             // NOTE: Two UTF-8 inputs of different length might compare as equal under
             // the OrdinalIgnoreCase comparer. This is distinct from UTF-16, where the
@@ -31,8 +36,10 @@ namespace System.Globalization
             while ((length != 0) && (charA <= maxChar) && (charB <= maxChar))
             {
                 // Ordinal equals or lowercase equals if the result ends up in the a-z range
-                if (charA == charB ||
-                    ((charA | 0x20) == (charB | 0x20) && char.IsAsciiLetter((char)charA)))
+                if (
+                    charA == charB
+                    || ((charA | 0x20) == (charB | 0x20) && char.IsAsciiLetter((char)charA))
+                )
                 {
                     length--;
                     charA = ref Unsafe.Add(ref charA, 1);
@@ -51,10 +58,20 @@ namespace System.Globalization
             }
 
             range -= length;
-            return EqualsStringIgnoreCaseNonAsciiUtf8(ref charA, lengthA - range, ref charB, lengthB - range);
+            return EqualsStringIgnoreCaseNonAsciiUtf8(
+                ref charA,
+                lengthA - range,
+                ref charB,
+                lengthB - range
+            );
         }
 
-        internal static bool EqualsStringIgnoreCaseNonAsciiUtf8(ref byte strA, int lengthA, ref byte strB, int lengthB)
+        internal static bool EqualsStringIgnoreCaseNonAsciiUtf8(
+            ref byte strA,
+            int lengthA,
+            ref byte strB,
+            int lengthB
+        )
         {
             // NLS/ICU doesn't provide native UTF-8 support so we need to do our own corresponding ordinal comparison
 
@@ -63,8 +80,16 @@ namespace System.Globalization
 
             do
             {
-                OperationStatus statusA = Rune.DecodeFromUtf8(spanA, out Rune runeA, out int bytesConsumedA);
-                OperationStatus statusB = Rune.DecodeFromUtf8(spanB, out Rune runeB, out int bytesConsumedB);
+                OperationStatus statusA = Rune.DecodeFromUtf8(
+                    spanA,
+                    out Rune runeA,
+                    out int bytesConsumedA
+                );
+                OperationStatus statusB = Rune.DecodeFromUtf8(
+                    spanB,
+                    out Rune runeB,
+                    out int bytesConsumedB
+                );
 
                 if (statusA != statusB)
                 {
@@ -80,7 +105,9 @@ namespace System.Globalization
                         return false;
                     }
                 }
-                else if (!spanA.Slice(0, bytesConsumedA).SequenceEqual(spanB.Slice(0, bytesConsumedB)))
+                else if (
+                    !spanA.Slice(0, bytesConsumedA).SequenceEqual(spanB.Slice(0, bytesConsumedB))
+                )
                 {
                     // OperationStatus match, but bytesConsumed or the sequence of bytes consumed do not; fail immediately
                     return false;
@@ -96,13 +123,17 @@ namespace System.Globalization
 
                 spanA = spanA.Slice(bytesConsumedA);
                 spanB = spanB.Slice(bytesConsumedB);
-            }
-            while ((spanA.Length | spanB.Length) != 0);
+            } while ((spanA.Length | spanB.Length) != 0);
 
             return true;
         }
 
-        private static bool EqualsIgnoreCaseUtf8_Vector128(ref byte charA, int lengthA, ref byte charB, int lengthB)
+        private static bool EqualsIgnoreCaseUtf8_Vector128(
+            ref byte charA,
+            int lengthA,
+            ref byte charB,
+            int lengthB
+        )
         {
             Debug.Assert(lengthA >= Vector128<byte>.Count);
             Debug.Assert(lengthB >= Vector128<byte>.Count);
@@ -132,8 +163,7 @@ namespace System.Globalization
                 }
 
                 i += (nuint)Vector128<byte>.Count;
-            }
-            while (i <= lengthToExamine);
+            } while (i <= lengthToExamine);
 
             if (i == lengthU)
             {
@@ -142,10 +172,18 @@ namespace System.Globalization
             }
 
             // Use scalar path for trailing elements
-            return EqualsIgnoreCaseUtf8_Scalar(ref Unsafe.Add(ref charA, i), (int)(lengthU - i), ref Unsafe.Add(ref charB, i), (int)(lengthU - i));
+            return EqualsIgnoreCaseUtf8_Scalar(
+                ref Unsafe.Add(ref charA, i),
+                (int)(lengthU - i),
+                ref Unsafe.Add(ref charB, i),
+                (int)(lengthU - i)
+            );
 
-        NON_ASCII:
-            if (Utf8Utility.AllBytesInVector128AreAscii(vec1) || Utf8Utility.AllBytesInVector128AreAscii(vec2))
+            NON_ASCII:
+            if (
+                Utf8Utility.AllBytesInVector128AreAscii(vec1)
+                || Utf8Utility.AllBytesInVector128AreAscii(vec2)
+            )
             {
                 // No need to use the fallback if one of the inputs is full-ASCII
                 return false;
@@ -153,15 +191,26 @@ namespace System.Globalization
 
             // Fallback for Non-ASCII inputs
             return EqualsStringIgnoreCaseUtf8(
-                ref Unsafe.Add(ref charA, i), lengthA - (int)i,
-                ref Unsafe.Add(ref charB, i), lengthB - (int)i
+                ref Unsafe.Add(ref charA, i),
+                lengthA - (int)i,
+                ref Unsafe.Add(ref charB, i),
+                lengthB - (int)i
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool EqualsIgnoreCaseUtf8(ref byte charA, int lengthA, ref byte charB, int lengthB)
+        internal static bool EqualsIgnoreCaseUtf8(
+            ref byte charA,
+            int lengthA,
+            ref byte charB,
+            int lengthB
+        )
         {
-            if (!Vector128.IsHardwareAccelerated || (lengthA < Vector128<byte>.Count) || (lengthB < Vector128<byte>.Count))
+            if (
+                !Vector128.IsHardwareAccelerated
+                || (lengthA < Vector128<byte>.Count)
+                || (lengthB < Vector128<byte>.Count)
+            )
             {
                 return EqualsIgnoreCaseUtf8_Scalar(ref charA, lengthA, ref charB, lengthB);
             }
@@ -169,7 +218,12 @@ namespace System.Globalization
             return EqualsIgnoreCaseUtf8_Vector128(ref charA, lengthA, ref charB, lengthB);
         }
 
-        internal static bool EqualsIgnoreCaseUtf8_Scalar(ref byte charA, int lengthA, ref byte charB, int lengthB)
+        internal static bool EqualsIgnoreCaseUtf8_Scalar(
+            ref byte charA,
+            int lengthA,
+            ref byte charB,
+            int lengthB
+        )
         {
             IntPtr byteOffset = IntPtr.Zero;
 
@@ -183,8 +237,12 @@ namespace System.Globalization
             // Read 8 chars (64 bits) at a time from each string
             while ((uint)length >= 8)
             {
-                valueAu64 = Unsafe.ReadUnaligned<ulong>(ref Unsafe.AddByteOffset(ref charA, byteOffset));
-                valueBu64 = Unsafe.ReadUnaligned<ulong>(ref Unsafe.AddByteOffset(ref charB, byteOffset));
+                valueAu64 = Unsafe.ReadUnaligned<ulong>(
+                    ref Unsafe.AddByteOffset(ref charA, byteOffset)
+                );
+                valueBu64 = Unsafe.ReadUnaligned<ulong>(
+                    ref Unsafe.AddByteOffset(ref charB, byteOffset)
+                );
 
                 // A 32-bit test - even with the bit-twiddling here - is more efficient than a 64-bit test.
                 ulong temp = valueAu64 | valueBu64;
@@ -222,8 +280,12 @@ namespace System.Globalization
             while ((uint)length >= 4)
 #endif
             {
-                valueAu32 = Unsafe.ReadUnaligned<uint>(ref Unsafe.AddByteOffset(ref charA, byteOffset));
-                valueBu32 = Unsafe.ReadUnaligned<uint>(ref Unsafe.AddByteOffset(ref charB, byteOffset));
+                valueAu32 = Unsafe.ReadUnaligned<uint>(
+                    ref Unsafe.AddByteOffset(ref charA, byteOffset)
+                );
+                valueBu32 = Unsafe.ReadUnaligned<uint>(
+                    ref Unsafe.AddByteOffset(ref charB, byteOffset)
+                );
 
                 if (!Utf8Utility.AllBytesInUInt32AreAscii(valueAu32 | valueBu32))
                 {
@@ -257,8 +319,12 @@ namespace System.Globalization
 
                 if (length == 3)
                 {
-                    valueAu32 = Unsafe.ReadUnaligned<ushort>(ref Unsafe.AddByteOffset(ref charA, byteOffset));
-                    valueBu32 = Unsafe.ReadUnaligned<ushort>(ref Unsafe.AddByteOffset(ref charB, byteOffset));
+                    valueAu32 = Unsafe.ReadUnaligned<ushort>(
+                        ref Unsafe.AddByteOffset(ref charA, byteOffset)
+                    );
+                    valueBu32 = Unsafe.ReadUnaligned<ushort>(
+                        ref Unsafe.AddByteOffset(ref charB, byteOffset)
+                    );
 
                     byteOffset += 2;
 
@@ -267,8 +333,12 @@ namespace System.Globalization
                 }
                 else if (length == 2)
                 {
-                    valueAu32 = Unsafe.ReadUnaligned<ushort>(ref Unsafe.AddByteOffset(ref charA, byteOffset));
-                    valueBu32 = Unsafe.ReadUnaligned<ushort>(ref Unsafe.AddByteOffset(ref charB, byteOffset));
+                    valueAu32 = Unsafe.ReadUnaligned<ushort>(
+                        ref Unsafe.AddByteOffset(ref charA, byteOffset)
+                    );
+                    valueBu32 = Unsafe.ReadUnaligned<ushort>(
+                        ref Unsafe.AddByteOffset(ref charB, byteOffset)
+                    );
                 }
                 else
                 {
@@ -302,31 +372,47 @@ namespace System.Globalization
             Debug.Assert(length == 0);
             return lengthA == lengthB;
 
-        NonAscii32:
+            NonAscii32:
             // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we return false
-            if (Utf8Utility.AllBytesInUInt32AreAscii(valueAu32) || Utf8Utility.AllBytesInUInt32AreAscii(valueBu32))
+            if (
+                Utf8Utility.AllBytesInUInt32AreAscii(valueAu32)
+                || Utf8Utility.AllBytesInUInt32AreAscii(valueBu32)
+            )
             {
                 return false;
             }
             goto NonAscii;
 
 #if TARGET_64BIT
-        NonAscii64:
+            NonAscii64:
             // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we return false
-            if (Utf8Utility.AllBytesInUInt64AreAscii(valueAu64) || Utf8Utility.AllBytesInUInt64AreAscii(valueBu64))
+            if (
+                Utf8Utility.AllBytesInUInt64AreAscii(valueAu64)
+                || Utf8Utility.AllBytesInUInt64AreAscii(valueBu64)
+            )
             {
                 return false;
             }
 #endif
-        NonAscii:
+            NonAscii:
             range -= length;
 
             // The non-ASCII case is factored out into its own helper method so that the JIT
             // doesn't need to emit a complex prolog for its caller (this method).
-            return EqualsStringIgnoreCaseUtf8(ref Unsafe.AddByteOffset(ref charA, byteOffset), lengthA - range, ref Unsafe.AddByteOffset(ref charB, byteOffset), lengthB - range);
+            return EqualsStringIgnoreCaseUtf8(
+                ref Unsafe.AddByteOffset(ref charA, byteOffset),
+                lengthA - range,
+                ref Unsafe.AddByteOffset(ref charB, byteOffset),
+                lengthB - range
+            );
         }
 
-        internal static bool StartsWithStringIgnoreCaseUtf8(ref byte source, int sourceLength, ref byte prefix, int prefixLength)
+        internal static bool StartsWithStringIgnoreCaseUtf8(
+            ref byte source,
+            int sourceLength,
+            ref byte prefix,
+            int prefixLength
+        )
         {
             // NOTE: Two UTF-8 inputs of different length might compare as equal under
             // the OrdinalIgnoreCase comparer. This is distinct from UTF-16, where the
@@ -341,8 +427,10 @@ namespace System.Globalization
             while ((length != 0) && (source <= maxChar) && (prefix <= maxChar))
             {
                 // Ordinal equals or lowercase equals if the result ends up in the a-z range
-                if (source == prefix ||
-                    ((source | 0x20) == (prefix | 0x20) && char.IsAsciiLetter((char)source)))
+                if (
+                    source == prefix
+                    || ((source | 0x20) == (prefix | 0x20) && char.IsAsciiLetter((char)source))
+                )
                 {
                     length--;
                     source = ref Unsafe.Add(ref source, 1);
@@ -361,10 +449,20 @@ namespace System.Globalization
             }
 
             range -= length;
-            return StartsWithStringIgnoreCaseNonAsciiUtf8(ref source, sourceLength - range, ref prefix, prefixLength - range);
+            return StartsWithStringIgnoreCaseNonAsciiUtf8(
+                ref source,
+                sourceLength - range,
+                ref prefix,
+                prefixLength - range
+            );
         }
 
-        internal static bool StartsWithStringIgnoreCaseNonAsciiUtf8(ref byte source, int sourceLength, ref byte prefix, int prefixLength)
+        internal static bool StartsWithStringIgnoreCaseNonAsciiUtf8(
+            ref byte source,
+            int sourceLength,
+            ref byte prefix,
+            int prefixLength
+        )
         {
             // NLS/ICU doesn't provide native UTF-8 support so we need to do our own corresponding ordinal comparison
 
@@ -373,8 +471,16 @@ namespace System.Globalization
 
             do
             {
-                OperationStatus statusA = Rune.DecodeFromUtf8(spanA, out Rune runeA, out int bytesConsumedA);
-                OperationStatus statusB = Rune.DecodeFromUtf8(spanB, out Rune runeB, out int bytesConsumedB);
+                OperationStatus statusA = Rune.DecodeFromUtf8(
+                    spanA,
+                    out Rune runeA,
+                    out int bytesConsumedA
+                );
+                OperationStatus statusB = Rune.DecodeFromUtf8(
+                    spanB,
+                    out Rune runeB,
+                    out int bytesConsumedB
+                );
 
                 if (statusA != statusB)
                 {
@@ -390,7 +496,9 @@ namespace System.Globalization
                         return false;
                     }
                 }
-                else if (!spanA.Slice(0, bytesConsumedA).SequenceEqual(spanB.Slice(0, bytesConsumedB)))
+                else if (
+                    !spanA.Slice(0, bytesConsumedA).SequenceEqual(spanB.Slice(0, bytesConsumedB))
+                )
                 {
                     // OperationStatus match, but bytesConsumed or the sequence of bytes consumed do not; fail immediately
                     return false;
@@ -406,13 +514,17 @@ namespace System.Globalization
 
                 spanA = spanA.Slice(bytesConsumedA);
                 spanB = spanB.Slice(bytesConsumedB);
-            }
-            while (spanB.Length != 0);
+            } while (spanB.Length != 0);
 
             return true;
         }
 
-        private static bool StartsWithIgnoreCaseUtf8_Vector128(ref byte source, int sourceLength, ref byte prefix, int prefixLength)
+        private static bool StartsWithIgnoreCaseUtf8_Vector128(
+            ref byte source,
+            int sourceLength,
+            ref byte prefix,
+            int prefixLength
+        )
         {
             Debug.Assert(sourceLength >= Vector128<byte>.Count);
             Debug.Assert(prefixLength >= Vector128<byte>.Count);
@@ -442,8 +554,7 @@ namespace System.Globalization
                 }
 
                 i += (nuint)Vector128<byte>.Count;
-            }
-            while (i <= lengthToExamine);
+            } while (i <= lengthToExamine);
 
             if (i == (uint)prefixLength)
             {
@@ -452,10 +563,18 @@ namespace System.Globalization
             }
 
             // Use scalar path for trailing elements
-            return StartsWithIgnoreCaseUtf8_Scalar(ref Unsafe.Add(ref source, i), (int)(lengthU - i), ref Unsafe.Add(ref prefix, i), (int)(lengthU - i));
+            return StartsWithIgnoreCaseUtf8_Scalar(
+                ref Unsafe.Add(ref source, i),
+                (int)(lengthU - i),
+                ref Unsafe.Add(ref prefix, i),
+                (int)(lengthU - i)
+            );
 
-        NON_ASCII:
-            if (Utf8Utility.AllBytesInVector128AreAscii(vec1) || Utf8Utility.AllBytesInVector128AreAscii(vec2))
+            NON_ASCII:
+            if (
+                Utf8Utility.AllBytesInVector128AreAscii(vec1)
+                || Utf8Utility.AllBytesInVector128AreAscii(vec2)
+            )
             {
                 // No need to use the fallback if one of the inputs is full-ASCII
                 return false;
@@ -463,23 +582,49 @@ namespace System.Globalization
 
             // Fallback for Non-ASCII inputs
             return StartsWithStringIgnoreCaseUtf8(
-                ref Unsafe.Add(ref source, i), sourceLength - (int)i,
-                ref Unsafe.Add(ref prefix, i), prefixLength - (int)i
+                ref Unsafe.Add(ref source, i),
+                sourceLength - (int)i,
+                ref Unsafe.Add(ref prefix, i),
+                prefixLength - (int)i
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool StartsWithIgnoreCaseUtf8(ref byte source, int sourceLength, ref byte prefix, int prefixLength)
+        internal static bool StartsWithIgnoreCaseUtf8(
+            ref byte source,
+            int sourceLength,
+            ref byte prefix,
+            int prefixLength
+        )
         {
-            if (!Vector128.IsHardwareAccelerated || (sourceLength < Vector128<byte>.Count) || (prefixLength < Vector128<byte>.Count))
+            if (
+                !Vector128.IsHardwareAccelerated
+                || (sourceLength < Vector128<byte>.Count)
+                || (prefixLength < Vector128<byte>.Count)
+            )
             {
-                return StartsWithIgnoreCaseUtf8_Scalar(ref source, sourceLength, ref prefix, prefixLength);
+                return StartsWithIgnoreCaseUtf8_Scalar(
+                    ref source,
+                    sourceLength,
+                    ref prefix,
+                    prefixLength
+                );
             }
 
-            return StartsWithIgnoreCaseUtf8_Vector128(ref source, sourceLength, ref prefix, prefixLength);
+            return StartsWithIgnoreCaseUtf8_Vector128(
+                ref source,
+                sourceLength,
+                ref prefix,
+                prefixLength
+            );
         }
 
-        internal static bool StartsWithIgnoreCaseUtf8_Scalar(ref byte source, int sourceLength, ref byte prefix, int prefixLength)
+        internal static bool StartsWithIgnoreCaseUtf8_Scalar(
+            ref byte source,
+            int sourceLength,
+            ref byte prefix,
+            int prefixLength
+        )
         {
             IntPtr byteOffset = IntPtr.Zero;
 
@@ -493,8 +638,12 @@ namespace System.Globalization
             // Read 8 chars (64 bits) at a time from each string
             while ((uint)length >= 8)
             {
-                valueAu64 = Unsafe.ReadUnaligned<ulong>(ref Unsafe.AddByteOffset(ref source, byteOffset));
-                valueBu64 = Unsafe.ReadUnaligned<ulong>(ref Unsafe.AddByteOffset(ref prefix, byteOffset));
+                valueAu64 = Unsafe.ReadUnaligned<ulong>(
+                    ref Unsafe.AddByteOffset(ref source, byteOffset)
+                );
+                valueBu64 = Unsafe.ReadUnaligned<ulong>(
+                    ref Unsafe.AddByteOffset(ref prefix, byteOffset)
+                );
 
                 // A 32-bit test - even with the bit-twiddling here - is more efficient than a 64-bit test.
                 ulong temp = valueAu64 | valueBu64;
@@ -532,8 +681,12 @@ namespace System.Globalization
             while ((uint)length >= 4)
 #endif
             {
-                valueAu32 = Unsafe.ReadUnaligned<uint>(ref Unsafe.AddByteOffset(ref source, byteOffset));
-                valueBu32 = Unsafe.ReadUnaligned<uint>(ref Unsafe.AddByteOffset(ref prefix, byteOffset));
+                valueAu32 = Unsafe.ReadUnaligned<uint>(
+                    ref Unsafe.AddByteOffset(ref source, byteOffset)
+                );
+                valueBu32 = Unsafe.ReadUnaligned<uint>(
+                    ref Unsafe.AddByteOffset(ref prefix, byteOffset)
+                );
 
                 if (!Utf8Utility.AllBytesInUInt32AreAscii(valueAu32 | valueBu32))
                 {
@@ -567,8 +720,12 @@ namespace System.Globalization
 
                 if (length == 3)
                 {
-                    valueAu32 = Unsafe.ReadUnaligned<ushort>(ref Unsafe.AddByteOffset(ref source, byteOffset));
-                    valueBu32 = Unsafe.ReadUnaligned<ushort>(ref Unsafe.AddByteOffset(ref prefix, byteOffset));
+                    valueAu32 = Unsafe.ReadUnaligned<ushort>(
+                        ref Unsafe.AddByteOffset(ref source, byteOffset)
+                    );
+                    valueBu32 = Unsafe.ReadUnaligned<ushort>(
+                        ref Unsafe.AddByteOffset(ref prefix, byteOffset)
+                    );
 
                     byteOffset += 2;
 
@@ -577,8 +734,12 @@ namespace System.Globalization
                 }
                 else if (length == 2)
                 {
-                    valueAu32 = Unsafe.ReadUnaligned<ushort>(ref Unsafe.AddByteOffset(ref source, byteOffset));
-                    valueBu32 = Unsafe.ReadUnaligned<ushort>(ref Unsafe.AddByteOffset(ref prefix, byteOffset));
+                    valueAu32 = Unsafe.ReadUnaligned<ushort>(
+                        ref Unsafe.AddByteOffset(ref source, byteOffset)
+                    );
+                    valueBu32 = Unsafe.ReadUnaligned<ushort>(
+                        ref Unsafe.AddByteOffset(ref prefix, byteOffset)
+                    );
                 }
                 else
                 {
@@ -616,28 +777,39 @@ namespace System.Globalization
             Debug.Assert(length == 0);
             return prefixLength <= sourceLength;
 
-        NonAscii32:
+            NonAscii32:
             // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we return false
-            if (Utf8Utility.AllBytesInUInt32AreAscii(valueAu32) || Utf8Utility.AllBytesInUInt32AreAscii(valueBu32))
+            if (
+                Utf8Utility.AllBytesInUInt32AreAscii(valueAu32)
+                || Utf8Utility.AllBytesInUInt32AreAscii(valueBu32)
+            )
             {
                 return false;
             }
             goto NonAscii;
 
 #if TARGET_64BIT
-        NonAscii64:
+            NonAscii64:
             // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we return false
-            if (Utf8Utility.AllBytesInUInt64AreAscii(valueAu64) || Utf8Utility.AllBytesInUInt64AreAscii(valueBu64))
+            if (
+                Utf8Utility.AllBytesInUInt64AreAscii(valueAu64)
+                || Utf8Utility.AllBytesInUInt64AreAscii(valueBu64)
+            )
             {
                 return false;
             }
 #endif
-        NonAscii:
+            NonAscii:
             range -= length;
 
             // The non-ASCII case is factored out into its own helper method so that the JIT
             // doesn't need to emit a complex prolog for its caller (this method).
-            return StartsWithStringIgnoreCaseUtf8(ref Unsafe.AddByteOffset(ref source, byteOffset), sourceLength - range, ref Unsafe.AddByteOffset(ref prefix, byteOffset), prefixLength - range);
+            return StartsWithStringIgnoreCaseUtf8(
+                ref Unsafe.AddByteOffset(ref source, byteOffset),
+                sourceLength - range,
+                ref Unsafe.AddByteOffset(ref prefix, byteOffset),
+                prefixLength - range
+            );
         }
     }
 }

@@ -15,23 +15,13 @@ namespace MathFloorDoubleTest
 
         public static double staticValue = 1.1;
 
-        public static double[] staticValueArray = new double[]
-        {
-            2.2,
-            3.3,
-            4.4
-        };
+        public static double[] staticValueArray = new double[] { 2.2, 3.3, 4.4 };
 
         public double instanceValue = 5.5;
 
-        public double[] instanceValueArray = new double[]
-        {
-            6.6,
-            7.7,
-            8.8
-        };
+        public double[] instanceValueArray = new double[] { 6.6, 7.7, 8.8 };
 
-        unsafe static int Main()
+        static unsafe int Main()
         {
             double localValue = 9.9;
 
@@ -80,19 +70,25 @@ namespace MathFloorDoubleTest
             {
                 if (Math.Floor(pStaticValueArray[0]) != 2.0)
                 {
-                    Console.WriteLine("Math.Floor of a addressed static value array (index 0) failed");
+                    Console.WriteLine(
+                        "Math.Floor of a addressed static value array (index 0) failed"
+                    );
                     return Fail;
                 }
 
                 if (Math.Floor(pStaticValueArray[1]) != 3.0)
                 {
-                    Console.WriteLine("Math.Floor of a addressed static value array (index 1) failed");
+                    Console.WriteLine(
+                        "Math.Floor of a addressed static value array (index 1) failed"
+                    );
                     return Fail;
                 }
 
                 if (Math.Floor(pStaticValueArray[2]) != 4.0)
                 {
-                    Console.WriteLine("Math.Floor of a addressed static value array (index 2) failed");
+                    Console.WriteLine(
+                        "Math.Floor of a addressed static value array (index 2) failed"
+                    );
                     return Fail;
                 }
             }
@@ -134,19 +130,25 @@ namespace MathFloorDoubleTest
             {
                 if (Math.Floor(pInstanceValueArray[0]) != 6.0)
                 {
-                    Console.WriteLine("Math.Floor of a addressed instance value array (index 0) failed");
+                    Console.WriteLine(
+                        "Math.Floor of a addressed instance value array (index 0) failed"
+                    );
                     return Fail;
                 }
 
                 if (Math.Floor(pInstanceValueArray[1]) != 7.0)
                 {
-                    Console.WriteLine("Math.Floor of a addressed instance value array (index 1) failed");
+                    Console.WriteLine(
+                        "Math.Floor of a addressed instance value array (index 1) failed"
+                    );
                     return Fail;
                 }
 
                 if (Math.Floor(pInstanceValueArray[2]) != 8.0)
                 {
-                    Console.WriteLine("Math.Floor of a addressed instance value array (index 2) failed");
+                    Console.WriteLine(
+                        "Math.Floor of a addressed instance value array (index 2) failed"
+                    );
                     return Fail;
                 }
             }

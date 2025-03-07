@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -19,25 +19,29 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Dynamic.Utils;
 using System.Reflection;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
 
 #if CLR2
-namespace Microsoft.Scripting.Ast {
+namespace Microsoft.Scripting.Ast
+{
 #else
-namespace System.Linq.Expressions {
+namespace System.Linq.Expressions
+{
 #endif
 
     /// <summary>
-    /// Represents initializing the elements of a collection member of a newly created object. 
+    /// Represents initializing the elements of a collection member of a newly created object.
     /// </summary>
-    public sealed class MemberListBinding : MemberBinding {
+    public sealed class MemberListBinding : MemberBinding
+    {
         ReadOnlyCollection<ElementInit> _initializers;
+
         internal MemberListBinding(MemberInfo member, ReadOnlyCollection<ElementInit> initializers)
 #pragma warning disable 618
-            : base(MemberBindingType.ListBinding, member) {
+            : base(MemberBindingType.ListBinding, member)
+        {
 #pragma warning restore 618
             _initializers = initializers;
         }
@@ -45,7 +49,8 @@ namespace System.Linq.Expressions {
         /// <summary>
         /// Gets the element initializers for initializing a collection member of a newly created object.
         /// </summary>
-        public ReadOnlyCollection<ElementInit> Initializers {
+        public ReadOnlyCollection<ElementInit> Initializers
+        {
             get { return _initializers; }
         }
 
@@ -56,17 +61,18 @@ namespace System.Linq.Expressions {
         /// </summary>
         /// <param name="initializers">The <see cref="Initializers" /> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public MemberListBinding Update(IEnumerable<ElementInit> initializers) {
-            if (initializers == Initializers) {
+        public MemberListBinding Update(IEnumerable<ElementInit> initializers)
+        {
+            if (initializers == Initializers)
+            {
                 return this;
             }
             return Expression.ListBind(Member, initializers);
         }
     }
-    
 
-    public partial class Expression {
-
+    public partial class Expression
+    {
         ///<summary>Creates a <see cref="T:System.Linq.Expressions.MemberListBinding" /> where the member is a field or property.</summary>
         ///<returns>A <see cref="T:System.Linq.Expressions.MemberListBinding" /> that has the <see cref="P:System.Linq.Expressions.MemberBinding.BindingType" /> property equal to <see cref="F:System.Linq.Expressions.MemberBindingType.ListBinding" /> and the <see cref="P:System.Linq.Expressions.MemberBinding.Member" /> and <see cref="P:System.Linq.Expressions.MemberListBinding.Initializers" /> properties set to the specified values.</returns>
         ///<param name="member">A <see cref="T:System.Reflection.MemberInfo" /> that represents a field or property to set the <see cref="P:System.Linq.Expressions.MemberBinding.Member" /> property equal to.</param>
@@ -75,7 +81,11 @@ namespace System.Linq.Expressions {
         ///<paramref name="member" /> is null. -or-One or more elements of <paramref name="initializers" /> is null.</exception>
         ///<exception cref="T:System.ArgumentException">
         ///<paramref name="member" /> does not represent a field or property.-or-The <see cref="P:System.Reflection.FieldInfo.FieldType" /> or <see cref="P:System.Reflection.PropertyInfo.PropertyType" /> of the field or property that <paramref name="member" /> represents does not implement <see cref="T:System.Collections.IEnumerable" />.</exception>
-        public static MemberListBinding ListBind(MemberInfo member, params ElementInit[] initializers) {
+        public static MemberListBinding ListBind(
+            MemberInfo member,
+            params ElementInit[] initializers
+        )
+        {
             ContractUtils.RequiresNotNull(member, "member");
             ContractUtils.RequiresNotNull(initializers, "initializers");
             return ListBind(member, (IEnumerable<ElementInit>)initializers);
@@ -89,7 +99,11 @@ namespace System.Linq.Expressions {
         ///<paramref name="member" /> is null. -or-One or more elements of <paramref name="initializers" /> is null.</exception>
         ///<exception cref="T:System.ArgumentException">
         ///<paramref name="member" /> does not represent a field or property.-or-The <see cref="P:System.Reflection.FieldInfo.FieldType" /> or <see cref="P:System.Reflection.PropertyInfo.PropertyType" /> of the field or property that <paramref name="member" /> represents does not implement <see cref="T:System.Collections.IEnumerable" />.</exception>
-        public static MemberListBinding ListBind(MemberInfo member, IEnumerable<ElementInit> initializers) {
+        public static MemberListBinding ListBind(
+            MemberInfo member,
+            IEnumerable<ElementInit> initializers
+        )
+        {
             ContractUtils.RequiresNotNull(member, "member");
             ContractUtils.RequiresNotNull(initializers, "initializers");
             Type memberType;
@@ -106,8 +120,12 @@ namespace System.Linq.Expressions {
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="propertyAccessor" /> is null. -or-One or more elements of <paramref name="initializers" /> is null.</exception>
         ///<exception cref="T:System.ArgumentException">
-        ///<paramref name="propertyAccessor" /> does not represent a property accessor method.-or-The <see cref="P:System.Reflection.PropertyInfo.PropertyType" /> of the property that the method represented by <paramref name="propertyAccessor" /> accesses does not implement <see cref="T:System.Collections.IEnumerable" />.</exception>  
-        public static MemberListBinding ListBind(MethodInfo propertyAccessor, params ElementInit[] initializers) {
+        ///<paramref name="propertyAccessor" /> does not represent a property accessor method.-or-The <see cref="P:System.Reflection.PropertyInfo.PropertyType" /> of the property that the method represented by <paramref name="propertyAccessor" /> accesses does not implement <see cref="T:System.Collections.IEnumerable" />.</exception>
+        public static MemberListBinding ListBind(
+            MethodInfo propertyAccessor,
+            params ElementInit[] initializers
+        )
+        {
             ContractUtils.RequiresNotNull(propertyAccessor, "propertyAccessor");
             ContractUtils.RequiresNotNull(initializers, "initializers");
             return ListBind(propertyAccessor, (IEnumerable<ElementInit>)initializers);
@@ -120,18 +138,28 @@ namespace System.Linq.Expressions {
         ///<exception cref="T:System.ArgumentNullException">
         ///<paramref name="propertyAccessor" /> is null. -or-One or more elements of <paramref name="initializers" /> are null.</exception>
         ///<exception cref="T:System.ArgumentException">
-        ///<paramref name="propertyAccessor" /> does not represent a property accessor method.-or-The <see cref="P:System.Reflection.PropertyInfo.PropertyType" /> of the property that the method represented by <paramref name="propertyAccessor" /> accesses does not implement <see cref="T:System.Collections.IEnumerable" />.</exception>        
-        public static MemberListBinding ListBind(MethodInfo propertyAccessor, IEnumerable<ElementInit> initializers) {
+        ///<paramref name="propertyAccessor" /> does not represent a property accessor method.-or-The <see cref="P:System.Reflection.PropertyInfo.PropertyType" /> of the property that the method represented by <paramref name="propertyAccessor" /> accesses does not implement <see cref="T:System.Collections.IEnumerable" />.</exception>
+        public static MemberListBinding ListBind(
+            MethodInfo propertyAccessor,
+            IEnumerable<ElementInit> initializers
+        )
+        {
             ContractUtils.RequiresNotNull(propertyAccessor, "propertyAccessor");
             ContractUtils.RequiresNotNull(initializers, "initializers");
             return ListBind(GetProperty(propertyAccessor), initializers);
         }
 
-        private static void ValidateListInitArgs(Type listType, ReadOnlyCollection<ElementInit> initializers) {
-            if (!typeof(IEnumerable).IsAssignableFrom(listType)) {
+        private static void ValidateListInitArgs(
+            Type listType,
+            ReadOnlyCollection<ElementInit> initializers
+        )
+        {
+            if (!typeof(IEnumerable).IsAssignableFrom(listType))
+            {
                 throw Error.TypeNotIEnumerable(listType);
             }
-            for (int i = 0, n = initializers.Count; i < n; i++) {
+            for (int i = 0, n = initializers.Count; i < n; i++)
+            {
                 ElementInit element = initializers[i];
                 ContractUtils.RequiresNotNull(element, "initializers");
                 ValidateCallInstanceType(listType, element.AddMethod);

@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.WebReference.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,89 +28,110 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Web.Services.Discovery;
-using System.Collections.Specialized;
 using System.CodeDom;
+using System.Collections.Specialized;
+using System.Web.Services.Discovery;
 
-namespace System.Web.Services.Description 
+namespace System.Web.Services.Description
 {
-	public
-	sealed class WebReference
-	{
-		DiscoveryClientDocumentCollection _documents;
+    public sealed class WebReference
+    {
+        DiscoveryClientDocumentCollection _documents;
 #if !MOBILE
-		CodeNamespace _proxyCode;
-		ServiceDescriptionImportWarnings _warnings;
+        CodeNamespace _proxyCode;
+        ServiceDescriptionImportWarnings _warnings;
 #endif
-		string _protocolName;
-		string _appSettingUrlKey;
-		string _appSettingBaseUrl;
-		StringCollection _validationWarnings;
-		
-#if !MOBILE
-		public WebReference (DiscoveryClientDocumentCollection documents, CodeNamespace proxyCode)
-		{
-			if (documents == null) throw new ArgumentNullException ("documents");
-			if (proxyCode == null) throw new ArgumentNullException ("proxyCode");
-			
-			_documents = documents;
-			_proxyCode = proxyCode;
-		}
-		
-		public WebReference (DiscoveryClientDocumentCollection documents, CodeNamespace proxyCode, string appSettingUrlKey, string appSettingBaseUrl)
-			: this (documents, proxyCode, String.Empty, appSettingUrlKey, appSettingBaseUrl)
-		{
-		}
-		
-		public WebReference (DiscoveryClientDocumentCollection documents, CodeNamespace proxyCode, string protocolName, string appSettingUrlKey, string appSettingBaseUrl)
-		{
-			if (documents == null) throw new ArgumentNullException ("documents");
-			if (proxyCode == null) throw new ArgumentNullException ("proxyCode");
-			
-			_documents = documents;
-			_proxyCode = proxyCode;
-			_protocolName = protocolName;
-			_appSettingUrlKey = appSettingUrlKey;
-			_appSettingBaseUrl = appSettingBaseUrl;
-		}
-#endif		
-		public string AppSettingBaseUrl {
-			get { return _appSettingBaseUrl; }
-		}
-		
-		public string AppSettingUrlKey {
-			get { return _appSettingUrlKey; }
-		}
-		
-		public DiscoveryClientDocumentCollection Documents {
-			get { return _documents; }
-		}
+        string _protocolName;
+        string _appSettingUrlKey;
+        string _appSettingBaseUrl;
+        StringCollection _validationWarnings;
 
-		public string ProtocolName {
-			get { return _protocolName; }
-			set { _protocolName = value; }
-		}
 #if !MOBILE
-		public CodeNamespace ProxyCode {
-			get { return _proxyCode; }
-		}
+        public WebReference(DiscoveryClientDocumentCollection documents, CodeNamespace proxyCode)
+        {
+            if (documents == null)
+                throw new ArgumentNullException("documents");
+            if (proxyCode == null)
+                throw new ArgumentNullException("proxyCode");
 
-		public ServiceDescriptionImportWarnings Warnings {
-			get { return _warnings; }
-			set { _warnings = value; }
-		}
+            _documents = documents;
+            _proxyCode = proxyCode;
+        }
+
+        public WebReference(
+            DiscoveryClientDocumentCollection documents,
+            CodeNamespace proxyCode,
+            string appSettingUrlKey,
+            string appSettingBaseUrl
+        )
+            : this(documents, proxyCode, String.Empty, appSettingUrlKey, appSettingBaseUrl) { }
+
+        public WebReference(
+            DiscoveryClientDocumentCollection documents,
+            CodeNamespace proxyCode,
+            string protocolName,
+            string appSettingUrlKey,
+            string appSettingBaseUrl
+        )
+        {
+            if (documents == null)
+                throw new ArgumentNullException("documents");
+            if (proxyCode == null)
+                throw new ArgumentNullException("proxyCode");
+
+            _documents = documents;
+            _proxyCode = proxyCode;
+            _protocolName = protocolName;
+            _appSettingUrlKey = appSettingUrlKey;
+            _appSettingBaseUrl = appSettingBaseUrl;
+        }
 #endif
-		public StringCollection ValidationWarnings {
-			get { 
-				if (_validationWarnings == null) _validationWarnings = new StringCollection ();
-				return _validationWarnings; 
-			}
-		}
 
-		internal void SetValidationWarnings (StringCollection col)
-		{
-			_validationWarnings = col;
-		}
-	}
+        public string AppSettingBaseUrl
+        {
+            get { return _appSettingBaseUrl; }
+        }
+
+        public string AppSettingUrlKey
+        {
+            get { return _appSettingUrlKey; }
+        }
+
+        public DiscoveryClientDocumentCollection Documents
+        {
+            get { return _documents; }
+        }
+
+        public string ProtocolName
+        {
+            get { return _protocolName; }
+            set { _protocolName = value; }
+        }
+#if !MOBILE
+        public CodeNamespace ProxyCode
+        {
+            get { return _proxyCode; }
+        }
+
+        public ServiceDescriptionImportWarnings Warnings
+        {
+            get { return _warnings; }
+            set { _warnings = value; }
+        }
+#endif
+        public StringCollection ValidationWarnings
+        {
+            get
+            {
+                if (_validationWarnings == null)
+                    _validationWarnings = new StringCollection();
+                return _validationWarnings;
+            }
+        }
+
+        internal void SetValidationWarnings(StringCollection col)
+        {
+            _validationWarnings = col;
+        }
+    }
 }
-

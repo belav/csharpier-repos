@@ -10,7 +10,16 @@ namespace System.DirectoryServices.Tests
 {
     internal class LdapConfiguration
     {
-        private LdapConfiguration(string serverName, string searchDn, string userName, string password, string port, AuthenticationTypes at, bool useTls, bool supportsServerSideSort)
+        private LdapConfiguration(
+            string serverName,
+            string searchDn,
+            string userName,
+            string password,
+            string port,
+            AuthenticationTypes at,
+            bool useTls,
+            bool supportsServerSideSort
+        )
         {
             ServerName = serverName;
             SearchDn = searchDn;
@@ -22,9 +31,11 @@ namespace System.DirectoryServices.Tests
             SupportsServerSideSort = supportsServerSideSort;
         }
 
-        private static LdapConfiguration s_ldapConfiguration = GetConfiguration("LDAP.Configuration.xml");
+        private static LdapConfiguration s_ldapConfiguration = GetConfiguration(
+            "LDAP.Configuration.xml"
+        );
 
-        internal static LdapConfiguration Configuration =>  s_ldapConfiguration;
+        internal static LdapConfiguration Configuration => s_ldapConfiguration;
 
         internal string ServerName { get; set; }
         internal string UserName { get; set; }
@@ -34,13 +45,19 @@ namespace System.DirectoryServices.Tests
         internal AuthenticationTypes AuthenticationTypes { get; set; }
         internal bool UseTls { get; set; }
         internal bool SupportsServerSideSort { get; set; }
-        internal string LdapPath => string.IsNullOrEmpty(Port) ? $"LDAP://{ServerName}/{SearchDn}" : $"LDAP://{ServerName}:{Port}/{SearchDn}";
-        internal string RootDSEPath => string.IsNullOrEmpty(Port) ? $"LDAP://{ServerName}/rootDSE" : $"LDAP://{ServerName}:{Port}/rootDSE";
+        internal string LdapPath =>
+            string.IsNullOrEmpty(Port)
+                ? $"LDAP://{ServerName}/{SearchDn}"
+                : $"LDAP://{ServerName}:{Port}/{SearchDn}";
+        internal string RootDSEPath =>
+            string.IsNullOrEmpty(Port)
+                ? $"LDAP://{ServerName}/rootDSE"
+                : $"LDAP://{ServerName}:{Port}/rootDSE";
         internal string UserNameWithNoDomain
         {
             get
             {
-                string [] parts = UserName.Split('\\');
+                string[] parts = UserName.Split('\\');
                 if (parts.Length > 1)
                     return parts[parts.Length - 1];
 
@@ -54,7 +71,9 @@ namespace System.DirectoryServices.Tests
 
         internal string GetLdapPath(string prefix) // like "ou=something"
         {
-            return string.IsNullOrEmpty(Port) ? $"LDAP://{ServerName}/{prefix},{SearchDn}" : $"LDAP://{ServerName}:{Port}/{prefix},{SearchDn}";
+            return string.IsNullOrEmpty(Port)
+                ? $"LDAP://{ServerName}/{prefix},{SearchDn}"
+                : $"LDAP://{ServerName}:{Port}/{prefix},{SearchDn}";
         }
 
         private const string LDAP_CAP_ACTIVE_DIRECTORY_OID = "1.2.840.113556.1.4.800";
@@ -66,12 +85,18 @@ namespace System.DirectoryServices.Tests
                 try
                 {
                     // This requires System.DirectoryServices.dll, which is Windows-only
-                    using (DirectoryEntry rootDse = new DirectoryEntry(LdapConfiguration.Configuration.RootDSEPath,
-                                            LdapConfiguration.Configuration.UserName,
-                                            LdapConfiguration.Configuration.Password,
-                                            LdapConfiguration.Configuration.AuthenticationTypes))
+                    using (
+                        DirectoryEntry rootDse = new DirectoryEntry(
+                            LdapConfiguration.Configuration.RootDSEPath,
+                            LdapConfiguration.Configuration.UserName,
+                            LdapConfiguration.Configuration.Password,
+                            LdapConfiguration.Configuration.AuthenticationTypes
+                        )
+                    )
                     {
-                        return rootDse.Properties["supportedCapabilities"].Contains(LDAP_CAP_ACTIVE_DIRECTORY_OID);
+                        return rootDse
+                            .Properties["supportedCapabilities"]
+                            .Contains(LDAP_CAP_ACTIVE_DIRECTORY_OID);
                     }
                 }
                 catch
@@ -88,7 +113,12 @@ namespace System.DirectoryServices.Tests
 
             // To use test servers, set an environment variable LDAP_TEST_SERVER_INDEX
             // to the 0-based index of the <Connection> element in LDAP.Configuration.xml
-            if (!int.TryParse(Environment.GetEnvironmentVariable("LDAP_TEST_SERVER_INDEX"), out int serverIndex))
+            if (
+                !int.TryParse(
+                    Environment.GetEnvironmentVariable("LDAP_TEST_SERVER_INDEX"),
+                    out int serverIndex
+                )
+            )
             {
                 return null;
             }
@@ -98,7 +128,10 @@ namespace System.DirectoryServices.Tests
             {
                 XElement configuration = XDocument.Load(configFile).Element("Configuration");
 
-                XElement connection = configuration.Elements("Connection").Skip(serverIndex).First();
+                XElement connection = configuration
+                    .Elements("Connection")
+                    .Skip(serverIndex)
+                    .First();
 
                 Debug.WriteLine($"Using test LDAP server {connection.Attribute("Name").Value}");
 
@@ -179,7 +212,16 @@ namespace System.DirectoryServices.Tests
                             at |= AuthenticationTypes.Signing;
                     }
 
-                    ldapConfig = new LdapConfiguration(serverName, searchDn, user, password, port, at, useTls, supportsServerSideSort);
+                    ldapConfig = new LdapConfiguration(
+                        serverName,
+                        searchDn,
+                        user,
+                        password,
+                        port,
+                        at,
+                        useTls,
+                        supportsServerSideSort
+                    );
                 }
             }
             catch (Exception ex)

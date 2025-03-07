@@ -49,11 +49,15 @@ namespace System.Net
         private readonly Stream _stream;
 
         internal HttpRequestStream(Stream stream, byte[] buffer, int offset, int length)
-            : this(stream, buffer, offset, length, -1)
-        {
-        }
+            : this(stream, buffer, offset, length, -1) { }
 
-        internal HttpRequestStream(Stream stream, byte[] buffer, int offset, int length, long contentlength)
+        internal HttpRequestStream(
+            Stream stream,
+            byte[] buffer,
+            int offset,
+            int length,
+            long contentlength
+        )
         {
             _stream = stream;
             _buffer = buffer;
@@ -126,7 +130,13 @@ namespace System.Net
             return nread;
         }
 
-        protected virtual IAsyncResult BeginReadCore(byte[] buffer, int offset, int size, AsyncCallback? cback, object? state)
+        protected virtual IAsyncResult BeginReadCore(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? cback,
+            object? state
+        )
         {
             if (size == 0 || _closed)
             {
@@ -173,7 +183,9 @@ namespace System.Net
                 }
                 if (r._endCalled)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.net_io_invalidendcall, nameof(EndRead)));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.net_io_invalidendcall, nameof(EndRead))
+                    );
                 }
                 r._endCalled = true;
 
@@ -193,7 +205,10 @@ namespace System.Net
             {
                 nread = _stream.EndRead(asyncResult);
             }
-            catch (IOException e) when (e.InnerException is ArgumentException || e.InnerException is InvalidOperationException)
+            catch (IOException e)
+                when (e.InnerException is ArgumentException
+                    || e.InnerException is InvalidOperationException
+                )
             {
                 ExceptionDispatchInfo.Throw(e.InnerException);
             }

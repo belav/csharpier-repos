@@ -8,6 +8,6 @@ namespace System.Net.NetworkInformation
     {
         None = 0,
         Read = 1,
-        Ping = 4
+        Ping = 4,
     };
 }

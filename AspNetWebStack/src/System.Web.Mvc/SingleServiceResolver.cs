@@ -15,7 +15,11 @@ namespace System.Web.Mvc
         private Func<IDependencyResolver> _resolverThunk;
         private string _callerMethodName;
 
-        public SingleServiceResolver(Func<TService> currentValueThunk, TService defaultValue, string callerMethodName)
+        public SingleServiceResolver(
+            Func<TService> currentValueThunk,
+            TService defaultValue,
+            string callerMethodName
+        )
         {
             if (currentValueThunk == null)
             {
@@ -33,7 +37,12 @@ namespace System.Web.Mvc
             _callerMethodName = callerMethodName;
         }
 
-        internal SingleServiceResolver(Func<TService> staticAccessor, TService defaultValue, IDependencyResolver resolver, string callerMethodName)
+        internal SingleServiceResolver(
+            Func<TService> staticAccessor,
+            TService defaultValue,
+            IDependencyResolver resolver,
+            string callerMethodName
+        )
             : this(staticAccessor, defaultValue, callerMethodName)
         {
             if (resolver != null)
@@ -53,7 +62,14 @@ namespace System.Web.Mvc
 
             if (result != null && _currentValueThunk() != null)
             {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, MvcResources.SingleServiceResolver_CannotRegisterTwoInstances, typeof(TService).Name.ToString(), _callerMethodName));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.SingleServiceResolver_CannotRegisterTwoInstances,
+                        typeof(TService).Name.ToString(),
+                        _callerMethodName
+                    )
+                );
             }
 
             return result;

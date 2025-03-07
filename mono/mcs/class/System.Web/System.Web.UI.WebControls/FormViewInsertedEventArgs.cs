@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,47 +32,51 @@ using System.Collections.Specialized;
 
 namespace System.Web.UI.WebControls
 {
-	public class FormViewInsertedEventArgs : EventArgs
-	{
-		int rowsAffected;
-		Exception e;
-		bool exceptionHandled;
-		bool keepInsertedMode;
-		IOrderedDictionary values;
-		
-		public FormViewInsertedEventArgs (int affectedRows, Exception e)
-		{
-			this.rowsAffected = affectedRows;
-			this.e = e;
-		}
-		
-		internal FormViewInsertedEventArgs (int affectedRows, Exception e, IOrderedDictionary values)
-		: this (affectedRows, e)
-		{
-			this.values = values;
-		}
-		
-		public int AffectedRows {
-			get { return rowsAffected; }
-		}
+    public class FormViewInsertedEventArgs : EventArgs
+    {
+        int rowsAffected;
+        Exception e;
+        bool exceptionHandled;
+        bool keepInsertedMode;
+        IOrderedDictionary values;
 
-		public Exception Exception {
-			get { return e; }
-		}
+        public FormViewInsertedEventArgs(int affectedRows, Exception e)
+        {
+            this.rowsAffected = affectedRows;
+            this.e = e;
+        }
 
-		public bool ExceptionHandled {
-			get { return exceptionHandled; }
-			set { exceptionHandled = value; }
-		}
-	
-		public bool KeepInInsertMode {
-			get { return keepInsertedMode; }
-			set { keepInsertedMode = value; }
-		}
+        internal FormViewInsertedEventArgs(int affectedRows, Exception e, IOrderedDictionary values)
+            : this(affectedRows, e)
+        {
+            this.values = values;
+        }
 
-		public IOrderedDictionary Values {
-			get { return values; }
-		}
-	}
+        public int AffectedRows
+        {
+            get { return rowsAffected; }
+        }
+
+        public Exception Exception
+        {
+            get { return e; }
+        }
+
+        public bool ExceptionHandled
+        {
+            get { return exceptionHandled; }
+            set { exceptionHandled = value; }
+        }
+
+        public bool KeepInInsertMode
+        {
+            get { return keepInsertedMode; }
+            set { keepInsertedMode = value; }
+        }
+
+        public IOrderedDictionary Values
+        {
+            get { return values; }
+        }
+    }
 }
-

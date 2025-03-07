@@ -235,10 +235,13 @@ namespace System.Data.Tests
             dRel = new DataRelation("MyRelation", dtParent.Columns[0], dtChild.Columns[0]);
 
             // Add relation which will create invalid constraint
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                ds.Relations.Add(dRel);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    ds.Relations.Add(dRel);
+                }
+            );
         }
 
         [Fact]
@@ -268,14 +271,22 @@ namespace System.Data.Tests
 
                 //add duplicated row
                 dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
-                dRel = new DataRelation("MyRelation", dtParent.Columns[0], dtChild.Columns[0], createConstraints);
+                dRel = new DataRelation(
+                    "MyRelation",
+                    dtParent.Columns[0],
+                    dtChild.Columns[0],
+                    createConstraints
+                );
                 // Add relation which will create invalid constraint
                 if (createConstraints == true)
                 {
-                    AssertExtensions.Throws<ArgumentException>(null, () =>
-                    {
-                        ds.Relations.Add(dRel);
-                    });
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () =>
+                        {
+                            ds.Relations.Add(dRel);
+                        }
+                    );
                 }
                 else
                     ds.Relations.Add(dRel);
@@ -284,7 +295,12 @@ namespace System.Data.Tests
                 ds.Relations.Clear();
                 dtParent.Constraints.Clear();
                 dtChild.Constraints.Clear();
-                dRel = new DataRelation("MyRelation", dtParent.Columns[0], dtChild.Columns[0], createConstraints);
+                dRel = new DataRelation(
+                    "MyRelation",
+                    dtParent.Columns[0],
+                    dtChild.Columns[0],
+                    createConstraints
+                );
                 ds.Relations.Add(dRel);
 
                 // DataRelation - parent Constraints,createConstraints=
@@ -317,17 +333,31 @@ namespace System.Data.Tests
 
             //check some exception
             // DataRelation - CTor ArgumentException, two columns child
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                dRel = new DataRelation("MyRelation", new DataColumn[] { dtParent.Columns[0] }, new DataColumn[] { dtChild.Columns[0], dtChild.Columns[2] });
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    dRel = new DataRelation(
+                        "MyRelation",
+                        new DataColumn[] { dtParent.Columns[0] },
+                        new DataColumn[] { dtChild.Columns[0], dtChild.Columns[2] }
+                    );
+                }
+            );
 
-            dRel = new DataRelation("MyRelation", new DataColumn[] { dtParent.Columns[0], dtParent.Columns[1] }, new DataColumn[] { dtChild.Columns[0], dtChild.Columns[2] });
+            dRel = new DataRelation(
+                "MyRelation",
+                new DataColumn[] { dtParent.Columns[0], dtParent.Columns[1] },
+                new DataColumn[] { dtChild.Columns[0], dtChild.Columns[2] }
+            );
             // DataRelation - Add Relation ArgumentException, fail on creating child Constraints
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                ds.Relations.Add(dRel);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    ds.Relations.Add(dRel);
+                }
+            );
 
             // DataRelation ArgumentException - parent Constraints
             Assert.Equal(1, dtParent.Constraints.Count);
@@ -342,7 +372,11 @@ namespace System.Data.Tests
             dtParent.Constraints.Clear();
             dtChild.Constraints.Clear();
             ds.Relations.Clear();
-            dRel = new DataRelation("MyRelation", new DataColumn[] { dtParent.Columns[0] }, new DataColumn[] { dtChild.Columns[0] });
+            dRel = new DataRelation(
+                "MyRelation",
+                new DataColumn[] { dtParent.Columns[0] },
+                new DataColumn[] { dtChild.Columns[0] }
+            );
             ds.Relations.Add(dRel);
 
             // DataSet DataRelation count
@@ -391,7 +425,12 @@ namespace System.Data.Tests
 
                 //add duplicated row
                 dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
-                dRel = new DataRelation("MyRelation", new DataColumn[] { dtParent.Columns[0] }, new DataColumn[] { dtChild.Columns[0] }, createConstraints);
+                dRel = new DataRelation(
+                    "MyRelation",
+                    new DataColumn[] { dtParent.Columns[0] },
+                    new DataColumn[] { dtChild.Columns[0] },
+                    createConstraints
+                );
                 // Add relation which will create invalid constraint
                 if (createConstraints == true)
                 {
@@ -405,7 +444,12 @@ namespace System.Data.Tests
                 dtChild.Constraints.Clear();
                 dtParent.Rows.Remove(dtParent.Rows[dtParent.Rows.Count - 1]);
 
-                dRel = new DataRelation("MyRelation", new DataColumn[] { dtParent.Columns[0] }, new DataColumn[] { dtChild.Columns[0] }, createConstraints);
+                dRel = new DataRelation(
+                    "MyRelation",
+                    new DataColumn[] { dtParent.Columns[0] },
+                    new DataColumn[] { dtChild.Columns[0] },
+                    createConstraints
+                );
                 ds.Relations.Add(dRel);
 
                 // DataRelation - parent Constraints,createConstraints=
@@ -533,7 +577,9 @@ namespace System.Data.Tests
             ds.Relations.Clear();
             t2.Columns[0].DateTimeMode = DataSetDateTime.Local;
 
-            Assert.Throws<InvalidConstraintException>(() => ds.Relations.Add("rel", t1.Columns[0], t2.Columns[0], false));
+            Assert.Throws<InvalidConstraintException>(
+                () => ds.Relations.Add("rel", t1.Columns[0], t2.Columns[0], false)
+            );
         }
     }
 }

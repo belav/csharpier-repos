@@ -21,7 +21,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="metadataClassType">The metadata class to reference.</param>
         /// <exception cref="System.ArgumentNullException">metadataClassType is null.</exception>
-        public MetadataTypeAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type metadataClassType)
+        public MetadataTypeAttribute(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type metadataClassType
+        )
         {
             _metadataClassType = metadataClassType;
         }

@@ -37,18 +37,33 @@ internal partial class TestDiscoverer(ILoggerFactory loggerFactory)
         string? runSettings,
         BufferedProgress<RunTestsPartialResult> progress,
         VsTestConsoleWrapper vsTestConsoleWrapper,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        var partialResult = new RunTestsPartialResult(LanguageServerResources.Discovering_tests, $"{Environment.NewLine}{LanguageServerResources.Starting_test_discovery}", Progress: null);
+        var partialResult = new RunTestsPartialResult(
+            LanguageServerResources.Discovering_tests,
+            $"{Environment.NewLine}{LanguageServerResources.Starting_test_discovery}",
+            Progress: null
+        );
         progress.Report(partialResult);
 
         var testMethodFinder = document.GetRequiredLanguageService<ITestMethodFinder>();
 
         // Find any potential test methods (based on attributes) that exist in the input range.
-        var potentialTestMethods = await GetPotentialTestMethodsAsync(range, document, testMethodFinder, cancellationToken);
+        var potentialTestMethods = await GetPotentialTestMethodsAsync(
+            range,
+            document,
+            testMethodFinder,
+            cancellationToken
+        );
         if (potentialTestMethods.IsEmpty)
         {
-            progress.Report(partialResult with { Message = LanguageServerResources.No_test_methods_found_in_requested_range });
+            progress.Report(
+                partialResult with
+                {
+                    Message = LanguageServerResources.No_test_methods_found_in_requested_range,
+                }
+            );
             return ImmutableArray<TestCase>.Empty;
         }
 
@@ -57,13 +72,26 @@ internal partial class TestDiscoverer(ILoggerFactory loggerFactory)
         var stopwatch = SharedStopwatch.StartNew();
 
         // The async APIs for vs test are broken (current impl ends up just hanging), so we must use the sync API instead.
-        var discoveryTask = Task.Run(() => vsTestConsoleWrapper.DiscoverTests(SpecializedCollections.SingletonEnumerable(projectOutputPath), discoverySettings: runSettings, discoveryHandler), cancellationToken);
+        var discoveryTask = Task.Run(
+            () =>
+                vsTestConsoleWrapper.DiscoverTests(
+                    SpecializedCollections.SingletonEnumerable(projectOutputPath),
+                    discoverySettings: runSettings,
+                    discoveryHandler
+                ),
+            cancellationToken
+        );
         cancellationToken.Register(() => vsTestConsoleWrapper.CancelDiscovery());
         await discoveryTask;
 
         if (discoveryHandler.IsAborted())
         {
-            progress.Report(partialResult with { Message = LanguageServerResources.Test_discovery_aborted });
+            progress.Report(
+                partialResult with
+                {
+                    Message = LanguageServerResources.Test_discovery_aborted,
+                }
+            );
             return ImmutableArray<TestCase>.Empty;
         }
 
@@ -71,22 +99,54 @@ internal partial class TestDiscoverer(ILoggerFactory loggerFactory)
         var elapsed = stopwatch.Elapsed;
 
         // Match what we found from vs test to what we found in the document to figure out exactly which tests to run.
-        var matchedTests = await MatchDiscoveredTestsToTestsInRangeAsync(testCases, potentialTestMethods, testMethodFinder, document, cancellationToken);
-        progress.Report(partialResult with { Message = string.Format(LanguageServerResources.Found_0_tests_in_1, matchedTests.Length, RunTestsHandler.GetShortTimespan(elapsed)) });
+        var matchedTests = await MatchDiscoveredTestsToTestsInRangeAsync(
+            testCases,
+            potentialTestMethods,
+            testMethodFinder,
+            document,
+            cancellationToken
+        );
+        progress.Report(
+            partialResult with
+            {
+                Message = string.Format(
+                    LanguageServerResources.Found_0_tests_in_1,
+                    matchedTests.Length,
+                    RunTestsHandler.GetShortTimespan(elapsed)
+                ),
+            }
+        );
 
         return matchedTests;
 
-        async Task<ImmutableArray<SyntaxNode>> GetPotentialTestMethodsAsync(LSP.Range range, Document document, ITestMethodFinder testMethodFinder, CancellationToken cancellationToken)
+        async Task<ImmutableArray<SyntaxNode>> GetPotentialTestMethodsAsync(
+            LSP.Range range,
+            Document document,
+            ITestMethodFinder testMethodFinder,
+            CancellationToken cancellationToken
+        )
         {
             var text = await document.GetTextAsync(cancellationToken);
             var textSpan = ProtocolConversions.RangeToTextSpan(range, text);
-            var potentialTestMethods = await testMethodFinder.GetPotentialTestMethodsAsync(document, textSpan, cancellationToken);
-            _logger.LogDebug(message: $"Potential test methods in range: {string.Join(Environment.NewLine, potentialTestMethods)}");
+            var potentialTestMethods = await testMethodFinder.GetPotentialTestMethodsAsync(
+                document,
+                textSpan,
+                cancellationToken
+            );
+            _logger.LogDebug(
+                message: $"Potential test methods in range: {string.Join(Environment.NewLine, potentialTestMethods)}"
+            );
             return potentialTestMethods;
         }
     }
 
-    private async Task<ImmutableArray<TestCase>> MatchDiscoveredTestsToTestsInRangeAsync(ImmutableArray<TestCase> discoveredTests, ImmutableArray<SyntaxNode> testMethods, ITestMethodFinder testMethodFinder, Document document, CancellationToken cancellationToken)
+    private async Task<ImmutableArray<TestCase>> MatchDiscoveredTestsToTestsInRangeAsync(
+        ImmutableArray<TestCase> discoveredTests,
+        ImmutableArray<SyntaxNode> testMethods,
+        ITestMethodFinder testMethodFinder,
+        Document document,
+        CancellationToken cancellationToken
+    )
     {
         // Match the tests in the requested range to the ones we discovered.
         using var _ = ArrayBuilder<TestCase>.GetInstance(out var matchedTests);
@@ -97,7 +157,14 @@ internal partial class TestDiscoverer(ILoggerFactory loggerFactory)
         var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken);
         foreach (var discoveredTest in discoveredTests)
         {
-            var isMatch = testMethods.Any(m => testMethodFinder.IsMatch(semanticModel, m, discoveredTest.FullyQualifiedName, cancellationToken));
+            var isMatch = testMethods.Any(m =>
+                testMethodFinder.IsMatch(
+                    semanticModel,
+                    m,
+                    discoveredTest.FullyQualifiedName,
+                    cancellationToken
+                )
+            );
             if (isMatch)
             {
                 matchedTests.Add(discoveredTest);

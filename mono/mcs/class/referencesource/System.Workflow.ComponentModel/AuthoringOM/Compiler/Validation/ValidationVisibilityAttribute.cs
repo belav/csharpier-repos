@@ -2,16 +2,24 @@ namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum ValidationOption
     {
         None,
         Optional,
-        Required
+        Required,
     }
 
-    [AttributeUsageAttribute(AttributeTargets.Property | AttributeTargets.Event, AllowMultiple = false, Inherited = true)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [AttributeUsageAttribute(
+        AttributeTargets.Property | AttributeTargets.Event,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ValidationOptionAttribute : Attribute
     {
         private ValidationOption validationOption;
@@ -23,10 +31,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public ValidationOption ValidationOption
         {
-            get
-            {
-                return this.validationOption;
-            }
+            get { return this.validationOption; }
         }
     }
 }

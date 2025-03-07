@@ -16,7 +16,18 @@ namespace System.Web.Http.WebHost
         [InlineData("foo", true)]
         public void GetDisabled_ParsesAppSettings(string setting, bool expected)
         {
-            Assert.Equal(expected, SuppressFormsAuthRedirectHelper.GetEnabled(new NameValueCollection() { { SuppressFormsAuthRedirectHelper.AppSettingsSuppressFormsAuthenticationRedirectKey, setting } }));
+            Assert.Equal(
+                expected,
+                SuppressFormsAuthRedirectHelper.GetEnabled(
+                    new NameValueCollection()
+                    {
+                        {
+                            SuppressFormsAuthRedirectHelper.AppSettingsSuppressFormsAuthenticationRedirectKey,
+                            setting
+                        },
+                    }
+                )
+            );
         }
 
         [Fact]
@@ -26,7 +37,10 @@ namespace System.Web.Http.WebHost
             Type preApplicationStartType = typeof(PreApplicationStartCode);
 #pragma warning restore
             PreAppStartTestHelper.TestPreAppStartClass(preApplicationStartType);
-            object[] attrs = preApplicationStartType.GetCustomAttributes(typeof(ObsoleteAttribute), true);
+            object[] attrs = preApplicationStartType.GetCustomAttributes(
+                typeof(ObsoleteAttribute),
+                true
+            );
             Assert.Single(attrs);
         }
     }

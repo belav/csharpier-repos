@@ -7,8 +7,13 @@ namespace System.Workflow.ComponentModel
     using System.Workflow.ComponentModel.Serialization;
 
     #region Class ActivityCollectionItemList
-    [DesignerSerializer(typeof(ActivityCollectionMarkupSerializer), typeof(WorkflowMarkupSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [DesignerSerializer(
+        typeof(ActivityCollectionMarkupSerializer),
+        typeof(WorkflowMarkupSerializer)
+    )]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityCollection : List<Activity>, IList<Activity>, IList
     {
         private Activity owner = null;
@@ -21,7 +26,10 @@ namespace System.Workflow.ComponentModel
             if (owner == null)
                 throw new ArgumentNullException("owner");
             if (!(owner is Activity))
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(Activity).FullName), "owner");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_UnexpectedArgumentType, typeof(Activity).FullName),
+                    "owner"
+                );
 
             this.owner = owner;
         }
@@ -40,10 +48,7 @@ namespace System.Workflow.ComponentModel
 
         internal Activity Owner
         {
-            get
-            {
-                return this.owner;
-            }
+            get { return this.owner; }
         }
 
         internal void InnerAdd(Activity activity)
@@ -60,7 +65,13 @@ namespace System.Workflow.ComponentModel
 
             Activity item = base[index];
 
-            ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(index, item, null, this.owner, ActivityCollectionChangeAction.Remove);
+            ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(
+                index,
+                item,
+                null,
+                this.owner,
+                ActivityCollectionChangeAction.Remove
+            );
             FireListChanging(args);
             base.RemoveAt(index);
             FireListChanged(args);
@@ -73,7 +84,13 @@ namespace System.Workflow.ComponentModel
             if (item == null)
                 throw new ArgumentNullException("item");
 
-            ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(index, null, item, this.owner, ActivityCollectionChangeAction.Add);
+            ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(
+                index,
+                null,
+                item,
+                this.owner,
+                ActivityCollectionChangeAction.Add
+            );
             FireListChanging(args);
             base.Insert(index, item);
             FireListChanged(args);
@@ -81,22 +98,26 @@ namespace System.Workflow.ComponentModel
 
         Activity IList<Activity>.this[int index]
         {
-            get
-            {
-                return base[index];
-            }
+            get { return base[index]; }
             set
             {
                 if (value == null)
                     throw new ArgumentNullException("item");
 
                 Activity oldItem = base[index];
-                ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(index, oldItem, value, this.owner, ActivityCollectionChangeAction.Replace);
+                ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(
+                    index,
+                    oldItem,
+                    value,
+                    this.owner,
+                    ActivityCollectionChangeAction.Replace
+                );
                 FireListChanging(args);
                 base[index] = value;
                 FireListChanged(args);
             }
         }
+
         int IList<Activity>.IndexOf(Activity item)
         {
             return base.IndexOf(item);
@@ -107,10 +128,7 @@ namespace System.Workflow.ComponentModel
         #region ICollection<Activity> Members
         bool ICollection<Activity>.IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         bool ICollection<Activity>.Contains(Activity item)
@@ -126,7 +144,13 @@ namespace System.Workflow.ComponentModel
             int index = base.IndexOf(item);
             if (index >= 0)
             {
-                ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(index, item, null, this.owner, ActivityCollectionChangeAction.Remove);
+                ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(
+                    index,
+                    item,
+                    null,
+                    this.owner,
+                    ActivityCollectionChangeAction.Remove
+                );
                 FireListChanging(args);
                 base.Remove(item);
                 FireListChanged(args);
@@ -138,7 +162,13 @@ namespace System.Workflow.ComponentModel
         void ICollection<Activity>.Clear()
         {
             ICollection<Activity> children = base.GetRange(0, base.Count);
-            ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(-1, children, null, this.owner, ActivityCollectionChangeAction.Remove);
+            ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(
+                -1,
+                children,
+                null,
+                this.owner,
+                ActivityCollectionChangeAction.Remove
+            );
             FireListChanging(args);
             base.Clear();
             FireListChanged(args);
@@ -149,7 +179,13 @@ namespace System.Workflow.ComponentModel
             if (item == null)
                 throw new ArgumentNullException("item");
 
-            ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(base.Count, null, item, this.owner, ActivityCollectionChangeAction.Add);
+            ActivityCollectionChangeEventArgs args = new ActivityCollectionChangeEventArgs(
+                base.Count,
+                null,
+                item,
+                this.owner,
+                ActivityCollectionChangeAction.Add
+            );
             FireListChanging(args);
             base.Add(item);
             FireListChanged(args);
@@ -157,11 +193,9 @@ namespace System.Workflow.ComponentModel
 
         int ICollection<Activity>.Count
         {
-            get
-            {
-                return base.Count;
-            }
+            get { return base.Count; }
         }
+
         void ICollection<Activity>.CopyTo(Activity[] array, int arrayIndex)
         {
             base.CopyTo(array, arrayIndex);
@@ -181,10 +215,7 @@ namespace System.Workflow.ComponentModel
         #region Member Implementations
         public new int Count
         {
-            get
-            {
-                return ((ICollection<Activity>)this).Count;
-            }
+            get { return ((ICollection<Activity>)this).Count; }
         }
 
         public new void Add(Activity item)
@@ -214,14 +245,8 @@ namespace System.Workflow.ComponentModel
 
         public new Activity this[int index]
         {
-            get
-            {
-                return ((IList<Activity>)this)[index];
-            }
-            set
-            {
-                ((IList<Activity>)this)[index] = value;
-            }
+            get { return ((IList<Activity>)this)[index]; }
+            set { ((IList<Activity>)this)[index] = value; }
         }
 
         public Activity this[string key]
@@ -256,7 +281,12 @@ namespace System.Workflow.ComponentModel
         int IList.Add(object value)
         {
             if (!(value is Activity))
-                throw new Exception(SR.GetString(SR.Error_InvalidListItem, this.GetType().GetGenericArguments()[0].FullName));
+                throw new Exception(
+                    SR.GetString(
+                        SR.Error_InvalidListItem,
+                        this.GetType().GetGenericArguments()[0].FullName
+                    )
+                );
             ((IList<Activity>)this).Add((Activity)value);
             return this.Count - 1;
         }
@@ -269,57 +299,73 @@ namespace System.Workflow.ComponentModel
         bool IList.Contains(object value)
         {
             if (!(value is Activity))
-                throw new Exception(SR.GetString(SR.Error_InvalidListItem, this.GetType().GetGenericArguments()[0].FullName));
+                throw new Exception(
+                    SR.GetString(
+                        SR.Error_InvalidListItem,
+                        this.GetType().GetGenericArguments()[0].FullName
+                    )
+                );
             return (((IList<Activity>)this).Contains((Activity)value));
         }
 
         int IList.IndexOf(object value)
         {
             if (!(value is Activity))
-                throw new Exception(SR.GetString(SR.Error_InvalidListItem, this.GetType().GetGenericArguments()[0].FullName));
+                throw new Exception(
+                    SR.GetString(
+                        SR.Error_InvalidListItem,
+                        this.GetType().GetGenericArguments()[0].FullName
+                    )
+                );
             return ((IList<Activity>)this).IndexOf((Activity)value);
         }
 
         void IList.Insert(int index, object value)
         {
             if (!(value is Activity))
-                throw new Exception(SR.GetString(SR.Error_InvalidListItem, this.GetType().GetGenericArguments()[0].FullName));
+                throw new Exception(
+                    SR.GetString(
+                        SR.Error_InvalidListItem,
+                        this.GetType().GetGenericArguments()[0].FullName
+                    )
+                );
             ((IList<Activity>)this).Insert(index, (Activity)value);
         }
 
         bool IList.IsFixedSize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         bool IList.IsReadOnly
         {
-            get
-            {
-                return ((IList<Activity>)this).IsReadOnly;
-            }
+            get { return ((IList<Activity>)this).IsReadOnly; }
         }
 
         void IList.Remove(object value)
         {
             if (!(value is Activity))
-                throw new Exception(SR.GetString(SR.Error_InvalidListItem, this.GetType().GetGenericArguments()[0].FullName));
+                throw new Exception(
+                    SR.GetString(
+                        SR.Error_InvalidListItem,
+                        this.GetType().GetGenericArguments()[0].FullName
+                    )
+                );
             ((IList<Activity>)this).Remove((Activity)value);
         }
+
         object IList.this[int index]
         {
-            get
-            {
-                return ((IList<Activity>)this)[index];
-            }
-
+            get { return ((IList<Activity>)this)[index]; }
             set
             {
                 if (!(value is Activity))
-                    throw new Exception(SR.GetString(SR.Error_InvalidListItem, this.GetType().GetGenericArguments()[0].FullName));
+                    throw new Exception(
+                        SR.GetString(
+                            SR.Error_InvalidListItem,
+                            this.GetType().GetGenericArguments()[0].FullName
+                        )
+                    );
                 ((IList<Activity>)this)[index] = (Activity)value;
             }
         }
@@ -333,6 +379,7 @@ namespace System.Workflow.ComponentModel
             for (int loop = 0; loop < this.Count; loop++)
                 array.SetValue(this[loop], loop + index);
         }
+
         bool ICollection.IsSynchronized
         {
             get { return false; }
@@ -353,19 +400,22 @@ namespace System.Workflow.ComponentModel
         }
 
         #endregion
-
     }
     #endregion
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum ActivityCollectionChangeAction
     {
         Add = 0x00,
         Remove = 0x01,
-        Replace = 0x02
+        Replace = 0x02,
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityCollectionChangeEventArgs : EventArgs
     {
         private int index = 0;
@@ -374,7 +424,13 @@ namespace System.Workflow.ComponentModel
         private object owner = null;
         private ActivityCollectionChangeAction action = ActivityCollectionChangeAction.Add;
 
-        public ActivityCollectionChangeEventArgs(int index, ICollection<Activity> removedItems, ICollection<Activity> addedItems, object owner, ActivityCollectionChangeAction action)
+        public ActivityCollectionChangeEventArgs(
+            int index,
+            ICollection<Activity> removedItems,
+            ICollection<Activity> addedItems,
+            object owner,
+            ActivityCollectionChangeAction action
+        )
         {
             this.index = index;
             this.removedItems = removedItems;
@@ -383,7 +439,13 @@ namespace System.Workflow.ComponentModel
             this.owner = owner;
         }
 
-        public ActivityCollectionChangeEventArgs(int index, Activity removedActivity, Activity addedActivity, object owner, ActivityCollectionChangeAction action)
+        public ActivityCollectionChangeEventArgs(
+            int index,
+            Activity removedActivity,
+            Activity addedActivity,
+            object owner,
+            ActivityCollectionChangeAction action
+        )
         {
             this.index = index;
             if (removedActivity != null)
@@ -404,7 +466,9 @@ namespace System.Workflow.ComponentModel
         {
             get
             {
-                return (this.removedItems != null) ? new List<Activity>(this.removedItems).AsReadOnly() : new List<Activity>().AsReadOnly();
+                return (this.removedItems != null)
+                    ? new List<Activity>(this.removedItems).AsReadOnly()
+                    : new List<Activity>().AsReadOnly();
             }
         }
 
@@ -412,32 +476,25 @@ namespace System.Workflow.ComponentModel
         {
             get
             {
-                return (this.addedItems != null) ? new List<Activity>(this.addedItems).AsReadOnly() : new List<Activity>().AsReadOnly();
+                return (this.addedItems != null)
+                    ? new List<Activity>(this.addedItems).AsReadOnly()
+                    : new List<Activity>().AsReadOnly();
             }
         }
 
         public object Owner
         {
-            get
-            {
-                return this.owner;
-            }
+            get { return this.owner; }
         }
 
         public int Index
         {
-            get
-            {
-                return this.index;
-            }
+            get { return this.index; }
         }
 
         public ActivityCollectionChangeAction Action
         {
-            get
-            {
-                return this.action;
-            }
+            get { return this.action; }
         }
     }
 }

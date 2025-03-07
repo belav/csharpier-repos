@@ -12,10 +12,12 @@ namespace System.Net
     {
         private static readonly Meter s_meter = new("System.Net.NameResolution");
 
-        private static readonly Histogram<double> s_lookupDuration = s_meter.CreateHistogram<double>(
-            name: "dns.lookup.duration",
-            unit: "s",
-            description: "Measures the time taken to perform a DNS lookup.");
+        private static readonly Histogram<double> s_lookupDuration =
+            s_meter.CreateHistogram<double>(
+                name: "dns.lookup.duration",
+                unit: "s",
+                description: "Measures the time taken to perform a DNS lookup."
+            );
 
         public static bool IsEnabled() => s_lookupDuration.Enabled;
 
@@ -29,19 +31,23 @@ namespace System.Net
             }
             else
             {
-                var errorTypeTag = KeyValuePair.Create("error.type", (object?)GetErrorType(exception));
+                var errorTypeTag = KeyValuePair.Create(
+                    "error.type",
+                    (object?)GetErrorType(exception)
+                );
                 s_lookupDuration.Record(duration.TotalSeconds, hostNameTag, errorTypeTag);
             }
         }
 
-        private static string GetErrorType(Exception exception) => (exception as SocketException)?.SocketErrorCode switch
-        {
-            SocketError.HostNotFound => "host_not_found",
-            SocketError.TryAgain => "try_again",
-            SocketError.AddressFamilyNotSupported => "address_family_not_supported",
-            SocketError.NoRecovery => "no_recovery",
+        private static string GetErrorType(Exception exception) =>
+            (exception as SocketException)?.SocketErrorCode switch
+            {
+                SocketError.HostNotFound => "host_not_found",
+                SocketError.TryAgain => "try_again",
+                SocketError.AddressFamilyNotSupported => "address_family_not_supported",
+                SocketError.NoRecovery => "no_recovery",
 
-            _ => exception.GetType().FullName!
-        };
+                _ => exception.GetType().FullName!,
+            };
     }
 }

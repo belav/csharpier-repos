@@ -14,6 +14,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal interface IGraphQuery
     {
-        Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken);
+        Task<GraphBuilder> GetGraphAsync(
+            Solution solution,
+            IGraphContext context,
+            CancellationToken cancellationToken
+        );
     }
 }

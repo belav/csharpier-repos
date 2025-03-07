@@ -1,28 +1,28 @@
 using System;
-using System.Text;
-using System.Reflection;
-using System.Collections;
 using System.CodeDom;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Workflow.ComponentModel;
-using System.Workflow.ComponentModel.Design;
-using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.Activities.Rules;
 using System.Globalization;
-using System.Windows.Forms.Design;
-using System.Workflow.Activities.Rules.Design;
+using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.Design;
 using System.Workflow.Activities.Common;
+using System.Workflow.Activities.Rules;
+using System.Workflow.Activities.Rules.Design;
+using System.Workflow.ComponentModel;
+using System.Workflow.ComponentModel.Compiler;
+using System.Workflow.ComponentModel.Design;
 
 namespace System.Workflow.Activities
 {
     [ActivityDesignerTheme(typeof(PolicyDesignerTheme))]
     internal sealed class PolicyDesigner : ActivityDesigner, IServiceProvider
     {
-        new public object GetService(Type type)
+        public new object GetService(Type type)
         {
             return base.GetService(type);
         }
@@ -32,7 +32,8 @@ namespace System.Workflow.Activities
             base.DoDefaultAction();
 
             // Do not allow editing if in debug mode.
-            WorkflowDesignerLoader workflowDesignerLoader = this.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+            WorkflowDesignerLoader workflowDesignerLoader =
+                this.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
             if (workflowDesignerLoader != null && workflowDesignerLoader.InDebugMode)
                 throw new InvalidOperationException(Messages.DebugModeEditsDisallowed);
 
@@ -41,15 +42,17 @@ namespace System.Workflow.Activities
             if (Helpers.IsActivityLocked(activity))
                 return;
 
-            RuleDefinitions rules = ConditionHelper.Load_Rules_DT(this, Helpers.GetRootActivity(activity));
+            RuleDefinitions rules = ConditionHelper.Load_Rules_DT(
+                this,
+                Helpers.GetRootActivity(activity)
+            );
             if (rules != null)
             {
                 RuleSetCollection ruleSetCollection = rules.RuleSets;
                 RuleSetReference ruleSetReference = activity.RuleSetReference;
                 RuleSet ruleSet = null;
                 string ruleSetName = null;
-                if (ruleSetReference != null
-                    && !string.IsNullOrEmpty(ruleSetReference.RuleSetName))
+                if (ruleSetReference != null && !string.IsNullOrEmpty(ruleSetReference.RuleSetName))
                 {
                     ruleSetName = ruleSetReference.RuleSetName;
                     if (ruleSetCollection.Contains(ruleSetName))
@@ -81,10 +84,11 @@ namespace System.Workflow.Activities
             }
 
             // force revalidation by setting a property
-            TypeDescriptor.GetProperties(activity)["RuleSetReference"].SetValue(activity, activity.RuleSetReference);
+            TypeDescriptor
+                .GetProperties(activity)["RuleSetReference"]
+                .SetValue(activity, activity.RuleSetReference);
         }
     }
-
 
     internal sealed class PolicyDesignerTheme : ActivityDesignerTheme
     {

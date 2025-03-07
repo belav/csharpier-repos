@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Legacy.Support;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.IO.Ports.Tests
 {
@@ -45,7 +45,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void WriteAfterClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying write method throws exception after a call to Close()");
 
@@ -60,9 +64,15 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void WriteAfterBaseStreamClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
-                Debug.WriteLine("Verifying write method throws exception after a call to BaseStream.Close()");
+                Debug.WriteLine(
+                    "Verifying write method throws exception after a call to BaseStream.Close()"
+                );
 
                 com.Open();
                 Stream serialStream = com.BaseStream;
@@ -75,8 +85,12 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void Timeout()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 var rndGen = new Random(-55);
                 var XOffBuffer = new byte[1];
@@ -99,11 +113,15 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasOneSerialPort), nameof(HasHardwareFlowControl))]
         public void SuccessiveWriteTimeout()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 var rndGen = new Random(-55);
 
@@ -112,16 +130,17 @@ namespace System.IO.Ports.Tests
                 //         com.Encoding = new System.Text.UTF7Encoding();
                 com.Encoding = Encoding.Unicode;
 
-                Debug.WriteLine("Verifying WriteTimeout={0} with successive call to write method", com.WriteTimeout);
+                Debug.WriteLine(
+                    "Verifying WriteTimeout={0} with successive call to write method",
+                    com.WriteTimeout
+                );
                 com.Open();
 
                 try
                 {
                     com.BaseStream.Write(new byte[s_BYTE_SIZE_TIMEOUT], 0, s_BYTE_SIZE_TIMEOUT);
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
 
                 VerifyTimeout(com);
             }
@@ -130,7 +149,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void SuccessiveWriteTimeoutWithWriteSucceeding()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
             {
                 var rndGen = new Random(-55);
                 var asyncEnableRts = new AsyncEnableRts();
@@ -142,7 +163,8 @@ namespace System.IO.Ports.Tests
 
                 Debug.WriteLine(
                     "Verifying WriteTimeout={0} with successive call to write method with the write succeeding sometime before it's timeout",
-                    com1.WriteTimeout);
+                    com1.WriteTimeout
+                );
                 com1.Open();
 
                 // Call EnableRTS asynchronously this will enable RTS in the middle of the following write call allowing it to succeed
@@ -154,9 +176,7 @@ namespace System.IO.Ports.Tests
                 {
                     com1.BaseStream.Write(new byte[s_BYTE_SIZE_TIMEOUT], 0, s_BYTE_SIZE_TIMEOUT);
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
 
                 asyncEnableRts.Stop();
 
@@ -168,9 +188,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort), nameof(HasHardwareFlowControl))]
         public void BytesToWrite()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
-                var asyncWriteRndByteArray = new AsyncWriteRndByteArray(com, s_BYTE_SIZE_BYTES_TO_WRITE);
+                var asyncWriteRndByteArray = new AsyncWriteRndByteArray(
+                    com,
+                    s_BYTE_SIZE_BYTES_TO_WRITE
+                );
                 var t = new Task(asyncWriteRndByteArray.WriteRndByteArray);
 
                 Debug.WriteLine("Verifying BytesToWrite with one call to Write");
@@ -189,13 +216,20 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasOneSerialPort), nameof(HasHardwareFlowControl))]
         public void BytesToWriteSuccessive()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
-                var asyncWriteRndByteArray = new AsyncWriteRndByteArray(com, s_BYTE_SIZE_BYTES_TO_WRITE);
+                var asyncWriteRndByteArray = new AsyncWriteRndByteArray(
+                    com,
+                    s_BYTE_SIZE_BYTES_TO_WRITE
+                );
                 var t1 = new Task(asyncWriteRndByteArray.WriteRndByteArray);
                 var t2 = new Task(asyncWriteRndByteArray.WriteRndByteArray);
 
@@ -216,7 +250,9 @@ namespace System.IO.Ports.Tests
                 TCSupport.WaitForExactWriteBufferLoad(com, s_BYTE_SIZE_BYTES_TO_WRITE * 2);
 
                 // Wait for both write methods to timeout
-                var aggregatedException = Assert.Throws<AggregateException>(() => TCSupport.WaitForTaskCompletion(t2));
+                var aggregatedException = Assert.Throws<AggregateException>(
+                    () => TCSupport.WaitForTaskCompletion(t2)
+                );
                 Assert.IsType<IOException>(aggregatedException.InnerException);
             }
         }
@@ -224,7 +260,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Handshake_None()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 var asyncWriteRndByteArray = new AsyncWriteRndByteArray(com, s_BYTE_SIZE_HANDSHAKE);
                 var t = new Task(asyncWriteRndByteArray.WriteRndByteArray);
@@ -267,7 +307,11 @@ namespace System.IO.Ports.Tests
             {
                 lock (this)
                 {
-                    using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+                    using (
+                        var com2 = new SerialPort(
+                            TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                        )
+                    )
                     {
                         var rndGen = new Random(-55);
                         int sleepPeriod = rndGen.Next(minRandomTimeout, maxRandomTimeout / 2);
@@ -286,7 +330,6 @@ namespace System.IO.Ports.Tests
                 }
             }
 
-
             public void Stop()
             {
                 lock (this)
@@ -302,13 +345,11 @@ namespace System.IO.Ports.Tests
             private readonly SerialPort _com;
             private readonly int _byteLength;
 
-
             public AsyncWriteRndByteArray(SerialPort com, int byteLength)
             {
                 _com = com;
                 _byteLength = byteLength;
             }
-
 
             public void WriteRndByteArray()
             {
@@ -324,9 +365,7 @@ namespace System.IO.Ports.Tests
                 {
                     _com.BaseStream.Write(buffer, 0, buffer.Length);
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
             }
         }
 
@@ -336,8 +375,10 @@ namespace System.IO.Ports.Tests
 
         private static void VerifyWriteException(Stream serialStream, Type expectedException)
         {
-            Assert.Throws(expectedException,
-                () => serialStream.Write(new byte[BYTE_SIZE_EXCEPTION], 0, BYTE_SIZE_EXCEPTION));
+            Assert.Throws(
+                expectedException,
+                () => serialStream.Write(new byte[BYTE_SIZE_EXCEPTION], 0, BYTE_SIZE_EXCEPTION)
+            );
         }
 
         private void VerifyTimeout(SerialPort com)
@@ -346,14 +387,11 @@ namespace System.IO.Ports.Tests
             int expectedTime = com.WriteTimeout;
             var actualTime = 0;
 
-
             try
             {
                 com.BaseStream.Write(new byte[s_BYTE_SIZE_TIMEOUT], 0, s_BYTE_SIZE_TIMEOUT); // Warm up write method
             }
-            catch (TimeoutException)
-            {
-            }
+            catch (TimeoutException) { }
 
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
 
@@ -364,9 +402,7 @@ namespace System.IO.Ports.Tests
                 {
                     com.BaseStream.Write(new byte[s_BYTE_SIZE_TIMEOUT], 0, s_BYTE_SIZE_TIMEOUT);
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
 
                 timer.Stop();
                 actualTime += (int)timer.ElapsedMilliseconds;
@@ -375,23 +411,35 @@ namespace System.IO.Ports.Tests
 
             Thread.CurrentThread.Priority = ThreadPriority.Normal;
             actualTime /= NUM_TRYS;
-            double percentageDifference = Math.Abs((expectedTime - actualTime) / (double)expectedTime);
+            double percentageDifference = Math.Abs(
+                (expectedTime - actualTime) / (double)expectedTime
+            );
 
             // Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
             if (maxPercentageDifference < percentageDifference)
             {
-                Fail("ERROR!!!: The write method timedout in {0} expected {1} percentage difference: {2}", actualTime,
-                    expectedTime, percentageDifference);
+                Fail(
+                    "ERROR!!!: The write method timedout in {0} expected {1} percentage difference: {2}",
+                    actualTime,
+                    expectedTime,
+                    percentageDifference
+                );
             }
         }
 
-
         private void Verify_Handshake(Handshake handshake)
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
-                var asyncWriteRndByteArray = new AsyncWriteRndByteArray(com1, s_BYTE_SIZE_HANDSHAKE);
+                var asyncWriteRndByteArray = new AsyncWriteRndByteArray(
+                    com1,
+                    s_BYTE_SIZE_HANDSHAKE
+                );
                 var t = new Task(asyncWriteRndByteArray.WriteRndByteArray);
 
                 var XOffBuffer = new byte[1];
@@ -407,7 +455,10 @@ namespace System.IO.Ports.Tests
                 com2.Open();
 
                 // Setup to ensure write will bock with type of handshake method being used
-                if (Handshake.RequestToSend == handshake || Handshake.RequestToSendXOnXOff == handshake)
+                if (
+                    Handshake.RequestToSend == handshake
+                    || Handshake.RequestToSendXOnXOff == handshake
+                )
                 {
                     com2.RtsEnable = false;
                 }
@@ -424,14 +475,21 @@ namespace System.IO.Ports.Tests
                 TCSupport.WaitForWriteBufferToLoad(com1, s_BYTE_SIZE_HANDSHAKE);
 
                 // Verify that CtsHolding is false if the RequestToSend or RequestToSendXOnXOff handshake method is used
-                if ((Handshake.RequestToSend == handshake || Handshake.RequestToSendXOnXOff == handshake) &&
-                    com1.CtsHolding)
+                if (
+                    (
+                        Handshake.RequestToSend == handshake
+                        || Handshake.RequestToSendXOnXOff == handshake
+                    ) && com1.CtsHolding
+                )
                 {
                     Fail("ERROR!!! Expected CtsHolding={0} actual {1}", false, com1.CtsHolding);
                 }
 
                 // Setup to ensure write will succeed
-                if (Handshake.RequestToSend == handshake || Handshake.RequestToSendXOnXOff == handshake)
+                if (
+                    Handshake.RequestToSend == handshake
+                    || Handshake.RequestToSendXOnXOff == handshake
+                )
                 {
                     com2.RtsEnable = true;
                 }
@@ -447,14 +505,18 @@ namespace System.IO.Ports.Tests
                 Assert.Equal(0, com1.BytesToWrite);
 
                 // Verify that CtsHolding is true if the RequestToSend or RequestToSendXOnXOff handshake method is used
-                if ((Handshake.RequestToSend == handshake || Handshake.RequestToSendXOnXOff == handshake) &&
-                    !com1.CtsHolding)
+                if (
+                    (
+                        Handshake.RequestToSend == handshake
+                        || Handshake.RequestToSendXOnXOff == handshake
+                    ) && !com1.CtsHolding
+                )
                 {
                     Fail("ERROR!!! Expected CtsHolding={0} actual {1}", true, com1.CtsHolding);
                 }
             }
 
-            #endregion
+        #endregion
         }
     }
 }

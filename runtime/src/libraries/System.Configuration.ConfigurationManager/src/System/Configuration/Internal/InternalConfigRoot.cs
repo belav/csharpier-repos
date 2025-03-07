@@ -18,9 +18,7 @@ namespace System.Configuration.Internal
         private ReaderWriterLock _hierarchyLock;
         private bool _isDesignTime;
 
-        internal InternalConfigRoot()
-        {
-        }
+        internal InternalConfigRoot() { }
 
         internal InternalConfigRoot(Configuration currentConfiguration, UpdateConfigHost host)
         {
@@ -46,11 +44,12 @@ namespace System.Configuration.Internal
             _hierarchyLock = new ReaderWriterLock();
 
             // Dummy record to hold _children for root
-            if (_isDesignTime) RootConfigRecord = MgmtConfigurationRecord.Create(this, null, string.Empty, null);
+            if (_isDesignTime)
+                RootConfigRecord = MgmtConfigurationRecord.Create(this, null, string.Empty, null);
             else
             {
-                RootConfigRecord =
-                    (BaseConfigurationRecord)RuntimeConfigurationRecord.Create(this, null, string.Empty);
+                RootConfigRecord = (BaseConfigurationRecord)
+                    RuntimeConfigurationRecord.Create(this, null, string.Empty);
             }
         }
 
@@ -58,7 +57,9 @@ namespace System.Configuration.Internal
 
         public object GetSection(string section, string configPath)
         {
-            BaseConfigurationRecord configRecord = (BaseConfigurationRecord)GetUniqueConfigRecord(configPath);
+            BaseConfigurationRecord configRecord = (BaseConfigurationRecord)GetUniqueConfigRecord(
+                configPath
+            );
             object result = configRecord.GetSection(section);
             return result;
         }
@@ -74,14 +75,17 @@ namespace System.Configuration.Internal
         // Get the nearest ancestor record (including self) which contains unique configuration information.
         public IInternalConfigRecord GetUniqueConfigRecord(string configPath)
         {
-            BaseConfigurationRecord configRecord = (BaseConfigurationRecord)GetConfigRecord(configPath);
+            BaseConfigurationRecord configRecord = (BaseConfigurationRecord)GetConfigRecord(
+                configPath
+            );
             while (configRecord.IsEmpty)
             {
                 BaseConfigurationRecord parentConfigRecord = configRecord.Parent;
 
                 // If all config records are empty, return the immediate child of the
                 // root placeholder (e.g. machine.config)
-                if (parentConfigRecord.IsRootConfig) break;
+                if (parentConfigRecord.IsRootConfig)
+                    break;
 
                 configRecord = parentConfigRecord;
             }
@@ -93,7 +97,8 @@ namespace System.Configuration.Internal
         // If the record does not exist, create it if it is needed.
         public IInternalConfigRecord GetConfigRecord(string configPath)
         {
-            if (!ConfigPathUtility.IsValid(configPath)) throw ExceptionUtil.ParameterInvalid(nameof(configPath));
+            if (!ConfigPathUtility.IsValid(configPath))
+                throw ExceptionUtil.ParameterInvalid(nameof(configPath));
 
             string[] parts = ConfigPathUtility.GetParts(configPath);
 
@@ -109,7 +114,8 @@ namespace System.Configuration.Internal
                 HlFindConfigRecord(parts, out index, out currentRecord);
 
                 // check if found
-                if ((index == parts.Length) || !currentRecord.HlNeedsChildFor(parts[index])) return currentRecord;
+                if ((index == parts.Length) || !currentRecord.HlNeedsChildFor(parts[index]))
+                    return currentRecord;
             }
             finally
             {
@@ -127,10 +133,15 @@ namespace System.Configuration.Internal
 
                 HlFindConfigRecord(parts, out index, out currentRecord);
 
-                if (index == parts.Length) return currentRecord;
+                if (index == parts.Length)
+                    return currentRecord;
 
-                string currentConfigPath = string.Join(BaseConfigurationRecord.ConfigPathSeparatorString, parts, 0,
-                    index);
+                string currentConfigPath = string.Join(
+                    BaseConfigurationRecord.ConfigPathSeparatorString,
+                    parts,
+                    0,
+                    index
+                );
 
                 // Create new records
                 while ((index < parts.Length) && currentRecord.HlNeedsChildFor(parts[index]))
@@ -140,8 +151,18 @@ namespace System.Configuration.Internal
                     BaseConfigurationRecord childRecord;
 
                     childRecord = _isDesignTime
-                        ? MgmtConfigurationRecord.Create(this, currentRecord, currentConfigPath, null)
-                        : (BaseConfigurationRecord)RuntimeConfigurationRecord.Create(this, currentRecord, currentConfigPath);
+                        ? MgmtConfigurationRecord.Create(
+                            this,
+                            currentRecord,
+                            currentConfigPath,
+                            null
+                        )
+                        : (BaseConfigurationRecord)
+                            RuntimeConfigurationRecord.Create(
+                                this,
+                                currentRecord,
+                                currentConfigPath
+                            );
 
                     currentRecord.HlAddChild(configName, childRecord);
 
@@ -170,11 +191,13 @@ namespace System.Configuration.Internal
             // and the testing for this is not easy for all scenarios.
             if (_hierarchyLock.IsReaderLockHeld)
                 throw ExceptionUtil.UnexpectedError(
-                    "System.Configuration.Internal.InternalConfigRoot::AcquireHierarchyLockForRead - reader lock already held by this thread");
+                    "System.Configuration.Internal.InternalConfigRoot::AcquireHierarchyLockForRead - reader lock already held by this thread"
+                );
 
             if (_hierarchyLock.IsWriterLockHeld)
                 throw ExceptionUtil.UnexpectedError(
-                    "System.Configuration.Internal.InternalConfigRoot::AcquireHierarchyLockForRead - writer lock already held by this thread");
+                    "System.Configuration.Internal.InternalConfigRoot::AcquireHierarchyLockForRead - writer lock already held by this thread"
+                );
 
             _hierarchyLock.AcquireReaderLock(-1);
         }
@@ -183,7 +206,8 @@ namespace System.Configuration.Internal
         {
             Debug.Assert(!_hierarchyLock.IsWriterLockHeld, "!_hierarchyLock.IsWriterLockHeld");
 
-            if (_hierarchyLock.IsReaderLockHeld) _hierarchyLock.ReleaseReaderLock();
+            if (_hierarchyLock.IsReaderLockHeld)
+                _hierarchyLock.ReleaseReaderLock();
         }
 
         private void AcquireHierarchyLockForWrite()
@@ -193,11 +217,13 @@ namespace System.Configuration.Internal
             // and the testing for this is not easy for all scenarios.
             if (_hierarchyLock.IsReaderLockHeld)
                 throw ExceptionUtil.UnexpectedError(
-                    "System.Configuration.Internal.InternalConfigRoot::AcquireHierarchyLockForWrite - reader lock already held by this thread");
+                    "System.Configuration.Internal.InternalConfigRoot::AcquireHierarchyLockForWrite - reader lock already held by this thread"
+                );
 
             if (_hierarchyLock.IsWriterLockHeld)
                 throw ExceptionUtil.UnexpectedError(
-                    "System.Configuration.Internal.InternalConfigRoot::AcquireHierarchyLockForWrite - writer lock already held by this thread");
+                    "System.Configuration.Internal.InternalConfigRoot::AcquireHierarchyLockForWrite - writer lock already held by this thread"
+                );
 
             _hierarchyLock.AcquireWriterLock(-1);
         }
@@ -214,7 +240,11 @@ namespace System.Configuration.Internal
         // If found, nextIndex == parts.Length and the resulting record is in currentRecord.
         // If not found, nextIndex is the index of the part of the path not found, and currentRecord
         // is the record that has been found so far (nexIndex - 1).
-        private void HlFindConfigRecord(string[] parts, out int nextIndex, out BaseConfigurationRecord currentRecord)
+        private void HlFindConfigRecord(
+            string[] parts,
+            out int nextIndex,
+            out BaseConfigurationRecord currentRecord
+        )
         {
             currentRecord = RootConfigRecord;
             nextIndex = 0;
@@ -232,7 +262,8 @@ namespace System.Configuration.Internal
         // Optionally ensure the config record matches a desired config record.
         private void RemoveConfigImpl(string configPath, BaseConfigurationRecord configRecord)
         {
-            if (!ConfigPathUtility.IsValid(configPath)) throw ExceptionUtil.ParameterInvalid(nameof(configPath));
+            if (!ConfigPathUtility.IsValid(configPath))
+                throw ExceptionUtil.ParameterInvalid(nameof(configPath));
 
             string[] parts = ConfigPathUtility.GetParts(configPath);
 
@@ -246,7 +277,10 @@ namespace System.Configuration.Internal
                 HlFindConfigRecord(parts, out index, out currentRecord);
 
                 // Return if not found, or does not match the one we are trying to remove.
-                if ((index != parts.Length) || ((configRecord != null) && !ReferenceEquals(configRecord, currentRecord)))
+                if (
+                    (index != parts.Length)
+                    || ((configRecord != null) && !ReferenceEquals(configRecord, currentRecord))
+                )
                     return;
 
                 // Remove it from the hierarchy.
@@ -271,7 +305,11 @@ namespace System.Configuration.Internal
 
         // Clear the result of a configSection evaluation at a particular point
         // in the hierarchy.
-        public void ClearResult(BaseConfigurationRecord configRecord, string configKey, bool forceEvaluation)
+        public void ClearResult(
+            BaseConfigurationRecord configRecord,
+            string configKey,
+            bool forceEvaluation
+        )
         {
             string[] parts = ConfigPathUtility.GetParts(configRecord.ConfigPath);
 

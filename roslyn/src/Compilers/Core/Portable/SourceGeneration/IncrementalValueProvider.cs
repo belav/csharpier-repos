@@ -22,7 +22,10 @@ namespace Microsoft.CodeAnalysis
         internal readonly IIncrementalGeneratorNode<TValue> Node;
         internal readonly bool CatchAnalyzerExceptions;
 
-        internal IncrementalValueProvider(IIncrementalGeneratorNode<TValue> node, bool catchAnalyzerExceptions)
+        internal IncrementalValueProvider(
+            IIncrementalGeneratorNode<TValue> node,
+            bool catchAnalyzerExceptions
+        )
         {
             this.Node = node;
             this.CatchAnalyzerExceptions = catchAnalyzerExceptions;
@@ -43,7 +46,10 @@ namespace Microsoft.CodeAnalysis
         internal readonly IIncrementalGeneratorNode<TValues> Node;
         internal readonly bool CatchAnalyzerExceptions;
 
-        internal IncrementalValuesProvider(IIncrementalGeneratorNode<TValues> node, bool catchAnalyzerExceptions)
+        internal IncrementalValuesProvider(
+            IIncrementalGeneratorNode<TValues> node,
+            bool catchAnalyzerExceptions
+        )
         {
             this.Node = node;
             this.CatchAnalyzerExceptions = catchAnalyzerExceptions;

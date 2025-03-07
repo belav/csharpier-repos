@@ -16,7 +16,9 @@ public class HomeController : Controller
     [HttpGet("Home/GetHelloWorld")]
     public object GetHelloWorld([FromHeader] string helloWorld)
     {
-        return ControllerContext.ActionDescriptor.Properties["source"].ToString() + " - " + helloWorld;
+        return ControllerContext.ActionDescriptor.Properties["source"].ToString()
+            + " - "
+            + helloWorld;
     }
 
     [HttpGet("Home/CannotBeRouted", Name = nameof(SuppressPathMatching))]
@@ -32,16 +34,20 @@ public class HomeController : Controller
     public object SuppressLinkGeneration() => "Hello world";
 
     [HttpGet("Home/RouteToSuppressLinkGeneration")]
-    public IActionResult RouteToSuppressLinkGeneration() => RedirectToRoute(nameof(SuppressLinkGeneration));
+    public IActionResult RouteToSuppressLinkGeneration() =>
+        RedirectToRoute(nameof(SuppressLinkGeneration));
 
     [HttpGet("Home/RouteToSuppressPathMatching")]
-    public IActionResult RouteToSuppressPathMatching() => RedirectToRoute(nameof(SuppressPathMatching));
+    public IActionResult RouteToSuppressPathMatching() =>
+        RedirectToRoute(nameof(SuppressPathMatching));
 
     private class SuppressPatchMatchingConvention : Attribute, IActionModelConvention
     {
         public void Apply(ActionModel model)
         {
-            var selector = model.Selectors.First(f => f.AttributeRouteModel.Template == "Home/CannotBeRouted");
+            var selector = model.Selectors.First(f =>
+                f.AttributeRouteModel.Template == "Home/CannotBeRouted"
+            );
             selector.AttributeRouteModel.SuppressPathMatching = true;
         }
     }

@@ -32,7 +32,8 @@ namespace System.Security.Cryptography.X509Certificates
         /// <summary>
         /// The X.509 Certificate Extensions to include in the certificate or certificate request.
         /// </summary>
-        public Collection<X509Extension> CertificateExtensions { get; } = new Collection<X509Extension>();
+        public Collection<X509Extension> CertificateExtensions { get; } =
+            new Collection<X509Extension>();
 
         /// <summary>
         ///   Gets a collection representing attributes, other than the extension request attribute, to include
@@ -42,7 +43,8 @@ namespace System.Security.Cryptography.X509Certificates
         ///   A collection representing attributes, other than the extension request attribute, to include
         ///   in a certificate request
         /// </value>
-        public Collection<AsnEncodedData> OtherRequestAttributes { get; } = new Collection<AsnEncodedData>();
+        public Collection<AsnEncodedData> OtherRequestAttributes { get; } =
+            new Collection<AsnEncodedData>();
 
         /// <summary>
         /// A <see cref="PublicKey" /> representation of the public key for the certificate or certificate request.
@@ -95,7 +97,11 @@ namespace System.Security.Cryptography.X509Certificates
         /// <param name="hashAlgorithm">
         ///   The hash algorithm to use when signing the certificate or certificate request.
         /// </param>
-        public CertificateRequest(X500DistinguishedName subjectName, ECDsa key, HashAlgorithmName hashAlgorithm)
+        public CertificateRequest(
+            X500DistinguishedName subjectName,
+            ECDsa key,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             ArgumentNullException.ThrowIfNull(subjectName);
             ArgumentNullException.ThrowIfNull(key);
@@ -126,7 +132,12 @@ namespace System.Security.Cryptography.X509Certificates
         ///   The RSA signature padding to apply if self-signing or being signed with an <see cref="X509Certificate2" />.
         /// </param>
         /// <seealso cref="X500DistinguishedName(string)"/>
-        public CertificateRequest(string subjectName, RSA key, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
+        public CertificateRequest(
+            string subjectName,
+            RSA key,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(subjectName);
             ArgumentNullException.ThrowIfNull(key);
@@ -162,7 +173,8 @@ namespace System.Security.Cryptography.X509Certificates
             X500DistinguishedName subjectName,
             RSA key,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding padding)
+            RSASignaturePadding padding
+        )
         {
             ArgumentNullException.ThrowIfNull(subjectName);
             ArgumentNullException.ThrowIfNull(key);
@@ -190,7 +202,11 @@ namespace System.Security.Cryptography.X509Certificates
         /// <param name="hashAlgorithm">
         ///   The hash algorithm to use when signing the certificate or certificate request.
         /// </param>
-        public CertificateRequest(X500DistinguishedName subjectName, PublicKey publicKey, HashAlgorithmName hashAlgorithm)
+        public CertificateRequest(
+            X500DistinguishedName subjectName,
+            PublicKey publicKey,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             ArgumentNullException.ThrowIfNull(subjectName);
             ArgumentNullException.ThrowIfNull(publicKey);
@@ -221,7 +237,8 @@ namespace System.Security.Cryptography.X509Certificates
             X500DistinguishedName subjectName,
             PublicKey publicKey,
             HashAlgorithmName hashAlgorithm,
-            RSASignaturePadding? rsaSignaturePadding = null)
+            RSASignaturePadding? rsaSignaturePadding = null
+        )
         {
             ArgumentNullException.ThrowIfNull(subjectName);
             ArgumentNullException.ThrowIfNull(publicKey);
@@ -339,7 +356,9 @@ namespace System.Security.Cryptography.X509Certificates
 
             if (OtherRequestAttributes.Count > 0 || hasExtensions)
             {
-                attributes = new X501Attribute[OtherRequestAttributes.Count + (hasExtensions ? 1 : 0)];
+                attributes = new X501Attribute[
+                    OtherRequestAttributes.Count + (hasExtensions ? 1 : 0)
+                ];
             }
 
             int attrCount = 0;
@@ -349,18 +368,28 @@ namespace System.Security.Cryptography.X509Certificates
                 if (attr is null)
                 {
                     throw new InvalidOperationException(
-                        SR.Format(SR.Cryptography_CertReq_NullValueInCollection, nameof(OtherRequestAttributes)));
+                        SR.Format(
+                            SR.Cryptography_CertReq_NullValueInCollection,
+                            nameof(OtherRequestAttributes)
+                        )
+                    );
                 }
 
                 if (attr.Oid is null || attr.Oid.Value is null)
                 {
                     throw new InvalidOperationException(
-                        SR.Format(SR.Cryptography_CertReq_MissingOidInCollection, nameof(OtherRequestAttributes)));
+                        SR.Format(
+                            SR.Cryptography_CertReq_MissingOidInCollection,
+                            nameof(OtherRequestAttributes)
+                        )
+                    );
                 }
 
                 if (attr.Oid.Value == Oids.Pkcs9ExtensionRequest)
                 {
-                    throw new InvalidOperationException(SR.Cryptography_CertReq_ExtensionRequestInOtherAttributes);
+                    throw new InvalidOperationException(
+                        SR.Cryptography_CertReq_ExtensionRequestInOtherAttributes
+                    );
                 }
 
                 Helpers.ValidateDer(attr.RawData);
@@ -373,7 +402,11 @@ namespace System.Security.Cryptography.X509Certificates
                 attributes[attrCount] = new Pkcs9ExtensionRequest(CertificateExtensions);
             }
 
-            var requestInfo = new Pkcs10CertificationRequestInfo(SubjectName, PublicKey, attributes);
+            var requestInfo = new Pkcs10CertificationRequestInfo(
+                SubjectName,
+                PublicKey,
+                attributes
+            );
             return requestInfo.ToPkcs10Request(signatureGenerator, HashAlgorithm);
         }
 
@@ -505,12 +538,15 @@ namespace System.Security.Cryptography.X509Certificates
             Span<byte> serialNumber = stackalloc byte[8];
             RandomNumberGenerator.Fill(serialNumber);
 
-            using (X509Certificate2 certificate = Create(
-                SubjectName,
-                _generator,
-                notBefore,
-                notAfter,
-                serialNumber))
+            using (
+                X509Certificate2 certificate = Create(
+                    SubjectName,
+                    _generator,
+                    notBefore,
+                    notAfter,
+                    serialNumber
+                )
+            )
             {
                 RSA? rsa = _key as RSA;
 
@@ -575,11 +611,17 @@ namespace System.Security.Cryptography.X509Certificates
             X509Certificate2 issuerCertificate,
             DateTimeOffset notBefore,
             DateTimeOffset notAfter,
-            byte[] serialNumber)
+            byte[] serialNumber
+        )
         {
             // The null case for serialNumber is the same exception type and message as an empty array,
             // so just let it turn into the empty span and call the span overload.
-            return Create(issuerCertificate, notBefore, notAfter, new ReadOnlySpan<byte>(serialNumber));
+            return Create(
+                issuerCertificate,
+                notBefore,
+                notAfter,
+                new ReadOnlySpan<byte>(serialNumber)
+            );
         }
 
         /// <summary>
@@ -626,12 +668,16 @@ namespace System.Security.Cryptography.X509Certificates
             X509Certificate2 issuerCertificate,
             DateTimeOffset notBefore,
             DateTimeOffset notAfter,
-            ReadOnlySpan<byte> serialNumber)
+            ReadOnlySpan<byte> serialNumber
+        )
         {
             ArgumentNullException.ThrowIfNull(issuerCertificate);
 
             if (!issuerCertificate.HasPrivateKey)
-                throw new ArgumentException(SR.Cryptography_CertReq_IssuerRequiresPrivateKey, nameof(issuerCertificate));
+                throw new ArgumentException(
+                    SR.Cryptography_CertReq_IssuerRequiresPrivateKey,
+                    nameof(issuerCertificate)
+                );
             if (notAfter < notBefore)
                 throw new ArgumentException(SR.Cryptography_CertReq_DatesReversed);
             if (serialNumber.IsEmpty)
@@ -643,8 +689,10 @@ namespace System.Security.Cryptography.X509Certificates
                     SR.Format(
                         SR.Cryptography_CertReq_AlgorithmMustMatch,
                         issuerCertificate.PublicKey.Oid.Value,
-                        PublicKey.Oid.Value),
-                    nameof(issuerCertificate));
+                        PublicKey.Oid.Value
+                    ),
+                    nameof(issuerCertificate)
+                );
             }
 
             DateTime notBeforeLocal = notBefore.LocalDateTime;
@@ -654,8 +702,10 @@ namespace System.Security.Cryptography.X509Certificates
                     SR.Format(
                         SR.Cryptography_CertReq_NotBeforeNotNested,
                         notBeforeLocal,
-                        issuerCertificate.NotBefore),
-                    nameof(notBefore));
+                        issuerCertificate.NotBefore
+                    ),
+                    nameof(notBefore)
+                );
             }
 
             DateTime notAfterLocal = notAfter.LocalDateTime;
@@ -674,8 +724,10 @@ namespace System.Security.Cryptography.X509Certificates
                     SR.Format(
                         SR.Cryptography_CertReq_NotAfterNotNested,
                         notAfterLocal,
-                        issuerCertificate.NotAfter),
-                    nameof(notAfter));
+                        issuerCertificate.NotAfter
+                    ),
+                    nameof(notAfter)
+                );
             }
 
             // Check the Basic Constraints and Key Usage extensions to help identify inappropriate certificates.
@@ -683,15 +735,25 @@ namespace System.Security.Cryptography.X509Certificates
             // to determine if a chain is valid; and a user can easily call the X509SignatureGenerator overload to
             // bypass this validation.  We're simply helping them at signing time understand that they've
             // chosen the wrong cert.
-            var basicConstraints = (X509BasicConstraintsExtension?)issuerCertificate.Extensions[Oids.BasicConstraints2];
+            var basicConstraints = (X509BasicConstraintsExtension?)
+                issuerCertificate.Extensions[Oids.BasicConstraints2];
             var keyUsage = (X509KeyUsageExtension?)issuerCertificate.Extensions[Oids.KeyUsage];
 
             if (basicConstraints == null)
-                throw new ArgumentException(SR.Cryptography_CertReq_BasicConstraintsRequired, nameof(issuerCertificate));
+                throw new ArgumentException(
+                    SR.Cryptography_CertReq_BasicConstraintsRequired,
+                    nameof(issuerCertificate)
+                );
             if (!basicConstraints.CertificateAuthority)
-                throw new ArgumentException(SR.Cryptography_CertReq_IssuerBasicConstraintsInvalid, nameof(issuerCertificate));
+                throw new ArgumentException(
+                    SR.Cryptography_CertReq_IssuerBasicConstraintsInvalid,
+                    nameof(issuerCertificate)
+                );
             if (keyUsage != null && (keyUsage.KeyUsages & X509KeyUsageFlags.KeyCertSign) == 0)
-                throw new ArgumentException(SR.Cryptography_CertReq_IssuerKeyUsageInvalid, nameof(issuerCertificate));
+                throw new ArgumentException(
+                    SR.Cryptography_CertReq_IssuerKeyUsageInvalid,
+                    nameof(issuerCertificate)
+                );
 
             AsymmetricAlgorithm? key = null;
             string keyAlgorithm = issuerCertificate.GetKeyAlgorithm();
@@ -704,7 +766,9 @@ namespace System.Security.Cryptography.X509Certificates
                     case Oids.Rsa:
                         if (_rsaPadding == null)
                         {
-                            throw new InvalidOperationException(SR.Cryptography_CertReq_RSAPaddingRequired);
+                            throw new InvalidOperationException(
+                                SR.Cryptography_CertReq_RSAPaddingRequired
+                            );
                         }
 
                         RSA? rsa = issuerCertificate.GetRSAPrivateKey();
@@ -719,10 +783,17 @@ namespace System.Security.Cryptography.X509Certificates
                     default:
                         throw new ArgumentException(
                             SR.Format(SR.Cryptography_UnknownKeyAlgorithm, keyAlgorithm),
-                            nameof(issuerCertificate));
+                            nameof(issuerCertificate)
+                        );
                 }
 
-                return Create(issuerCertificate.SubjectName, generator, notBefore, notAfter, serialNumber);
+                return Create(
+                    issuerCertificate.SubjectName,
+                    generator,
+                    notBefore,
+                    notAfter,
+                    serialNumber
+                );
             }
             finally
             {
@@ -764,11 +835,18 @@ namespace System.Security.Cryptography.X509Certificates
             X509SignatureGenerator generator,
             DateTimeOffset notBefore,
             DateTimeOffset notAfter,
-            byte[] serialNumber)
+            byte[] serialNumber
+        )
         {
             // The null case for serialNumber is the same exception type and message as an empty array,
             // so just let it turn into the empty span and call the span overload.
-            return Create(issuerName, generator, notBefore, notAfter, new ReadOnlySpan<byte>(serialNumber));
+            return Create(
+                issuerName,
+                generator,
+                notBefore,
+                notAfter,
+                new ReadOnlySpan<byte>(serialNumber)
+            );
         }
 
         /// <summary>
@@ -805,7 +883,8 @@ namespace System.Security.Cryptography.X509Certificates
             X509SignatureGenerator generator,
             DateTimeOffset notBefore,
             DateTimeOffset notAfter,
-            ReadOnlySpan<byte> serialNumber)
+            ReadOnlySpan<byte> serialNumber
+        )
         {
             ArgumentNullException.ThrowIfNull(issuerName);
             ArgumentNullException.ThrowIfNull(generator);
@@ -819,7 +898,10 @@ namespace System.Security.Cryptography.X509Certificates
             AlgorithmIdentifierAsn signatureAlgorithmAsn;
 
             // Deserialization also does validation of the value (except for Parameters, which have to be validated separately).
-            signatureAlgorithmAsn = AlgorithmIdentifierAsn.Decode(signatureAlgorithm, AsnEncodingRules.DER);
+            signatureAlgorithmAsn = AlgorithmIdentifierAsn.Decode(
+                signatureAlgorithm,
+                AsnEncodingRules.DER
+            );
             if (signatureAlgorithmAsn.Parameters.HasValue)
             {
                 Helpers.ValidateDer(signatureAlgorithmAsn.Parameters.Value.Span);
@@ -849,7 +931,9 @@ namespace System.Security.Cryptography.X509Certificates
             if (CertificateExtensions.Count > 0)
             {
                 HashSet<string?> usedOids = new HashSet<string?>(CertificateExtensions.Count);
-                List<X509ExtensionAsn> extensionAsns = new List<X509ExtensionAsn>(CertificateExtensions.Count);
+                List<X509ExtensionAsn> extensionAsns = new List<X509ExtensionAsn>(
+                    CertificateExtensions.Count
+                );
 
                 foreach (X509Extension extension in CertificateExtensions)
                 {
@@ -861,7 +945,11 @@ namespace System.Security.Cryptography.X509Certificates
                     if (!usedOids.Add(extension.Oid!.Value))
                     {
                         throw new InvalidOperationException(
-                            SR.Format(SR.Cryptography_CertReq_DuplicateExtension, extension.Oid.Value));
+                            SR.Format(
+                                SR.Cryptography_CertReq_DuplicateExtension,
+                                extension.Oid.Value
+                            )
+                        );
                     }
 
                     extensionAsns.Add(new X509ExtensionAsn(extension));
@@ -910,7 +998,11 @@ namespace System.Security.Cryptography.X509Certificates
 
             // Strip any unnecessary zeros from the beginning.
             int leadingZeros = 0;
-            while (leadingZeros < serialNumber.Length - 1 && serialNumber[leadingZeros] == 0 && serialNumber[leadingZeros + 1] < 0x80)
+            while (
+                leadingZeros < serialNumber.Length - 1
+                && serialNumber[leadingZeros] == 0
+                && serialNumber[leadingZeros + 1] < 0x80
+            )
             {
                 leadingZeros++;
             }

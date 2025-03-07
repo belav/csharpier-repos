@@ -2,17 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
+using Internal.CorConstants;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem.Interop;
-using Internal.CorConstants;
 
 namespace ILCompiler
 {
@@ -50,13 +49,18 @@ namespace ILCompiler
             _compilationGroup = compilationGroup;
         }
 
-        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType defType, StaticLayoutKind layoutKind)
+        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType defType,
+            StaticLayoutKind layoutKind
+        )
         {
             ComputedStaticFieldLayout layout = new ComputedStaticFieldLayout();
             if (defType.GetTypeDefinition() is EcmaType ecmaType)
             {
                 // ECMA types are the only ones that can have statics
-                ModuleFieldLayout moduleFieldLayout = _moduleFieldLayoutMap.GetOrCreateValue(ecmaType.EcmaModule);
+                ModuleFieldLayout moduleFieldLayout = _moduleFieldLayoutMap.GetOrCreateValue(
+                    ecmaType.EcmaModule
+                );
                 layout.GcStatics = moduleFieldLayout.GcStatics;
                 layout.NonGcStatics = moduleFieldLayout.NonGcStatics;
                 layout.ThreadGcStatics = moduleFieldLayout.ThreadGcStatics;
@@ -64,14 +68,26 @@ namespace ILCompiler
                 if (defType is EcmaType nonGenericType)
                 {
                     OffsetsForType offsetsForType;
-                    if (moduleFieldLayout.TypeOffsets.TryGetValue(nonGenericType.Handle, out offsetsForType))
+                    if (
+                        moduleFieldLayout.TypeOffsets.TryGetValue(
+                            nonGenericType.Handle,
+                            out offsetsForType
+                        )
+                    )
                     {
-                        layout.Offsets = _moduleFieldLayoutMap.CalculateTypeLayout(defType, moduleFieldLayout.Module, offsetsForType);
+                        layout.Offsets = _moduleFieldLayoutMap.CalculateTypeLayout(
+                            defType,
+                            moduleFieldLayout.Module,
+                            offsetsForType
+                        );
                     }
                 }
                 else if (defType is InstantiatedType instantiatedType)
                 {
-                    layout.Offsets = _moduleFieldLayoutMap.GetOrAddDynamicLayout(defType, moduleFieldLayout);
+                    layout.Offsets = _moduleFieldLayoutMap.GetOrAddDynamicLayout(
+                        defType,
+                        moduleFieldLayout
+                    );
                 }
                 else
                 {
@@ -126,7 +142,10 @@ namespace ILCompiler
                 return key == value.Module;
             }
 
-            protected override bool CompareValueToValue(ModuleFieldLayout value1, ModuleFieldLayout value2)
+            protected override bool CompareValueToValue(
+                ModuleFieldLayout value1,
+                ModuleFieldLayout value2
+            )
             {
                 return value1.Module == value2.Module;
             }
@@ -140,18 +159,27 @@ namespace ILCompiler
                 LayoutInt[] gcStatics = new LayoutInt[StaticIndex.Count]
                 {
                     LayoutInt.Zero,
-                    LayoutInt.Zero
+                    LayoutInt.Zero,
                 };
 
                 LayoutInt[] nonGcStatics = new LayoutInt[StaticIndex.Count]
                 {
-                    new LayoutInt(DomainLocalModuleDataBlobOffsetAsIntPtrCount * pointerSize + typeCountInModule),
-                    new LayoutInt(ThreadLocalModuleDataBlobOffsetAsIntPtrCount * pointerSize + typeCountInModule),
+                    new LayoutInt(
+                        DomainLocalModuleDataBlobOffsetAsIntPtrCount * pointerSize
+                            + typeCountInModule
+                    ),
+                    new LayoutInt(
+                        ThreadLocalModuleDataBlobOffsetAsIntPtrCount * pointerSize
+                            + typeCountInModule
+                    ),
                 };
 
-                Dictionary<TypeDefinitionHandle, OffsetsForType> typeOffsets = new Dictionary<TypeDefinitionHandle, OffsetsForType>();
+                Dictionary<TypeDefinitionHandle, OffsetsForType> typeOffsets =
+                    new Dictionary<TypeDefinitionHandle, OffsetsForType>();
 
-                foreach (TypeDefinitionHandle typeDefHandle in module.MetadataReader.TypeDefinitions)
+                foreach (
+                    TypeDefinitionHandle typeDefHandle in module.MetadataReader.TypeDefinitions
+                )
                 {
                     TypeDefinition typeDef = module.MetadataReader.GetTypeDefinition(typeDefHandle);
                     if (typeDef.GetGenericParameters().Count != 0)
@@ -162,19 +190,30 @@ namespace ILCompiler
                     }
 
                     // 0 corresponds to "normal" statics, 1 to thread-local statics
-                    int[] nonGcAlignment = new int[StaticIndex.Count] { 1, 1, };
-                    int[] nonGcBytes = new int[StaticIndex.Count] { 0, 0, };
-                    int[] gcBytes = new int[StaticIndex.Count] { 0, 0, };
+                    int[] nonGcAlignment = new int[StaticIndex.Count] { 1, 1 };
+                    int[] nonGcBytes = new int[StaticIndex.Count] { 0, 0 };
+                    int[] gcBytes = new int[StaticIndex.Count] { 0, 0 };
 
                     foreach (FieldDefinitionHandle fieldDefHandle in typeDef.GetFields())
                     {
-                        FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(fieldDefHandle);
-                        if ((fieldDef.Attributes & (FieldAttributes.Static | FieldAttributes.Literal)) == FieldAttributes.Static)
+                        FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(
+                            fieldDefHandle
+                        );
+                        if (
+                            (
+                                fieldDef.Attributes
+                                & (FieldAttributes.Static | FieldAttributes.Literal)
+                            ) == FieldAttributes.Static
+                        )
                         {
                             // Static RVA fields are included when approximating offsets and sizes for the module field layout, see
                             // <a href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L939">this loop</a>.
 
-                            int index = (IsFieldThreadStatic(in fieldDef, module.MetadataReader) ? StaticIndex.ThreadLocal : StaticIndex.Regular);
+                            int index = (
+                                IsFieldThreadStatic(in fieldDef, module.MetadataReader)
+                                    ? StaticIndex.ThreadLocal
+                                    : StaticIndex.Regular
+                            );
                             int alignment;
                             int size;
                             bool isGcPointerField;
@@ -183,11 +222,26 @@ namespace ILCompiler
                             CorElementType corElementType;
                             EntityHandle valueTypeHandle;
 
-                            GetFieldElementTypeAndValueTypeHandle(in fieldDef, module.MetadataReader, out corElementType, out valueTypeHandle);
+                            GetFieldElementTypeAndValueTypeHandle(
+                                in fieldDef,
+                                module.MetadataReader,
+                                out corElementType,
+                                out valueTypeHandle
+                            );
                             FieldDesc fieldDesc = module.GetField(fieldDefHandle);
 
-                            GetElementTypeInfo(module, fieldDesc, valueTypeHandle, corElementType, pointerSize, moduleLayout: true,
-                                out alignment, out size, out isGcPointerField, out isGcBoxedField);
+                            GetElementTypeInfo(
+                                module,
+                                fieldDesc,
+                                valueTypeHandle,
+                                corElementType,
+                                pointerSize,
+                                moduleLayout: true,
+                                out alignment,
+                                out size,
+                                out isGcPointerField,
+                                out isGcBoxedField
+                            );
 
                             if (size != 0)
                             {
@@ -201,18 +255,31 @@ namespace ILCompiler
                         }
                     }
 
-                    if (nonGcBytes[StaticIndex.Regular] != 0 ||
-                        nonGcBytes[StaticIndex.ThreadLocal] != 0 ||
-                        gcBytes[StaticIndex.Regular] != 0 ||
-                        gcBytes[StaticIndex.ThreadLocal] != 0)
+                    if (
+                        nonGcBytes[StaticIndex.Regular] != 0
+                        || nonGcBytes[StaticIndex.ThreadLocal] != 0
+                        || gcBytes[StaticIndex.Regular] != 0
+                        || gcBytes[StaticIndex.ThreadLocal] != 0
+                    )
                     {
-                        OffsetsForType offsetsForType = new OffsetsForType(LayoutInt.Indeterminate, LayoutInt.Indeterminate, LayoutInt.Indeterminate, LayoutInt.Indeterminate);
+                        OffsetsForType offsetsForType = new OffsetsForType(
+                            LayoutInt.Indeterminate,
+                            LayoutInt.Indeterminate,
+                            LayoutInt.Indeterminate,
+                            LayoutInt.Indeterminate
+                        );
                         for (int staticIndex = 0; staticIndex < StaticIndex.Count; staticIndex++)
                         {
                             if (nonGcBytes[staticIndex] != 0)
                             {
-                                offsetsForType.NonGcOffsets[staticIndex] = LayoutInt.AlignUp(nonGcStatics[staticIndex], new LayoutInt(nonGcAlignment[staticIndex]), module.Context.Target);
-                                nonGcStatics[staticIndex] = offsetsForType.NonGcOffsets[staticIndex] + new LayoutInt(nonGcBytes[staticIndex]);
+                                offsetsForType.NonGcOffsets[staticIndex] = LayoutInt.AlignUp(
+                                    nonGcStatics[staticIndex],
+                                    new LayoutInt(nonGcAlignment[staticIndex]),
+                                    module.Context.Target
+                                );
+                                nonGcStatics[staticIndex] =
+                                    offsetsForType.NonGcOffsets[staticIndex]
+                                    + new LayoutInt(nonGcBytes[staticIndex]);
                             }
                             if (gcBytes[staticIndex] != 0)
                             {
@@ -229,11 +296,28 @@ namespace ILCompiler
 
                 return new ModuleFieldLayout(
                     module,
-                    gcStatics: new StaticsBlock() { Size = gcStatics[StaticIndex.Regular], LargestAlignment = blockAlignment },
-                    nonGcStatics: new StaticsBlock() { Size = nonGcStatics[StaticIndex.Regular], LargestAlignment = blockAlignment },
-                    threadGcStatics: new StaticsBlock() { Size = gcStatics[StaticIndex.ThreadLocal], LargestAlignment = blockAlignment },
-                    threadNonGcStatics: new StaticsBlock() { Size = nonGcStatics[StaticIndex.ThreadLocal], LargestAlignment = blockAlignment },
-                    typeOffsets: typeOffsets);
+                    gcStatics: new StaticsBlock()
+                    {
+                        Size = gcStatics[StaticIndex.Regular],
+                        LargestAlignment = blockAlignment,
+                    },
+                    nonGcStatics: new StaticsBlock()
+                    {
+                        Size = nonGcStatics[StaticIndex.Regular],
+                        LargestAlignment = blockAlignment,
+                    },
+                    threadGcStatics: new StaticsBlock()
+                    {
+                        Size = gcStatics[StaticIndex.ThreadLocal],
+                        LargestAlignment = blockAlignment,
+                    },
+                    threadNonGcStatics: new StaticsBlock()
+                    {
+                        Size = nonGcStatics[StaticIndex.ThreadLocal],
+                        LargestAlignment = blockAlignment,
+                    },
+                    typeOffsets: typeOffsets
+                );
             }
 
             private void GetElementTypeInfoGeneric(
@@ -244,7 +328,8 @@ namespace ILCompiler
                 out int alignment,
                 out int size,
                 out bool isGcPointerField,
-                out bool isGcBoxedField)
+                out bool isGcBoxedField
+            )
             {
                 alignment = 1;
                 size = 0;
@@ -260,15 +345,25 @@ namespace ILCompiler
                 }
                 else if (fieldType.IsByRef || fieldType.IsByRefLike)
                 {
-                    ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, fieldDesc.OwningType);
+                    ThrowHelper.ThrowTypeLoadException(
+                        ExceptionStringID.ClassLoadGeneral,
+                        fieldDesc.OwningType
+                    );
                 }
                 else if (fieldType.IsValueType)
                 {
                     if (IsTypeByRefLike(valueTypeHandle, module.MetadataReader))
                     {
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, fieldDesc.OwningType);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadGeneral,
+                            fieldDesc.OwningType
+                        );
                     }
-                    if (moduleLayout && fieldType.GetTypeDefinition() is EcmaType ecmaType && ecmaType.EcmaModule != module)
+                    if (
+                        moduleLayout
+                        && fieldType.GetTypeDefinition() is EcmaType ecmaType
+                        && ecmaType.EcmaModule != module
+                    )
                     {
                         // Allocate pessimistic non-GC area for cross-module fields as that's what CoreCLR does
                         // <a href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L1006">here</a>
@@ -304,7 +399,8 @@ namespace ILCompiler
                 out int alignment,
                 out int size,
                 out bool isGcPointerField,
-                out bool isGcBoxedField)
+                out bool isGcBoxedField
+            )
             {
                 alignment = 1;
                 size = 0;
@@ -359,7 +455,10 @@ namespace ILCompiler
                         break;
 
                     case CorElementType.ELEMENT_TYPE_BYREF:
-                        ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, fieldDesc.OwningType);
+                        ThrowHelper.ThrowTypeLoadException(
+                            ExceptionStringID.ClassLoadGeneral,
+                            fieldDesc.OwningType
+                        );
                         break;
 
                     // Statics for valuetypes where the valuetype is defined in this module are handled here.
@@ -367,9 +466,16 @@ namespace ILCompiler
                     case CorElementType.ELEMENT_TYPE_VALUETYPE:
                         if (IsTypeByRefLike(valueTypeHandle, module.MetadataReader))
                         {
-                            ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, fieldDesc.OwningType);
+                            ThrowHelper.ThrowTypeLoadException(
+                                ExceptionStringID.ClassLoadGeneral,
+                                fieldDesc.OwningType
+                            );
                         }
-                        if (moduleLayout && fieldDesc.FieldType.GetTypeDefinition() is EcmaType ecmaType && ecmaType.EcmaModule != module)
+                        if (
+                            moduleLayout
+                            && fieldDesc.FieldType.GetTypeDefinition() is EcmaType ecmaType
+                            && ecmaType.EcmaModule != module
+                        )
                         {
                             // Allocate pessimistic non-GC area for cross-module fields as that's what CoreCLR does
                             // <a href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L1006">here</a>
@@ -395,7 +501,10 @@ namespace ILCompiler
                 }
             }
 
-            public FieldAndOffset[] GetOrAddDynamicLayout(DefType defType, ModuleFieldLayout moduleFieldLayout)
+            public FieldAndOffset[] GetOrAddDynamicLayout(
+                DefType defType,
+                ModuleFieldLayout moduleFieldLayout
+            )
             {
                 FieldAndOffset[] fieldsForType;
                 if (!moduleFieldLayout.TryGetDynamicLayout(defType, out fieldsForType))
@@ -420,7 +529,8 @@ namespace ILCompiler
                             break;
 
                         case TargetArchitecture.LoongArch64:
-                            nonGcOffset = DomainLocalModuleNormalDynamicEntryOffsetOfDataBlobLoongArch64;
+                            nonGcOffset =
+                                DomainLocalModuleNormalDynamicEntryOffsetOfDataBlobLoongArch64;
                             break;
 
                         default:
@@ -431,17 +541,23 @@ namespace ILCompiler
                         nonGcOffset: new LayoutInt(nonGcOffset),
                         tlsNonGcOffset: new LayoutInt(nonGcOffset),
                         gcOffset: LayoutInt.Zero,
-                        tlsGcOffset: LayoutInt.Zero);
+                        tlsGcOffset: LayoutInt.Zero
+                    );
 
                     fieldsForType = moduleFieldLayout.GetOrAddDynamicLayout(
                         defType,
-                        CalculateTypeLayout(defType, moduleFieldLayout.Module, offsetsForType));
+                        CalculateTypeLayout(defType, moduleFieldLayout.Module, offsetsForType)
+                    );
                 }
 
                 return fieldsForType;
             }
 
-            public FieldAndOffset[] CalculateTypeLayout(DefType defType, EcmaModule module, in OffsetsForType offsetsForType)
+            public FieldAndOffset[] CalculateTypeLayout(
+                DefType defType,
+                EcmaModule module,
+                in OffsetsForType offsetsForType
+            )
             {
                 List<FieldAndOffset> fieldsForType = null;
                 int pointerSize = module.Context.Target.PointerSize;
@@ -459,13 +575,22 @@ namespace ILCompiler
 
                 foreach (FieldDesc field in defType.GetFields())
                 {
-                    FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(((EcmaField)field.GetTypicalFieldDefinition()).Handle);
-                    if ((fieldDef.Attributes & (FieldAttributes.Static | FieldAttributes.Literal)) == FieldAttributes.Static)
+                    FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(
+                        ((EcmaField)field.GetTypicalFieldDefinition()).Handle
+                    );
+                    if (
+                        (fieldDef.Attributes & (FieldAttributes.Static | FieldAttributes.Literal))
+                        == FieldAttributes.Static
+                    )
                     {
                         if ((fieldDef.Attributes & FieldAttributes.HasFieldRVA) != 0)
                             continue;
 
-                        int index = (IsFieldThreadStatic(in fieldDef, module.MetadataReader) ? StaticIndex.ThreadLocal : StaticIndex.Regular);
+                        int index = (
+                            IsFieldThreadStatic(in fieldDef, module.MetadataReader)
+                                ? StaticIndex.ThreadLocal
+                                : StaticIndex.Regular
+                        );
                         int alignment;
                         int size;
                         bool isGcPointerField;
@@ -474,17 +599,40 @@ namespace ILCompiler
                         CorElementType corElementType;
                         EntityHandle valueTypeHandle;
 
-                        GetFieldElementTypeAndValueTypeHandle(in fieldDef, module.MetadataReader, out corElementType, out valueTypeHandle);
+                        GetFieldElementTypeAndValueTypeHandle(
+                            in fieldDef,
+                            module.MetadataReader,
+                            out corElementType,
+                            out valueTypeHandle
+                        );
 
                         if (defType.HasInstantiation)
                         {
-                            GetElementTypeInfoGeneric(module, field, valueTypeHandle, moduleLayout: false,
-                                out alignment, out size, out isGcPointerField, out isGcBoxedField);
+                            GetElementTypeInfoGeneric(
+                                module,
+                                field,
+                                valueTypeHandle,
+                                moduleLayout: false,
+                                out alignment,
+                                out size,
+                                out isGcPointerField,
+                                out isGcBoxedField
+                            );
                         }
                         else
                         {
-                            GetElementTypeInfo(module, field, valueTypeHandle, corElementType, pointerSize, moduleLayout: false,
-                                out alignment, out size, out isGcPointerField, out isGcBoxedField);
+                            GetElementTypeInfo(
+                                module,
+                                field,
+                                valueTypeHandle,
+                                corElementType,
+                                pointerSize,
+                                moduleLayout: false,
+                                out alignment,
+                                out size,
+                                out isGcPointerField,
+                                out isGcBoxedField
+                            );
                         }
                         if (isGcPointerField)
                         {
@@ -514,7 +662,11 @@ namespace ILCompiler
                     new LayoutInt[TargetDetails.MaximumLog2PrimitiveSize + 1],
                 };
 
-                for (int log2Size = TargetDetails.MaximumLog2PrimitiveSize; log2Size >= 0; log2Size--)
+                for (
+                    int log2Size = TargetDetails.MaximumLog2PrimitiveSize;
+                    log2Size >= 0;
+                    log2Size--
+                )
                 {
                     for (int index = 0; index < StaticIndex.Count; index++)
                     {
@@ -533,17 +685,30 @@ namespace ILCompiler
 
                 LayoutInt[] gcPointerFieldOffsets = new LayoutInt[StaticIndex.Count]
                 {
-                    offsetsForType.GcOffsets[StaticIndex.Regular] + new LayoutInt(gcBoxedCount[StaticIndex.Regular] * pointerSize),
-                    offsetsForType.GcOffsets[StaticIndex.ThreadLocal] + new LayoutInt(gcBoxedCount[StaticIndex.ThreadLocal] * pointerSize)
+                    offsetsForType.GcOffsets[StaticIndex.Regular]
+                        + new LayoutInt(gcBoxedCount[StaticIndex.Regular] * pointerSize),
+                    offsetsForType.GcOffsets[StaticIndex.ThreadLocal]
+                        + new LayoutInt(gcBoxedCount[StaticIndex.ThreadLocal] * pointerSize),
                 };
 
                 foreach (FieldDesc field in defType.GetFields())
                 {
-                    FieldDefinitionHandle fieldDefHandle = ((EcmaField)field.GetTypicalFieldDefinition()).Handle;
-                    FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(fieldDefHandle);
-                    if ((fieldDef.Attributes & (FieldAttributes.Static | FieldAttributes.Literal)) == FieldAttributes.Static)
+                    FieldDefinitionHandle fieldDefHandle = (
+                        (EcmaField)field.GetTypicalFieldDefinition()
+                    ).Handle;
+                    FieldDefinition fieldDef = module.MetadataReader.GetFieldDefinition(
+                        fieldDefHandle
+                    );
+                    if (
+                        (fieldDef.Attributes & (FieldAttributes.Static | FieldAttributes.Literal))
+                        == FieldAttributes.Static
+                    )
                     {
-                        int index = (IsFieldThreadStatic(in fieldDef, module.MetadataReader) ? StaticIndex.ThreadLocal : StaticIndex.Regular);
+                        int index = (
+                            IsFieldThreadStatic(in fieldDef, module.MetadataReader)
+                                ? StaticIndex.ThreadLocal
+                                : StaticIndex.Regular
+                        );
                         int alignment;
                         int size;
                         bool isGcPointerField;
@@ -552,17 +717,40 @@ namespace ILCompiler
                         CorElementType corElementType;
                         EntityHandle valueTypeHandle;
 
-                        GetFieldElementTypeAndValueTypeHandle(in fieldDef, module.MetadataReader, out corElementType, out valueTypeHandle);
+                        GetFieldElementTypeAndValueTypeHandle(
+                            in fieldDef,
+                            module.MetadataReader,
+                            out corElementType,
+                            out valueTypeHandle
+                        );
 
                         if (defType.HasInstantiation)
                         {
-                            GetElementTypeInfoGeneric(module, field, valueTypeHandle, moduleLayout: false,
-                                out alignment, out size, out isGcPointerField, out isGcBoxedField);
+                            GetElementTypeInfoGeneric(
+                                module,
+                                field,
+                                valueTypeHandle,
+                                moduleLayout: false,
+                                out alignment,
+                                out size,
+                                out isGcPointerField,
+                                out isGcBoxedField
+                            );
                         }
                         else
                         {
-                            GetElementTypeInfo(module, field, valueTypeHandle, corElementType, pointerSize, moduleLayout: false,
-                                out alignment, out size, out isGcPointerField, out isGcBoxedField);
+                            GetElementTypeInfo(
+                                module,
+                                field,
+                                valueTypeHandle,
+                                corElementType,
+                                pointerSize,
+                                moduleLayout: false,
+                                out alignment,
+                                out size,
+                                out isGcPointerField,
+                                out isGcBoxedField
+                            );
                         }
 
                         LayoutInt offset = LayoutInt.Zero;
@@ -599,7 +787,6 @@ namespace ILCompiler
                 return fieldsForType == null ? null : fieldsForType.ToArray();
             }
 
-
             protected override int GetKeyHashCode(EcmaModule key)
             {
                 return key.GetHashCode();
@@ -616,9 +803,18 @@ namespace ILCompiler
             /// <param name="fieldDef">Field definition</param>
             /// <param name="metadataReader">Metadata reader for the module</param>
             /// <returns>true when the field is marked with the ThreadStatic custom attribute</returns>
-            private static bool IsFieldThreadStatic(in FieldDefinition fieldDef, MetadataReader metadataReader)
+            private static bool IsFieldThreadStatic(
+                in FieldDefinition fieldDef,
+                MetadataReader metadataReader
+            )
             {
-                return !metadataReader.GetCustomAttributeHandle(fieldDef.GetCustomAttributes(), "System", "ThreadStaticAttribute").IsNil;
+                return !metadataReader
+                    .GetCustomAttributeHandle(
+                        fieldDef.GetCustomAttributes(),
+                        "System",
+                        "ThreadStaticAttribute"
+                    )
+                    .IsNil;
             }
 
             /// <summary>
@@ -627,13 +823,21 @@ namespace ILCompiler
             /// <param name="typeDefHandle">Handle to the field type to analyze</param>
             /// <param name="metadataReader">Metadata reader for the active module</param>
             /// <returns></returns>
-            private static bool IsTypeByRefLike(EntityHandle typeDefHandle, MetadataReader metadataReader)
+            private static bool IsTypeByRefLike(
+                EntityHandle typeDefHandle,
+                MetadataReader metadataReader
+            )
             {
-                return typeDefHandle.Kind == HandleKind.TypeDefinition &&
-                    !metadataReader.GetCustomAttributeHandle(
-                        metadataReader.GetTypeDefinition((TypeDefinitionHandle)typeDefHandle).GetCustomAttributes(),
-                        "System.Runtime.CompilerServices",
-                        "IsByRefLikeAttribute").IsNil;
+                return typeDefHandle.Kind == HandleKind.TypeDefinition
+                    && !metadataReader
+                        .GetCustomAttributeHandle(
+                            metadataReader
+                                .GetTypeDefinition((TypeDefinitionHandle)typeDefHandle)
+                                .GetCustomAttributes(),
+                            "System.Runtime.CompilerServices",
+                            "IsByRefLikeAttribute"
+                        )
+                        .IsNil;
             }
 
             /// <summary>
@@ -647,7 +851,8 @@ namespace ILCompiler
                 in FieldDefinition fieldDef,
                 MetadataReader metadataReader,
                 out CorElementType corElementType,
-                out EntityHandle valueTypeHandle)
+                out EntityHandle valueTypeHandle
+            )
             {
                 BlobReader signature = metadataReader.GetBlobReader(fieldDef.Signature);
                 SignatureHeader signatureHeader = signature.ReadSignatureHeader();
@@ -692,15 +897,16 @@ namespace ILCompiler
                 }
 
                 // SigParser::SkipCustomModifiers - modifier loop
-                while (signatureByte == (byte)CorElementType.ELEMENT_TYPE_CMOD_REQD ||
-                    signatureByte == (byte)CorElementType.ELEMENT_TYPE_CMOD_OPT)
+                while (
+                    signatureByte == (byte)CorElementType.ELEMENT_TYPE_CMOD_REQD
+                    || signatureByte == (byte)CorElementType.ELEMENT_TYPE_CMOD_OPT
+                )
                 {
                     signature.ReadCompressedInteger();
                     signatureByte = signature.ReadByte();
                 }
                 return (CorElementType)signatureByte;
             }
-
 
             /// <summary>
             /// Return the integral value of dyadic logarithm of given size
@@ -750,7 +956,12 @@ namespace ILCompiler
             /// </summary>
             public readonly LayoutInt[] GcOffsets;
 
-            public OffsetsForType(LayoutInt nonGcOffset, LayoutInt tlsNonGcOffset, LayoutInt gcOffset, LayoutInt tlsGcOffset)
+            public OffsetsForType(
+                LayoutInt nonGcOffset,
+                LayoutInt tlsNonGcOffset,
+                LayoutInt gcOffset,
+                LayoutInt tlsGcOffset
+            )
             {
                 NonGcOffsets = new LayoutInt[StaticIndex.Count] { nonGcOffset, tlsNonGcOffset };
                 GcOffsets = new LayoutInt[StaticIndex.Count] { gcOffset, tlsGcOffset };
@@ -766,11 +977,11 @@ namespace ILCompiler
 
             public StaticsBlock GcStatics { get; }
 
-            public StaticsBlock NonGcStatics { get;  }
+            public StaticsBlock NonGcStatics { get; }
 
-            public StaticsBlock ThreadGcStatics { get;  }
+            public StaticsBlock ThreadGcStatics { get; }
 
-            public StaticsBlock ThreadNonGcStatics { get;  }
+            public StaticsBlock ThreadNonGcStatics { get; }
 
             public IReadOnlyDictionary<TypeDefinitionHandle, OffsetsForType> TypeOffsets { get; }
 
@@ -782,7 +993,8 @@ namespace ILCompiler
                 StaticsBlock nonGcStatics,
                 StaticsBlock threadGcStatics,
                 StaticsBlock threadNonGcStatics,
-                IReadOnlyDictionary<TypeDefinitionHandle, OffsetsForType> typeOffsets)
+                IReadOnlyDictionary<TypeDefinitionHandle, OffsetsForType> typeOffsets
+            )
             {
                 Module = module;
                 GcStatics = gcStatics;
@@ -799,13 +1011,19 @@ namespace ILCompiler
                 return _genericTypeToFieldMap.TryGetValue(instantiatedType, out fieldMap);
             }
 
-            public FieldAndOffset[] GetOrAddDynamicLayout(DefType instantiatedType, FieldAndOffset[] fieldMap)
+            public FieldAndOffset[] GetOrAddDynamicLayout(
+                DefType instantiatedType,
+                FieldAndOffset[] fieldMap
+            )
             {
                 return _genericTypeToFieldMap.GetOrAdd(instantiatedType, fieldMap);
             }
         }
 
-        protected override ComputedInstanceFieldLayout ComputeInstanceFieldLayout(MetadataType type, int numInstanceFields)
+        protected override ComputedInstanceFieldLayout ComputeInstanceFieldLayout(
+            MetadataType type,
+            int numInstanceFields
+        )
         {
             if (type.IsExplicitLayout)
             {
@@ -825,12 +1043,27 @@ namespace ILCompiler
         /// This method decides whether the type needs aligned base offset in order to have layout resilient to
         /// base class layout changes.
         /// </summary>
-        protected override void AlignBaseOffsetIfNecessary(MetadataType type, ref LayoutInt baseOffset, bool requiresAlign8, bool requiresAlignedBase)
+        protected override void AlignBaseOffsetIfNecessary(
+            MetadataType type,
+            ref LayoutInt baseOffset,
+            bool requiresAlign8,
+            bool requiresAlignedBase
+        )
         {
-            if (requiresAlignedBase || _compilationGroup.NeedsAlignmentBetweenBaseTypeAndDerived(baseType: (MetadataType)type.BaseType, derivedType: type))
+            if (
+                requiresAlignedBase
+                || _compilationGroup.NeedsAlignmentBetweenBaseTypeAndDerived(
+                    baseType: (MetadataType)type.BaseType,
+                    derivedType: type
+                )
+            )
             {
-                bool use8Align = (requiresAlign8 || type.BaseType.RequiresAlign8()) && type.Context.Target.Architecture != TargetArchitecture.X86;
-                LayoutInt alignment = new LayoutInt(use8Align ? 8 : type.Context.Target.PointerSize);
+                bool use8Align =
+                    (requiresAlign8 || type.BaseType.RequiresAlign8())
+                    && type.Context.Target.Architecture != TargetArchitecture.X86;
+                LayoutInt alignment = new LayoutInt(
+                    use8Align ? 8 : type.Context.Target.PointerSize
+                );
                 baseOffset = LayoutInt.AlignUp(baseOffset, alignment, type.Context.Target);
             }
         }

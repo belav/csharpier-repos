@@ -74,7 +74,7 @@ namespace System.Tests
             Assert.False(bool.TryParse(value, out bool result));
             Assert.False(result);
         }
-        
+
         public static IEnumerable<object[]> Parse_ValidWithOffsetCount_TestData()
         {
             foreach (object[] inputs in Parse_Valid_TestData())

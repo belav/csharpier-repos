@@ -34,7 +34,8 @@ internal sealed class TemplateBuilder
         string htmlFieldName,
         string templateName,
         bool readOnly,
-        object additionalViewData)
+        object additionalViewData
+    )
     {
         ArgumentNullException.ThrowIfNull(viewEngine);
         ArgumentNullException.ThrowIfNull(bufferScope);
@@ -77,9 +78,9 @@ internal sealed class TemplateBuilder
         // though _model may have been reset to null. Otherwise we might lose track of the model type /property.
         viewData.ModelExplorer = _modelExplorer.GetExplorerForModel(_model);
 
-        var formatString = _readOnly ?
-            viewData.ModelMetadata.DisplayFormatString :
-            viewData.ModelMetadata.EditFormatString;
+        var formatString = _readOnly
+            ? viewData.ModelMetadata.DisplayFormatString
+            : viewData.ModelMetadata.EditFormatString;
 
         var formattedModelValue = _model;
         if (_model == null)
@@ -93,8 +94,16 @@ internal sealed class TemplateBuilder
         {
             formattedModelValue = string.Format(CultureInfo.CurrentCulture, formatString, _model);
         }
-        else if ((string.Equals("week", _templateName, StringComparison.OrdinalIgnoreCase) ||
-            string.Equals("week", viewData.ModelMetadata.DataTypeName, StringComparison.OrdinalIgnoreCase)))
+        else if (
+            (
+                string.Equals("week", _templateName, StringComparison.OrdinalIgnoreCase)
+                || string.Equals(
+                    "week",
+                    viewData.ModelMetadata.DataTypeName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
+        )
         {
             // "week" is a new HTML5 input type that only will be rendered in Rfc3339 mode
             formattedModelValue = FormatWeekHelper.GetFormattedWeek(_modelExplorer);
@@ -117,7 +126,9 @@ internal sealed class TemplateBuilder
         }
 
         viewData.TemplateInfo.FormattedModelValue = formattedModelValue;
-        viewData.TemplateInfo.HtmlFieldPrefix = _viewData.TemplateInfo.GetFullHtmlFieldName(_htmlFieldName);
+        viewData.TemplateInfo.HtmlFieldPrefix = _viewData.TemplateInfo.GetFullHtmlFieldName(
+            _htmlFieldName
+        );
 
         if (_additionalViewData != null)
         {
@@ -136,7 +147,8 @@ internal sealed class TemplateBuilder
             _viewContext,
             viewData,
             _templateName,
-            _readOnly);
+            _readOnly
+        );
 
         return templateRenderer.Render();
     }

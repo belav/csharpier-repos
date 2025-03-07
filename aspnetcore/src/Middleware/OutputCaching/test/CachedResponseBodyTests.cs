@@ -32,7 +32,10 @@ public class CachedResponseBodyTests
         using var cts = new CancellationTokenSource(_timeout);
 
         var receiverTask = ReceiveDataAsync(pipe.Reader, receivedSegments, cts.Token);
-        var copyTask = RecyclableReadOnlySequenceSegment.CopyToAsync(body, pipe.Writer, cts.Token).AsTask().ContinueWith(t => pipe.Writer.CompleteAsync(t.Exception));
+        var copyTask = RecyclableReadOnlySequenceSegment
+            .CopyToAsync(body, pipe.Writer, cts.Token)
+            .AsTask()
+            .ContinueWith(t => pipe.Writer.CompleteAsync(t.Exception));
 
         await Task.WhenAll(receiverTask, copyTask);
 
@@ -43,10 +46,7 @@ public class CachedResponseBodyTests
     [Fact]
     public async Task Copy_SingleSegment()
     {
-        var segments = new List<byte[]>
-            {
-                new byte[] { 1 }
-            };
+        var segments = new List<byte[]> { new byte[] { 1 } };
         var receivedSegments = new List<byte[]>();
         var body = RecyclableReadOnlySequenceSegment.CreateSequence(segments);
 
@@ -66,11 +66,7 @@ public class CachedResponseBodyTests
     [Fact]
     public async Task Copy_MultipleSegments()
     {
-        var segments = new List<byte[]>
-            {
-                new byte[] { 1 },
-                new byte[] { 2, 3 }
-            };
+        var segments = new List<byte[]> { new byte[] { 1 }, new byte[] { 2, 3 } };
         var receivedSegments = new List<byte[]>();
         var body = RecyclableReadOnlySequenceSegment.CreateSequence(segments);
 
@@ -87,13 +83,21 @@ public class CachedResponseBodyTests
         RecyclableReadOnlySequenceSegment.RecycleChain(body);
     }
 
-    static async Task CopyDataAsync(ReadOnlySequence<byte> body, PipeWriter writer, CancellationToken cancellationToken)
+    static async Task CopyDataAsync(
+        ReadOnlySequence<byte> body,
+        PipeWriter writer,
+        CancellationToken cancellationToken
+    )
     {
         await RecyclableReadOnlySequenceSegment.CopyToAsync(body, writer, cancellationToken);
         await writer.CompleteAsync();
     }
 
-    static async Task ReceiveDataAsync(PipeReader reader, List<byte[]> receivedSegments, CancellationToken cancellationToken)
+    static async Task ReceiveDataAsync(
+        PipeReader reader,
+        List<byte[]> receivedSegments,
+        CancellationToken cancellationToken
+    )
     {
         while (true)
         {

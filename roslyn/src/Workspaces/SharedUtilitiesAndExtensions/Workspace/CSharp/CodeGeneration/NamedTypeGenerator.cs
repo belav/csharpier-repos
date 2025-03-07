@@ -25,9 +25,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamedTypeSymbol namedType,
             CSharpCodeGenerationContextInfo info,
             IList<bool>? availableIndices,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var declaration = GenerateNamedTypeDeclaration(service, namedType, GetDestination(destination), info, cancellationToken);
+            var declaration = GenerateNamedTypeDeclaration(
+                service,
+                namedType,
+                GetDestination(destination),
+                info,
+                cancellationToken
+            );
             var members = Insert(destination.Members, declaration, info, availableIndices);
 
             return AddMembersTo(destination, members, cancellationToken);
@@ -39,13 +46,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamedTypeSymbol namedType,
             CSharpCodeGenerationContextInfo info,
             IList<bool>? availableIndices,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var declaration = GenerateNamedTypeDeclaration(service, namedType, CodeGenerationDestination.Namespace, info, cancellationToken);
+            var declaration = GenerateNamedTypeDeclaration(
+                service,
+                namedType,
+                CodeGenerationDestination.Namespace,
+                info,
+                cancellationToken
+            );
             var members = Insert(destination.Members, declaration, info, availableIndices);
             return ConditionallyAddFormattingAnnotationTo(
                 destination.WithMembers(members),
-                members);
+                members
+            );
         }
 
         public static CompilationUnitSyntax AddNamedTypeTo(
@@ -54,9 +69,16 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamedTypeSymbol namedType,
             CSharpCodeGenerationContextInfo info,
             IList<bool>? availableIndices,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var declaration = GenerateNamedTypeDeclaration(service, namedType, CodeGenerationDestination.CompilationUnit, info, cancellationToken);
+            var declaration = GenerateNamedTypeDeclaration(
+                service,
+                namedType,
+                CodeGenerationDestination.CompilationUnit,
+                info,
+                cancellationToken
+            );
             var members = Insert(destination.Members, declaration, info, availableIndices);
             return destination.WithMembers(members);
         }
@@ -66,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
             CSharpCodeGenerationContextInfo info,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var declaration = GetDeclarationSyntaxWithoutMembers(namedType, destination, info);
 
@@ -75,24 +98,43 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             // the getter and setter to get generated instead. Since the list of members is going to include
             // the method symbols for the getter and setter, we don't want to generate them twice.
 
-            var members = GetMembers(namedType).Where(s => s.Kind != SymbolKind.Property || PropertyGenerator.CanBeGenerated((IPropertySymbol)s))
-                                               .ToImmutableArray();
+            var members = GetMembers(namedType)
+                .Where(s =>
+                    s.Kind != SymbolKind.Property
+                    || PropertyGenerator.CanBeGenerated((IPropertySymbol)s)
+                )
+                .ToImmutableArray();
             if (namedType.IsRecord)
             {
-                declaration = GenerateRecordMembers(service, info, (RecordDeclarationSyntax)declaration, members, cancellationToken);
+                declaration = GenerateRecordMembers(
+                    service,
+                    info,
+                    (RecordDeclarationSyntax)declaration,
+                    members,
+                    cancellationToken
+                );
             }
             else
             {
                 // If we're generating a ComImport type, then do not attempt to do any
                 // reordering of members.
                 if (namedType.IsComImport)
-                    info = info.WithContext(info.Context.With(autoInsertionLocation: false, sortMembers: false));
+                    info = info.WithContext(
+                        info.Context.With(autoInsertionLocation: false, sortMembers: false)
+                    );
 
                 if (info.Context.GenerateMembers && namedType.TypeKind != TypeKind.Delegate)
                     declaration = service.AddMembers(declaration, members, info, cancellationToken);
             }
 
-            return AddFormatterAndCodeGeneratorAnnotationsTo(ConditionallyAddDocumentationCommentTo(declaration, namedType, info, cancellationToken));
+            return AddFormatterAndCodeGeneratorAnnotationsTo(
+                ConditionallyAddDocumentationCommentTo(
+                    declaration,
+                    namedType,
+                    info,
+                    cancellationToken
+                )
+            );
         }
 
         private static RecordDeclarationSyntax GenerateRecordMembers(
@@ -100,23 +142,33 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CSharpCodeGenerationContextInfo info,
             RecordDeclarationSyntax recordDeclaration,
             ImmutableArray<ISymbol> members,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (!info.Context.GenerateMembers)
                 members = ImmutableArray<ISymbol>.Empty;
 
             // For a record, add record parameters if we have a primary constructor.
-            var primaryConstructor = members.OfType<IMethodSymbol>().FirstOrDefault(m => CodeGenerationConstructorInfo.GetIsPrimaryConstructor(m));
+            var primaryConstructor = members
+                .OfType<IMethodSymbol>()
+                .FirstOrDefault(m => CodeGenerationConstructorInfo.GetIsPrimaryConstructor(m));
             if (primaryConstructor != null)
             {
-                var parameterList = ParameterGenerator.GenerateParameterList(primaryConstructor.Parameters, isExplicit: false, info);
+                var parameterList = ParameterGenerator.GenerateParameterList(
+                    primaryConstructor.Parameters,
+                    isExplicit: false,
+                    info
+                );
                 recordDeclaration = recordDeclaration.WithParameterList(parameterList);
 
                 // remove the primary constructor from the list of members to generate.
                 members = members.Remove(primaryConstructor);
 
                 // remove any fields/properties that were created by the primary constructor
-                members = members.WhereAsArray(m => m is not IPropertySymbol and not IFieldSymbol || !primaryConstructor.Parameters.Any(static (p, m) => p.Name == m.Name, m));
+                members = members.WhereAsArray(m =>
+                    m is not IPropertySymbol and not IFieldSymbol
+                    || !primaryConstructor.Parameters.Any(static (p, m) => p.Name == m.Name, m)
+                );
             }
 
             // remove any implicit overrides to generate.
@@ -124,12 +176,15 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 
             // If there are no members, just make a simple record with no body
             if (members.Length == 0)
-                return recordDeclaration.WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+                return recordDeclaration.WithSemicolonToken(
+                    SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                );
 
             // Otherwise, give the record a body and add the members to it.
-            recordDeclaration = recordDeclaration.WithOpenBraceToken(SyntaxFactory.Token(SyntaxKind.OpenBraceToken))
-                                                 .WithCloseBraceToken(SyntaxFactory.Token(SyntaxKind.CloseBraceToken))
-                                                 .WithSemicolonToken(default);
+            recordDeclaration = recordDeclaration
+                .WithOpenBraceToken(SyntaxFactory.Token(SyntaxKind.OpenBraceToken))
+                .WithCloseBraceToken(SyntaxFactory.Token(SyntaxKind.CloseBraceToken))
+                .WithSemicolonToken(default);
             return service.AddMembers(recordDeclaration, members, info, cancellationToken);
         }
 
@@ -138,7 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             MemberDeclarationSyntax declaration,
             IList<ISymbol> newMembers,
             CSharpCodeGenerationContextInfo info,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             declaration = RemoveAllMembers(declaration);
             declaration = service.AddMembers(declaration, newMembers, info, cancellationToken);
@@ -148,9 +204,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static MemberDeclarationSyntax GetDeclarationSyntaxWithoutMembers(
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
-            CSharpCodeGenerationContextInfo info)
+            CSharpCodeGenerationContextInfo info
+        )
         {
-            var reusableDeclarationSyntax = GetReuseableSyntaxNodeForSymbol<MemberDeclarationSyntax>(namedType, info);
+            var reusableDeclarationSyntax =
+                GetReuseableSyntaxNodeForSymbol<MemberDeclarationSyntax>(namedType, info);
             return reusableDeclarationSyntax == null
                 ? GetDeclarationSyntaxWithoutMembersWorker(namedType, destination, info)
                 : RemoveAllMembers(reusableDeclarationSyntax);
@@ -178,7 +236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static MemberDeclarationSyntax GetDeclarationSyntaxWithoutMembersWorker(
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
-            CSharpCodeGenerationContextInfo info)
+            CSharpCodeGenerationContextInfo info
+        )
         {
             if (namedType.TypeKind == TypeKind.Enum)
             {
@@ -193,20 +252,41 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             if (namedType.IsRecord)
             {
                 var isRecordClass = namedType.TypeKind is TypeKind.Class;
-                var declarationKind = isRecordClass ? SyntaxKind.RecordDeclaration : SyntaxKind.RecordStructDeclaration;
-                var classOrStructKeyword = SyntaxFactory.Token(isRecordClass ? default : SyntaxKind.StructKeyword);
+                var declarationKind = isRecordClass
+                    ? SyntaxKind.RecordDeclaration
+                    : SyntaxKind.RecordStructDeclaration;
+                var classOrStructKeyword = SyntaxFactory.Token(
+                    isRecordClass ? default : SyntaxKind.StructKeyword
+                );
 
-                typeDeclaration = SyntaxFactory.RecordDeclaration(kind: declarationKind, attributeLists: default, modifiers: default,
-                    SyntaxFactory.Token(SyntaxKind.RecordKeyword), classOrStructKeyword, namedType.Name.ToIdentifierToken(),
-                    typeParameterList: null, parameterList: null, baseList: null, constraintClauses: default, openBraceToken: default, members: default, closeBraceToken: default,
-                    SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+                typeDeclaration = SyntaxFactory.RecordDeclaration(
+                    kind: declarationKind,
+                    attributeLists: default,
+                    modifiers: default,
+                    SyntaxFactory.Token(SyntaxKind.RecordKeyword),
+                    classOrStructKeyword,
+                    namedType.Name.ToIdentifierToken(),
+                    typeParameterList: null,
+                    parameterList: null,
+                    baseList: null,
+                    constraintClauses: default,
+                    openBraceToken: default,
+                    members: default,
+                    closeBraceToken: default,
+                    SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                );
             }
             else
             {
-                var kind = namedType.TypeKind == TypeKind.Struct ? SyntaxKind.StructDeclaration :
-                           namedType.TypeKind == TypeKind.Interface ? SyntaxKind.InterfaceDeclaration : SyntaxKind.ClassDeclaration;
+                var kind =
+                    namedType.TypeKind == TypeKind.Struct ? SyntaxKind.StructDeclaration
+                    : namedType.TypeKind == TypeKind.Interface ? SyntaxKind.InterfaceDeclaration
+                    : SyntaxKind.ClassDeclaration;
 
-                typeDeclaration = SyntaxFactory.TypeDeclaration(kind, namedType.Name.ToIdentifierToken());
+                typeDeclaration = SyntaxFactory.TypeDeclaration(
+                    kind,
+                    namedType.Name.ToIdentifierToken()
+                );
             }
 
             var result = typeDeclaration
@@ -222,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static DelegateDeclarationSyntax GenerateDelegateDeclaration(
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
-            CSharpCodeGenerationContextInfo info)
+            CSharpCodeGenerationContextInfo info
+        )
         {
             var invokeMethod = namedType.DelegateInvokeMethod;
             Contract.ThrowIfNull(invokeMethod);
@@ -233,29 +314,46 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 invokeMethod.ReturnType.GenerateTypeSyntax(),
                 namedType.Name.ToIdentifierToken(),
                 TypeParameterGenerator.GenerateTypeParameterList(namedType.TypeParameters, info),
-                ParameterGenerator.GenerateParameterList(invokeMethod.Parameters, isExplicit: false, info: info),
-                namedType.TypeParameters.GenerateConstraintClauses());
+                ParameterGenerator.GenerateParameterList(
+                    invokeMethod.Parameters,
+                    isExplicit: false,
+                    info: info
+                ),
+                namedType.TypeParameters.GenerateConstraintClauses()
+            );
         }
 
         private static EnumDeclarationSyntax GenerateEnumDeclaration(
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
-            CSharpCodeGenerationContextInfo info)
+            CSharpCodeGenerationContextInfo info
+        )
         {
-            var baseList = namedType.EnumUnderlyingType != null && namedType.EnumUnderlyingType.SpecialType != SpecialType.System_Int32
-                ? SyntaxFactory.BaseList(SyntaxFactory.SingletonSeparatedList<BaseTypeSyntax>(SyntaxFactory.SimpleBaseType(namedType.EnumUnderlyingType.GenerateTypeSyntax())))
-                : null;
+            var baseList =
+                namedType.EnumUnderlyingType != null
+                && namedType.EnumUnderlyingType.SpecialType != SpecialType.System_Int32
+                    ? SyntaxFactory.BaseList(
+                        SyntaxFactory.SingletonSeparatedList<BaseTypeSyntax>(
+                            SyntaxFactory.SimpleBaseType(
+                                namedType.EnumUnderlyingType.GenerateTypeSyntax()
+                            )
+                        )
+                    )
+                    : null;
 
             return SyntaxFactory.EnumDeclaration(
                 GenerateAttributeDeclarations(namedType, info),
                 GenerateModifiers(namedType, destination, info),
                 namedType.Name.ToIdentifierToken(),
                 baseList: baseList,
-                members: default);
+                members: default
+            );
         }
 
         private static SyntaxList<AttributeListSyntax> GenerateAttributeDeclarations(
-            INamedTypeSymbol namedType, CSharpCodeGenerationContextInfo info)
+            INamedTypeSymbol namedType,
+            CSharpCodeGenerationContextInfo info
+        )
         {
             return AttributeGenerator.GenerateAttributeLists(namedType.GetAttributes(), info);
         }
@@ -263,16 +361,24 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static SyntaxTokenList GenerateModifiers(
             INamedTypeSymbol namedType,
             CodeGenerationDestination destination,
-            CSharpCodeGenerationContextInfo info)
+            CSharpCodeGenerationContextInfo info
+        )
         {
             var tokens = ArrayBuilder<SyntaxToken>.GetInstance();
 
             if (!namedType.IsFileLocal)
             {
-                var defaultAccessibility = destination is CodeGenerationDestination.CompilationUnit or CodeGenerationDestination.Namespace
+                var defaultAccessibility = destination
+                    is CodeGenerationDestination.CompilationUnit
+                        or CodeGenerationDestination.Namespace
                     ? Accessibility.Internal
                     : Accessibility.Private;
-                CSharpCodeGenerationHelpers.AddAccessibilityModifiers(namedType.DeclaredAccessibility, tokens, info, defaultAccessibility);
+                CSharpCodeGenerationHelpers.AddAccessibilityModifiers(
+                    namedType.DeclaredAccessibility,
+                    tokens,
+                    info,
+                    defaultAccessibility
+                );
             }
             else
             {
@@ -313,7 +419,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         }
 
         private static TypeParameterListSyntax? GenerateTypeParameterList(
-            INamedTypeSymbol namedType, CSharpCodeGenerationContextInfo info)
+            INamedTypeSymbol namedType,
+            CSharpCodeGenerationContextInfo info
+        )
         {
             return TypeParameterGenerator.GenerateTypeParameterList(namedType.TypeParameters, info);
         }
@@ -321,7 +429,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         private static BaseListSyntax? GenerateBaseList(INamedTypeSymbol namedType)
         {
             var types = new List<BaseTypeSyntax>();
-            if (namedType.TypeKind == TypeKind.Class && namedType.BaseType != null && namedType.BaseType.SpecialType != Microsoft.CodeAnalysis.SpecialType.System_Object)
+            if (
+                namedType.TypeKind == TypeKind.Class
+                && namedType.BaseType != null
+                && namedType.BaseType.SpecialType
+                    != Microsoft.CodeAnalysis.SpecialType.System_Object
+            )
                 types.Add(SyntaxFactory.SimpleBaseType(namedType.BaseType.GenerateTypeSyntax()));
 
             foreach (var type in namedType.Interfaces)
@@ -333,7 +446,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             return SyntaxFactory.BaseList(SyntaxFactory.SeparatedList(types));
         }
 
-        private static SyntaxList<TypeParameterConstraintClauseSyntax> GenerateConstraintClauses(INamedTypeSymbol namedType)
-            => namedType.TypeParameters.GenerateConstraintClauses();
+        private static SyntaxList<TypeParameterConstraintClauseSyntax> GenerateConstraintClauses(
+            INamedTypeSymbol namedType
+        ) => namedType.TypeParameters.GenerateConstraintClauses();
     }
 }

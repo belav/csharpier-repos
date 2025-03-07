@@ -28,7 +28,8 @@ namespace System.Diagnostics
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [SupportedOSPlatform("maccatalyst")]
-        public TimeSpan PrivilegedProcessorTime => new TimeSpan((long)GetThreadInfo().pth_system_time);
+        public TimeSpan PrivilegedProcessorTime =>
+            new TimeSpan((long)GetThreadInfo().pth_system_time);
 
         private static DateTime GetStartTime() => throw new PlatformNotSupportedException(); // macOS does not provide a way to get this data
 
@@ -60,7 +61,10 @@ namespace System.Diagnostics
 
         private Interop.libproc.proc_threadinfo GetThreadInfo()
         {
-            Interop.libproc.proc_threadinfo? info = Interop.libproc.GetThreadInfoById(_processId, _threadInfo._threadId);
+            Interop.libproc.proc_threadinfo? info = Interop.libproc.GetThreadInfoById(
+                _processId,
+                _threadInfo._threadId
+            );
             if (!info.HasValue)
             {
                 throw new InvalidOperationException(SR.Format(SR.ThreadExited, Id));

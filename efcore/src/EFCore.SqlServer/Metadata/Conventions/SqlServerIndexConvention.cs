@@ -16,13 +16,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
-public class SqlServerIndexConvention :
-    IEntityTypeBaseTypeChangedConvention,
-    IIndexAddedConvention,
-    IIndexUniquenessChangedConvention,
-    IIndexAnnotationChangedConvention,
-    IPropertyNullabilityChangedConvention,
-    IPropertyAnnotationChangedConvention
+public class SqlServerIndexConvention
+    : IEntityTypeBaseTypeChangedConvention,
+        IIndexAddedConvention,
+        IIndexUniquenessChangedConvention,
+        IIndexAnnotationChangedConvention,
+        IPropertyNullabilityChangedConvention,
+        IPropertyAnnotationChangedConvention
 {
     private readonly ISqlGenerationHelper _sqlGenerationHelper;
 
@@ -35,7 +35,8 @@ public class SqlServerIndexConvention :
     public SqlServerIndexConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies,
-        ISqlGenerationHelper sqlGenerationHelper)
+        ISqlGenerationHelper sqlGenerationHelper
+    )
     {
         _sqlGenerationHelper = sqlGenerationHelper;
 
@@ -64,10 +65,10 @@ public class SqlServerIndexConvention :
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
-        if (oldBaseType == null
-            || newBaseType == null)
+        if (oldBaseType == null || newBaseType == null)
         {
             foreach (var index in entityTypeBuilder.Metadata.GetDeclaredIndexes())
             {
@@ -83,8 +84,8 @@ public class SqlServerIndexConvention :
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessIndexAdded(
         IConventionIndexBuilder indexBuilder,
-        IConventionContext<IConventionIndexBuilder> context)
-        => SetIndexFilter(indexBuilder);
+        IConventionContext<IConventionIndexBuilder> context
+    ) => SetIndexFilter(indexBuilder);
 
     /// <summary>
     ///     Called after the uniqueness for an index is changed.
@@ -93,8 +94,8 @@ public class SqlServerIndexConvention :
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessIndexUniquenessChanged(
         IConventionIndexBuilder indexBuilder,
-        IConventionContext<bool?> context)
-        => SetIndexFilter(indexBuilder);
+        IConventionContext<bool?> context
+    ) => SetIndexFilter(indexBuilder);
 
     /// <summary>
     ///     Called after the nullability for a property is changed.
@@ -103,7 +104,8 @@ public class SqlServerIndexConvention :
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessPropertyNullabilityChanged(
         IConventionPropertyBuilder propertyBuilder,
-        IConventionContext<bool?> context)
+        IConventionContext<bool?> context
+    )
     {
         foreach (var index in propertyBuilder.Metadata.GetContainingIndexes())
         {
@@ -124,7 +126,8 @@ public class SqlServerIndexConvention :
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
         if (name == SqlServerAnnotationNames.Clustered)
         {
@@ -145,7 +148,8 @@ public class SqlServerIndexConvention :
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
         if (name == RelationalAnnotationNames.ColumnName)
         {
@@ -156,15 +160,19 @@ public class SqlServerIndexConvention :
         }
     }
 
-    private void SetIndexFilter(IConventionIndexBuilder indexBuilder, bool columnNameChanged = false)
+    private void SetIndexFilter(
+        IConventionIndexBuilder indexBuilder,
+        bool columnNameChanged = false
+    )
     {
         var index = indexBuilder.Metadata;
-        if (index.IsUnique
+        if (
+            index.IsUnique
             && index.IsClustered() != true
-            && GetNullableColumns(index) is { Count: > 0 } nullableColumns)
+            && GetNullableColumns(index) is { Count: > 0 } nullableColumns
+        )
         {
-            if (columnNameChanged
-                || index.GetFilter() == null)
+            if (columnNameChanged || index.GetFilter() == null)
             {
                 indexBuilder.HasFilter(CreateIndexFilter(nullableColumns));
             }

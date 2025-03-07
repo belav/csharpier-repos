@@ -20,34 +20,42 @@ public static class HttpMethods
     /// HTTP "CONNECT" method.
     /// </summary>
     public static readonly string Connect = "CONNECT";
+
     /// <summary>
     /// HTTP "DELETE" method.
     /// </summary>
     public static readonly string Delete = "DELETE";
+
     /// <summary>
     /// HTTP "GET" method.
     /// </summary>
     public static readonly string Get = "GET";
+
     /// <summary>
     /// HTTP "HEAD" method.
     /// </summary>
     public static readonly string Head = "HEAD";
+
     /// <summary>
     /// HTTP "OPTIONS" method.
     /// </summary>
     public static readonly string Options = "OPTIONS";
+
     /// <summary>
     /// HTTP "PATCH" method.
     /// </summary>
     public static readonly string Patch = "PATCH";
+
     /// <summary>
     /// HTTP "POST" method.
     /// </summary>
     public static readonly string Post = "POST";
+
     /// <summary>
     /// HTTP "PUT" method.
     /// </summary>
     public static readonly string Put = "PUT";
+
     /// <summary>
     /// HTTP "TRACE" method.
     /// </summary>
@@ -166,19 +174,20 @@ public static class HttpMethods
     /// </summary>
     /// <param name="method"></param>
     /// <returns></returns>
-    public static string GetCanonicalizedValue(string method) => method switch
-    {
-        string _ when IsGet(method) => Get,
-        string _ when IsPost(method) => Post,
-        string _ when IsPut(method) => Put,
-        string _ when IsDelete(method) => Delete,
-        string _ when IsOptions(method) => Options,
-        string _ when IsHead(method) => Head,
-        string _ when IsPatch(method) => Patch,
-        string _ when IsTrace(method) => Trace,
-        string _ when IsConnect(method) => Connect,
-        string _ => method
-    };
+    public static string GetCanonicalizedValue(string method) =>
+        method switch
+        {
+            string _ when IsGet(method) => Get,
+            string _ when IsPost(method) => Post,
+            string _ when IsPut(method) => Put,
+            string _ when IsDelete(method) => Delete,
+            string _ when IsOptions(method) => Options,
+            string _ when IsHead(method) => Head,
+            string _ when IsPatch(method) => Patch,
+            string _ when IsTrace(method) => Trace,
+            string _ when IsConnect(method) => Connect,
+            string _ => method,
+        };
 
     /// <summary>
     /// Returns a value that indicates if the HTTP methods are the same.
@@ -190,6 +199,7 @@ public static class HttpMethods
     /// </returns>
     public static bool Equals(string methodA, string methodB)
     {
-        return object.ReferenceEquals(methodA, methodB) || StringComparer.OrdinalIgnoreCase.Equals(methodA, methodB);
+        return object.ReferenceEquals(methodA, methodB)
+            || StringComparer.OrdinalIgnoreCase.Equals(methodA, methodB);
     }
 }

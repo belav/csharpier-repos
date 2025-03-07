@@ -16,15 +16,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInlineTypeCheck)]
-    public partial class CSharpAsAndNullCheckTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class CSharpAsAndNullCheckTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public CSharpAsAndNullCheckTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpAsAndNullCheckDiagnosticAnalyzer(), new CSharpAsAndNullCheckCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpAsAndNullCheckDiagnosticAnalyzer(),
+                new CSharpAsAndNullCheckCodeFixProvider()
+            );
 
         [Theory]
         [InlineData("x != null", "o is string x")]
@@ -44,7 +48,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         [InlineData("null == (x = o as string)", "!(o is string x)")]
         [InlineData("(x = o as string) is null", "!(o is string x)")]
         [InlineData("x == null", "o is not string x", LanguageVersion.CSharp9)]
-        public async Task InlineTypeCheck1(string input, string output, LanguageVersion version = LanguageVersion.CSharp8)
+        public async Task InlineTypeCheck1(
+            string input,
+            string output,
+            LanguageVersion version = LanguageVersion.CSharp8
+        )
         {
             await TestStatement($"if ({input}) {{ }}", $"if ({output}) {{ }}", version);
             await TestStatement($"var y = {input};", $"var y = {output};", version);
@@ -57,13 +65,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         [InlineData("(x = o as string) is object", "o is string x")]
         [InlineData("(x = o as string) == null", "!(o is string x)")]
         [InlineData("null == (x = o as string)", "!(o is string x)")]
-        public async Task InlineTypeCheck2(string input, string output)
-            => await TestStatement($"while ({input}) {{ }}", $"while ({output}) {{ }}");
+        public async Task InlineTypeCheck2(string input, string output) =>
+            await TestStatement($"while ({input}) {{ }}", $"while ({output}) {{ }}");
 
-        private async Task TestStatement(string input, string output, LanguageVersion version = LanguageVersion.CSharp8)
+        private async Task TestStatement(
+            string input,
+            string output,
+            LanguageVersion version = LanguageVersion.CSharp8
+        )
         {
             await TestInRegularAndScript1Async(
-$@"class C
+                $@"class C
 {{
     void M(object o)
     {{
@@ -71,13 +83,15 @@ $@"class C
         {input}
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     void M(object o)
     {{
         {output}
     }}
-}}", new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(version)));
+}}",
+                new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(version))
+            );
         }
 
         [Fact]
@@ -95,7 +109,13 @@ $@"class C
                         }
                     }
                 }
-                """, new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+                """,
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -113,7 +133,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -150,7 +171,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33345")]
@@ -190,7 +212,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -208,7 +231,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25237")]
@@ -223,7 +247,8 @@ $@"class C
                         [|return;|]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -241,7 +266,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -270,7 +296,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -305,7 +332,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -336,7 +364,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -366,7 +395,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -398,7 +428,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33345")]
@@ -430,7 +461,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33345")]
@@ -462,7 +494,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33345")]
@@ -497,7 +530,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -526,7 +560,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -555,7 +590,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -584,7 +620,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -605,7 +642,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -625,7 +663,8 @@ $@"class C
                         Console.WriteLine(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -647,7 +686,6 @@ $@"class C
                     }
                 }
                 """,
-
                 """
                 class C
                 {
@@ -661,7 +699,8 @@ $@"class C
                         Console.WriteLine(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21097")]
@@ -686,7 +725,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24286")]
@@ -705,7 +745,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -727,7 +768,8 @@ $@"class C
                         Console.WriteLine(x = Use(x));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -748,7 +790,8 @@ $@"class C
                         x = "writeAfter";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28821")]
@@ -775,7 +818,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28866")]
@@ -799,7 +843,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15957")]
@@ -836,7 +881,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17129")]
@@ -883,7 +929,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/17122")]
@@ -905,7 +952,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18053")]
@@ -939,7 +987,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -957,7 +1006,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -977,7 +1027,8 @@ $@"class C
                         var readAfterWhile = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -997,7 +1048,8 @@ $@"class C
                         x = "writeAfterWhile";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1016,7 +1068,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1035,7 +1088,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23504")]
@@ -1068,7 +1122,8 @@ $@"class C
                             : ";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23504")]
@@ -1097,7 +1152,8 @@ $@"class C
                         var title = obj is string str ? str : ";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21172")]
@@ -1115,7 +1171,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21551")]
@@ -1136,7 +1193,8 @@ $@"class C
                   public static bool operator ==(C c1, C c2) => false;
                   public static bool operator !=(C c1, C c2) => false;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1163,7 +1221,11 @@ $@"class C
                         return x;
                     }
                 }
-                """, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                """,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact]
@@ -1202,7 +1264,11 @@ $@"class C
                         }
                     }
                 }
-                """, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                """,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25993")]
@@ -1243,7 +1309,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25993")]
@@ -1267,7 +1334,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1293,7 +1361,8 @@ $@"class C
                     }
 
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1321,7 +1390,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1347,7 +1417,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1386,7 +1457,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1411,7 +1483,8 @@ $@"class C
                         M(e is C c ? c : null);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1427,7 +1500,8 @@ $@"class C
                         M(c != null ? c : null, c);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1443,7 +1517,8 @@ $@"class C
                         for (;(c)!=null;) {}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1468,7 +1543,11 @@ $@"class C
                         for (; !(!(e is C c));) { }
                     }
                 }
-                """, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                """,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact]
@@ -1499,7 +1578,11 @@ $@"class C
                         }
                     }
                 }
-                """, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                """,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact]
@@ -1519,7 +1602,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1554,7 +1638,11 @@ $@"class C
                         }
                     }
                 }
-                """, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                """,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact]
@@ -1586,7 +1674,11 @@ $@"class C
                         }
                     }
                 }
-                """, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                """,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact]
@@ -1605,7 +1697,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1624,7 +1717,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1649,7 +1743,11 @@ $@"class C
                         C F() => !(e is C c) ? null : c;
                     }
                 }
-                """, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                """,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact]
@@ -1666,7 +1764,8 @@ $@"class C
                         return c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1691,7 +1790,11 @@ $@"class C
                         System.Func<C> f = () => !(e is C c) ? null : c;
                     }
                 }
-                """, parameters: new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)));
+                """,
+                parameters: new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8)
+                )
+            );
         }
 
         [Fact]
@@ -1708,7 +1811,8 @@ $@"class C
                         return c;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31388")]
@@ -1730,7 +1834,8 @@ $@"class C
 
                     void M2(bool b) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40007")]
@@ -1773,7 +1878,8 @@ $@"class C
                         return dictionary;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45596")]
@@ -1791,7 +1897,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45596")]
@@ -1811,7 +1918,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37398")]
@@ -1850,7 +1958,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40006")]
@@ -1885,7 +1994,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/55782")]
@@ -1940,7 +2050,8 @@ $@"class C
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/55782")]
         public async Task TestLocalReferencedAcrossScopes2()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 using System.Transactions;
 
                 class BaseObject { }
@@ -2020,13 +2131,15 @@ $@"class C
                         return 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37875")]
         public async Task TestNullableWhenWrittenTo1()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 #nullable enable
                 using System;
 
@@ -2044,7 +2157,7 @@ $@"class C
                 """
                 #nullable enable
                 using System;
-                
+
                 class Program
                 {
                     static void Goo(object o1, object o2)
@@ -2054,13 +2167,15 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37875")]
         public async Task TestNullableWhenWrittenTo2()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 #nullable enable
                 using System;
 
@@ -2079,7 +2194,7 @@ $@"class C
                 """
                 #nullable enable
                 using System;
-                
+
                 class Program
                 {
                     static void Goo(object o1, object o2)
@@ -2090,13 +2205,15 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37875")]
         public async Task TestNullableWhenWrittenTo3()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 #nullable enable
                 using System;
 
@@ -2111,13 +2228,15 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37875")]
         public async Task TestNullableWhenWrittenTo4()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 #nullable enable
                 using System;
 
@@ -2132,7 +2251,8 @@ $@"class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

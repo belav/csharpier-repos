@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Data.Common.Utils;
 using System.Text;
 
-
 namespace System.Data.Mapping
 {
     /// <summary>
@@ -22,9 +21,7 @@ namespace System.Data.Mapping
     public abstract class EntityViewContainer
     {
         #region Constructors
-        protected EntityViewContainer()
-        {
-        }
+        protected EntityViewContainer() { }
         #endregion
 
         #region fields
@@ -50,53 +47,40 @@ namespace System.Data.Mapping
             }
         }
 
-        protected abstract System.Collections.Generic.KeyValuePair<string, string> GetViewAt(int index);
+        protected abstract System.Collections.Generic.KeyValuePair<string, string> GetViewAt(
+            int index
+        );
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         public string EdmEntityContainerName
         {
-            get
-            {
-                return this.m_storededmEntityContainerName;
-            }
-            set
-            {
-                this.m_storededmEntityContainerName = value;
-            }
+            get { return this.m_storededmEntityContainerName; }
+            set { this.m_storededmEntityContainerName = value; }
         }
         public string StoreEntityContainerName
         {
-            get
-            {
-                return this.m_storedStoreEntityContainerName;
-            }
-            set
-            {
-                this.m_storedStoreEntityContainerName = value;
-            }
+            get { return this.m_storedStoreEntityContainerName; }
+            set { this.m_storedStoreEntityContainerName = value; }
         }
         public string HashOverMappingClosure
         {
-            get
-            {
-                return this.m_storedHashOverMappingClosure;
-            }
-            set
-            {
-                this.m_storedHashOverMappingClosure = value;
-            }
+            get { return this.m_storedHashOverMappingClosure; }
+            set { this.m_storedHashOverMappingClosure = value; }
         }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "OverAll")]
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "OverAll"
+        )]
         public string HashOverAllExtentViews
         {
-            get
-            {
-                return this.m_storedhashOverAllExtentViews;
-            }
-            set
-            {
-                this.m_storedhashOverAllExtentViews = value;
-            }
+            get { return this.m_storedhashOverAllExtentViews; }
+            set { this.m_storedhashOverAllExtentViews = value; }
         }
 
         public int ViewCount

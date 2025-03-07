@@ -20,7 +20,9 @@ namespace System.Reflection.TypeLoading.Ecma
         {
             _handle = handle;
             _module = module;
-            _neverAccessThisExceptThroughCustomAttributeProperty = handle.GetCustomAttribute(Reader);
+            _neverAccessThisExceptThroughCustomAttributeProperty = handle.GetCustomAttribute(
+                Reader
+            );
         }
 
         public sealed override IList<CustomAttributeTypedArgument> ConstructorArguments
@@ -62,21 +64,39 @@ namespace System.Reflection.TypeLoading.Ecma
                 case HandleKind.MethodDefinition:
                 {
                     MethodDefinitionHandle mh = (MethodDefinitionHandle)ctorHandle;
-                    EcmaDefinitionType declaringType = mh.GetMethodDefinition(Reader).GetDeclaringType().ResolveTypeDef(_module);
-                    return new RoDefinitionConstructor<EcmaMethodDecoder>(declaringType, new EcmaMethodDecoder(mh, _module));
+                    EcmaDefinitionType declaringType = mh.GetMethodDefinition(Reader)
+                        .GetDeclaringType()
+                        .ResolveTypeDef(_module);
+                    return new RoDefinitionConstructor<EcmaMethodDecoder>(
+                        declaringType,
+                        new EcmaMethodDecoder(mh, _module)
+                    );
                 }
 
                 case HandleKind.MemberReference:
                 {
                     TypeContext typeContext = default;
-                    MemberReference mr = ((MemberReferenceHandle)ctorHandle).GetMemberReference(Reader);
+                    MemberReference mr = ((MemberReferenceHandle)ctorHandle).GetMemberReference(
+                        Reader
+                    );
                     MethodSignature<RoType> sig = mr.DecodeMethodSignature(_module, typeContext);
                     Type[] parameterTypes = sig.ParameterTypes.ToArray();
                     Type declaringType = mr.Parent.ResolveTypeDefRefOrSpec(_module, typeContext);
-                    const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.ExactBinding;
-                    ConstructorInfo? ci = declaringType.GetConstructor(bf, null, parameterTypes, null);
+                    const BindingFlags bf =
+                        BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.Instance
+                        | BindingFlags.ExactBinding;
+                    ConstructorInfo? ci = declaringType.GetConstructor(
+                        bf,
+                        null,
+                        parameterTypes,
+                        null
+                    );
                     if (ci == null)
-                        throw new MissingMethodException(SR.Format(SR.MissingCustomAttributeConstructor, declaringType));
+                        throw new MissingMethodException(
+                            SR.Format(SR.MissingCustomAttributeConstructor, declaringType)
+                        );
                     return ci;
                 }
 
@@ -100,8 +120,16 @@ namespace System.Reflection.TypeLoading.Ecma
         private MetadataReader Reader => _module.Reader;
         private MetadataLoadContext Loader => _module.Loader;
 
-        private ref readonly CustomAttribute CustomAttribute { get { Loader.DisposeCheck(); return ref _neverAccessThisExceptThroughCustomAttributeProperty; } }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]  // Block from debugger watch windows so they don't AV the debugged process.
+        private ref readonly CustomAttribute CustomAttribute
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return ref _neverAccessThisExceptThroughCustomAttributeProperty;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly CustomAttribute _neverAccessThisExceptThroughCustomAttributeProperty;
     }
 }

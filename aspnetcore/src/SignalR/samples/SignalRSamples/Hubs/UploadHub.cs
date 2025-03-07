@@ -10,7 +10,6 @@ namespace SignalRSamples.Hubs;
 
 public class UploadHub : Hub
 {
-
     public string Echo(string word)
     {
         return "Echo: " + word;
@@ -75,7 +74,6 @@ public class UploadHub : Hub
                 }
             }
             output.Writer.Complete();
-
         });
 
         return output.Reader;

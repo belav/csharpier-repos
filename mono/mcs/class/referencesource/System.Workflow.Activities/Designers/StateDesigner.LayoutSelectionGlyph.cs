@@ -1,23 +1,23 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.CodeDom;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Windows.Forms;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
 
     internal partial class StateDesigner : FreeformActivityDesigner
     {
@@ -38,18 +38,12 @@ namespace System.Workflow.Activities
 
             public override int Priority
             {
-                get
-                {
-                    return DesignerGlyph.HighestPriority;
-                }
+                get { return DesignerGlyph.HighestPriority; }
             }
 
             public override bool IsPrimarySelection
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override Rectangle GetBounds(ActivityDesigner designer, bool activated)

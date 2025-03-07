@@ -42,7 +42,8 @@ namespace System.Security.Cryptography
         /// <value>
         ///   <see langword="true" /> if the algorithm is supported; otherwise, <see langword="false" />.
         /// </value>
-        public static bool IsSupported { get; } = HashProviderDispenser.HashSupported(HashAlgorithmId);
+        public static bool IsSupported { get; } =
+            HashProviderDispenser.HashSupported(HashAlgorithmId);
 
         /// <summary>
         ///   Appends the specified data to the data already processed in the hash.
@@ -299,7 +300,11 @@ namespace System.Security.Cryptography
         ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" /> property
         ///   to determine if the platform supports SHAKE256.
         /// </exception>
-        public static ValueTask HashDataAsync(Stream source, Memory<byte> destination, CancellationToken cancellationToken = default)
+        public static ValueTask HashDataAsync(
+            Stream source,
+            Memory<byte> destination,
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -309,7 +314,12 @@ namespace System.Security.Cryptography
             }
 
             CheckPlatformSupport();
-            return LiteHashProvider.XofStreamAsync(HashAlgorithmId, source, destination, cancellationToken);
+            return LiteHashProvider.XofStreamAsync(
+                HashAlgorithmId,
+                source,
+                destination,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -340,7 +350,11 @@ namespace System.Security.Cryptography
         ///   The platform does not support SHAKE256. Callers can use the <see cref="IsSupported" /> property
         ///   to determine if the platform supports SHAKE256.
         /// </exception>
-        public static ValueTask<byte[]> HashDataAsync(Stream source, int outputLength, CancellationToken cancellationToken = default)
+        public static ValueTask<byte[]> HashDataAsync(
+            Stream source,
+            int outputLength,
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentOutOfRangeException.ThrowIfNegative(outputLength);
@@ -351,12 +365,21 @@ namespace System.Security.Cryptography
             }
 
             CheckPlatformSupport();
-            return LiteHashProvider.XofStreamAsync(HashAlgorithmId, outputLength, source, cancellationToken);
+            return LiteHashProvider.XofStreamAsync(
+                HashAlgorithmId,
+                outputLength,
+                source,
+                cancellationToken
+            );
         }
 
         private static void HashDataCore(ReadOnlySpan<byte> source, Span<byte> destination)
         {
-            HashProviderDispenser.OneShotHashProvider.HashDataXof(HashAlgorithmId, source, destination);
+            HashProviderDispenser.OneShotHashProvider.HashDataXof(
+                HashAlgorithmId,
+                source,
+                destination
+            );
         }
 
         private static void CheckPlatformSupport()

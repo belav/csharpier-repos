@@ -3,16 +3,15 @@
 //
 
 using System;
-using System.IO;
-using System.Threading;
-using System.Diagnostics;
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
-using System.Workflow.Runtime;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Threading;
 using System.Workflow.ComponentModel;
+using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime
@@ -20,7 +19,9 @@ namespace System.Workflow.Runtime
     /// <summary>
     /// Schedule Instance handed over to the client
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowInstance
     {
         private WorkflowRuntime _runtime;
@@ -30,7 +31,13 @@ namespace System.Workflow.Runtime
         internal WorkflowInstance(Guid instanceId, WorkflowRuntime workflowRuntime)
         {
             if (instanceId == Guid.Empty)
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, ExecutionStringManager.CantBeEmptyGuid, "instanceId"));
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        ExecutionStringManager.CantBeEmptyGuid,
+                        "instanceId"
+                    )
+                );
             if (workflowRuntime == null)
                 throw new ArgumentNullException("workflowRuntime");
 
@@ -40,26 +47,23 @@ namespace System.Workflow.Runtime
 
         public Guid InstanceId
         {
-            get
-            {
-                return _instanceId;
-            }
+            get { return _instanceId; }
         }
 
         public WorkflowRuntime WorkflowRuntime
         {
-            get
-            {
-                return _runtime;
-            }
+            get { return _runtime; }
         }
 
         internal WorkflowExecutor DeadWorkflow
         {
             set
             {
-                Debug.Assert(value.WorkflowStatus == WorkflowStatus.Completed || value.WorkflowStatus == WorkflowStatus.Terminated,
-                    "Dead workflow is not dead.");
+                Debug.Assert(
+                    value.WorkflowStatus == WorkflowStatus.Completed
+                        || value.WorkflowStatus == WorkflowStatus.Terminated,
+                    "Dead workflow is not dead."
+                );
                 _deadWorkflow = value;
             }
         }
@@ -172,7 +176,9 @@ namespace System.Workflow.Runtime
                     if (executor.IsInstanceValid)
                     {
                         if (executor.WorkflowStatus == WorkflowStatus.Created)
-                            throw new InvalidOperationException(ExecutionStringManager.CannotSuspendBeforeStart);
+                            throw new InvalidOperationException(
+                                ExecutionStringManager.CannotSuspendBeforeStart
+                            );
                         try
                         {
                             executor.Suspend(error);
@@ -206,7 +212,13 @@ namespace System.Workflow.Runtime
             using (new WorkflowTraceTransfer(this.InstanceId))
             {
                 if (_runtime == null || _runtime.GetService<WorkflowPersistenceService>() == null)
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, ExecutionStringManager.MissingPersistenceService, this.InstanceId));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            ExecutionStringManager.MissingPersistenceService,
+                            this.InstanceId
+                        )
+                    );
                 while (true)
                 {
                     WorkflowExecutor executor = _runtime.Load(this);
@@ -226,7 +238,8 @@ namespace System.Workflow.Runtime
                         {
                             try
                             {
-                                e.Handle.WaitOne(/* maybe should have a timeout here?*/);
+                                e.Handle.WaitOne( /* maybe should have a timeout here?*/
+                                );
                             }
                             catch (ObjectDisposedException)
                             {
@@ -335,7 +348,9 @@ namespace System.Workflow.Runtime
                     if (executor.IsInstanceValid)
                     {
                         if (executor.WorkflowStatus == WorkflowStatus.Created)
-                            throw new InvalidOperationException(ExecutionStringManager.CannotAbortBeforeStart);
+                            throw new InvalidOperationException(
+                                ExecutionStringManager.CannotAbortBeforeStart
+                            );
 
                         try
                         {
@@ -400,7 +415,12 @@ namespace System.Workflow.Runtime
             }
         }
 
-        public void EnqueueItem(IComparable queueName, Object item, IPendingWork pendingWork, Object workItem)
+        public void EnqueueItem(
+            IComparable queueName,
+            Object item,
+            IPendingWork pendingWork,
+            Object workItem
+        )
         {
             using (new WorkflowTraceTransfer(this.InstanceId))
             {
@@ -421,7 +441,12 @@ namespace System.Workflow.Runtime
             }
         }
 
-        public void EnqueueItemOnIdle(IComparable queueName, Object item, IPendingWork pendingWork, Object workItem)
+        public void EnqueueItemOnIdle(
+            IComparable queueName,
+            Object item,
+            IPendingWork pendingWork,
+            Object workItem
+        )
         {
             using (new WorkflowTraceTransfer(this.InstanceId))
             {

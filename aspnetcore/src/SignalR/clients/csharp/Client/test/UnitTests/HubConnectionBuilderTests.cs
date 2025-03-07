@@ -20,40 +20,61 @@ public class HubConnectionBuilderTests
     public void HubConnectionBuiderThrowsIfConnectionFactoryNotConfigured()
     {
         var ex = Assert.Throws<InvalidOperationException>(() => new HubConnectionBuilder().Build());
-        Assert.Equal("Cannot create HubConnection instance. An IConnectionFactory was not configured.", ex.Message);
+        Assert.Equal(
+            "Cannot create HubConnection instance. An IConnectionFactory was not configured.",
+            ex.Message
+        );
     }
 
     [Fact]
     public void CannotCreateConnectionWithNoEndPoint()
     {
         var builder = new HubConnectionBuilder();
-        builder.Services.AddSingleton<IConnectionFactory>(new HttpConnectionFactory(Options.Create(new HttpConnectionOptions()), NullLoggerFactory.Instance));
+        builder.Services.AddSingleton<IConnectionFactory>(
+            new HttpConnectionFactory(
+                Options.Create(new HttpConnectionOptions()),
+                NullLoggerFactory.Instance
+            )
+        );
 
         var ex = Assert.Throws<InvalidOperationException>(() => builder.Build());
-        Assert.Equal("Cannot create HubConnection instance. An EndPoint was not configured.", ex.Message);
+        Assert.Equal(
+            "Cannot create HubConnection instance. An EndPoint was not configured.",
+            ex.Message
+        );
     }
 
     [Fact]
     public void AddJsonProtocolSetsHubProtocolToJsonWithDefaultOptions()
     {
-        var serviceProvider = new HubConnectionBuilder().AddNewtonsoftJsonProtocol().Services.BuildServiceProvider();
+        var serviceProvider = new HubConnectionBuilder()
+            .AddNewtonsoftJsonProtocol()
+            .Services.BuildServiceProvider();
 
-        var actualProtocol = Assert.IsType<NewtonsoftJsonHubProtocol>(serviceProvider.GetService<IHubProtocol>());
-        Assert.IsType<CamelCasePropertyNamesContractResolver>(actualProtocol.PayloadSerializer.ContractResolver);
+        var actualProtocol = Assert.IsType<NewtonsoftJsonHubProtocol>(
+            serviceProvider.GetService<IHubProtocol>()
+        );
+        Assert.IsType<CamelCasePropertyNamesContractResolver>(
+            actualProtocol.PayloadSerializer.ContractResolver
+        );
     }
 
     [Fact]
     public void AddJsonProtocolSetsHubProtocolToJsonWithProvidedOptions()
     {
-        var serviceProvider = new HubConnectionBuilder().AddNewtonsoftJsonProtocol(options =>
-        {
-            options.PayloadSerializerSettings = new JsonSerializerSettings
+        var serviceProvider = new HubConnectionBuilder()
+            .AddNewtonsoftJsonProtocol(options =>
             {
-                DateFormatString = "JUST A TEST"
-            };
-        }).Services.BuildServiceProvider();
+                options.PayloadSerializerSettings = new JsonSerializerSettings
+                {
+                    DateFormatString = "JUST A TEST",
+                };
+            })
+            .Services.BuildServiceProvider();
 
-        var actualProtocol = Assert.IsType<NewtonsoftJsonHubProtocol>(serviceProvider.GetService<IHubProtocol>());
+        var actualProtocol = Assert.IsType<NewtonsoftJsonHubProtocol>(
+            serviceProvider.GetService<IHubProtocol>()
+        );
         Assert.Equal("JUST A TEST", actualProtocol.PayloadSerializer.DateFormatString);
     }
 
@@ -61,19 +82,29 @@ public class HubConnectionBuilderTests
     public void BuildCanOnlyBeCalledOnce()
     {
         var builder = new HubConnectionBuilder();
-        builder.Services.AddSingleton<IConnectionFactory>(new HttpConnectionFactory(Options.Create(new HttpConnectionOptions()), NullLoggerFactory.Instance));
+        builder.Services.AddSingleton<IConnectionFactory>(
+            new HttpConnectionFactory(
+                Options.Create(new HttpConnectionOptions()),
+                NullLoggerFactory.Instance
+            )
+        );
         builder.WithUrl("http://example.com");
 
         Assert.NotNull(builder.Build());
 
         var ex = Assert.Throws<InvalidOperationException>(() => builder.Build());
-        Assert.Equal("HubConnectionBuilder allows creation only of a single instance of HubConnection.", ex.Message);
+        Assert.Equal(
+            "HubConnectionBuilder allows creation only of a single instance of HubConnection.",
+            ex.Message
+        );
     }
 
     [Fact]
     public void AddMessagePackProtocolSetsHubProtocolToMsgPack()
     {
-        var serviceProvider = new HubConnectionBuilder().AddMessagePackProtocol().Services.BuildServiceProvider();
+        var serviceProvider = new HubConnectionBuilder()
+            .AddMessagePackProtocol()
+            .Services.BuildServiceProvider();
 
         Assert.IsType<MessagePackHubProtocol>(serviceProvider.GetService<IHubProtocol>());
     }
@@ -83,8 +114,7 @@ public class HubConnectionBuilderTests
     {
         var serverTimeout = TimeSpan.FromMinutes(1);
         var builder = new HubConnectionBuilder();
-        builder.WithUrl("http://example.com")
-            .WithServerTimeout(serverTimeout);
+        builder.WithUrl("http://example.com").WithServerTimeout(serverTimeout);
 
         var connection = builder.Build();
 
@@ -96,8 +126,7 @@ public class HubConnectionBuilderTests
     {
         var keepAliveInterval = TimeSpan.FromMinutes(1);
         var builder = new HubConnectionBuilder();
-        builder.WithUrl("http://example.com")
-            .WithKeepAliveInterval(keepAliveInterval);
+        builder.WithUrl("http://example.com").WithKeepAliveInterval(keepAliveInterval);
 
         var connection = builder.Build();
 
@@ -110,7 +139,8 @@ public class HubConnectionBuilderTests
         var serverTimeout = TimeSpan.FromMinutes(2);
         var keepAliveInterval = TimeSpan.FromMinutes(3);
         var builder = new HubConnectionBuilder();
-        builder.WithUrl("http://example.com")
+        builder
+            .WithUrl("http://example.com")
             .WithServerTimeout(serverTimeout)
             .WithKeepAliveInterval(keepAliveInterval);
 

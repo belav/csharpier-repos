@@ -46,43 +46,47 @@ public class MultipartReaderBenchmark
         switch (SectionCount)
         {
             case 1:
-                data = $"--{Boundary}\r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"\r\n" +
-$"text default{new string('a', LargePayload ? 10000000 : 0)}\r\n" +
-$"--{Boundary}--\r\n"; ;
+                data =
+                    $"--{Boundary}\r\n"
+                    + "Content-Disposition: form-data; name=\"text\"\r\n"
+                    + "\r\n"
+                    + $"text default{new string('a', LargePayload ? 10000000 : 0)}\r\n"
+                    + $"--{Boundary}--\r\n";
+                ;
                 break;
             case 2:
-                data = $"--{Boundary}\r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-$"--{Boundary}\r\n" +
-"Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n" +
-"Content-Type: text/plain\r\n" +
-"\r\n" +
-$"Content of a.txt.{new string('a', LargePayload ? 10000000 : 0)}\r\n" +
-"\r\n" +
-$"--{Boundary}--\r\n";
+                data =
+                    $"--{Boundary}\r\n"
+                    + "Content-Disposition: form-data; name=\"text\"\r\n"
+                    + "\r\n"
+                    + "text default\r\n"
+                    + $"--{Boundary}\r\n"
+                    + "Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n"
+                    + "Content-Type: text/plain\r\n"
+                    + "\r\n"
+                    + $"Content of a.txt.{new string('a', LargePayload ? 10000000 : 0)}\r\n"
+                    + "\r\n"
+                    + $"--{Boundary}--\r\n";
                 break;
             case 3:
-                data = $"--{Boundary}\r\n" +
-"Content-Disposition: form-data; name=\"text\"\r\n" +
-"\r\n" +
-"text default\r\n" +
-$"--{Boundary}\r\n" +
-"Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n" +
-"Content-Type: text/plain\r\n" +
-"\r\n" +
-$"Content of a.txt{new string('a', LargePayload ? 10000000 : 0)}\r\n" +
-"\r\n" +
-$"--{Boundary}\r\n" +
-"Content-Disposition: form-data; name=\"file2\"; filename=\"a.html\"\r\n" +
-"Content-Type: text/html\r\n" +
-"\r\n" +
-"<!DOCTYPE html><title>Content of a.html.</title>\r\n" +
-"\r\n" +
-$"--{Boundary}--\r\n";
+                data =
+                    $"--{Boundary}\r\n"
+                    + "Content-Disposition: form-data; name=\"text\"\r\n"
+                    + "\r\n"
+                    + "text default\r\n"
+                    + $"--{Boundary}\r\n"
+                    + "Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n"
+                    + "Content-Type: text/plain\r\n"
+                    + "\r\n"
+                    + $"Content of a.txt{new string('a', LargePayload ? 10000000 : 0)}\r\n"
+                    + "\r\n"
+                    + $"--{Boundary}\r\n"
+                    + "Content-Disposition: form-data; name=\"file2\"; filename=\"a.html\"\r\n"
+                    + "Content-Type: text/html\r\n"
+                    + "\r\n"
+                    + "<!DOCTYPE html><title>Content of a.html.</title>\r\n"
+                    + "\r\n"
+                    + $"--{Boundary}--\r\n";
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(SectionCount));
@@ -101,8 +105,7 @@ $"--{Boundary}--\r\n";
         {
             section = await reader.ReadNextSectionAsync();
             sectionCount += section is not null ? 1 : 0;
-        }
-        while (section is not null);
+        } while (section is not null);
 
         _stream.Position = 0;
 
@@ -125,8 +128,7 @@ $"--{Boundary}--\r\n";
             sectionCount += section is not null ? 1 : 0;
 
             section?.Body.CopyTo(NullStream.Instance);
-        }
-        while (section is not null);
+        } while (section is not null);
 
         _stream.Position = 0;
 
@@ -148,7 +150,11 @@ $"--{Boundary}--\r\n";
 
         public override long Length => 0;
 
-        public override long Position { get => 0; set { } }
+        public override long Position
+        {
+            get => 0;
+            set { }
+        }
 
         public override void Flush() { }
 

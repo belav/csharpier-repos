@@ -28,9 +28,7 @@ namespace System.Linq.Expressions.Tests
             }
 
             public IncompleteExpressionOverride()
-                : base()
-            {
-            }
+                : base() { }
 
             public Expression VisitChildren() => VisitChildren(new Visitor());
         }
@@ -84,9 +82,7 @@ namespace System.Linq.Expressions.Tests
         {
 #pragma warning disable 0618 // Testing obsolete behaviour.
             public ObsoleteIncompleteExpressionOverride(ExpressionType nodeType, Type type)
-                : base(nodeType, type)
-            {
-            }
+                : base(nodeType, type) { }
 #pragma warning restore 0618
         }
 
@@ -132,8 +128,17 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        public static IEnumerable<object[]> SomeTypes => new[] { typeof(int), typeof(void), typeof(object), typeof(DateTime), typeof(string), typeof(ExpressionTests), typeof(ExpressionType) }
-    .Select(type => new object[] { type });
+        public static IEnumerable<object[]> SomeTypes =>
+            new[]
+            {
+                typeof(int),
+                typeof(void),
+                typeof(object),
+                typeof(DateTime),
+                typeof(string),
+                typeof(ExpressionTests),
+                typeof(ExpressionType),
+            }.Select(type => new object[] { type });
 
         [Fact]
         public void NodeTypeMustBeOverridden()
@@ -145,7 +150,10 @@ namespace System.Linq.Expressions.Tests
         [Theory, TestOrder(1), MemberData(nameof(AllNodeTypesPlusSomeInvalid))]
         public void NodeTypeFromConstructor(ExpressionType nodeType)
         {
-            Assert.Equal(nodeType, new ObsoleteIncompleteExpressionOverride(nodeType, typeof(int)).NodeType);
+            Assert.Equal(
+                nodeType,
+                new ObsoleteIncompleteExpressionOverride(nodeType, typeof(int)).NodeType
+            );
         }
 
         [Fact, TestOrder(2)]
@@ -165,7 +173,10 @@ namespace System.Linq.Expressions.Tests
         [Theory, TestOrder(1), MemberData(nameof(SomeTypes))]
         public void TypeFromConstructor(Type type)
         {
-            Assert.Equal(type, new ObsoleteIncompleteExpressionOverride(ExpressionType.Constant, type).Type);
+            Assert.Equal(
+                type,
+                new ObsoleteIncompleteExpressionOverride(ExpressionType.Constant, type).Type
+            );
         }
 
         [Fact, TestOrder(1)]
@@ -213,7 +224,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitingCallsVisitExtension()
         {
-            Assert.Same(MarkerExtension, new IncompleteExpressionOverride.Visitor().Visit(new IncompleteExpressionOverride()));
+            Assert.Same(
+                MarkerExtension,
+                new IncompleteExpressionOverride.Visitor().Visit(new IncompleteExpressionOverride())
+            );
         }
 
         [Fact]
@@ -293,10 +307,13 @@ namespace System.Linq.Expressions.Tests
                 Expression.Add(Expression.Constant(0), Expression.Constant(0)),
                 Expression.Default(typeof(int)),
                 Expression.Property(Expression.Constant(new List<int>()), "Count"),
-                Expression.ArrayIndex(Expression.Constant(Array.Empty<int>()), Expression.Constant(0)),
+                Expression.ArrayIndex(
+                    Expression.Constant(Array.Empty<int>()),
+                    Expression.Constant(0)
+                ),
                 Expression.Field(null, typeof(ExpressionTests), "TestField"),
                 Expression.Field(null, typeof(ExpressionTests), "TestConstant"),
-                Expression.Field(null, typeof(ExpressionTests), "TestInitOnlyField")
+                Expression.Field(null, typeof(ExpressionTests), "TestInitOnlyField"),
             };
             Expression.Block(typeof(void), readableExpressions);
         }
@@ -306,18 +323,27 @@ namespace System.Linq.Expressions.Tests
             get
             {
                 yield return Expression.Property(null, typeof(ExpressionTests), "Unreadable");
-                yield return Expression.Property(Expression.Constant(new UnreadableIndexableClass()), "Item", Expression.Constant(0));
+                yield return Expression.Property(
+                    Expression.Constant(new UnreadableIndexableClass()),
+                    "Item",
+                    Expression.Constant(0)
+                );
             }
         }
 
-        public static IEnumerable<object[]> UnreadableExpressionData => UnreadableExpressions.Concat(new Expression[1]).Select(exp => new object[] { exp });
+        public static IEnumerable<object[]> UnreadableExpressionData =>
+            UnreadableExpressions.Concat(new Expression[1]).Select(exp => new object[] { exp });
 
         public static IEnumerable<Expression> WritableExpressions
         {
             get
             {
                 yield return Expression.Property(null, typeof(ExpressionTests), "Unreadable");
-                yield return Expression.Property(Expression.Constant(new UnreadableIndexableClass()), "Item", Expression.Constant(0));
+                yield return Expression.Property(
+                    Expression.Constant(new UnreadableIndexableClass()),
+                    "Item",
+                    Expression.Constant(0)
+                );
                 yield return Expression.Field(null, typeof(ExpressionTests), "TestField");
                 yield return Expression.Parameter(typeof(int));
             }
@@ -328,40 +354,65 @@ namespace System.Linq.Expressions.Tests
             get
             {
                 yield return Expression.Property(null, typeof(ExpressionTests), "Unwritable");
-                yield return Expression.Property(Expression.Constant(new UnwritableIndexableClass()), "Item", Expression.Constant(0));
+                yield return Expression.Property(
+                    Expression.Constant(new UnwritableIndexableClass()),
+                    "Item",
+                    Expression.Constant(0)
+                );
                 yield return Expression.Field(null, typeof(ExpressionTests), "TestConstant");
                 yield return Expression.Field(null, typeof(ExpressionTests), "TestInitOnlyField");
-                yield return Expression.Call(Expression.Default(typeof(ExpressionTests)), "ConfirmCannotReadSequence", new Type[0]);
+                yield return Expression.Call(
+                    Expression.Default(typeof(ExpressionTests)),
+                    "ConfirmCannotReadSequence",
+                    new Type[0]
+                );
                 yield return null;
             }
         }
 
-        public static IEnumerable<object[]> UnwritableExpressionData => UnwritableExpressions.Select(exp => new object[] { exp });
+        public static IEnumerable<object[]> UnwritableExpressionData =>
+            UnwritableExpressions.Select(exp => new object[] { exp });
 
-        public static IEnumerable<object[]> WritableExpressionData => WritableExpressions.Select(exp => new object[] { exp });
+        public static IEnumerable<object[]> WritableExpressionData =>
+            WritableExpressions.Select(exp => new object[] { exp });
 
         [Theory, MemberData(nameof(UnreadableExpressionData))]
         public void ConfirmCannotRead(Expression unreadableExpression)
         {
             if (unreadableExpression == null)
-                AssertExtensions.Throws<ArgumentNullException>("expression", () => Expression.Increment(unreadableExpression));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "expression",
+                    () => Expression.Increment(unreadableExpression)
+                );
             else
-                AssertExtensions.Throws<ArgumentException>("expression", () => Expression.Increment(unreadableExpression));
+                AssertExtensions.Throws<ArgumentException>(
+                    "expression",
+                    () => Expression.Increment(unreadableExpression)
+                );
         }
 
         [Fact]
         public void ConfirmCannotReadSequence()
         {
-            AssertExtensions.Throws<ArgumentException>("expressions[0]", () => Expression.Block(typeof(void), UnreadableExpressions));
+            AssertExtensions.Throws<ArgumentException>(
+                "expressions[0]",
+                () => Expression.Block(typeof(void), UnreadableExpressions)
+            );
         }
 
         [Theory, MemberData(nameof(UnwritableExpressionData))]
         public void ConfirmCannotWrite(Expression unwritableExpression)
         {
             if (unwritableExpression == null)
-                AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.Assign(unwritableExpression, Expression.Constant(0)));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "left",
+                    () => Expression.Assign(unwritableExpression, Expression.Constant(0))
+                );
             else
-                AssertExtensions.Throws<ArgumentException>("left", () => Expression.Assign(unwritableExpression, Expression.Constant(0)));
+                AssertExtensions.Throws<ArgumentException>(
+                    "left",
+                    () => Expression.Assign(unwritableExpression, Expression.Constant(0))
+                );
         }
 
         [Theory, MemberData(nameof(WritableExpressionData))]
@@ -373,21 +424,27 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public void CompileIrreduciebleExtension(bool useInterpreter)
         {
-            Expression<Action> exp = Expression.Lambda<Action>(new IrreducibleWithTypeAndNodeType());
+            Expression<Action> exp = Expression.Lambda<Action>(
+                new IrreducibleWithTypeAndNodeType()
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => exp.Compile(useInterpreter));
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public void CompileIrreduciebleStrangeNodeTypeExtension(bool useInterpreter)
         {
-            Expression<Action> exp = Expression.Lambda<Action>(new IrreduceibleWithTypeAndStrangeNodeType());
+            Expression<Action> exp = Expression.Lambda<Action>(
+                new IrreduceibleWithTypeAndStrangeNodeType()
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => exp.Compile(useInterpreter));
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public void CompileReducibleStrangeNodeTypeExtension(bool useInterpreter)
         {
-            Expression<Func<int>> exp = Expression.Lambda<Func<int>>(new ReducesFromStrangeNodeType());
+            Expression<Func<int>> exp = Expression.Lambda<Func<int>>(
+                new ReducesFromStrangeNodeType()
+            );
             Assert.Equal(3, exp.Compile(useInterpreter)());
         }
 

@@ -16,9 +16,11 @@ namespace System.ComponentModel.Composition.Hosting
             private readonly List<ComposablePartDefinition> _addedParts;
             private readonly HashSet<ComposablePartDefinition> _removedParts;
 
-            public CatalogChangeProxy(ComposablePartCatalog originalCatalog,
+            public CatalogChangeProxy(
+                ComposablePartCatalog originalCatalog,
                 IEnumerable<ComposablePartDefinition> addedParts,
-                IEnumerable<ComposablePartDefinition> removedParts)
+                IEnumerable<ComposablePartDefinition> removedParts
+            )
             {
                 _originalCatalog = originalCatalog;
                 _addedParts = new List<ComposablePartDefinition>(addedParts);
@@ -30,14 +32,16 @@ namespace System.ComponentModel.Composition.Hosting
                 return _originalCatalog.Concat(_addedParts).Except(_removedParts).GetEnumerator();
             }
 
-            public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
-                ImportDefinition definition)
+            public override IEnumerable<
+                Tuple<ComposablePartDefinition, ExportDefinition>
+            > GetExports(ImportDefinition definition)
             {
                 Requires.NotNull(definition, nameof(definition));
 
                 var originalExports = _originalCatalog.GetExports(definition);
                 var trimmedExports = originalExports.Where(partAndExport =>
-                    !_removedParts.Contains(partAndExport.Item1));
+                    !_removedParts.Contains(partAndExport.Item1)
+                );
 
                 var addedExports = new List<Tuple<ComposablePartDefinition, ExportDefinition>>();
                 foreach (var part in _addedParts)
@@ -46,7 +50,9 @@ namespace System.ComponentModel.Composition.Hosting
                     {
                         if (definition.IsConstraintSatisfiedBy(export))
                         {
-                            addedExports.Add(new Tuple<ComposablePartDefinition, ExportDefinition>(part, export));
+                            addedExports.Add(
+                                new Tuple<ComposablePartDefinition, ExportDefinition>(part, export)
+                            );
                         }
                     }
                 }

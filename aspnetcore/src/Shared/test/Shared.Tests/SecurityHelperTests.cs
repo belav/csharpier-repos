@@ -13,7 +13,10 @@ public class SecurityHelperTests
     [Fact]
     public void AddingToAnonymousIdentityDoesNotKeepAnonymousIdentity()
     {
-        var user = SecurityHelper.MergeUserPrincipal(new ClaimsPrincipal(), new GenericPrincipal(new GenericIdentity("Test1", "Alpha"), new string[0]));
+        var user = SecurityHelper.MergeUserPrincipal(
+            new ClaimsPrincipal(),
+            new GenericPrincipal(new GenericIdentity("Test1", "Alpha"), new string[0])
+        );
 
         Assert.NotNull(user);
         Assert.Equal("Alpha", user.Identity.AuthenticationType);
@@ -31,12 +34,18 @@ public class SecurityHelperTests
         Assert.Equal("Alpha", user.Identity.AuthenticationType);
         Assert.Equal("Test1", user.Identity.Name);
 
-        user = SecurityHelper.MergeUserPrincipal(user, new GenericPrincipal(new GenericIdentity("Test2", "Beta"), new string[0]));
+        user = SecurityHelper.MergeUserPrincipal(
+            user,
+            new GenericPrincipal(new GenericIdentity("Test2", "Beta"), new string[0])
+        );
 
         Assert.Equal("Beta", user.Identity.AuthenticationType);
         Assert.Equal("Test2", user.Identity.Name);
 
-        user = SecurityHelper.MergeUserPrincipal(user, new GenericPrincipal(new GenericIdentity("Test3", "Gamma"), new string[0]));
+        user = SecurityHelper.MergeUserPrincipal(
+            user,
+            new GenericPrincipal(new GenericIdentity("Test3", "Gamma"), new string[0])
+        );
 
         Assert.Equal("Gamma", user.Identity.AuthenticationType);
         Assert.Equal("Test3", user.Identity.Name);
@@ -78,7 +87,10 @@ public class SecurityHelperTests
         Assert.Equal(identityEmptyWithAuthType, user.Identities.Skip(3).First());
 
         // This merge should drop newEmptyIdentity since its empty
-        user = SecurityHelper.MergeUserPrincipal(user, new GenericPrincipal(new GenericIdentity("Test3", "Gamma"), new string[0]));
+        user = SecurityHelper.MergeUserPrincipal(
+            user,
+            new GenericPrincipal(new GenericIdentity("Test3", "Gamma"), new string[0])
+        );
 
         Assert.Equal("Gamma", user.Identity.AuthenticationType);
         Assert.Equal("Test3", user.Identity.Name);

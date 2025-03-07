@@ -21,7 +21,10 @@ public class InternalModelBuilderTest
 
         Assert.NotNull(entityBuilder);
         Assert.NotNull(model.FindEntityType(typeof(Customer)));
-        Assert.Same(entityBuilder, modelBuilder.Entity(typeof(Customer).DisplayName(), ConfigurationSource.DataAnnotation));
+        Assert.Same(
+            entityBuilder,
+            modelBuilder.Entity(typeof(Customer).DisplayName(), ConfigurationSource.DataAnnotation)
+        );
         Assert.NotNull(model.FindEntityType(typeof(Customer)).ClrType);
     }
 
@@ -31,11 +34,17 @@ public class InternalModelBuilderTest
         var model = new Model();
         var modelBuilder = CreateModelBuilder(model);
 
-        var entityBuilder = modelBuilder.Entity(typeof(Customer).DisplayName(), ConfigurationSource.DataAnnotation);
+        var entityBuilder = modelBuilder.Entity(
+            typeof(Customer).DisplayName(),
+            ConfigurationSource.DataAnnotation
+        );
 
         Assert.NotNull(entityBuilder);
         Assert.NotNull(model.FindEntityType(typeof(Customer).DisplayName()));
-        Assert.NotSame(entityBuilder, modelBuilder.Entity(typeof(Customer), ConfigurationSource.Explicit));
+        Assert.NotSame(
+            entityBuilder,
+            modelBuilder.Entity(typeof(Customer), ConfigurationSource.Explicit)
+        );
         Assert.NotNull(model.FindEntityType(typeof(Customer)).ClrType);
     }
 
@@ -62,7 +71,8 @@ public class InternalModelBuilderTest
 
         Assert.Equal(
             CoreResources.LogMappedEntityTypeIgnored(logger).GenerateMessage(nameof(Customer)),
-            logger.Message);
+            logger.Message
+        );
     }
 
     [ConditionalFact]
@@ -73,22 +83,33 @@ public class InternalModelBuilderTest
         var modelBuilder = CreateModelBuilder(model);
         modelBuilder.Entity(typeof(Customer).FullName!, ConfigurationSource.DataAnnotation);
 
-        Assert.NotNull(modelBuilder.Ignore(typeof(Customer).FullName!, ConfigurationSource.DataAnnotation));
+        Assert.NotNull(
+            modelBuilder.Ignore(typeof(Customer).FullName!, ConfigurationSource.DataAnnotation)
+        );
 
         Assert.Null(model.FindEntityType(typeof(Customer).FullName!));
-        Assert.NotNull(modelBuilder.Ignore(typeof(Customer).FullName!, ConfigurationSource.Explicit));
-        Assert.Null(modelBuilder.Entity(typeof(Customer).FullName!, ConfigurationSource.DataAnnotation));
+        Assert.NotNull(
+            modelBuilder.Ignore(typeof(Customer).FullName!, ConfigurationSource.Explicit)
+        );
+        Assert.Null(
+            modelBuilder.Entity(typeof(Customer).FullName!, ConfigurationSource.DataAnnotation)
+        );
 
         Assert.Null(logger.Message);
 
-        Assert.NotNull(modelBuilder.Entity(typeof(Customer).FullName!, ConfigurationSource.Explicit));
+        Assert.NotNull(
+            modelBuilder.Entity(typeof(Customer).FullName!, ConfigurationSource.Explicit)
+        );
 
-        Assert.NotNull(modelBuilder.Ignore(typeof(Customer).FullName!, ConfigurationSource.Explicit));
+        Assert.NotNull(
+            modelBuilder.Ignore(typeof(Customer).FullName!, ConfigurationSource.Explicit)
+        );
         Assert.Null(model.FindEntityType(typeof(Customer).FullName!));
 
         Assert.Equal(
             CoreResources.LogMappedEntityTypeIgnored(logger).GenerateMessage(nameof(Customer)),
-            logger.Message);
+            logger.Message
+        );
     }
 
     [ConditionalFact]
@@ -112,9 +133,13 @@ public class InternalModelBuilderTest
         var model = new Model();
         var modelBuilder = CreateModelBuilder(model);
 
-        Assert.NotNull(modelBuilder.Ignore(typeof(Customer).FullName, ConfigurationSource.Convention));
+        Assert.NotNull(
+            modelBuilder.Ignore(typeof(Customer).FullName, ConfigurationSource.Convention)
+        );
         Assert.Null(modelBuilder.Entity(typeof(Customer).FullName, ConfigurationSource.Convention));
-        Assert.NotNull(modelBuilder.Entity(typeof(Customer).FullName, ConfigurationSource.DataAnnotation));
+        Assert.NotNull(
+            modelBuilder.Entity(typeof(Customer).FullName, ConfigurationSource.DataAnnotation)
+        );
 
         Assert.Null(modelBuilder.Ignore(typeof(Customer).FullName, ConfigurationSource.Convention));
 
@@ -126,9 +151,16 @@ public class InternalModelBuilderTest
     {
         var logger = CreateTestLogger();
         var model = new Model(new ConventionSet(), new ModelDependencies(logger));
-        var entityType = model.AddEntityType(typeof(Customer), owned: false, ConfigurationSource.Explicit);
+        var entityType = model.AddEntityType(
+            typeof(Customer),
+            owned: false,
+            ConfigurationSource.Explicit
+        );
         var modelBuilder = CreateModelBuilder(model);
-        Assert.Same(entityType, modelBuilder.Entity(typeof(Customer), ConfigurationSource.Convention)!.Metadata);
+        Assert.Same(
+            entityType,
+            modelBuilder.Entity(typeof(Customer), ConfigurationSource.Convention)!.Metadata
+        );
         Assert.Null(modelBuilder.Ignore(typeof(Customer), ConfigurationSource.DataAnnotation));
         Assert.NotNull(model.FindEntityType(typeof(Customer)));
 
@@ -140,7 +172,8 @@ public class InternalModelBuilderTest
 
         Assert.Equal(
             CoreResources.LogMappedEntityTypeIgnored(logger).GenerateMessage(nameof(Customer)),
-            logger.Message);
+            logger.Message
+        );
     }
 
     [ConditionalFact]
@@ -148,22 +181,36 @@ public class InternalModelBuilderTest
     {
         var logger = CreateTestLogger();
         var model = new Model(new ConventionSet(), new ModelDependencies(logger));
-        var entityType = model.AddEntityType(typeof(Customer).FullName!, owned: false, ConfigurationSource.Explicit);
+        var entityType = model.AddEntityType(
+            typeof(Customer).FullName!,
+            owned: false,
+            ConfigurationSource.Explicit
+        );
         var modelBuilder = CreateModelBuilder(model);
 
-        Assert.Same(entityType, modelBuilder.Entity(typeof(Customer).FullName!, ConfigurationSource.Convention)!.Metadata);
-        Assert.Null(modelBuilder.Ignore(typeof(Customer).FullName!, ConfigurationSource.DataAnnotation));
+        Assert.Same(
+            entityType,
+            modelBuilder
+                .Entity(typeof(Customer).FullName!, ConfigurationSource.Convention)!
+                .Metadata
+        );
+        Assert.Null(
+            modelBuilder.Ignore(typeof(Customer).FullName!, ConfigurationSource.DataAnnotation)
+        );
         Assert.NotNull(model.FindEntityType(typeof(Customer).FullName!));
 
         Assert.Null(logger.Message);
 
-        Assert.NotNull(modelBuilder.Ignore(typeof(Customer).FullName!, ConfigurationSource.Explicit));
+        Assert.NotNull(
+            modelBuilder.Ignore(typeof(Customer).FullName!, ConfigurationSource.Explicit)
+        );
 
         Assert.Null(model.FindEntityType(typeof(Customer).FullName!));
 
         Assert.Equal(
             CoreResources.LogMappedEntityTypeIgnored(logger).GenerateMessage(nameof(Customer)),
-            logger.Message);
+            logger.Message
+        );
     }
 
     [ConditionalFact]
@@ -173,11 +220,18 @@ public class InternalModelBuilderTest
         modelBuilder
             .Entity(typeof(Customer), ConfigurationSource.Convention)
             .PrimaryKey(new[] { Customer.IdProperty }, ConfigurationSource.Convention);
-        var orderEntityTypeBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Explicit);
+        var orderEntityTypeBuilder = modelBuilder.Entity(
+            typeof(Order),
+            ConfigurationSource.Explicit
+        );
 
         Assert.NotNull(
             orderEntityTypeBuilder.HasRelationship(
-                typeof(Customer), new[] { Order.CustomerIdProperty }, ConfigurationSource.DataAnnotation));
+                typeof(Customer),
+                new[] { Order.CustomerIdProperty },
+                ConfigurationSource.DataAnnotation
+            )
+        );
 
         Assert.NotNull(modelBuilder.Ignore(typeof(Customer), ConfigurationSource.DataAnnotation));
 
@@ -192,11 +246,18 @@ public class InternalModelBuilderTest
         var customerEntityTypeBuilder = modelBuilder
             .Entity(typeof(Customer), ConfigurationSource.Explicit)
             .PrimaryKey(new[] { Customer.IdProperty }, ConfigurationSource.Convention);
-        var orderEntityTypeBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Convention);
+        var orderEntityTypeBuilder = modelBuilder.Entity(
+            typeof(Order),
+            ConfigurationSource.Convention
+        );
 
         Assert.NotNull(
-            orderEntityTypeBuilder
-                .HasRelationship(typeof(Customer), new[] { Order.CustomerIdProperty }, ConfigurationSource.DataAnnotation));
+            orderEntityTypeBuilder.HasRelationship(
+                typeof(Customer),
+                new[] { Order.CustomerIdProperty },
+                ConfigurationSource.DataAnnotation
+            )
+        );
 
         Assert.NotNull(modelBuilder.Ignore(typeof(Order), ConfigurationSource.DataAnnotation));
 
@@ -209,17 +270,35 @@ public class InternalModelBuilderTest
     {
         var modelBuilder = CreateModelBuilder();
         var baseEntityTypeBuilder = modelBuilder.Entity(typeof(Base), ConfigurationSource.Explicit);
-        var customerEntityTypeBuilder = modelBuilder.Entity(typeof(Customer), ConfigurationSource.Convention);
-        var specialCustomerEntityTypeBuilder = modelBuilder.Entity(typeof(SpecialCustomer), ConfigurationSource.Explicit);
+        var customerEntityTypeBuilder = modelBuilder.Entity(
+            typeof(Customer),
+            ConfigurationSource.Convention
+        );
+        var specialCustomerEntityTypeBuilder = modelBuilder.Entity(
+            typeof(SpecialCustomer),
+            ConfigurationSource.Explicit
+        );
 
-        Assert.NotNull(customerEntityTypeBuilder.HasBaseType(baseEntityTypeBuilder.Metadata, ConfigurationSource.Convention));
         Assert.NotNull(
-            specialCustomerEntityTypeBuilder.HasBaseType(customerEntityTypeBuilder.Metadata, ConfigurationSource.Convention));
+            customerEntityTypeBuilder.HasBaseType(
+                baseEntityTypeBuilder.Metadata,
+                ConfigurationSource.Convention
+            )
+        );
+        Assert.NotNull(
+            specialCustomerEntityTypeBuilder.HasBaseType(
+                customerEntityTypeBuilder.Metadata,
+                ConfigurationSource.Convention
+            )
+        );
 
         Assert.NotNull(modelBuilder.Ignore(typeof(Customer), ConfigurationSource.DataAnnotation));
 
         Assert.Equal(2, modelBuilder.Metadata.GetEntityTypes().Count());
-        Assert.Same(baseEntityTypeBuilder.Metadata, specialCustomerEntityTypeBuilder.Metadata.BaseType);
+        Assert.Same(
+            baseEntityTypeBuilder.Metadata,
+            specialCustomerEntityTypeBuilder.Metadata.BaseType
+        );
     }
 
     [ConditionalFact]
@@ -229,10 +308,18 @@ public class InternalModelBuilderTest
         modelBuilder
             .Entity(typeof(Customer), ConfigurationSource.Convention)
             .PrimaryKey(new[] { Customer.IdProperty }, ConfigurationSource.Convention);
-        var orderEntityTypeBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Convention);
+        var orderEntityTypeBuilder = modelBuilder.Entity(
+            typeof(Order),
+            ConfigurationSource.Convention
+        );
 
         Assert.NotNull(
-            orderEntityTypeBuilder.HasRelationship(typeof(Customer), new[] { Order.CustomerIdProperty }, ConfigurationSource.Explicit));
+            orderEntityTypeBuilder.HasRelationship(
+                typeof(Customer),
+                new[] { Order.CustomerIdProperty },
+                ConfigurationSource.Explicit
+            )
+        );
 
         Assert.Null(modelBuilder.Ignore(typeof(Customer), ConfigurationSource.DataAnnotation));
 
@@ -251,9 +338,20 @@ public class InternalModelBuilderTest
             .Entity(typeof(Product), ConfigurationSource.Convention)
             .PrimaryKey(new[] { Product.IdProperty }, ConfigurationSource.Convention);
 
-        var orderEntityTypeBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Convention);
-        orderEntityTypeBuilder.HasRelationship(typeof(Customer), new[] { Order.CustomerIdProperty }, ConfigurationSource.Convention);
-        orderEntityTypeBuilder.HasRelationship(typeof(Product), new[] { Order.ProductIdProperty }, ConfigurationSource.Convention);
+        var orderEntityTypeBuilder = modelBuilder.Entity(
+            typeof(Order),
+            ConfigurationSource.Convention
+        );
+        orderEntityTypeBuilder.HasRelationship(
+            typeof(Customer),
+            new[] { Order.CustomerIdProperty },
+            ConfigurationSource.Convention
+        );
+        orderEntityTypeBuilder.HasRelationship(
+            typeof(Product),
+            new[] { Order.ProductIdProperty },
+            ConfigurationSource.Convention
+        );
 
         Assert.NotNull(modelBuilder.Ignore(typeof(Customer), ConfigurationSource.Explicit));
 
@@ -272,18 +370,29 @@ public class InternalModelBuilderTest
             .Entity(typeof(Product), ConfigurationSource.Convention)
             .PrimaryKey(new[] { Product.IdProperty }, ConfigurationSource.Convention);
 
-        var orderEntityTypeBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Explicit);
-        orderEntityTypeBuilder.HasRelationship(typeof(Product), new[] { Order.ProductIdProperty }, ConfigurationSource.Convention)
-            .HasNavigation(
-                "Product",
-                pointsToPrincipal: true,
-                ConfigurationSource.Convention);
+        var orderEntityTypeBuilder = modelBuilder.Entity(
+            typeof(Order),
+            ConfigurationSource.Explicit
+        );
+        orderEntityTypeBuilder
+            .HasRelationship(
+                typeof(Product),
+                new[] { Order.ProductIdProperty },
+                ConfigurationSource.Convention
+            )
+            .HasNavigation("Product", pointsToPrincipal: true, ConfigurationSource.Convention);
 
         Assert.NotNull(modelBuilder.Ignore(typeof(Customer), ConfigurationSource.DataAnnotation));
 
         Cleanup(modelBuilder);
-        Assert.Equal(new[] { typeof(Order), typeof(Product) }, modelBuilder.Metadata.GetEntityTypes().Select(et => et.ClrType));
-        Assert.Equal(typeof(Product), orderEntityTypeBuilder.Metadata.GetForeignKeys().Single().PrincipalEntityType.ClrType);
+        Assert.Equal(
+            new[] { typeof(Order), typeof(Product) },
+            modelBuilder.Metadata.GetEntityTypes().Select(et => et.ClrType)
+        );
+        Assert.Equal(
+            typeof(Product),
+            orderEntityTypeBuilder.Metadata.GetForeignKeys().Single().PrincipalEntityType.ClrType
+        );
     }
 
     [ConditionalFact]
@@ -297,18 +406,29 @@ public class InternalModelBuilderTest
             .Entity(typeof(Product), ConfigurationSource.Explicit)
             .PrimaryKey(new[] { Product.IdProperty }, ConfigurationSource.Convention);
 
-        var orderEntityTypeBuilder = modelBuilder.Entity(typeof(Order), ConfigurationSource.Convention);
-        orderEntityTypeBuilder.HasRelationship(typeof(Product), new[] { Order.ProductIdProperty }, ConfigurationSource.Convention)
-            .HasNavigation(
-                "Order",
-                pointsToPrincipal: false,
-                ConfigurationSource.Convention);
+        var orderEntityTypeBuilder = modelBuilder.Entity(
+            typeof(Order),
+            ConfigurationSource.Convention
+        );
+        orderEntityTypeBuilder
+            .HasRelationship(
+                typeof(Product),
+                new[] { Order.ProductIdProperty },
+                ConfigurationSource.Convention
+            )
+            .HasNavigation("Order", pointsToPrincipal: false, ConfigurationSource.Convention);
 
         Assert.NotNull(modelBuilder.Ignore(typeof(Customer), ConfigurationSource.DataAnnotation));
 
         Cleanup(modelBuilder);
-        Assert.Equal(new[] { typeof(Order), typeof(Product) }, modelBuilder.Metadata.GetEntityTypes().Select(et => et.ClrType));
-        Assert.Equal(typeof(Product), orderEntityTypeBuilder.Metadata.GetForeignKeys().Single().PrincipalEntityType.ClrType);
+        Assert.Equal(
+            new[] { typeof(Order), typeof(Product) },
+            modelBuilder.Metadata.GetEntityTypes().Select(et => et.ClrType)
+        );
+        Assert.Equal(
+            typeof(Product),
+            orderEntityTypeBuilder.Metadata.GetForeignKeys().Single().PrincipalEntityType.ClrType
+        );
     }
 
     [ConditionalFact]
@@ -319,15 +439,30 @@ public class InternalModelBuilderTest
 
         var entityBuilder = modelBuilder.Entity(typeof(Customer), ConfigurationSource.Explicit);
 
-        var ownedEntityTypeBuilder = modelBuilder.Entity(typeof(Details), ConfigurationSource.Convention);
+        var ownedEntityTypeBuilder = modelBuilder.Entity(
+            typeof(Details),
+            ConfigurationSource.Convention
+        );
         Assert.NotNull(ownedEntityTypeBuilder);
 
         Assert.False(model.IsOwned(typeof(Details)));
         Assert.False(ownedEntityTypeBuilder.Metadata.IsOwned());
 
-        Assert.Null(entityBuilder.HasOwnership(typeof(Details), nameof(Customer.Details), ConfigurationSource.Convention));
+        Assert.Null(
+            entityBuilder.HasOwnership(
+                typeof(Details),
+                nameof(Customer.Details),
+                ConfigurationSource.Convention
+            )
+        );
 
-        Assert.NotNull(entityBuilder.HasOwnership(typeof(Details), nameof(Customer.Details), ConfigurationSource.DataAnnotation));
+        Assert.NotNull(
+            entityBuilder.HasOwnership(
+                typeof(Details),
+                nameof(Customer.Details),
+                ConfigurationSource.DataAnnotation
+            )
+        );
 
         Assert.False(model.IsOwned(typeof(Details)));
         Assert.True(ownedEntityTypeBuilder.Metadata.IsOwned());
@@ -336,11 +471,23 @@ public class InternalModelBuilderTest
 
         Assert.Empty(model.FindEntityTypes(typeof(Details)));
 
-        Assert.Null(entityBuilder.HasOwnership(typeof(Details), nameof(Customer.Details), ConfigurationSource.Convention));
+        Assert.Null(
+            entityBuilder.HasOwnership(
+                typeof(Details),
+                nameof(Customer.Details),
+                ConfigurationSource.Convention
+            )
+        );
 
         Assert.Null(modelBuilder.Owned(typeof(Details), ConfigurationSource.Convention));
 
-        Assert.NotNull(entityBuilder.HasOwnership(typeof(Details), nameof(Customer.Details), ConfigurationSource.Explicit));
+        Assert.NotNull(
+            entityBuilder.HasOwnership(
+                typeof(Details),
+                nameof(Customer.Details),
+                ConfigurationSource.Explicit
+            )
+        );
 
         Assert.NotNull(modelBuilder.Owned(typeof(Details), ConfigurationSource.Convention));
 
@@ -349,8 +496,14 @@ public class InternalModelBuilderTest
         Assert.True(model.IsOwned(typeof(Details)));
 
         Assert.NotNull(
-            modelBuilder.Entity(typeof(Product), ConfigurationSource.Explicit)
-                .HasOwnership(typeof(Details), nameof(Product.Details), ConfigurationSource.Explicit));
+            modelBuilder
+                .Entity(typeof(Product), ConfigurationSource.Explicit)
+                .HasOwnership(
+                    typeof(Details),
+                    nameof(Product.Details),
+                    ConfigurationSource.Explicit
+                )
+        );
 
         Assert.Null(modelBuilder.Ignore(typeof(Details), ConfigurationSource.Convention));
 
@@ -358,19 +511,38 @@ public class InternalModelBuilderTest
 
         Assert.Equal(
             CoreStrings.ClashingSharedType(typeof(Details).Name),
-            Assert.Throws<InvalidOperationException>(() => modelBuilder.Entity(typeof(Details), ConfigurationSource.Explicit)).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => modelBuilder.Entity(typeof(Details), ConfigurationSource.Explicit)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ClashingOwnedEntityType(typeof(Details).Name),
-            Assert.Throws<InvalidOperationException>(
-                ()
-                    => modelBuilder.SharedTypeEntity(nameof(Details), typeof(Details), ConfigurationSource.Explicit)).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        modelBuilder.SharedTypeEntity(
+                            nameof(Details),
+                            typeof(Details),
+                            ConfigurationSource.Explicit
+                        )
+                )
+                .Message
+        );
 
         Assert.NotNull(modelBuilder.Ignore(typeof(Details), ConfigurationSource.Explicit));
 
         Assert.False(model.IsOwned(typeof(Details)));
 
-        Assert.NotNull(modelBuilder.SharedTypeEntity(nameof(Details), typeof(Details), ConfigurationSource.Explicit));
+        Assert.NotNull(
+            modelBuilder.SharedTypeEntity(
+                nameof(Details),
+                typeof(Details),
+                ConfigurationSource.Explicit
+            )
+        );
 
         Assert.Empty(model.FindEntityTypes(typeof(Details)).Where(e => !e.HasSharedClrType));
 
@@ -378,7 +550,12 @@ public class InternalModelBuilderTest
 
         Assert.Equal(
             CoreStrings.ClashingNonOwnedEntityType("Details (Details)"),
-            Assert.Throws<InvalidOperationException>(() => modelBuilder.Owned(typeof(Details), ConfigurationSource.Explicit)).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => modelBuilder.Owned(typeof(Details), ConfigurationSource.Explicit)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -387,33 +564,50 @@ public class InternalModelBuilderTest
         var model = new Model();
         var modelBuilder = CreateModelBuilder(model);
 
-        var manyToManyLeft = modelBuilder.Entity(typeof(ManyToManyLeft), ConfigurationSource.Convention);
-        var manyToManyRight = modelBuilder.Entity(typeof(ManyToManyRight), ConfigurationSource.Convention);
-        var manyToManyLeftPK = manyToManyLeft.PrimaryKey(new[] { nameof(ManyToManyLeft.Id) }, ConfigurationSource.Convention);
-        var manyToManyRightPK = manyToManyRight.PrimaryKey(new[] { nameof(ManyToManyRight.Id) }, ConfigurationSource.Convention);
+        var manyToManyLeft = modelBuilder.Entity(
+            typeof(ManyToManyLeft),
+            ConfigurationSource.Convention
+        );
+        var manyToManyRight = modelBuilder.Entity(
+            typeof(ManyToManyRight),
+            ConfigurationSource.Convention
+        );
+        var manyToManyLeftPK = manyToManyLeft.PrimaryKey(
+            new[] { nameof(ManyToManyLeft.Id) },
+            ConfigurationSource.Convention
+        );
+        var manyToManyRightPK = manyToManyRight.PrimaryKey(
+            new[] { nameof(ManyToManyRight.Id) },
+            ConfigurationSource.Convention
+        );
 
         var skipNavOnLeft = manyToManyLeft.HasSkipNavigation(
             new MemberIdentity(typeof(ManyToManyLeft).GetProperty(nameof(ManyToManyLeft.Rights))),
             manyToManyRight.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         var skipNavOnRight = manyToManyRight.HasSkipNavigation(
             new MemberIdentity(typeof(ManyToManyRight).GetProperty(nameof(ManyToManyRight.Lefts))),
             manyToManyLeft.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         skipNavOnLeft.HasInverse(skipNavOnRight.Metadata, ConfigurationSource.Convention);
 
-        var joinEntityTypeBuilder =
-            model.AddEntityType(
+        var joinEntityTypeBuilder = model
+            .AddEntityType(
                 "JoinEntity",
                 typeof(Dictionary<string, object>),
                 owned: false,
-                ConfigurationSource.Convention).Builder;
+                ConfigurationSource.Convention
+            )
+            .Builder;
         var leftFK = joinEntityTypeBuilder
             .HasRelationship(
                 manyToManyLeft.Metadata.Name,
                 new List<string> { "ManyToManyLeft_Id" },
                 manyToManyLeftPK.Metadata,
-                ConfigurationSource.Convention)
+                ConfigurationSource.Convention
+            )
             .IsUnique(false, ConfigurationSource.Convention)
             .Metadata;
         var rightFK = joinEntityTypeBuilder
@@ -421,26 +615,30 @@ public class InternalModelBuilderTest
                 manyToManyRight.Metadata.Name,
                 new List<string> { "ManyToManyRight_Id" },
                 manyToManyRightPK.Metadata,
-                ConfigurationSource.Convention)
+                ConfigurationSource.Convention
+            )
             .IsUnique(false, ConfigurationSource.Convention)
             .Metadata;
         skipNavOnLeft.HasForeignKey(leftFK, ConfigurationSource.Convention);
         skipNavOnRight.HasForeignKey(rightFK, ConfigurationSource.Convention);
         joinEntityTypeBuilder.PrimaryKey(
             leftFK.Properties.Concat(rightFK.Properties).ToList(),
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
 
         var joinEntityType = joinEntityTypeBuilder.Metadata;
 
         Assert.NotNull(joinEntityType);
         Assert.NotNull(modelBuilder.RemoveImplicitJoinEntity(joinEntityType));
 
-        Assert.Empty(
-            model.GetEntityTypes()
-                .Where(e => e.IsImplicitlyCreatedJoinEntityType));
+        Assert.Empty(model.GetEntityTypes().Where(e => e.IsImplicitlyCreatedJoinEntityType));
 
-        var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(nameof(ManyToManyLeft.Rights));
-        var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(nameof(ManyToManyRight.Lefts));
+        var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(
+            nameof(ManyToManyLeft.Rights)
+        );
+        var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(
+            nameof(ManyToManyRight.Lefts)
+        );
 
         Assert.NotNull(leftSkipNav);
         Assert.NotNull(rightSkipNav);
@@ -452,35 +650,56 @@ public class InternalModelBuilderTest
         var model = new Model();
         var modelBuilder = CreateModelBuilder(model);
 
-        var manyToManyLeft = modelBuilder.Entity(typeof(ManyToManyLeft), ConfigurationSource.Convention);
-        var manyToManyRight = modelBuilder.Entity(typeof(ManyToManyRight), ConfigurationSource.Convention);
-        var manyToManyJoin = modelBuilder.Entity(typeof(ManyToManyJoin), ConfigurationSource.Convention);
-        var manyToManyLeftPK = manyToManyLeft.PrimaryKey(new[] { nameof(ManyToManyLeft.Id) }, ConfigurationSource.Convention);
-        var manyToManyRightPK = manyToManyRight.PrimaryKey(new[] { nameof(ManyToManyRight.Id) }, ConfigurationSource.Convention);
+        var manyToManyLeft = modelBuilder.Entity(
+            typeof(ManyToManyLeft),
+            ConfigurationSource.Convention
+        );
+        var manyToManyRight = modelBuilder.Entity(
+            typeof(ManyToManyRight),
+            ConfigurationSource.Convention
+        );
+        var manyToManyJoin = modelBuilder.Entity(
+            typeof(ManyToManyJoin),
+            ConfigurationSource.Convention
+        );
+        var manyToManyLeftPK = manyToManyLeft.PrimaryKey(
+            new[] { nameof(ManyToManyLeft.Id) },
+            ConfigurationSource.Convention
+        );
+        var manyToManyRightPK = manyToManyRight.PrimaryKey(
+            new[] { nameof(ManyToManyRight.Id) },
+            ConfigurationSource.Convention
+        );
         manyToManyJoin.PrimaryKey(
-            new[] { nameof(ManyToManyJoin.LeftId), nameof(ManyToManyJoin.RightId) }, ConfigurationSource.Convention);
+            new[] { nameof(ManyToManyJoin.LeftId), nameof(ManyToManyJoin.RightId) },
+            ConfigurationSource.Convention
+        );
 
         var skipNavOnLeft = manyToManyLeft.HasSkipNavigation(
             new MemberIdentity(typeof(ManyToManyLeft).GetProperty(nameof(ManyToManyLeft.Rights))),
             manyToManyRight.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         var skipNavOnRight = manyToManyRight.HasSkipNavigation(
             new MemberIdentity(typeof(ManyToManyRight).GetProperty(nameof(ManyToManyRight.Lefts))),
             manyToManyLeft.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         skipNavOnLeft.HasInverse(skipNavOnRight.Metadata, ConfigurationSource.Convention);
 
         var leftFK = manyToManyJoin.HasRelationship(
             manyToManyLeft.Metadata.Name,
             new[] { nameof(ManyToManyJoin.LeftId) },
             manyToManyLeftPK.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         skipNavOnLeft.Metadata.SetForeignKey(leftFK.Metadata, ConfigurationSource.Convention);
         var rightFK = manyToManyJoin.HasRelationship(
             manyToManyRight.Metadata.Name,
             new[] { nameof(ManyToManyJoin.RightId) },
             manyToManyRightPK.Metadata,
-            ConfigurationSource.Convention);
+            ConfigurationSource.Convention
+        );
         skipNavOnRight.Metadata.SetForeignKey(rightFK.Metadata, ConfigurationSource.Convention);
         skipNavOnLeft.HasInverse(skipNavOnRight.Metadata, ConfigurationSource.Convention);
 
@@ -490,8 +709,12 @@ public class InternalModelBuilderTest
 
         Assert.Null(modelBuilder.RemoveImplicitJoinEntity(joinEntityType));
 
-        var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(nameof(ManyToManyLeft.Rights));
-        var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(nameof(ManyToManyRight.Lefts));
+        var leftSkipNav = manyToManyLeft.Metadata.FindDeclaredSkipNavigation(
+            nameof(ManyToManyLeft.Rights)
+        );
+        var rightSkipNav = manyToManyRight.Metadata.FindDeclaredSkipNavigation(
+            nameof(ManyToManyRight.Lefts)
+        );
         Assert.NotNull(leftSkipNav);
         Assert.NotNull(rightSkipNav);
 
@@ -507,48 +730,96 @@ public class InternalModelBuilderTest
 
         var sharedTypeName = "SpecialDetails";
 
-        Assert.NotNull(modelBuilder.SharedTypeEntity(sharedTypeName, typeof(Details), ConfigurationSource.Convention));
+        Assert.NotNull(
+            modelBuilder.SharedTypeEntity(
+                sharedTypeName,
+                typeof(Details),
+                ConfigurationSource.Convention
+            )
+        );
 
         Assert.True(model.FindEntityType(sharedTypeName).HasSharedClrType);
 
-        Assert.Null(modelBuilder.SharedTypeEntity(sharedTypeName, typeof(Product), ConfigurationSource.Convention));
+        Assert.Null(
+            modelBuilder.SharedTypeEntity(
+                sharedTypeName,
+                typeof(Product),
+                ConfigurationSource.Convention
+            )
+        );
 
         Assert.NotNull(modelBuilder.Entity(typeof(Product), ConfigurationSource.DataAnnotation));
 
-        Assert.Null(modelBuilder.SharedTypeEntity(typeof(Product).DisplayName(), typeof(Product), ConfigurationSource.DataAnnotation));
+        Assert.Null(
+            modelBuilder.SharedTypeEntity(
+                typeof(Product).DisplayName(),
+                typeof(Product),
+                ConfigurationSource.DataAnnotation
+            )
+        );
 
-        Assert.NotNull(modelBuilder.SharedTypeEntity(sharedTypeName, typeof(Product), ConfigurationSource.Explicit));
+        Assert.NotNull(
+            modelBuilder.SharedTypeEntity(
+                sharedTypeName,
+                typeof(Product),
+                ConfigurationSource.Explicit
+            )
+        );
 
         Assert.Equal(typeof(Product), model.FindEntityType(sharedTypeName).ClrType);
 
         Assert.Equal(
             CoreStrings.ClashingMismatchedSharedType("SpecialDetails", nameof(Product)),
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.SharedTypeEntity(sharedTypeName, typeof(Details), ConfigurationSource.Explicit)).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        modelBuilder.SharedTypeEntity(
+                            sharedTypeName,
+                            typeof(Details),
+                            ConfigurationSource.Explicit
+                        )
+                )
+                .Message
+        );
 
         Assert.NotNull(modelBuilder.Entity(typeof(Customer), ConfigurationSource.Explicit));
 
         Assert.Equal(
-            CoreStrings.ClashingNonSharedType(typeof(Customer).DisplayName(), typeof(Customer).ShortDisplayName()),
-            Assert.Throws<InvalidOperationException>(
-                    () => modelBuilder.SharedTypeEntity(typeof(Customer).DisplayName(), typeof(Customer), ConfigurationSource.Explicit))
-                .Message);
+            CoreStrings.ClashingNonSharedType(
+                typeof(Customer).DisplayName(),
+                typeof(Customer).ShortDisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        modelBuilder.SharedTypeEntity(
+                            typeof(Customer).DisplayName(),
+                            typeof(Customer),
+                            ConfigurationSource.Explicit
+                        )
+                )
+                .Message
+        );
     }
 
-    private static TestLogger<DbLoggerCategory.Model, TestLoggingDefinitions> CreateTestLogger()
-        => new() { EnabledFor = LogLevel.Warning };
+    private static TestLogger<DbLoggerCategory.Model, TestLoggingDefinitions> CreateTestLogger() =>
+        new() { EnabledFor = LogLevel.Warning };
 
-    private static void Cleanup(InternalModelBuilder modelBuilder)
-        => new ModelCleanupConvention(CreateDependencies())
-            .ProcessModelFinalizing(
-                modelBuilder,
-                new ConventionContext<IConventionModelBuilder>(modelBuilder.Metadata.ConventionDispatcher));
+    private static void Cleanup(InternalModelBuilder modelBuilder) =>
+        new ModelCleanupConvention(CreateDependencies()).ProcessModelFinalizing(
+            modelBuilder,
+            new ConventionContext<IConventionModelBuilder>(
+                modelBuilder.Metadata.ConventionDispatcher
+            )
+        );
 
-    private static ProviderConventionSetBuilderDependencies CreateDependencies()
-        => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+    private static ProviderConventionSetBuilderDependencies CreateDependencies() =>
+        InMemoryTestHelpers
+            .Instance.CreateContextServices()
+            .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
-    protected virtual InternalModelBuilder CreateModelBuilder(Model model = null)
-        => new(model ?? new Model());
+    protected virtual InternalModelBuilder CreateModelBuilder(Model model = null) =>
+        new(model ?? new Model());
 
     private class Base
     {
@@ -563,15 +834,17 @@ public class InternalModelBuilderTest
         public Details Details { get; set; }
     }
 
-    private class SpecialCustomer : Customer
-    {
-    }
+    private class SpecialCustomer : Customer { }
 
     private class Order
     {
         public static readonly PropertyInfo IdProperty = typeof(Order).GetProperty("Id");
-        public static readonly PropertyInfo CustomerIdProperty = typeof(Order).GetProperty("CustomerId");
-        public static readonly PropertyInfo ProductIdProperty = typeof(Order).GetProperty("ProductId");
+        public static readonly PropertyInfo CustomerIdProperty = typeof(Order).GetProperty(
+            "CustomerId"
+        );
+        public static readonly PropertyInfo ProductIdProperty = typeof(Order).GetProperty(
+            "ProductId"
+        );
 
         public int Id { get; set; }
         public int CustomerId { get; set; }

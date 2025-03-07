@@ -27,36 +27,28 @@
 // paper sizes.
 //
 
-
 using System;
 using System.Drawing;
-using System.IO;
-using System.Drawing.Printing;
 using System.Drawing.Imaging;
+using System.Drawing.Printing;
+using System.IO;
 
 public class PrintingMargins
-{	
-	
-	static private void QueryPageSettings (object sender, QueryPageSettingsEventArgs e)
-	{
-		
-	}
+{
+    private static void QueryPageSettings(object sender, QueryPageSettingsEventArgs e) { }
 
-	static private void PrintPageEvent (object sender, PrintPageEventArgs e)
-	{					
-		e.Graphics.DrawRectangle (Pens.Red, e.MarginBounds);
-		e.Graphics.DrawRectangle (Pens.Green, e.PageBounds);		
-		e.HasMorePages = false;
-	}
+    private static void PrintPageEvent(object sender, PrintPageEventArgs e)
+    {
+        e.Graphics.DrawRectangle(Pens.Red, e.MarginBounds);
+        e.Graphics.DrawRectangle(Pens.Green, e.PageBounds);
+        e.HasMorePages = false;
+    }
 
-
-        public static void Main (string[] args)
-        {                
-		PrintDocument p = new PrintDocument ();
-		p.PrintPage += new PrintPageEventHandler (PrintPageEvent);
-		p.QueryPageSettings += new  QueryPageSettingsEventHandler (QueryPageSettings);
-                p.Print ();
-		
-        }
+    public static void Main(string[] args)
+    {
+        PrintDocument p = new PrintDocument();
+        p.PrintPage += new PrintPageEventHandler(PrintPageEvent);
+        p.QueryPageSettings += new QueryPageSettingsEventHandler(QueryPageSettings);
+        p.Print();
+    }
 }
-

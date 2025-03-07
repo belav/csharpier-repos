@@ -467,6 +467,5 @@ namespace System.IdentityModel.Claims
         }
 
 #pragma warning restore 1591
-
     }
 }

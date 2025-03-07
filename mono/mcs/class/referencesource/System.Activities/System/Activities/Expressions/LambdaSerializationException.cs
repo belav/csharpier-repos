@@ -11,23 +11,15 @@ namespace System.Activities.Expressions
     public class LambdaSerializationException : Exception
     {
         public LambdaSerializationException()
-            : base(SR.LambdaNotXamlSerializable)
-        {
-        }
+            : base(SR.LambdaNotXamlSerializable) { }
 
         public LambdaSerializationException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public LambdaSerializationException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         protected LambdaSerializationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {            
-        }
+            : base(info, context) { }
     }
 }

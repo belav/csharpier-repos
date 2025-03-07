@@ -7,7 +7,11 @@ using System.Linq;
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
 internal sealed class ImmutableQueueBufferAdapter<TElement>
-    : ArrayPoolBufferAdapter<ImmutableQueue<TElement>, ImmutableQueueBufferAdapter<TElement>.ImmutableQueueFactory, TElement>
+    : ArrayPoolBufferAdapter<
+        ImmutableQueue<TElement>,
+        ImmutableQueueBufferAdapter<TElement>.ImmutableQueueFactory,
+        TElement
+    >
 {
     internal class ImmutableQueueFactory : ICollectionFactory<ImmutableQueue<TElement>, TElement>
     {
@@ -17,7 +21,9 @@ internal sealed class ImmutableQueueBufferAdapter<TElement>
         }
     }
 
-    public static CollectionConverter<IImmutableQueue<TElement>> CreateInterfaceConverter(FormDataConverter<TElement> elementConverter)
+    public static CollectionConverter<IImmutableQueue<TElement>> CreateInterfaceConverter(
+        FormDataConverter<TElement> elementConverter
+    )
     {
         return new CollectionConverter<
             IImmutableQueue<TElement>,
@@ -26,8 +32,10 @@ internal sealed class ImmutableQueueBufferAdapter<TElement>
                 ImmutableQueue<TElement>,
                 ImmutableQueueBufferAdapter<TElement>,
                 PooledBuffer,
-                TElement>,
+                TElement
+            >,
             PooledBuffer,
-            TElement>(elementConverter);
+            TElement
+        >(elementConverter);
     }
 }

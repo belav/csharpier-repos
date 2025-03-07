@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest.SSE2.X64
@@ -81,16 +81,17 @@ namespace IntelHardwareIntrinsicTest.SSE2.X64
 
                     Sse2.X64.StoreNonTemporal(outBuffer, inArray[0]);
                     testResult = Fail;
-                    Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.X64.StoreNonTemporal)} failed on long: expected PlatformNotSupportedException exception.");
+                    Console.WriteLine(
+                        $"{nameof(Sse2)}.{nameof(Sse2.X64.StoreNonTemporal)} failed on long: expected PlatformNotSupportedException exception."
+                    );
                 }
-                catch (PlatformNotSupportedException)
-                {
-
-                }
+                catch (PlatformNotSupportedException) { }
                 catch (Exception ex)
                 {
                     testResult = Fail;
-                    Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.X64.StoreNonTemporal)}-{ex} failed on long: expected PlatformNotSupportedException exception.");
+                    Console.WriteLine(
+                        $"{nameof(Sse2)}.{nameof(Sse2.X64.StoreNonTemporal)}-{ex} failed on long: expected PlatformNotSupportedException exception."
+                    );
                 }
 
                 try
@@ -101,16 +102,17 @@ namespace IntelHardwareIntrinsicTest.SSE2.X64
 
                     Sse2.X64.StoreNonTemporal(outBuffer, inArray[0]);
                     testResult = Fail;
-                    Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.X64.StoreNonTemporal)} failed on ulong: expected PlatformNotSupportedException exception.");
+                    Console.WriteLine(
+                        $"{nameof(Sse2)}.{nameof(Sse2.X64.StoreNonTemporal)} failed on ulong: expected PlatformNotSupportedException exception."
+                    );
                 }
-                catch (PlatformNotSupportedException)
-                {
-
-                }
+                catch (PlatformNotSupportedException) { }
                 catch (Exception ex)
                 {
                     testResult = Fail;
-                    Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.X64.StoreNonTemporal)}-{ex} failed on ulong: expected PlatformNotSupportedException exception.");
+                    Console.WriteLine(
+                        $"{nameof(Sse2)}.{nameof(Sse2.X64.StoreNonTemporal)}-{ex} failed on ulong: expected PlatformNotSupportedException exception."
+                    );
                 }
             }
 
@@ -118,4 +120,3 @@ namespace IntelHardwareIntrinsicTest.SSE2.X64
         }
     }
 }
-

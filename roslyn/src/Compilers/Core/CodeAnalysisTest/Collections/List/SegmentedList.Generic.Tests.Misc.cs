@@ -69,7 +69,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             public void InsertValidations(T[] items)
             {
                 SegmentedList<T> list = new SegmentedList<T>(items);
-                int[] bad = new int[] { items.Length + 1, items.Length + 2, int.MaxValue, -1, -2, int.MinValue };
+                int[] bad = new int[]
+                {
+                    items.Length + 1,
+                    items.Length + 2,
+                    int.MaxValue,
+                    -1,
+                    -2,
+                    int.MinValue,
+                };
                 for (int i = 0; i < bad.Length; i++)
                 {
                     Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(bad[i], items[0])); //"ArgumentOutOfRangeException expected."
@@ -109,20 +117,39 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 SegmentedList<T> list = new SegmentedList<T>(items);
                 IList _ilist = list;
-                int[] bad = new int[] { items.Length + 1, items.Length + 2, int.MaxValue, -1, -2, int.MinValue };
+                int[] bad = new int[]
+                {
+                    items.Length + 1,
+                    items.Length + 2,
+                    int.MaxValue,
+                    -1,
+                    -2,
+                    int.MinValue,
+                };
                 for (int i = 0; i < bad.Length; i++)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() => _ilist.Insert(bad[i], items[0])); //"ArgumentOutOfRangeException expected."
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => _ilist.Insert(bad[i], items[0])
+                    ); //"ArgumentOutOfRangeException expected."
                 }
 
-                Assert.Throws<ArgumentException>("value", () => _ilist.Insert(0, new LinkedListNode<string>("blargh"))); //"ArgumentException expected."
+                Assert.Throws<ArgumentException>(
+                    "value",
+                    () => _ilist.Insert(0, new LinkedListNode<string>("blargh"))
+                ); //"ArgumentException expected."
             }
 
             #endregion
 
             #region InsertRange
 
-            public void InsertRangeIEnumerable(T?[] itemsX, T?[] itemsY, int index, int repeat, Func<T?[], IEnumerable<T?>> constructIEnumerable)
+            public void InsertRangeIEnumerable(
+                T?[] itemsX,
+                T?[] itemsY,
+                int index,
+                int repeat,
+                Func<T?[], IEnumerable<T?>> constructIEnumerable
+            )
             {
                 SegmentedList<T?> list = new SegmentedList<T?>(constructIEnumerable(itemsX));
 
@@ -178,13 +205,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             }
 
-            public void InsertRangeValidations(T?[] items, Func<T?[], IEnumerable<T?>> constructIEnumerable)
+            public void InsertRangeValidations(
+                T?[] items,
+                Func<T?[], IEnumerable<T?>> constructIEnumerable
+            )
             {
                 SegmentedList<T?> list = new SegmentedList<T?>(constructIEnumerable(items));
-                int[] bad = new int[] { items.Length + 1, items.Length + 2, int.MaxValue, -1, -2, int.MinValue };
+                int[] bad = new int[]
+                {
+                    items.Length + 1,
+                    items.Length + 2,
+                    int.MaxValue,
+                    -1,
+                    -2,
+                    int.MinValue,
+                };
                 for (int i = 0; i < bad.Length; i++)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(bad[i], constructIEnumerable(items))); //"ArgumentOutOfRangeException expected"
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => list.InsertRange(bad[i], constructIEnumerable(items))
+                    ); //"ArgumentOutOfRangeException expected"
                 }
 
                 Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, null!)); //"ArgumentNullException expected."
@@ -197,8 +237,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             public IEnumerable<T?> ConstructLazyTestEnumerable(T?[] items)
             {
-                return ConstructTestEnumerable(items)
-                    .Select(item => item);
+                return ConstructTestEnumerable(items).Select(item => item);
             }
 
             public IEnumerable<T?> ConstructTestList(T?[] items)
@@ -253,60 +292,87 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 //Always send items.Length is even
                 //
                 SegmentedList<T> list = new SegmentedList<T>(items);
-                int[] bad = new int[] {  /**/items.Length,1,
+                int[] bad = new int[]
+                { /**/
+                    items.Length,
+                    1,
                     /**/
-                                    items.Length+1,0,
+                    items.Length + 1,
+                    0,
                     /**/
-                                    items.Length+1,1,
+                    items.Length + 1,
+                    1,
                     /**/
-                                    items.Length,2,
+                    items.Length,
+                    2,
                     /**/
-                                    items.Length/2,items.Length/2+1,
+                    items.Length / 2,
+                    items.Length / 2 + 1,
                     /**/
-                                    items.Length-1,2,
+                    items.Length - 1,
+                    2,
                     /**/
-                                    items.Length-2,3,
+                    items.Length - 2,
+                    3,
                     /**/
-                                    1,items.Length,
+                    1,
+                    items.Length,
                     /**/
-                                    0,items.Length+1,
+                    0,
+                    items.Length + 1,
                     /**/
-                                    1,items.Length+1,
+                    1,
+                    items.Length + 1,
                     /**/
-                                    2,items.Length,
+                    2,
+                    items.Length,
                     /**/
-                                    items.Length/2+1,items.Length/2,
+                    items.Length / 2
+                        + 1,
+                    items.Length / 2,
                     /**/
-                                    2,items.Length-1,
+                    2,
+                    items.Length - 1,
                     /**/
-                                    3,items.Length-2
-                                };
+                    3,
+                    items.Length - 2,
+                };
 
                 for (int i = 0; i < bad.Length; i++)
                 {
                     Assert.Throws<ArgumentException>(null, () => list.GetRange(bad[i], bad[++i])); //"ArgumentException expected."
                 }
 
-                bad = new int[] {
+                bad = new int[]
+                {
                     /**/
-                                    -1,-1,
+                    -1,
+                    -1,
                     /**/
-                                    -1,0,
+                    -1,
+                    0,
                     /**/
-                                    -1,1,
+                    -1,
+                    1,
                     /**/
-                                    -1,2,
+                    -1,
+                    2,
                     /**/
-                                    0,-1,
+                    0,
+                    -1,
                     /**/
-                                    1,-1,
+                    1,
+                    -1,
                     /**/
-                                    2,-1
-                                };
+                    2,
+                    -1,
+                };
 
                 for (int i = 0; i < bad.Length; i++)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(() => list.GetRange(bad[i], bad[++i])); //"ArgumentOutOfRangeException expected."
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => list.GetRange(bad[i], bad[++i])
+                    ); //"ArgumentOutOfRangeException expected."
                 }
             }
 
@@ -323,7 +389,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             public void Exists_VerifyExceptions(T[] items)
             {
                 SegmentedList<T> list = new SegmentedList<T>();
-                Predicate<T> predicate = (T item) => { return true; };
+                Predicate<T> predicate = (T item) =>
+                {
+                    return true;
+                };
 
                 for (int i = 0; i < items.Length; ++i)
                     list.Add(items[i]);
@@ -336,7 +405,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 T? expectedItem = default(T);
                 SegmentedList<T?> list = new SegmentedList<T?>();
-                Predicate<T?> expectedItemDelegate = (T? item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+                Predicate<T?> expectedItemDelegate = (T? item) =>
+                {
+                    return expectedItem == null ? item == null : expectedItem.Equals(item);
+                };
                 bool typeNullable = default(T) == null;
 
                 for (int i = 0; i < items.Length; ++i)
@@ -347,22 +419,46 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 {
                     expectedItem = items[i];
 
-                    Assert.True(list.Exists(expectedItemDelegate),
-                        "Err_282308ahid Verifying Nullable returned FAILED\n");
+                    Assert.True(
+                        list.Exists(expectedItemDelegate),
+                        "Err_282308ahid Verifying Nullable returned FAILED\n"
+                    );
                 }
 
                 //[] Verify Exists returns true if the match returns true on every item
-                Assert.True((0 < items.Length) == list.Exists((T? item) => { return true; }),
-                        "Err_548ahid Verify Exists returns 0 if the match returns true on every item FAILED\n");
+                Assert.True(
+                    (0 < items.Length)
+                        == list.Exists(
+                            (T? item) =>
+                            {
+                                return true;
+                            }
+                        ),
+                    "Err_548ahid Verify Exists returns 0 if the match returns true on every item FAILED\n"
+                );
 
                 //[] Verify Exists returns false if the match returns false on every item
-                Assert.True(!list.Exists((T? item) => { return false; }),
-                        "Err_30848ahidi Verify Exists returns -1 if the match returns false on every item FAILED\n");
+                Assert.True(
+                    !list.Exists(
+                        (T? item) =>
+                        {
+                            return false;
+                        }
+                    ),
+                    "Err_30848ahidi Verify Exists returns -1 if the match returns false on every item FAILED\n"
+                );
 
                 //[] Verify with default(T)
                 list.Add(default(T));
-                Assert.True(list.Exists((T? item) => { return item == null ? default(T) == null : item.Equals(default(T)); }),
-                        "Err_541848ajodi Verify with default(T) FAILED\n");
+                Assert.True(
+                    list.Exists(
+                        (T? item) =>
+                        {
+                            return item == null ? default(T) == null : item.Equals(default(T));
+                        }
+                    ),
+                    "Err_541848ajodi Verify with default(T) FAILED\n"
+                );
                 list.RemoveAt(list.Count - 1);
             }
 
@@ -370,7 +466,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 T? expectedItem = default(T);
                 SegmentedList<T> list = new SegmentedList<T>();
-                Predicate<T> expectedItemDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+                Predicate<T> expectedItemDelegate = (T item) =>
+                {
+                    return expectedItem == null ? item == null : expectedItem.Equals(item);
+                };
 
                 if (0 < items.Length)
                 {
@@ -382,20 +481,32 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
                     //[] Verify first item is duplicated
                     expectedItem = items[0];
-                    Assert.True(list.Exists(expectedItemDelegate),
-                            "Err_2879072qaiadf  Verify first item is duplicated FAILED\n");
+                    Assert.True(
+                        list.Exists(expectedItemDelegate),
+                        "Err_2879072qaiadf  Verify first item is duplicated FAILED\n"
+                    );
                 }
 
                 if (1 < items.Length)
                 {
                     //[] Verify second item is duplicated
                     expectedItem = items[1];
-                    Assert.True(list.Exists(expectedItemDelegate),
-                            "Err_4588ajdia Verify second item is duplicated FAILED\n");
+                    Assert.True(
+                        list.Exists(expectedItemDelegate),
+                        "Err_4588ajdia Verify second item is duplicated FAILED\n"
+                    );
 
                     //[] Verify with match that matches more then one item
-                    Assert.True(list.Exists((T item) => { return item != null && (item.Equals(items[0]) || item.Equals(items[1])); }),
-                            "Err_4489ajodoi Verify with match that matches more then one item FAILED\n");
+                    Assert.True(
+                        list.Exists(
+                            (T item) =>
+                            {
+                                return item != null
+                                    && (item.Equals(items[0]) || item.Equals(items[1]));
+                            }
+                        ),
+                        "Err_4489ajodoi Verify with match that matches more then one item FAILED\n"
+                    );
                 }
             }
 
@@ -461,6 +572,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
                 Assert.False(list.Contains(items[items.Length / 2])); //"Should not contain item"
             }
+
             public void ContainsNullWhenReference(T?[] items, T? value)
             {
                 if ((object?)value != null)
@@ -555,8 +667,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 SegmentedList<T> list = new SegmentedList<T>();
                 IList _ilist = list;
 
-                Assert.False(_ilist.Contains(new LinkedListNode<string>("rah")),
-                    "Err_68850ahiuedpz Expected Contains to return false with invalid type");
+                Assert.False(
+                    _ilist.Contains(new LinkedListNode<string>("rah")),
+                    "Err_68850ahiuedpz Expected Contains to return false with invalid type"
+                );
             }
 
             #endregion
@@ -570,6 +684,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 list.Clear();
                 Assert.Equal(0, list.Count); //"Should be equal to 0."
             }
+
             public void ClearMultipleTimesEmptyList(int times)
             {
                 SegmentedList<T> list = new SegmentedList<T>();
@@ -580,6 +695,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     Assert.Equal(0, list.Count); //"Should be equal to 0."
                 }
             }
+
             public void ClearNonEmptyList(T[] items)
             {
                 SegmentedList<T> list = new SegmentedList<T>(items);
@@ -605,6 +721,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 _ilist.Clear();
                 Assert.Equal(0, list.Count); //"Should be equal to 0."
             }
+
             public void NonGenericIListClearMultipleTimesEmptyList(int times)
             {
                 SegmentedList<T> list = new SegmentedList<T>();
@@ -616,6 +733,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     Assert.Equal(0, list.Count); //"Should be equal to 0."
                 }
             }
+
             public void NonGenericIListClearNonEmptyList(T[] items)
             {
                 SegmentedList<T> list = new SegmentedList<T>(items);
@@ -643,7 +761,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 T? expectedItem = default(T);
                 SegmentedList<T> list = new SegmentedList<T>();
-                Predicate<T> expectedItemDelegate = delegate (T item) { return expectedItem == null ? item != null : !expectedItem.Equals(item); };
+                Predicate<T> expectedItemDelegate = delegate(T item)
+                {
+                    return expectedItem == null ? item != null : !expectedItem.Equals(item);
+                };
                 bool typeNullable = default(T) == null;
 
                 for (int i = 0; i < items.Length; ++i)
@@ -657,12 +778,29 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
 
                 //[] Verify TrueForAll returns true if the match returns true on every item
-                Assert.True(list.TrueForAll(delegate (T item) { return true; }),
-                        "Err_548ahid Verify TrueForAll returns true if the match returns true on every item FAILED\n");
+                Assert.True(
+                    list.TrueForAll(
+                        delegate(T item)
+                        {
+                            return true;
+                        }
+                    ),
+                    "Err_548ahid Verify TrueForAll returns true if the match returns true on every item FAILED\n"
+                );
 
                 //[] Verify TrueForAll returns false if the match returns false on every item
-                Assert.True((0 == items.Length) == list.TrueForAll(delegate (T item) { return false; }),
-                        "Err_30848ahidi Verify TrueForAll returns " + (0 == items.Length) + " if the match returns false on every item FAILED\n");
+                Assert.True(
+                    (0 == items.Length)
+                        == list.TrueForAll(
+                            delegate(T item)
+                            {
+                                return false;
+                            }
+                        ),
+                    "Err_30848ahidi Verify TrueForAll returns "
+                        + (0 == items.Length)
+                        + " if the match returns false on every item FAILED\n"
+                );
             }
 
             public void TrueForAll_VerifyExceptions(T[] items)
@@ -744,18 +882,48 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             StringDriver.BasicInsert(stringArr1, "strobia", 1, 5);
             StringDriver.BasicInsert(stringArr1, "strobia", 50, 51);
             StringDriver.BasicInsert(stringArr1, "strobia", 0, 100);
-            StringDriver.BasicInsert(new string?[] { null, null, null, "strobia", null }, null, 2, 3);
-            StringDriver.BasicInsert(new string?[] { null, null, null, null, null }, "strobia", 0, 5);
-            StringDriver.BasicInsert(new string?[] { null, null, null, null, null }, "strobia", 5, 1);
+            StringDriver.BasicInsert(
+                new string?[] { null, null, null, "strobia", null },
+                null,
+                2,
+                3
+            );
+            StringDriver.BasicInsert(
+                new string?[] { null, null, null, null, null },
+                "strobia",
+                0,
+                5
+            );
+            StringDriver.BasicInsert(
+                new string?[] { null, null, null, null, null },
+                "strobia",
+                5,
+                1
+            );
             StringDriver.NonGenericIListBasicInsert(stringArr1, "strobia", 99, 2);
             StringDriver.NonGenericIListBasicInsert(stringArr1, "strobia", 100, 3);
             StringDriver.NonGenericIListBasicInsert(stringArr1, "strobia", 0, 4);
             StringDriver.NonGenericIListBasicInsert(stringArr1, "strobia", 1, 5);
             StringDriver.NonGenericIListBasicInsert(stringArr1, "strobia", 50, 51);
             StringDriver.NonGenericIListBasicInsert(stringArr1, "strobia", 0, 100);
-            StringDriver.NonGenericIListBasicInsert(new string?[] { null, null, null, "strobia", null }, null, 2, 3);
-            StringDriver.NonGenericIListBasicInsert(new string?[] { null, null, null, null, null }, "strobia", 0, 5);
-            StringDriver.NonGenericIListBasicInsert(new string?[] { null, null, null, null, null }, "strobia", 5, 1);
+            StringDriver.NonGenericIListBasicInsert(
+                new string?[] { null, null, null, "strobia", null },
+                null,
+                2,
+                3
+            );
+            StringDriver.NonGenericIListBasicInsert(
+                new string?[] { null, null, null, null, null },
+                "strobia",
+                0,
+                5
+            );
+            StringDriver.NonGenericIListBasicInsert(
+                new string?[] { null, null, null, null, null },
+                "strobia",
+                5,
+                1
+            );
         }
 
         [Fact]
@@ -790,7 +958,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 intArr2[i] = i + 100;
             }
 
-            foreach (Func<int[], IEnumerable<int>> collectionGenerator in IntDriver.CollectionGenerators)
+            foreach (
+                Func<int[], IEnumerable<int>> collectionGenerator in IntDriver.CollectionGenerators
+            )
             {
                 IntDriver.InsertRangeIEnumerable(new int[0], intArr1, 0, 1, collectionGenerator);
                 IntDriver.InsertRangeIEnumerable(intArr1, intArr2, 0, 1, collectionGenerator);
@@ -808,18 +978,83 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             for (int i = 0; i < 10; i++)
                 stringArr2[i] = "SomeTestString" + (i + 100).ToString();
 
-            foreach (Func<string?[], IEnumerable<string?>> collectionGenerator in StringDriver.CollectionGenerators)
+            foreach (
+                Func<
+                    string?[],
+                    IEnumerable<string?>
+                > collectionGenerator in StringDriver.CollectionGenerators
+            )
             {
-                StringDriver.InsertRangeIEnumerable(new string[0], stringArr1, 0, 1, collectionGenerator);
-                StringDriver.InsertRangeIEnumerable(stringArr1, stringArr2, 0, 1, collectionGenerator);
-                StringDriver.InsertRangeIEnumerable(stringArr1, stringArr2, 1, 1, collectionGenerator);
-                StringDriver.InsertRangeIEnumerable(stringArr1, stringArr2, 99, 1, collectionGenerator);
-                StringDriver.InsertRangeIEnumerable(stringArr1, stringArr2, 100, 1, collectionGenerator);
-                StringDriver.InsertRangeIEnumerable(stringArr1, stringArr2, 50, 50, collectionGenerator);
-                StringDriver.InsertRangeIEnumerable(new string?[] { null, null, null, null }, stringArr2, 0, 1, collectionGenerator);
-                StringDriver.InsertRangeIEnumerable(new string?[] { null, null, null, null }, stringArr2, 4, 1, collectionGenerator);
-                StringDriver.InsertRangeIEnumerable(new string?[] { null, null, null, null }, new string?[] { null, null, null, null }, 0, 1, collectionGenerator);
-                StringDriver.InsertRangeIEnumerable(new string?[] { null, null, null, null }, new string?[] { null, null, null, null }, 4, 50, collectionGenerator);
+                StringDriver.InsertRangeIEnumerable(
+                    new string[0],
+                    stringArr1,
+                    0,
+                    1,
+                    collectionGenerator
+                );
+                StringDriver.InsertRangeIEnumerable(
+                    stringArr1,
+                    stringArr2,
+                    0,
+                    1,
+                    collectionGenerator
+                );
+                StringDriver.InsertRangeIEnumerable(
+                    stringArr1,
+                    stringArr2,
+                    1,
+                    1,
+                    collectionGenerator
+                );
+                StringDriver.InsertRangeIEnumerable(
+                    stringArr1,
+                    stringArr2,
+                    99,
+                    1,
+                    collectionGenerator
+                );
+                StringDriver.InsertRangeIEnumerable(
+                    stringArr1,
+                    stringArr2,
+                    100,
+                    1,
+                    collectionGenerator
+                );
+                StringDriver.InsertRangeIEnumerable(
+                    stringArr1,
+                    stringArr2,
+                    50,
+                    50,
+                    collectionGenerator
+                );
+                StringDriver.InsertRangeIEnumerable(
+                    new string?[] { null, null, null, null },
+                    stringArr2,
+                    0,
+                    1,
+                    collectionGenerator
+                );
+                StringDriver.InsertRangeIEnumerable(
+                    new string?[] { null, null, null, null },
+                    stringArr2,
+                    4,
+                    1,
+                    collectionGenerator
+                );
+                StringDriver.InsertRangeIEnumerable(
+                    new string?[] { null, null, null, null },
+                    new string?[] { null, null, null, null },
+                    0,
+                    1,
+                    collectionGenerator
+                );
+                StringDriver.InsertRangeIEnumerable(
+                    new string?[] { null, null, null, null },
+                    new string?[] { null, null, null, null },
+                    4,
+                    50,
+                    collectionGenerator
+                );
             }
         }
 

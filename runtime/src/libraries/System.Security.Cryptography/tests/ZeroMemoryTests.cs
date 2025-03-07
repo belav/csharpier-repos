@@ -72,7 +72,8 @@ namespace System.Security.Cryptography.Tests
             // It cannot be inlined, or it loses its no-optimization guarantee.
             Assert.Equal(
                 MethodImplAttributes.NoInlining | MethodImplAttributes.NoOptimization,
-                mi.MethodImplementationFlags);
+                mi.MethodImplementationFlags
+            );
         }
     }
 }

@@ -14,9 +14,18 @@ internal sealed class NonInvokingSingleClientProxy : ISingleClientProxy
         _memberName = memberName;
     }
 
-    public Task SendCoreAsync(string method, object?[] args, CancellationToken cancellationToken = default) =>
-        _clientProxy.SendCoreAsync(method, args, cancellationToken);
+    public Task SendCoreAsync(
+        string method,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    ) => _clientProxy.SendCoreAsync(method, args, cancellationToken);
 
-    public Task<T> InvokeCoreAsync<T>(string method, object?[] args, CancellationToken cancellationToken = default) =>
-        throw new NotImplementedException($"The default implementation of {_memberName} does not support client return results.");
+    public Task<T> InvokeCoreAsync<T>(
+        string method,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    ) =>
+        throw new NotImplementedException(
+            $"The default implementation of {_memberName} does not support client return results."
+        );
 }

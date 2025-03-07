@@ -26,21 +26,21 @@ public class MutateStructArg
         Console.WriteLine(l2.S); // Print modified value "Goodbye World"
         if ((l2.S == "Goodbye World") && (l2.X == 100))
         {
-            return 100;   // success
+            return 100; // success
         }
         else
         {
             Console.WriteLine("**** Test FAILED ***");
-            return 1;  // failure
+            return 1; // failure
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static P foo(P a)
     {
-        Console.WriteLine(a.S);   // Print the incoming value "Hello World"
-        a.S = "Goodbye World";    // Mutate the incoming value
+        Console.WriteLine(a.S); // Print the incoming value "Hello World"
+        a.S = "Goodbye World"; // Mutate the incoming value
         a.X = 100;
-        return a;                 // Copy the modified value to the return value (bug was that this was returning original unmodified arg)
+        return a; // Copy the modified value to the return value (bug was that this was returning original unmodified arg)
     }
 }

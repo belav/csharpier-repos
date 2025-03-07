@@ -14,15 +14,18 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
-    internal sealed class ExpandedVarargsMethodReference :
-        Cci.IMethodReference,
-        Cci.IGenericMethodInstanceReference,
-        Cci.ISpecializedMethodReference
+    internal sealed class ExpandedVarargsMethodReference
+        : Cci.IMethodReference,
+            Cci.IGenericMethodInstanceReference,
+            Cci.ISpecializedMethodReference
     {
         private readonly Cci.IMethodReference _underlyingMethod;
         private readonly ImmutableArray<Cci.IParameterTypeInformation> _argListParams;
 
-        public ExpandedVarargsMethodReference(Cci.IMethodReference underlyingMethod, ImmutableArray<Cci.IParameterTypeInformation> argListParams)
+        public ExpandedVarargsMethodReference(
+            Cci.IMethodReference underlyingMethod,
+            ImmutableArray<Cci.IParameterTypeInformation> argListParams
+        )
         {
             Debug.Assert(underlyingMethod.AcceptsExtraArguments);
             Debug.Assert(!argListParams.IsEmpty);
@@ -48,10 +51,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         ImmutableArray<Cci.IParameterTypeInformation> Cci.IMethodReference.ExtraParameters
         {
-            get
-            {
-                return _argListParams;
-            }
+            get { return _argListParams; }
         }
 
         Cci.IGenericMethodInstanceReference Cci.IMethodReference.AsGenericMethodInstanceReference
@@ -63,7 +63,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                     return null;
                 }
 
-                Debug.Assert(_underlyingMethod.AsGenericMethodInstanceReference == _underlyingMethod);
+                Debug.Assert(
+                    _underlyingMethod.AsGenericMethodInstanceReference == _underlyingMethod
+                );
                 return this;
             }
         }
@@ -92,7 +94,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             get { return _underlyingMethod.ParameterCount; }
         }
 
-        ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(EmitContext context)
+        ImmutableArray<Cci.IParameterTypeInformation> Cci.ISignature.GetParameters(
+            EmitContext context
+        )
         {
             return _underlyingMethod.GetParameters(context);
         }
@@ -155,21 +159,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             get { return _underlyingMethod.Name; }
         }
 
-        IEnumerable<Cci.ITypeReference> Cci.IGenericMethodInstanceReference.GetGenericArguments(EmitContext context)
+        IEnumerable<Cci.ITypeReference> Cci.IGenericMethodInstanceReference.GetGenericArguments(
+            EmitContext context
+        )
         {
             return _underlyingMethod.AsGenericMethodInstanceReference.GetGenericArguments(context);
         }
 
-        Cci.IMethodReference Cci.IGenericMethodInstanceReference.GetGenericMethod(EmitContext context)
+        Cci.IMethodReference Cci.IGenericMethodInstanceReference.GetGenericMethod(
+            EmitContext context
+        )
         {
-            return new ExpandedVarargsMethodReference(_underlyingMethod.AsGenericMethodInstanceReference.GetGenericMethod(context), _argListParams);
+            return new ExpandedVarargsMethodReference(
+                _underlyingMethod.AsGenericMethodInstanceReference.GetGenericMethod(context),
+                _argListParams
+            );
         }
 
         Cci.IMethodReference Cci.ISpecializedMethodReference.UnspecializedVersion
         {
             get
             {
-                return new ExpandedVarargsMethodReference(_underlyingMethod.AsSpecializedMethodReference.UnspecializedVersion, _argListParams);
+                return new ExpandedVarargsMethodReference(
+                    _underlyingMethod.AsSpecializedMethodReference.UnspecializedVersion,
+                    _argListParams
+                );
             }
         }
 
@@ -214,7 +228,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
             if (symbol != null)
             {
-                result.Builder.Append(symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat));
+                result.Builder.Append(
+                    symbol.ToDisplayString(SymbolDisplayFormat.ILVisualizationFormat)
+                );
             }
             else
             {

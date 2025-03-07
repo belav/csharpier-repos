@@ -28,8 +28,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new ThrowInCatchTest().Run(),              ref nSuccesses, ref nFailures);
-        
+        CountResults(new ThrowInCatchTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -46,27 +46,27 @@ public class TestSet
 class ThrowInCatchTest
 {
     Trace _trace;
-    
+
     public int Run()
     {
         _trace = new Trace("ThrowInCatchTest", "0123456");
         _trace.Write("0");
-        try 
+        try
         {
             _trace.Write("1");
-            try 
+            try
             {
                 _trace.Write("2");
                 throw new Exception(".....");
-            } 
-            catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e);
                 _trace.Write("3");
                 throw new Exception("5");
             }
-        } 
-        catch(Exception e)
+        }
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("4");
@@ -76,5 +76,3 @@ class ThrowInCatchTest
         return _trace.Match();
     }
 }
-
-

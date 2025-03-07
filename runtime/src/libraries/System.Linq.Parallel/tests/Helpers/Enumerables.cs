@@ -34,11 +34,14 @@ namespace System.Linq.Parallel.Tests
         /// <returns>An enumerable that throws on the given enumeration.</returns>
         public static IEnumerable<T> ThrowOnEnumeration(Exception e, int count)
         {
-            return Enumerable.Range(0, count).Select(i =>
-            {
-                if (i == count - 1) throw e;
-                return default(T);
-            });
+            return Enumerable
+                .Range(0, count)
+                .Select(i =>
+                {
+                    if (i == count - 1)
+                        throw e;
+                    return default(T);
+                });
         }
     }
 }

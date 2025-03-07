@@ -10,7 +10,12 @@ namespace Microsoft.CodeAnalysis
 {
     public readonly struct TypeInfo : IEquatable<TypeInfo>
     {
-        internal static readonly TypeInfo None = new TypeInfo(type: null, convertedType: null, nullability: default, convertedNullability: default);
+        internal static readonly TypeInfo None = new TypeInfo(
+            type: null,
+            convertedType: null,
+            nullability: default,
+            convertedNullability: default
+        );
 
         /// <summary>
         /// The type of the expression represented by the syntax node. For expressions that do not
@@ -37,11 +42,22 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public NullabilityInfo ConvertedNullability { get; }
 
-        internal TypeInfo(ITypeSymbol? type, ITypeSymbol? convertedType, NullabilityInfo nullability, NullabilityInfo convertedNullability)
+        internal TypeInfo(
+            ITypeSymbol? type,
+            ITypeSymbol? convertedType,
+            NullabilityInfo nullability,
+            NullabilityInfo convertedNullability
+        )
             : this()
         {
-            Debug.Assert(type is null || type.NullableAnnotation == nullability.FlowState.ToAnnotation());
-            Debug.Assert(convertedType is null || convertedType.NullableAnnotation == convertedNullability.FlowState.ToAnnotation());
+            Debug.Assert(
+                type is null || type.NullableAnnotation == nullability.FlowState.ToAnnotation()
+            );
+            Debug.Assert(
+                convertedType is null
+                    || convertedType.NullableAnnotation
+                        == convertedNullability.FlowState.ToAnnotation()
+            );
             this.Type = type;
             this.Nullability = nullability;
             this.ConvertedType = convertedType;
@@ -63,10 +79,16 @@ namespace Microsoft.CodeAnalysis
 
         public override int GetHashCode()
         {
-            return Hash.Combine(this.ConvertedType,
-                Hash.Combine(this.Type,
-                Hash.Combine(this.Nullability.GetHashCode(),
-                this.ConvertedNullability.GetHashCode())));
+            return Hash.Combine(
+                this.ConvertedType,
+                Hash.Combine(
+                    this.Type,
+                    Hash.Combine(
+                        this.Nullability.GetHashCode(),
+                        this.ConvertedNullability.GetHashCode()
+                    )
+                )
+            );
         }
     }
 }

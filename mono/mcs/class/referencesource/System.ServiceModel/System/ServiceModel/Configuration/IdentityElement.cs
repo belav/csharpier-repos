@@ -5,19 +5,17 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
     using System.Xml;
 
     public sealed partial class IdentityElement : ConfigurationElement
     {
-        public IdentityElement()
-        {
-        }
+        public IdentityElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.UserPrincipalName)]
         public UserPrincipalNameElement UserPrincipalName
@@ -28,7 +26,10 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.ServicePrincipalName)]
         public ServicePrincipalNameElement ServicePrincipalName
         {
-            get { return (ServicePrincipalNameElement)base[ConfigurationStrings.ServicePrincipalName]; }
+            get
+            {
+                return (ServicePrincipalNameElement)base[ConfigurationStrings.ServicePrincipalName];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Dns)]
@@ -52,7 +53,10 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.CertificateReference)]
         public CertificateReferenceElement CertificateReference
         {
-            get { return (CertificateReferenceElement)base[ConfigurationStrings.CertificateReference]; }
+            get
+            {
+                return (CertificateReferenceElement)base[ConfigurationStrings.CertificateReference];
+            }
         }
 
         internal void Copy(IdentityElement source)
@@ -63,19 +67,31 @@ namespace System.ServiceModel.Configuration
             }
 
             PropertyInformationCollection properties = source.ElementInformation.Properties;
-            if (properties[ConfigurationStrings.UserPrincipalName].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.UserPrincipalName].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.UserPrincipalName.Value = source.UserPrincipalName.Value;
             }
-            if (properties[ConfigurationStrings.ServicePrincipalName].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.ServicePrincipalName].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.ServicePrincipalName.Value = source.ServicePrincipalName.Value;
             }
-            if (properties[ConfigurationStrings.Certificate].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.Certificate].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.Certificate.EncodedValue = source.Certificate.EncodedValue;
             }
-            if (properties[ConfigurationStrings.CertificateReference].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.CertificateReference].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.CertificateReference.StoreName = source.CertificateReference.StoreName;
                 this.CertificateReference.StoreLocation = source.CertificateReference.StoreLocation;
@@ -110,9 +126,17 @@ namespace System.ServiceModel.Configuration
             }
             else if (identity is X509CertificateEndpointIdentity)
             {
-                X509Certificate2Collection certs = ((X509CertificateEndpointIdentity)identity).Certificates;
+                X509Certificate2Collection certs = (
+                    (X509CertificateEndpointIdentity)identity
+                ).Certificates;
 #pragma warning suppress 56506 //Microsoft; this.Certificate can never be null (underlying configuration system guarantees)
-                this.Certificate.EncodedValue = Convert.ToBase64String(certs.Export(certs.Count == 1 ? X509ContentType.SerializedCert : X509ContentType.SerializedStore));
+                this.Certificate.EncodedValue = Convert.ToBase64String(
+                    certs.Export(
+                        certs.Count == 1
+                            ? X509ContentType.SerializedCert
+                            : X509ContentType.SerializedStore
+                    )
+                );
             }
         }
     }

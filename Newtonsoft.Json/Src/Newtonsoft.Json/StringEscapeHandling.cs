@@ -43,6 +43,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// HTML (&lt;, &gt;, &amp;, &apos;, &quot;) and control characters (e.g. newline) are escaped.
         /// </summary>
-        EscapeHtml = 2
+        EscapeHtml = 2,
     }
 }

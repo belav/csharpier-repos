@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
         TExpressionSyntax,
         TStatementSyntax,
         TVariableDeclarator,
-        TIfStatementSyntax> : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TIfStatementSyntax
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TExpressionSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
@@ -28,32 +29,50 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
         where TIfStatementSyntax : TStatementSyntax
     {
         protected AbstractUseCoalesceExpressionForIfNullStatementCheckDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseCoalesceExpressionForIfNullCheckDiagnosticId,
-                   EnforceOnBuildValues.UseCoalesceExpression,
-                   CodeStyleOptions2.PreferCoalesceExpression,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Use_coalesce_expression), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   new LocalizableResourceString(nameof(AnalyzersResources.Null_check_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseCoalesceExpressionForIfNullCheckDiagnosticId,
+                EnforceOnBuildValues.UseCoalesceExpression,
+                CodeStyleOptions2.PreferCoalesceExpression,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_coalesce_expression),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Null_check_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
         protected abstract TSyntaxKind IfStatementKind { get; }
         protected abstract ISyntaxFacts SyntaxFacts { get; }
 
         protected abstract bool IsSingle(TVariableDeclarator declarator);
-        protected abstract bool IsNullCheck(TExpressionSyntax condition, [NotNullWhen(true)] out TExpressionSyntax? checkedExpression);
+        protected abstract bool IsNullCheck(
+            TExpressionSyntax condition,
+            [NotNullWhen(true)] out TExpressionSyntax? checkedExpression
+        );
         protected abstract bool HasElseBlock(TIfStatementSyntax ifStatement);
 
         protected abstract SyntaxNode GetDeclarationNode(TVariableDeclarator declarator);
-        protected abstract TExpressionSyntax GetConditionOfIfStatement(TIfStatementSyntax ifStatement);
-        protected abstract bool TryGetEmbeddedStatement(TIfStatementSyntax ifStatement, [NotNullWhen(true)] out TStatementSyntax? whenTrueStatement);
+        protected abstract TExpressionSyntax GetConditionOfIfStatement(
+            TIfStatementSyntax ifStatement
+        );
+        protected abstract bool TryGetEmbeddedStatement(
+            TIfStatementSyntax ifStatement,
+            [NotNullWhen(true)] out TStatementSyntax? whenTrueStatement
+        );
 
-        protected abstract TStatementSyntax? TryGetPreviousStatement(TIfStatementSyntax ifStatement);
+        protected abstract TStatementSyntax? TryGetPreviousStatement(
+            TIfStatementSyntax ifStatement
+        );
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeSyntax, this.IfStatementKind);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(AnalyzeSyntax, this.IfStatementKind);
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {
@@ -115,19 +134,24 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
                 return;
             }
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                ifStatement.GetFirstToken().GetLocation(),
-                option.Notification,
-                ImmutableArray.Create(
-                    expressionToCoalesce.GetLocation(),
-                    ifStatement.GetLocation(),
-                    whenTrueStatement.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    ifStatement.GetFirstToken().GetLocation(),
+                    option.Notification,
+                    ImmutableArray.Create(
+                        expressionToCoalesce.GetLocation(),
+                        ifStatement.GetLocation(),
+                        whenTrueStatement.GetLocation()
+                    ),
+                    properties: null
+                )
+            );
 
             bool AnalyzeLocalDeclarationForm(
                 TStatementSyntax localDeclarationStatement,
-                [NotNullWhen(true)] out TExpressionSyntax? expressionToCoalesce)
+                [NotNullWhen(true)] out TExpressionSyntax? expressionToCoalesce
+            )
             {
                 expressionToCoalesce = null;
 
@@ -138,9 +162,13 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
                 if (!syntaxFacts.IsIdentifierName(checkedExpression))
                     return false;
 
-                var conditionIdentifier = syntaxFacts.GetIdentifierOfIdentifierName(checkedExpression).ValueText;
+                var conditionIdentifier = syntaxFacts
+                    .GetIdentifierOfIdentifierName(checkedExpression)
+                    .ValueText;
 
-                var declarators = syntaxFacts.GetVariablesOfLocalDeclarationStatement(localDeclarationStatement);
+                var declarators = syntaxFacts.GetVariablesOfLocalDeclarationStatement(
+                    localDeclarationStatement
+                );
                 if (declarators.Count != 1)
                     return false;
 
@@ -152,12 +180,17 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
                 if (equalsValue is null)
                     return false;
 
-                if (syntaxFacts.GetValueOfEqualsValueClause(equalsValue) is not TExpressionSyntax initializer)
+                if (
+                    syntaxFacts.GetValueOfEqualsValueClause(equalsValue)
+                    is not TExpressionSyntax initializer
+                )
                     return false;
 
                 expressionToCoalesce = initializer;
 
-                var variableName = syntaxFacts.GetIdentifierOfVariableDeclarator(declarator).ValueText;
+                var variableName = syntaxFacts
+                    .GetIdentifierOfVariableDeclarator(declarator)
+                    .ValueText;
                 if (conditionIdentifier != variableName)
                     return false;
 
@@ -171,13 +204,22 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
 
                 // Looks good.  However, make sure the when-true part doesn't access this symbol.  We can't merge
                 // with the assignment then.
-                var localSymbol = (ILocalSymbol)semanticModel.GetRequiredDeclaredSymbol(GetDeclarationNode(declarator), cancellationToken);
+                var localSymbol = (ILocalSymbol)
+                    semanticModel.GetRequiredDeclaredSymbol(
+                        GetDeclarationNode(declarator),
+                        cancellationToken
+                    );
                 foreach (var identifier in whenPartToAnalyze.DescendantNodesAndSelf())
                 {
-                    if (syntaxFacts.IsIdentifierName(identifier) &&
-                        syntaxFacts.GetIdentifierOfIdentifierName(identifier).ValueText == localSymbol.Name)
+                    if (
+                        syntaxFacts.IsIdentifierName(identifier)
+                        && syntaxFacts.GetIdentifierOfIdentifierName(identifier).ValueText
+                            == localSymbol.Name
+                    )
                     {
-                        var symbol = semanticModel.GetSymbolInfo(identifier, cancellationToken).GetAnySymbol();
+                        var symbol = semanticModel
+                            .GetSymbolInfo(identifier, cancellationToken)
+                            .GetAnySymbol();
                         if (Equals(localSymbol, symbol))
                             return false;
                     }
@@ -185,7 +227,9 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
 
                 return true;
 
-                bool IsLegalWhenTrueStatementForAssignment([NotNullWhen(true)] out SyntaxNode? whenPartToAnalyze)
+                bool IsLegalWhenTrueStatementForAssignment(
+                    [NotNullWhen(true)] out SyntaxNode? whenPartToAnalyze
+                )
                 {
                     whenPartToAnalyze = whenTrueStatement;
 
@@ -204,11 +248,17 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
                     // can convert if embedded statement is assigning to same variable
                     if (syntaxFacts.IsSimpleAssignmentStatement(whenTrueStatement))
                     {
-                        syntaxFacts.GetPartsOfAssignmentStatement(whenTrueStatement, out var left, out var right);
+                        syntaxFacts.GetPartsOfAssignmentStatement(
+                            whenTrueStatement,
+                            out var left,
+                            out var right
+                        );
                         if (syntaxFacts.IsIdentifierName(left))
                         {
                             whenPartToAnalyze = right;
-                            var leftName = syntaxFacts.GetIdentifierOfIdentifierName(left).ValueText;
+                            var leftName = syntaxFacts
+                                .GetIdentifierOfIdentifierName(left)
+                                .ValueText;
                             return leftName == variableName;
                         }
                     }
@@ -219,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
 
             bool AnalyzeAssignmentForm(
                 TStatementSyntax assignmentStatement,
-                [NotNullWhen(true)] out TExpressionSyntax? expressionToCoalesce)
+                [NotNullWhen(true)] out TExpressionSyntax? expressionToCoalesce
+            )
             {
                 expressionToCoalesce = null;
 
@@ -227,7 +278,11 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
                 // if (expr == null)
                 //    ...
 
-                syntaxFacts.GetPartsOfAssignmentStatement(assignmentStatement, out var topAssignmentLeft, out var topAssignmentRight);
+                syntaxFacts.GetPartsOfAssignmentStatement(
+                    assignmentStatement,
+                    out var topAssignmentLeft,
+                    out var topAssignmentRight
+                );
                 if (!syntaxFacts.AreEquivalent(topAssignmentLeft, checkedExpression))
                     return false;
 
@@ -250,7 +305,11 @@ namespace Microsoft.CodeAnalysis.Analyzers.UseCoalesceExpression
                 // can convert if embedded statement is assigning to same variable
                 if (syntaxFacts.IsSimpleAssignmentStatement(whenTrueStatement))
                 {
-                    syntaxFacts.GetPartsOfAssignmentStatement(whenTrueStatement, out var innerAssignmentLeft, out _);
+                    syntaxFacts.GetPartsOfAssignmentStatement(
+                        whenTrueStatement,
+                        out var innerAssignmentLeft,
+                        out _
+                    );
                     return syntaxFacts.AreEquivalent(innerAssignmentLeft, checkedExpression);
                 }
 

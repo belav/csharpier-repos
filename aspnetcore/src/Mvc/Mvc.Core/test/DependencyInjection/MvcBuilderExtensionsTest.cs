@@ -39,11 +39,17 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var manager = new ApplicationPartManager();
             var builder = new MvcBuilder(Mock.Of<IServiceCollection>(), manager);
-            var assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Test"), AssemblyBuilderAccess.Run);
+            var assembly = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Test"),
+                AssemblyBuilderAccess.Run
+            );
 
-            var attribute = new CustomAttributeBuilder(typeof(ProvideApplicationPartFactoryAttribute).GetConstructor(
-                new[] { typeof(Type) }),
-                new[] { typeof(TestApplicationPartFactory) });
+            var attribute = new CustomAttributeBuilder(
+                typeof(ProvideApplicationPartFactoryAttribute).GetConstructor(
+                    new[] { typeof(Type) }
+                ),
+                new[] { typeof(TestApplicationPartFactory) }
+            );
 
             assembly.SetCustomAttribute(attribute);
 
@@ -61,7 +67,8 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var builder = new MvcBuilder(
                 Mock.Of<IServiceCollection>(),
-                new ApplicationPartManager());
+                new ApplicationPartManager()
+            );
 
             var part = new TestApplicationPart();
 
@@ -73,7 +80,10 @@ namespace Microsoft.AspNetCore.Mvc
 
             // Assert
             Assert.Same(result, builder);
-            Assert.Equal(new ApplicationPart[] { part }, builder.PartManager.ApplicationParts.ToArray());
+            Assert.Equal(
+                new ApplicationPart[] { part },
+                builder.PartManager.ApplicationParts.ToArray()
+            );
         }
 
         [Fact]
@@ -81,11 +91,9 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var collection = new ServiceCollection();
-            var controllerTypes = new[]
-            {
-                typeof(ControllerTypeA),
-                typeof(TypeBController),
-            }.Select(t => t.GetTypeInfo()).ToArray();
+            var controllerTypes = new[] { typeof(ControllerTypeA), typeof(TypeBController) }
+                .Select(t => t.GetTypeInfo())
+                .ToArray();
 
             var builder = new MvcBuilder(collection, GetApplicationPartManager(controllerTypes));
 
@@ -114,7 +122,9 @@ namespace Microsoft.AspNetCore.Mvc
             // Arrange
             var services = new ServiceCollection();
             var manager = new ApplicationPartManager();
-            manager.ApplicationParts.Add(new TestApplicationPart(typeof(ControllerOne), typeof(ControllerTwo)));
+            manager.ApplicationParts.Add(
+                new TestApplicationPart(typeof(ControllerOne), typeof(ControllerTwo))
+            );
             manager.FeatureProviders.Add(new TestFeatureProvider());
             var builder = new MvcBuilder(services, manager);
 
@@ -134,12 +144,9 @@ namespace Microsoft.AspNetCore.Mvc
         public void ConfigureApiBehaviorOptions_InvokesSetupAction()
         {
             // Arrange
-            var serviceCollection = new ServiceCollection()
-                .AddOptions();
+            var serviceCollection = new ServiceCollection().AddOptions();
 
-            var builder = new MvcBuilder(
-                serviceCollection,
-                new ApplicationPartManager());
+            var builder = new MvcBuilder(serviceCollection, new ApplicationPartManager());
 
             var part = new TestApplicationPart();
 
@@ -150,20 +157,16 @@ namespace Microsoft.AspNetCore.Mvc
             });
 
             // Assert
-            var options = serviceCollection.
-                BuildServiceProvider()
+            var options = serviceCollection
+                .BuildServiceProvider()
                 .GetRequiredService<IOptions<ApiBehaviorOptions>>()
                 .Value;
             Assert.True(options.SuppressMapClientErrors);
         }
 
-        private class ControllerOne
-        {
-        }
+        private class ControllerOne { }
 
-        private class ControllerTwo
-        {
-        }
+        private class ControllerTwo { }
 
         private static ApplicationPartManager GetApplicationPartManager(params TypeInfo[] types)
         {
@@ -193,13 +196,7 @@ namespace Microsoft.AspNetCore.Mvc
 // independent.
 namespace Microsoft.AspNetCore.Mvc.MvcServiceCollectionExtensionsTestControllers
 {
-    public class ControllerTypeA : ControllerBase
-    {
+    public class ControllerTypeA : ControllerBase { }
 
-    }
-
-    public class TypeBController
-    {
-
-    }
+    public class TypeBController { }
 }

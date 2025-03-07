@@ -5,11 +5,11 @@
 namespace System.ServiceModel
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
     using System.Reflection;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
 
     [AttributeUsage(ServiceModelAttributeTargets.OperationBehavior)]
     public sealed class TransactionFlowAttribute : Attribute, IOperationBehavior
@@ -22,19 +22,21 @@ namespace System.ServiceModel
             this.transactions = transactions;
         }
 
-
         public TransactionFlowOption Transactions
         {
-            get
-            {
-                return this.transactions;
-            }
+            get { return this.transactions; }
         }
 
-        internal static void OverrideFlow(BindingParameterCollection parameters, string action,
-                                          MessageDirection direction, TransactionFlowOption option)
+        internal static void OverrideFlow(
+            BindingParameterCollection parameters,
+            string action,
+            MessageDirection direction,
+            TransactionFlowOption option
+        )
         {
-            Dictionary<DirectionalAction, TransactionFlowOption> dictionary = EnsureDictionary(parameters);
+            Dictionary<DirectionalAction, TransactionFlowOption> dictionary = EnsureDictionary(
+                parameters
+            );
             DirectionalAction da = new DirectionalAction(direction, action);
 
             if (dictionary.ContainsKey(da))
@@ -47,10 +49,13 @@ namespace System.ServiceModel
             }
         }
 
-        static Dictionary<DirectionalAction, TransactionFlowOption> EnsureDictionary(BindingParameterCollection parameters)
+        static Dictionary<DirectionalAction, TransactionFlowOption> EnsureDictionary(
+            BindingParameterCollection parameters
+        )
         {
-            Dictionary<DirectionalAction, TransactionFlowOption> dictionary =
-                parameters.Find<Dictionary<DirectionalAction, TransactionFlowOption>>();
+            Dictionary<DirectionalAction, TransactionFlowOption> dictionary = parameters.Find<
+                Dictionary<DirectionalAction, TransactionFlowOption>
+            >();
             if (dictionary == null)
             {
                 dictionary = new Dictionary<DirectionalAction, TransactionFlowOption>();
@@ -61,27 +66,37 @@ namespace System.ServiceModel
 
         void ApplyBehavior(OperationDescription description, BindingParameterCollection parameters)
         {
-            Dictionary<DirectionalAction, TransactionFlowOption> dictionary = EnsureDictionary(parameters);
-            dictionary[new DirectionalAction(description.Messages[0].Direction, description.Messages[0].Action)] = this.transactions;
+            Dictionary<DirectionalAction, TransactionFlowOption> dictionary = EnsureDictionary(
+                parameters
+            );
+            dictionary[
+                new DirectionalAction(
+                    description.Messages[0].Direction,
+                    description.Messages[0].Action
+                )
+            ] = this.transactions;
         }
 
-        void IOperationBehavior.Validate(OperationDescription description)
-        {
-        }
+        void IOperationBehavior.Validate(OperationDescription description) { }
 
-        void IOperationBehavior.ApplyDispatchBehavior(OperationDescription description, DispatchOperation dispatch)
-        {
-        }
+        void IOperationBehavior.ApplyDispatchBehavior(
+            OperationDescription description,
+            DispatchOperation dispatch
+        ) { }
 
-        void IOperationBehavior.AddBindingParameters(OperationDescription description, BindingParameterCollection parameters)
+        void IOperationBehavior.AddBindingParameters(
+            OperationDescription description,
+            BindingParameterCollection parameters
+        )
         {
             if (parameters == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("parameters");
             ApplyBehavior(description, parameters);
         }
 
-        void IOperationBehavior.ApplyClientBehavior(OperationDescription description, ClientOperation proxy)
-        {
-        }
+        void IOperationBehavior.ApplyClientBehavior(
+            OperationDescription description,
+            ClientOperation proxy
+        ) { }
     }
 }

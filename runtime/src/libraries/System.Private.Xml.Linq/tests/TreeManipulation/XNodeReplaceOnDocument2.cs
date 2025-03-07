@@ -9,7 +9,20 @@ namespace XLinqTests
     {
         public override void AddChildren()
         {
-            AddChild(new TestVariation(OnXDocument) { Attribute = new VariationAttribute("XDocument: Replace with single node") { Params = new object[] { 1, "<?xml version='1.0'?>\t<?PI?> <E><sub1/></E>\n <!--comx--> " }, Priority = 0 } });
+            AddChild(
+                new TestVariation(OnXDocument)
+                {
+                    Attribute = new VariationAttribute("XDocument: Replace with single node")
+                    {
+                        Params = new object[]
+                        {
+                            1,
+                            "<?xml version='1.0'?>\t<?PI?> <E><sub1/></E>\n <!--comx--> ",
+                        },
+                        Priority = 0,
+                    },
+                }
+            );
         }
     }
 }

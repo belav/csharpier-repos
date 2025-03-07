@@ -5,32 +5,37 @@
 namespace System.Activities.DynamicUpdate
 {
     using System;
-    using System.IO;
     using System.Activities;
-    using System.Activities.Expressions;
     using System.Activities.DynamicUpdate;
+    using System.Activities.Expressions;
     using System.Activities.Hosting;
     using System.Activities.Runtime;
+    using System.Activities.Validation;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.IO;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Xaml;
-    using System.Activities.Validation;
     using Microsoft.VisualBasic.Activities;
 
     public static class DynamicUpdateServices
     {
-        private static Func<Activity, Exception> onInvalidActivityToBlockUpdate =
-            new Func<Activity, Exception>(OnInvalidActivityToBlockUpdate);
+        private static Func<Activity, Exception> onInvalidActivityToBlockUpdate = new Func<
+            Activity,
+            Exception
+        >(OnInvalidActivityToBlockUpdate);
 
-        private static Func<Activity, Exception> onInvalidImplementationMapAssociation =
-            new Func<Activity, Exception>(OnInvalidImplementationMapAssociation);
+        private static Func<Activity, Exception> onInvalidImplementationMapAssociation = new Func<
+            Activity,
+            Exception
+        >(OnInvalidImplementationMapAssociation);
 
-        private static AttachableMemberIdentifier implementationMapProperty = new AttachableMemberIdentifier(typeof(DynamicUpdateServices), "ImplementationMap");
+        private static AttachableMemberIdentifier implementationMapProperty =
+            new AttachableMemberIdentifier(typeof(DynamicUpdateServices), "ImplementationMap");
 
         public static void PrepareForUpdate(Activity workflowDefinitionToBeUpdated)
         {
@@ -52,7 +57,10 @@ namespace System.Activities.DynamicUpdate
             InternalPrepareForUpdate(activityDefinitionToBeUpdated, true);
         }
 
-        private static void InternalPrepareForUpdate(object definitionToBeUpdated, bool forImplementation)
+        private static void InternalPrepareForUpdate(
+            object definitionToBeUpdated,
+            bool forImplementation
+        )
         {
             // Clone the definition
             object clone;
@@ -77,8 +85,13 @@ namespace System.Activities.DynamicUpdate
             }
             else
             {
-                DynamicUpdateInfo.SetOriginalActivityBuilder(definitionToBeUpdated, (ActivityBuilder)clone);
-                mapItems = DynamicUpdateMap.CalculateImplementationMapItems(GetDynamicActivity((ActivityBuilder)definitionToBeUpdated));                
+                DynamicUpdateInfo.SetOriginalActivityBuilder(
+                    definitionToBeUpdated,
+                    (ActivityBuilder)clone
+                );
+                mapItems = DynamicUpdateMap.CalculateImplementationMapItems(
+                    GetDynamicActivity((ActivityBuilder)definitionToBeUpdated)
+                );
             }
 
             foreach (KeyValuePair<object, DynamicUpdateMapItem> objectInfo in mapItems)
@@ -92,32 +105,60 @@ namespace System.Activities.DynamicUpdate
             return CreateUpdateMap(updatedWorkflowDefinition, null);
         }
 
-        public static DynamicUpdateMap CreateUpdateMap(Activity updatedWorkflowDefinition, IEnumerable<Activity> disallowUpdateInsideActivities)
+        public static DynamicUpdateMap CreateUpdateMap(
+            Activity updatedWorkflowDefinition,
+            IEnumerable<Activity> disallowUpdateInsideActivities
+        )
         {
             IList<ActivityBlockingUpdate> activitiesBlockingUpdate;
-            return CreateUpdateMap(updatedWorkflowDefinition, disallowUpdateInsideActivities, out activitiesBlockingUpdate);
+            return CreateUpdateMap(
+                updatedWorkflowDefinition,
+                disallowUpdateInsideActivities,
+                out activitiesBlockingUpdate
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters, Justification = "Approved Design. Need to return the map and the block list.")]
-        public static DynamicUpdateMap CreateUpdateMap(Activity updatedWorkflowDefinition, IEnumerable<Activity> disallowUpdateInsideActivities, out IList<ActivityBlockingUpdate> activitiesBlockingUpdate)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "Approved Design. Need to return the map and the block list."
+        )]
+        public static DynamicUpdateMap CreateUpdateMap(
+            Activity updatedWorkflowDefinition,
+            IEnumerable<Activity> disallowUpdateInsideActivities,
+            out IList<ActivityBlockingUpdate> activitiesBlockingUpdate
+        )
         {
             if (updatedWorkflowDefinition == null)
             {
                 throw FxTrace.Exception.ArgumentNull("updatedWorkflowDefinition");
             }
 
-            Activity originalDefinition = DynamicUpdateInfo.GetOriginalDefinition(updatedWorkflowDefinition);
+            Activity originalDefinition = DynamicUpdateInfo.GetOriginalDefinition(
+                updatedWorkflowDefinition
+            );
             if (originalDefinition == null)
             {
-                throw FxTrace.Exception.Argument("updatedWorkflowDefinition", SR.MustCallPrepareBeforeFinalize);
+                throw FxTrace.Exception.Argument(
+                    "updatedWorkflowDefinition",
+                    SR.MustCallPrepareBeforeFinalize
+                );
             }
 
-            DynamicUpdateMap result = InternalTryCreateUpdateMap(updatedWorkflowDefinition, originalDefinition, disallowUpdateInsideActivities, false, out activitiesBlockingUpdate);
+            DynamicUpdateMap result = InternalTryCreateUpdateMap(
+                updatedWorkflowDefinition,
+                originalDefinition,
+                disallowUpdateInsideActivities,
+                false,
+                out activitiesBlockingUpdate
+            );
             // Remove the DynamicUpdateMapItems now that the update is finalized
             // Calling CalculateMapItems is actually an unnecessary perf hit since it calls CacheMetadata
             // again; but we do it so that Finalize is implemented purely in terms of other public APIs.
             DynamicUpdateInfo.SetOriginalDefinition(updatedWorkflowDefinition, null);
-            IDictionary<object, DynamicUpdateMapItem> mapItems = DynamicUpdateMap.CalculateMapItems(updatedWorkflowDefinition);
+            IDictionary<object, DynamicUpdateMapItem> mapItems = DynamicUpdateMap.CalculateMapItems(
+                updatedWorkflowDefinition
+            );
             foreach (object matchObject in mapItems.Keys)
             {
                 DynamicUpdateInfo.SetMapItem(matchObject, null);
@@ -131,35 +172,61 @@ namespace System.Activities.DynamicUpdate
             return CreateUpdateMap(updatedActivityDefinition, null);
         }
 
-        public static DynamicUpdateMap CreateUpdateMap(ActivityBuilder updatedActivityDefinition, IEnumerable<Activity> disallowUpdateInsideActivities)
+        public static DynamicUpdateMap CreateUpdateMap(
+            ActivityBuilder updatedActivityDefinition,
+            IEnumerable<Activity> disallowUpdateInsideActivities
+        )
         {
             IList<ActivityBlockingUpdate> activitiesBlockingUpdate;
-            return CreateUpdateMap(updatedActivityDefinition, disallowUpdateInsideActivities, out activitiesBlockingUpdate);
+            return CreateUpdateMap(
+                updatedActivityDefinition,
+                disallowUpdateInsideActivities,
+                out activitiesBlockingUpdate
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters, Justification = "Approved Design. Need to return the map and the block list.")]
-        public static DynamicUpdateMap CreateUpdateMap(ActivityBuilder updatedActivityDefinition, IEnumerable<Activity> disallowUpdateInsideActivities, out IList<ActivityBlockingUpdate> activitiesBlockingUpdate)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "Approved Design. Need to return the map and the block list."
+        )]
+        public static DynamicUpdateMap CreateUpdateMap(
+            ActivityBuilder updatedActivityDefinition,
+            IEnumerable<Activity> disallowUpdateInsideActivities,
+            out IList<ActivityBlockingUpdate> activitiesBlockingUpdate
+        )
         {
             if (updatedActivityDefinition == null)
             {
                 throw FxTrace.Exception.ArgumentNull("updatedActivityDefinition");
             }
 
-            ActivityBuilder originalActivityDefinition = DynamicUpdateInfo.GetOriginalActivityBuilder(updatedActivityDefinition);
+            ActivityBuilder originalActivityDefinition =
+                DynamicUpdateInfo.GetOriginalActivityBuilder(updatedActivityDefinition);
             if (originalActivityDefinition == null)
             {
-                throw FxTrace.Exception.Argument("updatedActivityDefinition", SR.MustCallPrepareBeforeFinalize);
+                throw FxTrace.Exception.Argument(
+                    "updatedActivityDefinition",
+                    SR.MustCallPrepareBeforeFinalize
+                );
             }
 
             Activity originalBuiltRoot = GetDynamicActivity(originalActivityDefinition);
             Activity updatedBuiltRoot = GetDynamicActivity(updatedActivityDefinition);
 
-            DynamicUpdateMap result = InternalTryCreateUpdateMap(updatedBuiltRoot, originalBuiltRoot, disallowUpdateInsideActivities, true, out activitiesBlockingUpdate);
+            DynamicUpdateMap result = InternalTryCreateUpdateMap(
+                updatedBuiltRoot,
+                originalBuiltRoot,
+                disallowUpdateInsideActivities,
+                true,
+                out activitiesBlockingUpdate
+            );
             // Remove the DynamicUpdateMapItems now that the update is finalized
             // Calling CalculateMapItems is actually an unnecessary perf hit since it calls CacheMetadata
             // again; but we do it so that Finalize is implemented purely in terms of other public APIs.
             DynamicUpdateInfo.SetOriginalActivityBuilder(updatedActivityDefinition, null);
-            IDictionary<object, DynamicUpdateMapItem> mapItems = DynamicUpdateMap.CalculateImplementationMapItems(updatedBuiltRoot);
+            IDictionary<object, DynamicUpdateMapItem> mapItems =
+                DynamicUpdateMap.CalculateImplementationMapItems(updatedBuiltRoot);
             foreach (object matchObject in mapItems.Keys)
             {
                 DynamicUpdateInfo.SetMapItem(matchObject, null);
@@ -168,7 +235,13 @@ namespace System.Activities.DynamicUpdate
             return result;
         }
 
-        private static DynamicUpdateMap InternalTryCreateUpdateMap(Activity updatedDefinition, Activity originalDefinition, IEnumerable<Activity> disallowUpdateInsideActivities, bool forImplementation, out IList<ActivityBlockingUpdate> activitiesBlockingUpdate)
+        private static DynamicUpdateMap InternalTryCreateUpdateMap(
+            Activity updatedDefinition,
+            Activity originalDefinition,
+            IEnumerable<Activity> disallowUpdateInsideActivities,
+            bool forImplementation,
+            out IList<ActivityBlockingUpdate> activitiesBlockingUpdate
+        )
         {
             DynamicUpdateMapBuilder builder = new DynamicUpdateMapBuilder
             {
@@ -194,7 +267,13 @@ namespace System.Activities.DynamicUpdate
         public static DynamicUpdateMap GetImplementationMap(Activity targetActivity)
         {
             DynamicUpdateMap result;
-            if (AttachablePropertyServices.TryGetProperty(targetActivity, implementationMapProperty, out result))
+            if (
+                AttachablePropertyServices.TryGetProperty(
+                    targetActivity,
+                    implementationMapProperty,
+                    out result
+                )
+            )
             {
                 return result;
             }
@@ -204,24 +283,31 @@ namespace System.Activities.DynamicUpdate
             }
         }
 
-        public static void SetImplementationMap(Activity targetActivity, DynamicUpdateMap implementationMap)
+        public static void SetImplementationMap(
+            Activity targetActivity,
+            DynamicUpdateMap implementationMap
+        )
         {
             if (implementationMap != null)
             {
-                AttachablePropertyServices.SetProperty(targetActivity, implementationMapProperty, implementationMap);
+                AttachablePropertyServices.SetProperty(
+                    targetActivity,
+                    implementationMapProperty,
+                    implementationMap
+                );
             }
             else
             {
-                AttachablePropertyServices.RemoveProperty(targetActivity, implementationMapProperty);
+                AttachablePropertyServices.RemoveProperty(
+                    targetActivity,
+                    implementationMapProperty
+                );
             }
         }
 
         static DynamicActivity GetDynamicActivity(ActivityBuilder activityDefinition)
         {
-            DynamicActivity result = new DynamicActivity
-            {
-                Name = activityDefinition.Name
-            };
+            DynamicActivity result = new DynamicActivity { Name = activityDefinition.Name };
             foreach (DynamicActivityProperty property in activityDefinition.Properties)
             {
                 result.Properties.Add(property);
@@ -242,13 +328,15 @@ namespace System.Activities.DynamicUpdate
                 VisualBasic.SetSettings(result, vbsettings);
             }
 
-            IList<string> namespacesForImplementation = TextExpression.GetNamespacesForImplementation(activityDefinition);
+            IList<string> namespacesForImplementation =
+                TextExpression.GetNamespacesForImplementation(activityDefinition);
             if (namespacesForImplementation.Count > 0)
             {
                 TextExpression.SetNamespacesForImplementation(result, namespacesForImplementation);
             }
 
-            IList<AssemblyReference> referencesForImplementation = TextExpression.GetReferencesForImplementation(activityDefinition);
+            IList<AssemblyReference> referencesForImplementation =
+                TextExpression.GetReferencesForImplementation(activityDefinition);
             if (referencesForImplementation.Count > 0)
             {
                 TextExpression.SetReferencesForImplementation(result, referencesForImplementation);
@@ -259,12 +347,17 @@ namespace System.Activities.DynamicUpdate
 
         static Exception OnInvalidActivityToBlockUpdate(Activity activity)
         {
-            return new ArgumentException(SR.InvalidActivityToBlockUpdateServices(activity), "disallowUpdateInsideActivities");
+            return new ArgumentException(
+                SR.InvalidActivityToBlockUpdateServices(activity),
+                "disallowUpdateInsideActivities"
+            );
         }
 
         static Exception OnInvalidImplementationMapAssociation(Activity activity)
         {
-            return new InvalidOperationException(SR.InvalidImplementationMapAssociationServices(activity));
+            return new InvalidOperationException(
+                SR.InvalidImplementationMapAssociationServices(activity)
+            );
         }
     }
 }

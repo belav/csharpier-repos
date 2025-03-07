@@ -18,7 +18,9 @@ public partial class ExampleTests
         var logger = GetLogger();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => TestExampleLanguageServer.CreateBadLanguageServer(logger));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => TestExampleLanguageServer.CreateBadLanguageServer(logger)
+        );
 
         Assert.Equal("Method textDocument/didOpen was implemented more than once.", ex.Message);
     }
@@ -35,7 +37,10 @@ public partial class ExampleTests
         var _ = await server.InitializeServerAsync();
 
         // Assert
-        var handlerProvider = server.GetTestAccessor().GetQueueAccessor()!.Value.GetHandlerProvider();
+        var handlerProvider = server
+            .GetTestAccessor()
+            .GetQueueAccessor()!
+            .Value.GetHandlerProvider();
         var methods = handlerProvider.GetRegisteredMethods();
 
         Assert.Equal(5, methods.Length);

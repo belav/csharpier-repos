@@ -7,33 +7,32 @@ namespace System.IdentityModel.Tokens
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Xml.Serialization;
-    using System.Xml;
-    using System.Runtime.Serialization;
     using System.Globalization;
     using System.IdentityModel.Selectors;
+    using System.Runtime.Serialization;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     public class SamlConditions
     {
-        readonly ImmutableCollection<SamlCondition> conditions = new ImmutableCollection<SamlCondition>();
+        readonly ImmutableCollection<SamlCondition> conditions =
+            new ImmutableCollection<SamlCondition>();
         bool isReadOnly = false;
 
         // Calculate once
         DateTime notBefore = SecurityUtils.MinUtcDateTime;
         DateTime notOnOrAfter = SecurityUtils.MaxUtcDateTime;
 
-        public SamlConditions()
-        {
-        }
+        public SamlConditions() { }
 
         public SamlConditions(DateTime notBefore, DateTime notOnOrAfter)
-            : this(notBefore, notOnOrAfter, null)
-        {
-        }
+            : this(notBefore, notOnOrAfter, null) { }
 
-        public SamlConditions(DateTime notBefore, DateTime notOnOrAfter,
+        public SamlConditions(
+            DateTime notBefore,
+            DateTime notOnOrAfter,
             IEnumerable<SamlCondition> conditions
-            )
+        )
         {
             this.notBefore = notBefore.ToUniversalTime();
             this.notOnOrAfter = notOnOrAfter.ToUniversalTime();
@@ -43,7 +42,12 @@ namespace System.IdentityModel.Tokens
                 foreach (SamlCondition condition in conditions)
                 {
                     if (condition == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SAMLEntityCannotBeNullOrEmpty, XD.SamlDictionary.Condition.Value));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SAMLEntityCannotBeNullOrEmpty,
+                                XD.SamlDictionary.Condition.Value
+                            )
+                        );
 
                     this.conditions.Add(condition);
                 }
@@ -61,7 +65,9 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
 
                 this.notBefore = value;
             }
@@ -73,7 +79,9 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
 
                 this.notOnOrAfter = value;
             }
@@ -99,26 +107,47 @@ namespace System.IdentityModel.Tokens
             }
         }
 
-        public virtual void ReadXml(XmlDictionaryReader reader, SamlSerializer samlSerializer, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver)
+        public virtual void ReadXml(
+            XmlDictionaryReader reader,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("reader"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("reader")
+                );
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("samlSerializer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("samlSerializer")
+                );
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
 
             string time = reader.GetAttribute(dictionary.NotBefore, null);
             if (!string.IsNullOrEmpty(time))
-                this.notBefore = DateTime.ParseExact(
-                    time, SamlConstants.AcceptedDateTimeFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None).ToUniversalTime();
+                this.notBefore = DateTime
+                    .ParseExact(
+                        time,
+                        SamlConstants.AcceptedDateTimeFormats,
+                        DateTimeFormatInfo.InvariantInfo,
+                        DateTimeStyles.None
+                    )
+                    .ToUniversalTime();
 
             time = reader.GetAttribute(dictionary.NotOnOrAfter, null);
             if (!string.IsNullOrEmpty(time))
-                this.notOnOrAfter = DateTime.ParseExact(
-                    time, SamlConstants.AcceptedDateTimeFormats, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None).ToUniversalTime();
+                this.notOnOrAfter = DateTime
+                    .ParseExact(
+                        time,
+                        SamlConstants.AcceptedDateTimeFormats,
+                        DateTimeFormatInfo.InvariantInfo,
+                        DateTimeStyles.None
+                    )
+                    .ToUniversalTime();
 
             // Saml Conditions element is an optional element and all its child element
             // are optional as well. So we can have a empty <saml:Conditions /> element
@@ -135,39 +164,67 @@ namespace System.IdentityModel.Tokens
             reader.Read();
             while (reader.IsStartElement())
             {
-                SamlCondition condition = samlSerializer.LoadCondition(reader, keyInfoSerializer, outOfBandTokenResolver);
+                SamlCondition condition = samlSerializer.LoadCondition(
+                    reader,
+                    keyInfoSerializer,
+                    outOfBandTokenResolver
+                );
                 if (condition == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadCondtion)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadCondtion))
+                    );
                 this.conditions.Add(condition);
             }
             reader.MoveToContent();
             reader.ReadEndElement();
         }
 
-        public virtual void WriteXml(XmlDictionaryWriter writer, SamlSerializer samlSerializer, SecurityTokenSerializer keyInfoSerializer)
+        public virtual void WriteXml(
+            XmlDictionaryWriter writer,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer
+        )
         {
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("writer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("writer")
+                );
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("samlSerializer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("samlSerializer")
+                );
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
 
-            writer.WriteStartElement(dictionary.PreferredPrefix.Value, dictionary.Conditions, dictionary.Namespace);
+            writer.WriteStartElement(
+                dictionary.PreferredPrefix.Value,
+                dictionary.Conditions,
+                dictionary.Namespace
+            );
 
             if (this.notBefore != SecurityUtils.MinUtcDateTime)
             {
                 writer.WriteStartAttribute(dictionary.NotBefore, null);
-                writer.WriteString(this.notBefore.ToString(SamlConstants.GeneratedDateTimeFormat, DateTimeFormatInfo.InvariantInfo));
+                writer.WriteString(
+                    this.notBefore.ToString(
+                        SamlConstants.GeneratedDateTimeFormat,
+                        DateTimeFormatInfo.InvariantInfo
+                    )
+                );
                 writer.WriteEndAttribute();
             }
 
             if (this.notOnOrAfter != SecurityUtils.MaxUtcDateTime)
             {
                 writer.WriteStartAttribute(dictionary.NotOnOrAfter, null);
-                writer.WriteString(this.notOnOrAfter.ToString(SamlConstants.GeneratedDateTimeFormat, DateTimeFormatInfo.InvariantInfo));
+                writer.WriteString(
+                    this.notOnOrAfter.ToString(
+                        SamlConstants.GeneratedDateTimeFormat,
+                        DateTimeFormatInfo.InvariantInfo
+                    )
+                );
                 writer.WriteEndAttribute();
             }
 
@@ -179,5 +236,4 @@ namespace System.IdentityModel.Tokens
             writer.WriteEndElement();
         }
     }
-
 }

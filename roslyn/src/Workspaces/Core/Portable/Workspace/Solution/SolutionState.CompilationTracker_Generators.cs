@@ -26,12 +26,16 @@ internal partial class SolutionState
 {
     private partial class CompilationTracker : ICompilationTracker
     {
-        private async Task<(Compilation compilationWithGeneratedFiles, CompilationTrackerGeneratorInfo generatorInfo)> AddExistingOrComputeNewGeneratorInfoAsync(
+        private async Task<(
+            Compilation compilationWithGeneratedFiles,
+            CompilationTrackerGeneratorInfo generatorInfo
+        )> AddExistingOrComputeNewGeneratorInfoAsync(
             SolutionState solution,
             Compilation compilationWithoutGeneratedFiles,
             CompilationTrackerGeneratorInfo generatorInfo,
             Compilation? compilationWithStaleGeneratedTrees,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (generatorInfo.DocumentsAreFinal)
             {
@@ -41,8 +45,14 @@ internal partial class SolutionState
                 // consumer of this Solution snapshot has already seen the trees and thus needs to ensure identity
                 // of them.
                 var compilationWithGeneratedFiles = compilationWithoutGeneratedFiles.AddSyntaxTrees(
-                    await generatorInfo.Documents.States.Values.SelectAsArrayAsync(
-                        static (state, cancellationToken) => state.GetSyntaxTreeAsync(cancellationToken), cancellationToken).ConfigureAwait(false));
+                    await generatorInfo
+                        .Documents.States.Values.SelectAsArrayAsync(
+                            static (state, cancellationToken) =>
+                                state.GetSyntaxTreeAsync(cancellationToken),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                );
 
                 // Will reuse the generator info since we're reusing all the trees from within it.
                 return (compilationWithGeneratedFiles, generatorInfo);
@@ -52,66 +62,114 @@ internal partial class SolutionState
             {
                 // We don't have any source generators.  Trivially bail out.
                 var compilationWithGeneratedFiles = compilationWithoutGeneratedFiles;
-                return (compilationWithGeneratedFiles, new CompilationTrackerGeneratorInfo(
-                    TextDocumentStates<SourceGeneratedDocumentState>.Empty, generatorInfo.Driver, documentsAreFinal: true));
+                return (
+                    compilationWithGeneratedFiles,
+                    new CompilationTrackerGeneratorInfo(
+                        TextDocumentStates<SourceGeneratedDocumentState>.Empty,
+                        generatorInfo.Driver,
+                        documentsAreFinal: true
+                    )
+                );
             }
 
             return await ComputeNewGeneratorInfoAsync(
-                solution,
-                compilationWithoutGeneratedFiles,
-                generatorInfo,
-                compilationWithStaleGeneratedTrees,
-                cancellationToken).ConfigureAwait(false);
+                    solution,
+                    compilationWithoutGeneratedFiles,
+                    generatorInfo,
+                    compilationWithStaleGeneratedTrees,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        private async Task<(Compilation compilationWithGeneratedFiles, CompilationTrackerGeneratorInfo generatorInfo)> ComputeNewGeneratorInfoAsync(
+        private async Task<(
+            Compilation compilationWithGeneratedFiles,
+            CompilationTrackerGeneratorInfo generatorInfo
+        )> ComputeNewGeneratorInfoAsync(
             SolutionState solution,
             Compilation compilationWithoutGeneratedFiles,
             CompilationTrackerGeneratorInfo generatorInfo,
             Compilation? compilationWithStaleGeneratedTrees,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // First try to compute the SG docs in the remote process (if we're the host process), syncing the results
             // back over to us to ensure that both processes are in total agreement about the SG docs and their
             // contents.
             var result = await TryComputeNewGeneratorInfoInRemoteProcessAsync(
-                solution, compilationWithoutGeneratedFiles, generatorInfo, compilationWithStaleGeneratedTrees, cancellationToken).ConfigureAwait(false);
+                    solution,
+                    compilationWithoutGeneratedFiles,
+                    generatorInfo,
+                    compilationWithStaleGeneratedTrees,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (result.HasValue)
                 return result.Value;
 
             // If that failed (OOP crash, or we are the OOP process ourselves), then generate the SG docs locally.
             return await ComputeNewGeneratorInfoInCurrentProcessAsync(
-                solution, compilationWithoutGeneratedFiles, generatorInfo, compilationWithStaleGeneratedTrees, cancellationToken).ConfigureAwait(false);
+                    solution,
+                    compilationWithoutGeneratedFiles,
+                    generatorInfo,
+                    compilationWithStaleGeneratedTrees,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        private async Task<(Compilation compilationWithGeneratedFiles, CompilationTrackerGeneratorInfo generatorInfo)?> TryComputeNewGeneratorInfoInRemoteProcessAsync(
+        private async Task<(
+            Compilation compilationWithGeneratedFiles,
+            CompilationTrackerGeneratorInfo generatorInfo
+        )?> TryComputeNewGeneratorInfoInRemoteProcessAsync(
             SolutionState solution,
             Compilation compilationWithoutGeneratedFiles,
             CompilationTrackerGeneratorInfo generatorInfo,
             Compilation? compilationWithStaleGeneratedTrees,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var options = solution.Services.GetRequiredService<IWorkspaceConfigurationService>().Options;
+            var options = solution
+                .Services.GetRequiredService<IWorkspaceConfigurationService>()
+                .Options;
             if (options.RunSourceGeneratorsInSameProcessOnly)
                 return null;
 
-            var client = await RemoteHostClient.TryGetClientAsync(solution.Services, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(solution.Services, cancellationToken)
+                .ConfigureAwait(false);
             if (client is null)
                 return null;
 
             // We're going to be making multiple calls over to OOP.  No point in resyncing data multiple times.  Keep a
             // single connection, and keep this solution instance alive (and synced) on both sides of the connection
             // throughout the calls.
-            var listenerProvider = solution.Services.ExportProvider.GetExports<IAsynchronousOperationListenerProvider>().First().Value;
-            using var connection = client.CreateConnection<IRemoteSourceGenerationService>(callbackTarget: null);
-            using var _ = RemoteKeepAliveSession.Create(solution, listenerProvider.GetListener(FeatureAttribute.Workspace));
+            var listenerProvider = solution
+                .Services.ExportProvider.GetExports<IAsynchronousOperationListenerProvider>()
+                .First()
+                .Value;
+            using var connection = client.CreateConnection<IRemoteSourceGenerationService>(
+                callbackTarget: null
+            );
+            using var _ = RemoteKeepAliveSession.Create(
+                solution,
+                listenerProvider.GetListener(FeatureAttribute.Workspace)
+            );
 
             // First, grab the info from our external host about the generated documents it has for this project.
             var projectId = this.ProjectState.Id;
-            var infosOpt = await connection.TryInvokeAsync(
-                solution,
-                (service, solutionChecksum, cancellationToken) => service.GetSourceGenerationInfoAsync(solutionChecksum, projectId, cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+            var infosOpt = await connection
+                .TryInvokeAsync(
+                    solution,
+                    (service, solutionChecksum, cancellationToken) =>
+                        service.GetSourceGenerationInfoAsync(
+                            solutionChecksum,
+                            projectId,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (!infosOpt.HasValue)
                 return null;
@@ -130,8 +188,10 @@ internal partial class SolutionState
                 var existingDocument = generatorInfo.Documents.GetState(documentId);
 
                 // Can keep what we have if it has the same doc and content identity.
-                if (existingDocument?.Identity == documentIdentity &&
-                    existingDocument.GetContentIdentity() == contentIdentity)
+                if (
+                    existingDocument?.Identity == documentIdentity
+                    && existingDocument.GetContentIdentity() == contentIdentity
+                )
                 {
                     continue;
                 }
@@ -143,21 +203,36 @@ internal partial class SolutionState
 
             // If we produced just as many documents as before, and none of them required any changes, then we can
             // reuse the prior compilation.
-            if (infos.Length == generatorInfo.Documents.Count &&
-                documentsToAddOrUpdate.Count == 0 &&
-                compilationWithStaleGeneratedTrees != null &&
-                generatorInfo.Documents.States.All(kvp => kvp.Value.ParseOptions.Equals(this.ProjectState.ParseOptions)))
+            if (
+                infos.Length == generatorInfo.Documents.Count
+                && documentsToAddOrUpdate.Count == 0
+                && compilationWithStaleGeneratedTrees != null
+                && generatorInfo.Documents.States.All(kvp =>
+                    kvp.Value.ParseOptions.Equals(this.ProjectState.ParseOptions)
+                )
+            )
             {
-                return (compilationWithStaleGeneratedTrees, generatorInfo.WithDocumentsAreFinal(true));
+                return (
+                    compilationWithStaleGeneratedTrees,
+                    generatorInfo.WithDocumentsAreFinal(true)
+                );
             }
 
             // Either we generated a different number of files, and/or we had contents of files that changed. Ensure
             // we know the contents of any new/changed files.
-            var generatedSourcesOpt = await connection.TryInvokeAsync(
-                solution,
-                (service, solutionChecksum, cancellationToken) => service.GetContentsAsync(
-                    solutionChecksum, projectId, documentsToAddOrUpdate.ToImmutable(), cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+            var generatedSourcesOpt = await connection
+                .TryInvokeAsync(
+                    solution,
+                    (service, solutionChecksum, cancellationToken) =>
+                        service.GetContentsAsync(
+                            solutionChecksum,
+                            projectId,
+                            documentsToAddOrUpdate.ToImmutable(),
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (!generatedSourcesOpt.HasValue)
                 return null;
@@ -167,7 +242,8 @@ internal partial class SolutionState
 
             // Now go through and produce the new document states, using what we have already if it is unchanged, or
             // what we have retrieved for anything new/changed.
-            using var generatedDocumentsBuilder = TemporaryArray<SourceGeneratedDocumentState>.Empty;
+            using var generatedDocumentsBuilder =
+                TemporaryArray<SourceGeneratedDocumentState>.Empty;
             foreach (var (documentIdentity, contentIdentity) in infos)
             {
                 var documentId = documentIdentity.DocumentId;
@@ -178,7 +254,12 @@ internal partial class SolutionState
                     // a document whose content we fetched from the remote side.
                     var generatedSource = generatedSources[addOrUpdateIndex];
                     var sourceText = SourceText.From(
-                        generatedSource, contentIdentity.EncodingName is null ? null : Encoding.GetEncoding(contentIdentity.EncodingName), contentIdentity.ChecksumAlgorithm);
+                        generatedSource,
+                        contentIdentity.EncodingName is null
+                            ? null
+                            : Encoding.GetEncoding(contentIdentity.EncodingName),
+                        contentIdentity.ChecksumAlgorithm
+                    );
 
                     var generatedDocument = SourceGeneratedDocumentState.Create(
                         documentIdentity,
@@ -188,49 +269,88 @@ internal partial class SolutionState
                         // Server provided us the checksum, so we just pass that along.  Note: it is critical that we do
                         // this as it may not be possible to reconstruct the same checksum the server produced due to
                         // the lossy nature of source texts.  See comment on GetOriginalSourceTextChecksum for more detail.
-                        contentIdentity.OriginalSourceTextContentHash);
-                    Contract.ThrowIfTrue(generatedDocument.GetOriginalSourceTextContentHash() != contentIdentity.OriginalSourceTextContentHash, "Checksums must match!");
+                        contentIdentity.OriginalSourceTextContentHash
+                    );
+                    Contract.ThrowIfTrue(
+                        generatedDocument.GetOriginalSourceTextContentHash()
+                            != contentIdentity.OriginalSourceTextContentHash,
+                        "Checksums must match!"
+                    );
                     generatedDocumentsBuilder.Add(generatedDocument);
                 }
                 else
                 {
                     // a document that already matched something locally.
                     var existingDocument = generatorInfo.Documents.GetRequiredState(documentId);
-                    Contract.ThrowIfTrue(existingDocument.Identity != documentIdentity, "Identities must match!");
-                    Contract.ThrowIfTrue(existingDocument.GetOriginalSourceTextContentHash() != contentIdentity.OriginalSourceTextContentHash, "Checksums must match!");
+                    Contract.ThrowIfTrue(
+                        existingDocument.Identity != documentIdentity,
+                        "Identities must match!"
+                    );
+                    Contract.ThrowIfTrue(
+                        existingDocument.GetOriginalSourceTextContentHash()
+                            != contentIdentity.OriginalSourceTextContentHash,
+                        "Checksums must match!"
+                    );
 
                     // ParseOptions may have changed between last generation and this one.  Ensure that they are
                     // properly propagated to the generated doc.
-                    generatedDocumentsBuilder.Add(existingDocument.WithParseOptions(this.ProjectState.ParseOptions!));
+                    generatedDocumentsBuilder.Add(
+                        existingDocument.WithParseOptions(this.ProjectState.ParseOptions!)
+                    );
                 }
             }
 
-            var generatedDocuments = new TextDocumentStates<SourceGeneratedDocumentState>(generatedDocumentsBuilder.ToImmutableAndClear());
+            var generatedDocuments = new TextDocumentStates<SourceGeneratedDocumentState>(
+                generatedDocumentsBuilder.ToImmutableAndClear()
+            );
             var compilationWithGeneratedFiles = compilationWithoutGeneratedFiles.AddSyntaxTrees(
-                await generatedDocuments.States.Values.SelectAsArrayAsync(
-                    static (state, cancellationToken) => state.GetSyntaxTreeAsync(cancellationToken), cancellationToken).ConfigureAwait(false));
-            return (compilationWithGeneratedFiles, new CompilationTrackerGeneratorInfo(generatedDocuments, generatorInfo.Driver, documentsAreFinal: true));
+                await generatedDocuments
+                    .States.Values.SelectAsArrayAsync(
+                        static (state, cancellationToken) =>
+                            state.GetSyntaxTreeAsync(cancellationToken),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            );
+            return (
+                compilationWithGeneratedFiles,
+                new CompilationTrackerGeneratorInfo(
+                    generatedDocuments,
+                    generatorInfo.Driver,
+                    documentsAreFinal: true
+                )
+            );
         }
 
-        private async Task<(Compilation compilationWithGeneratedFiles, CompilationTrackerGeneratorInfo generatorInfo)> ComputeNewGeneratorInfoInCurrentProcessAsync(
+        private async Task<(
+            Compilation compilationWithGeneratedFiles,
+            CompilationTrackerGeneratorInfo generatorInfo
+        )> ComputeNewGeneratorInfoInCurrentProcessAsync(
             SolutionState solution,
             Compilation compilationWithoutGeneratedFiles,
             CompilationTrackerGeneratorInfo generatorInfo,
             Compilation? compilationWithStaleGeneratedTrees,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // We have at least one source generator. If we don't already have a generator driver, we'll have to
             // create one from scratch
             if (generatorInfo.Driver == null)
             {
-                var additionalTexts = this.ProjectState.AdditionalDocumentStates.SelectAsArray(static documentState => documentState.AdditionalText);
-                var compilationFactory = this.ProjectState.LanguageServices.GetRequiredService<ICompilationFactoryService>();
+                var additionalTexts = this.ProjectState.AdditionalDocumentStates.SelectAsArray(
+                    static documentState => documentState.AdditionalText
+                );
+                var compilationFactory =
+                    this.ProjectState.LanguageServices.GetRequiredService<ICompilationFactoryService>();
 
-                generatorInfo = generatorInfo.WithDriver(compilationFactory.CreateGeneratorDriver(
-                    this.ProjectState.ParseOptions!,
-                    ProjectState.SourceGenerators.ToImmutableArray(),
-                    this.ProjectState.AnalyzerOptions.AnalyzerConfigOptionsProvider,
-                    additionalTexts));
+                generatorInfo = generatorInfo.WithDriver(
+                    compilationFactory.CreateGeneratorDriver(
+                        this.ProjectState.ParseOptions!,
+                        ProjectState.SourceGenerators.ToImmutableArray(),
+                        this.ProjectState.AnalyzerOptions.AnalyzerConfigOptionsProvider,
+                        additionalTexts
+                    )
+                );
             }
             else
             {
@@ -238,14 +358,25 @@ internal partial class SolutionState
                 // Assert that the generator driver is in sync with our additional document states; there's not a public
                 // API to get this, but we'll reflect in DEBUG-only.
                 var driverType = generatorInfo.Driver.GetType();
-                var stateMember = driverType.GetField("_state", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                var stateMember = driverType.GetField(
+                    "_state",
+                    System.Reflection.BindingFlags.NonPublic
+                        | System.Reflection.BindingFlags.Instance
+                );
                 Contract.ThrowIfNull(stateMember);
-                var additionalTextsMember = stateMember.FieldType.GetField("AdditionalTexts", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                var additionalTextsMember = stateMember.FieldType.GetField(
+                    "AdditionalTexts",
+                    System.Reflection.BindingFlags.NonPublic
+                        | System.Reflection.BindingFlags.Instance
+                );
                 Contract.ThrowIfNull(additionalTextsMember);
                 var state = stateMember.GetValue(generatorInfo.Driver);
-                var additionalTexts = (ImmutableArray<AdditionalText>)additionalTextsMember.GetValue(state)!;
+                var additionalTexts =
+                    (ImmutableArray<AdditionalText>)additionalTextsMember.GetValue(state)!;
 
-                Contract.ThrowIfFalse(additionalTexts.Length == this.ProjectState.AdditionalDocumentStates.Count);
+                Contract.ThrowIfFalse(
+                    additionalTexts.Length == this.ProjectState.AdditionalDocumentStates.Count
+                );
 #endif
             }
 
@@ -264,19 +395,32 @@ internal partial class SolutionState
                 // This matches the logic in CompileTimeSolutionProvider for which documents are removed when we're
                 // activating the generator.
                 if (documentState.Value.Attributes.DesignTimeOnly)
-                    treesToRemove.Add(await documentState.Value.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false));
+                    treesToRemove.Add(
+                        await documentState
+                            .Value.GetSyntaxTreeAsync(cancellationToken)
+                            .ConfigureAwait(false)
+                    );
             }
 
-            var compilationToRunGeneratorsOn = compilationWithoutGeneratedFiles.RemoveSyntaxTrees(treesToRemove);
+            var compilationToRunGeneratorsOn = compilationWithoutGeneratedFiles.RemoveSyntaxTrees(
+                treesToRemove
+            );
             // END HACK HACK HACK HACK.
 
-            generatorInfo = generatorInfo.WithDriver(generatorInfo.Driver.RunGenerators(compilationToRunGeneratorsOn, cancellationToken));
+            generatorInfo = generatorInfo.WithDriver(
+                generatorInfo.Driver.RunGenerators(compilationToRunGeneratorsOn, cancellationToken)
+            );
             Contract.ThrowIfNull(generatorInfo.Driver);
 
             var runResult = generatorInfo.Driver.GetRunResult();
 
-            var telemetryCollector = solution.Services.GetService<ISourceGeneratorTelemetryCollectorWorkspaceService>();
-            telemetryCollector?.CollectRunResult(runResult, generatorInfo.Driver.GetTimingInfo(), ProjectState);
+            var telemetryCollector =
+                solution.Services.GetService<ISourceGeneratorTelemetryCollectorWorkspaceService>();
+            telemetryCollector?.CollectRunResult(
+                runResult,
+                generatorInfo.Driver.GetTimingInfo(),
+                ProjectState
+            );
 
             // We may be able to reuse compilationWithStaleGeneratedTrees if the generated trees are identical. We will assign null
             // to compilationWithStaleGeneratedTrees if we at any point realize it can't be used. We'll first check the count of trees
@@ -285,20 +429,24 @@ internal partial class SolutionState
             // and the prior generated trees are identical.
             if (compilationWithStaleGeneratedTrees != null)
             {
-                var generatedTreeCount =
-                    runResult.Results.Sum(r => IsGeneratorRunResultToIgnore(r) ? 0 : r.GeneratedSources.Length);
+                var generatedTreeCount = runResult.Results.Sum(r =>
+                    IsGeneratorRunResultToIgnore(r) ? 0 : r.GeneratedSources.Length
+                );
 
                 if (generatorInfo.Documents.Count != generatedTreeCount)
                     compilationWithStaleGeneratedTrees = null;
             }
 
-            using var generatedDocumentsBuilder = TemporaryArray<SourceGeneratedDocumentState>.Empty;
+            using var generatedDocumentsBuilder =
+                TemporaryArray<SourceGeneratedDocumentState>.Empty;
             foreach (var generatorResult in runResult.Results)
             {
                 if (IsGeneratorRunResultToIgnore(generatorResult))
                     continue;
 
-                var generatorAnalyzerReference = this.ProjectState.GetAnalyzerReferenceForGenerator(generatorResult.Generator);
+                var generatorAnalyzerReference = this.ProjectState.GetAnalyzerReferenceForGenerator(
+                    generatorResult.Generator
+                );
 
                 foreach (var generatedSource in generatorResult.GeneratedSources)
                 {
@@ -306,7 +454,8 @@ internal partial class SolutionState
                         generatorInfo.Documents,
                         generatorResult.Generator,
                         generatorAnalyzerReference,
-                        generatedSource.HintName);
+                        generatedSource.HintName
+                    );
 
                     if (existing != null)
                     {
@@ -328,7 +477,8 @@ internal partial class SolutionState
                             generatedSource.HintName,
                             generatorResult.Generator,
                             generatedSource.SyntaxTree.FilePath,
-                            generatorAnalyzerReference);
+                            generatorAnalyzerReference
+                        );
 
                         generatedDocumentsBuilder.Add(
                             SourceGeneratedDocumentState.Create(
@@ -337,7 +487,9 @@ internal partial class SolutionState
                                 generatedSource.SyntaxTree.Options,
                                 ProjectState.LanguageServices,
                                 // Compute the checksum on demand from the given source text.
-                                originalSourceTextChecksum: null));
+                                originalSourceTextChecksum: null
+                            )
+                        );
 
                         // The count of trees was the same, but something didn't match up. Since we're here, at least one tree
                         // was added, and an equal number must have been removed. Rather than trying to incrementally update
@@ -349,22 +501,44 @@ internal partial class SolutionState
 
             // If we didn't null out this compilation, it means we can actually use it
             if (compilationWithStaleGeneratedTrees != null)
-                return (compilationWithStaleGeneratedTrees, generatorInfo.WithDocumentsAreFinal(true));
+                return (
+                    compilationWithStaleGeneratedTrees,
+                    generatorInfo.WithDocumentsAreFinal(true)
+                );
 
             // We produced new documents, so time to create new state for it
-            var generatedDocuments = new TextDocumentStates<SourceGeneratedDocumentState>(generatedDocumentsBuilder.ToImmutableAndClear());
+            var generatedDocuments = new TextDocumentStates<SourceGeneratedDocumentState>(
+                generatedDocumentsBuilder.ToImmutableAndClear()
+            );
             var compilationWithGeneratedFiles = compilationWithoutGeneratedFiles.AddSyntaxTrees(
-                await generatedDocuments.States.Values.SelectAsArrayAsync(
-                    static (state, cancellationToken) => state.GetSyntaxTreeAsync(cancellationToken), cancellationToken).ConfigureAwait(false));
-            return (compilationWithGeneratedFiles, new CompilationTrackerGeneratorInfo(generatedDocuments, generatorInfo.Driver, documentsAreFinal: true));
+                await generatedDocuments
+                    .States.Values.SelectAsArrayAsync(
+                        static (state, cancellationToken) =>
+                            state.GetSyntaxTreeAsync(cancellationToken),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            );
+            return (
+                compilationWithGeneratedFiles,
+                new CompilationTrackerGeneratorInfo(
+                    generatedDocuments,
+                    generatorInfo.Driver,
+                    documentsAreFinal: true
+                )
+            );
 
             static SourceGeneratedDocumentState? FindExistingGeneratedDocumentState(
                 TextDocumentStates<SourceGeneratedDocumentState> states,
                 ISourceGenerator generator,
                 AnalyzerReference analyzerReference,
-                string hintName)
+                string hintName
+            )
             {
-                var generatorIdentity = SourceGeneratorIdentity.Create(generator, analyzerReference);
+                var generatorIdentity = SourceGeneratorIdentity.Create(
+                    generator,
+                    analyzerReference
+                );
 
                 foreach (var (_, state) in states.States)
                 {

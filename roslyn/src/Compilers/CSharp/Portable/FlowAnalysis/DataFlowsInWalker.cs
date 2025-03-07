@@ -24,16 +24,45 @@ namespace Microsoft.CodeAnalysis.CSharp
         // flow analysis.
         private readonly HashSet<Symbol> _dataFlowsIn = new HashSet<Symbol>();
 
-        private DataFlowsInWalker(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion,
-            HashSet<Symbol> unassignedVariables, HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes)
-            : base(compilation, member, node, firstInRegion, lastInRegion, unassignedVariables, unassignedVariableAddressOfSyntaxes)
-        {
-        }
+        private DataFlowsInWalker(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion,
+            HashSet<Symbol> unassignedVariables,
+            HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes
+        )
+            : base(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                unassignedVariables,
+                unassignedVariableAddressOfSyntaxes
+            ) { }
 
-        internal static HashSet<Symbol> Analyze(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion,
-            HashSet<Symbol> unassignedVariables, HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes, out bool? succeeded)
+        internal static HashSet<Symbol> Analyze(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion,
+            HashSet<Symbol> unassignedVariables,
+            HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes,
+            out bool? succeeded
+        )
         {
-            var walker = new DataFlowsInWalker(compilation, member, node, firstInRegion, lastInRegion, unassignedVariables, unassignedVariableAddressOfSyntaxes);
+            var walker = new DataFlowsInWalker(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                unassignedVariables,
+                unassignedVariableAddressOfSyntaxes
+            );
             try
             {
                 bool badRegion = false;
@@ -79,10 +108,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void NoteBranch(
             PendingBranch pending,
             BoundNode gotoStmt,
-            BoundStatement targetStmt)
+            BoundStatement targetStmt
+        )
         {
             targetStmt.AssertIsLabeledStatement();
-            if (!gotoStmt.WasCompilerGenerated && !targetStmt.WasCompilerGenerated && !RegionContains(gotoStmt.Syntax.Span) && RegionContains(targetStmt.Syntax.Span))
+            if (
+                !gotoStmt.WasCompilerGenerated
+                && !targetStmt.WasCompilerGenerated
+                && !RegionContains(gotoStmt.Syntax.Span)
+                && RegionContains(targetStmt.Syntax.Span)
+            )
             {
                 pending.State = ResetState(pending.State);
             }
@@ -100,14 +135,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             return null;
         }
 
-        protected override void ReportUnassigned(Symbol symbol, SyntaxNode node, int slot, bool skipIfUseBeforeDeclaration)
+        protected override void ReportUnassigned(
+            Symbol symbol,
+            SyntaxNode node,
+            int slot,
+            bool skipIfUseBeforeDeclaration
+        )
         {
             // TODO: how to handle fields of structs?
             if (RegionContains(node.Span))
             {
                 // if the field access is reported as unassigned it should mean the original local
                 // or parameter flows in, so we should get the symbol associated with the expression
-                _dataFlowsIn.Add(symbol.Kind == SymbolKind.Field ? GetNonMemberSymbol(slot) : symbol);
+                _dataFlowsIn.Add(
+                    symbol.Kind == SymbolKind.Field ? GetNonMemberSymbol(slot) : symbol
+                );
             }
 
             base.ReportUnassigned(symbol, node, slot, skipIfUseBeforeDeclaration);
@@ -116,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override void ReportUnassignedOutParameter(
             ParameterSymbol parameter,
             SyntaxNode node,
-            Location location)
+            Location location
+        )
         {
             if (node != null && node is ReturnStatementSyntax && RegionContains(node.Span))
             {

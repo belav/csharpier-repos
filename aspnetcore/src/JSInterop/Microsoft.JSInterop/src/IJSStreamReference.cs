@@ -19,5 +19,8 @@ public interface IJSStreamReference : IAsyncDisposable
     /// <param name="maxAllowedSize">Maximum number of bytes permitted to be read from JavaScript.</param>
     /// <param name="cancellationToken"><see cref="CancellationToken" /> for cancelling read.</param>
     /// <returns><see cref="Stream"/> which can provide data associated with the current data reference.</returns>
-    ValueTask<Stream> OpenReadStreamAsync(long maxAllowedSize = 512000, CancellationToken cancellationToken = default);
+    ValueTask<Stream> OpenReadStreamAsync(
+        long maxAllowedSize = 512000,
+        CancellationToken cancellationToken = default
+    );
 }

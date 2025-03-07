@@ -10,12 +10,12 @@ namespace System.ServiceModel.Routing
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
-    using System.Runtime;
-    using System.ServiceModel.Description;
     using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
     using System.Xml;
     using SR2 = System.ServiceModel.Routing.SR;
@@ -30,15 +30,12 @@ namespace System.ServiceModel.Routing
             this.ProcessMessages = true;
         }
 
-        public bool ProcessMessages
-        {
-            get;
-            set;
-        }
+        public bool ProcessMessages { get; set; }
 
-        public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
         public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
         {
@@ -49,7 +46,10 @@ namespace System.ServiceModel.Routing
 
             if (this.ProcessMessages)
             {
-                SoapProcessingInspector inspector = new SoapProcessingInspector(endpoint, clientRuntime);
+                SoapProcessingInspector inspector = new SoapProcessingInspector(
+                    endpoint,
+                    clientRuntime
+                );
                 clientRuntime.MessageInspectors.Add(inspector);
                 clientRuntime.CallbackDispatchRuntime.MessageInspectors.Add(inspector);
                 foreach (ClientOperation clientOp in clientRuntime.Operations)
@@ -59,19 +59,25 @@ namespace System.ServiceModel.Routing
             }
         }
 
-        public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+        public void ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
-            throw FxTrace.Exception.AsError(new NotSupportedException(SR2.MarshalingBehaviorNotSupported));
+            throw FxTrace.Exception.AsError(
+                new NotSupportedException(SR2.MarshalingBehaviorNotSupported)
+            );
         }
 
-        public void Validate(ServiceEndpoint endpoint)
-        {
-        }
+        public void Validate(ServiceEndpoint endpoint) { }
 
-        class SoapProcessingInspector : IClientMessageInspector, IDispatchMessageInspector, IParameterInspector
+        class SoapProcessingInspector
+            : IClientMessageInspector,
+                IDispatchMessageInspector,
+                IParameterInspector
         {
             static HashSet<string> addressingHeadersToFlow = InitializeHeadersToFlow();
-            
+
             bool manualAddressing;
             MessageVersion sourceMessageVersion;
             MessageVersion sendMessageVersion;
@@ -83,9 +89,14 @@ namespace System.ServiceModel.Routing
                 this.manualAddressing = clientRuntime.ManualAddressing;
             }
 
-            void IParameterInspector.AfterCall(string operationName, object[] outputs, object returnValue, object correlationState)
+            void IParameterInspector.AfterCall(
+                string operationName,
+                object[] outputs,
+                object returnValue,
+                object correlationState
+            )
             {
-                // This call occurs AFTER IClientMessageInspector.AfterReceiveReply.  
+                // This call occurs AFTER IClientMessageInspector.AfterReceiveReply.
                 // We don't need to do any additional marshaling here.
             }
 
@@ -96,14 +107,17 @@ namespace System.ServiceModel.Routing
                     throw FxTrace.Exception.ArgumentNullOrEmpty("inputs");
                 }
 
-                //We have to remove some addressing headers to avoid errors before the 
+                //We have to remove some addressing headers to avoid errors before the
                 //Soap Processing MessageInspector gets called.  See CSDMain 117167.
                 Message request = (Message)inputs[0];
                 this.PreProcess(request);
                 return null;
             }
 
-            void IClientMessageInspector.AfterReceiveReply(ref Message reply, object correlationState)
+            void IClientMessageInspector.AfterReceiveReply(
+                ref Message reply,
+                object correlationState
+            )
             {
                 if (reply != null)
                 {
@@ -122,7 +136,12 @@ namespace System.ServiceModel.Routing
                         originalProperties.Via = incomingVia;
                     }
                     object incomingHttpRequest;
-                    if (originalProperties.TryGetValue(IncomingHttpRequestName, out incomingHttpRequest))
+                    if (
+                        originalProperties.TryGetValue(
+                            IncomingHttpRequestName,
+                            out incomingHttpRequest
+                        )
+                    )
                     {
                         originalProperties[HttpRequestMessageProperty.Name] = incomingHttpRequest;
                     }
@@ -130,16 +149,21 @@ namespace System.ServiceModel.Routing
                     //Reponses from BasicHttp (Addressing.None) don't have any action.  If we're marshaling
                     //to any addressing version other than none, we create a ReplyAction here
                     MessageHeaders replyHeaders = reply.Headers;
-                    if (replyHeaders.Action == null && 
-                        version.Addressing != AddressingVersion.None && 
-                        originalHeaders.Action != null)
+                    if (
+                        replyHeaders.Action == null
+                        && version.Addressing != AddressingVersion.None
+                        && originalHeaders.Action != null
+                    )
                     {
                         replyHeaders.Action = originalHeaders.Action + "Response";
                     }
                 }
             }
 
-            object IClientMessageInspector.BeforeSendRequest(ref Message request, IClientChannel channel)
+            object IClientMessageInspector.BeforeSendRequest(
+                ref Message request,
+                IClientChannel channel
+            )
             {
                 Message originalRequest = request;
                 if (this.sourceMessageVersion == null)
@@ -150,13 +174,20 @@ namespace System.ServiceModel.Routing
                 return originalRequest;
             }
 
-            object IDispatchMessageInspector.AfterReceiveRequest(ref Message request, IClientChannel channel, InstanceContext instanceContext)
+            object IDispatchMessageInspector.AfterReceiveRequest(
+                ref Message request,
+                IClientChannel channel,
+                InstanceContext instanceContext
+            )
             {
                 request = MarshalMessage(request, request.Headers.To, this.sourceMessageVersion);
                 return null;
             }
 
-            void IDispatchMessageInspector.BeforeSendReply(ref Message reply, object correlationState)
+            void IDispatchMessageInspector.BeforeSendReply(
+                ref Message reply,
+                object correlationState
+            )
             {
                 if (reply != null)
                 {
@@ -180,13 +211,21 @@ namespace System.ServiceModel.Routing
                 if (!this.manualAddressing)
                 {
                     MessageHeaders headers = message.Headers;
-                    string addressingNamespace = RoutingUtilities.GetAddressingNamespace(headers.MessageVersion.Addressing);
+                    string addressingNamespace = RoutingUtilities.GetAddressingNamespace(
+                        headers.MessageVersion.Addressing
+                    );
 
                     //Go through in reverse to reduce shifting after RemoveAt(i)
                     for (int i = headers.Count - 1; i >= 0; --i)
                     {
                         MessageHeaderInfo header = headers[i];
-                        if (string.Equals(header.Namespace, addressingNamespace, StringComparison.Ordinal))
+                        if (
+                            string.Equals(
+                                header.Namespace,
+                                addressingNamespace,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             if (!addressingHeadersToFlow.Contains(header.Name))
                             {
@@ -211,7 +250,11 @@ namespace System.ServiceModel.Routing
                 details.AppendLine("Understood Headers:");
                 foreach (MessageHeaderInfo understoodHeader in understoodHeaders)
                 {
-                    details.AppendFormat("\t{0}\t({1})\r\n", understoodHeader.Name, understoodHeader.Namespace);
+                    details.AppendFormat(
+                        "\t{0}\t({1})\r\n",
+                        understoodHeader.Name,
+                        understoodHeader.Namespace
+                    );
                 }
                 details.AppendLine("Properties:");
                 foreach (KeyValuePair<string, object> item in source.Properties)
@@ -220,9 +263,11 @@ namespace System.ServiceModel.Routing
                 }
 #endif //DEBUG_MARSHALING
 
-
                 //if we've understood and verified the security of the message, we need to create a new message
-                if (sourceVersion == targetVersion && !RoutingUtilities.IsMessageUsingWSSecurity(understoodHeaders))
+                if (
+                    sourceVersion == targetVersion
+                    && !RoutingUtilities.IsMessageUsingWSSecurity(understoodHeaders)
+                )
                 {
                     FilterHeaders(sourceHeaders, understoodHeadersSet);
                     FilterProperties(source.Properties);
@@ -234,7 +279,13 @@ namespace System.ServiceModel.Routing
                     {
                         MessageFault messageFault = MessageFault.CreateFault(source, int.MaxValue);
                         string action = sourceHeaders.Action;
-                        if (string.Equals(action, sourceVersion.Addressing.DefaultFaultAction, StringComparison.Ordinal))
+                        if (
+                            string.Equals(
+                                action,
+                                sourceVersion.Addressing.DefaultFaultAction,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             //The action was the default for the sourceVersion set it to the default for the targetVersion.
                             action = targetVersion.Addressing.DefaultFaultAction;
@@ -248,7 +299,11 @@ namespace System.ServiceModel.Routing
                     else
                     {
                         XmlDictionaryReader bodyReader = source.GetReaderAtBodyContents();
-                        result = Message.CreateMessage(targetVersion, sourceHeaders.Action, bodyReader);
+                        result = Message.CreateMessage(
+                            targetVersion,
+                            sourceHeaders.Action,
+                            bodyReader
+                        );
                     }
 
                     CloneHeaders(result.Headers, sourceHeaders, to, understoodHeadersSet);
@@ -286,7 +341,9 @@ namespace System.ServiceModel.Routing
 
             void FilterHeaders(MessageHeaders headers, HashSet<string> understoodHeadersSet)
             {
-                string addressingNamespace = RoutingUtilities.GetAddressingNamespace(headers.MessageVersion.Addressing);
+                string addressingNamespace = RoutingUtilities.GetAddressingNamespace(
+                    headers.MessageVersion.Addressing
+                );
 
                 //Go in reverse to reduce shifting after RemoveAt(i)
                 for (int i = headers.Count - 1; i >= 0; --i)
@@ -294,8 +351,14 @@ namespace System.ServiceModel.Routing
                     MessageHeaderInfo header = headers[i];
                     bool removeHeader = false;
 
-                    if (string.Equals(header.Namespace, addressingNamespace, StringComparison.Ordinal) &&
-                        (addressingHeadersToFlow.Contains(header.Name) || this.manualAddressing))
+                    if (
+                        string.Equals(
+                            header.Namespace,
+                            addressingNamespace,
+                            StringComparison.Ordinal
+                        )
+                        && (addressingHeadersToFlow.Contains(header.Name) || this.manualAddressing)
+                    )
                     {
                         continue;
                     }
@@ -322,12 +385,26 @@ namespace System.ServiceModel.Routing
                 }
             }
 
-            static bool ActorIsNextDestination(MessageHeaderInfo header, MessageVersion messageVersion)
+            static bool ActorIsNextDestination(
+                MessageHeaderInfo header,
+                MessageVersion messageVersion
+            )
             {
-                return (header.Actor != null && string.Equals(header.Actor, messageVersion.Envelope.NextDestinationActorValue));
+                return (
+                    header.Actor != null
+                    && string.Equals(
+                        header.Actor,
+                        messageVersion.Envelope.NextDestinationActorValue
+                    )
+                );
             }
 
-            void CloneHeaders(MessageHeaders targetHeaders, MessageHeaders sourceHeaders, Uri to, HashSet<string> understoodHeadersSet)
+            void CloneHeaders(
+                MessageHeaders targetHeaders,
+                MessageHeaders sourceHeaders,
+                Uri to,
+                HashSet<string> understoodHeadersSet
+            )
             {
                 for (int i = 0; i < sourceHeaders.Count; ++i)
                 {
@@ -335,11 +412,17 @@ namespace System.ServiceModel.Routing
                     if (!understoodHeadersSet.Contains(MessageHeaderKey(header)))
                     {
                         //If Actor is SOAP Intermediary ("*actor/next" which is us) check the Relay flag
-                        if (!ActorIsNextDestination(header, sourceHeaders.MessageVersion) || header.Relay)
+                        if (
+                            !ActorIsNextDestination(header, sourceHeaders.MessageVersion)
+                            || header.Relay
+                        )
                         {
                             //Always wrap the header because BufferedHeader isn't smart enough to allow custom
                             //headers to switch message versions
-                            MessageHeader messageHeader = new DelegatingHeader(header, sourceHeaders);
+                            MessageHeader messageHeader = new DelegatingHeader(
+                                header,
+                                sourceHeaders
+                            );
                             targetHeaders.Add(messageHeader);
                         }
                     }
@@ -377,7 +460,12 @@ namespace System.ServiceModel.Routing
                 // tell the outbound binding to use whatever Content-Type/Method/QueryString
                 // that the inboudnd message/response used.  Otherwise BasicHttp<->WsHttp won't work.
                 object incomingHttpRequest;
-                if (destination.TryGetValue(HttpRequestMessageProperty.Name, out incomingHttpRequest))
+                if (
+                    destination.TryGetValue(
+                        HttpRequestMessageProperty.Name,
+                        out incomingHttpRequest
+                    )
+                )
                 {
                     //Store the inbound value for later retoration
                     destination[IncomingHttpRequestName] = incomingHttpRequest;

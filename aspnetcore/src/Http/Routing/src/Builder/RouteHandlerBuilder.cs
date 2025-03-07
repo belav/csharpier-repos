@@ -12,7 +12,10 @@ public sealed class RouteHandlerBuilder : IEndpointConventionBuilder
     private readonly ICollection<Action<EndpointBuilder>>? _conventions;
     private readonly ICollection<Action<EndpointBuilder>>? _finallyConventions;
 
-    internal RouteHandlerBuilder(ICollection<Action<EndpointBuilder>> conventions, ICollection<Action<EndpointBuilder>> finallyConventions)
+    internal RouteHandlerBuilder(
+        ICollection<Action<EndpointBuilder>> conventions,
+        ICollection<Action<EndpointBuilder>> finallyConventions
+    )
     {
         _conventions = conventions;
         _finallyConventions = finallyConventions;

@@ -145,7 +145,11 @@ namespace System.Globalization.Tests
             yield return new object[] { new CultureInfo("fi-FI").DateTimeFormat, "H.mm.ss" };
             yield return new object[] { new CultureInfo("fil-PH").DateTimeFormat, "h:mm:ss tt" };
             yield return new object[] { new CultureInfo("fr-BE").DateTimeFormat, "HH:mm:ss" };
-            yield return new object[] { new CultureInfo("fr-CA").DateTimeFormat, "HH h mm min ss s" }; // HH 'h' mm 'min' ss 's'
+            yield return new object[]
+            {
+                new CultureInfo("fr-CA").DateTimeFormat,
+                "HH h mm min ss s",
+            }; // HH 'h' mm 'min' ss 's'
             yield return new object[] { new CultureInfo("fr-CH").DateTimeFormat, "HH:mm:ss" };
             yield return new object[] { new CultureInfo("fr-FR").DateTimeFormat, "HH:mm:ss" };
             yield return new object[] { new CultureInfo("gu-IN").DateTimeFormat, "hh:mm:ss tt" };
@@ -205,9 +209,15 @@ namespace System.Globalization.Tests
             yield return new object[] { new CultureInfo("zh-TW").DateTimeFormat, "tth:mm:ss" };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsHybridGlobalizationOnBrowser))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsHybridGlobalizationOnBrowser)
+        )]
         [MemberData(nameof(LongTimePattern_Get_TestData_HybridGlobalization))]
-        public void LongTimePattern_Get_ReturnsExpected_HybridGlobalization(DateTimeFormatInfo format, string value)
+        public void LongTimePattern_Get_ReturnsExpected_HybridGlobalization(
+            DateTimeFormatInfo format,
+            string value
+        )
         {
             Assert.Equal(value, format.LongTimePattern);
         }
@@ -251,13 +261,18 @@ namespace System.Globalization.Tests
         public void LongTimePattern_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", () => format.LongTimePattern = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => format.LongTimePattern = null
+            );
         }
 
         [Fact]
         public void LongTimePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.LongTimePattern = "HH:mm:ss");
+            Assert.Throws<InvalidOperationException>(
+                () => DateTimeFormatInfo.InvariantInfo.LongTimePattern = "HH:mm:ss"
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsIcuGlobalization))]
@@ -265,14 +280,22 @@ namespace System.Globalization.Tests
         {
             // Usually fr-CA long time format has a single quotes e.g. "HH 'h' mm 'min' ss 's'".
             // Ensuring when reading such formats from ICU we'll not eat the spaces after the single quotes.
-            string longTimeFormat = CultureInfo.GetCultureInfo("fr-CA").DateTimeFormat.LongTimePattern;
+            string longTimeFormat = CultureInfo
+                .GetCultureInfo("fr-CA")
+                .DateTimeFormat.LongTimePattern;
             int startIndex = 0;
 
-            while ((startIndex = longTimeFormat.IndexOf('\'', startIndex)) >= 0 && startIndex < longTimeFormat.Length - 1)
+            while (
+                (startIndex = longTimeFormat.IndexOf('\'', startIndex)) >= 0
+                && startIndex < longTimeFormat.Length - 1
+            )
             {
                 // We have the opening single quote, find the closing one.
                 startIndex++;
-                if ((startIndex = longTimeFormat.IndexOf('\'', startIndex)) > 0 && startIndex < longTimeFormat.Length - 1)
+                if (
+                    (startIndex = longTimeFormat.IndexOf('\'', startIndex)) > 0
+                    && startIndex < longTimeFormat.Length - 1
+                )
                 {
                     Assert.Equal(' ', longTimeFormat[++startIndex]);
                 }

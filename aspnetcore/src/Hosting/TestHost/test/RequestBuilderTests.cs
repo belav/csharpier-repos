@@ -12,7 +12,8 @@ public class RequestBuilderTests
     {
         var builder = new WebHostBuilder().Configure(app => { });
         var server = new TestServer(builder);
-        server.CreateRequest("/")
+        server
+            .CreateRequest("/")
             .AddHeader("Host", "MyHost:90")
             .And(request =>
             {
@@ -25,7 +26,8 @@ public class RequestBuilderTests
     {
         var builder = new WebHostBuilder().Configure(app => { });
         var server = new TestServer(builder);
-        server.CreateRequest("/")
+        server
+            .CreateRequest("/")
             .AddHeader("Content-Type", "Test/Value")
             .And(request =>
             {

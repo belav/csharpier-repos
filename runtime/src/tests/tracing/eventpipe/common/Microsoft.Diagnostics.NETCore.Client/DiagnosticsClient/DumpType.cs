@@ -8,6 +8,6 @@ namespace Microsoft.Diagnostics.NETCore.Client
         Normal = 1,
         WithHeap = 2,
         Triage = 3,
-        Full = 4
+        Full = 4,
     }
 }

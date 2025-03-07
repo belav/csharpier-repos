@@ -11,7 +11,6 @@
 /// own risk.
 /// </license>
 
-
 using System;
 
 namespace SciMark2
@@ -57,7 +56,6 @@ namespace SciMark2
             return T;
         }
 
-
         protected internal static double[][] new_copy(double[][] A)
         {
             int M = A.Length;
@@ -76,8 +74,6 @@ namespace SciMark2
 
             return T;
         }
-
-
 
         public static int[] new_copy(int[] x)
         {
@@ -125,7 +121,6 @@ namespace SciMark2
             solve(_LU, _pivot, x);
             return x;
         }
-
 
         /// <summary>
         /// LU factorization (in place).
@@ -212,7 +207,6 @@ namespace SciMark2
 
             return 0;
         }
-
 
         /// <summary>Solve a linear system, using a prefactored matrix
         /// in LU form.

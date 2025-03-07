@@ -10,21 +10,26 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal sealed class DisabledTextTriviaStructureProvider : AbstractSyntaxTriviaStructureProvider
+    internal sealed class DisabledTextTriviaStructureProvider
+        : AbstractSyntaxTriviaStructureProvider
     {
         public override void CollectBlockSpans(
             SyntaxTrivia trivia,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(trivia.SyntaxTree);
             CollectBlockSpans(trivia.SyntaxTree, trivia, ref spans, cancellationToken);
         }
 
         public static void CollectBlockSpans(
-            SyntaxTree syntaxTree, SyntaxTrivia trivia,
-            ref TemporaryArray<BlockSpan> spans, CancellationToken cancellationToken)
+            SyntaxTree syntaxTree,
+            SyntaxTrivia trivia,
+            ref TemporaryArray<BlockSpan> spans,
+            CancellationToken cancellationToken
+        )
         {
             // We'll always be leading trivia of some token.
             var startPos = trivia.FullSpan.Start;
@@ -33,7 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             var indexInParent = parentTriviaList.IndexOf(trivia);
 
             // Note: in some error cases (for example when all future tokens end up being skipped)
-            // the parser may end up attaching pre-processor directives as trailing trivia to a 
+            // the parser may end up attaching pre-processor directives as trailing trivia to a
             // preceding token.
             if (indexInParent < 0)
             {
@@ -46,35 +51,52 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 return;
             }
 
-            if (!parentTriviaList[indexInParent - 1].IsKind(SyntaxKind.IfDirectiveTrivia) &&
-                !parentTriviaList[indexInParent - 1].IsKind(SyntaxKind.ElifDirectiveTrivia) &&
-                !parentTriviaList[indexInParent - 1].IsKind(SyntaxKind.ElseDirectiveTrivia))
+            if (
+                !parentTriviaList[indexInParent - 1].IsKind(SyntaxKind.IfDirectiveTrivia)
+                && !parentTriviaList[indexInParent - 1].IsKind(SyntaxKind.ElifDirectiveTrivia)
+                && !parentTriviaList[indexInParent - 1].IsKind(SyntaxKind.ElseDirectiveTrivia)
+            )
             {
                 return;
             }
 
             var endTrivia = GetCorrespondingEndTrivia(trivia, parentTriviaList, indexInParent);
-            var endPos = GetEndPositionExludingLastNewLine(syntaxTree, endTrivia, cancellationToken);
+            var endPos = GetEndPositionExludingLastNewLine(
+                syntaxTree,
+                endTrivia,
+                cancellationToken
+            );
 
             var span = TextSpan.FromBounds(startPos, endPos);
-            spans.Add(new BlockSpan(
-                isCollapsible: true,
-                textSpan: span,
-                type: BlockTypes.PreprocessorRegion,
-                bannerText: CSharpStructureHelpers.Ellipsis,
-                autoCollapse: true));
+            spans.Add(
+                new BlockSpan(
+                    isCollapsible: true,
+                    textSpan: span,
+                    type: BlockTypes.PreprocessorRegion,
+                    bannerText: CSharpStructureHelpers.Ellipsis,
+                    autoCollapse: true
+                )
+            );
         }
 
-        private static int GetEndPositionExludingLastNewLine(SyntaxTree syntaxTree, SyntaxTrivia trivia, CancellationToken cancellationToken)
+        private static int GetEndPositionExludingLastNewLine(
+            SyntaxTree syntaxTree,
+            SyntaxTrivia trivia,
+            CancellationToken cancellationToken
+        )
         {
             var endPos = trivia.FullSpan.End;
             var text = syntaxTree.GetText(cancellationToken);
-            return endPos >= 2 && text[endPos - 1] == '\n' && text[endPos - 2] == '\r' ? endPos - 2 :
-                   endPos >= 1 && SyntaxFacts.IsNewLine(text[endPos - 1]) ? endPos - 1 : endPos;
+            return endPos >= 2 && text[endPos - 1] == '\n' && text[endPos - 2] == '\r' ? endPos - 2
+                : endPos >= 1 && SyntaxFacts.IsNewLine(text[endPos - 1]) ? endPos - 1
+                : endPos;
         }
 
         private static SyntaxTrivia GetCorrespondingEndTrivia(
-            SyntaxTrivia trivia, SyntaxTriviaList triviaList, int index)
+            SyntaxTrivia trivia,
+            SyntaxTriviaList triviaList,
+            int index
+        )
         {
             // Look through our parent token's trivia, to extend the span to the end of the last
             // disabled trivia.
@@ -115,7 +137,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                         if (nestedIfDirectiveTrivia > 0)
                         {
                             // This #else/#elif corresponded to a nested #if, ignore as
-                            // they're not relevant to the original construct we started 
+                            // they're not relevant to the original construct we started
                             // on.
                             continue;
                         }
@@ -127,7 +149,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 }
             }
 
-            // Couldn't find a future trivia to collapse up to.  Just collapse the original 
+            // Couldn't find a future trivia to collapse up to.  Just collapse the original
             // disabled text trivia we started with.
             return trivia;
         }

@@ -10,10 +10,8 @@ using static System.Runtime.InteropServices.ComWrappers;
 
 namespace NativeExports.ComInterfaceGenerator
 {
-
     public static unsafe class ArrayMarshalling
     {
-
         [UnmanagedCallersOnly(EntryPoint = "new_get_and_set_int_array")]
         public static void* CreateComObject()
         {
@@ -33,21 +31,39 @@ namespace NativeExports.ComInterfaceGenerator
                 {
                     if (MyComWrapper._s_comInterface1VTable != null)
                         return _s_comInterface1VTable;
-                    void** vtable = (void**)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ImplementingObject), sizeof(void*) * 4);
-                    GetIUnknownImpl(out var fpQueryInterface, out var fpAddReference, out var fpRelease);
+                    void** vtable = (void**)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(ImplementingObject),
+                            sizeof(void*) * 4
+                        );
+                    GetIUnknownImpl(
+                        out var fpQueryInterface,
+                        out var fpAddReference,
+                        out var fpRelease
+                    );
                     vtable[0] = (void*)fpQueryInterface;
                     vtable[1] = (void*)fpAddReference;
                     vtable[2] = (void*)fpRelease;
-                    vtable[3] = (delegate* unmanaged<void*, int**, int>)&ImplementingObject.ABI.GetInts;
+                    vtable[3] = (delegate* unmanaged<void*, int**, int>)
+                        &ImplementingObject.ABI.GetInts;
                     _s_comInterface1VTable = vtable;
                     return _s_comInterface1VTable;
                 }
             }
-            protected override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+
+            protected override ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            )
             {
                 if (obj is ImplementingObject)
                 {
-                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ImplementingObject), sizeof(ComInterfaceEntry));
+                    ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(ImplementingObject),
+                            sizeof(ComInterfaceEntry)
+                        );
                     comInterfaceEntry->IID = new Guid(IGetIntArray.IID);
                     comInterfaceEntry->Vtable = (nint)GetIntArrayVTable;
                     count = 1;
@@ -57,9 +73,15 @@ namespace NativeExports.ComInterfaceGenerator
                 return null;
             }
 
-            protected override object? CreateObject(nint externalComObject, CreateObjectFlags flags) => throw new NotImplementedException();
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+            protected override object? CreateObject(
+                nint externalComObject,
+                CreateObjectFlags flags
+            ) => throw new NotImplementedException();
+
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
         }
+
         class ImplementingObject : IGetIntArray
         {
             int[] _data = new int[10] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -71,10 +93,11 @@ namespace NativeExports.ComInterfaceGenerator
                 [UnmanagedCallersOnly]
                 public static int GetInts(void* @this, int** values)
                 {
-
                     try
                     {
-                        int[] arr = ComInterfaceDispatch.GetInstance<IGetIntArray>((ComInterfaceDispatch*)@this).GetInts();
+                        int[] arr = ComInterfaceDispatch
+                            .GetInstance<IGetIntArray>((ComInterfaceDispatch*)@this)
+                            .GetInts();
                         *values = (int*)Marshal.AllocCoTaskMem(sizeof(int) * arr.Length);
                         for (int i = 0; i < arr.Length; i++)
                         {

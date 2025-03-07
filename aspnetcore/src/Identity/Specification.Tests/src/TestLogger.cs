@@ -57,7 +57,13 @@ public class TestLogger<TName> : ILogger<TName>, ITestLogger
     /// <param name="state"></param>
     /// <param name="exception"></param>
     /// <param name="formatter"></param>
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+    public void Log<TState>(
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception exception,
+        Func<TState, Exception, string> formatter
+    )
     {
         if (formatter == null)
         {

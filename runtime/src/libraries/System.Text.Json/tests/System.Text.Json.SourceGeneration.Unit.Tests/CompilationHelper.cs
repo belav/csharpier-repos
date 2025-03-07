@@ -23,31 +23,36 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public ImmutableArray<ContextGenerationSpec> ContextGenerationSpecs { get; set; }
         public ImmutableArray<Diagnostic> Diagnostics { get; set; }
 
-        public IEnumerable<TypeGenerationSpec> AllGeneratedTypes
-            => ContextGenerationSpecs.SelectMany(ctx => ctx.GeneratedTypes);
+        public IEnumerable<TypeGenerationSpec> AllGeneratedTypes =>
+            ContextGenerationSpecs.SelectMany(ctx => ctx.GeneratedTypes);
 
-        public void AssertContainsType(string fullyQualifiedName)
-            => Assert.Contains(
-                    AllGeneratedTypes,
-                    spec => spec.TypeRef.FullyQualifiedName == fullyQualifiedName);
+        public void AssertContainsType(string fullyQualifiedName) =>
+            Assert.Contains(
+                AllGeneratedTypes,
+                spec => spec.TypeRef.FullyQualifiedName == fullyQualifiedName
+            );
     }
 
     public static class CompilationHelper
     {
-        private readonly static CSharpParseOptions s_defaultParseOptions = CreateParseOptions();
+        private static readonly CSharpParseOptions s_defaultParseOptions = CreateParseOptions();
 
         public static CSharpParseOptions CreateParseOptions(
             LanguageVersion? version = null,
-            DocumentationMode? documentationMode = null)
+            DocumentationMode? documentationMode = null
+        )
         {
             return new CSharpParseOptions(
                 kind: SourceCodeKind.Regular,
                 languageVersion: version ?? LanguageVersion.CSharp9, // C# 9 is the minimum supported lang version by the source generator.
-                documentationMode: documentationMode ?? DocumentationMode.Parse);
+                documentationMode: documentationMode ?? DocumentationMode.Parse
+            );
         }
 
 #if NETCOREAPP
-        private static readonly Assembly systemRuntimeAssembly = Assembly.Load(new AssemblyName("System.Runtime"));
+        private static readonly Assembly systemRuntimeAssembly = Assembly.Load(
+            new AssemblyName("System.Runtime")
+        );
 #endif
 
         public static Compilation CreateCompilation(
@@ -55,15 +60,18 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             MetadataReference[] additionalReferences = null,
             string assemblyName = "TestAssembly",
             bool includeSTJ = true,
-            CSharpParseOptions? parseOptions = null)
+            CSharpParseOptions? parseOptions = null
+        )
         {
-
-            List<MetadataReference> references = new() {
+            List<MetadataReference> references = new()
+            {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Type).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(KeyValuePair<,>).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(ContractNamespaceAttribute).Assembly.Location),
+                MetadataReference.CreateFromFile(
+                    typeof(ContractNamespaceAttribute).Assembly.Location
+                ),
                 MetadataReference.CreateFromFile(typeof(JavaScriptEncoder).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(GeneratedCodeAttribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(ReadOnlySpan<>).Assembly.Location),
@@ -72,13 +80,19 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 MetadataReference.CreateFromFile(typeof(LinkedList<>).Assembly.Location),
                 MetadataReference.CreateFromFile(systemRuntimeAssembly.Location),
 #else
-                MetadataReference.CreateFromFile(typeof(System.Runtime.CompilerServices.Unsafe).Assembly.Location),
+                MetadataReference.CreateFromFile(
+                    typeof(System.Runtime.CompilerServices.Unsafe).Assembly.Location
+                ),
 #endif
             };
 
             if (includeSTJ)
             {
-                references.Add(MetadataReference.CreateFromFile(typeof(JsonSerializerOptions).Assembly.Location));
+                references.Add(
+                    MetadataReference.CreateFromFile(
+                        typeof(JsonSerializerOptions).Assembly.Location
+                    )
+                );
             }
 
             // Add additional references as needed.
@@ -107,42 +121,56 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             );
         }
 
-        public static SyntaxTree ParseSource(string source, CSharpParseOptions? options = null)
-            => CSharpSyntaxTree.ParseText(source, options ?? s_defaultParseOptions);
+        public static SyntaxTree ParseSource(string source, CSharpParseOptions? options = null) =>
+            CSharpSyntaxTree.ParseText(source, options ?? s_defaultParseOptions);
 
-        public static CSharpGeneratorDriver CreateJsonSourceGeneratorDriver(Compilation compilation, JsonSourceGenerator? generator = null)
+        public static CSharpGeneratorDriver CreateJsonSourceGeneratorDriver(
+            Compilation compilation,
+            JsonSourceGenerator? generator = null
+        )
         {
             generator ??= new();
-            CSharpParseOptions parseOptions = compilation.SyntaxTrees
-                .OfType<CSharpSyntaxTree>()
-                .Select(tree => tree.Options)
-                .FirstOrDefault() ?? s_defaultParseOptions;
+            CSharpParseOptions parseOptions =
+                compilation
+                    .SyntaxTrees.OfType<CSharpSyntaxTree>()
+                    .Select(tree => tree.Options)
+                    .FirstOrDefault() ?? s_defaultParseOptions;
 
             return
 #if ROSLYN4_0_OR_GREATER
-                CSharpGeneratorDriver.Create(
-                    generators: new ISourceGenerator[] { generator.AsSourceGenerator() },
-                    parseOptions: parseOptions,
-                    driverOptions: new GeneratorDriverOptions(
-                        disabledOutputs: IncrementalGeneratorOutputKind.None,
-                        trackIncrementalGeneratorSteps: true));
+            CSharpGeneratorDriver.Create(
+                generators: new ISourceGenerator[] { generator.AsSourceGenerator() },
+                parseOptions: parseOptions,
+                driverOptions: new GeneratorDriverOptions(
+                    disabledOutputs: IncrementalGeneratorOutputKind.None,
+                    trackIncrementalGeneratorSteps: true
+                )
+            );
 #else
-                CSharpGeneratorDriver.Create(
-                    generators: new ISourceGenerator[] { generator },
-                    parseOptions: parseOptions);
+            CSharpGeneratorDriver.Create(
+                generators: new ISourceGenerator[] { generator },
+                parseOptions: parseOptions
+            );
 #endif
         }
 
-        public static JsonSourceGeneratorResult RunJsonSourceGenerator(Compilation compilation, bool disableDiagnosticValidation = false)
+        public static JsonSourceGeneratorResult RunJsonSourceGenerator(
+            Compilation compilation,
+            bool disableDiagnosticValidation = false
+        )
         {
             var generatedSpecs = ImmutableArray<ContextGenerationSpec>.Empty;
             var generator = new JsonSourceGenerator
             {
-                OnSourceEmitting = specs => generatedSpecs = specs
+                OnSourceEmitting = specs => generatedSpecs = specs,
             };
 
             CSharpGeneratorDriver driver = CreateJsonSourceGeneratorDriver(compilation, generator);
-            driver.RunGeneratorsAndUpdateCompilation(compilation, out Compilation outCompilation, out ImmutableArray<Diagnostic> diagnostics);
+            driver.RunGeneratorsAndUpdateCompilation(
+                compilation,
+                out Compilation outCompilation,
+                out ImmutableArray<Diagnostic> diagnostics
+            );
 
             if (!disableDiagnosticValidation)
             {
@@ -814,10 +842,13 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
         internal static void AssertEqualDiagnosticMessages(
             IEnumerable<DiagnosticData> expectedDiags,
-            IEnumerable<Diagnostic> actualDiags)
+            IEnumerable<Diagnostic> actualDiags
+        )
         {
             HashSet<DiagnosticData> expectedSet = new(expectedDiags);
-            HashSet<DiagnosticData> actualSet = new(actualDiags.Select(d => new DiagnosticData(d.Severity, d.Location, d.GetMessage())));
+            HashSet<DiagnosticData> actualSet = new(
+                actualDiags.Select(d => new DiagnosticData(d.Severity, d.Location, d.GetMessage()))
+            );
             AssertExtensions.Equal(expectedSet, actualSet);
         }
 
@@ -827,7 +858,10 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             return reference?.SyntaxTree.GetLocation(reference.Span);
         }
 
-        internal static void AssertMaxSeverity(this IEnumerable<Diagnostic> diagnostics, DiagnosticSeverity maxSeverity)
+        internal static void AssertMaxSeverity(
+            this IEnumerable<Diagnostic> diagnostics,
+            DiagnosticSeverity maxSeverity
+        )
         {
             Assert.Empty(diagnostics.Where(diagnostic => diagnostic.Severity > maxSeverity));
         }
@@ -837,16 +871,25 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         DiagnosticSeverity Severity,
         string FilePath,
         LinePositionSpan LinePositionSpan,
-        string Message)
+        string Message
+    )
     {
         public DiagnosticData(DiagnosticSeverity severity, Location location, string message)
-            : this(severity, location.SourceTree?.FilePath ?? "", location.GetLineSpan().Span, TrimCultureSensitiveMessage(message))
-        {
-        }
+            : this(
+                severity,
+                location.SourceTree?.FilePath ?? "",
+                location.GetLineSpan().Span,
+                TrimCultureSensitiveMessage(message)
+            ) { }
 
         // for non-English runs, trim the message content since it might be translated.
-        private static string TrimCultureSensitiveMessage(string message) => s_IsEnglishCulture ? message : "";
-        private readonly static bool s_IsEnglishCulture = CultureInfo.CurrentUICulture.Name.StartsWith("en", StringComparison.OrdinalIgnoreCase);
-        public override string ToString() => $"{Severity}, {Message}, {FilePath}@{LinePositionSpan}";
+        private static string TrimCultureSensitiveMessage(string message) =>
+            s_IsEnglishCulture ? message : "";
+
+        private static readonly bool s_IsEnglishCulture =
+            CultureInfo.CurrentUICulture.Name.StartsWith("en", StringComparison.OrdinalIgnoreCase);
+
+        public override string ToString() =>
+            $"{Severity}, {Message}, {FilePath}@{LinePositionSpan}";
     }
 }

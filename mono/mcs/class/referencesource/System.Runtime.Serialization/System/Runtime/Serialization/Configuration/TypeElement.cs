@@ -8,21 +8,21 @@ namespace System.Runtime.Serialization.Configuration
     using System.Collections.Generic;
     using System.Configuration;
     using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
     using System.Security;
+    using System.ServiceModel.Diagnostics;
 
     public sealed partial class TypeElement : ConfigurationElement
     {
-        public TypeElement()
-        {
-        }
+        public TypeElement() { }
 
         public TypeElement(string typeName)
             : this()
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("typeName");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "typeName"
+                );
             }
             this.Type = typeName;
         }
@@ -32,10 +32,17 @@ namespace System.Runtime.Serialization.Configuration
             get { return this.key; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DefaultCollectionName, DefaultValue = null, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultCollectionName,
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public ParameterElementCollection Parameters
         {
-            get { return (ParameterElementCollection)base[ConfigurationStrings.DefaultCollectionName]; }
+            get
+            {
+                return (ParameterElementCollection)base[ConfigurationStrings.DefaultCollectionName];
+            }
         }
 
         protected override void Reset(ConfigurationElement parentElement)
@@ -61,18 +68,28 @@ namespace System.Runtime.Serialization.Configuration
             set { base[ConfigurationStrings.Index] = value; }
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Loads type given name in configuration."
-            + " Since this information is used to determine whether a particular type is included as a known type,"
-            + " changes to the logic should be reviewed.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Loads type given name in configuration."
+                + " Since this information is used to determine whether a particular type is included as a known type,"
+                + " changes to the logic should be reviewed."
+        )]
         internal Type GetType(string rootType, Type[] typeArgs)
         {
             return GetType(rootType, typeArgs, this.Type, this.Index, this.Parameters);
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Loads type given name in configuration."
-            + " Since this information is used to determine whether a particular type is included as a known type,"
-            + " changes to the logic should be reviewed.")]
-        internal static Type GetType(string rootType, Type[] typeArgs, string type, int index, ParameterElementCollection parameters)
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Loads type given name in configuration."
+                + " Since this information is used to determine whether a particular type is included as a known type,"
+                + " changes to the logic should be reviewed."
+        )]
+        internal static Type GetType(
+            string rootType,
+            Type[] typeArgs,
+            string type,
+            int index,
+            ParameterElementCollection parameters
+        )
         {
             if (String.IsNullOrEmpty(type))
             {
@@ -81,17 +98,25 @@ namespace System.Runtime.Serialization.Configuration
                     int typeArgsCount = typeArgs == null ? 0 : typeArgs.Length;
                     if (typeArgsCount == 0)
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.KnownTypeConfigIndexOutOfBoundsZero,
-                            rootType,
-                            typeArgsCount,
-                            index));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(
+                                SR.KnownTypeConfigIndexOutOfBoundsZero,
+                                rootType,
+                                typeArgsCount,
+                                index
+                            )
+                        );
                     }
                     else
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.KnownTypeConfigIndexOutOfBounds,
-                            rootType,
-                            typeArgsCount,
-                            index));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(
+                                SR.KnownTypeConfigIndexOutOfBounds,
+                                rootType,
+                                typeArgsCount,
+                                index
+                            )
+                        );
                     }
                 }
 
@@ -102,10 +127,14 @@ namespace System.Runtime.Serialization.Configuration
             if (t.IsGenericTypeDefinition)
             {
                 if (parameters.Count != t.GetGenericArguments().Length)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.KnownTypeConfigGenericParamMismatch,
-                        type,
-                        t.GetGenericArguments().Length,
-                        parameters.Count));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(
+                            SR.KnownTypeConfigGenericParamMismatch,
+                            type,
+                            t.GetGenericArguments().Length,
+                            parameters.Count
+                        )
+                    );
 
                 Type[] types = new Type[parameters.Count];
                 for (int i = 0; i < types.Length; ++i)

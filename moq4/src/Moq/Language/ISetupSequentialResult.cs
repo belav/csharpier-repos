@@ -23,7 +23,7 @@ namespace Moq.Language
         /// <summary>
         /// Uses delegate to get return value
         /// </summary>
-        /// <param name="valueFunction">The function that will calculate the return value.</param> 
+        /// <param name="valueFunction">The function that will calculate the return value.</param>
         ISetupSequentialResult<TResult> Returns(Func<TResult> valueFunction);
 
         /// <summary>
@@ -34,12 +34,14 @@ namespace Moq.Language
         /// <summary>
         /// Throws an exception
         /// </summary>
-        ISetupSequentialResult<TResult> Throws<TException>() where TException : Exception, new();
+        ISetupSequentialResult<TResult> Throws<TException>()
+            where TException : Exception, new();
 
         /// <summary>
         /// Uses delegate to throws an exception
         /// </summary>
-        ISetupSequentialResult<TResult> Throws<TException>(Func<TException> exceptionFunction) where TException : Exception;
+        ISetupSequentialResult<TResult> Throws<TException>(Func<TException> exceptionFunction)
+            where TException : Exception;
 
         /// <summary>
         /// Calls original method

@@ -16,16 +16,21 @@ namespace Microsoft.CodeAnalysis
     {
         /// <summary>
         /// Looks for metadata references among the assembly file references given to the compilation when constructed.
-        /// When scripts are included into a project we don't want #r's to reference other assemblies than those 
+        /// When scripts are included into a project we don't want #r's to reference other assemblies than those
         /// specified explicitly in the project references.
         /// </summary>
-        internal sealed class ExistingReferencesResolver : MetadataReferenceResolver, IEquatable<ExistingReferencesResolver>
+        internal sealed class ExistingReferencesResolver
+            : MetadataReferenceResolver,
+                IEquatable<ExistingReferencesResolver>
         {
             private readonly MetadataReferenceResolver _resolver;
             private readonly ImmutableArray<MetadataReference> _availableReferences;
             private readonly Lazy<HashSet<AssemblyIdentity>> _lazyAvailableReferences;
 
-            public ExistingReferencesResolver(MetadataReferenceResolver resolver, ImmutableArray<MetadataReference> availableReferences)
+            public ExistingReferencesResolver(
+                MetadataReferenceResolver resolver,
+                ImmutableArray<MetadataReference> availableReferences
+            )
             {
                 Debug.Assert(resolver != null);
                 Debug.Assert(availableReferences != null);
@@ -34,30 +39,49 @@ namespace Microsoft.CodeAnalysis
                 _availableReferences = availableReferences;
 
                 // Delay reading assembly identities until they are actually needed (only when #r is encountered).
-                _lazyAvailableReferences = new Lazy<HashSet<AssemblyIdentity>>(() => new HashSet<AssemblyIdentity>(
-                    from reference in _availableReferences
-                    let identity = TryGetIdentity(reference)
-                    where identity != null
-                    select identity!));
+                _lazyAvailableReferences = new Lazy<HashSet<AssemblyIdentity>>(
+                    () =>
+                        new HashSet<AssemblyIdentity>(
+                            from reference in _availableReferences
+                            let identity = TryGetIdentity(reference)
+                            where identity != null
+                            select identity!
+                        )
+                );
             }
 
-            public override ImmutableArray<PortableExecutableReference> ResolveReference(string reference, string? baseFilePath, MetadataReferenceProperties properties)
+            public override ImmutableArray<PortableExecutableReference> ResolveReference(
+                string reference,
+                string? baseFilePath,
+                MetadataReferenceProperties properties
+            )
             {
-                var resolvedReferences = _resolver.ResolveReference(reference, baseFilePath, properties);
-                return resolvedReferences.WhereAsArray(r => _lazyAvailableReferences.Value.Contains(TryGetIdentity(r)!));
+                var resolvedReferences = _resolver.ResolveReference(
+                    reference,
+                    baseFilePath,
+                    properties
+                );
+                return resolvedReferences.WhereAsArray(r =>
+                    _lazyAvailableReferences.Value.Contains(TryGetIdentity(r)!)
+                );
             }
 
             private static AssemblyIdentity? TryGetIdentity(MetadataReference metadataReference)
             {
                 var peReference = metadataReference as PortableExecutableReference;
-                if (peReference == null || peReference.Properties.Kind != MetadataImageKind.Assembly)
+                if (
+                    peReference == null
+                    || peReference.Properties.Kind != MetadataImageKind.Assembly
+                )
                 {
                     return null;
                 }
 
                 try
                 {
-                    PEAssembly assembly = ((AssemblyMetadata)peReference.GetMetadataNoCopy()).GetAssembly()!;
+                    PEAssembly assembly = (
+                        (AssemblyMetadata)peReference.GetMetadataNoCopy()
+                    ).GetAssembly()!;
                     return assembly.Identity;
                 }
                 catch (Exception e) when (e is BadImageFormatException || e is IOException)
@@ -74,13 +98,13 @@ namespace Microsoft.CodeAnalysis
 
             public bool Equals(ExistingReferencesResolver? other)
             {
-                return
-                    other is object &&
-                    _resolver.Equals(other._resolver) &&
-                    _availableReferences.SequenceEqual(other._availableReferences);
+                return other is object
+                    && _resolver.Equals(other._resolver)
+                    && _availableReferences.SequenceEqual(other._availableReferences);
             }
 
-            public override bool Equals(object? other) => other is ExistingReferencesResolver obj && Equals(obj);
+            public override bool Equals(object? other) =>
+                other is ExistingReferencesResolver obj && Equals(obj);
         }
     }
 }

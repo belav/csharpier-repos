@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
- public struct float4
+public struct float4
 {
     public float4(float x, float y, float z, float w)
     {
@@ -14,7 +14,7 @@ using Xunit;
         this.z = z;
         this.w = w;
     }
-    
+
     public float x;
     public float y;
     public float z;

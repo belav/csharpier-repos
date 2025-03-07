@@ -15,7 +15,11 @@ namespace Microsoft.AspNetCore.Http;
 /// into related groups. These tags are typically included in the generated specification
 /// and are typically used to group operations by tags in the UI.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Delegate | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Delegate | AttributeTargets.Class,
+    Inherited = false,
+    AllowMultiple = false
+)]
 [DebuggerDisplay("{ToString(),nq}")]
 public sealed class TagsAttribute : Attribute, ITagsMetadata
 {

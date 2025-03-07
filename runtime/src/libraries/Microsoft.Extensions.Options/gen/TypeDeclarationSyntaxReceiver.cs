@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Options.Generators
         /// <summary>
         /// Gets class/struct/record declaration syntax holders after visiting nodes.
         /// </summary>
-        public ICollection<TypeDeclarationSyntax> TypeDeclarations { get; } = new List<TypeDeclarationSyntax>();
+        public ICollection<TypeDeclarationSyntax> TypeDeclarations { get; } =
+            new List<TypeDeclarationSyntax>();
 
         /// <inheritdoc/>
         public void OnVisitSyntaxNode(SyntaxNode syntaxNode)

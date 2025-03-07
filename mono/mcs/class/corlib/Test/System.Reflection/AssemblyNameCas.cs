@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,111 +26,113 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Configuration.Assemblies;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Reflection {
+namespace MonoCasTests.System.Reflection
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class AssemblyNameCas
+    {
+        private MonoTests.System.Reflection.AssemblyNameTest ant;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class AssemblyNameCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            ant = new MonoTests.System.Reflection.AssemblyNameTest();
+        }
 
-		private MonoTests.System.Reflection.AssemblyNameTest ant;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+            ant.SetUp();
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			ant = new MonoTests.System.Reflection.AssemblyNameTest ();
-		}
+        [TearDown]
+        public void TearDown()
+        {
+            ant.TearDown();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-			ant.SetUp ();
-		}
+        // Partial Trust Tests
 
-		[TearDown]
-		public void TearDown ()
-		{
-			ant.TearDown ();
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void PartialTrust_Deny_Unrestricted()
+        {
+            // call "normal" unit with reduced privileges
+            ant.Constructor0();
+            ant.SetPublicKey();
+            ant.SetPublicKeyToken();
+            ant.Clone_Empty();
+        }
 
-		// Partial Trust Tests
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, SerializationFormatter = true)]
+        public void PartialTrust_PermitOnly_SerializationFormatter()
+        {
+            ant.Serialization_WithoutStrongName();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void PartialTrust_Deny_Unrestricted ()
-		{
-			// call "normal" unit with reduced privileges
-			ant.Constructor0 ();
-			ant.SetPublicKey ();
-			ant.SetPublicKeyToken ();
-			ant.Clone_Empty ();
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void PartialTrust_PermitOnly_UnmanagedCode()
+        {
+            ant.KeyPair();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, SerializationFormatter = true)]
-		public void PartialTrust_PermitOnly_SerializationFormatter ()
-		{
-			ant.Serialization_WithoutStrongName ();
-		}
+        [Test]
+        [SecurityPermission(
+            SecurityAction.PermitOnly,
+            UnmanagedCode = true,
+            SerializationFormatter = true
+        )]
+        public void PartialTrust_PermitOnly_UnmanagedCodeSerializationFormatter()
+        {
+            // UnmanagedCode is required to create a StrongNameKeyPair instance
+            ant.Serialization();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void PartialTrust_PermitOnly_UnmanagedCode ()
-		{
-			ant.KeyPair ();
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, SerializationFormatter = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void PartialTrust_Deny_SerializationFormatter()
+        {
+            ant.Serialization();
+        }
 
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void PartialTrust_Deny_UnmanagedCode()
+        {
+            ant.KeyPair();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true, SerializationFormatter = true)]
-		public void PartialTrust_PermitOnly_UnmanagedCodeSerializationFormatter ()
-		{
-			// UnmanagedCode is required to create a StrongNameKeyPair instance
-			ant.Serialization ();
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SerializationFormatter = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void PartialTrust_Deny_SerializationFormatter ()
-		{
-			ant.Serialization ();
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void PartialTrust_Deny_UnmanagedCode ()
-		{
-			ant.KeyPair ();
-		}
-
-		[Test]
-		[FileIOPermission (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void PartialTrust_PermitOnly_FileIOPermission ()
-		{
-			// call "normal" unit with reduced privileges
-			ant.FullName_Name ();
-			ant.FullName_Version ();
-			ant.FullName_Culture ();
-			ant.FullName_PublicKey ();
-			ant.FullName_PublicKeyToken ();
-			ant.FullName_VersionCulture ();
-			ant.FullName_VersionPublicKey ();
-			ant.FullName_CulturePublicKey ();
-			ant.HashAlgorithm ();
-			ant.Clone_Empty ();
-			// mostly because they call Assembly.GetName
-		}
-	}
+        [Test]
+        [FileIOPermission(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void PartialTrust_PermitOnly_FileIOPermission()
+        {
+            // call "normal" unit with reduced privileges
+            ant.FullName_Name();
+            ant.FullName_Version();
+            ant.FullName_Culture();
+            ant.FullName_PublicKey();
+            ant.FullName_PublicKeyToken();
+            ant.FullName_VersionCulture();
+            ant.FullName_VersionPublicKey();
+            ant.FullName_CulturePublicKey();
+            ant.HashAlgorithm();
+            ant.Clone_Empty();
+            // mostly because they call Assembly.GetName
+        }
+    }
 }

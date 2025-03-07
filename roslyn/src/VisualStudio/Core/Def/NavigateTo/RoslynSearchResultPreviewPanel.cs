@@ -28,15 +28,18 @@ internal sealed partial class RoslynSearchItemsSourceProvider
             Guid projectGuid,
             Span span,
             string title,
-            ImageId icon)
+            ImageId icon
+        )
             : base(title, icon)
         {
             UserInterface = new CodeEditorModel(
                 nameof(RoslynSearchResultPreviewPanel),
-                new VisualStudio.Threading.AsyncLazy<TextDocumentLocation>(() =>
-                    Task.FromResult(new TextDocumentLocation(uri, projectGuid, span)),
-                    provider._threadingContext.JoinableTaskFactory),
-                isEditable: true);
+                new VisualStudio.Threading.AsyncLazy<TextDocumentLocation>(
+                    () => Task.FromResult(new TextDocumentLocation(uri, projectGuid, span)),
+                    provider._threadingContext.JoinableTaskFactory
+                ),
+                isEditable: true
+            );
         }
     }
 }

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         {
             private sealed partial class UnitTestingIncrementalAnalyzerProcessor
             {
-                private sealed class UnitTestingLowPriorityProcessor : AbstractUnitTestingPriorityProcessor
+                private sealed class UnitTestingLowPriorityProcessor
+                    : AbstractUnitTestingPriorityProcessor
                 {
                     private readonly UnitTestingAsyncProjectWorkItemQueue _workItemQueue;
 
@@ -31,18 +32,28 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         Lazy<ImmutableArray<IUnitTestingIncrementalAnalyzer>> lazyAnalyzers,
                         IGlobalOperationNotificationService? globalOperationNotificationService,
                         TimeSpan backOffTimeSpan,
-                        CancellationToken shutdownToken)
-                        : base(listener, processor, lazyAnalyzers, globalOperationNotificationService, backOffTimeSpan, shutdownToken)
+                        CancellationToken shutdownToken
+                    )
+                        : base(
+                            listener,
+                            processor,
+                            lazyAnalyzers,
+                            globalOperationNotificationService,
+                            backOffTimeSpan,
+                            shutdownToken
+                        )
                     {
-                        _workItemQueue = new UnitTestingAsyncProjectWorkItemQueue(processor._registration.ProgressReporter);
+                        _workItemQueue = new UnitTestingAsyncProjectWorkItemQueue(
+                            processor._registration.ProgressReporter
+                        );
 
                         Start();
                     }
 
                     public int WorkItemCount => _workItemQueue.WorkItemCount;
 
-                    protected override Task WaitAsync(CancellationToken cancellationToken)
-                        => _workItemQueue.WaitAsync(cancellationToken);
+                    protected override Task WaitAsync(CancellationToken cancellationToken) =>
+                        _workItemQueue.WaitAsync(cancellationToken);
 
                     protected override async Task ExecuteAsync()
                     {
@@ -52,19 +63,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             await WaitForHigherPriorityOperationsAsync().ConfigureAwait(false);
 
                             // process any available project work, preferring the active project.
-                            var preferableProjectId = Processor._documentTracker.SupportsDocumentTracking
+                            var preferableProjectId = Processor
+                                ._documentTracker
+                                .SupportsDocumentTracking
                                 ? Processor._documentTracker.TryGetActiveDocument()?.ProjectId
                                 : null;
 
-                            if (_workItemQueue.TryTakeAnyWork(
+                            if (
+                                _workItemQueue.TryTakeAnyWork(
                                     preferableProjectId,
 #if false // Not used in unit testing crawling
                                     Processor.DependencyGraph,
                                     Processor.DiagnosticAnalyzerService,
 #endif
-                                    out var workItem, out var projectCancellation))
+                                    out var workItem,
+                                    out var projectCancellation
+                                )
+                            )
                             {
-                                await ProcessProjectAsync(Analyzers, workItem, projectCancellation).ConfigureAwait(false);
+                                await ProcessProjectAsync(Analyzers, workItem, projectCancellation)
+                                    .ConfigureAwait(false);
                             }
                         }
                         catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
@@ -87,14 +105,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                     protected override bool HigherQueueHasWorkItem
                     {
-                        get
-                        {
-                            return
+                        get { return
 #if false // Not used in unit testing crawling
                                 Processor._highPriorityProcessor.HasAnyWork ||
 #endif
-                                Processor._normalPriorityProcessor.HasAnyWork;
-                        }
+                            Processor._normalPriorityProcessor.HasAnyWork; }
                     }
 
                     protected override void OnPaused()
@@ -109,7 +124,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         UpdateLastAccessTime();
 
                         // Project work
-                        item = item.ToProjectWorkItem(Processor._listener.BeginAsyncOperation("WorkItem"));
+                        item = item.ToProjectWorkItem(
+                            Processor._listener.BeginAsyncOperation("WorkItem")
+                        );
 
                         var added = _workItemQueue.AddOrReplace(item);
 
@@ -117,9 +134,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         // and let higher work item run
                         CancelRunningTaskIfHigherQueueHasWorkItem();
 
-                        Logger.Log(FunctionId.WorkCoordinator_Project_Enqueue, s_enqueueLogger, Environment.TickCount, item.ProjectId, !added);
+                        Logger.Log(
+                            FunctionId.WorkCoordinator_Project_Enqueue,
+                            s_enqueueLogger,
+                            Environment.TickCount,
+                            item.ProjectId,
+                            !added
+                        );
 
-                        UnitTestingSolutionCrawlerLogger.LogWorkItemEnqueue(Processor._logAggregator, item.ProjectId);
+                        UnitTestingSolutionCrawlerLogger.LogWorkItemEnqueue(
+                            Processor._logAggregator,
+                            item.ProjectId
+                        );
                     }
 
                     private void CancelRunningTaskIfHigherQueueHasWorkItem()
@@ -132,7 +158,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         _workItemQueue.RequestCancellationOnRunningTasks();
                     }
 
-                    private async Task ProcessProjectAsync(ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers, UnitTestingWorkItem workItem, CancellationToken cancellationToken)
+                    private async Task ProcessProjectAsync(
+                        ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers,
+                        UnitTestingWorkItem workItem,
+                        CancellationToken cancellationToken
+                    )
                     {
                         if (CancellationToken.IsCancellationRequested)
                         {
@@ -146,7 +176,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                         try
                         {
-                            using (Logger.LogBlock(FunctionId.WorkCoordinator_ProcessProjectAsync, w => w.ToString(), workItem, cancellationToken))
+                            using (
+                                Logger.LogBlock(
+                                    FunctionId.WorkCoordinator_ProcessProjectAsync,
+                                    w => w.ToString(),
+                                    workItem,
+                                    cancellationToken
+                                )
+                            )
                             {
                                 var project = processingSolution.GetProject(projectId);
                                 if (project != null)
@@ -157,16 +194,25 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                                                            reasons.Contains(UnitTestingPredefinedInvocationReasons.SolutionRemoved);
 #endif
 
-                                    await Processor.RunAnalyzersAsync(analyzers, project, workItem,
-                                        (a, p, c) => a.AnalyzeProjectAsync(p,
+                                    await Processor
+                                        .RunAnalyzersAsync(
+                                            analyzers,
+                                            project,
+                                            workItem,
+                                            (a, p, c) => a.AnalyzeProjectAsync(p,
 #if false // Not used in unit testing crawling
                                                 semanticsChanged,
 #endif
-                                            reasons, c), cancellationToken).ConfigureAwait(false);
+                                                    reasons, c),
+                                            cancellationToken
+                                        )
+                                        .ConfigureAwait(false);
                                 }
                                 else
                                 {
-                                    UnitTestingSolutionCrawlerLogger.LogProcessProjectNotExist(Processor._logAggregator);
+                                    UnitTestingSolutionCrawlerLogger.LogProcessProjectNotExist(
+                                        Processor._logAggregator
+                                    );
 
 #if false // Not used in unit testing crawling
                                     await RemoveProjectAsync(projectId, cancellationToken).ConfigureAwait(false);
@@ -179,7 +225,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                                 }
                             }
                         }
-                        catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+                        catch (Exception e)
+                            when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
                         {
                             throw ExceptionUtilities.Unreachable();
                         }
@@ -191,10 +238,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             // after that point.
                             if (!processedEverything && !CancellationToken.IsCancellationRequested)
                             {
-                                _workItemQueue.AddOrReplace(workItem.Retry(Listener.BeginAsyncOperation("ReenqueueWorkItem")));
+                                _workItemQueue.AddOrReplace(
+                                    workItem.Retry(
+                                        Listener.BeginAsyncOperation("ReenqueueWorkItem")
+                                    )
+                                );
                             }
 
-                            UnitTestingSolutionCrawlerLogger.LogProcessProject(Processor._logAggregator, projectId.Id, processedEverything);
+                            UnitTestingSolutionCrawlerLogger.LogProcessProject(
+                                Processor._logAggregator,
+                                projectId.Id,
+                                processedEverything
+                            );
 
                             // remove one that is finished running
                             _workItemQueue.MarkWorkItemDoneFor(projectId);
@@ -231,14 +286,23 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             _lowPriorityProcessor = lowPriorityProcessor;
                         }
 
-                        internal void WaitUntilCompletion(ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers, List<UnitTestingWorkItem> items)
+                        internal void WaitUntilCompletion(
+                            ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers,
+                            List<UnitTestingWorkItem> items
+                        )
                         {
                             var uniqueIds = new HashSet<ProjectId>();
                             foreach (var item in items)
                             {
                                 if (uniqueIds.Add(item.ProjectId))
                                 {
-                                    _lowPriorityProcessor.ProcessProjectAsync(analyzers, item, CancellationToken.None).Wait();
+                                    _lowPriorityProcessor
+                                        .ProcessProjectAsync(
+                                            analyzers,
+                                            item,
+                                            CancellationToken.None
+                                        )
+                                        .Wait();
                                 }
                             }
                         }

@@ -5,8 +5,8 @@ using System.Buffers;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
@@ -96,11 +96,14 @@ public class PooledStreamStackTests
 
     private static Http2Stream<HttpContext> CreateStream(int streamId, long expirationTimestamp)
     {
-        var context = TestContextFactory.CreateHttp2StreamContext(connectionId: "TestConnectionId", streamId: streamId);
+        var context = TestContextFactory.CreateHttp2StreamContext(
+            connectionId: "TestConnectionId",
+            streamId: streamId
+        );
 
         return new Http2Stream<HttpContext>(new DummyApplication(), context)
         {
-            DrainExpirationTimestamp = expirationTimestamp
+            DrainExpirationTimestamp = expirationTimestamp,
         };
     }
 }

@@ -8,9 +8,11 @@ namespace System.Activities.DurableInstancing
 
     sealed class DetectActivatableWorkflowsCommand : InstancePersistenceCommand
     {
-        public DetectActivatableWorkflowsCommand() :
-            base(SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace.GetName("DetectActivatableWorkflows"))
-        {
-        }
+        public DetectActivatableWorkflowsCommand()
+            : base(
+                SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace.GetName(
+                    "DetectActivatableWorkflows"
+                )
+            ) { }
     }
 }

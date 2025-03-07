@@ -56,7 +56,11 @@ namespace System.Runtime.Serialization
             return reader.GetAttribute(i);
         }
 
-        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Conceptually, this property describes this instance. Callers should expect to have an instance on hand to 'ask' about this 'emtpy' circumstance.")]
+        [SuppressMessage(
+            "Performance",
+            "CA1822:Mark members as static",
+            Justification = "Conceptually, this property describes this instance. Callers should expect to have an instance on hand to 'ask' about this 'emtpy' circumstance."
+        )]
         internal bool IsEmptyElement
         {
             get { return false; }
@@ -208,9 +212,14 @@ namespace System.Runtime.Serialization
 
         private static InvalidDataContractException CreateInvalidPrimitiveTypeException(Type type)
         {
-            return new InvalidDataContractException(SR.Format(
-                type.IsInterface ? SR.InterfaceTypeCannotBeCreated : SR.InvalidPrimitiveType_Serialization,
-                DataContract.GetClrTypeFullName(type)));
+            return new InvalidDataContractException(
+                SR.Format(
+                    type.IsInterface
+                        ? SR.InterfaceTypeCannotBeCreated
+                        : SR.InvalidPrimitiveType_Serialization,
+                    DataContract.GetClrTypeFullName(type)
+                )
+            );
         }
 
         public object ReadElementContentAsAnyType(Type valueType)
@@ -335,7 +344,12 @@ namespace System.Runtime.Serialization
         [DoesNotReturn]
         private void ThrowConversionException(string value, string type)
         {
-            throw new XmlException(XmlObjectSerializer.TryAddLineInfo(this, SR.Format(SR.XmlInvalidConversion, value, type)));
+            throw new XmlException(
+                XmlObjectSerializer.TryAddLineInfo(
+                    this,
+                    SR.Format(SR.XmlInvalidConversion, value, type)
+                )
+            );
         }
 
         [DoesNotReturn]
@@ -776,11 +790,20 @@ namespace System.Runtime.Serialization
             if (string.IsNullOrEmpty(str))
                 name = ns = string.Empty;
             else
-                XmlObjectSerializerReadContext.ParseQualifiedName(str, this, out name, out ns, out _);
+                XmlObjectSerializerReadContext.ParseQualifiedName(
+                    str,
+                    this,
+                    out name,
+                    out ns,
+                    out _
+                );
             return new XmlQualifiedName(name, ns);
         }
 
-        private static void CheckExpectedArrayLength(XmlObjectSerializerReadContext context, int arrayLength)
+        private static void CheckExpectedArrayLength(
+            XmlObjectSerializerReadContext context,
+            int arrayLength
+        )
         {
             context.IncrementItemCount(arrayLength);
         }
@@ -793,15 +816,31 @@ namespace System.Runtime.Serialization
             return Math.Min(context.RemainingItemCount, dictionaryReader.Quotas.MaxArrayLength);
         }
 
-        private static void CheckActualArrayLength(int expectedLength, int actualLength, XmlDictionaryString itemName, XmlDictionaryString itemNamespace)
+        private static void CheckActualArrayLength(
+            int expectedLength,
+            int actualLength,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace
+        )
         {
             if (expectedLength != actualLength)
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ArrayExceededSizeAttribute, expectedLength, itemName.Value, itemNamespace.Value));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(
+                        SR.ArrayExceededSizeAttribute,
+                        expectedLength,
+                        itemName.Value,
+                        itemNamespace.Value
+                    )
+                );
         }
 
-        internal bool TryReadBooleanArray(XmlObjectSerializerReadContext context,
-            XmlDictionaryString itemName, XmlDictionaryString itemNamespace,
-            int arrayLength, [NotNullWhen(true)] out bool[]? array)
+        internal bool TryReadBooleanArray(
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            int arrayLength,
+            [NotNullWhen(true)] out bool[]? array
+        )
         {
             if (dictionaryReader == null)
             {
@@ -813,8 +852,19 @@ namespace System.Runtime.Serialization
             {
                 CheckExpectedArrayLength(context, arrayLength);
                 array = new bool[arrayLength];
-                int read, offset = 0;
-                while ((read = dictionaryReader.ReadArray(itemName, itemNamespace, array, offset, arrayLength - offset)) > 0)
+                int read,
+                    offset = 0;
+                while (
+                    (
+                        read = dictionaryReader.ReadArray(
+                            itemName,
+                            itemNamespace,
+                            array,
+                            offset,
+                            arrayLength - offset
+                        )
+                    ) > 0
+                )
                 {
                     offset += read;
                 }
@@ -823,15 +873,23 @@ namespace System.Runtime.Serialization
             else
             {
                 array = BooleanArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader, itemName, itemNamespace, GetArrayLengthQuota(context));
+                    dictionaryReader,
+                    itemName,
+                    itemNamespace,
+                    GetArrayLengthQuota(context)
+                );
                 context.IncrementItemCount(array.Length);
             }
             return true;
         }
 
-        internal virtual bool TryReadDateTimeArray(XmlObjectSerializerReadContext context,
-            XmlDictionaryString itemName, XmlDictionaryString itemNamespace,
-            int arrayLength, [NotNullWhen(true)] out DateTime[]? array)
+        internal virtual bool TryReadDateTimeArray(
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            int arrayLength,
+            [NotNullWhen(true)] out DateTime[]? array
+        )
         {
             if (dictionaryReader == null)
             {
@@ -843,8 +901,19 @@ namespace System.Runtime.Serialization
             {
                 CheckExpectedArrayLength(context, arrayLength);
                 array = new DateTime[arrayLength];
-                int read, offset = 0;
-                while ((read = dictionaryReader.ReadArray(itemName, itemNamespace, array, offset, arrayLength - offset)) > 0)
+                int read,
+                    offset = 0;
+                while (
+                    (
+                        read = dictionaryReader.ReadArray(
+                            itemName,
+                            itemNamespace,
+                            array,
+                            offset,
+                            arrayLength - offset
+                        )
+                    ) > 0
+                )
                 {
                     offset += read;
                 }
@@ -853,15 +922,23 @@ namespace System.Runtime.Serialization
             else
             {
                 array = DateTimeArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader, itemName, itemNamespace, GetArrayLengthQuota(context));
+                    dictionaryReader,
+                    itemName,
+                    itemNamespace,
+                    GetArrayLengthQuota(context)
+                );
                 context.IncrementItemCount(array.Length);
             }
             return true;
         }
 
-        internal bool TryReadDecimalArray(XmlObjectSerializerReadContext context,
-            XmlDictionaryString itemName, XmlDictionaryString itemNamespace,
-            int arrayLength, [NotNullWhen(true)] out decimal[]? array)
+        internal bool TryReadDecimalArray(
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            int arrayLength,
+            [NotNullWhen(true)] out decimal[]? array
+        )
         {
             if (dictionaryReader == null)
             {
@@ -873,8 +950,19 @@ namespace System.Runtime.Serialization
             {
                 CheckExpectedArrayLength(context, arrayLength);
                 array = new decimal[arrayLength];
-                int read, offset = 0;
-                while ((read = dictionaryReader.ReadArray(itemName, itemNamespace, array, offset, arrayLength - offset)) > 0)
+                int read,
+                    offset = 0;
+                while (
+                    (
+                        read = dictionaryReader.ReadArray(
+                            itemName,
+                            itemNamespace,
+                            array,
+                            offset,
+                            arrayLength - offset
+                        )
+                    ) > 0
+                )
                 {
                     offset += read;
                 }
@@ -883,15 +971,23 @@ namespace System.Runtime.Serialization
             else
             {
                 array = DecimalArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader, itemName, itemNamespace, GetArrayLengthQuota(context));
+                    dictionaryReader,
+                    itemName,
+                    itemNamespace,
+                    GetArrayLengthQuota(context)
+                );
                 context.IncrementItemCount(array.Length);
             }
             return true;
         }
 
-        internal bool TryReadInt32Array(XmlObjectSerializerReadContext context,
-            XmlDictionaryString itemName, XmlDictionaryString itemNamespace,
-            int arrayLength, [NotNullWhen(true)] out int[]? array)
+        internal bool TryReadInt32Array(
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            int arrayLength,
+            [NotNullWhen(true)] out int[]? array
+        )
         {
             if (dictionaryReader == null)
             {
@@ -903,8 +999,19 @@ namespace System.Runtime.Serialization
             {
                 CheckExpectedArrayLength(context, arrayLength);
                 array = new int[arrayLength];
-                int read, offset = 0;
-                while ((read = dictionaryReader.ReadArray(itemName, itemNamespace, array, offset, arrayLength - offset)) > 0)
+                int read,
+                    offset = 0;
+                while (
+                    (
+                        read = dictionaryReader.ReadArray(
+                            itemName,
+                            itemNamespace,
+                            array,
+                            offset,
+                            arrayLength - offset
+                        )
+                    ) > 0
+                )
                 {
                     offset += read;
                 }
@@ -913,15 +1020,23 @@ namespace System.Runtime.Serialization
             else
             {
                 array = Int32ArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader, itemName, itemNamespace, GetArrayLengthQuota(context));
+                    dictionaryReader,
+                    itemName,
+                    itemNamespace,
+                    GetArrayLengthQuota(context)
+                );
                 context.IncrementItemCount(array.Length);
             }
             return true;
         }
 
-        internal bool TryReadInt64Array(XmlObjectSerializerReadContext context,
-            XmlDictionaryString itemName, XmlDictionaryString itemNamespace,
-            int arrayLength, [NotNullWhen(true)] out long[]? array)
+        internal bool TryReadInt64Array(
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            int arrayLength,
+            [NotNullWhen(true)] out long[]? array
+        )
         {
             if (dictionaryReader == null)
             {
@@ -933,8 +1048,19 @@ namespace System.Runtime.Serialization
             {
                 CheckExpectedArrayLength(context, arrayLength);
                 array = new long[arrayLength];
-                int read, offset = 0;
-                while ((read = dictionaryReader.ReadArray(itemName, itemNamespace, array, offset, arrayLength - offset)) > 0)
+                int read,
+                    offset = 0;
+                while (
+                    (
+                        read = dictionaryReader.ReadArray(
+                            itemName,
+                            itemNamespace,
+                            array,
+                            offset,
+                            arrayLength - offset
+                        )
+                    ) > 0
+                )
                 {
                     offset += read;
                 }
@@ -943,15 +1069,23 @@ namespace System.Runtime.Serialization
             else
             {
                 array = Int64ArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader, itemName, itemNamespace, GetArrayLengthQuota(context));
+                    dictionaryReader,
+                    itemName,
+                    itemNamespace,
+                    GetArrayLengthQuota(context)
+                );
                 context.IncrementItemCount(array.Length);
             }
             return true;
         }
 
-        internal bool TryReadSingleArray(XmlObjectSerializerReadContext context,
-            XmlDictionaryString itemName, XmlDictionaryString itemNamespace,
-            int arrayLength, [NotNullWhen(true)] out float[]? array)
+        internal bool TryReadSingleArray(
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            int arrayLength,
+            [NotNullWhen(true)] out float[]? array
+        )
         {
             if (dictionaryReader == null)
             {
@@ -963,8 +1097,19 @@ namespace System.Runtime.Serialization
             {
                 CheckExpectedArrayLength(context, arrayLength);
                 array = new float[arrayLength];
-                int read, offset = 0;
-                while ((read = dictionaryReader.ReadArray(itemName, itemNamespace, array, offset, arrayLength - offset)) > 0)
+                int read,
+                    offset = 0;
+                while (
+                    (
+                        read = dictionaryReader.ReadArray(
+                            itemName,
+                            itemNamespace,
+                            array,
+                            offset,
+                            arrayLength - offset
+                        )
+                    ) > 0
+                )
                 {
                     offset += read;
                 }
@@ -973,15 +1118,23 @@ namespace System.Runtime.Serialization
             else
             {
                 array = SingleArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader, itemName, itemNamespace, GetArrayLengthQuota(context));
+                    dictionaryReader,
+                    itemName,
+                    itemNamespace,
+                    GetArrayLengthQuota(context)
+                );
                 context.IncrementItemCount(array.Length);
             }
             return true;
         }
 
-        internal bool TryReadDoubleArray(XmlObjectSerializerReadContext context,
-            XmlDictionaryString itemName, XmlDictionaryString itemNamespace,
-            int arrayLength, [NotNullWhen(true)] out double[]? array)
+        internal bool TryReadDoubleArray(
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            int arrayLength,
+            [NotNullWhen(true)] out double[]? array
+        )
         {
             if (dictionaryReader == null)
             {
@@ -993,8 +1146,19 @@ namespace System.Runtime.Serialization
             {
                 CheckExpectedArrayLength(context, arrayLength);
                 array = new double[arrayLength];
-                int read, offset = 0;
-                while ((read = dictionaryReader.ReadArray(itemName, itemNamespace, array, offset, arrayLength - offset)) > 0)
+                int read,
+                    offset = 0;
+                while (
+                    (
+                        read = dictionaryReader.ReadArray(
+                            itemName,
+                            itemNamespace,
+                            array,
+                            offset,
+                            arrayLength - offset
+                        )
+                    ) > 0
+                )
                 {
                     offset += read;
                 }
@@ -1003,7 +1167,11 @@ namespace System.Runtime.Serialization
             else
             {
                 array = DoubleArrayHelperWithDictionaryString.Instance.ReadArray(
-                    dictionaryReader, itemName, itemNamespace, GetArrayLengthQuota(context));
+                    dictionaryReader,
+                    itemName,
+                    itemNamespace,
+                    GetArrayLengthQuota(context)
+                );
                 context.IncrementItemCount(array.Length);
             }
             return true;
@@ -1011,7 +1179,9 @@ namespace System.Runtime.Serialization
 
         internal IDictionary<string, string>? GetNamespacesInScope(XmlNamespaceScope scope)
         {
-            return (reader is IXmlNamespaceResolver) ? ((IXmlNamespaceResolver)reader).GetNamespacesInScope(scope) : null;
+            return (reader is IXmlNamespaceResolver)
+                ? ((IXmlNamespaceResolver)reader).GetNamespacesInScope(scope)
+                : null;
         }
 
         // IXmlLineInfo members
@@ -1071,7 +1241,9 @@ namespace System.Runtime.Serialization
                 if (reader is not XmlTextReader xmlTextReader)
                 {
                     IXmlTextParser? xmlTextParser = reader as IXmlTextParser;
-                    return (xmlTextParser == null) ? WhitespaceHandling.None : xmlTextParser.WhitespaceHandling;
+                    return (xmlTextParser == null)
+                        ? WhitespaceHandling.None
+                        : xmlTextParser.WhitespaceHandling;
                 }
                 else
                     return xmlTextReader.WhitespaceHandling;
@@ -1089,14 +1261,40 @@ namespace System.Runtime.Serialization
         }
 
         // delegating properties and methods
-        internal string Name { get { return reader.Name; } }
-        internal string LocalName { get { return reader.LocalName; } }
-        internal string NamespaceURI { get { return reader.NamespaceURI; } }
-        internal string Value { get { return reader.Value; } }
-        internal Type ValueType { get { return reader.ValueType; } }
-        internal int Depth { get { return reader.Depth; } }
-        internal string? LookupNamespace(string prefix) { return reader.LookupNamespace(prefix); }
-        internal bool EOF { get { return reader.EOF; } }
+        internal string Name
+        {
+            get { return reader.Name; }
+        }
+        internal string LocalName
+        {
+            get { return reader.LocalName; }
+        }
+        internal string NamespaceURI
+        {
+            get { return reader.NamespaceURI; }
+        }
+        internal string Value
+        {
+            get { return reader.Value; }
+        }
+        internal Type ValueType
+        {
+            get { return reader.ValueType; }
+        }
+        internal int Depth
+        {
+            get { return reader.Depth; }
+        }
+
+        internal string? LookupNamespace(string prefix)
+        {
+            return reader.LookupNamespace(prefix);
+        }
+
+        internal bool EOF
+        {
+            get { return reader.EOF; }
+        }
 
         internal void Skip()
         {

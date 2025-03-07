@@ -7,7 +7,10 @@ using Xunit;
 
 namespace System.DirectoryServices.Protocols.Tests
 {
-    [ConditionalClass(typeof(DirectoryServicesTestHelpers), nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled))]
+    [ConditionalClass(
+        typeof(DirectoryServicesTestHelpers),
+        nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled)
+    )]
     public class ExtendedDNControlTests
     {
         [Fact]
@@ -19,7 +22,10 @@ namespace System.DirectoryServices.Protocols.Tests
             Assert.True(control.ServerSide);
             Assert.Equal("1.2.840.113556.1.4.529", control.Type);
 
-            var expected = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 3, 2, 1, 0 } : new byte[] { 48, 3, 2, 1, 0 };
+            var expected =
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 3, 2, 1, 0 }
+                    : new byte[] { 48, 3, 2, 1, 0 };
             Assert.Equal(expected, control.GetValue());
         }
 
@@ -32,7 +38,10 @@ namespace System.DirectoryServices.Protocols.Tests
             Assert.True(control.ServerSide);
             Assert.Equal("1.2.840.113556.1.4.529", control.Type);
 
-            var expected = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? new byte[] { 48, 132, 0, 0, 0, 3, 2, 1, 1 } : new byte[] { 48, 3, 2, 1, 1 };
+            var expected =
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? new byte[] { 48, 132, 0, 0, 0, 3, 2, 1, 1 }
+                    : new byte[] { 48, 3, 2, 1, 1 };
             Assert.Equal(expected, control.GetValue());
         }
 
@@ -41,7 +50,10 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(ExtendedDNFlag.StandardString + 1)]
         public void Ctor_InvalidFlag_ThrowsInvalidEnumArgumentException(ExtendedDNFlag flag)
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => new ExtendedDNControl(flag));
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "value",
+                () => new ExtendedDNControl(flag)
+            );
         }
     }
 }

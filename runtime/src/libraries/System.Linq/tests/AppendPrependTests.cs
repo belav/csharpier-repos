@@ -12,8 +12,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQueryAppend()
         {
-            var q1 = from x1 in new int?[] { 2, 3, null, 2, null, 4, 5 }
-                     select x1;
+            var q1 = from x1 in new int?[] { 2, 3, null, 2, null, 4, 5 } select x1;
 
             Assert.Equal(q1.Append(42), q1.Append(42));
             Assert.Equal(q1.Append(42), q1.Concat(new int?[] { 42 }));
@@ -22,8 +21,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQueryPrepend()
         {
-            var q1 = from x1 in new int?[] { 2, 3, null, 2, null, 4, 5 }
-                     select x1;
+            var q1 = from x1 in new int?[] { 2, 3, null, 2, null, 4, 5 } select x1;
 
             Assert.Equal(q1.Prepend(42), q1.Prepend(42));
             Assert.Equal(q1.Prepend(42), (new int?[] { 42 }).Concat(q1));
@@ -32,8 +30,19 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQueryAppend()
         {
-            var q1 = from x1 in new[] { "AAA", string.Empty, "q", "C", "#", "!@#$%^", "0987654321", "Calling Twice" }
-                     select x1;
+            var q1 =
+                from x1 in new[]
+                {
+                    "AAA",
+                    string.Empty,
+                    "q",
+                    "C",
+                    "#",
+                    "!@#$%^",
+                    "0987654321",
+                    "Calling Twice",
+                }
+                select x1;
 
             Assert.Equal(q1.Append("hi"), q1.Append("hi"));
             Assert.Equal(q1.Append("hi"), q1.Concat(new string[] { "hi" }));
@@ -42,8 +51,19 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQueryPrepend()
         {
-            var q1 = from x1 in new[] { "AAA", string.Empty, "q", "C", "#", "!@#$%^", "0987654321", "Calling Twice" }
-                     select x1;
+            var q1 =
+                from x1 in new[]
+                {
+                    "AAA",
+                    string.Empty,
+                    "q",
+                    "C",
+                    "#",
+                    "!@#$%^",
+                    "0987654321",
+                    "Calling Twice",
+                }
+                select x1;
 
             Assert.Equal(q1.Prepend("hi"), q1.Prepend("hi"));
             Assert.Equal(q1.Prepend("hi"), (new string[] { "hi" }).Concat(q1));
@@ -104,7 +124,11 @@ namespace System.Linq.Tests
         [Fact]
         public void ForcedToEnumeratorDoesntEnumerateMultipleAppendsAndPrepends()
         {
-            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).Append(4).Append(5).Prepend(-1).Prepend(-2);
+            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3)
+                .Append(4)
+                .Append(5)
+                .Prepend(-1)
+                .Prepend(-2);
             // Don't insist on this behaviour, but check it's correct if it happens
             var en = iterator as IEnumerator<int>;
             Assert.False(en != null && en.MoveNext());
@@ -113,14 +137,24 @@ namespace System.Linq.Tests
         [Fact]
         public void SourceNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).Append(1));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).Prepend(1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).Append(1)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).Prepend(1)
+            );
         }
 
         [Fact]
         public void Combined()
         {
-            var v = "foo".Append('1').Append('2').Prepend('3').Concat("qq".Append('Q').Prepend('W'));
+            var v = "foo"
+                .Append('1')
+                .Append('2')
+                .Prepend('3')
+                .Concat("qq".Append('Q').Prepend('W'));
 
             Assert.Equal(v.ToArray(), "3foo12WqqQ".ToArray());
 
@@ -246,11 +280,19 @@ namespace System.Linq.Tests
             Assert.Equal(Enumerable.Range(0, 6), source.ToList());
             Assert.Equal(Enumerable.Range(0, 6), source.ToArray());
 
-            source = NumberRangeGuaranteedNotCollectionType(2, 2).Append(4).Prepend(1).Append(5).Prepend(0);
+            source = NumberRangeGuaranteedNotCollectionType(2, 2)
+                .Append(4)
+                .Prepend(1)
+                .Append(5)
+                .Prepend(0);
             Assert.Equal(Enumerable.Range(0, 6), source.ToList());
             Assert.Equal(Enumerable.Range(0, 6), source.ToArray());
 
-            source = NumberRangeGuaranteedNotCollectionType(2, 2).Prepend(1).Prepend(0).Append(4).Append(5);
+            source = NumberRangeGuaranteedNotCollectionType(2, 2)
+                .Prepend(1)
+                .Prepend(0)
+                .Append(4)
+                .Append(5);
             Assert.Equal(Enumerable.Range(0, 6), source.ToList());
             Assert.Equal(Enumerable.Range(0, 6), source.ToArray());
         }
@@ -258,9 +300,23 @@ namespace System.Linq.Tests
         [Fact]
         public void AppendPrependRunOnce()
         {
-            var source = NumberRangeGuaranteedNotCollectionType(2, 2).RunOnce().Prepend(1).RunOnce().Prepend(0).RunOnce().Append(4).RunOnce().Append(5).RunOnce();
+            var source = NumberRangeGuaranteedNotCollectionType(2, 2)
+                .RunOnce()
+                .Prepend(1)
+                .RunOnce()
+                .Prepend(0)
+                .RunOnce()
+                .Append(4)
+                .RunOnce()
+                .Append(5)
+                .RunOnce();
             Assert.Equal(Enumerable.Range(0, 6), source.ToList());
-            source = NumberRangeGuaranteedNotCollectionType(2, 2).Prepend(1).Prepend(0).Append(4).Append(5).RunOnce();
+            source = NumberRangeGuaranteedNotCollectionType(2, 2)
+                .Prepend(1)
+                .Prepend(0)
+                .Append(4)
+                .Append(5)
+                .RunOnce();
             Assert.Equal(Enumerable.Range(0, 6), source.ToList());
         }
     }

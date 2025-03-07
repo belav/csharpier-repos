@@ -15,38 +15,83 @@ namespace System.IO.Tests
         [InlineData(true)]
         public void DisposeHandleThenUseFileStream_CopyToAsync(bool useAsync)
         {
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.None, 0x100, useAsync))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.None,
+                    0x100,
+                    useAsync
+                )
+            )
             {
                 fs.SafeFileHandle.Dispose();
-                Assert.Throws<ObjectDisposedException>(() => { fs.CopyToAsync(new MemoryStream()); });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    fs.CopyToAsync(new MemoryStream());
+                });
             }
 
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.None, 0x100, useAsync))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.None,
+                    0x100,
+                    useAsync
+                )
+            )
             {
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
                 fs.SafeFileHandle.Dispose();
-                Assert.Throws<ObjectDisposedException>(() => { fs.CopyToAsync(new MemoryStream()).Wait(); });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    fs.CopyToAsync(new MemoryStream()).Wait();
+                });
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))] // inner loop, just a few cases
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )] // inner loop, just a few cases
         [InlineData(false, false)]
         [InlineData(true, false)]
         [InlineData(true, true)]
         public Task File_AllDataCopied_InnerLoop(bool useAsync, bool preWrite)
         {
             return File_AllDataCopied(
-                _ => new MemoryStream(), useAsync, preRead: false, preWrite: preWrite, exposeHandle: false, cancelable: true,
-                bufferSize: 4096, writeSize: 1024, numWrites: 10);
+                _ => new MemoryStream(),
+                useAsync,
+                preRead: false,
+                preWrite: preWrite,
+                exposeHandle: false,
+                cancelable: true,
+                bufferSize: 4096,
+                writeSize: 1024,
+                numWrites: 10
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))] // outer loop, many combinations
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )] // outer loop, many combinations
         [OuterLoop]
         [MemberData(nameof(File_AllDataCopied_MemberData))]
         public async Task File_AllDataCopied(
             Func<string, Stream> createDestinationStream,
-            bool useAsync, bool preRead, bool preWrite, bool exposeHandle, bool cancelable,
-            int bufferSize, int writeSize, int numWrites)
+            bool useAsync,
+            bool preRead,
+            bool preWrite,
+            bool exposeHandle,
+            bool cancelable,
+            int bufferSize,
+            int writeSize,
+            int numWrites
+        )
         {
             // Create the expected data
             long totalLength = writeSize * numWrites;
@@ -58,7 +103,16 @@ namespace System.IO.Tests
             File.WriteAllBytes(srcPath, expectedData);
 
             string dstPath = GetTestFilePath();
-            using (FileStream src = new FileStream(srcPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None, bufferSize, useAsync))
+            using (
+                FileStream src = new FileStream(
+                    srcPath,
+                    FileMode.Open,
+                    FileAccess.ReadWrite,
+                    FileShare.None,
+                    bufferSize,
+                    useAsync
+                )
+            )
             using (Stream dst = createDestinationStream(dstPath))
             {
                 // If configured to expose the handle, do so.  This influences the stream's need to ensure the position is in sync.
@@ -88,7 +142,11 @@ namespace System.IO.Tests
                 }
 
                 // Do the copy
-                await src.CopyToAsync(dst, writeSize, cancelable ? new CancellationTokenSource().Token : CancellationToken.None);
+                await src.CopyToAsync(
+                    dst,
+                    writeSize,
+                    cancelable ? new CancellationTokenSource().Token : CancellationToken.None
+                );
                 dst.Flush();
 
                 // Make sure we're at the end of the source file
@@ -118,24 +176,86 @@ namespace System.IO.Tests
                             Func<string, Stream> createDestinationStream;
                             switch (streamType)
                             {
-                                case 0: createDestinationStream = _ => new MemoryStream(); break;
-                                default: createDestinationStream = s => File.Create(s); break;
+                                case 0:
+                                    createDestinationStream = _ => new MemoryStream();
+                                    break;
+                                default:
+                                    createDestinationStream = s => File.Create(s);
+                                    break;
                             }
 
                             // Various exposeHandle (whether the SafeFileHandle was publicly accessed),
                             // preWrite, bufferSize, writeSize, and numWrites combinations
-                            yield return new object[] { createDestinationStream, useAsync, preRead, false, false, cancelable, 0x1000, 0x100, 100 };
-                            yield return new object[] { createDestinationStream, useAsync, preRead, false, false, cancelable, 0x1, 0x1, 1000 };
-                            yield return new object[] { createDestinationStream, useAsync, preRead, false, true, cancelable, 0x2, 0x100, 100 };
-                            yield return new object[] { createDestinationStream, useAsync, preRead, false, false, cancelable, 0x4000, 0x10, 100 };
-                            yield return new object[] { createDestinationStream, useAsync, preRead, false, true, cancelable, 0x1000, 99999, 10 };
+                            yield return new object[]
+                            {
+                                createDestinationStream,
+                                useAsync,
+                                preRead,
+                                false,
+                                false,
+                                cancelable,
+                                0x1000,
+                                0x100,
+                                100,
+                            };
+                            yield return new object[]
+                            {
+                                createDestinationStream,
+                                useAsync,
+                                preRead,
+                                false,
+                                false,
+                                cancelable,
+                                0x1,
+                                0x1,
+                                1000,
+                            };
+                            yield return new object[]
+                            {
+                                createDestinationStream,
+                                useAsync,
+                                preRead,
+                                false,
+                                true,
+                                cancelable,
+                                0x2,
+                                0x100,
+                                100,
+                            };
+                            yield return new object[]
+                            {
+                                createDestinationStream,
+                                useAsync,
+                                preRead,
+                                false,
+                                false,
+                                cancelable,
+                                0x4000,
+                                0x10,
+                                100,
+                            };
+                            yield return new object[]
+                            {
+                                createDestinationStream,
+                                useAsync,
+                                preRead,
+                                false,
+                                true,
+                                cancelable,
+                                0x1000,
+                                99999,
+                                10,
+                            };
                         }
                     }
                 }
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public async Task DerivedFileStream_ReadAsyncInvoked(bool useAsync)
@@ -147,7 +267,13 @@ namespace System.IO.Tests
             File.WriteAllBytes(srcPath, expectedData);
 
             bool readAsyncInvoked = false;
-            using (var fs = new FileStreamThatOverridesReadAsync(srcPath, useAsync, () => readAsyncInvoked = true))
+            using (
+                var fs = new FileStreamThatOverridesReadAsync(
+                    srcPath,
+                    useAsync,
+                    () => readAsyncInvoked = true
+                )
+            )
             {
                 await fs.CopyToAsync(new MemoryStream());
                 Assert.True(readAsyncInvoked);
@@ -158,13 +284,22 @@ namespace System.IO.Tests
         {
             private readonly Action _readAsyncInvoked;
 
-            internal FileStreamThatOverridesReadAsync(string path, bool useAsync, Action readAsyncInvoked) :
-                base(path, FileMode.Open, FileAccess.Read, FileShare.Read, 0x1000, useAsync)
+            internal FileStreamThatOverridesReadAsync(
+                string path,
+                bool useAsync,
+                Action readAsyncInvoked
+            )
+                : base(path, FileMode.Open, FileAccess.Read, FileShare.Read, 0x1000, useAsync)
             {
                 _readAsyncInvoked = readAsyncInvoked;
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 _readAsyncInvoked();
                 return base.ReadAsync(buffer, offset, count, cancellationToken);

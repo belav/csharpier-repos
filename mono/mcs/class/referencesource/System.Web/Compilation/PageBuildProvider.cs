@@ -4,35 +4,37 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+namespace System.Web.Compilation
+{
+    using System;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.IO;
+    using System.Web.Configuration;
+    using System.Web.UI;
+    using System.Web.Util;
 
+    [BuildProviderAppliesTo(BuildProviderAppliesTo.Web)]
+    internal class PageBuildProvider : TemplateControlBuildProvider
+    {
+        internal override DependencyParser CreateDependencyParser()
+        {
+            return new PageDependencyParser();
+        }
 
-namespace System.Web.Compilation {
+        protected override TemplateParser CreateParser()
+        {
+            return new PageParser();
+        }
 
-using System;
-using System.IO;
-using System.Collections;
-using System.CodeDom.Compiler;
-using System.Web.Configuration;
-using System.Web.Util;
-using System.Web.UI;
+        internal override BaseCodeDomTreeGenerator CreateCodeDomTreeGenerator(TemplateParser parser)
+        {
+            return new PageCodeDomTreeGenerator((PageParser)parser);
+        }
 
-[BuildProviderAppliesTo(BuildProviderAppliesTo.Web)]
-internal class PageBuildProvider: TemplateControlBuildProvider {
-    internal override DependencyParser CreateDependencyParser() {
-        return new PageDependencyParser();
+        internal override BuildResultNoCompileTemplateControl CreateNoCompileBuildResult()
+        {
+            return new BuildResultNoCompilePage(Parser.BaseType, Parser);
+        }
     }
-
-    protected override TemplateParser CreateParser() {
-        return new PageParser();
-    }
-
-    internal override BaseCodeDomTreeGenerator CreateCodeDomTreeGenerator(TemplateParser parser) {
-        return new PageCodeDomTreeGenerator((PageParser)parser);
-    }
-
-    internal override BuildResultNoCompileTemplateControl CreateNoCompileBuildResult() {
-        return new BuildResultNoCompilePage(Parser.BaseType, Parser);
-    }
-}
-
 }

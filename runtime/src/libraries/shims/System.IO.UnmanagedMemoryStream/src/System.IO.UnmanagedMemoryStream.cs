@@ -2,4 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IO.UnmanagedMemoryStream))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IO.UnmanagedMemoryAccessor))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.IO.UnmanagedMemoryAccessor)
+)]

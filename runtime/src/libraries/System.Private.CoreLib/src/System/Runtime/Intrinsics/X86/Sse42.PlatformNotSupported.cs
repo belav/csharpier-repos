@@ -15,20 +15,31 @@ namespace System.Runtime.Intrinsics.X86
     {
         internal Sse42() { }
 
-        public static new bool IsSupported { [Intrinsic] get { return false; } }
+        public static new bool IsSupported
+        {
+            [Intrinsic]
+            get { return false; }
+        }
 
         public new abstract class X64 : Sse41.X64
         {
             internal X64() { }
 
-            public static new bool IsSupported { [Intrinsic] get { return false; } }
+            public static new bool IsSupported
+            {
+                [Intrinsic]
+                get { return false; }
+            }
 
             /// <summary>
             /// unsigned __int64 _mm_crc32_u64 (unsigned __int64 crc, unsigned __int64 v)
             ///   CRC32 r64, r/m64
             /// This intrinsic is only available on 64-bit processes
             /// </summary>
-            public static ulong Crc32(ulong crc, ulong data) { throw new PlatformNotSupportedException(); }
+            public static ulong Crc32(ulong crc, ulong data)
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
         /// <summary>
@@ -36,22 +47,39 @@ namespace System.Runtime.Intrinsics.X86
         ///    PCMPGTQ xmm1,       xmm2/m128
         ///   VPCMPGTQ xmm1, xmm2, xmm3/m128
         /// </summary>
-        public static Vector128<long> CompareGreaterThan(Vector128<long> left, Vector128<long> right) { throw new PlatformNotSupportedException(); }
+        public static Vector128<long> CompareGreaterThan(
+            Vector128<long> left,
+            Vector128<long> right
+        )
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         /// unsigned int _mm_crc32_u8 (unsigned int crc, unsigned char v)
         ///   CRC32 r32, r/m8
         /// </summary>
-        public static uint Crc32(uint crc, byte data) { throw new PlatformNotSupportedException(); }
+        public static uint Crc32(uint crc, byte data)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         /// <summary>
         /// unsigned int _mm_crc32_u16 (unsigned int crc, unsigned short v)
         ///   CRC32 r32, r/m16
         /// </summary>
-        public static uint Crc32(uint crc, ushort data) { throw new PlatformNotSupportedException(); }
+        public static uint Crc32(uint crc, ushort data)
+        {
+            throw new PlatformNotSupportedException();
+        }
+
         /// <summary>
         /// unsigned int _mm_crc32_u32 (unsigned int crc, unsigned int v)
         ///   CRC32 r32, r/m32
         /// </summary>
-        public static uint Crc32(uint crc, uint data) { throw new PlatformNotSupportedException(); }
+        public static uint Crc32(uint crc, uint data)
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 }

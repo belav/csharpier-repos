@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// <summary>
 /// Constraints a route parameter to be an integer within a given range of values.
 /// </summary>
-public class RangeRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class RangeRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class RangeRouteConstraint : IRouteConstraint
 #endif
@@ -30,7 +33,10 @@ internal class RangeRouteConstraint : IRouteConstraint
     {
         if (min > max)
         {
-            var errorMessage = Resources.FormatRangeConstraint_MinShouldBeLessThanOrEqualToMax("min", "max");
+            var errorMessage = Resources.FormatRangeConstraint_MinShouldBeLessThanOrEqualToMax(
+                "min",
+                "max"
+            );
             throw new ArgumentOutOfRangeException(nameof(min), min, errorMessage);
         }
 
@@ -55,10 +61,10 @@ internal class RangeRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);
@@ -75,7 +81,14 @@ internal class RangeRouteConstraint : IRouteConstraint
 
     private bool CheckConstraintCore(string? valueString)
     {
-        if (long.TryParse(valueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var longValue))
+        if (
+            long.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out var longValue
+            )
+        )
         {
             return longValue >= Min && longValue <= Max;
         }

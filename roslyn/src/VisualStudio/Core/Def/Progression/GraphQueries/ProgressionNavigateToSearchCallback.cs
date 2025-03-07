@@ -5,8 +5,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.VisualStudio.GraphModel;
 using Microsoft.CodeAnalysis.NavigateTo;
+using Microsoft.VisualStudio.GraphModel;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
@@ -17,7 +17,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             private readonly IGraphContext _context;
             private readonly GraphBuilder _graphBuilder;
 
-            public ProgressionNavigateToSearchCallback(IGraphContext context, GraphBuilder graphBuilder)
+            public ProgressionNavigateToSearchCallback(
+                IGraphContext context,
+                GraphBuilder graphBuilder
+            )
             {
                 _context = context;
                 _graphBuilder = graphBuilder;
@@ -29,16 +32,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 // information along to progression.  That will happen in GraphQueryManager.PopulateContextGraphAsync
             }
 
-            public void ReportProgress(int current, int maximum)
-                => _context.ReportProgress(current, maximum, null);
+            public void ReportProgress(int current, int maximum) =>
+                _context.ReportProgress(current, maximum, null);
 
-            public void ReportIncomplete()
-            {
-            }
+            public void ReportIncomplete() { }
 
-            public async Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken)
+            public async Task AddItemAsync(
+                Project project,
+                INavigateToSearchResult result,
+                CancellationToken cancellationToken
+            )
             {
-                var node = await _graphBuilder.CreateNodeAsync(project.Solution, result, cancellationToken).ConfigureAwait(false);
+                var node = await _graphBuilder
+                    .CreateNodeAsync(project.Solution, result, cancellationToken)
+                    .ConfigureAwait(false);
                 if (node != null)
                 {
                     // _context.OutputNodes is not threadsafe.  So ensure only one navto callback can mutate it at a time.

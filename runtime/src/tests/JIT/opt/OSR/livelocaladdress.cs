@@ -9,14 +9,14 @@ using Xunit;
 public class LiveLocalAddress
 {
     [Fact]
-    public static unsafe int TestEntryPoint()        
+    public static unsafe int TestEntryPoint()
     {
         long result = 0;
         int a = 0;
-        int *c = &a;
+        int* c = &a;
         int b = 0;
         long distance = c - &b;
-        
+
         for (int i = 0; i < 100_000; i++)
         {
             result += &a - &b;

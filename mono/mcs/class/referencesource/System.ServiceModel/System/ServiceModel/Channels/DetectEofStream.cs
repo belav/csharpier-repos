@@ -63,8 +63,6 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected virtual void OnReceivedEof()
-        {
-        }
+        protected virtual void OnReceivedEof() { }
     }
 }

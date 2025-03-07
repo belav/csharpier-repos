@@ -18,7 +18,10 @@ namespace System.Web.Http
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties<HttpConfiguration>(TypeAssert.TypeProperties.IsPublicVisibleClass | TypeAssert.TypeProperties.IsDisposable);
+            Assert.Type.HasProperties<HttpConfiguration>(
+                TypeAssert.TypeProperties.IsPublicVisibleClass
+                    | TypeAssert.TypeProperties.IsDisposable
+            );
         }
 
         [Fact]
@@ -107,7 +110,10 @@ namespace System.Web.Http
             // Arrange
             int count = 0;
             var config = new HttpConfiguration();
-            config.Initializer = _ => { count++; };
+            config.Initializer = _ =>
+            {
+                count++;
+            };
 
             // Act
             config.EnsureInitialized();
@@ -115,7 +121,6 @@ namespace System.Web.Http
 
             config.EnsureInitialized();
             Assert.Equal(1, count);
-
         }
 
         [Fact]
@@ -123,7 +128,10 @@ namespace System.Web.Http
         {
             // Arrange
             var config = new HttpConfiguration();
-            Mock<MediaTypeFormatter> mockFormatter = new Mock<MediaTypeFormatter>() { CallBase = true };
+            Mock<MediaTypeFormatter> mockFormatter = new Mock<MediaTypeFormatter>()
+            {
+                CallBase = true,
+            };
             mockFormatter.Object.RequiredMemberSelector = null;
 
             config.Formatters.Clear();
@@ -182,7 +190,11 @@ namespace System.Web.Http
 
             HttpConfiguration config2 = new HttpConfiguration();
             HttpConfiguration configPassedToAction2 = null;
-            config2.Initializer = (c) => { config1.Initializer(config1); configPassedToAction2 = c; };
+            config2.Initializer = (c) =>
+            {
+                config1.Initializer(config1);
+                configPassedToAction2 = c;
+            };
 
             // Act
             config2.Initializer(config2);
@@ -200,7 +212,10 @@ namespace System.Web.Http
             HttpControllerSettings settings = new HttpControllerSettings(config);
 
             // Act
-            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(settings, config);
+            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(
+                settings,
+                config
+            );
 
             // Assert
             Assert.Same(config, clonedConfig);
@@ -212,10 +227,13 @@ namespace System.Web.Http
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
             HttpControllerSettings settings = new HttpControllerSettings(config);
-            settings.Formatters.Clear();    // accessing this property will force a clone
+            settings.Formatters.Clear(); // accessing this property will force a clone
 
             // Act
-            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(settings, config);
+            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(
+                settings,
+                config
+            );
 
             // Assert
             Assert.NotNull(clonedConfig);
@@ -230,10 +248,13 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             config.Initializer = (c) => configPassedToAction = c;
             HttpControllerSettings settings = new HttpControllerSettings(config);
-            settings.Formatters.Clear();    // accessing this property will force a clone
+            settings.Formatters.Clear(); // accessing this property will force a clone
 
             // Act
-            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(settings, config);
+            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(
+                settings,
+                config
+            );
 
             // Assert
             Assert.Same(clonedConfig, configPassedToAction);
@@ -246,21 +267,42 @@ namespace System.Web.Http
             bool calledTrace = false;
             HttpConfiguration config = new HttpConfiguration();
             Mock<ITraceWriter> mockTracer = new Mock<ITraceWriter>() { CallBase = true };
-            mockTracer.Setup(m => m.Trace(It.IsAny<HttpRequestMessage>(),
-                                          It.IsAny<string>(),
-                                          It.IsAny<TraceLevel>(),
-                                          It.IsAny<Action<TraceRecord>>())).Callback(() => { calledTrace = true; });
+            mockTracer
+                .Setup(m =>
+                    m.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+                )
+                .Callback(() =>
+                {
+                    calledTrace = true;
+                });
 
             config.Services.Replace(typeof(ITraceWriter), mockTracer.Object);
-            config.Initializer(config);    // installs tracer on original config
+            config.Initializer(config); // installs tracer on original config
 
             HttpControllerSettings settings = new HttpControllerSettings(config);
-            Mock<IContentNegotiator> mockNegotiator = new Mock<IContentNegotiator>() { CallBase = true };
+            Mock<IContentNegotiator> mockNegotiator = new Mock<IContentNegotiator>()
+            {
+                CallBase = true,
+            };
             settings.Services.Replace(typeof(IContentNegotiator), mockNegotiator.Object);
 
             // Act
-            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(settings, config);
-            clonedConfig.Services.GetContentNegotiator().Negotiate(typeof(string), new HttpRequestMessage(), Enumerable.Empty<MediaTypeFormatter>());
+            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(
+                settings,
+                config
+            );
+            clonedConfig
+                .Services.GetContentNegotiator()
+                .Negotiate(
+                    typeof(string),
+                    new HttpRequestMessage(),
+                    Enumerable.Empty<MediaTypeFormatter>()
+                );
 
             // Assert
             Assert.True(calledTrace);
@@ -273,22 +315,43 @@ namespace System.Web.Http
             bool calledTrace = false;
             HttpConfiguration config = new HttpConfiguration();
             Mock<ITraceWriter> mockTracer = new Mock<ITraceWriter>() { CallBase = true };
-            mockTracer.Setup(m => m.Trace(It.IsAny<HttpRequestMessage>(),
-                                          It.IsAny<string>(),
-                                          It.IsAny<TraceLevel>(),
-                                          It.IsAny<Action<TraceRecord>>())).Callback(() => { calledTrace = true; });
+            mockTracer
+                .Setup(m =>
+                    m.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+                )
+                .Callback(() =>
+                {
+                    calledTrace = true;
+                });
 
             config.Services.Replace(typeof(ITraceWriter), mockTracer.Object);
-            config.Initializer(config);    // installs tracer on original config
+            config.Initializer(config); // installs tracer on original config
 
             HttpControllerSettings settings = new HttpControllerSettings(config);
-            Mock<MediaTypeFormatter> mockFormatter = new Mock<MediaTypeFormatter>() { CallBase = true };
+            Mock<MediaTypeFormatter> mockFormatter = new Mock<MediaTypeFormatter>()
+            {
+                CallBase = true,
+            };
             settings.Formatters.Clear();
             settings.Formatters.Add(mockFormatter.Object);
 
             // Act
-            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(settings, config);
-            clonedConfig.Formatters[0].GetPerRequestFormatterInstance(typeof(string), new HttpRequestMessage(), new MediaTypeHeaderValue("application/mine"));
+            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(
+                settings,
+                config
+            );
+            clonedConfig
+                .Formatters[0]
+                .GetPerRequestFormatterInstance(
+                    typeof(string),
+                    new HttpRequestMessage(),
+                    new MediaTypeHeaderValue("application/mine")
+                );
 
             // Assert
             Assert.True(calledTrace);
@@ -301,19 +364,37 @@ namespace System.Web.Http
             bool calledTrace = false;
             HttpConfiguration config = new HttpConfiguration();
             Mock<ITraceWriter> mockTracer = new Mock<ITraceWriter>() { CallBase = true };
-            mockTracer.Setup(m => m.Trace(It.IsAny<HttpRequestMessage>(),
-                                          It.IsAny<string>(),
-                                          It.IsAny<TraceLevel>(),
-                                          It.IsAny<Action<TraceRecord>>())).Callback(() => { calledTrace = true; });
+            mockTracer
+                .Setup(m =>
+                    m.Trace(
+                        It.IsAny<HttpRequestMessage>(),
+                        It.IsAny<string>(),
+                        It.IsAny<TraceLevel>(),
+                        It.IsAny<Action<TraceRecord>>()
+                    )
+                )
+                .Callback(() =>
+                {
+                    calledTrace = true;
+                });
 
-            config.Initializer(config);    // ensures TraceManager is called, but it will be a NOP
+            config.Initializer(config); // ensures TraceManager is called, but it will be a NOP
 
             HttpControllerSettings settings = new HttpControllerSettings(config);
             settings.Services.Replace(typeof(ITraceWriter), mockTracer.Object);
 
             // Act
-            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(settings, config);
-            clonedConfig.Services.GetContentNegotiator().Negotiate(typeof(string), new HttpRequestMessage(), Enumerable.Empty<MediaTypeFormatter>());
+            HttpConfiguration clonedConfig = HttpConfiguration.ApplyControllerSettings(
+                settings,
+                config
+            );
+            clonedConfig
+                .Services.GetContentNegotiator()
+                .Negotiate(
+                    typeof(string),
+                    new HttpRequestMessage(),
+                    Enumerable.Empty<MediaTypeFormatter>()
+                );
 
             // Assert
             Assert.True(calledTrace);

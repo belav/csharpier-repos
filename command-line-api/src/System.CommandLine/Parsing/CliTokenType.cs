@@ -19,13 +19,13 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <see cref="CliCommand"/>
         Command,
-        
+
         /// <summary>
         /// An option token.
         /// </summary>
         /// <see cref="CliOption"/>
         Option,
-        
+
         /// <summary>
         /// A double dash (<c>--</c>) token, which changes the meaning of subsequent tokens.
         /// </summary>
@@ -35,6 +35,6 @@ namespace System.CommandLine.Parsing
         /// A directive token.
         /// </summary>
         /// <see cref="CliDirective"/>
-        Directive
+        Directive,
     }
 }

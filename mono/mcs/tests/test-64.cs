@@ -6,24 +6,25 @@
 // to lookups in the namespace.
 //
 
-class Operator {
+class Operator { }
+
+class Blah
+{
+    public enum Operator
+    {
+        A,
+        B,
+    };
+
+    public Blah(Operator x) { }
 }
 
-class Blah {
+class T
+{
+    public static int Main()
+    {
+        Blah b = new Blah(Blah.Operator.A);
 
-	public enum Operator { A, B };
-	
-	public Blah (Operator x)
-	{
-	}
+        return 0;
+    }
 }
-
-class T {
-	public static int Main ()
-	{
-		Blah b = new Blah (Blah.Operator.A);
-
-		return 0;
-	}
-}
-

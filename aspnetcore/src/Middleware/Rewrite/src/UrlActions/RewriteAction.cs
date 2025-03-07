@@ -18,7 +18,8 @@ internal sealed class RewriteAction : UrlAction
         Pattern pattern,
         bool queryStringAppend,
         bool queryStringDelete,
-        bool escapeBackReferences)
+        bool escapeBackReferences
+    )
     {
         // For the replacement, we must have at least
         // one segment (cannot have an empty replacement)
@@ -29,20 +30,20 @@ internal sealed class RewriteAction : UrlAction
         EscapeBackReferences = escapeBackReferences;
     }
 
-    public RewriteAction(
-        RuleResult result,
-        Pattern pattern,
-        bool queryStringAppend) :
-        this(result,
+    public RewriteAction(RuleResult result, Pattern pattern, bool queryStringAppend)
+        : this(
+            result,
             pattern,
             queryStringAppend,
             queryStringDelete: false,
-            escapeBackReferences: false)
-    {
+            escapeBackReferences: false
+        ) { }
 
-    }
-
-    public override void ApplyAction(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override void ApplyAction(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         var pattern = Url!.Evaluate(context, ruleBackReferences, conditionBackReferences);
         var request = context.HttpContext.Request;
@@ -105,13 +106,12 @@ internal sealed class RewriteAction : UrlAction
                 if (QueryStringAppend)
                 {
                     request.QueryString = request.QueryString.Add(
-                        QueryString.FromUriComponent(
-                            pattern.Substring(split)));
+                        QueryString.FromUriComponent(pattern.Substring(split))
+                    );
                 }
                 else
                 {
-                    request.QueryString = QueryString.FromUriComponent(
-                        pattern.Substring(split));
+                    request.QueryString = QueryString.FromUriComponent(pattern.Substring(split));
                 }
             }
             else

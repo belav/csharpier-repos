@@ -34,9 +34,15 @@ namespace ComInterfaceGenerator.Unit.Tests
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.VtableIndexStubGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.VtableIndexStubGenerator()
+            );
 
-            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName("INativeAPI");
+            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName(
+                "INativeAPI"
+            );
             Assert.NotNull(userDefinedInterface);
 
             Assert.Single(userDefinedInterface.GetTypeMembers("Native"));
@@ -60,12 +66,24 @@ namespace ComInterfaceGenerator.Unit.Tests
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.VtableIndexStubGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.VtableIndexStubGenerator()
+            );
 
-            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName("INativeAPI");
+            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName(
+                "INativeAPI"
+            );
             Assert.NotNull(userDefinedInterface);
 
-            Assert.Equal(userDefinedInterface, Assert.Single(Assert.Single(userDefinedInterface.GetTypeMembers("Native")).Interfaces), SymbolEqualityComparer.Default);
+            Assert.Equal(
+                userDefinedInterface,
+                Assert.Single(
+                    Assert.Single(userDefinedInterface.GetTypeMembers("Native")).Interfaces
+                ),
+                SymbolEqualityComparer.Default
+            );
         }
 
         [Fact]
@@ -90,7 +108,11 @@ namespace ComInterfaceGenerator.Unit.Tests
             // Allow the Native nested type name to be missing in the pre-source-generator compilation
             TestUtils.AssertPreSourceGeneratorCompilation(comp, "CS0426");
 
-            var newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.VtableIndexStubGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.VtableIndexStubGenerator()
+            );
             TestUtils.AssertPostSourceGeneratorCompilation(newComp);
         }
 
@@ -112,17 +134,30 @@ namespace ComInterfaceGenerator.Unit.Tests
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.VtableIndexStubGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.VtableIndexStubGenerator()
+            );
 
-            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName("INativeAPI");
+            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName(
+                "INativeAPI"
+            );
             Assert.NotNull(userDefinedInterface);
 
-            INamedTypeSymbol dynamicInterfaceCastableImplementationAttribute = newComp.GetTypeByMetadataName("System.Runtime.InteropServices.DynamicInterfaceCastableImplementationAttribute")!;
+            INamedTypeSymbol dynamicInterfaceCastableImplementationAttribute =
+                newComp.GetTypeByMetadataName(
+                    "System.Runtime.InteropServices.DynamicInterfaceCastableImplementationAttribute"
+                )!;
 
             Assert.Contains(
                 dynamicInterfaceCastableImplementationAttribute,
-                Assert.Single(userDefinedInterface.GetTypeMembers("Native")).GetAttributes().Select(attr => attr.AttributeClass),
-                SymbolEqualityComparer.Default);
+                Assert
+                    .Single(userDefinedInterface.GetTypeMembers("Native"))
+                    .GetAttributes()
+                    .Select(attr => attr.AttributeClass),
+                SymbolEqualityComparer.Default
+            );
         }
 
         [Fact]
@@ -143,16 +178,28 @@ namespace ComInterfaceGenerator.Unit.Tests
             Compilation comp = await TestUtils.CreateCompilation(source);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out _, new Microsoft.Interop.VtableIndexStubGenerator());
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out _,
+                new Microsoft.Interop.VtableIndexStubGenerator()
+            );
 
-            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName("INativeAPI");
+            INamedTypeSymbol? userDefinedInterface = newComp.Assembly.GetTypeByMetadataName(
+                "INativeAPI"
+            );
             Assert.NotNull(userDefinedInterface);
 
-            INamedTypeSymbol nativeInterface = Assert.Single(userDefinedInterface.GetTypeMembers("Native"));
+            INamedTypeSymbol nativeInterface = Assert.Single(
+                userDefinedInterface.GetTypeMembers("Native")
+            );
 
-            IMethodSymbol abiMethod = Assert.IsAssignableFrom<IMethodSymbol>(Assert.Single(nativeInterface.GetMembers("ABI_Method")));
+            IMethodSymbol abiMethod = Assert.IsAssignableFrom<IMethodSymbol>(
+                Assert.Single(nativeInterface.GetMembers("ABI_Method"))
+            );
 
-            INamedTypeSymbol unmanagedCallersOnlyAttribute = newComp.GetTypeByMetadataName("System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute")!;
+            INamedTypeSymbol unmanagedCallersOnlyAttribute = newComp.GetTypeByMetadataName(
+                "System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute"
+            )!;
 
             Assert.True(abiMethod.IsStatic);
             Assert.False(abiMethod.IsAbstract);
@@ -160,7 +207,8 @@ namespace ComInterfaceGenerator.Unit.Tests
             Assert.Contains(
                 unmanagedCallersOnlyAttribute,
                 abiMethod.GetAttributes().Select(attr => attr.AttributeClass),
-                SymbolEqualityComparer.Default);
+                SymbolEqualityComparer.Default
+            );
         }
     }
 }

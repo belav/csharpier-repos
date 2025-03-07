@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,199 +27,242 @@
 //
 using System;
 using System.Collections.Generic;
+using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
-using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class OneWayBindingElement : BindingElement
-	{
-		public OneWayBindingElement ()
-		{
-			pool = new ChannelPoolSettings ();
-		}
+    public sealed class OneWayBindingElement : BindingElement
+    {
+        public OneWayBindingElement()
+        {
+            pool = new ChannelPoolSettings();
+        }
 
-		OneWayBindingElement (OneWayBindingElement other)
-		{
-			pool = new ChannelPoolSettings (other.pool);
-		}
+        OneWayBindingElement(OneWayBindingElement other)
+        {
+            pool = new ChannelPoolSettings(other.pool);
+        }
 
-		ChannelPoolSettings pool;
+        ChannelPoolSettings pool;
 
-		public ChannelPoolSettings ChannelPoolSettings {
-			get { return pool; }
-		}
+        public ChannelPoolSettings ChannelPoolSettings
+        {
+            get { return pool; }
+        }
 
-		[MonoTODO ("It generates just pass-thru factory")]
-		public override IChannelFactory<TChannel>
-			BuildChannelFactory<TChannel> (BindingContext context)
-		{
-			if (typeof (TChannel) == typeof (IOutputSessionChannel) ||
-			    typeof (TChannel) == typeof (IOutputChannel))
-				return new OneWayChannelFactory<TChannel> (context.BuildInnerChannelFactory<TChannel> ());
-			throw new ArgumentException (String.Format ("The requested channel type '{0}' is not supported by this binding element", typeof (TChannel)));
-		}
+        [MonoTODO("It generates just pass-thru factory")]
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
+        {
+            if (
+                typeof(TChannel) == typeof(IOutputSessionChannel)
+                || typeof(TChannel) == typeof(IOutputChannel)
+            )
+                return new OneWayChannelFactory<TChannel>(
+                    context.BuildInnerChannelFactory<TChannel>()
+                );
+            throw new ArgumentException(
+                String.Format(
+                    "The requested channel type '{0}' is not supported by this binding element",
+                    typeof(TChannel)
+                )
+            );
+        }
 
-		[MonoTODO ("It generates just pass-thru listener")]
-		public override IChannelListener<TChannel>
-			BuildChannelListener<TChannel> (
-			BindingContext context)
-		{
-			if (typeof (TChannel) == typeof (IInputSessionChannel) ||
-			    typeof (TChannel) == typeof (IInputChannel))
-				return new OneWayChannelListener<TChannel> (context.BuildInnerChannelListener<TChannel> ());
-			throw new ArgumentException (String.Format ("The requested channel type '{0}' is not supported by this binding element", typeof (TChannel)));
-		}
+        [MonoTODO("It generates just pass-thru listener")]
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
+        {
+            if (
+                typeof(TChannel) == typeof(IInputSessionChannel)
+                || typeof(TChannel) == typeof(IInputChannel)
+            )
+                return new OneWayChannelListener<TChannel>(
+                    context.BuildInnerChannelListener<TChannel>()
+                );
+            throw new ArgumentException(
+                String.Format(
+                    "The requested channel type '{0}' is not supported by this binding element",
+                    typeof(TChannel)
+                )
+            );
+        }
 
-		public override bool CanBuildChannelFactory<TChannel> (
-			BindingContext context)
-		{
-			return typeof (TChannel) == typeof (IOutputSessionChannel) ||
-				typeof (TChannel) == typeof (IOutputChannel);
-		}
+        public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
+        {
+            return typeof(TChannel) == typeof(IOutputSessionChannel)
+                || typeof(TChannel) == typeof(IOutputChannel);
+        }
 
-		public override bool CanBuildChannelListener<TChannel> (
-			BindingContext context)
-		{
-			return typeof (TChannel) == typeof (IInputSessionChannel) ||
-				typeof (TChannel) == typeof (IInputChannel);
-		}
+        public override bool CanBuildChannelListener<TChannel>(BindingContext context)
+        {
+            return typeof(TChannel) == typeof(IInputSessionChannel)
+                || typeof(TChannel) == typeof(IInputChannel);
+        }
 
-		public override BindingElement Clone ()
-		{
-			return new OneWayBindingElement (this);
-		}
+        public override BindingElement Clone()
+        {
+            return new OneWayBindingElement(this);
+        }
 
-		[MonoTODO]
-		public override T GetProperty<T> (BindingContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override T GetProperty<T>(BindingContext context)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
-	class OneWayChannelFactory<TChannel> : ChannelFactoryBase<TChannel>
-	{
-		IChannelFactory<TChannel> inner;
+    class OneWayChannelFactory<TChannel> : ChannelFactoryBase<TChannel>
+    {
+        IChannelFactory<TChannel> inner;
 
-		public OneWayChannelFactory (IChannelFactory<TChannel> inner)
-		{
-			this.inner = inner;
-		}
+        public OneWayChannelFactory(IChannelFactory<TChannel> inner)
+        {
+            this.inner = inner;
+        }
 
-		protected override TChannel OnCreateChannel (EndpointAddress address, Uri via)
-		{
-			return inner.CreateChannel (address, via);
-		}
+        protected override TChannel OnCreateChannel(EndpointAddress address, Uri via)
+        {
+            return inner.CreateChannel(address, via);
+        }
 
-		protected override void OnOpen (TimeSpan timeout)
-		{
-			inner.Open (timeout);
-		}
+        protected override void OnOpen(TimeSpan timeout)
+        {
+            inner.Open(timeout);
+        }
 
-		protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return inner.BeginOpen (timeout, callback, state);
-		}
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return inner.BeginOpen(timeout, callback, state);
+        }
 
-		protected override void OnEndOpen (IAsyncResult result)
-		{
-			inner.EndOpen (result);
-		}
+        protected override void OnEndOpen(IAsyncResult result)
+        {
+            inner.EndOpen(result);
+        }
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-			inner.Close (timeout);
-		}
+        protected override void OnClose(TimeSpan timeout)
+        {
+            inner.Close(timeout);
+        }
 
-		protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return inner.BeginClose (timeout, callback, state);
-		}
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return inner.BeginClose(timeout, callback, state);
+        }
 
-		protected override void OnEndClose (IAsyncResult result)
-		{
-			inner.EndClose (result);
-		}
-	}
+        protected override void OnEndClose(IAsyncResult result)
+        {
+            inner.EndClose(result);
+        }
+    }
 
-	class OneWayChannelListener<TChannel> : ChannelListenerBase<TChannel>
-		where TChannel : class, IChannel
-	{
-		IChannelListener<TChannel> inner;
+    class OneWayChannelListener<TChannel> : ChannelListenerBase<TChannel>
+        where TChannel : class, IChannel
+    {
+        IChannelListener<TChannel> inner;
 
-		public OneWayChannelListener (IChannelListener<TChannel> inner)
-		{
-			this.inner = inner;
-		}
+        public OneWayChannelListener(IChannelListener<TChannel> inner)
+        {
+            this.inner = inner;
+        }
 
-		public override Uri Uri {
-			get { return inner.Uri; }
-		}
+        public override Uri Uri
+        {
+            get { return inner.Uri; }
+        }
 
-		protected override void OnAbort ()
-		{
-			inner.Abort ();
-		}
+        protected override void OnAbort()
+        {
+            inner.Abort();
+        }
 
-		protected override void OnOpen (TimeSpan timeout)
-		{
-			inner.Open (timeout);
-		}
+        protected override void OnOpen(TimeSpan timeout)
+        {
+            inner.Open(timeout);
+        }
 
-		protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return inner.BeginOpen (timeout, callback, state);
-		}
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return inner.BeginOpen(timeout, callback, state);
+        }
 
-		protected override void OnEndOpen (IAsyncResult result)
-		{
-			inner.EndOpen (result);
-		}
+        protected override void OnEndOpen(IAsyncResult result)
+        {
+            inner.EndOpen(result);
+        }
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-			inner.Close (timeout);
-		}
+        protected override void OnClose(TimeSpan timeout)
+        {
+            inner.Close(timeout);
+        }
 
-		protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return inner.BeginClose (timeout, callback, state);
-		}
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return inner.BeginClose(timeout, callback, state);
+        }
 
-		protected override void OnEndClose (IAsyncResult result)
-		{
-			inner.EndClose (result);
-		}
+        protected override void OnEndClose(IAsyncResult result)
+        {
+            inner.EndClose(result);
+        }
 
-		protected override bool OnWaitForChannel (TimeSpan timeout)
-		{
-			return inner.WaitForChannel (timeout);
-		}
+        protected override bool OnWaitForChannel(TimeSpan timeout)
+        {
+            return inner.WaitForChannel(timeout);
+        }
 
-		protected override IAsyncResult OnBeginWaitForChannel (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return inner.BeginWaitForChannel (timeout, callback, state);
-		}
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return inner.BeginWaitForChannel(timeout, callback, state);
+        }
 
-		protected override bool OnEndWaitForChannel (IAsyncResult result)
-		{
-			return inner.EndWaitForChannel (result);
-		}
+        protected override bool OnEndWaitForChannel(IAsyncResult result)
+        {
+            return inner.EndWaitForChannel(result);
+        }
 
-		protected override TChannel OnAcceptChannel (TimeSpan timeout)
-		{
-			return inner.AcceptChannel (timeout);
-		}
+        protected override TChannel OnAcceptChannel(TimeSpan timeout)
+        {
+            return inner.AcceptChannel(timeout);
+        }
 
-		protected override IAsyncResult OnBeginAcceptChannel (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return inner.BeginAcceptChannel (timeout, callback, state);
-		}
+        protected override IAsyncResult OnBeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return inner.BeginAcceptChannel(timeout, callback, state);
+        }
 
-		protected override TChannel OnEndAcceptChannel (IAsyncResult result)
-		{
-			return inner.EndAcceptChannel (result);
-		}
-	}
+        protected override TChannel OnEndAcceptChannel(IAsyncResult result)
+        {
+            return inner.EndAcceptChannel(result);
+        }
+    }
 }

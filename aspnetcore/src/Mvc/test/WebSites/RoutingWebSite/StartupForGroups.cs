@@ -14,7 +14,9 @@ public class StartupForGroups
         services.AddMvc().AddNewtonsoftJson();
 
         // Used by some controllers defined in this project.
-        services.Configure<RouteOptions>(options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer));
+        services.Configure<RouteOptions>(options =>
+            options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer)
+        );
         services.AddScoped<TestResponseGenerator>();
         // This is used by test response generator
         services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -29,7 +31,10 @@ public class StartupForGroups
             pagesGroup.MapRazorPages();
 
             var controllerGroup = endpoints.MapGroup("/controllers/{org}");
-            controllerGroup.MapControllerRoute(name: "default", pattern: "{controller}/{action}/{id?}");
+            controllerGroup.MapControllerRoute(
+                name: "default",
+                pattern: "{controller}/{action}/{id?}"
+            );
         });
     }
 }

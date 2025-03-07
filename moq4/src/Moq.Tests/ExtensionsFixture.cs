@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Reflection;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -39,9 +38,7 @@ namespace Moq.Tests
         public void Loose()
         {
             var myMock = new Mock<IEnumerable<int>>(MockBehavior.Loose);
-            myMock
-                .Setup(a => a.ToString())
-                .Returns("Hello");
+            myMock.Setup(a => a.ToString()).Returns("Hello");
             myMock.Reset();
             Assert.NotEqual("Hello", myMock.Object.ToString());
             myMock.VerifyAll();
@@ -51,9 +48,7 @@ namespace Moq.Tests
         public void Strict()
         {
             var myMock = new Mock<IEnumerable<int>>(MockBehavior.Strict);
-            myMock
-                .Setup(a => a.ToString())
-                .Returns("Hello");
+            myMock.Setup(a => a.ToString()).Returns("Hello");
             myMock.Reset();
             Assert.NotEqual("Hello", myMock.Object.ToString());
             myMock.VerifyAll();
@@ -63,9 +58,7 @@ namespace Moq.Tests
         public void LooseNoCall()
         {
             var myMock = new Mock<IEnumerable<int>>(MockBehavior.Loose);
-            myMock
-                .Setup(a => a.ToString())
-                .Returns("Hello");
+            myMock.Setup(a => a.ToString()).Returns("Hello");
             myMock.Reset();
             myMock.VerifyAll();
         }
@@ -74,9 +67,7 @@ namespace Moq.Tests
         public void StrictNoCall()
         {
             var myMock = new Mock<IEnumerable<int>>(MockBehavior.Strict);
-            myMock
-                .Setup(a => a.ToString())
-                .Returns("Hello");
+            myMock.Setup(a => a.ToString()).Returns("Hello");
             myMock.Reset();
             myMock.VerifyAll();
         }
@@ -85,7 +76,9 @@ namespace Moq.Tests
         [Fact]
         public void IsExtensionMethod_recognizes_extension_method_as_such()
         {
-            var isExtensionMethodMethod = typeof(Moq.Extensions).GetMethod(nameof(Moq.Extensions.IsExtensionMethod));
+            var isExtensionMethodMethod = typeof(Moq.Extensions).GetMethod(
+                nameof(Moq.Extensions.IsExtensionMethod)
+            );
 
             Assert.True(isExtensionMethodMethod.IsExtensionMethod());
         }
@@ -106,7 +99,10 @@ namespace Moq.Tests
         [InlineData(nameof(IMethods.RefInt), "ref int")]
         [InlineData(nameof(IMethods.OutInt), "out int")]
         [InlineData(nameof(IMethods.BoolAndParamsString), "bool, params string[]")]
-        public void GetParameterTypeList_formats_parameter_lists_correctly(string methodName, string expected)
+        public void GetParameterTypeList_formats_parameter_lists_correctly(
+            string methodName,
+            string expected
+        )
         {
             var actual = GetParameterTypeList(methodName);
             Assert.Equal(expected, actual);
@@ -193,7 +189,10 @@ namespace Moq.Tests
 
         public class WithWriteOnlyProperty
         {
-            public virtual object Property { set { } }
+            public virtual object Property
+            {
+                set { }
+            }
         }
 
         public class WithAutoProperty
@@ -203,12 +202,18 @@ namespace Moq.Tests
 
         public class OverridesOnlyGetter : WithAutoProperty
         {
-            public override object Property { get => base.Property; }
+            public override object Property
+            {
+                get => base.Property;
+            }
         }
 
         public class OverridesOnlySetter : WithAutoProperty
         {
-            public override object Property { set => base.Property = value; }
+            public override object Property
+            {
+                set => base.Property = value;
+            }
         }
     }
 

@@ -20,7 +20,13 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                     new object[] { null, null, true, typeof(InvalidOperationException) },
                     // dummy exceptions
                     new object[] { null, new FormatException(), false, typeof(FormatException) },
-                    new object[] { null, new DllNotFoundException(), true, typeof(DllNotFoundException) }
+                    new object[]
+                    {
+                        null,
+                        new DllNotFoundException(),
+                        true,
+                        typeof(DllNotFoundException),
+                    },
                 };
             }
         }
@@ -37,7 +43,12 @@ namespace System.ComponentModel.EventBasedAsync.Tests
 
         [Theory]
         [MemberData(nameof(TestInput))]
-        public static void ResultPropertyTest(object expectedResult, Exception expectedError, bool cancelled, Type expectedExceptionType)
+        public static void ResultPropertyTest(
+            object expectedResult,
+            Exception expectedError,
+            bool cancelled,
+            Type expectedExceptionType
+        )
         {
             var target = new RunWorkerCompletedEventArgs(expectedResult, expectedError, cancelled);
 
@@ -49,7 +60,9 @@ namespace System.ComponentModel.EventBasedAsync.Tests
             {
                 if (expectedError != null)
                 {
-                    TargetInvocationException error = Assert.Throws<TargetInvocationException>(() => target.Result);
+                    TargetInvocationException error = Assert.Throws<TargetInvocationException>(
+                        () => target.Result
+                    );
                     Assert.Equal(expectedExceptionType, error.InnerException.GetType());
                     Assert.Same(expectedError, error.InnerException);
                 }

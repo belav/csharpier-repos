@@ -14,7 +14,10 @@ namespace System.CommandLine.Help
         /// </summary>
         public HelpBuilder Builder
         {
-            get => _builder ??= new HelpBuilder(Console.IsOutputRedirected ? int.MaxValue : Console.WindowWidth);
+            get =>
+                _builder ??= new HelpBuilder(
+                    Console.IsOutputRedirected ? int.MaxValue : Console.WindowWidth
+                );
             set => _builder = value ?? throw new ArgumentNullException(nameof(value));
         }
 
@@ -23,10 +26,12 @@ namespace System.CommandLine.Help
         {
             var output = parseResult.Configuration.Output;
 
-            var helpContext = new HelpContext(Builder,
-                                              parseResult.CommandResult.Command,
-                                              output,
-                                              parseResult);
+            var helpContext = new HelpContext(
+                Builder,
+                parseResult.CommandResult.Command,
+                output,
+                parseResult
+            );
 
             Builder.Write(helpContext);
 

@@ -86,7 +86,10 @@ public abstract partial class MatcherConformanceTest
     [Theory]
     [InlineData("/S%mple", "/S%mple")]
     [InlineData("/S\\imple", "/S\\imple")] // surrogate pair
-    public virtual async Task Match_SingleLiteralSegment_PercentEncoded(string template, string path)
+    public virtual async Task Match_SingleLiteralSegment_PercentEncoded(
+        string template,
+        string path
+    )
     {
         // Arrange
         var (matcher, endpoint) = CreateMatcher(template);
@@ -196,7 +199,7 @@ public abstract partial class MatcherConformanceTest
         // Arrange
         var (matcher, endpoint) = CreateMatcher("/{p}");
         var httpContext = CreateContext("/14");
-        var values = new RouteValueDictionary(new { p = "14", });
+        var values = new RouteValueDictionary(new { p = "14" });
 
         // Act
         await matcher.MatchAsync(httpContext);
@@ -211,7 +214,7 @@ public abstract partial class MatcherConformanceTest
         // Arrange
         var (matcher, endpoint) = CreateMatcher("/{p:int}");
         var httpContext = CreateContext("/14");
-        var values = new RouteValueDictionary(new { p = "14", });
+        var values = new RouteValueDictionary(new { p = "14" });
 
         // Act
         await matcher.MatchAsync(httpContext);
@@ -226,7 +229,7 @@ public abstract partial class MatcherConformanceTest
         // Arrange
         var (matcher, endpoint) = CreateMatcher("/{p}");
         var httpContext = CreateContext("/14/");
-        var values = new RouteValueDictionary(new { p = "14", });
+        var values = new RouteValueDictionary(new { p = "14" });
 
         // Act
         await matcher.MatchAsync(httpContext);
@@ -242,11 +245,11 @@ public abstract partial class MatcherConformanceTest
         var (matcher, endpoint) = CreateMatcher("/foo/{ }/{.!$%}/{dynamic.data}");
         var httpContext = CreateContext("/foo/space/weirdmatch/matcherid");
         var values = new RouteValueDictionary()
-            {
-                { " ", "space" },
-                { ".!$%", "weirdmatch" },
-                { "dynamic.data", "matcherid" },
-            };
+        {
+            { " ", "space" },
+            { ".!$%", "weirdmatch" },
+            { "dynamic.data", "matcherid" },
+        };
 
         // Act
         await matcher.MatchAsync(httpContext);
@@ -274,14 +277,24 @@ public abstract partial class MatcherConformanceTest
     }
 
     [Theory]
-    [InlineData("/{a}/b", "/54/b", new string[] { "a", }, new string[] { "54", })]
-    [InlineData("/{a}/b", "/54/b/", new string[] { "a", }, new string[] { "54", })]
-    [InlineData("/{a}/{b}", "/54/73", new string[] { "a", "b" }, new string[] { "54", "73", })]
-    [InlineData("/a/{b}/c", "/a/b/c", new string[] { "b", }, new string[] { "b", })]
-    [InlineData("/a/{b}/c/", "/a/b/c", new string[] { "b", }, new string[] { "b", })]
-    [InlineData("/{a}/b/{c}", "/54/b/c", new string[] { "a", "c", }, new string[] { "54", "c", })]
-    [InlineData("/{a}/{b}/{c}", "/54/b/c", new string[] { "a", "b", "c", }, new string[] { "54", "b", "c", })]
-    public virtual async Task Match_MultipleParameters(string template, string path, string[] keys, string[] values)
+    [InlineData("/{a}/b", "/54/b", new string[] { "a" }, new string[] { "54" })]
+    [InlineData("/{a}/b", "/54/b/", new string[] { "a" }, new string[] { "54" })]
+    [InlineData("/{a}/{b}", "/54/73", new string[] { "a", "b" }, new string[] { "54", "73" })]
+    [InlineData("/a/{b}/c", "/a/b/c", new string[] { "b" }, new string[] { "b" })]
+    [InlineData("/a/{b}/c/", "/a/b/c", new string[] { "b" }, new string[] { "b" })]
+    [InlineData("/{a}/b/{c}", "/54/b/c", new string[] { "a", "c" }, new string[] { "54", "c" })]
+    [InlineData(
+        "/{a}/{b}/{c}",
+        "/54/b/c",
+        new string[] { "a", "b", "c" },
+        new string[] { "54", "b", "c" }
+    )]
+    public virtual async Task Match_MultipleParameters(
+        string template,
+        string path,
+        string[] keys,
+        string[] values
+    )
     {
         // Arrange
         var (matcher, endpoint) = CreateMatcher(template);

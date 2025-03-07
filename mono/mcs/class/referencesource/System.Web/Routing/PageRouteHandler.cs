@@ -4,24 +4,32 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Routing {
-
+namespace System.Web.Routing
+{
     using System;
-    using System.Web.UI;
-    using System.Web.Compilation;
-    using System.Web.Security;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
+    using System.Web.Compilation;
+    using System.Web.Security;
+    using System.Web.UI;
 
-    public class PageRouteHandler : IRouteHandler {
+    public class PageRouteHandler : IRouteHandler
+    {
         public PageRouteHandler(string virtualPath)
-            : this(virtualPath, true) {
-        }
+            : this(virtualPath, true) { }
 
-        public PageRouteHandler(string virtualPath, bool checkPhysicalUrlAccess) {
-            if (string.IsNullOrEmpty(virtualPath) || !virtualPath.StartsWith("~/", StringComparison.OrdinalIgnoreCase)) {
-                throw new ArgumentException(SR.GetString(SR.PageRouteHandler_InvalidVirtualPath), "virtualPath");
+        public PageRouteHandler(string virtualPath, bool checkPhysicalUrlAccess)
+        {
+            if (
+                string.IsNullOrEmpty(virtualPath)
+                || !virtualPath.StartsWith("~/", StringComparison.OrdinalIgnoreCase)
+            )
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.PageRouteHandler_InvalidVirtualPath),
+                    "virtualPath"
+                );
             }
 
             this.VirtualPath = virtualPath;
@@ -38,9 +46,9 @@ namespace System.Web.Routing {
         public string VirtualPath { get; private set; }
 
         /// <summary>
-        /// Because we're not actually rewriting the URL, ASP.NET's URL Auth will apply 
+        /// Because we're not actually rewriting the URL, ASP.NET's URL Auth will apply
         /// to the incoming request URL and not the URL of the physical WebForm page.
-        /// Setting this to true (default) will apply URL access rules against the 
+        /// Setting this to true (default) will apply URL access rules against the
         /// physical file.
         /// </summary>
         /// <value>True by default</value>
@@ -48,9 +56,12 @@ namespace System.Web.Routing {
 
         private bool _useRouteVirtualPath;
         private Route _routeVirtualPath;
-        private Route RouteVirtualPath {
-            get {
-                if (_routeVirtualPath == null) {
+        private Route RouteVirtualPath
+        {
+            get
+            {
+                if (_routeVirtualPath == null)
+                {
                     //Trim off ~/
                     _routeVirtualPath = new Route(VirtualPath.Substring(2), this);
                 }
@@ -58,36 +69,55 @@ namespace System.Web.Routing {
             }
         }
 
-        private bool CheckUrlAccess(string virtualPath, RequestContext requestContext) {
+        private bool CheckUrlAccess(string virtualPath, RequestContext requestContext)
+        {
             IPrincipal user = requestContext.HttpContext.User;
             // If there's no authenticated user, use the default identity
-            if (user == null) {
-                user = new GenericPrincipal(new GenericIdentity(String.Empty, String.Empty), new string[0]);
+            if (user == null)
+            {
+                user = new GenericPrincipal(
+                    new GenericIdentity(String.Empty, String.Empty),
+                    new string[0]
+                );
             }
             return CheckUrlAccessWithAssert(virtualPath, requestContext, user);
         }
 
         [SecurityPermission(SecurityAction.Assert, Unrestricted = true)]
-        private bool CheckUrlAccessWithAssert(string virtualPath, RequestContext requestContext, IPrincipal user) {
-            return UrlAuthorizationModule.CheckUrlAccessForPrincipal(virtualPath, user, requestContext.HttpContext.Request.HttpMethod);
+        private bool CheckUrlAccessWithAssert(
+            string virtualPath,
+            RequestContext requestContext,
+            IPrincipal user
+        )
+        {
+            return UrlAuthorizationModule.CheckUrlAccessForPrincipal(
+                virtualPath,
+                user,
+                requestContext.HttpContext.Request.HttpMethod
+            );
         }
 
-        public virtual IHttpHandler GetHttpHandler(RequestContext requestContext) {
-            if (requestContext == null) {
+        public virtual IHttpHandler GetHttpHandler(RequestContext requestContext)
+        {
+            if (requestContext == null)
+            {
                 throw new ArgumentNullException("requestContext");
             }
 
             string virtualPath = GetSubstitutedVirtualPath(requestContext);
             // Virtual Path ----s up with query strings, so we need to strip them off
             int qmark = virtualPath.IndexOf('?');
-            if (qmark != -1) {
+            if (qmark != -1)
+            {
                 virtualPath = virtualPath.Substring(0, qmark);
             }
-            if (this.CheckPhysicalUrlAccess && !CheckUrlAccess(virtualPath, requestContext)) {
+            if (this.CheckPhysicalUrlAccess && !CheckUrlAccess(virtualPath, requestContext))
+            {
                 return new UrlAuthFailureHandler();
             }
 
-            Page page = BuildManager.CreateInstanceFromVirtualPath(virtualPath, typeof(Page)) as Page;
+            Page page =
+                BuildManager.CreateInstanceFromVirtualPath(virtualPath, typeof(Page)) as Page;
             return page;
         }
 
@@ -96,16 +126,21 @@ namespace System.Web.Routing {
         /// </summary>
         /// <param name="requestContext"></param>
         /// <returns></returns>
-        public string GetSubstitutedVirtualPath(RequestContext requestContext) {
-            if (requestContext == null) {
+        public string GetSubstitutedVirtualPath(RequestContext requestContext)
+        {
+            if (requestContext == null)
+            {
                 throw new ArgumentNullException("requestContext");
             }
 
             if (!_useRouteVirtualPath)
                 return VirtualPath;
 
-            VirtualPathData vpd = RouteVirtualPath.GetVirtualPath(requestContext, requestContext.RouteData.Values);
-            // 
+            VirtualPathData vpd = RouteVirtualPath.GetVirtualPath(
+                requestContext,
+                requestContext.RouteData.Values
+            );
+            //
             if (vpd == null)
                 return VirtualPath;
             return "~/" + vpd.VirtualPath;

@@ -15,7 +15,8 @@ internal sealed class DataSourceDependentMatcher : Matcher
     public DataSourceDependentMatcher(
         EndpointDataSource dataSource,
         Lifetime lifetime,
-        Func<MatcherBuilder> matcherBuilderFactory)
+        Func<MatcherBuilder> matcherBuilderFactory
+    )
     {
         _matcherBuilderFactory = matcherBuilderFactory;
 
@@ -47,21 +48,31 @@ internal sealed class DataSourceDependentMatcher : Matcher
             if (endpoints[i] is RouteEndpoint endpoint)
             {
                 // Validate that endpoint names are unique.
-                var endpointName = endpoint.Metadata.GetMetadata<IEndpointNameMetadata>()?.EndpointName;
+                var endpointName = endpoint
+                    .Metadata.GetMetadata<IEndpointNameMetadata>()
+                    ?.EndpointName;
                 if (endpointName is not null)
                 {
                     if (seenEndpointNames.TryGetValue(endpointName, out var existingEndpoint))
                     {
-                        throw new InvalidOperationException($"Duplicate endpoint name '{endpointName}' found on '{endpoint.DisplayName}' and '{existingEndpoint}'. Endpoint names must be globally unique.");
+                        throw new InvalidOperationException(
+                            $"Duplicate endpoint name '{endpointName}' found on '{endpoint.DisplayName}' and '{existingEndpoint}'. Endpoint names must be globally unique."
+                        );
                     }
 
-                    seenEndpointNames.Add(endpointName, endpoint.DisplayName ?? endpoint.RoutePattern.RawText);
+                    seenEndpointNames.Add(
+                        endpointName,
+                        endpoint.DisplayName ?? endpoint.RoutePattern.RawText
+                    );
                 }
 
                 // We check for duplicate endpoint names on all endpoints regardless
                 // of whether they suppress matching because endpoint names can be
                 // used in OpenAPI specifications as well.
-                if (endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching != true)
+                if (
+                    endpoint.Metadata.GetMetadata<ISuppressMatchingMetadata>()?.SuppressMatching
+                    != true
+                )
                 {
                     builder.AddEndpoint(endpoint);
                 }

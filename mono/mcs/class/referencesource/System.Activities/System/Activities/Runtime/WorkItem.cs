@@ -5,14 +5,14 @@
 namespace System.Activities.Runtime
 {
     using System;
-    using System.Runtime;
+    using System.Activities.Debugger;
+    using System.Activities.Tracking;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
+    using System.Runtime;
     using System.Runtime.DurableInstancing;
     using System.Runtime.Serialization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Activities.Debugger;
-    using System.Collections.Generic;
-    using System.Activities.Tracking;
 
     [DataContract]
     internal abstract class WorkItem
@@ -31,9 +31,7 @@ namespace System.Activities.Runtime
         Exception exceptionToPropagate;
 
         // Used by subclasses in the pooled case.
-        protected WorkItem()
-        {
-        }
+        protected WorkItem() { }
 
         protected WorkItem(ActivityInstance activityInstance)
         {
@@ -43,75 +41,46 @@ namespace System.Activities.Runtime
 
         public ActivityInstance ActivityInstance
         {
-            get
-            {
-                return this.activityInstance;
-            }
+            get { return this.activityInstance; }
         }
 
         public Exception WorkflowAbortException
         {
-            get
-            {
-                return this.workflowAbortException;
-            }
+            get { return this.workflowAbortException; }
         }
 
         public Exception ExceptionToPropagate
         {
-            get
-            {
-                return this.exceptionToPropagate;
-            }
+            get { return this.exceptionToPropagate; }
             set
             {
-                Fx.Assert(value != null, "We should never set this back to null explicitly.  Use the ExceptionPropagated method below.");
+                Fx.Assert(
+                    value != null,
+                    "We should never set this back to null explicitly.  Use the ExceptionPropagated method below."
+                );
 
                 this.exceptionToPropagate = value;
             }
         }
 
-        public abstract ActivityInstance PropertyManagerOwner
-        {
-            get;
-        }
+        public abstract ActivityInstance PropertyManagerOwner { get; }
 
         public virtual ActivityInstance OriginalExceptionSource
         {
-            get
-            {
-                return this.ActivityInstance;
-            }
+            get { return this.ActivityInstance; }
         }
-        
+
         public bool IsEmpty
         {
-            get
-            {
-                return this.isEmpty;
-            }
-            protected set
-            {
-                this.isEmpty = value;
-            }
+            get { return this.isEmpty; }
+            protected set { this.isEmpty = value; }
         }
 
-        public bool ExitNoPersistRequired
-        {
-            get;
-            protected set;
-        }
+        public bool ExitNoPersistRequired { get; protected set; }
 
-        protected bool IsPooled
-        {
-            get;
-            set;
-        }
+        protected bool IsPooled { get; set; }
 
-        public abstract bool IsValid
-        {
-            get;
-        }
+        public abstract bool IsValid { get; }
 
         [DataMember(Name = "activityInstance")]
         internal ActivityInstance SerializedActivityInstance
@@ -157,7 +126,9 @@ namespace System.Activities.Runtime
         // by going through Dispose()
         protected virtual void ReleaseToPool(ActivityExecutor executor)
         {
-            Fx.Assert("This should never be called ... only overridden versions should get called.");
+            Fx.Assert(
+                "This should never be called ... only overridden versions should get called."
+            );
         }
 
         static void OnAssociateComplete(IAsyncResult result)
@@ -235,7 +206,11 @@ namespace System.Activities.Runtime
         {
             if (TD.ScheduleRuntimeWorkItemIsEnabled())
             {
-                TD.ScheduleRuntimeWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                TD.ScheduleRuntimeWorkItem(
+                    this.ActivityInstance.Activity.GetType().ToString(),
+                    this.ActivityInstance.Activity.DisplayName,
+                    this.ActivityInstance.Id
+                );
             }
         }
 
@@ -245,7 +220,11 @@ namespace System.Activities.Runtime
         {
             if (TD.StartRuntimeWorkItemIsEnabled())
             {
-                TD.StartRuntimeWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                TD.StartRuntimeWorkItem(
+                    this.ActivityInstance.Activity.GetType().ToString(),
+                    this.ActivityInstance.Activity.DisplayName,
+                    this.ActivityInstance.Id
+                );
             }
         }
 
@@ -255,7 +234,11 @@ namespace System.Activities.Runtime
         {
             if (TD.CompleteRuntimeWorkItemIsEnabled())
             {
-                TD.CompleteRuntimeWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                TD.CompleteRuntimeWorkItem(
+                    this.ActivityInstance.Activity.GetType().ToString(),
+                    this.ActivityInstance.Activity.DisplayName,
+                    this.ActivityInstance.Id
+                );
             }
         }
 
@@ -265,19 +248,24 @@ namespace System.Activities.Runtime
 
         public bool FlushBookmarkScopeKeys(ActivityExecutor executor)
         {
-            Fx.Assert(executor.BookmarkScopeManager.HasKeysToUpdate, "We should not have been called if we don't have pending keys.");
+            Fx.Assert(
+                executor.BookmarkScopeManager.HasKeysToUpdate,
+                "We should not have been called if we don't have pending keys."
+            );
 
             try
             {
-                // disassociation is local-only so we don't need to yield 
-                ICollection<InstanceKey> keysToDisassociate = executor.BookmarkScopeManager.GetKeysToDisassociate();
+                // disassociation is local-only so we don't need to yield
+                ICollection<InstanceKey> keysToDisassociate =
+                    executor.BookmarkScopeManager.GetKeysToDisassociate();
                 if (keysToDisassociate != null && keysToDisassociate.Count > 0)
                 {
                     executor.DisassociateKeys(keysToDisassociate);
                 }
 
                 // if we have keys to associate, provide them for an asynchronous association
-                ICollection<InstanceKey> keysToAssociate = executor.BookmarkScopeManager.GetKeysToAssociate();
+                ICollection<InstanceKey> keysToAssociate =
+                    executor.BookmarkScopeManager.GetKeysToAssociate();
 
                 // It could be that we only had keys to Disassociate. We should only do BeginAssociateKeys
                 // if we have keysToAssociate.
@@ -285,10 +273,16 @@ namespace System.Activities.Runtime
                 {
                     if (associateCallback == null)
                     {
-                        associateCallback = Fx.ThunkCallback(new AsyncCallback(OnAssociateComplete));
+                        associateCallback = Fx.ThunkCallback(
+                            new AsyncCallback(OnAssociateComplete)
+                        );
                     }
 
-                    IAsyncResult result = executor.BeginAssociateKeys(keysToAssociate, associateCallback, new CallbackData(executor, this));
+                    IAsyncResult result = executor.BeginAssociateKeys(
+                        keysToAssociate,
+                        associateCallback,
+                        new CallbackData(executor, this)
+                    );
                     if (result.CompletedSynchronously)
                     {
                         executor.EndAssociateKeys(result);
@@ -314,7 +308,10 @@ namespace System.Activities.Runtime
 
         public bool FlushTracking(ActivityExecutor executor)
         {
-            Fx.Assert(executor.HasPendingTrackingRecords, "We should not have been called if we don't have pending tracking records");
+            Fx.Assert(
+                executor.HasPendingTrackingRecords,
+                "We should not have been called if we don't have pending tracking records"
+            );
 
             try
             {
@@ -325,7 +322,8 @@ namespace System.Activities.Runtime
 
                 IAsyncResult result = executor.BeginTrackPendingRecords(
                     trackingCallback,
-                    new CallbackData(executor, this));
+                    new CallbackData(executor, this)
+                );
 
                 if (result.CompletedSynchronously)
                 {
@@ -358,17 +356,9 @@ namespace System.Activities.Runtime
                 this.WorkItem = workItem;
             }
 
-            public ActivityExecutor Executor
-            {
-                get;
-                private set;
-            }
+            public ActivityExecutor Executor { get; private set; }
 
-            public WorkItem WorkItem
-            {
-                get;
-                private set;
-            }
+            public WorkItem WorkItem { get; private set; }
         }
     }
 }

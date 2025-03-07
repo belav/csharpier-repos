@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel;
     using System.Collections.Generic;
+    using System.ServiceModel;
 
     public sealed class DispatchOperation
     {
@@ -53,7 +53,12 @@ namespace System.ServiceModel.Dispatcher
             this.isOneWay = true;
         }
 
-        public DispatchOperation(DispatchRuntime parent, string name, string action, string replyAction)
+        public DispatchOperation(
+            DispatchRuntime parent,
+            string name,
+            string action,
+            string replyAction
+        )
             : this(parent, name, action)
         {
             this.replyAction = replyAction;
@@ -83,7 +88,6 @@ namespace System.ServiceModel.Dispatcher
         public bool AutoDisposeParameters
         {
             get { return this.autoDisposeParameters; }
-
             set
             {
                 lock (this.parent.ThisLock)
@@ -113,7 +117,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.faultFormatter == null)
                 {
-                    this.faultFormatter = new DataContractSerializerFaultFormatter(this.faultContractInfos);
+                    this.faultFormatter = new DataContractSerializerFaultFormatter(
+                        this.faultContractInfos
+                    );
                 }
                 return this.faultFormatter;
             }
@@ -130,22 +136,13 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool IncludeExceptionDetailInFaults
         {
-            get
-            {
-                return this.includeExceptionDetailInFaults;
-            }
-            set
-            {
-                this.includeExceptionDetailInFaults = value;
-            }
+            get { return this.includeExceptionDetailInFaults; }
+            set { this.includeExceptionDetailInFaults = value; }
         }
 
         internal bool IsFaultFormatterSetExplicit
         {
-            get
-            {
-                return this.isFaultFormatterSetExplicit;
-            }
+            get { return this.isFaultFormatterSetExplicit; }
         }
 
         public ImpersonationOption Impersonation
@@ -233,11 +230,7 @@ namespace System.ServiceModel.Dispatcher
             get { return this.parent; }
         }
 
-        internal ReceiveContextAcknowledgementMode ReceiveContextAcknowledgementMode
-        {
-            get;
-            set;
-        }
+        internal ReceiveContextAcknowledgementMode ReceiveContextAcknowledgementMode { get; set; }
 
         internal bool BufferedReceiveEnabled
         {

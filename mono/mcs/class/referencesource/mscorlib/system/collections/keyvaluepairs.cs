@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  KeyValuePairs
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
@@ -15,28 +15,33 @@
 **
 ===========================================================*/
 
-namespace System.Collections {
+namespace System.Collections
+{
     using System.Diagnostics;
-    
-    [DebuggerDisplay("{value}", Name = "[{key}]", Type = "" )]
-    internal class KeyValuePairs {
+
+    [DebuggerDisplay("{value}", Name = "[{key}]", Type = "")]
+    internal class KeyValuePairs
+    {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private object key;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private object value;
 
-        public KeyValuePairs(object key, object value) {
+        public KeyValuePairs(object key, object value)
+        {
             this.value = value;
             this.key = key;
         }
 
-        public object Key {
+        public object Key
+        {
             get { return key; }
         }
 
-        public object Value {
+        public object Value
+        {
             get { return value; }
         }
-    }    
+    }
 }

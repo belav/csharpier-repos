@@ -67,7 +67,14 @@ namespace System.Text.RegularExpressions.Tests
                         if (engine == RegexEngine.NonBacktracking) // Backreferences are not yet supported by the NonBacktracking engine
                             continue;
 
-                        yield return new object[] { engine, @"(.)\1", firstChar, secondChar, culture };
+                        yield return new object[]
+                        {
+                            engine,
+                            @"(.)\1",
+                            firstChar,
+                            secondChar,
+                            culture,
+                        };
                     }
                 }
             }
@@ -75,15 +82,25 @@ namespace System.Text.RegularExpressions.Tests
 
         [Theory]
         [MemberData(nameof(Characters_With_Common_Lowercase_Match_Data))]
-        public async Task Characters_With_Common_Lowercase_Match(RegexEngine engine, string pattern, string input, string culture)
+        public async Task Characters_With_Common_Lowercase_Match(
+            RegexEngine engine,
+            string pattern,
+            string input,
+            string culture
+        )
         {
-            Regex regex = await RegexHelpers.GetRegexAsync(engine, pattern, RegexOptions.IgnoreCase, CultureInfo.GetCultureInfo(culture));
+            Regex regex = await RegexHelpers.GetRegexAsync(
+                engine,
+                pattern,
+                RegexOptions.IgnoreCase,
+                CultureInfo.GetCultureInfo(culture)
+            );
             Assert.True(regex.IsMatch(input));
         }
 
         public static IEnumerable<object[]> EnginesThatSupportBackreferences()
         {
-            foreach(RegexEngine engine in RegexHelpers.AvailableEngines)
+            foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
             {
                 if (engine == RegexEngine.NonBacktracking) // Nonbacktracking engine doesn't yet support backreferences.
                     continue;
@@ -112,26 +129,46 @@ namespace System.Text.RegularExpressions.Tests
 
         [Theory]
         [MemberData(nameof(Characters_With_Common_Lowercase_Match_Backreference_Data))]
-        public async Task Characters_With_Common_Lowercase_Match_Backreference(RegexEngine engine, string pattern, string firstChar, string secondChar, string culture)
+        public async Task Characters_With_Common_Lowercase_Match_Backreference(
+            RegexEngine engine,
+            string pattern,
+            string firstChar,
+            string secondChar,
+            string culture
+        )
         {
             using var _ = new ThreadCultureChange(culture);
-            Regex regex = await RegexHelpers.GetRegexAsync(engine, pattern, RegexOptions.IgnoreCase);
+            Regex regex = await RegexHelpers.GetRegexAsync(
+                engine,
+                pattern,
+                RegexOptions.IgnoreCase
+            );
             Assert.True(regex.IsMatch($"{firstChar}{secondChar}"));
             Assert.True(regex.IsMatch($"{secondChar}{firstChar}"));
         }
 
         [Theory]
         [MemberData(nameof(EnginesThatSupportBackreferences))]
-        public async Task Ensure_CultureInvariant_Option_Is_Used_For_Backreferences(RegexEngine engine)
+        public async Task Ensure_CultureInvariant_Option_Is_Used_For_Backreferences(
+            RegexEngine engine
+        )
         {
             using var _ = new ThreadCultureChange("tr-TR");
-            Regex regex = await RegexHelpers.GetRegexAsync(engine, @"(.)\1", RegexOptions.CultureInvariant | RegexOptions.IgnoreCase);
+            Regex regex = await RegexHelpers.GetRegexAsync(
+                engine,
+                @"(.)\1",
+                RegexOptions.CultureInvariant | RegexOptions.IgnoreCase
+            );
             // There is no mapping between 'i' and 'I' in tr-TR culture, so this test is validating that when passing CultureInvariant
             // option, we will use InvariantCulture mappings for backreferences.
             Assert.True(regex.IsMatch("iI"));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMobile), nameof(PlatformDetection.IsNotBrowser))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotMobile),
+            nameof(PlatformDetection.IsNotBrowser)
+        )]
         // This test creates a source generated engine for each of the ~870 cultures and ensures the result compiles. This test alone takes around 30
         // seconds on a fast machine, so marking as OuterLoop.
         [OuterLoop]
@@ -143,7 +180,11 @@ namespace System.Text.RegularExpressions.Tests
                 {
                     // This test will try to emit code that looks like: textInfo = CultureInfo.GetCultureInfo(CurrentCulture.Name).TextInfo
                     // so we will validate in this test that we are able to do that for all cultures and that GetCultureInfo returns a valid Culture.
-                    Regex r = await RegexHelpers.GetRegexAsync(RegexEngine.SourceGenerated, @"(.)\1", RegexOptions.IgnoreCase);
+                    Regex r = await RegexHelpers.GetRegexAsync(
+                        RegexEngine.SourceGenerated,
+                        @"(.)\1",
+                        RegexOptions.IgnoreCase
+                    );
                     Assert.True(r.IsMatch("Aa"));
                 }
             }
@@ -155,18 +196,29 @@ namespace System.Text.RegularExpressions.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/67793")]
         [Theory]
         [MemberData(nameof(Unicode_IgnoreCase_TestData))]
-        public async Task Unicode_IgnoreCase_Tests(RegexEngine engine, string culture, RegexOptions options)
+        public async Task Unicode_IgnoreCase_Tests(
+            RegexEngine engine,
+            string culture,
+            RegexOptions options
+        )
         {
             IEnumerable<(string, string)> testCases = GetPatternAndInputsForCulture(culture);
 
             foreach ((string c, string lowerC) in testCases)
             {
-                using (ThreadCultureChange cultureChange = (options & RegexOptions.CultureInvariant) == 0 ?
-                    new ThreadCultureChange(culture) : null)
+                using (
+                    ThreadCultureChange cultureChange =
+                        (options & RegexOptions.CultureInvariant) == 0
+                            ? new ThreadCultureChange(culture)
+                            : null
+                )
                 {
                     // We validate that there is no case where c.ToLower() == lowerC and c.ToLower() != lowerC.ToLower()
                     // given this would create inconsistencies with the way we handle case-insensitive backreference comparisons.
-                    Assert.Equal(CultureInfo.GetCultureInfo(culture).TextInfo.ToLower(lowerC), lowerC);
+                    Assert.Equal(
+                        CultureInfo.GetCultureInfo(culture).TextInfo.ToLower(lowerC),
+                        lowerC
+                    );
                     await ValidateMatch(c, lowerC);
                     await ValidateMatch(lowerC, c);
                 }
@@ -176,13 +228,18 @@ namespace System.Text.RegularExpressions.Tests
 
             async Task ValidateMatch(string pattern, string input)
             {
-                Regex regex = await RegexHelpers.GetRegexAsync(engine, pattern, options | RegexOptions.IgnoreCase);
+                Regex regex = await RegexHelpers.GetRegexAsync(
+                    engine,
+                    pattern,
+                    options | RegexOptions.IgnoreCase
+                );
                 Assert.True(regex.IsMatch(input));
             }
 
             static IEnumerable<(string, string)> GetPatternAndInputsForCulture(string culture)
             {
-                TextInfo textInfo = string.IsNullOrEmpty(culture) ? CultureInfo.InvariantCulture.TextInfo
+                TextInfo textInfo = string.IsNullOrEmpty(culture)
+                    ? CultureInfo.InvariantCulture.TextInfo
                     : CultureInfo.GetCultureInfo(culture).TextInfo;
 
                 for (int i = 0; i <= char.MaxValue; i++)
@@ -203,11 +260,16 @@ namespace System.Text.RegularExpressions.Tests
             {
                 foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
                 {
-                    yield return new object[] { engine, culture, RegexOptions.None};
+                    yield return new object[] { engine, culture, RegexOptions.None };
                     if (string.IsNullOrEmpty(culture))
                     {
                         // For the Invariant culture equivalences also test to get the same behavior with RegexOptions.CultureInvariant.
-                        yield return new object[] { engine, culture, RegexOptions.CultureInvariant };
+                        yield return new object[]
+                        {
+                            engine,
+                            culture,
+                            RegexOptions.CultureInvariant,
+                        };
                     }
                 }
             }

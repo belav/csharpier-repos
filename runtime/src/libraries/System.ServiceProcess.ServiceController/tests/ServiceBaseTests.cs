@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.XUnitExtensions;
 using System.Diagnostics;
+using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
 
 /// <summary>
@@ -10,15 +10,22 @@ using Xunit;
 /// </summary>
 namespace System.ServiceProcess.Tests
 {
-    [OuterLoop(/* Modifies machine state */)]
-    [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Persistent issues starting test service on NETFX")]
+    [OuterLoop( /* Modifies machine state */
+
+    )]
+    [SkipOnTargetFramework(
+        TargetFrameworkMonikers.NetFramework,
+        "Persistent issues starting test service on NETFX"
+    )]
     public class ServiceBaseTests : IDisposable
     {
         private const int connectionTimeout = 30000;
         private readonly TestServiceProvider _testService;
 
-        protected static bool IsElevatedAndSupportsEventLogs => PlatformDetection.IsPrivilegedProcess && PlatformDetection.IsNotWindowsNanoServer;
-        protected static bool IsElevatedAndWindows10OrLater => PlatformDetection.IsPrivilegedProcess && PlatformDetection.IsWindows10OrLater;
+        protected static bool IsElevatedAndSupportsEventLogs =>
+            PlatformDetection.IsPrivilegedProcess && PlatformDetection.IsNotWindowsNanoServer;
+        protected static bool IsElevatedAndWindows10OrLater =>
+            PlatformDetection.IsPrivilegedProcess && PlatformDetection.IsWindows10OrLater;
 
         private bool _disposed;
 
@@ -29,7 +36,9 @@ namespace System.ServiceProcess.Tests
 
         private void AssertExpectedProperties(ServiceController testServiceController)
         {
-            var comparer = PlatformDetection.IsNetFramework ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal; // .NET Framework upper cases the name
+            var comparer = PlatformDetection.IsNetFramework
+                ? StringComparer.OrdinalIgnoreCase
+                : StringComparer.Ordinal; // .NET Framework upper cases the name
             Assert.Equal(_testService.TestServiceName, testServiceController.ServiceName, comparer);
             Assert.Equal(_testService.TestServiceDisplayName, testServiceController.DisplayName);
             Assert.Equal(_testService.TestMachineName, testServiceController.MachineName);
@@ -57,7 +66,7 @@ namespace System.ServiceProcess.Tests
                         Console.WriteLine("Trying to clean-up " + currentService);
                         TestServiceInstaller deleteService = new TestServiceInstaller()
                         {
-                            ServiceName = controller.ServiceName
+                            ServiceName = controller.ServiceName,
                         };
                         deleteService.RemoveService();
                         Console.WriteLine("Cleaned up " + currentService);
@@ -71,14 +80,20 @@ namespace System.ServiceProcess.Tests
         }
 
 #if NETCOREAPP
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPrivilegedProcess)
+        )]
         [InlineData(-2)]
         [InlineData((long)int.MaxValue + 1)]
         public void RequestAdditionalTime_Throws_ArgumentOutOfRangeException(long milliseconds)
         {
             TimeSpan time = TimeSpan.FromMilliseconds(milliseconds);
             using var serviceBase = new ServiceBase();
-            Assert.Throws<ArgumentOutOfRangeException>("time", () => serviceBase.RequestAdditionalTime(time));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "time",
+                () => serviceBase.RequestAdditionalTime(time)
+            );
         }
 #endif
 
@@ -210,7 +225,10 @@ namespace System.ServiceProcess.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, ".NET Framework receives the Connected Byte Code after the Exception Thrown Byte Code")]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            ".NET Framework receives the Connected Byte Code after the Exception Thrown Byte Code"
+        )]
         public void PropagateExceptionFromOnStart()
         {
             string serviceName = nameof(PropagateExceptionFromOnStart) + Guid.NewGuid().ToString();
@@ -241,7 +259,9 @@ namespace System.ServiceProcess.Tests
             TestServiceProvider.DebugTrace("ServiceBaseTests.ConnectToServer: connecting");
             _testService.Client.Connect(connectionTimeout);
             Assert.Equal((int)PipeMessageByteCode.Connected, _testService.GetByte());
-            TestServiceProvider.DebugTrace("ServiceBaseTests.ConnectToServer: received connect byte");
+            TestServiceProvider.DebugTrace(
+                "ServiceBaseTests.ConnectToServer: received connect byte"
+            );
 
             ServiceController controller = new ServiceController(_testService.TestServiceName);
             AssertExpectedProperties(controller);

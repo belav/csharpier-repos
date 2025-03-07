@@ -17,11 +17,11 @@ namespace Tests.Collections
         protected ICollectionTest(bool isSynchronized)
         {
             _expectedIsSynchronized = isSynchronized;
-            ValidArrayTypes = new[] {typeof (object)};
+            ValidArrayTypes = new[] { typeof(object) };
             InvalidArrayTypes = new[]
             {
-                typeof (MyInvalidReferenceType),
-                typeof (MyInvalidValueType)
+                typeof(MyInvalidReferenceType),
+                typeof(MyInvalidValueType),
             };
         }
 
@@ -44,7 +44,7 @@ namespace Tests.Collections
         {
             IEnumerable obj = GetEnumerable(items);
             Assert.IsAssignableFrom<ICollection>(obj);
-            return (ICollection) obj;
+            return (ICollection)obj;
         }
 
         [Fact]
@@ -59,9 +59,7 @@ namespace Tests.Collections
         public void IsSynchronized()
         {
             ICollection collection = GetCollection(GenerateItems(16));
-            Assert.Equal(
-                ExpectedIsSynchronized,
-                collection.IsSynchronized);
+            Assert.Equal(ExpectedIsSynchronized, collection.IsSynchronized);
         }
 
         [Fact]
@@ -84,9 +82,7 @@ namespace Tests.Collections
         public void SyncRootCanBeLocked()
         {
             ICollection collection = GetCollection(GenerateItems(16));
-            lock (collection.SyncRoot)
-            {
-            }
+            lock (collection.SyncRoot) { }
         }
 
         [Fact]
@@ -101,8 +97,7 @@ namespace Tests.Collections
         public void CopyToNull()
         {
             ICollection collection = GetCollection(GenerateItems(16));
-            Assert.Throws<ArgumentNullException>(
-                () => collection.CopyTo(null, 0));
+            Assert.Throws<ArgumentNullException>(() => collection.CopyTo(null, 0));
         }
 
         [Theory]
@@ -113,15 +108,17 @@ namespace Tests.Collections
         {
             object[] items = GenerateItems(16);
             ICollection collection = GetCollection(items);
-            var items2 = (object[]) items.Clone();
+            var items2 = (object[])items.Clone();
 
-            Assert.ThrowsAny<ArgumentException>(
-                () => collection.CopyTo(items2, index));
+            Assert.ThrowsAny<ArgumentException>(() => collection.CopyTo(items2, index));
 
             CollectionAssert.Equal(items, items2);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
         public void CopyToArrayWithNonZeroBounds()
         {
             object[] items = GenerateItems(16);
@@ -129,32 +126,32 @@ namespace Tests.Collections
             if (CopyToOnlySupportsZeroLowerBounds)
             {
                 Array itemArray = Array.CreateInstance(
-                    typeof (object),
-                    new[] {collection.Count + 8},
-                    new[] {-4});
-                var tempItemArray = (Array) itemArray.Clone();
-                Assert.Throws<ArgumentException>(
-                    () => collection.CopyTo(itemArray, 0));
+                    typeof(object),
+                    new[] { collection.Count + 8 },
+                    new[] { -4 }
+                );
+                var tempItemArray = (Array)itemArray.Clone();
+                Assert.Throws<ArgumentException>(() => collection.CopyTo(itemArray, 0));
                 CollectionAssert.Equal(tempItemArray, itemArray);
             }
             else
             {
                 Array itemArray = Array.CreateInstance(
-                    typeof (object),
-                    new[] {collection.Count + 4},
-                    new[] {-4});
-                var tempItemArray = (Array) itemArray.Clone();
-                Assert.Throws<ArgumentException>(
-                    () => collection.CopyTo(itemArray, 1));
+                    typeof(object),
+                    new[] { collection.Count + 4 },
+                    new[] { -4 }
+                );
+                var tempItemArray = (Array)itemArray.Clone();
+                Assert.Throws<ArgumentException>(() => collection.CopyTo(itemArray, 1));
                 CollectionAssert.Equal(tempItemArray, itemArray);
 
                 itemArray = Array.CreateInstance(
-                    typeof (object),
-                    new[] {collection.Count + 4},
-                    new[] {-6});
-                tempItemArray = (Array) itemArray.Clone();
-                Assert.Throws<ArgumentException>(
-                    () => collection.CopyTo(itemArray, -1));
+                    typeof(object),
+                    new[] { collection.Count + 4 },
+                    new[] { -6 }
+                );
+                tempItemArray = (Array)itemArray.Clone();
+                Assert.Throws<ArgumentException>(() => collection.CopyTo(itemArray, -1));
                 CollectionAssert.Equal(tempItemArray, itemArray);
             }
         }
@@ -164,9 +161,8 @@ namespace Tests.Collections
         {
             object[] items = GenerateItems(16);
             ICollection collection = GetCollection(items);
-            var tempArray = (object[]) items.Clone();
-            Assert.Throws<ArgumentException>(
-                () => collection.CopyTo(items, collection.Count));
+            var tempArray = (object[])items.Clone();
+            Assert.Throws<ArgumentException>(() => collection.CopyTo(items, collection.Count));
             CollectionAssert.Equal(tempArray, items);
         }
 
@@ -176,9 +172,8 @@ namespace Tests.Collections
             object[] items = GenerateItems(16);
             ICollection collection = GetCollection(items);
             object[] itemArray = GenerateItems(collection.Count + 1);
-            var tempItemArray = (object[]) itemArray.Clone();
-            Assert.Throws<ArgumentException>(
-                () => collection.CopyTo(itemArray, 2));
+            var tempItemArray = (object[])itemArray.Clone();
+            Assert.Throws<ArgumentException>(() => collection.CopyTo(itemArray, 2));
             CollectionAssert.Equal(tempItemArray, itemArray);
         }
 
@@ -188,13 +183,11 @@ namespace Tests.Collections
             object[] items = GenerateItems(16);
             ICollection collection = GetCollection(items);
             Assert.Throws<ArgumentException>(
-                () =>
-                collection.CopyTo(new object[1, collection.Count], 0));
+                () => collection.CopyTo(new object[1, collection.Count], 0)
+            );
         }
 
-        protected void AssertThrows(
-            Type[] exceptionTypes,
-            Action testCode)
+        protected void AssertThrows(Type[] exceptionTypes, Action testCode)
         {
             Exception exception = Record.Exception(testCode);
             if (exception == null)
@@ -202,7 +195,8 @@ namespace Tests.Collections
                 throw EqualException.ForMismatchedValues(
                     exceptionTypes,
                     null,
-                    "Expected an exception but got null.");
+                    "Expected an exception but got null."
+                );
             }
             Type exceptionType = exception.GetType();
             if (!exceptionTypes.Contains(exceptionType))
@@ -210,7 +204,8 @@ namespace Tests.Collections
                 throw EqualException.ForMismatchedValues(
                     exceptionTypes,
                     exceptionType,
-                    "Caught wrong exception.");
+                    "Caught wrong exception."
+                );
             }
         }
 
@@ -220,29 +215,14 @@ namespace Tests.Collections
             object[] items = GenerateItems(16);
             ICollection collection = GetCollection(items);
             Type[] expectedExceptionTypes = IsGenericCompatibility
-                                                ? new[]
-                                                {
-                                                    typeof (
-                                                      ArgumentException),
-                                                    typeof (
-                                                      InvalidCastException
-                                                      )
-                                                }
-                                                : new[]
-                                                {
-                                                    typeof (
-                                                      ArgumentException)
-                                                };
+                ? new[] { typeof(ArgumentException), typeof(InvalidCastException) }
+                : new[] { typeof(ArgumentException) };
             foreach (Type type in InvalidArrayTypes)
             {
-                Array itemArray = Array.CreateInstance(
-                    type,
-                    collection.Count);
-                var tempItemArray = (Array) itemArray.Clone();
+                Array itemArray = Array.CreateInstance(type, collection.Count);
+                var tempItemArray = (Array)itemArray.Clone();
 
-                AssertThrows(
-                    expectedExceptionTypes,
-                    () => collection.CopyTo(itemArray, 0));
+                AssertThrows(expectedExceptionTypes, () => collection.CopyTo(itemArray, 0));
                 CollectionAssert.Equal(tempItemArray, itemArray);
             }
         }
@@ -253,11 +233,7 @@ namespace Tests.Collections
         [InlineData(16, 20, 0, 0)]
         [InlineData(16, 20, 0, 4)]
         [InlineData(16, 24, 0, 4)]
-        public void CopyTo(
-            int size,
-            int arraySize,
-            int arrayLowerBound,
-            int copyToIndex)
+        public void CopyTo(int size, int arraySize, int arrayLowerBound, int copyToIndex)
         {
             if (arrayLowerBound != 0 && !PlatformDetection.IsNonZeroLowerBoundArraySupported)
                 return;
@@ -265,25 +241,19 @@ namespace Tests.Collections
             object[] items = GenerateItems(size);
             ICollection collection = GetCollection(items);
             Array itemArray = Array.CreateInstance(
-                typeof (object),
-                new[] {arraySize},
-                new[] {arrayLowerBound});
-            var tempItemArray = (Array) itemArray.Clone();
-            if (CopyToOnlySupportsZeroLowerBounds
-                && arrayLowerBound != 0)
+                typeof(object),
+                new[] { arraySize },
+                new[] { arrayLowerBound }
+            );
+            var tempItemArray = (Array)itemArray.Clone();
+            if (CopyToOnlySupportsZeroLowerBounds && arrayLowerBound != 0)
             {
-                Assert.Throws<ArgumentException>(
-                    () => collection.CopyTo(itemArray, copyToIndex));
+                Assert.Throws<ArgumentException>(() => collection.CopyTo(itemArray, copyToIndex));
             }
             else
             {
                 collection.CopyTo(itemArray, copyToIndex);
-                Array.Copy(
-                    items,
-                    0,
-                    tempItemArray,
-                    copyToIndex,
-                    items.Length);
+                Array.Copy(items, 0, tempItemArray, copyToIndex, items.Length);
                 CollectionAssert.Equal(tempItemArray, itemArray);
             }
         }
@@ -295,9 +265,7 @@ namespace Tests.Collections
             {
                 object[] items = GenerateItems(16);
                 ICollection collection = GetCollection(items);
-                Array itemArray = Array.CreateInstance(
-                    type,
-                    collection.Count);
+                Array itemArray = Array.CreateInstance(type, collection.Count);
                 collection.CopyTo(itemArray, 0);
                 CollectionAssert.Equal(items, itemArray);
             }
@@ -310,15 +278,11 @@ namespace Tests.Collections
             ICollection<T> collection = GetCollection(items) as ICollection<T>;
             if (collection == null)
                 return;
-            Assert.All(items, item => Assert.True(collection.Contains((T) item)));
+            Assert.All(items, item => Assert.True(collection.Contains((T)item)));
         }
 
-        internal class MyInvalidReferenceType
-        {
-        }
+        internal class MyInvalidReferenceType { }
 
-        internal struct MyInvalidValueType
-        {
-        }
+        internal struct MyInvalidValueType { }
     }
 }

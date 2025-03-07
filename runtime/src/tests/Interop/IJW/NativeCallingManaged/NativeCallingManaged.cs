@@ -16,7 +16,10 @@ namespace NativeCallingManaged
         public static int TestEntryPoint()
         {
             // Disable running on Windows 7 until IJW activation work is complete.
-            if(Environment.OSVersion.Platform != PlatformID.Win32NT || TestLibrary.Utilities.IsWindows7)
+            if (
+                Environment.OSVersion.Platform != PlatformID.Win32NT
+                || TestLibrary.Utilities.IsWindows7
+            )
             {
                 return 100;
             }
@@ -29,7 +32,7 @@ namespace NativeCallingManaged
             object testInstance = Activator.CreateInstance(testType);
             MethodInfo testMethod = testType.GetMethod("ManagedEntryPoint");
             int result = (int)testMethod.Invoke(testInstance, null);
-            if(result != 100)
+            if (result != 100)
             {
                 TestFramework.LogError("IJW", "Incorrect result returned: " + result);
                 success = false;

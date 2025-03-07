@@ -19,20 +19,33 @@ public class ReverseEngineeringConfigurationTests
     private void ValidateContextNameInReverseEngineerGenerator(string contextName)
     {
         var assembly = typeof(ReverseEngineeringConfigurationTests).Assembly;
-        var reverseEngineer = new DesignTimeServicesBuilder(assembly, assembly, new TestOperationReporter(), new string[0])
+        var reverseEngineer = new DesignTimeServicesBuilder(
+            assembly,
+            assembly,
+            new TestOperationReporter(),
+            new string[0]
+        )
             .Build("Microsoft.EntityFrameworkCore.SqlServer")
             .CreateScope()
-            .ServiceProvider
-            .GetRequiredService<IReverseEngineerScaffolder>();
+            .ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
 
         Assert.Equal(
             DesignStrings.ContextClassNotValidCSharpIdentifier(contextName),
-            Assert.Throws<ArgumentException>(
-                    () => reverseEngineer.ScaffoldModel(
-                        "connectionstring",
-                        new DatabaseModelFactoryOptions(),
-                        new ModelReverseEngineerOptions(),
-                        new ModelCodeGenerationOptions { ModelNamespace = "FakeNamespace", ContextName = contextName }))
-                .Message);
+            Assert
+                .Throws<ArgumentException>(
+                    () =>
+                        reverseEngineer.ScaffoldModel(
+                            "connectionstring",
+                            new DatabaseModelFactoryOptions(),
+                            new ModelReverseEngineerOptions(),
+                            new ModelCodeGenerationOptions
+                            {
+                                ModelNamespace = "FakeNamespace",
+                                ContextName = contextName,
+                            }
+                        )
+                )
+                .Message
+        );
     }
 }

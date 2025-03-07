@@ -14,19 +14,13 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .IsFixedLength();
+        modelBuilder.Entity<Customer>().Property(e => e.Name).IsFixedLength();
 
         var property = modelBuilder.Model.FindEntityType(typeof(Customer)).FindProperty("Name");
 
         Assert.True(property.IsFixedLength());
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .IsFixedLength(false);
+        modelBuilder.Entity<Customer>().Property(e => e.Name).IsFixedLength(false);
 
         Assert.False(property.IsFixedLength());
     }
@@ -36,10 +30,7 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .HasColumnName("Eman");
+        modelBuilder.Entity<Customer>().Property(e => e.Name).HasColumnName("Eman");
 
         var property = modelBuilder.Model.FindEntityType(typeof(Customer)).FindProperty("Name");
 
@@ -52,10 +43,7 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .HasColumnType("nvarchar(42)");
+        modelBuilder.Entity<Customer>().Property(e => e.Name).HasColumnType("nvarchar(42)");
 
         var property = modelBuilder.Model.FindEntityType(typeof(Customer)).FindProperty("Name");
 
@@ -67,10 +55,7 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .HasDefaultValueSql("CherryCoke");
+        modelBuilder.Entity<Customer>().Property(e => e.Name).HasDefaultValueSql("CherryCoke");
 
         var property = modelBuilder.Model.FindEntityType(typeof(Customer)).FindProperty("Name");
 
@@ -100,10 +85,7 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .HasComputedColumnSql("CherryCoke");
+        modelBuilder.Entity<Customer>().Property(e => e.Name).HasComputedColumnSql("CherryCoke");
 
         var property = modelBuilder.Model.FindEntityType(typeof(Customer)).FindProperty("Name");
 
@@ -134,10 +116,7 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
         var stringValue = "DefaultValueString";
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .HasDefaultValue(stringValue);
+        modelBuilder.Entity<Customer>().Property(e => e.Name).HasDefaultValue(stringValue);
 
         var property = modelBuilder.Model.FindEntityType(typeof(Customer)).FindProperty("Name");
 
@@ -150,12 +129,11 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.SomeShort)
-            .HasDefaultValue(7);
+        modelBuilder.Entity<Customer>().Property(e => e.SomeShort).HasDefaultValue(7);
 
-        var property = modelBuilder.Model.FindEntityType(typeof(Customer)).FindProperty("SomeShort");
+        var property = modelBuilder
+            .Model.FindEntityType(typeof(Customer))
+            .FindProperty("SomeShort");
 
         Assert.Equal((short)7, property.GetDefaultValue());
         Assert.Equal(ValueGenerated.OnAdd, property.ValueGenerated);
@@ -184,12 +162,11 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.EnumValue)
-            .HasDefaultValue(MyEnum.Tue);
+        modelBuilder.Entity<Customer>().Property(e => e.EnumValue).HasDefaultValue(MyEnum.Tue);
 
-        var property = modelBuilder.Model.FindEntityType(typeof(Customer)).FindProperty("EnumValue");
+        var property = modelBuilder
+            .Model.FindEntityType(typeof(Customer))
+            .FindProperty("EnumValue");
 
         Assert.Equal(typeof(MyEnum), property.GetDefaultValue().GetType());
         Assert.Equal(MyEnum.Tue, property.GetDefaultValue());
@@ -201,26 +178,18 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .HasAlternateKey(e => e.Name);
+        modelBuilder.Entity<Customer>().HasAlternateKey(e => e.Name);
 
         var entityType = modelBuilder.Model.FindEntityType(typeof(Customer));
         var key = entityType.FindKey(entityType.FindProperty(nameof(Customer.Name)));
 
         Assert.Equal("AK_Customer_Name", key.GetName());
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Name)
-            .HasColumnName("Pie");
+        modelBuilder.Entity<Customer>().Property(e => e.Name).HasColumnName("Pie");
 
         Assert.Equal("AK_Customer_Pie", key.GetName());
 
-        modelBuilder
-            .Entity<Customer>()
-            .HasAlternateKey(e => e.Name)
-            .HasName("KeyLimePie");
+        modelBuilder.Entity<Customer>().HasAlternateKey(e => e.Name).HasName("KeyLimePie");
 
         Assert.Equal("KeyLimePie", key.GetName());
     }
@@ -230,8 +199,13 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateBuilder();
         var entityTypeBuilder = modelBuilder.Entity(typeof(Splot), ConfigurationSource.Convention);
-        var idProperty = entityTypeBuilder.Property(typeof(int), "Id", ConfigurationSource.Convention).Metadata;
-        var keyBuilder = entityTypeBuilder.HasKey(new[] { idProperty.Name }, ConfigurationSource.Convention);
+        var idProperty = entityTypeBuilder
+            .Property(typeof(int), "Id", ConfigurationSource.Convention)
+            .Metadata;
+        var keyBuilder = entityTypeBuilder.HasKey(
+            new[] { idProperty.Name },
+            ConfigurationSource.Convention
+        );
 
         Assert.NotNull(keyBuilder.HasName("Splew"));
         Assert.Equal("Splew", keyBuilder.Metadata.GetName());
@@ -249,15 +223,19 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder
-            .Entity<Customer>().HasMany(e => e.Orders).WithOne(e => e.Customer).HasForeignKey(e => e.CustomerId);
+            .Entity<Customer>()
+            .HasMany(e => e.Orders)
+            .WithOne(e => e.Customer)
+            .HasForeignKey(e => e.CustomerId);
 
-        var foreignKey = modelBuilder.Model.FindEntityType(typeof(Order)).GetForeignKeys()
+        var foreignKey = modelBuilder
+            .Model.FindEntityType(typeof(Order))
+            .GetForeignKeys()
             .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
         Assert.Equal("FK_Order_Customer_CustomerId", foreignKey.GetConstraintName());
 
-        modelBuilder
-            .Entity<Order>().Property(e => e.CustomerId).HasColumnName("CID");
+        modelBuilder.Entity<Order>().Property(e => e.CustomerId).HasColumnName("CID");
 
         Assert.Equal("FK_Order_Customer_CID", foreignKey.GetConstraintName());
     }
@@ -268,16 +246,22 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder
-            .Entity<Customer>().HasMany(e => e.Orders).WithOne(e => e.Customer)
+            .Entity<Customer>()
+            .HasMany(e => e.Orders)
+            .WithOne(e => e.Customer)
             .HasConstraintName("LemonSupreme");
 
-        var foreignKey = modelBuilder.Model.FindEntityType(typeof(Order)).GetForeignKeys()
+        var foreignKey = modelBuilder
+            .Model.FindEntityType(typeof(Order))
+            .GetForeignKeys()
             .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
         Assert.Equal("LemonSupreme", foreignKey.GetConstraintName());
 
         modelBuilder
-            .Entity<Customer>().HasMany(e => e.Orders).WithOne(e => e.Customer)
+            .Entity<Customer>()
+            .HasMany(e => e.Orders)
+            .WithOne(e => e.Customer)
             .HasConstraintName(null);
 
         Assert.Equal("FK_Order_Customer_CustomerId", foreignKey.GetConstraintName());
@@ -289,11 +273,15 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder
-            .Entity<Customer>().HasMany(e => e.Orders).WithOne(e => e.Customer)
+            .Entity<Customer>()
+            .HasMany(e => e.Orders)
+            .WithOne(e => e.Customer)
             .HasForeignKey(e => e.CustomerId)
             .HasConstraintName("LemonSupreme");
 
-        var foreignKey = modelBuilder.Model.FindEntityType(typeof(Order)).GetForeignKeys()
+        var foreignKey = modelBuilder
+            .Model.FindEntityType(typeof(Order))
+            .GetForeignKeys()
             .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
         Assert.Equal("LemonSupreme", foreignKey.GetConstraintName());
@@ -305,16 +293,22 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder
-            .Entity<Order>().HasOne(e => e.Customer).WithMany(e => e.Orders)
+            .Entity<Order>()
+            .HasOne(e => e.Customer)
+            .WithMany(e => e.Orders)
             .HasConstraintName("LemonSupreme");
 
-        var foreignKey = modelBuilder.Model.FindEntityType(typeof(Order)).GetForeignKeys()
+        var foreignKey = modelBuilder
+            .Model.FindEntityType(typeof(Order))
+            .GetForeignKeys()
             .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
         Assert.Equal("LemonSupreme", foreignKey.GetConstraintName());
 
         modelBuilder
-            .Entity<Order>().HasOne(e => e.Customer).WithMany(e => e.Orders)
+            .Entity<Order>()
+            .HasOne(e => e.Customer)
+            .WithMany(e => e.Orders)
             .HasConstraintName(null);
 
         Assert.Equal("FK_Order_Customer_CustomerId", foreignKey.GetConstraintName());
@@ -326,11 +320,15 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder
-            .Entity<Order>().HasOne(e => e.Customer).WithMany(e => e.Orders)
+            .Entity<Order>()
+            .HasOne(e => e.Customer)
+            .WithMany(e => e.Orders)
             .HasForeignKey(e => e.CustomerId)
             .HasConstraintName("LemonSupreme");
 
-        var foreignKey = modelBuilder.Model.FindEntityType(typeof(Order)).GetForeignKeys()
+        var foreignKey = modelBuilder
+            .Model.FindEntityType(typeof(Order))
+            .GetForeignKeys()
             .Single(fk => fk.PrincipalEntityType.ClrType == typeof(Customer));
 
         Assert.Equal("LemonSupreme", foreignKey.GetConstraintName());
@@ -342,16 +340,23 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder
-            .Entity<Order>().HasOne(e => e.Details).WithOne(e => e.Order)
+            .Entity<Order>()
+            .HasOne(e => e.Details)
+            .WithOne(e => e.Order)
             .HasPrincipalKey<Order>(e => e.OrderId)
             .HasConstraintName("LemonSupreme");
 
-        var foreignKey = modelBuilder.Model.FindEntityType(typeof(OrderDetails)).GetForeignKeys().Single();
+        var foreignKey = modelBuilder
+            .Model.FindEntityType(typeof(OrderDetails))
+            .GetForeignKeys()
+            .Single();
 
         Assert.Equal("LemonSupreme", foreignKey.GetConstraintName());
 
         modelBuilder
-            .Entity<Order>().HasOne(e => e.Details).WithOne(e => e.Order)
+            .Entity<Order>()
+            .HasOne(e => e.Details)
+            .WithOne(e => e.Order)
             .HasConstraintName(null);
 
         Assert.Equal("FK_OrderDetails_Order_OrderId", foreignKey.GetConstraintName());
@@ -363,11 +368,16 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder
-            .Entity<Order>().HasOne(e => e.Details).WithOne(e => e.Order)
+            .Entity<Order>()
+            .HasOne(e => e.Details)
+            .WithOne(e => e.Order)
             .HasForeignKey<OrderDetails>(e => e.Id)
             .HasConstraintName("LemonSupreme");
 
-        var foreignKey = modelBuilder.Model.FindEntityType(typeof(OrderDetails)).GetForeignKeys().Single();
+        var foreignKey = modelBuilder
+            .Model.FindEntityType(typeof(OrderDetails))
+            .GetForeignKeys()
+            .Single();
 
         Assert.Equal("LemonSupreme", foreignKey.GetConstraintName());
     }
@@ -378,7 +388,10 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateBuilder();
         var entityTypeBuilder = modelBuilder.Entity(typeof(Splot), ConfigurationSource.Convention);
         entityTypeBuilder.Property(typeof(int), "Id", ConfigurationSource.Convention);
-        var indexBuilder = entityTypeBuilder.HasIndex(new[] { "Id" }, ConfigurationSource.Convention);
+        var indexBuilder = entityTypeBuilder.HasIndex(
+            new[] { "Id" },
+            ConfigurationSource.Convention
+        );
 
         Assert.NotNull(indexBuilder.HasFilter("Splew"));
         Assert.Equal("Splew", indexBuilder.Metadata.GetFilter());
@@ -401,18 +414,13 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .HasIndex(e => e.Id);
+        modelBuilder.Entity<Customer>().HasIndex(e => e.Id);
 
         var index = modelBuilder.Model.FindEntityType(typeof(Customer)).GetIndexes().Single();
 
         Assert.Equal("IX_Customer_Id", index.GetDatabaseName());
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Id)
-            .HasColumnName("Eendax");
+        modelBuilder.Entity<Customer>().Property(e => e.Id).HasColumnName("Eendax");
 
         Assert.Equal("IX_Customer_Eendax", index.GetDatabaseName());
     }
@@ -422,10 +430,7 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .HasIndex(e => e.Id)
-            .HasDatabaseName("Eeeendeeex");
+        modelBuilder.Entity<Customer>().HasIndex(e => e.Id).HasDatabaseName("Eeeendeeex");
 
         var index = modelBuilder.Model.FindEntityType(typeof(Customer)).GetIndexes().Single();
 
@@ -571,14 +576,18 @@ public class RelationalBuilderExtensionsTest
         derivedBuilder.HasBaseType((EntityType)null, ConfigurationSource.DataAnnotation);
 
         Assert.NotNull(
-            derivedBuilder.HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
-                .HasName("CK_Splow", fromDataAnnotation: true));
+            derivedBuilder
+                .HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
+                .HasName("CK_Splow", fromDataAnnotation: true)
+        );
         Assert.Equal("Splew", derivedEntityType.GetCheckConstraints().Single().ModelName);
         Assert.Equal("s < p", derivedEntityType.GetCheckConstraints().Single().Sql);
         Assert.Equal("CK_Splow", derivedEntityType.GetCheckConstraints().Single().Name);
 
         Assert.True(derivedBuilder.CanHaveCheckConstraint("Splew", "s < p"));
-        Assert.True(derivedBuilder.CanHaveCheckConstraint("Splew", "s > p", fromDataAnnotation: true));
+        Assert.True(
+            derivedBuilder.CanHaveCheckConstraint("Splew", "s > p", fromDataAnnotation: true)
+        );
         Assert.False(derivedBuilder.CanHaveCheckConstraint("Splew", "s > p"));
         Assert.True(derivedBuilder.CanHaveCheckConstraint("Splot", "s > p"));
 
@@ -591,22 +600,34 @@ public class RelationalBuilderExtensionsTest
         Assert.Empty(baseEntityType.GetCheckConstraints());
 
         Assert.NotNull(
-            baseBuilder.HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
-                .HasName("CK_Splot", fromDataAnnotation: true));
+            baseBuilder
+                .HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
+                .HasName("CK_Splot", fromDataAnnotation: true)
+        );
         Assert.Equal("Splew", baseEntityType.GetCheckConstraints().Single().ModelName);
         Assert.Equal("s < p", baseEntityType.GetCheckConstraints().Single().Sql);
         Assert.Equal("CK_Splot", baseEntityType.GetCheckConstraints().Single().Name);
 
-        Assert.NotNull(derivedBuilder.HasBaseType((EntityType)baseEntityType, ConfigurationSource.DataAnnotation));
+        Assert.NotNull(
+            derivedBuilder.HasBaseType(
+                (EntityType)baseEntityType,
+                ConfigurationSource.DataAnnotation
+            )
+        );
 
         Assert.Null(
-            baseBuilder.HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
-                .HasName("CK_Splew"));
+            baseBuilder
+                .HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
+                .HasName("CK_Splew")
+        );
         Assert.Equal("Splew", baseEntityType.GetCheckConstraints().Single().ModelName);
         Assert.Equal("s < p", baseEntityType.GetCheckConstraints().Single().Sql);
         Assert.Equal("CK_Splot", baseEntityType.GetCheckConstraints().Single().Name);
         Assert.Empty(derivedEntityType.GetDeclaredCheckConstraints());
-        Assert.Same(baseEntityType.GetCheckConstraints().Single(), derivedEntityType.GetCheckConstraints().Single());
+        Assert.Same(
+            baseEntityType.GetCheckConstraints().Single(),
+            derivedEntityType.GetCheckConstraints().Single()
+        );
     }
 
     [ConditionalFact]
@@ -615,12 +636,16 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateBuilder();
 
         var derivedBuilder = modelBuilder.Entity(typeof(Splow), ConfigurationSource.Convention);
-        Assert.NotNull(derivedBuilder.HasBaseType((string)null, ConfigurationSource.DataAnnotation));
+        Assert.NotNull(
+            derivedBuilder.HasBaseType((string)null, ConfigurationSource.DataAnnotation)
+        );
         IReadOnlyEntityType derivedEntityType = derivedBuilder.Metadata;
 
         Assert.NotNull(
-            derivedBuilder.HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
-                .HasName("CK_Splow", fromDataAnnotation: true));
+            derivedBuilder
+                .HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
+                .HasName("CK_Splow", fromDataAnnotation: true)
+        );
         Assert.Equal("Splew", derivedEntityType.GetCheckConstraints().Single().ModelName);
         Assert.Equal("s < p", derivedEntityType.GetCheckConstraints().Single().Sql);
         Assert.Equal("CK_Splow", derivedEntityType.GetCheckConstraints().Single().Name);
@@ -630,22 +655,34 @@ public class RelationalBuilderExtensionsTest
         Assert.Null(derivedEntityType.BaseType);
 
         Assert.NotNull(
-            baseBuilder.HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
-                .HasName("CK_Splot", fromDataAnnotation: true));
+            baseBuilder
+                .HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
+                .HasName("CK_Splot", fromDataAnnotation: true)
+        );
         Assert.Equal("Splew", baseEntityType.GetCheckConstraints().Single().ModelName);
         Assert.Equal("s < p", baseEntityType.GetCheckConstraints().Single().Sql);
         Assert.Equal("CK_Splot", baseEntityType.GetCheckConstraints().Single().Name);
 
-        Assert.NotNull(derivedBuilder.HasBaseType((EntityType)baseEntityType, ConfigurationSource.DataAnnotation));
+        Assert.NotNull(
+            derivedBuilder.HasBaseType(
+                (EntityType)baseEntityType,
+                ConfigurationSource.DataAnnotation
+            )
+        );
 
         Assert.Null(
-            baseBuilder.HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
-                .HasName("CK_Splew"));
+            baseBuilder
+                .HasCheckConstraint("Splew", "s < p", fromDataAnnotation: true)
+                .HasName("CK_Splew")
+        );
         Assert.Equal("Splew", baseEntityType.GetCheckConstraints().Single().ModelName);
         Assert.Equal("s < p", baseEntityType.GetCheckConstraints().Single().Sql);
         Assert.Equal("CK_Splot", baseEntityType.GetCheckConstraints().Single().Name);
         Assert.Empty(derivedEntityType.GetDeclaredCheckConstraints());
-        Assert.Same(baseEntityType.GetCheckConstraints().Single(), derivedEntityType.GetCheckConstraints().Single());
+        Assert.Same(
+            baseEntityType.GetCheckConstraints().Single(),
+            derivedEntityType.GetCheckConstraints().Single()
+        );
     }
 
     [ConditionalFact]
@@ -654,9 +691,7 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
         var entityType = modelBuilder.Entity<Customer>().Metadata;
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToTable(tb => tb.HasTrigger("Customer_Trigger"));
+        modelBuilder.Entity<Customer>().ToTable(tb => tb.HasTrigger("Customer_Trigger"));
 
         var trigger = entityType.FindDeclaredTrigger("Customer_Trigger");
 
@@ -729,7 +764,10 @@ public class RelationalBuilderExtensionsTest
         Assert.Equal("Name", entityType.FindDiscriminatorProperty().Name);
         Assert.Equal(typeof(string), entityType.FindDiscriminatorProperty().ClrType);
         Assert.Equal("1", entityType.GetDiscriminatorValue());
-        Assert.Equal("2", modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue());
+        Assert.Equal(
+            "2",
+            modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue()
+        );
     }
 
     [ConditionalFact]
@@ -737,10 +775,7 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .HasDiscriminator(b => b.Name)
-            .HasValue("1");
+        modelBuilder.Entity<Customer>().HasDiscriminator(b => b.Name).HasValue("1");
 
         modelBuilder
             .Entity<SpecialCustomer>()
@@ -752,7 +787,10 @@ public class RelationalBuilderExtensionsTest
         Assert.Equal("Name", entityType.FindDiscriminatorProperty().Name);
         Assert.Equal(typeof(string), entityType.FindDiscriminatorProperty().ClrType);
         Assert.Equal("1", entityType.GetDiscriminatorValue());
-        Assert.Equal("2", modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue());
+        Assert.Equal(
+            "2",
+            modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue()
+        );
     }
 
     [ConditionalFact]
@@ -770,7 +808,10 @@ public class RelationalBuilderExtensionsTest
         Assert.Equal("Name", entityType.FindDiscriminatorProperty().Name);
         Assert.Equal(typeof(string), entityType.FindDiscriminatorProperty().ClrType);
         Assert.Equal("1", entityType.GetDiscriminatorValue());
-        Assert.Equal("2", modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue());
+        Assert.Equal(
+            "2",
+            modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue()
+        );
     }
 
     [ConditionalFact]
@@ -778,10 +819,7 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .HasDiscriminator<string>("Name")
-            .HasValue("1");
+        modelBuilder.Entity<Customer>().HasDiscriminator<string>("Name").HasValue("1");
 
         modelBuilder
             .Entity<SpecialCustomer>()
@@ -793,7 +831,10 @@ public class RelationalBuilderExtensionsTest
         Assert.Equal("Name", entityType.FindDiscriminatorProperty().Name);
         Assert.Equal(typeof(string), entityType.FindDiscriminatorProperty().ClrType);
         Assert.Equal("1", entityType.GetDiscriminatorValue());
-        Assert.Equal("2", modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue());
+        Assert.Equal(
+            "2",
+            modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue()
+        );
     }
 
     [ConditionalFact]
@@ -811,7 +852,10 @@ public class RelationalBuilderExtensionsTest
         Assert.Equal("Name", entityType.FindDiscriminatorProperty().Name);
         Assert.Equal(typeof(string), entityType.FindDiscriminatorProperty().ClrType);
         Assert.Equal("1", entityType.GetDiscriminatorValue());
-        Assert.Equal("2", modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue());
+        Assert.Equal(
+            "2",
+            modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue()
+        );
     }
 
     [ConditionalFact]
@@ -834,7 +878,10 @@ public class RelationalBuilderExtensionsTest
         Assert.Equal("Name", entityType.FindDiscriminatorProperty().Name);
         Assert.Equal(typeof(string), entityType.FindDiscriminatorProperty().ClrType);
         Assert.Equal("1", entityType.GetDiscriminatorValue());
-        Assert.Equal("2", modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue());
+        Assert.Equal(
+            "2",
+            modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue()
+        );
     }
 
     [ConditionalFact]
@@ -852,7 +899,10 @@ public class RelationalBuilderExtensionsTest
         Assert.Equal("Name", entityType.FindDiscriminatorProperty().Name);
         Assert.Equal(typeof(string), entityType.FindDiscriminatorProperty().ClrType);
         Assert.Equal("1", entityType.GetDiscriminatorValue());
-        Assert.Equal("2", modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue());
+        Assert.Equal(
+            "2",
+            modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue()
+        );
     }
 
     [ConditionalFact]
@@ -870,7 +920,10 @@ public class RelationalBuilderExtensionsTest
         Assert.Equal("Discriminator", entityType.FindDiscriminatorProperty().Name);
         Assert.Equal(typeof(string), entityType.FindDiscriminatorProperty().ClrType);
         Assert.Equal("1", entityType.GetDiscriminatorValue());
-        Assert.Equal("2", modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue());
+        Assert.Equal(
+            "2",
+            modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue()
+        );
     }
 
     [ConditionalFact]
@@ -878,21 +931,18 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity(typeof(Customer))
-            .HasDiscriminator()
-            .HasValue("1");
+        modelBuilder.Entity(typeof(Customer)).HasDiscriminator().HasValue("1");
 
-        modelBuilder
-            .Entity(typeof(SpecialCustomer))
-            .HasDiscriminator()
-            .HasValue("2");
+        modelBuilder.Entity(typeof(SpecialCustomer)).HasDiscriminator().HasValue("2");
 
         var entityType = modelBuilder.Model.FindEntityType(typeof(Customer));
         Assert.Equal("Discriminator", entityType.FindDiscriminatorProperty().Name);
         Assert.Equal(typeof(string), entityType.FindDiscriminatorProperty().ClrType);
         Assert.Equal("1", entityType.GetDiscriminatorValue());
-        Assert.Equal("2", modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue());
+        Assert.Equal(
+            "2",
+            modelBuilder.Model.FindEntityType(typeof(SpecialCustomer)).GetDiscriminatorValue()
+        );
     }
 
     [ConditionalFact]
@@ -912,9 +962,7 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToTable("Customizer");
+        modelBuilder.Entity<Customer>().ToTable("Customizer");
 
         var entityType = modelBuilder.Model.FindEntityType(typeof(Customer));
 
@@ -936,9 +984,7 @@ public class RelationalBuilderExtensionsTest
 
         modelBuilder.HasDefaultSchema("db0");
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToTable("Customizer", "db1");
+        modelBuilder.Entity<Customer>().ToTable("Customizer", "db1");
 
         var entityType = modelBuilder.Model.FindEntityType(typeof(Customer));
 
@@ -1061,15 +1107,13 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .HasSequence<int>(
-                "Snook", b =>
-                {
-                    b.IncrementsBy(11)
-                        .StartsAt(1729)
-                        .HasMin(111)
-                        .HasMax(2222);
-                });
+        modelBuilder.HasSequence<int>(
+            "Snook",
+            b =>
+            {
+                b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222);
+            }
+        );
 
         var sequence = modelBuilder.Model.FindSequence("Snook");
 
@@ -1081,15 +1125,14 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .HasSequence(
-                typeof(int), "Snook", b =>
-                {
-                    b.IncrementsBy(11)
-                        .StartsAt(1729)
-                        .HasMin(111)
-                        .HasMax(2222);
-                });
+        modelBuilder.HasSequence(
+            typeof(int),
+            "Snook",
+            b =>
+            {
+                b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222);
+            }
+        );
 
         var sequence = modelBuilder.Model.FindSequence("Snook");
 
@@ -1146,8 +1189,11 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .HasSequence<int>("Snook", "Tasty", b => b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222));
+        modelBuilder.HasSequence<int>(
+            "Snook",
+            "Tasty",
+            b => b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
+        );
 
         var sequence = modelBuilder.Model.FindSequence("Snook", "Tasty");
 
@@ -1159,8 +1205,12 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .HasSequence(typeof(int), "Snook", "Tasty", b => b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222));
+        modelBuilder.HasSequence(
+            typeof(int),
+            "Snook",
+            "Tasty",
+            b => b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
+        );
 
         var sequence = modelBuilder.Model.FindSequence("Snook", "Tasty");
 
@@ -1187,7 +1237,9 @@ public class RelationalBuilderExtensionsTest
     public void Can_create_dbFunction()
     {
         var modelBuilder = CreateConventionModelBuilder();
-        var testMethod = typeof(TestDbFunctions).GetTypeInfo().GetDeclaredMethod(nameof(TestDbFunctions.MethodA));
+        var testMethod = typeof(TestDbFunctions)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(TestDbFunctions.MethodA));
         modelBuilder.HasDbFunction(testMethod);
 
         var dbFunc = modelBuilder.Model.FindDbFunction(testMethod) as DbFunction;
@@ -1202,15 +1254,9 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        AssertIsGeneric(
-            modelBuilder
-                .Entity<Customer>()
-                .ToTable("Will"));
+        AssertIsGeneric(modelBuilder.Entity<Customer>().ToTable("Will"));
 
-        AssertIsGeneric(
-            modelBuilder
-                .Entity<Customer>()
-                .ToTable("Jay", "Simon"));
+        AssertIsGeneric(modelBuilder.Entity<Customer>().ToTable("Jay", "Simon"));
     }
 
     [ConditionalFact]
@@ -1218,13 +1264,9 @@ public class RelationalBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity(typeof(Customer))
-            .ToTable("Will");
+        modelBuilder.Entity(typeof(Customer)).ToTable("Will");
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToTable("Jay", "Simon");
+        modelBuilder.Entity<Customer>().ToTable("Jay", "Simon");
     }
 
     [ConditionalFact]
@@ -1233,34 +1275,22 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         AssertIsGeneric(
-            modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .HasColumnName("Will"));
+            modelBuilder.Entity<Customer>().Property(e => e.Name).HasColumnName("Will")
+        );
+
+        AssertIsGeneric(modelBuilder.Entity<Customer>().Property(e => e.Name).HasColumnType("Jay"));
 
         AssertIsGeneric(
-            modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .HasColumnType("Jay"));
+            modelBuilder.Entity<Customer>().Property(e => e.Name).HasDefaultValueSql("Simon")
+        );
 
         AssertIsGeneric(
-            modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .HasDefaultValueSql("Simon"));
+            modelBuilder.Entity<Customer>().Property(e => e.Name).HasComputedColumnSql("Simon")
+        );
 
         AssertIsGeneric(
-            modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .HasComputedColumnSql("Simon"));
-
-        AssertIsGeneric(
-            modelBuilder
-                .Entity<Customer>()
-                .Property(e => e.Name)
-                .HasDefaultValue("Neil"));
+            modelBuilder.Entity<Customer>().Property(e => e.Name).HasDefaultValue("Neil")
+        );
     }
 
     [ConditionalFact]
@@ -1273,15 +1303,9 @@ public class RelationalBuilderExtensionsTest
             .Property(typeof(string), "Name")
             .HasColumnName("Will");
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(typeof(string), "Name")
-            .HasColumnName("Jay");
+        modelBuilder.Entity<Customer>().Property(typeof(string), "Name").HasColumnName("Jay");
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(typeof(string), "Name")
-            .HasColumnType("Simon");
+        modelBuilder.Entity<Customer>().Property(typeof(string), "Name").HasColumnType("Simon");
 
         modelBuilder
             .Entity(typeof(Customer))
@@ -1308,10 +1332,7 @@ public class RelationalBuilderExtensionsTest
             .Property(typeof(string), "Name")
             .HasComputedColumnSql("Neil");
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(typeof(string), "Name")
-            .HasDefaultValue("Simon");
+        modelBuilder.Entity<Customer>().Property(typeof(string), "Name").HasDefaultValue("Simon");
 
         modelBuilder
             .Entity(typeof(Customer))
@@ -1368,23 +1389,27 @@ public class RelationalBuilderExtensionsTest
 
         AssertIsGeneric(
             modelBuilder
-                .Entity<Customer>().HasMany(e => e.Orders)
+                .Entity<Customer>()
+                .HasMany(e => e.Orders)
                 .WithOne(e => e.Customer)
-                .HasConstraintName("Will"));
+                .HasConstraintName("Will")
+        );
 
         AssertIsGeneric(
             modelBuilder
                 .Entity<Order>()
                 .HasOne(e => e.Customer)
                 .WithMany(e => e.Orders)
-                .HasConstraintName("Jay"));
+                .HasConstraintName("Jay")
+        );
 
         AssertIsGeneric(
             modelBuilder
                 .Entity<Order>()
                 .HasOne(e => e.Details)
                 .WithOne(e => e.Order)
-                .HasConstraintName("Simon"));
+                .HasConstraintName("Simon")
+        );
     }
 
     [ConditionalFact]
@@ -1393,7 +1418,8 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder
-            .Entity<Customer>().HasMany(typeof(Order), "Orders")
+            .Entity<Customer>()
+            .HasMany(typeof(Order), "Orders")
             .WithOne("Customer")
             .HasConstraintName("Will");
 
@@ -1416,7 +1442,11 @@ public class RelationalBuilderExtensionsTest
         var modelBuilder = CreateBuilder();
         var entityTypeBuilder = modelBuilder.Entity(typeof(Splot), ConfigurationSource.Convention);
         entityTypeBuilder.Property(typeof(int), "Id", ConfigurationSource.Convention);
-        var relationshipBuilder = entityTypeBuilder.HasRelationship("Splot", new[] { "Id" }, ConfigurationSource.Convention);
+        var relationshipBuilder = entityTypeBuilder.HasRelationship(
+            "Splot",
+            new[] { "Id" },
+            ConfigurationSource.Convention
+        );
 
         Assert.NotNull(relationshipBuilder.HasConstraintName("Splew"));
         Assert.Equal("Splew", relationshipBuilder.Metadata.GetConstraintName());
@@ -1428,27 +1458,19 @@ public class RelationalBuilderExtensionsTest
         Assert.Equal("Splow", relationshipBuilder.Metadata.GetConstraintName());
     }
 
-    private void AssertIsGeneric(EntityTypeBuilder<Customer> _)
-    {
-    }
+    private void AssertIsGeneric(EntityTypeBuilder<Customer> _) { }
 
-    private void AssertIsGeneric(PropertyBuilder<string> _)
-    {
-    }
+    private void AssertIsGeneric(PropertyBuilder<string> _) { }
 
-    private void AssertIsGeneric(ReferenceCollectionBuilder<Customer, Order> _)
-    {
-    }
+    private void AssertIsGeneric(ReferenceCollectionBuilder<Customer, Order> _) { }
 
-    private void AssertIsGeneric(ReferenceReferenceBuilder<Order, OrderDetails> _)
-    {
-    }
+    private void AssertIsGeneric(ReferenceReferenceBuilder<Order, OrderDetails> _) { }
 
-    protected virtual ModelBuilder CreateConventionModelBuilder()
-        => FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
+    protected virtual ModelBuilder CreateConventionModelBuilder() =>
+        FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
 
-    private InternalModelBuilder CreateBuilder()
-        => (InternalModelBuilder)CreateConventionModelBuilder().GetInfrastructure();
+    private InternalModelBuilder CreateBuilder() =>
+        (InternalModelBuilder)CreateConventionModelBuilder().GetInfrastructure();
 
     private static void ValidateSchemaNamedSpecificSequence(IReadOnlySequence sequence)
     {
@@ -1465,7 +1487,7 @@ public class RelationalBuilderExtensionsTest
     {
         Sun,
         Mon,
-        Tue
+        Tue,
     }
 
     private class Customer
@@ -1478,9 +1500,7 @@ public class RelationalBuilderExtensionsTest
         public IEnumerable<Order> Orders { get; set; }
     }
 
-    private class SpecialCustomer : Customer
-    {
-    }
+    private class SpecialCustomer : Customer { }
 
     private class Order
     {
@@ -1507,11 +1527,7 @@ public class RelationalBuilderExtensionsTest
         public int? Splowed { get; set; }
     }
 
-    private class Splow : Splot
-    {
-    }
+    private class Splow : Splot { }
 
-    private class Splod : Splow
-    {
-    }
+    private class Splod : Splow { }
 }

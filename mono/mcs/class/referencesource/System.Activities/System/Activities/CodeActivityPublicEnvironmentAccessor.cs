@@ -5,9 +5,9 @@
 namespace System.Activities
 {
     using System;
-    using System.Runtime;
-    using System.Diagnostics;
     using System.Activities.Expressions;
+    using System.Diagnostics;
+    using System.Runtime;
 
     public struct CodeActivityPublicEnvironmentAccessor
     {
@@ -22,33 +22,45 @@ namespace System.Activities
         public static CodeActivityPublicEnvironmentAccessor Create(CodeActivityMetadata metadata)
         {
             metadata.ThrowIfDisposed();
-            
+
             AssertIsCodeActivity(metadata.CurrentActivity);
 
-            CodeActivityPublicEnvironmentAccessor result = new CodeActivityPublicEnvironmentAccessor();
+            CodeActivityPublicEnvironmentAccessor result =
+                new CodeActivityPublicEnvironmentAccessor();
             result.metadata = metadata;
             return result;
         }
 
-        internal static CodeActivityPublicEnvironmentAccessor CreateWithoutArgument(CodeActivityMetadata metadata)
+        internal static CodeActivityPublicEnvironmentAccessor CreateWithoutArgument(
+            CodeActivityMetadata metadata
+        )
         {
             CodeActivityPublicEnvironmentAccessor toReturn = Create(metadata);
             toReturn.withoutArgument = true;
             return toReturn;
         }
 
-        public static bool operator ==(CodeActivityPublicEnvironmentAccessor left, CodeActivityPublicEnvironmentAccessor right)
+        public static bool operator ==(
+            CodeActivityPublicEnvironmentAccessor left,
+            CodeActivityPublicEnvironmentAccessor right
+        )
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(CodeActivityPublicEnvironmentAccessor left, CodeActivityPublicEnvironmentAccessor right)
+        public static bool operator !=(
+            CodeActivityPublicEnvironmentAccessor left,
+            CodeActivityPublicEnvironmentAccessor right
+        )
         {
             return !left.Equals(right);
         }
 
-        public bool TryGetAccessToPublicLocation(LocationReference publicLocation,
-            ArgumentDirection accessDirection, out LocationReference equivalentLocation)
+        public bool TryGetAccessToPublicLocation(
+            LocationReference publicLocation,
+            ArgumentDirection accessDirection,
+            out LocationReference equivalentLocation
+        )
         {
             if (publicLocation == null)
             {
@@ -56,11 +68,18 @@ namespace System.Activities
             }
             ThrowIfUninitialized();
 
-            return TryGetAccessToPublicLocation(publicLocation, accessDirection, false, out equivalentLocation);
+            return TryGetAccessToPublicLocation(
+                publicLocation,
+                accessDirection,
+                false,
+                out equivalentLocation
+            );
         }
 
-        public bool TryGetReferenceToPublicLocation(LocationReference publicReference,
-            out LocationReference equivalentReference)
+        public bool TryGetReferenceToPublicLocation(
+            LocationReference publicReference,
+            out LocationReference equivalentReference
+        )
         {
             if (publicReference == null)
             {
@@ -78,7 +97,8 @@ namespace System.Activities
                 return false;
             }
 
-            CodeActivityPublicEnvironmentAccessor other = (CodeActivityPublicEnvironmentAccessor)obj;
+            CodeActivityPublicEnvironmentAccessor other =
+                (CodeActivityPublicEnvironmentAccessor)obj;
             return other.metadata == this.metadata;
         }
 
@@ -87,22 +107,33 @@ namespace System.Activities
             return this.metadata.GetHashCode();
         }
 
-        // In 4.0 the expression type for publicly inspectable auto-generated arguments was 
+        // In 4.0 the expression type for publicly inspectable auto-generated arguments was
         // LocationReferenceValue<T>, whether the argument was actually used as an L-Value or R-Value.
         // We keep that for back-compat (useLocationReferenceValue == true), and only use the new
         // EnvironmentLocationValue/Reference classes for new activities.
-        internal bool TryGetAccessToPublicLocation(LocationReference publicLocation,
-            ArgumentDirection accessDirection, bool useLocationReferenceValue, out LocationReference equivalentLocation)
+        internal bool TryGetAccessToPublicLocation(
+            LocationReference publicLocation,
+            ArgumentDirection accessDirection,
+            bool useLocationReferenceValue,
+            out LocationReference equivalentLocation
+        )
         {
-            Fx.Assert(!useLocationReferenceValue || this.ActivityMetadata.CurrentActivity.UseOldFastPath, "useLocationReferenceValue should only be used for back-compat");
+            Fx.Assert(
+                !useLocationReferenceValue || this.ActivityMetadata.CurrentActivity.UseOldFastPath,
+                "useLocationReferenceValue should only be used for back-compat"
+            );
 
             if (this.metadata.Environment.IsVisible(publicLocation))
             {
                 if (!this.withoutArgument)
                 {
                     CreateArgument(publicLocation, accessDirection, useLocationReferenceValue);
-                }                
-                equivalentLocation = new InlinedLocationReference(publicLocation, this.metadata.CurrentActivity, accessDirection);
+                }
+                equivalentLocation = new InlinedLocationReference(
+                    publicLocation,
+                    this.metadata.CurrentActivity,
+                    accessDirection
+                );
                 return true;
             }
 
@@ -110,10 +141,16 @@ namespace System.Activities
             return false;
         }
 
-        internal bool TryGetReferenceToPublicLocation(LocationReference publicReference,
-            bool useLocationReferenceValue, out LocationReference equivalentReference)
+        internal bool TryGetReferenceToPublicLocation(
+            LocationReference publicReference,
+            bool useLocationReferenceValue,
+            out LocationReference equivalentReference
+        )
         {
-            Fx.Assert(!useLocationReferenceValue || this.ActivityMetadata.CurrentActivity.UseOldFastPath, "useLocationReferenceValue should only be used for back-compat");
+            Fx.Assert(
+                !useLocationReferenceValue || this.ActivityMetadata.CurrentActivity.UseOldFastPath,
+                "useLocationReferenceValue should only be used for back-compat"
+            );
 
             if (this.metadata.Environment.IsVisible(publicReference))
             {
@@ -121,7 +158,10 @@ namespace System.Activities
                 {
                     CreateLocationArgument(publicReference, useLocationReferenceValue);
                 }
-                equivalentReference = new InlinedLocationReference(publicReference, this.metadata.CurrentActivity);
+                equivalentReference = new InlinedLocationReference(
+                    publicReference,
+                    this.metadata.CurrentActivity
+                );
                 return true;
             }
 
@@ -129,23 +169,43 @@ namespace System.Activities
             return false;
         }
 
-        internal void CreateArgument(LocationReference sourceReference, ArgumentDirection accessDirection, bool useLocationReferenceValue = false)
+        internal void CreateArgument(
+            LocationReference sourceReference,
+            ArgumentDirection accessDirection,
+            bool useLocationReferenceValue = false
+        )
         {
-            ActivityWithResult expression = ActivityUtilities.CreateLocationAccessExpression(sourceReference, accessDirection != ArgumentDirection.In, useLocationReferenceValue);
+            ActivityWithResult expression = ActivityUtilities.CreateLocationAccessExpression(
+                sourceReference,
+                accessDirection != ArgumentDirection.In,
+                useLocationReferenceValue
+            );
             AddGeneratedArgument(sourceReference.Type, accessDirection, expression);
         }
 
-        internal void CreateLocationArgument(LocationReference sourceReference, bool useLocationReferenceValue = false)
+        internal void CreateLocationArgument(
+            LocationReference sourceReference,
+            bool useLocationReferenceValue = false
+        )
         {
-            ActivityWithResult expression = ActivityUtilities.CreateLocationAccessExpression(sourceReference, true, useLocationReferenceValue);
+            ActivityWithResult expression = ActivityUtilities.CreateLocationAccessExpression(
+                sourceReference,
+                true,
+                useLocationReferenceValue
+            );
             AddGeneratedArgument(expression.ResultType, ArgumentDirection.In, expression);
         }
 
-        void AddGeneratedArgument(Type argumentType, ArgumentDirection direction, ActivityWithResult expression)
+        void AddGeneratedArgument(
+            Type argumentType,
+            ArgumentDirection direction,
+            ActivityWithResult expression
+        )
         {
             Argument argument = ActivityUtilities.CreateArgument(argumentType, direction);
             argument.Expression = expression;
-            RuntimeArgument runtimeArgument = this.metadata.CurrentActivity.AddTempAutoGeneratedArgument(argumentType, direction);
+            RuntimeArgument runtimeArgument =
+                this.metadata.CurrentActivity.AddTempAutoGeneratedArgument(argumentType, direction);
             Argument.TryBind(argument, runtimeArgument, this.metadata.CurrentActivity);
         }
 
@@ -165,9 +225,18 @@ namespace System.Activities
             ActivityWithResult activityWithResult = activity as ActivityWithResult;
             if (activityWithResult != null)
             {
-                codeActivityOfTType = typeof(CodeActivity<>).MakeGenericType(activityWithResult.ResultType);
+                codeActivityOfTType = typeof(CodeActivity<>).MakeGenericType(
+                    activityWithResult.ResultType
+                );
             }
-            Fx.Assert(activity is CodeActivity || (codeActivityOfTType != null && codeActivityOfTType.IsAssignableFrom(activity.GetType())), "Expected CodeActivity or CodeActivity<T>");
+            Fx.Assert(
+                activity is CodeActivity
+                    || (
+                        codeActivityOfTType != null
+                        && codeActivityOfTType.IsAssignableFrom(activity.GetType())
+                    ),
+                "Expected CodeActivity or CodeActivity<T>"
+            );
         }
     }
 }

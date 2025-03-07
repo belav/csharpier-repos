@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class SetupCollection : ISetupList
@@ -29,7 +28,6 @@ namespace Moq
         sealed class SetupCollection : ISetupList
     */
     sealed class SetupCollection : ISetupList
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private List<Setup> setups;
@@ -129,7 +127,8 @@ namespace Moq
             for (int i = this.setups.Count - 1; i >= 0; --i)
             {
                 var setup = this.setups[i];
-                if (setup.IsOverridden || setup.IsConditional) continue;
+                if (setup.IsOverridden || setup.IsConditional)
+                    continue;
 
                 if (!visitedSetups.Add(setup.Expectation))
                 {
@@ -158,7 +157,8 @@ namespace Moq
                 for (int i = 0; i < this.setups.Count; ++i)
                 {
                     var setup = this.setups[i];
-                    if (setup.IsOverridden) continue;
+                    if (setup.IsOverridden)
+                        continue;
 
                     if (predicate(setup))
                     {
@@ -184,7 +184,8 @@ namespace Moq
                 for (int i = this.setups.Count - 1; i >= 0; --i)
                 {
                     var setup = this.setups[i];
-                    if (setup.IsOverridden) continue;
+                    if (setup.IsOverridden)
+                        continue;
 
                     if (predicate(setup))
                     {

@@ -21,15 +21,14 @@ public static partial class WebAssemblyHotReload
     private const string BlazorHotReloadModuleName = "blazor-hotreload";
 
     private static HotReloadAgent? _hotReloadAgent;
-    private static readonly UpdateDelta[] _updateDeltas = new[]
-    {
-        new UpdateDelta(),
-    };
+    private static readonly UpdateDelta[] _updateDeltas = new[] { new UpdateDelta() };
 
     internal static async Task InitializeAsync()
     {
-        if (Environment.GetEnvironmentVariable("__ASPNETCORE_BROWSER_TOOLS") == "true" &&
-            OperatingSystem.IsBrowser())
+        if (
+            Environment.GetEnvironmentVariable("__ASPNETCORE_BROWSER_TOOLS") == "true"
+            && OperatingSystem.IsBrowser()
+        )
         {
             // Attempt to read previously applied hot reload deltas if the ASP.NET Core browser tools are available (indicated by the presence of the Environment variable).
             // The agent is injected in to the hosted app and can serve this script that can provide results from local-storage.
@@ -43,11 +42,20 @@ public static partial class WebAssemblyHotReload
     /// For framework use only.
     /// </summary>
     [JSInvokable(nameof(ApplyHotReloadDelta))]
-    public static void ApplyHotReloadDelta(string moduleIdString, byte[] metadataDelta, byte[] ilDelta, byte[] pdbBytes)
+    public static void ApplyHotReloadDelta(
+        string moduleIdString,
+        byte[] metadataDelta,
+        byte[] ilDelta,
+        byte[] pdbBytes
+    )
     {
         // Analyzer has a bug where it doesn't handle ConditionalAttribute: https://github.com/dotnet/roslyn/issues/63464
 #pragma warning disable IDE0200 // Remove unnecessary lambda expression
-        Interlocked.CompareExchange(ref _hotReloadAgent, new HotReloadAgent(m => Debug.WriteLine(m)), null);
+        Interlocked.CompareExchange(
+            ref _hotReloadAgent,
+            new HotReloadAgent(m => Debug.WriteLine(m)),
+            null
+        );
 #pragma warning restore IDE0200 // Remove unnecessary lambda expression
 
         var moduleId = Guid.Parse(moduleIdString, CultureInfo.InvariantCulture);
@@ -66,7 +74,11 @@ public static partial class WebAssemblyHotReload
     [JSInvokable(nameof(GetApplyUpdateCapabilities))]
     public static string GetApplyUpdateCapabilities()
     {
-        var method = typeof(System.Reflection.Metadata.MetadataUpdater).GetMethod("GetCapabilities", BindingFlags.NonPublic | BindingFlags.Static, Type.EmptyTypes);
+        var method = typeof(System.Reflection.Metadata.MetadataUpdater).GetMethod(
+            "GetCapabilities",
+            BindingFlags.NonPublic | BindingFlags.Static,
+            Type.EmptyTypes
+        );
         if (method is null)
         {
             return string.Empty;

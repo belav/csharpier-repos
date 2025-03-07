@@ -35,5 +35,5 @@ public enum AuthenticationSchemes
     /// <summary>
     /// Specifies Kerberos authentication.
     /// </summary>
-    Kerberos = 0x10
+    Kerberos = 0x10,
 }

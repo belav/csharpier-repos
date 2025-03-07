@@ -20,21 +20,36 @@ namespace System.Collections.Immutable.Tests
         /// <param name="objectUnderTest">An instance of the collection to test, which must have at least two elements.</param>
         /// <param name="additionalItem">A unique item that does not already exist in <paramref name="objectUnderTest" />.</param>
         /// <param name="equalsStructurally">A delegate that invokes the EqualsStructurally method.</param>
-        protected static void StructuralEqualityHelper<TCollection, TElement>(TCollection objectUnderTest, TElement additionalItem, Func<TCollection, IEnumerable<TElement>, bool> equalsStructurally)
+        protected static void StructuralEqualityHelper<TCollection, TElement>(
+            TCollection objectUnderTest,
+            TElement additionalItem,
+            Func<TCollection, IEnumerable<TElement>, bool> equalsStructurally
+        )
             where TCollection : class, IEnumerable<TElement>
         {
             Requires.NotNull(objectUnderTest, nameof(objectUnderTest));
-            Requires.Argument(objectUnderTest.Count() >= 2, nameof(objectUnderTest), "Collection must contain at least two elements.");
+            Requires.Argument(
+                objectUnderTest.Count() >= 2,
+                nameof(objectUnderTest),
+                "Collection must contain at least two elements."
+            );
             Requires.NotNull(equalsStructurally, nameof(equalsStructurally));
 
             var structuralEquatableUnderTest = objectUnderTest as IStructuralEquatable;
 
             List<TElement> equivalentSequence = objectUnderTest.ToList();
-            IEnumerable<TElement> shorterSequence = equivalentSequence.Take(equivalentSequence.Count() - 1);
-            IEnumerable<TElement> longerSequence = equivalentSequence.Concat(new[] { additionalItem });
-            IEnumerable<TElement> nonUniqueSubsetSequenceOfSameLength = shorterSequence.Concat(shorterSequence.Take(1));
+            IEnumerable<TElement> shorterSequence = equivalentSequence.Take(
+                equivalentSequence.Count() - 1
+            );
+            IEnumerable<TElement> longerSequence = equivalentSequence.Concat(
+                new[] { additionalItem }
+            );
+            IEnumerable<TElement> nonUniqueSubsetSequenceOfSameLength = shorterSequence.Concat(
+                shorterSequence.Take(1)
+            );
 
-            var testValues = new IEnumerable<TElement>[] {
+            var testValues = new IEnumerable<TElement>[]
+            {
                 objectUnderTest,
                 null,
                 Enumerable.Empty<TElement>(),
@@ -46,7 +61,8 @@ namespace System.Collections.Immutable.Tests
 
             foreach (IEnumerable<TElement> value in testValues)
             {
-                bool expectedResult = value != null && Enumerable.SequenceEqual(objectUnderTest, value);
+                bool expectedResult =
+                    value != null && Enumerable.SequenceEqual(objectUnderTest, value);
 
                 if (structuralEquatableUnderTest != null)
                 {
@@ -56,7 +72,11 @@ namespace System.Collections.Immutable.Tests
                     {
                         Assert.Equal(
                             expectedResult,
-                            structuralEquatableUnderTest.Equals(new NonGenericEnumerableWrapper(value), null));
+                            structuralEquatableUnderTest.Equals(
+                                new NonGenericEnumerableWrapper(value),
+                                null
+                            )
+                        );
                     }
                 }
 

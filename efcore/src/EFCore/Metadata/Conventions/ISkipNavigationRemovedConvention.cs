@@ -20,5 +20,6 @@ public interface ISkipNavigationRemovedConvention : IConvention
     void ProcessSkipNavigationRemoved(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionSkipNavigation navigation,
-        IConventionContext<IConventionSkipNavigation> context);
+        IConventionContext<IConventionSkipNavigation> context
+    );
 }

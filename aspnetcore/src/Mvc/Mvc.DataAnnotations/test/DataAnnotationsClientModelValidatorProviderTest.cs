@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 public class DataAnnotationsClientModelValidatorProviderTest
 {
-    private readonly IModelMetadataProvider _metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
+    private readonly IModelMetadataProvider _metadataProvider =
+        TestModelMetadataProvider.CreateDefaultProvider();
 
     [Fact]
     public void CreateValidators_AddsRequiredAttribute_ForIsRequiredTrue()
@@ -19,13 +20,18 @@ public class DataAnnotationsClientModelValidatorProviderTest
         var provider = new DataAnnotationsClientModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
 
         var metadata = _metadataProvider.GetMetadataForProperty(
             typeof(DummyRequiredAttributeHelperClass),
-            nameof(DummyRequiredAttributeHelperClass.ValueTypeWithoutAttribute));
+            nameof(DummyRequiredAttributeHelperClass.ValueTypeWithoutAttribute)
+        );
 
-        var providerContext = new ClientValidatorProviderContext(metadata, GetValidatorItems(metadata));
+        var providerContext = new ClientValidatorProviderContext(
+            metadata,
+            GetValidatorItems(metadata)
+        );
 
         // Act
         provider.CreateValidators(providerContext);
@@ -42,17 +48,22 @@ public class DataAnnotationsClientModelValidatorProviderTest
         var provider = new DataAnnotationsClientModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
 
         var metadata = _metadataProvider.GetMetadataForProperty(
             typeof(DummyRequiredAttributeHelperClass),
-            nameof(DummyRequiredAttributeHelperClass.ValueTypeWithoutAttribute));
+            nameof(DummyRequiredAttributeHelperClass.ValueTypeWithoutAttribute)
+        );
 
         var items = GetValidatorItems(metadata);
         var expectedValidatorItem = new ClientValidatorItem
         {
-            Validator = new RequiredAttributeAdapter(new RequiredAttribute(), stringLocalizer: null),
-            IsReusable = true
+            Validator = new RequiredAttributeAdapter(
+                new RequiredAttribute(),
+                stringLocalizer: null
+            ),
+            IsReusable = true,
         };
         items.Add(expectedValidatorItem);
 
@@ -73,13 +84,18 @@ public class DataAnnotationsClientModelValidatorProviderTest
         var provider = new DataAnnotationsClientModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
 
         var metadata = _metadataProvider.GetMetadataForProperty(
             typeof(DummyRequiredAttributeHelperClass),
-            nameof(DummyRequiredAttributeHelperClass.ReferenceTypeWithoutAttribute));
+            nameof(DummyRequiredAttributeHelperClass.ReferenceTypeWithoutAttribute)
+        );
 
-        var providerContext = new ClientValidatorProviderContext(metadata, GetValidatorItems(metadata));
+        var providerContext = new ClientValidatorProviderContext(
+            metadata,
+            GetValidatorItems(metadata)
+        );
 
         // Act
         provider.CreateValidators(providerContext);
@@ -95,13 +111,18 @@ public class DataAnnotationsClientModelValidatorProviderTest
         var provider = new DataAnnotationsClientModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
 
         var metadata = _metadataProvider.GetMetadataForProperty(
             typeof(DummyRequiredAttributeHelperClass),
-            nameof(DummyRequiredAttributeHelperClass.WithAttribute));
+            nameof(DummyRequiredAttributeHelperClass.WithAttribute)
+        );
 
-        var providerContext = new ClientValidatorProviderContext(metadata, GetValidatorItems(metadata));
+        var providerContext = new ClientValidatorProviderContext(
+            metadata,
+            GetValidatorItems(metadata)
+        );
 
         // Act
         provider.CreateValidators(providerContext);
@@ -119,10 +140,16 @@ public class DataAnnotationsClientModelValidatorProviderTest
         var provider = new DataAnnotationsClientModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
-        var metadata = _metadataProvider.GetMetadataForType(typeof(DummyClassWithDummyValidationAttribute));
+            stringLocalizerFactory: null
+        );
+        var metadata = _metadataProvider.GetMetadataForType(
+            typeof(DummyClassWithDummyValidationAttribute)
+        );
 
-        var providerContext = new ClientValidatorProviderContext(metadata, GetValidatorItems(metadata));
+        var providerContext = new ClientValidatorProviderContext(
+            metadata,
+            GetValidatorItems(metadata)
+        );
 
         // Act
         provider.CreateValidators(providerContext);
@@ -137,14 +164,10 @@ public class DataAnnotationsClientModelValidatorProviderTest
         return metadata.ValidatorMetadata.Select(v => new ClientValidatorItem(v)).ToList();
     }
 
-    private class DummyValidationAttribute : ValidationAttribute
-    {
-    }
+    private class DummyValidationAttribute : ValidationAttribute { }
 
     [DummyValidation]
-    private class DummyClassWithDummyValidationAttribute
-    {
-    }
+    private class DummyClassWithDummyValidationAttribute { }
 
     private class DummyRequiredAttributeHelperClass
     {

@@ -5,7 +5,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-
 using Moq.Properties;
 
 namespace Moq
@@ -14,7 +13,6 @@ namespace Moq
     ///   Defines the number of invocations allowed by a mocked method.
     /// </summary>
     public readonly struct Times : IEquatable<Times>
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly int from;
@@ -51,7 +49,6 @@ namespace Moq
         readonly int from;
         readonly int to;
         readonly Kind kind;
-
 
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:

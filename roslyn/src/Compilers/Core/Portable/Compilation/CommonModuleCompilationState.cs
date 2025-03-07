@@ -30,12 +30,13 @@ namespace Microsoft.CodeAnalysis
         }
     }
 
-    internal class ModuleCompilationState<TNamedTypeSymbol, TMethodSymbol> : CommonModuleCompilationState
+    internal class ModuleCompilationState<TNamedTypeSymbol, TMethodSymbol>
+        : CommonModuleCompilationState
         where TNamedTypeSymbol : class, INamedTypeSymbolInternal
         where TMethodSymbol : class, IMethodSymbolInternal
     {
         /// <summary>
-        /// Maps an async/iterator method to the synthesized state machine type that implements the method. 
+        /// Maps an async/iterator method to the synthesized state machine type that implements the method.
         /// </summary>
         private Dictionary<TMethodSymbol, TNamedTypeSymbol>? _lazyStateMachineTypes;
 
@@ -45,7 +46,11 @@ namespace Microsoft.CodeAnalysis
 
             if (_lazyStateMachineTypes == null)
             {
-                Interlocked.CompareExchange(ref _lazyStateMachineTypes, new Dictionary<TMethodSymbol, TNamedTypeSymbol>(), null);
+                Interlocked.CompareExchange(
+                    ref _lazyStateMachineTypes,
+                    new Dictionary<TMethodSymbol, TNamedTypeSymbol>(),
+                    null
+                );
             }
 
             lock (_lazyStateMachineTypes)
@@ -54,12 +59,16 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal bool TryGetStateMachineType(TMethodSymbol method, [NotNullWhen(true)] out TNamedTypeSymbol? stateMachineType)
+        internal bool TryGetStateMachineType(
+            TMethodSymbol method,
+            [NotNullWhen(true)] out TNamedTypeSymbol? stateMachineType
+        )
         {
             Debug.Assert(Frozen);
 
             stateMachineType = null;
-            return _lazyStateMachineTypes != null && _lazyStateMachineTypes.TryGetValue(method, out stateMachineType);
+            return _lazyStateMachineTypes != null
+                && _lazyStateMachineTypes.TryGetValue(method, out stateMachineType);
         }
     }
 }

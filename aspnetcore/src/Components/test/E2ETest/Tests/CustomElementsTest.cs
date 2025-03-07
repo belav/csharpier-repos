@@ -24,10 +24,9 @@ public class CustomElementsTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public CustomElementsTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -75,31 +74,74 @@ public class CustomElementsTest : ServerTestBase<ToggleExecutionModeServerFixtur
             var customElement = app.FindElement(By.Id($"custom-element-{id}"));
 
             var expectedStringValue = $"Custom element {id} (Clicked {clickCount} times)";
-            Browser.Equal(expectedStringValue, () => customElement.FindElement(By.ClassName("string-param")).Text);
+            Browser.Equal(
+                expectedStringValue,
+                () => customElement.FindElement(By.ClassName("string-param")).Text
+            );
 
             var expectedBoolValue = clickCount % 2 == 0 ? bool.TrueString : bool.FalseString;
-            Browser.Equal(expectedBoolValue, () => customElement.FindElement(By.ClassName("bool-param")).Text);
+            Browser.Equal(
+                expectedBoolValue,
+                () => customElement.FindElement(By.ClassName("bool-param")).Text
+            );
 
             var expectedNullableBoolValue = doNullableParamsHaveValues ? expectedBoolValue : "null";
-            Browser.Equal(expectedNullableBoolValue, () => customElement.FindElement(By.ClassName("nullable-bool-param")).Text);
+            Browser.Equal(
+                expectedNullableBoolValue,
+                () => customElement.FindElement(By.ClassName("nullable-bool-param")).Text
+            );
 
             var expectedIntegerValue = clickCount.ToString(CultureInfo.InvariantCulture);
-            Browser.Equal(expectedIntegerValue, () => customElement.FindElement(By.ClassName("int-param")).Text);
-            Browser.Equal(expectedIntegerValue, () => customElement.FindElement(By.ClassName("long-param")).Text);
+            Browser.Equal(
+                expectedIntegerValue,
+                () => customElement.FindElement(By.ClassName("int-param")).Text
+            );
+            Browser.Equal(
+                expectedIntegerValue,
+                () => customElement.FindElement(By.ClassName("long-param")).Text
+            );
 
-            var expectedNullableIntegerValue = doNullableParamsHaveValues ? expectedIntegerValue : "null";
-            Browser.Equal(expectedNullableIntegerValue, () => customElement.FindElement(By.ClassName("nullable-int-param")).Text);
-            Browser.Equal(expectedNullableIntegerValue, () => customElement.FindElement(By.ClassName("nullable-long-param")).Text);
+            var expectedNullableIntegerValue = doNullableParamsHaveValues
+                ? expectedIntegerValue
+                : "null";
+            Browser.Equal(
+                expectedNullableIntegerValue,
+                () => customElement.FindElement(By.ClassName("nullable-int-param")).Text
+            );
+            Browser.Equal(
+                expectedNullableIntegerValue,
+                () => customElement.FindElement(By.ClassName("nullable-long-param")).Text
+            );
 
             var expectedFloatValue = expectedIntegerValue + ".5";
-            Browser.Equal(expectedFloatValue, () => customElement.FindElement(By.ClassName("float-param")).Text);
-            Browser.Equal(expectedFloatValue, () => customElement.FindElement(By.ClassName("double-param")).Text);
-            Browser.Equal(expectedFloatValue, () => customElement.FindElement(By.ClassName("decimal-param")).Text);
+            Browser.Equal(
+                expectedFloatValue,
+                () => customElement.FindElement(By.ClassName("float-param")).Text
+            );
+            Browser.Equal(
+                expectedFloatValue,
+                () => customElement.FindElement(By.ClassName("double-param")).Text
+            );
+            Browser.Equal(
+                expectedFloatValue,
+                () => customElement.FindElement(By.ClassName("decimal-param")).Text
+            );
 
-            var expectedNullableFloatValue = doNullableParamsHaveValues ? expectedFloatValue : "null";
-            Browser.Equal(expectedNullableFloatValue, () => customElement.FindElement(By.ClassName("nullable-float-param")).Text);
-            Browser.Equal(expectedNullableFloatValue, () => customElement.FindElement(By.ClassName("nullable-double-param")).Text);
-            Browser.Equal(expectedNullableFloatValue, () => customElement.FindElement(By.ClassName("nullable-decimal-param")).Text);
+            var expectedNullableFloatValue = doNullableParamsHaveValues
+                ? expectedFloatValue
+                : "null";
+            Browser.Equal(
+                expectedNullableFloatValue,
+                () => customElement.FindElement(By.ClassName("nullable-float-param")).Text
+            );
+            Browser.Equal(
+                expectedNullableFloatValue,
+                () => customElement.FindElement(By.ClassName("nullable-double-param")).Text
+            );
+            Browser.Equal(
+                expectedNullableFloatValue,
+                () => customElement.FindElement(By.ClassName("nullable-decimal-param")).Text
+            );
         }
     }
 
@@ -117,9 +159,17 @@ public class CustomElementsTest : ServerTestBase<ToggleExecutionModeServerFixtur
 
         // The complex object parameter was updated.
         var expectedComplexObjectValue = @"{ Property = ""Clicked 2 times"" }";
-        Browser.Equal(expectedComplexObjectValue, () => app.FindElement(By.Id("custom-element-0")).FindElement(By.ClassName("complex-type-param")).Text);
+        Browser.Equal(
+            expectedComplexObjectValue,
+            () =>
+                app.FindElement(By.Id("custom-element-0"))
+                    .FindElement(By.ClassName("complex-type-param"))
+                    .Text
+        );
 
-        app.FindElement(By.Id("custom-element-0")).FindElement(By.ClassName("invoke-callback")).Click();
+        app.FindElement(By.Id("custom-element-0"))
+            .FindElement(By.ClassName("invoke-callback"))
+            .Click();
 
         // The callback parameter was invoked.
         var expectedMessage = "Callback with count = 2";

@@ -4,16 +4,14 @@
 
 namespace System.ServiceModel.Configuration
 {
-    using System.Configuration;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Configuration;
+    using System.ServiceModel.Description;
 
     public sealed partial class ServiceMetadataPublishingElement : BehaviorExtensionElement
     {
-        public ServiceMetadataPublishingElement()
-        {
-        }
+        public ServiceMetadataPublishingElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.ExternalMetadataLocation)]
         public Uri ExternalMetadataLocation
@@ -74,7 +72,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.HttpsGetBinding] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.HttpsGetBindingConfiguration, DefaultValue = "")]
+        [ConfigurationProperty(
+            ConfigurationStrings.HttpsGetBindingConfiguration,
+            DefaultValue = ""
+        )]
         [StringValidator(MinLength = 0)]
         public string HttpsGetBindingConfiguration
         {
@@ -82,7 +83,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.HttpsGetBindingConfiguration] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.PolicyVersion, DefaultValue = ConfigurationStrings.Default)]
+        [ConfigurationProperty(
+            ConfigurationStrings.PolicyVersion,
+            DefaultValue = ConfigurationStrings.Default
+        )]
         [TypeConverter(typeof(PolicyVersionConverter))]
         public PolicyVersion PolicyVersion
         {
@@ -106,7 +110,6 @@ namespace System.ServiceModel.Configuration
             this.HttpGetBindingConfiguration = source.HttpGetBindingConfiguration;
             this.HttpsGetBinding = source.HttpsGetBinding;
             this.HttpsGetBindingConfiguration = source.HttpsGetBindingConfiguration;
-
         }
 
         protected internal override object CreateBehavior()
@@ -120,9 +123,15 @@ namespace System.ServiceModel.Configuration
             behavior.ExternalMetadataLocation = this.ExternalMetadataLocation;
             behavior.MetadataExporter.PolicyVersion = this.PolicyVersion;
             if (!String.IsNullOrEmpty(this.HttpGetBinding))
-                behavior.HttpGetBinding = ConfigLoader.LookupBinding(this.HttpGetBinding, this.HttpGetBindingConfiguration);
+                behavior.HttpGetBinding = ConfigLoader.LookupBinding(
+                    this.HttpGetBinding,
+                    this.HttpGetBindingConfiguration
+                );
             if (!String.IsNullOrEmpty(this.HttpsGetBinding))
-                behavior.HttpsGetBinding = ConfigLoader.LookupBinding(this.HttpsGetBinding, this.HttpsGetBindingConfiguration);
+                behavior.HttpsGetBinding = ConfigLoader.LookupBinding(
+                    this.HttpsGetBinding,
+                    this.HttpsGetBindingConfiguration
+                );
 
             return behavior;
         }
@@ -133,6 +142,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

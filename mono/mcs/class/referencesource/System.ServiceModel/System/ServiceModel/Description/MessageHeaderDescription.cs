@@ -5,13 +5,13 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Xml;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Runtime.Serialization;
     using System.ComponentModel;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Text;
+    using System.Xml;
 
     public class MessageHeaderDescription : MessagePartDescription
     {
@@ -22,10 +22,7 @@ namespace System.ServiceModel.Description
         bool isUnknownHeader;
 
         public MessageHeaderDescription(string name, string ns)
-            : base(name, ns)
-        {
-
-        }
+            : base(name, ns) { }
 
         internal MessageHeaderDescription(MessageHeaderDescription other)
             : base(other)
@@ -72,14 +69,8 @@ namespace System.ServiceModel.Description
 
         internal bool IsUnknownHeaderCollection
         {
-            get
-            {
-                return isUnknownHeader || Multiple && (Type == typeof(XmlElement));
-            }
-            set
-            {
-                isUnknownHeader = value;
-            }
+            get { return isUnknownHeader || Multiple && (Type == typeof(XmlElement)); }
+            set { isUnknownHeader = value; }
         }
     }
 }
