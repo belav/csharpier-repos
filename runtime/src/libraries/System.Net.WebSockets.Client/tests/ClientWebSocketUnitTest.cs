@@ -68,14 +68,12 @@ namespace System.Net.WebSockets.Client.Tests
                     )
                 )
                 {
-                    exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () =>
-                            cws.CloseOutputAsync(
-                                WebSocketCloseStatus.Empty,
-                                "",
-                                new CancellationToken()
-                            )
-                    );
+                    exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        cws.CloseOutputAsync(
+                            WebSocketCloseStatus.Empty,
+                            "",
+                            new CancellationToken()
+                        ));
                 }
 
                 string expectedMessage = ResourceHelper.GetExceptionMessage(
@@ -122,9 +120,8 @@ namespace System.Net.WebSockets.Client.Tests
                     )
                 )
                 {
-                    exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => cws.ReceiveAsync(segment, ct)
-                    );
+                    exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        cws.ReceiveAsync(segment, ct));
                 }
 
                 string expectedMessage = ResourceHelper.GetExceptionMessage(
@@ -170,9 +167,8 @@ namespace System.Net.WebSockets.Client.Tests
                     )
                 )
                 {
-                    exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => cws.SendAsync(segment, WebSocketMessageType.Text, false, ct)
-                    );
+                    exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        cws.SendAsync(segment, WebSocketMessageType.Text, false, ct));
                 }
 
                 string expectedMessage = ResourceHelper.GetExceptionMessage(

@@ -14,9 +14,8 @@ public abstract class NorthwindIncludeQueryRelationalTestBase<TFixture>
         Assert.Equal(
             RelationalStrings.LastUsedWithoutOrderBy(nameof(Enumerable.Last)),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Include_collection_with_last_no_orderby(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Include_collection_with_last_no_orderby(async))
             ).Message
         );
 

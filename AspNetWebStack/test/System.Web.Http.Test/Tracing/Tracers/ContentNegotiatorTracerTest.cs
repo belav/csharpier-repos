@@ -275,14 +275,12 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ((IContentNegotiator)_tracer).Negotiate(
-                        typeof(int),
-                        _request,
-                        new MediaTypeFormatter[0]
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ((IContentNegotiator)_tracer).Negotiate(
+                    typeof(int),
+                    _request,
+                    new MediaTypeFormatter[0]
+                ));
 
             // Assert
             Assert.Equal<TraceRecord>(

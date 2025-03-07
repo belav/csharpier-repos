@@ -403,9 +403,8 @@ public class JSRuntimeTest
         var byteArray = new byte[] { 1, 5, 7 };
 
         // Act
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(
-            () => runtime.ReceiveByteArray(7, byteArray)
-        );
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            runtime.ReceiveByteArray(7, byteArray));
 
         // Assert
         Assert.Equal(2, runtime.ByteArraysToBeRevived.Count);
@@ -437,10 +436,8 @@ public class JSRuntimeTest
         var dataReference = new JSStreamReference(runtime, 10, 10);
 
         // Act
-        var exception = await Assert.ThrowsAsync<NotSupportedException>(
-            async () =>
-                await runtime.ReadJSDataAsStreamAsync(dataReference, 10, CancellationToken.None)
-        );
+        var exception = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+            await runtime.ReadJSDataAsStreamAsync(dataReference, 10, CancellationToken.None));
 
         // Assert
         Assert.Equal(

@@ -186,12 +186,10 @@ namespace System.IO.Tests
             byte[] buffer = new byte[10];
             if (async)
             {
-                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                    async () => await s.ReadAtLeastAsync(buffer, -1)
-                );
-                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                    async () => await s.ReadAtLeastAsync(buffer, -10)
-                );
+                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+                    await s.ReadAtLeastAsync(buffer, -1));
+                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+                    await s.ReadAtLeastAsync(buffer, -10));
             }
             else
             {
@@ -224,12 +222,10 @@ namespace System.IO.Tests
             byte[] emptyBuffer = Array.Empty<byte>();
             if (async)
             {
-                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                    async () => await s.ReadAtLeastAsync(buffer, 21)
-                );
-                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                    async () => await s.ReadAtLeastAsync(emptyBuffer, 1)
-                );
+                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+                    await s.ReadAtLeastAsync(buffer, 21));
+                await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+                    await s.ReadAtLeastAsync(emptyBuffer, 1));
             }
             else
             {
@@ -267,9 +263,8 @@ namespace System.IO.Tests
             byte[] buffer = new byte[20];
             if (async)
             {
-                await Assert.ThrowsAsync<EndOfStreamException>(
-                    async () => await s.ReadAtLeastAsync(buffer, 11)
-                );
+                await Assert.ThrowsAsync<EndOfStreamException>(async () =>
+                    await s.ReadAtLeastAsync(buffer, 11));
             }
             else
             {
@@ -316,9 +311,8 @@ namespace System.IO.Tests
             CancellationToken token = cts.Token;
             cts.Cancel();
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                async () => await s.ReadAtLeastAsync(buffer, 10, cancellationToken: token)
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+                await s.ReadAtLeastAsync(buffer, 10, cancellationToken: token));
             Assert.Equal(1, readInvokedCount);
         }
     }

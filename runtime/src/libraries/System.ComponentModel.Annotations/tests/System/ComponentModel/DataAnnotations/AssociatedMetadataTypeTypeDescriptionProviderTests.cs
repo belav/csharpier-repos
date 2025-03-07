@@ -31,9 +31,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
                 typeof(ClassWithInvalidMetadata)
             );
-            Assert.Throws<InvalidOperationException>(
-                () => provider.GetTypeDescriptor(typeof(ClassWithInvalidMetadata), null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                provider.GetTypeDescriptor(typeof(ClassWithInvalidMetadata), null));
         }
 
         [Fact]

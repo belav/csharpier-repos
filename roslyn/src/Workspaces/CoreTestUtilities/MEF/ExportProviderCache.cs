@@ -81,9 +81,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             // If we run CreatePartsAsync on the test thread we may deadlock since it'll schedule stuff back
             // on the thread.
-            var parts = Task.Run(
-                async () => await discovery.CreatePartsAsync(assemblies).ConfigureAwait(false)
-            ).Result;
+            var parts = Task.Run(async () =>
+                await discovery.CreatePartsAsync(assemblies).ConfigureAwait(false)).Result;
 
             return ComposableCatalog.Create(resolver ?? Resolver.DefaultInstance).AddParts(parts);
         }
@@ -97,9 +96,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             // If we run CreatePartsAsync on the test thread we may deadlock since it'll schedule stuff back
             // on the thread.
-            var parts = Task.Run(
-                async () => await discovery.CreatePartsAsync(types).ConfigureAwait(false)
-            ).Result;
+            var parts = Task.Run(async () =>
+                await discovery.CreatePartsAsync(types).ConfigureAwait(false)).Result;
 
             return ComposableCatalog.Create(resolver ?? Resolver.DefaultInstance).AddParts(parts);
         }

@@ -660,9 +660,8 @@ public class ParameterBindingMethodCacheTests
     [MemberData(nameof(InvalidTryParseStringTypesData))]
     public void FindTryParseMethod_ThrowsIfInvalidTryParseOnType(Type type)
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => new ParameterBindingMethodCache().FindTryParseMethod(type)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new ParameterBindingMethodCache().FindTryParseMethod(type));
         Assert.StartsWith(
             $"TryParse method found on {TypeNameHelper.GetTypeDisplayName(type, fullName: false)} with incorrect format. Must be a static method with format",
             ex.Message
@@ -691,12 +690,10 @@ public class ParameterBindingMethodCacheTests
     [Fact]
     public void FindTryParseMethod_ThrowsIfMultipleInterfacesMatch()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                new ParameterBindingMethodCache().FindTryParseMethod(
-                    typeof(TryParseFromMultipleInterfaces)
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new ParameterBindingMethodCache().FindTryParseMethod(
+                typeof(TryParseFromMultipleInterfaces)
+            ));
         Assert.Equal(
             "TryParseFromMultipleInterfaces implements multiple interfaces defining a static Boolean TryParse(System.String, TryParseFromMultipleInterfaces ByRef) method causing ambiguity.",
             ex.Message
@@ -747,9 +744,8 @@ public class ParameterBindingMethodCacheTests
     {
         var cache = new ParameterBindingMethodCache();
         var parameter = new MockParameterInfo(type, "anything");
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => cache.FindBindAsyncMethod(parameter)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            cache.FindBindAsyncMethod(parameter));
         Assert.StartsWith(
             $"BindAsync method found on {TypeNameHelper.GetTypeDisplayName(type, fullName: false)} with incorrect format. Must be a static method with format",
             ex.Message
@@ -789,9 +785,8 @@ public class ParameterBindingMethodCacheTests
     {
         var cache = new ParameterBindingMethodCache();
         var parameter = new MockParameterInfo(typeof(BindAsyncFromMultipleInterfaces), "anything");
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => cache.FindBindAsyncMethod(parameter)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            cache.FindBindAsyncMethod(parameter));
         Assert.Equal(
             "BindAsyncFromMultipleInterfaces implements multiple interfaces defining a static System.Threading.Tasks.ValueTask`1[Microsoft.AspNetCore.Http.Extensions.Tests.ParameterBindingMethodCacheTests+BindAsyncFromMultipleInterfaces] BindAsync(Microsoft.AspNetCore.Http.HttpContext) method causing ambiguity.",
             ex.Message

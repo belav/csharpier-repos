@@ -365,9 +365,8 @@ Wry5FNNo
             {
                 Assert.Equal(string.Empty, c.FriendlyName);
 
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => c.FriendlyName = "This is a friendly name."
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    c.FriendlyName = "This is a friendly name.");
                 Assert.Equal(string.Empty, c.FriendlyName);
 
                 Assert.Throws<PlatformNotSupportedException>(() => c.FriendlyName = null);

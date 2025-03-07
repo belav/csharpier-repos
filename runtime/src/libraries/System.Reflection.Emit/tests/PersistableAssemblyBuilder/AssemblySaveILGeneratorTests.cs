@@ -1381,9 +1381,8 @@ namespace System.Reflection.Emit.Tests
             // only OpCodes.Switch expected
             Assert.Throws<ArgumentException>(() => il.Emit(OpCodes.Call, new Label[0]));
             // only OpCodes.Call or .OpCodes.Callvirt or OpCodes.Newob expected
-            Assert.Throws<ArgumentException>(
-                () => il.Emit(OpCodes.Switch, typeof(object).GetConstructor(Type.EmptyTypes))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                il.Emit(OpCodes.Switch, typeof(object).GetConstructor(Type.EmptyTypes)));
             // Undefined label
             Assert.Throws<ArgumentException>(() => il.MarkLabel(new Label()));
             // only OpCodes.Call or OpCodes.Callvirt or OpCodes.Newob expected

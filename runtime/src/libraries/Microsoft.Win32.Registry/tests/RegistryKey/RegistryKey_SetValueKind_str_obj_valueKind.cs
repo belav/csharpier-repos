@@ -224,9 +224,8 @@ namespace Microsoft.Win32.RegistryTests
 
             const string valueName = "FooBar";
             // Should throw if passed value is null
-            Assert.Throws<ArgumentNullException>(
-                () => TestRegistryKey.SetValue(valueName, null, RegistryValueKind.QWord)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                TestRegistryKey.SetValue(valueName, null, RegistryValueKind.QWord));
 
             // Should throw because valueKind is equal to -2 which is not an acceptable value
             AssertExtensions.Throws<ArgumentException>(
@@ -262,9 +261,8 @@ namespace Microsoft.Win32.RegistryTests
             // Should throw because RegistryKey is readonly
             using (var rk = Registry.CurrentUser.OpenSubKey(TestRegistryKeyName, false))
             {
-                Assert.Throws<UnauthorizedAccessException>(
-                    () => rk.SetValue(valueName, int.MaxValue, RegistryValueKind.DWord)
-                );
+                Assert.Throws<UnauthorizedAccessException>(() =>
+                    rk.SetValue(valueName, int.MaxValue, RegistryValueKind.DWord));
             }
 
             // Should throw if RegistryKey is closed

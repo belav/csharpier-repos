@@ -15,28 +15,23 @@ public class ZipFile_Create_Stream : ZipFileTestBase
     public void CreateFromDirectory_NullSourceDirectory_Throws()
     {
         using MemoryStream ms = new MemoryStream();
-        Assert.Throws<ArgumentNullException>(
-            () => ZipFile.CreateFromDirectory(sourceDirectoryName: null, ms)
-        );
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                ZipFile.CreateFromDirectory(
-                    sourceDirectoryName: null,
-                    ms,
-                    CompressionLevel.NoCompression,
-                    includeBaseDirectory: false
-                )
-        );
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                ZipFile.CreateFromDirectory(
-                    sourceDirectoryName: null,
-                    ms,
-                    CompressionLevel.NoCompression,
-                    includeBaseDirectory: false,
-                    Encoding.UTF8
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            ZipFile.CreateFromDirectory(sourceDirectoryName: null, ms));
+        Assert.Throws<ArgumentNullException>(() =>
+            ZipFile.CreateFromDirectory(
+                sourceDirectoryName: null,
+                ms,
+                CompressionLevel.NoCompression,
+                includeBaseDirectory: false
+            ));
+        Assert.Throws<ArgumentNullException>(() =>
+            ZipFile.CreateFromDirectory(
+                sourceDirectoryName: null,
+                ms,
+                CompressionLevel.NoCompression,
+                includeBaseDirectory: false,
+                Encoding.UTF8
+            ));
     }
 
     [Theory]
@@ -49,25 +44,21 @@ public class ZipFile_Create_Stream : ZipFileTestBase
     )
     {
         using MemoryStream ms = new MemoryStream();
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-                ZipFile.CreateFromDirectory(
-                    "sourceDirectory",
-                    ms,
-                    invalidCompressionLevel,
-                    includeBaseDirectory: false
-                )
-        );
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-                ZipFile.CreateFromDirectory(
-                    "sourceDirectory",
-                    ms,
-                    invalidCompressionLevel,
-                    includeBaseDirectory: false,
-                    Encoding.UTF8
-                )
-        );
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            ZipFile.CreateFromDirectory(
+                "sourceDirectory",
+                ms,
+                invalidCompressionLevel,
+                includeBaseDirectory: false
+            ));
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            ZipFile.CreateFromDirectory(
+                "sourceDirectory",
+                ms,
+                invalidCompressionLevel,
+                includeBaseDirectory: false,
+                Encoding.UTF8
+            ));
     }
 
     [Fact]

@@ -13,9 +13,8 @@ public class RateLimitingApplicationBuilderExtensionsTests : LoggedTest
     [Fact]
     public void UseRateLimiter_ThrowsOnNullAppBuilder()
     {
-        Assert.Throws<ArgumentNullException>(
-            () => RateLimiterApplicationBuilderExtensions.UseRateLimiter(null)
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            RateLimiterApplicationBuilderExtensions.UseRateLimiter(null));
     }
 
     [Fact]

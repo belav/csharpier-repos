@@ -33,23 +33,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         [Fact]
         public void Create_Errors()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => EditAndContinueMethodDebugInfoReader.Create((ISymUnmanagedReader5)null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => EditAndContinueMethodDebugInfoReader.Create((MetadataReader)null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => EditAndContinueMethodDebugInfoReader.Create(null, 1)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                EditAndContinueMethodDebugInfoReader.Create((ISymUnmanagedReader5)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                EditAndContinueMethodDebugInfoReader.Create((MetadataReader)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                EditAndContinueMethodDebugInfoReader.Create(null, 1));
 
             var mockSymReader = new Mock<ISymUnmanagedReader5>(MockBehavior.Strict).Object;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => EditAndContinueMethodDebugInfoReader.Create(mockSymReader, 0)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => EditAndContinueMethodDebugInfoReader.Create(mockSymReader, -1)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                EditAndContinueMethodDebugInfoReader.Create(mockSymReader, 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                EditAndContinueMethodDebugInfoReader.Create(mockSymReader, -1));
         }
 
         [Theory]

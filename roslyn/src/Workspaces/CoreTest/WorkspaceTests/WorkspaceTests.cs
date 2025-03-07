@@ -32,9 +32,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(
                 WorkspacesResources.Changing_documents_is_not_supported,
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => ws.TryApplyChanges(changedDoc.Project.Solution)
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        ws.TryApplyChanges(changedDoc.Project.Solution))
                     .Message
             );
         }
@@ -54,9 +53,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(
                 WorkspacesResources.Changing_document_property_is_not_supported,
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => ws.TryApplyChanges(changedDoc.Project.Solution)
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        ws.TryApplyChanges(changedDoc.Project.Solution))
                     .Message
             );
         }
@@ -78,9 +76,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(
                 WorkspacesResources.Changing_document_property_is_not_supported,
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => ws.TryApplyChanges(changedDoc.Project.Solution)
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        ws.TryApplyChanges(changedDoc.Project.Solution))
                     .Message
             );
         }
@@ -101,9 +98,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(
                 WorkspacesResources.Changing_document_property_is_not_supported,
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => ws.TryApplyChanges(changedDoc.Project.Solution)
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        ws.TryApplyChanges(changedDoc.Project.Solution))
                     .Message
             );
         }
@@ -123,9 +119,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal(
                 WorkspacesResources.Changing_document_property_is_not_supported,
                 Assert
-                    .Throws<NotSupportedException>(
-                        () => ws.TryApplyChanges(changedDoc.Project.Solution)
-                    )
+                    .Throws<NotSupportedException>(() =>
+                        ws.TryApplyChanges(changedDoc.Project.Solution))
                     .Message
             );
         }

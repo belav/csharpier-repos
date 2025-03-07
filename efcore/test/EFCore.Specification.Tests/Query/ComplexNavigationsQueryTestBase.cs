@@ -1730,24 +1730,18 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     public virtual Task Multiple_required_navigations_with_Include(bool async)
         // Include after select. Issue #16752.
         =>
-        AssertIncludeOnNonEntity(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Level4>()
-                            .Select(l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
-                            )
-                            .Include(l2 => l2.OneToOne_Optional_FK2),
-                    elementAsserter: (e, a) =>
-                        AssertInclude(
-                            e,
-                            a,
-                            new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2)
+        AssertIncludeOnNonEntity(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Level4>()
+                        .Select(l4 =>
+                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                         )
-                )
-        );
+                        .Include(l2 => l2.OneToOne_Optional_FK2),
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1756,71 +1750,53 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     )
         // Include after select. Issue #16752.
         =>
-        AssertIncludeOnNonEntity(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Level4>()
-                            .Select(l4 => l4.OneToOne_Required_FK_Inverse4)
-                            .Select(l3 => l3.OneToOne_Required_FK_Inverse3)
-                            .Include(l2 => l2.OneToOne_Optional_FK2),
-                    elementAsserter: (e, a) =>
-                        AssertInclude(
-                            e,
-                            a,
-                            new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2)
-                        )
-                )
-        );
+        AssertIncludeOnNonEntity(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Level4>()
+                        .Select(l4 => l4.OneToOne_Required_FK_Inverse4)
+                        .Select(l3 => l3.OneToOne_Required_FK_Inverse3)
+                        .Include(l2 => l2.OneToOne_Optional_FK2),
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Multiple_required_navigation_with_string_based_Include(bool async)
         // Include after select. Issue #16752.
         =>
-        AssertIncludeOnNonEntity(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Level4>()
-                            .Select(l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
-                            )
-                            .Include("OneToOne_Optional_FK2"),
-                    elementAsserter: (e, a) =>
-                        AssertInclude(
-                            e,
-                            a,
-                            new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2)
+        AssertIncludeOnNonEntity(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Level4>()
+                        .Select(l4 =>
+                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                         )
-                )
-        );
+                        .Include("OneToOne_Optional_FK2"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Multiple_required_navigation_with_EF_Property_Include(bool async)
         // Include after select. Issue #16752.
         =>
-        AssertIncludeOnNonEntity(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Level4>()
-                            .Select(l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
-                            )
-                            .Include(l2 => EF.Property<Level2>(l2, "OneToOne_Optional_FK2")),
-                    elementAsserter: (e, a) =>
-                        AssertInclude(
-                            e,
-                            a,
-                            new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2)
+        AssertIncludeOnNonEntity(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Level4>()
+                        .Select(l4 =>
+                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
                         )
-                )
-        );
+                        .Include(l2 => EF.Property<Level2>(l2, "OneToOne_Optional_FK2")),
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1829,23 +1805,17 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     )
         // Include after select. Issue #16752.
         =>
-        AssertIncludeOnNonEntity(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Level4>()
-                            .Select(l4 => l4.OneToOne_Required_FK_Inverse4)
-                            .Select(l3 => l3.OneToOne_Required_FK_Inverse3)
-                            .Include("OneToOne_Optional_FK2"),
-                    elementAsserter: (e, a) =>
-                        AssertInclude(
-                            e,
-                            a,
-                            new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2)
-                        )
-                )
-        );
+        AssertIncludeOnNonEntity(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Level4>()
+                        .Select(l4 => l4.OneToOne_Required_FK_Inverse4)
+                        .Select(l3 => l3.OneToOne_Required_FK_Inverse3)
+                        .Include("OneToOne_Optional_FK2"),
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1854,45 +1824,33 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     )
         // Include after select. Issue #16752.
         =>
-        AssertIncludeOnNonEntity(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Level4>()
-                            .Select(l4 => l4.OneToOne_Required_FK_Inverse4)
-                            .Select(l3 => l3.OneToOne_Required_FK_Inverse3)
-                            .Include(l2 => EF.Property<Level2>(l2, "OneToOne_Optional_FK2")),
-                    elementAsserter: (e, a) =>
-                        AssertInclude(
-                            e,
-                            a,
-                            new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2)
-                        )
-                )
-        );
+        AssertIncludeOnNonEntity(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Level4>()
+                        .Select(l4 => l4.OneToOne_Required_FK_Inverse4)
+                        .Select(l3 => l3.OneToOne_Required_FK_Inverse3)
+                        .Include(l2 => EF.Property<Level2>(l2, "OneToOne_Optional_FK2")),
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Optional_navigation_with_Include(bool async)
         // Include after select. Issue #16752.
         =>
-        AssertIncludeOnNonEntity(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Level1>()
-                            .Select(l1 => l1.OneToOne_Optional_FK1)
-                            .Include(l2 => l2.OneToOne_Optional_FK2),
-                    elementAsserter: (e, a) =>
-                        AssertInclude(
-                            e,
-                            a,
-                            new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2)
-                        )
-                )
-        );
+        AssertIncludeOnNonEntity(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Level1>()
+                        .Select(l1 => l1.OneToOne_Optional_FK1)
+                        .Include(l2 => l2.OneToOne_Optional_FK2),
+                elementAsserter: (e, a) =>
+                    AssertInclude(e, a, new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2))
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2581,42 +2539,40 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     )
         // Translation failed message. Issue #17328.
         =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        from x in (
-                            from l1 in ss.Set<Level1>()
-                            join l2 in ss.Set<Level2>()
-                                on l1.Id equals l2.Level1_Optional_Id
-                                into grouping
-                            from l2 in grouping.DefaultIfEmpty()
-                            orderby l1.Id
-                            select ClientLevel1(l1)
-                        ).Take(2)
-                        join l2_outer in ss.Set<Level2>()
-                            on x.Id equals l2_outer.Level1_Optional_Id
-                            into grouping_outer
-                        from l2_outer in grouping_outer.DefaultIfEmpty()
-                        select l2_outer.Name,
-                    ss =>
-                        from x in (
-                            from l1 in ss.Set<Level1>()
-                            join l2 in ss.Set<Level2>()
-                                on l1.Id equals l2.Level1_Optional_Id
-                                into grouping
-                            from l2 in grouping.DefaultIfEmpty()
-                            orderby l1.Id
-                            select ClientLevel1(l1)
-                        ).Take(2)
-                        join l2_outer in ss.Set<Level2>()
-                            on x.Id equals l2_outer.Level1_Optional_Id
-                            into grouping_outer
-                        from l2_outer in grouping_outer.DefaultIfEmpty()
-                        select l2_outer.Name
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    from x in (
+                        from l1 in ss.Set<Level1>()
+                        join l2 in ss.Set<Level2>()
+                            on l1.Id equals l2.Level1_Optional_Id
+                            into grouping
+                        from l2 in grouping.DefaultIfEmpty()
+                        orderby l1.Id
+                        select ClientLevel1(l1)
+                    ).Take(2)
+                    join l2_outer in ss.Set<Level2>()
+                        on x.Id equals l2_outer.Level1_Optional_Id
+                        into grouping_outer
+                    from l2_outer in grouping_outer.DefaultIfEmpty()
+                    select l2_outer.Name,
+                ss =>
+                    from x in (
+                        from l1 in ss.Set<Level1>()
+                        join l2 in ss.Set<Level2>()
+                            on l1.Id equals l2.Level1_Optional_Id
+                            into grouping
+                        from l2 in grouping.DefaultIfEmpty()
+                        orderby l1.Id
+                        select ClientLevel1(l1)
+                    ).Take(2)
+                    join l2_outer in ss.Set<Level2>()
+                        on x.Id equals l2_outer.Level1_Optional_Id
+                        into grouping_outer
+                    from l2_outer in grouping_outer.DefaultIfEmpty()
+                    select l2_outer.Name
+            ));
 
     private static Level1 ClientLevel1(Level1 arg) => arg;
 
@@ -3204,31 +3160,29 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     public virtual Task Level4_Include(bool async)
         // Include after select. Issue #16752.
         =>
-        AssertIncludeOnNonEntity(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Level1>()
-                            .Select(l1 => l1.OneToOne_Required_PK1)
-                            .Where(t => t != null)
-                            .Select(l2 => l2.OneToOne_Required_PK2)
-                            .Where(t => t != null)
-                            .Select(l3 => l3.OneToOne_Required_PK3)
-                            .Where(t => t != null)
-                            .Select(l4 =>
-                                l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
-                            )
-                            .Include(l2 => l2.OneToOne_Optional_FK2),
-                    elementAsserter: (e, a) =>
-                        AssertInclude(
-                            e,
-                            a,
-                            new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2)
-                        ),
-                    elementSorter: e => e.Id
-                )
-        );
+        AssertIncludeOnNonEntity(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Level1>()
+                        .Select(l1 => l1.OneToOne_Required_PK1)
+                        .Where(t => t != null)
+                        .Select(l2 => l2.OneToOne_Required_PK2)
+                        .Where(t => t != null)
+                        .Select(l3 => l3.OneToOne_Required_PK3)
+                        .Where(t => t != null)
+                        .Select(l4 =>
+                            l4.OneToOne_Required_FK_Inverse4.OneToOne_Required_FK_Inverse3
+                        )
+                        .Include(l2 => l2.OneToOne_Optional_FK2),
+                elementAsserter: (e, a) =>
+                    AssertInclude(
+                        e,
+                        a,
+                        new ExpectedInclude<Level2>(l2 => l2.OneToOne_Optional_FK2)
+                    ),
+                elementSorter: e => e.Id
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

@@ -107,9 +107,8 @@ public class When_skipping_validation : NonValidatingSpecBase
     [Fact]
     public void Should_skip_validation()
     {
-        typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-            () => Mapper.ConfigurationProvider.AssertConfigurationIsValid()
-        );
+        typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
+            Mapper.ConfigurationProvider.AssertConfigurationIsValid());
     }
 }
 
@@ -710,15 +709,13 @@ public class When_testing_a_dto_in_a_specfic_profile : NonValidatingSpecBase
 
     [Fact]
     public void Should_ignore_bad_dtos_in_other_profiles() =>
-        typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(
-            () => AssertConfigurationIsValid("Good")
-        );
+        typeof(AutoMapperConfigurationException).ShouldNotBeThrownBy(() =>
+            AssertConfigurationIsValid("Good"));
 
     [Fact]
     public void Should_throw_when_profile_name_does_not_exist() =>
-        typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(
-            () => AssertConfigurationIsValid("Does not exist")
-        );
+        typeof(ArgumentOutOfRangeException).ShouldBeThrownBy(() =>
+            AssertConfigurationIsValid("Does not exist"));
 }
 
 public class When_testing_a_dto_with_mismatched_custom_member_mapping : NonValidatingSpecBase

@@ -464,14 +464,11 @@ namespace System.Security.Cryptography.Tests
             byte[] buffer = new byte[1];
             CancellationToken cancelledToken = new CancellationToken(canceled: true);
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                async () =>
-                    await TShakeTrait.HashDataAsync(Stream.Null, outputLength: 1, cancelledToken)
-            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await TShakeTrait.HashDataAsync(Stream.Null, outputLength: 1, cancelledToken));
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                async () => await TShakeTrait.HashDataAsync(Stream.Null, buffer, cancelledToken)
-            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await TShakeTrait.HashDataAsync(Stream.Null, buffer, cancelledToken));
         }
 
         [ConditionalFact(nameof(IsSupported))]
@@ -533,21 +530,16 @@ namespace System.Security.Cryptography.Tests
             shake.Dispose(); // Assert.NoThrow
 
             Assert.Throws<ObjectDisposedException>(() => TShakeTrait.AppendData(shake, buffer));
-            Assert.Throws<ObjectDisposedException>(
-                () => TShakeTrait.AppendData(shake, new ReadOnlySpan<byte>(buffer))
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => TShakeTrait.GetHashAndReset(shake, outputLength: 1)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => TShakeTrait.GetHashAndReset(shake, buffer.AsSpan())
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => TShakeTrait.GetCurrentHash(shake, outputLength: 1)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => TShakeTrait.GetCurrentHash(shake, buffer.AsSpan())
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                TShakeTrait.AppendData(shake, new ReadOnlySpan<byte>(buffer)));
+            Assert.Throws<ObjectDisposedException>(() =>
+                TShakeTrait.GetHashAndReset(shake, outputLength: 1));
+            Assert.Throws<ObjectDisposedException>(() =>
+                TShakeTrait.GetHashAndReset(shake, buffer.AsSpan()));
+            Assert.Throws<ObjectDisposedException>(() =>
+                TShakeTrait.GetCurrentHash(shake, outputLength: 1));
+            Assert.Throws<ObjectDisposedException>(() =>
+                TShakeTrait.GetCurrentHash(shake, buffer.AsSpan()));
         }
 
         [ConditionalFact(nameof(IsNotSupported))]
@@ -557,27 +549,20 @@ namespace System.Security.Cryptography.Tests
             byte[] destination = new byte[0];
 
             Assert.Throws<PlatformNotSupportedException>(() => TShakeTrait.Create());
-            Assert.Throws<PlatformNotSupportedException>(
-                () => TShakeTrait.HashData(source, outputLength: 0)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => TShakeTrait.HashData(new ReadOnlySpan<byte>(source), outputLength: 0)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => TShakeTrait.HashData(source, destination)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => TShakeTrait.HashData(Stream.Null, outputLength: 0)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => TShakeTrait.HashData(Stream.Null, destination)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => TShakeTrait.HashDataAsync(Stream.Null, destination)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => TShakeTrait.HashDataAsync(Stream.Null, outputLength: 0)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                TShakeTrait.HashData(source, outputLength: 0));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                TShakeTrait.HashData(new ReadOnlySpan<byte>(source), outputLength: 0));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                TShakeTrait.HashData(source, destination));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                TShakeTrait.HashData(Stream.Null, outputLength: 0));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                TShakeTrait.HashData(Stream.Null, destination));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                TShakeTrait.HashDataAsync(Stream.Null, destination));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                TShakeTrait.HashDataAsync(Stream.Null, outputLength: 0));
         }
 
         [Fact]

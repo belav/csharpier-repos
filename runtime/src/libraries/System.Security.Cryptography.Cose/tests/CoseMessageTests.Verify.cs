@@ -78,9 +78,8 @@ namespace System.Security.Cryptography.Cose.Tests
             byte[] encodedMsg = Sign(s_sampleContent, GetCoseSigner(DefaultKey, DefaultHash));
             CoseMessage msg = Decode(encodedMsg);
 
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
-                () => Verify(msg, DefaultKey, null!)
-            );
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                Verify(msg, DefaultKey, null!));
             Assert.True(ex.ParamName == "content" || ex.ParamName == "detachedContent");
         }
 

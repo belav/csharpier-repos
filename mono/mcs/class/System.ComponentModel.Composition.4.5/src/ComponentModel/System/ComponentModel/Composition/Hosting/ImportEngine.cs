@@ -317,9 +317,8 @@ namespace System.ComponentModel.Composition.Hosting
                 var requiredImports = part.ImportDefinitions.Where(IsRequiredImportForPreview);
 
                 // If this atomicComposition gets rolledback for any reason we need to reset our state
-                atomicComposition.AddRevertActionAllowNull(
-                    () => partManager.State = ImportState.NoImportsSatisfied
-                );
+                atomicComposition.AddRevertActionAllowNull(() =>
+                    partManager.State = ImportState.NoImportsSatisfied);
 
                 result = result.MergeResult(
                     this.TrySatisfyImportSubset(partManager, requiredImports, atomicComposition)
@@ -604,9 +603,8 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 else
                 {
-                    atomicComposition.AddCompleteAction(
-                        () => partManager.TryOnComposed().ThrowOnErrors()
-                    );
+                    atomicComposition.AddCompleteAction(() =>
+                        partManager.TryOnComposed().ThrowOnErrors());
                 }
             }
 
@@ -652,9 +650,8 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 else
                 {
-                    atomicComposition.AddCompleteAction(
-                        () => partManager.TrySetImport(import, exports).ThrowOnErrors()
-                    );
+                    atomicComposition.AddCompleteAction(() =>
+                        partManager.TrySetImport(import, exports).ThrowOnErrors());
                 }
             }
             else

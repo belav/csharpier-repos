@@ -106,12 +106,10 @@ namespace System.PrivateUri.Tests
                 Assert.Equal(i, uri.Port);
             }
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => UriParser.Register(new HttpStyleUriParser(), "invalid-port", -2)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => UriParser.Register(new HttpStyleUriParser(), "invalid-port", 65536)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                UriParser.Register(new HttpStyleUriParser(), "invalid-port", -2));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                UriParser.Register(new HttpStyleUriParser(), "invalid-port", 65536));
         }
 
         [Fact]
@@ -435,9 +433,8 @@ namespace System.PrivateUri.Tests
         public static void GetComponents_Null()
         {
             TestUriParser parser = new TestUriParser();
-            Assert.Throws<NullReferenceException>(
-                () => parser.GetComponents(null, UriComponents.Host, UriFormat.SafeUnescaped)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                parser.GetComponents(null, UriComponents.Host, UriFormat.SafeUnescaped));
         }
 
         [Fact]
@@ -456,9 +453,8 @@ namespace System.PrivateUri.Tests
         {
             Uri http = new Uri(FullHttpUri);
             TestUriParser parser = new TestUriParser();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => parser.GetComponents(http, UriComponents.Host, (UriFormat)int.MinValue)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                parser.GetComponents(http, UriComponents.Host, (UriFormat)int.MinValue));
         }
 
         [Fact]
@@ -466,9 +462,8 @@ namespace System.PrivateUri.Tests
         {
             Uri uri = new Uri(FullHttpUri);
             TestUriParser parser = new TestUriParser();
-            Assert.Throws<InvalidOperationException>(
-                () => parser.DangerousExposed_InitializeAndValidate(uri, out _)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                parser.DangerousExposed_InitializeAndValidate(uri, out _));
         }
 
         [Fact]
@@ -476,9 +471,8 @@ namespace System.PrivateUri.Tests
         {
             Uri uri = new Uri("foo", UriKind.Relative);
             TestUriParser parser = new TestUriParser();
-            Assert.Throws<InvalidOperationException>(
-                () => parser.DangerousExposed_InitializeAndValidate(uri, out _)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                parser.DangerousExposed_InitializeAndValidate(uri, out _));
         }
 
         [Fact]
@@ -499,9 +493,8 @@ namespace System.PrivateUri.Tests
             parser.BaseInitializeAndValidateCallCount = 0;
             uri = new Uri("test-scheme://foo.bar");
             parser.BaseInitializeAndValidateCallCount = 1;
-            Assert.Throws<InvalidOperationException>(
-                () => parser.DangerousExposed_InitializeAndValidate(uri, out _)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                parser.DangerousExposed_InitializeAndValidate(uri, out _));
         }
 
         [Fact]
@@ -703,9 +696,8 @@ namespace System.PrivateUri.Tests
         [Fact]
         public static void Register_NullParser()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => UriParser.Register(null, Prefix + "null.parser", 2006)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                UriParser.Register(null, Prefix + "null.parser", 2006));
         }
 
         [Fact]
@@ -723,9 +715,8 @@ namespace System.PrivateUri.Tests
             TestUriParser parser = new TestUriParser();
             UriParser.Register(parser, scheme, 2005);
             Assert.True(UriParser.IsKnownScheme(scheme), "IsKnownScheme-true");
-            Assert.Throws<InvalidOperationException>(
-                () => UriParser.Register(parser, scheme, 2006)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                UriParser.Register(parser, scheme, 2006));
         }
 
         #endregion UriParser tests

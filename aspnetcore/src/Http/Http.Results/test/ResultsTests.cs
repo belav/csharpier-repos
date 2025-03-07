@@ -1200,9 +1200,8 @@ public partial class ResultsTests
     [Fact]
     public void Json_WithInvalidSerializerContext_ThrowsInvalidOperationException()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => Results.Json(null, type: typeof(Todo), context: StringJsonContext.Default)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            Results.Json(null, type: typeof(Todo), context: StringJsonContext.Default));
         Assert.Equal(
             ex.Message,
             $"Unable to obtain the JsonTypeInfo for type 'Microsoft.AspNetCore.Http.HttpResults.ResultsTests+Todo' from the context '{typeof(StringJsonContext).FullName}'."
@@ -1212,9 +1211,8 @@ public partial class ResultsTests
     [Fact]
     public void JsonOfT_WithInvalidSerializerContext_ThrowsInvalidOperationException()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => Results.Json<Todo>(null, context: StringJsonContext.Default)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            Results.Json<Todo>(null, context: StringJsonContext.Default));
         Assert.Equal(
             ex.Message,
             $"Unable to obtain the JsonTypeInfo for type 'Microsoft.AspNetCore.Http.HttpResults.ResultsTests+Todo' from the context '{typeof(StringJsonContext).FullName}'."

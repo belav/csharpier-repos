@@ -88,9 +88,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             );
 
             // Act & assert
-            var ex = Assert.Throws<HttpAntiForgeryException>(
-                () => tokenStore.GetCookieToken(mockHttpContext.Object)
-            );
+            var ex = Assert.Throws<HttpAntiForgeryException>(() =>
+                tokenStore.GetCookieToken(mockHttpContext.Object));
             Assert.Equal(expectedException, ex);
         }
 
@@ -179,9 +178,8 @@ namespace System.Web.Helpers.AntiXsrf.Test
             );
 
             // Act & assert
-            var ex = Assert.Throws<HttpAntiForgeryException>(
-                () => tokenStore.GetFormToken(mockHttpContext.Object)
-            );
+            var ex = Assert.Throws<HttpAntiForgeryException>(() =>
+                tokenStore.GetFormToken(mockHttpContext.Object));
             Assert.Same(expectedException, ex);
         }
 

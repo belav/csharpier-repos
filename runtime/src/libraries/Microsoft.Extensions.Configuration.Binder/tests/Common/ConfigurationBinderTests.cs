@@ -380,9 +380,8 @@ namespace Microsoft.Extensions
 
             var instance = new ComplexOptions();
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
 
             string expectedMessage = SR.Format(
                 SR.Error_MissingConfig,
@@ -419,9 +418,8 @@ namespace Microsoft.Extensions
                 "'ThisDoesNotExistInTheModel'"
             );
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -442,9 +440,8 @@ namespace Microsoft.Extensions
 
             var instance = new ComplexOptions();
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
 
             string expectedMessage = SR.Format(
                 SR.Error_MissingConfig,
@@ -481,9 +478,8 @@ namespace Microsoft.Extensions
                 "'ThisDoesNotExistInTheModel'"
             );
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -603,13 +599,11 @@ namespace Microsoft.Extensions
 #pragma warning disable SYSLIB1104
             var exception = Assert.Throws<InvalidOperationException>(() => config.Bind(options));
 
-            var getValueException = Assert.Throws<InvalidOperationException>(
-                () => config.GetValue(type, "Value")
-            );
+            var getValueException = Assert.Throws<InvalidOperationException>(() =>
+                config.GetValue(type, "Value"));
 
-            var getException = Assert.Throws<InvalidOperationException>(
-                () => config.GetSection("Value").Get(type)
-            );
+            var getException = Assert.Throws<InvalidOperationException>(() =>
+                config.GetSection("Value").Get(type));
 #pragma warning restore SYSLIB1104
 
             // assert
@@ -809,9 +803,8 @@ namespace Microsoft.Extensions
             var config = configurationBuilder.Build();
 
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            var ex = Assert.Throws<NotSupportedException>(
-                () => config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true)
-            );
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true));
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
             var options = config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true);
@@ -863,9 +856,8 @@ namespace Microsoft.Extensions
             var options = new ComplexOptions();
 
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            var ex = Assert.Throws<NotSupportedException>(
-                () => config.Bind(options, o => o.BindNonPublicProperties = true)
-            );
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                config.Bind(options, o => o.BindNonPublicProperties = true));
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
             config.Bind(options, o => o.BindNonPublicProperties = true);
@@ -892,14 +884,12 @@ namespace Microsoft.Extensions
             var config = configurationBuilder.Build();
 
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            var ex = Assert.Throws<NotSupportedException>(
-                () => config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true)
-            );
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true));
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 
-            ex = Assert.Throws<NotSupportedException>(
-                () => config.Get(typeof(ComplexOptions), o => o.BindNonPublicProperties = true)
-            );
+            ex = Assert.Throws<NotSupportedException>(() =>
+                config.Get(typeof(ComplexOptions), o => o.BindNonPublicProperties = true));
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
             var options = config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true);
@@ -930,9 +920,8 @@ namespace Microsoft.Extensions
 
             var options = new ComplexOptions();
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            Assert.Throws<NotSupportedException>(
-                () => config.Bind(options, o => o.BindNonPublicProperties = true)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                config.Bind(options, o => o.BindNonPublicProperties = true));
 #else
             config.Bind(options, o => o.BindNonPublicProperties = true);
             Assert.Null(
@@ -950,9 +939,8 @@ namespace Microsoft.Extensions
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.Equal(
                 SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ISomeInterface)),
                 exception.Message
@@ -971,9 +959,8 @@ namespace Microsoft.Extensions
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.Equal(
                 SR.Format(
                     SR.Error_MissingPublicInstanceConstructor,
@@ -997,9 +984,8 @@ namespace Microsoft.Extensions
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.Equal(
                 SR.Format(
                     SR.Error_ConstructorParametersDoNotMatchProperties,
@@ -1023,9 +1009,8 @@ namespace Microsoft.Extensions
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.Equal(
                 SR.Format(
                     SR.Error_ParameterHasNoMatchingConfig,
@@ -1050,9 +1035,8 @@ namespace Microsoft.Extensions
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.Equal(
                 SR.Format(
                     SR.Error_ConstructorParametersDoNotMatchProperties,
@@ -1124,9 +1108,8 @@ namespace Microsoft.Extensions
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
 
             Assert.Equal(
                 SR.Format(
@@ -1174,9 +1157,8 @@ namespace Microsoft.Extensions
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.NotNull(exception.InnerException);
             Assert.Equal(
                 SR.Format(SR.Error_FailedToActivate, typeof(ThrowsWhenActivated)),
@@ -1199,9 +1181,8 @@ namespace Microsoft.Extensions
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions())
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions()));
             Assert.Equal(
                 SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ISomeInterface)),
                 exception.Message
@@ -1277,9 +1258,8 @@ namespace Microsoft.Extensions
                 typeof(ImmutableClassWithMultipleParameterizedConstructors)
             );
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Get<ImmutableClassWithMultipleParameterizedConstructors>()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ImmutableClassWithMultipleParameterizedConstructors>());
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -1306,9 +1286,8 @@ namespace Microsoft.Extensions
                 "string1"
             );
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Get<ImmutableClassWithOneParameterizedConstructorButWithInParameter>()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ImmutableClassWithOneParameterizedConstructorButWithInParameter>());
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -1335,9 +1314,8 @@ namespace Microsoft.Extensions
                 "int1"
             );
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Get<ImmutableClassWithOneParameterizedConstructorButWithRefParameter>()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ImmutableClassWithOneParameterizedConstructorButWithRefParameter>());
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -1364,9 +1342,8 @@ namespace Microsoft.Extensions
                 "int2"
             );
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Get<ImmutableClassWithOneParameterizedConstructorButWithOutParameter>()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ImmutableClassWithOneParameterizedConstructorButWithOutParameter>());
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -1606,9 +1583,8 @@ namespace Microsoft.Extensions
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Get<ByteArrayOptions>()
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ByteArrayOptions>());
             Assert.Equal(
                 SR.Format(SR.Error_FailedBinding, "MyByteArray", typeof(byte[])),
                 exception.Message
@@ -1785,9 +1761,8 @@ namespace Microsoft.Extensions
             var test = new ClassOverridingVirtualProperty();
 
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            var ex = Assert.Throws<NotSupportedException>(
-                () => config.Bind(test, b => b.BindNonPublicProperties = true)
-            );
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                config.Bind(test, b => b.BindNonPublicProperties = true));
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
             config.Bind(test, b => b.BindNonPublicProperties = true);
@@ -1805,21 +1780,15 @@ namespace Microsoft.Extensions
             IConfiguration config = configurationBuilder.Build();
 
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            var ex = Assert.Throws<NotSupportedException>(
-                () =>
-                    config.Get<ClassOverridingVirtualProperty>(b =>
-                        b.BindNonPublicProperties = true
-                    )
-            );
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                config.Get<ClassOverridingVirtualProperty>(b => b.BindNonPublicProperties = true));
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 
-            ex = Assert.Throws<NotSupportedException>(
-                () =>
-                    config.Get(
-                        typeof(ClassOverridingVirtualProperty),
-                        b => b.BindNonPublicProperties = true
-                    )
-            );
+            ex = Assert.Throws<NotSupportedException>(() =>
+                config.Get(
+                    typeof(ClassOverridingVirtualProperty),
+                    b => b.BindNonPublicProperties = true
+                ));
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
             var test = config.Get<ClassOverridingVirtualProperty>(b =>
@@ -2388,9 +2357,8 @@ namespace Microsoft.Extensions
             IConfiguration? configuration = null;
 
             Assert.Throws<ArgumentNullException>(() => configuration.Get<GeolocationClass>());
-            Assert.Throws<ArgumentNullException>(
-                () => configuration.Get<GeolocationClass>(_ => { })
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                configuration.Get<GeolocationClass>(_ => { }));
             Assert.Throws<ArgumentNullException>(() => configuration.Get<Geolocation>());
             Assert.Throws<ArgumentNullException>(() => configuration.Get<Geolocation>(_ => { }));
 
@@ -2418,9 +2386,8 @@ namespace Microsoft.Extensions
             );
 #pragma warning disable SYSLIB1104 // The target type for a binder call could not be determined
             Assert.Throws<ArgumentNullException>(() => configuration.GetValue(type: null, key));
-            Assert.Throws<ArgumentNullException>(
-                () => configuration.GetValue(type: null, key, defaultValue: null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                configuration.GetValue(type: null, key, defaultValue: null));
 #pragma warning restore SYSLIB1104 // The target type for a binder call could not be determined
 
             // Null key.
@@ -2428,46 +2395,31 @@ namespace Microsoft.Extensions
 
             void Test(IConfiguration? configuration, string? key)
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => configuration.GetValue<GeolocationClass>(key)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => configuration.GetValue<GeolocationClass>(key, defaultValue: null)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => configuration.GetValue<Geolocation>(key)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => configuration.GetValue<Geolocation>(key, defaultValue: default)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue<GeolocationClass>(key));
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue<GeolocationClass>(key, defaultValue: null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue<Geolocation>(key));
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue<Geolocation>(key, defaultValue: default));
                 TestUntypedOverloads(configuration: null, key);
             }
 
             void TestUntypedOverloads(IConfiguration? configuration, string? key)
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => configuration.GetValue(typeof(GeolocationClass), key)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => configuration.GetValue(typeof(GeolocationClass), key, defaultValue: null)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                        configuration.GetValue(
-                            typeof(GeolocationClass),
-                            key,
-                            new GeolocationClass()
-                        )
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => configuration.GetValue(typeof(Geolocation), key)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => configuration.GetValue(typeof(Geolocation), key, defaultValue: null)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => configuration.GetValue(typeof(Geolocation), key, default(Geolocation))
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(GeolocationClass), key));
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(GeolocationClass), key, defaultValue: null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(GeolocationClass), key, new GeolocationClass()));
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(Geolocation), key));
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(Geolocation), key, defaultValue: null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(Geolocation), key, default(Geolocation)));
             }
         }
 

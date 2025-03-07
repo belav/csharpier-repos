@@ -410,9 +410,10 @@ public class When_resolve_throws : NonValidatingSpecBase
     [Fact]
     public void Should_propagate_exception()
     {
-        new Action(
-            () => Mapper.Map<Destination>(new Source())
-        ).ShouldThrowException<AutoMapperMappingException>(e => e.InnerException.ShouldBe(_ex));
+        new Action(() =>
+            Mapper.Map<Destination>(new Source())).ShouldThrowException<AutoMapperMappingException>(
+            e => e.InnerException.ShouldBe(_ex)
+        );
     }
 }
 

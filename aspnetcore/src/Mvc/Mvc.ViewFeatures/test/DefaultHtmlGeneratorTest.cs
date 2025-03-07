@@ -670,15 +670,13 @@ public class DefaultHtmlGeneratorTest
         viewContext.ViewData[nameof(Model.Name)] = value;
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-                htmlGenerator.GetCurrentValues(
-                    viewContext,
-                    modelExplorer: null,
-                    expression: nameof(Model.Name),
-                    allowMultiple: true
-                )
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            htmlGenerator.GetCurrentValues(
+                viewContext,
+                modelExplorer: null,
+                expression: nameof(Model.Name),
+                allowMultiple: true
+            ));
         Assert.Equal(
             "The parameter 'expression' must evaluate to an IEnumerable when multiple selection is allowed.",
             exception.Message

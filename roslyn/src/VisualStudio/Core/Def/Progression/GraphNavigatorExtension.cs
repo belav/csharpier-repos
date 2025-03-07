@@ -76,16 +76,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     if (document == null)
                         return;
 
-                    this.ThreadingContext.JoinableTaskFactory.Run(
-                        () =>
-                            NavigateToAsync(
-                                sourceLocation,
-                                symbolId,
-                                project,
-                                document,
-                                CancellationToken.None
-                            )
-                    );
+                    this.ThreadingContext.JoinableTaskFactory.Run(() =>
+                        NavigateToAsync(
+                            sourceLocation,
+                            symbolId,
+                            project,
+                            document,
+                            CancellationToken.None
+                        ));
                 }
             }
         }

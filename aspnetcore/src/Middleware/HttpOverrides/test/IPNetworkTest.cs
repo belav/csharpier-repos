@@ -72,9 +72,8 @@ public class IPNetworkTest
         var address = IPAddress.Parse(prefixText);
 
         // Act
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(
-            () => new IPNetwork(address, prefixLength)
-        );
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new IPNetwork(address, prefixLength));
 
         // Assert
         Assert.StartsWith("The prefix length was out of range.", ex.Message);

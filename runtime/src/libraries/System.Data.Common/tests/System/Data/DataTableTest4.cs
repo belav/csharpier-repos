@@ -596,9 +596,8 @@ namespace System.Data.Tests
                 // Should throw an exception if the Xml
                 // File has no schema and target table
                 // too does not define any schema
-                InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                    () => table.ReadXml(stream)
-                );
+                InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                    table.ReadXml(stream));
                 Assert.Null(ex.InnerException);
                 Assert.NotNull(ex.Message);
             }
@@ -1510,9 +1509,8 @@ namespace System.Data.Tests
                 DataTable table = new DataTable("Table1");
                 table.Columns.Add(new DataColumn("id", typeof(int)));
 
-                ArgumentException ex = Assert.Throws<ArgumentException>(
-                    () => table.ReadXml(stream)
-                );
+                ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                    table.ReadXml(stream));
                 // DataTable 'Table1' does not match to
                 // any DataTable in source
                 Assert.Equal(typeof(ArgumentException), ex.GetType());
@@ -1687,9 +1685,8 @@ namespace System.Data.Tests
                 table.Columns.Add(new DataColumn("id", Type.GetType("System.Int32")));
                 ds.Tables.Add(table);
 
-                ArgumentException ex = Assert.Throws<ArgumentException>(
-                    () => table.ReadXml(stream)
-                );
+                ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                    table.ReadXml(stream));
                 // DataTable 'Table1' does not match to
                 // any DataTable in sources
                 Assert.Null(ex.InnerException);
@@ -1762,9 +1759,8 @@ namespace System.Data.Tests
             {
                 DataTable table = new DataTable();
 
-                InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
-                    () => table.ReadXml(stream)
-                );
+                InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                    table.ReadXml(stream));
                 Assert.Null(ex.InnerException);
                 Assert.NotNull(ex.Message);
             }

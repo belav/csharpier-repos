@@ -79,9 +79,8 @@ public class DatabaseErrorPageMiddlewareTest
 
         var server = host.GetTestServer();
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await server.CreateClient().GetAsync("http://localhost/")
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await server.CreateClient().GetAsync("http://localhost/"));
 
         Assert.Equal("Exception requested from TestMiddleware", ex.Message);
     }
@@ -108,9 +107,8 @@ public class DatabaseErrorPageMiddlewareTest
                 DatabaseErrorButNoMigrationsMiddleware
             >(database);
             using var server = host.GetTestServer();
-            var ex = await Assert.ThrowsAsync<DbUpdateException>(
-                async () => await server.CreateClient().GetAsync("http://localhost/")
-            );
+            var ex = await Assert.ThrowsAsync<DbUpdateException>(async () =>
+                await server.CreateClient().GetAsync("http://localhost/"));
 
             Assert.Equal("SQLite Error 1: 'no such table: Blogs'.", ex.InnerException.Message);
         }

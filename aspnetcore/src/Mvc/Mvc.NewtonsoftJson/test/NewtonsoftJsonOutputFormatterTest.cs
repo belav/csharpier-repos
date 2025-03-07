@@ -560,13 +560,11 @@ public class NewtonsoftJsonOutputFormatterTest : JsonOutputFormatterTestBase
         };
 
         // Act
-        await Assert.ThrowsAsync<OperationCanceledException>(
-            () =>
-                formatter.WriteResponseBodyAsync(
-                    outputFormatterContext,
-                    Encoding.GetEncoding("utf-8")
-                )
-        );
+        await Assert.ThrowsAsync<OperationCanceledException>(() =>
+            formatter.WriteResponseBodyAsync(
+                outputFormatterContext,
+                Encoding.GetEncoding("utf-8")
+            ));
 
         async IAsyncEnumerable<int> AsyncEnumerableThrows(
             [EnumeratorCancellation] CancellationToken cancellationToken = default

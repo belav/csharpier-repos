@@ -43,13 +43,11 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void Ctor_TooLongBoundary_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    new MultipartContent(
-                        "Some",
-                        "LongerThan70CharactersLongerThan70CharactersLongerThan70CharactersLongerThan70CharactersLongerThan70Characters"
-                    )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new MultipartContent(
+                    "Some",
+                    "LongerThan70CharactersLongerThan70CharactersLongerThan70CharactersLongerThan70CharactersLongerThan70Characters"
+                ));
         }
 
         [Fact]
@@ -485,9 +483,8 @@ namespace System.Net.Http.Functional.Tests
                     () => s.Seek(0, (SeekOrigin)42)
                 );
                 Assert.Throws<NotSupportedException>(() => s.Write(new byte[1], 0, 0));
-                Assert.Throws<NotSupportedException>(
-                    () => s.Write(new Span<byte>(new byte[1], 0, 0))
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    s.Write(new Span<byte>(new byte[1], 0, 0)));
                 Assert.Throws<NotSupportedException>(() =>
                 {
                     s.WriteAsync(new byte[1], 0, 0);

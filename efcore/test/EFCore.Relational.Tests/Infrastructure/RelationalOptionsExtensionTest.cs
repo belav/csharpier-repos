@@ -70,9 +70,8 @@ public class RelationalOptionsExtensionTest
         Assert.Equal(
             RelationalStrings.InvalidCommandTimeout(-1),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => new FakeRelationalOptionsExtension().WithCommandTimeout(-1)
-                )
+                .Throws<InvalidOperationException>(() =>
+                    new FakeRelationalOptionsExtension().WithCommandTimeout(-1))
                 .Message
         );
 
@@ -93,9 +92,8 @@ public class RelationalOptionsExtensionTest
         Assert.Equal(
             RelationalStrings.InvalidMaxBatchSize(-1),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => new FakeRelationalOptionsExtension().WithMaxBatchSize(-1)
-                )
+                .Throws<InvalidOperationException>(() =>
+                    new FakeRelationalOptionsExtension().WithMaxBatchSize(-1))
                 .Message
         );
 
@@ -104,9 +102,8 @@ public class RelationalOptionsExtensionTest
         Assert.Equal(
             RelationalStrings.InvalidMinBatchSize(-1),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => new FakeRelationalOptionsExtension().WithMinBatchSize(-1)
-                )
+                .Throws<InvalidOperationException>(() =>
+                    new FakeRelationalOptionsExtension().WithMinBatchSize(-1))
                 .Message
         );
 }

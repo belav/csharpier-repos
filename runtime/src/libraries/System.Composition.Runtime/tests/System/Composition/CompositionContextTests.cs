@@ -67,12 +67,10 @@ namespace System.Composition.Runtime.Tests
                 }
                 else
                 {
-                    Assert.Throws<CompositionFailedException>(
-                        () => context.GetExport<int>(contractName)
-                    );
-                    Assert.Throws<CompositionFailedException>(
-                        () => context.GetExport(typeof(int), contractName)
-                    );
+                    Assert.Throws<CompositionFailedException>(() =>
+                        context.GetExport<int>(contractName));
+                    Assert.Throws<CompositionFailedException>(() =>
+                        context.GetExport(typeof(int), contractName));
 
                     Assert.False(context.TryGetExport(contractName, out int export1));
                     Assert.Equal(0, export1);
@@ -124,18 +122,15 @@ namespace System.Composition.Runtime.Tests
                 if (contractName == null)
                 {
                     Assert.Throws<CompositionFailedException>(() => context.GetExports<object>());
-                    Assert.Throws<CompositionFailedException>(
-                        () => context.GetExports(typeof(object))
-                    );
+                    Assert.Throws<CompositionFailedException>(() =>
+                        context.GetExports(typeof(object)));
                 }
                 else
                 {
-                    Assert.Throws<CompositionFailedException>(
-                        () => context.GetExports<object>(contractName)
-                    );
-                    Assert.Throws<CompositionFailedException>(
-                        () => context.GetExports(typeof(object), contractName)
-                    );
+                    Assert.Throws<CompositionFailedException>(() =>
+                        context.GetExports<object>(contractName));
+                    Assert.Throws<CompositionFailedException>(() =>
+                        context.GetExports(typeof(object), contractName));
                 }
             }
         }

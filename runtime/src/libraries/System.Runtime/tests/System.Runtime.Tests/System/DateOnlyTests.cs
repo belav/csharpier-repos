@@ -107,9 +107,8 @@ namespace System.Tests
             Assert.Equal(dayNumber, dateOnly.DayNumber);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => DateOnly.FromDayNumber(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => DateOnly.FromDayNumber(DateOnly.MaxValue.DayNumber + 1)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                DateOnly.FromDayNumber(DateOnly.MaxValue.DayNumber + 1));
         }
 
         [Fact]
@@ -372,14 +371,8 @@ namespace System.Tests
                     out parsedDateOnly1
                 )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    DateOnly.Parse(
-                        s,
-                        CultureInfo.InvariantCulture,
-                        DateTimeStyles.AdjustToUniversal
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
             Assert.False(
                 DateOnly.TryParse(
                     s,
@@ -388,9 +381,8 @@ namespace System.Tests
                     out parsedDateOnly1
                 )
             );
-            Assert.Throws<ArgumentException>(
-                () => DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal));
             Assert.False(
                 DateOnly.TryParse(
                     s,
@@ -399,10 +391,8 @@ namespace System.Tests
                     out parsedDateOnly1
                 )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal));
             Assert.False(
                 DateOnly.TryParse(
                     s,
@@ -411,14 +401,12 @@ namespace System.Tests
                     out parsedDateOnly1
                 )
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    DateOnly.Parse(
-                        s,
-                        CultureInfo.InvariantCulture,
-                        DateTimeStyles.NoCurrentDateDefault
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                DateOnly.Parse(
+                    s,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.NoCurrentDateDefault
+                ));
 
             s = "     " + s + "     ";
             parsedDateOnly = DateOnly.Parse(
@@ -677,12 +665,10 @@ namespace System.Tests
                 Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten));
                 Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "r"));
                 Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "O"));
-                Assert.Throws<FormatException>(
-                    () => dateOnly.TryFormat(stackalloc char[100], out charsWritten, "u")
-                );
-                Assert.Throws<FormatException>(
-                    () => dateOnly.TryFormat(stackalloc char[100], out charsWritten, "hh-ss")
-                );
+                Assert.Throws<FormatException>(() =>
+                    dateOnly.TryFormat(stackalloc char[100], out charsWritten, "u"));
+                Assert.Throws<FormatException>(() =>
+                    dateOnly.TryFormat(stackalloc char[100], out charsWritten, "hh-ss"));
                 Assert.Throws<FormatException>(() => $"{dateOnly:u}");
                 Assert.Throws<FormatException>(() => $"{dateOnly:hh-ss}");
             }
@@ -702,12 +688,10 @@ namespace System.Tests
                 );
                 Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "r", null));
                 Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "O", null));
-                Assert.Throws<FormatException>(
-                    () => dateOnly.TryFormat(stackalloc byte[100], out charsWritten, "u", null)
-                );
-                Assert.Throws<FormatException>(
-                    () => dateOnly.TryFormat(stackalloc byte[100], out charsWritten, "hh-ss", null)
-                );
+                Assert.Throws<FormatException>(() =>
+                    dateOnly.TryFormat(stackalloc byte[100], out charsWritten, "u", null));
+                Assert.Throws<FormatException>(() =>
+                    dateOnly.TryFormat(stackalloc byte[100], out charsWritten, "hh-ss", null));
                 Assert.Throws<FormatException>(() => $"{dateOnly:u}");
                 Assert.Throws<FormatException>(() => $"{dateOnly:hh-ss}");
             }

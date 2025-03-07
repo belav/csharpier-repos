@@ -69,9 +69,8 @@ namespace System.IO.Compression.Tests
             DirectoryInfo destination = Directory.CreateDirectory(
                 Path.Combine(GetTestFilePath(), "Bar")
             );
-            Assert.Throws<IOException>(
-                () => ZipFile.ExtractToDirectory(archivePath, destination.FullName)
-            );
+            Assert.Throws<IOException>(() =>
+                ZipFile.ExtractToDirectory(archivePath, destination.FullName));
         }
 
         /// <summary>
@@ -171,21 +170,17 @@ namespace System.IO.Compression.Tests
             using (var tempFolder = new TempDirectory(GetTestFilePath()))
             {
                 ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, overwriteFiles: false);
-                Assert.Throws<IOException>(
-                    () =>
-                        ZipFile.ExtractToDirectory(
-                            zipFileName,
-                            tempFolder.Path /* default false */
-                        )
-                );
-                Assert.Throws<IOException>(
-                    () =>
-                        ZipFile.ExtractToDirectory(
-                            zipFileName,
-                            tempFolder.Path,
-                            overwriteFiles: false
-                        )
-                );
+                Assert.Throws<IOException>(() =>
+                    ZipFile.ExtractToDirectory(
+                        zipFileName,
+                        tempFolder.Path /* default false */
+                    ));
+                Assert.Throws<IOException>(() =>
+                    ZipFile.ExtractToDirectory(
+                        zipFileName,
+                        tempFolder.Path,
+                        overwriteFiles: false
+                    ));
                 ZipFile.ExtractToDirectory(zipFileName, tempFolder.Path, overwriteFiles: true);
 
                 DirsEqual(tempFolder.Path, folderName);
@@ -206,23 +201,19 @@ namespace System.IO.Compression.Tests
                     Encoding.UTF8,
                     overwriteFiles: false
                 );
-                Assert.Throws<IOException>(
-                    () =>
-                        ZipFile.ExtractToDirectory(
-                            zipFileName,
-                            tempFolder.Path,
-                            Encoding.UTF8 /* default false */
-                        )
-                );
-                Assert.Throws<IOException>(
-                    () =>
-                        ZipFile.ExtractToDirectory(
-                            zipFileName,
-                            tempFolder.Path,
-                            Encoding.UTF8,
-                            overwriteFiles: false
-                        )
-                );
+                Assert.Throws<IOException>(() =>
+                    ZipFile.ExtractToDirectory(
+                        zipFileName,
+                        tempFolder.Path,
+                        Encoding.UTF8 /* default false */
+                    ));
+                Assert.Throws<IOException>(() =>
+                    ZipFile.ExtractToDirectory(
+                        zipFileName,
+                        tempFolder.Path,
+                        Encoding.UTF8,
+                        overwriteFiles: false
+                    ));
                 ZipFile.ExtractToDirectory(
                     zipFileName,
                     tempFolder.Path,
@@ -249,9 +240,8 @@ namespace System.IO.Compression.Tests
             {
                 writer.Write("This is a test.");
             }
-            Assert.Throws<IOException>(
-                () => ZipFile.ExtractToDirectory(archivePath, GetTestFilePath())
-            );
+            Assert.Throws<IOException>(() =>
+                ZipFile.ExtractToDirectory(archivePath, GetTestFilePath()));
         }
 
         [Fact]
@@ -272,9 +262,8 @@ namespace System.IO.Compression.Tests
             {
                 writer.Write("This is a test.");
             }
-            Assert.Throws<IOException>(
-                () => ZipFile.ExtractToDirectory(archivePath, GetTestFilePath())
-            );
+            Assert.Throws<IOException>(() =>
+                ZipFile.ExtractToDirectory(archivePath, GetTestFilePath()));
         }
     }
 }

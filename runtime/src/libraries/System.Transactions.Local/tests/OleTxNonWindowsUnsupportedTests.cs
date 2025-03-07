@@ -21,9 +21,8 @@ public class OleTxNonWindowsUnsupportedTests
         // Votes and outcomes don't matter, the 2nd enlistment fails in non-Windows
         var enlistment1 = new TestEnlistment(Phase1Vote.Prepared, EnlistmentOutcome.Aborted);
 
-        Assert.Throws<PlatformNotSupportedException>(
-            () => tx.EnlistDurable(Guid.NewGuid(), enlistment1, EnlistmentOptions.None)
-        );
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            tx.EnlistDurable(Guid.NewGuid(), enlistment1, EnlistmentOptions.None));
         Assert.Equal(TransactionStatus.Aborted, tx.TransactionInformation.Status);
     }
 
@@ -51,9 +50,8 @@ public class OleTxNonWindowsUnsupportedTests
 
         // Now enlist a durable enlistment, this will cause the escalation to a distributed transaction and fail on non-Windows.
         var durableEnlistment = new TestEnlistment(Phase1Vote.Prepared, EnlistmentOutcome.Aborted);
-        Assert.Throws<PlatformNotSupportedException>(
-            () => tx.EnlistDurable(Guid.NewGuid(), durableEnlistment, EnlistmentOptions.None)
-        );
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            tx.EnlistDurable(Guid.NewGuid(), durableEnlistment, EnlistmentOptions.None));
 
         Assert.True(promotableEnlistment1.PromoteCalled);
         Assert.False(promotableEnlistment2.PromoteCalled);
@@ -63,9 +61,8 @@ public class OleTxNonWindowsUnsupportedTests
 
     [Fact]
     public void TransmitterPropagationToken() =>
-        Assert.Throws<PlatformNotSupportedException>(
-            () => TransactionInterop.GetTransmitterPropagationToken(new CommittableTransaction())
-        );
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            TransactionInterop.GetTransmitterPropagationToken(new CommittableTransaction()));
 
     [Fact]
     public void GetWhereabouts() =>
@@ -73,13 +70,11 @@ public class OleTxNonWindowsUnsupportedTests
 
     [Fact]
     public void GetExportCookie() =>
-        Assert.Throws<PlatformNotSupportedException>(
-            () => TransactionInterop.GetExportCookie(new CommittableTransaction(), new byte[200])
-        );
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            TransactionInterop.GetExportCookie(new CommittableTransaction(), new byte[200]));
 
     [Fact]
     public void GetDtcTransaction() =>
-        Assert.Throws<PlatformNotSupportedException>(
-            () => TransactionInterop.GetDtcTransaction(new CommittableTransaction())
-        );
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            TransactionInterop.GetDtcTransaction(new CommittableTransaction()));
 }

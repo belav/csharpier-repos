@@ -220,9 +220,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act and Assert
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => createFunc(provider: serviceProvider, type: type, args: Array.Empty<object>())
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                createFunc(provider: serviceProvider, type: type, args: Array.Empty<object>()));
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -241,19 +240,16 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             >();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
-            var ex1 = Assert.Throws<InvalidOperationException>(
-                () =>
-                    CreateInstance<AnotherClassAcceptingData>(
-                        createFunc,
-                        serviceProvider,
-                        "1",
-                        "2",
-                        "3"
-                    )
-            );
-            var ex2 = Assert.Throws<InvalidOperationException>(
-                () => CreateInstance<AnotherClassAcceptingData>(createFunc, serviceProvider, 1, 2)
-            );
+            var ex1 = Assert.Throws<InvalidOperationException>(() =>
+                CreateInstance<AnotherClassAcceptingData>(
+                    createFunc,
+                    serviceProvider,
+                    "1",
+                    "2",
+                    "3"
+                ));
+            var ex2 = Assert.Throws<InvalidOperationException>(() =>
+                CreateInstance<AnotherClassAcceptingData>(createFunc, serviceProvider, 1, 2));
 
             Assert.Equal(expectedMessage, ex1.Message);
             Assert.Equal(expectedMessage, ex2.Message);
@@ -269,22 +265,15 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var serviceCollection = new TestServiceCollection();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
-            var ex1 = Assert.Throws<Exception>(
-                () =>
-                    CreateInstance<ClassWithThrowingEmptyCtor>(
-                        createFunc,
-                        provider: serviceProvider
-                    )
-            );
+            var ex1 = Assert.Throws<Exception>(() =>
+                CreateInstance<ClassWithThrowingEmptyCtor>(createFunc, provider: serviceProvider));
 
-            var ex2 = Assert.Throws<Exception>(
-                () =>
-                    CreateInstance<ClassWithThrowingCtor>(
-                        createFunc,
-                        provider: serviceProvider,
-                        args: new object[] { new FakeService() }
-                    )
-            );
+            var ex2 = Assert.Throws<Exception>(() =>
+                CreateInstance<ClassWithThrowingCtor>(
+                    createFunc,
+                    provider: serviceProvider,
+                    args: new object[] { new FakeService() }
+                ));
 
             // Assert
             Assert.Equal(nameof(ClassWithThrowingEmptyCtor), ex1.Message);
@@ -305,9 +294,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 + "There should only be one applicable constructor.";
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => ActivatorUtilities.CreateFactory(type, new[] { paramType })
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                ActivatorUtilities.CreateFactory(type, new[] { paramType }));
 
             // Assert
             Assert.Equal(expectedMessage, ex.Message);
@@ -338,9 +326,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             else
             {
                 // Act
-                var ex = Assert.Throws<InvalidOperationException>(
-                    () => ActivatorUtilities.CreateInstance(serviceProvider, type, value)
-                );
+                var ex = Assert.Throws<InvalidOperationException>(() =>
+                    ActivatorUtilities.CreateInstance(serviceProvider, type, value));
 
                 // Assert
                 Assert.Equal(
@@ -380,14 +367,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act
-            var exception = Assert.Throws<InvalidOperationException>(
-                () =>
-                    CreateInstance<ClassWithMultipleMarkedCtors>(
-                        createFunc,
-                        serviceProvider,
-                        "hello"
-                    )
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                CreateInstance<ClassWithMultipleMarkedCtors>(createFunc, serviceProvider, "hello"));
 
             // Assert
             Assert.Equal(
@@ -409,15 +390,13 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(
-                () =>
-                    CreateInstance<ClassWithAmbiguousCtorsAndAttribute>(
-                        createFunc,
-                        serviceProvider,
-                        0,
-                        "hello"
-                    )
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                CreateInstance<ClassWithAmbiguousCtorsAndAttribute>(
+                    createFunc,
+                    serviceProvider,
+                    0,
+                    "hello"
+                ));
             Assert.Equal(message, exception.Message);
         }
 
@@ -528,9 +507,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 new TestServiceCollection().AddSingleton<CreationCountFakeService>();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => CreateInstance<CreationCountFakeService>(createFunc, serviceProvider)
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                CreateInstance<CreationCountFakeService>(createFunc, serviceProvider));
             Assert.Equal(
                 $"Unable to resolve service for type '{typeof(IFakeService)}' while attempting"
                     + $" to activate '{typeof(CreationCountFakeService)}'.",
@@ -546,9 +524,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
             // Act & Assert
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => ActivatorUtilities.CreateInstance(serviceProvider, typeof(AbstractFoo))
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                ActivatorUtilities.CreateInstance(serviceProvider, typeof(AbstractFoo)));
             var msg = "Instances of abstract classes cannot be created.";
             Assert.Equal(msg, ex.Message);
         }
@@ -560,9 +537,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var serviceCollection = new TestServiceCollection();
             var serviceProvider = CreateServiceProvider(serviceCollection);
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => ActivatorUtilities.CreateInstance(serviceProvider, typeof(Bar))
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                ActivatorUtilities.CreateInstance(serviceProvider, typeof(Bar)));
             var msg = "some error";
             Assert.Equal(msg, ex.Message);
         }

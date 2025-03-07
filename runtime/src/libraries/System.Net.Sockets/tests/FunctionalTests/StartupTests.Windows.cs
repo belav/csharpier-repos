@@ -128,15 +128,13 @@ namespace System.Net.Sockets.Tests
                 {
                     using var pipe = new AnonymousPipeServerStream();
                     using SafeHandle clientSafeHandle = pipe.ClientSafePipeHandle;
-                    SocketException se = Assert.Throws<SocketException>(
-                        () =>
-                            new Socket(
-                                new SafeSocketHandle(
-                                    clientSafeHandle.DangerousGetHandle(),
-                                    ownsHandle: false
-                                )
+                    SocketException se = Assert.Throws<SocketException>(() =>
+                        new Socket(
+                            new SafeSocketHandle(
+                                clientSafeHandle.DangerousGetHandle(),
+                                ownsHandle: false
                             )
-                    );
+                        ));
                     Assert.Equal(SocketError.NotSocket, se.SocketErrorCode);
                 })
                 .Dispose();

@@ -565,9 +565,8 @@ namespace System.Tests
             Assert.Throws<RankException>(() => Array.BinarySearch(new string[0, 0], ""));
             Assert.Throws<RankException>(() => Array.BinarySearch(new string[0, 0], "", null));
             Assert.Throws<RankException>(() => Array.BinarySearch(new string[0, 0], 0, 0, ""));
-            Assert.Throws<RankException>(
-                () => Array.BinarySearch(new string[0, 0], 0, 0, "", null)
-            );
+            Assert.Throws<RankException>(() =>
+                Array.BinarySearch(new string[0, 0], 0, 0, "", null));
         }
 
         public static IEnumerable<object[]> BinarySearch_TypesNotComparable_TestData()
@@ -592,22 +591,18 @@ namespace System.Tests
         {
             Assert.Throws<InvalidOperationException>(() => Array.BinarySearch(array, value));
             Assert.Throws<InvalidOperationException>(() => Array.BinarySearch(array, value, null));
-            Assert.Throws<InvalidOperationException>(
-                () => Array.BinarySearch(array, 0, array.Length, value)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.BinarySearch(array, 0, array.Length, value, null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.BinarySearch(array, 0, array.Length, value));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.BinarySearch(array, 0, array.Length, value, null));
 
             if (value is T)
             {
                 Assert.Throws<InvalidOperationException>(() => Array.BinarySearch(array, (T)value));
-                Assert.Throws<InvalidOperationException>(
-                    () => Array.BinarySearch(array, 0, array.Length, (T)value)
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => Array.BinarySearch(array, 0, array.Length, (T)value, null)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    Array.BinarySearch(array, 0, array.Length, (T)value));
+                Assert.Throws<InvalidOperationException>(() =>
+                    Array.BinarySearch(array, 0, array.Length, (T)value, null));
             }
         }
 
@@ -805,20 +800,16 @@ namespace System.Tests
         {
             Assert.Throws<IndexOutOfRangeException>(() => new int[10].GetValue(index));
             Assert.Throws<IndexOutOfRangeException>(() => new int[10, 10].GetValue(index, 0));
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue(index, 0, 0)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue(new int[] { index, 0, 0 })
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue(index, 0, 0));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue(new int[] { index, 0, 0 }));
             Assert.Throws<IndexOutOfRangeException>(() => new int[10].GetValue((long)index));
             Assert.Throws<IndexOutOfRangeException>(() => new int[10, 10].GetValue((long)index, 0));
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue((long)index, 0, 0)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue(new long[] { (long)index, 0, 0 })
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue((long)index, 0, 0));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue(new long[] { (long)index, 0, 0 }));
         }
 
         [Theory]
@@ -847,19 +838,15 @@ namespace System.Tests
         public void GetValue_OutOfRangeIntIndex2_ThrowsIndexOutOfRangeException(int index)
         {
             Assert.Throws<IndexOutOfRangeException>(() => new int[10, 10].GetValue(0, index));
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue(0, index, 0)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue(new int[] { 0, index, 0 })
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue(0, index, 0));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue(new int[] { 0, index, 0 }));
             Assert.Throws<IndexOutOfRangeException>(() => new int[10, 10].GetValue((long)0, index));
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue((long)0, index, 0)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue(new long[] { 0, index, 0 })
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue((long)0, index, 0));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue(new long[] { 0, index, 0 }));
         }
 
         [Theory]
@@ -886,18 +873,14 @@ namespace System.Tests
         [InlineData(10)]
         public void GetValue_OutOfRangeIntIndex3_ThrowsIndexOutOfRangeException(int index)
         {
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue(0, 0, index)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue(new int[] { 0, 0, index })
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue((long)0, 0, index)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].GetValue(new long[] { 0, 0, index })
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue(0, 0, index));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue(new int[] { 0, 0, index }));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue((long)0, 0, index));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].GetValue(new long[] { 0, 0, index }));
         }
 
         [Theory]
@@ -979,22 +962,17 @@ namespace System.Tests
         {
             Assert.Throws<IndexOutOfRangeException>(() => new int[10].SetValue(1, index));
             Assert.Throws<IndexOutOfRangeException>(() => new int[10, 10].SetValue(1, index, 0));
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, index, 0, 0)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, new int[] { index, 0, 0 })
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, index, 0, 0));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, new int[] { index, 0, 0 }));
             Assert.Throws<IndexOutOfRangeException>(() => new int[10].SetValue(1, (long)index));
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10].SetValue(1, (long)index, 0)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, (long)index, 0, 0)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, new long[] { (long)index, 0, 0 })
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10].SetValue(1, (long)index, 0));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, (long)index, 0, 0));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, new long[] { (long)index, 0, 0 }));
         }
 
         [Theory]
@@ -1026,21 +1004,16 @@ namespace System.Tests
         public void SetValue_OutOfRangeIntIndex2_ThrowsIndexOutOfRangeException(int index)
         {
             Assert.Throws<IndexOutOfRangeException>(() => new int[10, 10].SetValue(1, 0, index));
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, 0, index, 0)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, new int[] { 0, index, 0 })
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10].SetValue(1, (long)0, index)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, (long)0, index, 0)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, new long[] { 0, index, 0 })
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, 0, index, 0));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, new int[] { 0, index, 0 }));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10].SetValue(1, (long)0, index));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, (long)0, index, 0));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, new long[] { 0, index, 0 }));
         }
 
         [Theory]
@@ -1067,18 +1040,14 @@ namespace System.Tests
         [InlineData(10)]
         public void SetValue_OutOfRangeIntIndex3_ThrowsIndexOutOfRangeException(int index)
         {
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, 0, 0, index)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, new int[] { 0, 0, index })
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, (long)0, 0, index)
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 10, 10].SetValue(1, new long[] { 0, 0, index })
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, 0, 0, index));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, new int[] { 0, 0, index }));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, (long)0, 0, index));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 10, 10].SetValue(1, new long[] { 0, 0, index }));
         }
 
         [Theory]
@@ -1542,16 +1511,14 @@ namespace System.Tests
         [Fact]
         public void ConvertAll_ConverterActionThrows_RethrowsException()
         {
-            Assert.Throws<DivideByZeroException>(
-                () =>
-                    Array.ConvertAll<string, string>(
-                        new string[1],
-                        element =>
-                        {
-                            throw new DivideByZeroException();
-                        }
-                    )
-            );
+            Assert.Throws<DivideByZeroException>(() =>
+                Array.ConvertAll<string, string>(
+                    new string[1],
+                    element =>
+                    {
+                        throw new DivideByZeroException();
+                    }
+                ));
         }
 
         public static IEnumerable<object[]> Copy_Array_Reliable_TestData()
@@ -3204,20 +3171,16 @@ namespace System.Tests
         public static void Copy_SourceAndDestinationArrayHaveDifferentRanks_ThrowsRankException()
         {
             Assert.Throws<RankException>(() => Array.Copy(new string[10, 10], new string[10], 0));
-            Assert.Throws<RankException>(
-                () => Array.Copy(new string[10, 10], new string[10], (long)0)
-            );
+            Assert.Throws<RankException>(() =>
+                Array.Copy(new string[10, 10], new string[10], (long)0));
 
-            Assert.Throws<RankException>(
-                () => Array.Copy(new string[10, 10], 0, new string[10], 0, 0)
-            );
-            Assert.Throws<RankException>(
-                () => Array.Copy(new string[10, 10], (long)0, new string[10], 0, 0)
-            );
+            Assert.Throws<RankException>(() =>
+                Array.Copy(new string[10, 10], 0, new string[10], 0, 0));
+            Assert.Throws<RankException>(() =>
+                Array.Copy(new string[10, 10], (long)0, new string[10], 0, 0));
 
-            Assert.Throws<RankException>(
-                () => Array.ConstrainedCopy(new string[10, 10], 0, new string[10], 0, 0)
-            );
+            Assert.Throws<RankException>(() =>
+                Array.ConstrainedCopy(new string[10, 10], 0, new string[10], 0, 0));
         }
 
         public static IEnumerable<object[]> Copy_SourceAndDestinationNeverConvertible_TestData()
@@ -3405,40 +3368,32 @@ namespace System.Tests
             Array destinationArray
         )
         {
-            Assert.Throws<ArrayTypeMismatchException>(
-                () => Array.Copy(sourceArray, destinationArray, 0)
-            );
-            Assert.Throws<ArrayTypeMismatchException>(
-                () => Array.Copy(sourceArray, destinationArray, (long)0)
-            );
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                Array.Copy(sourceArray, destinationArray, 0));
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                Array.Copy(sourceArray, destinationArray, (long)0));
 
-            Assert.Throws<ArrayTypeMismatchException>(
-                () =>
-                    Array.Copy(
-                        sourceArray,
-                        sourceArray.GetLowerBound(0),
-                        destinationArray,
-                        destinationArray.GetLowerBound(0),
-                        0
-                    )
-            );
-            Assert.Throws<ArrayTypeMismatchException>(
-                () =>
-                    Array.Copy(
-                        sourceArray,
-                        (long)sourceArray.GetLowerBound(0),
-                        destinationArray,
-                        destinationArray.GetLowerBound(0),
-                        0
-                    )
-            );
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                Array.Copy(
+                    sourceArray,
+                    sourceArray.GetLowerBound(0),
+                    destinationArray,
+                    destinationArray.GetLowerBound(0),
+                    0
+                ));
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                Array.Copy(
+                    sourceArray,
+                    (long)sourceArray.GetLowerBound(0),
+                    destinationArray,
+                    destinationArray.GetLowerBound(0),
+                    0
+                ));
 
-            Assert.Throws<ArrayTypeMismatchException>(
-                () => sourceArray.CopyTo(destinationArray, destinationArray.GetLowerBound(0))
-            );
-            Assert.Throws<ArrayTypeMismatchException>(
-                () => sourceArray.CopyTo(destinationArray, (long)destinationArray.GetLowerBound(0))
-            );
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                sourceArray.CopyTo(destinationArray, destinationArray.GetLowerBound(0)));
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                sourceArray.CopyTo(destinationArray, (long)destinationArray.GetLowerBound(0)));
         }
 
         [Fact]
@@ -3446,12 +3401,10 @@ namespace System.Tests
         {
             unsafe
             {
-                Assert.Throws<ArrayTypeMismatchException>(
-                    () => Array.Copy(new void*[1], new object[1], 0)
-                );
-                Assert.Throws<ArrayTypeMismatchException>(
-                    () => Array.Copy(new object[1], new void*[1], 0)
-                );
+                Assert.Throws<ArrayTypeMismatchException>(() =>
+                    Array.Copy(new void*[1], new object[1], 0));
+                Assert.Throws<ArrayTypeMismatchException>(() =>
+                    Array.Copy(new object[1], new void*[1], 0));
             }
         }
 
@@ -3534,40 +3487,32 @@ namespace System.Tests
         )
         {
             int length = Math.Min(sourceArray.Length, destinationArray.Length);
-            Assert.Throws<InvalidCastException>(
-                () => Array.Copy(sourceArray, destinationArray, length)
-            );
-            Assert.Throws<InvalidCastException>(
-                () => Array.Copy(sourceArray, destinationArray, (long)length)
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                Array.Copy(sourceArray, destinationArray, length));
+            Assert.Throws<InvalidCastException>(() =>
+                Array.Copy(sourceArray, destinationArray, (long)length));
 
-            Assert.Throws<InvalidCastException>(
-                () =>
-                    Array.Copy(
-                        sourceArray,
-                        sourceArray.GetLowerBound(0),
-                        destinationArray,
-                        destinationArray.GetLowerBound(0),
-                        length
-                    )
-            );
-            Assert.Throws<InvalidCastException>(
-                () =>
-                    Array.Copy(
-                        sourceArray,
-                        (long)sourceArray.GetLowerBound(0),
-                        destinationArray,
-                        destinationArray.GetLowerBound(0),
-                        length
-                    )
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                Array.Copy(
+                    sourceArray,
+                    sourceArray.GetLowerBound(0),
+                    destinationArray,
+                    destinationArray.GetLowerBound(0),
+                    length
+                ));
+            Assert.Throws<InvalidCastException>(() =>
+                Array.Copy(
+                    sourceArray,
+                    (long)sourceArray.GetLowerBound(0),
+                    destinationArray,
+                    destinationArray.GetLowerBound(0),
+                    length
+                ));
 
-            Assert.Throws<InvalidCastException>(
-                () => sourceArray.CopyTo(destinationArray, destinationArray.GetLowerBound(0))
-            );
-            Assert.Throws<InvalidCastException>(
-                () => sourceArray.CopyTo(destinationArray, (long)destinationArray.GetLowerBound(0))
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                sourceArray.CopyTo(destinationArray, destinationArray.GetLowerBound(0)));
+            Assert.Throws<InvalidCastException>(() =>
+                sourceArray.CopyTo(destinationArray, (long)destinationArray.GetLowerBound(0)));
 
             // No exception is thrown if length == 0, as conversion error checking occurs during, not before copying
             Array.Copy(
@@ -3611,16 +3556,14 @@ namespace System.Tests
         )
         {
             _ = ignored;
-            Assert.Throws<ArrayTypeMismatchException>(
-                () =>
-                    Array.ConstrainedCopy(
-                        sourceArray,
-                        sourceIndex,
-                        destinationArray,
-                        destinationIndex,
-                        length
-                    )
-            );
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                Array.ConstrainedCopy(
+                    sourceArray,
+                    sourceIndex,
+                    destinationArray,
+                    destinationIndex,
+                    length
+                ));
         }
 
         [Fact]
@@ -4148,15 +4091,12 @@ namespace System.Tests
             Assert.Throws<NotSupportedException>(() => Array.CreateInstance(elementType, 0));
             Assert.Throws<NotSupportedException>(() => Array.CreateInstance(elementType, 0, 0));
             Assert.Throws<NotSupportedException>(() => Array.CreateInstance(elementType, 0, 0, 0));
-            Assert.Throws<NotSupportedException>(
-                () => Array.CreateInstance(elementType, new int[1])
-            );
-            Assert.Throws<NotSupportedException>(
-                () => Array.CreateInstance(elementType, new long[1])
-            );
-            Assert.Throws<NotSupportedException>(
-                () => Array.CreateInstance(elementType, new int[1], new int[1])
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                Array.CreateInstance(elementType, new int[1]));
+            Assert.Throws<NotSupportedException>(() =>
+                Array.CreateInstance(elementType, new long[1]));
+            Assert.Throws<NotSupportedException>(() =>
+                Array.CreateInstance(elementType, new int[1], new int[1]));
         }
 
         [Theory]
@@ -4165,26 +4105,20 @@ namespace System.Tests
             Type elementType
         )
         {
-            Assert.Throws<NotSupportedException>(
-                () => Array.CreateInstanceFromArrayType(elementType.MakeArrayType(), 0)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => Array.CreateInstanceFromArrayType(elementType.MakeArrayType(rank: 2), 0, 0)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => Array.CreateInstanceFromArrayType(elementType.MakeArrayType(rank: 3), 0, 0, 0)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => Array.CreateInstanceFromArrayType(elementType.MakeArrayType(), new int[1])
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    Array.CreateInstanceFromArrayType(
-                        elementType.MakeArrayType(),
-                        new int[1],
-                        new int[1]
-                    )
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                Array.CreateInstanceFromArrayType(elementType.MakeArrayType(), 0));
+            Assert.Throws<NotSupportedException>(() =>
+                Array.CreateInstanceFromArrayType(elementType.MakeArrayType(rank: 2), 0, 0));
+            Assert.Throws<NotSupportedException>(() =>
+                Array.CreateInstanceFromArrayType(elementType.MakeArrayType(rank: 3), 0, 0, 0));
+            Assert.Throws<NotSupportedException>(() =>
+                Array.CreateInstanceFromArrayType(elementType.MakeArrayType(), new int[1]));
+            Assert.Throws<NotSupportedException>(() =>
+                Array.CreateInstanceFromArrayType(
+                    elementType.MakeArrayType(),
+                    new int[1],
+                    new int[1]
+                ));
         }
 
         [Theory]
@@ -4458,9 +4392,8 @@ namespace System.Tests
                 );
             }
 
-            Assert.Throws<ArgumentException>(
-                () => Array.CreateInstanceFromArrayType(typeof(object[]), [7], [8])
-            );
+            Assert.Throws<ArgumentException>(() =>
+                Array.CreateInstanceFromArrayType(typeof(object[]), [7], [8]));
         }
 
         [Theory]
@@ -4503,13 +4436,11 @@ namespace System.Tests
         {
             var lengths = new int[length];
             var lowerBounds = new int[length];
-            Assert.Throws<TypeLoadException>(
-                () => Array.CreateInstance(typeof(int), lengths, lowerBounds)
-            );
+            Assert.Throws<TypeLoadException>(() =>
+                Array.CreateInstance(typeof(int), lengths, lowerBounds));
 
-            Assert.Throws<ArgumentException>(
-                () => Array.CreateInstanceFromArrayType(typeof(int[]), lengths, lowerBounds)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                Array.CreateInstanceFromArrayType(typeof(int[]), lengths, lowerBounds));
         }
 
         [ConditionalFact(
@@ -4809,16 +4740,14 @@ namespace System.Tests
         [Fact]
         public void ForEach_ActionThrows_RethrowsException()
         {
-            Assert.Throws<DivideByZeroException>(
-                () =>
-                    Array.ForEach(
-                        new int[1],
-                        element =>
-                        {
-                            throw new DivideByZeroException();
-                        }
-                    )
-            );
+            Assert.Throws<DivideByZeroException>(() =>
+                Array.ForEach(
+                    new int[1],
+                    element =>
+                    {
+                        throw new DivideByZeroException();
+                    }
+                ));
         }
 
         public static IEnumerable<object[]> GetEnumerator_TestData()
@@ -6592,9 +6521,8 @@ namespace System.Tests
             // This was not fixed in order to be compatible with the .NET Framework and Xamarin.
             // See https://github.com/dotnet/runtime/issues/19265
             IStructuralComparable comparable = new int[] { 1, 2, 3 };
-            Assert.Throws<NullReferenceException>(
-                () => comparable.CompareTo(new int[] { 1, 2, 3 }, null)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                comparable.CompareTo(new int[] { 1, 2, 3 }, null));
         }
 
         public static IEnumerable<object[]> IStructuralEquatable_TestData()
@@ -6710,9 +6638,8 @@ namespace System.Tests
             // This was not fixed in order to be compatible with the .NET Framework and Xamarin.
             // See https://github.com/dotnet/runtime/issues/19265
             IStructuralEquatable equatable = new int[] { 1, 2, 3 };
-            Assert.Throws<NullReferenceException>(
-                () => equatable.Equals(new int[] { 1, 2, 3 }, null)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                equatable.Equals(new int[] { 1, 2, 3 }, null));
         }
 
         [Fact]
@@ -9442,13 +9369,11 @@ namespace System.Tests
             Assert.Throws<RankException>(() => Array.Sort(new int[10, 10], 0, 0));
             Assert.Throws<RankException>(() => Array.Sort(new int[10, 10], 0, 0, (IComparer)null));
             Assert.Throws<RankException>(() => Array.Sort(new int[10, 10], new int[10]));
-            Assert.Throws<RankException>(
-                () => Array.Sort(new int[10, 10], new int[10], (IComparer)null)
-            );
+            Assert.Throws<RankException>(() =>
+                Array.Sort(new int[10, 10], new int[10], (IComparer)null));
             Assert.Throws<RankException>(() => Array.Sort(new int[10, 10], new int[10], 0, 0));
-            Assert.Throws<RankException>(
-                () => Array.Sort(new int[10, 10], new int[10], 0, 0, (IComparer)null)
-            );
+            Assert.Throws<RankException>(() =>
+                Array.Sort(new int[10, 10], new int[10], 0, 0, (IComparer)null));
         }
 
         public static IEnumerable<object[]> Sort_NotComparable_TestData()
@@ -9461,42 +9386,32 @@ namespace System.Tests
         public void Sort_NotComparable_ThrowsInvalidOperationException<T>(T[] array)
         {
             Assert.Throws<InvalidOperationException>(() => Array.Sort((Array)array));
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort((Array)array, (IComparer)null)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort((Array)array, 0, array.Length)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort((Array)array, 0, array.Length, (IComparer)null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort((Array)array, (IComparer)null));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort((Array)array, 0, array.Length));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort((Array)array, 0, array.Length, (IComparer)null));
             Assert.Throws<InvalidOperationException>(() => Array.Sort(array));
             Assert.Throws<InvalidOperationException>(() => Array.Sort(array, (IComparer<T>)null));
             Assert.Throws<InvalidOperationException>(() => Array.Sort(array, 0, array.Length));
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort(array, 0, array.Length, (IComparer<T>)null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort(array, 0, array.Length, (IComparer<T>)null));
 
             Assert.Throws<InvalidOperationException>(() => Array.Sort((Array)array, array));
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort((Array)array, array, (IComparer)null)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort((Array)array, array, 0, array.Length)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort((Array)array, array, 0, array.Length, (IComparer)null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort((Array)array, array, (IComparer)null));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort((Array)array, array, 0, array.Length));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort((Array)array, array, 0, array.Length, (IComparer)null));
             Assert.Throws<InvalidOperationException>(() => Array.Sort(array, array));
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort(array, array, (IComparer<T>)null)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort(array, array, 0, array.Length)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort(array, array, 0, array.Length, (IComparer<T>)null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort(array, array, (IComparer<T>)null));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort(array, array, 0, array.Length));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort(array, array, 0, array.Length, (IComparer<T>)null));
         }
 
         [Fact]
@@ -9528,21 +9443,16 @@ namespace System.Tests
         [Fact]
         public void Sort_ComparisonThrowsException_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort(new int[2], new DivideByZeroComparer())
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort(new int[2], 0, 2, new DivideByZeroComparer())
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort(new int[2], new int[2], new DivideByZeroComparer())
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort(new int[2], new int[2], 0, 2, new DivideByZeroComparer())
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Array.Sort(new int[2], (x, y) => throw new DivideByZeroException())
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort(new int[2], new DivideByZeroComparer()));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort(new int[2], 0, 2, new DivideByZeroComparer()));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort(new int[2], new int[2], new DivideByZeroComparer()));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort(new int[2], new int[2], 0, 2, new DivideByZeroComparer()));
+            Assert.Throws<InvalidOperationException>(() =>
+                Array.Sort(new int[2], (x, y) => throw new DivideByZeroException()));
         }
 
         [Fact]
@@ -11045,9 +10955,8 @@ namespace System.Tests
             Assert.Throws<RankException>(() => Array.Sort(new int[10], new int[10, 10]));
             Assert.Throws<RankException>(() => Array.Sort(new int[10], new int[10, 10], null));
             Assert.Throws<RankException>(() => Array.Sort(new int[10], new int[10, 10], 0, 0));
-            Assert.Throws<RankException>(
-                () => Array.Sort(new int[10], new int[10, 10], 0, 0, null)
-            );
+            Assert.Throws<RankException>(() =>
+                Array.Sort(new int[10], new int[10, 10], 0, 0, null));
         }
 
         [ConditionalFact(
@@ -11124,9 +11033,8 @@ namespace System.Tests
         public static void SetValue_Invalid()
         {
             Assert.Throws<InvalidCastException>(() => new int[10].SetValue("1", 1)); // Value has an incompatible type
-            Assert.Throws<InvalidCastException>(
-                () => new int[10, 10].SetValue("1", new int[] { 1, 1 })
-            ); // Value has an incompatible type
+            Assert.Throws<InvalidCastException>(() =>
+                new int[10, 10].SetValue("1", new int[] { 1, 1 })); // Value has an incompatible type
 
             Assert.Throws<IndexOutOfRangeException>(() => new int[10].SetValue(1, -1)); // Index < 0
             Assert.Throws<IndexOutOfRangeException>(() => new int[10].SetValue(1, 10)); // Index >= array.Length
@@ -11141,19 +11049,15 @@ namespace System.Tests
                 () => new int[10, 10].SetValue(1, new int[] { 1, 2, 3 })
             ); // Indices.Length > array.Length
 
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[8, 10].SetValue(1, new int[] { -1, 2 })
-            ); // Indices[0] < 0
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[8, 10].SetValue(1, new int[] { 9, 2 })
-            ); // Indices[0] > array.GetLength(0)
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[8, 10].SetValue(1, new int[] { -1, 2 })); // Indices[0] < 0
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[8, 10].SetValue(1, new int[] { 9, 2 })); // Indices[0] > array.GetLength(0)
 
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 8].SetValue(1, new int[] { 1, -1 })
-            ); // Indices[1] < 0
-            Assert.Throws<IndexOutOfRangeException>(
-                () => new int[10, 8].SetValue(1, new int[] { 1, 9 })
-            ); // Indices[1] > array.GetLength(1)
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 8].SetValue(1, new int[] { 1, -1 })); // Indices[1] < 0
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                new int[10, 8].SetValue(1, new int[] { 1, 9 })); // Indices[1] > array.GetLength(1)
         }
 
         public static IEnumerable<object[]> TrueForAll_TestData()
@@ -11487,9 +11391,8 @@ namespace System.Tests
         public static void Fill_ThrowsArrayTypeMismatchException()
         {
             Bar[] barArray = CreateBarArray();
-            Assert.Throws<ArrayTypeMismatchException>(
-                () => Array.Fill<object>(barArray, new Foo())
-            );
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                Array.Fill<object>(barArray, new Foo()));
             Assert.Equal(CreateBarArray(), barArray);
         }
 
@@ -11497,9 +11400,8 @@ namespace System.Tests
         public static void FillWithStartIndexAndCount_ThrowsArrayTypeMismatchException()
         {
             Bar[] barArray = CreateBarArray();
-            Assert.Throws<ArrayTypeMismatchException>(
-                () => Array.Fill<object>(barArray, new Foo(), 1, 2)
-            );
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                Array.Fill<object>(barArray, new Foo(), 1, 2));
             Assert.Equal(CreateBarArray(), barArray);
         }
 

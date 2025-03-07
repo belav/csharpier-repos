@@ -16,52 +16,42 @@ namespace System.Formats.Tar.Tests
         {
             CancellationTokenSource cs = new CancellationTokenSource();
             cs.Cancel();
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                () =>
-                    TarFile.ExtractToDirectoryAsync(
-                        "file.tar",
-                        "directory",
-                        overwriteFiles: true,
-                        cs.Token
-                    )
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(() =>
+                TarFile.ExtractToDirectoryAsync(
+                    "file.tar",
+                    "directory",
+                    overwriteFiles: true,
+                    cs.Token
+                ));
         }
 
         [Fact]
         public async Task InvalidPaths_Throw()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                () =>
-                    TarFile.ExtractToDirectoryAsync(
-                        sourceFileName: null,
-                        destinationDirectoryName: "path",
-                        overwriteFiles: false
-                    )
-            );
-            await Assert.ThrowsAsync<ArgumentException>(
-                () =>
-                    TarFile.ExtractToDirectoryAsync(
-                        sourceFileName: string.Empty,
-                        destinationDirectoryName: "path",
-                        overwriteFiles: false
-                    )
-            );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                () =>
-                    TarFile.ExtractToDirectoryAsync(
-                        sourceFileName: "path",
-                        destinationDirectoryName: null,
-                        overwriteFiles: false
-                    )
-            );
-            await Assert.ThrowsAsync<ArgumentException>(
-                () =>
-                    TarFile.ExtractToDirectoryAsync(
-                        sourceFileName: "path",
-                        destinationDirectoryName: string.Empty,
-                        overwriteFiles: false
-                    )
-            );
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                TarFile.ExtractToDirectoryAsync(
+                    sourceFileName: null,
+                    destinationDirectoryName: "path",
+                    overwriteFiles: false
+                ));
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                TarFile.ExtractToDirectoryAsync(
+                    sourceFileName: string.Empty,
+                    destinationDirectoryName: "path",
+                    overwriteFiles: false
+                ));
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                TarFile.ExtractToDirectoryAsync(
+                    sourceFileName: "path",
+                    destinationDirectoryName: null,
+                    overwriteFiles: false
+                ));
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                TarFile.ExtractToDirectoryAsync(
+                    sourceFileName: "path",
+                    destinationDirectoryName: string.Empty,
+                    overwriteFiles: false
+                ));
         }
 
         [Fact]
@@ -74,14 +64,12 @@ namespace System.Formats.Tar.Tests
 
                 Directory.CreateDirectory(dirPath);
 
-                await Assert.ThrowsAsync<FileNotFoundException>(
-                    () =>
-                        TarFile.ExtractToDirectoryAsync(
-                            sourceFileName: filePath,
-                            destinationDirectoryName: dirPath,
-                            overwriteFiles: false
-                        )
-                );
+                await Assert.ThrowsAsync<FileNotFoundException>(() =>
+                    TarFile.ExtractToDirectoryAsync(
+                        sourceFileName: filePath,
+                        destinationDirectoryName: dirPath,
+                        overwriteFiles: false
+                    ));
             }
         }
 
@@ -95,14 +83,12 @@ namespace System.Formats.Tar.Tests
 
                 File.Create(filePath).Dispose();
 
-                await Assert.ThrowsAsync<DirectoryNotFoundException>(
-                    () =>
-                        TarFile.ExtractToDirectoryAsync(
-                            sourceFileName: filePath,
-                            destinationDirectoryName: dirPath,
-                            overwriteFiles: false
-                        )
-                );
+                await Assert.ThrowsAsync<DirectoryNotFoundException>(() =>
+                    TarFile.ExtractToDirectoryAsync(
+                        sourceFileName: filePath,
+                        destinationDirectoryName: dirPath,
+                        overwriteFiles: false
+                    ));
             }
         }
 
@@ -297,14 +283,12 @@ namespace System.Formats.Tar.Tests
 
                 File.Create(filePath).Dispose();
 
-                await Assert.ThrowsAsync<IOException>(
-                    () =>
-                        TarFile.ExtractToDirectoryAsync(
-                            sourceArchiveFileName,
-                            destination.Path,
-                            overwriteFiles: false
-                        )
-                );
+                await Assert.ThrowsAsync<IOException>(() =>
+                    TarFile.ExtractToDirectoryAsync(
+                        sourceArchiveFileName,
+                        destination.Path,
+                        overwriteFiles: false
+                    ));
             }
         }
 

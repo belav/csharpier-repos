@@ -1856,15 +1856,13 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(
                 CoreStrings.RelationshipCannotBeInverted,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<OrderDetails>()
-                                .HasOne(e => e.Order)
-                                .WithOne(e => e.Details)
-                                .HasForeignKey<OrderDetails>(e => e.OrderId)
-                                .HasPrincipalKey<OrderDetails>(e => e.OrderId)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<OrderDetails>()
+                            .HasOne(e => e.Order)
+                            .WithOne(e => e.Details)
+                            .HasForeignKey<OrderDetails>(e => e.OrderId)
+                            .HasPrincipalKey<OrderDetails>(e => e.OrderId))
                     .Message
             );
         }
@@ -1940,15 +1938,13 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(
                 CoreStrings.RelationshipCannotBeInverted,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<OrderDetails>()
-                                .HasOne(e => e.Order)
-                                .WithOne(e => e.Details)
-                                .HasPrincipalKey<OrderDetails>(e => e.OrderId)
-                                .HasForeignKey<OrderDetails>(e => e.OrderId)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<OrderDetails>()
+                            .HasOne(e => e.Order)
+                            .WithOne(e => e.Details)
+                            .HasPrincipalKey<OrderDetails>(e => e.OrderId)
+                            .HasForeignKey<OrderDetails>(e => e.OrderId))
                     .Message
             );
         }
@@ -2009,13 +2005,8 @@ public abstract partial class ModelBuilderTest
                     "{'OrderId'}"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<OrderDetails>()
-                                .Navigation(e => e.Order)
-                                .IsRequired()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<OrderDetails>().Navigation(e => e.Order).IsRequired())
                     .Message
             );
 
@@ -2026,9 +2017,8 @@ public abstract partial class ModelBuilderTest
                     "{'OrderId'}"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => modelBuilder.Entity<Order>().Navigation(e => e.Details).IsRequired()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Order>().Navigation(e => e.Details).IsRequired())
                     .Message
             );
         }
@@ -2058,9 +2048,8 @@ public abstract partial class ModelBuilderTest
                     modelBuilder.GetDisplayName(typeof(OrderCombination))
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => relationship.HasForeignKey<OrderCombination>(e => e.OrderId)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        relationship.HasForeignKey<OrderCombination>(e => e.OrderId))
                     .Message
             );
 
@@ -2071,9 +2060,8 @@ public abstract partial class ModelBuilderTest
                     modelBuilder.GetDisplayName(typeof(OrderCombination))
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => relationship.HasPrincipalKey<OrderCombination>(e => e.OrderId)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        relationship.HasPrincipalKey<OrderCombination>(e => e.OrderId))
                     .Message
             );
         }
@@ -2126,9 +2114,8 @@ public abstract partial class ModelBuilderTest
                     nameof(OrderDetails)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => modelBuilder.Entity<Order>().HasNoKey()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Order>().HasNoKey())
                     .Message
             );
         }
@@ -2148,9 +2135,8 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(
                 CoreStrings.NavigationToKeylessType(nameof(OrderDetails.Order), nameof(Order)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => modelBuilder.Entity<Order>().HasNoKey()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Order>().HasNoKey())
                     .Message
             );
         }
@@ -3071,13 +3057,11 @@ public abstract partial class ModelBuilderTest
                     typeof(SelfRef).Name
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<SelfRef>()
-                                .HasOne(e => e.SelfRef1)
-                                .WithOne(e => e.SelfRef1)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<SelfRef>()
+                            .HasOne(e => e.SelfRef1)
+                            .WithOne(e => e.SelfRef1))
                     .Message
             );
         }
@@ -3307,15 +3291,13 @@ public abstract partial class ModelBuilderTest
                     nameof(Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<Customer>()
-                                .HasOne(c => c.Details)
-                                .WithOne(d => d.Customer)
-                                .HasPrincipalKey<Customer>("Id")
-                                .HasForeignKey<CustomerDetails>("GuidProperty")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<Customer>()
+                            .HasOne(c => c.Details)
+                            .WithOne(d => d.Customer)
+                            .HasPrincipalKey<Customer>("Id")
+                            .HasForeignKey<CustomerDetails>("GuidProperty"))
                     .Message
             );
         }
@@ -3366,15 +3348,13 @@ public abstract partial class ModelBuilderTest
                     nameof(Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<Customer>()
-                                .HasOne(c => c.Details)
-                                .WithOne(d => d.Customer)
-                                .HasForeignKey<CustomerDetails>("GuidProperty")
-                                .HasPrincipalKey<Customer>("Id")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<Customer>()
+                            .HasOne(c => c.Details)
+                            .WithOne(d => d.Customer)
+                            .HasForeignKey<CustomerDetails>("GuidProperty")
+                            .HasPrincipalKey<Customer>("Id"))
                     .Message
             );
         }
@@ -3427,15 +3407,13 @@ public abstract partial class ModelBuilderTest
                     nameof(Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<Customer>()
-                                .HasOne(c => c.Details)
-                                .WithOne(d => d.Customer)
-                                .HasPrincipalKey<Customer>("Id")
-                                .HasForeignKey<CustomerDetails>("Id", "GuidProperty")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<Customer>()
+                            .HasOne(c => c.Details)
+                            .WithOne(d => d.Customer)
+                            .HasPrincipalKey<Customer>("Id")
+                            .HasForeignKey<CustomerDetails>("Id", "GuidProperty"))
                     .Message
             );
         }
@@ -3489,15 +3467,13 @@ public abstract partial class ModelBuilderTest
                     nameof(Customer)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<Customer>()
-                                .HasOne(c => c.Details)
-                                .WithOne(d => d.Customer)
-                                .HasForeignKey<CustomerDetails>("Id", "GuidProperty")
-                                .HasPrincipalKey<Customer>("Id")
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<Customer>()
+                            .HasOne(c => c.Details)
+                            .WithOne(d => d.Customer)
+                            .HasForeignKey<CustomerDetails>("Id", "GuidProperty")
+                            .HasPrincipalKey<Customer>("Id"))
                     .Message
             );
         }
@@ -3705,9 +3681,8 @@ public abstract partial class ModelBuilderTest
                     principalType.DisplayName() + "." + nameof(Hob.Nob)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => modelBuilder.Entity<Nob>().HasOne(e => e.Hob).WithOne(e => e.Nob)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Nob>().HasOne(e => e.Hob).WithOne(e => e.Nob))
                     .Message
             );
         }
@@ -3762,9 +3737,8 @@ public abstract partial class ModelBuilderTest
                     dependentType.DisplayName() + "." + nameof(Nob.Hob)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => modelBuilder.Entity<Nob>().HasOne(e => e.Hob).WithOne(e => e.Nob)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Nob>().HasOne(e => e.Hob).WithOne(e => e.Nob))
                     .Message
             );
         }
@@ -4288,9 +4262,8 @@ public abstract partial class ModelBuilderTest
                     "'AlphaOne', 'AlphaTwo'"
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => modelBuilder.Entity<Zeta>().HasOne<Alpha>().WithOne()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Zeta>().HasOne<Alpha>().WithOne())
                     .Message
             );
         }

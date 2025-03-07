@@ -740,9 +740,8 @@ namespace System.Net.WebSockets.Client.Tests
                     }
 
                     WebSocketException newReceiveException =
-                        await Assert.ThrowsAsync<WebSocketException>(
-                            () => ReceiveAsync(clientSocket, recvSegment, cts.Token)
-                        );
+                        await Assert.ThrowsAsync<WebSocketException>(() =>
+                            ReceiveAsync(clientSocket, recvSegment, cts.Token));
 
                     Assert.Equal(
                         ResourceHelper.GetExceptionMessage(

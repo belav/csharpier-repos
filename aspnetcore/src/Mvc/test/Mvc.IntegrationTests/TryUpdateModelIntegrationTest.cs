@@ -1122,9 +1122,8 @@ public class TryUpdateModelIntegrationTest
         var oldModel = model;
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => TryUpdateModelAsync(model, string.Empty, testContext)
-        );
+        var ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            TryUpdateModelAsync(model, string.Empty, testContext));
         Assert.Equal(
             $"TryUpdateModelAsync cannot update a record type model. If a '{model.GetType()}' must be updated, include it in an object type.",
             ex.Message

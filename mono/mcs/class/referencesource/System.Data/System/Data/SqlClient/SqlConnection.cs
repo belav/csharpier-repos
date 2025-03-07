@@ -1587,9 +1587,8 @@ namespace System.Data.SqlClient
                                                 tdsConn.DoomThisConnection();
                                             }
                                             catch (SqlException) { }
-                                            runningReconnect = Task.Run(
-                                                () => ReconnectAsync(timeout)
-                                            );
+                                            runningReconnect = Task.Run(() =>
+                                                ReconnectAsync(timeout));
                                             // if current reconnect is not null, somebody already started reconnection task - some kind of race condition
                                             Debug.Assert(
                                                 _currentReconnectionTask == null,
@@ -1740,9 +1739,8 @@ namespace System.Data.SqlClient
                             new CancellationTokenRegistration();
                         if (cancellationToken.CanBeCanceled)
                         {
-                            registration = cancellationToken.Register(
-                                () => completion.TrySetCanceled()
-                            );
+                            registration = cancellationToken.Register(() =>
+                                completion.TrySetCanceled());
                         }
                         OpenAsyncRetry retry = new OpenAsyncRetry(
                             this,

@@ -237,9 +237,8 @@ namespace System.Net.Http.Json.Functional.Tests
                         HttpResponseMessage response = await client.SendAsync(request);
 
                         // As of now, we pass the message body to the serializer even when its empty which causes the serializer to throw.
-                        JsonException ex = await Assert.ThrowsAsync<JsonException>(
-                            () => response.Content.ReadFromJsonAsync(typeof(Person))
-                        );
+                        JsonException ex = await Assert.ThrowsAsync<JsonException>(() =>
+                            response.Content.ReadFromJsonAsync(typeof(Person)));
                         Assert.Contains(
                             "Path: $ | LineNumber: 0 | BytePositionInLine: 0",
                             ex.Message
@@ -295,9 +294,8 @@ namespace System.Net.Http.Json.Functional.Tests
                         HttpResponseMessage response = await client.SendAsync(request);
 
                         InvalidOperationException ex =
-                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                () => response.Content.ReadFromJsonAsync<Person>()
-                            );
+                            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                response.Content.ReadFromJsonAsync<Person>());
                         Assert.IsType<ArgumentException>(ex.InnerException);
                     }
                 },

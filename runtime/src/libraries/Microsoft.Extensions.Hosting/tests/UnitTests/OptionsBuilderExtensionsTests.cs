@@ -20,9 +20,8 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void ValidateOnStart_NullOptionsBuilder_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => OptionsBuilderExtensions.ValidateOnStart<object>(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                OptionsBuilderExtensions.ValidateOnStart<object>(null));
         }
 
         [Fact]

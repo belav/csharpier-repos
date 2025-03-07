@@ -38,92 +38,80 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Fact]
     public void Ctor_ThrowsExceptionsWhenNullArgs()
     {
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new HttpLoggingMiddleware(
-                    null,
-                    CreateOptionsAccessor(),
-                    LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
-                    Array.Empty<IHttpLoggingInterceptor>(),
-                    ObjectPool.Create<HttpLoggingInterceptorContext>(),
-                    TimeProvider.System
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                null,
+                CreateOptionsAccessor(),
+                LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
+                Array.Empty<IHttpLoggingInterceptor>(),
+                ObjectPool.Create<HttpLoggingInterceptorContext>(),
+                TimeProvider.System
+            ));
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new HttpLoggingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    null,
-                    LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
-                    Array.Empty<IHttpLoggingInterceptor>(),
-                    ObjectPool.Create<HttpLoggingInterceptorContext>(),
-                    TimeProvider.System
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                null,
+                LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
+                Array.Empty<IHttpLoggingInterceptor>(),
+                ObjectPool.Create<HttpLoggingInterceptorContext>(),
+                TimeProvider.System
+            ));
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new HttpLoggingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    CreateOptionsAccessor(),
-                    null,
-                    Array.Empty<IHttpLoggingInterceptor>(),
-                    ObjectPool.Create<HttpLoggingInterceptorContext>(),
-                    TimeProvider.System
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                CreateOptionsAccessor(),
+                null,
+                Array.Empty<IHttpLoggingInterceptor>(),
+                ObjectPool.Create<HttpLoggingInterceptorContext>(),
+                TimeProvider.System
+            ));
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new HttpLoggingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    CreateOptionsAccessor(),
-                    LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
-                    null,
-                    ObjectPool.Create<HttpLoggingInterceptorContext>(),
-                    TimeProvider.System
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                CreateOptionsAccessor(),
+                LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
+                null,
+                ObjectPool.Create<HttpLoggingInterceptorContext>(),
+                TimeProvider.System
+            ));
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new HttpLoggingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    CreateOptionsAccessor(),
-                    LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
-                    Array.Empty<IHttpLoggingInterceptor>(),
-                    null,
-                    TimeProvider.System
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                CreateOptionsAccessor(),
+                LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
+                Array.Empty<IHttpLoggingInterceptor>(),
+                null,
+                TimeProvider.System
+            ));
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new HttpLoggingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    CreateOptionsAccessor(),
-                    LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
-                    Array.Empty<IHttpLoggingInterceptor>(),
-                    ObjectPool.Create<HttpLoggingInterceptorContext>(),
-                    null
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                CreateOptionsAccessor(),
+                LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
+                Array.Empty<IHttpLoggingInterceptor>(),
+                ObjectPool.Create<HttpLoggingInterceptorContext>(),
+                null
+            ));
     }
 
     [Fact]

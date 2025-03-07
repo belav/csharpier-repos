@@ -78,9 +78,8 @@ namespace System.Net.Http.Functional.Tests
                         );
                     }
                 );
-                Assert.Throws<InvalidOperationException>(
-                    () => handler.SslProtocols = SslProtocols.Tls12
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    handler.SslProtocols = SslProtocols.Tls12);
             }
         }
 
@@ -306,14 +305,12 @@ namespace System.Net.Http.Functional.Tests
             using (HttpClient client = CreateHttpClient(handler))
             {
                 handler.SslProtocols = sslProtocols;
-                await Assert.ThrowsAsync<HttpRequestException>(
-                    () =>
-                        RemoteServerQuery.Run(
-                            () => client.GetAsync(url),
-                            remoteServerExceptionWrapper,
-                            url
-                        )
-                );
+                await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    RemoteServerQuery.Run(
+                        () => client.GetAsync(url),
+                        remoteServerExceptionWrapper,
+                        url
+                    ));
             }
         }
 

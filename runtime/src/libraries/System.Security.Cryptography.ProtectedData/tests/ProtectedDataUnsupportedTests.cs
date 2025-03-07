@@ -14,9 +14,8 @@ namespace System.Security.Cryptography.ProtectedDataTests
         [InlineData(DataProtectionScope.CurrentUser)]
         public static void Protect_PlatformNotSupported(DataProtectionScope scope)
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => ProtectedData.Protect(null, null, scope)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                ProtectedData.Protect(null, null, scope));
         }
 
         [Theory]
@@ -24,9 +23,8 @@ namespace System.Security.Cryptography.ProtectedDataTests
         [InlineData(DataProtectionScope.CurrentUser)]
         public static void Unprotect_PlatformNotSupported(DataProtectionScope scope)
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => ProtectedData.Unprotect(null, null, scope)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                ProtectedData.Unprotect(null, null, scope));
         }
     }
 }

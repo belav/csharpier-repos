@@ -531,17 +531,15 @@ class C
             var exception = new Exception("Test Exception");
             var testGenerator = new CallbackGenerator(
                 onInit: (i) =>
-                    i.RegisterForSyntaxNotifications(
-                        () =>
-                            new TestSyntaxReceiver(
-                                tag: 0,
-                                callback: (a) =>
-                                {
-                                    if (a is AssignmentExpressionSyntax)
-                                        throw exception;
-                                }
-                            )
-                    ),
+                    i.RegisterForSyntaxNotifications(() =>
+                        new TestSyntaxReceiver(
+                            tag: 0,
+                            callback: (a) =>
+                            {
+                                if (a is AssignmentExpressionSyntax)
+                                    throw exception;
+                            }
+                        )),
                 onExecute: (e) =>
                 {
                     e.AddSource("test", SourceText.From("public class D{}", Encoding.UTF8));
@@ -664,17 +662,15 @@ class C
             var exception = new Exception("Test Exception");
             var testGenerator = new CallbackGenerator(
                 onInit: (i) =>
-                    i.RegisterForSyntaxNotifications(
-                        () =>
-                            new TestSyntaxReceiver(
-                                tag: 0,
-                                callback: (a) =>
-                                {
-                                    if (a is AssignmentExpressionSyntax)
-                                        throw exception;
-                                }
-                            )
-                    ),
+                    i.RegisterForSyntaxNotifications(() =>
+                        new TestSyntaxReceiver(
+                            tag: 0,
+                            callback: (a) =>
+                            {
+                                if (a is AssignmentExpressionSyntax)
+                                    throw exception;
+                            }
+                        )),
                 onExecute: (e) => { }
             );
 
@@ -1063,33 +1059,30 @@ class D
             var testGenerator = new CallbackGenerator(
                 onInit: (i) =>
                 {
-                    i.RegisterForSyntaxNotifications(
-                        () =>
-                            new TestSyntaxContextReceiver(
-                                callback: (ctx) =>
+                    i.RegisterForSyntaxNotifications(() =>
+                        new TestSyntaxContextReceiver(
+                            callback: (ctx) =>
+                            {
+                                if (
+                                    ctx.Node is ClassDeclarationSyntax cds
+                                    && cds.Identifier.Value?.ToString() == "C"
+                                )
                                 {
-                                    if (
-                                        ctx.Node is ClassDeclarationSyntax cds
-                                        && cds.Identifier.Value?.ToString() == "C"
-                                    )
-                                    {
-                                        // ensure we can query the semantic model for D
-                                        var dType =
-                                            ctx.SemanticModel.Compilation.GetTypeByMetadataName(
-                                                "D"
-                                            );
-                                        Assert.NotNull(dType);
-                                        Assert.False(dType.IsErrorType());
+                                    // ensure we can query the semantic model for D
+                                    var dType = ctx.SemanticModel.Compilation.GetTypeByMetadataName(
+                                        "D"
+                                    );
+                                    Assert.NotNull(dType);
+                                    Assert.False(dType.IsErrorType());
 
-                                        // and the code referencing it now works
-                                        var typeInfo = ctx.SemanticModel.GetTypeInfo(
-                                            cds.BaseList!.Types[0].Type
-                                        );
-                                        Assert.Same(dType, typeInfo.Type);
-                                    }
+                                    // and the code referencing it now works
+                                    var typeInfo = ctx.SemanticModel.GetTypeInfo(
+                                        cds.BaseList!.Types[0].Type
+                                    );
+                                    Assert.Same(dType, typeInfo.Type);
                                 }
-                            )
-                    );
+                            }
+                        ));
                     i.RegisterForPostInitialization(
                         (pic) => pic.AddSource("postInit", postInitSource)
                     );
@@ -3037,9 +3030,8 @@ class C
                 new ISourceGenerator[] { generator },
                 parseOptions: parseOptions
             );
-            Assert.Throws<OperationCanceledException>(
-                () => driver = driver.RunGenerators(compilation, cancellationToken: cts.Token)
-            );
+            Assert.Throws<OperationCanceledException>(() =>
+                driver = driver.RunGenerators(compilation, cancellationToken: cts.Token));
             Assert.Equal(19, filterCalled);
         }
 
@@ -3094,9 +3086,8 @@ class C { }
                 new ISourceGenerator[] { generator },
                 parseOptions: parseOptions
             );
-            Assert.Throws<OperationCanceledException>(
-                () => driver = driver.RunGenerators(compilation, cancellationToken: cts.Token)
-            );
+            Assert.Throws<OperationCanceledException>(() =>
+                driver = driver.RunGenerators(compilation, cancellationToken: cts.Token));
             Assert.True(generatorCancelled);
         }
 
@@ -3128,21 +3119,19 @@ class C
 
             var testGenerator = new CallbackGenerator(
                 onInit: (i) =>
-                    i.RegisterForSyntaxNotifications(
-                        () =>
-                            new TestSyntaxReceiver(
-                                tag: 0,
-                                callback: (a) =>
+                    i.RegisterForSyntaxNotifications(() =>
+                        new TestSyntaxReceiver(
+                            tag: 0,
+                            callback: (a) =>
+                            {
+                                if (a is AssignmentExpressionSyntax)
                                 {
-                                    if (a is AssignmentExpressionSyntax)
-                                    {
-                                        throw new OperationCanceledException(
-                                            "Simulated cancellation from external source"
-                                        );
-                                    }
+                                    throw new OperationCanceledException(
+                                        "Simulated cancellation from external source"
+                                    );
                                 }
-                            )
-                    ),
+                            }
+                        )),
                 onExecute: (e) =>
                 {
                     e.AddSource("test", SourceText.From("public class D{}", Encoding.UTF8));

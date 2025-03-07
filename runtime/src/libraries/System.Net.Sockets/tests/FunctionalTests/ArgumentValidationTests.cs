@@ -174,9 +174,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void DontFragment_IPv6_Throws_NotSupported()
         {
-            Assert.Throws<NotSupportedException>(
-                () => GetSocket(AddressFamily.InterNetworkV6).DontFragment
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                GetSocket(AddressFamily.InterNetworkV6).DontFragment);
         }
 
         [Fact]
@@ -213,9 +212,8 @@ namespace System.Net.Sockets.Tests
             {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
-                Assert.Throws<InvalidOperationException>(
-                    () => socket.Connect(new IPEndPoint(IPAddress.Loopback, 1))
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    socket.Connect(new IPEndPoint(IPAddress.Loopback, 1)));
             }
         }
 
@@ -228,23 +226,19 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void Connect_IPAddress_InvalidPort_Throws_ArgumentOutOfRange()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().Connect(IPAddress.Loopback, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().Connect(IPAddress.Loopback, 65536)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Connect(IPAddress.Loopback, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Connect(IPAddress.Loopback, 65536));
         }
 
         [Fact]
         public void Connect_IPAddress_InvalidAddressFamily_Throws_NotSupported()
         {
-            Assert.Throws<NotSupportedException>(
-                () => GetSocket(AddressFamily.InterNetwork).Connect(IPAddress.IPv6Loopback, 1)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => GetSocket(AddressFamily.InterNetworkV6).Connect(IPAddress.Loopback, 1)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                GetSocket(AddressFamily.InterNetwork).Connect(IPAddress.IPv6Loopback, 1));
+            Assert.Throws<NotSupportedException>(() =>
+                GetSocket(AddressFamily.InterNetworkV6).Connect(IPAddress.Loopback, 1));
         }
 
         [Fact]
@@ -257,9 +251,8 @@ namespace System.Net.Sockets.Tests
         public void Connect_Host_InvalidPort_Throws_ArgumentOutOfRange()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => GetSocket().Connect("localhost", -1));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().Connect("localhost", 65536)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Connect("localhost", 65536));
         }
 
         [Fact]
@@ -280,12 +273,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void Connect_IPAddresses_InvalidPort_Throws_ArgumentOutOfRange()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().Connect(new[] { IPAddress.Loopback }, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().Connect(new[] { IPAddress.Loopback }, 65536)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Connect(new[] { IPAddress.Loopback }, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Connect(new[] { IPAddress.Loopback }, 65536));
         }
 
         [Fact]
@@ -314,52 +305,40 @@ namespace System.Net.Sockets.Tests
         public void Send_Buffer_NullBuffer_Throws_ArgumentNull()
         {
             SocketError errorCode;
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().Send(null, 0, 0, SocketFlags.None, out errorCode)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().Send(null, 0, 0, SocketFlags.None, out errorCode));
         }
 
         [Fact]
         public void Send_Buffer_InvalidOffset_Throws_ArgumentOutOfRange()
         {
             SocketError errorCode;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().Send(s_buffer, -1, 0, SocketFlags.None, out errorCode)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .Send(s_buffer, s_buffer.Length + 1, 0, SocketFlags.None, out errorCode)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Send(s_buffer, -1, 0, SocketFlags.None, out errorCode));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .Send(s_buffer, s_buffer.Length + 1, 0, SocketFlags.None, out errorCode));
         }
 
         [Fact]
         public void Send_Buffer_InvalidCount_Throws_ArgumentOutOfRange()
         {
             SocketError errorCode;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().Send(s_buffer, 0, -1, SocketFlags.None, out errorCode)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .Send(s_buffer, 0, s_buffer.Length + 1, SocketFlags.None, out errorCode)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket().Send(s_buffer, s_buffer.Length, 1, SocketFlags.None, out errorCode)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Send(s_buffer, 0, -1, SocketFlags.None, out errorCode));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .Send(s_buffer, 0, s_buffer.Length + 1, SocketFlags.None, out errorCode));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Send(s_buffer, s_buffer.Length, 1, SocketFlags.None, out errorCode));
         }
 
         [Fact]
         public void Send_Buffers_NullBuffers_Throws_ArgumentNull()
         {
             SocketError errorCode;
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    GetSocket()
-                        .Send((IList<ArraySegment<byte>>)null, SocketFlags.None, out errorCode)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().Send((IList<ArraySegment<byte>>)null, SocketFlags.None, out errorCode));
         }
 
         [Fact]
@@ -378,53 +357,41 @@ namespace System.Net.Sockets.Tests
         public void Receive_Buffer_NullBuffer_Throws_ArgumentNull()
         {
             SocketError errorCode;
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().Receive(null, 0, 0, SocketFlags.None, out errorCode)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().Receive(null, 0, 0, SocketFlags.None, out errorCode));
         }
 
         [Fact]
         public void Receive_Buffer_InvalidOffset_Throws_ArgumentOutOfRange()
         {
             SocketError errorCode;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().Receive(s_buffer, -1, 0, SocketFlags.None, out errorCode)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .Receive(s_buffer, s_buffer.Length + 1, 0, SocketFlags.None, out errorCode)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Receive(s_buffer, -1, 0, SocketFlags.None, out errorCode));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .Receive(s_buffer, s_buffer.Length + 1, 0, SocketFlags.None, out errorCode));
         }
 
         [Fact]
         public void Receive_Buffer_InvalidCount_Throws_ArgumentOutOfRange()
         {
             SocketError errorCode;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().Receive(s_buffer, 0, -1, SocketFlags.None, out errorCode)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .Receive(s_buffer, 0, s_buffer.Length + 1, SocketFlags.None, out errorCode)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .Receive(s_buffer, s_buffer.Length, 1, SocketFlags.None, out errorCode)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Receive(s_buffer, 0, -1, SocketFlags.None, out errorCode));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .Receive(s_buffer, 0, s_buffer.Length + 1, SocketFlags.None, out errorCode));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Receive(s_buffer, s_buffer.Length, 1, SocketFlags.None, out errorCode));
         }
 
         [Fact]
         public void Receive_Buffers_NullBuffers_Throws_ArgumentNull()
         {
             SocketError errorCode;
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    GetSocket()
-                        .Receive((IList<ArraySegment<byte>>)null, SocketFlags.None, out errorCode)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket()
+                    .Receive((IList<ArraySegment<byte>>)null, SocketFlags.None, out errorCode));
         }
 
         [Fact]
@@ -442,15 +409,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetSocketOption_Object_ObjectNull_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    GetSocket()
-                        .SetSocketOption(
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.Linger,
-                            (object)null
-                        )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket()
+                    .SetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.Linger,
+                        (object)null
+                    ));
         }
 
         [Fact]
@@ -566,19 +531,15 @@ namespace System.Net.Sockets.Tests
             Assert.Throws<ArgumentNullException>(() => Socket.Select(null, null, null, -1));
             Assert.Throws<ArgumentNullException>(() => Socket.Select(emptyList, null, null, -1));
             Assert.Throws<ArgumentNullException>(() => Socket.Select(null, emptyList, null, -1));
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(emptyList, emptyList, null, -1)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(emptyList, emptyList, null, -1));
             Assert.Throws<ArgumentNullException>(() => Socket.Select(null, null, emptyList, -1));
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(emptyList, null, emptyList, -1)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(null, emptyList, emptyList, -1)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(emptyList, emptyList, emptyList, -1)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(emptyList, null, emptyList, -1));
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(null, emptyList, emptyList, -1));
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(emptyList, emptyList, emptyList, -1));
         }
 
         [Fact]
@@ -587,30 +548,22 @@ namespace System.Net.Sockets.Tests
             TimeSpan nonInfinity = TimeSpan.FromMilliseconds(1);
             var emptyList = new List<Socket>();
 
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(null, null, null, nonInfinity)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(emptyList, null, null, nonInfinity)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(null, emptyList, null, nonInfinity)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(emptyList, emptyList, null, nonInfinity)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(null, null, emptyList, nonInfinity)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(emptyList, null, emptyList, nonInfinity)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(null, emptyList, emptyList, nonInfinity)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.Select(emptyList, emptyList, emptyList, nonInfinity)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(null, null, null, nonInfinity));
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(emptyList, null, null, nonInfinity));
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(null, emptyList, null, nonInfinity));
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(emptyList, emptyList, null, nonInfinity));
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(null, null, emptyList, nonInfinity));
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(emptyList, null, emptyList, nonInfinity));
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(null, emptyList, emptyList, nonInfinity));
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(emptyList, emptyList, emptyList, nonInfinity));
         }
 
         [Fact]
@@ -643,35 +596,27 @@ namespace System.Net.Sockets.Tests
                     var list = new List<Socket>();
                     list.Add(s);
 
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => Socket.Select(null, list, null, TimeSpan.FromMicroseconds(-1))
-                    );
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () =>
-                            Socket.Select(
-                                null,
-                                list,
-                                null,
-                                TimeSpan.FromMicroseconds((double)int.MaxValue + 1)
-                            )
-                    );
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => Socket.Select(null, list, null, TimeSpan.FromMilliseconds(-1.1))
-                    );
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        Socket.Select(null, list, null, TimeSpan.FromMicroseconds(-1)));
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        Socket.Select(
+                            null,
+                            list,
+                            null,
+                            TimeSpan.FromMicroseconds((double)int.MaxValue + 1)
+                        ));
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        Socket.Select(null, list, null, TimeSpan.FromMilliseconds(-1.1)));
 
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => s.Poll(TimeSpan.FromMicroseconds(-1), SelectMode.SelectWrite)
-                    );
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () =>
-                            s.Poll(
-                                TimeSpan.FromMicroseconds((double)int.MaxValue + 1),
-                                SelectMode.SelectWrite
-                            )
-                    );
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => s.Poll(TimeSpan.FromMilliseconds(-1.1), SelectMode.SelectWrite)
-                    );
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        s.Poll(TimeSpan.FromMicroseconds(-1), SelectMode.SelectWrite));
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        s.Poll(
+                            TimeSpan.FromMicroseconds((double)int.MaxValue + 1),
+                            SelectMode.SelectWrite
+                        ));
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        s.Poll(TimeSpan.FromMilliseconds(-1.1), SelectMode.SelectWrite));
                 }
             }
         }
@@ -720,15 +665,12 @@ namespace System.Net.Sockets.Tests
         {
             var largeList = new LargeList();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Socket.Select(largeList, null, null, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Socket.Select(null, largeList, null, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Socket.Select(null, null, largeList, -1)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Socket.Select(largeList, null, null, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Socket.Select(null, largeList, null, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Socket.Select(null, null, largeList, -1));
         }
 
         [Fact]
@@ -737,34 +679,27 @@ namespace System.Net.Sockets.Tests
             var largeList = new LargeList();
 
             TimeSpan infinity = Timeout.InfiniteTimeSpan;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Socket.Select(largeList, null, null, infinity)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Socket.Select(null, largeList, null, infinity)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Socket.Select(null, null, largeList, infinity)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Socket.Select(largeList, null, null, infinity));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Socket.Select(null, largeList, null, infinity));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Socket.Select(null, null, largeList, infinity));
 
             TimeSpan negative = TimeSpan.FromMilliseconds(-1);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Socket.Select(largeList, null, null, negative)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Socket.Select(null, largeList, null, negative)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Socket.Select(null, null, largeList, negative)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Socket.Select(largeList, null, null, negative));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Socket.Select(null, largeList, null, negative));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Socket.Select(null, null, largeList, negative));
         }
 
         [Fact]
         public void AcceptAsync_NullAsyncEventArgs_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().AcceptAsync((SocketAsyncEventArgs)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().AcceptAsync((SocketAsyncEventArgs)null));
         }
 
         [Fact]
@@ -803,9 +738,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void ConnectAsync_NullAsyncEventArgs_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().ConnectAsync((SocketAsyncEventArgs)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().ConnectAsync((SocketAsyncEventArgs)null));
         }
 
         [Fact]
@@ -855,22 +789,19 @@ namespace System.Net.Sockets.Tests
                 RemoteEndPoint = new DnsEndPoint("localhost", 1, AddressFamily.InterNetworkV6),
             };
 
-            Assert.Throws<NotSupportedException>(
-                () => GetSocket(AddressFamily.InterNetwork).ConnectAsync(eventArgs)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                GetSocket(AddressFamily.InterNetwork).ConnectAsync(eventArgs));
 
             eventArgs.RemoteEndPoint = new IPEndPoint(IPAddress.IPv6Loopback, 1);
-            Assert.Throws<NotSupportedException>(
-                () => GetSocket(AddressFamily.InterNetwork).ConnectAsync(eventArgs)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                GetSocket(AddressFamily.InterNetwork).ConnectAsync(eventArgs));
         }
 
         [Fact]
         public void ConnectAsync_Static_NullAsyncEventArgs_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, null));
         }
 
         [Fact]
@@ -896,17 +827,15 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void ReceiveAsync_NullAsyncEventArgs_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().ReceiveAsync((SocketAsyncEventArgs)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().ReceiveAsync((SocketAsyncEventArgs)null));
         }
 
         [Fact]
         public void SendAsync_NullAsyncEventArgs_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().SendAsync((SocketAsyncEventArgs)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().SendAsync((SocketAsyncEventArgs)null));
         }
 
         [Fact]
@@ -954,9 +883,8 @@ namespace System.Net.Sockets.Tests
                 {
                     _ = s.Handle;
                 }
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => s.Connect(new DnsEndPoint("localhost", 12345))
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    s.Connect(new DnsEndPoint("localhost", 12345)));
             }
         }
 
@@ -1106,9 +1034,8 @@ namespace System.Net.Sockets.Tests
                 {
                     _ = s.Handle;
                 }
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => s.Connect(new[] { IPAddress.Loopback }, 12345)
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    s.Connect(new[] { IPAddress.Loopback }, 12345));
             }
         }
 
@@ -1364,9 +1291,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginAccept_NotBound_Throws_InvalidOperation()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => GetSocket().BeginAccept(TheAsyncCallback, null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                GetSocket().BeginAccept(TheAsyncCallback, null));
             Assert.Throws<InvalidOperationException>(() =>
             {
                 GetSocket().AcceptAsync();
@@ -1386,9 +1312,8 @@ namespace System.Net.Sockets.Tests
             {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
 
-                Assert.Throws<InvalidOperationException>(
-                    () => socket.BeginAccept(TheAsyncCallback, null)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    socket.BeginAccept(TheAsyncCallback, null));
                 Assert.Throws<InvalidOperationException>(() =>
                 {
                     socket.AcceptAsync();
@@ -1405,9 +1330,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginConnect_EndPoint_NullEndPoint_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().BeginConnect((EndPoint)null, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().BeginConnect((EndPoint)null, TheAsyncCallback, null));
             Assert.Throws<ArgumentNullException>(() =>
             {
                 GetSocket().ConnectAsync((EndPoint)null);
@@ -1427,14 +1351,12 @@ namespace System.Net.Sockets.Tests
             {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        socket.BeginConnect(
-                            new IPEndPoint(IPAddress.Loopback, 1),
-                            TheAsyncCallback,
-                            null
-                        )
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    socket.BeginConnect(
+                        new IPEndPoint(IPAddress.Loopback, 1),
+                        TheAsyncCallback,
+                        null
+                    ));
                 Assert.Throws<InvalidOperationException>(() =>
                 {
                     socket.ConnectAsync(new IPEndPoint(IPAddress.Loopback, 1));
@@ -1453,14 +1375,12 @@ namespace System.Net.Sockets.Tests
                 var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             )
             {
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                        s.BeginConnect(
-                            new DnsEndPoint("localhost", 1, AddressFamily.InterNetworkV6),
-                            TheAsyncCallback,
-                            null
-                        )
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    s.BeginConnect(
+                        new DnsEndPoint("localhost", 1, AddressFamily.InterNetworkV6),
+                        TheAsyncCallback,
+                        null
+                    ));
             }
 
             using (
@@ -1477,9 +1397,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginConnect_Host_NullHost_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().BeginConnect((string)null, 1, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().BeginConnect((string)null, 1, TheAsyncCallback, null));
             Assert.Throws<ArgumentNullException>(() =>
             {
                 GetSocket().ConnectAsync((string)null, 1);
@@ -1491,9 +1410,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(65536)]
         public void BeginConnect_Host_InvalidPort_Throws_ArgumentOutOfRange(int port)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().BeginConnect("localhost", port, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().BeginConnect("localhost", port, TheAsyncCallback, null));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 GetSocket().ConnectAsync("localhost", port);
@@ -1513,9 +1431,8 @@ namespace System.Net.Sockets.Tests
             {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
-                Assert.Throws<InvalidOperationException>(
-                    () => socket.BeginConnect("localhost", 1, TheAsyncCallback, null)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    socket.BeginConnect("localhost", 1, TheAsyncCallback, null));
                 Assert.Throws<InvalidOperationException>(() =>
                 {
                     socket.ConnectAsync("localhost", 1);
@@ -1526,9 +1443,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginConnect_IPAddress_NullIPAddress_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().BeginConnect((IPAddress)null, 1, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().BeginConnect((IPAddress)null, 1, TheAsyncCallback, null));
             Assert.Throws<ArgumentNullException>(() =>
             {
                 GetSocket().ConnectAsync((IPAddress)null, 1);
@@ -1540,9 +1456,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(65536)]
         public void BeginConnect_IPAddress_InvalidPort_Throws_ArgumentOutOfRange(int port)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => GetSocket().BeginConnect(IPAddress.Loopback, port, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().BeginConnect(IPAddress.Loopback, port, TheAsyncCallback, null));
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 GetSocket().ConnectAsync(IPAddress.Loopback, 65536);
@@ -1552,11 +1467,9 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginConnect_IPAddress_AddressFamily_Throws_NotSupported()
         {
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    GetSocket(AddressFamily.InterNetwork)
-                        .BeginConnect(IPAddress.IPv6Loopback, 1, TheAsyncCallback, null)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                GetSocket(AddressFamily.InterNetwork)
+                    .BeginConnect(IPAddress.IPv6Loopback, 1, TheAsyncCallback, null));
             Assert.Throws<NotSupportedException>(() =>
             {
                 GetSocket(AddressFamily.InterNetwork).ConnectAsync(IPAddress.IPv6Loopback, 1);
@@ -1566,9 +1479,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginConnect_IPAddresses_NullIPAddresses_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().BeginConnect((IPAddress[])null, 1, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().BeginConnect((IPAddress[])null, 1, TheAsyncCallback, null));
             Assert.Throws<ArgumentNullException>(() =>
             {
                 GetSocket().ConnectAsync((IPAddress[])null, 1);
@@ -1596,11 +1508,9 @@ namespace System.Net.Sockets.Tests
         [InlineData(65536)]
         public void BeginConnect_IPAddresses_InvalidPort_Throws_ArgumentOutOfRange(int port)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .BeginConnect(new[] { IPAddress.Loopback }, port, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .BeginConnect(new[] { IPAddress.Loopback }, port, TheAsyncCallback, null));
         }
 
         [Theory]
@@ -1608,9 +1518,8 @@ namespace System.Net.Sockets.Tests
         [InlineData(65536)]
         public async Task ConnectAsync_IPAddresses_InvalidPort_Throws_ArgumentOutOfRange(int port)
         {
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                () => GetSocket().ConnectAsync(new[] { IPAddress.Loopback }, port)
-            );
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
+                GetSocket().ConnectAsync(new[] { IPAddress.Loopback }, port));
         }
 
         [Fact]
@@ -1626,10 +1535,8 @@ namespace System.Net.Sockets.Tests
             {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        socket.BeginConnect(new[] { IPAddress.Loopback }, 1, TheAsyncCallback, null)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    socket.BeginConnect(new[] { IPAddress.Loopback }, 1, TheAsyncCallback, null));
             }
         }
 
@@ -1646,9 +1553,8 @@ namespace System.Net.Sockets.Tests
             {
                 socket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 socket.Listen(1);
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => socket.ConnectAsync(new[] { IPAddress.Loopback }, 1)
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    socket.ConnectAsync(new[] { IPAddress.Loopback }, 1));
             }
         }
 
@@ -1670,9 +1576,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginSend_Buffer_NullBuffer_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().BeginSend(null, 0, 0, SocketFlags.None, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().BeginSend(null, 0, 0, SocketFlags.None, TheAsyncCallback, null));
             Assert.Throws<ArgumentNullException>(() =>
             {
                 GetSocket().SendAsync(new ArraySegment<byte>(null, 0, 0), SocketFlags.None);
@@ -1682,22 +1587,18 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginSend_Buffer_InvalidOffset_Throws_ArgumentOutOfRange()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket().BeginSend(s_buffer, -1, 0, SocketFlags.None, TheAsyncCallback, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .BeginSend(
-                            s_buffer,
-                            s_buffer.Length + 1,
-                            0,
-                            SocketFlags.None,
-                            TheAsyncCallback,
-                            null
-                        )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().BeginSend(s_buffer, -1, 0, SocketFlags.None, TheAsyncCallback, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .BeginSend(
+                        s_buffer,
+                        s_buffer.Length + 1,
+                        0,
+                        SocketFlags.None,
+                        TheAsyncCallback,
+                        null
+                    ));
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -1716,34 +1617,28 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginSend_Buffer_InvalidCount_Throws_ArgumentOutOfRange()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket().BeginSend(s_buffer, 0, -1, SocketFlags.None, TheAsyncCallback, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .BeginSend(
-                            s_buffer,
-                            0,
-                            s_buffer.Length + 1,
-                            SocketFlags.None,
-                            TheAsyncCallback,
-                            null
-                        )
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .BeginSend(
-                            s_buffer,
-                            s_buffer.Length,
-                            1,
-                            SocketFlags.None,
-                            TheAsyncCallback,
-                            null
-                        )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().BeginSend(s_buffer, 0, -1, SocketFlags.None, TheAsyncCallback, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .BeginSend(
+                        s_buffer,
+                        0,
+                        s_buffer.Length + 1,
+                        SocketFlags.None,
+                        TheAsyncCallback,
+                        null
+                    ));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .BeginSend(
+                        s_buffer,
+                        s_buffer.Length,
+                        1,
+                        SocketFlags.None,
+                        TheAsyncCallback,
+                        null
+                    ));
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -1770,9 +1665,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginSend_Buffers_NullBuffers_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().BeginSend(null, SocketFlags.None, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().BeginSend(null, SocketFlags.None, TheAsyncCallback, null));
             Assert.Throws<ArgumentNullException>(() =>
             {
                 GetSocket().SendAsync((IList<ArraySegment<byte>>)null, SocketFlags.None);
@@ -1820,9 +1714,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginReceive_Buffer_NullBuffer_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().BeginReceive(null, 0, 0, SocketFlags.None, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().BeginReceive(null, 0, 0, SocketFlags.None, TheAsyncCallback, null));
             Assert.Throws<ArgumentNullException>(() =>
             {
                 GetSocket().ReceiveAsync(new ArraySegment<byte>(null, 0, 0), SocketFlags.None);
@@ -1832,23 +1725,19 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginReceive_Buffer_InvalidOffset_Throws_ArgumentOutOfRange()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .BeginReceive(s_buffer, -1, 0, SocketFlags.None, TheAsyncCallback, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .BeginReceive(
-                            s_buffer,
-                            s_buffer.Length + 1,
-                            0,
-                            SocketFlags.None,
-                            TheAsyncCallback,
-                            null
-                        )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .BeginReceive(s_buffer, -1, 0, SocketFlags.None, TheAsyncCallback, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .BeginReceive(
+                        s_buffer,
+                        s_buffer.Length + 1,
+                        0,
+                        SocketFlags.None,
+                        TheAsyncCallback,
+                        null
+                    ));
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -1867,35 +1756,29 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginReceive_Buffer_InvalidCount_Throws_ArgumentOutOfRange()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .BeginReceive(s_buffer, 0, -1, SocketFlags.None, TheAsyncCallback, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .BeginReceive(
-                            s_buffer,
-                            0,
-                            s_buffer.Length + 1,
-                            SocketFlags.None,
-                            TheAsyncCallback,
-                            null
-                        )
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    GetSocket()
-                        .BeginReceive(
-                            s_buffer,
-                            s_buffer.Length,
-                            1,
-                            SocketFlags.None,
-                            TheAsyncCallback,
-                            null
-                        )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .BeginReceive(s_buffer, 0, -1, SocketFlags.None, TheAsyncCallback, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .BeginReceive(
+                        s_buffer,
+                        0,
+                        s_buffer.Length + 1,
+                        SocketFlags.None,
+                        TheAsyncCallback,
+                        null
+                    ));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket()
+                    .BeginReceive(
+                        s_buffer,
+                        s_buffer.Length,
+                        1,
+                        SocketFlags.None,
+                        TheAsyncCallback,
+                        null
+                    ));
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
@@ -1922,9 +1805,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginReceive_Buffers_NullBuffers_Throws_ArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => GetSocket().BeginReceive(null, SocketFlags.None, TheAsyncCallback, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                GetSocket().BeginReceive(null, SocketFlags.None, TheAsyncCallback, null));
             Assert.Throws<ArgumentNullException>(() =>
             {
                 GetSocket().ReceiveAsync((IList<ArraySegment<byte>>)null, SocketFlags.None);

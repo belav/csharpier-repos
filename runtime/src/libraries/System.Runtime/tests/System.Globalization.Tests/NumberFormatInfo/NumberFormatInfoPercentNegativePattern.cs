@@ -65,9 +65,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void PercentNegativePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => NumberFormatInfo.InvariantInfo.PercentNegativePattern = 1
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.PercentNegativePattern = 1);
         }
     }
 }

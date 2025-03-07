@@ -68,9 +68,8 @@ namespace System.Linq.Expressions.Tests
         {
             if (!RuntimeFeature.IsDynamicCodeSupported)
             {
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => Expression.GetDelegateType(typeArgs)
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    Expression.GetDelegateType(typeArgs));
             }
             else
             {
@@ -99,9 +98,8 @@ namespace System.Linq.Expressions.Tests
             Type[] delegateArgs = typeArgs.Append(typeof(void)).ToArray();
             if (!RuntimeFeature.IsDynamicCodeSupported)
             {
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => Expression.GetDelegateType(delegateArgs)
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    Expression.GetDelegateType(delegateArgs));
             }
             else
             {

@@ -46,103 +46,78 @@ namespace System.Reflection.Tests
                     )
                     {
                         ICustomAttributeProvider icp = mem;
-                        Assert.Throws<InvalidOperationException>(
-                            () => icp.GetCustomAttributes(inherit: false)
-                        );
-                        Assert.Throws<InvalidOperationException>(
-                            () => icp.GetCustomAttributes(null, inherit: false)
-                        );
-                        Assert.Throws<InvalidOperationException>(
-                            () => icp.IsDefined(null, inherit: false)
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                            icp.GetCustomAttributes(inherit: false));
+                        Assert.Throws<InvalidOperationException>(() =>
+                            icp.GetCustomAttributes(null, inherit: false));
+                        Assert.Throws<InvalidOperationException>(() =>
+                            icp.IsDefined(null, inherit: false));
 
                         if (mem is ConstructorInfo c)
                         {
-                            Assert.Throws<InvalidOperationException>(
-                                () => c.Invoke(Array.Empty<object>())
-                            );
-                            Assert.Throws<InvalidOperationException>(
-                                () =>
-                                    c.Invoke(
-                                        default(BindingFlags),
-                                        null,
-                                        Array.Empty<object>(),
-                                        null
-                                    )
-                            );
-                            Assert.Throws<InvalidOperationException>(
-                                () => c.Invoke(null, Array.Empty<object>())
-                            );
-                            Assert.Throws<InvalidOperationException>(
-                                () =>
-                                    c.Invoke(
-                                        null,
-                                        default(BindingFlags),
-                                        null,
-                                        Array.Empty<object>(),
-                                        null
-                                    )
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                                c.Invoke(Array.Empty<object>()));
+                            Assert.Throws<InvalidOperationException>(() =>
+                                c.Invoke(default(BindingFlags), null, Array.Empty<object>(), null));
+                            Assert.Throws<InvalidOperationException>(() =>
+                                c.Invoke(null, Array.Empty<object>()));
+                            Assert.Throws<InvalidOperationException>(() =>
+                                c.Invoke(
+                                    null,
+                                    default(BindingFlags),
+                                    null,
+                                    Array.Empty<object>(),
+                                    null
+                                ));
                             Assert.Throws<InvalidOperationException>(() => c.MethodHandle);
                             Assert.Throws<InvalidOperationException>(() => c.IsSecurityCritical);
-                            Assert.Throws<InvalidOperationException>(
-                                () => c.IsSecuritySafeCritical
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                                c.IsSecuritySafeCritical);
                             Assert.Throws<InvalidOperationException>(() => c.IsSecurityTransparent);
                         }
 
                         if (mem is EventInfo e)
                         {
-                            Assert.Throws<InvalidOperationException>(
-                                () => e.AddEventHandler(null, null)
-                            );
-                            Assert.Throws<InvalidOperationException>(
-                                () => e.RemoveEventHandler(null, null)
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                                e.AddEventHandler(null, null));
+                            Assert.Throws<InvalidOperationException>(() =>
+                                e.RemoveEventHandler(null, null));
                         }
 
                         if (mem is FieldInfo f)
                         {
                             Assert.Throws<InvalidOperationException>(() => f.FieldHandle);
                             Assert.Throws<InvalidOperationException>(() => f.GetValue(null));
-                            Assert.Throws<InvalidOperationException>(
-                                () => f.GetValueDirect(default)
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                                f.GetValueDirect(default));
                             Assert.Throws<InvalidOperationException>(() => f.SetValue(null, null));
-                            Assert.Throws<InvalidOperationException>(
-                                () => f.SetValueDirect(default, null)
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                                f.SetValueDirect(default, null));
                             Assert.Throws<InvalidOperationException>(() => f.IsSecurityCritical);
-                            Assert.Throws<InvalidOperationException>(
-                                () => f.IsSecuritySafeCritical
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                                f.IsSecuritySafeCritical);
                             Assert.Throws<InvalidOperationException>(() => f.IsSecurityTransparent);
                         }
 
                         if (mem is MethodInfo m)
                         {
-                            Assert.Throws<InvalidOperationException>(
-                                () => m.Invoke(null, Array.Empty<object>())
-                            );
-                            Assert.Throws<InvalidOperationException>(
-                                () =>
-                                    m.Invoke(
-                                        null,
-                                        default(BindingFlags),
-                                        null,
-                                        Array.Empty<object>(),
-                                        null
-                                    )
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                                m.Invoke(null, Array.Empty<object>()));
+                            Assert.Throws<InvalidOperationException>(() =>
+                                m.Invoke(
+                                    null,
+                                    default(BindingFlags),
+                                    null,
+                                    Array.Empty<object>(),
+                                    null
+                                ));
                             Assert.Throws<InvalidOperationException>(() => m.MethodHandle);
                             Assert.Throws<InvalidOperationException>(() => m.CreateDelegate(null));
-                            Assert.Throws<InvalidOperationException>(
-                                () => m.CreateDelegate(null, null)
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                                m.CreateDelegate(null, null));
                             Assert.Throws<InvalidOperationException>(() => m.IsSecurityCritical);
-                            Assert.Throws<InvalidOperationException>(
-                                () => m.IsSecuritySafeCritical
-                            );
+                            Assert.Throws<InvalidOperationException>(() =>
+                                m.IsSecuritySafeCritical);
                             Assert.Throws<InvalidOperationException>(() => m.IsSecurityTransparent);
                         }
 

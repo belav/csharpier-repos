@@ -96,9 +96,8 @@ public class StartupManagerTests
             + $"Use a void returning ConfigureServices method instead or a ConfigureContainer method.";
 #pragma warning restore CS0612 // Type or member is obsolete
 
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => startup.ConfigureServicesDelegate(serviceCollection)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            startup.ConfigureServicesDelegate(serviceCollection));
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -435,9 +434,8 @@ public class StartupManagerTests
         serviceCollection.AddSingleton<IFakeStartupCallback>(new FakeStartupCallback());
         var services = serviceCollection.BuildServiceProvider();
         var type = StartupLoader.FindStartupType("Microsoft.AspNetCore.Hosting.Tests", "Boom");
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => StartupLoader.LoadMethods(services, type, "Boom")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            StartupLoader.LoadMethods(services, type, "Boom"));
         Assert.Equal(
             "A public method named 'ConfigureBoom' or 'Configure' could not be found in the 'Microsoft.AspNetCore.Hosting.Fakes.StartupBoom' type.",
             ex.Message
@@ -500,9 +498,8 @@ public class StartupManagerTests
             "TwoConfigures"
         );
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => StartupLoader.LoadMethods(services, type, "TwoConfigures")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            StartupLoader.LoadMethods(services, type, "TwoConfigures"));
         Assert.Equal(
             "Having multiple overloads of method 'Configure' is not supported.",
             ex.Message
@@ -526,9 +523,8 @@ public class StartupManagerTests
             "PrivateConfigure"
         );
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => StartupLoader.LoadMethods(services, type, "PrivateConfigure")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            StartupLoader.LoadMethods(services, type, "PrivateConfigure"));
         Assert.Equal(
             "A public method named 'ConfigurePrivateConfigure' or 'Configure' could not be found in the 'Microsoft.AspNetCore.Hosting.Fakes.StartupPrivateConfigure' type.",
             ex.Message
@@ -551,9 +547,8 @@ public class StartupManagerTests
             "TwoConfigureServices"
         );
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => StartupLoader.LoadMethods(services, type, "TwoConfigureServices")
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            StartupLoader.LoadMethods(services, type, "TwoConfigureServices"));
         Assert.Equal(
             "Having multiple overloads of method 'ConfigureServices' is not supported.",
             ex.Message
@@ -765,9 +760,8 @@ public class StartupManagerTests
             Environments.Development
         );
 
-        Assert.Throws<InvalidOperationException>(
-            () => startup.ConfigureServicesDelegate(serviceCollection)
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+            startup.ConfigureServicesDelegate(serviceCollection));
     }
 
     [Fact]
@@ -776,14 +770,12 @@ public class StartupManagerTests
         var serviceCollection = new ServiceCollection();
         var services = serviceCollection.BuildServiceProvider();
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-                StartupLoader.LoadMethods(
-                    services,
-                    typeof(MyContainerStartupBaseClass),
-                    Environments.Development
-                )
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+            StartupLoader.LoadMethods(
+                services,
+                typeof(MyContainerStartupBaseClass),
+                Environments.Development
+            ));
     }
 
     [Fact]
@@ -793,14 +785,12 @@ public class StartupManagerTests
         serviceCollection.AddSingleton<IServiceProviderFactory<MyContainer>, MyContainerFactory>();
         var services = serviceCollection.BuildServiceProvider();
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-                StartupLoader.LoadMethods(
-                    services,
-                    typeof(MyContainerStartupWithOverloads),
-                    Environments.Development
-                )
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+            StartupLoader.LoadMethods(
+                services,
+                typeof(MyContainerStartupWithOverloads),
+                Environments.Development
+            ));
     }
 
     [Fact]

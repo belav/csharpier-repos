@@ -69,35 +69,27 @@ namespace Microsoft.Win32.RegistryTests
         {
             // Should throw if passed subkey name is null
             Assert.Throws<ArgumentNullException>(() => TestRegistryKey.CreateSubKey(null, true));
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    TestRegistryKey.CreateSubKey(null, RegistryKeyPermissionCheck.ReadWriteSubTree)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        null,
-                        RegistryKeyPermissionCheck.ReadWriteSubTree,
-                        new RegistrySecurity()
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        null,
-                        RegistryKeyPermissionCheck.ReadWriteSubTree,
-                        new RegistryOptions()
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    TestRegistryKey.CreateSubKey(
-                        null,
-                        RegistryKeyPermissionCheck.ReadWriteSubTree,
-                        new RegistryOptions(),
-                        new RegistrySecurity()
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                TestRegistryKey.CreateSubKey(null, RegistryKeyPermissionCheck.ReadWriteSubTree));
+            Assert.Throws<ArgumentNullException>(() =>
+                TestRegistryKey.CreateSubKey(
+                    null,
+                    RegistryKeyPermissionCheck.ReadWriteSubTree,
+                    new RegistrySecurity()
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                TestRegistryKey.CreateSubKey(
+                    null,
+                    RegistryKeyPermissionCheck.ReadWriteSubTree,
+                    new RegistryOptions()
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                TestRegistryKey.CreateSubKey(
+                    null,
+                    RegistryKeyPermissionCheck.ReadWriteSubTree,
+                    new RegistryOptions(),
+                    new RegistrySecurity()
+                ));
 
             // Should throw if passed option is invalid
             AssertExtensions.Throws<ArgumentException>(

@@ -281,19 +281,12 @@ namespace System.Web.TestUtil
 
             // Assert ArgumentOutOfRangeException is thrown for value one less than smallest
             // enum value, and one more than largest enum value
-            var targetException = Assert.Throws<TargetInvocationException>(
-                () => propInfo.SetValue(instance, Convert.ToInt32(values[0]) - 1, null)
-            );
+            var targetException = Assert.Throws<TargetInvocationException>(() =>
+                propInfo.SetValue(instance, Convert.ToInt32(values[0]) - 1, null));
             Assert.IsType<ArgumentOutOfRangeException>(targetException.InnerException);
 
-            targetException = Assert.Throws<TargetInvocationException>(
-                () =>
-                    propInfo.SetValue(
-                        instance,
-                        Convert.ToInt32(values[values.Length - 1]) + 1,
-                        null
-                    )
-            );
+            targetException = Assert.Throws<TargetInvocationException>(() =>
+                propInfo.SetValue(instance, Convert.ToInt32(values[values.Length - 1]) + 1, null));
             Assert.IsType<ArgumentOutOfRangeException>(targetException.InnerException);
         }
 

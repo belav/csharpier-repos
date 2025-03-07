@@ -669,12 +669,10 @@ namespace System.IO.Pipes.Tests
         {
             using (client)
             {
-                await Assert.ThrowsAsync<IOException>(
-                    () => client.WriteAsync(new byte[100], 0, 100)
-                );
-                await Assert.ThrowsAsync<IOException>(
-                    () => client.WriteAsync(new byte[100]).AsTask()
-                );
+                await Assert.ThrowsAsync<IOException>(() =>
+                    client.WriteAsync(new byte[100], 0, 100));
+                await Assert.ThrowsAsync<IOException>(() =>
+                    client.WriteAsync(new byte[100]).AsTask());
             }
         }
     }

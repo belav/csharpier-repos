@@ -673,9 +673,8 @@ namespace System.Net.Primitives.Unit.Tests
             ); // Empty domain
 
             cc.MaxCookieSize = 1;
-            Assert.Throws<CookieException>(
-                () => cc.Add(new Cookie("name", "long-text", "", "contoso.com"))
-            ); // Value.Length > MaxCookieSize
+            Assert.Throws<CookieException>(() =>
+                cc.Add(new Cookie("name", "long-text", "", "contoso.com"))); // Value.Length > MaxCookieSize
         }
 
         [Fact]

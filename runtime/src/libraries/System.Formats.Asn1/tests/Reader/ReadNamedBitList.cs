@@ -221,9 +221,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(inputHex.HexToByteArray(), ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>()
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>());
 
             Assert.True(reader.HasData, "reader.HasData");
         }
@@ -237,9 +236,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(inputHex.HexToByteArray(), ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>()
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>());
 
             Assert.True(reader.HasData, "reader.HasData");
         }
@@ -253,9 +251,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(inputHex.HexToByteArray(), ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>()
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>());
 
             Assert.True(reader.HasData, "reader.HasData");
         }
@@ -276,12 +273,10 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                    reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
-                        new Asn1Tag(TagClass.ContextSpecific, 0)
-                    )
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
+                    new Asn1Tag(TagClass.ContextSpecific, 0)
+                ));
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -308,27 +303,22 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>()
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>());
 
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                    reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
-                        new Asn1Tag(TagClass.Application, 0)
-                    )
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
+                    new Asn1Tag(TagClass.Application, 0)
+                ));
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                    reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
-                        new Asn1Tag(TagClass.ContextSpecific, 1)
-                    )
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
+                    new Asn1Tag(TagClass.ContextSpecific, 1)
+                ));
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 

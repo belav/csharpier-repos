@@ -45,14 +45,12 @@ public class SSRRenderModeBoundaryTest
         PrepareEndpoint(httpContext, new WebAssemblyRenderModeSubclass());
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                new SSRRenderModeBoundary(
-                    httpContext,
-                    typeof(TestComponent),
-                    new ServerRenderModeSubclass()
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new SSRRenderModeBoundary(
+                httpContext,
+                typeof(TestComponent),
+                new ServerRenderModeSubclass()
+            ));
         Assert.Contains(
             $"A component of type '{typeof(TestComponent)}' has render mode '{nameof(ServerRenderModeSubclass)}'",
             ex.Message
@@ -68,14 +66,12 @@ public class SSRRenderModeBoundaryTest
         PrepareEndpoint(httpContext, new ServerRenderModeSubclass());
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                new SSRRenderModeBoundary(
-                    httpContext,
-                    typeof(TestComponent),
-                    new WebAssemblyRenderModeSubclass()
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new SSRRenderModeBoundary(
+                httpContext,
+                typeof(TestComponent),
+                new WebAssemblyRenderModeSubclass()
+            ));
         Assert.Contains(
             $"A component of type '{typeof(TestComponent)}' has render mode '{nameof(WebAssemblyRenderModeSubclass)}'",
             ex.Message
@@ -91,14 +87,12 @@ public class SSRRenderModeBoundaryTest
         PrepareEndpoint(httpContext, new WebAssemblyRenderModeSubclass());
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                new SSRRenderModeBoundary(
-                    httpContext,
-                    typeof(TestComponent),
-                    new AutoRenderModeSubclass()
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new SSRRenderModeBoundary(
+                httpContext,
+                typeof(TestComponent),
+                new AutoRenderModeSubclass()
+            ));
         Assert.Contains(
             $"A component of type '{typeof(TestComponent)}' has render mode '{nameof(AutoRenderModeSubclass)}'",
             ex.Message
@@ -114,14 +108,12 @@ public class SSRRenderModeBoundaryTest
         PrepareEndpoint(httpContext, new ServerRenderModeSubclass());
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                new SSRRenderModeBoundary(
-                    httpContext,
-                    typeof(TestComponent),
-                    new AutoRenderModeSubclass()
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new SSRRenderModeBoundary(
+                httpContext,
+                typeof(TestComponent),
+                new AutoRenderModeSubclass()
+            ));
         Assert.Contains(
             $"A component of type '{typeof(TestComponent)}' has render mode '{nameof(AutoRenderModeSubclass)}'",
             ex.Message

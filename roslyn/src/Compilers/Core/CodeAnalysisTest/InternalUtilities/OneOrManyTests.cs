@@ -247,9 +247,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
             Assert.Throws<IndexOutOfRangeException>(() => single[-1]);
             Assert.Throws<IndexOutOfRangeException>(() => quad[5]);
             Assert.Throws<IndexOutOfRangeException>(() => quad[-1]);
-            Assert.Throws<ArgumentNullException>(
-                () => OneOrMany.Create(default(ImmutableArray<int>))
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                OneOrMany.Create(default(ImmutableArray<int>)));
         }
 
         [Fact]

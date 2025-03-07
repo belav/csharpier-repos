@@ -87,14 +87,12 @@ public class PInvokes
 
         // By default, bool is a 4-byte Windows BOOL, which will make the calculation of stack space for the stdcall calling convention
         // incorrect, causing the entry point to not be found.
-        Assert.Throws<EntryPointNotFoundException>(
-            () =>
-                DisabledRuntimeMarshallingNative.CheckStructWithShortAndBool(
-                    new StructWithShortAndBool(s, b),
-                    s,
-                    b
-                )
-        );
+        Assert.Throws<EntryPointNotFoundException>(() =>
+            DisabledRuntimeMarshallingNative.CheckStructWithShortAndBool(
+                new StructWithShortAndBool(s, b),
+                s,
+                b
+            ));
     }
 
     [Fact]
@@ -103,14 +101,12 @@ public class PInvokes
     {
         short s = 41;
         char c = '\u2705';
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
-                DisabledRuntimeMarshallingNative.CheckStructWithWCharAndShort(
-                    new StructWithShortAndGeneric<char>(s, c),
-                    s,
-                    c
-                )
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            DisabledRuntimeMarshallingNative.CheckStructWithWCharAndShort(
+                new StructWithShortAndGeneric<char>(s, c),
+                s,
+                c
+            ));
     }
 
     [Fact]

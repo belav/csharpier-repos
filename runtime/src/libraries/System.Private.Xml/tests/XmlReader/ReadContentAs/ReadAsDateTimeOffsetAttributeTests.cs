@@ -159,9 +159,8 @@ namespace System.Xml.XmlReaderTests
             var reader = Utils.CreateFragmentReader("<Root a='0001-01-01T00:00:00-15:00'/>");
             reader.PositionOnElement("Root");
             reader.MoveToAttribute("a");
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => reader.ReadContentAs(typeof(DateTimeOffset), null)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                reader.ReadContentAs(typeof(DateTimeOffset), null));
         }
 
         [Fact]

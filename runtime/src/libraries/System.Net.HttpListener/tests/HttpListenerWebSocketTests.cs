@@ -116,15 +116,13 @@ namespace System.Net.Tests
             HttpListenerWebSocketContext context = await GetWebSocketContext();
             context.WebSocket.Dispose();
 
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                () =>
-                    context.WebSocket.SendAsync(
-                        new ArraySegment<byte>(new byte[10]),
-                        WebSocketMessageType.Text,
-                        false,
-                        new CancellationToken()
-                    )
-            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                context.WebSocket.SendAsync(
+                    new ArraySegment<byte>(new byte[10]),
+                    WebSocketMessageType.Text,
+                    false,
+                    new CancellationToken()
+                ));
         }
 
         [ConditionalTheory(nameof(IsNotWindows7))]
@@ -233,13 +231,11 @@ namespace System.Net.Tests
             await ClientConnectTask;
 
             context.WebSocket.Dispose();
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                () =>
-                    context.WebSocket.ReceiveAsync(
-                        new ArraySegment<byte>(new byte[10]),
-                        new CancellationToken()
-                    )
-            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                context.WebSocket.ReceiveAsync(
+                    new ArraySegment<byte>(new byte[10]),
+                    new CancellationToken()
+                ));
         }
 
         public static IEnumerable<object[]> CloseStatus_Valid_TestData()
@@ -303,15 +299,13 @@ namespace System.Net.Tests
             Assert.Equal(WebSocketState.CloseSent, context.WebSocket.State);
 
             // Trying to send if the socket initiated a close should fail.
-            await Assert.ThrowsAsync<WebSocketException>(
-                () =>
-                    context.WebSocket.SendAsync(
-                        new ArraySegment<byte>(new byte[10]),
-                        WebSocketMessageType.Binary,
-                        false,
-                        new CancellationToken()
-                    )
-            );
+            await Assert.ThrowsAsync<WebSocketException>(() =>
+                context.WebSocket.SendAsync(
+                    new ArraySegment<byte>(new byte[10]),
+                    WebSocketMessageType.Binary,
+                    false,
+                    new CancellationToken()
+                ));
 
             // Close the client.
             Task clientCloseTask = Client.CloseAsync(
@@ -339,22 +333,18 @@ namespace System.Net.Tests
             Assert.Equal(WebSocketState.Closed, context.WebSocket.State);
 
             // Trying to read or write if closed should fail.
-            await Assert.ThrowsAsync<WebSocketException>(
-                () =>
-                    context.WebSocket.ReceiveAsync(
-                        new ArraySegment<byte>(receivedServerBytes),
-                        new CancellationToken()
-                    )
-            );
-            await Assert.ThrowsAsync<WebSocketException>(
-                () =>
-                    context.WebSocket.SendAsync(
-                        new ArraySegment<byte>(receivedServerBytes),
-                        WebSocketMessageType.Binary,
-                        false,
-                        new CancellationToken()
-                    )
-            );
+            await Assert.ThrowsAsync<WebSocketException>(() =>
+                context.WebSocket.ReceiveAsync(
+                    new ArraySegment<byte>(receivedServerBytes),
+                    new CancellationToken()
+                ));
+            await Assert.ThrowsAsync<WebSocketException>(() =>
+                context.WebSocket.SendAsync(
+                    new ArraySegment<byte>(receivedServerBytes),
+                    WebSocketMessageType.Binary,
+                    false,
+                    new CancellationToken()
+                ));
 
             // Trying to close again should be a nop.
             await context.WebSocket.CloseAsync(
@@ -413,13 +403,11 @@ namespace System.Net.Tests
             Assert.Equal(WebSocketState.CloseReceived, context.WebSocket.State);
 
             // Trying to read if the server received a close handshake should fail.
-            await Assert.ThrowsAsync<WebSocketException>(
-                () =>
-                    context.WebSocket.ReceiveAsync(
-                        new ArraySegment<byte>(receivedServerBytes),
-                        new CancellationToken()
-                    )
-            );
+            await Assert.ThrowsAsync<WebSocketException>(() =>
+                context.WebSocket.ReceiveAsync(
+                    new ArraySegment<byte>(receivedServerBytes),
+                    new CancellationToken()
+                ));
 
             // Close the server.
             Task serverCloseTask = context.WebSocket.CloseAsync(
@@ -448,22 +436,18 @@ namespace System.Net.Tests
             Assert.Equal(WebSocketState.Closed, context.WebSocket.State);
 
             // Trying to read or write if closed should fail.
-            await Assert.ThrowsAsync<WebSocketException>(
-                () =>
-                    context.WebSocket.ReceiveAsync(
-                        new ArraySegment<byte>(receivedServerBytes),
-                        new CancellationToken()
-                    )
-            );
-            await Assert.ThrowsAsync<WebSocketException>(
-                () =>
-                    context.WebSocket.SendAsync(
-                        new ArraySegment<byte>(receivedServerBytes),
-                        WebSocketMessageType.Binary,
-                        false,
-                        new CancellationToken()
-                    )
-            );
+            await Assert.ThrowsAsync<WebSocketException>(() =>
+                context.WebSocket.ReceiveAsync(
+                    new ArraySegment<byte>(receivedServerBytes),
+                    new CancellationToken()
+                ));
+            await Assert.ThrowsAsync<WebSocketException>(() =>
+                context.WebSocket.SendAsync(
+                    new ArraySegment<byte>(receivedServerBytes),
+                    WebSocketMessageType.Binary,
+                    false,
+                    new CancellationToken()
+                ));
 
             // Trying to close again should be a nop.
             await context.WebSocket.CloseAsync(

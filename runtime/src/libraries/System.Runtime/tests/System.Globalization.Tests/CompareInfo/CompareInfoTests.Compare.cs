@@ -2840,14 +2840,12 @@ namespace System.Globalization.Tests
             {
                 char hiraganaChar1 = hiraganaList[0];
                 char katakanaChar1 = (char)(hiraganaChar1 + hiraganaToKatakanaOffset);
-                Assert.Throws<PlatformNotSupportedException>(
-                    () =>
-                        s_invariantCompare.Compare(
-                            new string(hiraganaChar1, 1),
-                            new string(katakanaChar1, 1),
-                            option
-                        )
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    s_invariantCompare.Compare(
+                        new string(hiraganaChar1, 1),
+                        new string(katakanaChar1, 1),
+                        option
+                    ));
             }
         }
     }

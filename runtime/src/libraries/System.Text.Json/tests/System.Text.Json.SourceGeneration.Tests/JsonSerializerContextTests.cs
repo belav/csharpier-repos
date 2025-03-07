@@ -36,9 +36,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             JsonPropertyInfo propertyInfo = typeInfo.Properties[0];
             Assert.Throws<InvalidOperationException>(() => propertyInfo.Name = "differentName");
-            Assert.Throws<InvalidOperationException>(
-                () => propertyInfo.NumberHandling = JsonNumberHandling.AllowReadingFromString
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                propertyInfo.NumberHandling = JsonNumberHandling.AllowReadingFromString);
             Assert.Throws<InvalidOperationException>(() => propertyInfo.IsRequired = true);
             Assert.Throws<InvalidOperationException>(() => propertyInfo.Order = -1);
         }
@@ -56,9 +55,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             JsonPropertyInfo propertyInfo = typeInfo.Properties[0];
             Assert.Throws<InvalidOperationException>(() => propertyInfo.Name = "differentName");
-            Assert.Throws<InvalidOperationException>(
-                () => propertyInfo.NumberHandling = JsonNumberHandling.AllowReadingFromString
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                propertyInfo.NumberHandling = JsonNumberHandling.AllowReadingFromString);
             Assert.Throws<InvalidOperationException>(() => propertyInfo.IsRequired = true);
             Assert.Throws<InvalidOperationException>(() => propertyInfo.Order = -1);
         }
@@ -188,9 +186,8 @@ namespace System.Text.Json.SourceGeneration.Tests
                     object[] objArr = new object[] { new MyStruct() };
 
                     // Metadata not generated for MyStruct without JsonSerializableAttribute.
-                    NotSupportedException ex = Assert.Throws<NotSupportedException>(
-                        () => JsonSerializer.Serialize(objArr, MetadataContext.Default.ObjectArray)
-                    );
+                    NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
+                        JsonSerializer.Serialize(objArr, MetadataContext.Default.ObjectArray));
                     string exAsStr = ex.ToString();
                     Assert.Contains(typeof(MyStruct).ToString(), exAsStr);
                     Assert.Contains("JsonSerializerOptions", exAsStr);
@@ -325,9 +322,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.IsAssignableFrom<JsonTypeInfo<Person>>(personInfo);
             Assert.Same(options, personInfo.Options);
 
-            NotSupportedException exn = Assert.Throws<NotSupportedException>(
-                () => options.GetTypeInfo(typeof(MyStruct))
-            );
+            NotSupportedException exn = Assert.Throws<NotSupportedException>(() =>
+                options.GetTypeInfo(typeof(MyStruct)));
             Assert.Contains(typeof(NestedContext).FullName, exn.Message);
             Assert.Contains(typeof(PersonJsonContext).FullName, exn.Message);
         }
@@ -381,12 +377,10 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Equal(expectedJson, JsonSerializer.Serialize(value, options));
 
             // Throws since deserialization without metadata is not supported
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize<JsonMessage>(expectedJson, jsonMessageInfo)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize<JsonMessage>(expectedJson, options)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<JsonMessage>(expectedJson, jsonMessageInfo));
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize<JsonMessage>(expectedJson, options));
         }
 
         [Theory]
@@ -765,9 +759,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             );
 
             // ensure we're not falling back to reflection serialization
-            Assert.Throws<NotSupportedException>(
-                () => JsonSerializer.Serialize(new Person("a", "b"), o)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Serialize(new Person("a", "b"), o));
             Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize((byte)1, o));
 
             ClassWithPocoListDictionaryAndNullable obj = new()

@@ -239,14 +239,12 @@ public class DotNetDispatcherTest
         );
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                DotNetDispatcher.Invoke(
-                    jsRuntime,
-                    new DotNetInvocationInfo(thisAssemblyName, method, default, default),
-                    argsJson
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            DotNetDispatcher.Invoke(
+                jsRuntime,
+                new DotNetInvocationInfo(thisAssemblyName, method, default, default),
+                argsJson
+            ));
         Assert.Equal(
             $"In call to '{method}', parameter of type '{nameof(TestDTO)}' at index 3 must be declared as type 'DotNetObjectRef<TestDTO>' to receive the incoming value.",
             ex.Message
@@ -329,14 +327,12 @@ public class DotNetDispatcherTest
         objectRef.Dispose();
 
         // Act/Assert
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-                DotNetDispatcher.Invoke(
-                    jsRuntime,
-                    new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default),
-                    null
-                )
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            DotNetDispatcher.Invoke(
+                jsRuntime,
+                new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default),
+                null
+            ));
         Assert.StartsWith("There is no tracked object with id '1'.", ex.Message);
     }
 
@@ -354,14 +350,12 @@ public class DotNetDispatcherTest
         objectRef.Dispose();
 
         // Act/Assert
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-                DotNetDispatcher.Invoke(
-                    jsRuntime,
-                    new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default),
-                    null
-                )
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            DotNetDispatcher.Invoke(
+                jsRuntime,
+                new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default),
+                null
+            ));
         Assert.StartsWith("There is no tracked object with id '1'.", ex.Message);
     }
 
@@ -469,13 +463,11 @@ public class DotNetDispatcherTest
         var task = jsRuntime.InvokeAsync<TestDTO>("somemethod");
 
         // Act & Assert
-        Assert.ThrowsAny<JsonException>(
-            () =>
-                DotNetDispatcher.EndInvokeJS(
-                    jsRuntime,
-                    $"{{\"key\": \"{jsRuntime.LastInvocationAsyncHandle}\"}}"
-                )
-        );
+        Assert.ThrowsAny<JsonException>(() =>
+            DotNetDispatcher.EndInvokeJS(
+                jsRuntime,
+                $"{{\"key\": \"{jsRuntime.LastInvocationAsyncHandle}\"}}"
+            ));
     }
 
     [Fact]
@@ -486,13 +478,11 @@ public class DotNetDispatcherTest
         var task = jsRuntime.InvokeAsync<TestDTO>("somemethod");
 
         // Act & Assert
-        Assert.ThrowsAny<JsonException>(
-            () =>
-                DotNetDispatcher.EndInvokeJS(
-                    jsRuntime,
-                    $"[{jsRuntime.LastInvocationAsyncHandle}, false"
-                )
-        );
+        Assert.ThrowsAny<JsonException>(() =>
+            DotNetDispatcher.EndInvokeJS(
+                jsRuntime,
+                $"[{jsRuntime.LastInvocationAsyncHandle}, false"
+            ));
     }
 
     [Fact]
@@ -503,13 +493,11 @@ public class DotNetDispatcherTest
         var task = jsRuntime.InvokeAsync<TestDTO>("somemethod");
 
         // Act & Assert
-        Assert.ThrowsAny<JsonException>(
-            () =>
-                DotNetDispatcher.EndInvokeJS(
-                    jsRuntime,
-                    $"[{jsRuntime.LastInvocationAsyncHandle}, false, \"Hello\", 5]"
-                )
-        );
+        Assert.ThrowsAny<JsonException>(() =>
+            DotNetDispatcher.EndInvokeJS(
+                jsRuntime,
+                $"[{jsRuntime.LastInvocationAsyncHandle}, false, \"Hello\", 5]"
+            ));
     }
 
     [Fact]
@@ -660,14 +648,12 @@ public class DotNetDispatcherTest
         var jsRuntime = new TestJSRuntime();
 
         // Act
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-                DotNetDispatcher.Invoke(
-                    jsRuntime,
-                    new DotNetInvocationInfo(thisAssemblyName, methodIdentifier, 0, default),
-                    "[7]"
-                )
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            DotNetDispatcher.Invoke(
+                jsRuntime,
+                new DotNetInvocationInfo(thisAssemblyName, methodIdentifier, 0, default),
+                "[7]"
+            ));
         Assert.Contains(
             $"The assembly '{thisAssemblyName}' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].",
             ex.Message
@@ -684,14 +670,12 @@ public class DotNetDispatcherTest
         var argsJson = "[\"hello world\"]";
 
         // Act
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-                DotNetDispatcher.Invoke(
-                    jsRuntime,
-                    new DotNetInvocationInfo(null, methodIdentifier, 1, default),
-                    argsJson
-                )
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            DotNetDispatcher.Invoke(
+                jsRuntime,
+                new DotNetInvocationInfo(null, methodIdentifier, 1, default),
+                argsJson
+            ));
         Assert.Contains(
             $"The type 'GenericType`1' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].",
             ex.Message
@@ -707,19 +691,12 @@ public class DotNetDispatcherTest
         var argsJson = "[\"hello world\"]";
 
         // Act & Assert
-        Assert.Throws<JsonException>(
-            () =>
-                DotNetDispatcher.Invoke(
-                    jsRuntime,
-                    new DotNetInvocationInfo(
-                        null,
-                        nameof(GenericType<int>.EchoParameter),
-                        1,
-                        default
-                    ),
-                    argsJson
-                )
-        );
+        Assert.Throws<JsonException>(() =>
+            DotNetDispatcher.Invoke(
+                jsRuntime,
+                new DotNetInvocationInfo(null, nameof(GenericType<int>.EchoParameter), 1, default),
+                argsJson
+            ));
     }
 
     [Fact]
@@ -1043,15 +1020,13 @@ public class DotNetDispatcherTest
     [InlineData("<xml>")]
     public void ParseArguments_ThrowsIfJsonIsInvalid(string arguments)
     {
-        Assert.ThrowsAny<JsonException>(
-            () =>
-                DotNetDispatcher.ParseArguments(
-                    new TestJSRuntime(),
-                    "SomeMethod",
-                    arguments,
-                    new[] { typeof(string) }
-                )
-        );
+        Assert.ThrowsAny<JsonException>(() =>
+            DotNetDispatcher.ParseArguments(
+                new TestJSRuntime(),
+                "SomeMethod",
+                arguments,
+                new[] { typeof(string) }
+            ));
     }
 
     [Theory]
@@ -1060,15 +1035,13 @@ public class DotNetDispatcherTest
     public void ParseArguments_ThrowsIfTheArgsJsonIsNotArray(string arguments)
     {
         // Act & Assert
-        Assert.ThrowsAny<JsonException>(
-            () =>
-                DotNetDispatcher.ParseArguments(
-                    new TestJSRuntime(),
-                    "SomeMethod",
-                    arguments,
-                    new[] { typeof(string) }
-                )
-        );
+        Assert.ThrowsAny<JsonException>(() =>
+            DotNetDispatcher.ParseArguments(
+                new TestJSRuntime(),
+                "SomeMethod",
+                arguments,
+                new[] { typeof(string) }
+            ));
     }
 
     [Theory]
@@ -1077,15 +1050,13 @@ public class DotNetDispatcherTest
     public void ParseArguments_ThrowsIfTheArgsJsonIsInvalidArray(string arguments)
     {
         // Act & Assert
-        Assert.ThrowsAny<JsonException>(
-            () =>
-                DotNetDispatcher.ParseArguments(
-                    new TestJSRuntime(),
-                    "SomeMethod",
-                    arguments,
-                    new[] { typeof(string) }
-                )
-        );
+        Assert.ThrowsAny<JsonException>(() =>
+            DotNetDispatcher.ParseArguments(
+                new TestJSRuntime(),
+                "SomeMethod",
+                arguments,
+                new[] { typeof(string) }
+            ));
     }
 
     [Fact]
@@ -1152,15 +1123,13 @@ public class DotNetDispatcherTest
         var arguments = "[4, {\"__dotNetObject\": 7}]";
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                DotNetDispatcher.ParseArguments(
-                    new TestJSRuntime(),
-                    method,
-                    arguments,
-                    new[] { typeof(int), typeof(TestDTO) }
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            DotNetDispatcher.ParseArguments(
+                new TestJSRuntime(),
+                method,
+                arguments,
+                new[] { typeof(int), typeof(TestDTO) }
+            ));
 
         // Assert
         Assert.Equal(

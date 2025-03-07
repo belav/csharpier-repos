@@ -249,9 +249,8 @@ public class PersistComponentStateTagHelperTest
         var output = GetTagHelperOutput();
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => tagHelper.ProcessAsync(context, output)
-        );
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            tagHelper.ProcessAsync(context, output));
     }
 
     private static TagHelperContext GetTagHelperContext()

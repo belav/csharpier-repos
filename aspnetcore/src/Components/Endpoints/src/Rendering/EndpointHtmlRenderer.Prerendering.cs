@@ -132,9 +132,8 @@ internal partial class EndpointHtmlRenderer
             var rootComponent = prerenderMode is null
                 ? InstantiateComponent(componentType)
                 : new SSRRenderModeBoundary(_httpContext, componentType, prerenderMode);
-            var htmlRootComponent = await Dispatcher.InvokeAsync(
-                () => BeginRenderingComponent(rootComponent, parameters)
-            );
+            var htmlRootComponent = await Dispatcher.InvokeAsync(() =>
+                BeginRenderingComponent(rootComponent, parameters));
             var result = new PrerenderedComponentHtmlContent(Dispatcher, htmlRootComponent);
 
             await WaitForResultReady(waitForQuiescence, result);

@@ -150,13 +150,11 @@ public class CosmosDbContextOptionsExtensionsTests
 
     private void Throws<T>(Action<CosmosDbContextOptionsBuilder> cosmosOptionsAction)
         where T : Exception =>
-        Assert.Throws<T>(
-            () =>
-                new DbContextOptionsBuilder().UseCosmos(
-                    "serviceEndPoint",
-                    "authKeyOrResourceToken",
-                    "databaseName",
-                    cosmosOptionsAction
-                )
-        );
+        Assert.Throws<T>(() =>
+            new DbContextOptionsBuilder().UseCosmos(
+                "serviceEndPoint",
+                "authKeyOrResourceToken",
+                "databaseName",
+                cosmosOptionsAction
+            ));
 }

@@ -20,9 +20,8 @@ public class DefaultViewComponentDescriptorProviderTest
         var provider = CreateProvider(type);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => provider.GetViewComponents().ToArray()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            provider.GetViewComponents().ToArray());
         Assert.Equal(expected, ex.Message);
     }
 
@@ -39,9 +38,8 @@ public class DefaultViewComponentDescriptorProviderTest
         var provider = CreateProvider(type);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => provider.GetViewComponents().ToArray()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            provider.GetViewComponents().ToArray());
         Assert.Equal(expected, ex.Message);
     }
 
@@ -57,9 +55,8 @@ public class DefaultViewComponentDescriptorProviderTest
         var provider = CreateProvider(type);
 
         // Act and Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => provider.GetViewComponents().ToArray()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            provider.GetViewComponents().ToArray());
         Assert.Equal(expected, ex.Message);
     }
 
@@ -73,9 +70,8 @@ public class DefaultViewComponentDescriptorProviderTest
         var provider = CreateProvider(type);
 
         // Act and Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => provider.GetViewComponents().ToArray()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            provider.GetViewComponents().ToArray());
         Assert.Equal(expected, ex.Message);
     }
 
@@ -89,9 +85,8 @@ public class DefaultViewComponentDescriptorProviderTest
         var provider = CreateProvider(type);
 
         // Act and Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => provider.GetViewComponents().ToArray()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            provider.GetViewComponents().ToArray());
         Assert.Equal(expected, ex.Message);
     }
 

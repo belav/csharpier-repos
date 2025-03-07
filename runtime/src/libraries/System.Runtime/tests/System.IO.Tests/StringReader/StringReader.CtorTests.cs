@@ -307,19 +307,14 @@ namespace System.IO.Tests
         {
             var reader = new StringReader("abc");
 
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => reader.ReadAsync(Memory<char>.Empty, new CancellationToken(true)).AsTask()
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () =>
-                    reader.ReadBlockAsync(Memory<char>.Empty, new CancellationToken(true)).AsTask()
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => reader.ReadLineAsync(new CancellationToken(true)).AsTask()
-            );
-            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => reader.ReadToEndAsync(new CancellationToken(true))
-            );
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                reader.ReadAsync(Memory<char>.Empty, new CancellationToken(true)).AsTask());
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                reader.ReadBlockAsync(Memory<char>.Empty, new CancellationToken(true)).AsTask());
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                reader.ReadLineAsync(new CancellationToken(true)).AsTask());
+            await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                reader.ReadToEndAsync(new CancellationToken(true)));
         }
 
         private static void ValidateDisposedExceptions(StringReader sr)

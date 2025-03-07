@@ -17,9 +17,8 @@ namespace System.Formats.Tar.Tests
             TarWriter writer = new TarWriter(archiveStream);
             await writer.DisposeAsync();
 
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                () => writer.WriteEntryAsync("fileName", "entryName")
-            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                writer.WriteEntryAsync("fileName", "entryName"));
         }
 
         [Fact]
@@ -28,12 +27,10 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             await using (TarWriter writer = new TarWriter(archiveStream))
             {
-                await Assert.ThrowsAsync<ArgumentNullException>(
-                    () => writer.WriteEntryAsync(null, "entryName")
-                );
-                await Assert.ThrowsAsync<ArgumentException>(
-                    () => writer.WriteEntryAsync(string.Empty, "entryName")
-                );
+                await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                    writer.WriteEntryAsync(null, "entryName"));
+                await Assert.ThrowsAsync<ArgumentException>(() =>
+                    writer.WriteEntryAsync(string.Empty, "entryName"));
             }
         }
 

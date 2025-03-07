@@ -302,9 +302,8 @@ namespace Tests.Integration
             Assert.Equal(0, me.Children.Length);
 
             // Can only have one name
-            Assert.Throws<ChangeRejectedException>(
-                () => container.ComposeParts(new MyName("Blayke"))
-            );
+            Assert.Throws<ChangeRejectedException>(() =>
+                container.ComposeParts(new MyName("Blayke")));
 
             batch = new CompositionBatch();
             batch.AddPart(new MyName("Blayke"));
@@ -333,9 +332,8 @@ namespace Tests.Integration
             batch = new CompositionBatch();
 
             // Can only have one spouse because they aren't recomposable
-            Assert.Throws<ChangeRejectedException>(
-                () => container.ComposeParts(new Spouse("Cameron"))
-            );
+            Assert.Throws<ChangeRejectedException>(() =>
+                container.ComposeParts(new Spouse("Cameron")));
 
             Assert.Equal(1, me.Relatives.Length);
 

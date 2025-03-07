@@ -222,13 +222,11 @@ namespace System.Tests
         [Fact]
         public void GetInterface_SameNameInterfaces_ThrowsAmbiguousMatchException()
         {
-            Assert.Throws<AmbiguousMatchException>(
-                () =>
-                    typeof(ClassWithTwoSameNameInterfaces).GetInterface(
-                        "Interface1",
-                        ignoreCase: true
-                    )
-            );
+            Assert.Throws<AmbiguousMatchException>(() =>
+                typeof(ClassWithTwoSameNameInterfaces).GetInterface(
+                    "Interface1",
+                    ignoreCase: true
+                ));
         }
 
         [Fact]
@@ -245,13 +243,11 @@ namespace System.Tests
         [Fact]
         public void GetInterface_MixedCaseAmbiguity_ThrowsAmbiguousMatchException()
         {
-            Assert.Throws<AmbiguousMatchException>(
-                () =>
-                    typeof(ClassWithMixedCaseInterfaces).GetInterface(
-                        "mixedinterface",
-                        ignoreCase: true
-                    )
-            );
+            Assert.Throws<AmbiguousMatchException>(() =>
+                typeof(ClassWithMixedCaseInterfaces).GetInterface(
+                    "mixedinterface",
+                    ignoreCase: true
+                ));
         }
     }
 

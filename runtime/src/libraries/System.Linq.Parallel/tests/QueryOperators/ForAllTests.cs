@@ -47,29 +47,25 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void ForAll_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .ForAll(x =>
-                        {
-                            throw new DeliberateTestException();
-                        })
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Select(
-                            (Func<int, int>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .ForAll(x =>
+                    {
+                        throw new DeliberateTestException();
+                    }));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Select(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-                        .ForAll(x => { })
-            );
+                    )
+                    .ForAll(x => { }));
         }
 
         [Fact]

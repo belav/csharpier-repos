@@ -38,9 +38,8 @@ public class RelatedAssemblyPartTest
         var assembly = new TestAssembly { AttributeAssembly = "MyAssembly" };
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => RelatedAssemblyAttribute.GetRelatedAssemblies(assembly, throwOnError: true)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            RelatedAssemblyAttribute.GetRelatedAssemblies(assembly, throwOnError: true));
         Assert.Equal(expected, ex.Message);
     }
 
@@ -52,9 +51,8 @@ public class RelatedAssemblyPartTest
         var assembly = new TestAssembly { AttributeAssembly = "DoesNotExist" };
 
         // Act & Assert
-        Assert.Throws<FileNotFoundException>(
-            () => RelatedAssemblyAttribute.GetRelatedAssemblies(assembly, throwOnError: true)
-        );
+        Assert.Throws<FileNotFoundException>(() =>
+            RelatedAssemblyAttribute.GetRelatedAssemblies(assembly, throwOnError: true));
     }
 
     [Fact]

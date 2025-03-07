@@ -120,64 +120,53 @@ namespace Microsoft.Extensions.Options.Tests
             string validFailureMessage = "Something's wrong";
             object validDependency = new();
 
-            Assert.Throws<ArgumentNullException>(
-                () => new ValidateOptions<object>(validName, null, validFailureMessage)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ValidateOptions<object, object>(
-                        validName,
-                        validDependency,
-                        null,
-                        validFailureMessage
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ValidateOptions<object, object, object>(
-                        validName,
-                        validDependency,
-                        validDependency,
-                        null,
-                        validFailureMessage
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ValidateOptions<object, object, object, object>(
-                        validName,
-                        validDependency,
-                        validDependency,
-                        validDependency,
-                        null,
-                        validFailureMessage
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ValidateOptions<object, object, object, object, object>(
-                        validName,
-                        validDependency,
-                        validDependency,
-                        validDependency,
-                        validDependency,
-                        null,
-                        validFailureMessage
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ValidateOptions<object, object, object, object, object, object>(
-                        validName,
-                        validDependency,
-                        validDependency,
-                        validDependency,
-                        validDependency,
-                        validDependency,
-                        null,
-                        validFailureMessage
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ValidateOptions<object>(validName, null, validFailureMessage));
+            Assert.Throws<ArgumentNullException>(() =>
+                new ValidateOptions<object, object>(
+                    validName,
+                    validDependency,
+                    null,
+                    validFailureMessage
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                new ValidateOptions<object, object, object>(
+                    validName,
+                    validDependency,
+                    validDependency,
+                    null,
+                    validFailureMessage
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                new ValidateOptions<object, object, object, object>(
+                    validName,
+                    validDependency,
+                    validDependency,
+                    validDependency,
+                    null,
+                    validFailureMessage
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                new ValidateOptions<object, object, object, object, object>(
+                    validName,
+                    validDependency,
+                    validDependency,
+                    validDependency,
+                    validDependency,
+                    null,
+                    validFailureMessage
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                new ValidateOptions<object, object, object, object, object, object>(
+                    validName,
+                    validDependency,
+                    validDependency,
+                    validDependency,
+                    validDependency,
+                    validDependency,
+                    null,
+                    validFailureMessage
+                ));
         }
     }
 }

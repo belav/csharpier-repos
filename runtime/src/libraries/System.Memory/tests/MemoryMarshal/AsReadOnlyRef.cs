@@ -36,22 +36,17 @@ namespace System.SpanTests
         [Fact]
         public static void AsReadOnlyRefFail()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => MemoryMarshal.AsRef<uint>(new ReadOnlySpan<byte>(new byte[] { 1 }))
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(
-                        new ReadOnlySpan<byte>(new byte[] { 1 })
-                    )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                MemoryMarshal.AsRef<uint>(new ReadOnlySpan<byte>(new byte[] { 1 })));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(
+                    new ReadOnlySpan<byte>(new byte[] { 1 })
+                ));
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                    MemoryMarshal.AsRef<TestHelpers.StructWithReferences>(
-                        new ReadOnlySpan<byte>(new byte[100])
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                MemoryMarshal.AsRef<TestHelpers.StructWithReferences>(
+                    new ReadOnlySpan<byte>(new byte[100])
+                ));
         }
     }
 }

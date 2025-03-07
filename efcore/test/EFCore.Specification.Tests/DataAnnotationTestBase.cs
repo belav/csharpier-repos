@@ -911,14 +911,12 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                 nameof(CompositeKeyAttribute)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        modelBuilder
-                            .Entity<CompositeKeyAttribute>()
-                            .HasOne<KeyFluentApiAndKeylessAttribute>()
-                            .WithOne()
-                            .HasForeignKey<CompositeKeyAttribute>("fk")
-                )
+                .Throws<InvalidOperationException>(() =>
+                    modelBuilder
+                        .Entity<CompositeKeyAttribute>()
+                        .HasOne<KeyFluentApiAndKeylessAttribute>()
+                        .WithOne()
+                        .HasForeignKey<CompositeKeyAttribute>("fk"))
                 .Message
         );
     }
@@ -2775,9 +2773,8 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                 nameof(A)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => modelBuilder.Entity<ConflictingFKAttributes>()
-                )
+                .Throws<InvalidOperationException>(() =>
+                    modelBuilder.Entity<ConflictingFKAttributes>())
                 .Message
         );
     }

@@ -87,9 +87,8 @@ namespace System.IO.Pipes.Tests
             Assert.NotNull(server.GetAccessControl());
             server.SetAccessControl(new PipeSecurity());
             Assert.Throws<InvalidOperationException>(() => client.GetAccessControl());
-            Assert.Throws<InvalidOperationException>(
-                () => client.SetAccessControl(new PipeSecurity())
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                client.SetAccessControl(new PipeSecurity()));
         }
 
         [Fact]
@@ -120,9 +119,8 @@ namespace System.IO.Pipes.Tests
             Assert.NotNull(server.GetAccessControl());
             server.SetAccessControl(new PipeSecurity());
             Assert.Throws<ObjectDisposedException>(() => client.GetAccessControl());
-            Assert.Throws<ObjectDisposedException>(
-                () => client.SetAccessControl(new PipeSecurity())
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                client.SetAccessControl(new PipeSecurity()));
         }
 
         [Fact]
@@ -153,9 +151,8 @@ namespace System.IO.Pipes.Tests
             Assert.NotNull(server.GetAccessControl());
             server.SetAccessControl(new PipeSecurity());
             Assert.Throws<ObjectDisposedException>(() => client.GetAccessControl());
-            Assert.Throws<ObjectDisposedException>(
-                () => client.SetAccessControl(new PipeSecurity())
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                client.SetAccessControl(new PipeSecurity()));
         }
 
         [Fact]
@@ -215,9 +212,8 @@ namespace System.IO.Pipes.Tests
             server.Dispose();
             Assert.Throws<IOException>(() => client.Write(new byte[] { 0 }, 0, 1));
             Assert.Throws<ObjectDisposedException>(() => server.GetAccessControl());
-            Assert.Throws<ObjectDisposedException>(
-                () => server.SetAccessControl(new PipeSecurity())
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                server.SetAccessControl(new PipeSecurity()));
             Assert.NotNull(client.GetAccessControl());
             Assert.Throws<IOException>(() => client.SetAccessControl(new PipeSecurity()));
         }
@@ -248,9 +244,8 @@ namespace System.IO.Pipes.Tests
             server.SafePipeHandle.Close();
             Assert.Throws<IOException>(() => client.Write(new byte[] { 0 }, 0, 1));
             Assert.Throws<ObjectDisposedException>(() => server.GetAccessControl());
-            Assert.Throws<ObjectDisposedException>(
-                () => server.SetAccessControl(new PipeSecurity())
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                server.SetAccessControl(new PipeSecurity()));
             Assert.NotNull(client.GetAccessControl());
             Assert.Throws<IOException>(() => client.SetAccessControl(new PipeSecurity()));
         }

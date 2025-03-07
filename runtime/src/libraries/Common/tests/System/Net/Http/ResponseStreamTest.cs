@@ -537,9 +537,8 @@ namespace System.Net.Http.Functional.Tests
                 )
             )
             {
-                TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(
-                    () => client.SendAsync(req, token)
-                );
+                TaskCanceledException ex = await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                    client.SendAsync(req, token));
                 Assert.Equal(token, ex.CancellationToken);
                 Assert.Equal(1, readNotCancelledCount);
                 Assert.Equal(0, readCancelledCount);
@@ -580,9 +579,8 @@ namespace System.Net.Http.Functional.Tests
                 )
             )
             {
-                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.SendAsync(req)
-                );
+                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.SendAsync(req));
                 Assert.Equal("TypeError: Failed to fetch", ex.Message);
                 Assert.Equal(1, readCount);
             }
@@ -657,9 +655,8 @@ namespace System.Net.Http.Functional.Tests
                 {
                     if (PlatformDetection.IsBrowser) // TypeError: Failed to fetch
                     {
-                        await Assert.ThrowsAsync<HttpRequestException>(
-                            () => ReadAsStreamHelper(uri)
-                        );
+                        await Assert.ThrowsAsync<HttpRequestException>(() =>
+                            ReadAsStreamHelper(uri));
                     }
                     else if (IsWinHttpHandler)
                     {
@@ -667,9 +664,8 @@ namespace System.Net.Http.Functional.Tests
                     }
                     else
                     {
-                        HttpIOException exception = await Assert.ThrowsAsync<HttpIOException>(
-                            () => ReadAsStreamHelper(uri)
-                        );
+                        HttpIOException exception = await Assert.ThrowsAsync<HttpIOException>(() =>
+                            ReadAsStreamHelper(uri));
                         Assert.Equal(HttpRequestError.ResponseEnded, exception.HttpRequestError);
                     }
                 }

@@ -2411,54 +2411,41 @@ namespace System.Tests
 
             Assert.Throws<FormatException>(() => DateTime.Parse(""));
             Assert.Throws<FormatException>(() => DateTime.Parse("", new MyFormatter()));
-            Assert.Throws<FormatException>(
-                () => DateTime.Parse("", new MyFormatter(), DateTimeStyles.NoCurrentDateDefault)
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse("", new MyFormatter(), DateTimeStyles.NoCurrentDateDefault));
 
-            Assert.Throws<FormatException>(
-                () => DateTime.Parse("2020-5-7T09:37:00.0000000-07:00c")
-            );
-            Assert.Throws<FormatException>(
-                () => DateTime.Parse("2020-5-7T09:37:00.0000000-07:00c", new MyFormatter())
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.Parse(
-                        "2020-5-7T09:37:00.0000000-07:00c",
-                        new MyFormatter(),
-                        DateTimeStyles.NoCurrentDateDefault
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse("2020-5-7T09:37:00.0000000-07:00c"));
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse("2020-5-7T09:37:00.0000000-07:00c", new MyFormatter()));
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse(
+                    "2020-5-7T09:37:00.0000000-07:00c",
+                    new MyFormatter(),
+                    DateTimeStyles.NoCurrentDateDefault
+                ));
 
-            Assert.Throws<FormatException>(
-                () => DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#")
-            );
-            Assert.Throws<FormatException>(
-                () => DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#", new MyFormatter())
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.Parse(
-                        "2020-5-7T09:37:00.0000000+00:00#",
-                        new MyFormatter(),
-                        DateTimeStyles.NoCurrentDateDefault
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#"));
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#", new MyFormatter()));
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse(
+                    "2020-5-7T09:37:00.0000000+00:00#",
+                    new MyFormatter(),
+                    DateTimeStyles.NoCurrentDateDefault
+                ));
 
-            Assert.Throws<FormatException>(
-                () => DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#\0")
-            );
-            Assert.Throws<FormatException>(
-                () => DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#\0", new MyFormatter())
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.Parse(
-                        "2020-5-7T09:37:00.0000000+00:00#\0",
-                        new MyFormatter(),
-                        DateTimeStyles.NoCurrentDateDefault
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#\0"));
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#\0", new MyFormatter()));
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse(
+                    "2020-5-7T09:37:00.0000000+00:00#\0",
+                    new MyFormatter(),
+                    DateTimeStyles.NoCurrentDateDefault
+                ));
         }
 
         [Theory]
@@ -2495,18 +2482,15 @@ namespace System.Tests
             );
 
             Assert.Throws<FormatException>(() => DateTime.ParseExact("", "d", new MyFormatter()));
-            Assert.Throws<FormatException>(
-                () => DateTime.ParseExact("", "d", new MyFormatter(), DateTimeStyles.None)
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.ParseExact(
-                        "",
-                        new[] { "d" },
-                        new MyFormatter(),
-                        DateTimeStyles.NoCurrentDateDefault
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact("", "d", new MyFormatter(), DateTimeStyles.None));
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(
+                    "",
+                    new[] { "d" },
+                    new MyFormatter(),
+                    DateTimeStyles.NoCurrentDateDefault
+                ));
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "format",
@@ -2529,36 +2513,29 @@ namespace System.Tests
             );
 
             Assert.Throws<FormatException>(() => DateTime.ParseExact("123", "", new MyFormatter()));
-            Assert.Throws<FormatException>(
-                () => DateTime.ParseExact("123", "", new MyFormatter(), DateTimeStyles.None)
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.ParseExact(
-                        "123",
-                        new string[0],
-                        new MyFormatter(),
-                        DateTimeStyles.NoCurrentDateDefault
-                    )
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.ParseExact(
-                        "123",
-                        new string[] { null },
-                        new MyFormatter(),
-                        DateTimeStyles.NoCurrentDateDefault
-                    )
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.ParseExact(
-                        "123",
-                        new[] { "" },
-                        new MyFormatter(),
-                        DateTimeStyles.NoCurrentDateDefault
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact("123", "", new MyFormatter(), DateTimeStyles.None));
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(
+                    "123",
+                    new string[0],
+                    new MyFormatter(),
+                    DateTimeStyles.NoCurrentDateDefault
+                ));
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(
+                    "123",
+                    new string[] { null },
+                    new MyFormatter(),
+                    DateTimeStyles.NoCurrentDateDefault
+                ));
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(
+                    "123",
+                    new[] { "" },
+                    new MyFormatter(),
+                    DateTimeStyles.NoCurrentDateDefault
+                ));
         }
 
         [Fact]
@@ -2849,13 +2826,10 @@ namespace System.Tests
             string expected = dt.ToString(toStringFormat);
 
             Assert.Throws<FormatException>(() => DateTime.ParseExact(expected, parseFormat, null));
-            Assert.Throws<FormatException>(
-                () => DateTime.ParseExact(expected, parseFormat, null, DateTimeStyles.None)
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.ParseExact(expected, new[] { parseFormat }, null, DateTimeStyles.None)
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(expected, parseFormat, null, DateTimeStyles.None));
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(expected, new[] { parseFormat }, null, DateTimeStyles.None));
 
             Assert.False(
                 DateTime.TryParseExact(
@@ -2981,18 +2955,15 @@ namespace System.Tests
         public static void ParseExact_InvalidData_R(string invalidString)
         {
             Assert.Throws<FormatException>(() => DateTime.ParseExact(invalidString, "r", null));
-            Assert.Throws<FormatException>(
-                () => DateTime.ParseExact(invalidString, "r", null, DateTimeStyles.None)
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.ParseExact(
-                        invalidString,
-                        new string[] { "r" },
-                        null,
-                        DateTimeStyles.None
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(invalidString, "r", null, DateTimeStyles.None));
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(
+                    invalidString,
+                    new string[] { "r" },
+                    null,
+                    DateTimeStyles.None
+                ));
         }
 
         public static IEnumerable<object[]> ParseExact_TestData_InvalidData_R()
@@ -3181,18 +3152,15 @@ namespace System.Tests
         public static void ParseExact_InvalidData_O(string invalidString)
         {
             Assert.Throws<FormatException>(() => DateTime.ParseExact(invalidString, "o", null));
-            Assert.Throws<FormatException>(
-                () => DateTime.ParseExact(invalidString, "o", null, DateTimeStyles.None)
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.ParseExact(
-                        invalidString,
-                        new string[] { "o" },
-                        null,
-                        DateTimeStyles.None
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(invalidString, "o", null, DateTimeStyles.None));
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(
+                    invalidString,
+                    new string[] { "o" },
+                    null,
+                    DateTimeStyles.None
+                ));
         }
 
         public static IEnumerable<object[]> ParseExact_TestData_InvalidData_O()
@@ -4880,12 +4848,10 @@ namespace System.Tests
             DateTimeStyles style
         )
         {
-            Assert.Throws<FormatException>(
-                () => DateTime.ParseExact(input, format, culture, style)
-            );
-            Assert.Throws<FormatException>(
-                () => DateTime.ParseExact(input, new[] { format }, culture, style)
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(input, format, culture, style));
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(input, new[] { format }, culture, style));
 
             Assert.False(
                 DateTime.TryParseExact(input, format, culture, style, out DateTime result)
@@ -6017,12 +5983,10 @@ namespace System.Tests
             DateTimeStyles style
         )
         {
-            Assert.Throws<FormatException>(
-                () => DateTime.ParseExact(input.AsSpan(), format, culture, style)
-            );
-            Assert.Throws<FormatException>(
-                () => DateTime.ParseExact(input.AsSpan(), new[] { format }, culture, style)
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(input.AsSpan(), format, culture, style));
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(input.AsSpan(), new[] { format }, culture, style));
 
             Assert.False(
                 DateTime.TryParseExact(input.AsSpan(), format, culture, style, out DateTime result)
@@ -6469,15 +6433,13 @@ namespace System.Tests
                     DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal
                 )
             );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.ParseExact(
-                        "G, J 4, 2023 9:30:12 AM",
-                        "dddd, MMMM d, yyyy h':'mm':'ss tt",
-                        CultureInfo.InvariantCulture,
-                        DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(
+                    "G, J 4, 2023 9:30:12 AM",
+                    "dddd, MMMM d, yyyy h':'mm':'ss tt",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal
+                ));
             Assert.Equal(
                 expected,
                 DateTime.ParseExact(
@@ -6497,15 +6459,13 @@ namespace System.Tests
                     DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal
                 )
             );
-            Assert.Throws<FormatException>(
-                () =>
-                    DateTime.ParseExact(
-                        "ghi, 04 jkl 2023 09:30:12 GMT",
-                        "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
-                        CultureInfo.InvariantCulture,
-                        DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(
+                    "ghi, 04 jkl 2023 09:30:12 GMT",
+                    "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal
+                ));
             Assert.Equal(
                 expected,
                 DateTime.ParseExact(
@@ -6783,9 +6743,8 @@ namespace System.Tests
                 case DateTimeUnits.Microsecond:
                     if (throws)
                     {
-                        Assert.Throws<ArgumentOutOfRangeException>(
-                            () => initialValue.AddMicroseconds(value)
-                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            initialValue.AddMicroseconds(value));
                         return;
                     }
 
@@ -6795,9 +6754,8 @@ namespace System.Tests
                 case DateTimeUnits.Millisecond:
                     if (throws)
                     {
-                        Assert.Throws<ArgumentOutOfRangeException>(
-                            () => initialValue.AddMilliseconds(value)
-                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            initialValue.AddMilliseconds(value));
                         return;
                     }
 
@@ -6807,9 +6765,8 @@ namespace System.Tests
                 case DateTimeUnits.Second:
                     if (throws)
                     {
-                        Assert.Throws<ArgumentOutOfRangeException>(
-                            () => initialValue.AddSeconds(value)
-                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            initialValue.AddSeconds(value));
                         return;
                     }
 
@@ -6819,9 +6776,8 @@ namespace System.Tests
                 case DateTimeUnits.Minute:
                     if (throws)
                     {
-                        Assert.Throws<ArgumentOutOfRangeException>(
-                            () => initialValue.AddMinutes(value)
-                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            initialValue.AddMinutes(value));
                         return;
                     }
 
@@ -6831,9 +6787,8 @@ namespace System.Tests
                 case DateTimeUnits.Hour:
                     if (throws)
                     {
-                        Assert.Throws<ArgumentOutOfRangeException>(
-                            () => initialValue.AddHours(value)
-                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            initialValue.AddHours(value));
                         return;
                     }
 
@@ -6844,9 +6799,8 @@ namespace System.Tests
                 case DateTimeUnits.Day:
                     if (throws)
                     {
-                        Assert.Throws<ArgumentOutOfRangeException>(
-                            () => initialValue.AddDays(value)
-                        );
+                        Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            initialValue.AddDays(value));
                         return;
                     }
 

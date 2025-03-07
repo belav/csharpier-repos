@@ -20,9 +20,8 @@ public class InputRadioTest
             InnerContent = RadioButtonsWithoutGroup(null),
         };
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => RenderAndGetTestInputComponentAsync(rootComponent)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            RenderAndGetTestInputComponentAsync(rootComponent));
         Assert.Contains($"must have an ancestor", ex.Message);
     }
 

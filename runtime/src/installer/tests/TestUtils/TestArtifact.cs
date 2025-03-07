@@ -12,9 +12,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
 {
     public class TestArtifact : IDisposable
     {
-        private static readonly Lazy<bool> _preserveTestRuns = new Lazy<bool>(
-            () => TestContext.GetTestContextVariableOrNull("PRESERVE_TEST_RUNS") == "1"
-        );
+        private static readonly Lazy<bool> _preserveTestRuns = new Lazy<bool>(() =>
+            TestContext.GetTestContextVariableOrNull("PRESERVE_TEST_RUNS") == "1");
 
         public static bool PreserveTestRuns() => _preserveTestRuns.Value;
 

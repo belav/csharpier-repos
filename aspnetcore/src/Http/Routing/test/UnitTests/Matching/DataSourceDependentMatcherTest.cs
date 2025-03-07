@@ -198,9 +198,8 @@ public class DataSourceDependentMatcherTest
         );
 
         // Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            new DataSourceDependentMatcher(dataSource, lifetime, TestMatcherBuilder.Create));
         Assert.Equal(expectedError, exception.Message);
     }
 
@@ -246,14 +245,12 @@ public class DataSourceDependentMatcherTest
         );
 
         // Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-                new DataSourceDependentMatcher(
-                    compositeDataSource,
-                    lifetime,
-                    TestMatcherBuilder.Create
-                )
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            new DataSourceDependentMatcher(
+                compositeDataSource,
+                lifetime,
+                TestMatcherBuilder.Create
+            ));
         Assert.Equal(expectedError, exception.Message);
     }
 
@@ -283,18 +280,16 @@ public class DataSourceDependentMatcherTest
         );
 
         // Assert that rerunning initializer throws AggregateException
-        var exception = Assert.Throws<AggregateException>(
-            () =>
-                dataSource.AddEndpoint(
-                    new RouteEndpoint(
-                        TestConstants.EmptyRequestDelegate,
-                        RoutePatternFactory.Parse("/bar"),
-                        0,
-                        new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
-                        "/bar"
-                    )
+        var exception = Assert.Throws<AggregateException>(() =>
+            dataSource.AddEndpoint(
+                new RouteEndpoint(
+                    TestConstants.EmptyRequestDelegate,
+                    RoutePatternFactory.Parse("/bar"),
+                    0,
+                    new EndpointMetadataCollection(new EndpointNameMetadata("Foo")),
+                    "/bar"
                 )
-        );
+            ));
         Assert.Equal(expectedError, exception.InnerException.Message);
     }
 

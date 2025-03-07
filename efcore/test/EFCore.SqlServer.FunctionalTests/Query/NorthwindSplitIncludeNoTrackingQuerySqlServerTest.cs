@@ -28,9 +28,8 @@ public class NorthwindSplitIncludeNoTrackingQuerySqlServerTest
         Assert.Equal(
             SqlServerStrings.SplitQueryOffsetWithoutOrderBy,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Include_collection_skip_take_no_order_by(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Include_collection_skip_take_no_order_by(async))
             ).Message
         );
 
@@ -38,9 +37,8 @@ public class NorthwindSplitIncludeNoTrackingQuerySqlServerTest
         Assert.Equal(
             SqlServerStrings.SplitQueryOffsetWithoutOrderBy,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Include_collection_skip_no_order_by(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Include_collection_skip_no_order_by(async))
             ).Message
         );
 

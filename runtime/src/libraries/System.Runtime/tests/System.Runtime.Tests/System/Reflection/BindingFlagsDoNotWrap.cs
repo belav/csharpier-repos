@@ -312,9 +312,8 @@ namespace System.Reflection.Tests
             where T : Exception
         {
             Assert.Throws<T>(() => action(BindingFlags.DoNotWrapExceptions));
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
-                () => action(default(BindingFlags))
-            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
+                action(default(BindingFlags)));
             Assert.Equal(typeof(T), tie.InnerException.GetType());
         }
 

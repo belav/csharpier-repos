@@ -70,12 +70,10 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void ChangeWrapperHandleStrength_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: true)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.ChangeWrapperHandleStrength(null, fIsWeak: false)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.ChangeWrapperHandleStrength(null, fIsWeak: true));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.ChangeWrapperHandleStrength(null, fIsWeak: false));
         }
 
         private static void NonGenericMethod(int i) { }

@@ -148,13 +148,11 @@ namespace System.Collections.Immutable.Tests
             ImmutableArray<int> array = source.ToImmutableArray();
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(() => array.AsSpan(-1, 1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                () => array.AsSpan(array.Length + 1, 1)
-            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() =>
+                array.AsSpan(array.Length + 1, 1));
             AssertExtensions.Throws<ArgumentOutOfRangeException>(() => array.AsSpan(0, -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                () => array.AsSpan(0, array.Length + 1)
-            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() =>
+                array.AsSpan(0, array.Length + 1));
         }
 
         [Theory]
@@ -297,9 +295,8 @@ namespace System.Collections.Immutable.Tests
                 "selector",
                 () => ImmutableArray.CreateRange(s_emptyDefault, (Func<int, int>)null)
             );
-            Assert.Throws<NullReferenceException>(
-                () => ImmutableArray.CreateRange(s_emptyDefault, i => i)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                ImmutableArray.CreateRange(s_emptyDefault, i => i));
         }
 
         [Theory]
@@ -367,9 +364,8 @@ namespace System.Collections.Immutable.Tests
                 "selector",
                 () => ImmutableArray.CreateRange(s_emptyDefault, (Func<int, int, int>)null, 0)
             );
-            Assert.Throws<NullReferenceException>(
-                () => ImmutableArray.CreateRange(s_emptyDefault, (x, y) => 0, 0)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                ImmutableArray.CreateRange(s_emptyDefault, (x, y) => 0, 0));
         }
 
         [Theory]
@@ -463,9 +459,8 @@ namespace System.Collections.Immutable.Tests
                 () => ImmutableArray.CreateRange(array, 0, -1, i => i)
             );
 
-            Assert.Throws<NullReferenceException>(
-                () => ImmutableArray.CreateRange(s_emptyDefault, 0, 0, i => i)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                ImmutableArray.CreateRange(s_emptyDefault, 0, 0, i => i));
         }
 
         [Theory]
@@ -625,9 +620,8 @@ namespace System.Collections.Immutable.Tests
                 () => ImmutableArray.CreateRange(array, 0, -1, (i, j) => i + j, 0)
             );
 
-            Assert.Throws<NullReferenceException>(
-                () => ImmutableArray.CreateRange(s_emptyDefault, 0, 0, (x, y) => 0, 0)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                ImmutableArray.CreateRange(s_emptyDefault, 0, 0, (x, y) => 0, 0));
         }
 
         [Theory]
@@ -821,9 +815,8 @@ namespace System.Collections.Immutable.Tests
         [InlineData(-1, 0)]
         public void SliceDefaultInvalid(int start, int length)
         {
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.Slice(start, length)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.Slice(start, length));
         }
 
         [Theory]
@@ -1052,12 +1045,10 @@ namespace System.Collections.Immutable.Tests
         {
             Assert.Throws<NullReferenceException>(() => s_emptyDefault.Length);
             Assert.Throws<InvalidOperationException>(() => ((ICollection)s_emptyDefault).Count);
-            Assert.Throws<InvalidOperationException>(
-                () => ((ICollection<int>)s_emptyDefault).Count
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ((IReadOnlyCollection<int>)s_emptyDefault).Count
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ((ICollection<int>)s_emptyDefault).Count);
+            Assert.Throws<InvalidOperationException>(() =>
+                ((IReadOnlyCollection<int>)s_emptyDefault).Count);
         }
 
         [Theory]
@@ -1078,21 +1069,18 @@ namespace System.Collections.Immutable.Tests
         {
             TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.IndexOf(5));
             TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.IndexOf(5, 0));
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.IndexOf(5, 0, 0)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.IndexOf(5, 0, 0));
         }
 
         [Fact]
         public void LastIndexOfInvalid()
         {
             TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.LastIndexOf(5));
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.LastIndexOf(5, 0)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.LastIndexOf(5, 0, 0)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.LastIndexOf(5, 0));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.LastIndexOf(5, 0, 0));
         }
 
         [Fact]
@@ -1229,12 +1217,10 @@ namespace System.Collections.Immutable.Tests
         public void GetEnumeratorInvalid()
         {
             TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.GetEnumerator());
-            Assert.Throws<InvalidOperationException>(
-                () => ((IEnumerable)s_emptyDefault).GetEnumerator()
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ((IEnumerable<int>)s_emptyDefault).GetEnumerator()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ((IEnumerable)s_emptyDefault).GetEnumerator());
+            Assert.Throws<InvalidOperationException>(() =>
+                ((IEnumerable<int>)s_emptyDefault).GetEnumerator());
         }
 
         [Theory]
@@ -1573,34 +1559,26 @@ namespace System.Collections.Immutable.Tests
         {
             // If the lhs or the rhs is a default ImmutableArray, AddRange should throw.
 
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.AddRange(source)
-            ); // Enumerable overload
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.AddRange(source.ToImmutableArray())
-            ); // ImmutableArray overload
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => source.ToImmutableArray().AddRange(s_emptyDefault)
-            ); // ImmutableArray overload
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.AddRange(source)); // Enumerable overload
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.AddRange(source.ToImmutableArray())); // ImmutableArray overload
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                source.ToImmutableArray().AddRange(s_emptyDefault)); // ImmutableArray overload
 
             int[] sourceArray = source.ToArray();
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.AddRange(sourceArray)
-            ); // Array overload
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.AddRange(new ReadOnlySpan<int>(sourceArray))
-            ); // ReadOnlySpan overload
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.AddRange(sourceArray)); // Array overload
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.AddRange(new ReadOnlySpan<int>(sourceArray))); // ReadOnlySpan overload
 
-            Assert.Throws<InvalidOperationException>(
-                () => source.ToImmutableArray().AddRange((IEnumerable<int>)s_emptyDefault)
-            ); // Enumerable overload
+            Assert.Throws<InvalidOperationException>(() =>
+                source.ToImmutableArray().AddRange((IEnumerable<int>)s_emptyDefault)); // Enumerable overload
 
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.AddRange(s_emptyDefault)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.AddRange((IEnumerable<int>)s_emptyDefault)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.AddRange(s_emptyDefault));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.AddRange((IEnumerable<int>)s_emptyDefault));
         }
 
         [Theory]
@@ -1679,9 +1657,8 @@ namespace System.Collections.Immutable.Tests
         [InlineData(0)]
         public void InsertDefaultInvalid(int index)
         {
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.Insert(index, 10)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.Insert(index, 10));
         }
 
         [Theory]
@@ -1741,36 +1718,27 @@ namespace System.Collections.Immutable.Tests
         {
             ImmutableArray<int> immutableArray = items.ToImmutableArray();
 
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.InsertRange(1, items)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.InsertRange(-1, items)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.InsertRange(0, items)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.InsertRange(1, items));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.InsertRange(-1, items));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.InsertRange(0, items));
 
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.InsertRange(1, immutableArray)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.InsertRange(-1, immutableArray)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.InsertRange(0, immutableArray)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.InsertRange(1, immutableArray));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.InsertRange(-1, immutableArray));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.InsertRange(0, immutableArray));
 
             int[] array = items.ToArray();
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.InsertRange(1, array)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.InsertRange(-1, array)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.InsertRange(0, array)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.InsertRange(1, array));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.InsertRange(-1, array));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.InsertRange(0, array));
 
             var span = new ReadOnlySpan<int>(array);
             TestExtensionsMethods.ValidateDefaultThisBehavior(
@@ -1786,26 +1754,21 @@ namespace System.Collections.Immutable.Tests
                 s => s_emptyDefault.InsertRange(0, s)
             );
 
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => immutableArray.InsertRange(1, s_emptyDefault)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => immutableArray.InsertRange(-1, s_emptyDefault)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => immutableArray.InsertRange(0, s_emptyDefault)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                immutableArray.InsertRange(1, s_emptyDefault));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                immutableArray.InsertRange(-1, s_emptyDefault));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                immutableArray.InsertRange(0, s_emptyDefault));
 
             if (immutableArray.Length > 0)
             {
-                Assert.Throws<InvalidOperationException>(
-                    () => immutableArray.InsertRange(1, (IEnumerable<int>)s_emptyDefault)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    immutableArray.InsertRange(1, (IEnumerable<int>)s_emptyDefault));
             }
 
-            Assert.Throws<InvalidOperationException>(
-                () => immutableArray.InsertRange(0, (IEnumerable<int>)s_emptyDefault)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                immutableArray.InsertRange(0, (IEnumerable<int>)s_emptyDefault));
         }
 
         [Theory]
@@ -1975,12 +1938,10 @@ namespace System.Collections.Immutable.Tests
                     Assert.Throws<NullReferenceException>(() => s_emptyDefault.Remove(5));
                     Assert.Throws<NullReferenceException>(() => s_emptyDefault.Remove(5, comparer));
 
-                    Assert.Throws<InvalidOperationException>(
-                        () => ((IImmutableList<int>)s_emptyDefault).Remove(5)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => ((IImmutableList<int>)s_emptyDefault).Remove(5, comparer)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)s_emptyDefault).Remove(5));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)s_emptyDefault).Remove(5, comparer));
                 }
             );
         }
@@ -2025,9 +1986,8 @@ namespace System.Collections.Immutable.Tests
         [InlineData(1, -1)]
         public void RemoveRangeIndexLengthDefaultInvalid(int index, int length)
         {
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.RemoveRange(index, length)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.RemoveRange(index, length));
         }
 
         [Theory]
@@ -2149,26 +2109,20 @@ namespace System.Collections.Immutable.Tests
                 comparer =>
                 {
                     // Enumerable overloads, lhs is default
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.RemoveRange(source)
-                    );
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.RemoveRange(source, comparer)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => ((IImmutableList<int>)s_emptyDefault).RemoveRange(source)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => ((IImmutableList<int>)s_emptyDefault).RemoveRange(source, comparer)
-                    );
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.RemoveRange(source));
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.RemoveRange(source, comparer));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)s_emptyDefault).RemoveRange(source));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)s_emptyDefault).RemoveRange(source, comparer));
 
                     // Struct overloads, lhs is default
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.RemoveRange(immutableArray)
-                    );
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.RemoveRange(immutableArray, comparer)
-                    );
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.RemoveRange(immutableArray));
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.RemoveRange(immutableArray, comparer));
 
                     // Struct overloads, rhs is default
                     AssertExtensions.Throws<ArgumentNullException>(
@@ -2181,22 +2135,17 @@ namespace System.Collections.Immutable.Tests
                     );
 
                     // Enumerable overloads, rhs is default
-                    Assert.Throws<InvalidOperationException>(
-                        () => immutableArray.RemoveRange((IEnumerable<int>)s_emptyDefault)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => immutableArray.RemoveRange((IEnumerable<int>)s_emptyDefault, comparer)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => ((IImmutableList<int>)immutableArray).RemoveRange(s_emptyDefault)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            ((IImmutableList<int>)immutableArray).RemoveRange(
-                                s_emptyDefault,
-                                comparer
-                            )
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        immutableArray.RemoveRange((IEnumerable<int>)s_emptyDefault));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        immutableArray.RemoveRange((IEnumerable<int>)s_emptyDefault, comparer));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)immutableArray).RemoveRange(s_emptyDefault));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)immutableArray).RemoveRange(
+                            s_emptyDefault,
+                            comparer
+                        ));
 
                     // Struct overloads, both sides are default
                     AssertExtensions.Throws<ArgumentNullException>(
@@ -2209,22 +2158,17 @@ namespace System.Collections.Immutable.Tests
                     );
 
                     // Enumerable overloads, both sides are default
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.RemoveRange((IEnumerable<int>)s_emptyDefault)
-                    );
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.RemoveRange((IEnumerable<int>)s_emptyDefault, comparer)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => ((IImmutableList<int>)s_emptyDefault).RemoveRange(s_emptyDefault)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            ((IImmutableList<int>)s_emptyDefault).RemoveRange(
-                                s_emptyDefault,
-                                comparer
-                            )
-                    );
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.RemoveRange((IEnumerable<int>)s_emptyDefault));
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.RemoveRange((IEnumerable<int>)s_emptyDefault, comparer));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)s_emptyDefault).RemoveRange(s_emptyDefault));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)s_emptyDefault).RemoveRange(
+                            s_emptyDefault,
+                            comparer
+                        ));
 
                     // Enumerable overloads, rhs is null
                     AssertExtensions.Throws<ArgumentNullException>(
@@ -2253,34 +2197,26 @@ namespace System.Collections.Immutable.Tests
                     );
 
                     // Enumerable overloads, lhs is default and rhs is null
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.RemoveRange(items: null as IEnumerable<int>)
-                    );
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () =>
-                            s_emptyDefault.RemoveRange(
-                                items: null as IEnumerable<int>,
-                                equalityComparer: comparer
-                            )
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            ((IImmutableList<int>)s_emptyDefault).RemoveRange(
-                                items: null as IEnumerable<int>
-                            )
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            ((IImmutableList<int>)s_emptyDefault).RemoveRange(
-                                items: null as IEnumerable<int>,
-                                equalityComparer: comparer
-                            )
-                    );
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.RemoveRange(items: null as IEnumerable<int>));
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.RemoveRange(
+                            items: null as IEnumerable<int>,
+                            equalityComparer: comparer
+                        ));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)s_emptyDefault).RemoveRange(
+                            items: null as IEnumerable<int>
+                        ));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)s_emptyDefault).RemoveRange(
+                            items: null as IEnumerable<int>,
+                            equalityComparer: comparer
+                        ));
 
                     // Array overloads, lhs is default and rhs is null
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.RemoveRange(items: null as int[], comparer)
-                    );
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.RemoveRange(items: null as int[], comparer));
 
                     // Array overloads, rhs is null
                     AssertExtensions.Throws<ArgumentNullException>(
@@ -2294,9 +2230,8 @@ namespace System.Collections.Immutable.Tests
 
                     // Array overloads, lhs is default
                     int[] array = source.ToArray();
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.RemoveRange(items: array, comparer)
-                    );
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.RemoveRange(items: array, comparer));
 
                     // Span overloads, lhs is default
                     var span = new ReadOnlySpan<int>(array);
@@ -2318,12 +2253,10 @@ namespace System.Collections.Immutable.Tests
             IEnumerable<int> emptyBoxed = s_empty;
             IEnumerable<int> emptyDefaultBoxed = s_emptyDefault;
 
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.RemoveRange(emptyBoxed)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.RemoveRange(emptyDefaultBoxed)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.RemoveRange(emptyBoxed));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.RemoveRange(emptyDefaultBoxed));
             Assert.Throws<InvalidOperationException>(() => s_empty.RemoveRange(emptyDefaultBoxed));
 
             Assert.Equal(oneElementBoxed, oneElementBoxed);
@@ -2472,16 +2405,13 @@ namespace System.Collections.Immutable.Tests
                 comparer =>
                 {
                     Assert.Throws<NullReferenceException>(() => s_emptyDefault.Replace(123, 123));
-                    Assert.Throws<NullReferenceException>(
-                        () => s_emptyDefault.Replace(123, 123, comparer)
-                    );
+                    Assert.Throws<NullReferenceException>(() =>
+                        s_emptyDefault.Replace(123, 123, comparer));
 
-                    Assert.Throws<InvalidOperationException>(
-                        () => ((IImmutableList<int>)s_emptyDefault).Replace(123, 123)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => ((IImmutableList<int>)s_emptyDefault).Replace(123, 123, comparer)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)s_emptyDefault).Replace(123, 123));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ((IImmutableList<int>)s_emptyDefault).Replace(123, 123, comparer));
                 }
             );
         }
@@ -2530,9 +2460,8 @@ namespace System.Collections.Immutable.Tests
         [InlineData(1)]
         public void SetItemDefaultInvalid(int index)
         {
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.SetItem(index, item: 0)
-            );
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.SetItem(index, item: 0));
         }
 
         [Theory]
@@ -2724,30 +2653,24 @@ namespace System.Collections.Immutable.Tests
 
             if (destinationIndex == 0)
             {
-                TestExtensionsMethods.ValidateDefaultThisBehavior(
-                    () => s_emptyDefault.CopyTo(destination)
-                );
+                TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                    s_emptyDefault.CopyTo(destination));
             }
 
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.CopyTo(destination, destinationIndex)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.CopyTo(0, destination, destinationIndex, 0)
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () =>
-                    s_emptyDefault.CopyTo(
-                        new Span<int>(
-                            destination,
-                            destinationIndex,
-                            destinationLength - destinationIndex
-                        )
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.CopyTo(destination, destinationIndex));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.CopyTo(0, destination, destinationIndex, 0));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.CopyTo(
+                    new Span<int>(
+                        destination,
+                        destinationIndex,
+                        destinationLength - destinationIndex
                     )
-            );
-            TestExtensionsMethods.ValidateDefaultThisBehavior(
-                () => s_emptyDefault.CopyTo(new Span<int>(destination, destinationIndex, 0))
-            );
+                ));
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.CopyTo(new Span<int>(destination, destinationIndex, 0)));
         }
 
         [Theory]
@@ -2807,16 +2730,14 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<IndexOutOfRangeException>(() => array[array.Length]);
             Assert.Throws<IndexOutOfRangeException>(() => ((IList)array)[array.Length]);
             Assert.Throws<IndexOutOfRangeException>(() => ((IList<int>)array)[array.Length]);
-            Assert.Throws<IndexOutOfRangeException>(
-                () => ((IReadOnlyList<int>)array)[array.Length]
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                ((IReadOnlyList<int>)array)[array.Length]);
 
             Assert.Throws<IndexOutOfRangeException>(() => array[array.Length + 1]);
             Assert.Throws<IndexOutOfRangeException>(() => ((IList)array)[array.Length + 1]);
             Assert.Throws<IndexOutOfRangeException>(() => ((IList<int>)array)[array.Length + 1]);
-            Assert.Throws<IndexOutOfRangeException>(
-                () => ((IReadOnlyList<int>)array)[array.Length + 1]
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                ((IReadOnlyList<int>)array)[array.Length + 1]);
         }
 
         [Theory]
@@ -2828,9 +2749,8 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<NullReferenceException>(() => s_emptyDefault[index]);
             Assert.Throws<InvalidOperationException>(() => ((IList)s_emptyDefault)[index]);
             Assert.Throws<InvalidOperationException>(() => ((IList<int>)s_emptyDefault)[index]);
-            Assert.Throws<InvalidOperationException>(
-                () => ((IReadOnlyList<int>)s_emptyDefault)[index]
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ((IReadOnlyList<int>)s_emptyDefault)[index]);
         }
 
         [Theory]
@@ -2940,15 +2860,12 @@ namespace System.Collections.Immutable.Tests
                 comparer =>
                 {
                     TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.Sort());
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.Sort(comparer)
-                    );
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.Sort(comparer.Compare)
-                    );
-                    TestExtensionsMethods.ValidateDefaultThisBehavior(
-                        () => s_emptyDefault.Sort(index, count, comparer)
-                    );
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.Sort(comparer));
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.Sort(comparer.Compare));
+                    TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                        s_emptyDefault.Sort(index, count, comparer));
                 }
             );
         }
@@ -3200,16 +3117,13 @@ namespace System.Collections.Immutable.Tests
         public void IStructuralEquatableEqualsNullComparerInvalid()
         {
             // This was not fixed for compatibility reasons. See https://github.com/dotnet/runtime/issues/19265
-            Assert.Throws<NullReferenceException>(
-                () =>
-                    ((IStructuralEquatable)ImmutableArray.Create(1, 2, 3)).Equals(
-                        ImmutableArray.Create(1, 2, 3),
-                        comparer: null
-                    )
-            );
-            Assert.Throws<NullReferenceException>(
-                () => ((IStructuralEquatable)s_emptyDefault).Equals(other: null, comparer: null)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                ((IStructuralEquatable)ImmutableArray.Create(1, 2, 3)).Equals(
+                    ImmutableArray.Create(1, 2, 3),
+                    comparer: null
+                ));
+            Assert.Throws<NullReferenceException>(() =>
+                ((IStructuralEquatable)s_emptyDefault).Equals(other: null, comparer: null));
         }
 
         [Theory]
@@ -3380,15 +3294,13 @@ namespace System.Collections.Immutable.Tests
         )
         {
             ImmutableArray<int> array = source.ToImmutableArray();
-            Assert.Throws<NullReferenceException>(
-                () => ((IStructuralComparable)array).CompareTo(other, comparer: null)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                ((IStructuralComparable)array).CompareTo(other, comparer: null));
 
             if (other == null)
             {
-                Assert.Throws<NullReferenceException>(
-                    () => ((IStructuralComparable)array).CompareTo(s_emptyDefault, comparer: null)
-                );
+                Assert.Throws<NullReferenceException>(() =>
+                    ((IStructuralComparable)array).CompareTo(s_emptyDefault, comparer: null));
             }
         }
 

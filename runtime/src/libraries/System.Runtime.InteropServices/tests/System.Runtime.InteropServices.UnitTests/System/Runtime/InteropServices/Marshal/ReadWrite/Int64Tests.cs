@@ -168,12 +168,10 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void ReadInt64_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
-                () => Marshal.ReadInt64(IntPtr.Zero)
-            );
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
-                () => Marshal.ReadInt64(IntPtr.Zero, 2)
-            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
+                Marshal.ReadInt64(IntPtr.Zero));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
+                Marshal.ReadInt64(IntPtr.Zero, 2));
         }
 
         [Fact]
@@ -215,12 +213,10 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void WriteInt64_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
-                () => Marshal.WriteInt64(IntPtr.Zero, 0)
-            );
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
-                () => Marshal.WriteInt64(IntPtr.Zero, 2, 0)
-            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
+                Marshal.WriteInt64(IntPtr.Zero, 0));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() =>
+                Marshal.WriteInt64(IntPtr.Zero, 2, 0));
         }
 
         [Fact]

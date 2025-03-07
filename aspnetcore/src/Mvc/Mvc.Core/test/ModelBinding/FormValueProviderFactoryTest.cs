@@ -59,9 +59,8 @@ public class FormValueProviderFactoryTest
         var factory = new FormValueProviderFactory();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<ValueProviderException>(
-            () => factory.CreateValueProviderAsync(valueProviderContext)
-        );
+        var ex = await Assert.ThrowsAsync<ValueProviderException>(() =>
+            factory.CreateValueProviderAsync(valueProviderContext));
         Assert.Same(exception, ex.InnerException);
     }
 
@@ -75,9 +74,8 @@ public class FormValueProviderFactoryTest
         var factory = new FormValueProviderFactory();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<ValueProviderException>(
-            () => factory.CreateValueProviderAsync(valueProviderContext)
-        );
+        var ex = await Assert.ThrowsAsync<ValueProviderException>(() =>
+            factory.CreateValueProviderAsync(valueProviderContext));
         Assert.Same(exception, ex.InnerException);
     }
 
@@ -91,9 +89,8 @@ public class FormValueProviderFactoryTest
         var factory = new FormValueProviderFactory();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
-            () => factory.CreateValueProviderAsync(valueProviderContext)
-        );
+        var ex = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() =>
+            factory.CreateValueProviderAsync(valueProviderContext));
         Assert.Same(exception, ex);
     }
 

@@ -46,9 +46,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void NegativeSign_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => NumberFormatInfo.InvariantInfo.NegativeSign = ""
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.NegativeSign = "");
         }
     }
 }

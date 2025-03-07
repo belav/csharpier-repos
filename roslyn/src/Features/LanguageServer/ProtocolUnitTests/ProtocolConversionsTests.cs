@@ -275,9 +275,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
                 Start = new Position(0, 0),
                 End = new Position(sourceText.Lines.Count, 0),
             };
-            Assert.Throws<ArgumentException>(
-                () => ProtocolConversions.RangeToTextSpan(range, sourceText)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                ProtocolConversions.RangeToTextSpan(range, sourceText));
         }
 
         [Fact]
@@ -288,9 +287,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
 
             // This start position will be beyond the end position
             var range = new Range() { Start = new Position(2, 20), End = new Position(3, 0) };
-            Assert.Throws<ArgumentException>(
-                () => ProtocolConversions.RangeToTextSpan(range, sourceText)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                ProtocolConversions.RangeToTextSpan(range, sourceText));
         }
 
         private static string GetTestMarkup()

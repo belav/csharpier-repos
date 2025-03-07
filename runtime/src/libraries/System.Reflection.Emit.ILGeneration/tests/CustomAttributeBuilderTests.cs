@@ -2127,38 +2127,26 @@ namespace System.Reflection.Emit.Tests
                     FieldInfo[] namedFields = new FieldInfo[0];
                     object[] fieldValues = new object[0];
 
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () => new CustomAttributeBuilder(con, constructorArgs)
-                    );
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () =>
-                            new CustomAttributeBuilder(
-                                con,
-                                constructorArgs,
-                                namedFields,
-                                fieldValues
-                            )
-                    );
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () =>
-                            new CustomAttributeBuilder(
-                                con,
-                                constructorArgs,
-                                namedProperties,
-                                propertyValues
-                            )
-                    );
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () =>
-                            new CustomAttributeBuilder(
-                                con,
-                                constructorArgs,
-                                namedProperties,
-                                propertyValues,
-                                namedFields,
-                                fieldValues
-                            )
-                    );
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new CustomAttributeBuilder(con, constructorArgs));
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new CustomAttributeBuilder(con, constructorArgs, namedFields, fieldValues));
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new CustomAttributeBuilder(
+                            con,
+                            constructorArgs,
+                            namedProperties,
+                            propertyValues
+                        ));
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new CustomAttributeBuilder(
+                            con,
+                            constructorArgs,
+                            namedProperties,
+                            propertyValues,
+                            namedFields,
+                            fieldValues
+                        ));
                 },
                 options
             );

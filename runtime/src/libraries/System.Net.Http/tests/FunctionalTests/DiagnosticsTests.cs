@@ -324,9 +324,8 @@ namespace System.Net.Http.Functional.Tests
                         {
                             diagnosticListenerObserver.Enable();
 
-                            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(
-                                () => GetAsync(useVersion, testAsync, InvalidUri)
-                            );
+                            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                                GetAsync(useVersion, testAsync, InvalidUri));
 
                             await responseLoggedTcs.Task;
 
@@ -390,9 +389,8 @@ namespace System.Net.Http.Functional.Tests
                                 .CreateClientAndServerAsync(
                                     async uri =>
                                     {
-                                        await Assert.ThrowsAsync<TaskCanceledException>(
-                                            () => GetAsync(useVersion, testAsync, uri, cts.Token)
-                                        );
+                                        await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                                            GetAsync(useVersion, testAsync, uri, cts.Token));
                                     },
                                     async server =>
                                     {
@@ -904,9 +902,8 @@ namespace System.Net.Http.Functional.Tests
                         {
                             diagnosticListenerObserver.Enable();
 
-                            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(
-                                () => GetAsync(useVersion, testAsync, InvalidUri)
-                            );
+                            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                                GetAsync(useVersion, testAsync, InvalidUri));
 
                             await activityStopTcs.Task;
 
@@ -1111,9 +1108,8 @@ namespace System.Net.Http.Functional.Tests
                                 s.Equals("System.Net.Http.Exception")
                             );
 
-                            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(
-                                () => GetAsync(useVersion, testAsync, InvalidUri)
-                            );
+                            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                                GetAsync(useVersion, testAsync, InvalidUri));
 
                             await exceptionLoggedTcs.Task;
 

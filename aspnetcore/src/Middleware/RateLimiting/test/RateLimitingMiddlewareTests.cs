@@ -21,58 +21,50 @@ public class RateLimitingMiddlewareTests
         var options = CreateOptionsAccessor();
         options.Value.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>();
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new RateLimitingMiddleware(
-                    null,
-                    new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-                    options,
-                    Mock.Of<IServiceProvider>(),
-                    new RateLimitingMetrics(new TestMeterFactory())
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new RateLimitingMiddleware(
+                null,
+                new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+                options,
+                Mock.Of<IServiceProvider>(),
+                new RateLimitingMetrics(new TestMeterFactory())
+            ));
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new RateLimitingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    null,
-                    options,
-                    Mock.Of<IServiceProvider>(),
-                    new RateLimitingMetrics(new TestMeterFactory())
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new RateLimitingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                null,
+                options,
+                Mock.Of<IServiceProvider>(),
+                new RateLimitingMetrics(new TestMeterFactory())
+            ));
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new RateLimitingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-                    options,
-                    null,
-                    new RateLimitingMetrics(new TestMeterFactory())
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new RateLimitingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+                options,
+                null,
+                new RateLimitingMetrics(new TestMeterFactory())
+            ));
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new RateLimitingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
-                    options,
-                    Mock.Of<IServiceProvider>(),
-                    null
-                )
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new RateLimitingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                new NullLoggerFactory().CreateLogger<RateLimitingMiddleware>(),
+                options,
+                Mock.Of<IServiceProvider>(),
+                null
+            ));
     }
 
     [Fact]

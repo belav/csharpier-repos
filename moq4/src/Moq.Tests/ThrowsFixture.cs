@@ -37,9 +37,8 @@ namespace Moq.Tests
             mock.Setup(x => x.Execute(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .Throws((string s1, string s2, string s3) => new Exception(s1 + s2 + s3));
 
-            var exception = Assert.Throws<Exception>(
-                () => mock.Object.Execute("blah1", "blah2", "blah3")
-            );
+            var exception = Assert.Throws<Exception>(() =>
+                mock.Object.Execute("blah1", "blah2", "blah3"));
             Assert.Equal("blah1blah2blah3", exception.Message);
         }
 
@@ -59,9 +58,8 @@ namespace Moq.Tests
                     (string s1, string s2, string s3, string s4) => new Exception(s1 + s2 + s3 + s4)
                 );
 
-            var exception = Assert.Throws<Exception>(
-                () => mock.Object.Execute("blah1", "blah2", "blah3", "blah4")
-            );
+            var exception = Assert.Throws<Exception>(() =>
+                mock.Object.Execute("blah1", "blah2", "blah3", "blah4"));
             Assert.Equal("blah1blah2blah3blah4", exception.Message);
         }
 
@@ -83,9 +81,8 @@ namespace Moq.Tests
                         new Exception(s1 + s2 + s3 + s4 + s5)
                 );
 
-            var exception = Assert.Throws<Exception>(
-                () => mock.Object.Execute("blah1", "blah2", "blah3", "blah4", "blah5")
-            );
+            var exception = Assert.Throws<Exception>(() =>
+                mock.Object.Execute("blah1", "blah2", "blah3", "blah4", "blah5"));
             Assert.Equal("blah1blah2blah3blah4blah5", exception.Message);
         }
 
@@ -108,9 +105,8 @@ namespace Moq.Tests
                         new Exception(s1 + s2 + s3 + s4 + s5 + s6)
                 );
 
-            var exception = Assert.Throws<Exception>(
-                () => mock.Object.Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6")
-            );
+            var exception = Assert.Throws<Exception>(() =>
+                mock.Object.Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6"));
             Assert.Equal("blah1blah2blah3blah4blah5blah6", exception.Message);
         }
 
@@ -134,18 +130,8 @@ namespace Moq.Tests
                         new Exception(s1 + s2 + s3 + s4 + s5 + s6 + s7)
                 );
 
-            var exception = Assert.Throws<Exception>(
-                () =>
-                    mock.Object.Execute(
-                        "blah1",
-                        "blah2",
-                        "blah3",
-                        "blah4",
-                        "blah5",
-                        "blah6",
-                        "blah7"
-                    )
-            );
+            var exception = Assert.Throws<Exception>(() =>
+                mock.Object.Execute("blah1", "blah2", "blah3", "blah4", "blah5", "blah6", "blah7"));
             Assert.Equal("blah1blah2blah3blah4blah5blah6blah7", exception.Message);
         }
 
@@ -178,19 +164,17 @@ namespace Moq.Tests
                     ) => new Exception(s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8)
                 );
 
-            var exception = Assert.Throws<Exception>(
-                () =>
-                    mock.Object.Execute(
-                        "blah1",
-                        "blah2",
-                        "blah3",
-                        "blah4",
-                        "blah5",
-                        "blah6",
-                        "blah7",
-                        "blah8"
-                    )
-            );
+            var exception = Assert.Throws<Exception>(() =>
+                mock.Object.Execute(
+                    "blah1",
+                    "blah2",
+                    "blah3",
+                    "blah4",
+                    "blah5",
+                    "blah6",
+                    "blah7",
+                    "blah8"
+                ));
             Assert.Equal("blah1blah2blah3blah4blah5blah6blah7blah8", exception.Message);
         }
 

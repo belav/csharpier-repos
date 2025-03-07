@@ -770,9 +770,8 @@ namespace System.Web.WebSockets
                     {
                         // If the task didn't complete synchronously, let the CancellationToken abort the operation
                         // The callback may complete inline, so we need to make sure it doesn't throw
-                        cancellationTokenRegistration = cancellationToken.Register(
-                            () => Abort(throwIfDisposed: false)
-                        );
+                        cancellationTokenRegistration = cancellationToken.Register(() =>
+                            Abort(throwIfDisposed: false));
                     }
 
                     // The 'await' keyword may cause an exception to be observed (rethrown)

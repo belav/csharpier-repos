@@ -362,9 +362,8 @@ namespace System.Net.Tests
             var listener = new HttpListener();
             listener.Close();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => listener.AuthenticationSchemeSelectorDelegate = null
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                listener.AuthenticationSchemeSelectorDelegate = null);
         }
 
         [Fact]
@@ -373,9 +372,8 @@ namespace System.Net.Tests
             var listener = new HttpListener();
             listener.Close();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => listener.AuthenticationSchemes = AuthenticationSchemes.Basic
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                listener.AuthenticationSchemes = AuthenticationSchemes.Basic);
         }
 
         [Fact]
@@ -440,9 +438,8 @@ namespace System.Net.Tests
             var listener = new HttpListener();
             listener.Close();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => listener.UnsafeConnectionNtlmAuthentication = false
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                listener.UnsafeConnectionNtlmAuthentication = false);
         }
 
         [Fact]
@@ -464,9 +461,8 @@ namespace System.Net.Tests
             var listener = new HttpListener();
             listener.Close();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => listener.ExtendedProtectionSelectorDelegate = null
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                listener.ExtendedProtectionSelectorDelegate = null);
         }
 
         [Fact]

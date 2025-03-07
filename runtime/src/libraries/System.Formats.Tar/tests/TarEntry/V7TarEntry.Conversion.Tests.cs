@@ -16,48 +16,34 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void Constructor_Conversion_UnsupportedEntryTypes_Ustar()
         {
-            Assert.Throws<ArgumentException>(
-                () => new V7TarEntry(new UstarTarEntry(TarEntryType.BlockDevice, InitialEntryName))
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new V7TarEntry(
-                        new UstarTarEntry(TarEntryType.CharacterDevice, InitialEntryName)
-                    )
-            );
-            Assert.Throws<ArgumentException>(
-                () => new V7TarEntry(new UstarTarEntry(TarEntryType.Fifo, InitialEntryName))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                new V7TarEntry(new UstarTarEntry(TarEntryType.BlockDevice, InitialEntryName)));
+            Assert.Throws<ArgumentException>(() =>
+                new V7TarEntry(new UstarTarEntry(TarEntryType.CharacterDevice, InitialEntryName)));
+            Assert.Throws<ArgumentException>(() =>
+                new V7TarEntry(new UstarTarEntry(TarEntryType.Fifo, InitialEntryName)));
         }
 
         [Fact]
         public void Constructor_Conversion_UnsupportedEntryTypes_Pax()
         {
-            Assert.Throws<ArgumentException>(
-                () => new V7TarEntry(new PaxTarEntry(TarEntryType.BlockDevice, InitialEntryName))
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new V7TarEntry(new PaxTarEntry(TarEntryType.CharacterDevice, InitialEntryName))
-            );
-            Assert.Throws<ArgumentException>(
-                () => new V7TarEntry(new PaxTarEntry(TarEntryType.Fifo, InitialEntryName))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                new V7TarEntry(new PaxTarEntry(TarEntryType.BlockDevice, InitialEntryName)));
+            Assert.Throws<ArgumentException>(() =>
+                new V7TarEntry(new PaxTarEntry(TarEntryType.CharacterDevice, InitialEntryName)));
+            Assert.Throws<ArgumentException>(() =>
+                new V7TarEntry(new PaxTarEntry(TarEntryType.Fifo, InitialEntryName)));
         }
 
         [Fact]
         public void Constructor_Conversion_UnsupportedEntryTypes_Gnu()
         {
-            Assert.Throws<ArgumentException>(
-                () => new V7TarEntry(new GnuTarEntry(TarEntryType.BlockDevice, InitialEntryName))
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new V7TarEntry(new GnuTarEntry(TarEntryType.CharacterDevice, InitialEntryName))
-            );
-            Assert.Throws<ArgumentException>(
-                () => new V7TarEntry(new GnuTarEntry(TarEntryType.Fifo, InitialEntryName))
-            );
+            Assert.Throws<ArgumentException>(() =>
+                new V7TarEntry(new GnuTarEntry(TarEntryType.BlockDevice, InitialEntryName)));
+            Assert.Throws<ArgumentException>(() =>
+                new V7TarEntry(new GnuTarEntry(TarEntryType.CharacterDevice, InitialEntryName)));
+            Assert.Throws<ArgumentException>(() =>
+                new V7TarEntry(new GnuTarEntry(TarEntryType.Fifo, InitialEntryName)));
         }
 
         [Fact]

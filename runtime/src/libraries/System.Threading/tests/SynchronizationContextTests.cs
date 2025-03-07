@@ -18,9 +18,8 @@ namespace System.Threading.Tests
             IntPtr eventHandle = e.SafeWaitHandle.DangerousGetHandle();
             var handles = new IntPtr[] { eventHandle, eventHandle };
             Assert.Equal(WaitHandle.WaitTimeout, tsc.Wait(handles, false, 0));
-            Assert.Throws<DuplicateWaitObjectException>(
-                () => Task.Run(() => tsc.Wait(handles, true, 0)).GetAwaiter().GetResult()
-            ); // ensure Wait runs on MTA thread
+            Assert.Throws<DuplicateWaitObjectException>(() =>
+                Task.Run(() => tsc.Wait(handles, true, 0)).GetAwaiter().GetResult()); // ensure Wait runs on MTA thread
 
             var e2 = new ManualResetEvent(false);
             handles = new IntPtr[] { eventHandle, e2.SafeWaitHandle.DangerousGetHandle() };
@@ -39,9 +38,8 @@ namespace System.Threading.Tests
         [Fact]
         public static void WaitTest_ChangedInDotNetCore()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => TestSynchronizationContext.WaitHelper(null, false, 0)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                TestSynchronizationContext.WaitHelper(null, false, 0));
         }
 
         [Fact]

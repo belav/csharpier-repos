@@ -172,19 +172,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             Guid projectGuid
         )
         {
-            return _threadingContext.JoinableTaskFactory.Run(
-                async () =>
-                    await ((IVsTypeScriptVisualStudioProjectFactory)this)
-                        .CreateAndAddToWorkspaceAsync(
-                            projectSystemName,
-                            language,
-                            projectFilePath,
-                            hierarchy,
-                            projectGuid,
-                            CancellationToken.None
-                        )
-                        .ConfigureAwait(false)
-            );
+            return _threadingContext.JoinableTaskFactory.Run(async () =>
+                await ((IVsTypeScriptVisualStudioProjectFactory)this)
+                    .CreateAndAddToWorkspaceAsync(
+                        projectSystemName,
+                        language,
+                        projectFilePath,
+                        hierarchy,
+                        projectGuid,
+                        CancellationToken.None
+                    )
+                    .ConfigureAwait(false));
         }
 
         async ValueTask<VSTypeScriptVisualStudioProjectWrapper> IVsTypeScriptVisualStudioProjectFactory.CreateAndAddToWorkspaceAsync(

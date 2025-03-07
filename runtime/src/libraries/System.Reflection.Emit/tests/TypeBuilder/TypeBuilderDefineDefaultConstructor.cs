@@ -100,9 +100,8 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.CreateType();
-            Assert.Throws<InvalidOperationException>(
-                () => type.DefineDefaultConstructor(MethodAttributes.Public)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                type.DefineDefaultConstructor(MethodAttributes.Public));
         }
 
         [Fact]
@@ -111,9 +110,8 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(
                 TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract
             );
-            Assert.Throws<InvalidOperationException>(
-                () => type.DefineDefaultConstructor(MethodAttributes.Public)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                type.DefineDefaultConstructor(MethodAttributes.Public));
         }
 
         [Fact]
@@ -145,9 +143,8 @@ namespace System.Reflection.Emit.Tests
             );
             nestedType.SetParent(createdType);
 
-            Assert.Throws<NotSupportedException>(
-                () => nestedType.DefineDefaultConstructor(MethodAttributes.Public)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                nestedType.DefineDefaultConstructor(MethodAttributes.Public));
         }
 
         [Theory]
@@ -171,9 +168,8 @@ namespace System.Reflection.Emit.Tests
 
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public | TypeAttributes.Class);
             type.SetParent(createdParentType);
-            Assert.Throws<NotSupportedException>(
-                () => type.DefineDefaultConstructor(MethodAttributes.Public)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                type.DefineDefaultConstructor(MethodAttributes.Public));
         }
 
         [Fact]
@@ -183,9 +179,8 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder parentType = Helpers.DynamicType(TypeAttributes.Public);
             type.SetParent(parentType.AsType());
 
-            Assert.Throws<NotSupportedException>(
-                () => type.DefineDefaultConstructor(MethodAttributes.Public)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                type.DefineDefaultConstructor(MethodAttributes.Public));
         }
 
         [Fact]
@@ -201,9 +196,8 @@ namespace System.Reflection.Emit.Tests
 
             TypeBuilder type = module.DefineType("Type");
             type.SetParent(genericParent);
-            Assert.Throws<NotSupportedException>(
-                () => type.DefineDefaultConstructor(MethodAttributes.Public)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                type.DefineDefaultConstructor(MethodAttributes.Public));
         }
 
         [Fact]

@@ -492,18 +492,14 @@ namespace System.Threading.Tasks.Tests
         public static void TestInvalidParameters()
         {
             Assert.Throws<ArgumentNullException>(() => new ConcurrentExclusiveSchedulerPair(null)); //TargetScheduler is null
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, 0)
-            ); //maxConcurrencyLevel is invalid
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, -2)
-            ); //maxConcurrencyLevel is invalid
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, -1, 0)
-            ); //maxItemsPerTask  is invalid
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, -1, -2)
-            ); //maxItemsPerTask  is invalid
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, 0)); //maxConcurrencyLevel is invalid
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, -2)); //maxConcurrencyLevel is invalid
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, -1, 0)); //maxItemsPerTask  is invalid
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, -1, -2)); //maxItemsPerTask  is invalid
         }
 
         /// <summary>

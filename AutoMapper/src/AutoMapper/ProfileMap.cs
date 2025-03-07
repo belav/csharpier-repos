@@ -68,9 +68,8 @@ public class ProfileMap
         TypeMapConfigs();
         OpenTypeMapConfigs();
         _typeDetails = new(2 * _typeMapConfigs.Length);
-        _runtimeTypeDetails = new(
-            () => new(Environment.ProcessorCount, 2 * _openTypeMapConfigs.Count)
-        );
+        _runtimeTypeDetails = new(() =>
+            new(Environment.ProcessorCount, 2 * _openTypeMapConfigs.Count));
         return;
         void TypeMapConfigs()
         {

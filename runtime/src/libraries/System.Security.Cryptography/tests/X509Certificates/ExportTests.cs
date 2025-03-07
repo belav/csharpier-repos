@@ -58,9 +58,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (X509Certificate2 c1 = new X509Certificate2(TestData.MsCertificate))
             {
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => c1.Export(X509ContentType.SerializedCert)
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    c1.Export(X509ContentType.SerializedCert));
             }
         }
 
@@ -106,9 +105,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c1 = new X509Certificate2(TestData.MsCertificate))
             {
                 byte[] pfx = c1.Export(X509ContentType.Pkcs12, password);
-                Assert.ThrowsAny<CryptographicException>(
-                    () => new X509Certificate2(pfx, "PlaceholderWrongPassword")
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    new X509Certificate2(pfx, "PlaceholderWrongPassword"));
             }
         }
 
@@ -132,9 +130,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 byte[] pfx = cert.Export(X509ContentType.Pkcs12, password);
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => new X509Certificate2(pfx, "PlaceholderWrongPassword")
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    new X509Certificate2(pfx, "PlaceholderWrongPassword"));
 
                 using (var cert2 = new X509Certificate2(pfx, password))
                 {

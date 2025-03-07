@@ -199,9 +199,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Set_throws_for_owned_type(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => AssertQuery(async, ss => ss.Set<Order>())
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            AssertQuery(async, ss => ss.Set<Order>()));
 
         Assert.Equal(
             CoreStrings.InvalidSetTypeOwned(nameof(Order), nameof(OwnedPerson)),
@@ -412,9 +411,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
 
         var message = async
             ? (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => asTrackingQuery.ToListAsync()
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    asTrackingQuery.ToListAsync())
             ).Message
             : Assert.Throws<InvalidOperationException>(() => asTrackingQuery.ToList()).Message;
         Assert.Empty(context.ChangeTracker.Entries());
@@ -901,13 +899,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
         Assert.Equal(
             "Nullable object must have a value.",
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss => ss.Set<Barton>().Select(e => new { e.Throned.Value })
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(async, ss => ss.Set<Barton>().Select(e => new { e.Throned.Value })))
             ).Message
         );
 

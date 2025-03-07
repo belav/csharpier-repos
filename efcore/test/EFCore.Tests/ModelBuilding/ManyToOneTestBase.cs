@@ -1822,9 +1822,8 @@ public abstract partial class ModelBuilderTest
                     dependentType.DisplayName() + "." + nameof(Hob.Nob)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => modelBuilder.Entity<Hob>().HasOne(e => e.Nob).WithMany(e => e.Hobs)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Hob>().HasOne(e => e.Nob).WithMany(e => e.Hobs))
                     .Message
             );
         }

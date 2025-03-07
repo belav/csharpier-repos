@@ -209,9 +209,8 @@ public class CosmosConcurrencyTest : IClassFixture<CosmosConcurrencyTest.CosmosF
             await innerContext.SaveChangesAsync();
         }
 
-        var updateException = await Assert.ThrowsAnyAsync<TException>(
-            () => outerContext.SaveChangesAsync()
-        );
+        var updateException = await Assert.ThrowsAnyAsync<TException>(() =>
+            outerContext.SaveChangesAsync());
 
         var entry = updateException.Entries.Single();
         Assert.IsAssignableFrom<Customer>(entry.Entity);

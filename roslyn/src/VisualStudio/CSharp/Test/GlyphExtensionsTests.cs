@@ -112,9 +112,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
                 )
             );
 
-            Assert.ThrowsAny<ArgumentException>(
-                () => TestGlyph(StandardGlyphGroup.GlyphGroupClass, (SymbolKind)1000)
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+                TestGlyph(StandardGlyphGroup.GlyphGroupClass, (SymbolKind)1000));
 
             TestGlyph(
                 StandardGlyphGroup.GlyphGroupClass,
@@ -152,14 +151,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
                 typeKind: TypeKind.Error
             );
 
-            Assert.ThrowsAny<Exception>(
-                () =>
-                    TestGlyph(
-                        StandardGlyphGroup.GlyphGroupClass,
-                        SymbolKind.NamedType,
-                        typeKind: TypeKind.Unknown
-                    )
-            );
+            Assert.ThrowsAny<Exception>(() =>
+                TestGlyph(
+                    StandardGlyphGroup.GlyphGroupClass,
+                    SymbolKind.NamedType,
+                    typeKind: TypeKind.Unknown
+                ));
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545015")]

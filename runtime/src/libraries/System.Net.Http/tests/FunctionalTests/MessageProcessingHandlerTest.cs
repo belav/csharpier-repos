@@ -66,9 +66,8 @@ namespace System.Net.Http.Functional.Tests
             var transport = new MockTransportHandler(true); // Throw if Send/SendAsync() is called.
             var handler = new MockHandler(transport);
 
-            await Assert.ThrowsAsync<MockException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None)
-            );
+            await Assert.ThrowsAsync<MockException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None));
 
             Assert.Equal(1, handler.ProcessRequestCount);
             Assert.Equal(0, handler.ProcessResponseCount);
@@ -83,9 +82,8 @@ namespace System.Net.Http.Functional.Tests
             });
             var handler = new MockHandler(transport);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None)
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None));
 
             Assert.Equal(1, handler.ProcessRequestCount);
             Assert.Equal(0, handler.ProcessResponseCount);
@@ -107,9 +105,8 @@ namespace System.Net.Http.Functional.Tests
 
             // Note that ProcessRequest() is called by SendAsync(). However, the exception is not thrown
             // by SendAsync(). Instead, the returned Task is marked as faulted and contains the exception.
-            await Assert.ThrowsAsync<MockException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None)
-            );
+            await Assert.ThrowsAsync<MockException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None));
 
             Assert.Equal(0, transport.SendAsyncCount);
             Assert.Equal(1, handler.ProcessRequestCount);
@@ -131,9 +128,8 @@ namespace System.Net.Http.Functional.Tests
             );
 
             // Throwing an exception in ProcessResponse() will cause the Task to complete as 'faulted'.
-            await Assert.ThrowsAsync<MockException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None)
-            );
+            await Assert.ThrowsAsync<MockException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), CancellationToken.None));
 
             Assert.Equal(1, transport.SendAsyncCount);
             Assert.Equal(1, handler.ProcessRequestCount);
@@ -150,9 +146,8 @@ namespace System.Net.Http.Functional.Tests
             var transport = new MockTransportHandler(cts); // inner handler will cancel.
             var handler = new MockHandler(transport);
 
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), cts.Token));
             Assert.Equal(0, handler.ProcessResponseCount);
         }
 
@@ -174,9 +169,8 @@ namespace System.Net.Http.Functional.Tests
 
             // Note that even ProcessMessage() is called on the same thread, we don't expect SendAsync() to throw.
             // SendAsync() must complete successfully, but the Task will be canceled.
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), cts.Token));
             Assert.Equal(0, handler.ProcessResponseCount);
         }
 
@@ -196,9 +190,8 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
 
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), cts.Token));
         }
 
         [Fact]
@@ -219,9 +212,8 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), cts.Token));
 
             Assert.Equal(0, handler.ProcessResponseCount);
         }
@@ -244,9 +236,8 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), cts.Token));
 
             Assert.Equal(1, handler.ProcessResponseCount);
         }
@@ -270,9 +261,8 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), cts.Token));
 
             Assert.Equal(0, handler.ProcessResponseCount);
         }
@@ -296,9 +286,8 @@ namespace System.Net.Http.Functional.Tests
                 }
             );
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                () => handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                handler.TestSendAsync(new HttpRequestMessage(), cts.Token));
 
             Assert.Equal(1, handler.ProcessResponseCount);
         }

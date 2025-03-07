@@ -588,25 +588,21 @@ namespace System.Net.Security.Tests
             NetworkCredential credential,
             string targetName
         ) =>
-            Task.Run(
-                () =>
-                    client.AuthenticateAsClient(
-                        credential,
-                        targetName,
-                        ProtectionLevel.EncryptAndSign,
-                        TokenImpersonationLevel.Identification
-                    )
-            );
+            Task.Run(() =>
+                client.AuthenticateAsClient(
+                    credential,
+                    targetName,
+                    ProtectionLevel.EncryptAndSign,
+                    TokenImpersonationLevel.Identification
+                ));
 
         protected override Task AuthenticateAsServerAsync(NegotiateStream server) =>
-            Task.Run(
-                () =>
-                    server.AuthenticateAsServer(
-                        (NetworkCredential)CredentialCache.DefaultCredentials,
-                        ProtectionLevel.EncryptAndSign,
-                        TokenImpersonationLevel.Identification
-                    )
-            );
+            Task.Run(() =>
+                server.AuthenticateAsServer(
+                    (NetworkCredential)CredentialCache.DefaultCredentials,
+                    ProtectionLevel.EncryptAndSign,
+                    TokenImpersonationLevel.Identification
+                ));
     }
 
     public class NegotiateStreamStreamToStreamTest_Sync_NotEncrypted
@@ -617,25 +613,21 @@ namespace System.Net.Security.Tests
             NetworkCredential credential,
             string targetName
         ) =>
-            Task.Run(
-                () =>
-                    client.AuthenticateAsClient(
-                        credential,
-                        targetName,
-                        ProtectionLevel.None,
-                        TokenImpersonationLevel.Identification
-                    )
-            );
+            Task.Run(() =>
+                client.AuthenticateAsClient(
+                    credential,
+                    targetName,
+                    ProtectionLevel.None,
+                    TokenImpersonationLevel.Identification
+                ));
 
         protected override Task AuthenticateAsServerAsync(NegotiateStream server) =>
-            Task.Run(
-                () =>
-                    server.AuthenticateAsServer(
-                        (NetworkCredential)CredentialCache.DefaultCredentials,
-                        ProtectionLevel.None,
-                        TokenImpersonationLevel.Identification
-                    )
-            );
+            Task.Run(() =>
+                server.AuthenticateAsServer(
+                    (NetworkCredential)CredentialCache.DefaultCredentials,
+                    ProtectionLevel.None,
+                    TokenImpersonationLevel.Identification
+                ));
 
         protected override bool IsEncryptedAndSigned => false;
     }

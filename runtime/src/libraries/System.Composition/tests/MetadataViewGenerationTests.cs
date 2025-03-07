@@ -82,9 +82,8 @@ namespace System.Composition.Lightweight.UnitTests
         {
             var cc = new ContainerConfiguration().WithPart<HasNameA>().CreateContainer();
 
-            var x = Assert.Throws<CompositionFailedException>(
-                () => cc.GetExport<Lazy<HasNoName, InvalidConcreteView>>()
-            );
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                cc.GetExport<Lazy<HasNoName, InvalidConcreteView>>());
 
             Assert.Equal(
                 "The type 'InvalidConcreteView' cannot be used as a metadata view. A metadata view must be a concrete class with a parameterless or dictionary constructor.",
@@ -113,9 +112,8 @@ namespace System.Composition.Lightweight.UnitTests
             var cc = new ContainerConfiguration()
                 .WithParts(typeof(ImportsWithMetadataInterface), typeof(ExportsWithMetadata))
                 .CreateContainer();
-            var x = Assert.Throws<CompositionFailedException>(
-                () => cc.GetExport<ImportsWithMetadataInterface>()
-            );
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                cc.GetExport<ImportsWithMetadataInterface>());
             Assert.Equal(
                 "The type 'INamed' cannot be used as a metadata view. A metadata view must be a concrete class with a parameterless or dictionary constructor.",
                 x.Message

@@ -133,9 +133,8 @@ namespace System.Collections.Concurrent.Tests
 
             const int NumItems = 100000;
 
-            Task producer = Task.Run(
-                () => Parallel.For(1, NumItems + 1, i => Assert.True(c.TryAdd(i)))
-            );
+            Task producer = Task.Run(() =>
+                Parallel.For(1, NumItems + 1, i => Assert.True(c.TryAdd(i))));
 
             var hs = new HashSet<int>();
             while (hs.Count < NumItems)
@@ -1140,9 +1139,8 @@ namespace System.Collections.Concurrent.Tests
         {
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection();
             Type proxyType = DebuggerAttributes.GetProxyType(c);
-            var tie = Assert.Throws<TargetInvocationException>(
-                () => Activator.CreateInstance(proxyType, new object[] { null })
-            );
+            var tie = Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(proxyType, new object[] { null }));
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

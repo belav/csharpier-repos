@@ -399,27 +399,23 @@ namespace System.Security.Cryptography.Cng.Tests
                     alg.Padding = PaddingMode.None;
 
                     byte[] destination = new byte[alg.BlockSize / 8];
-                    CryptographicException ce = Assert.ThrowsAny<CryptographicException>(
-                        () =>
-                            alg.EncryptCfb(
-                                Array.Empty<byte>(),
-                                destination,
-                                PaddingMode.None,
-                                notSupportedFeedbackSizeInBits
-                            )
-                    );
+                    CryptographicException ce = Assert.ThrowsAny<CryptographicException>(() =>
+                        alg.EncryptCfb(
+                            Array.Empty<byte>(),
+                            destination,
+                            PaddingMode.None,
+                            notSupportedFeedbackSizeInBits
+                        ));
 
                     Assert.Contains(feedbackSizeString, ce.Message);
 
-                    ce = Assert.ThrowsAny<CryptographicException>(
-                        () =>
-                            alg.DecryptCfb(
-                                Array.Empty<byte>(),
-                                destination,
-                                PaddingMode.None,
-                                notSupportedFeedbackSizeInBits
-                            )
-                    );
+                    ce = Assert.ThrowsAny<CryptographicException>(() =>
+                        alg.DecryptCfb(
+                            Array.Empty<byte>(),
+                            destination,
+                            PaddingMode.None,
+                            notSupportedFeedbackSizeInBits
+                        ));
 
                     Assert.Contains(feedbackSizeString, ce.Message);
 
@@ -449,9 +445,8 @@ namespace System.Security.Cryptography.Cng.Tests
 
             try
             {
-                CryptographicException ce = Assert.Throws<CryptographicException>(
-                    () => createFromKey(keyName)
-                );
+                CryptographicException ce = Assert.Throws<CryptographicException>(() =>
+                    createFromKey(keyName));
                 Assert.Contains($"'{algorithm.Algorithm}'", ce.Message);
             }
             finally

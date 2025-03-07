@@ -177,9 +177,8 @@ public class ExecutorFactoryTest
         };
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ExecutorFactory.CreateExecutor(handler)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ExecutorFactory.CreateExecutor(handler));
         Assert.Equal(
             $"Unsupported handler method return type '{methodInfo.ReturnType}'.",
             ex.Message

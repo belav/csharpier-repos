@@ -230,17 +230,15 @@ namespace System.Security.Cryptography.Tests
         {
             // Oid group is implemented strictly - no fallback to OidGroup.All as with many other parts of Crypto.
             _ = friendlyName;
-            Assert.Throws<CryptographicException>(
-                () => Oid.FromOidValue(oidValue, OidGroup.EncryptionAlgorithm)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                Oid.FromOidValue(oidValue, OidGroup.EncryptionAlgorithm));
         }
 
         [Fact]
         public static void LookupOidByValue_Method_NullInput()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => Oid.FromOidValue(null, OidGroup.HashAlgorithm)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Oid.FromOidValue(null, OidGroup.HashAlgorithm));
         }
 
         [Theory]
@@ -248,9 +246,8 @@ namespace System.Security.Cryptography.Tests
         [InlineData(Bogus_Name)]
         public static void LookupOidByValue_Method_BadInput(string badInput)
         {
-            Assert.Throws<CryptographicException>(
-                () => Oid.FromOidValue(badInput, OidGroup.HashAlgorithm)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                Oid.FromOidValue(badInput, OidGroup.HashAlgorithm));
         }
 
         [Theory]
@@ -306,17 +303,15 @@ namespace System.Security.Cryptography.Tests
         {
             // Oid group is implemented strictly - no fallback to OidGroup.All as with many other parts of Crypto.
             _ = oidValue;
-            Assert.Throws<CryptographicException>(
-                () => Oid.FromFriendlyName(friendlyName, OidGroup.EncryptionAlgorithm)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                Oid.FromFriendlyName(friendlyName, OidGroup.EncryptionAlgorithm));
         }
 
         [Fact]
         public static void LookupOidByFriendlyName_Method_NullInput()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => Oid.FromFriendlyName(null, OidGroup.HashAlgorithm)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Oid.FromFriendlyName(null, OidGroup.HashAlgorithm));
         }
 
         [Theory]
@@ -324,9 +319,8 @@ namespace System.Security.Cryptography.Tests
         [InlineData(Bogus_Name)]
         public static void LookupOidByFriendlyName_Method_BadInput(string badInput)
         {
-            Assert.Throws<CryptographicException>(
-                () => Oid.FromFriendlyName(badInput, OidGroup.HashAlgorithm)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                Oid.FromFriendlyName(badInput, OidGroup.HashAlgorithm));
         }
 
         [Fact]

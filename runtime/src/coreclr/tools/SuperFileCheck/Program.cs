@@ -817,15 +817,13 @@ namespace SuperFileCheck
                                 {
                                     tmpFilePath = Path.Combine(tmpDirName, tmpFileName);
                                 }
-                                tasks[i] = Task.Run(
-                                    () =>
-                                        RunSuperFileCheckAsync(
-                                            methodDeclInfos[index],
-                                            argsToCopy.ToArray(),
-                                            checkPrefixes,
-                                            tmpFilePath
-                                        )
-                                );
+                                tasks[i] = Task.Run(() =>
+                                    RunSuperFileCheckAsync(
+                                        methodDeclInfos[index],
+                                        argsToCopy.ToArray(),
+                                        checkPrefixes,
+                                        tmpFilePath
+                                    ));
                             }
 
                             await Task.WhenAll(tasks);

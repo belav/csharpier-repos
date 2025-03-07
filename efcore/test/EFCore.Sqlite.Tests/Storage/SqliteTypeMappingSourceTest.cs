@@ -386,9 +386,8 @@ public class SqliteTypeMappingSourceTest : RelationalTypeMappingSourceTestBase
         var property = ((IMutableModel)new Model())
             .AddEntityType("Entity1")
             .AddProperty("Strange", typeof(object));
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => CreateRelationalTypeMappingSource(CreateModel()).GetMapping((IProperty)property)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            CreateRelationalTypeMappingSource(CreateModel()).GetMapping((IProperty)property));
         Assert.Equal(
             RelationalStrings.UnsupportedPropertyType(
                 "Entity1 (Dictionary<string, object>)",
@@ -401,10 +400,8 @@ public class SqliteTypeMappingSourceTest : RelationalTypeMappingSourceTestBase
         Assert.Equal(
             RelationalStrings.UnsupportedType("object"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        CreateRelationalTypeMappingSource(CreateModel()).GetMapping(typeof(object))
-                )
+                .Throws<InvalidOperationException>(() =>
+                    CreateRelationalTypeMappingSource(CreateModel()).GetMapping(typeof(object)))
                 .Message
         );
     }

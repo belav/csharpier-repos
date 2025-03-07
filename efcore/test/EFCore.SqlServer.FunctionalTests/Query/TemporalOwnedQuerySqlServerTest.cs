@@ -99,10 +99,8 @@ FROM [OwnedPerson] FOR SYSTEM_TIME BETWEEN '1990-01-01T00:00:00.0000000' AND '22
     {
         var context = CreateContext();
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    context.Set<Star>().TemporalAll().Select(x => x.Planets.ToList()).ToListAsync()
-            )
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.Set<Star>().TemporalAll().Select(x => x.Planets.ToList()).ToListAsync())
         ).Message;
 
         Assert.Equal(

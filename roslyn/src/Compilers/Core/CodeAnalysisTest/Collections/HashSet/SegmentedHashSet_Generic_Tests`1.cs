@@ -134,12 +134,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void HashSet_Generic_Constructor_IEnumerable_Null()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => new SegmentedHashSet<T>((IEnumerable<T>)null!)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => new SegmentedHashSet<T>((IEnumerable<T>)null!, EqualityComparer<T>.Default)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new SegmentedHashSet<T>((IEnumerable<T>)null!));
+            Assert.Throws<ArgumentNullException>(() =>
+                new SegmentedHashSet<T>((IEnumerable<T>)null!, EqualityComparer<T>.Default));
         }
 
         [Theory]

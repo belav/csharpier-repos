@@ -607,9 +607,8 @@ public class ComplexTypeModelBinderTest
         var binder = CreateBinder(bindingContext.ModelMetadata);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => binder.CreateModelPublic(bindingContext)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            binder.CreateModelPublic(bindingContext));
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
@@ -634,9 +633,8 @@ public class ComplexTypeModelBinderTest
         var binder = CreateBinder(metadata);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => binder.CreateModelPublic(bindingContext)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            binder.CreateModelPublic(bindingContext));
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -653,9 +651,8 @@ public class ComplexTypeModelBinderTest
         var binder = CreateBinder(bindingContext.ModelMetadata);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => binder.CreateModelPublic(bindingContext)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            binder.CreateModelPublic(bindingContext));
         Assert.Equal(
             string.Format(
                 CultureInfo.CurrentCulture,
@@ -1093,9 +1090,8 @@ public class ComplexTypeModelBinderTest
         binder.Results[nestedProperty] = ModelBindingResult.Success(null);
 
         // Act
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await binder.BindModelAsync(bindingContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await binder.BindModelAsync(bindingContext));
         // Assert
         var unexpectedMessage =
             "Alternatively, set the 'NameContainer' property to a non-null value in the 'Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderTest+ModelWithPropertyInitializedInConstructor' constructor.";

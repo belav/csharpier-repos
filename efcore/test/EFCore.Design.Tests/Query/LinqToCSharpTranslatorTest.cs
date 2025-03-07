@@ -49,9 +49,8 @@ public class LinqToCSharpTranslatorTest
 
     [Fact]
     public void Constant_throws_on_unsupported_type() =>
-        Assert.Throws<NotSupportedException>(
-            () => AssertExpression(Constant(default(DateTime)), "")
-        );
+        Assert.Throws<NotSupportedException>(() =>
+            AssertExpression(Constant(default(DateTime)), ""));
 
     [Fact]
     public void Enum() => AssertExpression(Constant(SomeEnum.One), "SomeEnum.One");
@@ -409,18 +408,14 @@ Activator.CreateInstance<LinqToCSharpTranslatorTest.BlogWithRequiredProperties>(
 
     [Fact]
     public void Instantiation_with_required_properties_and_non_parameterless_constructor() =>
-        Assert.Throws<NotImplementedException>(
-            () =>
-                AssertExpression(
-                    New(
-                        typeof(BlogWithRequiredProperties).GetConstructor(
-                            new[] { typeof(string) }
-                        )!,
-                        Constant("foo")
-                    ),
-                    ""
-                )
-        );
+        Assert.Throws<NotImplementedException>(() =>
+            AssertExpression(
+                New(
+                    typeof(BlogWithRequiredProperties).GetConstructor(new[] { typeof(string) })!,
+                    Constant("foo")
+                ),
+                ""
+            ));
 
     [Fact]
     public void Instantiation_with_required_properties_with_SetsRequiredMembers() =>
@@ -515,9 +510,8 @@ Activator.CreateInstance<LinqToCSharpTranslatorTest.BlogWithRequiredProperties>(
 
     [Fact]
     public void Conditional_without_false_value_fails() =>
-        Assert.Throws<NotSupportedException>(
-            () => AssertExpression(IfThen(Constant(true), Constant(8)), "true ? 1 : 2")
-        );
+        Assert.Throws<NotSupportedException>(() =>
+            AssertExpression(IfThen(Constant(true), Constant(8)), "true ? 1 : 2"));
 
     [Fact]
     public void Conditional_statement() =>
@@ -1353,13 +1347,11 @@ new int[]
 
     [Fact]
     public void Cannot_lift_out_of_expression_context() =>
-        Assert.Throws<NotSupportedException>(
-            () =>
-                AssertExpression(
-                    Assign(Parameter(typeof(int), "i"), Block(Call(FooMethod), Constant(8))),
-                    ""
-                )
-        );
+        Assert.Throws<NotSupportedException>(() =>
+            AssertExpression(
+                Assign(Parameter(typeof(int), "i"), Block(Call(FooMethod), Constant(8))),
+                ""
+            ));
 
     [Fact]
     public void Lift_switch_expression()

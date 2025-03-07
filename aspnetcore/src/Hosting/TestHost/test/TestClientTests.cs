@@ -267,9 +267,8 @@ public class TestClientTests
             throw new InvalidOperationException("HttpContent exception")
         );
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => client.SendAsync(message, CancellationToken.None)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            client.SendAsync(message, CancellationToken.None));
         Assert.Equal("HttpContent exception", ex.Message);
         Assert.Equal(0, requestCount);
     }
@@ -845,9 +844,8 @@ public class TestClientTests
         tokenSource.Cancel();
 
         // Assert
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            async () => await client.ConnectAsync(new Uri("http://localhost"), tokenSource.Token)
-        );
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+            await client.ConnectAsync(new Uri("http://localhost"), tokenSource.Token));
     }
 
     private class VerifierLogger : ILogger<IWebHost>
@@ -896,13 +894,11 @@ public class TestClientTests
             CancellationToken.None
         );
         var buffer = new byte[1024];
-        await Assert.ThrowsAsync<IOException>(
-            async () =>
-                await clientSocket.ReceiveAsync(
-                    new System.ArraySegment<byte>(buffer),
-                    CancellationToken.None
-                )
-        );
+        await Assert.ThrowsAsync<IOException>(async () =>
+            await clientSocket.ReceiveAsync(
+                new System.ArraySegment<byte>(buffer),
+                CancellationToken.None
+            ));
 
         clientSocket.Dispose();
     }
@@ -1005,9 +1001,8 @@ public class TestClientTests
         response.Dispose();
 
         // Assert
-        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            async () => await tcs.Task
-        );
+        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+            await tcs.Task);
     }
 
     [Fact]
@@ -1033,13 +1028,11 @@ public class TestClientTests
         using var server = new TestServer(builder);
         using var client = server.CreateClient();
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1));
-        var response = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            () => client.GetAsync("http://localhost:12345", cts.Token)
-        );
+        var response = await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+            client.GetAsync("http://localhost:12345", cts.Token));
 
-        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-            async () => await tcs.Task
-        );
+        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+            await tcs.Task);
     }
 
     [Fact]
@@ -1188,9 +1181,8 @@ public class TestClientTests
                         // Feature needs to exist for SignalR to verify that the server supports WebSockets
                         Assert.NotNull(upgradeFeature);
                         Assert.False(upgradeFeature.IsUpgradableRequest);
-                        await Assert.ThrowsAsync<NotSupportedException>(
-                            () => upgradeFeature.UpgradeAsync()
-                        );
+                        await Assert.ThrowsAsync<NotSupportedException>(() =>
+                            upgradeFeature.UpgradeAsync());
 
                         var webSocketFeature = c.Features.Get<IHttpWebSocketFeature>();
                         Assert.NotNull(webSocketFeature);

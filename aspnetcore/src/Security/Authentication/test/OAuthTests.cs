@@ -568,13 +568,11 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
         );
 
         using var server = host.GetTestServer();
-        var exception = await Assert.ThrowsAsync<AuthenticationFailureException>(
-            () =>
-                server.SendAsync(
-                    "https://www.example.com/oauth-callback?code=random_code&state=protected_state",
-                    ".AspNetCore.Correlation.correlationId=N"
-                )
-        );
+        var exception = await Assert.ThrowsAsync<AuthenticationFailureException>(() =>
+            server.SendAsync(
+                "https://www.example.com/oauth-callback?code=random_code&state=protected_state",
+                ".AspNetCore.Correlation.correlationId=N"
+            ));
     }
 
     [Fact]
@@ -626,13 +624,11 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
         );
 
         using var server = host.GetTestServer();
-        var exception = await Assert.ThrowsAsync<AuthenticationFailureException>(
-            () =>
-                server.SendAsync(
-                    "https://www.example.com/oauth-callback?code=random_code&state=protected_state",
-                    ".AspNetCore.Correlation.correlationId=N"
-                )
-        );
+        var exception = await Assert.ThrowsAsync<AuthenticationFailureException>(() =>
+            server.SendAsync(
+                "https://www.example.com/oauth-callback?code=random_code&state=protected_state",
+                ".AspNetCore.Correlation.correlationId=N"
+            ));
     }
 
     private static async Task<IHost> CreateHost(

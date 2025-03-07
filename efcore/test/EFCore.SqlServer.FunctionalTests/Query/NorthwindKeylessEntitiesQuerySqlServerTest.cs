@@ -67,9 +67,8 @@ FROM [Alphabetical list of products] AS [a]
     public override async Task KeylessEntity_with_nav_defining_query(bool async)
     {
         // FromSql mapping. Issue #21627.
-        await Assert.ThrowsAsync<SqlException>(
-            () => base.KeylessEntity_with_nav_defining_query(async)
-        );
+        await Assert.ThrowsAsync<SqlException>(() =>
+            base.KeylessEntity_with_nav_defining_query(async));
 
         AssertSql(
             """

@@ -107,9 +107,8 @@ namespace System.ComponentModel.Composition
 
             using (var atomicComposition = new AtomicComposition())
             {
-                Assert.Throws<ChangeRejectedException>(
-                    () => engine.PreviewImports(importer, atomicComposition)
-                );
+                Assert.Throws<ChangeRejectedException>(() =>
+                    engine.PreviewImports(importer, atomicComposition));
             }
 
             exportProvider.AddExport("Value", 22);
@@ -235,9 +234,8 @@ namespace System.ComponentModel.Composition
 
             // After rejection batch failures throw ChangeRejectedException to indicate that
             // the failure did not affect the container
-            Assert.Throws<ChangeRejectedException>(
-                () => exportProvider.ReplaceExportValue("Value", 42)
-            );
+            Assert.Throws<ChangeRejectedException>(() =>
+                exportProvider.ReplaceExportValue("Value", 42));
 
             Assert.Equal(21, importer.GetImport(import));
 
@@ -281,9 +279,8 @@ namespace System.ComponentModel.Composition
 
             Assert.Equal(21, importer.GetImport(import));
 
-            Assert.Throws<ChangeRejectedException>(
-                () => exportProvider.ReplaceExportValue("Value", 42)
-            );
+            Assert.Throws<ChangeRejectedException>(() =>
+                exportProvider.ReplaceExportValue("Value", 42));
 
             Assert.Equal(21, importer.GetImport(import));
 
@@ -334,9 +331,8 @@ namespace System.ComponentModel.Composition
             importer.ResetImport(import1);
             importer.ResetImport(import2);
 
-            Assert.Throws<ChangeRejectedException>(
-                () => exportProvider.ReplaceExportValue("Value", 42)
-            );
+            Assert.Throws<ChangeRejectedException>(() =>
+                exportProvider.ReplaceExportValue("Value", 42));
 
             Assert.Null(importer.GetImport(import1));
             Assert.Null(importer.GetImport(import2));

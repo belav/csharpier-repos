@@ -58,9 +58,8 @@ namespace System.Data.Tests
             //Null exception
             Assert.Throws<NullReferenceException>(() => new UniqueConstraint((DataColumn)null));
 
-            Assert.Throws<InvalidConstraintException>(
-                () => new UniqueConstraint(new DataColumn[] { })
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+                new UniqueConstraint(new DataColumn[] { }));
 
             DataTable dt = new DataTable("Table1");
             dt.Columns.Add("Col1", typeof(int));
@@ -72,9 +71,8 @@ namespace System.Data.Tests
             ds.Tables.Add(dt2);
 
             //columns from two different tables.
-            Assert.Throws<InvalidConstraintException>(
-                () => new UniqueConstraint(new DataColumn[] { dt.Columns[0], dt2.Columns[0] })
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+                new UniqueConstraint(new DataColumn[] { dt.Columns[0], dt2.Columns[0] }));
         }
 
         [Fact]

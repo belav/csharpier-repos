@@ -22,61 +22,51 @@ namespace Microsoft.Extensions.Logging.Console.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddConsole_NullConfigure_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ServiceCollection().AddLogging(builder =>
-                    {
-                        builder.AddConsole(null);
-                    })
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ServiceCollection().AddLogging(builder =>
+                {
+                    builder.AddConsole(null);
+                }));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddSimpleConsole_NullConfigure_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ServiceCollection().AddLogging(builder =>
-                    {
-                        builder.AddSimpleConsole(null);
-                    })
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ServiceCollection().AddLogging(builder =>
+                {
+                    builder.AddSimpleConsole(null);
+                }));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddSystemdConsole_NullConfigure_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ServiceCollection().AddLogging(builder =>
-                    {
-                        builder.AddSystemdConsole(null);
-                    })
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ServiceCollection().AddLogging(builder =>
+                {
+                    builder.AddSystemdConsole(null);
+                }));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddJsonConsole_NullConfigure_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ServiceCollection().AddLogging(builder =>
-                    {
-                        builder.AddJsonConsole(null);
-                    })
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ServiceCollection().AddLogging(builder =>
+                {
+                    builder.AddJsonConsole(null);
+                }));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void AddConsoleFormatter_NullConfigure_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    new ServiceCollection().AddLogging(builder =>
-                    {
-                        builder.AddConsoleFormatter<CustomFormatter, CustomOptions>(null);
-                    })
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ServiceCollection().AddLogging(builder =>
+                {
+                    builder.AddConsoleFormatter<CustomFormatter, CustomOptions>(null);
+                }));
         }
 
         [ConditionalTheory(
@@ -503,9 +493,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 .AddLogging(builder => builder.AddConfiguration(configuration).AddConsole(o => { }))
                 .BuildServiceProvider();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => serviceProvider.GetRequiredService<ILoggerProvider>()
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                serviceProvider.GetRequiredService<ILoggerProvider>());
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

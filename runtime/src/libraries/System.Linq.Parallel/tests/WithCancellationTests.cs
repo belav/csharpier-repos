@@ -28,16 +28,13 @@ namespace System.Linq.Parallel.Tests
         public static void WithCancellation_Multiple_CancelableToken()
         {
             CancellationToken token = new CancellationTokenSource().Token;
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Range(0, 1).WithCancellation(token).WithCancellation(token)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .WithCancellation(token)
-                        .WithCancellation(new CancellationTokenSource().Token)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Range(0, 1).WithCancellation(token).WithCancellation(token));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .WithCancellation(token)
+                    .WithCancellation(new CancellationTokenSource().Token));
         }
 
         [Fact]
@@ -141,43 +138,37 @@ namespace System.Linq.Parallel.Tests
                 .Select(x => x)
                 .AsParallel()
                 .AsUnordered();
-            AssertThrows.Wrapped<OperationCanceledException>(
-                () =>
-                    left.GroupJoin(
-                            right,
-                            x =>
-                            {
-                                throw new OperationCanceledException();
-                            },
-                            y => y,
-                            (x, e) => x
-                        )
-                        .ForAll(x => { })
-            );
-            AssertThrows.Wrapped<OperationCanceledException>(
-                () =>
-                    left.Join(
-                            right,
-                            x =>
-                            {
-                                throw new OperationCanceledException();
-                            },
-                            y => y,
-                            (x, e) => x
-                        )
-                        .ForAll(x => { })
-            );
-            AssertThrows.Wrapped<OperationCanceledException>(
-                () =>
-                    left.Zip<int, int, int>(
-                            right,
-                            (x, y) =>
-                            {
-                                throw new OperationCanceledException();
-                            }
-                        )
-                        .ForAll(x => { })
-            );
+            AssertThrows.Wrapped<OperationCanceledException>(() =>
+                left.GroupJoin(
+                        right,
+                        x =>
+                        {
+                            throw new OperationCanceledException();
+                        },
+                        y => y,
+                        (x, e) => x
+                    )
+                    .ForAll(x => { }));
+            AssertThrows.Wrapped<OperationCanceledException>(() =>
+                left.Join(
+                        right,
+                        x =>
+                        {
+                            throw new OperationCanceledException();
+                        },
+                        y => y,
+                        (x, e) => x
+                    )
+                    .ForAll(x => { }));
+            AssertThrows.Wrapped<OperationCanceledException>(() =>
+                left.Zip<int, int, int>(
+                        right,
+                        (x, y) =>
+                        {
+                            throw new OperationCanceledException();
+                        }
+                    )
+                    .ForAll(x => { }));
         }
 
         // If a query is canceled and immediately disposed, the dispose should not throw an OCE.

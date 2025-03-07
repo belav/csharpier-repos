@@ -30,9 +30,8 @@ namespace System.Web.Http.ModelBinding
             descriptor.Setup(desc => desc.IsOptional).Returns(false);
             var binding = new FormatterParameterBinding(descriptor.Object, formatters, null);
 
-            HttpResponseException exception = Assert.Throws<HttpResponseException>(
-                () => binding.ReadContentAsync(request, typeof(string), formatters, null)
-            );
+            HttpResponseException exception = Assert.Throws<HttpResponseException>(() =>
+                binding.ReadContentAsync(request, typeof(string), formatters, null));
 
             Assert.Equal(HttpStatusCode.UnsupportedMediaType, exception.Response.StatusCode);
             HttpError error;
@@ -53,9 +52,8 @@ namespace System.Web.Http.ModelBinding
             descriptor.Setup(desc => desc.IsOptional).Returns(false);
             var binding = new FormatterParameterBinding(descriptor.Object, formatters, null);
 
-            HttpResponseException exception = Assert.Throws<HttpResponseException>(
-                () => binding.ReadContentAsync(request, typeof(string), formatters, null)
-            );
+            HttpResponseException exception = Assert.Throws<HttpResponseException>(() =>
+                binding.ReadContentAsync(request, typeof(string), formatters, null));
 
             Assert.Equal(HttpStatusCode.UnsupportedMediaType, exception.Response.StatusCode);
             HttpError error;

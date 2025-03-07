@@ -19,18 +19,16 @@ namespace System.Runtime.InteropServices.Tests
         public void CreateAggregatedObject_ThrowsNotSupportedException()
         {
             object value = new object();
-            Assert.Throws<NotSupportedException>(
-                () => Marshal.CreateAggregatedObject(IntPtr.Zero, value)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                Marshal.CreateAggregatedObject(IntPtr.Zero, value));
         }
 
         [Fact]
         public void CreateAggregatedObject_T_ThrowsNotSupportedException()
         {
             object value = new object();
-            Assert.Throws<NotSupportedException>(
-                () => Marshal.CreateAggregatedObject<object>(IntPtr.Zero, value)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                Marshal.CreateAggregatedObject<object>(IntPtr.Zero, value));
         }
 
         [Fact]
@@ -54,25 +52,22 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SetComObjectData_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(
-                () => Marshal.SetComObjectData(new object(), "key", "value")
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                Marshal.SetComObjectData(new object(), "key", "value"));
         }
 
         [Fact]
         public void CreateWrapperOfType_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(
-                () => Marshal.CreateWrapperOfType(new object(), typeof(object))
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                Marshal.CreateWrapperOfType(new object(), typeof(object)));
         }
 
         [Fact]
         public void CreateWrapperOfType_T_TWrapper_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(
-                () => Marshal.CreateWrapperOfType<object, object>(new object())
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                Marshal.CreateWrapperOfType<object, object>(new object()));
         }
 
         [Fact]
@@ -83,9 +78,8 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void GetNativeVariantForObject_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(
-                () => Marshal.GetNativeVariantForObject(99, IntPtr.Zero)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                Marshal.GetNativeVariantForObject(99, IntPtr.Zero));
         }
 
         [Fact]
@@ -96,9 +90,8 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void GetNativeVariantForObject_T_ThrowsNotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(
-                () => Marshal.GetNativeVariantForObject<double>(99, IntPtr.Zero)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                Marshal.GetNativeVariantForObject<double>(99, IntPtr.Zero));
         }
 
         public struct NativeVariant { }
@@ -140,9 +133,8 @@ namespace System.Runtime.InteropServices.Tests
             try
             {
                 Marshal.StructureToPtr(variant, ptr, fDeleteOld: false);
-                Assert.Throws<NotSupportedException>(
-                    () => Marshal.GetObjectForNativeVariant<NativeVariant_T>(ptr)
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    Marshal.GetObjectForNativeVariant<NativeVariant_T>(ptr));
             }
             finally
             {
@@ -157,9 +149,8 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.AllocHGlobal(2 * Marshal.SizeOf<NativeVariant>());
             try
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Marshal.GetObjectsForNativeVariants(ptr, 2)
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    Marshal.GetObjectsForNativeVariants(ptr, 2));
             }
             finally
             {
@@ -173,9 +164,8 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.AllocHGlobal(2 * Marshal.SizeOf<NativeVariant_T>());
             try
             {
-                Assert.Throws<NotSupportedException>(
-                    () => Marshal.GetObjectsForNativeVariants<sbyte>(ptr, 2)
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    Marshal.GetObjectsForNativeVariants<sbyte>(ptr, 2));
             }
             finally
             {

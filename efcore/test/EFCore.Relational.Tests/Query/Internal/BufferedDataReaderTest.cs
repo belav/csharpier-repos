@@ -187,24 +187,20 @@ public class BufferedDataReaderTest
             new object[] { true }
         );
 
-        await Assert.ThrowsAsync<NotSupportedException>(
-            () =>
-                Verify_method_result(
-                    r => r.GetBytes(0, 0, new byte[0], 0, 0),
-                    async,
-                    0,
-                    new object[] { 1L }
-                )
-        );
-        await Assert.ThrowsAsync<NotSupportedException>(
-            () =>
-                Verify_method_result(
-                    r => r.GetChars(0, 0, new char[0], 0, 0),
-                    async,
-                    0,
-                    new object[] { 1L }
-                )
-        );
+        await Assert.ThrowsAsync<NotSupportedException>(() =>
+            Verify_method_result(
+                r => r.GetBytes(0, 0, new byte[0], 0, 0),
+                async,
+                0,
+                new object[] { 1L }
+            ));
+        await Assert.ThrowsAsync<NotSupportedException>(() =>
+            Verify_method_result(
+                r => r.GetChars(0, 0, new char[0], 0, 0),
+                async,
+                0,
+                new object[] { 1L }
+            ));
     }
 
     private async Task Verify_method_result<T>(

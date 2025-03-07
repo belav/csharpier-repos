@@ -10,9 +10,8 @@ namespace System.Tests
         [Fact]
         public void NullArgumentThrowsArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => Environment.ExpandEnvironmentVariables(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Environment.ExpandEnvironmentVariables(null));
         }
 
         [Fact]

@@ -190,9 +190,8 @@ public class ModelStateDictionaryTest
         source.AddModelError("key", "some error");
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => source.MarkFieldSkipped("key")
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            source.MarkFieldSkipped("key"));
 
         // Assert
         Assert.Equal(
@@ -252,9 +251,8 @@ public class ModelStateDictionaryTest
         source.AddModelError("key", "some-error");
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => source.MarkFieldValid("key")
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            source.MarkFieldValid("key"));
 
         // Assert
         Assert.Equal(
@@ -1696,9 +1694,8 @@ public class ModelStateDictionaryTest
         dictionary.MaxStateDepth = stateDepth;
 
         // Act
-        var invalidException = Assert.Throws<InvalidOperationException>(
-            () => dictionary.TryAddModelException(key, exception)
-        );
+        var invalidException = Assert.Throws<InvalidOperationException>(() =>
+            dictionary.TryAddModelException(key, exception));
 
         // Assert
         Assert.Equal(
@@ -1717,9 +1714,8 @@ public class ModelStateDictionaryTest
         dictionary.MaxStateDepth = stateDepth;
 
         // Act
-        var invalidException = Assert.Throws<InvalidOperationException>(
-            () => dictionary.TryAddModelError(key, "errorMessage")
-        );
+        var invalidException = Assert.Throws<InvalidOperationException>(() =>
+            dictionary.TryAddModelError(key, "errorMessage"));
 
         // Assert
         Assert.Equal(
@@ -1737,9 +1733,8 @@ public class ModelStateDictionaryTest
         dictionary.MaxStateDepth = stateDepth;
 
         // Act
-        var invalidException = Assert.Throws<InvalidOperationException>(
-            () => dictionary.SetModelValue(key, string.Empty, string.Empty)
-        );
+        var invalidException = Assert.Throws<InvalidOperationException>(() =>
+            dictionary.SetModelValue(key, string.Empty, string.Empty));
 
         // Assert
         Assert.Equal(
@@ -1777,9 +1772,8 @@ public class ModelStateDictionaryTest
         source.MaxStateDepth = stateDepth;
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => source.MarkFieldSkipped(key)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            source.MarkFieldSkipped(key));
 
         // Assert
         Assert.Equal(

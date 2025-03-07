@@ -1410,9 +1410,8 @@ public class SqlServerTypeMappingSourceTest : RelationalTypeMappingSourceTestBas
             .AddProperty("Strange", typeof(object));
         var model = CreateModel();
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => CreateRelationalTypeMappingSource(model).GetMapping((IProperty)property)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            CreateRelationalTypeMappingSource(model).GetMapping((IProperty)property));
         Assert.Equal(
             RelationalStrings.UnsupportedPropertyType(
                 "Entity1 (Dictionary<string, object>)",
@@ -1425,18 +1424,16 @@ public class SqlServerTypeMappingSourceTest : RelationalTypeMappingSourceTestBas
         Assert.Equal(
             RelationalStrings.UnsupportedType("object"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => CreateRelationalTypeMappingSource(model).GetMapping(typeof(object))
-                )
+                .Throws<InvalidOperationException>(() =>
+                    CreateRelationalTypeMappingSource(model).GetMapping(typeof(object)))
                 .Message
         );
 
         Assert.Equal(
             RelationalStrings.UnsupportedStoreType("object"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => CreateRelationalTypeMappingSource(model).GetMapping("object")
-                )
+                .Throws<InvalidOperationException>(() =>
+                    CreateRelationalTypeMappingSource(model).GetMapping("object"))
                 .Message
         );
     }

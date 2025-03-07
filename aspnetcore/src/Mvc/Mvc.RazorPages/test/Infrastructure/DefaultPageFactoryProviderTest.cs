@@ -32,9 +32,8 @@ public class DefaultPageFactoryProviderTest
         var factoryProvider = CreatePageFactory();
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => factoryProvider.CreatePageFactory(descriptor)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            factoryProvider.CreatePageFactory(descriptor));
         Assert.Equal(
             $"Page created by '{pageActivator.GetType()}' must be an instance of '{typeof(PageBase)}'.",
             ex.Message

@@ -325,9 +325,8 @@ namespace System.PrivateUri.Tests
                 Assert.Empty(uri.Fragment);
 
                 _ = referenceUri.GetComponents(UriComponents.AbsoluteUri, UriFormat.UriEscaped);
-                Assert.Throws<InvalidOperationException>(
-                    () => uri.GetComponents(UriComponents.Path, UriFormat.UriEscaped)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    uri.GetComponents(UriComponents.Path, UriFormat.UriEscaped));
             }
         }
 
@@ -347,18 +346,14 @@ namespace System.PrivateUri.Tests
             Assert.Equal("80", uri.GetComponents(UriComponents.StrongPort, format));
             Assert.Empty(uri.GetComponents(UriComponents.Fragment, format));
 
-            Assert.Throws<InvalidOperationException>(
-                () => uri.GetComponents(UriComponents.Path, format)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => uri.GetComponents(UriComponents.Query, format)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => uri.GetComponents(UriComponents.PathAndQuery, format)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => uri.GetComponents(UriComponents.AbsoluteUri, format)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                uri.GetComponents(UriComponents.Path, format));
+            Assert.Throws<InvalidOperationException>(() =>
+                uri.GetComponents(UriComponents.Query, format));
+            Assert.Throws<InvalidOperationException>(() =>
+                uri.GetComponents(UriComponents.PathAndQuery, format));
+            Assert.Throws<InvalidOperationException>(() =>
+                uri.GetComponents(UriComponents.AbsoluteUri, format));
         }
 
         private sealed class CustomUriParser : UriParser { }

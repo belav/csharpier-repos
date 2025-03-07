@@ -747,9 +747,8 @@ namespace System.Security.Cryptography.Tests
                     IV,
                     paddingMode: PaddingMode.None
                 );
-                Assert.Throws<CryptographicException>(
-                    () => alg.DecryptCbc(ciphertext, IV, destination, paddingMode: paddingMode)
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    alg.DecryptCbc(ciphertext, IV, destination, paddingMode: paddingMode));
                 Assert.True(
                     destination.AsSpan().IndexOf(plaintextByte) < 0,
                     "does not contain plaintext data"
@@ -781,9 +780,8 @@ namespace System.Security.Cryptography.Tests
 
                 // Use paddingMode: None since we manually padded our data
                 byte[] ciphertext = alg.EncryptEcb(invalidPadding, paddingMode: PaddingMode.None);
-                Assert.Throws<CryptographicException>(
-                    () => alg.DecryptEcb(ciphertext, destination, paddingMode: paddingMode)
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    alg.DecryptEcb(ciphertext, destination, paddingMode: paddingMode));
                 Assert.True(
                     destination.AsSpan().IndexOf(plaintextByte) < 0,
                     "does not contain plaintext data"
@@ -824,9 +822,8 @@ namespace System.Security.Cryptography.Tests
                     IV,
                     paddingMode: PaddingMode.None
                 );
-                Assert.Throws<CryptographicException>(
-                    () => alg.DecryptCfb(ciphertext, IV, destination, paddingMode: paddingMode)
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    alg.DecryptCfb(ciphertext, IV, destination, paddingMode: paddingMode));
                 Assert.True(
                     destination.AsSpan().IndexOf(plaintextByte) < 0,
                     "does not contain plaintext data"

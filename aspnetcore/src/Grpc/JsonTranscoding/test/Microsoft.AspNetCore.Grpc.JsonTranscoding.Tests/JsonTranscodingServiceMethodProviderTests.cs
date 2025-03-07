@@ -133,9 +133,8 @@ public class JsonTranscodingServiceMethodProviderTests
         var endpoints = MapEndpoints<JsonTranscodingGreeterService>();
 
         // Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => FindGrpcEndpoint(endpoints, nameof(JsonTranscodingGreeterService.NoOption))
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            FindGrpcEndpoint(endpoints, nameof(JsonTranscodingGreeterService.NoOption)));
         Assert.Equal("Couldn't find gRPC endpoint for method NoOption.", ex.Message);
     }
 
@@ -224,9 +223,8 @@ public class JsonTranscodingServiceMethodProviderTests
     public void AddMethod_BadResponseBody_ThrowError()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => MapEndpoints<JsonTranscodingInvalidResponseBodyGreeterService>()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            MapEndpoints<JsonTranscodingInvalidResponseBodyGreeterService>());
 
         // Assert
         Assert.Equal(
@@ -247,9 +245,8 @@ public class JsonTranscodingServiceMethodProviderTests
     public void AddMethod_BadResponseBody_Nested_ThrowError()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => MapEndpoints<JsonTranscodingInvalidNestedResponseBodyGreeterService>()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            MapEndpoints<JsonTranscodingInvalidNestedResponseBodyGreeterService>());
 
         // Assert
         Assert.Equal(
@@ -270,9 +267,8 @@ public class JsonTranscodingServiceMethodProviderTests
     public void AddMethod_BadBody_ThrowError()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => MapEndpoints<JsonTranscodingInvalidBodyGreeterService>()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            MapEndpoints<JsonTranscodingInvalidBodyGreeterService>());
 
         // Assert
         Assert.Equal(
@@ -293,9 +289,8 @@ public class JsonTranscodingServiceMethodProviderTests
     public void AddMethod_BadBody_Nested_ThrowError()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => MapEndpoints<JsonTranscodingInvalidNestedBodyGreeterService>()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            MapEndpoints<JsonTranscodingInvalidNestedBodyGreeterService>());
 
         // Assert
         Assert.Equal(
@@ -316,9 +311,8 @@ public class JsonTranscodingServiceMethodProviderTests
     public void AddMethod_BadPattern_ThrowError()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => MapEndpoints<JsonTranscodingInvalidPatternGreeterService>()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            MapEndpoints<JsonTranscodingInvalidPatternGreeterService>());
 
         // Assert
         Assert.Equal(

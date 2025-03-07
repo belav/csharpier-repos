@@ -34,15 +34,12 @@ namespace System.DirectoryServices.AccountManagement.Tests
                 Assert.Equal(ContextType.Machine, principal.ContextType);
             }
             Assert.Throws<ArgumentException>(() => new ComputerPrincipal(null));
-            Assert.Throws<ArgumentException>(
-                () => new ComputerPrincipal(null, "samAccountName", "password", true)
-            );
-            Assert.Throws<ArgumentException>(
-                () => new ComputerPrincipal(context, null, "password", true)
-            );
-            Assert.Throws<ArgumentException>(
-                () => new ComputerPrincipal(context, "samAccountName", null, true)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                new ComputerPrincipal(null, "samAccountName", "password", true));
+            Assert.Throws<ArgumentException>(() =>
+                new ComputerPrincipal(context, null, "password", true));
+            Assert.Throws<ArgumentException>(() =>
+                new ComputerPrincipal(context, "samAccountName", null, true));
 
             using (var principal = new UserPrincipal(context))
             {
@@ -50,15 +47,12 @@ namespace System.DirectoryServices.AccountManagement.Tests
                 Assert.Equal(ContextType.Machine, principal.ContextType);
             }
             Assert.Throws<ArgumentException>(() => new UserPrincipal(null));
-            Assert.Throws<ArgumentException>(
-                () => new UserPrincipal(null, "samAccountName", "password", true)
-            );
-            Assert.Throws<ArgumentException>(
-                () => new UserPrincipal(context, null, "password", true)
-            );
-            Assert.Throws<ArgumentException>(
-                () => new UserPrincipal(context, "samAccountName", null, true)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                new UserPrincipal(null, "samAccountName", "password", true));
+            Assert.Throws<ArgumentException>(() =>
+                new UserPrincipal(context, null, "password", true));
+            Assert.Throws<ArgumentException>(() =>
+                new UserPrincipal(context, "samAccountName", null, true));
 
             using (var principal = new GroupPrincipal(context))
             {
@@ -328,30 +322,24 @@ namespace System.DirectoryServices.AccountManagement.Tests
 
             try
             {
-                Assert.Throws<InvalidEnumArgumentException>(
-                    () => new PrincipalContext((ContextType)768, null, null, null)
-                );
-                Assert.Throws<PrincipalServerDownException>(
-                    () => new PrincipalContext(ContextType.Domain, "InvalidDomainName", null, null)
-                );
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        new PrincipalContext(
-                            ContextType.Domain,
-                            LdapConfiguration.Configuration.ServerName,
-                            "InvalidTestUserName",
-                            null
-                        )
-                );
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        new PrincipalContext(
-                            ContextType.Domain,
-                            LdapConfiguration.Configuration.ServerName,
-                            LdapConfiguration.Configuration.UserName,
-                            null
-                        )
-                );
+                Assert.Throws<InvalidEnumArgumentException>(() =>
+                    new PrincipalContext((ContextType)768, null, null, null));
+                Assert.Throws<PrincipalServerDownException>(() =>
+                    new PrincipalContext(ContextType.Domain, "InvalidDomainName", null, null));
+                Assert.Throws<ArgumentException>(() =>
+                    new PrincipalContext(
+                        ContextType.Domain,
+                        LdapConfiguration.Configuration.ServerName,
+                        "InvalidTestUserName",
+                        null
+                    ));
+                Assert.Throws<ArgumentException>(() =>
+                    new PrincipalContext(
+                        ContextType.Domain,
+                        LdapConfiguration.Configuration.ServerName,
+                        LdapConfiguration.Configuration.UserName,
+                        null
+                    ));
                 Assert.Throws<ArgumentException>(() => new UserPrincipal(null));
                 Assert.Throws<ArgumentException>(() => new GroupPrincipal(null));
 
@@ -365,9 +353,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
 
                         group.Members.Add(context, IdentityType.Name, user.Name);
                         group.Save();
-                        Assert.Throws<PrincipalExistsException>(
-                            () => group.Members.Add(context, IdentityType.Name, user.Name)
-                        );
+                        Assert.Throws<PrincipalExistsException>(() =>
+                            group.Members.Add(context, IdentityType.Name, user.Name));
                         group.Members.Remove(context, IdentityType.Name, user.Name);
                         group.Save();
 
@@ -401,9 +388,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
                 using var user = new UserPrincipal(context, u1.Name, u1.Password, true);
 
                 Assert.Throws<InvalidOperationException>(() => user.Save(null));
-                Assert.Throws<InvalidOperationException>(
-                    () => user.Save(new PrincipalContext(ContextType.Machine))
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    user.Save(new PrincipalContext(ContextType.Machine)));
             }
             finally
             {
@@ -511,12 +497,10 @@ namespace System.DirectoryServices.AccountManagement.Tests
                         context.ValidateCredentials(u1.Name, u1.Password, ContextOptions.ServerBind)
                     );
 
-                    Assert.Throws<System.DirectoryServices.Protocols.LdapException>(
-                        () => context.ValidateCredentials(u1.Name, "WrongPassword")
-                    );
-                    Assert.Throws<System.DirectoryServices.Protocols.LdapException>(
-                        () => context.ValidateCredentials("WrongUser", u1.Password)
-                    );
+                    Assert.Throws<System.DirectoryServices.Protocols.LdapException>(() =>
+                        context.ValidateCredentials(u1.Name, "WrongPassword"));
+                    Assert.Throws<System.DirectoryServices.Protocols.LdapException>(() =>
+                        context.ValidateCredentials("WrongUser", u1.Password));
                 }
             }
             finally

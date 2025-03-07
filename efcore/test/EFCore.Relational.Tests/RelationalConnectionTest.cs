@@ -38,9 +38,8 @@ public class RelationalConnectionTest
         Assert.Equal(
             CoreStrings.NoEfServices,
             Assert
-                .Throws<InvalidOperationException>(
-                    () => serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>()
-                )
+                .Throws<InvalidOperationException>(() =>
+                    serviceScope.ServiceProvider.GetService<ConstructorTestContext1A>())
                 .Message
         );
     }
@@ -989,9 +988,8 @@ public class RelationalConnectionTest
         Assert.Equal(
             RelationalStrings.NoProviderConfigured,
             Assert
-                .Throws<InvalidOperationException>(
-                    () => new FakeRelationalConnection(CreateOptions())
-                )
+                .Throws<InvalidOperationException>(() =>
+                    new FakeRelationalConnection(CreateOptions()))
                 .Message
         );
 
@@ -1000,15 +998,13 @@ public class RelationalConnectionTest
         Assert.Equal(
             RelationalStrings.MultipleProvidersConfigured,
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        new FakeRelationalConnection(
-                            CreateOptions(
-                                new FakeRelationalOptionsExtension(),
-                                new AnotherFakeRelationalOptionsExtension()
-                            )
+                .Throws<InvalidOperationException>(() =>
+                    new FakeRelationalConnection(
+                        CreateOptions(
+                            new FakeRelationalOptionsExtension(),
+                            new AnotherFakeRelationalOptionsExtension()
                         )
-                )
+                    ))
                 .Message
         );
 
@@ -1112,9 +1108,8 @@ public class RelationalConnectionTest
         Assert.Equal(
             RelationalStrings.CannotChangeWhenOpen,
             Assert
-                .Throws<InvalidOperationException>(
-                    () => connection.DbConnection = new FakeDbConnection("Fake")
-                )
+                .Throws<InvalidOperationException>(() =>
+                    connection.DbConnection = new FakeDbConnection("Fake"))
                 .Message
         );
     }

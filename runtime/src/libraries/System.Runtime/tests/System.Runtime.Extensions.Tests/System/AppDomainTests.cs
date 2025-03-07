@@ -326,13 +326,11 @@ namespace System.Tests
                             new string[2] { "2", "3" }
                         )
                     );
-                    Assert.Throws<FormatException>(
-                        () =>
-                            AppDomain.CurrentDomain.ExecuteAssemblyByName(
-                                assembly.FullName,
-                                new string[1] { "a" }
-                            )
-                    );
+                    Assert.Throws<FormatException>(() =>
+                        AppDomain.CurrentDomain.ExecuteAssemblyByName(
+                            assembly.FullName,
+                            new string[1] { "a" }
+                        ));
                     AssemblyName assemblyName = assembly.GetName();
                     Assert.Equal(
                         105,
@@ -360,9 +358,8 @@ namespace System.Tests
                 "assemblyFile",
                 () => AppDomain.CurrentDomain.ExecuteAssembly(null)
             );
-            Assert.Throws<FileNotFoundException>(
-                () => AppDomain.CurrentDomain.ExecuteAssembly("NonExistentFile.exe")
-            );
+            Assert.Throws<FileNotFoundException>(() =>
+                AppDomain.CurrentDomain.ExecuteAssembly("NonExistentFile.exe"));
 
 #pragma warning disable SYSLIB0003 // Code Access Security is not supported or honored by the runtime.
             Func<int> executeAssembly = () =>
@@ -1721,13 +1718,11 @@ namespace System.Tests
                     assembly.GetType("System.Tests.AGenericClass`1[[Bogus, BogusAssembly]]", false);
                     Assert.Null(firstChanceExceptionThrown);
 
-                    Exception thrown = Assert.Throws<FileNotFoundException>(
-                        () =>
-                            assembly.GetType(
-                                "System.Tests.AGenericClass`1[[Bogus, AnotherBogusAssembly]]",
-                                true
-                            )
-                    );
+                    Exception thrown = Assert.Throws<FileNotFoundException>(() =>
+                        assembly.GetType(
+                            "System.Tests.AGenericClass`1[[Bogus, AnotherBogusAssembly]]",
+                            true
+                        ));
                     Assert.Same(firstChanceExceptionThrown, thrown);
                 })
                 .Dispose();

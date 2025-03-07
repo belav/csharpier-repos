@@ -873,9 +873,8 @@ namespace System.Runtime.InteropServices.Tests
 
         public static void Field_ParentIsStruct_ThrowsTypeLoadException()
         {
-            Assert.Throws<TypeLoadException>(
-                () => StructWithCustomMarshalerFieldMethod(new StructWithCustomMarshalerField())
-            );
+            Assert.Throws<TypeLoadException>(() =>
+                StructWithCustomMarshalerFieldMethod(new StructWithCustomMarshalerField()));
         }
 
         public struct StructWithCustomMarshalerField
@@ -975,9 +974,8 @@ namespace System.Runtime.InteropServices.Tests
 
         public static void DelegateParameter_MarshalerOnRefInt_ThrowsMarshalDirectiveException()
         {
-            Assert.Throws<MarshalDirectiveException>(
-                () => CustomMarshallerWithDelegateRef(84664, (ref int x) => x.ToString())
-            );
+            Assert.Throws<MarshalDirectiveException>(() =>
+                CustomMarshallerWithDelegateRef(84664, (ref int x) => x.ToString()));
         }
 
         [Fact]

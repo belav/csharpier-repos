@@ -410,9 +410,8 @@ namespace System.Formats.Cbor.Tests
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
-            Assert.Throws<InvalidOperationException>(
-                () => reader.ReadCborNegativeIntegerRepresentation()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                reader.ReadCborNegativeIntegerRepresentation());
 
             Assert.Equal(encoding.Length, reader.BytesRemaining);
         }
@@ -460,9 +459,8 @@ namespace System.Formats.Cbor.Tests
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
-            Assert.Throws<CborContentException>(
-                () => reader.ReadCborNegativeIntegerRepresentation()
-            );
+            Assert.Throws<CborContentException>(() =>
+                reader.ReadCborNegativeIntegerRepresentation());
             Assert.Equal(encoding.Length, reader.BytesRemaining);
         }
 
@@ -496,9 +494,8 @@ namespace System.Formats.Cbor.Tests
             byte[] encoding = Array.Empty<byte>();
             var reader = new CborReader(encoding);
 
-            Assert.Throws<CborContentException>(
-                () => reader.ReadCborNegativeIntegerRepresentation()
-            );
+            Assert.Throws<CborContentException>(() =>
+                reader.ReadCborNegativeIntegerRepresentation());
             Assert.Equal(encoding.Length, reader.BytesRemaining);
         }
     }

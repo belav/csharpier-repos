@@ -36,12 +36,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void TextIsCompleteSubmission()
         {
             Assert.Throws<ArgumentNullException>(() => SyntaxFactory.IsCompleteSubmission(null));
-            Assert.Throws<ArgumentException>(
-                () =>
-                    SyntaxFactory.IsCompleteSubmission(
-                        SyntaxFactory.ParseSyntaxTree("", options: TestOptions.Regular)
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                SyntaxFactory.IsCompleteSubmission(
+                    SyntaxFactory.ParseSyntaxTree("", options: TestOptions.Regular)
+                ));
 
             AssertCompleteSubmission("");
             AssertCompleteSubmission("//hello");

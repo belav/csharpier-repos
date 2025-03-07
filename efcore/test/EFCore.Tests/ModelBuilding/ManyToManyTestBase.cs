@@ -450,13 +450,11 @@ public abstract partial class ModelBuilderTest
                     nameof(Product)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<Category>()
-                                .HasMany(o => o.Products)
-                                .WithMany(c => c.Categories)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<Category>()
+                            .HasMany(o => o.Products)
+                            .WithMany(c => c.Categories))
                     .Message
             );
         }
@@ -479,13 +477,11 @@ public abstract partial class ModelBuilderTest
                     nameof(Product)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<Product>()
-                                .HasMany(o => o.Categories)
-                                .WithMany(c => c.Products)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<Product>()
+                            .HasMany(o => o.Categories)
+                            .WithMany(c => c.Products))
                     .Message
             );
         }
@@ -677,13 +673,11 @@ public abstract partial class ModelBuilderTest
                     nameof(SelfRefManyToOne.SelfRef2)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<SelfRefManyToOne>()
-                                .HasMany(e => e.SelfRef2)
-                                .WithMany(e => e.SelfRef2)
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<SelfRefManyToOne>()
+                            .HasMany(e => e.SelfRef2)
+                            .WithMany(e => e.SelfRef2))
                     .Message
             );
         }
@@ -866,13 +860,11 @@ public abstract partial class ModelBuilderTest
                     nameof(ManyToManyNavPrincipal.Dependents)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                            modelBuilder
-                                .Entity<ManyToManyNavPrincipal>()
-                                .Navigation(p => p.Dependents)
-                                .IsRequired()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder
+                            .Entity<ManyToManyNavPrincipal>()
+                            .Navigation(p => p.Dependents)
+                            .IsRequired())
                     .Message
             );
         }
@@ -947,9 +939,8 @@ public abstract partial class ModelBuilderTest
                     typeof(Dictionary<string, object>).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => modelBuilder.Entity<Dictionary<string, object>>()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Dictionary<string, object>>())
                     .Message
             );
 
@@ -1026,9 +1017,8 @@ public abstract partial class ModelBuilderTest
                     typeof(Dictionary<string, object>).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => modelBuilder.Entity<Dictionary<string, object>>()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Dictionary<string, object>>())
                     .Message
             );
 
@@ -1111,9 +1101,8 @@ public abstract partial class ModelBuilderTest
                     typeof(Dictionary<string, object>).ShortDisplayName()
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () => modelBuilder.Entity<Dictionary<string, object>>()
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Dictionary<string, object>>())
                     .Message
             );
 

@@ -219,12 +219,10 @@ namespace System.Net.Tests
         {
             string uri = absoluteUri + Guid.NewGuid().ToString();
 
-            Assert.Throws<FormatException>(
-                () =>
-                    WebRequest.Create(
-                        $"{uri}\r\n{WebRequestMethods.Ftp.AppendFile} {Guid.NewGuid().ToString()}"
-                    )
-            );
+            Assert.Throws<FormatException>(() =>
+                WebRequest.Create(
+                    $"{uri}\r\n{WebRequestMethods.Ftp.AppendFile} {Guid.NewGuid().ToString()}"
+                ));
         }
 
         [ConditionalFact(nameof(LocalServerAvailable))]
@@ -234,9 +232,8 @@ namespace System.Net.Tests
                 WebRequest.Create(absoluteUri + Guid.NewGuid().ToString());
             ftpWebRequest.Method = "APPE";
             ftpWebRequest.Credentials = new NetworkCredential("test\r\ntest2", "test\r\ntest2");
-            var requestException = Assert.Throws<WebException>(
-                () => ftpWebRequest.GetRequestStream()
-            );
+            var requestException = Assert.Throws<WebException>(() =>
+                ftpWebRequest.GetRequestStream());
             Assert.True(requestException.InnerException is FormatException);
 
             var responseException = Assert.Throws<WebException>(() => ftpWebRequest.GetResponse());

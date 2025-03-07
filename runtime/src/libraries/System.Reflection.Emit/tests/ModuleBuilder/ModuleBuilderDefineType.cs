@@ -304,9 +304,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineType_NonAbstractInterface_ThrowsInvalidOperationException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            Assert.Throws<InvalidOperationException>(
-                () => module.DefineType("A", TypeAttributes.Interface)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                module.DefineType("A", TypeAttributes.Interface));
         }
     }
 }

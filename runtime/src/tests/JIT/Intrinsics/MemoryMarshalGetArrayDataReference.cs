@@ -229,20 +229,15 @@ namespace MemoryMarshalGetArrayDataReferenceTest
             ThrowsNRE(() => ref MemoryMarshal.GetArrayDataReference(NoInline<byte[]>(null)));
             ThrowsNRE(() => ref MemoryMarshal.GetArrayDataReference(NoInline<string[]>(null)));
             ThrowsNRE(() => ref MemoryMarshal.GetArrayDataReference(NoInline<Half[]>(null)));
-            ThrowsNRE(
-                () => ref MemoryMarshal.GetArrayDataReference(NoInline<Vector128<byte>[]>(null))
-            );
-            ThrowsNRE(
-                () => ref MemoryMarshal.GetArrayDataReference(NoInline<StructWithByte[]>(null))
-            );
+            ThrowsNRE(() =>
+                ref MemoryMarshal.GetArrayDataReference(NoInline<Vector128<byte>[]>(null)));
+            ThrowsNRE(() =>
+                ref MemoryMarshal.GetArrayDataReference(NoInline<StructWithByte[]>(null)));
             ThrowsNRE(() => ref MemoryMarshal.GetArrayDataReference(NoInline<SimpleEnum[]>(null)));
-            ThrowsNRE(
-                () => ref MemoryMarshal.GetArrayDataReference(NoInline<GenericStruct<byte>[]>(null))
-            );
-            ThrowsNRE(
-                () =>
-                    ref MemoryMarshal.GetArrayDataReference(NoInline<GenericStruct<string>[]>(null))
-            );
+            ThrowsNRE(() =>
+                ref MemoryMarshal.GetArrayDataReference(NoInline<GenericStruct<byte>[]>(null)));
+            ThrowsNRE(() =>
+                ref MemoryMarshal.GetArrayDataReference(NoInline<GenericStruct<string>[]>(null)));
 
             ThrowsNRE(() => ref ptrByte(NoInline<byte[]>(null)));
             ThrowsNRE(() => ref ptrString(NoInline<string[]>(null)));
@@ -494,9 +489,8 @@ namespace MemoryMarshalGetArrayDataReferenceTest
             ThrowsNRE(() => ref ptrMd(null));
 
             ThrowsNRE(() => ref MemoryMarshal.GetArrayDataReference((Array)NoInline<byte[]>(null)));
-            ThrowsNRE(
-                () => ref MemoryMarshal.GetArrayDataReference((Array)NoInline<string[]>(null))
-            );
+            ThrowsNRE(() =>
+                ref MemoryMarshal.GetArrayDataReference((Array)NoInline<string[]>(null)));
             ThrowsNRE(() => ref MemoryMarshal.GetArrayDataReference(NoInline<Array>(null)));
 
             ThrowsNRE(() => ref ptrMd(NoInline<byte[]>(null)));

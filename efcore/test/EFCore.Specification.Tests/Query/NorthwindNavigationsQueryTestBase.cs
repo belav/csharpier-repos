@@ -20,56 +20,47 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_with_nav_projected_in_subquery_when_client_eval(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        from c in ss.Set<Customer>()
-                        join o in ss.Set<Order>().Select(o => ClientProjection(o, o.Customer))
-                            on c.CustomerID equals o.CustomerID
-                        join od in ss.Set<OrderDetail>()
-                            .Select(od => ClientProjection(od, od.Product))
-                            on o.OrderID equals od.OrderID
-                        select c
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    from c in ss.Set<Customer>()
+                    join o in ss.Set<Order>().Select(o => ClientProjection(o, o.Customer))
+                        on c.CustomerID equals o.CustomerID
+                    join od in ss.Set<OrderDetail>().Select(od => ClientProjection(od, od.Product))
+                        on o.OrderID equals od.OrderID
+                    select c
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_with_nav_in_predicate_in_subquery_when_client_eval(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        from c in ss.Set<Customer>()
-                        join o in ss.Set<Order>().Where(o => ClientPredicate(o, o.Customer))
-                            on c.CustomerID equals o.CustomerID
-                        join od in ss.Set<OrderDetail>()
-                            .Where(od => ClientPredicate(od, od.Product))
-                            on o.OrderID equals od.OrderID
-                        select c
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    from c in ss.Set<Customer>()
+                    join o in ss.Set<Order>().Where(o => ClientPredicate(o, o.Customer))
+                        on c.CustomerID equals o.CustomerID
+                    join od in ss.Set<OrderDetail>().Where(od => ClientPredicate(od, od.Product))
+                        on o.OrderID equals od.OrderID
+                    select c
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_with_nav_in_orderby_in_subquery_when_client_eval(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        from c in ss.Set<Customer>()
-                        join o in ss.Set<Order>().OrderBy(o => ClientOrderBy(o, o.Customer))
-                            on c.CustomerID equals o.CustomerID
-                        join od in ss.Set<OrderDetail>()
-                            .OrderBy(od => ClientOrderBy(od, od.Product))
-                            on o.OrderID equals od.OrderID
-                        select c
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    from c in ss.Set<Customer>()
+                    join o in ss.Set<Order>().OrderBy(o => ClientOrderBy(o, o.Customer))
+                        on c.CustomerID equals o.CustomerID
+                    join od in ss.Set<OrderDetail>().OrderBy(od => ClientOrderBy(od, od.Product))
+                        on o.OrderID equals od.OrderID
+                    select c
+            ));
 
     private static readonly Random _randomGenerator = new();
 
@@ -916,24 +907,20 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                 nameof(OrderDetail)
             ),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                from p in ss.Set<Product>()
-                                where
-                                    p.OrderDetails.Contains(
-                                        ss.Set<OrderDetail>()
-                                            .OrderByDescending(o => o.OrderID)
-                                            .ThenBy(o => o.ProductID)
-                                            .FirstOrDefault(orderDetail =>
-                                                orderDetail.Quantity == 1
-                                            )
-                                    )
-                                select p
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            from p in ss.Set<Product>()
+                            where
+                                p.OrderDetails.Contains(
+                                    ss.Set<OrderDetail>()
+                                        .OrderByDescending(o => o.OrderID)
+                                        .ThenBy(o => o.ProductID)
+                                        .FirstOrDefault(orderDetail => orderDetail.Quantity == 1)
+                                )
+                            select p
+                    ))
             ).Message
         );
 
@@ -948,22 +935,20 @@ public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBas
                 nameof(OrderDetail)
             ),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                from p in ss.Set<Product>()
-                                where
-                                    p.OrderDetails.Contains(
-                                        ss.Set<OrderDetail>()
-                                            .OrderByDescending(o => o.OrderID)
-                                            .ThenBy(o => o.ProductID)
-                                            .FirstOrDefault()
-                                    )
-                                select p
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            from p in ss.Set<Product>()
+                            where
+                                p.OrderDetails.Contains(
+                                    ss.Set<OrderDetail>()
+                                        .OrderByDescending(o => o.OrderID)
+                                        .ThenBy(o => o.ProductID)
+                                        .FirstOrDefault()
+                                )
+                            select p
+                    ))
             ).Message
         );
 

@@ -31,17 +31,15 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
     public virtual Task GroupBy_Property_Select_Average_with_group_enumerable_projected(bool async)
         // Select with aggregate after grouping. Issue #18923.
         =>
-        AssertTranslationFailed(
-            () =>
-                AssertQueryScalar(
-                    async,
-                    ss =>
-                        ss.Set<Order>()
-                            .Where(o => o.Customer.City != "London")
-                            .GroupBy(o => o.CustomerID, (k, es) => new { k, es })
-                            .Select(g => g.es.Average(o => o.OrderID))
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQueryScalar(
+                async,
+                ss =>
+                    ss.Set<Order>()
+                        .Where(o => o.Customer.City != "London")
+                        .GroupBy(o => o.CustomerID, (k, es) => new { k, es })
+                        .Select(g => g.es.Average(o => o.OrderID))
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2777,19 +2775,17 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
     public virtual async Task GroupBy_aggregate_SelectMany(bool async)
     {
         var message = (
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            from o in ss.Set<Order>()
-                            group o by o.CustomerID into g
-                            let id = g.Min(x => x.OrderID)
-                            from o in ss.Set<Order>()
-                            where o.OrderID == id
-                            select o
-                    )
-            )
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                AssertQuery(
+                    async,
+                    ss =>
+                        from o in ss.Set<Order>()
+                        group o by o.CustomerID into g
+                        let id = g.Min(x => x.OrderID)
+                        from o in ss.Set<Order>()
+                        where o.OrderID == id
+                        select o
+                ))
         ).Message;
 
         Assert.Contains(
@@ -3358,96 +3354,82 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupBy_Where_with_grouping_result(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss => ss.Set<Customer>().GroupBy(c => c.City).Where(e => e.Key.StartsWith("s"))
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss => ss.Set<Customer>().GroupBy(c => c.City).Where(e => e.Key.StartsWith("s"))
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupBy_OrderBy_with_grouping_result(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss => ss.Set<Customer>().GroupBy(c => c.City).OrderBy(e => e.Key),
-                    assertOrder: true
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss => ss.Set<Customer>().GroupBy(c => c.City).OrderBy(e => e.Key),
+                assertOrder: true
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupBy_SelectMany(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(async, ss => ss.Set<Customer>().GroupBy(c => c.City).SelectMany(g => g))
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(async, ss => ss.Set<Customer>().GroupBy(c => c.City).SelectMany(g => g)));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_GroupBy_SelectMany(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Order>()
-                            .OrderBy(o => o.OrderID)
-                            .GroupBy(o => o.CustomerID)
-                            .SelectMany(g => g)
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Order>()
+                        .OrderBy(o => o.OrderID)
+                        .GroupBy(o => o.CustomerID)
+                        .SelectMany(g => g)
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_GroupBy_SelectMany_shadow(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Employee>()
-                            .OrderBy(e => e.EmployeeID)
-                            .GroupBy(e => e.EmployeeID)
-                            .SelectMany(g => g)
-                            .Select(g => EF.Property<string>(g, "Title"))
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Employee>()
+                        .OrderBy(e => e.EmployeeID)
+                        .GroupBy(e => e.EmployeeID)
+                        .SelectMany(g => g)
+                        .Select(g => EF.Property<string>(g, "Title"))
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupBy_with_orderby_take_skip_distinct_followed_by_group_key_projection(
         bool async
     ) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Order>()
-                            .GroupBy(o => o.CustomerID)
-                            .OrderBy(g => g.Key)
-                            .Take(5)
-                            .Skip(3)
-                            .Distinct()
-                            .Select(g => g.Key),
-                    assertOrder: true
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Order>()
+                        .GroupBy(o => o.CustomerID)
+                        .OrderBy(g => g.Key)
+                        .Take(5)
+                        .Skip(3)
+                        .Distinct()
+                        .Select(g => g.Key),
+                assertOrder: true
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupBy_Distinct(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss => ss.Set<Order>().GroupBy(o => o.CustomerID).Distinct().Select(g => g.Key)
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss => ss.Set<Order>().GroupBy(o => o.CustomerID).Distinct().Select(g => g.Key)
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3488,22 +3470,20 @@ public abstract class NorthwindGroupByQueryTestBase<TFixture> : QueryTestBase<TF
     public virtual Task Select_GroupBy_SelectMany(bool async)
         // Entity equality. Issue #15938.
         =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Order>()
-                            .Select(o => new ProjectedType
-                            {
-                                Order = o.OrderID,
-                                Customer = o.CustomerID,
-                            })
-                            .GroupBy(p => p.Customer)
-                            .SelectMany(g => g),
-                    elementSorter: g => g.Order
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss =>
+                    ss.Set<Order>()
+                        .Select(o => new ProjectedType
+                        {
+                            Order = o.OrderID,
+                            Customer = o.CustomerID,
+                        })
+                        .GroupBy(p => p.Customer)
+                        .SelectMany(g => g),
+                elementSorter: g => g.Order
+            ));
 
     #endregion
 

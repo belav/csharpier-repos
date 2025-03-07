@@ -258,9 +258,8 @@ namespace System.Net.NetworkInformation.Tests
                 _log.WriteLine("BytesSent: " + stats.BytesSent);
                 _log.WriteLine("IncomingPacketsDiscarded: " + stats.IncomingPacketsDiscarded);
                 _log.WriteLine("IncomingPacketsWithErrors: " + stats.IncomingPacketsWithErrors);
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => stats.IncomingUnknownProtocolPackets
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    stats.IncomingUnknownProtocolPackets);
                 _log.WriteLine("NonUnicastPacketsReceived: " + stats.NonUnicastPacketsReceived);
                 Assert.Throws<PlatformNotSupportedException>(() => stats.NonUnicastPacketsSent);
                 _log.WriteLine("OutgoingPacketsDiscarded: " + stats.OutgoingPacketsDiscarded);

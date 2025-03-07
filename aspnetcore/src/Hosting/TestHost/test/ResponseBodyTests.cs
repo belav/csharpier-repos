@@ -94,9 +94,8 @@ public class ResponseBodyTests
         });
 
         var client = host.GetTestServer().CreateClient();
-        var requestException = await Assert.ThrowsAsync<HttpRequestException>(
-            () => client.GetAsync("/")
-        );
+        var requestException = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            client.GetAsync("/"));
         var ex = (InvalidOperationException)requestException?.InnerException?.InnerException;
         Assert.NotNull(ex);
         Assert.Contains("Synchronous operations are disallowed.", ex.Message);

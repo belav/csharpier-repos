@@ -356,9 +356,8 @@ namespace System.Net.Http.Formatting
             }
             string json = sb.ToString();
 
-            return Assert.ThrowsAsync<JsonReaderException>(
-                () => DeserializeAsync(json, typeof(object))
-            );
+            return Assert.ThrowsAsync<JsonReaderException>(() =>
+                DeserializeAsync(json, typeof(object)));
         }
 
         [Theory]

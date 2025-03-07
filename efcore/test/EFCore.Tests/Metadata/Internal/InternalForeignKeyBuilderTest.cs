@@ -862,10 +862,8 @@ public class InternalForeignKeyBuilderTest
         Assert.Equal(
             CoreStrings.AmbiguousEndRequiredDependent("{'CustomerTempId'}", nameof(Order)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        relationshipBuilder.IsRequiredDependent(true, ConfigurationSource.Explicit)
-                )
+                .Throws<InvalidOperationException>(() =>
+                    relationshipBuilder.IsRequiredDependent(true, ConfigurationSource.Explicit))
                 .Message
         );
     }
@@ -922,16 +920,14 @@ public class InternalForeignKeyBuilderTest
                 nameof(Order)
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        customerEntityBuilder.HasRelationship(
-                            orderEntityBuilder.Metadata,
-                            nameof(Customer.Orders),
-                            nameof(Order.Customer),
-                            ConfigurationSource.Convention,
-                            setTargetAsPrincipal: true
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    customerEntityBuilder.HasRelationship(
+                        orderEntityBuilder.Metadata,
+                        nameof(Customer.Orders),
+                        nameof(Order.Customer),
+                        ConfigurationSource.Convention,
+                        setTargetAsPrincipal: true
+                    ))
                 .Message
         );
     }
@@ -985,13 +981,11 @@ public class InternalForeignKeyBuilderTest
                 relationshipBuilder.Metadata.PrincipalEntityType.DisplayName()
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        relationshipBuilder.DependentEntityType(
-                            relationshipBuilder.Metadata.PrincipalEntityType,
-                            ConfigurationSource.Explicit
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    relationshipBuilder.DependentEntityType(
+                        relationshipBuilder.Metadata.PrincipalEntityType,
+                        ConfigurationSource.Explicit
+                    ))
                 .Message
         );
 
@@ -1010,13 +1004,11 @@ public class InternalForeignKeyBuilderTest
                 relationshipBuilder.Metadata.PrincipalEntityType.DisplayName()
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        relationshipBuilder.PrincipalEntityType(
-                            relationshipBuilder.Metadata.DeclaringEntityType,
-                            ConfigurationSource.Explicit
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    relationshipBuilder.PrincipalEntityType(
+                        relationshipBuilder.Metadata.DeclaringEntityType,
+                        ConfigurationSource.Explicit
+                    ))
                 .Message
         );
 
@@ -1095,14 +1087,12 @@ public class InternalForeignKeyBuilderTest
         Assert.Equal(
             CoreStrings.PrincipalKeylessType(nameof(Order), nameof(Customer), nameof(Order)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        relationshipBuilder.HasEntityTypes(
-                            relationshipBuilder.Metadata.DeclaringEntityType,
-                            relationshipBuilder.Metadata.PrincipalEntityType,
-                            ConfigurationSource.DataAnnotation
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    relationshipBuilder.HasEntityTypes(
+                        relationshipBuilder.Metadata.DeclaringEntityType,
+                        relationshipBuilder.Metadata.PrincipalEntityType,
+                        ConfigurationSource.DataAnnotation
+                    ))
                 .Message
         );
     }

@@ -2695,9 +2695,8 @@ WHERE LTRIM([c].[ContactTitle]) = N'Owner'
     public override async Task TrimStart_with_char_array_argument_in_predicate(bool async)
     {
         // String.Trim with parameters. Issue #22927.
-        await AssertTranslationFailed(
-            () => base.TrimStart_with_char_array_argument_in_predicate(async)
-        );
+        await AssertTranslationFailed(() =>
+            base.TrimStart_with_char_array_argument_in_predicate(async));
 
         AssertSql();
     }
@@ -2726,9 +2725,8 @@ WHERE RTRIM([c].[ContactTitle]) = N'Owner'
     public override async Task TrimEnd_with_char_array_argument_in_predicate(bool async)
     {
         // String.Trim with parameters. Issue #22927.
-        await AssertTranslationFailed(
-            () => base.TrimEnd_with_char_array_argument_in_predicate(async)
-        );
+        await AssertTranslationFailed(() =>
+            base.TrimEnd_with_char_array_argument_in_predicate(async));
 
         AssertSql();
     }

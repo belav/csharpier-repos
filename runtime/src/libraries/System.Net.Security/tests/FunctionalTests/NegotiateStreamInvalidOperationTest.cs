@@ -152,23 +152,19 @@ namespace System.Net.Security.Tests
             using (var server = new NegotiateStream(stream2))
             {
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    Assert.ThrowsAsync<AuthenticationException>(
-                        () =>
-                            client.AuthenticateAsClientAsync(
-                                CredentialCache.DefaultNetworkCredentials,
-                                string.Empty
-                            )
-                    ),
+                    Assert.ThrowsAsync<AuthenticationException>(() =>
+                        client.AuthenticateAsClientAsync(
+                            CredentialCache.DefaultNetworkCredentials,
+                            string.Empty
+                        )),
                     // We suppress the Delegation flag in NTLM case.
-                    Assert.ThrowsAsync<AuthenticationException>(
-                        () =>
-                            server.AuthenticateAsServerAsync(
-                                (NetworkCredential)CredentialCache.DefaultCredentials,
-                                null,
-                                ProtectionLevel.EncryptAndSign,
-                                TokenImpersonationLevel.Delegation
-                            )
-                    )
+                    Assert.ThrowsAsync<AuthenticationException>(() =>
+                        server.AuthenticateAsServerAsync(
+                            (NetworkCredential)CredentialCache.DefaultCredentials,
+                            null,
+                            ProtectionLevel.EncryptAndSign,
+                            TokenImpersonationLevel.Delegation
+                        ))
                 );
             }
         }
@@ -189,16 +185,13 @@ namespace System.Net.Security.Tests
             using (var server = new NegotiateStream(stream2))
             {
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    Assert.ThrowsAsync<AuthenticationException>(
-                        () =>
-                            client.AuthenticateAsClientAsync(
-                                CredentialCache.DefaultNetworkCredentials,
-                                string.Empty
-                            )
-                    ),
-                    Assert.ThrowsAsync<AuthenticationException>(
-                        () => server.AuthenticateAsServerAsync(policy)
-                    )
+                    Assert.ThrowsAsync<AuthenticationException>(() =>
+                        client.AuthenticateAsClientAsync(
+                            CredentialCache.DefaultNetworkCredentials,
+                            string.Empty
+                        )),
+                    Assert.ThrowsAsync<AuthenticationException>(() =>
+                        server.AuthenticateAsServerAsync(policy))
                 );
             }
         }
@@ -228,12 +221,10 @@ namespace System.Net.Security.Tests
                 );
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    Assert.ThrowsAsync<InvalidOperationException>(
-                        () => client.AuthenticateAsClientAsync()
-                    ),
-                    Assert.ThrowsAsync<InvalidOperationException>(
-                        () => server.AuthenticateAsServerAsync()
-                    )
+                    Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        client.AuthenticateAsClientAsync()),
+                    Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        server.AuthenticateAsServerAsync())
                 );
             }
         }
@@ -276,28 +267,23 @@ namespace System.Net.Security.Tests
             {
                 // ProtectionLevel not match.
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                    Assert.ThrowsAsync<AuthenticationException>(
-                        () =>
-                            client.AuthenticateAsClientAsync(
-                                (NetworkCredential)CredentialCache.DefaultCredentials,
-                                TargetName,
-                                ProtectionLevel.None,
-                                TokenImpersonationLevel.Identification
-                            )
-                    ),
-                    Assert.ThrowsAsync<AuthenticationException>(
-                        () =>
-                            server.AuthenticateAsServerAsync(
-                                (NetworkCredential)CredentialCache.DefaultCredentials,
-                                ProtectionLevel.Sign,
-                                TokenImpersonationLevel.Identification
-                            )
-                    )
+                    Assert.ThrowsAsync<AuthenticationException>(() =>
+                        client.AuthenticateAsClientAsync(
+                            (NetworkCredential)CredentialCache.DefaultCredentials,
+                            TargetName,
+                            ProtectionLevel.None,
+                            TokenImpersonationLevel.Identification
+                        )),
+                    Assert.ThrowsAsync<AuthenticationException>(() =>
+                        server.AuthenticateAsServerAsync(
+                            (NetworkCredential)CredentialCache.DefaultCredentials,
+                            ProtectionLevel.Sign,
+                            TokenImpersonationLevel.Identification
+                        ))
                 );
 
-                Assert.Throws<AuthenticationException>(
-                    () => client.Write(s_sampleMsg, 0, s_sampleMsg.Length)
-                );
+                Assert.Throws<AuthenticationException>(() =>
+                    client.Write(s_sampleMsg, 0, s_sampleMsg.Length));
             }
         }
 

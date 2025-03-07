@@ -105,16 +105,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void OnlyAscii7Permitted()
         {
-            Assert.Throws<CryptographicException>(
-                () =>
-                    CertificateRevocationListBuilder.BuildCrlDistributionPointExtension(
-                        new[]
-                        {
-                            // http://[nihongo].example/ca4.crl
-                            "http://\u65E5\u672C\u8A8E.example/ca4.crl",
-                        }
-                    )
-            );
+            Assert.Throws<CryptographicException>(() =>
+                CertificateRevocationListBuilder.BuildCrlDistributionPointExtension(
+                    new[]
+                    {
+                        // http://[nihongo].example/ca4.crl
+                        "http://\u65E5\u672C\u8A8E.example/ca4.crl",
+                    }
+                ));
         }
     }
 }

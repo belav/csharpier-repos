@@ -64,9 +64,8 @@ public class SqliteCommandTest
             {
                 reader.Read();
 
-                var ex = Assert.Throws<InvalidOperationException>(
-                    () => command.CommandText = "SELECT 2;"
-                );
+                var ex = Assert.Throws<InvalidOperationException>(() =>
+                    command.CommandText = "SELECT 2;");
 
                 Assert.Equal(Resources.SetRequiresNoOpenReader("CommandText"), ex.Message);
             }
@@ -142,9 +141,8 @@ public class SqliteCommandTest
             {
                 reader.Read();
 
-                var ex = Assert.Throws<InvalidOperationException>(
-                    () => command.Connection = new SqliteConnection()
-                );
+                var ex = Assert.Throws<InvalidOperationException>(() =>
+                    command.Connection = new SqliteConnection());
 
                 Assert.Equal(Resources.SetRequiresNoOpenReader("Connection"), ex.Message);
             }
@@ -160,9 +158,8 @@ public class SqliteCommandTest
     [InlineData(CommandType.TableDirect)]
     public void CommandType_validates_value(CommandType commandType)
     {
-        var ex = Assert.Throws<ArgumentException>(
-            () => new SqliteCommand().CommandType = commandType
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            new SqliteCommand().CommandType = commandType);
 
         Assert.Equal(Resources.InvalidCommandType(commandType), ex.Message);
     }
@@ -194,9 +191,8 @@ public class SqliteCommandTest
     {
         using (var connection = new SqliteConnection("Data Source=:memory:"))
         {
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => connection.CreateCommand().Prepare()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                connection.CreateCommand().Prepare());
 
             Assert.Equal(Resources.CallRequiresOpenConnection("Prepare"), ex.Message);
         }
@@ -279,9 +275,8 @@ public class SqliteCommandTest
     [Fact]
     public void ExecuteReader_throws_when_no_connection()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => new SqliteCommand().ExecuteReader()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new SqliteCommand().ExecuteReader());
 
         Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteReader"), ex.Message);
     }
@@ -291,9 +286,8 @@ public class SqliteCommandTest
     {
         using (var connection = new SqliteConnection("Data Source=:memory:"))
         {
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => connection.CreateCommand().ExecuteReader()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                connection.CreateCommand().ExecuteReader());
 
             Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteReader"), ex.Message);
         }
@@ -331,9 +325,8 @@ public class SqliteCommandTest
     [Fact]
     public void ExecuteScalar_throws_when_no_connection()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => new SqliteCommand().ExecuteScalar()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new SqliteCommand().ExecuteScalar());
 
         Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteScalar"), ex.Message);
     }
@@ -343,9 +336,8 @@ public class SqliteCommandTest
     {
         using (var connection = new SqliteConnection("Data Source=:memory:"))
         {
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => connection.CreateCommand().ExecuteScalar()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                connection.CreateCommand().ExecuteScalar());
 
             Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteScalar"), ex.Message);
         }
@@ -574,9 +566,8 @@ public class SqliteCommandTest
     [Fact]
     public void ExecuteNonQuery_throws_when_no_connection()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => new SqliteCommand().ExecuteNonQuery()
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new SqliteCommand().ExecuteNonQuery());
 
         Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteNonQuery"), ex.Message);
     }
@@ -586,9 +577,8 @@ public class SqliteCommandTest
     {
         using (var connection = new SqliteConnection("Data Source=:memory:"))
         {
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => connection.CreateCommand().ExecuteNonQuery()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                connection.CreateCommand().ExecuteNonQuery());
 
             Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteNonQuery"), ex.Message);
         }
@@ -624,9 +614,8 @@ public class SqliteCommandTest
                 {
                     command.Transaction = transaction;
 
-                    var ex = Assert.Throws<InvalidOperationException>(
-                        () => command.ExecuteReader()
-                    );
+                    var ex = Assert.Throws<InvalidOperationException>(() =>
+                        command.ExecuteReader());
 
                     Assert.Equal(Resources.TransactionConnectionMismatch, ex.Message);
                 }
@@ -645,9 +634,8 @@ public class SqliteCommandTest
             {
                 connection.ExecuteNonQuery("ROLLBACK;");
 
-                var ex = Assert.Throws<InvalidOperationException>(
-                    () => connection.ExecuteNonQuery("SELECT 1;")
-                );
+                var ex = Assert.Throws<InvalidOperationException>(() =>
+                    connection.ExecuteNonQuery("SELECT 1;"));
 
                 Assert.Equal(Resources.TransactionCompleted, ex.Message);
             }

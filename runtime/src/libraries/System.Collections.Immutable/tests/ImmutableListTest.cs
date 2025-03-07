@@ -938,9 +938,8 @@ namespace System.Collections.Immutable.Tests
         public static void TestDebuggerAttributes_Null()
         {
             Type proxyType = DebuggerAttributes.GetProxyType(ImmutableList.Create<double>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
-                () => Activator.CreateInstance(proxyType, (object)null)
-            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(proxyType, (object)null));
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

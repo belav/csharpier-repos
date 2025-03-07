@@ -374,9 +374,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadUtcTime(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 0))
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadUtcTime(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 0)));
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -416,32 +415,26 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.Throws<AsnContentException>(() => reader.ReadUtcTime(TwoDigitYearMax));
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadUtcTime(expectedTag: new Asn1Tag(TagClass.Application, 5))
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadUtcTime(expectedTag: new Asn1Tag(TagClass.Application, 5)));
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                    reader.ReadUtcTime(
-                        TwoDigitYearMax,
-                        expectedTag: new Asn1Tag(TagClass.Application, 5)
-                    )
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadUtcTime(
+                    TwoDigitYearMax,
+                    expectedTag: new Asn1Tag(TagClass.Application, 5)
+                ));
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadUtcTime(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 7))
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadUtcTime(expectedTag: new Asn1Tag(TagClass.ContextSpecific, 7)));
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                    reader.ReadUtcTime(
-                        TwoDigitYearMax,
-                        expectedTag: new Asn1Tag(TagClass.ContextSpecific, 7)
-                    )
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadUtcTime(
+                    TwoDigitYearMax,
+                    expectedTag: new Asn1Tag(TagClass.ContextSpecific, 7)
+                ));
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
             Assert.Equal(

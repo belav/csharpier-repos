@@ -56,9 +56,8 @@ public class DefaultEndpointDataSourceTests
     {
         Endpoint[] endpoints = null;
 
-        var actual = Assert.Throws<ArgumentNullException>(
-            () => new DefaultEndpointDataSource(endpoints)
-        );
+        var actual = Assert.Throws<ArgumentNullException>(() =>
+            new DefaultEndpointDataSource(endpoints));
         Assert.Equal("endpoints", actual.ParamName);
     }
 
@@ -122,9 +121,8 @@ public class DefaultEndpointDataSourceTests
     {
         IEnumerable<Endpoint> endpoints = null;
 
-        var actual = Assert.Throws<ArgumentNullException>(
-            () => new DefaultEndpointDataSource(endpoints)
-        );
+        var actual = Assert.Throws<ArgumentNullException>(() =>
+            new DefaultEndpointDataSource(endpoints));
         Assert.Equal("endpoints", actual.ParamName);
     }
 }

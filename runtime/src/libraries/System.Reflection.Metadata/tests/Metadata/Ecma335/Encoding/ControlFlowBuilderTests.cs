@@ -232,46 +232,38 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                 () => flow.AddCatchRegion(l1, l2, l3, l4, MetadataTokens.MethodDefinitionHandle(1))
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    flow.AddCatchRegion(
-                        default(LabelHandle),
-                        l2,
-                        l3,
-                        l4,
-                        MetadataTokens.TypeReferenceHandle(1)
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    flow.AddCatchRegion(
-                        l1,
-                        default(LabelHandle),
-                        l3,
-                        l4,
-                        MetadataTokens.TypeReferenceHandle(1)
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    flow.AddCatchRegion(
-                        l1,
-                        l2,
-                        default(LabelHandle),
-                        l4,
-                        MetadataTokens.TypeReferenceHandle(1)
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    flow.AddCatchRegion(
-                        l1,
-                        l2,
-                        l3,
-                        default(LabelHandle),
-                        MetadataTokens.TypeReferenceHandle(1)
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                flow.AddCatchRegion(
+                    default(LabelHandle),
+                    l2,
+                    l3,
+                    l4,
+                    MetadataTokens.TypeReferenceHandle(1)
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                flow.AddCatchRegion(
+                    l1,
+                    default(LabelHandle),
+                    l3,
+                    l4,
+                    MetadataTokens.TypeReferenceHandle(1)
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                flow.AddCatchRegion(
+                    l1,
+                    l2,
+                    default(LabelHandle),
+                    l4,
+                    MetadataTokens.TypeReferenceHandle(1)
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                flow.AddCatchRegion(
+                    l1,
+                    l2,
+                    l3,
+                    default(LabelHandle),
+                    MetadataTokens.TypeReferenceHandle(1)
+                ));
 
             AssertExtensions.Throws<ArgumentException>(
                 "tryStart",

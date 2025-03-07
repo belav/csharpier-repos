@@ -18,9 +18,8 @@ public class FieldIdentifierTest
     [Fact]
     public void CannotUseValueTypeModel()
     {
-        var ex = Assert.Throws<ArgumentException>(
-            () => new FieldIdentifier(DateTime.Now, "somefield")
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            new FieldIdentifier(DateTime.Now, "somefield"));
         Assert.Equal("model", ex.ParamName);
         Assert.StartsWith("The model must be a reference-typed object.", ex.Message);
     }
@@ -28,9 +27,8 @@ public class FieldIdentifierTest
     [Fact]
     public void CannotUseNullFieldName()
     {
-        var ex = Assert.Throws<ArgumentNullException>(
-            () => new FieldIdentifier(new object(), null)
-        );
+        var ex = Assert.Throws<ArgumentNullException>(() =>
+            new FieldIdentifier(new object(), null));
         Assert.Equal("fieldName", ex.ParamName);
     }
 
@@ -168,9 +166,8 @@ public class FieldIdentifierTest
     [Fact]
     public void CannotCreateFromExpression_NonMember()
     {
-        var ex = Assert.Throws<ArgumentException>(
-            () => FieldIdentifier.Create(() => new TestModel())
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            FieldIdentifier.Create(() => new TestModel()));
         Assert.Equal(
             $"The provided expression contains a NewExpression which is not supported. {nameof(FieldIdentifier)} only supports simple member accessors (fields, properties) of an object.",
             ex.Message

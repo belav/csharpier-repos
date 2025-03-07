@@ -188,13 +188,11 @@ namespace System.Web.Http.Tracing.Tracers
             );
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                    ((IHttpActionInvoker)tracer).InvokeActionAsync(
-                        _actionContext,
-                        CancellationToken.None
-                    )
-            );
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                ((IHttpActionInvoker)tracer).InvokeActionAsync(
+                    _actionContext,
+                    CancellationToken.None
+                ));
 
             Assert.Equal(expectedException.Message, exception.Message);
         }
@@ -355,13 +353,11 @@ namespace System.Web.Http.Tracing.Tracers
             };
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ((IHttpActionInvoker)tracer).InvokeActionAsync(
-                        _actionContext,
-                        CancellationToken.None
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ((IHttpActionInvoker)tracer).InvokeActionAsync(
+                    _actionContext,
+                    CancellationToken.None
+                ));
 
             // Assert
             Assert.Equal<TraceRecord>(

@@ -364,9 +364,8 @@ namespace LibraryImportGenerator.IntegrationTests
                     8,
                     9,
                 ];
-                Assert.Throws<ArgumentException>(
-                    () => NativeExportsNE.MarshallingFails.FillRangeArray(arr, arr.Length, 0)
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    NativeExportsNE.MarshallingFails.FillRangeArray(arr, arr.Length, 0));
                 FillRangeArrayMarshaller.Marshaller.AssertAllHaveBeenCleaned();
             }
             FillRangeArrayMarshaller.Marshaller.UnmarshallingFailsIndex = -1;
@@ -399,15 +398,8 @@ namespace LibraryImportGenerator.IntegrationTests
                 FillRangeArrayMarshaller.Marshaller.ExpectedFreedValues = Enumerable
                     .Range(0, 100)
                     .ToArray();
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        NativeExportsNE.MarshallingFails.FillRangeArray2D(
-                            arr,
-                            arr.Length,
-                            widths,
-                            0
-                        )
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    NativeExportsNE.MarshallingFails.FillRangeArray2D(arr, arr.Length, widths, 0));
                 FillRangeArrayMarshaller.Marshaller.AssertAllHaveBeenCleaned();
             }
             FillRangeArrayMarshaller.Marshaller.UnmarshallingFailsIndex = -1;

@@ -144,12 +144,10 @@ namespace System.ComponentModel.Composition
             Func<string, AssemblyCatalog> catalogCreator
         )
         {
-            Assert.Throws<PathTooLongException>(
-                () =>
-                    catalogCreator(
-                        @"c:\This is a very long path\And Just to make sure\We will continue to make it very long\This is a very long path\And Just to make sure\We will continue to make it very long\This is a very long path\And Just to make sure\We will continue to make it very long\myassembly.dll"
-                    )
-            );
+            Assert.Throws<PathTooLongException>(() =>
+                catalogCreator(
+                    @"c:\This is a very long path\And Just to make sure\We will continue to make it very long\This is a very long path\And Just to make sure\We will continue to make it very long\This is a very long path\And Just to make sure\We will continue to make it very long\myassembly.dll"
+                ));
         }
 
         internal static void Constructor_NonAssemblyFileNameAsCodeBaseArgument_ShouldThrowBadImageFormat(
@@ -164,9 +162,8 @@ namespace System.ComponentModel.Composition
             Func<string, AssemblyCatalog> catalogCreator
         )
         {
-            Assert.Throws<FileNotFoundException>(
-                () => catalogCreator(@"FileThat should not ever exist")
-            );
+            Assert.Throws<FileNotFoundException>(() =>
+                catalogCreator(@"FileThat should not ever exist"));
         }
 
         // Test Assembly variant of the APIs

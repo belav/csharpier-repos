@@ -76,24 +76,18 @@ namespace System.Text.Tests
 
             // Act & assert
 
-            RunTest(
-                () => transcodingStream.ReadAsync(new byte[0], 0, 0, expectedCancellationToken)
-            );
-            RunTest(
-                () =>
-                    transcodingStream
-                        .ReadAsync(Memory<byte>.Empty, expectedCancellationToken)
-                        .AsTask()
-            );
-            RunTest(
-                () => transcodingStream.WriteAsync(new byte[0], 0, 0, expectedCancellationToken)
-            );
-            RunTest(
-                () =>
-                    transcodingStream
-                        .WriteAsync(ReadOnlyMemory<byte>.Empty, expectedCancellationToken)
-                        .AsTask()
-            );
+            RunTest(() =>
+                transcodingStream.ReadAsync(new byte[0], 0, 0, expectedCancellationToken));
+            RunTest(() =>
+                transcodingStream
+                    .ReadAsync(Memory<byte>.Empty, expectedCancellationToken)
+                    .AsTask());
+            RunTest(() =>
+                transcodingStream.WriteAsync(new byte[0], 0, 0, expectedCancellationToken));
+            RunTest(() =>
+                transcodingStream
+                    .WriteAsync(ReadOnlyMemory<byte>.Empty, expectedCancellationToken)
+                    .AsTask());
 
             void RunTest(Func<Task> callback)
             {
@@ -211,39 +205,29 @@ namespace System.Text.Tests
             Assert.False(transcodingStream.CanSeek);
             Assert.False(transcodingStream.CanWrite);
 
-            Assert.Throws<ObjectDisposedException>(
-                () => (object)transcodingStream.BeginRead(new byte[0], 0, 0, null, null)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => (object)transcodingStream.BeginWrite(new byte[0], 0, 0, null, null)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                (object)transcodingStream.BeginRead(new byte[0], 0, 0, null, null));
+            Assert.Throws<ObjectDisposedException>(() =>
+                (object)transcodingStream.BeginWrite(new byte[0], 0, 0, null, null));
             Assert.Throws<ObjectDisposedException>(() => transcodingStream.Flush());
             Assert.Throws<ObjectDisposedException>(() => (object)transcodingStream.FlushAsync());
-            Assert.Throws<ObjectDisposedException>(
-                () => (object)transcodingStream.Read(new byte[0], 0, 0)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => (object)transcodingStream.Read(Span<byte>.Empty)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => (object)transcodingStream.ReadAsync(new byte[0], 0, 0)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => (object)transcodingStream.ReadAsync(Memory<byte>.Empty)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                (object)transcodingStream.Read(new byte[0], 0, 0));
+            Assert.Throws<ObjectDisposedException>(() =>
+                (object)transcodingStream.Read(Span<byte>.Empty));
+            Assert.Throws<ObjectDisposedException>(() =>
+                (object)transcodingStream.ReadAsync(new byte[0], 0, 0));
+            Assert.Throws<ObjectDisposedException>(() =>
+                (object)transcodingStream.ReadAsync(Memory<byte>.Empty));
             Assert.Throws<ObjectDisposedException>(() => (object)transcodingStream.ReadByte());
-            Assert.Throws<ObjectDisposedException>(
-                () => transcodingStream.Write(new byte[0], 0, 0)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => transcodingStream.Write(ReadOnlySpan<byte>.Empty)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => (object)transcodingStream.WriteAsync(new byte[0], 0, 0)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => (object)transcodingStream.WriteAsync(ReadOnlyMemory<byte>.Empty)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                transcodingStream.Write(new byte[0], 0, 0));
+            Assert.Throws<ObjectDisposedException>(() =>
+                transcodingStream.Write(ReadOnlySpan<byte>.Empty));
+            Assert.Throws<ObjectDisposedException>(() =>
+                (object)transcodingStream.WriteAsync(new byte[0], 0, 0));
+            Assert.Throws<ObjectDisposedException>(() =>
+                (object)transcodingStream.WriteAsync(ReadOnlyMemory<byte>.Empty));
             Assert.Throws<ObjectDisposedException>(() => transcodingStream.WriteByte((byte)'x'));
         }
 
@@ -421,21 +405,16 @@ namespace System.Text.Tests
                 "buffer",
                 () => transcodingStream.Read(null, 0, 0)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.Read(new byte[5], -1, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.Read(new byte[5], 3, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.Read(new byte[5], 5, 1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.Read(new byte[5], 6, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.Read(new byte[5], 6, 0)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.Read(new byte[5], -1, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.Read(new byte[5], 3, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.Read(new byte[5], 5, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.Read(new byte[5], 6, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.Read(new byte[5], 6, 0));
         }
 
         [Fact]
@@ -730,21 +709,16 @@ namespace System.Text.Tests
                 "buffer",
                 () => (object)transcodingStream.ReadAsync(null, 0, 0)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => (object)transcodingStream.ReadAsync(new byte[5], -1, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => (object)transcodingStream.ReadAsync(new byte[5], 3, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => (object)transcodingStream.ReadAsync(new byte[5], 5, 1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => (object)transcodingStream.ReadAsync(new byte[5], 6, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => (object)transcodingStream.ReadAsync(new byte[5], 6, 0)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                (object)transcodingStream.ReadAsync(new byte[5], -1, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                (object)transcodingStream.ReadAsync(new byte[5], 3, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                (object)transcodingStream.ReadAsync(new byte[5], 5, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                (object)transcodingStream.ReadAsync(new byte[5], 6, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                (object)transcodingStream.ReadAsync(new byte[5], 6, 0));
         }
 
         [Fact]
@@ -760,21 +734,16 @@ namespace System.Text.Tests
                 "buffer",
                 () => transcodingStream.BeginRead(null, 0, 0, null, null)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.BeginRead(new byte[5], -1, -1, null, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.BeginRead(new byte[5], 3, -1, null, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.BeginRead(new byte[5], 5, 1, null, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.BeginRead(new byte[5], 6, -1, null, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.BeginRead(new byte[5], 6, 0, null, null)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.BeginRead(new byte[5], -1, -1, null, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.BeginRead(new byte[5], 3, -1, null, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.BeginRead(new byte[5], 5, 1, null, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.BeginRead(new byte[5], 6, -1, null, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.BeginRead(new byte[5], 6, 0, null, null));
         }
 
         private async Task RunReadTestAsync(
@@ -923,9 +892,8 @@ namespace System.Text.Tests
             Assert.Throws<NotSupportedException>(() => transcodingStream.Length);
             Assert.Throws<NotSupportedException>(() => transcodingStream.Position);
             Assert.Throws<NotSupportedException>(() => transcodingStream.Position = 0);
-            Assert.Throws<NotSupportedException>(
-                () => transcodingStream.Seek(0, SeekOrigin.Current)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                transcodingStream.Seek(0, SeekOrigin.Current));
             Assert.Throws<NotSupportedException>(() => transcodingStream.SetLength(0));
         }
 
@@ -1051,21 +1019,16 @@ namespace System.Text.Tests
                 "buffer",
                 () => transcodingStream.Write(null, 0, 0)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.Write(new byte[5], -1, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.Write(new byte[5], 3, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.Write(new byte[5], 5, 1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.Write(new byte[5], 6, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.Write(new byte[5], 6, 0)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.Write(new byte[5], -1, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.Write(new byte[5], 3, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.Write(new byte[5], 5, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.Write(new byte[5], 6, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.Write(new byte[5], 6, 0));
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
@@ -1236,21 +1199,16 @@ namespace System.Text.Tests
                 "buffer",
                 () => (object)transcodingStream.WriteAsync(null, 0, 0)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => (object)transcodingStream.WriteAsync(new byte[5], -1, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => (object)transcodingStream.WriteAsync(new byte[5], 3, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => (object)transcodingStream.WriteAsync(new byte[5], 5, 1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => (object)transcodingStream.WriteAsync(new byte[5], 6, -1)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => (object)transcodingStream.WriteAsync(new byte[5], 6, 0)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                (object)transcodingStream.WriteAsync(new byte[5], -1, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                (object)transcodingStream.WriteAsync(new byte[5], 3, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                (object)transcodingStream.WriteAsync(new byte[5], 5, 1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                (object)transcodingStream.WriteAsync(new byte[5], 6, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                (object)transcodingStream.WriteAsync(new byte[5], 6, 0));
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
@@ -1307,21 +1265,16 @@ namespace System.Text.Tests
                 "buffer",
                 () => transcodingStream.BeginWrite(null, 0, 0, null, null)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.BeginWrite(new byte[5], -1, -1, null, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.BeginWrite(new byte[5], 3, -1, null, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.BeginWrite(new byte[5], 5, 1, null, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.BeginWrite(new byte[5], 6, -1, null, null)
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => transcodingStream.BeginWrite(new byte[5], 6, 0, null, null)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.BeginWrite(new byte[5], -1, -1, null, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.BeginWrite(new byte[5], 3, -1, null, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.BeginWrite(new byte[5], 5, 1, null, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.BeginWrite(new byte[5], 6, -1, null, null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                transcodingStream.BeginWrite(new byte[5], 6, 0, null, null));
         }
 
         // returns "abc...xyzabc...xyzabc..."

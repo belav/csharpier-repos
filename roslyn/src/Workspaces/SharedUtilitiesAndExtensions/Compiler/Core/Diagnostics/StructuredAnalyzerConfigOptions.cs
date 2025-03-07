@@ -28,9 +28,8 @@ internal abstract class StructuredAnalyzerConfigOptions : AnalyzerConfigOptions,
         public Implementation(AnalyzerConfigOptions options)
         {
             _options = options;
-            _lazyNamingStylePreferences = new Lazy<NamingStylePreferences>(
-                () => EditorConfigNamingStyleParser.ParseDictionary(_options)
-            );
+            _lazyNamingStylePreferences = new Lazy<NamingStylePreferences>(() =>
+                EditorConfigNamingStyleParser.ParseDictionary(_options));
         }
 
         public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>

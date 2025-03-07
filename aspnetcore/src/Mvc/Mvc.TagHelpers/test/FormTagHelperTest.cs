@@ -1064,9 +1064,8 @@ public class FormTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => formTagHelper.ProcessAsync(context, tagHelperOutput)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            formTagHelper.ProcessAsync(context, tagHelperOutput));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }
@@ -1106,9 +1105,8 @@ public class FormTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => formTagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            formTagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }
@@ -1146,9 +1144,8 @@ public class FormTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => formTagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            formTagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }
@@ -1186,9 +1183,8 @@ public class FormTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => formTagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            formTagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }

@@ -44,21 +44,17 @@ namespace System.Security.AccessControl.Tests
         [Fact]
         public void CustomAce_Constructor_Invalid()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new CustomAce((AceType)16, (AceFlags)15, new byte[1])
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new CustomAce((AceType)19, (AceFlags)1, new byte[1])
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new CustomAce((AceType)0, (AceFlags)2, new byte[4])
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new CustomAce((AceType)16, (AceFlags)15, new byte[1]));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new CustomAce((AceType)19, (AceFlags)1, new byte[1]));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new CustomAce((AceType)0, (AceFlags)2, new byte[4]));
 
             foreach (AceType type in Enum.GetValues(typeof(AceType)))
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => new CustomAce(type, (AceFlags)1, new byte[4])
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    new CustomAce(type, (AceFlags)1, new byte[4]));
             }
         }
 

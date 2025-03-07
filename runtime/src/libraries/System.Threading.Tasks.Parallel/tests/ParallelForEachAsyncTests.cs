@@ -988,18 +988,16 @@ namespace System.Threading.Tasks.Tests
         {
             using var cts = new CancellationTokenSource(10);
             OperationCanceledException oce =
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () =>
-                        Parallel.ForAsync(
-                            long.MinValue,
-                            long.MaxValue,
-                            cts.Token,
-                            async (item, cancellationToken) =>
-                            {
-                                await Task.Yield();
-                            }
-                        )
-                );
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    Parallel.ForAsync(
+                        long.MinValue,
+                        long.MaxValue,
+                        cts.Token,
+                        async (item, cancellationToken) =>
+                        {
+                            await Task.Yield();
+                        }
+                    ));
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -1018,17 +1016,15 @@ namespace System.Threading.Tasks.Tests
 
             using var cts = new CancellationTokenSource(10);
             OperationCanceledException oce =
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () =>
-                        Parallel.ForEachAsync(
-                            Infinite(),
-                            cts.Token,
-                            async (item, cancellationToken) =>
-                            {
-                                await Task.Yield();
-                            }
-                        )
-                );
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    Parallel.ForEachAsync(
+                        Infinite(),
+                        cts.Token,
+                        async (item, cancellationToken) =>
+                        {
+                            await Task.Yield();
+                        }
+                    ));
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -1047,17 +1043,15 @@ namespace System.Threading.Tasks.Tests
 
             using var cts = new CancellationTokenSource(10);
             OperationCanceledException oce =
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () =>
-                        Parallel.ForEachAsync(
-                            InfiniteAsync(),
-                            cts.Token,
-                            async (item, cancellationToken) =>
-                            {
-                                await Task.Yield();
-                            }
-                        )
-                );
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    Parallel.ForEachAsync(
+                        InfiniteAsync(),
+                        cts.Token,
+                        async (item, cancellationToken) =>
+                        {
+                            await Task.Yield();
+                        }
+                    ));
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -1652,44 +1646,40 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task Exception_ImplicitlyCancelsOtherWorkers_For()
         {
-            await Assert.ThrowsAsync<Exception>(
-                () =>
-                    Parallel.ForAsync(
-                        0,
-                        long.MaxValue,
-                        async (item, cancellationToken) =>
+            await Assert.ThrowsAsync<Exception>(() =>
+                Parallel.ForAsync(
+                    0,
+                    long.MaxValue,
+                    async (item, cancellationToken) =>
+                    {
+                        await Task.Yield();
+                        if (item == 1000)
                         {
-                            await Task.Yield();
-                            if (item == 1000)
-                            {
-                                throw new Exception();
-                            }
+                            throw new Exception();
                         }
-                    )
-            );
+                    }
+                ));
 
-            await Assert.ThrowsAsync<FormatException>(
-                () =>
-                    Parallel.ForAsync(
-                        0,
-                        long.MaxValue,
-                        new ParallelOptions { MaxDegreeOfParallelism = 2 },
-                        async (item, cancellationToken) =>
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Parallel.ForAsync(
+                    0,
+                    long.MaxValue,
+                    new ParallelOptions { MaxDegreeOfParallelism = 2 },
+                    async (item, cancellationToken) =>
+                    {
+                        if (item == 0)
                         {
-                            if (item == 0)
-                            {
-                                throw new FormatException();
-                            }
-                            else
-                            {
-                                Assert.Equal(1, item);
-                                var tcs = new TaskCompletionSource();
-                                cancellationToken.Register(() => tcs.SetResult());
-                                await tcs.Task;
-                            }
+                            throw new FormatException();
                         }
-                    )
-            );
+                        else
+                        {
+                            Assert.Equal(1, item);
+                            var tcs = new TaskCompletionSource();
+                            cancellationToken.Register(() => tcs.SetResult());
+                            await tcs.Task;
+                        }
+                    }
+                ));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1704,42 +1694,38 @@ namespace System.Threading.Tasks.Tests
                 }
             }
 
-            await Assert.ThrowsAsync<Exception>(
-                () =>
-                    Parallel.ForEachAsync(
-                        Iterate(),
-                        async (item, cancellationToken) =>
+            await Assert.ThrowsAsync<Exception>(() =>
+                Parallel.ForEachAsync(
+                    Iterate(),
+                    async (item, cancellationToken) =>
+                    {
+                        await Task.Yield();
+                        if (item == 1000)
                         {
-                            await Task.Yield();
-                            if (item == 1000)
-                            {
-                                throw new Exception();
-                            }
+                            throw new Exception();
                         }
-                    )
-            );
+                    }
+                ));
 
-            await Assert.ThrowsAsync<FormatException>(
-                () =>
-                    Parallel.ForEachAsync(
-                        Iterate(),
-                        new ParallelOptions { MaxDegreeOfParallelism = 2 },
-                        async (item, cancellationToken) =>
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Parallel.ForEachAsync(
+                    Iterate(),
+                    new ParallelOptions { MaxDegreeOfParallelism = 2 },
+                    async (item, cancellationToken) =>
+                    {
+                        if (item == 0)
                         {
-                            if (item == 0)
-                            {
-                                throw new FormatException();
-                            }
-                            else
-                            {
-                                Assert.Equal(1, item);
-                                var tcs = new TaskCompletionSource();
-                                cancellationToken.Register(() => tcs.SetResult());
-                                await tcs.Task;
-                            }
+                            throw new FormatException();
                         }
-                    )
-            );
+                        else
+                        {
+                            Assert.Equal(1, item);
+                            var tcs = new TaskCompletionSource();
+                            cancellationToken.Register(() => tcs.SetResult());
+                            await tcs.Task;
+                        }
+                    }
+                ));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1755,42 +1741,38 @@ namespace System.Threading.Tasks.Tests
                 }
             }
 
-            await Assert.ThrowsAsync<Exception>(
-                () =>
-                    Parallel.ForEachAsync(
-                        Iterate(),
-                        async (item, cancellationToken) =>
+            await Assert.ThrowsAsync<Exception>(() =>
+                Parallel.ForEachAsync(
+                    Iterate(),
+                    async (item, cancellationToken) =>
+                    {
+                        await Task.Yield();
+                        if (item == 1000)
                         {
-                            await Task.Yield();
-                            if (item == 1000)
-                            {
-                                throw new Exception();
-                            }
+                            throw new Exception();
                         }
-                    )
-            );
+                    }
+                ));
 
-            await Assert.ThrowsAsync<FormatException>(
-                () =>
-                    Parallel.ForEachAsync(
-                        Iterate(),
-                        new ParallelOptions { MaxDegreeOfParallelism = 2 },
-                        async (item, cancellationToken) =>
+            await Assert.ThrowsAsync<FormatException>(() =>
+                Parallel.ForEachAsync(
+                    Iterate(),
+                    new ParallelOptions { MaxDegreeOfParallelism = 2 },
+                    async (item, cancellationToken) =>
+                    {
+                        if (item == 0)
                         {
-                            if (item == 0)
-                            {
-                                throw new FormatException();
-                            }
-                            else
-                            {
-                                Assert.Equal(1, item);
-                                var tcs = new TaskCompletionSource();
-                                cancellationToken.Register(() => tcs.SetResult());
-                                await tcs.Task;
-                            }
+                            throw new FormatException();
                         }
-                    )
-            );
+                        else
+                        {
+                            Assert.Equal(1, item);
+                            var tcs = new TaskCompletionSource();
+                            cancellationToken.Register(() => tcs.SetResult());
+                            await tcs.Task;
+                        }
+                    }
+                ));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1811,24 +1793,22 @@ namespace System.Threading.Tasks.Tests
             var signal = new TaskCompletionSource(
                 TaskContinuationOptions.RunContinuationsAsynchronously
             );
-            AggregateException ae = Assert.Throws<AggregateException>(
-                () =>
-                    Parallel
-                        .ForEachAsync(
-                            Iterate(signal.Task),
-                            new ParallelOptions { MaxDegreeOfParallelism = 3 },
-                            async (item, cancellationToken) =>
+            AggregateException ae = Assert.Throws<AggregateException>(() =>
+                Parallel
+                    .ForEachAsync(
+                        Iterate(signal.Task),
+                        new ParallelOptions { MaxDegreeOfParallelism = 3 },
+                        async (item, cancellationToken) =>
+                        {
+                            if (item == 0)
                             {
-                                if (item == 0)
-                                {
-                                    signal.SetResult();
-                                    throw new FormatException();
-                                }
-                                await Task.CompletedTask;
+                                signal.SetResult();
+                                throw new FormatException();
                             }
-                        )
-                        .Wait()
-            );
+                            await Task.CompletedTask;
+                        }
+                    )
+                    .Wait());
 
             Assert.Equal(1, ae.InnerExceptions.Count);
             Assert.IsType<FormatException>(ae.InnerException);

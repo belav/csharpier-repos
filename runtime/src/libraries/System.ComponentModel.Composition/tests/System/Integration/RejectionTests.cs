@@ -207,9 +207,8 @@ namespace Tests.Integration
                 typeof(MissingImportPart)
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () => container.GetExportedValue<Needy>()
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+                container.GetExportedValue<Needy>());
         }
 
         public class MissingImportPart : NoImportPart
@@ -223,9 +222,8 @@ namespace Tests.Integration
         {
             var container = ContainerFactory.Create();
 
-            ExceptionAssert.Throws<ChangeRejectedException>(
-                () => container.ComposeParts(new MissingImportPart())
-            );
+            ExceptionAssert.Throws<ChangeRejectedException>(() =>
+                container.ComposeParts(new MissingImportPart()));
         }
 
         [Fact]
@@ -265,17 +263,15 @@ namespace Tests.Integration
             var export = container.GetExport<Needy>();
 
             // Cannot add another import because it would break existing promised compositions
-            ExceptionAssert.Throws<ChangeRejectedException>(
-                () => container.ComposeParts(new NoImportPart())
-            );
+            ExceptionAssert.Throws<ChangeRejectedException>(() =>
+                container.ComposeParts(new NoImportPart()));
 
             // Instansitate the object
             var needy = export.Value;
 
             // Cannot add another import because it would break existing compositions
-            ExceptionAssert.Throws<ChangeRejectedException>(
-                () => container.ComposeParts(new NoImportPart())
-            );
+            ExceptionAssert.Throws<ChangeRejectedException>(() =>
+                container.ComposeParts(new NoImportPart()));
         }
 
         [Fact]
@@ -306,9 +302,8 @@ namespace Tests.Integration
             var needy = export.Value;
 
             // Cannot add another import because it would break existing compositions
-            ExceptionAssert.Throws<ChangeRejectedException>(
-                () => container.ComposeParts(new NoImportPart())
-            );
+            ExceptionAssert.Throws<ChangeRejectedException>(() =>
+                container.ComposeParts(new NoImportPart()));
         }
 
         public interface ILoopA { }

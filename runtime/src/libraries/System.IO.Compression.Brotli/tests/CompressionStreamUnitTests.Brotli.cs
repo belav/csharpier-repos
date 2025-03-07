@@ -51,9 +51,8 @@ namespace System.IO.Compression
             CompressionLevel compressionLevel
         )
         {
-            Assert.Throws<ArgumentException>(
-                () => new BrotliStream(new MemoryStream(), compressionLevel)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                new BrotliStream(new MemoryStream(), compressionLevel));
         }
 
         [Fact]

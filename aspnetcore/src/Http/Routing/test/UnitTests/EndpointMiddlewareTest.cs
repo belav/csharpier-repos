@@ -137,9 +137,8 @@ public class EndpointMiddlewareTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => middleware.Invoke(httpContext)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            middleware.Invoke(httpContext));
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -176,9 +175,8 @@ public class EndpointMiddlewareTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => middleware.Invoke(httpContext)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            middleware.Invoke(httpContext));
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -299,9 +297,8 @@ public class EndpointMiddlewareTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => middleware.Invoke(httpContext)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            middleware.Invoke(httpContext));
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -423,9 +420,8 @@ public class EndpointMiddlewareTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => middleware.Invoke(httpContext)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            middleware.Invoke(httpContext));
 
         // Assert
         Assert.Equal(expected, ex.Message);

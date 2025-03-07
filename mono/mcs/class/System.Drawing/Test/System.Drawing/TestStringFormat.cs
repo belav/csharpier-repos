@@ -211,9 +211,8 @@ namespace MonoTests.System.Drawing
         {
             using (StringFormat sf = new StringFormat())
             {
-                Assert.Throws<InvalidEnumArgumentException>(
-                    () => sf.Alignment = (StringAlignment)Int32.MinValue
-                );
+                Assert.Throws<InvalidEnumArgumentException>(() =>
+                    sf.Alignment = (StringAlignment)Int32.MinValue);
             }
         }
 
@@ -235,9 +234,8 @@ namespace MonoTests.System.Drawing
         {
             using (StringFormat sf = new StringFormat())
             {
-                Assert.Throws<InvalidEnumArgumentException>(
-                    () => sf.HotkeyPrefix = (HotkeyPrefix)Int32.MinValue
-                );
+                Assert.Throws<InvalidEnumArgumentException>(() =>
+                    sf.HotkeyPrefix = (HotkeyPrefix)Int32.MinValue);
             }
         }
 
@@ -259,9 +257,8 @@ namespace MonoTests.System.Drawing
         {
             using (StringFormat sf = new StringFormat())
             {
-                Assert.Throws<InvalidEnumArgumentException>(
-                    () => sf.LineAlignment = (StringAlignment)Int32.MinValue
-                );
+                Assert.Throws<InvalidEnumArgumentException>(() =>
+                    sf.LineAlignment = (StringAlignment)Int32.MinValue);
             }
         }
 
@@ -283,9 +280,8 @@ namespace MonoTests.System.Drawing
         {
             using (StringFormat sf = new StringFormat())
             {
-                Assert.Throws<InvalidEnumArgumentException>(
-                    () => sf.Trimming = (StringTrimming)Int32.MinValue
-                );
+                Assert.Throws<InvalidEnumArgumentException>(() =>
+                    sf.Trimming = (StringTrimming)Int32.MinValue);
             }
         }
 

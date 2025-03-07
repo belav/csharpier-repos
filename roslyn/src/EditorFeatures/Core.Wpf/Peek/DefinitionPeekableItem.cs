@@ -67,11 +67,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                     return;
 
                 // Note: this is called on a background thread, but we must block the thread since the API doesn't support proper asynchrony.
-                var success = _peekableItem._threadingContext.JoinableTaskFactory.Run(
-                    async () =>
-                        await FindResultsAsync(resultCollection, callback, cancellationToken)
-                            .ConfigureAwait(false)
-                );
+                var success = _peekableItem._threadingContext.JoinableTaskFactory.Run(async () =>
+                    await FindResultsAsync(resultCollection, callback, cancellationToken)
+                        .ConfigureAwait(false));
                 if (!success)
                     callback.ReportFailure(
                         new Exception(EditorFeaturesResources.No_information_found)

@@ -194,18 +194,16 @@ namespace System.Net.Mail.Tests
         [Fact]
         public void Send_Network_Host_Null()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello")
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello"));
         }
 
         [Fact]
         public void Send_Network_Host_Whitespace()
         {
             Smtp.Host = " \r\n ";
-            Assert.Throws<InvalidOperationException>(
-                () => Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello")
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello"));
         }
 
         [Fact]
@@ -251,9 +249,8 @@ namespace System.Net.Mail.Tests
         {
             Smtp.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
             Smtp.PickupDirectoryLocation = location;
-            Assert.Throws<SmtpException>(
-                () => Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello")
-            );
+            Assert.Throws<SmtpException>(() =>
+                Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello"));
         }
 
         [Theory]
@@ -279,9 +276,8 @@ namespace System.Net.Mail.Tests
         {
             using (var smtp = new SmtpClient(Guid.NewGuid().ToString("N")))
             {
-                Assert.Throws<SmtpException>(
-                    () => smtp.Send("anyone@anyone.com", "anyone@anyone.com", "subject", "body")
-                );
+                Assert.Throws<SmtpException>(() =>
+                    smtp.Send("anyone@anyone.com", "anyone@anyone.com", "subject", "body"));
             }
         }
 
@@ -290,15 +286,13 @@ namespace System.Net.Mail.Tests
         {
             using (var smtp = new SmtpClient(Guid.NewGuid().ToString("N")))
             {
-                await Assert.ThrowsAsync<SmtpException>(
-                    () =>
-                        smtp.SendMailAsync(
-                            "anyone@anyone.com",
-                            "anyone@anyone.com",
-                            "subject",
-                            "body"
-                        )
-                );
+                await Assert.ThrowsAsync<SmtpException>(() =>
+                    smtp.SendMailAsync(
+                        "anyone@anyone.com",
+                        "anyone@anyone.com",
+                        "subject",
+                        "body"
+                    ));
             }
         }
 

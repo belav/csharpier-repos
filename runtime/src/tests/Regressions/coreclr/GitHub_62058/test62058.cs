@@ -20,17 +20,15 @@ public class Program
     public static void TestEntryPoint()
     {
         bool warmup = new Foo().IsValid;
-        CatchIgnore(
-            () =>
-                CatchRethrow(() =>
+        CatchIgnore(() =>
+            CatchRethrow(() =>
+            {
+                IFoo[] foos = { new Foo(), null };
+                foreach (var foo in foos)
                 {
-                    IFoo[] foos = { new Foo(), null };
-                    foreach (var foo in foos)
-                    {
-                        bool check = foo.IsValid;
-                    }
-                })
-        );
+                    bool check = foo.IsValid;
+                }
+            }));
     }
 
     public static void CatchRethrow(Action action)

@@ -39,11 +39,9 @@ public class SharedTypeQueryInMemoryTest : SharedTypeQueryTestBase
             modelBuilder
                 .Entity<ViewQuery24601>()
                 .HasNoKey()
-                .ToInMemoryQuery(
-                    () =>
-                        Set<Dictionary<string, object>>("STET")
-                            .Select(e => new ViewQuery24601 { Value = (string)e["Value"] })
-                );
+                .ToInMemoryQuery(() =>
+                    Set<Dictionary<string, object>>("STET")
+                        .Select(e => new ViewQuery24601 { Value = (string)e["Value"] }));
         }
     }
 }

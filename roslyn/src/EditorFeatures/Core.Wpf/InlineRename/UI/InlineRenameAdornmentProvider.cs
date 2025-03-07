@@ -78,9 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _listenerProvider = listenerProvider;
             if (smartRenameSessionFactory is not null)
             {
-                _smartRenameSessionFactory = new Lazy<ISmartRenameSessionFactoryWrapper>(
-                    () => ISmartRenameSessionFactoryWrapper.FromInstance(smartRenameSessionFactory)
-                );
+                _smartRenameSessionFactory = new Lazy<ISmartRenameSessionFactoryWrapper>(() =>
+                    ISmartRenameSessionFactoryWrapper.FromInstance(smartRenameSessionFactory));
             }
 
             _threadingContext = threadingContext;

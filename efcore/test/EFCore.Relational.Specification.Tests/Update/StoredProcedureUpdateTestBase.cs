@@ -364,9 +364,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
 
         entity1.Name = "Updated";
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-            async () => await SaveChanges(context1, async)
-        );
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
+            await SaveChanges(context1, async));
         var entry = exception.Entries.Single();
         Assert.Same(entity1, entry.Entity);
     }
@@ -528,9 +527,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
 
         entity1.Name = "Updated";
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-            async () => await SaveChanges(context1, async)
-        );
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
+            await SaveChanges(context1, async));
         var entry = exception.Entries.Single();
         Assert.Same(entity1, entry.Entity);
     }
@@ -616,9 +614,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
 
         entity1.Name = "Updated";
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-            async () => await SaveChanges(context1, async)
-        );
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
+            await SaveChanges(context1, async));
         var entry = exception.Entries.Single();
         Assert.Same(entity1, entry.Entity);
     }
@@ -704,9 +701,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
 
         entity1.Name = "Updated";
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-            async () => await SaveChanges(context1, async)
-        );
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
+            await SaveChanges(context1, async));
         var entry = exception.Entries.Single();
         Assert.Same(entity1, entry.Entity);
     }
@@ -758,9 +754,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
 
         entity1.Name = "Updated";
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-            async () => await SaveChanges(context1, async)
-        );
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
+            await SaveChanges(context1, async));
         var entry = exception.Entries.Single();
         Assert.Same(entity1, entry.Entity);
     }
@@ -816,9 +811,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
 
         entity1.Name = "Updated";
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-            async () => await SaveChanges(context1, async)
-        );
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
+            await SaveChanges(context1, async));
         var entry = exception.Entries.Single();
         Assert.Same(entity1, entry.Entity);
     }
@@ -880,9 +874,8 @@ public abstract class StoredProcedureUpdateTestBase : NonSharedModelTestBase
 
         ClearLog();
 
-        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-            async () => await SaveChanges(context1, async)
-        );
+        var exception = await Assert.ThrowsAsync<DbUpdateConcurrencyException>(async () =>
+            await SaveChanges(context1, async));
         Assert.Same(entity1, Assert.Single(exception.Entries).Entity);
     }
 

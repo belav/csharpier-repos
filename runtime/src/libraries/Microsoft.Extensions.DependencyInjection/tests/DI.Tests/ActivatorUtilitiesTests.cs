@@ -84,26 +84,23 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider();
             B? nullB = null;
 
-            Assert.Throws<InvalidOperationException>(
-                () => ActivatorUtilities.CreateInstance<ABCS1>(serviceProvider, nullB!, new C())
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ActivatorUtilities.CreateInstance<ABCS1>(serviceProvider, nullB!, new C()));
         }
 
         [Fact]
         public void TypeActivatorThrowsOnNullProvider()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => ActivatorUtilities.CreateInstance<ClassWithABCS>(null, "hello")
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                ActivatorUtilities.CreateInstance<ClassWithABCS>(null, "hello"));
         }
 
         [Fact]
         public void FactoryActivatorThrowsOnNullProvider()
         {
             var f = ActivatorUtilities.CreateFactory(typeof(ClassWithA), new Type[0]);
-            Exception ex = Assert.Throws<ArgumentNullException>(
-                () => f(serviceProvider: null, null)
-            );
+            Exception ex = Assert.Throws<ArgumentNullException>(() =>
+                f(serviceProvider: null, null));
             Assert.Contains("serviceProvider", ex.ToString());
         }
 
@@ -190,12 +187,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             services.AddSingleton(b);
             using var provider = services.BuildServiceProvider();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () =>
-                    ActivatorUtilities.CreateInstance<ClassWithABC_MultipleCtorsWithSameLength>(
-                        provider
-                    )
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                ActivatorUtilities.CreateInstance<ClassWithABC_MultipleCtorsWithSameLength>(
+                    provider
+                ));
             Assert.Equal(message, exception.Message);
         }
 
@@ -493,9 +488,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
                     var services = new ServiceCollection();
                     using var provider = services.BuildServiceProvider();
-                    var ex = Assert.Throws<InvalidOperationException>(
-                        () => factory1(provider, null)
-                    );
+                    var ex = Assert.Throws<InvalidOperationException>(() =>
+                        factory1(provider, null));
                     Assert.Equal(
                         $"Unable to resolve service for type '{typeof(A).FullName}' while attempting to activate '{typeof(ClassWithA).FullName}'.",
                         ex.Message

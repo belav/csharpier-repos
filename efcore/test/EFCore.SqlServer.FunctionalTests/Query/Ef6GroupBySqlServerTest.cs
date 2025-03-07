@@ -557,9 +557,8 @@ ORDER BY [c].[Id], [t].[Id]
         Assert.StartsWith(
             "Missing alias in the list",
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Whats_new_2021_sample_3(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Whats_new_2021_sample_3(async))
             ).Message
         );
 
@@ -592,9 +591,8 @@ ORDER BY CAST(LEN((
         Assert.StartsWith(
             "Missing alias in the list",
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Whats_new_2021_sample_5(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Whats_new_2021_sample_5(async))
             ).Message
         );
 
@@ -626,9 +624,8 @@ ORDER BY (
         Assert.StartsWith(
             "Missing alias in the list",
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => base.Whats_new_2021_sample_6(async)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Whats_new_2021_sample_6(async))
             ).Message
         );
 

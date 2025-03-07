@@ -27191,22 +27191,18 @@ interface I {}
                         .Symbol.ToTestDisplayString()
                 );
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                        model.TryGetSpeculativeSemanticModel(
-                            baseWithargs.ArgumentList.OpenParenToken.SpanStart,
-                            (PrimaryConstructorBaseTypeSyntax)null!,
-                            out _
-                        )
-                );
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        model.TryGetSpeculativeSemanticModel(
-                            baseWithargs.ArgumentList.OpenParenToken.SpanStart,
-                            baseWithargs,
-                            out _
-                        )
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    model.TryGetSpeculativeSemanticModel(
+                        baseWithargs.ArgumentList.OpenParenToken.SpanStart,
+                        (PrimaryConstructorBaseTypeSyntax)null!,
+                        out _
+                    ));
+                Assert.Throws<ArgumentException>(() =>
+                    model.TryGetSpeculativeSemanticModel(
+                        baseWithargs.ArgumentList.OpenParenToken.SpanStart,
+                        baseWithargs,
+                        out _
+                    ));
 
                 symbolInfo = model.GetSpeculativeSymbolInfo(
                     otherBasePosition,
@@ -27494,22 +27490,18 @@ interface I {}
                     )
                 );
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                        model.TryGetSpeculativeSemanticModel(
-                            baseWithargs.ArgumentList.OpenParenToken.SpanStart,
-                            (PrimaryConstructorBaseTypeSyntax)null!,
-                            out _
-                        )
-                );
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        model.TryGetSpeculativeSemanticModel(
-                            baseWithargs.ArgumentList.OpenParenToken.SpanStart,
-                            baseWithargs,
-                            out _
-                        )
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    model.TryGetSpeculativeSemanticModel(
+                        baseWithargs.ArgumentList.OpenParenToken.SpanStart,
+                        (PrimaryConstructorBaseTypeSyntax)null!,
+                        out _
+                    ));
+                Assert.Throws<ArgumentException>(() =>
+                    model.TryGetSpeculativeSemanticModel(
+                        baseWithargs.ArgumentList.OpenParenToken.SpanStart,
+                        baseWithargs,
+                        out _
+                    ));
 
                 symbolInfo = model.GetSpeculativeSymbolInfo(
                     otherBasePosition,

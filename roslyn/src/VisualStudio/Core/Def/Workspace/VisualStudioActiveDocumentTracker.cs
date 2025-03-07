@@ -264,9 +264,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     && (int)frameType == (int)__WindowFrameTypeFlags.WINDOWFRAMETYPE_Document
                 )
                 {
-                    var runningDocumentTable = ThreadingContext.JoinableTaskFactory.Run(
-                        () => GetRunningDocumentTableAsync(ThreadingContext.DisposalToken).AsTask()
-                    );
+                    var runningDocumentTable = ThreadingContext.JoinableTaskFactory.Run(() =>
+                        GetRunningDocumentTableAsync(ThreadingContext.DisposalToken).AsTask());
                     TrackNewActiveWindowFrame(frame, runningDocumentTable);
                 }
             }

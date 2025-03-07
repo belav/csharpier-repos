@@ -155,9 +155,8 @@ namespace Moq.Tests
         {
             var person = new Mock<IPerson>();
             person.Setup(p => p.GetFriendTaskAsync().Result).Throws(Exception);
-            var exception = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendTaskAsync()
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendTaskAsync());
             Assert.Same(Exception, exception);
         }
 
@@ -166,9 +165,8 @@ namespace Moq.Tests
         {
             var person = new Mock<IPerson>();
             person.Setup(p => p.GetFriendTaskAsync().Result).Throws(() => Exception);
-            var exception = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendTaskAsync()
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendTaskAsync());
             Assert.Same(Exception, exception);
         }
 
@@ -179,9 +177,8 @@ namespace Moq.Tests
             person
                 .Setup(p => p.GetFriendTaskAsync(NameOfFriend).Result)
                 .Throws((string s) => new Exception(NameOfFriend));
-            var exception = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendTaskAsync(NameOfFriend)
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendTaskAsync(NameOfFriend));
             Assert.Equal(NameOfFriend, exception.Message);
         }
 
@@ -208,9 +205,8 @@ namespace Moq.Tests
         {
             var person = new Mock<IPerson>();
             person.Setup(p => p.GetFriendValueTaskAsync().Result).Throws(Exception);
-            var exception = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendValueTaskAsync()
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendValueTaskAsync());
             Assert.Same(Exception, exception);
         }
 
@@ -219,9 +215,8 @@ namespace Moq.Tests
         {
             var person = new Mock<IPerson>();
             person.Setup(p => p.GetFriendValueTaskAsync().Result).Throws(() => Exception);
-            var exception = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendValueTaskAsync()
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendValueTaskAsync());
             Assert.Same(Exception, exception);
         }
 
@@ -232,9 +227,8 @@ namespace Moq.Tests
             person
                 .Setup(p => p.GetFriendValueTaskAsync(NameOfFriend).Result)
                 .Throws((string s) => new Exception(NameOfFriend));
-            var exception = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendValueTaskAsync(NameOfFriend)
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendValueTaskAsync(NameOfFriend));
             Assert.Equal(NameOfFriend, exception.Message);
         }
 
@@ -318,12 +312,10 @@ namespace Moq.Tests
                 .SetupSequence(p => p.GetFriendTaskAsync().Result)
                 .Throws(Exception)
                 .Throws(SecondException);
-            var exception = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendTaskAsync()
-            );
-            var secondException = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendTaskAsync()
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendTaskAsync());
+            var secondException = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendTaskAsync());
             Assert.Same(Exception, exception);
             Assert.Same(SecondException, secondException);
         }
@@ -336,12 +328,10 @@ namespace Moq.Tests
                 .SetupSequence(p => p.GetFriendTaskAsync().Result)
                 .Throws(() => Exception)
                 .Throws(() => SecondException);
-            var exception = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendTaskAsync()
-            );
-            var secondException = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendTaskAsync()
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendTaskAsync());
+            var secondException = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendTaskAsync());
             Assert.Same(Exception, exception);
             Assert.Same(SecondException, secondException);
         }
@@ -368,12 +358,10 @@ namespace Moq.Tests
                 .SetupSequence(p => p.GetFriendValueTaskAsync().Result)
                 .Throws(Exception)
                 .Throws(SecondException);
-            var exception = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendValueTaskAsync()
-            );
-            var secondException = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendValueTaskAsync()
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendValueTaskAsync());
+            var secondException = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendValueTaskAsync());
             Assert.Same(Exception, exception);
             Assert.Same(SecondException, secondException);
         }
@@ -386,12 +374,10 @@ namespace Moq.Tests
                 .SetupSequence(p => p.GetFriendValueTaskAsync().Result)
                 .Throws(() => Exception)
                 .Throws(() => SecondException);
-            var exception = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendValueTaskAsync()
-            );
-            var secondException = await Assert.ThrowsAsync<Exception>(
-                async () => await person.Object.GetFriendValueTaskAsync()
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendValueTaskAsync());
+            var secondException = await Assert.ThrowsAsync<Exception>(async () =>
+                await person.Object.GetFriendValueTaskAsync());
             Assert.Same(Exception, exception);
             Assert.Same(SecondException, secondException);
         }

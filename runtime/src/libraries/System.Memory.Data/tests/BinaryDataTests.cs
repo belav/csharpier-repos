@@ -172,9 +172,8 @@ namespace System.Tests
             BinaryData data = BinaryData.FromStream(payload);
             Stream stream = data.ToStream();
             Assert.Throws<NotSupportedException>(() => stream.Write(buffer, 0, buffer.Length));
-            await Assert.ThrowsAsync<NotSupportedException>(
-                () => stream.WriteAsync(buffer, 0, buffer.Length)
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                stream.WriteAsync(buffer, 0, buffer.Length));
             Assert.Throws<NotSupportedException>(() => stream.WriteByte(1));
             Assert.False(stream.CanWrite);
             StreamReader sr = new StreamReader(stream);
@@ -439,12 +438,10 @@ namespace System.Tests
         [Fact]
         public void MaxStreamLengthRespected()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => BinaryData.FromStream(new OverFlowStream(offset: 0))
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => BinaryData.FromStream(new OverFlowStream(offset: int.MaxValue + 2L))
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                BinaryData.FromStream(new OverFlowStream(offset: 0)));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                BinaryData.FromStream(new OverFlowStream(offset: int.MaxValue + 2L)));
 
             // should not throw
 
@@ -549,14 +546,12 @@ namespace System.Tests
             ex = Assert.Throws<ArgumentNullException>(() => BinaryData.FromStream(null, null));
             Assert.Contains("stream", ex.Message);
 
-            ex = await Assert.ThrowsAsync<ArgumentNullException>(
-                () => BinaryData.FromStreamAsync(null)
-            );
+            ex = await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                BinaryData.FromStreamAsync(null));
             Assert.Contains("stream", ex.Message);
 
-            ex = await Assert.ThrowsAsync<ArgumentNullException>(
-                () => BinaryData.FromStreamAsync(null, null)
-            );
+            ex = await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                BinaryData.FromStreamAsync(null, null));
             Assert.Contains("stream", ex.Message);
         }
 
@@ -643,12 +638,10 @@ namespace System.Tests
             };
             BinaryData data = BinaryData.FromObjectAsJson(payload);
             Assert.ThrowsAny<Exception>(() => data.ToObjectFromJson<string>());
-            Assert.ThrowsAny<Exception>(
-                () =>
-                    data.ToObjectFromJson<MismatchedTestModel>(
-                        jsonTypeInfo: MismatchedTestModelJsonContext.Default.MismatchedTestModel
-                    )
-            );
+            Assert.ThrowsAny<Exception>(() =>
+                data.ToObjectFromJson<MismatchedTestModel>(
+                    jsonTypeInfo: MismatchedTestModelJsonContext.Default.MismatchedTestModel
+                ));
         }
 
         [Fact]
@@ -769,9 +762,8 @@ namespace System.Tests
 
             Assert.Throws<IOException>(() => stream.Seek(-1, SeekOrigin.Begin));
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => stream.Seek((long)int.MaxValue + 1, SeekOrigin.Begin)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                stream.Seek((long)int.MaxValue + 1, SeekOrigin.Begin));
             Assert.Throws<ArgumentOutOfRangeException>(() => stream.Seek(0, (SeekOrigin)3));
         }
 
@@ -782,18 +774,14 @@ namespace System.Tests
             var stream = new BinaryData(buffer).ToStream();
             stream.Seek(3, SeekOrigin.Begin);
             var read = new byte[buffer.Length - stream.Position];
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                () => stream.ReadAsync(read, 0, buffer.Length)
-            );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                () => stream.ReadAsync(null, 0, buffer.Length)
-            );
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                () => stream.ReadAsync(read, -1, read.Length)
-            );
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                () => stream.ReadAsync(read, 0, -1)
-            );
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
+                stream.ReadAsync(read, 0, buffer.Length));
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                stream.ReadAsync(null, 0, buffer.Length));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
+                stream.ReadAsync(read, -1, read.Length));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
+                stream.ReadAsync(read, 0, -1));
             await stream.ReadAsync(read, 0, read.Length);
             Assert.Equal(new ReadOnlyMemory<byte>(buffer, 3, buffer.Length - 3).ToArray(), read);
         }
@@ -804,9 +792,8 @@ namespace System.Tests
             byte[] buffer = "some data"u8.ToArray();
             var stream = new BinaryData(buffer).ToStream();
             Assert.Throws<ArgumentOutOfRangeException>(() => stream.Position = -1);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => stream.Position = (long)int.MaxValue + 1
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                stream.Position = (long)int.MaxValue + 1);
         }
 
         [Fact]
@@ -819,9 +806,8 @@ namespace System.Tests
             Assert.Throws<ObjectDisposedException>(() => stream.Position);
             Assert.Throws<ObjectDisposedException>(() => stream.Seek(0, SeekOrigin.Begin));
             Assert.Throws<ObjectDisposedException>(() => stream.Read(buffer, 0, buffer.Length));
-            Assert.ThrowsAsync<ObjectDisposedException>(
-                () => stream.ReadAsync(buffer, 0, buffer.Length)
-            );
+            Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                stream.ReadAsync(buffer, 0, buffer.Length));
             Assert.Throws<ObjectDisposedException>(() => stream.ReadByte());
             Assert.Throws<ObjectDisposedException>(() => stream.Length);
             Assert.False(stream.CanRead);

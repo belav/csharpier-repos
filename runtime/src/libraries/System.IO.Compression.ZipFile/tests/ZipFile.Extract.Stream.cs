@@ -191,17 +191,14 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
         using Stream source = File.OpenRead(zfile("normal.zip"));
         ZipFile.ExtractToDirectory(source, tempFolder.Path, overwriteFiles: false);
         source.Position = 0;
-        Assert.Throws<IOException>(
-            () =>
-                ZipFile.ExtractToDirectory(
-                    source,
-                    tempFolder.Path /* default false */
-                )
-        );
+        Assert.Throws<IOException>(() =>
+            ZipFile.ExtractToDirectory(
+                source,
+                tempFolder.Path /* default false */
+            ));
         source.Position = 0;
-        Assert.Throws<IOException>(
-            () => ZipFile.ExtractToDirectory(source, tempFolder.Path, overwriteFiles: false)
-        );
+        Assert.Throws<IOException>(() =>
+            ZipFile.ExtractToDirectory(source, tempFolder.Path, overwriteFiles: false));
         source.Position = 0;
         ZipFile.ExtractToDirectory(source, tempFolder.Path, overwriteFiles: true);
 
@@ -217,24 +214,20 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
         using Stream source = File.OpenRead(zfile("normal.zip"));
         ZipFile.ExtractToDirectory(source, tempFolder.Path, Encoding.UTF8, overwriteFiles: false);
         source.Position = 0;
-        Assert.Throws<IOException>(
-            () =>
-                ZipFile.ExtractToDirectory(
-                    source,
-                    tempFolder.Path,
-                    Encoding.UTF8 /* default false */
-                )
-        );
+        Assert.Throws<IOException>(() =>
+            ZipFile.ExtractToDirectory(
+                source,
+                tempFolder.Path,
+                Encoding.UTF8 /* default false */
+            ));
         source.Position = 0;
-        Assert.Throws<IOException>(
-            () =>
-                ZipFile.ExtractToDirectory(
-                    source,
-                    tempFolder.Path,
-                    Encoding.UTF8,
-                    overwriteFiles: false
-                )
-        );
+        Assert.Throws<IOException>(() =>
+            ZipFile.ExtractToDirectory(
+                source,
+                tempFolder.Path,
+                Encoding.UTF8,
+                overwriteFiles: false
+            ));
         source.Position = 0;
         ZipFile.ExtractToDirectory(source, tempFolder.Path, Encoding.UTF8, overwriteFiles: true);
 

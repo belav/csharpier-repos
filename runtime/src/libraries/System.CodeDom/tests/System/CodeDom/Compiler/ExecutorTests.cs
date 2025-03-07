@@ -21,27 +21,17 @@ namespace System.CodeDom.Compiler.Tests
         {
             string outputName = null,
                 errorName = null;
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    Executor.ExecWaitWithCapture(
-                        (IntPtr)1,
-                        null,
-                        null,
-                        ref outputName,
-                        ref errorName
-                    )
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    Executor.ExecWaitWithCapture(
-                        (IntPtr)1,
-                        null,
-                        null,
-                        null,
-                        ref outputName,
-                        ref errorName
-                    )
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Executor.ExecWaitWithCapture((IntPtr)1, null, null, ref outputName, ref errorName));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Executor.ExecWaitWithCapture(
+                    (IntPtr)1,
+                    null,
+                    null,
+                    null,
+                    ref outputName,
+                    ref errorName
+                ));
         }
 
         [Fact]
@@ -49,9 +39,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             string outputName = null,
                 errorName = null;
-            Assert.Throws<NullReferenceException>(
-                () => Executor.ExecWaitWithCapture("", null, ref outputName, ref errorName)
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                Executor.ExecWaitWithCapture("", null, ref outputName, ref errorName));
         }
 
         // NOTE: RemoteInvoke is used because Executor creates inheritable files, which causes a problem

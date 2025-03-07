@@ -23,9 +23,8 @@ namespace System.Security.Cryptography.Cose.Tests
             writer.WriteInt64(value);
 
             CoseHeaderValue headerValue = CoseHeaderValue.FromEncodedValue(writer.Encode());
-            Exception ex = Assert.Throws<InvalidOperationException>(
-                () => headerValue.GetValueAsInt32()
-            );
+            Exception ex = Assert.Throws<InvalidOperationException>(() =>
+                headerValue.GetValueAsInt32());
             Assert.IsType<OverflowException>(ex.InnerException);
         }
 
@@ -167,9 +166,8 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 Assert.Equal(GetValueAs.BytesSpan, method);
                 Memory<byte> buffer = new byte[1024]; // big enough to not throw ArgumentException.
-                Assert.Throws<InvalidOperationException>(
-                    () => headerValue.GetValueAsBytes(buffer.Span)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    headerValue.GetValueAsBytes(buffer.Span));
             }
         }
 

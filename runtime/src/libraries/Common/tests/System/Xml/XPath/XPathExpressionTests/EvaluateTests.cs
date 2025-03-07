@@ -76,12 +76,10 @@ namespace XPathTests.XPathExpressionTests
             string exceptionString
         )
         {
-            Assert.Throws<XPathException>(
-                () => EvaluateTestCompiledXPathExpression<object>(kind, toEvaluate, null)
-            );
-            Assert.Throws<XPathException>(
-                () => EvaluateTestNonCompiled<object>(kind, toEvaluate, null)
-            );
+            Assert.Throws<XPathException>(() =>
+                EvaluateTestCompiledXPathExpression<object>(kind, toEvaluate, null));
+            Assert.Throws<XPathException>(() =>
+                EvaluateTestNonCompiled<object>(kind, toEvaluate, null));
         }
 
         /// <summary>

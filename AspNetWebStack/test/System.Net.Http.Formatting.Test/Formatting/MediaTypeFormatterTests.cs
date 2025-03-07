@@ -201,9 +201,8 @@ namespace System.Net.Http.Formatting
             HttpContent content = new StringContent("Hello World", Encoding.UTF8, "text/plain");
 
             // Act
-            Assert.Throws<InvalidOperationException>(
-                () => formatter.SelectCharacterEncoding(content.Headers)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                formatter.SelectCharacterEncoding(content.Headers));
         }
 
         [Theory]

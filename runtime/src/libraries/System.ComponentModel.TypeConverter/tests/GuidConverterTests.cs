@@ -81,9 +81,8 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(int))]
         public void ConvertTo_InvalidValue_ThrowsNotSupportedException(Type destinationType)
         {
-            Assert.Throws<NotSupportedException>(
-                () => Converter.ConvertTo(new object(), destinationType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                Converter.ConvertTo(new object(), destinationType));
         }
     }
 }

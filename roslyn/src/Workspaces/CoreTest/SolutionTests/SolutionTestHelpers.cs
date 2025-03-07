@@ -102,9 +102,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.NotSame(mutableItems, items);
 
             // null item:
-            Assert.Throws<ArgumentNullException>(
-                () => factory(instanceWithNoItem, new TValue[] { item, default })
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                factory(instanceWithNoItem, new TValue[] { item, default }));
 
             // duplicate item:
             if (allowDuplicates)
@@ -114,9 +113,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
             else
             {
-                Assert.Throws<ArgumentException>(
-                    () => factory(instanceWithNoItem, new TValue[] { item, item })
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    factory(instanceWithNoItem, new TValue[] { item, item }));
             }
         }
     }

@@ -20,9 +20,8 @@ namespace System.Security.Cryptography.Cng.Tests
 
                 Assert.ThrowsAny<CryptographicException>(() => key.ExportPkcs8PrivateKey());
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => key.TryExportPkcs8PrivateKey(Span<byte>.Empty, out _)
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.TryExportPkcs8PrivateKey(Span<byte>.Empty, out _));
             }
         }
 

@@ -457,12 +457,10 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Null(
                 SerializationContext.Default.StructWithCustomConverterProperty.SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () => SerializationContext.Default.ClassWithBadCustomConverter.SerializeHandler
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => SerializationContext.Default.StructWithBadCustomConverter.SerializeHandler
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                SerializationContext.Default.ClassWithBadCustomConverter.SerializeHandler);
+            Assert.Throws<InvalidOperationException>(() =>
+                SerializationContext.Default.StructWithBadCustomConverter.SerializeHandler);
             Assert.Null(SerializationContext.Default.NullablePersonStruct.SerializeHandler);
             Assert.NotNull(SerializationContext.Default.PersonStruct.SerializeHandler);
             Assert.NotNull(
@@ -482,12 +480,10 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Empty(typeInfo.Properties);
 
             var value = new ClassWithCustomConverterProperty();
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(value, typeInfo)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize("""{"Property":42}""", typeInfo)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(value, typeInfo));
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize("""{"Property":42}""", typeInfo));
         }
 
         [Fact]
@@ -972,9 +968,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             string json = JsonSerializer.Serialize(person, DefaultContext.NullablePersonStruct);
             JsonTestHelper.AssertJsonEqual(@"{""FirstName"":""Jane"",""LastName"":""Doe""}", json);
 
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Deserialize(json, DefaultContext.NullablePersonStruct)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize(json, DefaultContext.NullablePersonStruct));
         }
     }
 
@@ -1131,20 +1126,16 @@ namespace System.Text.Json.SourceGeneration.Tests
                     .StructWithCustomConverterFactoryProperty
                     .SerializeHandler
             );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    SerializationWithPerTypeAttributeContext
-                        .Default
-                        .ClassWithBadCustomConverter
-                        .SerializeHandler
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    SerializationWithPerTypeAttributeContext
-                        .Default
-                        .StructWithBadCustomConverter
-                        .SerializeHandler
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .ClassWithBadCustomConverter
+                    .SerializeHandler);
+            Assert.Throws<InvalidOperationException>(() =>
+                SerializationWithPerTypeAttributeContext
+                    .Default
+                    .StructWithBadCustomConverter
+                    .SerializeHandler);
             Assert.Null(
                 SerializationWithPerTypeAttributeContext
                     .Default

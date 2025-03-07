@@ -2182,12 +2182,10 @@ namespace System.Tests
         [Fact]
         public void ToOACurrency_InvalidAsLong_ThrowsOverflowException()
         {
-            Assert.Throws<OverflowException>(
-                () => decimal.ToOACurrency(new decimal(long.MaxValue) + 1)
-            );
-            Assert.Throws<OverflowException>(
-                () => decimal.ToOACurrency(new decimal(long.MinValue) - 1)
-            );
+            Assert.Throws<OverflowException>(() =>
+                decimal.ToOACurrency(new decimal(long.MaxValue) + 1));
+            Assert.Throws<OverflowException>(() =>
+                decimal.ToOACurrency(new decimal(long.MinValue) - 1));
         }
 
         [Fact]

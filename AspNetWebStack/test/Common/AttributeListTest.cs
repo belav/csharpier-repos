@@ -87,9 +87,8 @@ namespace System.ComponentModel
         public void AttributeListRemoveAtThrows()
         {
             Assert.Throws<NotSupportedException>(() => _list.RemoveAt(0));
-            Assert.Throws<NotSupportedException>(
-                () => ((ICollection<Attribute>)_list).Remove(_list[0])
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                ((ICollection<Attribute>)_list).Remove(_list[0]));
         }
 
         [Fact]

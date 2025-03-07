@@ -77,9 +77,8 @@ namespace Microsoft.Extensions.Primitives
         {
             StringSegment segment = default;
 
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.AsSpan(0)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.AsSpan(0));
             Assert.Equal("start", exception.ParamName);
         }
 
@@ -88,9 +87,8 @@ namespace Microsoft.Extensions.Primitives
         {
             var segment = new StringSegment("Hello, World!", 1, 3);
 
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.AsSpan(4)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.AsSpan(4));
             Assert.Equal("start", exception.ParamName);
         }
 
@@ -107,9 +105,8 @@ namespace Microsoft.Extensions.Primitives
         {
             var segment = new StringSegment("Hello, World!", 1, 3);
 
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.AsSpan(-1, 1)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.AsSpan(-1, 1));
             Assert.Equal("start", exception.ParamName);
         }
 
@@ -118,9 +115,8 @@ namespace Microsoft.Extensions.Primitives
         {
             var segment = new StringSegment("Hello, World!", 1, 3);
 
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.AsSpan(0, -1)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.AsSpan(0, -1));
             Assert.Equal("length", exception.ParamName);
         }
 
@@ -129,9 +125,8 @@ namespace Microsoft.Extensions.Primitives
         {
             var segment = new StringSegment("Hello, World!", 1, 3);
 
-            ArgumentException exception = Assert.Throws<ArgumentException>(
-                () => segment.AsSpan(2, 3)
-            );
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                segment.AsSpan(2, 3));
             Assert.Contains("bounds", exception.Message);
         }
 
@@ -140,9 +135,8 @@ namespace Microsoft.Extensions.Primitives
         {
             var segment = new StringSegment("Hello, World!", 1, 3);
 
-            ArgumentException exception = Assert.Throws<ArgumentException>(
-                () => segment.AsSpan(1, int.MaxValue)
-            );
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                segment.AsSpan(1, int.MaxValue));
             Assert.Contains("bounds", exception.Message);
         }
 
@@ -191,9 +185,8 @@ namespace Microsoft.Extensions.Primitives
         public void StringSegmentConstructor_NullBuffer_Throws()
         {
             // Arrange, Act and Assert
-            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                () => new StringSegment(null, 0, 0)
-            );
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+                new StringSegment(null, 0, 0));
             Assert.Contains("buffer", exception.Message);
         }
 
@@ -201,9 +194,8 @@ namespace Microsoft.Extensions.Primitives
         public void StringSegmentConstructor_NegativeOffset_Throws()
         {
             // Arrange, Act and Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StringSegment("", -1, 0)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StringSegment("", -1, 0));
             Assert.Contains("offset", exception.Message);
         }
 
@@ -211,9 +203,8 @@ namespace Microsoft.Extensions.Primitives
         public void StringSegmentConstructor_NegativeLength_Throws()
         {
             // Arrange, Act and Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => new StringSegment("", 0, -1)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StringSegment("", 0, -1));
             Assert.Contains("length", exception.Message);
         }
 
@@ -860,9 +851,8 @@ namespace Microsoft.Extensions.Primitives
         {
             StringSegment segment = default;
 
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.Substring(0, 0)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.Substring(0, 0));
             Assert.Equal("offset", exception.ParamName);
         }
 
@@ -883,9 +873,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment("Hello, World!", 1, 3);
 
             // Act & Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.Substring(-1, 1)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.Substring(-1, 1));
             Assert.Equal("offset", exception.ParamName);
         }
 
@@ -896,9 +885,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment("Hello, World!", 1, 3);
 
             // Act & Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.Substring(0, -1)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.Substring(0, -1));
             Assert.Equal("length", exception.ParamName);
         }
 
@@ -909,9 +897,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment("Hello, World!", 1, 3);
 
             // Act & Assert
-            ArgumentException exception = Assert.Throws<ArgumentException>(
-                () => segment.Substring(2, 3)
-            );
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                segment.Substring(2, 3));
             Assert.Contains("bounds", exception.Message);
         }
 
@@ -922,9 +909,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment("Hello, World!", 1, 3);
 
             // Act & Assert
-            ArgumentException exception = Assert.Throws<ArgumentException>(
-                () => segment.Substring(1, int.MaxValue)
-            );
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                segment.Substring(1, int.MaxValue));
             Assert.Contains("bounds", exception.Message);
         }
 
@@ -961,9 +947,8 @@ namespace Microsoft.Extensions.Primitives
         {
             StringSegment segment = default;
 
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.Subsegment(0, 0)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.Subsegment(0, 0));
             Assert.Equal("offset", exception.ParamName);
         }
 
@@ -984,9 +969,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment("Hello, World!", 1, 3);
 
             // Act & Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.Subsegment(-1, 1)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.Subsegment(-1, 1));
             Assert.Equal("offset", exception.ParamName);
         }
 
@@ -997,9 +981,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment("Hello, World!", 1, 3);
 
             // Act & Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.Subsegment(0, -1)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.Subsegment(0, -1));
             Assert.Equal("length", exception.ParamName);
         }
 
@@ -1010,9 +993,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment("Hello, World!", 1, 3);
 
             // Act & Assert
-            ArgumentException exception = Assert.Throws<ArgumentException>(
-                () => segment.Subsegment(2, 3)
-            );
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                segment.Subsegment(2, 3));
             Assert.Contains("bounds", exception.Message);
         }
 
@@ -1023,9 +1005,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment("Hello, World!", 1, 3);
 
             // Act & Assert
-            ArgumentException exception = Assert.Throws<ArgumentException>(
-                () => segment.Subsegment(1, int.MaxValue)
-            );
+            ArgumentException exception = Assert.Throws<ArgumentException>(() =>
+                segment.Subsegment(1, int.MaxValue));
             Assert.Contains("bounds", exception.Message);
         }
 
@@ -1281,9 +1262,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment(buffer, 3, buffer.Length - 3);
 
             // Act & Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.IndexOf('!', int.MaxValue, 3)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.IndexOf('!', int.MaxValue, 3));
             Assert.Equal("start", exception.ParamName);
         }
 
@@ -1361,9 +1341,8 @@ namespace Microsoft.Extensions.Primitives
             StringSegment segment = new StringSegment("12345", 0, 1);
 
             // Act & Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                () => segment.IndexOfAny(new[] { '5' }, 2, 3)
-            );
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                segment.IndexOfAny(new[] { '5' }, 2, 3));
             Assert.Equal("start", exception.ParamName);
         }
 

@@ -52,27 +52,24 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_NegativeMaximumLength_ThrowsInvalidOperationException()
         {
             var attribute = new StringLengthAttribute(-1);
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object())));
         }
 
         [Fact]
         public static void Validate_MinimumLengthGreaterThanMaximumLength_ThrowsInvalidOperationException()
         {
             var attribute = new StringLengthAttribute(42) { MinimumLength = 43 };
-            Assert.Throws<InvalidOperationException>(
-                () => attribute.Validate("Any", new ValidationContext(new object()))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.Validate("Any", new ValidationContext(new object())));
         }
 
         [Fact]
         public static void Validate_ValueNotString_ThrowsInvalidCastException()
         {
             var attribute = new StringLengthAttribute(42);
-            Assert.Throws<InvalidCastException>(
-                () => attribute.Validate(new object(), new ValidationContext(new object()))
-            );
+            Assert.Throws<InvalidCastException>(() =>
+                attribute.Validate(new object(), new ValidationContext(new object())));
         }
     }
 }

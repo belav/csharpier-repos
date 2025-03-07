@@ -12,9 +12,8 @@ namespace System.IO.Tests
         [InlineData(10, 6, -1)]
         public static void MemoryStream_Ctor_NegativeIndices(int arraySize, int index, int count)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new MemoryStream(new byte[arraySize], index, count)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new MemoryStream(new byte[arraySize], index, count));
         }
 
         [Theory]

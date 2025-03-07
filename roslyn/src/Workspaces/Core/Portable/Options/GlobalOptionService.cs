@@ -70,9 +70,8 @@ internal sealed class GlobalOptionService(
         {
             if (workspaceThreadingService is not null)
             {
-                return workspaceThreadingService.Run(
-                    () => GetOptionPersistersAsync(persisterProviders, cancellationToken)
-                );
+                return workspaceThreadingService.Run(() =>
+                    GetOptionPersistersAsync(persisterProviders, cancellationToken));
             }
             else
             {

@@ -3663,9 +3663,8 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext));
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -3753,9 +3752,8 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext));
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -3807,9 +3805,8 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext));
         Assert.Equal(expectedMessage, exception.Message);
     }
 

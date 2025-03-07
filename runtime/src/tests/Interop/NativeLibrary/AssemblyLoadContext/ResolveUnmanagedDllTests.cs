@@ -153,9 +153,8 @@ public class ResolveUnmanagedDllTests
         AssemblyLoadContext alc = AssemblyLoadContext.GetLoadContext(assembly);
         using (var handler = new Handlers(alc, returnValid: false))
         {
-            Assert.Throws<DllNotFoundException>(
-                () => NativeLibrary.Load(FakeNativeLibrary.Name, assembly, null)
-            );
+            Assert.Throws<DllNotFoundException>(() =>
+                NativeLibrary.Load(FakeNativeLibrary.Name, assembly, null));
             Assert.True(handler.EventHandlerInvoked);
         }
 
@@ -181,9 +180,8 @@ public class ResolveUnmanagedDllTests
             }
             else
             {
-                TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
-                    () => NativeSumInAssemblyLoadContext(alc, addend1, addend2)
-                );
+                TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
+                    NativeSumInAssemblyLoadContext(alc, addend1, addend2));
                 Assert.Equal(typeof(DllNotFoundException), ex.InnerException.GetType());
             }
 

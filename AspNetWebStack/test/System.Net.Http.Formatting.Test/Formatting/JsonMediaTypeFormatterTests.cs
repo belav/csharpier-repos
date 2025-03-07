@@ -22,19 +22,17 @@ namespace System.Net.Http.Formatting
         // Test data which should round-trip without type information in the serialization.  Contains an exhaustive
         // selection of JSON native types.  (BSON also supports Int32, Int64, DateTime, Guid, ... natively.)
         private static readonly RefTypeTestData<object> BunchOfJsonObjectsTestData =
-            new RefTypeTestData<object>(
-                () =>
-                    new List<object>
-                    {
-                        null,
-                        String.Empty,
-                        "This is a string",
-                        false,
-                        true,
-                        Double.MinValue,
-                        Double.MaxValue,
-                    }
-            );
+            new RefTypeTestData<object>(() =>
+                new List<object>
+                {
+                    null,
+                    String.Empty,
+                    "This is a string",
+                    false,
+                    true,
+                    Double.MinValue,
+                    Double.MaxValue,
+                });
 
         // Test data for DBNull.  Separate from BunchOfJsonObjectsTestData because DBNull will round-trip as null.
         private static readonly RefTypeTestData<object> DBNullAsObjectTestData =

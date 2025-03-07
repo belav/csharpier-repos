@@ -398,14 +398,12 @@ class A {
 
             await OpenDocumentAsync(testLspServer, document);
 
-            await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(
-                async () =>
-                    await RunGetDocumentPullDiagnosticsAsync(
-                        testLspServer,
-                        document.GetURI(),
-                        useVSDiagnostics
-                    )
-            );
+            await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(async () =>
+                await RunGetDocumentPullDiagnosticsAsync(
+                    testLspServer,
+                    document.GetURI(),
+                    useVSDiagnostics
+                ));
         }
 
         [Theory, CombinatorialData]
@@ -437,14 +435,12 @@ class A {
                 false
             );
 
-            await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(
-                async () =>
-                    await RunGetDocumentPullDiagnosticsAsync(
-                        testLspServer,
-                        document.GetURI(),
-                        useVSDiagnostics
-                    )
-            );
+            await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(async () =>
+                await RunGetDocumentPullDiagnosticsAsync(
+                    testLspServer,
+                    document.GetURI(),
+                    useVSDiagnostics
+                ));
         }
 
         [Theory, CombinatorialData]
@@ -2060,10 +2056,8 @@ class A {
                 pullDiagnostics: false
             );
 
-            await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(
-                async () =>
-                    await RunGetWorkspacePullDiagnosticsAsync(testLspServer, useVSDiagnostics)
-            );
+            await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(async () =>
+                await RunGetWorkspacePullDiagnosticsAsync(testLspServer, useVSDiagnostics));
         }
 
         [Theory, CombinatorialData]

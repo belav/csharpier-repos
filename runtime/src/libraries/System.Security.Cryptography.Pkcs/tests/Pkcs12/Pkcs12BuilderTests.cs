@@ -108,9 +108,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Pkcs12Builder builder = new Pkcs12Builder();
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => builder.AddSafeContentsEncrypted(contents, s_derNull.Span, s_win7Pbe)
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                builder.AddSafeContentsEncrypted(contents, s_derNull.Span, s_win7Pbe));
         }
 
         [Fact]
@@ -119,9 +118,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12Builder builder = new Pkcs12Builder();
             Assert.False(builder.IsSealed);
             Assert.Throws<InvalidOperationException>(() => builder.Encode());
-            Assert.Throws<InvalidOperationException>(
-                () => builder.TryEncode(Span<byte>.Empty, out _)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.TryEncode(Span<byte>.Empty, out _));
         }
 
         [Theory]
@@ -231,9 +229,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Assert.Throws<InvalidOperationException>(() => builder.SealWithoutIntegrity());
 
-            Assert.Throws<InvalidOperationException>(
-                () => builder.SealWithMac(ReadOnlySpan<char>.Empty, HashAlgorithmName.SHA1, 2)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.SealWithMac(ReadOnlySpan<char>.Empty, HashAlgorithmName.SHA1, 2));
         }
 
         [Theory]
@@ -325,40 +322,32 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12Builder builder = new Pkcs12Builder();
             builder.SealWithoutIntegrity();
 
-            Assert.Throws<InvalidOperationException>(
-                () => builder.AddSafeContentsUnencrypted(contents)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.AddSafeContentsUnencrypted(contents));
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    builder.AddSafeContentsEncrypted(
-                        contents,
-                        Array.Empty<byte>(),
-                        s_pbkdf2Parameters
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.AddSafeContentsEncrypted(
+                    contents,
+                    Array.Empty<byte>(),
+                    s_pbkdf2Parameters
+                ));
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    builder.AddSafeContentsEncrypted(
-                        contents,
-                        ReadOnlySpan<byte>.Empty,
-                        s_pbkdf2Parameters
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.AddSafeContentsEncrypted(
+                    contents,
+                    ReadOnlySpan<byte>.Empty,
+                    s_pbkdf2Parameters
+                ));
 
-            Assert.Throws<InvalidOperationException>(
-                () => builder.AddSafeContentsEncrypted(contents, string.Empty, s_pbkdf2Parameters)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.AddSafeContentsEncrypted(contents, string.Empty, s_pbkdf2Parameters));
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    builder.AddSafeContentsEncrypted(
-                        contents,
-                        ReadOnlySpan<char>.Empty,
-                        s_pbkdf2Parameters
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                builder.AddSafeContentsEncrypted(
+                    contents,
+                    ReadOnlySpan<char>.Empty,
+                    s_pbkdf2Parameters
+                ));
         }
 
         [Fact]

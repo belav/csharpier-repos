@@ -240,9 +240,8 @@ namespace System.Composition.Hosting.Core.Tests
                 )
             )
             {
-                Assert.Throws<CompositionFailedException>(
-                    () => host.TryGetExport(type, out object _)
-                );
+                Assert.Throws<CompositionFailedException>(() =>
+                    host.TryGetExport(type, out object _));
             }
         }
 
@@ -255,9 +254,8 @@ namespace System.Composition.Hosting.Core.Tests
                 )
             )
             {
-                Assert.Throws<InvalidOperationException>(
-                    () => host.TryGetExport(typeof(Lazy<int, AbstractConstructor>), out object _)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    host.TryGetExport(typeof(Lazy<int, AbstractConstructor>), out object _));
             }
         }
 
@@ -297,9 +295,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(new MultiplePromises())
             )
             {
-                Assert.Throws<CompositionFailedException>(
-                    () => host.TryGetExport(new CompositionContract(typeof(int)), out object export)
-                );
+                Assert.Throws<CompositionFailedException>(() =>
+                    host.TryGetExport(new CompositionContract(typeof(int)), out object export));
             }
         }
 
@@ -332,9 +329,8 @@ namespace System.Composition.Hosting.Core.Tests
                 CompositionHost host = CompositionHost.CreateCompositionHost(new FailedDependency())
             )
             {
-                Assert.Throws<CompositionFailedException>(
-                    () => host.TryGetExport(new CompositionContract(typeof(int)), out object export)
-                );
+                Assert.Throws<CompositionFailedException>(() =>
+                    host.TryGetExport(new CompositionContract(typeof(int)), out object export));
             }
         }
 

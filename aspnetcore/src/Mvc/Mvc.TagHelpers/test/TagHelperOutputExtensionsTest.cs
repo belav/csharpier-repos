@@ -1016,12 +1016,10 @@ public class TagHelperOutputExtensionsTest
         );
 
         // Act and Assert
-        var exceptionAdd = Assert.Throws<ArgumentException>(
-            () => tagHelperOutput.AddClass(classValue, htmlEncoder)
-        );
-        var exceptionRemove = Assert.Throws<ArgumentException>(
-            () => tagHelperOutput.RemoveClass(classValue, htmlEncoder)
-        );
+        var exceptionAdd = Assert.Throws<ArgumentException>(() =>
+            tagHelperOutput.AddClass(classValue, htmlEncoder));
+        var exceptionRemove = Assert.Throws<ArgumentException>(() =>
+            tagHelperOutput.RemoveClass(classValue, htmlEncoder));
         Assert.Equal(expected, exceptionAdd.Message);
         Assert.Equal(expected, exceptionRemove.Message);
     }

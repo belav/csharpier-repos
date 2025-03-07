@@ -633,48 +633,38 @@ namespace System.Reflection.Emit.Tests
                     Type[] parameterTypes = null;
                     Type owner = typeof(TestClass);
 
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () => new DynamicMethod(name, returnType, parameterTypes)
-                    );
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () => new DynamicMethod(name, returnType, parameterTypes, true)
-                    );
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () => new DynamicMethod(name, returnType, parameterTypes, module)
-                    );
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () => new DynamicMethod(name, returnType, parameterTypes, owner)
-                    );
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () => new DynamicMethod(name, returnType, parameterTypes, module, true)
-                    );
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () => new DynamicMethod(name, returnType, parameterTypes, owner, true)
-                    );
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () =>
-                            new DynamicMethod(
-                                name,
-                                MethodAttributes.Public | MethodAttributes.Static,
-                                CallingConventions.Standard,
-                                returnType,
-                                parameterTypes,
-                                module,
-                                true
-                            )
-                    );
-                    Assert.Throws<PlatformNotSupportedException>(
-                        () =>
-                            new DynamicMethod(
-                                name,
-                                MethodAttributes.Public | MethodAttributes.Static,
-                                CallingConventions.Standard,
-                                returnType,
-                                parameterTypes,
-                                owner,
-                                true
-                            )
-                    );
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new DynamicMethod(name, returnType, parameterTypes));
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new DynamicMethod(name, returnType, parameterTypes, true));
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new DynamicMethod(name, returnType, parameterTypes, module));
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new DynamicMethod(name, returnType, parameterTypes, owner));
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new DynamicMethod(name, returnType, parameterTypes, module, true));
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new DynamicMethod(name, returnType, parameterTypes, owner, true));
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new DynamicMethod(
+                            name,
+                            MethodAttributes.Public | MethodAttributes.Static,
+                            CallingConventions.Standard,
+                            returnType,
+                            parameterTypes,
+                            module,
+                            true
+                        ));
+                    Assert.Throws<PlatformNotSupportedException>(() =>
+                        new DynamicMethod(
+                            name,
+                            MethodAttributes.Public | MethodAttributes.Static,
+                            CallingConventions.Standard,
+                            returnType,
+                            parameterTypes,
+                            owner,
+                            true
+                        ));
                 },
                 options
             );

@@ -484,9 +484,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         var testSelector = Browser.WaitUntilTestSelectorReady();
 
         app.FindElement(By.LinkText("Programmatic navigation cases")).Click();
-        Browser.True(
-            () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
-        );
+        Browser.True(() =>
+            Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal));
         Browser.Contains("programmatic navigation", () => app.FindElement(By.Id("test-info")).Text);
 
         // We navigate to the /Other page
@@ -498,9 +497,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         // After we press back, we should end up at the "/ProgrammaticNavigationCases" page so we know browser history has not been replaced
         // If history had been replaced we would have ended up at the "/" page
         Browser.Navigate().Back();
-        Browser.True(
-            () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
-        );
+        Browser.True(() =>
+            Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal));
         AssertHighlightedLinks("Programmatic navigation cases");
 
         // When the navigation is forced, the state is ignored (we could choose to throw here).
@@ -509,15 +507,13 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.DoesNotExist(By.Id("test-state"));
 
         // We check if we had a force load
-        Assert.Throws<StaleElementReferenceException>(
-            () => testSelector.SelectedOption.GetAttribute("value")
-        );
+        Assert.Throws<StaleElementReferenceException>(() =>
+            testSelector.SelectedOption.GetAttribute("value"));
 
         // But still we should be able to navigate back, and end up at the "/ProgrammaticNavigationCases" page
         Browser.Navigate().Back();
-        Browser.True(
-            () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
-        );
+        Browser.True(() =>
+            Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal));
         Browser.WaitUntilTestSelectorReady();
     }
 
@@ -530,9 +526,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         var testSelector = Browser.WaitUntilTestSelectorReady();
 
         app.FindElement(By.LinkText("Programmatic navigation cases")).Click();
-        Browser.True(
-            () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
-        );
+        Browser.True(() =>
+            Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal));
         Browser.Contains("programmatic navigation", () => app.FindElement(By.Id("test-info")).Text);
 
         // We navigate to the /Other page, with "replace" enabled
@@ -567,9 +562,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         var testSelector = Browser.WaitUntilTestSelectorReady();
 
         app.FindElement(By.LinkText("Programmatic navigation cases")).Click();
-        Browser.True(
-            () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
-        );
+        Browser.True(() =>
+            Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal));
         Browser.Contains("programmatic navigation", () => app.FindElement(By.Id("test-info")).Text);
 
         // We navigate to the /Other page
@@ -581,9 +575,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         // After we press back, we should end up at the "/ProgrammaticNavigationCases" page so we know browser history has not been replaced
         // If history had been replaced we would have ended up at the "/" page
         Browser.Navigate().Back();
-        Browser.True(
-            () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
-        );
+        Browser.True(() =>
+            Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal));
         AssertHighlightedLinks("Programmatic navigation cases");
 
         // For completeness, we will test if the normal NavigateTo(string uri, bool forceLoad) overload will also
@@ -593,9 +586,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         AssertHighlightedLinks("Other", "Other with base-relative URL (matches all)");
 
         Browser.Navigate().Back();
-        Browser.True(
-            () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
-        );
+        Browser.True(() =>
+            Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal));
         AssertHighlightedLinks("Programmatic navigation cases");
 
         // Because this was client-side navigation, we didn't lose the state in the test selector
@@ -608,15 +600,13 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.True(() => Browser.Url.EndsWith("/Other", StringComparison.Ordinal));
 
         // We check if we had a force load
-        Assert.Throws<StaleElementReferenceException>(
-            () => testSelector.SelectedOption.GetAttribute("value")
-        );
+        Assert.Throws<StaleElementReferenceException>(() =>
+            testSelector.SelectedOption.GetAttribute("value"));
 
         // But still we should be able to navigate back, and end up at the "/ProgrammaticNavigationCases" page
         Browser.Navigate().Back();
-        Browser.True(
-            () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
-        );
+        Browser.True(() =>
+            Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal));
         Browser.WaitUntilTestSelectorReady();
     }
 
@@ -629,9 +619,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         var testSelector = Browser.WaitUntilTestSelectorReady();
 
         app.FindElement(By.LinkText("Programmatic navigation cases")).Click();
-        Browser.True(
-            () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
-        );
+        Browser.True(() =>
+            Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal));
         Browser.Contains("programmatic navigation", () => app.FindElement(By.Id("test-info")).Text);
 
         // We navigate to the /Other page, with "replace" enabled
@@ -664,9 +653,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         var testSelector = Browser.WaitUntilTestSelectorReady();
 
         app.FindElement(By.LinkText("Programmatic navigation cases")).Click();
-        Browser.True(
-            () => Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal)
-        );
+        Browser.True(() =>
+            Browser.Url.EndsWith("/ProgrammaticNavigationCases", StringComparison.Ordinal));
         Browser.Contains("programmatic navigation", () => app.FindElement(By.Id("test-info")).Text);
 
         // We navigate to the /Other page, with replacehistroyentry and forceload enabled
@@ -674,9 +662,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.True(() => Browser.Url.EndsWith("/Other", StringComparison.Ordinal));
 
         // We check if we had a force load
-        Assert.Throws<StaleElementReferenceException>(
-            () => testSelector.SelectedOption.GetAttribute("value")
-        );
+        Assert.Throws<StaleElementReferenceException>(() =>
+            testSelector.SelectedOption.GetAttribute("value"));
 
         // After we press back, we should end up at the "/" page so we know browser history has been replaced
         Browser.Navigate().Back();

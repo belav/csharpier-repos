@@ -337,9 +337,8 @@ app.MapPost("/", TestAction);
             new RequestBodyDetectionFeature(false)
         );
 
-        var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
-            () => endpoint.RequestDelegate(httpContext)
-        );
+        var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+            endpoint.RequestDelegate(httpContext));
         Assert.StartsWith("Implicit body inferred for parameter", ex.Message);
         Assert.EndsWith(
             "but no body was provided. Did you mean to use a Service instead?",

@@ -49,12 +49,10 @@ namespace System.Diagnostics.Tests
         {
             Process currentProcess = Process.GetCurrentProcess();
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Process.GetProcessesByName(currentProcess.ProcessName, "127.0.0.1")
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Process.GetProcessById(currentProcess.Id, "127.0.0.1")
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Process.GetProcessesByName(currentProcess.ProcessName, "127.0.0.1"));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Process.GetProcessById(currentProcess.Id, "127.0.0.1"));
         }
 
         [Theory]
@@ -64,9 +62,8 @@ namespace System.Diagnostics.Tests
         )
         {
             Process currentProcess = Process.GetCurrentProcess();
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Process.GetProcessesByName(currentProcess.ProcessName, machineName)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Process.GetProcessesByName(currentProcess.ProcessName, machineName));
         }
 
         [Fact]
@@ -85,16 +82,14 @@ namespace System.Diagnostics.Tests
                 Console.WriteLine(
                     $"None of the following programs were installed on this machine: {string.Join(",", s_allowedProgramsToRun)}."
                 );
-                Assert.Throws<Win32Exception>(
-                    () =>
-                        Process.Start(
-                            new ProcessStartInfo
-                            {
-                                UseShellExecute = true,
-                                FileName = Environment.CurrentDirectory,
-                            }
-                        )
-                );
+                Assert.Throws<Win32Exception>(() =>
+                    Process.Start(
+                        new ProcessStartInfo
+                        {
+                            UseShellExecute = true,
+                            FileName = Environment.CurrentDirectory,
+                        }
+                    ));
             }
         }
 

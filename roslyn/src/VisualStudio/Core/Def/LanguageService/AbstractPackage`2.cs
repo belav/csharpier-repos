@@ -143,11 +143,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             {
                 if (!IVsShellExtensions.IsInCommandLineMode(JoinableTaskFactory))
                 {
-                    JoinableTaskFactory.Run(
-                        async () =>
-                            await UnregisterObjectBrowserLibraryManagerAsync(CancellationToken.None)
-                                .ConfigureAwait(true)
-                    );
+                    JoinableTaskFactory.Run(async () =>
+                        await UnregisterObjectBrowserLibraryManagerAsync(CancellationToken.None)
+                            .ConfigureAwait(true));
                 }
 
                 // If we've created the language service then tell it it's time to clean itself up now.

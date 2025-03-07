@@ -310,21 +310,19 @@ public class ExecutionStrategyTest : IDisposable
 
         var executionCount = 0;
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                execute(
-                    executionStrategyMock,
-                    () =>
+        Assert.Throws<ArgumentNullException>(() =>
+            execute(
+                executionStrategyMock,
+                () =>
+                {
+                    if (executionCount++ < 3)
                     {
-                        if (executionCount++ < 3)
-                        {
-                            throw new ArgumentOutOfRangeException();
-                        }
-
-                        throw new ArgumentNullException();
+                        throw new ArgumentOutOfRangeException();
                     }
-                )
-        );
+
+                    throw new ArgumentNullException();
+                }
+            ));
 
         Assert.Equal(4, executionCount);
     }
@@ -352,22 +350,20 @@ public class ExecutionStrategyTest : IDisposable
 
         Assert.IsType<ArgumentOutOfRangeException>(
             Assert
-                .Throws<RetryLimitExceededException>(
-                    () =>
-                        execute(
-                            executionStrategyMock,
-                            () =>
+                .Throws<RetryLimitExceededException>(() =>
+                    execute(
+                        executionStrategyMock,
+                        () =>
+                        {
+                            if (executionCount++ < 3)
                             {
-                                if (executionCount++ < 3)
-                                {
-                                    throw new ArgumentOutOfRangeException();
-                                }
-
-                                Assert.True(false);
-                                return 0;
+                                throw new ArgumentOutOfRangeException();
                             }
-                        )
-                )
+
+                            Assert.True(false);
+                            return 0;
+                        }
+                    ))
                 .InnerException
         );
 
@@ -399,9 +395,8 @@ public class ExecutionStrategyTest : IDisposable
                     "DbContext.Database.CreateExecutionStrategy()"
                 ),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => executeAsync(mockExecutionStrategy)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        executeAsync(mockExecutionStrategy))
                 ).Message
             );
         }
@@ -432,9 +427,8 @@ public class ExecutionStrategyTest : IDisposable
                     "DbContext.Database.CreateExecutionStrategy()"
                 ),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => executeAsync(mockExecutionStrategy)
-                    )
+                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        executeAsync(mockExecutionStrategy))
                 ).Message
             );
         }
@@ -466,9 +460,8 @@ public class ExecutionStrategyTest : IDisposable
                 "DbContext.Database.CreateExecutionStrategy()"
             ),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => executeAsync(mockExecutionStrategy)
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    executeAsync(mockExecutionStrategy))
             ).Message
         );
     }
@@ -654,21 +647,19 @@ public class ExecutionStrategyTest : IDisposable
 
         var executionCount = 0;
 
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            () =>
-                executeAsync(
-                    executionStrategyMock,
-                    ct =>
+        await Assert.ThrowsAsync<ArgumentNullException>(() =>
+            executeAsync(
+                executionStrategyMock,
+                ct =>
+                {
+                    if (executionCount++ < 3)
                     {
-                        if (executionCount++ < 3)
-                        {
-                            throw new ArgumentOutOfRangeException();
-                        }
-
-                        throw new ArgumentNullException();
+                        throw new ArgumentOutOfRangeException();
                     }
-                )
-        );
+
+                    throw new ArgumentNullException();
+                }
+            ));
 
         Assert.Equal(4, executionCount);
     }
@@ -700,25 +691,20 @@ public class ExecutionStrategyTest : IDisposable
 
         // ReSharper disable once PossibleNullReferenceException
         Assert.IsType<ArgumentOutOfRangeException>((
-                await Assert.ThrowsAsync<RetryLimitExceededException>(
-                    () =>
-                        executeAsync(
-                            executionStrategyMock,
-                            ct =>
+                await Assert.ThrowsAsync<RetryLimitExceededException>(() =>
+                    executeAsync(
+                        executionStrategyMock,
+                        ct =>
+                        {
+                            if (executionCount++ < 3)
                             {
-                                if (executionCount++ < 3)
-                                {
-                                    throw new DbUpdateException(
-                                        "",
-                                        new ArgumentOutOfRangeException()
-                                    );
-                                }
-
-                                Assert.True(false);
-                                return Task.FromResult(0);
+                                throw new DbUpdateException("", new ArgumentOutOfRangeException());
                             }
-                        )
-                )
+
+                            Assert.True(false);
+                            return Task.FromResult(0);
+                        }
+                    ))
             ).InnerException.InnerException);
 
         Assert.Equal(3, executionCount);

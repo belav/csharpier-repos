@@ -2179,9 +2179,8 @@ namespace System.Transactions.Tests
             using (TransactionScope ts = new TransactionScope())
             {
                 Trace("Before EnlistPromotable");
-                Exception ex = Assert.ThrowsAny<Exception>(
-                    () => SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet)
-                );
+                Exception ex = Assert.ThrowsAny<Exception>(() =>
+                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet));
                 Assert.True(
                     ex is TransactionException
                         || (
@@ -2207,9 +2206,8 @@ namespace System.Transactions.Tests
                 );
 
                 Trace("After EnlistPromotable");
-                ex = Assert.ThrowsAny<Exception>(
-                    () => SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet)
-                );
+                ex = Assert.ThrowsAny<Exception>(() =>
+                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet));
                 Assert.True(
                     ex is TransactionException
                         || (
@@ -2221,9 +2219,8 @@ namespace System.Transactions.Tests
                 Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
 
                 Trace("After Promotion");
-                ex = Assert.ThrowsAny<Exception>(
-                    () => SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet)
-                );
+                ex = Assert.ThrowsAny<Exception>(() =>
+                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet));
                 Assert.True(
                     ex is TransactionException
                         || (

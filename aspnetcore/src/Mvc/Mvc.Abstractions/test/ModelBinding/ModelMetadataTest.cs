@@ -393,9 +393,8 @@ public class ModelMetadataTest
         var metadata = new TestModelMetadata(typeof(string));
 
         // Act & Assert
-        var result = Assert.Throws<NotImplementedException>(
-            () => metadata.GetMetadataForType(typeof(string))
-        );
+        var result = Assert.Throws<NotImplementedException>(() =>
+            metadata.GetMetadataForType(typeof(string)));
     }
 
     [Fact]
@@ -405,9 +404,8 @@ public class ModelMetadataTest
         var metadata = new TestModelMetadata(typeof(string));
 
         // Act & Assert
-        var result = Assert.Throws<NotImplementedException>(
-            () => metadata.GetMetadataForProperties(typeof(string))
-        );
+        var result = Assert.Throws<NotImplementedException>(() =>
+            metadata.GetMetadataForProperties(typeof(string)));
     }
 
     private class TestModelMetadata : ModelMetadata

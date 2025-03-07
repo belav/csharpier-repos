@@ -12,9 +12,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ParseNullTypeFail()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => JsonSerializer.Deserialize(new ReadOnlySpan<byte>(), (Type)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Deserialize(new ReadOnlySpan<byte>(), (Type)null));
         }
 
         [Theory]
@@ -74,9 +73,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ToStringNullTypeFail()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => JsonSerializer.Serialize(new object(), (Type)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize(new object(), (Type)null));
         }
 
         [Fact]
@@ -91,9 +89,8 @@ namespace System.Text.Json.Serialization.Tests
             byte[] encodedNull = Encoding.UTF8.GetBytes(@"null");
 
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => JsonSerializer.SerializeToUtf8Bytes(null, null)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    JsonSerializer.SerializeToUtf8Bytes(null, null));
             }
 
             {

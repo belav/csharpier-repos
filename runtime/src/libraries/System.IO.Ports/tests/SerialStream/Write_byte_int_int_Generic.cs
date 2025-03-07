@@ -250,9 +250,8 @@ namespace System.IO.Ports.Tests
                 TCSupport.WaitForExactWriteBufferLoad(com, s_BYTE_SIZE_BYTES_TO_WRITE * 2);
 
                 // Wait for both write methods to timeout
-                var aggregatedException = Assert.Throws<AggregateException>(
-                    () => TCSupport.WaitForTaskCompletion(t2)
-                );
+                var aggregatedException = Assert.Throws<AggregateException>(() =>
+                    TCSupport.WaitForTaskCompletion(t2));
                 Assert.IsType<IOException>(aggregatedException.InnerException);
             }
         }

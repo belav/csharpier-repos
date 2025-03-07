@@ -23,14 +23,12 @@ namespace Microsoft.Win32.RegistryTests
         public void NegativeTests()
         {
             // Should throw if passed value is null
-            Assert.Throws<ArgumentNullException>(
-                () => Registry.SetValue(TestRegistryKey.Name, "test", value: null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Registry.SetValue(TestRegistryKey.Name, "test", value: null));
 
             // Should throw if passed keyName is null
-            Assert.Throws<ArgumentNullException>(
-                () => Registry.SetValue(keyName: null, valueName: "test", value: "test")
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Registry.SetValue(keyName: null, valueName: "test", value: "test"));
 
             // Should throw if passed string does NOT start with one of the valid base key names
             AssertExtensions.Throws<ArgumentException>(

@@ -1061,18 +1061,14 @@ public class Http3StreamTests : Http3TestBase
             {
                 var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
 
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Headers.Append("Custom你好Name", "Custom Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.ContentType = "Custom 你好 Type"
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Headers.Append("CustomName", "Custom 你好 Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Headers.Append("CustomName", "Custom \r Value")
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Headers.Append("Custom你好Name", "Custom Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.ContentType = "Custom 你好 Type");
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Headers.Append("CustomName", "Custom 你好 Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Headers.Append("CustomName", "Custom \r Value"));
                 await context.Response.WriteAsync("Hello World");
             },
             headers,
@@ -1107,12 +1103,10 @@ public class Http3StreamTests : Http3TestBase
             {
                 var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
 
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Headers.Append("Custom你好Name", "Custom Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.Headers.Append("CustomName", "Custom \r Value")
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Headers.Append("Custom你好Name", "Custom Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.Headers.Append("CustomName", "Custom \r Value"));
                 context.Response.ContentType = "Custom 你好 Type";
                 context.Response.Headers.Append("CustomName", "Custom 你好 Value");
                 await context.Response.WriteAsync("Hello World");
@@ -1248,26 +1242,19 @@ public class Http3StreamTests : Http3TestBase
             async context =>
             {
                 await context.Response.WriteAsync("Hello World");
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.AppendTrailer("Custom你好Name", "Custom Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.AppendTrailer("CustomName", "Custom 你好 Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.AppendTrailer("CustomName", "Custom \r Value")
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.AppendTrailer("Custom你好Name", "Custom Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.AppendTrailer("CustomName", "Custom 你好 Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.AppendTrailer("CustomName", "Custom \r Value"));
                 // ETag is one of the few special cased trailers. Accept is not.
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag =
-                            "Custom 你好 Tag"
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        context.Features.Get<IHttpResponseTrailersFeature>().Trailers.Accept =
-                            "Custom 你好 Tag"
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag =
+                        "Custom 你好 Tag");
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Features.Get<IHttpResponseTrailersFeature>().Trailers.Accept =
+                        "Custom 你好 Tag");
             },
             headers,
             endStream: true
@@ -1297,12 +1284,10 @@ public class Http3StreamTests : Http3TestBase
             async context =>
             {
                 await context.Response.WriteAsync("Hello World");
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.AppendTrailer("Custom你好Name", "Custom Value")
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => context.Response.AppendTrailer("CustomName", "Custom \r Value")
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.AppendTrailer("Custom你好Name", "Custom Value"));
+                Assert.Throws<InvalidOperationException>(() =>
+                    context.Response.AppendTrailer("CustomName", "Custom \r Value"));
                 context.Response.AppendTrailer("CustomName", "Custom 你好 Value");
                 // ETag is one of the few special cased trailers. Accept is not.
                 context.Features.Get<IHttpResponseTrailersFeature>().Trailers.ETag =
@@ -1554,9 +1539,8 @@ public class Http3StreamTests : Http3TestBase
                     context.Response.ContentLength = 25;
                     context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => context.Response.CompleteAsync().DefaultTimeout()
-                    );
+                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        context.Response.CompleteAsync().DefaultTimeout());
                     Assert.Equal(CoreStrings.FormatTooFewBytesWritten(0, 25), ex.Message);
 
                     Assert.True(startingTcs.Task.IsCompletedSuccessfully);
@@ -1689,9 +1673,8 @@ public class Http3StreamTests : Http3TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => context.Response.WriteAsync("2 Hello World").DefaultTimeout()
-                    );
+                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        context.Response.WriteAsync("2 Hello World").DefaultTimeout());
                     Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
 
                     // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
@@ -1757,9 +1740,8 @@ public class Http3StreamTests : Http3TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => context.Response.WriteAsync("2 Hello World").DefaultTimeout()
-                    );
+                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        context.Response.WriteAsync("2 Hello World").DefaultTimeout());
                     Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
 
                     // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
@@ -2010,9 +1992,8 @@ public class Http3StreamTests : Http3TestBase
 
                     context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                        () => context.Response.CompleteAsync().DefaultTimeout()
-                    );
+                    var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                        context.Response.CompleteAsync().DefaultTimeout());
                     Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
 
                     Assert.False(
@@ -2086,9 +2067,8 @@ public class Http3StreamTests : Http3TestBase
 
                     context.Response.AppendTrailer("CustomName", "Custom Value");
 
-                    var ex = Assert.Throws<InvalidOperationException>(
-                        () => context.Response.BodyWriter.Complete()
-                    );
+                    var ex = Assert.Throws<InvalidOperationException>(() =>
+                        context.Response.BodyWriter.Complete());
                     Assert.Equal(CoreStrings.FormatTooFewBytesWritten(11, 25), ex.Message);
 
                     Assert.False(
@@ -2248,12 +2228,10 @@ public class Http3StreamTests : Http3TestBase
                     Assert.False(context.RequestAborted.CanBeCanceled);
                     context.Abort();
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        async () => await requestBodyTask
-                    );
-                    await Assert.ThrowsAsync<ConnectionAbortedException>(
-                        async () => await context.Request.BodyReader.ReadAsync()
-                    );
+                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                        await requestBodyTask);
+                    await Assert.ThrowsAsync<ConnectionAbortedException>(async () =>
+                        await context.Request.BodyReader.ReadAsync());
 
                     // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                     await clientTcs.Task.DefaultTimeout();
@@ -2413,12 +2391,10 @@ public class Http3StreamTests : Http3TestBase
                     Assert.NotNull(resetFeature);
                     resetFeature.Reset((int)Http3ErrorCode.NoError);
 
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        async () => await requestBodyTask
-                    );
-                    await Assert.ThrowsAsync<ConnectionAbortedException>(
-                        async () => await context.Request.BodyReader.ReadAsync()
-                    );
+                    await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                        await requestBodyTask);
+                    await Assert.ThrowsAsync<ConnectionAbortedException>(async () =>
+                        await context.Request.BodyReader.ReadAsync());
 
                     // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
                     await clientTcs.Task.DefaultTimeout();

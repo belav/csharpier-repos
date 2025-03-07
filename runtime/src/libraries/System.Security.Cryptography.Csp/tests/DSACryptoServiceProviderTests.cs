@@ -241,12 +241,10 @@ namespace System.Security.Cryptography.Csp.Tests
         public static void Ctor_UseCspParameter_Throws_Unix()
         {
             var cspParameters = new CspParameters();
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new DSACryptoServiceProvider(cspParameters)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new DSACryptoServiceProvider(0, cspParameters)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new DSACryptoServiceProvider(cspParameters));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new DSACryptoServiceProvider(0, cspParameters));
         }
 
         [Fact]
@@ -265,9 +263,8 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var dsa = new DSACryptoServiceProvider())
             {
                 // Verify that the Unix shims throws the same exception as Windows when large keys imported
-                Assert.ThrowsAny<CryptographicException>(
-                    () => dsa.ImportParameters(DSATestData.GetDSA2048Params())
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    dsa.ImportParameters(DSATestData.GetDSA2048Params()));
             }
         }
 
@@ -279,9 +276,8 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var dsa = new DSACryptoServiceProvider())
             {
                 byte[] signVal = dsa.SignData(DSATestData.HelloBytes);
-                Assert.ThrowsAny<CryptographicException>(
-                    () => dsa.VerifyHash(hashVal, "SHA256", signVal)
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    dsa.VerifyHash(hashVal, "SHA256", signVal));
             }
         }
 
@@ -343,9 +339,8 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var dsa = new DSACryptoServiceProvider())
             {
-                Assert.ThrowsAny<CryptographicException>(
-                    () => dsa.SignData(DSATestData.HelloBytes, new HashAlgorithmName("sha1"))
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    dsa.SignData(DSATestData.HelloBytes, new HashAlgorithmName("sha1")));
             }
         }
 
@@ -354,21 +349,17 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var dsa = new DSACryptoServiceProvider())
             {
-                Assert.ThrowsAny<CryptographicException>(
-                    () => dsa.SignData(DSATestData.HelloBytes, HashAlgorithmName.SHA256)
-                );
-                Assert.ThrowsAny<CryptographicException>(
-                    () => dsa.SignData(new System.IO.MemoryStream(), HashAlgorithmName.SHA256)
-                );
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        dsa.SignData(
-                            DSATestData.HelloBytes,
-                            0,
-                            DSATestData.HelloBytes.Length,
-                            HashAlgorithmName.SHA256
-                        )
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    dsa.SignData(DSATestData.HelloBytes, HashAlgorithmName.SHA256));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    dsa.SignData(new System.IO.MemoryStream(), HashAlgorithmName.SHA256));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    dsa.SignData(
+                        DSATestData.HelloBytes,
+                        0,
+                        DSATestData.HelloBytes.Length,
+                        HashAlgorithmName.SHA256
+                    ));
             }
         }
 
@@ -379,19 +370,16 @@ namespace System.Security.Cryptography.Csp.Tests
             {
                 byte[] signVal = dsa.SignData(DSATestData.HelloBytes);
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => dsa.VerifyData(DSATestData.HelloBytes, signVal, HashAlgorithmName.SHA256)
-                );
-                Assert.ThrowsAny<CryptographicException>(
-                    () =>
-                        dsa.VerifyData(
-                            DSATestData.HelloBytes,
-                            0,
-                            DSATestData.HelloBytes.Length,
-                            signVal,
-                            HashAlgorithmName.SHA256
-                        )
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    dsa.VerifyData(DSATestData.HelloBytes, signVal, HashAlgorithmName.SHA256));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    dsa.VerifyData(
+                        DSATestData.HelloBytes,
+                        0,
+                        DSATestData.HelloBytes.Length,
+                        signVal,
+                        HashAlgorithmName.SHA256
+                    ));
             }
         }
 

@@ -431,33 +431,29 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void X509Certificate2FromPkcs7DerFile()
         {
-            Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(TestFiles.Pkcs7SingleDerFile)
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                new X509Certificate2(TestFiles.Pkcs7SingleDerFile));
         }
 
         [Fact]
         public static void X509Certificate2FromPkcs7PemFile()
         {
-            Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(TestFiles.Pkcs7SinglePemFile)
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                new X509Certificate2(TestFiles.Pkcs7SinglePemFile));
         }
 
         [Fact]
         public static void X509Certificate2FromPkcs7DerBlob()
         {
-            Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(TestData.Pkcs7SingleDerBytes)
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                new X509Certificate2(TestData.Pkcs7SingleDerBytes));
         }
 
         [Fact]
         public static void X509Certificate2FromPkcs7PemBlob()
         {
-            Assert.ThrowsAny<CryptographicException>(
-                () => new X509Certificate2(TestData.Pkcs7SinglePemBytes)
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                new X509Certificate2(TestData.Pkcs7SinglePemBytes));
         }
 
         [Fact]
@@ -481,12 +477,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 // State held on X509Certificate
                 Assert.ThrowsAny<CryptographicException>(() => c.GetCertHash());
                 Assert.ThrowsAny<CryptographicException>(() => c.GetCertHashString());
-                Assert.ThrowsAny<CryptographicException>(
-                    () => c.GetCertHash(HashAlgorithmName.SHA256)
-                );
-                Assert.ThrowsAny<CryptographicException>(
-                    () => c.GetCertHashString(HashAlgorithmName.SHA256)
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    c.GetCertHash(HashAlgorithmName.SHA256));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    c.GetCertHashString(HashAlgorithmName.SHA256));
                 Assert.ThrowsAny<CryptographicException>(() => c.GetKeyAlgorithm());
                 Assert.ThrowsAny<CryptographicException>(() => c.GetKeyAlgorithmParameters());
                 Assert.ThrowsAny<CryptographicException>(() => c.GetKeyAlgorithmParametersString());
@@ -498,9 +492,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.ThrowsAny<CryptographicException>(() => c.NotBefore);
                 Assert.ThrowsAny<CryptographicException>(() => c.NotAfter);
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => c.TryGetCertHash(HashAlgorithmName.SHA256, Array.Empty<byte>(), out _)
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    c.TryGetCertHash(HashAlgorithmName.SHA256, Array.Empty<byte>(), out _));
 
                 // State held on X509Certificate2
                 Assert.ThrowsAny<CryptographicException>(() => c.RawDataMemory);

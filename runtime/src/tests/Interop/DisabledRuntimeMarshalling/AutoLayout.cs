@@ -13,31 +13,26 @@ public unsafe class PInvokes_AutoLayout
     [Fact]
     public static void AutoLayoutStruct()
     {
-        Assert.Throws<MarshalDirectiveException>(
-            () => DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(new AutoLayoutStruct())
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(new AutoLayoutStruct()));
     }
 
     [Fact]
     public static void StructWithAutoLayoutField()
     {
-        AssertThrowsMarshalDirectiveOrTypeLoad(
-            () =>
-                DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(
-                    new SequentialWithAutoLayoutField()
-                )
-        );
+        AssertThrowsMarshalDirectiveOrTypeLoad(() =>
+            DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(
+                new SequentialWithAutoLayoutField()
+            ));
     }
 
     [Fact]
     public static void StructWithNestedAutoLayoutField()
     {
-        AssertThrowsMarshalDirectiveOrTypeLoad(
-            () =>
-                DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(
-                    new SequentialWithAutoLayoutNestedField()
-                )
-        );
+        AssertThrowsMarshalDirectiveOrTypeLoad(() =>
+            DisabledRuntimeMarshallingNative.CallWithAutoLayoutStruct(
+                new SequentialWithAutoLayoutNestedField()
+            ));
     }
 
     private static void AssertThrowsMarshalDirectiveOrTypeLoad(Action testCode)

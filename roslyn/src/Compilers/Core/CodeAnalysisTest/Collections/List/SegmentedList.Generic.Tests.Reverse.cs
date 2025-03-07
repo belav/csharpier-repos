@@ -168,9 +168,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 InvalidParameters,
                 invalidSet =>
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => list.Reverse(invalidSet.Item1, invalidSet.Item2)
-                    );
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        list.Reverse(invalidSet.Item1, invalidSet.Item2));
                 }
             );
         }

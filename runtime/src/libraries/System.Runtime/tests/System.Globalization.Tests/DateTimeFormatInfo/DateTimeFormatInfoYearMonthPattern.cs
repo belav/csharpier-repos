@@ -136,9 +136,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void YearMonthPattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => DateTimeFormatInfo.InvariantInfo.YearMonthPattern = "yyyy MMMM"
-            ); // DateTimeFormatInfo.InvariantInfo is read only
+            Assert.Throws<InvalidOperationException>(() =>
+                DateTimeFormatInfo.InvariantInfo.YearMonthPattern = "yyyy MMMM"); // DateTimeFormatInfo.InvariantInfo is read only
         }
     }
 }

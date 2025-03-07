@@ -72,9 +72,8 @@ namespace System.Net.Http.Functional.Tests
 
                         // Warmup the connection.
                         int streamId1 = await ReadRequestHeaderAsync();
-                        await GuardConnectionWriteAsync(
-                            () => _connection.SendDefaultResponseAsync(streamId1)
-                        );
+                        await GuardConnectionWriteAsync(() =>
+                            _connection.SendDefaultResponseAsync(streamId1));
 
                         Interlocked.Exchange(ref _pingCounter, 0); // reset the PING counter
                         // Request under the test scope.
@@ -88,9 +87,8 @@ namespace System.Net.Http.Functional.Tests
                         Interlocked.Exchange(ref _pingCounter, 0); // reset the counter
 
                         // Finish the response:
-                        await GuardConnectionWriteAsync(
-                            () => _connection.SendDefaultResponseAsync(streamId2)
-                        );
+                        await GuardConnectionWriteAsync(() =>
+                            _connection.SendDefaultResponseAsync(streamId2));
 
                         // Simulate inactive period:
                         await Task.Delay(5_000);
@@ -143,9 +141,8 @@ namespace System.Net.Http.Functional.Tests
 
                         // Warmup the connection.
                         int streamId1 = await ReadRequestHeaderAsync();
-                        await GuardConnectionWriteAsync(
-                            () => _connection.SendDefaultResponseAsync(streamId1)
-                        );
+                        await GuardConnectionWriteAsync(() =>
+                            _connection.SendDefaultResponseAsync(streamId1));
 
                         // Request under the test scope.
                         int streamId2 = await ReadRequestHeaderAsync();
@@ -159,9 +156,8 @@ namespace System.Net.Http.Functional.Tests
                         Assert.True(_pingCounter > 1);
 
                         // Finish the response:
-                        await GuardConnectionWriteAsync(
-                            () => _connection.SendDefaultResponseAsync(streamId2)
-                        );
+                        await GuardConnectionWriteAsync(() =>
+                            _connection.SendDefaultResponseAsync(streamId2));
                         Interlocked.Exchange(ref _pingCounter, 0); // reset the PING counter
 
                         if (policy == HttpKeepAlivePingPolicy.Always)
@@ -236,9 +232,8 @@ namespace System.Net.Http.Functional.Tests
 
                         // Warmup the connection.
                         int streamId1 = await ReadRequestHeaderAsync();
-                        await GuardConnectionWriteAsync(
-                            () => _connection.SendDefaultResponseAsync(streamId1)
-                        );
+                        await GuardConnectionWriteAsync(() =>
+                            _connection.SendDefaultResponseAsync(streamId1));
 
                         // Request under the test scope.
                         int streamId2 = await ReadRequestHeaderAsync();
@@ -249,9 +244,8 @@ namespace System.Net.Http.Functional.Tests
                         await Task.Delay(6_000);
 
                         // Finish the response:
-                        await GuardConnectionWriteAsync(
-                            () => _connection.SendDefaultResponseAsync(streamId2)
-                        );
+                        await GuardConnectionWriteAsync(() =>
+                            _connection.SendDefaultResponseAsync(streamId2));
 
                         await TerminateLoopbackConnectionAsync();
                     },
@@ -294,9 +288,8 @@ namespace System.Net.Http.Functional.Tests
 
                         // Warmup the connection.
                         int streamId1 = await ReadRequestHeaderAsync();
-                        await GuardConnectionWriteAsync(
-                            () => _connection.SendDefaultResponseAsync(streamId1)
-                        );
+                        await GuardConnectionWriteAsync(() =>
+                            _connection.SendDefaultResponseAsync(streamId1));
 
                         DisablePingResponse();
 
@@ -307,9 +300,8 @@ namespace System.Net.Http.Functional.Tests
                         int streamId2 = await ReadRequestHeaderAsync();
 
                         // Finish the response:
-                        await GuardConnectionWriteAsync(
-                            () => _connection.SendDefaultResponseAsync(streamId2)
-                        );
+                        await GuardConnectionWriteAsync(() =>
+                            _connection.SendDefaultResponseAsync(streamId2));
 
                         await TerminateLoopbackConnectionAsync();
                     },

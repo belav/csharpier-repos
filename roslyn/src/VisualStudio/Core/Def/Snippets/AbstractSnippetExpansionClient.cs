@@ -702,14 +702,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                 return false;
             }
 
-            var symbols = ThreadingContext.JoinableTaskFactory.Run(
-                () =>
-                    GetReferencedSymbolsToLeftOfCaretAsync(
-                        document,
-                        caretPosition: triggerSpan.End,
-                        cancellationToken
-                    )
-            );
+            var symbols = ThreadingContext.JoinableTaskFactory.Run(() =>
+                GetReferencedSymbolsToLeftOfCaretAsync(
+                    document,
+                    caretPosition: triggerSpan.End,
+                    cancellationToken
+                ));
 
             var methodSymbols = symbols.OfType<IMethodSymbol>().ToImmutableArray();
             if (methodSymbols.Any())
@@ -958,9 +956,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             // TODO: The following blocks the UI thread without cancellation, but it only occurs when an argument value
             // completion session is active, which is behind an experimental feature flag.
             // https://github.com/dotnet/roslyn/issues/50634
-            var compilation = ThreadingContext.JoinableTaskFactory.Run(
-                () => document.Project.GetRequiredCompilationAsync(CancellationToken.None)
-            );
+            var compilation = ThreadingContext.JoinableTaskFactory.Run(() =>
+                document.Project.GetRequiredCompilationAsync(CancellationToken.None));
             var newSymbolKey =
                 (
                     e.NewModel.SelectedItem
@@ -1172,9 +1169,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                         value,
                         cancellationToken
                     );
-                    ThreadingContext.JoinableTaskFactory.Run(
-                        () => provider.ProvideArgumentAsync(context)
-                    );
+                    ThreadingContext.JoinableTaskFactory.Run(() =>
+                        provider.ProvideArgumentAsync(context));
 
                     if (context.DefaultValue is not null)
                     {

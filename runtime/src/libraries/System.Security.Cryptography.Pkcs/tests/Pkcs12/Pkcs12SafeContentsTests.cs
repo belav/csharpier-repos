@@ -136,9 +136,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Pkcs12SafeContents innerContents = new Pkcs12SafeContents();
 
-            Assert.Throws<InvalidOperationException>(
-                () => outerContents.AddNestedContents(innerContents)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                outerContents.AddNestedContents(innerContents));
         }
 
         [Fact]
@@ -212,9 +211,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             using (RSA rsa = RSA.Create())
             {
-                Assert.Throws<InvalidOperationException>(
-                    () => contents.AddShroudedKey(rsa, ReadOnlySpan<byte>.Empty, s_pbeParameters)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    contents.AddShroudedKey(rsa, ReadOnlySpan<byte>.Empty, s_pbeParameters));
             }
         }
 
@@ -225,9 +223,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             using (RSA rsa = RSA.Create())
             {
-                Assert.Throws<InvalidOperationException>(
-                    () => contents.AddShroudedKey(rsa, ReadOnlySpan<char>.Empty, s_pbeParameters)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    contents.AddShroudedKey(rsa, ReadOnlySpan<char>.Empty, s_pbeParameters));
             }
         }
 

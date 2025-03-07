@@ -127,9 +127,8 @@ public class RequestDecompressionMiddlewareTests
         var compressedBytes = await GetDeflateCompressedContent(uncompressedBytes);
 
         // Act/Assert
-        await Assert.ThrowsAsync<InvalidDataException>(
-            async () => await InvokeMiddleware(compressedBytes, new[] { contentEncoding })
-        );
+        await Assert.ThrowsAsync<InvalidDataException>(async () =>
+            await InvokeMiddleware(compressedBytes, new[] { contentEncoding }));
     }
 
     [Fact]

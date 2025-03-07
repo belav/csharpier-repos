@@ -894,9 +894,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
                             RelationalStrings.ExecuteDeleteOnTableSplitting("Vehicles")
                         )[21..],
                         (
-                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                () => context.Set<Vehicle>().ExecuteDeleteAsync()
-                            )
+                            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                context.Set<Vehicle>().ExecuteDeleteAsync())
                         ).Message
                     )
             );
@@ -913,9 +912,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
                             RelationalStrings.ExecuteDeleteOnTableSplitting("Vehicles")
                         )[21..],
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () => context.Set<Vehicle>().ExecuteDelete()
-                            )
+                            .Throws<InvalidOperationException>(() =>
+                                context.Set<Vehicle>().ExecuteDelete())
                             .Message
                     )
             );

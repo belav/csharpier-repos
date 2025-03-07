@@ -193,9 +193,8 @@ public class ClrCollectionAccessorFactoryTest
         Assert.Equal(
             CoreStrings.NoFieldOrGetter("WriteOnlyPropNoField", typeof(MyEntity).Name),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => new ClrCollectionAccessorFactory().Create(navigation)
-                )
+                .Throws<InvalidOperationException>(() =>
+                    new ClrCollectionAccessorFactory().Create(navigation))
                 .Message
         );
     }
@@ -254,9 +253,8 @@ public class ClrCollectionAccessorFactoryTest
                 typeof(MyOtherEntity[]).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => new ClrCollectionAccessorFactory().Create(navigation)
-                )
+                .Throws<InvalidOperationException>(() =>
+                    new ClrCollectionAccessorFactory().Create(navigation))
                 .Message
         );
     }
@@ -271,14 +269,12 @@ public class ClrCollectionAccessorFactoryTest
         Assert.Equal(
             CoreStrings.NavigationNoSetter("NoBackingFound", typeof(MyEntity).Name),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        accessor.Add(
-                            new MyEntity(false),
-                            new MyOtherEntity(),
-                            forMaterialization: false
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    accessor.Add(
+                        new MyEntity(false),
+                        new MyOtherEntity(),
+                        forMaterialization: false
+                    ))
                 .Message
         );
     }
@@ -293,14 +289,12 @@ public class ClrCollectionAccessorFactoryTest
         Assert.Equal(
             CoreStrings.NavigationNoSetter("ReadOnlyPropNoField", typeof(MyEntity).Name),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        accessor.Add(
-                            new MyEntity(false),
-                            new MyOtherEntity(),
-                            forMaterialization: false
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    accessor.Add(
+                        new MyEntity(false),
+                        new MyOtherEntity(),
+                        forMaterialization: false
+                    ))
                 .Message
         );
     }
@@ -327,14 +321,12 @@ public class ClrCollectionAccessorFactoryTest
                 typeof(MyPrivateCollection).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        accessor.Add(
-                            new MyEntity(false),
-                            new MyOtherEntity(),
-                            forMaterialization: false
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    accessor.Add(
+                        new MyEntity(false),
+                        new MyOtherEntity(),
+                        forMaterialization: false
+                    ))
                 .Message
         );
     }
@@ -353,14 +345,12 @@ public class ClrCollectionAccessorFactoryTest
                 typeof(MyInternalCollection).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        accessor.Add(
-                            new MyEntity(false),
-                            new MyOtherEntity(),
-                            forMaterialization: false
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    accessor.Add(
+                        new MyEntity(false),
+                        new MyOtherEntity(),
+                        forMaterialization: false
+                    ))
                 .Message
         );
     }
@@ -379,14 +369,12 @@ public class ClrCollectionAccessorFactoryTest
                 typeof(MyUnavailableCollection).Name
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        accessor.Add(
-                            new MyEntity(false),
-                            new MyOtherEntity(),
-                            forMaterialization: false
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    accessor.Add(
+                        new MyEntity(false),
+                        new MyOtherEntity(),
+                        forMaterialization: false
+                    ))
                 .Message
         );
     }

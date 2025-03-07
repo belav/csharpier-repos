@@ -32,9 +32,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void WhenAll_Null()
         {
 #pragma warning disable CA2012 // Use ValueTasks correctly (the instance is never created)
-            Assert.Throws<ArgumentNullException>(
-                () => SpecializedTasks.WhenAll<int>((IEnumerable<ValueTask<int>>)null!)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                SpecializedTasks.WhenAll<int>((IEnumerable<ValueTask<int>>)null!));
 #pragma warning restore CA2012 // Use ValueTasks correctly
         }
 
@@ -484,15 +483,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var arg = new StateType();
 
 #pragma warning disable CA2012 // Use ValueTasks correctly (the instance is never created)
-            var exception = Assert.Throws<InvalidOperationException>(
-                () =>
-                    SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
-                        func,
-                        transform,
-                        arg,
-                        cancellationToken
-                    )
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                ));
 #pragma warning restore CA2012 // Use ValueTasks correctly
             Assert.Same(fault, exception);
             Assert.False(executedTransform);
@@ -560,9 +557,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.False(task.IsCompleted);
 
             gate.Set();
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => task.AsTask()
-            );
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                task.AsTask());
             Assert.Same(fault, exception);
             Assert.False(executedTransform);
         }
@@ -587,15 +583,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var arg = new StateType();
 
 #pragma warning disable CA2012 // Use ValueTasks correctly (the instance is never created)
-            var exception = Assert.Throws<InvalidOperationException>(
-                () =>
-                    SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
-                        func,
-                        transform,
-                        arg,
-                        cancellationToken
-                    )
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                ));
 #pragma warning restore CA2012 // Use ValueTasks correctly
             Assert.Same(fault, exception);
             Assert.False(executedTransform);
@@ -686,15 +680,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var cancellationToken = new CancellationToken(canceled: false);
 
 #pragma warning disable CA2012 // Use ValueTasks correctly (the instance is never created)
-            var exception = Assert.Throws<InvalidOperationException>(
-                () =>
-                    SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
-                        func,
-                        transform,
-                        arg,
-                        cancellationToken
-                    )
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                ));
 #pragma warning restore CA2012 // Use ValueTasks correctly
             Assert.Same(fault, exception);
         }
@@ -725,9 +717,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.False(task.IsCompleted);
 
             gate.Set();
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => task.AsTask()
-            );
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                task.AsTask());
             Assert.Same(fault, exception);
         }
     }

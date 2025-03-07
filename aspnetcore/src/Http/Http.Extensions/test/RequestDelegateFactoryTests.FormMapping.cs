@@ -47,9 +47,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var requestDelegate = factoryResult.RequestDelegate;
 
         // Act
-        var exception = await Assert.ThrowsAsync<BadHttpRequestException>(
-            async () => await requestDelegate(httpContext)
-        );
+        var exception = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
+            await requestDelegate(httpContext));
 
         // Assert
         Assert.Equal(
@@ -93,9 +92,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var requestDelegate = factoryResult.RequestDelegate;
 
         // Act
-        var exception = await Assert.ThrowsAsync<BadHttpRequestException>(
-            async () => await requestDelegate(httpContext)
-        );
+        var exception = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
+            await requestDelegate(httpContext));
 
         // Assert
         Assert.Equal(
@@ -141,9 +139,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var requestDelegate = factoryResult.RequestDelegate;
 
         // Act
-        var exception = await Assert.ThrowsAsync<BadHttpRequestException>(
-            async () => await requestDelegate(httpContext)
-        );
+        var exception = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
+            await requestDelegate(httpContext));
 
         // Assert
         Assert.Equal(
@@ -162,9 +159,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         );
 
         // Act - 2
-        var anotherException = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-            async () => await requestDelegate(httpContext)
-        );
+        var anotherException = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+            await requestDelegate(httpContext));
 
         // Assert - 2
         Assert.Equal(
@@ -268,9 +264,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var factoryResult = RequestDelegateFactory.Create(TestAction, options, metadataResult);
         var requestDelegate = factoryResult.RequestDelegate;
 
-        var exception = await Assert.ThrowsAsync<BadHttpRequestException>(
-            async () => await requestDelegate(httpContext)
-        );
+        var exception = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
+            await requestDelegate(httpContext));
 
         Assert.Equal(
             "The maximum recursion depth of '3' was exceeded for 'Manager.Manager.Manager.Name'.",

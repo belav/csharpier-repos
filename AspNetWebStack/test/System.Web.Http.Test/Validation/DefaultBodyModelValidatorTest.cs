@@ -179,16 +179,14 @@ namespace System.Web.Http.Validation
             HttpActionContext actionContext = ContextUtil.CreateActionContext();
 
             // Act
-            Assert.DoesNotThrow(
-                () =>
-                    new DefaultBodyModelValidator().Validate(
-                        model,
-                        type,
-                        metadataProvider,
-                        actionContext,
-                        string.Empty
-                    )
-            );
+            Assert.DoesNotThrow(() =>
+                new DefaultBodyModelValidator().Validate(
+                    model,
+                    type,
+                    metadataProvider,
+                    actionContext,
+                    string.Empty
+                ));
 
             // Assert
             Dictionary<string, string> actualErrors = new Dictionary<string, string>();
@@ -217,16 +215,14 @@ namespace System.Web.Http.Validation
             object model = new Address() { Street = "Microsoft Way" };
 
             // Act
-            Assert.DoesNotThrow(
-                () =>
-                    new DefaultBodyModelValidator().Validate(
-                        model,
-                        typeof(Address),
-                        metadataProvider,
-                        actionContext,
-                        string.Empty
-                    )
-            );
+            Assert.DoesNotThrow(() =>
+                new DefaultBodyModelValidator().Validate(
+                    model,
+                    typeof(Address),
+                    metadataProvider,
+                    actionContext,
+                    string.Empty
+                ));
 
             // Assert
             Assert.Contains("Street", actionContext.ModelState.Keys);
@@ -300,16 +296,14 @@ namespace System.Web.Http.Validation
             };
 
             // Act & Assert
-            Assert.DoesNotThrow(
-                () =>
-                    validator.Validate(
-                        instance,
-                        typeof(TypeThatOverridesEquals[]),
-                        metadataProvider,
-                        actionContext,
-                        String.Empty
-                    )
-            );
+            Assert.DoesNotThrow(() =>
+                validator.Validate(
+                    instance,
+                    typeof(TypeThatOverridesEquals[]),
+                    metadataProvider,
+                    actionContext,
+                    String.Empty
+                ));
         }
 
         public class Person

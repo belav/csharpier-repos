@@ -143,9 +143,8 @@ public class FormDataMapperTests
         var options = new FormDataMapperOptions();
 
         // Act & Assert
-        var exception = Assert.Throws<FormDataMappingException>(
-            () => FormDataMapper.Map<int>(reader, options)
-        );
+        var exception = Assert.Throws<FormDataMappingException>(() =>
+            FormDataMapper.Map<int>(reader, options));
         Assert.NotNull(exception?.Error);
         Assert.Equal("value", exception.Error.Key);
         Assert.Equal(
@@ -623,9 +622,8 @@ public class FormDataMapperTests
         TestArrayPoolBufferAdapter.OnReturn += returned.Add;
 
         // Act
-        var result = Assert.Throws<InvalidOperationException>(
-            () => FormDataMapper.Map<int[]>(reader, options)
-        );
+        var result = Assert.Throws<InvalidOperationException>(() =>
+            FormDataMapper.Map<int[]>(reader, options));
 
         TestArrayPoolBufferAdapter.OnRent -= rented.Add;
         TestArrayPoolBufferAdapter.OnReturn -= returned.Add;

@@ -30,13 +30,11 @@ namespace System.IO.Tests
         [Fact]
         public void NonExistentPathAsync()
         {
-            Assert.ThrowsAsync<DirectoryNotFoundException>(
-                () =>
-                    File.AppendAllBytesAsync(
-                        Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
-                        new byte[0]
-                    )
-            );
+            Assert.ThrowsAsync<DirectoryNotFoundException>(() =>
+                File.AppendAllBytesAsync(
+                    Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
+                    new byte[0]
+                ));
         }
 
         [Fact]
@@ -83,9 +81,8 @@ namespace System.IO.Tests
 
             using (File.Create(path))
             {
-                await Assert.ThrowsAsync<IOException>(
-                    async () => await File.AppendAllBytesAsync(path, bytes)
-                );
+                await Assert.ThrowsAsync<IOException>(async () =>
+                    await File.AppendAllBytesAsync(path, bytes));
             }
         }
 
@@ -111,9 +108,8 @@ namespace System.IO.Tests
                 }
                 else
                 {
-                    await Assert.ThrowsAsync<UnauthorizedAccessException>(
-                        async () => await File.AppendAllBytesAsync(path, dataToAppend)
-                    );
+                    await Assert.ThrowsAsync<UnauthorizedAccessException>(async () =>
+                        await File.AppendAllBytesAsync(path, dataToAppend));
                 }
             }
             finally

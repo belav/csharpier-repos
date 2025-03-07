@@ -329,8 +329,7 @@ public class BindingInfoTest
         var modelMetadata = provider.GetMetadataForType(modelType);
 
         // Act and Assert
-        Assert.Throws<NotSupportedException>(
-            () => BindingInfo.GetBindingInfo(attributes, modelMetadata)
-        );
+        Assert.Throws<NotSupportedException>(() =>
+            BindingInfo.GetBindingInfo(attributes, modelMetadata));
     }
 }

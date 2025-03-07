@@ -99,9 +99,8 @@ FROM [Blogs] AS [b]
 
     // #31407
     public override Task Update_non_main_table_in_entity_with_entity_splitting(bool async) =>
-        Assert.ThrowsAnyAsync<Exception>(
-            () => base.Update_non_main_table_in_entity_with_entity_splitting(async)
-        );
+        Assert.ThrowsAnyAsync<Exception>(() =>
+            base.Update_non_main_table_in_entity_with_entity_splitting(async));
 
     public override async Task Delete_entity_with_auto_include(bool async)
     {

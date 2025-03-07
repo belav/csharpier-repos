@@ -3459,14 +3459,12 @@ struct S
             using (var output = new MemoryStream())
             using (var pdbOutput = new MemoryStream())
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        comp.Emit(
-                            output,
-                            pdbOutput,
-                            options: EmitOptions.Default.WithEmitMetadataOnly(true)
-                        )
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    comp.Emit(
+                        output,
+                        pdbOutput,
+                        options: EmitOptions.Default.WithEmitMetadataOnly(true)
+                    ));
             }
         }
 
@@ -3482,14 +3480,12 @@ struct S
             using (var output = new MemoryStream())
             using (var metadataPeOutput = new MemoryStream())
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        comp.Emit(
-                            output,
-                            metadataPEStream: metadataPeOutput,
-                            options: EmitOptions.Default.WithEmitMetadataOnly(true)
-                        )
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    comp.Emit(
+                        output,
+                        metadataPEStream: metadataPeOutput,
+                        options: EmitOptions.Default.WithEmitMetadataOnly(true)
+                    ));
             }
         }
 
@@ -3505,14 +3501,12 @@ struct S
             using (var output = new MemoryStream())
             using (var metadataPeOutput = new MemoryStream())
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        comp.Emit(
-                            output,
-                            metadataPEStream: metadataPeOutput,
-                            options: EmitOptions.Default.WithIncludePrivateMembers(true)
-                        )
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    comp.Emit(
+                        output,
+                        metadataPEStream: metadataPeOutput,
+                        options: EmitOptions.Default.WithIncludePrivateMembers(true)
+                    ));
             }
         }
 
@@ -3550,14 +3544,12 @@ struct S
             using (var output = new MemoryStream())
             using (var metadataPeOutput = new MemoryStream())
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        comp.Emit(
-                            output,
-                            metadataPEStream: metadataPeOutput,
-                            options: EmitOptions.Default
-                        )
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    comp.Emit(
+                        output,
+                        metadataPEStream: metadataPeOutput,
+                        options: EmitOptions.Default
+                    ));
             }
         }
 
@@ -3574,9 +3566,8 @@ struct S
 
             using (var output = new MemoryStream())
             {
-                Assert.Throws<ArgumentException>(
-                    () => comp.Emit(output, options: EmitOptions.Default.WithEmitMetadataOnly(true))
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    comp.Emit(output, options: EmitOptions.Default.WithEmitMetadataOnly(true)));
             }
         }
 
@@ -3636,15 +3627,13 @@ struct S
 
             using (var output = new MemoryStream())
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                        comp.Emit(
-                            output,
-                            options: EmitOptions
-                                .Default.WithEmitMetadataOnly(true)
-                                .WithDebugInformationFormat(DebugInformationFormat.Embedded)
-                        )
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    comp.Emit(
+                        output,
+                        options: EmitOptions
+                            .Default.WithEmitMetadataOnly(true)
+                            .WithDebugInformationFormat(DebugInformationFormat.Embedded)
+                    ));
             }
         }
 
@@ -7357,9 +7346,8 @@ public class X
                 // Allow for cancellation
                 broken = new BrokenStream();
                 broken.BreakHow = BrokenStream.BreakHowType.CancelOnWrite;
-                Assert.Throws<OperationCanceledException>(
-                    () => comp.Emit(peStream, pdbStream: broken, options: portablePdbOptions)
-                );
+                Assert.Throws<OperationCanceledException>(() =>
+                    comp.Emit(peStream, pdbStream: broken, options: portablePdbOptions));
             }
         }
 

@@ -1139,9 +1139,8 @@ public partial class TypedResultsTests
     [Fact]
     public void Json_WithInvalidSerializerContext_ThrowsInvalidOperationException()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TypedResults.Json(string.Empty, context: ObjectJsonContext.Default)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TypedResults.Json(string.Empty, context: ObjectJsonContext.Default));
         Assert.Equal(
             ex.Message,
             $"Unable to obtain the JsonTypeInfo for type 'System.String' from the context '{typeof(ObjectJsonContext).FullName}'."

@@ -28,13 +28,11 @@ public class ServerTransportsTest
         Browser.Exists(By.Id("startBlazorServerBtn")).Click();
 
         var javascript = (IJavaScriptExecutor)Browser;
-        Browser.True(
-            () =>
-                (bool)
-                    javascript.ExecuteScript(
-                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                    )
-        );
+        Browser.True(() =>
+            (bool)
+                javascript.ExecuteScript(
+                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                ));
 
         AssertLogContainsMessages(
             "Starting up Blazor server-side application.",
@@ -55,13 +53,11 @@ public class ServerTransportsTest
         Browser.Exists(By.Id("startWithLongPollingBtn")).Click();
 
         var javascript = (IJavaScriptExecutor)Browser;
-        Browser.True(
-            () =>
-                (bool)
-                    javascript.ExecuteScript(
-                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                    )
-        );
+        Browser.True(() =>
+            (bool)
+                javascript.ExecuteScript(
+                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                ));
 
         AssertLogContainsMessages(
             "Information: Starting up Blazor server-side application.",
@@ -81,13 +77,11 @@ public class ServerTransportsTest
         Browser.Exists(By.Id("startAndRejectWebSocketConnectionBtn")).Click();
 
         var javascript = (IJavaScriptExecutor)Browser;
-        Browser.True(
-            () =>
-                (bool)
-                    javascript.ExecuteScript(
-                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                    )
-        );
+        Browser.True(() =>
+            (bool)
+                javascript.ExecuteScript(
+                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                ));
 
         AssertLogContainsMessages(
             "Information: Starting up Blazor server-side application.",
@@ -107,13 +101,11 @@ public class ServerTransportsTest
         Browser.Exists(By.Id("startAndRejectWebSocketConnectionBtn")).Click();
 
         var javascript = (IJavaScriptExecutor)Browser;
-        Browser.True(
-            () =>
-                (bool)
-                    javascript.ExecuteScript(
-                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                    )
-        );
+        Browser.True(() =>
+            (bool)
+                javascript.ExecuteScript(
+                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                ));
 
         AssertLogContainsMessages(
             "Information: Starting up Blazor server-side application.",
@@ -134,13 +126,11 @@ public class ServerTransportsTest
         Browser.Exists(By.Id("startBlazorServerBtn")).Click();
 
         var javascript = (IJavaScriptExecutor)Browser;
-        Browser.True(
-            () =>
-                (bool)
-                    javascript.ExecuteScript(
-                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                    )
-        );
+        Browser.True(() =>
+            (bool)
+                javascript.ExecuteScript(
+                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                ));
 
         AssertLogContainsMessages(
             "Starting up Blazor server-side application.",
@@ -160,13 +150,11 @@ public class ServerTransportsTest
         Browser.Exists(By.Id("startWithWebSocketsBtn")).Click();
 
         var javascript = (IJavaScriptExecutor)Browser;
-        Browser.True(
-            () =>
-                (bool)
-                    javascript.ExecuteScript(
-                        "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
-                    )
-        );
+        Browser.True(() =>
+            (bool)
+                javascript.ExecuteScript(
+                    "return window['__aspnetcore__testing__blazor__start__script__executed__'] === true;"
+                ));
 
         AssertLogContainsMessages(
             "Starting up Blazor server-side application.",

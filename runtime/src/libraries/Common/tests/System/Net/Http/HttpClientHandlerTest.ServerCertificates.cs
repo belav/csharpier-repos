@@ -115,12 +115,10 @@ namespace System.Net.Http.Functional.Tests
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 }
 
-                Assert.Throws<InvalidOperationException>(
-                    () => handler.ServerCertificateCustomValidationCallback = null
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => handler.CheckCertificateRevocationList = false
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    handler.ServerCertificateCustomValidationCallback = null);
+                Assert.Throws<InvalidOperationException>(() =>
+                    handler.CheckCertificateRevocationList = false);
             }
         }
 
@@ -255,9 +253,8 @@ namespace System.Net.Http.Functional.Tests
                 {
                     return false;
                 };
-                await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.GetAsync(Configuration.Http.SecureRemoteEchoServer)
-                );
+                await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.GetAsync(Configuration.Http.SecureRemoteEchoServer));
             }
         }
 
@@ -274,9 +271,8 @@ namespace System.Net.Http.Functional.Tests
                     throw e;
                 };
 
-                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.GetAsync(Configuration.Http.SecureRemoteEchoServer)
-                );
+                HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.GetAsync(Configuration.Http.SecureRemoteEchoServer));
                 Assert.Same(e, ex.GetBaseException());
             }
         }
@@ -323,9 +319,8 @@ namespace System.Net.Http.Functional.Tests
             handler.CheckCertificateRevocationList = true;
             using (HttpClient client = CreateHttpClient(handler))
             {
-                await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.GetAsync(Configuration.Http.RevokedCertRemoteServer)
-                );
+                await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.GetAsync(Configuration.Http.RevokedCertRemoteServer));
             }
         }
 

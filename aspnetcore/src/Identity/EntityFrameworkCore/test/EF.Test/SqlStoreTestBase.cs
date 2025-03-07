@@ -409,9 +409,8 @@ public abstract class SqlStoreTestBase<TUser, TRole, TKey>
         var result = await manager.CreateAsync(user);
         Assert.NotNull(user);
         user.SecurityStamp = null;
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await manager.GetSecurityStampAsync(user)
-        );
+        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await manager.GetSecurityStampAsync(user));
     }
 
     [ConditionalFact]

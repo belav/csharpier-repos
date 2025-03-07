@@ -2409,15 +2409,13 @@ public class ValidationWithRecordIntegrationTests
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                parameterBinder.BindModelAsync(
-                    parameter,
-                    testContext,
-                    modelMetadataProvider,
-                    modelMetadata
-                )
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            ));
 
         Assert.Equal(expected, ex.Message);
     }
@@ -2452,15 +2450,13 @@ public class ValidationWithRecordIntegrationTests
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                parameterBinder.BindModelAsync(
-                    parameter,
-                    testContext,
-                    modelMetadataProvider,
-                    modelMetadata
-                )
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            ));
 
         Assert.Equal(expected, ex.Message);
     }
@@ -2500,15 +2496,13 @@ public class ValidationWithRecordIntegrationTests
         var modelState = testContext.ModelState;
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-                parameterBinder.BindModelAsync(
-                    parameter,
-                    testContext,
-                    modelMetadataProvider,
-                    modelMetadata
-                )
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(
+                parameter,
+                testContext,
+                modelMetadataProvider,
+                modelMetadata
+            ));
 
         Assert.Equal(expected, ex.Message);
     }

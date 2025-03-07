@@ -196,9 +196,8 @@ namespace System.Net.Http.Functional.Tests
                         };
                         Assert.True(request.Headers.TryAddWithoutValidation("bad", value));
 
-                        await Assert.ThrowsAsync<HttpRequestException>(
-                            () => client.SendAsync(TestAsync, request)
-                        );
+                        await Assert.ThrowsAsync<HttpRequestException>(() =>
+                            client.SendAsync(TestAsync, request));
                     }
                 },
                 async server =>
@@ -543,9 +542,8 @@ namespace System.Net.Http.Functional.Tests
                 )
             )
             {
-                await Assert.ThrowsAsync<HttpRequestException>(
-                    () => client.SendAsync(TestAsync, m)
-                );
+                await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.SendAsync(TestAsync, m));
             }
         }
 

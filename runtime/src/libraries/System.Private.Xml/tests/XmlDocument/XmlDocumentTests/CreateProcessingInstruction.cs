@@ -30,18 +30,16 @@ namespace System.Xml.XmlDocumentTests
         public static void NullTargetThrows()
         {
             var xmlDocument = new XmlDocument();
-            Assert.Throws<ArgumentNullException>(
-                () => xmlDocument.CreateProcessingInstruction(null, "anyData")
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                xmlDocument.CreateProcessingInstruction(null, "anyData"));
         }
 
         [Fact]
         public static void EmptyTargetThrows()
         {
             var xmlDocument = new XmlDocument();
-            Assert.Throws<ArgumentException>(
-                () => xmlDocument.CreateProcessingInstruction("", "anyData")
-            );
+            Assert.Throws<ArgumentException>(() =>
+                xmlDocument.CreateProcessingInstruction("", "anyData"));
         }
     }
 }

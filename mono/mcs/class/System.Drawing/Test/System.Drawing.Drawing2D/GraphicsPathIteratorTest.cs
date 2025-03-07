@@ -87,9 +87,8 @@ namespace MonoTests.System.Drawing.Drawing2D
                 {
                     PointF[] points = null;
                     byte[] types = new byte[1];
-                    Assert.Throws<NullReferenceException>(
-                        () => gpi.CopyData(ref points, ref types, 0, 1)
-                    );
+                    Assert.Throws<NullReferenceException>(() =>
+                        gpi.CopyData(ref points, ref types, 0, 1));
                 }
             }
         }
@@ -104,9 +103,8 @@ namespace MonoTests.System.Drawing.Drawing2D
                 {
                     PointF[] points = new PointF[1];
                     byte[] types = null;
-                    Assert.Throws<NullReferenceException>(
-                        () => gpi.CopyData(ref points, ref types, 0, 1)
-                    );
+                    Assert.Throws<NullReferenceException>(() =>
+                        gpi.CopyData(ref points, ref types, 0, 1));
                 }
             }
         }
@@ -121,9 +119,8 @@ namespace MonoTests.System.Drawing.Drawing2D
                 {
                     PointF[] points = new PointF[1];
                     byte[] types = new byte[2];
-                    Assert.Throws<ArgumentException>(
-                        () => gpi.CopyData(ref points, ref types, 0, 1)
-                    );
+                    Assert.Throws<ArgumentException>(() =>
+                        gpi.CopyData(ref points, ref types, 0, 1));
                 }
             }
         }
@@ -138,9 +135,8 @@ namespace MonoTests.System.Drawing.Drawing2D
                 {
                     PointF[] points = null;
                     byte[] types = new byte[2];
-                    Assert.Throws<NullReferenceException>(
-                        () => gpi.Enumerate(ref points, ref types)
-                    );
+                    Assert.Throws<NullReferenceException>(() =>
+                        gpi.Enumerate(ref points, ref types));
                 }
             }
         }
@@ -155,9 +151,8 @@ namespace MonoTests.System.Drawing.Drawing2D
                 {
                     PointF[] points = new PointF[1];
                     byte[] types = null;
-                    Assert.Throws<NullReferenceException>(
-                        () => gpi.Enumerate(ref points, ref types)
-                    );
+                    Assert.Throws<NullReferenceException>(() =>
+                        gpi.Enumerate(ref points, ref types));
                 }
             }
         }

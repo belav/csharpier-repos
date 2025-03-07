@@ -97,9 +97,8 @@ namespace System.Net.Http.Functional.Tests
                         );
                         connection.CompleteRequestProcessing();
 
-                        await Assert.ThrowsAnyAsync<Exception>(
-                            () => connection.ReadRequestDataAsync()
-                        );
+                        await Assert.ThrowsAnyAsync<Exception>(() =>
+                            connection.ReadRequestDataAsync());
                     });
 
                     await server.AcceptConnectionSendResponseAndCloseAsync();
@@ -153,9 +152,8 @@ namespace System.Net.Http.Functional.Tests
                         }
                         else
                         {
-                            await Assert.ThrowsAnyAsync<Exception>(
-                                () => connection.ReadRequestDataAsync()
-                            );
+                            await Assert.ThrowsAnyAsync<Exception>(() =>
+                                connection.ReadRequestDataAsync());
                         }
                     });
 

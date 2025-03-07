@@ -797,9 +797,8 @@ internal static class WaitSubsystemTests
 
         // Single wait fails
         Assert.Throws<OverflowException>(() => m.WaitOne(0));
-        Assert.Throws<OverflowException>(
-            () => m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
-        );
+        Assert.Throws<OverflowException>(() =>
+            m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
         Assert.Throws<OverflowException>(() => m.WaitOne());
 
         var e0 = new AutoResetEvent(false);
@@ -845,9 +844,8 @@ internal static class WaitSubsystemTests
         init(false, false, true, true);
         Assert.Throws<OverflowException>(() => WaitHandle.WaitAny(h, 0));
         verify(false, false, true, true);
-        Assert.Throws<OverflowException>(
-            () => WaitHandle.WaitAny(h, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
-        );
+        Assert.Throws<OverflowException>(() =>
+            WaitHandle.WaitAny(h, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
         verify(false, false, true, true);
         Assert.Throws<OverflowException>(() => WaitHandle.WaitAny(h));
         verify(false, false, true, true);
@@ -856,9 +854,8 @@ internal static class WaitSubsystemTests
         init(true, true, true, true);
         Assert.Throws<OverflowException>(() => WaitHandle.WaitAll(h, 0));
         verify(true, true, true, true);
-        Assert.Throws<OverflowException>(
-            () => WaitHandle.WaitAll(h, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
-        );
+        Assert.Throws<OverflowException>(() =>
+            WaitHandle.WaitAll(h, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
         verify(true, true, true, true);
         Assert.Throws<OverflowException>(() => WaitHandle.WaitAll(h));
         verify(true, true, true, true);

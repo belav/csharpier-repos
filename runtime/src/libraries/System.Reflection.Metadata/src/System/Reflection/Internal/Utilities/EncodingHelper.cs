@@ -19,9 +19,8 @@ namespace System.Reflection.Internal
 
         // Use AcquireBuffer(int) and ReleaseBuffer(byte[])
         // instead of the pool directly to implement the size check.
-        private static readonly ObjectPool<byte[]> s_pool = new ObjectPool<byte[]>(
-            () => new byte[PooledBufferSize]
-        );
+        private static readonly ObjectPool<byte[]> s_pool = new ObjectPool<byte[]>(() =>
+            new byte[PooledBufferSize]);
 
         public static string DecodeUtf8(
             byte* bytes,

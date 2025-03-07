@@ -14,36 +14,30 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void NullStream_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    TarFile.ExtractToDirectory(
-                        source: null,
-                        destinationDirectoryName: "path",
-                        overwriteFiles: false
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                TarFile.ExtractToDirectory(
+                    source: null,
+                    destinationDirectoryName: "path",
+                    overwriteFiles: false
+                ));
         }
 
         [Fact]
         public void InvalidPath_Throws()
         {
             using MemoryStream archive = new MemoryStream();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    TarFile.ExtractToDirectory(
-                        archive,
-                        destinationDirectoryName: null,
-                        overwriteFiles: false
-                    )
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    TarFile.ExtractToDirectory(
-                        archive,
-                        destinationDirectoryName: string.Empty,
-                        overwriteFiles: false
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                TarFile.ExtractToDirectory(
+                    archive,
+                    destinationDirectoryName: null,
+                    overwriteFiles: false
+                ));
+            Assert.Throws<ArgumentException>(() =>
+                TarFile.ExtractToDirectory(
+                    archive,
+                    destinationDirectoryName: string.Empty,
+                    overwriteFiles: false
+                ));
         }
 
         [Fact]
@@ -56,14 +50,12 @@ namespace System.Formats.Tar.Tests
                 canWrite: true,
                 canSeek: true
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    TarFile.ExtractToDirectory(
-                        unreadable,
-                        destinationDirectoryName: "path",
-                        overwriteFiles: false
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                TarFile.ExtractToDirectory(
+                    unreadable,
+                    destinationDirectoryName: "path",
+                    overwriteFiles: false
+                ));
         }
 
         [Fact]
@@ -73,14 +65,12 @@ namespace System.Formats.Tar.Tests
             string dirPath = Path.Join(root.Path, "dir");
 
             using MemoryStream archive = new MemoryStream();
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                    TarFile.ExtractToDirectory(
-                        archive,
-                        destinationDirectoryName: dirPath,
-                        overwriteFiles: false
-                    )
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                TarFile.ExtractToDirectory(
+                    archive,
+                    destinationDirectoryName: dirPath,
+                    overwriteFiles: false
+                ));
         }
 
         [Fact]
@@ -135,9 +125,8 @@ namespace System.Formats.Tar.Tests
 
             using TempDirectory root = new TempDirectory();
 
-            Assert.ThrowsAny<IOException>(
-                () => TarFile.ExtractToDirectory(archive, root.Path, overwriteFiles: false)
-            );
+            Assert.ThrowsAny<IOException>(() =>
+                TarFile.ExtractToDirectory(archive, root.Path, overwriteFiles: false));
 
             Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
         }
@@ -657,14 +646,8 @@ namespace System.Formats.Tar.Tests
             }
             archive.Position = 0;
 
-            Assert.Throws<IOException>(
-                () =>
-                    TarFile.ExtractToDirectory(
-                        archive,
-                        destinationFolderPath,
-                        overwriteFiles: false
-                    )
-            );
+            Assert.Throws<IOException>(() =>
+                TarFile.ExtractToDirectory(archive, destinationFolderPath, overwriteFiles: false));
             Assert.False(File.Exists(entryFilePath), $"File should not exist: {entryFilePath}");
         }
     }

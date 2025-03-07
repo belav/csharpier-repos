@@ -319,16 +319,13 @@ namespace System.Security.Cryptography.Tests
             hash.Dispose();
             Assert.Throws<ObjectDisposedException>(() => hash.Hash);
             Assert.Throws<ObjectDisposedException>(() => hash.ComputeHash(Array.Empty<byte>()));
-            Assert.Throws<ObjectDisposedException>(
-                () => hash.ComputeHash(Array.Empty<byte>(), 0, 0)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                hash.ComputeHash(Array.Empty<byte>(), 0, 0));
             Assert.Throws<ObjectDisposedException>(() => hash.ComputeHash((Stream)null));
-            Assert.Throws<ObjectDisposedException>(
-                () => hash.TransformBlock(Array.Empty<byte>(), 0, 0, null, 0)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => hash.TransformFinalBlock(Array.Empty<byte>(), 0, 0)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                hash.TransformBlock(Array.Empty<byte>(), 0, 0, null, 0));
+            Assert.Throws<ObjectDisposedException>(() =>
+                hash.TransformFinalBlock(Array.Empty<byte>(), 0, 0));
         }
 
         [ConditionalFact(nameof(IsSupported))]
@@ -693,74 +690,54 @@ namespace System.Security.Cryptography.Tests
             byte[] buffer = new byte[THashTrait.HashSizeInBytes];
             Assert.Throws<PlatformNotSupportedException>(() => HashData(Array.Empty<byte>()));
             Assert.Throws<PlatformNotSupportedException>(() => HashData(ReadOnlySpan<byte>.Empty));
-            Assert.Throws<PlatformNotSupportedException>(
-                () => HashData(ReadOnlySpan<byte>.Empty, buffer)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => TryHashData(ReadOnlySpan<byte>.Empty, buffer, out _)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                HashData(ReadOnlySpan<byte>.Empty, buffer));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                TryHashData(ReadOnlySpan<byte>.Empty, buffer, out _));
 
             Assert.Throws<PlatformNotSupportedException>(() => HashData(Stream.Null));
             Assert.Throws<PlatformNotSupportedException>(() => HashData(Stream.Null, buffer));
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(
-                async () => await HashDataAsync(Stream.Null, default(CancellationToken))
-            );
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(
-                async () => await HashDataAsync(Stream.Null, buffer, default(CancellationToken))
-            );
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
+                await HashDataAsync(Stream.Null, default(CancellationToken)));
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
+                await HashDataAsync(Stream.Null, buffer, default(CancellationToken)));
         }
 
         [ConditionalFact(nameof(IsNotSupported))]
         public async Task CryptographicOperations_HashData_NotSupported()
         {
             byte[] buffer = new byte[THashTrait.HashSizeInBytes];
-            Assert.Throws<PlatformNotSupportedException>(
-                () => CryptographicOperations.HashData(HashAlgorithm, Array.Empty<byte>())
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => CryptographicOperations.HashData(HashAlgorithm, ReadOnlySpan<byte>.Empty)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    CryptographicOperations.HashData(
-                        HashAlgorithm,
-                        ReadOnlySpan<byte>.Empty,
-                        buffer
-                    )
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    CryptographicOperations.TryHashData(
-                        HashAlgorithm,
-                        ReadOnlySpan<byte>.Empty,
-                        buffer,
-                        out _
-                    )
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                CryptographicOperations.HashData(HashAlgorithm, Array.Empty<byte>()));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                CryptographicOperations.HashData(HashAlgorithm, ReadOnlySpan<byte>.Empty));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                CryptographicOperations.HashData(HashAlgorithm, ReadOnlySpan<byte>.Empty, buffer));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                CryptographicOperations.TryHashData(
+                    HashAlgorithm,
+                    ReadOnlySpan<byte>.Empty,
+                    buffer,
+                    out _
+                ));
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () => CryptographicOperations.HashData(HashAlgorithm, Stream.Null)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => CryptographicOperations.HashData(HashAlgorithm, Stream.Null, buffer)
-            );
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(
-                async () =>
-                    await CryptographicOperations.HashDataAsync(
-                        HashAlgorithm,
-                        Stream.Null,
-                        default(CancellationToken)
-                    )
-            );
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(
-                async () =>
-                    await CryptographicOperations.HashDataAsync(
-                        HashAlgorithm,
-                        Stream.Null,
-                        buffer,
-                        default(CancellationToken)
-                    )
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                CryptographicOperations.HashData(HashAlgorithm, Stream.Null));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                CryptographicOperations.HashData(HashAlgorithm, Stream.Null, buffer));
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
+                await CryptographicOperations.HashDataAsync(
+                    HashAlgorithm,
+                    Stream.Null,
+                    default(CancellationToken)
+                ));
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(async () =>
+                await CryptographicOperations.HashDataAsync(
+                    HashAlgorithm,
+                    Stream.Null,
+                    buffer,
+                    default(CancellationToken)
+                ));
         }
 
         [ConditionalFact(nameof(IsNotSupported))]
@@ -1066,9 +1043,8 @@ namespace System.Security.Cryptography.Tests
             HashAlgorithm hash = Create();
             hash.Dispose();
             Assert.Throws<ObjectDisposedException>(() => hash.ComputeHash(new byte[1]));
-            Assert.Throws<ObjectDisposedException>(
-                () => hash.TryComputeHash(new byte[1], new byte[1], out int bytesWritten)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                hash.TryComputeHash(new byte[1], new byte[1], out int bytesWritten));
         }
 
         [ConditionalFact(nameof(IsSupported))]

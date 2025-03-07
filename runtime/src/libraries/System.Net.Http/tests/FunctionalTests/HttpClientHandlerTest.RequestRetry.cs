@@ -100,9 +100,8 @@ namespace System.Net.Http.Functional.Tests
                     {
                         // Send request. The server will keeping closing the connection after it is successfully established.
                         // SocketsHttpHandler should retry the request up to the retry limit, then fail.
-                        await Assert.ThrowsAsync<HttpRequestException>(
-                            async () => await client.GetAsync(url)
-                        );
+                        await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                            await client.GetAsync(url));
                     }
                 },
                 async server =>
@@ -151,9 +150,8 @@ namespace System.Net.Http.Functional.Tests
                             contentSending,
                             connectionClosed.Task
                         );
-                        await Assert.ThrowsAsync<HttpRequestException>(
-                            () => client.SendAsync(TestAsync, request)
-                        );
+                        await Assert.ThrowsAsync<HttpRequestException>(() =>
+                            client.SendAsync(TestAsync, request));
                     }
                 },
                 async server =>

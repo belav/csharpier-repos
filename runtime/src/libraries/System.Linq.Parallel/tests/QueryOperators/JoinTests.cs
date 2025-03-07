@@ -758,18 +758,14 @@ namespace System.Linq.Parallel.Tests
         public static void Join_NotSupportedException()
         {
 #pragma warning disable 618
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Join(Enumerable.Range(0, 1), i => i, i => i, (i, j) => i)
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Join(Enumerable.Range(0, 1), i => i, i => i, (i, j) => i, null)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Join(Enumerable.Range(0, 1), i => i, i => i, (i, j) => i));
+            Assert.Throws<NotSupportedException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Join(Enumerable.Range(0, 1), i => i, i => i, (i, j) => i, null));
 #pragma warning restore 618
         }
 
@@ -778,58 +774,50 @@ namespace System.Linq.Parallel.Tests
         public static void Join_NoDuplicateSettings()
         {
             CancellationToken t = new CancellationTokenSource().Token;
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .WithCancellation(t)
-                        .Join(
-                            ParallelEnumerable.Range(0, 1).WithCancellation(t),
-                            x => x,
-                            y => y,
-                            (l, r) => l
-                        )
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .WithDegreeOfParallelism(1)
-                        .Join(
-                            ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1),
-                            x => x,
-                            y => y,
-                            (l, r) => l
-                        )
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .WithExecutionMode(ParallelExecutionMode.Default)
-                        .Join(
-                            ParallelEnumerable
-                                .Range(0, 1)
-                                .WithExecutionMode(ParallelExecutionMode.Default),
-                            x => x,
-                            y => y,
-                            (l, r) => l
-                        )
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .WithMergeOptions(ParallelMergeOptions.Default)
-                        .Join(
-                            ParallelEnumerable
-                                .Range(0, 1)
-                                .WithMergeOptions(ParallelMergeOptions.Default),
-                            x => x,
-                            y => y,
-                            (l, r) => l
-                        )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .WithCancellation(t)
+                    .Join(
+                        ParallelEnumerable.Range(0, 1).WithCancellation(t),
+                        x => x,
+                        y => y,
+                        (l, r) => l
+                    ));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .WithDegreeOfParallelism(1)
+                    .Join(
+                        ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1),
+                        x => x,
+                        y => y,
+                        (l, r) => l
+                    ));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .WithExecutionMode(ParallelExecutionMode.Default)
+                    .Join(
+                        ParallelEnumerable
+                            .Range(0, 1)
+                            .WithExecutionMode(ParallelExecutionMode.Default),
+                        x => x,
+                        y => y,
+                        (l, r) => l
+                    ));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .WithMergeOptions(ParallelMergeOptions.Default)
+                    .Join(
+                        ParallelEnumerable
+                            .Range(0, 1)
+                            .WithMergeOptions(ParallelMergeOptions.Default),
+                        x => x,
+                        y => y,
+                        (l, r) => l
+                    ));
         }
 
         [Fact]

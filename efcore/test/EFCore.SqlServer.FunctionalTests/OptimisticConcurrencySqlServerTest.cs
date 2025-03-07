@@ -232,9 +232,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                         return;
                     }
 
-                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(
-                        () => context.SaveChangesAsync()
-                    );
+                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                        context.SaveChangesAsync());
 
                     await fanEntry.ReloadAsync();
                     await swagEntry.ReloadAsync();
@@ -276,9 +275,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                         return;
                     }
 
-                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(
-                        () => context.SaveChangesAsync()
-                    );
+                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                        context.SaveChangesAsync());
 
                     await fanEntry.ReloadAsync();
                     await swagEntry.ReloadAsync();
@@ -368,9 +366,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                         return;
                     }
 
-                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(
-                        () => context.SaveChangesAsync()
-                    );
+                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                        context.SaveChangesAsync());
 
                     await circuitEntry.ReloadAsync();
                     await cityEntry.ReloadAsync();
@@ -414,9 +411,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
                         return;
                     }
 
-                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(
-                        () => context.SaveChangesAsync()
-                    );
+                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                        context.SaveChangesAsync());
 
                     await circuitEntry.ReloadAsync();
                     await cityEntry.ReloadAsync();

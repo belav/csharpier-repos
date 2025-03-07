@@ -43,9 +43,8 @@ namespace Tests.System
         [PlatformSpecific(TestPlatforms.Windows)]
         public void Paste_Argv0Rules_ThrowsIfQuotes_OnWindows(string argv0)
         {
-            Assert.Throws<ApplicationException>(
-                () => PasteArguments.Paste(new[] { argv0 }, pasteFirstArgumentUsingArgV0Rules: true)
-            );
+            Assert.Throws<ApplicationException>(() =>
+                PasteArguments.Paste(new[] { argv0 }, pasteFirstArgumentUsingArgV0Rules: true));
         }
     }
 }

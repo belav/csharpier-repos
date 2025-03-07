@@ -108,9 +108,8 @@ namespace System.Formats.Tar.Tests
             TarEntry entry = InvokeTarEntryCreationConstructor(format, entryType, fileName);
             entry.LinkName = linkTarget;
 
-            Assert.Throws<InvalidOperationException>(
-                () => entry.ExtractToFile(fileName, overwrite: false)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                entry.ExtractToFile(fileName, overwrite: false));
 
             Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
         }

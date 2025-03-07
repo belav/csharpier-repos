@@ -52,8 +52,7 @@ public class DestinationValueInitializedByCtorBug : AutoMapperSpecBase
         }
 
         Mapper.Map<List<ItemToMap>, List<ItemToMapDto>>(entities);
-        typeof(AutoMapperMappingException).ShouldNotBeThrownBy(
-            () => Mapper.Map<List<ItemToMap>, List<ItemToMapDto>>(entities)
-        );
+        typeof(AutoMapperMappingException).ShouldNotBeThrownBy(() =>
+            Mapper.Map<List<ItemToMap>, List<ItemToMapDto>>(entities));
     }
 }

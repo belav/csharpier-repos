@@ -270,9 +270,8 @@ namespace System.Linq.Parallel.Tests
         public static void Zip_NotSupportedException()
         {
 #pragma warning disable 618
-            Assert.Throws<NotSupportedException>(
-                () => ParallelEnumerable.Range(0, 1).Zip(Enumerable.Range(0, 1), (x, y) => x)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                ParallelEnumerable.Range(0, 1).Zip(Enumerable.Range(0, 1), (x, y) => x));
 #pragma warning restore 618
         }
 
@@ -281,44 +280,36 @@ namespace System.Linq.Parallel.Tests
         public static void Zip_NoDuplicateSettings()
         {
             CancellationToken t = new CancellationTokenSource().Token;
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .WithCancellation(t)
-                        .Zip(ParallelEnumerable.Range(0, 1).WithCancellation(t), (l, r) => l)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .WithDegreeOfParallelism(1)
-                        .Zip(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1), (l, r) => l)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .WithExecutionMode(ParallelExecutionMode.Default)
-                        .Zip(
-                            ParallelEnumerable
-                                .Range(0, 1)
-                                .WithExecutionMode(ParallelExecutionMode.Default),
-                            (l, r) => l
-                        )
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .WithMergeOptions(ParallelMergeOptions.Default)
-                        .Zip(
-                            ParallelEnumerable
-                                .Range(0, 1)
-                                .WithMergeOptions(ParallelMergeOptions.Default),
-                            (l, r) => l
-                        )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .WithCancellation(t)
+                    .Zip(ParallelEnumerable.Range(0, 1).WithCancellation(t), (l, r) => l));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .WithDegreeOfParallelism(1)
+                    .Zip(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1), (l, r) => l));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .WithExecutionMode(ParallelExecutionMode.Default)
+                    .Zip(
+                        ParallelEnumerable
+                            .Range(0, 1)
+                            .WithExecutionMode(ParallelExecutionMode.Default),
+                        (l, r) => l
+                    ));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .WithMergeOptions(ParallelMergeOptions.Default)
+                    .Zip(
+                        ParallelEnumerable
+                            .Range(0, 1)
+                            .WithMergeOptions(ParallelMergeOptions.Default),
+                        (l, r) => l
+                    ));
         }
 
         [Fact]

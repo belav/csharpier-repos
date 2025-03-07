@@ -97,9 +97,8 @@ namespace System.Net.Tests
         {
             WebHeaderCollection w = new WebHeaderCollection();
             w[HttpRequestHeader.Accept] = "text/json";
-            Assert.Throws<InvalidOperationException>(
-                () => w[HttpResponseHeader.ContentLength] = "123"
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                w[HttpResponseHeader.ContentLength] = "123");
         }
 
         [Fact]
@@ -107,9 +106,8 @@ namespace System.Net.Tests
         {
             WebHeaderCollection w = new WebHeaderCollection();
             w[HttpResponseHeader.ContentLength] = "123";
-            Assert.Throws<InvalidOperationException>(
-                () => w[HttpRequestHeader.Accept] = "text/json"
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                w[HttpRequestHeader.Accept] = "text/json");
         }
 
         [Fact]

@@ -520,34 +520,25 @@ namespace System.Linq.Parallel.Tests
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Min());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<long>().Min());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<float>().Min());
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<double>().Min()
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<decimal>().Min()
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<NotComparable>().Min()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<double>().Min());
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<decimal>().Min());
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<NotComparable>().Min());
 
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<int>().Min(x => (int)x)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<int>().Min(x => (long)x)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<int>().Min(x => (float)x)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<int>().Min(x => (double)x)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<int>().Min(x => (decimal)x)
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => ParallelEnumerable.Empty<int>().Min(x => new NotComparable(x))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Min(x => (int)x));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Min(x => (long)x));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Min(x => (float)x));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Min(x => (double)x));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Min(x => (decimal)x));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Min(x => new NotComparable(x)));
         }
 
         [Fact]
@@ -837,167 +828,143 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Min_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, int>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, int>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, int?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, int?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, long>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, long>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, long?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, long?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, float>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, float>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, float?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, float?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, double>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, double>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, double?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, double?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, decimal>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, decimal>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, decimal?>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+                    ));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, decimal?>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
 
-            AssertThrows.Wrapped<DeliberateTestException>(
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .Min(
-                            (Func<int, NotComparable>)(
-                                x =>
-                                {
-                                    throw new DeliberateTestException();
-                                }
-                            )
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Min(
+                        (Func<int, NotComparable>)(
+                            x =>
+                            {
+                                throw new DeliberateTestException();
+                            }
                         )
-            );
+                    ));
         }
 
         [Fact]
         public static void Min_AggregateException_NotComparable()
         {
-            ArgumentException e = AssertThrows.Wrapped<ArgumentException>(
-                () => ParallelEnumerable.Repeat(new NotComparable(0), 2).Min()
-            );
+            ArgumentException e = AssertThrows.Wrapped<ArgumentException>(() =>
+                ParallelEnumerable.Repeat(new NotComparable(0), 2).Min());
             Assert.Null(e.ParamName);
 
-            e = AssertThrows.Wrapped<ArgumentException>(
-                () => ParallelEnumerable.Range(0, 2).Min(x => new NotComparable(x))
-            );
+            e = AssertThrows.Wrapped<ArgumentException>(() =>
+                ParallelEnumerable.Range(0, 2).Min(x => new NotComparable(x)));
             Assert.Null(e.ParamName);
         }
 

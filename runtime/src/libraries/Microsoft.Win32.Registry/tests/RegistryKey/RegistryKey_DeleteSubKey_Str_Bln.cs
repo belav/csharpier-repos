@@ -28,9 +28,8 @@ namespace Microsoft.Win32.RegistryTests
             using (var rk = TestRegistryKey.CreateSubKey(name))
             {
                 using RegistryKey subkey = rk.CreateSubKey(name);
-                Assert.Throws<InvalidOperationException>(
-                    () => TestRegistryKey.DeleteSubKey(name, false)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    TestRegistryKey.DeleteSubKey(name, false));
             }
 
             // Should throw because RegistryKey is readonly

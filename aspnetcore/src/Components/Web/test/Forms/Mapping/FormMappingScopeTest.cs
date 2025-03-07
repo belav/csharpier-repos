@@ -97,9 +97,8 @@ public class FormMappingScopeTest
         var id = _renderer.AssignRootComponentId(testComponent);
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => _renderer.RenderRootComponent(id)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            _renderer.RenderRootComponent(id));
         Assert.Equal(
             $"The FormMappingScope component requires a nonempty Name parameter value.",
             exception.Message
@@ -117,9 +116,8 @@ public class FormMappingScopeTest
         var id = _renderer.AssignRootComponentId(testComponent);
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => _renderer.RenderRootComponent(id)
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            _renderer.RenderRootComponent(id));
         Assert.Equal(
             $"The FormMappingScope component requires a nonempty Name parameter value.",
             exception.Message

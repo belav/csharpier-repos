@@ -82,9 +82,8 @@ namespace System.Memory.Tests.SequenceReader
                 }
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new SequenceReader<byte>(bytes).Advance(-1)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new SequenceReader<byte>(bytes).Advance(-1));
         }
     }
 }

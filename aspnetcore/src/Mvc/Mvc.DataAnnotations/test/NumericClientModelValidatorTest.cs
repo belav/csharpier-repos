@@ -155,9 +155,8 @@ public class NumericClientModelValidatorTest
         provider
             .ForType(typeof(int))
             .BindingDetails(d =>
-                d.ModelBindingMessageProvider.SetNonPropertyValueMustBeANumberAccessor(
-                    () => $"Error message from override."
-                )
+                d.ModelBindingMessageProvider.SetNonPropertyValueMustBeANumberAccessor(() =>
+                    $"Error message from override.")
             );
         var metadata = provider.GetMetadataForType(typeof(int));
 

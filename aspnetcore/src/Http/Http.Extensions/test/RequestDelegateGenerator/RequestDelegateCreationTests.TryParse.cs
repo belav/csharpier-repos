@@ -391,8 +391,7 @@ app.MapGet("/{myBindAsyncRecord}", TestAction);
             new Dictionary<string, StringValues> { ["myBindAsyncRecord"] = "foo" }
         );
 
-        await Assert.ThrowsAsync<NotImplementedException>(
-            async () => await endpoint.RequestDelegate(httpContext)
-        );
+        await Assert.ThrowsAsync<NotImplementedException>(async () =>
+            await endpoint.RequestDelegate(httpContext));
     }
 }

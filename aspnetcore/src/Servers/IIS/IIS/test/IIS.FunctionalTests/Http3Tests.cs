@@ -140,9 +140,8 @@ public class Http3Tests : FunctionalTestsBase
             Fixture.Client.BaseAddress.ToString() + "Http3_ResetAfterHeaders_SetResult"
         );
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(
-            () => response.Content.ReadAsStringAsync()
-        );
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            response.Content.ReadAsStringAsync());
         var qex = Assert.IsType<QuicException>(ex.InnerException?.InnerException?.InnerException);
         Assert.Equal(QuicError.StreamAborted, qex.QuicError);
         Assert.Equal(0x010c, qex.ApplicationErrorCode.Value); // H3_REQUEST_CANCELLED
@@ -163,9 +162,8 @@ public class Http3Tests : FunctionalTestsBase
                 + "Http3_AppExceptionAfterHeaders_InternalError_SetResult"
         );
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(
-            () => response.Content.ReadAsStringAsync()
-        );
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            response.Content.ReadAsStringAsync());
         var qex = Assert.IsType<QuicException>(ex.InnerException?.InnerException?.InnerException);
         Assert.Equal(QuicError.StreamAborted, qex.QuicError);
         Assert.Equal(0x0102, qex.ApplicationErrorCode.Value); // H3_INTERNAL_ERROR

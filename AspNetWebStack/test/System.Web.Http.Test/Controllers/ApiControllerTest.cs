@@ -405,9 +405,8 @@ namespace System.Web.Http
                 IncludeErrorDetailPolicy.Always;
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<HttpResponseException>(
-                () => api.ExecuteAsync(controllerContext, CancellationToken.None)
-            );
+            var exception = await Assert.ThrowsAsync<HttpResponseException>(() =>
+                api.ExecuteAsync(controllerContext, CancellationToken.None));
 
             Assert.Equal(HttpStatusCode.NotFound, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);
@@ -433,13 +432,11 @@ namespace System.Web.Http
                         It.IsAny<CancellationToken>()
                     )
                 )
-                .Returns(
-                    () =>
-                        Task.Factory.StartNew(() =>
-                        {
-                            log.Add("model binding");
-                        })
-                );
+                .Returns(() =>
+                    Task.Factory.StartNew(() =>
+                    {
+                        log.Add("model binding");
+                    }));
             binderMock
                 .Setup(b => b.GetBinding(It.IsAny<HttpActionDescriptor>()))
                 .Returns(actionBindingMock.Object);
@@ -538,14 +535,12 @@ namespace System.Web.Http
                         It.IsAny<CancellationToken>()
                     )
                 )
-                .Returns(
-                    () =>
-                        Task.Factory.StartNew(() =>
-                        {
-                            log.Add("action");
-                            return new HttpResponseMessage();
-                        })
-                );
+                .Returns(() =>
+                    Task.Factory.StartNew(() =>
+                    {
+                        log.Add("action");
+                        return new HttpResponseMessage();
+                    }));
             controllerContext.Configuration.Services.Replace(
                 typeof(IHttpActionInvoker),
                 invokerMock.Object
@@ -1018,9 +1013,8 @@ namespace System.Web.Http
             controllerContext.Configuration.Filters.Add(CreateStubExceptionFilter());
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<Exception>(
-                () => controller.ExecuteAsync(controllerContext, CancellationToken.None)
-            );
+            var exception = await Assert.ThrowsAsync<Exception>(() =>
+                controller.ExecuteAsync(controllerContext, CancellationToken.None));
 
             Assert.Same(expectedException, exception);
             Assert.Equal(new string[] { "logger", "handler" }, log.ToArray());

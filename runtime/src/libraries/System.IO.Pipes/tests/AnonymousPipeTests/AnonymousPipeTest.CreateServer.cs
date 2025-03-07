@@ -14,20 +14,12 @@ namespace System.IO.Pipes.Tests
         [Fact]
         public static void InOutPipeDirection_Throws_NotSupportedException()
         {
-            Assert.Throws<NotSupportedException>(
-                () => new AnonymousPipeServerStream(PipeDirection.InOut)
-            );
-            Assert.Throws<NotSupportedException>(
-                () => new AnonymousPipeServerStream(PipeDirection.InOut, HandleInheritability.None)
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    new AnonymousPipeServerStream(
-                        PipeDirection.InOut,
-                        HandleInheritability.None,
-                        500
-                    )
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                new AnonymousPipeServerStream(PipeDirection.InOut));
+            Assert.Throws<NotSupportedException>(() =>
+                new AnonymousPipeServerStream(PipeDirection.InOut, HandleInheritability.None));
+            Assert.Throws<NotSupportedException>(() =>
+                new AnonymousPipeServerStream(PipeDirection.InOut, HandleInheritability.None, 500));
 
             using (
                 AnonymousPipeServerStream dummyserver = new AnonymousPipeServerStream(
@@ -35,14 +27,12 @@ namespace System.IO.Pipes.Tests
                 )
             )
             {
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                        new AnonymousPipeServerStream(
-                            PipeDirection.InOut,
-                            dummyserver.SafePipeHandle,
-                            null
-                        )
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    new AnonymousPipeServerStream(
+                        PipeDirection.InOut,
+                        dummyserver.SafePipeHandle,
+                        null
+                    ));
             }
 
             using (
@@ -51,14 +41,12 @@ namespace System.IO.Pipes.Tests
                 )
             )
             {
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                        new AnonymousPipeServerStream(
-                            PipeDirection.InOut,
-                            dummyserver.SafePipeHandle,
-                            null
-                        )
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                    new AnonymousPipeServerStream(
+                        PipeDirection.InOut,
+                        dummyserver.SafePipeHandle,
+                        null
+                    ));
             }
         }
 

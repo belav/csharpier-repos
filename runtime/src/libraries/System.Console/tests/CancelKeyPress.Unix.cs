@@ -73,9 +73,8 @@ public partial class CancelKeyPressTests
 
                     // Create a process and wait for it to exit.
                     using (
-                        RemoteInvokeHandle handle = RemoteExecutor.Invoke(
-                            () => RemoteExecutor.SuccessExitCode
-                        )
+                        RemoteInvokeHandle handle = RemoteExecutor.Invoke(() =>
+                            RemoteExecutor.SuccessExitCode)
                     )
                     {
                         // Process exit is detected on SIGCHLD

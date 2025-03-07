@@ -49,15 +49,12 @@ namespace System.Security.Cryptography.EcDsa.Tests
             base.UseAfterDispose(ecdsa, data, sig);
             byte[] hash = new byte[32];
 
-            Assert.Throws<ObjectDisposedException>(
-                () => ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan())
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => ecdsa.SignData(hash.AsSpan(), Span<byte>.Empty, HashAlgorithmName.SHA256)
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => ecdsa.SignHash(hash.AsSpan(), Span<byte>.Empty)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan()));
+            Assert.Throws<ObjectDisposedException>(() =>
+                ecdsa.SignData(hash.AsSpan(), Span<byte>.Empty, HashAlgorithmName.SHA256));
+            Assert.Throws<ObjectDisposedException>(() =>
+                ecdsa.SignHash(hash.AsSpan(), Span<byte>.Empty));
         }
 
         [Theory]
@@ -95,14 +92,12 @@ namespace System.Security.Cryptography.EcDsa.Tests
                     )
             );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    ecdsa.SignData(
-                        ReadOnlySpan<byte>.Empty,
-                        Span<byte>.Empty,
-                        new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                ecdsa.SignData(
+                    ReadOnlySpan<byte>.Empty,
+                    Span<byte>.Empty,
+                    new HashAlgorithmName(Guid.NewGuid().ToString("N"))
+                ));
         }
 
         private static byte[] WithOutputArray(Func<byte[], int> func)
@@ -163,12 +158,10 @@ namespace System.Security.Cryptography.EcDsa.Tests
             base.UseAfterDispose(ecdsa, data, sig);
             byte[] hash = new byte[32];
 
-            Assert.Throws<ObjectDisposedException>(
-                () => ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan())
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => ecdsa.SignData(hash.AsSpan(), HashAlgorithmName.SHA256)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan()));
+            Assert.Throws<ObjectDisposedException>(() =>
+                ecdsa.SignData(hash.AsSpan(), HashAlgorithmName.SHA256));
             Assert.Throws<ObjectDisposedException>(() => ecdsa.SignHash(hash.AsSpan()));
         }
 
@@ -193,13 +186,11 @@ namespace System.Security.Cryptography.EcDsa.Tests
                         (DSASignatureFormat)42
                     )
             );
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    ecdsa.SignData(
-                        ReadOnlySpan<byte>.Empty,
-                        new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                ecdsa.SignData(
+                    ReadOnlySpan<byte>.Empty,
+                    new HashAlgorithmName(Guid.NewGuid().ToString("N"))
+                ));
         }
     }
 
@@ -259,9 +250,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
             base.UseAfterDispose(ecdsa, data, sig);
             byte[] hash = new byte[32];
 
-            Assert.Throws<ObjectDisposedException>(
-                () => ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan())
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                ecdsa.VerifyHash(hash.AsSpan(), sig.AsSpan()));
             Assert.Throws<ObjectDisposedException>(() => ecdsa.TrySignHash(hash, sig, out _));
         }
 
@@ -288,15 +278,13 @@ namespace System.Security.Cryptography.EcDsa.Tests
                         out int bytesWritten
                     )
             );
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    ecdsa.TrySignData(
-                        ReadOnlySpan<byte>.Empty,
-                        Span<byte>.Empty,
-                        new HashAlgorithmName(Guid.NewGuid().ToString("N")),
-                        out int bytesWritten
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                ecdsa.TrySignData(
+                    ReadOnlySpan<byte>.Empty,
+                    Span<byte>.Empty,
+                    new HashAlgorithmName(Guid.NewGuid().ToString("N")),
+                    out int bytesWritten
+                ));
         }
 
         [Theory, MemberData(nameof(RealImplementations))]
@@ -320,14 +308,12 @@ namespace System.Security.Cryptography.EcDsa.Tests
                         new HashAlgorithmName("")
                     )
             );
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                    ecdsa.VerifyData(
-                        ReadOnlySpan<byte>.Empty,
-                        Span<byte>.Empty,
-                        new HashAlgorithmName(Guid.NewGuid().ToString("N"))
-                    )
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+                ecdsa.VerifyData(
+                    ReadOnlySpan<byte>.Empty,
+                    Span<byte>.Empty,
+                    new HashAlgorithmName(Guid.NewGuid().ToString("N"))
+                ));
         }
 
         private static byte[] TryWithOutputArray(Func<byte[], (bool, int)> func)
@@ -586,9 +572,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
                 ECParameters keyParameters = ecdsaPriv.ExportParameters(false);
                 ecdsa.ImportParameters(keyParameters);
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => SignData(ecdsa, new byte[] { 1, 2, 3, 4, 5 }, HashAlgorithmName.SHA256)
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    SignData(ecdsa, new byte[] { 1, 2, 3, 4, 5 }, HashAlgorithmName.SHA256));
             }
         }
 

@@ -20,9 +20,8 @@ namespace System.Linq.Tests
         )]
         public void NonGenericEnumerableDebugView_ThrowsForNullSource()
         {
-            Exception exc = Assert.Throws<TargetInvocationException>(
-                () => CreateSystemCore_EnumerableDebugView(null)
-            );
+            Exception exc = Assert.Throws<TargetInvocationException>(() =>
+                CreateSystemCore_EnumerableDebugView(null));
             ArgumentNullException ane = Assert.IsType<ArgumentNullException>(exc.InnerException);
             Assert.Equal("enumerable", ane.ParamName);
         }
@@ -35,9 +34,8 @@ namespace System.Linq.Tests
         {
             IEnumerable source = Enumerable.Range(10, 0);
             object debugView = CreateSystemCore_EnumerableDebugView(source);
-            Exception exc = Assert.Throws<TargetInvocationException>(
-                () => GetItems<object>(debugView)
-            );
+            Exception exc = Assert.Throws<TargetInvocationException>(() =>
+                GetItems<object>(debugView));
             Assert.NotNull(exc.InnerException);
             Assert.Equal(
                 "System.Linq.SystemCore_EnumerableDebugViewEmptyException",
@@ -63,9 +61,8 @@ namespace System.Linq.Tests
         )]
         public void GenericEnumerableDebugView_ThrowsForNullSource()
         {
-            Exception exc = Assert.Throws<TargetInvocationException>(
-                () => CreateSystemCore_EnumerableDebugView<int>(null)
-            );
+            Exception exc = Assert.Throws<TargetInvocationException>(() =>
+                CreateSystemCore_EnumerableDebugView<int>(null));
             ArgumentNullException ane = Assert.IsType<ArgumentNullException>(exc.InnerException);
             Assert.Equal("enumerable", ane.ParamName);
         }
@@ -78,9 +75,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<int> source = Enumerable.Range(10, 0);
             object debugView = CreateSystemCore_EnumerableDebugView(source);
-            Exception exc = Assert.Throws<TargetInvocationException>(
-                () => GetItems<int>(debugView)
-            );
+            Exception exc = Assert.Throws<TargetInvocationException>(() =>
+                GetItems<int>(debugView));
             Assert.NotNull(exc.InnerException);
             Assert.Equal(
                 "System.Linq.SystemCore_EnumerableDebugViewEmptyException",

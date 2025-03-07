@@ -3043,9 +3043,8 @@ EXEC sp_rename N'[People].[Foo]', N'foo', N'INDEX';
 
     public override async Task Add_primary_key_int()
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Add_primary_key_int()
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Add_primary_key_int());
 
         Assert.Equal(SqlServerStrings.AlterIdentityColumn, exception.Message);
     }
@@ -3135,9 +3134,8 @@ ALTER TABLE [People] ADD CONSTRAINT [PK_People] PRIMARY KEY NONCLUSTERED ([SomeF
 
     public override async Task Drop_primary_key_int()
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Drop_primary_key_int()
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Drop_primary_key_int());
 
         Assert.Equal(SqlServerStrings.AlterIdentityColumn, exception.Message);
     }
@@ -8595,77 +8593,75 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
     public virtual async Task Alter_computed_column_sql_on_temporal_table()
     {
         var message = (
-            await Assert.ThrowsAsync<NotSupportedException>(
-                () =>
-                    Test(
-                        builder =>
-                            builder.Entity(
-                                "Customer",
-                                e =>
-                                {
-                                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                                    e.HasKey("Id");
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                Test(
+                    builder =>
+                        builder.Entity(
+                            "Customer",
+                            e =>
+                            {
+                                e.Property<int>("Id").ValueGeneratedOnAdd();
+                                e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                                e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                                e.HasKey("Id");
 
-                                    e.ToTable(tb =>
-                                        tb.IsTemporal(ttb =>
-                                        {
-                                            ttb.UseHistoryTable("HistoryTable");
-                                            ttb.HasPeriodStart("Start");
-                                            ttb.HasPeriodEnd("End");
-                                        })
-                                    );
-                                }
-                            ),
-                        builder =>
-                            builder.Entity(
-                                "Customer",
-                                e =>
-                                {
-                                    e.Property<int?>("IdPlusFive")
-                                        .HasComputedColumnSql("Id + 5 PERSISTED");
-                                }
-                            ),
-                        builder =>
-                            builder.Entity(
-                                "Customer",
-                                e =>
-                                {
-                                    e.Property<int?>("IdPlusFive")
-                                        .HasComputedColumnSql("Id + 10 PERSISTED");
-                                }
-                            ),
-                        model =>
-                        {
-                            var table = Assert.Single(model.Tables);
-                            Assert.Equal("Customer", table.Name);
-                            Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                            Assert.Equal(
-                                "HistoryTable",
-                                table[SqlServerAnnotationNames.TemporalHistoryTableName]
-                            );
-                            Assert.Equal(
-                                "Start",
-                                table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
-                            );
-                            Assert.Equal(
-                                "End",
-                                table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
-                            );
+                                e.ToTable(tb =>
+                                    tb.IsTemporal(ttb =>
+                                    {
+                                        ttb.UseHistoryTable("HistoryTable");
+                                        ttb.HasPeriodStart("Start");
+                                        ttb.HasPeriodEnd("End");
+                                    })
+                                );
+                            }
+                        ),
+                    builder =>
+                        builder.Entity(
+                            "Customer",
+                            e =>
+                            {
+                                e.Property<int?>("IdPlusFive")
+                                    .HasComputedColumnSql("Id + 5 PERSISTED");
+                            }
+                        ),
+                    builder =>
+                        builder.Entity(
+                            "Customer",
+                            e =>
+                            {
+                                e.Property<int?>("IdPlusFive")
+                                    .HasComputedColumnSql("Id + 10 PERSISTED");
+                            }
+                        ),
+                    model =>
+                    {
+                        var table = Assert.Single(model.Tables);
+                        Assert.Equal("Customer", table.Name);
+                        Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                        Assert.Equal(
+                            "HistoryTable",
+                            table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                        );
+                        Assert.Equal(
+                            "Start",
+                            table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                        );
+                        Assert.Equal(
+                            "End",
+                            table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                        );
 
-                            Assert.Collection(
-                                table.Columns,
-                                c => Assert.Equal("Id", c.Name),
-                                c => Assert.Equal("IdPlusFive", c.Name)
-                            );
-                            Assert.Same(
-                                table.Columns.Single(c => c.Name == "Id"),
-                                Assert.Single(table.PrimaryKey!.Columns)
-                            );
-                        }
-                    )
-            )
+                        Assert.Collection(
+                            table.Columns,
+                            c => Assert.Equal("Id", c.Name),
+                            c => Assert.Equal("IdPlusFive", c.Name)
+                        );
+                        Assert.Same(
+                            table.Columns.Single(c => c.Name == "Id"),
+                            Assert.Single(table.PrimaryKey!.Columns)
+                        );
+                    }
+                ))
         ).Message;
 
         Assert.Equal(

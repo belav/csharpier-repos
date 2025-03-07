@@ -95,14 +95,12 @@ namespace System.Reflection.Emit.Tests
             module.CreateGlobalFunctions();
 
             Assert.Null(field.DeclaringType);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    module.DefineInitializedData(
-                        "MyField2",
-                        new byte[] { 1, 0, 1 },
-                        FieldAttributes.Public
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                module.DefineInitializedData(
+                    "MyField2",
+                    new byte[] { 1, 0, 1 },
+                    FieldAttributes.Public
+                ));
         }
 
         [ConditionalFact(

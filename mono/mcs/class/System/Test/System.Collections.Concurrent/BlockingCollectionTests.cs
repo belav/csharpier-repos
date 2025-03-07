@@ -201,9 +201,8 @@ namespace MonoTests.System.Collections.Concurrent
             var arr = new[] { a, b };
             string res = null;
 
-            Task<int> t = Task.Factory.StartNew(
-                () => BlockingCollection<string>.TakeFromAny(arr, out res)
-            );
+            Task<int> t = Task.Factory.StartNew(() =>
+                BlockingCollection<string>.TakeFromAny(arr, out res));
             a.Add("foo");
             Assert.AreEqual(0, t.Result, "#1");
             Assert.AreEqual("foo", res, "#2");
@@ -224,17 +223,15 @@ namespace MonoTests.System.Collections.Concurrent
             var cts = new CancellationTokenSource();
             string res = null;
 
-            Task<int> t = Task.Factory.StartNew(
-                () => BlockingCollection<string>.TakeFromAny(arr, out res, cts.Token)
-            );
+            Task<int> t = Task.Factory.StartNew(() =>
+                BlockingCollection<string>.TakeFromAny(arr, out res, cts.Token));
             Thread.Sleep(100);
             a.Add("foo");
             Assert.AreEqual(0, t.Result, "#1");
             Assert.AreEqual("foo", res, "#2");
 
-            t = Task.Factory.StartNew(
-                () => BlockingCollection<string>.TakeFromAny(arr, out res, cts.Token)
-            );
+            t = Task.Factory.StartNew(() =>
+                BlockingCollection<string>.TakeFromAny(arr, out res, cts.Token));
             Thread.Sleep(100);
             b.Add("bar");
             Assert.AreEqual(1, t.Result, "#3");

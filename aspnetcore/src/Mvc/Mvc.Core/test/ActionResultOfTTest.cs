@@ -15,9 +15,8 @@ public class ActionResultOfTTest
         var input = new FileStreamResult(Stream.Null, "application/json");
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(
-            () => new ActionResult<FileStreamResult>(value: input)
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            new ActionResult<FileStreamResult>(value: input));
         Assert.Equal(
             $"Invalid type parameter '{typeof(FileStreamResult)}' specified for 'ActionResult<T>'.",
             ex.Message
@@ -31,9 +30,8 @@ public class ActionResultOfTTest
         var actionResult = new OkResult();
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(
-            () => new ActionResult<FileStreamResult>(result: actionResult)
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            new ActionResult<FileStreamResult>(result: actionResult));
         Assert.Equal(
             $"Invalid type parameter '{typeof(FileStreamResult)}' specified for 'ActionResult<T>'.",
             ex.Message
@@ -47,9 +45,8 @@ public class ActionResultOfTTest
         var result = new TestResult();
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(
-            () => new ActionResult<TestResult>(value: result)
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+            new ActionResult<TestResult>(value: result));
         Assert.Equal(
             $"Invalid type parameter '{typeof(TestResult)}' specified for 'ActionResult<T>'.",
             ex.Message

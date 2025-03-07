@@ -291,9 +291,8 @@ namespace System.Net.Sockets.Tests
                 }
                 else
                 {
-                    SocketException se = await Assert.ThrowsAsync<SocketException>(
-                        () => AcceptAsync(listener, server)
-                    );
+                    SocketException se = await Assert.ThrowsAsync<SocketException>(() =>
+                        AcceptAsync(listener, server));
                     Assert.Equal(SocketError.InvalidArgument, se.SocketErrorCode);
                 }
             }
@@ -333,9 +332,8 @@ namespace System.Net.Sockets.Tests
 
                 server.BindToAnonymousPort(IPAddress.Loopback);
 
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => AcceptAsync(listener, server)
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AcceptAsync(listener, server));
             }
         }
 
@@ -378,9 +376,8 @@ namespace System.Net.Sockets.Tests
                 Assert.Same(server, accepted);
                 Assert.True(accepted.Connected);
 
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => AcceptAsync(listener, server)
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AcceptAsync(listener, server));
             }
         }
 
@@ -624,9 +621,8 @@ namespace System.Net.Sockets.Tests
                 var acceptTask = listen.AcceptAsync(cts.Token);
                 Assert.True(acceptTask.IsCompleted);
 
-                var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    async () => await acceptTask
-                );
+                var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                    await acceptTask);
                 Assert.Equal(cts.Token, oce.CancellationToken);
             }
         }
@@ -652,9 +648,8 @@ namespace System.Net.Sockets.Tests
 
                 cts.Cancel();
 
-                var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    async () => await acceptTask
-                );
+                var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                    await acceptTask);
                 Assert.Equal(cts.Token, oce.CancellationToken);
             }
         }

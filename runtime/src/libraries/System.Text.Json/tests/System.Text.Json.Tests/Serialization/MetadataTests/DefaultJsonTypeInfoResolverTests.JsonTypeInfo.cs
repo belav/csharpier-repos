@@ -54,9 +54,8 @@ namespace System.Text.Json.Serialization.Tests
             else if (ti.Kind == JsonTypeInfoKind.None)
             {
                 Assert.Null(ti.CreateObject);
-                Assert.Throws<InvalidOperationException>(
-                    () => ti.CreateObject = () => Activator.CreateInstance(type)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    ti.CreateObject = () => Activator.CreateInstance(type));
             }
             else
             {
@@ -99,9 +98,8 @@ namespace System.Text.Json.Serialization.Tests
             if (ti.Kind == JsonTypeInfoKind.None)
             {
                 Assert.Null(ti.CreateObject);
-                Assert.Throws<InvalidOperationException>(
-                    () => ti.CreateObject = () => (T)Activator.CreateInstance(typeof(T))
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    ti.CreateObject = () => (T)Activator.CreateInstance(typeof(T)));
             }
             else
             {
@@ -248,9 +246,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             JsonTypeInfo jsonTypeInfo = JsonTypeInfo.CreateJsonTypeInfo(typeof(Poco), new());
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => jsonTypeInfo.NumberHandling = handling
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                jsonTypeInfo.NumberHandling = handling);
         }
 
         [Theory]
@@ -391,9 +388,8 @@ namespace System.Text.Json.Serialization.Tests
 
             object testObj = Activator.CreateInstance(expectedType);
 
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize(testObj, expectedType, o)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(testObj, expectedType, o));
         }
 
         [Theory]
@@ -448,33 +444,25 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.True(typeInfo.IsReadOnly);
             Assert.True(typeInfo.Properties.IsReadOnly);
-            Assert.Throws<InvalidOperationException>(
-                () => typeInfo.CreateJsonPropertyInfo(typeof(string), "foo")
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => untyped.CreateObject = untyped.CreateObject
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => typeInfo.CreateObject = typeInfo.CreateObject
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => typeInfo.NumberHandling = typeInfo.NumberHandling
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => typeInfo.CreateJsonPropertyInfo(typeof(string), "foo")
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => typeInfo.UnmappedMemberHandling = typeInfo.UnmappedMemberHandling
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                typeInfo.CreateJsonPropertyInfo(typeof(string), "foo"));
+            Assert.Throws<InvalidOperationException>(() =>
+                untyped.CreateObject = untyped.CreateObject);
+            Assert.Throws<InvalidOperationException>(() =>
+                typeInfo.CreateObject = typeInfo.CreateObject);
+            Assert.Throws<InvalidOperationException>(() =>
+                typeInfo.NumberHandling = typeInfo.NumberHandling);
+            Assert.Throws<InvalidOperationException>(() =>
+                typeInfo.CreateJsonPropertyInfo(typeof(string), "foo"));
+            Assert.Throws<InvalidOperationException>(() =>
+                typeInfo.UnmappedMemberHandling = typeInfo.UnmappedMemberHandling);
             Assert.Throws<InvalidOperationException>(() => typeInfo.Properties.Clear());
             Assert.Throws<InvalidOperationException>(() => typeInfo.PolymorphismOptions = null);
             Assert.Throws<InvalidOperationException>(() => typeInfo.PolymorphismOptions = new());
-            Assert.Throws<InvalidOperationException>(
-                () => typeInfo.PreferredPropertyObjectCreationHandling = null
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => typeInfo.OriginatingResolver = new DefaultJsonTypeInfoResolver()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                typeInfo.PreferredPropertyObjectCreationHandling = null);
+            Assert.Throws<InvalidOperationException>(() =>
+                typeInfo.OriginatingResolver = new DefaultJsonTypeInfoResolver());
 
             if (typeInfo.Properties.Count > 0)
             {
@@ -487,17 +475,13 @@ namespace System.Text.Json.Serialization.Tests
             if (typeInfo.PolymorphismOptions is JsonPolymorphismOptions jpo)
             {
                 Assert.True(jpo.DerivedTypes.IsReadOnly);
-                Assert.Throws<InvalidOperationException>(
-                    () => jpo.IgnoreUnrecognizedTypeDiscriminators = true
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => jpo.TypeDiscriminatorPropertyName = "__case"
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                        jpo.UnknownDerivedTypeHandling =
-                            JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    jpo.IgnoreUnrecognizedTypeDiscriminators = true);
+                Assert.Throws<InvalidOperationException>(() =>
+                    jpo.TypeDiscriminatorPropertyName = "__case");
+                Assert.Throws<InvalidOperationException>(() =>
+                    jpo.UnknownDerivedTypeHandling =
+                        JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor);
                 Assert.Throws<InvalidOperationException>(() => jpo.DerivedTypes.Clear());
                 Assert.Throws<InvalidOperationException>(() => jpo.DerivedTypes.Add(default));
                 Assert.Throws<InvalidOperationException>(() => jpo.DerivedTypes.Insert(0, default));
@@ -536,9 +520,8 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.Throws<InvalidOperationException>(() => property.ShouldSerialize = null);
                 Assert.Throws<InvalidOperationException>(() => property.Get = null);
                 Assert.Throws<InvalidOperationException>(() => property.Set = null);
-                Assert.Throws<InvalidOperationException>(
-                    () => property.ObjectCreationHandling = null
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    property.ObjectCreationHandling = null);
                 Assert.Throws<InvalidOperationException>(() => property.IsExtensionData = true);
                 Assert.Throws<InvalidOperationException>(() => property.IsRequired = true);
             }
@@ -607,9 +590,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions();
             JsonTypeInfo jsonTypeInfo = JsonTypeInfo.CreateJsonTypeInfo(collectionType, options);
-            Assert.Throws<InvalidOperationException>(
-                () => jsonTypeInfo.CreateObject = () => new object()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                jsonTypeInfo.CreateObject = () => new object());
         }
 
         [Theory]
@@ -691,9 +673,8 @@ namespace System.Text.Json.Serialization.Tests
 
             MyClass obj = new() { Value = "foo" };
 
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize<MyClass>(obj, o)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize<MyClass>(obj, o));
         }
 
         [Theory]
@@ -723,9 +704,8 @@ namespace System.Text.Json.Serialization.Tests
 
             MyClass obj = new() { Value = "foo" };
 
-            Assert.Throws<InvalidOperationException>(
-                () => JsonSerializer.Serialize<MyClass>(obj, o)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize<MyClass>(obj, o));
         }
 
         [Fact]
@@ -764,12 +744,10 @@ namespace System.Text.Json.Serialization.Tests
                     if (ReferenceEquals(typeInfo1, typeInfo2))
                         continue;
 
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            typeInfo1.Properties.Add(
-                                typeInfo2.CreateJsonPropertyInfo(typeof(int), "test")
-                            )
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        typeInfo1.Properties.Add(
+                            typeInfo2.CreateJsonPropertyInfo(typeof(int), "test")
+                        ));
                 }
             }
         }
@@ -861,16 +839,13 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void CreateJsonTypeInfoWithNullArgumentsThrows()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => JsonTypeInfo.CreateJsonTypeInfo(null, new JsonSerializerOptions())
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => JsonTypeInfo.CreateJsonTypeInfo(typeof(string), null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonTypeInfo.CreateJsonTypeInfo(null, new JsonSerializerOptions()));
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonTypeInfo.CreateJsonTypeInfo(typeof(string), null));
             Assert.Throws<ArgumentNullException>(() => JsonTypeInfo.CreateJsonTypeInfo(null, null));
-            Assert.Throws<ArgumentNullException>(
-                () => JsonTypeInfo.CreateJsonTypeInfo<string>(null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonTypeInfo.CreateJsonTypeInfo<string>(null));
         }
 
         [Theory]
@@ -882,9 +857,8 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(RefStruct))]
         public static void CreateJsonTypeInfoWithInappropriateTypeThrows(Type type)
         {
-            Assert.Throws<ArgumentException>(
-                () => JsonTypeInfo.CreateJsonTypeInfo(type, new JsonSerializerOptions())
-            );
+            Assert.Throws<ArgumentException>(() =>
+                JsonTypeInfo.CreateJsonTypeInfo(type, new JsonSerializerOptions()));
         }
 
         ref struct RefStruct
@@ -900,13 +874,11 @@ namespace System.Text.Json.Serialization.Tests
                 Converters = { new ClassWithThrowingConverterFactory.Converter() },
             };
             // Should not be wrapped in TargetInvocationException.
-            Assert.Throws<NotFiniteNumberException>(
-                () =>
-                    JsonTypeInfo.CreateJsonTypeInfo(
-                        typeof(ClassWithThrowingConverterFactory),
-                        options
-                    )
-            );
+            Assert.Throws<NotFiniteNumberException>(() =>
+                JsonTypeInfo.CreateJsonTypeInfo(
+                    typeof(ClassWithThrowingConverterFactory),
+                    options
+                ));
         }
 
         public class ClassWithThrowingConverterFactory
@@ -928,9 +900,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonTypeInfo ti = JsonTypeInfo.CreateJsonTypeInfo<MyClass>(new JsonSerializerOptions());
             Assert.Throws<ArgumentNullException>(() => ti.CreateJsonPropertyInfo(null, "test"));
-            Assert.Throws<ArgumentNullException>(
-                () => ti.CreateJsonPropertyInfo(typeof(string), null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                ti.CreateJsonPropertyInfo(typeof(string), null));
             Assert.Throws<ArgumentNullException>(() => ti.CreateJsonPropertyInfo(null, null));
         }
 
@@ -1390,17 +1361,13 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new();
             options.TypeInfoResolver = resolver;
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    JsonSerializer.Serialize(
-                        new RecursiveType() { Next = new RecursiveType() },
-                        options
-                    )
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    JsonSerializer.Deserialize<RecursiveType>("""{"Next":{"Next":null}}""", options)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Serialize(
+                    new RecursiveType() { Next = new RecursiveType() },
+                    options
+                ));
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<RecursiveType>("""{"Next":{"Next":null}}""", options));
 
             static JsonTypeInfo? ResolveTypeInfo(Type type, JsonSerializerOptions options)
             {
@@ -1682,9 +1649,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             JsonTypeInfo jsonTypeInfo = JsonTypeInfo.CreateJsonTypeInfo(typeof(Poco), new());
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => jsonTypeInfo.UnmappedMemberHandling = handling
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                jsonTypeInfo.UnmappedMemberHandling = handling);
         }
 
         [Theory]
@@ -1701,19 +1667,14 @@ namespace System.Text.Json.Serialization.Tests
             // Invalid kinds default to null.
             Assert.Null(jsonTypeInfo.PreferredPropertyObjectCreationHandling);
 
-            Assert.Throws<InvalidOperationException>(
-                () => jsonTypeInfo.PreferredPropertyObjectCreationHandling = null
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    jsonTypeInfo.PreferredPropertyObjectCreationHandling =
-                        JsonObjectCreationHandling.Populate
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    jsonTypeInfo.PreferredPropertyObjectCreationHandling =
-                        JsonObjectCreationHandling.Replace
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                jsonTypeInfo.PreferredPropertyObjectCreationHandling = null);
+            Assert.Throws<InvalidOperationException>(() =>
+                jsonTypeInfo.PreferredPropertyObjectCreationHandling =
+                    JsonObjectCreationHandling.Populate);
+            Assert.Throws<InvalidOperationException>(() =>
+                jsonTypeInfo.PreferredPropertyObjectCreationHandling =
+                    JsonObjectCreationHandling.Replace);
             Assert.Null(jsonTypeInfo.PreferredPropertyObjectCreationHandling);
         }
 
@@ -1726,9 +1687,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             JsonTypeInfo jsonTypeInfo = JsonTypeInfo.CreateJsonTypeInfo(typeof(Poco), new());
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => jsonTypeInfo.PreferredPropertyObjectCreationHandling = handling
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                jsonTypeInfo.PreferredPropertyObjectCreationHandling = handling);
         }
 
         [Theory]
@@ -1741,9 +1701,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             JsonTypeInfo jsonTypeInfo = JsonTypeInfo.CreateJsonTypeInfo(type, new());
-            Assert.Throws<InvalidOperationException>(
-                () => jsonTypeInfo.UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                jsonTypeInfo.UnmappedMemberHandling = JsonUnmappedMemberHandling.Skip);
         }
 
         [Theory]

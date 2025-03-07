@@ -303,12 +303,10 @@ namespace System.Security.Cryptography.Csp.Tests
         public static void Ctor_UseCspParameter_Throws_Unix()
         {
             var cspParameters = new CspParameters();
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new RSACryptoServiceProvider(cspParameters)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new RSACryptoServiceProvider(0, cspParameters)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new RSACryptoServiceProvider(cspParameters));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new RSACryptoServiceProvider(0, cspParameters));
         }
 
         [Fact]
@@ -327,9 +325,8 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var rsa = new RSACryptoServiceProvider())
             {
                 // Verify that Unix shims and Windows Csp both throws the same exception when large Exponent imported
-                Assert.ThrowsAny<CryptographicException>(
-                    () => rsa.ImportParameters(TestData.RsaBigExponentParams)
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    rsa.ImportParameters(TestData.RsaBigExponentParams));
             }
         }
 
@@ -362,9 +359,8 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                Assert.Throws<CryptographicException>(
-                    () => rsa.Encrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256)
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    rsa.Encrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256));
             }
         }
 
@@ -373,9 +369,8 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                Assert.Throws<CryptographicException>(
-                    () => rsa.Decrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256)
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    rsa.Decrypt(TestData.HelloBytes, RSAEncryptionPadding.OaepSHA256));
             }
         }
 
@@ -384,14 +379,12 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        rsa.SignData(
-                            TestData.HelloBytes,
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pss
-                        )
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    rsa.SignData(
+                        TestData.HelloBytes,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pss
+                    ));
             }
         }
 
@@ -401,15 +394,13 @@ namespace System.Security.Cryptography.Csp.Tests
             using (var rsa = new RSACryptoServiceProvider())
             {
                 byte[] sig = rsa.SignData(TestData.HelloBytes, "SHA256");
-                Assert.Throws<CryptographicException>(
-                    () =>
-                        rsa.VerifyData(
-                            TestData.HelloBytes,
-                            sig,
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pss
-                        )
-                );
+                Assert.Throws<CryptographicException>(() =>
+                    rsa.VerifyData(
+                        TestData.HelloBytes,
+                        sig,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pss
+                    ));
             }
         }
 

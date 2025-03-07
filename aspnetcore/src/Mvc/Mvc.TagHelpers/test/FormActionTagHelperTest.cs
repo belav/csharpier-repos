@@ -561,9 +561,8 @@ public class FormActionTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => tagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            tagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }
@@ -606,9 +605,8 @@ public class FormActionTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => tagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            tagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }
@@ -649,9 +647,8 @@ public class FormActionTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => tagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            tagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }
@@ -692,9 +689,8 @@ public class FormActionTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => tagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            tagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }
@@ -735,9 +731,8 @@ public class FormActionTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => tagHelper.ProcessAsync(context, output)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            tagHelper.ProcessAsync(context, output));
 
         Assert.Equal(expectedErrorMessage, ex.Message);
     }

@@ -57,9 +57,8 @@ namespace System.Web.Mvc.Test
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>(MockBehavior.Strict);
 
             // Act & Assert
-            var ex = Assert.Throws<MockException>(
-                () => MultiServiceResolver.GetCombined<TestProvider>(null, resolver.Object)
-            );
+            var ex = Assert.Throws<MockException>(() =>
+                MultiServiceResolver.GetCombined<TestProvider>(null, resolver.Object));
             Assert.Equal(
                 "IDependencyResolver.GetServices(System.Web.Mvc.Test.MultiServiceResolverTest+TestProvider) invocation failed with mock behavior Strict."
                     + Environment.NewLine

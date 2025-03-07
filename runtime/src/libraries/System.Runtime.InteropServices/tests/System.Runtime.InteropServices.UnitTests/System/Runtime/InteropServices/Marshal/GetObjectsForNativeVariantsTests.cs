@@ -312,12 +312,10 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public static void GetObjectsForNativeVariants_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.GetObjectsForNativeVariants(IntPtr.Zero, 10)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.GetObjectsForNativeVariants<int>(IntPtr.Zero, 10)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetObjectsForNativeVariants(IntPtr.Zero, 10));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetObjectsForNativeVariants<int>(IntPtr.Zero, 10));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]

@@ -90,9 +90,8 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.CreateType();
 
-            Assert.Throws<InvalidOperationException>(
-                () => type.AddInterfaceImplementation(typeof(EmptyNonGenericInterface1))
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                type.AddInterfaceImplementation(typeof(EmptyNonGenericInterface1)));
         }
 
         public static IEnumerable<object[]> NonInterfaceTypes_TestData()

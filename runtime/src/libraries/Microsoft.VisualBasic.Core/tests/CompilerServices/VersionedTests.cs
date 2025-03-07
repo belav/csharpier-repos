@@ -40,9 +40,8 @@ namespace Microsoft.VisualBasic.Tests
             object[] args
         )
         {
-            Assert.Throws<ArgumentException>(
-                () => Versioned.CallByName(instance, methodName, useCallType, args)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                Versioned.CallByName(instance, methodName, useCallType, args));
         }
 
         [Theory]
@@ -54,9 +53,8 @@ namespace Microsoft.VisualBasic.Tests
             object[] args
         )
         {
-            Assert.Throws<MissingMemberException>(
-                () => Versioned.CallByName(instance, methodName, useCallType, args)
-            );
+            Assert.Throws<MissingMemberException>(() =>
+                Versioned.CallByName(instance, methodName, useCallType, args));
         }
 
         public static IEnumerable<object[]> CallByName_TestData()

@@ -489,12 +489,10 @@ namespace Microsoft.Extensions
                 var config = configurationBuilder.Build();
                 var configSection = config.GetSection("Section");
 
-                var exception = Assert.Throws<InvalidOperationException>(
-                    () =>
-                        configSection.Get<MyModelContainingArray>(o =>
-                            o.ErrorOnUnknownConfiguration = true
-                        )
-                );
+                var exception = Assert.Throws<InvalidOperationException>(() =>
+                    configSection.Get<MyModelContainingArray>(o =>
+                        o.ErrorOnUnknownConfiguration = true
+                    ));
 
                 Assert.Equal(
                     SR.Format(
@@ -520,12 +518,10 @@ namespace Microsoft.Extensions
                 var config = configurationBuilder.Build();
                 var configSection = config.GetSection("Section");
 
-                var exception = Assert.Throws<InvalidOperationException>(
-                    () =>
-                        configSection.Get<MyModelContainingADictionary>(o =>
-                            o.ErrorOnUnknownConfiguration = true
-                        )
-                );
+                var exception = Assert.Throws<InvalidOperationException>(() =>
+                    configSection.Get<MyModelContainingADictionary>(o =>
+                        o.ErrorOnUnknownConfiguration = true
+                    ));
 
                 Assert.Equal(
                     SR.Format(

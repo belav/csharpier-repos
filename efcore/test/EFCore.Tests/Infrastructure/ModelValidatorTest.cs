@@ -1790,9 +1790,8 @@ public partial class ModelValidatorTest : ModelValidatorTestBase
         Assert.Equal(
             CoreStrings.SeedDatumDerivedType(nameof(A), nameof(D)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => modelBuilder.Entity<A>().HasData(new D { Id = 2, P0 = 3 })
-                )
+                .Throws<InvalidOperationException>(() =>
+                    modelBuilder.Entity<A>().HasData(new D { Id = 2, P0 = 3 }))
                 .Message
         );
     }
@@ -1805,13 +1804,11 @@ public partial class ModelValidatorTest : ModelValidatorTestBase
         Assert.Equal(
             CoreStrings.SeedDatumDerivedType(nameof(A), nameof(D)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        modelBuilder
-                            .Entity<B>()
-                            .OwnsOne(b => b.A, a => a.HasData(new D { Id = 2, P0 = 3 }))
-                            .OwnsOne(b => b.AnotherA)
-                )
+                .Throws<InvalidOperationException>(() =>
+                    modelBuilder
+                        .Entity<B>()
+                        .OwnsOne(b => b.A, a => a.HasData(new D { Id = 2, P0 = 3 }))
+                        .OwnsOne(b => b.AnotherA))
                 .Message
         );
     }

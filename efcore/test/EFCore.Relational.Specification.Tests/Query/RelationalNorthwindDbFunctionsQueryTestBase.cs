@@ -81,13 +81,11 @@ public abstract class NorthwindDbFunctionsQueryRelationalTestBase<TFixture>
     {
         var arr = new[] { 1, 2 };
 
-        await AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss => ss.Set<OrderDetail>().Where(od => EF.Functions.Least(arr) == 10251)
-                )
-        );
+        await AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss => ss.Set<OrderDetail>().Where(od => EF.Functions.Least(arr) == 10251)
+            ));
     }
 
     [ConditionalTheory]
@@ -96,13 +94,11 @@ public abstract class NorthwindDbFunctionsQueryRelationalTestBase<TFixture>
     {
         var arr = new[] { 1, 2 };
 
-        await AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss => ss.Set<OrderDetail>().Where(od => EF.Functions.Greatest(arr) == 10251)
-                )
-        );
+        await AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss => ss.Set<OrderDetail>().Where(od => EF.Functions.Greatest(arr) == 10251)
+            ));
     }
 
     protected abstract string CaseInsensitiveCollation { get; }

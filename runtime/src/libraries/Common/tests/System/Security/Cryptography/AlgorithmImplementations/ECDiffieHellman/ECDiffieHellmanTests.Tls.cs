@@ -18,9 +18,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         {
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => ecdh.DeriveKeyTls(null, s_fourByteLabel, s_emptySeed)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    ecdh.DeriveKeyTls(null, s_fourByteLabel, s_emptySeed));
             }
         }
 
@@ -32,9 +31,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman bob = ECDiffieHellmanFactory.Create(bobSize))
             using (ECDiffieHellmanPublicKey bobPublic = bob.PublicKey)
             {
-                Assert.ThrowsAny<ArgumentException>(
-                    () => alice.DeriveKeyTls(bobPublic, s_fourByteLabel, s_emptySeed)
-                );
+                Assert.ThrowsAny<ArgumentException>(() =>
+                    alice.DeriveKeyTls(bobPublic, s_fourByteLabel, s_emptySeed));
             }
         }
 
@@ -44,9 +42,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => ecdh.DeriveKeyTls(publicKey, null, s_emptySeed)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    ecdh.DeriveKeyTls(publicKey, null, s_emptySeed));
             }
         }
 
@@ -56,9 +53,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => ecdh.DeriveKeyTls(publicKey, s_fourByteLabel, null)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    ecdh.DeriveKeyTls(publicKey, s_fourByteLabel, null));
             }
         }
 
@@ -73,9 +69,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
             using (ECDiffieHellmanPublicKey publicKey = ecdh.PublicKey)
             {
-                Assert.ThrowsAny<CryptographicException>(
-                    () => ecdh.DeriveKeyTls(publicKey, s_fourByteLabel, seed)
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    ecdh.DeriveKeyTls(publicKey, s_fourByteLabel, seed));
             }
         }
 

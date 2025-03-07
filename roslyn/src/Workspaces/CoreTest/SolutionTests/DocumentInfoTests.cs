@@ -26,9 +26,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentNullException>(() => DocumentInfo.Create(id: null, "doc"));
             Assert.Throws<ArgumentNullException>(() => DocumentInfo.Create(documentId, name: null));
 
-            Assert.Throws<ArgumentNullException>(
-                () => DocumentInfo.Create(documentId, "doc", folders: new[] { "folder", null })
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                DocumentInfo.Create(documentId, "doc", folders: new[] { "folder", null }));
         }
 
         [Fact]

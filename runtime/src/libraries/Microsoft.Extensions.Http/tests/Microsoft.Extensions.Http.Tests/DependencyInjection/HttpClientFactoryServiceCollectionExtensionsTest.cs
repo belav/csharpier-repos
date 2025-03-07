@@ -717,9 +717,8 @@ namespace Microsoft.Extensions.DependencyInjection
             serviceCollection.AddHttpClient<TestTypedClient>();
 
             // Act
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => serviceCollection.AddHttpClient<AnotherNamespace.TestTypedClient>()
-            );
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                serviceCollection.AddHttpClient<AnotherNamespace.TestTypedClient>());
 
             // Assert
             Assert.Equal(

@@ -411,17 +411,14 @@ namespace System.Reflection.Tests
             Assert.Equal<Type>(type.GetInterfaces(), type.GetTypeInfo().ImplementedInterfaces);
 
             TestUtils.AssertNewObjectReturnedEachTime(() => type.GenericTypeArguments);
-            TestUtils.AssertNewObjectReturnedEachTime(
-                () => type.GetTypeInfo().GenericTypeParameters
-            );
+            TestUtils.AssertNewObjectReturnedEachTime(() =>
+                type.GetTypeInfo().GenericTypeParameters);
             TestUtils.AssertNewObjectReturnedEachTime(() => type.GetGenericArguments());
             TestUtils.AssertNewObjectReturnedEachTime(() => type.GetInterfaces());
-            TestUtils.AssertNewObjectReturnedEachTime(
-                () => type.GetTypeInfo().ImplementedInterfaces
-            );
-            CustomAttributeTests.ValidateCustomAttributesAllocatesFreshObjectsEachTime(
-                () => type.CustomAttributes
-            );
+            TestUtils.AssertNewObjectReturnedEachTime(() =>
+                type.GetTypeInfo().ImplementedInterfaces);
+            CustomAttributeTests.ValidateCustomAttributesAllocatesFreshObjectsEachTime(() =>
+                type.CustomAttributes);
 
             const BindingFlags bf =
                 BindingFlags.Public
@@ -452,15 +449,12 @@ namespace System.Reflection.Tests
                 if (type.Assembly.ReflectionOnly)
                 {
                     ICustomAttributeProvider icp = mem;
-                    Assert.Throws<InvalidOperationException>(
-                        () => icp.IsDefined(null, inherit: false)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => icp.GetCustomAttributes(null, inherit: false)
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => icp.GetCustomAttributes(inherit: false)
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        icp.IsDefined(null, inherit: false));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        icp.GetCustomAttributes(null, inherit: false));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        icp.GetCustomAttributes(inherit: false));
 
                     if (mem is MethodBase mb)
                     {
@@ -470,9 +464,8 @@ namespace System.Reflection.Tests
                 }
             }
 
-            TestUtils.AssertNewObjectReturnedEachTime(
-                () => type.GetMember("*", MemberTypes.All, bf)
-            );
+            TestUtils.AssertNewObjectReturnedEachTime(() =>
+                type.GetMember("*", MemberTypes.All, bf));
 
             // Test some things that common to types that are not of a particular bucket.
             // (The Test*CommonInvariants() methods will cover the other half.)
@@ -515,9 +508,8 @@ namespace System.Reflection.Tests
             {
                 Assert.Throws<InvalidOperationException>(() => type.GenericParameterAttributes);
                 Assert.Throws<InvalidOperationException>(() => type.GenericParameterPosition);
-                Assert.Throws<InvalidOperationException>(
-                    () => type.GetGenericParameterConstraints()
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    type.GetGenericParameterConstraints());
                 Assert.Throws<InvalidOperationException>(() => type.DeclaringMethod);
             }
         }

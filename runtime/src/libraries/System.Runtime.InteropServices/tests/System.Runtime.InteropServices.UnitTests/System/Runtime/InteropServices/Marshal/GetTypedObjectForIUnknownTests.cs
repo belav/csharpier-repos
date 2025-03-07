@@ -110,9 +110,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetTypedObjectForIUnknown_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int))
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetTypedObjectForIUnknown(IntPtr.Zero, typeof(int)));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
@@ -215,9 +214,8 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.GetIUnknownForObject(o);
             try
             {
-                Assert.Throws<InvalidCastException>(
-                    () => Marshal.GetTypedObjectForIUnknown(ptr, type)
-                );
+                Assert.Throws<InvalidCastException>(() =>
+                    Marshal.GetTypedObjectForIUnknown(ptr, type));
             }
             finally
             {
@@ -248,9 +246,8 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.GetIUnknownForObject(o);
             try
             {
-                Assert.Throws<BadImageFormatException>(
-                    () => Marshal.GetTypedObjectForIUnknown(ptr, o.GetType())
-                );
+                Assert.Throws<BadImageFormatException>(() =>
+                    Marshal.GetTypedObjectForIUnknown(ptr, o.GetType()));
             }
             finally
             {

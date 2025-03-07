@@ -117,27 +117,24 @@ public class ProxyTests
         Assert.Equal(
             ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.CreateProxy<SharedTypeEntityType>()
-                )
+                .Throws<InvalidOperationException>(() =>
+                    context.CreateProxy<SharedTypeEntityType>())
                 .Message
         );
 
         Assert.Equal(
             ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.CreateProxy<SharedTypeEntityType>(_ => { })
-                )
+                .Throws<InvalidOperationException>(() =>
+                    context.CreateProxy<SharedTypeEntityType>(_ => { }))
                 .Message
         );
 
         Assert.Equal(
             ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => context.CreateProxy(typeof(SharedTypeEntityType))
-                )
+                .Throws<InvalidOperationException>(() =>
+                    context.CreateProxy(typeof(SharedTypeEntityType)))
                 .Message
         );
     }
@@ -357,15 +354,13 @@ public class ProxyTests
         Assert.Equal(
             CoreStrings.AddingProxyTypeAsEntityType("Castle.Proxies.ClassToBeProxiedProxy"),
             Assert
-                .Throws<ArgumentException>(
-                    () =>
-                        new EntityType(
-                            proxy.GetType(),
-                            model,
-                            owned: false,
-                            ConfigurationSource.Explicit
-                        )
-                )
+                .Throws<ArgumentException>(() =>
+                    new EntityType(
+                        proxy.GetType(),
+                        model,
+                        owned: false,
+                        ConfigurationSource.Explicit
+                    ))
                 .Message
         );
     }

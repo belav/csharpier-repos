@@ -135,13 +135,11 @@ namespace System.Net.Http.Functional.Tests
                                                     {
                                                         buffersResponse = false;
                                                         using HttpResponseMessage response =
-                                                            await Task.Run(
-                                                                () =>
-                                                                    client.Send(
-                                                                        request,
-                                                                        HttpCompletionOption.ResponseHeadersRead
-                                                                    )
-                                                            );
+                                                            await Task.Run(() =>
+                                                                client.Send(
+                                                                    request,
+                                                                    HttpCompletionOption.ResponseHeadersRead
+                                                                ));
                                                         response.Content.CopyTo(
                                                             Stream.Null,
                                                             null,
@@ -200,13 +198,11 @@ namespace System.Net.Http.Functional.Tests
                                                     {
                                                         buffersResponse = false;
                                                         using HttpResponseMessage response =
-                                                            await Task.Run(
-                                                                () =>
-                                                                    invoker.Send(
-                                                                        request,
-                                                                        cancellationToken: default
-                                                                    )
-                                                            );
+                                                            await Task.Run(() =>
+                                                                invoker.Send(
+                                                                    request,
+                                                                    cancellationToken: default
+                                                                ));
                                                         await response.Content.CopyToAsync(
                                                             Stream.Null
                                                         );
@@ -336,24 +332,20 @@ namespace System.Net.Http.Functional.Tests
                                                 case "Send":
                                                     await Assert.ThrowsAsync<TaskCanceledException>(
                                                         async () =>
-                                                            await Task.Run(
-                                                                () =>
-                                                                    client.Send(request, cts.Token)
-                                                            )
+                                                            await Task.Run(() =>
+                                                                client.Send(request, cts.Token))
                                                     );
                                                     break;
 
                                                 case "UnbufferedSend":
                                                     await Assert.ThrowsAsync<TaskCanceledException>(
                                                         async () =>
-                                                            await Task.Run(
-                                                                () =>
-                                                                    client.Send(
-                                                                        request,
-                                                                        HttpCompletionOption.ResponseHeadersRead,
-                                                                        cts.Token
-                                                                    )
-                                                            )
+                                                            await Task.Run(() =>
+                                                                client.Send(
+                                                                    request,
+                                                                    HttpCompletionOption.ResponseHeadersRead,
+                                                                    cts.Token
+                                                                ))
                                                     );
                                                     break;
 
@@ -411,10 +403,8 @@ namespace System.Net.Http.Functional.Tests
                                                 case "InvokerSend":
                                                     await Assert.ThrowsAsync<TaskCanceledException>(
                                                         async () =>
-                                                            await Task.Run(
-                                                                () =>
-                                                                    invoker.Send(request, cts.Token)
-                                                            )
+                                                            await Task.Run(() =>
+                                                                invoker.Send(request, cts.Token))
                                                     );
                                                     break;
 
@@ -556,13 +546,11 @@ namespace System.Net.Http.Functional.Tests
 
                                                 case "InvokerSend":
                                                     HttpResponseMessage syncResponse =
-                                                        await Task.Run(
-                                                            () =>
-                                                                invoker.Send(
-                                                                    request,
-                                                                    cancellationToken: default
-                                                                )
-                                                        );
+                                                        await Task.Run(() =>
+                                                            invoker.Send(
+                                                                request,
+                                                                cancellationToken: default
+                                                            ));
                                                     await syncResponse.Content.CopyToAsync(
                                                         Stream.Null
                                                     );

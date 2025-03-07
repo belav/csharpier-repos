@@ -476,14 +476,12 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Using_OfType_on_multiple_type_with_no_result(bool async) =>
-        AssertTranslationFailed(
-            () =>
-                AssertQuery(
-                    async,
-                    ss => ss.Set<Animal>().OfType<Eagle>().OfType<Kiwi>(),
-                    elementSorter: e => e.Name
-                )
-        );
+        AssertTranslationFailed(() =>
+            AssertQuery(
+                async,
+                ss => ss.Set<Animal>().OfType<Eagle>().OfType<Kiwi>(),
+                elementSorter: e => e.Name
+            ));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

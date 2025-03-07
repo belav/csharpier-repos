@@ -28,9 +28,8 @@ namespace System.Net.Sockets.Tests
             );
             s.Dispose();
             await Assert.ThrowsAsync<ObjectDisposedException>(() => SendFileAsync(s, null));
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                () => SendFileAsync(s, null, null, null, TransmitFileOptions.UseDefaultWorkerThread)
-            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                SendFileAsync(s, null, null, null, TransmitFileOptions.UseDefaultWorkerThread));
         }
 
         [Fact]
@@ -43,9 +42,8 @@ namespace System.Net.Sockets.Tests
             );
 
             await Assert.ThrowsAsync<NotSupportedException>(() => SendFileAsync(s, null));
-            await Assert.ThrowsAsync<NotSupportedException>(
-                () => SendFileAsync(s, null, null, null, TransmitFileOptions.UseDefaultWorkerThread)
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                SendFileAsync(s, null, null, null, TransmitFileOptions.UseDefaultWorkerThread));
         }
 
         [Theory]
@@ -61,22 +59,19 @@ namespace System.Net.Sockets.Tests
             {
                 if (!useOverloadWithBuffers)
                 {
-                    await Assert.ThrowsAsync<FileNotFoundException>(
-                        () => SendFileAsync(client, doesNotExist)
-                    );
+                    await Assert.ThrowsAsync<FileNotFoundException>(() =>
+                        SendFileAsync(client, doesNotExist));
                 }
                 else
                 {
-                    await Assert.ThrowsAsync<FileNotFoundException>(
-                        () =>
-                            SendFileAsync(
-                                client,
-                                doesNotExist,
-                                null,
-                                null,
-                                TransmitFileOptions.UseDefaultWorkerThread
-                            )
-                    );
+                    await Assert.ThrowsAsync<FileNotFoundException>(() =>
+                        SendFileAsync(
+                            client,
+                            doesNotExist,
+                            null,
+                            null,
+                            TransmitFileOptions.UseDefaultWorkerThread
+                        ));
                 }
             }
         }
@@ -114,22 +109,19 @@ namespace System.Net.Sockets.Tests
 
             if (usePreAndPostbufferOverload)
             {
-                await Assert.ThrowsAsync<NotSupportedException>(
-                    () =>
-                        SendFileAsync(
-                            client,
-                            tempFile.Path,
-                            Array.Empty<byte>(),
-                            Array.Empty<byte>(),
-                            TransmitFileOptions.UseDefaultWorkerThread
-                        )
-                );
+                await Assert.ThrowsAsync<NotSupportedException>(() =>
+                    SendFileAsync(
+                        client,
+                        tempFile.Path,
+                        Array.Empty<byte>(),
+                        Array.Empty<byte>(),
+                        TransmitFileOptions.UseDefaultWorkerThread
+                    ));
             }
             else
             {
-                await Assert.ThrowsAsync<NotSupportedException>(
-                    () => SendFileAsync(client, tempFile.Path)
-                );
+                await Assert.ThrowsAsync<NotSupportedException>(() =>
+                    SendFileAsync(client, tempFile.Path));
             }
         }
 
@@ -550,16 +542,14 @@ namespace System.Net.Sockets.Tests
                     var cts = new CancellationTokenSource();
                     cts.Cancel();
 
-                    await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
-                            await server.SendFileAsync(
-                                null,
-                                ReadOnlyMemory<byte>.Empty,
-                                ReadOnlyMemory<byte>.Empty,
-                                TransmitFileOptions.UseDefaultWorkerThread,
-                                cts.Token
-                            )
-                    );
+                    await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                        await server.SendFileAsync(
+                            null,
+                            ReadOnlyMemory<byte>.Empty,
+                            ReadOnlyMemory<byte>.Empty,
+                            TransmitFileOptions.UseDefaultWorkerThread,
+                            cts.Token
+                        ));
                 }
             }
         }
@@ -622,17 +612,15 @@ namespace System.Net.Sockets.Tests
             );
             s.Dispose();
             Assert.Throws<ObjectDisposedException>(() => s.BeginSendFile(null, null, null));
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                    s.BeginSendFile(
-                        null,
-                        null,
-                        null,
-                        TransmitFileOptions.UseDefaultWorkerThread,
-                        null,
-                        null
-                    )
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                s.BeginSendFile(
+                    null,
+                    null,
+                    null,
+                    TransmitFileOptions.UseDefaultWorkerThread,
+                    null,
+                    null
+                ));
         }
 
         [Fact]

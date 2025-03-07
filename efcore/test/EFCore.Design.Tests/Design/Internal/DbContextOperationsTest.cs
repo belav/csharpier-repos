@@ -120,11 +120,9 @@ public class DbContextOperationsTest
         Assert.Equal(
             DesignStrings.CannotFindDbContextTypes("Bang!"),
             Assert
-                .Throws<OperationException>(
-                    () =>
-                        CreateOperations(typeof(ThrowingTestProgram))
-                            .CreateContext(typeof(TestContext).FullName)
-                )
+                .Throws<OperationException>(() =>
+                    CreateOperations(typeof(ThrowingTestProgram))
+                        .CreateContext(typeof(TestContext).FullName))
                 .Message
         );
 

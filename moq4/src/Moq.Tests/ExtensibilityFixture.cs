@@ -79,9 +79,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IOrderRepository>();
 
-            var ex = Record.Exception(
-                () => mock.VerifySet(repo => repo.OrderSavedLast = Order.IsBig())
-            );
+            var ex = Record.Exception(() =>
+                mock.VerifySet(repo => repo.OrderSavedLast = Order.IsBig()));
             Assert.Contains("repo => repo.OrderSavedLast = Order.IsBig()", ex.Message);
         }
 
@@ -90,9 +89,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IOrderRepository>();
 
-            var ex = Record.Exception(
-                () => mock.VerifySet(repo => repo.OrderSavedLast = Order.IsSmall)
-            );
+            var ex = Record.Exception(() =>
+                mock.VerifySet(repo => repo.OrderSavedLast = Order.IsSmall));
             Assert.Contains("repo => repo.OrderSavedLast = Match.Matcher<Order>()", ex.Message);
         }
     }

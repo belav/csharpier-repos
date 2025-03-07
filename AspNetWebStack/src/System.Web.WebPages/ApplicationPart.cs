@@ -47,12 +47,10 @@ namespace System.Web.WebPages
 
             Assembly = assembly;
             RootVirtualPath = rootVirtualPath;
-            _applicationPartResources = new Lazy<IDictionary<string, string>>(
-                () =>
-                    Assembly
-                        .GetManifestResourceNames()
-                        .ToDictionary(key => key, key => key, StringComparer.OrdinalIgnoreCase)
-            );
+            _applicationPartResources = new Lazy<IDictionary<string, string>>(() =>
+                Assembly
+                    .GetManifestResourceNames()
+                    .ToDictionary(key => key, key => key, StringComparer.OrdinalIgnoreCase));
             _applicationPartName = new Lazy<string>(() => Assembly.Name);
         }
 

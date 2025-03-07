@@ -42,9 +42,8 @@ public class AttributeRoutingTest
         var routeContext = new RouteContext(new DefaultHttpContext());
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<RouteCreationException>(
-            () => route.RouteAsync(routeContext)
-        );
+        var ex = await Assert.ThrowsAsync<RouteCreationException>(() =>
+            route.RouteAsync(routeContext));
 
         Assert.Equal(expectedMessage, ex.Message);
     }

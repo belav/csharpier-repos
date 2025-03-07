@@ -31,19 +31,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             var c = CSharpCompilation.Create("c");
             var ds = new[] { (Diagnostic)null };
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    CompilationWithAnalyzers.GetEffectiveDiagnostics(
-                        default(ImmutableArray<Diagnostic>),
-                        c
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => CompilationWithAnalyzers.GetEffectiveDiagnostics(null, c)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => CompilationWithAnalyzers.GetEffectiveDiagnostics(ds, null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                CompilationWithAnalyzers.GetEffectiveDiagnostics(
+                    default(ImmutableArray<Diagnostic>),
+                    c
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                CompilationWithAnalyzers.GetEffectiveDiagnostics(null, c));
+            Assert.Throws<ArgumentNullException>(() =>
+                CompilationWithAnalyzers.GetEffectiveDiagnostics(ds, null));
         }
 
         [Fact]

@@ -326,9 +326,8 @@ namespace System.Linq.Expressions.Tests
                 typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.InstanceMethod))
             );
             Action compiledDelegate = Expression.Lambda<Action>(call).Compile(useInterpreter);
-            TargetInvocationException exception = Assert.Throws<TargetInvocationException>(
-                () => compiledDelegate.DynamicInvoke()
-            );
+            TargetInvocationException exception = Assert.Throws<TargetInvocationException>(() =>
+                compiledDelegate.DynamicInvoke());
             Assert.IsType<NullReferenceException>(exception.InnerException);
         }
 
@@ -997,17 +996,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void MethodName_DoesNotExist_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Call(
-                        Expression.Constant(new NonGenericClass()),
-                        "NoSuchMethod",
-                        null
-                    )
-            );
-            Assert.Throws<InvalidOperationException>(
-                () => Expression.Call(typeof(NonGenericClass), "NoSuchMethod", null)
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Call(Expression.Constant(new NonGenericClass()), "NoSuchMethod", null));
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Call(typeof(NonGenericClass), "NoSuchMethod", null));
         }
 
         public static IEnumerable<object[]> InvalidTypeArgs_TestData()
@@ -1023,22 +1015,18 @@ namespace System.Linq.Expressions.Tests
             Type[] typeArgs
         )
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Call(
-                        Expression.Constant(new NonGenericClass()),
-                        nameof(NonGenericClass.GenericInstanceMethod),
-                        typeArgs
-                    )
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Call(
-                        typeof(NonGenericClass),
-                        nameof(NonGenericClass.GenericStaticMethod),
-                        typeArgs
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Call(
+                    Expression.Constant(new NonGenericClass()),
+                    nameof(NonGenericClass.GenericInstanceMethod),
+                    typeArgs
+                ));
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Call(
+                    typeof(NonGenericClass),
+                    nameof(NonGenericClass.GenericStaticMethod),
+                    typeArgs
+                ));
         }
 
         [Fact]
@@ -1067,22 +1055,18 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void MethodName_NonGenericMethodHasTypeArgs_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Call(
-                        Expression.Constant(new NonGenericClass()),
-                        nameof(NonGenericClass.InstanceMethod),
-                        new Type[1]
-                    )
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Call(
-                        typeof(NonGenericClass),
-                        nameof(NonGenericClass.StaticMethod),
-                        new Type[1]
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Call(
+                    Expression.Constant(new NonGenericClass()),
+                    nameof(NonGenericClass.InstanceMethod),
+                    new Type[1]
+                ));
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Call(
+                    typeof(NonGenericClass),
+                    nameof(NonGenericClass.StaticMethod),
+                    new Type[1]
+                ));
         }
 
         [Fact]
@@ -1136,24 +1120,20 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void MethodName_ArgumentsHasNullValueButDifferentCount_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Call(
-                        Expression.Constant(new NonGenericClass()),
-                        nameof(NonGenericClass.InstanceMethod1),
-                        new Type[0],
-                        new Expression[] { null, Expression.Constant("") }
-                    )
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    Expression.Call(
-                        typeof(NonGenericClass),
-                        nameof(NonGenericClass.StaticMethod1),
-                        new Type[0],
-                        new Expression[] { null, Expression.Constant("") }
-                    )
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Call(
+                    Expression.Constant(new NonGenericClass()),
+                    nameof(NonGenericClass.InstanceMethod1),
+                    new Type[0],
+                    new Expression[] { null, Expression.Constant("") }
+                ));
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.Call(
+                    typeof(NonGenericClass),
+                    nameof(NonGenericClass.StaticMethod1),
+                    new Type[0],
+                    new Expression[] { null, Expression.Constant("") }
+                ));
         }
 
         [Fact]

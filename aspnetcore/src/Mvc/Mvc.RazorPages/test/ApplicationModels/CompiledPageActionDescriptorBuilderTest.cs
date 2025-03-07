@@ -155,9 +155,8 @@ public class CompiledPageActionDescriptorBuilderTest
         var globalFilters = new FilterCollection();
 
         // Act & Assert
-        var actual = Assert.Throws<InvalidOperationException>(
-            () => CompiledPageActionDescriptorBuilder.Build(pageApplicationModel, globalFilters)
-        );
+        var actual = Assert.Throws<InvalidOperationException>(() =>
+            CompiledPageActionDescriptorBuilder.Build(pageApplicationModel, globalFilters));
     }
 
     [Fact]

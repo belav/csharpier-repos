@@ -842,18 +842,16 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                 .Replace("\r", "")
                 .Replace("\n", ""),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<EntityTwo>()
-                                    .Include(e => e.OneSkip.Where(i => i.Id < 10))
-                                    .ThenInclude(e => e.BranchSkip)
-                                    .Include(e => e.OneSkip.Where(i => i.Id < 20))
-                                    .ThenInclude(e => e.ThreeSkipPayloadFull)
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<EntityTwo>()
+                                .Include(e => e.OneSkip.Where(i => i.Id < 10))
+                                .ThenInclude(e => e.BranchSkip)
+                                .Include(e => e.OneSkip.Where(i => i.Id < 20))
+                                .ThenInclude(e => e.ThreeSkipPayloadFull)
+                    ))
             )
                 .Message.Replace("\r", "")
                 .Replace("\n", "")
@@ -871,20 +869,18 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                 .Replace("\r", "")
                 .Replace("\n", ""),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<EntityCompositeKey>()
-                                    .Include(e => e.TwoSkipShared)
-                                    .ThenInclude(e => e.OneSkip.Where(i => i.Id < 10))
-                                    .ThenInclude(e => e.BranchSkip)
-                                    .Include(e => e.TwoSkipShared)
-                                    .ThenInclude(e => e.OneSkip.Where(i => i.Id < 20))
-                                    .ThenInclude(e => e.ThreeSkipPayloadFull)
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<EntityCompositeKey>()
+                                .Include(e => e.TwoSkipShared)
+                                .ThenInclude(e => e.OneSkip.Where(i => i.Id < 10))
+                                .ThenInclude(e => e.BranchSkip)
+                                .Include(e => e.TwoSkipShared)
+                                .ThenInclude(e => e.OneSkip.Where(i => i.Id < 20))
+                                .ThenInclude(e => e.ThreeSkipPayloadFull)
+                    ))
             )
                 .Message.Replace("\r", "")
                 .Replace("\n", "")
@@ -1043,19 +1039,17 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                 .Replace("\r", "")
                 .Replace("\n", ""),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<EntityThree>()
-                                    .Include(e => e.OneSkipPayloadFull)
-                                    .ThenInclude(e => e.Collection.Where(i => i.Id < 20))
-                                    .Include(e => e.JoinOnePayloadFull)
-                                    .ThenInclude(e => e.One)
-                                    .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<EntityThree>()
+                                .Include(e => e.OneSkipPayloadFull)
+                                .ThenInclude(e => e.Collection.Where(i => i.Id < 20))
+                                .Include(e => e.JoinOnePayloadFull)
+                                .ThenInclude(e => e.One)
+                                .ThenInclude(e => e.Collection.Where(i => i.Id < 10))
+                    ))
             )
                 .Message.Replace("\r", "")
                 .Replace("\n", "")
@@ -1554,39 +1548,37 @@ public abstract class ManyToManyQueryTestBase<TFixture> : QueryTestBase<TFixture
                 .Replace("\r", "")
                 .Replace("\n", ""),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        AssertQuery(
-                            async,
-                            ss =>
-                                ss.Set<UnidirectionalEntityTwo>()
-                                    .Include(e =>
-                                        EF.Property<IEnumerable<UnidirectionalEntityOne>>(
-                                                e,
-                                                "UnidirectionalEntityOne"
-                                            )
-                                            .Where(i => i.Id < 10)
-                                    )
-                                    .ThenInclude(e => e.BranchSkip)
-                                    .Include(e =>
-                                        EF.Property<IEnumerable<UnidirectionalEntityOne>>(
-                                                e,
-                                                "UnidirectionalEntityOne"
-                                            )
-                                            .Where(i => i.Id < 20)
-                                    )
-                                    .ThenInclude<
-                                        UnidirectionalEntityTwo,
-                                        UnidirectionalEntityOne,
-                                        ICollection<UnidirectionalEntityThree>
-                                    >(e =>
-                                        EF.Property<ICollection<UnidirectionalEntityThree>>(
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    AssertQuery(
+                        async,
+                        ss =>
+                            ss.Set<UnidirectionalEntityTwo>()
+                                .Include(e =>
+                                    EF.Property<IEnumerable<UnidirectionalEntityOne>>(
                                             e,
-                                            "UnidirectionalEntityThree"
+                                            "UnidirectionalEntityOne"
                                         )
+                                        .Where(i => i.Id < 10)
+                                )
+                                .ThenInclude(e => e.BranchSkip)
+                                .Include(e =>
+                                    EF.Property<IEnumerable<UnidirectionalEntityOne>>(
+                                            e,
+                                            "UnidirectionalEntityOne"
+                                        )
+                                        .Where(i => i.Id < 20)
+                                )
+                                .ThenInclude<
+                                    UnidirectionalEntityTwo,
+                                    UnidirectionalEntityOne,
+                                    ICollection<UnidirectionalEntityThree>
+                                >(e =>
+                                    EF.Property<ICollection<UnidirectionalEntityThree>>(
+                                        e,
+                                        "UnidirectionalEntityThree"
                                     )
-                        )
-                )
+                                )
+                    ))
             )
                 .Message.Replace("\r", "")
                 .Replace("\n", "")

@@ -1765,12 +1765,10 @@ SELECT * FROM [Customers2]
         Assert.Equal(
             CoreStrings.NavigationNotAddedAdHoc("Post", "Blog", "Blog"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Database.SqlQueryRaw<Post>(
-                            NormalizeDelimitersInRawString(@"SELECT * FROM [Posts]")
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    context.Database.SqlQueryRaw<Post>(
+                        NormalizeDelimitersInRawString(@"SELECT * FROM [Posts]")
+                    ))
                 .Message
         );
     }
@@ -1783,12 +1781,10 @@ SELECT * FROM [Customers2]
         Assert.Equal(
             CoreStrings.NavigationNotAddedAdHoc("Blog", "Posts", "List<Post>"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Database.SqlQueryRaw<Blog>(
-                            NormalizeDelimitersInRawString(@"SELECT * FROM [Blogs]")
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    context.Database.SqlQueryRaw<Blog>(
+                        NormalizeDelimitersInRawString(@"SELECT * FROM [Blogs]")
+                    ))
                 .Message
         );
     }
@@ -1801,12 +1797,10 @@ SELECT * FROM [Customers2]
         Assert.Equal(
             CoreStrings.PropertyNotAddedAdHoc("Person", "Contact", "ContactInfo"),
             Assert
-                .Throws<InvalidOperationException>(
-                    () =>
-                        context.Database.SqlQueryRaw<Person>(
-                            NormalizeDelimitersInRawString(@"SELECT * FROM [People]")
-                        )
-                )
+                .Throws<InvalidOperationException>(() =>
+                    context.Database.SqlQueryRaw<Person>(
+                        NormalizeDelimitersInRawString(@"SELECT * FROM [People]")
+                    ))
                 .Message
         );
     }

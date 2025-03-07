@@ -63,17 +63,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
         public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
             where T : ITag
         {
-            var stateMachine = buffer.Properties.GetOrCreateSingletonProperty(
-                () =>
-                    new StateMachine(
-                        _threadingContext,
-                        buffer,
-                        _inlineRenameService,
-                        _diagnosticAnalyzerService,
-                        _globalOptions,
-                        _asyncListener
-                    )
-            );
+            var stateMachine = buffer.Properties.GetOrCreateSingletonProperty(() =>
+                new StateMachine(
+                    _threadingContext,
+                    buffer,
+                    _inlineRenameService,
+                    _diagnosticAnalyzerService,
+                    _globalOptions,
+                    _asyncListener
+                ));
             return new Tagger(stateMachine) as ITagger<T>;
         }
 

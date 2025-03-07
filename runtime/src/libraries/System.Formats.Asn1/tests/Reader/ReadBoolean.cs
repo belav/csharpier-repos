@@ -81,9 +81,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadBoolean(new Asn1Tag(TagClass.ContextSpecific, 0))
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadBoolean(new Asn1Tag(TagClass.ContextSpecific, 0)));
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -112,15 +111,13 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadBoolean(new Asn1Tag(TagClass.Application, 0))
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadBoolean(new Asn1Tag(TagClass.Application, 0)));
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadBoolean(new Asn1Tag(TagClass.ContextSpecific, 1))
-            );
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadBoolean(new Asn1Tag(TagClass.ContextSpecific, 1)));
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 

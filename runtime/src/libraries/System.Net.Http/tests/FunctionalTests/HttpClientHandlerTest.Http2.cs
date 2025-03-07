@@ -29,9 +29,8 @@ namespace System.Net.Http.Functional.Tests
 
         private async Task AssertProtocolErrorAsync(Task task, ProtocolErrors errorCode)
         {
-            HttpRequestException outerEx = await Assert.ThrowsAsync<HttpRequestException>(
-                () => task
-            );
+            HttpRequestException outerEx = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                task);
             _output.WriteLine($"Outer exception: {outerEx}");
             Assert.Equal(HttpRequestError.HttpProtocolError, outerEx.HttpRequestError);
             HttpProtocolException protocolEx = Assert.IsType<HttpProtocolException>(
@@ -43,9 +42,8 @@ namespace System.Net.Http.Functional.Tests
 
         private async Task AssertHttpProtocolException(Task task, ProtocolErrors errorCode)
         {
-            HttpProtocolException protocolEx = await Assert.ThrowsAsync<HttpProtocolException>(
-                () => task
-            );
+            HttpProtocolException protocolEx = await Assert.ThrowsAsync<HttpProtocolException>(() =>
+                task);
             Assert.Equal(HttpRequestError.HttpProtocolError, protocolEx.HttpRequestError);
             Assert.Equal(errorCode, (ProtocolErrors)protocolEx.ErrorCode);
         }
@@ -603,9 +601,8 @@ namespace System.Net.Http.Functional.Tests
                 // Extra request is queued on the client.
                 Task<HttpResponseMessage> extraSendTask = client.GetAsync(server.Address);
                 await Assert
-                    .ThrowsAnyAsync<OperationCanceledException>(
-                        () => connection.ReadRequestHeaderAsync()
-                    )
+                    .ThrowsAnyAsync<OperationCanceledException>(() =>
+                        connection.ReadRequestHeaderAsync())
                     .WaitAsync(TestHelper.PassingTestTimeout)
                     .ConfigureAwait(false);
 
@@ -785,9 +782,8 @@ namespace System.Net.Http.Functional.Tests
                 // Extra request is queued on the client.
                 Task<HttpResponseMessage> extraSendTask = client.GetAsync(server.Address);
                 await Assert
-                    .ThrowsAnyAsync<OperationCanceledException>(
-                        () => connection.ReadRequestHeaderAsync()
-                    )
+                    .ThrowsAnyAsync<OperationCanceledException>(() =>
+                        connection.ReadRequestHeaderAsync())
                     .WaitAsync(TestHelper.PassingTestTimeout)
                     .ConfigureAwait(false);
 
@@ -1215,12 +1211,10 @@ namespace System.Net.Http.Functional.Tests
                 await connection.WaitForConnectionShutdownAsync();
 
                 // Expect client to detect that server has disconnected and throw an exception
-                await Assert.ThrowsAnyAsync<HttpRequestException>(
-                    () =>
-                        new Task[] { sendTask }.WhenAllOrAnyFailed(
-                            TestHelper.PassingTestTimeoutMilliseconds
-                        )
-                );
+                await Assert.ThrowsAnyAsync<HttpRequestException>(() =>
+                    new Task[] { sendTask }.WhenAllOrAnyFailed(
+                        TestHelper.PassingTestTimeoutMilliseconds
+                    ));
             }
         }
 
@@ -1251,12 +1245,10 @@ namespace System.Net.Http.Functional.Tests
                 await connection.SendGoAway(0, errorCode: ProtocolErrors.PROTOCOL_ERROR);
 
                 // Expect client to detect that server has disconnected and throw an exception
-                var exception = await Assert.ThrowsAnyAsync<HttpRequestException>(
-                    () =>
-                        new Task[] { sendTask }.WhenAllOrAnyFailed(
-                            TestHelper.PassingTestTimeoutMilliseconds
-                        )
-                );
+                var exception = await Assert.ThrowsAnyAsync<HttpRequestException>(() =>
+                    new Task[] { sendTask }.WhenAllOrAnyFailed(
+                        TestHelper.PassingTestTimeoutMilliseconds
+                    ));
 
                 var protocolException = Assert.IsType<HttpProtocolException>(
                     exception.InnerException
@@ -2397,9 +2389,8 @@ namespace System.Net.Http.Functional.Tests
                 Stopwatch stopwatch = Stopwatch.StartNew();
 
                 cts.Cancel();
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    async () => await clientTask
-                );
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                    await clientTask);
 
                 // Ensure that the cancellation occurs promptly
                 stopwatch.Stop();
@@ -2448,9 +2439,8 @@ namespace System.Net.Http.Functional.Tests
                 await Task.Delay(1000);
                 cts.Cancel();
 
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    async () => await clientTask
-                );
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                    await clientTask);
             }
         }
 
@@ -2478,9 +2468,8 @@ namespace System.Net.Http.Functional.Tests
                         request.Version = new Version(2, 0);
                         request.Content = new CustomContent(stream);
 
-                        await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                            async () => await client.SendAsync(request, cts.Token)
-                        );
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                            await client.SendAsync(request, cts.Token));
 
                         // Wait until the RST_STREAM for the previous request is received before the next request starts.
                         await rstReceived.Task.WaitAsync(TimeSpan.FromSeconds(60));
@@ -2655,9 +2644,8 @@ namespace System.Net.Http.Functional.Tests
                         request.Content = throwingContent;
 
                         HttpRequestException exn =
-                            await Assert.ThrowsAnyAsync<HttpRequestException>(
-                                async () => await client.SendAsync(request)
-                            );
+                            await Assert.ThrowsAnyAsync<HttpRequestException>(async () =>
+                                await client.SendAsync(request));
                         Assert.IsType<InvalidOperationException>(exn.InnerException);
                         await tcs.Task; // prevent disposal of client until server has completed operations
                     }
@@ -2688,9 +2676,8 @@ namespace System.Net.Http.Functional.Tests
                         request.Version = new Version(2, 0);
                         request.Content = throwingContent;
 
-                        await Assert.ThrowsAnyAsync<CustomException>(
-                            async () => await client.SendAsync(request)
-                        );
+                        await Assert.ThrowsAnyAsync<CustomException>(async () =>
+                            await client.SendAsync(request));
                         await tcs.Task; // prevent disposal of client until server has completed operations
                     }
                 },
@@ -3251,15 +3238,13 @@ namespace System.Net.Http.Functional.Tests
                     await connection.ReadRstStreamAsync(streamId);
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await Assert.ThrowsAsync<IOException>(
-                        async () =>
-                            await SendAndReceiveResponseDataAsync(
-                                contentBytes,
-                                responseStream,
-                                connection,
-                                streamId
-                            )
-                    );
+                    await Assert.ThrowsAsync<IOException>(async () =>
+                        await SendAndReceiveResponseDataAsync(
+                            contentBytes,
+                            responseStream,
+                            connection,
+                            streamId
+                        ));
                 }
 
                 // On handler dispose, client should shutdown the connection without sending additional frames.
@@ -3352,15 +3337,13 @@ namespace System.Net.Http.Functional.Tests
                     await connection.ReadRstStreamAsync(streamId);
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await Assert.ThrowsAsync<IOException>(
-                        async () =>
-                            await SendAndReceiveResponseDataAsync(
-                                contentBytes,
-                                responseStream,
-                                connection,
-                                streamId
-                            )
-                    );
+                    await Assert.ThrowsAsync<IOException>(async () =>
+                        await SendAndReceiveResponseDataAsync(
+                            contentBytes,
+                            responseStream,
+                            connection,
+                            streamId
+                        ));
                 }
 
                 // On handler dispose, client should shutdown the connection without sending additional frames.
@@ -3634,15 +3617,13 @@ namespace System.Net.Http.Functional.Tests
                     responseStream.Dispose();
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await Assert.ThrowsAsync<ObjectDisposedException>(
-                        async () =>
-                            await SendAndReceiveResponseDataAsync(
-                                contentBytes,
-                                responseStream,
-                                connection,
-                                streamId
-                            )
-                    );
+                    await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                        await SendAndReceiveResponseDataAsync(
+                            contentBytes,
+                            responseStream,
+                            connection,
+                            streamId
+                        ));
 
                     // Cancellation on the request body may not propagate immediately. So wait a brief time to try to ensure it propagates.
                     await Task.Delay(500);
@@ -3755,15 +3736,13 @@ namespace System.Net.Http.Functional.Tests
                     responseStream.Dispose();
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await Assert.ThrowsAsync<ObjectDisposedException>(
-                        async () =>
-                            await SendAndReceiveResponseDataAsync(
-                                contentBytes,
-                                responseStream,
-                                connection,
-                                streamId
-                            )
-                    );
+                    await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                        await SendAndReceiveResponseDataAsync(
+                            contentBytes,
+                            responseStream,
+                            connection,
+                            streamId
+                        ));
 
                     // Cancellation on the request body may not propagate immediately. So wait a brief time to try to ensure it propagates.
                     await Task.Delay(500);
@@ -3884,15 +3863,13 @@ namespace System.Net.Http.Functional.Tests
                     responseStream.Dispose();
 
                     // Trying to read on the response stream should fail now, and client should ignore any data received
-                    await Assert.ThrowsAsync<ObjectDisposedException>(
-                        async () =>
-                            await SendAndReceiveResponseDataAsync(
-                                contentBytes,
-                                responseStream,
-                                connection,
-                                streamId
-                            )
-                    );
+                    await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                        await SendAndReceiveResponseDataAsync(
+                            contentBytes,
+                            responseStream,
+                            connection,
+                            streamId
+                        ));
 
                     // Client should NOT send RST_STREAM. The stream was completed successfully, but the remaining response data was discarded.
                 }
@@ -4342,9 +4319,8 @@ namespace System.Net.Http.Functional.Tests
                             );
                         });
 
-                        Exception e = await Assert.ThrowsAsync<HttpRequestException>(
-                            () => requestTask
-                        );
+                        Exception e = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                            requestTask);
                     }
                 );
             }
@@ -4702,9 +4678,8 @@ namespace System.Net.Http.Functional.Tests
                     handler.MaxResponseHeadersLength = 1;
 
                     using HttpClient client = CreateHttpClient(handler);
-                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(
-                        () => client.GetAsync(uri)
-                    );
+                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                        client.GetAsync(uri));
                     Assert.Contains(
                         (handler.MaxResponseHeadersLength * 1024).ToString(),
                         e.ToString()
@@ -4745,9 +4720,8 @@ namespace System.Net.Http.Functional.Tests
                     handler.MaxResponseHeadersLength = 1;
 
                     using HttpClient client = CreateHttpClient(handler);
-                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(
-                        () => client.GetAsync(uri)
-                    );
+                    Exception e = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                        client.GetAsync(uri));
                     Assert.Contains(
                         (handler.MaxResponseHeadersLength * 1024).ToString(),
                         e.ToString()

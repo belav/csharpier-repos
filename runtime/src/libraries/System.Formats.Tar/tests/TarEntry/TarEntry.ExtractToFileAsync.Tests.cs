@@ -25,9 +25,8 @@ namespace System.Formats.Tar.Tests
             );
             CancellationTokenSource cs = new CancellationTokenSource();
             cs.Cancel();
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                () => entry.ExtractToFileAsync("dir", overwrite: true, cs.Token)
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(() =>
+                entry.ExtractToFileAsync("dir", overwrite: true, cs.Token));
         }
 
         [Theory]
@@ -53,9 +52,8 @@ namespace System.Formats.Tar.Tests
                 entry.DataStream.Write(new byte[] { 0x1 });
                 entry.DataStream.Seek(0, SeekOrigin.Begin);
 
-                await Assert.ThrowsAsync<IOException>(
-                    () => entry.ExtractToFileAsync(root.Path, overwrite: false)
-                );
+                await Assert.ThrowsAsync<IOException>(() =>
+                    entry.ExtractToFileAsync(root.Path, overwrite: false));
 
                 Assert.False(File.Exists(fullPath));
             }
@@ -84,9 +82,8 @@ namespace System.Formats.Tar.Tests
                 entry.DataStream.Write(new byte[] { 0x1 });
                 entry.DataStream.Seek(0, SeekOrigin.Begin);
 
-                await Assert.ThrowsAsync<IOException>(
-                    () => entry.ExtractToFileAsync(root.Path, overwrite: false)
-                );
+                await Assert.ThrowsAsync<IOException>(() =>
+                    entry.ExtractToFileAsync(root.Path, overwrite: false));
 
                 Assert.False(File.Exists(fullPath));
             }
@@ -140,9 +137,8 @@ namespace System.Formats.Tar.Tests
                 TarEntry entry = InvokeTarEntryCreationConstructor(format, entryType, fileName);
                 entry.LinkName = linkTarget;
 
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => entry.ExtractToFileAsync(fileName, overwrite: false)
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    entry.ExtractToFileAsync(fileName, overwrite: false));
 
                 Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
             }

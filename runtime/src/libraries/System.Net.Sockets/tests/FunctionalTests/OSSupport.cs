@@ -67,16 +67,12 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.Throws<SocketException>(
-                    () => client.IOControl(IOControlCode.DataToRead, null, null)
-                );
-                Assert.Throws<SocketException>(
-                    () => client.IOControl(IOControlCode.DataToRead, null, new byte[0])
-                );
-                Assert.Throws<SocketException>(
-                    () =>
-                        client.IOControl(IOControlCode.DataToRead, null, new byte[sizeof(int) - 1])
-                );
+                Assert.Throws<SocketException>(() =>
+                    client.IOControl(IOControlCode.DataToRead, null, null));
+                Assert.Throws<SocketException>(() =>
+                    client.IOControl(IOControlCode.DataToRead, null, new byte[0]));
+                Assert.Throws<SocketException>(() =>
+                    client.IOControl(IOControlCode.DataToRead, null, new byte[sizeof(int) - 1]));
 
                 byte[] fionreadResult = new byte[sizeof(int)];
 
@@ -135,16 +131,12 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.Throws<SocketException>(
-                    () => client.IOControl(IOControlCode.OobDataRead, null, null)
-                );
-                Assert.Throws<SocketException>(
-                    () => client.IOControl(IOControlCode.OobDataRead, null, new byte[0])
-                );
-                Assert.Throws<SocketException>(
-                    () =>
-                        client.IOControl(IOControlCode.OobDataRead, null, new byte[sizeof(int) - 1])
-                );
+                Assert.Throws<SocketException>(() =>
+                    client.IOControl(IOControlCode.OobDataRead, null, null));
+                Assert.Throws<SocketException>(() =>
+                    client.IOControl(IOControlCode.OobDataRead, null, new byte[0]));
+                Assert.Throws<SocketException>(() =>
+                    client.IOControl(IOControlCode.OobDataRead, null, new byte[sizeof(int) - 1]));
 
                 using (
                     var listener = new Socket(
@@ -232,16 +224,12 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.Throws<SocketException>(
-                    () => client.IOControl(IOControlCode.OobDataRead, null, null)
-                );
-                Assert.Throws<SocketException>(
-                    () => client.IOControl(IOControlCode.OobDataRead, null, new byte[0])
-                );
-                Assert.Throws<SocketException>(
-                    () =>
-                        client.IOControl(IOControlCode.OobDataRead, null, new byte[sizeof(int) - 1])
-                );
+                Assert.Throws<SocketException>(() =>
+                    client.IOControl(IOControlCode.OobDataRead, null, null));
+                Assert.Throws<SocketException>(() =>
+                    client.IOControl(IOControlCode.OobDataRead, null, new byte[0]));
+                Assert.Throws<SocketException>(() =>
+                    client.IOControl(IOControlCode.OobDataRead, null, new byte[sizeof(int) - 1]));
 
                 using (
                     var listener = new Socket(
@@ -325,12 +313,10 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.Throws<InvalidOperationException>(
-                    () => client.IOControl(unchecked((int)IOControlCode.NonBlockingIO), null, null)
-                );
-                Assert.Throws<InvalidOperationException>(
-                    () => client.IOControl(IOControlCode.NonBlockingIO, null, null)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    client.IOControl(unchecked((int)IOControlCode.NonBlockingIO), null, null));
+                Assert.Throws<InvalidOperationException>(() =>
+                    client.IOControl(IOControlCode.NonBlockingIO, null, null));
             }
         }
 
@@ -358,12 +344,10 @@ namespace System.Net.Sockets.Tests
 
                         default:
                             // The rest should throw PNSE.
-                            Assert.Throws<PlatformNotSupportedException>(
-                                () => client.IOControl((int)code, null, null)
-                            );
-                            Assert.Throws<PlatformNotSupportedException>(
-                                () => client.IOControl(code, null, null)
-                            );
+                            Assert.Throws<PlatformNotSupportedException>(() =>
+                                client.IOControl((int)code, null, null));
+                            Assert.Throws<PlatformNotSupportedException>(() =>
+                                client.IOControl(code, null, null));
                             break;
                     }
                 }

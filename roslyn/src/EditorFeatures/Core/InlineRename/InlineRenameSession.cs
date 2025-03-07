@@ -873,14 +873,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             // which at least will allow the user to cancel the rename if they want.
             //
             // In the future we should remove this entrypoint and have all callers use CommitAsync instead.
-            return _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    CommitWorkerAsync(
-                        previewChanges,
-                        canUseBackgroundWorkIndicator: false,
-                        CancellationToken.None
-                    )
-            );
+            return _threadingContext.JoinableTaskFactory.Run(() =>
+                CommitWorkerAsync(
+                    previewChanges,
+                    canUseBackgroundWorkIndicator: false,
+                    CancellationToken.None
+                ));
         }
 
         public Task CommitAsync(bool previewChanges, CancellationToken cancellationToken) =>

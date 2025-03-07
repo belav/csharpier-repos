@@ -346,9 +346,8 @@ namespace System.IO.Tests
                                 )
                             )
                             {
-                                Assert.Throws<IOException>(
-                                    () => fs2.Lock(long.Parse(secondPos), long.Parse(secondLen))
-                                );
+                                Assert.Throws<IOException>(() =>
+                                    fs2.Lock(long.Parse(secondPos), long.Parse(secondLen)));
                             }
                         },
                         path,

@@ -128,9 +128,8 @@ namespace System.Diagnostics.Tests
             );
 
             //Exception not thrown with invalid key
-            Assert.Throws<ArgumentNullException>(
-                () => environment.Contains(new KeyValuePair<string, string>(null, "NewValue99"))
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                environment.Contains(new KeyValuePair<string, string>(null, "NewValue99")));
 
             environment.Add(new KeyValuePair<string, string>("NewKey98", "NewValue98"));
 
@@ -1201,12 +1200,10 @@ namespace System.Diagnostics.Tests
         public void UseCredentialsForNetworkingOnly_GetSetUnix_ThrowsPlatformNotSupportedException()
         {
             var info = new ProcessStartInfo();
-            Assert.Throws<PlatformNotSupportedException>(
-                () => info.UseCredentialsForNetworkingOnly
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => info.UseCredentialsForNetworkingOnly = false
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                info.UseCredentialsForNetworkingOnly);
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                info.UseCredentialsForNetworkingOnly = false);
         }
 
         [Theory]
@@ -1226,9 +1223,8 @@ namespace System.Diagnostics.Tests
         {
             var info = new ProcessStartInfo();
             Assert.Throws<PlatformNotSupportedException>(() => info.PasswordInClearText);
-            Assert.Throws<PlatformNotSupportedException>(
-                () => info.PasswordInClearText = "passwordInClearText"
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                info.PasswordInClearText = "passwordInClearText");
         }
 
         [Fact]

@@ -133,11 +133,9 @@ namespace System.Reflection.Tests
             );
 
             // Narrowing not allowed
-            Assert.Throws<ArgumentException>(
-                () =>
-                    GetMethod(nameof(EnumMethods.PassColorsShort))
-                        .Invoke(null, new object[] { OtherColorsInt.Red })
-            );
+            Assert.Throws<ArgumentException>(() =>
+                GetMethod(nameof(EnumMethods.PassColorsShort))
+                    .Invoke(null, new object[] { OtherColorsInt.Red }));
 
             static MethodInfo GetMethod(string name) =>
                 typeof(EnumMethods).GetMethod(name, BindingFlags.Public | BindingFlags.Static)!;

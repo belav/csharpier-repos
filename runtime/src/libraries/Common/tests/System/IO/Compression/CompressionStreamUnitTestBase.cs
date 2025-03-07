@@ -423,33 +423,26 @@ namespace System.IO.Compression
             decompressor.Dispose();
 
             //Check that Close has really closed the underlying stream
-            Assert.Throws<ObjectDisposedException>(
-                () => compressedStream.Read(bytes, 0, bytes.Length)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                compressedStream.Read(bytes, 0, bytes.Length));
         }
 
         [Fact]
         public void Ctor_ArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => CreateStream(null, CompressionLevel.Fastest)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => CreateStream(null, CompressionMode.Decompress)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => CreateStream(null, CompressionMode.Compress)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                CreateStream(null, CompressionLevel.Fastest));
+            Assert.Throws<ArgumentNullException>(() =>
+                CreateStream(null, CompressionMode.Decompress));
+            Assert.Throws<ArgumentNullException>(() =>
+                CreateStream(null, CompressionMode.Compress));
 
-            Assert.Throws<ArgumentNullException>(
-                () => CreateStream(null, CompressionLevel.Fastest, true)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => CreateStream(null, CompressionMode.Decompress, false)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => CreateStream(null, CompressionMode.Compress, true)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                CreateStream(null, CompressionLevel.Fastest, true));
+            Assert.Throws<ArgumentNullException>(() =>
+                CreateStream(null, CompressionMode.Decompress, false));
+            Assert.Throws<ArgumentNullException>(() =>
+                CreateStream(null, CompressionMode.Compress, true));
 
             AssertExtensions.Throws<ArgumentException>(
                 "mode",
@@ -491,18 +484,16 @@ namespace System.IO.Compression
                     CompressionMode.Decompress
                 )
             )
-                Assert.Throws<InvalidDataException>(
-                    () => decompressor.Read(new byte[1024], 0, 1024)
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                    decompressor.Read(new byte[1024], 0, 1024));
             using (
                 var decompressor = CreateStream(
                     new BadWrappedStream(BadWrappedStream.Mode.ReturnTooLargeCounts),
                     CompressionMode.Decompress
                 )
             )
-                await Assert.ThrowsAsync<InvalidDataException>(
-                    () => decompressor.ReadAsync(new byte[1024], 0, 1024)
-                );
+                await Assert.ThrowsAsync<InvalidDataException>(() =>
+                    decompressor.ReadAsync(new byte[1024], 0, 1024));
             using (
                 var decompressor = CreateStream(
                     new BadWrappedStream(BadWrappedStream.Mode.ReturnTooLargeCounts),

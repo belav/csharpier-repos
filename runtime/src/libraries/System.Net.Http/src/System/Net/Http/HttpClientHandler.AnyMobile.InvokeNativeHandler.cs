@@ -42,9 +42,8 @@ namespace System.Net.Http
 #endif
 
         private ICredentials? GetDefaultProxyCredentials() =>
-            (ICredentials?)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_DefaultProxyCredentials")!
-            );
+            (ICredentials?)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_DefaultProxyCredentials")!);
 
         private void SetDefaultProxyCredentials(ICredentials? value) =>
             InvokeNativeHandlerSetter(
@@ -53,9 +52,8 @@ namespace System.Net.Http
             );
 
         private int GetMaxConnectionsPerServer() =>
-            (int)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_MaxConnectionsPerServer")!
-            );
+            (int)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_MaxConnectionsPerServer")!);
 
         private void SetMaxConnectionsPerServer(int value) =>
             InvokeNativeHandlerSetter(
@@ -64,9 +62,8 @@ namespace System.Net.Http
             );
 
         private int GetMaxResponseHeadersLength() =>
-            (int)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_MaxResponseHeadersLength")!
-            );
+            (int)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_MaxResponseHeadersLength")!);
 
         private void SetMaxResponseHeadersLength(int value) =>
             InvokeNativeHandlerSetter(
@@ -75,9 +72,8 @@ namespace System.Net.Http
             );
 
         private ClientCertificateOption GetClientCertificateOptions() =>
-            (ClientCertificateOption)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_ClientCertificateOptions")!
-            );
+            (ClientCertificateOption)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_ClientCertificateOptions")!);
 
         private void SetClientCertificateOptions(ClientCertificateOption value) =>
             InvokeNativeHandlerSetter(
@@ -86,9 +82,8 @@ namespace System.Net.Http
             );
 
         private X509CertificateCollection GetClientCertificates() =>
-            (X509CertificateCollection)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_ClientCertificates")!
-            );
+            (X509CertificateCollection)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_ClientCertificates")!);
 
         private Func<
             HttpRequestMessage,
@@ -98,11 +93,9 @@ namespace System.Net.Http
             bool
         > GetServerCertificateCustomValidationCallback() =>
             (Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool>)
-                InvokeNativeHandlerGetter(
-                    () =>
-                        Type.GetType(NativeHandlerType)!
-                            .GetMethod("get_ServerCertificateCustomValidationCallback")!
-                );
+                InvokeNativeHandlerGetter(() =>
+                    Type.GetType(NativeHandlerType)!
+                        .GetMethod("get_ServerCertificateCustomValidationCallback")!);
 
         private void SetServerCertificateCustomValidationCallback(
             Func<HttpRequestMessage, X509Certificate2?, X509Chain?, SslPolicyErrors, bool>? value
@@ -115,11 +108,8 @@ namespace System.Net.Http
             );
 
         private bool GetCheckCertificateRevocationList() =>
-            (bool)InvokeNativeHandlerGetter(
-                () =>
-                    Type.GetType(NativeHandlerType)!
-                        .GetMethod("get_CheckCertificateRevocationList")!
-            );
+            (bool)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_CheckCertificateRevocationList")!);
 
         private void SetCheckCertificateRevocationList(bool value) =>
             InvokeNativeHandlerSetter(
@@ -130,9 +120,8 @@ namespace System.Net.Http
             );
 
         private SslProtocols GetSslProtocols() =>
-            (SslProtocols)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_SslProtocols")!
-            );
+            (SslProtocols)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_SslProtocols")!);
 
         private void SetSslProtocols(SslProtocols value) =>
             InvokeNativeHandlerSetter(
@@ -142,32 +131,24 @@ namespace System.Net.Http
 
         private IDictionary<string, object?> GetProperties() =>
             (IDictionary<string, object?>)
-                InvokeNativeHandlerGetter(
-                    () => Type.GetType(NativeHandlerType)!.GetMethod("get_Properties")!
-                );
+                InvokeNativeHandlerGetter(() =>
+                    Type.GetType(NativeHandlerType)!.GetMethod("get_Properties")!);
 
         private bool GetSupportsAutomaticDecompression() =>
-            (bool)InvokeNativeHandlerGetter(
-                () =>
-                    Type.GetType(NativeHandlerType)!
-                        .GetMethod("get_SupportsAutomaticDecompression")!
-            );
+            (bool)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_SupportsAutomaticDecompression")!);
 
         private bool GetSupportsProxy() =>
-            (bool)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_SupportsProxy")!
-            );
+            (bool)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_SupportsProxy")!);
 
         private bool GetSupportsRedirectConfiguration() =>
-            (bool)InvokeNativeHandlerGetter(
-                () =>
-                    Type.GetType(NativeHandlerType)!.GetMethod("get_SupportsRedirectConfiguration")!
-            );
+            (bool)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_SupportsRedirectConfiguration")!);
 
         private DecompressionMethods GetAutomaticDecompression() =>
-            (DecompressionMethods)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_AutomaticDecompression")!
-            );
+            (DecompressionMethods)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_AutomaticDecompression")!);
 
         private void SetAutomaticDecompression(DecompressionMethods value) =>
             InvokeNativeHandlerSetter(
@@ -176,9 +157,8 @@ namespace System.Net.Http
             );
 
         private bool GetUseProxy() =>
-            (bool)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_UseProxy")!
-            );
+            (bool)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_UseProxy")!);
 
         private void SetUseProxy(bool value) =>
             InvokeNativeHandlerSetter(
@@ -187,9 +167,8 @@ namespace System.Net.Http
             );
 
         private IWebProxy GetProxy() =>
-            (IWebProxy)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_Proxy")!
-            );
+            (IWebProxy)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_Proxy")!);
 
         private void SetProxy(IWebProxy value) =>
             InvokeNativeHandlerSetter(
@@ -198,9 +177,8 @@ namespace System.Net.Http
             );
 
         private bool GetPreAuthenticate() =>
-            (bool)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_PreAuthenticate")!
-            );
+            (bool)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_PreAuthenticate")!);
 
         private void SetPreAuthenticate(bool value) =>
             InvokeNativeHandlerSetter(
@@ -209,9 +187,8 @@ namespace System.Net.Http
             );
 
         private int GetMaxAutomaticRedirections() =>
-            (int)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_MaxAutomaticRedirections")!
-            );
+            (int)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_MaxAutomaticRedirections")!);
 
         private void SetMaxAutomaticRedirections(int value) =>
             InvokeNativeHandlerSetter(
@@ -220,9 +197,8 @@ namespace System.Net.Http
             );
 
         private bool GetUseCookies() =>
-            (bool)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_UseCookies")!
-            );
+            (bool)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_UseCookies")!);
 
         private void SetUseCookies(bool value) =>
             InvokeNativeHandlerSetter(
@@ -231,9 +207,8 @@ namespace System.Net.Http
             );
 
         private CookieContainer GetCookieContainer() =>
-            (CookieContainer)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_CookieContainer")!
-            );
+            (CookieContainer)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_CookieContainer")!);
 
         private void SetCookieContainer(CookieContainer value) =>
             InvokeNativeHandlerSetter(
@@ -242,9 +217,8 @@ namespace System.Net.Http
             );
 
         private bool GetAllowAutoRedirect() =>
-            (bool)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_AllowAutoRedirect")!
-            );
+            (bool)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_AllowAutoRedirect")!);
 
         private void SetAllowAutoRedirect(bool value) =>
             InvokeNativeHandlerSetter(
@@ -253,9 +227,8 @@ namespace System.Net.Http
             );
 
         private ICredentials GetCredentials() =>
-            (ICredentials)InvokeNativeHandlerGetter(
-                () => Type.GetType(NativeHandlerType)!.GetMethod("get_Credentials")!
-            );
+            (ICredentials)InvokeNativeHandlerGetter(() =>
+                Type.GetType(NativeHandlerType)!.GetMethod("get_Credentials")!);
 
         private void SetCredentials(ICredentials? value) =>
             InvokeNativeHandlerSetter(

@@ -57,15 +57,13 @@ namespace System.ComponentModel.Tests
                         }
                         else
                         {
-                            Assert.Throws<NotSupportedException>(
-                                () =>
-                                    Converter.ConvertTo(
-                                        convertTest.Context,
-                                        convertTest.Culture,
-                                        convertTest.Source,
-                                        convertTest.DestinationType
-                                    )
-                            );
+                            Assert.Throws<NotSupportedException>(() =>
+                                Converter.ConvertTo(
+                                    convertTest.Context,
+                                    convertTest.Culture,
+                                    convertTest.Source,
+                                    convertTest.DestinationType
+                                ));
                         }
                     }
                     else
@@ -92,15 +90,13 @@ namespace System.ComponentModel.Tests
                             }
                             else
                             {
-                                Assert.Throws<NotSupportedException>(
-                                    () =>
-                                        this.Converter.ConvertTo(
-                                            convertTest.Context,
-                                            convertTest.Culture,
-                                            convertTest.Source,
-                                            convertTest.DestinationType
-                                        )
-                                );
+                                Assert.Throws<NotSupportedException>(() =>
+                                    this.Converter.ConvertTo(
+                                        convertTest.Context,
+                                        convertTest.Culture,
+                                        convertTest.Source,
+                                        convertTest.DestinationType
+                                    ));
                             }
                         }
                     }

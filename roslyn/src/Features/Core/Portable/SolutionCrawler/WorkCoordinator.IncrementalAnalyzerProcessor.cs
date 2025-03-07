@@ -72,14 +72,12 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 onlyHighPriorityAnalyzer: true
                             )
                     );
-                    var lazyAllAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(
-                        () =>
-                            GetIncrementalAnalyzers(
-                                _registration,
-                                analyzersGetter,
-                                onlyHighPriorityAnalyzer: false
-                            )
-                    );
+                    var lazyAllAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(() =>
+                        GetIncrementalAnalyzers(
+                            _registration,
+                            analyzersGetter,
+                            onlyHighPriorityAnalyzer: false
+                        ));
 
                     if (!initializeLazily)
                     {

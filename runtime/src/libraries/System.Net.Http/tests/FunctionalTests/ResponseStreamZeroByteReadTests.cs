@@ -177,17 +177,15 @@ namespace System.Net.Http.Functional.Tests
                     Assert.False(sawZeroByteRead.Task.IsCompleted);
                 }
 
-                Task<int> zeroByteReadTask = Task.Run(
-                    () =>
-                        StreamConformanceTests.ReadAsync(
-                            readMode,
-                            clientStream,
-                            Array.Empty<byte>(),
-                            0,
-                            0,
-                            CancellationToken.None
-                        )
-                );
+                Task<int> zeroByteReadTask = Task.Run(() =>
+                    StreamConformanceTests.ReadAsync(
+                        readMode,
+                        clientStream,
+                        Array.Empty<byte>(),
+                        0,
+                        0,
+                        CancellationToken.None
+                    ));
                 Assert.False(zeroByteReadTask.IsCompleted);
 
                 // The zero-byte read should block until data is actually available

@@ -247,9 +247,8 @@ namespace System.IO.Pipelines.Tests
 
             PipeWriter writableBuffer = _pipe.Writer.WriteEmpty(PauseWriterThreshold);
             InvalidOperationException invalidOperationException =
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () => await writableBuffer.FlushAsync()
-                );
+                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    await writableBuffer.FlushAsync());
             Assert.Equal("Reader failed", invalidOperationException.Message);
             invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(
                 async () => await writableBuffer.FlushAsync()

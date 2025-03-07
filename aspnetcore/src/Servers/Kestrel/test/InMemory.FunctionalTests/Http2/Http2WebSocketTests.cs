@@ -533,26 +533,22 @@ public class Http2WebSocketTests : Http2TestBase
             var connectFeature = context.Features.Get<IHttpExtendedConnectFeature>();
             // We could throw, but no-oping is adequate.
             Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1]));
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => context.Response.Body.WriteAsync(new byte[1] { 0x00 }).AsTask()
-            );
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.Response.Body.WriteAsync(new byte[1] { 0x00 }).AsTask());
             Assert.Equal(CoreStrings.FormatConnectResponseCanNotHaveBody(200), ex.Message);
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => context.Response.BodyWriter.WriteAsync(new byte[1] { 0x00 }).AsTask()
-            );
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.Response.BodyWriter.WriteAsync(new byte[1] { 0x00 }).AsTask());
             Assert.Equal(CoreStrings.FormatConnectResponseCanNotHaveBody(200), ex.Message);
 
             var stream = await connectFeature.AcceptAsync();
 
             // The body streams still shouldn't work after Accept
             Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1]));
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => context.Response.Body.WriteAsync(new byte[1] { 0x00 }).AsTask()
-            );
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.Response.Body.WriteAsync(new byte[1] { 0x00 }).AsTask());
             Assert.Equal(CoreStrings.FormatConnectResponseCanNotHaveBody(200), ex.Message);
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                () => context.Response.BodyWriter.WriteAsync(new byte[1] { 0x00 }).AsTask()
-            );
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.Response.BodyWriter.WriteAsync(new byte[1] { 0x00 }).AsTask());
             Assert.Equal(CoreStrings.FormatConnectResponseCanNotHaveBody(200), ex.Message);
 
             // The connect stream should work

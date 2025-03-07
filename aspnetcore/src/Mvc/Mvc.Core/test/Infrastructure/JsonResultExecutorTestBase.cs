@@ -320,9 +320,8 @@ public abstract class JsonResultExecutorTestBase
         var executor = CreateExecutor();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => executor.ExecuteAsync(context, result)
-        );
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            executor.ExecuteAsync(context, result));
 
         // Assert
         Assert.StartsWith(
@@ -464,9 +463,8 @@ public abstract class JsonResultExecutorTestBase
         var executor = CreateExecutor();
 
         // Act & Assert
-        await Assert.ThrowsAsync<OperationCanceledException>(
-            () => executor.ExecuteAsync(context, result)
-        );
+        await Assert.ThrowsAsync<OperationCanceledException>(() =>
+            executor.ExecuteAsync(context, result));
 
         async IAsyncEnumerable<int> AsyncEnumerableThrows(
             [EnumeratorCancellation] CancellationToken cancellationToken = default

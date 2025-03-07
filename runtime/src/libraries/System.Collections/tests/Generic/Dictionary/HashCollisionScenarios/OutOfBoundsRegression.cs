@@ -326,9 +326,8 @@ namespace System.Collections.Tests
         >(() => GetStringHashCodeOpenDelegate("GetNonRandomizedHashCode"));
 
         private static Lazy<Func<string, int>> _lazyGetNonRandomizedOrdinalIgnoreCaseHashCodeDel =
-            new Lazy<Func<string, int>>(
-                () => GetStringHashCodeOpenDelegate("GetNonRandomizedHashCodeOrdinalIgnoreCase")
-            );
+            new Lazy<Func<string, int>>(() =>
+                GetStringHashCodeOpenDelegate("GetNonRandomizedHashCodeOrdinalIgnoreCase"));
 
         // n.b., must be initialized *after* delegate fields above
         private static readonly List<string> _collidingStrings = GenerateCollidingStrings(110);

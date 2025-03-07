@@ -251,9 +251,8 @@ namespace System.Security.Cryptography.Tests
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(
-                    () => DeriveKey(test.Hash, test.Ikm, test.Okm.Length, test.Salt, test.Info)
-                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    DeriveKey(test.Hash, test.Ikm, test.Okm.Length, test.Salt, test.Info));
             }
         }
 

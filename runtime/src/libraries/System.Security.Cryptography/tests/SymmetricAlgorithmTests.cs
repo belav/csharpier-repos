@@ -181,9 +181,8 @@ namespace System.Security.Cryptography.Tests
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
-            Assert.Throws<NotSupportedException>(
-                () => alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None));
         }
 
         [Fact]
@@ -191,9 +190,8 @@ namespace System.Security.Cryptography.Tests
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
-            Assert.Throws<NotSupportedException>(
-                () => alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None));
         }
 
         [Fact]
@@ -216,9 +214,8 @@ namespace System.Security.Cryptography.Tests
                 TryEncryptEcbCoreImpl = EncryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () => alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None));
         }
 
         [Fact]
@@ -241,9 +238,8 @@ namespace System.Security.Cryptography.Tests
                 TryDecryptEcbCoreImpl = DecryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () => alg.DecryptEcb(new byte[128 / 8], PaddingMode.None)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.DecryptEcb(new byte[128 / 8], PaddingMode.None));
         }
 
         [Fact]
@@ -266,9 +262,8 @@ namespace System.Security.Cryptography.Tests
                 TryEncryptEcbCoreImpl = EncryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () => alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None));
         }
 
         [Fact]
@@ -291,9 +286,8 @@ namespace System.Security.Cryptography.Tests
                 TryEncryptEcbCoreImpl = EncryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () => alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None));
         }
 
         [Fact]
@@ -316,9 +310,8 @@ namespace System.Security.Cryptography.Tests
                 TryDecryptEcbCoreImpl = DecryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () => alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None));
         }
 
         [Fact]
@@ -341,9 +334,8 @@ namespace System.Security.Cryptography.Tests
                 TryDecryptEcbCoreImpl = DecryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () => alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None));
         }
 
         [Fact]
@@ -351,14 +343,8 @@ namespace System.Security.Cryptography.Tests
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    alg.EncryptCbc(
-                        Array.Empty<byte>(),
-                        new byte[alg.BlockSize / 8],
-                        PaddingMode.None
-                    )
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
         }
 
         [Fact]
@@ -366,14 +352,8 @@ namespace System.Security.Cryptography.Tests
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    alg.DecryptEcb(
-                        Array.Empty<byte>(),
-                        new byte[alg.BlockSize / 8],
-                        PaddingMode.None
-                    )
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                alg.DecryptEcb(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
         }
 
         [Fact]
@@ -397,14 +377,8 @@ namespace System.Security.Cryptography.Tests
                 TryEncryptCbcCoreImpl = EncryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    alg.EncryptCbc(
-                        Array.Empty<byte>(),
-                        new byte[alg.BlockSize / 8],
-                        PaddingMode.None
-                    )
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
         }
 
         [Fact]
@@ -428,9 +402,8 @@ namespace System.Security.Cryptography.Tests
                 TryDecryptCbcCoreImpl = DecryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () => alg.DecryptCbc(new byte[128 / 8], new byte[128 / 8], PaddingMode.None)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.DecryptCbc(new byte[128 / 8], new byte[128 / 8], PaddingMode.None));
         }
 
         [Fact]
@@ -454,14 +427,8 @@ namespace System.Security.Cryptography.Tests
                 TryEncryptCbcCoreImpl = EncryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    alg.EncryptCbc(
-                        Array.Empty<byte>(),
-                        new byte[alg.BlockSize / 8],
-                        PaddingMode.None
-                    )
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
         }
 
         [Fact]
@@ -485,14 +452,8 @@ namespace System.Security.Cryptography.Tests
                 TryEncryptCbcCoreImpl = EncryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    alg.EncryptCbc(
-                        Array.Empty<byte>(),
-                        new byte[alg.BlockSize / 8],
-                        PaddingMode.None
-                    )
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
         }
 
         [Fact]
@@ -516,14 +477,8 @@ namespace System.Security.Cryptography.Tests
                 TryDecryptCbcCoreImpl = DecryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    alg.DecryptCbc(
-                        Array.Empty<byte>(),
-                        new byte[alg.BlockSize / 8],
-                        PaddingMode.None
-                    )
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.DecryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
         }
 
         [Fact]
@@ -547,14 +502,8 @@ namespace System.Security.Cryptography.Tests
                 TryDecryptCbcCoreImpl = DecryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    alg.DecryptCbc(
-                        Array.Empty<byte>(),
-                        new byte[alg.BlockSize / 8],
-                        PaddingMode.None
-                    )
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.DecryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
         }
 
         [Fact]
@@ -662,9 +611,8 @@ namespace System.Security.Cryptography.Tests
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
-            Assert.Throws<NotSupportedException>(
-                () => alg.EncryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8])
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                alg.EncryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8]));
         }
 
         [Fact]
@@ -672,9 +620,8 @@ namespace System.Security.Cryptography.Tests
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
-            Assert.Throws<NotSupportedException>(
-                () => alg.DecryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8])
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                alg.DecryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8]));
         }
 
         [Fact]
@@ -699,14 +646,8 @@ namespace System.Security.Cryptography.Tests
                 TryEncryptCfbCoreImpl = EncryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    alg.EncryptCfb(
-                        Array.Empty<byte>(),
-                        new byte[alg.BlockSize / 8],
-                        PaddingMode.None
-                    )
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.EncryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
         }
 
         [Fact]
@@ -731,9 +672,8 @@ namespace System.Security.Cryptography.Tests
                 TryDecryptCfbCoreImpl = DecryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () => alg.DecryptCfb(new byte[128 / 8], new byte[128 / 8], feedbackSizeInBits: 128)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.DecryptCfb(new byte[128 / 8], new byte[128 / 8], feedbackSizeInBits: 128));
         }
 
         [Fact]
@@ -758,10 +698,8 @@ namespace System.Security.Cryptography.Tests
                 TryEncryptCfbCoreImpl = EncryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    alg.EncryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.EncryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128));
         }
 
         [Fact]
@@ -786,10 +724,8 @@ namespace System.Security.Cryptography.Tests
                 TryEncryptCfbCoreImpl = EncryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    alg.EncryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.EncryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128));
         }
 
         [Fact]
@@ -814,10 +750,8 @@ namespace System.Security.Cryptography.Tests
                 TryDecryptCfbCoreImpl = DecryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                    alg.DecryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.DecryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128));
         }
 
         [Fact]
@@ -842,9 +776,8 @@ namespace System.Security.Cryptography.Tests
                 TryDecryptCfbCoreImpl = DecryptImpl,
             };
 
-            Assert.Throws<CryptographicException>(
-                () => alg.DecryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 8)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                alg.DecryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 8));
         }
 
         [Fact]

@@ -478,9 +478,8 @@ RETURNING 1;
         batch.Complete(moreBatchesExpected: false);
 
         var exception = async
-            ? await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-                () => batch.ExecuteAsync(connection)
-            )
+            ? await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() =>
+                batch.ExecuteAsync(connection))
             : Assert.Throws<DbUpdateConcurrencyException>(() => batch.Execute(connection));
 
         Assert.Equal(RelationalStrings.UpdateConcurrencyException(1, 42), exception.Message);
@@ -513,9 +512,8 @@ RETURNING 1;
         batch.Complete(moreBatchesExpected: false);
 
         var exception = async
-            ? await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-                () => batch.ExecuteAsync(connection)
-            )
+            ? await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() =>
+                batch.ExecuteAsync(connection))
             : Assert.Throws<DbUpdateConcurrencyException>(() => batch.Execute(connection));
 
         Assert.Equal(RelationalStrings.UpdateConcurrencyException(1, 0), exception.Message);
@@ -585,9 +583,8 @@ RETURNING 1;
         batch.Complete(moreBatchesExpected: false);
 
         var actualException = async
-            ? await Assert.ThrowsAsync<OperationCanceledException>(
-                () => batch.ExecuteAsync(connection)
-            )
+            ? await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                batch.ExecuteAsync(connection))
             : Assert.Throws<OperationCanceledException>(() => batch.Execute(connection));
 
         Assert.Same(originalException, actualException);

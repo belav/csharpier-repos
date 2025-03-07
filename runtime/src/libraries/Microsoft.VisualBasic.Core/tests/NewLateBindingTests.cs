@@ -329,17 +329,15 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             //   Dim instance = New Properties_GetOnly("A", 0)
             //   instance.P = "B"
             var instance = new Properties_GetOnly("A", 0);
-            Assert.Throws<MissingMemberException>(
-                () =>
-                    NewLateBinding.LateSet(
-                        Instance: instance,
-                        Type: null,
-                        MemberName: "P",
-                        Arguments: new object[] { "B" },
-                        ArgumentNames: null,
-                        TypeArguments: null
-                    )
-            );
+            Assert.Throws<MissingMemberException>(() =>
+                NewLateBinding.LateSet(
+                    Instance: instance,
+                    Type: null,
+                    MemberName: "P",
+                    Arguments: new object[] { "B" },
+                    ArgumentNames: null,
+                    TypeArguments: null
+                ));
             Assert.Equal("A", instance.P);
         }
 
@@ -350,17 +348,15 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             //   Dim instance = New Properties_GetOnly(Nothing, 10)
             //   instance(3) = "3"
             var instance = new Properties_GetOnly(null, 10);
-            Assert.Throws<MissingMemberException>(
-                () =>
-                    NewLateBinding.LateSet(
-                        Instance: instance,
-                        Type: null,
-                        MemberName: "Item",
-                        Arguments: new object[] { 3, "3" },
-                        ArgumentNames: null,
-                        TypeArguments: null
-                    )
-            );
+            Assert.Throws<MissingMemberException>(() =>
+                NewLateBinding.LateSet(
+                    Instance: instance,
+                    Type: null,
+                    MemberName: "Item",
+                    Arguments: new object[] { 3, "3" },
+                    ArgumentNames: null,
+                    TypeArguments: null
+                ));
             Assert.Null(instance[3]);
         }
 
@@ -371,19 +367,17 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             //   Dim instance = New Properties_GetOnly("A", 0)
             //   instance.Set_P("B")
             var instance = new Properties_GetOnly("A", 0);
-            Assert.Throws<MissingMemberException>(
-                () =>
-                    NewLateBinding.LateCall(
-                        Instance: instance,
-                        Type: null,
-                        MemberName: "Set_P",
-                        Arguments: new object[] { "B" },
-                        ArgumentNames: null,
-                        TypeArguments: null,
-                        CopyBack: null,
-                        IgnoreReturn: true
-                    )
-            );
+            Assert.Throws<MissingMemberException>(() =>
+                NewLateBinding.LateCall(
+                    Instance: instance,
+                    Type: null,
+                    MemberName: "Set_P",
+                    Arguments: new object[] { "B" },
+                    ArgumentNames: null,
+                    TypeArguments: null,
+                    CopyBack: null,
+                    IgnoreReturn: true
+                ));
             Assert.Equal("A", instance.P);
         }
 
@@ -475,17 +469,15 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void Properties_GetAndInit_01()
         {
             var instance = new Properties_GetAndInit("A", 0);
-            Assert.Throws<MissingMemberException>(
-                () =>
-                    NewLateBinding.LateSet(
-                        Instance: instance,
-                        Type: null,
-                        MemberName: "P",
-                        Arguments: new object[] { "B" },
-                        ArgumentNames: null,
-                        TypeArguments: null
-                    )
-            );
+            Assert.Throws<MissingMemberException>(() =>
+                NewLateBinding.LateSet(
+                    Instance: instance,
+                    Type: null,
+                    MemberName: "P",
+                    Arguments: new object[] { "B" },
+                    ArgumentNames: null,
+                    TypeArguments: null
+                ));
             Assert.Equal("A", instance.P);
         }
 
@@ -494,17 +486,15 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void Properties_GetAndInit_02()
         {
             var instance = new Properties_GetAndInit(null, 10);
-            Assert.Throws<MissingMemberException>(
-                () =>
-                    NewLateBinding.LateSet(
-                        Instance: instance,
-                        Type: null,
-                        MemberName: "Item",
-                        Arguments: new object[] { 3, "3" },
-                        ArgumentNames: null,
-                        TypeArguments: null
-                    )
-            );
+            Assert.Throws<MissingMemberException>(() =>
+                NewLateBinding.LateSet(
+                    Instance: instance,
+                    Type: null,
+                    MemberName: "Item",
+                    Arguments: new object[] { 3, "3" },
+                    ArgumentNames: null,
+                    TypeArguments: null
+                ));
             Assert.Null(instance[3]);
         }
 

@@ -62,9 +62,8 @@ namespace System.Net.Primitives.Functional.Tests
             CookieContainer cc = new CookieContainer();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => cc.Capacity = 0); // <= 0
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => cc.Capacity = cc.PerDomainCapacity - 1
-            ); // < per domain capacity
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                cc.Capacity = cc.PerDomainCapacity - 1); // < per domain capacity
         }
 
         [Fact]
@@ -108,9 +107,8 @@ namespace System.Net.Primitives.Functional.Tests
             CookieContainer cc = new CookieContainer();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => cc.PerDomainCapacity = 0); // Per domain capacity <= 0
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => cc.PerDomainCapacity = cc.Capacity + 1
-            ); // Per domain capacity >= Capacity
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                cc.PerDomainCapacity = cc.Capacity + 1); // Per domain capacity >= Capacity
         }
 
         [Fact]
@@ -118,9 +116,8 @@ namespace System.Net.Primitives.Functional.Tests
         {
             CookieContainer cc = new CookieContainer();
             Assert.Throws<ArgumentNullException>(() => cc.Add(null, new Cookie("name", "value"))); // Null uri
-            Assert.Throws<ArgumentNullException>(
-                () => cc.Add(new Uri("http://contoso.com"), (Cookie)null)
-            ); // Null cookie
+            Assert.Throws<ArgumentNullException>(() =>
+                cc.Add(new Uri("http://contoso.com"), (Cookie)null)); // Null cookie
         }
 
         [Fact]
@@ -128,9 +125,8 @@ namespace System.Net.Primitives.Functional.Tests
         {
             CookieContainer cc = new CookieContainer();
             Assert.Throws<ArgumentNullException>(() => cc.Add(null, new CookieCollection())); //Null uri
-            Assert.Throws<ArgumentNullException>(
-                () => cc.Add(new Uri("http://contoso.com"), (CookieCollection)null)
-            ); //Null collection
+            Assert.Throws<ArgumentNullException>(() =>
+                cc.Add(new Uri("http://contoso.com"), (CookieCollection)null)); //Null collection
         }
 
         [Fact]

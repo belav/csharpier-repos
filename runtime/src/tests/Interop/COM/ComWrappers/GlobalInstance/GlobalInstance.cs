@@ -393,9 +393,8 @@ namespace ComWrappersTests.GlobalInstance
 
             if (validateUseRegistered)
             {
-                Assert.Throws<InvalidCastException>(
-                    () => MarshalInterface.CreateTrackerObjectWrongType()
-                );
+                Assert.Throws<InvalidCastException>(() =>
+                    MarshalInterface.CreateTrackerObjectWrongType());
 
                 FakeWrapper wrapper = MarshalInterface.CreateTrackerObjectAsInterface();
                 Assert.NotNull(wrapper);

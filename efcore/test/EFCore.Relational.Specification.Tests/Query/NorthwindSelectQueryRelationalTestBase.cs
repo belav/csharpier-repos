@@ -13,9 +13,8 @@ public abstract class NorthwindSelectQueryRelationalTestBase<TFixture>
     public override Task Select_bool_closure_with_order_by_property_with_cast_to_nullable(
         bool async
     ) =>
-        AssertTranslationFailed(
-            () => base.Select_bool_closure_with_order_by_property_with_cast_to_nullable(async)
-        );
+        AssertTranslationFailed(() =>
+            base.Select_bool_closure_with_order_by_property_with_cast_to_nullable(async));
 
     public override Task Reverse_without_explicit_ordering(bool async) =>
         AssertTranslationFailedWithDetails(

@@ -142,9 +142,8 @@ public sealed class ExpressionFormatterTest : IDisposable
         // Act
         for (; i < result.Length; i++)
         {
-            result[i] = ExpressionFormatter.FormatLambda(
-                () => person.Parent.Parent.Children[i].Parent.Children[i].Children[i].Name
-            );
+            result[i] = ExpressionFormatter.FormatLambda(() =>
+                person.Parent.Parent.Children[i].Parent.Children[i].Children[i].Name);
         }
 
         // Assert

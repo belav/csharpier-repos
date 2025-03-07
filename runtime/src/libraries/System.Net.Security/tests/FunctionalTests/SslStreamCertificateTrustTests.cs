@@ -140,10 +140,8 @@ namespace System.Net.Security.Tests
                     nameof(SslStream_SendCertificateTrust_CertificateCollection)
                 );
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    SslCertificateTrust.CreateForX509Collection(caCerts, sendTrustInHandshake: true)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                SslCertificateTrust.CreateForX509Collection(caCerts, sendTrustInHandshake: true));
         }
 
         [ConditionalFact(nameof(DoesNotSupportSendingCustomCANamesInTls))]
@@ -157,13 +155,10 @@ namespace System.Net.Security.Tests
 
             using X509Store store = new X509Store("Root", StoreLocation.LocalMachine);
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                    SslCertificateTrust.CreateForX509Collection(caCerts, sendTrustInHandshake: true)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => SslCertificateTrust.CreateForX509Store(store, sendTrustInHandshake: true)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                SslCertificateTrust.CreateForX509Collection(caCerts, sendTrustInHandshake: true));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                SslCertificateTrust.CreateForX509Store(store, sendTrustInHandshake: true));
         }
     }
 }

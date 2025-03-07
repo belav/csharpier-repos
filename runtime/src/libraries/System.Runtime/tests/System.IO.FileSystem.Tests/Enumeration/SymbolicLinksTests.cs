@@ -93,23 +93,18 @@ namespace System.IO.Tests.Enumeration
             }
             else
             {
-                Assert.Throws<IOException>(
-                    () => testDirectory.EnumerateFileSystemInfos("*", options).Count()
-                );
-                Assert.Throws<IOException>(
-                    () => testDirectory.GetFileSystemInfos("*", options).Count()
-                );
+                Assert.Throws<IOException>(() =>
+                    testDirectory.EnumerateFileSystemInfos("*", options).Count());
+                Assert.Throws<IOException>(() =>
+                    testDirectory.GetFileSystemInfos("*", options).Count());
 
-                Assert.Throws<IOException>(
-                    () => testDirectory.EnumerateDirectories("*", options).Count()
-                );
-                Assert.Throws<IOException>(
-                    () => testDirectory.GetDirectories("*", options).Count()
-                );
+                Assert.Throws<IOException>(() =>
+                    testDirectory.EnumerateDirectories("*", options).Count());
+                Assert.Throws<IOException>(() =>
+                    testDirectory.GetDirectories("*", options).Count());
 
-                Assert.Throws<IOException>(
-                    () => testDirectory.EnumerateFiles("*", options).Count()
-                );
+                Assert.Throws<IOException>(() =>
+                    testDirectory.EnumerateFiles("*", options).Count());
                 Assert.Throws<IOException>(() => testDirectory.GetFiles("*", options).Count());
             }
         }
@@ -141,31 +136,22 @@ namespace System.IO.Tests.Enumeration
             }
             else
             {
-                Assert.Throws<IOException>(
-                    () =>
-                        Directory
-                            .EnumerateFileSystemEntries(testDirectory.FullName, "*", options)
-                            .Count()
-                );
-                Assert.Throws<IOException>(
-                    () =>
-                        Directory.GetFileSystemEntries(testDirectory.FullName, "*", options).Count()
-                );
+                Assert.Throws<IOException>(() =>
+                    Directory
+                        .EnumerateFileSystemEntries(testDirectory.FullName, "*", options)
+                        .Count());
+                Assert.Throws<IOException>(() =>
+                    Directory.GetFileSystemEntries(testDirectory.FullName, "*", options).Count());
 
-                Assert.Throws<IOException>(
-                    () =>
-                        Directory.EnumerateDirectories(testDirectory.FullName, "*", options).Count()
-                );
-                Assert.Throws<IOException>(
-                    () => Directory.GetDirectories(testDirectory.FullName, "*", options).Count()
-                );
+                Assert.Throws<IOException>(() =>
+                    Directory.EnumerateDirectories(testDirectory.FullName, "*", options).Count());
+                Assert.Throws<IOException>(() =>
+                    Directory.GetDirectories(testDirectory.FullName, "*", options).Count());
 
-                Assert.Throws<IOException>(
-                    () => Directory.EnumerateFiles(testDirectory.FullName, "*", options).Count()
-                );
-                Assert.Throws<IOException>(
-                    () => Directory.GetFiles(testDirectory.FullName, "*", options).Count()
-                );
+                Assert.Throws<IOException>(() =>
+                    Directory.EnumerateFiles(testDirectory.FullName, "*", options).Count());
+                Assert.Throws<IOException>(() =>
+                    Directory.GetFiles(testDirectory.FullName, "*", options).Count());
             }
         }
 

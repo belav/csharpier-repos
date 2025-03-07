@@ -46,9 +46,8 @@ namespace System.IO.Tests
         public Task Read_FileNotFoundAsync()
         {
             string path = GetTestFilePath();
-            return Assert.ThrowsAsync<FileNotFoundException>(
-                async () => await File.ReadAllBytesAsync(path)
-            );
+            return Assert.ThrowsAsync<FileNotFoundException>(async () =>
+                await File.ReadAllBytesAsync(path));
         }
 
         [Fact]
@@ -81,9 +80,8 @@ namespace System.IO.Tests
             CancellationToken token = source.Token;
             source.Cancel();
             Assert.True(File.WriteAllBytesAsync(path, new byte[0], token).IsCanceled);
-            return Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await File.WriteAllBytesAsync(path, new byte[0], token)
-            );
+            return Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await File.WriteAllBytesAsync(path, new byte[0], token));
         }
 
         [Fact]
@@ -104,12 +102,10 @@ namespace System.IO.Tests
             byte[] bytes = Encoding.UTF8.GetBytes(new string('c', 100));
             using (File.Create(path))
             {
-                await Assert.ThrowsAsync<IOException>(
-                    async () => await File.WriteAllBytesAsync(path, bytes)
-                );
-                await Assert.ThrowsAsync<IOException>(
-                    async () => await File.ReadAllBytesAsync(path)
-                );
+                await Assert.ThrowsAsync<IOException>(async () =>
+                    await File.WriteAllBytesAsync(path, bytes));
+                await Assert.ThrowsAsync<IOException>(async () =>
+                    await File.ReadAllBytesAsync(path));
             }
         }
 
@@ -132,9 +128,8 @@ namespace System.IO.Tests
                     Assert.Equal("text"u8.ToArray(), await File.ReadAllBytesAsync(path));
                 }
                 else
-                    await Assert.ThrowsAsync<UnauthorizedAccessException>(
-                        async () => await File.WriteAllBytesAsync(path, "text"u8.ToArray())
-                    );
+                    await Assert.ThrowsAsync<UnauthorizedAccessException>(async () =>
+                        await File.WriteAllBytesAsync(path, "text"u8.ToArray()));
             }
             finally
             {

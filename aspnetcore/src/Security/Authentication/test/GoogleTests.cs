@@ -417,9 +417,8 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
             o.ClientSecret = "Test Secret";
         });
         using var server = host.GetTestServer();
-        var error = await Assert.ThrowsAnyAsync<Exception>(
-            () => server.SendAsync("https://example.com/signin-google?code=TestCode")
-        );
+        var error = await Assert.ThrowsAnyAsync<Exception>(() =>
+            server.SendAsync("https://example.com/signin-google?code=TestCode"));
         Assert.Equal("The oauth state was missing or invalid.", error.GetBaseException().Message);
     }
 
@@ -1006,9 +1005,8 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
 
         //Post a message to the Google middleware
         using var server = host.GetTestServer();
-        var error = await Assert.ThrowsAnyAsync<Exception>(
-            () => server.SendAsync("https://example.com/signin-google?code=TestCode")
-        );
+        var error = await Assert.ThrowsAnyAsync<Exception>(() =>
+            server.SendAsync("https://example.com/signin-google?code=TestCode"));
         Assert.Equal("The oauth state was missing or invalid.", error.GetBaseException().Message);
     }
 
@@ -1474,21 +1472,18 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                                 }
                                 else if (req.Path == new PathString("/signIn"))
                                 {
-                                    await Assert.ThrowsAsync<InvalidOperationException>(
-                                        () => context.SignInAsync("Google", new ClaimsPrincipal())
-                                    );
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.SignInAsync("Google", new ClaimsPrincipal()));
                                 }
                                 else if (req.Path == new PathString("/signOut"))
                                 {
-                                    await Assert.ThrowsAsync<InvalidOperationException>(
-                                        () => context.SignOutAsync("Google")
-                                    );
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.SignOutAsync("Google"));
                                 }
                                 else if (req.Path == new PathString("/forbid"))
                                 {
-                                    await Assert.ThrowsAsync<InvalidOperationException>(
-                                        () => context.ForbidAsync("Google")
-                                    );
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.ForbidAsync("Google"));
                                 }
                                 else if (testpath != null)
                                 {

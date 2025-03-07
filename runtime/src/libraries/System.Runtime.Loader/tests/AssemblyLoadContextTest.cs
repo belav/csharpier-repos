@@ -35,9 +35,8 @@ namespace System.Runtime.Loader.Tests
         [Fact]
         public static void GetAssemblyNameTest_AssemblyNotFound()
         {
-            Assert.Throws<FileNotFoundException>(
-                () => AssemblyLoadContext.GetAssemblyName("Non.Existing.Assembly.dll")
-            );
+            Assert.Throws<FileNotFoundException>(() =>
+                AssemblyLoadContext.GetAssemblyName("Non.Existing.Assembly.dll"));
         }
 
         [Fact]

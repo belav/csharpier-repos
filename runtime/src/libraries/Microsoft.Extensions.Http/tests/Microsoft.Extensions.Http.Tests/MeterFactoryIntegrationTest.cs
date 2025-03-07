@@ -78,9 +78,8 @@ namespace Microsoft.Extensions.Http
             var serviceCollection = new ServiceCollection();
             serviceCollection
                 .AddHttpClient("Test")
-                .ConfigurePrimaryHttpMessageHandler(
-                    () => new HttpClientHandler { MeterFactory = testMeterFactory }
-                );
+                .ConfigurePrimaryHttpMessageHandler(() =>
+                    new HttpClientHandler { MeterFactory = testMeterFactory });
 
             var services = serviceCollection.BuildServiceProvider();
             var messageHandlerFactory = services.GetRequiredService<IHttpMessageHandlerFactory>();

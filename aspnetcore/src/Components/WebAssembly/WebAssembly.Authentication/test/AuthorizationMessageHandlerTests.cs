@@ -25,9 +25,8 @@ public class AuthorizationMessageHandlerTests
         );
         // Act & Assert
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => new HttpClient(handler).GetAsync("https://www.example.com")
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            new HttpClient(handler).GetAsync("https://www.example.com"));
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -210,9 +209,8 @@ public class AuthorizationMessageHandlerTests
         handler.InnerHandler = new TestMessageHandler(response);
 
         // Act & assert
-        var exception = await Assert.ThrowsAsync<AccessTokenNotAvailableException>(
-            () => new HttpClient(handler).GetAsync("https://localhost:5001/weather")
-        );
+        var exception = await Assert.ThrowsAsync<AccessTokenNotAvailableException>(() =>
+            new HttpClient(handler).GetAsync("https://localhost:5001/weather"));
     }
 
     [Fact]

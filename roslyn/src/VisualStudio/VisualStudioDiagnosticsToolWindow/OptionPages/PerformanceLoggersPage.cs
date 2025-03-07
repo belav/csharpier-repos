@@ -73,9 +73,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
             SetRoslynLogger(loggerTypeNames, () => new OutputWindowLogger(isEnabled));
 
             // update loggers in remote process
-            var client = threadingContext.JoinableTaskFactory.Run(
-                () => RemoteHostClient.TryGetClientAsync(workspaceServices, CancellationToken.None)
-            );
+            var client = threadingContext.JoinableTaskFactory.Run(() =>
+                RemoteHostClient.TryGetClientAsync(workspaceServices, CancellationToken.None));
             if (client != null)
             {
                 var functionIds = Enum.GetValues(typeof(FunctionId))
@@ -83,20 +82,18 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
                     .Where(isEnabled)
                     .ToImmutableArray();
 
-                threadingContext.JoinableTaskFactory.Run(
-                    async () =>
-                        _ = await client
-                            .TryInvokeAsync<IRemoteProcessTelemetryService>(
-                                (service, cancellationToken) =>
-                                    service.EnableLoggingAsync(
-                                        loggerTypeNames,
-                                        functionIds,
-                                        cancellationToken
-                                    ),
-                                CancellationToken.None
-                            )
-                            .ConfigureAwait(false)
-                );
+                threadingContext.JoinableTaskFactory.Run(async () =>
+                    _ = await client
+                        .TryInvokeAsync<IRemoteProcessTelemetryService>(
+                            (service, cancellationToken) =>
+                                service.EnableLoggingAsync(
+                                    loggerTypeNames,
+                                    functionIds,
+                                    cancellationToken
+                                ),
+                            CancellationToken.None
+                        )
+                        .ConfigureAwait(false));
             }
         }
 

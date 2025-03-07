@@ -12,17 +12,15 @@ namespace System.ConfigurationTests
         [Fact]
         public void ConfigurationSectionThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(
-                () => new ConfigurationProperty("foo", typeof(ConfigurationSection))
-            );
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new ConfigurationProperty("foo", typeof(ConfigurationSection)));
         }
 
         [Fact]
         public void AppSettingsSectionThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(
-                () => new ConfigurationProperty("foo", typeof(AppSettingsSection))
-            );
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new ConfigurationProperty("foo", typeof(AppSettingsSection)));
         }
 
         [Fact]
@@ -85,17 +83,15 @@ namespace System.ConfigurationTests
         public void NonMatchingValidatorThrows()
         {
             CantValidateValidator validator = new CantValidateValidator();
-            Assert.Throws<ConfigurationErrorsException>(
-                () =>
-                    new ConfigurationProperty(
-                        "foo",
-                        typeof(string),
-                        null,
-                        null,
-                        validator,
-                        ConfigurationPropertyOptions.None
-                    )
-            );
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new ConfigurationProperty(
+                    "foo",
+                    typeof(string),
+                    null,
+                    null,
+                    validator,
+                    ConfigurationPropertyOptions.None
+                ));
         }
 
         public class FooFailsValidator : ConfigurationValidatorBase

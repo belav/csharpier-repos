@@ -3551,9 +3551,8 @@ public abstract class JsonUpdateTestBase<TFixture> : IClassFixture<TFixture>
                         nameof(JsonEntityAllTypes.TestGuidCollection)
                     ),
                     (
-                        await Assert.ThrowsAsync<InvalidOperationException>(
-                            async () => await context.SaveChangesAsync()
-                        )
+                        await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                            await context.SaveChangesAsync())
                     ).Message
                 );
             }

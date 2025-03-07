@@ -476,13 +476,11 @@ public class CascadingParameterStateTest
     [Fact]
     public void FindCascadingParameters_DisallowsSingleDeliveryWhenIsFixedIsFalse()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                CreateAncestry(
-                    new SupplyParameterWithSingleDeliveryComponent(isFixed: false),
-                    new ComponentWithCascadingParams()
-                )
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            CreateAncestry(
+                new SupplyParameterWithSingleDeliveryComponent(isFixed: false),
+                new ComponentWithCascadingParams()
+            ));
 
         Assert.StartsWith(
             $"'{typeof(SupplyParameterWithSingleDeliveryAttribute)}' is flagged with SingleDelivery",

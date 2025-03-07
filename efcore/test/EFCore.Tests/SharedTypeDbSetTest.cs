@@ -76,9 +76,8 @@ public class SharedTypeDbSetTest
         Assert.StartsWith(
             CoreStrings.ContextDisposed,
             (
-                await Assert.ThrowsAsync<ObjectDisposedException>(
-                    () => set.AddAsync(new Category()).AsTask()
-                )
+                await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    set.AddAsync(new Category()).AsTask())
             ).Message
         );
 
@@ -104,9 +103,8 @@ public class SharedTypeDbSetTest
         Assert.StartsWith(
             CoreStrings.ContextDisposed,
             Assert
-                .Throws<ObjectDisposedException>(
-                    () => context.Set<Dictionary<string, object>>("SharedTypeEntityTypeName")
-                )
+                .Throws<ObjectDisposedException>(() =>
+                    context.Set<Dictionary<string, object>>("SharedTypeEntityTypeName"))
                 .Message
         );
     }
@@ -879,9 +877,8 @@ public class SharedTypeDbSetTest
         Assert.Equal(
             CoreStrings.DataBindingWithIListSource,
             Assert
-                .Throws<NotSupportedException>(
-                    () => ((IListSource)context.Gu1s.Distinct()).GetList()
-                )
+                .Throws<NotSupportedException>(() =>
+                    ((IListSource)context.Gu1s.Distinct()).GetList())
                 .Message
         );
     }

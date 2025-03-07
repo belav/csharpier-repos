@@ -80,42 +80,31 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
             Assert.Throws<ArgumentException>(() => _provider.SuppressShadowCopy(@"\bar.dll"));
             Assert.Throws<ArgumentException>(() => _provider.SuppressShadowCopy(@"../bar.dll"));
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    _provider.GetMetadataShadowCopy(
-                        IsRunningOnMono ? "/goo.dll" : @"c:\goo.dll",
-                        (MetadataImageKind)Byte.MaxValue
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => _provider.GetMetadataShadowCopy(null, MetadataImageKind.Assembly)
-            );
-            Assert.Throws<ArgumentException>(
-                () => _provider.GetMetadataShadowCopy("c:goo.dll", MetadataImageKind.Assembly)
-            );
-            Assert.Throws<ArgumentException>(
-                () => _provider.GetMetadataShadowCopy("bar.dll", MetadataImageKind.Assembly)
-            );
-            Assert.Throws<ArgumentException>(
-                () => _provider.GetMetadataShadowCopy(@"\bar.dll", MetadataImageKind.Assembly)
-            );
-            Assert.Throws<ArgumentException>(
-                () => _provider.GetMetadataShadowCopy(@"../bar.dll", MetadataImageKind.Assembly)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                _provider.GetMetadataShadowCopy(
+                    IsRunningOnMono ? "/goo.dll" : @"c:\goo.dll",
+                    (MetadataImageKind)Byte.MaxValue
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                _provider.GetMetadataShadowCopy(null, MetadataImageKind.Assembly));
+            Assert.Throws<ArgumentException>(() =>
+                _provider.GetMetadataShadowCopy("c:goo.dll", MetadataImageKind.Assembly));
+            Assert.Throws<ArgumentException>(() =>
+                _provider.GetMetadataShadowCopy("bar.dll", MetadataImageKind.Assembly));
+            Assert.Throws<ArgumentException>(() =>
+                _provider.GetMetadataShadowCopy(@"\bar.dll", MetadataImageKind.Assembly));
+            Assert.Throws<ArgumentException>(() =>
+                _provider.GetMetadataShadowCopy(@"../bar.dll", MetadataImageKind.Assembly));
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    _provider.GetMetadata(
-                        IsRunningOnMono ? "/goo.dll" : @"c:\goo.dll",
-                        (MetadataImageKind)Byte.MaxValue
-                    )
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => _provider.GetMetadata(null, MetadataImageKind.Assembly)
-            );
-            Assert.Throws<ArgumentException>(
-                () => _provider.GetMetadata("c:goo.dll", MetadataImageKind.Assembly)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                _provider.GetMetadata(
+                    IsRunningOnMono ? "/goo.dll" : @"c:\goo.dll",
+                    (MetadataImageKind)Byte.MaxValue
+                ));
+            Assert.Throws<ArgumentNullException>(() =>
+                _provider.GetMetadata(null, MetadataImageKind.Assembly));
+            Assert.Throws<ArgumentException>(() =>
+                _provider.GetMetadata("c:goo.dll", MetadataImageKind.Assembly));
         }
 
         [Fact]
@@ -247,16 +236,14 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
         public unsafe void DisposalOnFailure()
         {
             var f0 = Temp.CreateFile().WriteAllText("bogus").Path;
-            Assert.Throws<BadImageFormatException>(
-                () => _provider.GetMetadata(f0, MetadataImageKind.Assembly)
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                _provider.GetMetadata(f0, MetadataImageKind.Assembly));
 
             string f1 = Temp.CreateFile()
                 .WriteAllBytes(TestResources.SymbolsTests.MultiModule.MultiModuleDll)
                 .Path;
-            Assert.Throws<FileNotFoundException>(
-                () => _provider.GetMetadata(f1, MetadataImageKind.Assembly)
-            );
+            Assert.Throws<FileNotFoundException>(() =>
+                _provider.GetMetadata(f1, MetadataImageKind.Assembly));
         }
 
         [Fact]

@@ -189,9 +189,8 @@ namespace System.Tests
                 out written
             );
 
-            Assert.Throws<FormatException>(
-                () => Convert.FromHexString(hex.Substring(0, hex.Length - 1))
-            );
+            Assert.Throws<FormatException>(() =>
+                Convert.FromHexString(hex.Substring(0, hex.Length - 1)));
             Assert.Equal(OperationStatus.NeedMoreData, oneOffResult);
             Assert.Equal(spanHex.Length - 1, consumed);
             Assert.Equal((spanHex.Length - 1) / 2, written);

@@ -252,9 +252,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void MonthDayPattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => DateTimeFormatInfo.InvariantInfo.MonthDayPattern = "MMMM dd"
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                DateTimeFormatInfo.InvariantInfo.MonthDayPattern = "MMMM dd");
         }
     }
 }

@@ -489,9 +489,8 @@ namespace Microsoft.Extensions.Logging.Test
                 options
             );
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => loggerFactory.CreateLogger("Category")
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                loggerFactory.CreateLogger("Category"));
             Assert.Equal(
                 "Only one wildcard character is allowed in category name.",
                 exception.Message

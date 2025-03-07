@@ -47,40 +47,34 @@ namespace System.Net.NameResolution.Tests
         [Fact]
         public void DnsObsoleteGetHostByName_HostAlmostTooLong254Chars_Throws()
         {
-            Assert.ThrowsAny<SocketException>(
-                () =>
-                    Dns.GetHostByName(
-                        "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
-                            + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
-                            + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are"
-                    )
-            );
+            Assert.ThrowsAny<SocketException>(() =>
+                Dns.GetHostByName(
+                    "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
+                        + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
+                        + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are"
+                ));
         }
 
         [Fact]
         public void DnsObsoleteGetHostByName_HostAlmostTooLong254CharsAndDot_Throws()
         {
-            Assert.ThrowsAny<SocketException>(
-                () =>
-                    Dns.GetHostByName(
-                        "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
-                            + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
-                            + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are."
-                    )
-            );
+            Assert.ThrowsAny<SocketException>(() =>
+                Dns.GetHostByName(
+                    "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
+                        + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
+                        + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Are."
+                ));
         }
 
         [Fact]
         public void DnsObsoleteGetHostByName_HostTooLong255Chars_Throws()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                    Dns.GetHostByName(
-                        "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
-                            + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
-                            + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Aret"
-                    )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Dns.GetHostByName(
+                    "Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualllllllly.I.Will.Get.To.The.Eeeee"
+                        + "eeeeend.Almost.There.Are.We.Really.Long.Name.Over.One.Hundred.And.Twenty.Six.Chars.Eeeeeeeventualll"
+                        + "llllly.I.Will.Get.To.The.Eeeeeeeeeend.Almost.There.Aret"
+                ));
         }
 
         [Fact]

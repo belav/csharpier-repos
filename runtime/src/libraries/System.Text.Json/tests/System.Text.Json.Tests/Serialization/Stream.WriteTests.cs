@@ -15,40 +15,33 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task WriteNullArgumentFail()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                async () => await JsonSerializer.SerializeAsync((Stream)null, 1)
-            );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                async () => await JsonSerializer.SerializeAsync((Stream)null, 1, typeof(int))
-            );
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await JsonSerializer.SerializeAsync((Stream)null, 1));
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await JsonSerializer.SerializeAsync((Stream)null, 1, typeof(int)));
             Assert.Throws<ArgumentNullException>(() => JsonSerializer.Serialize((Stream)null, 1));
-            Assert.Throws<ArgumentNullException>(
-                () => JsonSerializer.Serialize((Stream)null, 1, typeof(int))
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize((Stream)null, 1, typeof(int)));
         }
 
         [Fact]
         public async Task VerifyValueFail()
         {
             MemoryStream stream = new MemoryStream();
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                async () => await JsonSerializer.SerializeAsync(stream, "", (Type)null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => JsonSerializer.Serialize(stream, "", (Type)null)
-            );
+            await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await JsonSerializer.SerializeAsync(stream, "", (Type)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize(stream, "", (Type)null));
         }
 
         [Fact]
         public async Task VerifyTypeFail()
         {
             MemoryStream stream = new MemoryStream();
-            await Assert.ThrowsAsync<ArgumentException>(
-                async () => await JsonSerializer.SerializeAsync(stream, 1, typeof(string))
-            );
-            Assert.Throws<ArgumentException>(
-                () => JsonSerializer.Serialize(stream, 1, typeof(string))
-            );
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+                await JsonSerializer.SerializeAsync(stream, 1, typeof(string)));
+            Assert.Throws<ArgumentException>(() =>
+                JsonSerializer.Serialize(stream, 1, typeof(string)));
         }
 
         [Fact]
@@ -442,9 +435,8 @@ namespace System.Text.Json.Serialization.Tests
 
             using (var memoryStream = new MemoryStream())
             {
-                await Assert.ThrowsAsync<JsonException>(
-                    async () => await Serializer.SerializeWrapper(memoryStream, orders[0], options)
-                );
+                await Assert.ThrowsAsync<JsonException>(async () =>
+                    await Serializer.SerializeWrapper(memoryStream, orders[0], options));
             }
         }
 

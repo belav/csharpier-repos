@@ -74,9 +74,8 @@ public class PullFromJSDataStreamTest
 
         // Act & Assert
         using var mem = new MemoryStream();
-        var ex = await Assert.ThrowsAsync<EndOfStreamException>(
-            async () => await pullFromJSDataStream.CopyToAsync(mem).DefaultTimeout()
-        );
+        var ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
+            await pullFromJSDataStream.CopyToAsync(mem).DefaultTimeout());
         Assert.Equal("Failed to read the requested number of bytes from the stream.", ex.Message);
     }
 
@@ -90,9 +89,8 @@ public class PullFromJSDataStreamTest
 
         // Act & Assert
         using var mem = new MemoryStream();
-        var ex = await Assert.ThrowsAsync<EndOfStreamException>(
-            async () => await pullFromJSDataStream.CopyToAsync(mem).DefaultTimeout()
-        );
+        var ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
+            await pullFromJSDataStream.CopyToAsync(mem).DefaultTimeout());
         Assert.Equal("Failed to read the requested number of bytes from the stream.", ex.Message);
     }
 
@@ -106,9 +104,8 @@ public class PullFromJSDataStreamTest
 
         // Act & Assert
         using var mem = new MemoryStream();
-        var ex = await Assert.ThrowsAsync<EndOfStreamException>(
-            async () => await pullFromJSDataStream.CopyToAsync(mem).DefaultTimeout()
-        );
+        var ex = await Assert.ThrowsAsync<EndOfStreamException>(async () =>
+            await pullFromJSDataStream.CopyToAsync(mem).DefaultTimeout());
         Assert.Equal("Failed to read the requested number of bytes from the stream.", ex.Message);
     }
 

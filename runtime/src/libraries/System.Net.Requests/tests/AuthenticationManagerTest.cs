@@ -15,12 +15,10 @@ namespace System.Net.Tests
         [Fact]
         public void Authenticate_NotSupported()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => AuthenticationManager.Authenticate(null, null, null)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => AuthenticationManager.PreAuthenticate(null, null)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                AuthenticationManager.Authenticate(null, null, null));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                AuthenticationManager.PreAuthenticate(null, null));
         }
 
         [Fact]
@@ -32,12 +30,10 @@ namespace System.Net.Tests
         [Fact]
         public void Unregister_Null_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => AuthenticationManager.Unregister((IAuthenticationModule)null)
-            );
-            Assert.Throws<ArgumentNullException>(
-                () => AuthenticationManager.Unregister((string)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                AuthenticationManager.Unregister((IAuthenticationModule)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                AuthenticationManager.Unregister((string)null));
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

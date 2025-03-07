@@ -18,9 +18,8 @@ public partial class ExampleTests
         var logger = GetLogger();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => TestExampleLanguageServer.CreateBadLanguageServer(logger)
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TestExampleLanguageServer.CreateBadLanguageServer(logger));
 
         Assert.Equal("Method textDocument/didOpen was implemented more than once.", ex.Message);
     }

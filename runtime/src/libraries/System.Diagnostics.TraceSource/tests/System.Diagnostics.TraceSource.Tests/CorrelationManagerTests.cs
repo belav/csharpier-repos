@@ -43,9 +43,8 @@ namespace System.Diagnostics.TraceSourceTests
         [Fact]
         public void CorrelationManager_EmptyStack()
         {
-            Assert.Throws<InvalidOperationException>(
-                () => Trace.CorrelationManager.StopLogicalOperation()
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+                Trace.CorrelationManager.StopLogicalOperation());
         }
 
         [Fact]

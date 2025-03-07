@@ -3320,34 +3320,21 @@ namespace System.Data.SqlClient
     static internal class SysTxForGlobalTransactions
     {
         private static readonly Lazy<MethodInfo> _enlistPromotableSinglePhase =
-            new Lazy<MethodInfo>(
-                () =>
-                    typeof(SysTx.Transaction).GetMethod(
-                        "EnlistPromotableSinglePhase",
-                        new Type[]
-                        {
-                            typeof(SysTx.IPromotableSinglePhaseNotification),
-                            typeof(Guid),
-                        }
-                    )
-            );
+            new Lazy<MethodInfo>(() =>
+                typeof(SysTx.Transaction).GetMethod(
+                    "EnlistPromotableSinglePhase",
+                    new Type[] { typeof(SysTx.IPromotableSinglePhaseNotification), typeof(Guid) }
+                ));
 
         private static readonly Lazy<MethodInfo> _setDistributedTransactionIdentifier =
-            new Lazy<MethodInfo>(
-                () =>
-                    typeof(SysTx.Transaction).GetMethod(
-                        "SetDistributedTransactionIdentifier",
-                        new Type[]
-                        {
-                            typeof(SysTx.IPromotableSinglePhaseNotification),
-                            typeof(Guid),
-                        }
-                    )
-            );
+            new Lazy<MethodInfo>(() =>
+                typeof(SysTx.Transaction).GetMethod(
+                    "SetDistributedTransactionIdentifier",
+                    new Type[] { typeof(SysTx.IPromotableSinglePhaseNotification), typeof(Guid) }
+                ));
 
-        private static readonly Lazy<MethodInfo> _getPromotedToken = new Lazy<MethodInfo>(
-            () => typeof(SysTx.Transaction).GetMethod("GetPromotedToken")
-        );
+        private static readonly Lazy<MethodInfo> _getPromotedToken = new Lazy<MethodInfo>(() =>
+            typeof(SysTx.Transaction).GetMethod("GetPromotedToken"));
 
         /// <summary>
         /// Enlists the given IPromotableSinglePhaseNotification and Non-MSDTC Promoter type into a transaction

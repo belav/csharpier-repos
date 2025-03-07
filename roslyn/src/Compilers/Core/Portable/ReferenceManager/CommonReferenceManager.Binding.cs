@@ -19,12 +19,10 @@ namespace Microsoft.CodeAnalysis
             MultiDictionary<string, (AssemblyData DefinitionData, int DefinitionIndex)>
         > s_pool = new ObjectPool<
             MultiDictionary<string, (AssemblyData DefinitionData, int DefinitionIndex)>
-        >(
-            () =>
-                new MultiDictionary<string, (AssemblyData DefinitionData, int DefinitionIndex)>(
-                    AssemblyIdentityComparer.SimpleNameComparer
-                )
-        );
+        >(() =>
+            new MultiDictionary<string, (AssemblyData DefinitionData, int DefinitionIndex)>(
+                AssemblyIdentityComparer.SimpleNameComparer
+            ));
 
         /// <summary>
         /// For the given set of AssemblyData objects, do the following:
@@ -925,14 +923,12 @@ namespace Microsoft.CodeAnalysis
 
         private static readonly ObjectPool<
             Queue<AssemblyReferenceCandidate>
-        > s_candidatesToExaminePool = new ObjectPool<Queue<AssemblyReferenceCandidate>>(
-            () => new Queue<AssemblyReferenceCandidate>()
-        );
+        > s_candidatesToExaminePool = new ObjectPool<Queue<AssemblyReferenceCandidate>>(() =>
+            new Queue<AssemblyReferenceCandidate>());
         private static readonly ObjectPool<
             List<TAssemblySymbol?>
-        > s_candidateReferencedSymbolsPool = new ObjectPool<List<TAssemblySymbol?>>(
-            () => new List<TAssemblySymbol?>(capacity: 1024)
-        );
+        > s_candidateReferencedSymbolsPool = new ObjectPool<List<TAssemblySymbol?>>(() =>
+            new List<TAssemblySymbol?>(capacity: 1024));
 
         private void ReuseAssemblySymbols(
             BoundInputAssembly[] boundInputs,

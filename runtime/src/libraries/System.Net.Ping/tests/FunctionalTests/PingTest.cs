@@ -1319,9 +1319,8 @@ namespace System.Net.NetworkInformation.Tests
 
             byte[] buffer = TestSettings.PayloadAsBytes;
             Ping ping = new Ping();
-            Assert.Throws<PlatformNotSupportedException>(
-                () => ping.Send(TestSettings.LocalHost, TestSettings.PingTimeout, buffer)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                ping.Send(TestSettings.LocalHost, TestSettings.PingTimeout, buffer));
         }
 
         [ConditionalFact(nameof(UsesPingUtility))]
@@ -1331,9 +1330,8 @@ namespace System.Net.NetworkInformation.Tests
 
             byte[] buffer = TestSettings.PayloadAsBytes;
             Ping ping = new Ping();
-            await Assert.ThrowsAsync<PlatformNotSupportedException>(
-                () => ping.SendPingAsync(TestSettings.LocalHost, TestSettings.PingTimeout, buffer)
-            );
+            await Assert.ThrowsAsync<PlatformNotSupportedException>(() =>
+                ping.SendPingAsync(TestSettings.LocalHost, TestSettings.PingTimeout, buffer));
         }
     }
 }

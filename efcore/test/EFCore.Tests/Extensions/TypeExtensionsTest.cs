@@ -213,9 +213,8 @@ public class TypeExtensionsTest
             typeof(TindersticksIIVinyl),
             typeof(TindersticksIIVinyl).GetAnyProperty("VertrauenIII").DeclaringType
         );
-        Assert.Throws<AmbiguousMatchException>(
-            () => typeof(TindersticksIICd).GetAnyProperty("SleepySong")
-        );
+        Assert.Throws<AmbiguousMatchException>(() =>
+            typeof(TindersticksIICd).GetAnyProperty("SleepySong"));
 
         Assert.Same(
             typeof(TindersticksIICd),
@@ -273,9 +272,8 @@ public class TypeExtensionsTest
             typeof(TindersticksIICd),
             typeof(TindersticksIICd).GetAnyProperty("VertrauenIII").DeclaringType
         );
-        Assert.Throws<AmbiguousMatchException>(
-            () => typeof(TindersticksIICd).GetAnyProperty("SleepySong")
-        );
+        Assert.Throws<AmbiguousMatchException>(() =>
+            typeof(TindersticksIICd).GetAnyProperty("SleepySong"));
     }
 
     public class TindersticksII

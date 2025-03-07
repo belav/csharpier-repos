@@ -1492,9 +1492,8 @@ FROM [Customers] AS [c]
     }
 
     public override Task Member_binding_after_ctor_arguments_fails_with_client_eval(bool async) =>
-        AssertTranslationFailed(
-            () => base.Member_binding_after_ctor_arguments_fails_with_client_eval(async)
-        );
+        AssertTranslationFailed(() =>
+            base.Member_binding_after_ctor_arguments_fails_with_client_eval(async));
 
     public override async Task Filtered_collection_projection_is_tracked(bool async)
     {
@@ -1559,12 +1558,10 @@ CROSS APPLY (
         bool async
     )
     {
-        await AssertUnableToTranslateEFProperty(
-            () =>
-                base.SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
-                    async
-                )
-        );
+        await AssertUnableToTranslateEFProperty(() =>
+            base.SelectMany_with_collection_being_correlated_subquery_which_references_non_mapped_properties_from_inner_and_outer_entity(
+                async
+            ));
 
         AssertSql();
     }
@@ -2426,12 +2423,10 @@ ORDER BY [t].[OrderDate], [t].[CustomerID]
         Assert.Equal(
             RelationalStrings.InsufficientInformationToIdentifyElementOfCollectionJoin,
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () =>
-                        base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
-                            async
-                        )
-                )
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Correlated_collection_after_distinct_with_complex_projection_not_containing_original_identifier(
+                        async
+                    ))
             ).Message
         );
 

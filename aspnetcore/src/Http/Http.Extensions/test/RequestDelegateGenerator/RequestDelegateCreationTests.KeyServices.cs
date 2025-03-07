@@ -55,9 +55,8 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] [FromServi
         }
 
         // Throw during endpoint construction
-        var exception = Assert.Throws<NotSupportedException>(
-            () => GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider)
-        );
+        var exception = Assert.Throws<NotSupportedException>(() =>
+            GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider));
         Assert.Equal(
             $"The {nameof(FromKeyedServicesAttribute)} is not supported on parameters that are also annotated with {nameof(IFromServiceMetadata)}.",
             exception.Message
@@ -143,9 +142,8 @@ app.MapGet("/", (HttpContext context, [FromKeyedServices("service1")] TestServic
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await endpoint.RequestDelegate(httpContext)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await endpoint.RequestDelegate(httpContext));
 
         Assert.Equal(
             "No service for type 'Microsoft.AspNetCore.Http.Generators.Tests.TestService' has been registered.",

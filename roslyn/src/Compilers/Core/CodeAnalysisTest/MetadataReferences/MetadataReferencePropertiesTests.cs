@@ -57,47 +57,32 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void Constructor_Errors()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => new MetadataReferenceProperties((MetadataImageKind)byte.MaxValue)
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new MetadataReferenceProperties(
-                        MetadataImageKind.Module,
-                        ImmutableArray.Create("blah")
-                    )
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new MetadataReferenceProperties(
-                        MetadataImageKind.Module,
-                        embedInteropTypes: true
-                    )
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new MetadataReferenceProperties(
-                        MetadataImageKind.Module,
-                        ImmutableArray.Create("")
-                    )
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                    new MetadataReferenceProperties(
-                        MetadataImageKind.Module,
-                        ImmutableArray.Create("x\0x")
-                    )
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new MetadataReferenceProperties((MetadataImageKind)byte.MaxValue));
+            Assert.Throws<ArgumentException>(() =>
+                new MetadataReferenceProperties(
+                    MetadataImageKind.Module,
+                    ImmutableArray.Create("blah")
+                ));
+            Assert.Throws<ArgumentException>(() =>
+                new MetadataReferenceProperties(MetadataImageKind.Module, embedInteropTypes: true));
+            Assert.Throws<ArgumentException>(() =>
+                new MetadataReferenceProperties(
+                    MetadataImageKind.Module,
+                    ImmutableArray.Create("")
+                ));
+            Assert.Throws<ArgumentException>(() =>
+                new MetadataReferenceProperties(
+                    MetadataImageKind.Module,
+                    ImmutableArray.Create("x\0x")
+                ));
 
-            Assert.Throws<ArgumentException>(
-                () => MetadataReferenceProperties.Module.WithAliases(ImmutableArray.Create("blah"))
-            );
-            Assert.Throws<ArgumentException>(
-                () => MetadataReferenceProperties.Module.WithAliases(new[] { "blah" })
-            );
-            Assert.Throws<ArgumentException>(
-                () => MetadataReferenceProperties.Module.WithEmbedInteropTypes(true)
-            );
+            Assert.Throws<ArgumentException>(() =>
+                MetadataReferenceProperties.Module.WithAliases(ImmutableArray.Create("blah")));
+            Assert.Throws<ArgumentException>(() =>
+                MetadataReferenceProperties.Module.WithAliases(new[] { "blah" }));
+            Assert.Throws<ArgumentException>(() =>
+                MetadataReferenceProperties.Module.WithEmbedInteropTypes(true));
         }
 
         [Fact]

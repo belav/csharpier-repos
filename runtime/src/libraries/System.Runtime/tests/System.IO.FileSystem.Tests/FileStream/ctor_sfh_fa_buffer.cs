@@ -46,9 +46,8 @@ namespace System.IO.Tests
                 var handle = File.OpenHandle(GetTestFilePath(), FileMode.Create, FileAccess.Write)
             )
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () => CreateFileStream(handle, FileAccess.Read, -1)
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    CreateFileStream(handle, FileAccess.Read, -1));
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
                 Assert.False(handle.IsClosed);

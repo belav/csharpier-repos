@@ -22,9 +22,8 @@ public class ByteArrayJsonConverterTest
         var json = "{}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(
-            () => JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions)
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions));
         Assert.Equal(
             "JSON serialization is attempting to deserialize an unexpected byte array.",
             ex.Message
@@ -40,9 +39,8 @@ public class ByteArrayJsonConverterTest
         var json = "{}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(
-            () => JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions)
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions));
         Assert.Equal("Unexpected JSON Token EndObject, expected 'PropertyName'.", ex.Message);
     }
 
@@ -55,9 +53,8 @@ public class ByteArrayJsonConverterTest
         var json = "{\"foo\":2}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(
-            () => JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions)
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions));
         Assert.Equal("Unexpected JSON Property foo.", ex.Message);
     }
 
@@ -70,9 +67,8 @@ public class ByteArrayJsonConverterTest
         var json = $"{{\"__byte[]\":0";
 
         // Act & Assert
-        var ex = Record.Exception(
-            () => JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions)
-        );
+        var ex = Record.Exception(() =>
+            JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions));
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -97,9 +93,8 @@ public class ByteArrayJsonConverterTest
         var json = "\"Hello world\"";
 
         // Act
-        var ex = Assert.Throws<JsonException>(
-            () => JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions)
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions));
 
         // Assert
         Assert.Equal(
@@ -134,9 +129,8 @@ public class ByteArrayJsonConverterTest
         var json = $"{{\"__byte[]\":9120,\"__byte[]\":0}}";
 
         // Act
-        var ex = Assert.Throws<JsonException>(
-            () => JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions)
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions));
 
         // Assert
         Assert.Equal("Unexpected JSON Token PropertyName, expected 'EndObject'.", ex.Message);
@@ -152,9 +146,8 @@ public class ByteArrayJsonConverterTest
         var json = $"{{\"__byte[]\":\"something\"}}";
 
         // Act
-        var ex = Assert.Throws<JsonException>(
-            () => JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions)
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions));
 
         // Assert
         Assert.Equal("Unexpected JSON Token String, expected 'Number'.", ex.Message);
@@ -170,9 +163,8 @@ public class ByteArrayJsonConverterTest
         var json = $"{{\"__byte[]\":5000000000}}";
 
         // Act
-        var ex = Assert.Throws<JsonException>(
-            () => JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions)
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions));
 
         // Assert
         Assert.Equal("Unexpected number, expected 32-bit integer.", ex.Message);
@@ -188,9 +180,8 @@ public class ByteArrayJsonConverterTest
         var json = $"{{\"__byte[]\":-5}}";
 
         // Act
-        var ex = Assert.Throws<JsonException>(
-            () => JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions)
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<byte[]>(json, JsonSerializerOptions));
 
         // Assert
         Assert.Equal("Byte array -5 not found.", ex.Message);

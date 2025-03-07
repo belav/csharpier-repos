@@ -172,9 +172,8 @@ namespace System.IO.Tests
         [Fact]
         public void GetFullPath_PathTooLong()
         {
-            Assert.Throws<PathTooLongException>(
-                () => Path.GetFullPath(@"C:\" + new string('a', short.MaxValue) + @"\")
-            );
+            Assert.Throws<PathTooLongException>(() =>
+                Path.GetFullPath(@"C:\" + new string('a', short.MaxValue) + @"\"));
         }
 
         [
@@ -285,9 +284,8 @@ namespace System.IO.Tests
             if (PathFeatures.IsUsingLegacyPathNormalization())
             {
                 // Legacy Path doesn't support any of these paths.
-                AssertExtensions.ThrowsAny<ArgumentException, NotSupportedException>(
-                    () => Path.GetFullPath(path)
-                );
+                AssertExtensions.ThrowsAny<ArgumentException, NotSupportedException>(() =>
+                    Path.GetFullPath(path));
                 return;
             }
 

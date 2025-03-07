@@ -173,9 +173,8 @@ public class HtmlHelperDisplayNameExtensionsTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => helper.DisplayNameFor(model => new { foo = "Bar" })
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            helper.DisplayNameFor(model => new { foo = "Bar" }));
         Assert.Equal(
             "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions.",
             exception.Message
@@ -191,9 +190,8 @@ public class HtmlHelperDisplayNameExtensionsTest
         >(model: null);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => helper.DisplayNameFor(model => new { foo = "Bar" })
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            helper.DisplayNameFor(model => new { foo = "Bar" }));
         Assert.Equal(
             "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions.",
             exception.Message

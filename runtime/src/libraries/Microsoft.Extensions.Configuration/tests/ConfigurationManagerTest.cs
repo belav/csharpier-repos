@@ -252,9 +252,8 @@ namespace Microsoft.Extensions.Configuration.Test
             Assert.Equal("TestValue2", config["TestKey"]);
 
             Assert.Throws<ObjectDisposedException>(() => config.AddInMemoryCollection());
-            Assert.Throws<ObjectDisposedException>(
-                () => ((IConfigurationBuilder)config).Sources.Clear()
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                ((IConfigurationBuilder)config).Sources.Clear());
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads

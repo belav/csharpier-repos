@@ -20,38 +20,32 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Contains("returnType", ex.ToString());
 
-            ex = Assert.Throws<ArgumentNullException>(
-                () => JsonSerializer.Deserialize("", returnType: null)
-            );
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Deserialize("", returnType: null));
             Assert.Contains("returnType", ex.ToString());
 
-            ex = Assert.Throws<ArgumentNullException>(
-                () => JsonSerializer.Deserialize(new char[] { '1' }, returnType: null)
-            );
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Deserialize(new char[] { '1' }, returnType: null));
             Assert.Contains("returnType", ex.ToString());
 
-            ex = Assert.Throws<ArgumentNullException>(
-                () => JsonSerializer.Deserialize(new byte[] { 1 }, returnType: null)
-            );
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Deserialize(new byte[] { 1 }, returnType: null));
             Assert.Contains("returnType", ex.ToString());
 
-            ex = Assert.Throws<ArgumentNullException>(
-                () => JsonSerializer.DeserializeAsync(new MemoryStream(), returnType: null)
-            );
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.DeserializeAsync(new MemoryStream(), returnType: null));
             Assert.Contains("returnType", ex.ToString());
         }
 
         [Fact]
         public static void NullJsonThrows()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
-                () => JsonSerializer.Deserialize(json: (string)null, returnType: typeof(string))
-            );
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Deserialize(json: (string)null, returnType: typeof(string)));
             Assert.Contains("json", ex.ToString());
 
-            ex = Assert.Throws<ArgumentNullException>(
-                () => JsonSerializer.DeserializeAsync(utf8Json: null, returnType: null)
-            );
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.DeserializeAsync(utf8Json: null, returnType: null));
             Assert.Contains("utf8Json", ex.ToString());
         }
 
@@ -694,9 +688,8 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>(json));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>(jsonBytes));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.DeserializeAsync<int>(new MemoryStream(jsonBytes)).Result
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.DeserializeAsync<int>(new MemoryStream(jsonBytes)).Result);
 
             // Using a reader directly doesn't throw.
             Utf8JsonReader reader = new Utf8JsonReader(jsonBytes);
@@ -712,9 +705,8 @@ namespace System.Text.Json.Serialization.Tests
             byte[] jsonBytes = Encoding.UTF8.GetBytes(json);
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>(json));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>(jsonBytes));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.DeserializeAsync<int>(new MemoryStream(jsonBytes)).Result
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.DeserializeAsync<int>(new MemoryStream(jsonBytes)).Result);
 
             // Using a reader directly doesn't throw.
             Utf8JsonReader reader = new Utf8JsonReader(jsonBytes);
@@ -747,9 +739,8 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int[]>(json));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int[]>(jsonBytes));
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.DeserializeAsync<int[]>(new MemoryStream(jsonBytes)).Result
-            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.DeserializeAsync<int[]>(new MemoryStream(jsonBytes)).Result);
 
             // Using a reader directly throws since it can't read full int[].
             Utf8JsonReader reader = new Utf8JsonReader(jsonBytes);
@@ -788,12 +779,10 @@ namespace System.Text.Json.Serialization.Tests
                 var options = new JsonSerializerOptions();
                 options.Converters.Add(new CustomConverter());
 
-                Assert.Throws<JsonException>(
-                    () => JsonSerializer.Deserialize<DeepArray>(json, options)
-                );
-                Assert.Throws<JsonException>(
-                    () => JsonSerializer.Deserialize<IContent>(json, options)
-                );
+                Assert.Throws<JsonException>(() =>
+                    JsonSerializer.Deserialize<DeepArray>(json, options));
+                Assert.Throws<JsonException>(() =>
+                    JsonSerializer.Deserialize<IContent>(json, options));
             }
 
             {

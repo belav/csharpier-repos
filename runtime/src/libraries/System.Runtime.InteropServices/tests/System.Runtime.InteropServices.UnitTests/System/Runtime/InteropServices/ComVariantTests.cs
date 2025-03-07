@@ -452,9 +452,8 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(~TestPlatforms.Windows)]
         public void Array_Raw_NonWindows()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => ComVariant.CreateRaw(VarEnum.VT_ARRAY | VarEnum.VT_I4, 0)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                ComVariant.CreateRaw(VarEnum.VT_ARRAY | VarEnum.VT_I4, 0));
         }
 
         [Fact]

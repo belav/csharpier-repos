@@ -238,9 +238,8 @@ public class Http3Tests : LoggedTest
         var response = await client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead);
         headersReceived.SetResult();
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(
-            () => response.Content.ReadAsStringAsync()
-        );
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            response.Content.ReadAsStringAsync());
         var qex = Assert.IsType<QuicException>(ex.InnerException?.InnerException?.InnerException);
         Assert.Equal(QuicError.StreamAborted, qex.QuicError);
         Assert.Equal(0x010c, qex.ApplicationErrorCode.Value);
@@ -273,9 +272,8 @@ public class Http3Tests : LoggedTest
         var response = await client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead);
         headersReceived.SetResult();
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(
-            () => response.Content.ReadAsStringAsync()
-        );
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(() =>
+            response.Content.ReadAsStringAsync());
         var qex = Assert.IsType<QuicException>(ex.InnerException?.InnerException?.InnerException);
         Assert.Equal(QuicError.StreamAborted, qex.QuicError);
         Assert.Equal(0x0102, qex.ApplicationErrorCode.Value); // H3_INTERNAL_ERROR

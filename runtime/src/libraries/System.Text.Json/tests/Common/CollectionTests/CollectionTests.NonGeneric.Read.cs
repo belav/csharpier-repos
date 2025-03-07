@@ -27,12 +27,10 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             // No way to populate this collection.
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await Serializer.DeserializeWrapper<
-                        GenericIEnumerableWrapper<WrapperForIEnumerable>
-                    >(@"[[1,2],[3,4]]")
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await Serializer.DeserializeWrapper<
+                    GenericIEnumerableWrapper<WrapperForIEnumerable>
+                >(@"[[1,2],[3,4]]"));
         }
 
         [Fact]
@@ -181,9 +179,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task ReadClassWithStructIListWrapper_NullJson_Throws()
         {
             string json = @"{ ""List"" : null }";
-            await Assert.ThrowsAsync<JsonException>(
-                async () => await Serializer.DeserializeWrapper<ClassWithStructIListWrapper>(json)
-            );
+            await Assert.ThrowsAsync<JsonException>(async () =>
+                await Serializer.DeserializeWrapper<ClassWithStructIListWrapper>(json));
         }
 
         [Fact]
@@ -214,10 +211,8 @@ namespace System.Text.Json.Serialization.Tests
         public async Task ReadClassWithStructIDictionaryWrapper_NullJson_Throws()
         {
             string json = @"{ ""Dictionary"" : null }";
-            await Assert.ThrowsAsync<JsonException>(
-                async () =>
-                    await Serializer.DeserializeWrapper<ClassWithStructIDictionaryWrapper>(json)
-            );
+            await Assert.ThrowsAsync<JsonException>(async () =>
+                await Serializer.DeserializeWrapper<ClassWithStructIDictionaryWrapper>(json));
         }
 
         [Fact]
@@ -269,12 +264,10 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             // No way to populate this collection.
-            await Assert.ThrowsAsync<NotSupportedException>(
-                async () =>
-                    await Serializer.DeserializeWrapper<
-                        GenericICollectionWrapper<WrapperForICollection>
-                    >(@"[[1,2],[3,4]]")
-            );
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await Serializer.DeserializeWrapper<
+                    GenericICollectionWrapper<WrapperForICollection>
+                >(@"[[1,2],[3,4]]"));
         }
 
         [Fact]
@@ -603,9 +596,8 @@ namespace System.Text.Json.Serialization.Tests
             Type exceptionMessageType
         )
         {
-            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
-                async () => await Serializer.DeserializeWrapper(json, type)
-            );
+            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await Serializer.DeserializeWrapper(json, type));
             Assert.Contains(exceptionMessageType.ToString(), ex.Message);
         }
 
@@ -639,9 +631,8 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(typeof(WrapperForIDictionaryInternalConstructor), @"{""Key"":""Value""}")]
         public async Task Read_NonGeneric_NoPublicConstructor_Throws(Type type, string json)
         {
-            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
-                async () => await Serializer.DeserializeWrapper(json, type)
-            );
+            NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await Serializer.DeserializeWrapper(json, type));
             Assert.Contains(type.ToString(), ex.Message);
         }
     }

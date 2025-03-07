@@ -147,17 +147,15 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
     public virtual PropertyBuilder Property(string propertyName) =>
-        UpdateBuilder(
-            () =>
-                new PropertyBuilder(
-                    DependentEntityType
-                        .Builder.Property(
-                            Check.NotEmpty(propertyName, nameof(propertyName)),
-                            ConfigurationSource.Explicit
-                        )!
-                        .Metadata
-                )
-        );
+        UpdateBuilder(() =>
+            new PropertyBuilder(
+                DependentEntityType
+                    .Builder.Property(
+                        Check.NotEmpty(propertyName, nameof(propertyName)),
+                        ConfigurationSource.Explicit
+                    )!
+                    .Metadata
+            ));
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the owned entity type.
@@ -174,18 +172,16 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
     public virtual PropertyBuilder<TProperty> Property<TProperty>(string propertyName) =>
-        UpdateBuilder(
-            () =>
-                new PropertyBuilder<TProperty>(
-                    DependentEntityType
-                        .Builder.Property(
-                            typeof(TProperty),
-                            Check.NotEmpty(propertyName, nameof(propertyName)),
-                            ConfigurationSource.Explicit
-                        )!
-                        .Metadata
-                )
-        );
+        UpdateBuilder(() =>
+            new PropertyBuilder<TProperty>(
+                DependentEntityType
+                    .Builder.Property(
+                        typeof(TProperty),
+                        Check.NotEmpty(propertyName, nameof(propertyName)),
+                        ConfigurationSource.Explicit
+                    )!
+                    .Metadata
+            ));
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the owned entity type.
@@ -225,17 +221,15 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
     public virtual PrimitiveCollectionBuilder PrimitiveCollection(string propertyName) =>
-        UpdateBuilder(
-            () =>
-                new PrimitiveCollectionBuilder(
-                    DependentEntityType
-                        .Builder.PrimitiveCollection(
-                            Check.NotEmpty(propertyName, nameof(propertyName)),
-                            ConfigurationSource.Explicit
-                        )!
-                        .Metadata
-                )
-        );
+        UpdateBuilder(() =>
+            new PrimitiveCollectionBuilder(
+                DependentEntityType
+                    .Builder.PrimitiveCollection(
+                        Check.NotEmpty(propertyName, nameof(propertyName)),
+                        ConfigurationSource.Explicit
+                    )!
+                    .Metadata
+            ));
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the owned type where that property represents
@@ -255,18 +249,16 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     public virtual PrimitiveCollectionBuilder<TProperty> PrimitiveCollection<TProperty>(
         string propertyName
     ) =>
-        UpdateBuilder(
-            () =>
-                new PrimitiveCollectionBuilder<TProperty>(
-                    DependentEntityType
-                        .Builder.PrimitiveCollection(
-                            typeof(TProperty),
-                            Check.NotEmpty(propertyName, nameof(propertyName)),
-                            ConfigurationSource.Explicit
-                        )!
-                        .Metadata
-                )
-        );
+        UpdateBuilder(() =>
+            new PrimitiveCollectionBuilder<TProperty>(
+                DependentEntityType
+                    .Builder.PrimitiveCollection(
+                        typeof(TProperty),
+                        Check.NotEmpty(propertyName, nameof(propertyName)),
+                        ConfigurationSource.Explicit
+                    )!
+                    .Metadata
+            ));
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the owned type where that property represents

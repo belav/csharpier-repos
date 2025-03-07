@@ -195,9 +195,8 @@ namespace Microsoft.Extensions.Configuration
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(
-                () => new ConfigurationBuilder().AddJsonFile(path: null)
-            );
+            var exception = Assert.Throws<ArgumentException>(() =>
+                new ConfigurationBuilder().AddJsonFile(path: null));
 
             Assert.Equal(expectedMsg, exception.Message);
         }
@@ -207,9 +206,8 @@ namespace Microsoft.Extensions.Configuration
         {
             var expectedMsg = new ArgumentException(SR.Error_InvalidFilePath, "path").Message;
 
-            var exception = Assert.Throws<ArgumentException>(
-                () => new ConfigurationBuilder().AddJsonFile(string.Empty)
-            );
+            var exception = Assert.Throws<ArgumentException>(() =>
+                new ConfigurationBuilder().AddJsonFile(string.Empty));
 
             Assert.Equal(expectedMsg, exception.Message);
         }

@@ -151,13 +151,11 @@ namespace System.Reflection.Metadata.Tests
             //mutate mscorlib
             peImage[mscorlibIndex + headers.MetadataStartOffset] = 0xFF;
 
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        headers.MetadataSize
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    headers.MetadataSize
+                ));
         }
 
         [Fact]
@@ -184,32 +182,26 @@ namespace System.Reflection.Metadata.Tests
             peImage[clrIndex + headers.MetadataStartOffset] = 0xFF;
 
             //Not enough space for VersionString
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        fiveIndex + 2,
-                        MetadataReaderOptions.Default
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    fiveIndex + 2,
+                    MetadataReaderOptions.Default
+                ));
             //NotEnoughSpaceForStreamHeaderName for index of five + uint16 + COR20Constants.MinimumSizeofStreamHeader
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        fiveIndex + clrIndex + COR20Constants.MinimumSizeofStreamHeader + 2,
-                        MetadataReaderOptions.Default
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    fiveIndex + clrIndex + COR20Constants.MinimumSizeofStreamHeader + 2,
+                    MetadataReaderOptions.Default
+                ));
             //SR.StreamHeaderTooSmall
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        fiveIndex + clrIndex + COR20Constants.MinimumSizeofStreamHeader,
-                        MetadataReaderOptions.Default
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    fiveIndex + clrIndex + COR20Constants.MinimumSizeofStreamHeader,
+                    MetadataReaderOptions.Default
+                ));
         }
 
         [Fact]
@@ -255,13 +247,11 @@ namespace System.Reflection.Metadata.Tests
                     Encoding.ASCII.GetBytes(name).Length
                 );
                 peImage[fiveIndex + 10 + headers.MetadataStartOffset + name.Length] = (byte)0;
-                Assert.Throws<BadImageFormatException>(
-                    () =>
-                        new MetadataReader(
-                            (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                            fiveIndex + 15 + name.Length
-                        )
-                );
+                Assert.Throws<BadImageFormatException>(() =>
+                    new MetadataReader(
+                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                        fiveIndex + 15 + name.Length
+                    ));
             }
 
             Array.Copy(
@@ -277,13 +267,11 @@ namespace System.Reflection.Metadata.Tests
                     + headers.MetadataStartOffset
                     + COR20Constants.MinimalDeltaMetadataTableStreamName.Length
             ] = (byte)0;
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        headers.MetadataSize
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    headers.MetadataSize
+                ));
         }
 
         [Fact]
@@ -307,9 +295,8 @@ namespace System.Reflection.Metadata.Tests
                 externalTableMaskIndex,
                 8
             );
-            Assert.Throws<BadImageFormatException>(
-                () => new MetadataReader((byte*)pinned.AddrOfPinnedObject(), peImage.Length)
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader((byte*)pinned.AddrOfPinnedObject(), peImage.Length));
         }
 
         [Fact]
@@ -398,13 +385,11 @@ namespace System.Reflection.Metadata.Tests
                 presentTablesIndex + remainingBytesIndex + headers.MetadataStartOffset + 16,
                 8
             );
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        headers.MetadataSize
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    headers.MetadataSize
+                ));
             //set row counts greater than TokenTypeIds.RIDMask
             Array.Copy(
                 new byte[] { 0, 0, 1, 0 },
@@ -413,13 +398,11 @@ namespace System.Reflection.Metadata.Tests
                 presentTablesIndex + remainingBytesIndex + headers.MetadataStartOffset + 16,
                 4
             );
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        headers.MetadataSize
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    headers.MetadataSize
+                ));
             //set remaining bytes smaller than required for row counts.
             Array.Copy(
                 new byte[] { 25, 0, 0, 0 },
@@ -428,13 +411,11 @@ namespace System.Reflection.Metadata.Tests
                 remainingBytesIndex + headers.MetadataStartOffset,
                 4
             );
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        headers.MetadataSize
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    headers.MetadataSize
+                ));
             //0xcc90da21758 is a value to make (presentTables & ~validTables) != 0 but not (presentTables & (ulong)(TableMask.PtrTables | TableMask.EnCMap)) != 0
             Array.Copy(
                 new byte[] { 0x58, 0x17, 0xa2, 0x0d, 0xc9, 0x0c, 0, 0 },
@@ -443,13 +424,11 @@ namespace System.Reflection.Metadata.Tests
                 presentTablesIndex + remainingBytesIndex + headers.MetadataStartOffset,
                 8
             );
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        headers.MetadataSize
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    headers.MetadataSize
+                ));
             //0xccb0da21757 makes (presentTables & ~validTables) != 0 fail
             Array.Copy(
                 new byte[] { 0x57, 0x17, 0xa2, 0x0d, 0xcb, 0x0c, 0, 0 },
@@ -458,13 +437,11 @@ namespace System.Reflection.Metadata.Tests
                 presentTablesIndex + remainingBytesIndex + headers.MetadataStartOffset,
                 8
             );
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        headers.MetadataSize
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    headers.MetadataSize
+                ));
             //set remaining bytes smaller than MetadataStreamConstants.SizeOfMetadataTableHeader
             Array.Copy(
                 new byte[] { 1, 0, 0, 0 },
@@ -473,13 +450,11 @@ namespace System.Reflection.Metadata.Tests
                 remainingBytesIndex + headers.MetadataStartOffset,
                 4
             );
-            Assert.Throws<BadImageFormatException>(
-                () =>
-                    new MetadataReader(
-                        (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
-                        headers.MetadataSize
-                    )
-            );
+            Assert.Throws<BadImageFormatException>(() =>
+                new MetadataReader(
+                    (byte*)pinned.AddrOfPinnedObject() + headers.MetadataStartOffset,
+                    headers.MetadataSize
+                ));
         }
 
         [Fact]
@@ -4406,22 +4381,19 @@ namespace System.Reflection.Metadata.Tests
                 null,
                 () => MetadataReader.GetAssemblyName(string.Empty)
             );
-            Assert.Throws<FileNotFoundException>(
-                () => MetadataReader.GetAssemblyName("IDontExist")
-            );
+            Assert.Throws<FileNotFoundException>(() =>
+                MetadataReader.GetAssemblyName("IDontExist"));
 
             using (var tempFile = new TempFile(Path.GetTempFileName(), 0)) // Zero-size file
             {
-                Assert.Throws<BadImageFormatException>(
-                    () => MetadataReader.GetAssemblyName(tempFile.Path)
-                );
+                Assert.Throws<BadImageFormatException>(() =>
+                    MetadataReader.GetAssemblyName(tempFile.Path));
             }
 
             using (var tempFile = new TempFile(Path.GetTempFileName(), 42))
             {
-                Assert.Throws<BadImageFormatException>(
-                    () => MetadataReader.GetAssemblyName(tempFile.Path)
-                );
+                Assert.Throws<BadImageFormatException>(() =>
+                    MetadataReader.GetAssemblyName(tempFile.Path));
             }
 
             if (PlatformDetection.HasAssemblyFiles)

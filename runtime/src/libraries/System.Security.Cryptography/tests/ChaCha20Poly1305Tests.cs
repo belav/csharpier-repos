@@ -35,9 +35,8 @@ namespace System.Security.Cryptography.Tests
                 additionalData[0] ^= 1;
 
                 byte[] decrypted = new byte[dataLength];
-                Assert.Throws<AuthenticationTagMismatchException>(
-                    () => chaChaPoly.Decrypt(nonce, ciphertext, tag, decrypted, additionalData)
-                );
+                Assert.Throws<AuthenticationTagMismatchException>(() =>
+                    chaChaPoly.Decrypt(nonce, ciphertext, tag, decrypted, additionalData));
             }
         }
 
@@ -174,12 +173,10 @@ namespace System.Security.Cryptography.Tests
 
             using (var chaChaPoly = new ChaCha20Poly1305(key))
             {
-                Assert.Throws<ArgumentException>(
-                    () => chaChaPoly.Encrypt(nonce, plaintext, ciphertext, tag)
-                );
-                Assert.Throws<ArgumentException>(
-                    () => chaChaPoly.Decrypt(nonce, ciphertext, tag, plaintext)
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    chaChaPoly.Encrypt(nonce, plaintext, ciphertext, tag));
+                Assert.Throws<ArgumentException>(() =>
+                    chaChaPoly.Decrypt(nonce, ciphertext, tag, plaintext));
             }
         }
 
@@ -200,12 +197,10 @@ namespace System.Security.Cryptography.Tests
 
             using (var chaChaPoly = new ChaCha20Poly1305(key))
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => chaChaPoly.Encrypt((byte[])null, plaintext, ciphertext, tag)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => chaChaPoly.Decrypt((byte[])null, ciphertext, tag, plaintext)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    chaChaPoly.Encrypt((byte[])null, plaintext, ciphertext, tag));
+                Assert.Throws<ArgumentNullException>(() =>
+                    chaChaPoly.Decrypt((byte[])null, ciphertext, tag, plaintext));
             }
         }
 
@@ -220,12 +215,10 @@ namespace System.Security.Cryptography.Tests
 
             using (var chaChaPoly = new ChaCha20Poly1305(key))
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => chaChaPoly.Encrypt(nonce, (byte[])null, ciphertext, tag)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => chaChaPoly.Decrypt(nonce, ciphertext, tag, (byte[])null)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    chaChaPoly.Encrypt(nonce, (byte[])null, ciphertext, tag));
+                Assert.Throws<ArgumentNullException>(() =>
+                    chaChaPoly.Decrypt(nonce, ciphertext, tag, (byte[])null));
             }
         }
 
@@ -240,12 +233,10 @@ namespace System.Security.Cryptography.Tests
 
             using (var chaChaPoly = new ChaCha20Poly1305(key))
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => chaChaPoly.Encrypt(nonce, plaintext, (byte[])null, tag)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => chaChaPoly.Decrypt(nonce, (byte[])null, tag, plaintext)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    chaChaPoly.Encrypt(nonce, plaintext, (byte[])null, tag));
+                Assert.Throws<ArgumentNullException>(() =>
+                    chaChaPoly.Decrypt(nonce, (byte[])null, tag, plaintext));
             }
         }
 
@@ -260,12 +251,10 @@ namespace System.Security.Cryptography.Tests
 
             using (var chaChaPoly = new ChaCha20Poly1305(key))
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => chaChaPoly.Encrypt(nonce, plaintext, ciphertext, (byte[])null)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => chaChaPoly.Decrypt(nonce, ciphertext, (byte[])null, plaintext)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    chaChaPoly.Encrypt(nonce, plaintext, ciphertext, (byte[])null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    chaChaPoly.Decrypt(nonce, ciphertext, (byte[])null, plaintext));
             }
         }
 
@@ -306,9 +295,8 @@ namespace System.Security.Cryptography.Tests
 
                 tag[0] ^= 1;
 
-                Assert.Throws<AuthenticationTagMismatchException>(
-                    () => chaChaPoly.Decrypt(nonce, data, tag, data)
-                );
+                Assert.Throws<AuthenticationTagMismatchException>(() =>
+                    chaChaPoly.Decrypt(nonce, data, tag, data));
                 Assert.Equal(new byte[data.Length], data);
             }
         }
@@ -364,16 +352,14 @@ namespace System.Security.Cryptography.Tests
                 tag[0] ^= 1;
 
                 byte[] plaintext = RandomNumberGenerator.GetBytes(testCase.Plaintext.Length);
-                Assert.Throws<AuthenticationTagMismatchException>(
-                    () =>
-                        chaChaPoly.Decrypt(
-                            testCase.Nonce,
-                            ciphertext,
-                            tag,
-                            plaintext,
-                            testCase.AssociatedData
-                        )
-                );
+                Assert.Throws<AuthenticationTagMismatchException>(() =>
+                    chaChaPoly.Decrypt(
+                        testCase.Nonce,
+                        ciphertext,
+                        tag,
+                        plaintext,
+                        testCase.AssociatedData
+                    ));
                 Assert.Equal(new byte[plaintext.Length], plaintext);
             }
         }
@@ -390,12 +376,10 @@ namespace System.Security.Cryptography.Tests
             ChaCha20Poly1305 chaChaPoly = new ChaCha20Poly1305(key);
             chaChaPoly.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => chaChaPoly.Encrypt(nonce, plaintext, ciphertext, new byte[tag.Length])
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => chaChaPoly.Decrypt(nonce, ciphertext, tag, plaintext)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                chaChaPoly.Encrypt(nonce, plaintext, ciphertext, new byte[tag.Length]));
+            Assert.Throws<ObjectDisposedException>(() =>
+                chaChaPoly.Decrypt(nonce, ciphertext, tag, plaintext));
         }
 
         public static IEnumerable<object[]> GetInvalidNonceSizes()

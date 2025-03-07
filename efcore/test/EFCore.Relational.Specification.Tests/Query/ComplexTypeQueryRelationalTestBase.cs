@@ -12,9 +12,8 @@ public abstract class ComplexTypeQueryRelationalTestBase<TFixture>
 
     public override async Task Subquery_over_complex_type(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Subquery_over_complex_type(async)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Subquery_over_complex_type(async));
 
         Assert.Equal(
             RelationalStrings.SubqueryOverComplexTypesNotSupported(
@@ -28,9 +27,8 @@ public abstract class ComplexTypeQueryRelationalTestBase<TFixture>
 
     public override async Task Concat_two_different_complex_type(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Concat_two_different_complex_type(async)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Concat_two_different_complex_type(async));
 
         Assert.Equal(
             RelationalStrings.SetOperationOverDifferentStructuralTypes(
@@ -45,9 +43,8 @@ public abstract class ComplexTypeQueryRelationalTestBase<TFixture>
 
     public override async Task Union_two_different_complex_type(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Union_two_different_complex_type(async)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Union_two_different_complex_type(async));
 
         Assert.Equal(
             RelationalStrings.SetOperationOverDifferentStructuralTypes(
@@ -62,9 +59,8 @@ public abstract class ComplexTypeQueryRelationalTestBase<TFixture>
 
     public override async Task Complex_type_equals_null(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Complex_type_equals_null(async)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Complex_type_equals_null(async));
 
         Assert.Equal(RelationalStrings.CannotCompareComplexTypeToNull, exception.Message);
 
@@ -73,9 +69,8 @@ public abstract class ComplexTypeQueryRelationalTestBase<TFixture>
 
     public override async Task Subquery_over_struct_complex_type(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Subquery_over_struct_complex_type(async)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Subquery_over_struct_complex_type(async));
 
         Assert.Equal(
             RelationalStrings.SubqueryOverComplexTypesNotSupported(
@@ -89,9 +84,8 @@ public abstract class ComplexTypeQueryRelationalTestBase<TFixture>
 
     public override async Task Concat_two_different_struct_complex_type(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Concat_two_different_struct_complex_type(async)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Concat_two_different_struct_complex_type(async));
 
         Assert.Equal(
             RelationalStrings.SetOperationOverDifferentStructuralTypes(
@@ -106,9 +100,8 @@ public abstract class ComplexTypeQueryRelationalTestBase<TFixture>
 
     public override async Task Union_two_different_struct_complex_type(bool async)
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => base.Union_two_different_struct_complex_type(async)
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Union_two_different_struct_complex_type(async));
 
         Assert.Equal(
             RelationalStrings.SetOperationOverDifferentStructuralTypes(

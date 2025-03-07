@@ -70,26 +70,23 @@ namespace System.ConfigurationTests
         [Fact]
         public void AddNullKeyValueThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(
-                () => new KeyValueConfigurationCollection().Add(null, null)
-            );
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new KeyValueConfigurationCollection().Add(null, null));
         }
 
         [Fact]
         public void AddNullKeyValueElementThrows()
         {
             var element = new KeyValueConfigurationElement(null, null);
-            Assert.Throws<ConfigurationErrorsException>(
-                () => new KeyValueConfigurationCollection().Add(element)
-            );
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new KeyValueConfigurationCollection().Add(element));
         }
 
         [Fact]
         public void AddNullKeyThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(
-                () => new KeyValueConfigurationCollection().Add(null, "foo")
-            );
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new KeyValueConfigurationCollection().Add(null, "foo"));
         }
 
         [Fact]

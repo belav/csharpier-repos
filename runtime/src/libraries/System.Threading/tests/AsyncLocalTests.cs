@@ -112,9 +112,8 @@ namespace System.Threading.Tests
             using (ExecutionContext.SuppressFlow())
             {
                 ExecutionContext ec = ExecutionContext.Capture();
-                Assert.Throws<InvalidOperationException>(
-                    () => ExecutionContext.Run(ec, _ => { }, null)
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    ExecutionContext.Run(ec, _ => { }, null));
             }
         }
 

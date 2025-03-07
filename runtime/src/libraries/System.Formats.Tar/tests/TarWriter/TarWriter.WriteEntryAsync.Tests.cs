@@ -30,12 +30,10 @@ namespace System.Formats.Tar.Tests
                         TarEntryType.Directory,
                         "dir"
                     );
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => writer.WriteEntryAsync(entry, cs.Token)
-                    );
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => writer.WriteEntryAsync("file.txt", "file.txt", cs.Token)
-                    );
+                    await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        writer.WriteEntryAsync(entry, cs.Token));
+                    await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                        writer.WriteEntryAsync("file.txt", "file.txt", cs.Token));
                 }
             }
         }

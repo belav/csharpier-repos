@@ -39,9 +39,8 @@ namespace System.Security.Cryptography.Tests
                 additionalData[0] ^= 1;
 
                 byte[] decrypted = new byte[dataLength];
-                Assert.Throws<AuthenticationTagMismatchException>(
-                    () => aesGcm.Decrypt(nonce, ciphertext, tag, decrypted, additionalData)
-                );
+                Assert.Throws<AuthenticationTagMismatchException>(() =>
+                    aesGcm.Decrypt(nonce, ciphertext, tag, decrypted, additionalData));
             }
         }
 
@@ -59,12 +58,10 @@ namespace System.Security.Cryptography.Tests
             Assert.Throws<CryptographicException>(() => new AesGcm(key));
             Assert.Throws<CryptographicException>(() => new AesGcm(key.AsSpan()));
 #pragma warning restore SYSLIB0053
-            Assert.Throws<CryptographicException>(
-                () => new AesGcm(key, AesGcm.TagByteSizes.MinSize)
-            );
-            Assert.Throws<CryptographicException>(
-                () => new AesGcm(key.AsSpan(), AesGcm.TagByteSizes.MinSize)
-            );
+            Assert.Throws<CryptographicException>(() =>
+                new AesGcm(key, AesGcm.TagByteSizes.MinSize));
+            Assert.Throws<CryptographicException>(() =>
+                new AesGcm(key.AsSpan(), AesGcm.TagByteSizes.MinSize));
         }
 
         [Theory]
@@ -308,12 +305,10 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesGcm = new AesGcm(key, tag.Length))
             {
-                Assert.Throws<ArgumentException>(
-                    () => aesGcm.Encrypt(nonce, plaintext, ciphertext, tag)
-                );
-                Assert.Throws<ArgumentException>(
-                    () => aesGcm.Decrypt(nonce, ciphertext, tag, plaintext)
-                );
+                Assert.Throws<ArgumentException>(() =>
+                    aesGcm.Encrypt(nonce, plaintext, ciphertext, tag));
+                Assert.Throws<ArgumentException>(() =>
+                    aesGcm.Decrypt(nonce, ciphertext, tag, plaintext));
             }
         }
 
@@ -323,9 +318,8 @@ namespace System.Security.Cryptography.Tests
 #pragma warning disable SYSLIB0053
             Assert.Throws<ArgumentNullException>(() => new AesGcm((byte[])null));
 #pragma warning restore SYSLIB0053
-            Assert.Throws<ArgumentNullException>(
-                () => new AesGcm((byte[])null, AesGcm.TagByteSizes.MinSize)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new AesGcm((byte[])null, AesGcm.TagByteSizes.MinSize));
         }
 
         [Fact]
@@ -342,12 +336,10 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesGcm = new AesGcm(key, tag.Length))
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => aesGcm.Encrypt((byte[])null, plaintext, ciphertext, tag)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => aesGcm.Decrypt((byte[])null, ciphertext, tag, plaintext)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    aesGcm.Encrypt((byte[])null, plaintext, ciphertext, tag));
+                Assert.Throws<ArgumentNullException>(() =>
+                    aesGcm.Decrypt((byte[])null, ciphertext, tag, plaintext));
             }
         }
 
@@ -365,12 +357,10 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesGcm = new AesGcm(key, tag.Length))
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => aesGcm.Encrypt(nonce, (byte[])null, ciphertext, tag)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => aesGcm.Decrypt(nonce, ciphertext, tag, (byte[])null)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    aesGcm.Encrypt(nonce, (byte[])null, ciphertext, tag));
+                Assert.Throws<ArgumentNullException>(() =>
+                    aesGcm.Decrypt(nonce, ciphertext, tag, (byte[])null));
             }
         }
 
@@ -388,12 +378,10 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesGcm = new AesGcm(key, tag.Length))
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => aesGcm.Encrypt(nonce, plaintext, (byte[])null, tag)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => aesGcm.Decrypt(nonce, (byte[])null, tag, plaintext)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    aesGcm.Encrypt(nonce, plaintext, (byte[])null, tag));
+                Assert.Throws<ArgumentNullException>(() =>
+                    aesGcm.Decrypt(nonce, (byte[])null, tag, plaintext));
             }
         }
 
@@ -411,12 +399,10 @@ namespace System.Security.Cryptography.Tests
 
             using (var aesGcm = new AesGcm(key, tagSizeInBytes: 16))
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => aesGcm.Encrypt(nonce, plaintext, ciphertext, (byte[])null)
-                );
-                Assert.Throws<ArgumentNullException>(
-                    () => aesGcm.Decrypt(nonce, ciphertext, (byte[])null, plaintext)
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    aesGcm.Encrypt(nonce, plaintext, ciphertext, (byte[])null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    aesGcm.Decrypt(nonce, ciphertext, (byte[])null, plaintext));
             }
         }
 
@@ -465,9 +451,8 @@ namespace System.Security.Cryptography.Tests
 
                 tag[0] ^= 1;
 
-                Assert.Throws<AuthenticationTagMismatchException>(
-                    () => aesGcm.Decrypt(nonce, data, tag, data)
-                );
+                Assert.Throws<AuthenticationTagMismatchException>(() =>
+                    aesGcm.Decrypt(nonce, data, tag, data));
                 Assert.Equal(new byte[data.Length], data);
             }
         }
@@ -621,16 +606,14 @@ namespace System.Security.Cryptography.Tests
 
                 byte[] plaintext = new byte[testCase.Plaintext.Length];
                 RandomNumberGenerator.Fill(plaintext);
-                Assert.Throws<AuthenticationTagMismatchException>(
-                    () =>
-                        aesGcm.Decrypt(
-                            testCase.Nonce,
-                            ciphertext,
-                            tag,
-                            plaintext,
-                            testCase.AssociatedData
-                        )
-                );
+                Assert.Throws<AuthenticationTagMismatchException>(() =>
+                    aesGcm.Decrypt(
+                        testCase.Nonce,
+                        ciphertext,
+                        tag,
+                        plaintext,
+                        testCase.AssociatedData
+                    ));
                 Assert.Equal(new byte[plaintext.Length], plaintext);
             }
         }
@@ -665,16 +648,14 @@ namespace System.Security.Cryptography.Tests
                 ciphertext[0] ^= 1;
 
                 byte[] plaintext = RandomNumberGenerator.GetBytes(testCase.Plaintext.Length);
-                Assert.Throws<AuthenticationTagMismatchException>(
-                    () =>
-                        aesGcm.Decrypt(
-                            testCase.Nonce,
-                            ciphertext,
-                            tag,
-                            plaintext,
-                            testCase.AssociatedData
-                        )
-                );
+                Assert.Throws<AuthenticationTagMismatchException>(() =>
+                    aesGcm.Decrypt(
+                        testCase.Nonce,
+                        ciphertext,
+                        tag,
+                        plaintext,
+                        testCase.AssociatedData
+                    ));
                 AssertExtensions.FilledWith<byte>(0, plaintext);
             }
         }
@@ -691,12 +672,10 @@ namespace System.Security.Cryptography.Tests
             AesGcm aesGcm = new AesGcm(key, tag.Length);
             aesGcm.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () => aesGcm.Encrypt(nonce, plaintext, ciphertext, new byte[tag.Length])
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () => aesGcm.Decrypt(nonce, ciphertext, tag, plaintext)
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                aesGcm.Encrypt(nonce, plaintext, ciphertext, new byte[tag.Length]));
+            Assert.Throws<ObjectDisposedException>(() =>
+                aesGcm.Decrypt(nonce, ciphertext, tag, plaintext));
         }
 
         public static IEnumerable<object[]> GetValidNonceSizes()
@@ -1199,12 +1178,10 @@ namespace System.Security.Cryptography.Tests
             Assert.Throws<PlatformNotSupportedException>(() => new AesGcm(key.AsSpan()));
 #pragma warning restore SYSLIB0053
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new AesGcm(key, AesGcm.TagByteSizes.MinSize)
-            );
-            Assert.Throws<PlatformNotSupportedException>(
-                () => new AesGcm(key.AsSpan(), AesGcm.TagByteSizes.MinSize)
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new AesGcm(key, AesGcm.TagByteSizes.MinSize));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new AesGcm(key.AsSpan(), AesGcm.TagByteSizes.MinSize));
         }
 
         [Fact]

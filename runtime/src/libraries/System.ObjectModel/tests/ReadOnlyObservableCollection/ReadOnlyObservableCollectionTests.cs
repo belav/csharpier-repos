@@ -307,13 +307,11 @@ namespace System.Collections.ObjectModel.Tests
         )]
         public static void DebuggerAttribute_NullCollection_ThrowsArgumentNullException()
         {
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
-                () =>
-                    DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
-                        typeof(ReadOnlyObservableCollection<int>),
-                        null
-                    )
-            );
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                    typeof(ReadOnlyObservableCollection<int>),
+                    null
+                ));
             ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
                 ex.InnerException
             );

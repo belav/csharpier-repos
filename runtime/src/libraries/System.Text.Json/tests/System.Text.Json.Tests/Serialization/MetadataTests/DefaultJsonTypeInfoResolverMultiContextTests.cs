@@ -68,9 +68,8 @@ namespace System.Text.Json.Serialization.Tests
             SomeClass obj = new() { ObjProp = "test", IntProp = 42 };
 
             // TODO: reassess if this is expected behavior
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.SerializeWrapper(obj, ti)
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.SerializeWrapper(obj, ti));
         }
 
         [Fact]
@@ -84,9 +83,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // TODO: reassess if this is expected behavior
             string json = """{"ObjProp":"test","IntProp":42}""";
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => Serializer.DeserializeWrapper(json, ti)
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.DeserializeWrapper(json, ti));
         }
 
         [Fact]

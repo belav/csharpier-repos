@@ -37,9 +37,8 @@ namespace System.Security.Cryptography.Rsa.Tests
 
                 Assert.Equal(exported, exported2);
 
-                Assert.ThrowsAny<CryptographicException>(
-                    () => rsa.ExportCspBlob(includePrivateParameters: true)
-                );
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    rsa.ExportCspBlob(includePrivateParameters: true));
             }
         }
 

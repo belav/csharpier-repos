@@ -693,9 +693,8 @@ public static unsafe class UnsafeAccessorsTests
     {
         Console.WriteLine($"Running {nameof(Verify_InvalidTargetUnsafeAccessorAmbiguousMatch)}");
 
-        Assert.Throws<AmbiguousMatchException>(
-            () => CallAmbiguousMethod(CallPrivateConstructorClass(), null)
-        );
+        Assert.Throws<AmbiguousMatchException>(() =>
+            CallAmbiguousMethod(CallPrivateConstructorClass(), null));
 
         // This is an ambiguous match since there are two methods each with two custom modifiers.
         // Therefore the default "ignore custom modifiers" logic fails. The fallback is for a
@@ -727,21 +726,18 @@ public static unsafe class UnsafeAccessorsTests
     {
         Console.WriteLine($"Running {nameof(Verify_InvalidUseUnsafeAccessor)}");
 
-        Assert.Throws<BadImageFormatException>(
-            () => FieldReturnMustBeByRefClass((UserDataClass)null)
-        );
+        Assert.Throws<BadImageFormatException>(() =>
+            FieldReturnMustBeByRefClass((UserDataClass)null));
         Assert.Throws<BadImageFormatException>(() =>
         {
             UserDataValue local = new();
             FieldReturnMustBeByRefValue(ref local);
         });
         Assert.Throws<BadImageFormatException>(() => FieldArgumentMustBeByRef(new UserDataValue()));
-        Assert.Throws<BadImageFormatException>(
-            () => FieldMustHaveSingleArgument((UserDataClass)null, 0)
-        );
-        Assert.Throws<BadImageFormatException>(
-            () => StaticFieldMustHaveSingleArgument((UserDataClass)null, 0)
-        );
+        Assert.Throws<BadImageFormatException>(() =>
+            FieldMustHaveSingleArgument((UserDataClass)null, 0));
+        Assert.Throws<BadImageFormatException>(() =>
+            StaticFieldMustHaveSingleArgument((UserDataClass)null, 0));
         Assert.Throws<BadImageFormatException>(() => InvalidKindValue(null));
         Assert.Throws<BadImageFormatException>(() => InvalidCtorSignatureClass());
         Assert.Throws<BadImageFormatException>(() => InvalidCtorSignatureValue());

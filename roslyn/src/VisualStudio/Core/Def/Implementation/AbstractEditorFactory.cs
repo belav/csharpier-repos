@@ -336,15 +336,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         )
         {
             var threadingContext = _componentModel.GetService<IThreadingContext>();
-            threadingContext.JoinableTaskFactory.Run(
-                () =>
-                    FormatDocumentCreatedFromTemplateAsync(
-                        hierarchy,
-                        itemid,
-                        filePath,
-                        cancellationToken
-                    )
-            );
+            threadingContext.JoinableTaskFactory.Run(() =>
+                FormatDocumentCreatedFromTemplateAsync(
+                    hierarchy,
+                    itemid,
+                    filePath,
+                    cancellationToken
+                ));
         }
 
         // NOTE: This function has been created to hide IWinFormsEditorFactory type in non-WinForms scenarios (e.g. editing .cs or .vb file)

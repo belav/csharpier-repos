@@ -186,9 +186,8 @@ public class MiddlewareFilterTest
         ); // The action won't run
 
         // Act
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await invoker.InvokeAsync()
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await invoker.InvokeAsync());
 
         // Assert
         Assert.Equal(expectedMessage, exception.Message);
@@ -248,9 +247,8 @@ public class MiddlewareFilterTest
         ); // The action won't run
 
         // Act
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await invoker.InvokeAsync()
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await invoker.InvokeAsync());
 
         // Assert
         var resourceExecutedContext = resourceFilter1.ResourceExecutedContext;
@@ -276,12 +274,10 @@ public class MiddlewareFilterTest
 
     private ResourceExecutionDelegate GetResourceExecutionDelegate(HttpContext httpContext)
     {
-        return new ResourceExecutionDelegate(
-            () =>
-                Task.FromResult(
-                    new ResourceExecutedContext(new ActionContext(), new List<IFilterMetadata>())
-                )
-        );
+        return new ResourceExecutionDelegate(() =>
+            Task.FromResult(
+                new ResourceExecutedContext(new ActionContext(), new List<IFilterMetadata>())
+            ));
     }
 
     private TestControllerActionInvoker CreateInvoker(

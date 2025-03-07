@@ -103,19 +103,17 @@ public class OwnedNavigationBuilder<
     public virtual PropertyBuilder<TProperty> Property<TProperty>(
         Expression<Func<TDependentEntity, TProperty>> propertyExpression
     ) =>
-        UpdateBuilder(
-            () =>
-                new PropertyBuilder<TProperty>(
-                    DependentEntityType
-                        .Builder.Property(
-                            Check
-                                .NotNull(propertyExpression, nameof(propertyExpression))
-                                .GetMemberAccess(),
-                            ConfigurationSource.Explicit
-                        )!
-                        .Metadata
-                )
-        );
+        UpdateBuilder(() =>
+            new PropertyBuilder<TProperty>(
+                DependentEntityType
+                    .Builder.Property(
+                        Check
+                            .NotNull(propertyExpression, nameof(propertyExpression))
+                            .GetMemberAccess(),
+                        ConfigurationSource.Explicit
+                    )!
+                    .Metadata
+            ));
 
     /// <summary>
     ///     Returns an object that can be used to configure a property of the owned type where that property represents
@@ -137,19 +135,17 @@ public class OwnedNavigationBuilder<
     public virtual PropertyBuilder<TProperty> PrimitiveCollection<TProperty>(
         Expression<Func<TDependentEntity, TProperty>> propertyExpression
     ) =>
-        UpdateBuilder(
-            () =>
-                new PropertyBuilder<TProperty>(
-                    DependentEntityType
-                        .Builder.PrimitiveCollection(
-                            Check
-                                .NotNull(propertyExpression, nameof(propertyExpression))
-                                .GetMemberAccess(),
-                            ConfigurationSource.Explicit
-                        )!
-                        .Metadata
-                )
-        );
+        UpdateBuilder(() =>
+            new PropertyBuilder<TProperty>(
+                DependentEntityType
+                    .Builder.PrimitiveCollection(
+                        Check
+                            .NotNull(propertyExpression, nameof(propertyExpression))
+                            .GetMemberAccess(),
+                        ConfigurationSource.Explicit
+                    )!
+                    .Metadata
+            ));
 
     /// <summary>
     ///     Returns an object that can be used to configure an existing navigation property

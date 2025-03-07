@@ -182,15 +182,8 @@ namespace R2RTest
                 foreach (string subdir in Directory.EnumerateDirectories(folder))
                 {
                     subfolderTasks.Add(
-                        Task.Run(
-                            () =>
-                                LocateSubtreeAsync(
-                                    subdir,
-                                    coreRootFolder,
-                                    testHostFolder,
-                                    directories
-                                )
-                        )
+                        Task.Run(() =>
+                            LocateSubtreeAsync(subdir, coreRootFolder, testHostFolder, directories))
                     );
                 }
                 await Task.WhenAll(subfolderTasks);

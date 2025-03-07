@@ -135,9 +135,8 @@ namespace System.Composition.UnitTests
         [Fact]
         public void TypesWithMismatchedGenericParameterListsAreDetectedDuringDiscovery()
         {
-            var x = Assert.Throws<CompositionFailedException>(
-                () => CreateContainer(typeof(RepositoryWithKey<,>))
-            );
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                CreateContainer(typeof(RepositoryWithKey<,>)));
             Assert.Equal(
                 "Exported contract 'IRepository`1' of open generic part 'RepositoryWithKey`2' does not match the generic arguments of the class.",
                 x.Message
@@ -147,9 +146,8 @@ namespace System.Composition.UnitTests
         [Fact]
         public void TypesWithNonGenericExportsAreDetectedDuringDiscovery()
         {
-            var x = Assert.Throws<CompositionFailedException>(
-                () => CreateContainer(typeof(RepositoryWithNonGenericExport<>))
-            );
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                CreateContainer(typeof(RepositoryWithNonGenericExport<>)));
             Assert.Equal(
                 "Open generic part 'RepositoryWithNonGenericExport`1' cannot export non-generic contract 'IRepository'.",
                 x.Message

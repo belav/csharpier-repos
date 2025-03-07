@@ -57,9 +57,8 @@ public class KeyTest
                 entityType1.DisplayName()
             ),
             Assert
-                .Throws<InvalidOperationException>(
-                    () => entityType1.AddKey(new[] { property1, property2 })
-                )
+                .Throws<InvalidOperationException>(() =>
+                    entityType1.AddKey(new[] { property1, property2 }))
                 .Message
         );
     }

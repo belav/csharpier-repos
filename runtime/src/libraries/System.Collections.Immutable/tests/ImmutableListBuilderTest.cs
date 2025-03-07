@@ -152,9 +152,8 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(new[] { 1, 2, 3, 4, 5, 6 }, mutable);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => mutable.InsertRange(-1, new int[0]));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => mutable.InsertRange(mutable.Count + 1, new int[0])
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                mutable.InsertRange(mutable.Count + 1, new int[0]));
         }
 
         [Fact]
@@ -472,9 +471,8 @@ namespace System.Collections.Immutable.Tests
         public static void TestDebuggerAttributes_Null()
         {
             Type proxyType = DebuggerAttributes.GetProxyType(ImmutableList.CreateBuilder<string>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
-                () => Activator.CreateInstance(proxyType, (object)null)
-            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(proxyType, (object)null));
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 

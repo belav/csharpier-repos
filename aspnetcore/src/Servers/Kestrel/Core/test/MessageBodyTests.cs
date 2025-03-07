@@ -138,9 +138,8 @@ public class MessageBodyTests : LoggedTest
             input.Add("Hello");
             var readResult = await reader.ReadAsync();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await reader.ReadAsync()
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await reader.ReadAsync());
 
             await body.StopAsync();
         }
@@ -429,9 +428,8 @@ public class MessageBodyTests : LoggedTest
             input.Add("80000000\r\n");
 
             var buffer = new byte[1024];
-            var ex = await Assert.ThrowsAsync<IOException>(
-                async () => await stream.ReadAsync(buffer, 0, buffer.Length)
-            );
+            var ex = await Assert.ThrowsAsync<IOException>(async () =>
+                await stream.ReadAsync(buffer, 0, buffer.Length));
             Assert.IsType<OverflowException>(ex.InnerException);
             Assert.Equal(CoreStrings.BadRequest_BadChunkSizeData, ex.Message);
 
@@ -457,11 +455,9 @@ public class MessageBodyTests : LoggedTest
 
             var buffer = new byte[1024];
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
-                async () =>
+            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-                    await stream.ReadAsync(buffer, 0, buffer.Length)
-            );
+                await stream.ReadAsync(buffer, 0, buffer.Length));
 
             Assert.Equal(CoreStrings.BadRequest_BadChunkSizeData, ex.Message);
 
@@ -629,15 +625,13 @@ public class MessageBodyTests : LoggedTest
         using (var input = new TestInput())
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex = Assert.Throws<BadHttpRequestException>(
-                () =>
+            var ex = Assert.Throws<BadHttpRequestException>(() =>
 #pragma warning restore CS0618 // Type or member is obsolete
-                    Http1MessageBody.For(
-                        HttpVersion.Http11,
-                        new HttpRequestHeaders { HeaderTransferEncoding = "chunked, not-chunked" },
-                        input.Http1Connection
-                    )
-            );
+                Http1MessageBody.For(
+                    HttpVersion.Http11,
+                    new HttpRequestHeaders { HeaderTransferEncoding = "chunked, not-chunked" },
+                    input.Http1Connection
+                ));
 
             Assert.Equal(StatusCodes.Status400BadRequest, ex.StatusCode);
             Assert.Equal(
@@ -676,15 +670,13 @@ public class MessageBodyTests : LoggedTest
         {
             input.Http1Connection.Method = method;
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex = Assert.Throws<BadHttpRequestException>(
-                () =>
+            var ex = Assert.Throws<BadHttpRequestException>(() =>
 #pragma warning restore CS0618 // Type or member is obsolete
-                    Http1MessageBody.For(
-                        HttpVersion.Http10,
-                        new HttpRequestHeaders(),
-                        input.Http1Connection
-                    )
-            );
+                Http1MessageBody.For(
+                    HttpVersion.Http10,
+                    new HttpRequestHeaders(),
+                    input.Http1Connection
+                ));
 
             Assert.Equal(StatusCodes.Status400BadRequest, ex.StatusCode);
             Assert.Equal(
@@ -880,9 +872,8 @@ public class MessageBodyTests : LoggedTest
             input.Http1Connection.SendTimeoutResponse();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            var exception = await Assert.ThrowsAsync<BadHttpRequestException>(
-                async () => await body.ReadAsync()
-            );
+            var exception = await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
+                await body.ReadAsync());
 #pragma warning restore CS0618 // Type or member is obsolete
             Assert.Equal(StatusCodes.Status408RequestTimeout, exception.StatusCode);
 
@@ -962,9 +953,8 @@ public class MessageBodyTests : LoggedTest
             using (var ms = new MemoryStream())
             {
 #pragma warning disable CS0618 // Type or member is obsolete
-                var exception = await Assert.ThrowsAsync<BadHttpRequestException>(
-                    () => stream.CopyToAsync(ms)
-                );
+                var exception = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                    stream.CopyToAsync(ms));
 #pragma warning restore CS0618 // Type or member is obsolete
                 Assert.Equal(StatusCodes.Status408RequestTimeout, exception.StatusCode);
             }
@@ -1461,18 +1451,14 @@ public class MessageBodyTests : LoggedTest
             input.Application.Output.Complete();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex0 = Assert.Throws<BadHttpRequestException>(
-                () => reader.TryRead(out var readResult)
-            );
-            var ex1 = Assert.Throws<BadHttpRequestException>(
-                () => reader.TryRead(out var readResult)
-            );
-            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(
-                () => reader.ReadAsync().AsTask()
-            );
-            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(
-                () => reader.ReadAsync().AsTask()
-            );
+            var ex0 = Assert.Throws<BadHttpRequestException>(() =>
+                reader.TryRead(out var readResult));
+            var ex1 = Assert.Throws<BadHttpRequestException>(() =>
+                reader.TryRead(out var readResult));
+            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                reader.ReadAsync().AsTask());
+            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                reader.ReadAsync().AsTask());
 #pragma warning restore CS0618 // Type or member is obsolete
 
             Assert.Equal(RequestRejectionReason.UnexpectedEndOfRequestContent, ex0.Reason);
@@ -1506,18 +1492,14 @@ public class MessageBodyTests : LoggedTest
             input.Application.Output.Complete();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex0 = Assert.Throws<BadHttpRequestException>(
-                () => reader.TryRead(out var readResult)
-            );
-            var ex1 = Assert.Throws<BadHttpRequestException>(
-                () => reader.TryRead(out var readResult)
-            );
-            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(
-                () => reader.ReadAsync().AsTask()
-            );
-            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(
-                () => reader.ReadAsync().AsTask()
-            );
+            var ex0 = Assert.Throws<BadHttpRequestException>(() =>
+                reader.TryRead(out var readResult));
+            var ex1 = Assert.Throws<BadHttpRequestException>(() =>
+                reader.TryRead(out var readResult));
+            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                reader.ReadAsync().AsTask());
+            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                reader.ReadAsync().AsTask());
 #pragma warning restore CS0618 // Type or member is obsolete
 
             Assert.Equal(RequestRejectionReason.UnexpectedEndOfRequestContent, ex0.Reason);
@@ -1545,18 +1527,14 @@ public class MessageBodyTests : LoggedTest
             input.Application.Output.Complete();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            var ex0 = Assert.Throws<BadHttpRequestException>(
-                () => reader.TryRead(out var readResult)
-            );
-            var ex1 = Assert.Throws<BadHttpRequestException>(
-                () => reader.TryRead(out var readResult)
-            );
-            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(
-                () => reader.ReadAsync().AsTask()
-            );
-            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(
-                () => reader.ReadAsync().AsTask()
-            );
+            var ex0 = Assert.Throws<BadHttpRequestException>(() =>
+                reader.TryRead(out var readResult));
+            var ex1 = Assert.Throws<BadHttpRequestException>(() =>
+                reader.TryRead(out var readResult));
+            var ex2 = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                reader.ReadAsync().AsTask());
+            var ex3 = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                reader.ReadAsync().AsTask());
 #pragma warning restore CS0618 // Type or member is obsolete
 
             Assert.Equal(RequestRejectionReason.UnexpectedEndOfRequestContent, ex0.Reason);

@@ -92,18 +92,16 @@ namespace System.Reflection.Emit.Tests
             Type[] types = new Type[] { typeof(short), typeof(bool) };
             Type[][] customModifiers = new Type[][] { types, types };
 
-            Assert.Throws<NullReferenceException>(
-                () =>
-                    SignatureHelper.GetPropertySigHelper(
-                        null,
-                        typeof(string),
-                        types,
-                        types,
-                        types,
-                        customModifiers,
-                        customModifiers
-                    )
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                SignatureHelper.GetPropertySigHelper(
+                    null,
+                    typeof(string),
+                    types,
+                    types,
+                    types,
+                    customModifiers,
+                    customModifiers
+                ));
         }
 
         [Fact]

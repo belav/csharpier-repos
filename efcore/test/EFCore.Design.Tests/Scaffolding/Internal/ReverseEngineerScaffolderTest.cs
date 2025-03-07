@@ -66,9 +66,8 @@ public class ReverseEngineerScaffolderTest
             },
         };
 
-        var ex = Assert.Throws<OperationException>(
-            () => scaffolder.Save(scaffoldedModel, directory.Path, overwriteFiles: false)
-        );
+        var ex = Assert.Throws<OperationException>(() =>
+            scaffolder.Save(scaffoldedModel, directory.Path, overwriteFiles: false));
 
         Assert.Equal(
             DesignStrings.ExistingFiles(
@@ -131,9 +130,8 @@ public class ReverseEngineerScaffolderTest
                 },
             };
 
-            var ex = Assert.Throws<OperationException>(
-                () => scaffolder.Save(scaffoldedModel, directory.Path, overwriteFiles: true)
-            );
+            var ex = Assert.Throws<OperationException>(() =>
+                scaffolder.Save(scaffoldedModel, directory.Path, overwriteFiles: true));
 
             Assert.Equal(
                 DesignStrings.ReadOnlyFiles(

@@ -108,9 +108,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Throws<ArgumentNullException>(() => new ActionBlock<int>((Func<int, Task>)null));
             Assert.Throws<ArgumentNullException>(() => new ActionBlock<int>((Func<int, Task>)null));
             Assert.Throws<ArgumentNullException>(() => new ActionBlock<int>(i => { }, null));
-            Assert.Throws<ArgumentNullException>(
-                () => new ActionBlock<int>(i => default(Task), null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new ActionBlock<int>(i => default(Task), null));
 
             // Valid arguments; make sure they don't throw, and validate some properties afterwards
             var blocks = new[]
@@ -507,9 +506,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         ab.Post(i); // Post may return false, depending on race with ActionBlock faulting
                     }
 
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () => await ab.Completion
-                    );
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                        await ab.Completion);
 
                     if (!singleProducerConstrained)
                     {

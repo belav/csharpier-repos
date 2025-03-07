@@ -128,9 +128,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 };
                 for (int i = 0; i < bad.Length; i++)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => _ilist.Insert(bad[i], items[0])
-                    ); //"ArgumentOutOfRangeException expected."
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        _ilist.Insert(bad[i], items[0])); //"ArgumentOutOfRangeException expected."
                 }
 
                 Assert.Throws<ArgumentException>(
@@ -222,9 +221,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 };
                 for (int i = 0; i < bad.Length; i++)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => list.InsertRange(bad[i], constructIEnumerable(items))
-                    ); //"ArgumentOutOfRangeException expected"
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        list.InsertRange(bad[i], constructIEnumerable(items))); //"ArgumentOutOfRangeException expected"
                 }
 
                 Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, null!)); //"ArgumentNullException expected."
@@ -370,9 +368,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
                 for (int i = 0; i < bad.Length; i++)
                 {
-                    Assert.Throws<ArgumentOutOfRangeException>(
-                        () => list.GetRange(bad[i], bad[++i])
-                    ); //"ArgumentOutOfRangeException expected."
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        list.GetRange(bad[i], bad[++i])); //"ArgumentOutOfRangeException expected."
                 }
             }
 

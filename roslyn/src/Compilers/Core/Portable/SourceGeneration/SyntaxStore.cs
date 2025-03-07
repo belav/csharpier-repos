@@ -122,9 +122,8 @@ namespace Microsoft.CodeAnalysis
                             var root = new Lazy<SyntaxNode>(() => tree.GetRoot(_cancellationToken));
                             var model =
                                 state != EntryState.Removed
-                                    ? new Lazy<SemanticModel>(
-                                        () => _compilation.GetSemanticModel(tree)
-                                    )
+                                    ? new Lazy<SemanticModel>(() =>
+                                        _compilation.GetSemanticModel(tree))
                                     : null;
                             for (int i = 0; i < syntaxInputBuilders.Count; i++)
                             {

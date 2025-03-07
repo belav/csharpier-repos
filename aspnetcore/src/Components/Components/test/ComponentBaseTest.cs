@@ -413,9 +413,8 @@ public class ComponentBaseTest
 
         // Act & Assert
         var componentId = renderer.AssignRootComponentId(component);
-        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
-            () => renderer.RenderRootComponentAsync(componentId)
-        );
+        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() =>
+            renderer.RenderRootComponentAsync(componentId));
 
         // Assert
         Assert.Same(expected, actual);
@@ -431,9 +430,8 @@ public class ComponentBaseTest
 
         // Act & Assert
         var componentId = renderer.AssignRootComponentId(component);
-        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
-            () => renderer.RenderRootComponentAsync(componentId)
-        );
+        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() =>
+            renderer.RenderRootComponentAsync(componentId));
 
         // Assert
         Assert.Same(expected, actual);
@@ -449,9 +447,8 @@ public class ComponentBaseTest
 
         // Act & Assert
         var componentId = renderer.AssignRootComponentId(component);
-        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
-            () => renderer.RenderRootComponentAsync(componentId)
-        );
+        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() =>
+            renderer.RenderRootComponentAsync(componentId));
 
         // Assert
         Assert.Same(expected, actual);
@@ -470,9 +467,8 @@ public class ComponentBaseTest
 
         // Act & Assert
         var componentId = renderer.AssignRootComponentId(component);
-        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
-            () => renderer.RenderRootComponentAsync(componentId)
-        );
+        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() =>
+            renderer.RenderRootComponentAsync(componentId));
 
         // Assert
         Assert.Same(expected, actual);

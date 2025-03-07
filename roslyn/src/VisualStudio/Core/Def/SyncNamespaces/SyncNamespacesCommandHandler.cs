@@ -185,15 +185,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
                 showProgress: true,
                 operationContext =>
                 {
-                    solution = _threadingContext.JoinableTaskFactory.Run(
-                        () =>
-                            syncService.SyncNamespacesAsync(
-                                projects,
-                                options,
-                                operationContext.GetCodeAnalysisProgress(),
-                                operationContext.UserCancellationToken
-                            )
-                    );
+                    solution = _threadingContext.JoinableTaskFactory.Run(() =>
+                        syncService.SyncNamespacesAsync(
+                            projects,
+                            options,
+                            operationContext.GetCodeAnalysisProgress(),
+                            operationContext.UserCancellationToken
+                        ));
                 }
             );
 

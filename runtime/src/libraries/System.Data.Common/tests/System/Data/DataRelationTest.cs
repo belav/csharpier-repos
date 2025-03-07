@@ -249,9 +249,8 @@ namespace System.Data.Tests
             childs[0] = col4;
             childs[1] = col7;
 
-            Assert.Throws<InvalidConstraintException>(
-                () => new DataRelation("Rel", Parents, childs)
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+                new DataRelation("Rel", Parents, childs));
 
             childs[1] = col6;
 
@@ -330,9 +329,8 @@ namespace System.Data.Tests
             );
 
             Assert.Throws<NullReferenceException>(() => _set.Relations.Add(relation));
-            Assert.Throws<NullReferenceException>(
-                () => _set.Relations.AddRange(new DataRelation[] { relation })
-            );
+            Assert.Throws<NullReferenceException>(() =>
+                _set.Relations.AddRange(new DataRelation[] { relation }));
 
             _set.BeginInit();
             _set.Relations.AddRange(new DataRelation[] { relation });

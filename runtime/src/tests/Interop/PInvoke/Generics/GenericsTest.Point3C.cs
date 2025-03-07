@@ -35,10 +35,8 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint3C('1', '2', '3'));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
-                GenericsNative.GetPoint3COut('1', '2', '3', out GenericsNative.Point3<char> value3)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetPoint3COut('1', '2', '3', out GenericsNative.Point3<char> value3));
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint3CRef('1', '2', '3'));
 
@@ -53,12 +51,10 @@ unsafe partial class GenericsTest
             default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddPoint3Cs(values, values.Length)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddPoint3Cs(values, values.Length));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () => GenericsNative.AddPoint3Cs(in values[0], values.Length)
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddPoint3Cs(in values[0], values.Length));
     }
 }

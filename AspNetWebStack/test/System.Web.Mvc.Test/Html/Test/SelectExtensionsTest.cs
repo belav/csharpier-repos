@@ -4709,9 +4709,8 @@ namespace System.Web.Mvc.Html.Test
                         + "<option value=\"01/01/1900 00:00:02\">Charlie</option>"
                         + Environment.NewLine
                         + "</select>",
-                    Action = new Func<MvcHtmlString>(
-                        () => helper.DropDownList("foo", selectList, (string)null)
-                    ),
+                    Action = new Func<MvcHtmlString>(() =>
+                        helper.DropDownList("foo", selectList, (string)null)),
                 },
                 // DropDownList(name, selectList, optionLabel) (With default value selected from ViewData)
                 new
@@ -4723,9 +4722,8 @@ namespace System.Web.Mvc.Html.Test
                         + "<option value=\"01/01/1900 00:00:02\">Charlie</option>"
                         + Environment.NewLine
                         + "</select>",
-                    Action = new Func<MvcHtmlString>(
-                        () => defaultValueHelper.DropDownList("bar", selectList, (string)null)
-                    ),
+                    Action = new Func<MvcHtmlString>(() =>
+                        defaultValueHelper.DropDownList("bar", selectList, (string)null)),
                 },
                 // ListBox(name, selectList)
                 new
@@ -4749,9 +4747,8 @@ namespace System.Web.Mvc.Html.Test
                         + "<option value=\"01/01/1900 00:00:02\">Charlie</option>"
                         + Environment.NewLine
                         + "</select>",
-                    Action = new Func<MvcHtmlString>(
-                        () => defaultValueHelper.ListBox("foo", selectList)
-                    ),
+                    Action = new Func<MvcHtmlString>(() =>
+                        defaultValueHelper.ListBox("foo", selectList)),
                 },
             };
 

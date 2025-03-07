@@ -1404,9 +1404,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                             ),
                         };
 
-                        Assert.Throws<ArgumentException>(
-                            () => new CallSiteFactory(serviceDescriptors)
-                        );
+                        Assert.Throws<ArgumentException>(() =>
+                            new CallSiteFactory(serviceDescriptors));
                     }
 
                     (Type, Type)[] validTestCases = new[]
@@ -1485,18 +1484,14 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         CreateAotCompatibilityCallSiteFactory();
 
                     // Verify open generics throw when passing ValueTypes
-                    Assert.Throws<InvalidOperationException>(
-                        () => callSiteFactory(typeof(IFakeOpenGenericService<Struct1>))
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => callSiteFactory(typeof(IFakeOpenGenericService<int>))
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => callSiteFactory(typeof(IServiceWithTwoGenerics<Class3, int>))
-                    );
-                    Assert.Throws<InvalidOperationException>(
-                        () => callSiteFactory(typeof(IServiceWithTwoGenerics<int, Class3>))
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        callSiteFactory(typeof(IFakeOpenGenericService<Struct1>)));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        callSiteFactory(typeof(IFakeOpenGenericService<int>)));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        callSiteFactory(typeof(IServiceWithTwoGenerics<Class3, int>)));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        callSiteFactory(typeof(IServiceWithTwoGenerics<int, Class3>)));
 
                     ServiceCallSite callSite = callSiteFactory(
                         typeof(IFakeOpenGenericService<Class3>)
@@ -1515,9 +1510,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     );
 
                     // Verify Enumerable services throw when passing ValueTypes
-                    Assert.Throws<InvalidOperationException>(
-                        () => callSiteFactory(typeof(IEnumerable<Struct1>))
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        callSiteFactory(typeof(IEnumerable<Struct1>)));
 
                     callSite = callSiteFactory(typeof(Struct1));
                     Assert.Equal(CallSiteKind.Constant, callSite.Kind);

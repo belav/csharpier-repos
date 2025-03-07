@@ -20,9 +20,8 @@ namespace System.IO
         [Fact]
         public void GetAccessControl_DirectoryInfo_InvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => FileSystemAclExtensions.GetAccessControl((DirectoryInfo)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                FileSystemAclExtensions.GetAccessControl((DirectoryInfo)null));
         }
 
         [Fact]
@@ -38,13 +37,11 @@ namespace System.IO
         [Fact]
         public void GetAccessControl_DirectoryInfo_AccessControlSections_InvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    FileSystemAclExtensions.GetAccessControl(
-                        (DirectoryInfo)null,
-                        new AccessControlSections()
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                FileSystemAclExtensions.GetAccessControl(
+                    (DirectoryInfo)null,
+                    new AccessControlSections()
+                ));
         }
 
         [Fact]
@@ -63,9 +60,8 @@ namespace System.IO
         [Fact]
         public void GetAccessControl_FileInfo_InvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => FileSystemAclExtensions.GetAccessControl((FileInfo)null)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                FileSystemAclExtensions.GetAccessControl((FileInfo)null));
         }
 
         [Fact]
@@ -82,13 +78,11 @@ namespace System.IO
         [Fact]
         public void GetAccessControl_FileInfo_AccessControlSections_InvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    FileSystemAclExtensions.GetAccessControl(
-                        (FileInfo)null,
-                        new AccessControlSections()
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                FileSystemAclExtensions.GetAccessControl(
+                    (FileInfo)null,
+                    new AccessControlSections()
+                ));
         }
 
         [Fact]
@@ -272,9 +266,8 @@ namespace System.IO
             var dirInfo = new DirectoryInfo(dirPath);
             var security = new DirectorySecurity();
             // Fails because the DirectorySecurity lacks any rights to create parent folder
-            Assert.Throws<UnauthorizedAccessException>(
-                () => CreateDirectoryWithSecurity(dirInfo, security)
-            );
+            Assert.Throws<UnauthorizedAccessException>(() =>
+                CreateDirectoryWithSecurity(dirInfo, security));
         }
 
         [Fact]
@@ -395,17 +388,15 @@ namespace System.IO
             string path = Path.Combine(tempRootDir.GenerateSubItemPath(), "file.txt");
             var info = new FileInfo(path);
             var security = new FileSecurity();
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                    info.Create(
-                        FileMode.CreateNew,
-                        FileSystemRights.FullControl,
-                        FileShare.None,
-                        DefaultBufferSize,
-                        FileOptions.None,
-                        security
-                    )
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                info.Create(
+                    FileMode.CreateNew,
+                    FileSystemRights.FullControl,
+                    FileShare.None,
+                    DefaultBufferSize,
+                    FileOptions.None,
+                    security
+                ));
         }
 
         [Theory]
@@ -530,17 +521,15 @@ namespace System.IO
 
             var security = new FileSecurity();
             var info = new FileInfo(PathGenerator.GenerateTestFileName());
-            Assert.Throws<IOException>(
-                () =>
-                    info.Create(
-                        FileMode.Truncate,
-                        FileSystemRights.Write | FileSystemRights.ReadData,
-                        FileShare.None,
-                        DefaultBufferSize,
-                        FileOptions.None,
-                        security
-                    )
-            );
+            Assert.Throws<IOException>(() =>
+                info.Create(
+                    FileMode.Truncate,
+                    FileSystemRights.Write | FileSystemRights.ReadData,
+                    FileShare.None,
+                    DefaultBufferSize,
+                    FileOptions.None,
+                    security
+                ));
         }
 
         public static IEnumerable<object[]> WriteRights_AllArguments_Data() =>
@@ -889,17 +878,15 @@ namespace System.IO
         {
             var security = new FileSecurity();
             var info = new FileInfo(PathGenerator.GenerateTestFileName());
-            Assert.Throws<ArgumentException>(
-                () =>
-                    info.Create(
-                        mode,
-                        rights,
-                        FileShare.None,
-                        DefaultBufferSize,
-                        FileOptions.None,
-                        security
-                    )
-            );
+            Assert.Throws<ArgumentException>(() =>
+                info.Create(
+                    mode,
+                    rights,
+                    FileShare.None,
+                    DefaultBufferSize,
+                    FileOptions.None,
+                    security
+                ));
         }
 
         private void FileInfo_Create_FileSecurity_Successful(FileMode mode, FileSystemRights rights)

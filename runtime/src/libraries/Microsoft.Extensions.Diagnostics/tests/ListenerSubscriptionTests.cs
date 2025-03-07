@@ -403,15 +403,13 @@ namespace Microsoft.Extensions.Diagnostics.Tests
                     );
                     var meter = new Meter("Long.Silly.Meter.Name");
                     var instrument = meter.CreateCounter<int>("InstrumentName");
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            ListenerSubscription.RuleMatches(
-                                rule,
-                                instrument,
-                                "ListenerName",
-                                new FakeMeterFactory()
-                            )
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        ListenerSubscription.RuleMatches(
+                            rule,
+                            instrument,
+                            "ListenerName",
+                            new FakeMeterFactory()
+                        ));
                 })
                 .Dispose();
         }

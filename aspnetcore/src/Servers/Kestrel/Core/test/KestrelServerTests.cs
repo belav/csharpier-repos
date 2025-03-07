@@ -123,9 +123,8 @@ public class KestrelServerTests
         {
             server.Features.Get<IServerAddressesFeature>().Addresses.Add("http://127.0.0.1:0/base");
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => StartDummyApplication(server)
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                StartDummyApplication(server));
 
             Assert.Equal(
                 $"A path base can only be configured using {nameof(IApplicationBuilder)}.UsePathBase().",
@@ -241,9 +240,8 @@ public class KestrelServerTests
 
         using (var server = CreateServer(options, testLogger))
         {
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => StartDummyApplication(server)
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                StartDummyApplication(server));
 
             Assert.Equal(
                 CoreStrings.FormatMaxRequestBufferSmallerThanRequestLineBuffer(
@@ -277,9 +275,8 @@ public class KestrelServerTests
 
         using (var server = CreateServer(options, testLogger))
         {
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => StartDummyApplication(server)
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                StartDummyApplication(server));
 
             Assert.Equal(
                 CoreStrings.FormatMaxRequestBufferSmallerThanRequestHeaderBuffer(
@@ -311,14 +308,12 @@ public class KestrelServerTests
     [Fact]
     public void ConstructorWithNullTransportFactoryThrows()
     {
-        var exception = Assert.Throws<ArgumentNullException>(
-            () =>
-                new KestrelServer(
-                    Options.Create<KestrelServerOptions>(null),
-                    null,
-                    new LoggerFactory(new[] { new KestrelTestLoggerProvider() })
-                )
-        );
+        var exception = Assert.Throws<ArgumentNullException>(() =>
+            new KestrelServer(
+                Options.Create<KestrelServerOptions>(null),
+                null,
+                new LoggerFactory(new[] { new KestrelTestLoggerProvider() })
+            ));
 
         Assert.Equal("transportFactory", exception.ParamName);
     }
@@ -354,14 +349,12 @@ public class KestrelServerTests
     [Fact]
     public void ConstructorWithNoTransportFactoriesThrows()
     {
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-                CreateKestrelServer(
-                    options: null,
-                    new List<IConnectionListenerFactory>(),
-                    Array.Empty<IMultiplexedConnectionListenerFactory>()
-                )
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            CreateKestrelServer(
+                options: null,
+                new List<IConnectionListenerFactory>(),
+                Array.Empty<IMultiplexedConnectionListenerFactory>()
+            ));
 
         Assert.Equal(CoreStrings.TransportNotFound, exception.Message);
     }
@@ -394,13 +387,11 @@ public class KestrelServerTests
             Array.Empty<IMultiplexedConnectionListenerFactory>()
         );
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await server.StartAsync(
-                    new DummyApplication(context => Task.CompletedTask),
-                    CancellationToken.None
-                )
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await server.StartAsync(
+                new DummyApplication(context => Task.CompletedTask),
+                CancellationToken.None
+            ));
 
         Assert.Equal(
             "No registered IConnectionListenerFactory supports endpoint IPEndPoint: 127.0.0.1:0",
@@ -460,13 +451,11 @@ public class KestrelServerTests
             }
         );
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-                await server.StartAsync(
-                    new DummyApplication(context => Task.CompletedTask),
-                    CancellationToken.None
-                )
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await server.StartAsync(
+                new DummyApplication(context => Task.CompletedTask),
+                CancellationToken.None
+            ));
 
         Assert.Equal(
             "No registered IMultiplexedConnectionListenerFactory supports endpoint IPEndPoint: 127.0.0.1:0",
@@ -790,21 +779,18 @@ public class KestrelServerTests
         var timeout = TestConstants.DefaultTimeout;
         Assert.Same(
             unbindException,
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => stopTask1.TimeoutAfter(timeout)
-            )
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                stopTask1.TimeoutAfter(timeout))
         );
         Assert.Same(
             unbindException,
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => stopTask2.TimeoutAfter(timeout)
-            )
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                stopTask2.TimeoutAfter(timeout))
         );
         Assert.Same(
             unbindException,
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => stopTask3.TimeoutAfter(timeout)
-            )
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                stopTask3.TimeoutAfter(timeout))
         );
 
         mockTransport.Verify(

@@ -36,15 +36,13 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         )]
         public void ConvertTo_NullTypeTests()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    converter.ConvertTo(
-                        null,
-                        CultureInfo.InvariantCulture,
-                        new ExtendedProtectionPolicy(PolicyEnforcement.Never),
-                        null
-                    )
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                converter.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    new ExtendedProtectionPolicy(PolicyEnforcement.Never),
+                    null
+                ));
         }
 
         [Fact]
@@ -97,10 +95,8 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         {
             ExtendedProtectionPolicy policy = new ExtendedProtectionPolicy(PolicyEnforcement.Never);
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                    converter.ConvertTo(null, CultureInfo.InvariantCulture, policy, destinationType)
-            );
+            Assert.Throws<NotSupportedException>(() =>
+                converter.ConvertTo(null, CultureInfo.InvariantCulture, policy, destinationType));
         }
 
         private ExtendedProtectionPolicyTypeConverter converter =

@@ -195,14 +195,12 @@ namespace System.Threading.Tests
             Assert.Throws<ArgumentNullException>(() => Monitor.TryEnter(null, 1));
             Assert.Throws<ArgumentNullException>(() => Monitor.TryEnter(null, 1, ref lockTaken));
             Assert.Throws<ArgumentNullException>(() => Monitor.TryEnter(null, TimeSpan.Zero));
-            Assert.Throws<ArgumentNullException>(
-                () => Monitor.TryEnter(null, TimeSpan.Zero, ref lockTaken)
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+                Monitor.TryEnter(null, TimeSpan.Zero, ref lockTaken));
 
             Assert.Throws<ArgumentOutOfRangeException>(() => Monitor.TryEnter(obj, -2));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => Monitor.TryEnter(obj, -2, ref lockTaken)
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Monitor.TryEnter(obj, -2, ref lockTaken));
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "timeout",
                 () => Monitor.TryEnter(obj, TimeSpan.FromMilliseconds(-2))

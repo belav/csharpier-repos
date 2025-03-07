@@ -192,23 +192,21 @@ namespace System.Net.Security.Tests
                 string serverHost = serverCertificate.GetNameInfo(X509NameType.SimpleName, false);
                 var clientCertificates = new X509CertificateCollection() { clientCertificate };
 
-                await Assert.ThrowsAnyAsync<Exception>(
-                    () =>
-                        TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                            AuthenticateClientAsync(
-                                serverHost,
-                                clientCertificates,
-                                checkCertificateRevocation: false,
-                                protocols: clientProtocols
-                            ),
-                            AuthenticateServerAsync(
-                                serverCertificate,
-                                clientCertificateRequired: true,
-                                checkCertificateRevocation: false,
-                                protocols: serverProtocols
-                            )
+                await Assert.ThrowsAnyAsync<Exception>(() =>
+                    TestConfiguration.WhenAllOrAnyFailedWithTimeout(
+                        AuthenticateClientAsync(
+                            serverHost,
+                            clientCertificates,
+                            checkCertificateRevocation: false,
+                            protocols: clientProtocols
+                        ),
+                        AuthenticateServerAsync(
+                            serverCertificate,
+                            clientCertificateRequired: true,
+                            checkCertificateRevocation: false,
+                            protocols: serverProtocols
                         )
-                );
+                    ));
             }
         }
 

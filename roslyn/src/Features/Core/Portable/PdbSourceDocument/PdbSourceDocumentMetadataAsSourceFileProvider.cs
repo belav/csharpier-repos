@@ -159,15 +159,11 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     // add our DLL as a reference, and use SymbolKey to map the type across.
                     var documentationProvider =
                         sourceWorkspace.Services.GetRequiredService<IDocumentationProviderService>();
-                    var dllReference = IOUtilities.PerformIO(
-                        () =>
-                            MetadataReference.CreateFromFile(
-                                dllPath,
-                                documentation: documentationProvider.GetDocumentationProvider(
-                                    dllPath
-                                )
-                            )
-                    );
+                    var dllReference = IOUtilities.PerformIO(() =>
+                        MetadataReference.CreateFromFile(
+                            dllPath,
+                            documentation: documentationProvider.GetDocumentationProvider(dllPath)
+                        ));
                     if (dllReference is null)
                     {
                         _logger?.Log(
